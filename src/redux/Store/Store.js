@@ -1,23 +1,25 @@
 
-import reducer from './reducers';
+// import reducer from './reducers';
 import workpaceReducer from '../Reducers/workpace';
 import project_reducer from '../Reducers/project_reducer';
 import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getUser } from './middleware/crud'
-import { actions } from './actions/user.action';
+import { getUser } from '../middleware/crud'
+import { actions } from '../actions/action.js';
+import { setWorkspaCrud } from '../middleware/crud'
 
-const reducer = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer });
+const reducers = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer });
 
 
 const store = createStore(
-    reducer,
+    reducers,
     composeWithDevTools(
         applyMiddleware
             (
-                getUser//פונקציה לקריאה//
+                setWorkspaCrud
+                // getUser//פונקציה לקריאה//
 
             ))
 )
