@@ -1,0 +1,35 @@
+.tools{
+width: 14vw;
+height: 70vh;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border-radius: 12px;
+margin: 0px -35px;
+text-align: center;
+
+}
+.new{
+    color: #A66DFF;
+    font-size: x-large;
+}
+
+.aicon{
+ cursor: pointer;
+  width: 50px;
+height: 50px;
+background: #E8EAEC 0% 0% no-repeat padding-box;
+opacity: 1;
+border-radius: 100px;
+margin: 16px 0px;
+
+
+
+ }
+ .imgaicon{
+   margin: 10px;
+ }
+ .imgaicon1{
+     margin: 0px 5px;
+ }
+ .icon{
+   margin: 10px -4px;
+ }

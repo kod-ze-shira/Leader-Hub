@@ -4,6 +4,7 @@ import Body from './body/body';
 import Nav from '../warps/nav/nav';
 import Left_nav from '../warps/left_nav/left_nav';
 import Configurator from '../warps/configurator/configurator';
+import Tools from './tools/tools';
 
 export default function Hub()
 {
@@ -11,20 +12,26 @@ export default function Hub()
         <>
             <Nav />
             <div className="row">
-                <div className="col-md-2">
-                <Configurator />
+                <div className="col-md-1">
+                    <Left_nav />
                  
 
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-3  mt-2">
                     <Header />
-                     <Body />
+                  
+                   <div className="row mt-3">
+                    <div className="col-2"> <Tools/></div>
+                    <div className="col-4"> <Body /></div>
+                    </div>
                     
                   
 
                 </div>
+                <div className="col-md-6"></div>
                 <div className="col-md-2">
-                    <Left_nav />
+                  
+                    <Configurator />
                 </div>
             </div>
             

@@ -1,8 +1,11 @@
 import * as React from 'react';
+import './tablebody.css';
 import { DataGrid } from '@material-ui/data-grid';
 
 // import './tablebody.css';
-
+export default function TableBody() {
+    
+ 
 const columns = [
     { field: 'id', headerName: 'ALL', width: 160 },
     { field: 'firstName', headerName: 'NAME', width: 260 },
@@ -16,7 +19,7 @@ const columns = [
     {
         field: 'ALLTEAM',
         headerName: 'ALL TEAM',
-        type:'string',
+        type:'File',
         // sortable: false,
         width: 200,
 
@@ -24,34 +27,35 @@ const columns = [
     {
         field: 'STATUS',
         headerName: 'STATUS',
-        type: 'number',
+
         width: 160,
     },
+    
+
   
 ];
 
 const rows = [
-    { id: 1, firstName: 'rachel', lastName: '14 Feb 2019', TASKS: '148 / 148',  },
-    { id: 2, firstName: 'malka', lastName: '14 Feb 2019', TASKS: '0 / 148' },
-    { id: 3, firstName: 'sara', lastName: '14 Feb 2019', TASKS: '148 / 148' },
-    { id: 4, firstName: 'david', lastName: '14 Feb 2019', TASKS: '148 / 148' },
-    { id: 5, firstName: 'shalom', lastName: '14 Feb 2019', TASKS: '148 / 148' },
-    { id: 6, firstName: 'chaim', lastName: '14 Feb 2019', TASKS: '14 / 19' },
-    { id: 7, firstName: 'meir', lastName: '14 Feb 2019', TASKS: '8 / 8' },
-    { id: 9, firstName: 'noa', lastName: '14 Feb 2019', TASKS: '8 / 14' },
+    { id: 2, firstName: 'malka', lastName: '14 Feb 2019', TASKS: '0 / 148', ALLTEAM: 'img', STATUS:' Processing 80%'},
+    { id: 3, firstName: 'sara', lastName: '14 Feb 2019', TASKS: '148 / 148', ALLTEAM: 'img' , STATUS:'Completed 100%' },
+    { id: 4, firstName: 'david', lastName: '14 Feb 2019', TASKS: '148 / 148', ALLTEAM: 'img', STATUS: 'Completed 80%'},
+    { id: 5, firstName: 'shalom', lastName: '14 Feb 2019', TASKS: '148 / 148', ALLTEAM: 'img', STATUS: 'Completed 100%' },
+    { id: 6, firstName: 'chaim', lastName: '14 Feb 2019', TASKS: '14 / 19', ALLTEAM: 'img', STATUS: 'Completed 40%' },
+    { id: 7, firstName: 'meir', lastName: '14 Feb 2019', TASKS: '8 / 8', ALLTEAM: 'img', STATUS: 'Completed 60%' },
+    { id: 9, firstName: 'noa', lastName: '14 Feb 2019', TASKS: '8 / 14', ALLTEAM: 'img', STATUS: 'Completed 90%'},
+    { id: 9, firstName: 'noa', lastName: '14 Feb 2019', TASKS: '8 / 14', ALLTEAM: 'img', STATUS: 'Completed 90%' },
 ];
- 
+  return (
 
-export default function TableBody() {
-    return (
-
-        <div style={{ height: 400, width: '100%' }}>
- 
-
-
-            <DataGrid rows={rows} 
+      <div className="tablebody">
+         
+     
+         
+          <DataGrid rows={rows} 
             
-             columns={columns} pageSize={5} checkboxSelection />
+             columns={columns} pageSize={5} checkboxSelection  />
+            
+         
            
       
         </div>

@@ -3,6 +3,7 @@ import Search from '../Search/search';
 // import TableHeader from '../Table/tableheader/tableheader' 
 import TableBody from '../Table/tablebody/tablebody';
 import './body.css';
+
 // import { connect } from 'react-redux';
 // import { setlastname, setName } from '../../../redux/actions/action'
 
@@ -38,11 +39,13 @@ export default function Body()
          
          <br></br>
          aba toda {workpace.name} {workpace.lastName} */}
-
-     <Search />
+      
+        
+        <Search />
        {/* <TableHeader/> */}
-      <TableBody/>
-    </div>
+        <TableBody/>
+        </div>
+   
     );
 }
-// )
+// )>

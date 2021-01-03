@@ -7,7 +7,7 @@ export default function Nav() {
     return (
         <div className="nav">
             <div className="logo">
-            <img src={require('../../img/logo.png')}></img>
+                <img src={require('../../img/Path.png')}></img>
             </div>
         </div>
     );

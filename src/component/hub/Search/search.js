@@ -7,9 +7,11 @@ export default function Search() {
         <div className="row Search">
             <div className="row mt-5"></div>
              <div className="col-4 mt-4" id="search">
-                <div className="mt-1"></div>
-                <img id="imgsearch" src={require('../../img/search-solid.png')}></img>
-                <input type="text"  id="inputsearch" placeholder="Search" />
+                {/* <div className="mt-1"></div> */}
+                <div className="row mt-1">
+                <div className="col-1"> <img id="imgsearch" src={require('../../img/search-solid.png')}></img></div>
+                <div className="col-2"> <input type="text" id="inputsearch" placeholder="Search" /></div>
+               </div>
              
             </div>
             <div className="col-1"></div>
@@ -20,9 +22,10 @@ export default function Search() {
             <div className="col-2 mt-4 All_Task" tabIndex="-1">
                 <div className="mt-2"></div>
                 <img src={require('../../img/1star-solid.png')}></img>
+               
                 
                 All Task</div>
-            <div className="col-2 mt-4  Project" tabIndex="-1">
+            <div className="col-1 mt-4  Project" tabIndex="-1">
                 <div className="mt-2"></div>
                  Project</div>
             <div className="col-3 mt-4">
