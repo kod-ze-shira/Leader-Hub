@@ -6,6 +6,7 @@ import { DataGrid } from '@material-ui/data-grid';
 export default function TableBody() {
     
  
+  
 const columns = [
     { field: 'id', headerName: 'ALL', width: 160 },
     { field: 'firstName', headerName: 'NAME', width: 260 },
@@ -50,6 +51,9 @@ const rows = [
       <div className="tablebody">
          
      
+        {/* <div style={{ height: 400, width: '100%' }}> */}
+         
+
          
           <DataGrid rows={rows} 
             

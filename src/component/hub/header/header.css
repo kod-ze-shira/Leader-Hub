@@ -35,7 +35,10 @@ opacity: 1;
   opacity: 1;
   color: #9F61FF;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> e11eaf3c97551a1ef920a03dfeb255ff6bbb6bdc
 .input_task_or_project{
   width: 18vw;
 height: 46px;
@@ -70,10 +73,13 @@ text-align: center;
 #date1:focus{
    outline:none;
 }
+<<<<<<< HEAD
 #workpas{
   background-color: #ffe6e6;
   color:   #ff3333;
 }
+=======
+>>>>>>> e11eaf3c97551a1ef920a03dfeb255ff6bbb6bdc
 #inputText{
   margin: 0px 10px;
     width: 22vw;
@@ -117,4 +123,8 @@ opacity: 1;
 color: #8181A5;
 margin: 0px -80px;
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e11eaf3c97551a1ef920a03dfeb255ff6bbb6bdc
