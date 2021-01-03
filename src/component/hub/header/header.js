@@ -17,7 +17,7 @@ function Header(props) {
     //     }}
     // props.createW(jsonW);
     const change = (event) => {
-
+        debugger
         props.createW(event.target.name, event.target.value)
 
 
@@ -40,7 +40,7 @@ function Header(props) {
                 <div className="col-md-2 col-xs-1 mt-2 Do" style={{ color: "#707074" }}>Do To</div>
             </div>
             <div className="row mt-2">
-
+                {/* <h1>{props.workspace1}</h1> */}
                 <div className="col-md-1 col-xs-0.5">
 
                     <Dropdown>
@@ -74,9 +74,12 @@ function Header(props) {
                 </div>
                 <div className="col-md-2 col-xs-1 START" ><div className="textstart mt-2">
                     <div className="mt-2" ></div>
-                    <b onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</b></div></div>
+                    <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button></div></div>
             </div>
+            <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
+
         </div>
+
     );
 }
 const mapStateToProps = (state) => {

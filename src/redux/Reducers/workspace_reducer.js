@@ -16,7 +16,7 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
-        //  name: "",
+        name: "",
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -36,7 +36,9 @@ const initialState = {
 // }, initialState);
 const workspaces = {
     setWorkspace(state, action) {
-        state.workpace[action.payload] = action.value;
+        debugger
+        // state.workpace[action.payload] = action.value;
+        state.workspace = action.value
         // dispatch({ type: "GET_ALL" })
     },
 
