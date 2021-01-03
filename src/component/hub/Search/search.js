@@ -22,9 +22,10 @@ export default function Search() {
             <div className="col-2 mt-4 All_Task" tabIndex="-1">
                 <div className="mt-2"></div>
                 <img src={require('../../img/1star-solid.png')}></img>
+               
                 
                 All Task</div>
-            <div className="col-1 mt-4 Project" tabIndex="-1">
+            <div className="col-1 mt-4  Project" tabIndex="-1">
                 <div className="mt-2"></div>
                  Project</div>
             <div className="col-3 mt-4">

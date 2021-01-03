@@ -1,0 +1,61 @@
+.headerserch{
+    width: 75vw;
+height: 13vh;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border-radius: 8px;
+opacity: 1;
+margin: 0px -40px;
+}
+.newtask{
+      width: 18vw;
+      text-align: center;
+    height: 46px;
+    background-color: #EEE5FC ;
+  box-shadow: 0px 2px 1px #00000012;
+  border-radius: 12px;
+  opacity: 1;
+  color: #9F61FF;
+ margin: 0px 60px;
+}
+
+.x{
+  font-size: large;
+  margin: 0px 30px;
+  cursor: pointer;
+}
+.STARTtask{
+  width: 25vw;
+height: 46px;
+background: #9F61FF 0% 0% no-repeat padding-box;
+border-radius: 8px;
+opacity: 1;
+color:WHITE;
+cursor: pointer;
+text-align: center;
+margin: 0px 10px;
+}
+#datetask{
+      border:white;
+  cursor: pointer;
+  width: 9vw;
+   
+}
+.newdate{
+      width: 10vw;
+      height: 46px;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #979797;
+border-radius: 8px;
+opacity: 1;
+text-align: center;
+    margin: 0px 100px;
+}
+.input_task{
+  width: 18vw;
+height: 46px;
+background: #EEE5FC 0% 0% no-repeat padding-box;
+border-radius: 8px;
+opacity: 1;
+color:#B5B9C9;
+margin: 0px -19px;
+}

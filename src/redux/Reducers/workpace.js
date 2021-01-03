@@ -2,8 +2,8 @@ import produce from 'immer';
 
 const initialState = {
        workpace: {
-        name: "malka",
-        lastName:"rabin"
+        name: "",
+     
     }
 }
 export default produce((state, action) => {

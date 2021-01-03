@@ -4,7 +4,7 @@
 }
 #search{
 /* margin: 0px -40px; */
-width:15vw;
+width:12vw;
 height: 5vh;
 background:white;
 border: 1px solid #BDBDC9;
@@ -16,7 +16,7 @@ opacity: 1;
     width: 15vw;
 }
 #inputsearch{
-width: 15vw;
+width: 10vw;
 background-color:white;
 border:white;
 }
@@ -68,13 +68,13 @@ color: #9F61FF;
 
 .Project{
   width: 151px;
-height: 5vh;
-border: 1px solid #BDBDC9;
-border-radius: 4px;
-opacity: 1;
-color: #75798E;
-margin: 35px -7px;
-cursor: pointer;
+ height: 5vh;
+ border: 1px solid #BDBDC9;
+ border-radius: 4px;
+ opacity: 1;
+ color: #75798E;
+ margin: 35px -7px;
+ cursor: pointer;
 }
 .Project:focus{
   background: #FCF7E5 0% 0% no-repeat padding-box;
@@ -105,11 +105,11 @@ margin: 0px 40px;
 }
 #Processing{
   background: #D8CCF8 0% 0% no-repeat padding-box;
-box-shadow: 0px 2px 1px #00000012;
-border-radius: 2px;
-opacity: 1;
-height: 5vh;
-color: #6226EF;
+  box-shadow: 0px 2px 1px #00000012;
+  border-radius: 2px;
+  opacity: 1;
+  height: 5vh;
+  color: #6226EF;
 }
 #Completed{
   background-color:#D5F5E3;

@@ -1,9 +1,12 @@
 import * as React from 'react';
+import './tablebody.css';
 import { DataGrid } from '@material-ui/data-grid';
 
 // import './tablebody.css';
 export default function TableBody() {
-  const malka=<img src=  { require("../../../img/ana.png") }></img>   
+    
+ 
+  
 const columns = [
     { field: 'id', headerName: 'ALL', width: 160 },
     { field: 'firstName', headerName: 'NAME', width: 260 },
@@ -45,7 +48,10 @@ const rows = [
 ];
   return (
 
-        <div style={{ height: 400, width: '100%' }}>
+      <div className="tablebody">
+         
+     
+        {/* <div style={{ height: 400, width: '100%' }}> */}
          
 
          
