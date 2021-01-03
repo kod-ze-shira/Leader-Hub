@@ -1,16 +1,9 @@
 .body{
-<<<<<<< HEAD
-  width:60vw;
-=======
   width:75vw;
->>>>>>> e11eaf3c97551a1ef920a03dfeb255ff6bbb6bdc
   height:70vh;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
-<<<<<<< HEAD
   margin:0px 150px;
-=======
-  margin: 0px -40px;
->>>>>>> e11eaf3c97551a1ef920a03dfeb255ff6bbb6bdc
+  /* margin: 0px -40px; */
 }
