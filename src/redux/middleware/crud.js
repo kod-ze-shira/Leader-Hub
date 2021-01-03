@@ -17,6 +17,7 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             type: 'POST',
             withCradentials: true,
             async: false,
+            headers:{"authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJzaW1kc01ycmNKZHBRZ3RhOGtnWHlRQmRERnkyIiwiZW1haWwiOiJjdG9AbGVhZGVyLmNvZGVzIiwiaXAiOiI1LjEwMi4yNDYuMjAyIiwiaWF0IjoxNjA0NDgyOTc0fQ.Nn2IC7j_VCDOFIkbwzT3nao0l7OcqbNqDUKkcL0Aoik"},
             contentType: "application/json; charset=utf-8",
             // data: userIdW,
             data: JSON.stringify({
