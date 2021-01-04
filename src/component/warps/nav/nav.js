@@ -9,6 +9,7 @@ export default function Nav() {
             <div className="logo">
                 <img src={require('../../img/Path.png')}></img>
             </div>
+            
         </div>
     );
 }
