@@ -23,6 +23,8 @@ const initialState = {
 
     }
 
+
+
 }
 // export default produce((state, action) => {
 //     switch (action.type) {
@@ -38,7 +40,7 @@ const workspaces = {
     setWorkspace(state, action) {
         debugger
         // state.workpace[action.payload] = action.value;
-        state.workspace = action.value
+        state.workspace.name = action.value
         // dispatch({ type: "GET_ALL" })
     },
 

@@ -4,13 +4,15 @@ import workpaceReducer from '../Reducers/workpace';
 import project_reducer from '../Reducers/project_reducer';
 import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
+import public_reducer from '../Reducers/public_reducer';
+
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { getUser } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 
-const reducers = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer });
+const reducers = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer, public_reducer });
 
 
 const store = createStore(
@@ -36,7 +38,7 @@ console.log(userName);
 // }
 window.store = store;
 //ליירק בעת  עבודה בשרת  
-let jwtFromCookie="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJzaW1kc01ycmNKZHBRZ3RhOGtnWHlRQmRERnkyIiwiZW1haWwiOiJjdG9AbGVhZGVyLmNvZGVzIiwiaXAiOiI1LjEwMi4yNDYuMjAyIiwiaWF0IjoxNjA0NDgyOTc0fQ.Nn2IC7j_VCDOFIkbwzT3nao0l7OcqbNqDUKkcL0Aoik";
+let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0";
 store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 store.dispatch(actions.getUserFromServer(userName));
 
