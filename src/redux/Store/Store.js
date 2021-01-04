@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import { createStore, combineReducers } from 'redux';
-import workpaceReducer from '../Reducers/workpace';
-import projectReducer from '../Reducers/project'
-
-
-const reducer = combineReducers({ workpaceReducer,projectReducer});
-
-const store = createStore(reducer);
-window.store = store;
-=======
 
 // import reducer from './reducers';
 import workpaceReducer from '../Reducers/workpace';
@@ -51,5 +40,4 @@ window.store = store;
 // store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 store.dispatch(actions.getUserFromServer(userName));
 
->>>>>>> e11eaf3c97551a1ef920a03dfeb255ff6bbb6bdc
 export default store;

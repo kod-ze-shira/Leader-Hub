@@ -57,13 +57,7 @@ function Header(props) {
         task ?
             workpas ?
                 project ?
-
-                    <div className="headerserch">
-
-
-                        return (
-
-        <div className="headerserch">
+                   <div className="headerserch">
                             <div className="row">
 
                                 <div className="col-md-1 col-xs-2 mt-2 Type" style={{ color: "#707074" }}>Type</div>
@@ -110,15 +104,15 @@ function Header(props) {
                                     <input type="date" id="date1"></input>
                                 </div>
                                 <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
-                                    <div className="mt-2"></div>
-                                    <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button></div></div>
-
+                                <div className="mt-2"></div>
                                 <b>START TASK</b></div>
+                                </div></div>
 
+                        <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
                             <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
                         </div>
 
-                    </div>
+           
 
         :
     <>
