@@ -107,7 +107,7 @@ function Header(props) {
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
                                 </div></div>
-
+                        <button onClick={()=>props.editWorkpaceFromServer()}></button>
                         <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
                             <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
                         </div>
@@ -145,6 +145,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        editWorkpaceFromServer1: (w) => dispatch(actions.setWorkspaceCrud(w)),
+        editWorkpaceFromServer: (props) => dispatch(actions.editWorkpaceFromServer(props)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
         // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
