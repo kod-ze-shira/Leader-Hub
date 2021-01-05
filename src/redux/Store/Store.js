@@ -11,6 +11,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { getUser } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
+import { setProjectCrud } from '../middleware/crud'
+import { setTaskCrud } from '../middleware/crud'
+
 
 const reducers = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer, public_reducer });
 
@@ -20,7 +23,11 @@ const store = createStore(
     composeWithDevTools(
         applyMiddleware
             (
-                setWorkspaCrud
+                setWorkspaCrud,
+                setTaskCrud,
+                setProjectCrud,
+
+
                 // getUser//פונקציה לקריאה//
 
             ))

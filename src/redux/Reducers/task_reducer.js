@@ -13,20 +13,41 @@
 //     }
 // }, initialState);
 import produce from 'immer';
-
+import createReducer from './reducerUtils';
 const initialState = {
-    workpace: {
-        name: "malka",
-        lastName: "rabin"
-    }
-}
-export default produce((state, action) => {
-    switch (action.type) {
-        case 'SET_NAME':
-            state.workpace.name = action.payload;
-            break;
-        case 'SET_LAST_NAME':
-            state.workpace.lastName = action.payload;
+    task: {
+        name: "",
+        //  uaserId:"",
+        //  projects:[],
+        //  team:""
 
     }
-}, initialState);
+
+
+
+}
+// export default produce((state, action) => {
+//     switch (action.type) {
+//         case 'SET_WORKSPACE':
+//             state.workpace.name = action.payload.name;
+//             break;
+//         // case 'SET_LAST_NAME':
+//         //     state.workpace.lastName = action.payload;
+
+//     }
+// }, initialState);
+const tasks = {
+    setTask(state, action) {
+        debugger
+        // state.workpace[action.payload] = action.value;
+        state.task.name = action.value
+        // dispatch({ type: "GET_ALL" })
+    },
+
+
+
+
+}
+
+
+export default produce((state, action) => createReducer(state, action, tasks), initialState);

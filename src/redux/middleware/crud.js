@@ -7,6 +7,43 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
 
         let user_name = "renana-il"
         let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newWorkspace "
+        let workspace = getState().workspace_reducer.workspace;
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            // data: JSON.stringify({
+            data: workspace,
+            // }),
+            // dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                // dispatch({ type: '', payload: data })
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
+export const setTaskCrud = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'SET_TASK_CRUD') {
+        debugger
+
+        let user_name = "renana-il"
+        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newTask "
         let name = action.payload;
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -90,38 +127,38 @@ function checkPermission(result) {
         resolve(true)
 
     })
-      }
-export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'EDIT_WORKPACE') {
-        var W = getState().workpace;;
-        console.log(quote);
-        ;
-        $.ajax({
-
-            url: "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace",
-            method: 'POST',
-            headers: { "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0" },
-            data: JSON.stringify(),
-            success: function (response) {
-                ;
-                console.log(resJson);
-             
-                if (resJson)
-                    dispatch({ type: "SET_WORKPACE", payload: resJson });
-         
-
-        },
-            error: function (err) {
-                alert('please try again later');
-                console.log(err)
-            },
-
-        });
-
-    }
-    return next(action);
 }
+// export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
+
+//     if (action.type === 'EDIT_WORKPACE') {
+//         var W = getState().workpace;
+//         console.log(quote);
+//         ;
+//         $.ajax({
+
+//             url: "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace",
+//             method: 'POST',
+//             headers: { "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0" },
+//             data: JSON.stringify(),
+//             success: function (response) {
+//                 ;
+//                 console.log(resJson);
+
+//                 if (resJson)
+//                     dispatch({ type: "SET_WORKPACE", payload: resJson });
+
+
+//             },
+//             error: function (err) {
+//                 alert('please try again later');
+//                 console.log(err)
+//             },
+
+//         });
+
+//     }
+//     return next(action);
+// }
 
 
 
