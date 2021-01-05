@@ -130,6 +130,7 @@ function checkPermission(result) {
 }
 // export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
 
+<<<<<<< HEAD
 //     if (action.type === 'EDIT_WORKPACE') {
 //         var W = getState().workpace;
 //         console.log(quote);
@@ -159,8 +160,112 @@ function checkPermission(result) {
 //     }
 //     return next(action);
 // }
+=======
+    if (action.type === 'EDIT_WORKSPACE') {
+        debugger
+
+        var w = getState().workpace;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ w }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                
+            },
+            error: function (err) {
+               
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
 
 
+
+export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_PROJECT') {
+        debugger
+
+        var p = getState().project;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ p }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
+>>>>>>> 365f09d6ec7728c97409889f4da94e38718585d5
+
+export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_TASK') {
+        debugger
+
+        var t = getState().task;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ t }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
 
 
 
