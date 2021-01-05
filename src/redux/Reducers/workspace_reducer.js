@@ -16,7 +16,7 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
-        name: "אבא אני אוהבת אותך תעזור לי שזה יעבוד",
+        name: "aba tazor",
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -26,6 +26,10 @@ const initialState = {
 
 
 }
+// setname(state, action) {
+//     state.contactDetails.youTube = action.payload;
+// }
+
 // export default produce((state, action) => {
 //     switch (action.type) {
 //         case 'SET_WORKSPACE':
@@ -40,7 +44,7 @@ const workspaces = {
     setWorkspace(state, action) {
         debugger
         // state.workpace[action.payload] = action.value;
-        state.workspace.name = action.value
+        
         // dispatch({ type: "GET_ALL" })
     },
 

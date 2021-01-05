@@ -64,7 +64,7 @@ function Header(props) {
                               
                             </div>
                             <div className="row mt-2">
-                                {/* <h1>{props.workspace1}</h1> */}
+                             
                                 <div className="col-md-1 col-xs-0.5">
 
                                     <Dropdown>
@@ -86,17 +86,16 @@ function Header(props) {
                                     </Dropdown>
 
                                 </div>
-
+                                
                                 <div className="col-2"></div>
-
+                            {/* <input value={props.workspace.name} /> */}
                                 <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
                                 </div></div>
-                               
                                 <button onClick={()=>props.editWorkpaceFromServer()}>edit workpace</button>
-                                <button onClick={() => props.EditProjectFromServer()}>edit project</button>
-                                <button onClick={() => props.EditTaskFromServer()}>edit task</button>
+                              <button onClick={() => props.EditProjectFromServer()}>edit project</button>
+                        <button onClick={() => props.EditTaskFromServer()}>edit Task</button>
                                 <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
                                 <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
                         </div>
@@ -126,8 +125,9 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        workpace: state.workpaceReducer.workpace,
         workspace1: state.workspace_reducer.workspace,
-       
+
 
 
     }
@@ -135,9 +135,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-  
-        EditProjectFromServer: (p) => dispatch(actions.EditProjectFromServer(p)),
         EditTaskFromServer: (t) => dispatch(actions.EditTaskFromServer(t)),
+        EditProjectFromServer: (p) => dispatch(actions.EditProjectFromServer(p)),
         editWorkpaceFromServer: (w) => dispatch(actions.editWorkpaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
