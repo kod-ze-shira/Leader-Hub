@@ -47,57 +47,61 @@ function Header(props) {
     //         "name": nameW,
 
     //     }}
-    // // props.createW(jsonW);
-    // const change = (event) => {
-    //     debugger
-    //     props.createW(event.target.name, event.target.value)
-    // }
+    // props.createW(jsonW);
+    const change = (event) => {
+        debugger
+        props.createW(event.target.name, event.target.value)
+    }
 
     return (
         task ?
             workpas ?
                 project ?
-                    <div className="headerserch">
-                        <div className="row">
+                   <div className="headerserch">
+                            <div className="row">
 
-                            <div className="col-md-1 col-xs-2 mt-2 Type" style={{ color: "#707074" }}>Type</div>
-
-                        </div>
-                        <div className="row mt-2">
-                            {/* <h1>{props.workspace1}</h1> */}
-                            <div className="col-md-1 col-xs-0.5">
-
-                                <Dropdown>
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                        <img src={require('../../img/angle-down-solid.png')}></img>
-                           select <img src={require('../../img/star-solid.png')}></img>
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item id="project" onClick={newpoject}>
-                                            Project</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2" id="task" onClick={newtask}>
-                                            <img src={require('../../img/1star-solid.png')}></img>
-                                Task</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2" id="workpas" onClick={newworkpas}>
-
-                                            workpas</Dropdown.Item>
-
-                                    </Dropdown.Menu>
-                                </Dropdown>
-
+                                <div className="col-md-1 col-xs-2 mt-2 Type" style={{ color: "#707074" }}>Type</div>
+                              
                             </div>
+                            <div className="row mt-2">
+                                {/* <h1>{props.workspace1}</h1> */}
+                                <div className="col-md-1 col-xs-0.5">
 
-                            <div className="col-2"></div>
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                            <img src={require('../../img/angle-down-solid.png')}></img>
+                           select <img src={require('../../img/star-solid.png')}></img>
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item id="project" onClick={newpoject}>
+                                                Project</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-2" id="task" onClick={newtask}>
+                                                <img src={require('../../img/1star-solid.png')}></img>
+                                Task</Dropdown.Item>
+                                            <Dropdown.Item href="#/action-2" id="workpas" onClick={newworkpas}>
 
-                            <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
+                                                workpas</Dropdown.Item>
+
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+
+                                </div>
+
+                                <div className="col-2"></div>
+
+                                <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
-                            </div></div>
-                        <button id="btnedit" onClick={() => props.editWorkpaceFromServer()}>edit workpace</button>
-                        <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
-                        <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
-                    </div>
+                                </div></div>
+                               
+                                <button onClick={()=>props.editWorkpaceFromServer()}>edit workpace</button>
+                                <button onClick={() => props.EditProjectFromServer()}>edit project</button>
+                                <button onClick={() => props.EditTaskFromServer()}>edit task</button>
+                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
+                                <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
+                        </div>
 
+           
 
                     :
                     <>
@@ -122,19 +126,22 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // workspace1: state.workspace_reducer.workspace,
-
+        workspace1: state.workspace_reducer.workspace,
+       
 
 
     }
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        editWorkpaceFromServer1: (w) => dispatch(actions.setWorkspaceCrud(w)),
-        editWorkpaceFromServer: (props) => dispatch(actions.editWorkpaceFromServer(props)),
+  
+        EditProjectFromServer: (p) => dispatch(actions.EditProjectFromServer(p)),
+        EditTaskFromServer: (t) => dispatch(actions.EditTaskFromServer(t)),
+        editWorkpaceFromServer: (w) => dispatch(actions.editWorkpaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
-        // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
+  
 
 
 
