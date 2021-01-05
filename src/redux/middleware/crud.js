@@ -90,7 +90,6 @@ function checkPermission(result) {
         resolve(true)
 
     })
-<<<<<<< HEAD
       }
 export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
 
@@ -130,6 +129,3 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
 
 
 
-=======
-}
->>>>>>> 20db694c290bd9e51f3f3221f65eac691e41202c
