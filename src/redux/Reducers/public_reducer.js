@@ -1,7 +1,9 @@
 import produce from 'immer';
+import { act } from 'react-dom/test-utils';
 import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
+    userName:""
 
 }
 // export default produce((state, action) => {
@@ -14,7 +16,7 @@ const initialState = {
 
 //     }
 // }, initialState);
-const cookies = {
+const publicData = {
     // setWorkspace(state, action) {
     //     debugger
     //     // state.workpace[action.payload] = action.value;
@@ -24,11 +26,13 @@ const cookies = {
 
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
-        debugger
     },
+    setUserName(state,action){
+        state.userName=action.payload;
+    }
 
 
 }
 
 
-export default produce((state, action) => createReducer(state, action, cookies), initialState);
+export default produce((state, action) => createReducer(state, action, publicData), initialState);

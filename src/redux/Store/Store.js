@@ -34,8 +34,9 @@ const store = createStore(
 )
 var url = window.location;
 console.log(url);
-var userName = (url.pathname.split('/')[1]);
-console.log(userName);
+store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
+// var userName = (url.pathname.split('/')[1]);
+// console.log(userName);
 //ליירק בעת  עבודה לוקאלית 
 // if (document.cookie) {
 //     let jwtFromCookie = document.cookie.includes('jwt') ?
@@ -47,6 +48,5 @@ window.store = store;
 //ליירק בעת  עבודה בשרת  
 let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0";
 store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
-store.dispatch(actions.getUserFromServer(userName));
 
 export default store;

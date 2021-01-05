@@ -5,10 +5,8 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
         debugger
 
-        let user_name = "renana-il"
-        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newWorkspace "
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace "
         let workspace = getState().workspace_reducer.workspace;
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -42,10 +40,9 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_TASK_CRUD') {
         debugger
 
-        let user_name = "renana-il"
-        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newTask "
+       
+        let urlData = "https://reacthub.dev.leader.codes/api/" +  getState().public_reducer.userName + "/newTask "
         let name = action.payload;
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -79,10 +76,8 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_PROJECT_CRUD') {
         debugger
 
-        let user_name = "renana-il"
-        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newProject "
+        let urlData = "https://reacthub.dev.leader.codes/api/" +  getState().public_reducer.userName + "/newProject "
         let name = action.payload;
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -136,8 +131,7 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
         debugger
 
         var w = getState().workpace;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -173,8 +167,7 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
         debugger
 
         var p = getState().project;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -208,8 +201,7 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
         debugger
 
         var t = getState().task;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         $.ajax({
             url: urlData,
             type: 'POST',
