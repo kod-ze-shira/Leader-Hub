@@ -66,7 +66,7 @@ export default function NewProject()
 
                 <div className="row mt-3">
                     <div className="col-1"></div>
-                    <div className="col-8" style={{ color: 'white' }}>Start Date</div>
+                    <div className="col-8" style={{ color: 'white' }}>Start Date:</div>
                 </div>
                 <div className="row">
                     <div className="col-2"></div>
@@ -75,7 +75,7 @@ export default function NewProject()
                
                  <div className="row mt-3">
                     <div className="col-1"></div>
-                    <div className="col-8" style={{ color: 'white' }}> Due date</div>
+                    <div className="col-8" style={{ color: 'white' }}> Due date:</div>
                 </div>
                 <div className="row">
                     <div className="col-2"></div>
@@ -83,7 +83,7 @@ export default function NewProject()
                 </div>
                 <div className="row mt-4">
                     <div className="col-1"></div>
-                    <div className="col-7" style={{ color: "white" }}>Description</div>
+                    <div className="col-7" style={{ color: "white" }}>Description:</div>
                     <div className='custom-control custom-switch'>
                         <input
                             type='checkbox'

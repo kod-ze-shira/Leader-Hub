@@ -1,15 +1,7 @@
 import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
-    project: {
-        name: "",
-        //  uaserId:"",
-        //  projects:[],
-        //  team:""
-
-    }
-
-
+    tokenFromCookies: "",
 
 }
 // export default produce((state, action) => {
@@ -22,18 +14,21 @@ const initialState = {
 
 //     }
 // }, initialState);
-const projects = {
-    setProject1(state, action) {
+const cookies = {
+    // setWorkspace(state, action) {
+    //     debugger
+    //     // state.workpace[action.payload] = action.value;
+    //     state.workspace = action.value
+    //     // dispatch({ type: "GET_ALL" })
+    // },
+
+    setTokenFromCookies(state, action) {
+        state.tokenFromCookies = action.payload;
         debugger
-        // state.workpace[action.payload] = action.value;
-        state.project.name = action.value
-        // dispatch({ type: "GET_ALL" })
     },
-
-
 
 
 }
 
 
-export default produce((state, action) => createReducer(state, action, projects), initialState);
+export default produce((state, action) => createReducer(state, action, cookies), initialState);

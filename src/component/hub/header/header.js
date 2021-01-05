@@ -114,23 +114,23 @@ function Header(props) {
 
            
 
-        :
-    <>
-        <NewProject />
-    </>
-        :
-    <>
-        <NewWorkpas />
+                    :
+                    <>
+                        <NewProject />
+                    </>
+                :
+                <>
+                    <NewWorkpas />
 
-    </>
-      :
-    <>
-        <Newtask />
-    </>
+                </>
+            :
+            <>
+                <Newtask />
+            </>
 
-      
 
-      
+
+
 
     )
 
@@ -146,7 +146,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
-
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
         // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
 
