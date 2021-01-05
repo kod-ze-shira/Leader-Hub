@@ -128,37 +128,115 @@ function checkPermission(result) {
 
     })
 }
-// export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
-
-//     if (action.type === 'EDIT_WORKPACE') {
-//         var W = getState().workpace;
-//         console.log(quote);
-//         ;
-//         $.ajax({
-
-//             url: "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace",
-//             method: 'POST',
-//             headers: { "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0" },
-//             data: JSON.stringify(),
-//             success: function (response) {
-//                 ;
-//                 console.log(resJson);
-
-//                 if (resJson)
-//                     dispatch({ type: "SET_WORKPACE", payload: resJson });
 
 
-//             },
-//             error: function (err) {
-//                 alert('please try again later');
-//                 console.log(err)
-//             },
+export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
 
-//         });
+    if (action.type === 'EDIT_WORKSPACE') {
+        debugger
 
-//     }
-//     return next(action);
-// }
+        var w = getState().workpace;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ w }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
+
+
+
+export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_PROJECT') {
+        debugger
+
+        var p = getState().project;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ p }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
+
+export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_TASK') {
+        debugger
+
+        var t = getState().task;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ t }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+        debugger
+    }
+    return next(action);
+}
+
 
 
 
