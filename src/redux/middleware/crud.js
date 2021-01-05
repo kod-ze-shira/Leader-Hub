@@ -56,3 +56,41 @@ function checkPermission(result) {
     
     })
       }
+export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_QUOTE') {
+        var W = getState().workpace;;
+        console.log(quote);
+        ;
+        $.ajax({
+        // return fetch("https://reacthub.dev.leader.codes/api/renana-il/editWorkspace " , {
+            url: "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace",
+            method: 'POST',
+            headers: { "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0" },
+            data: JSON.stringify(),
+            success: function (response) {
+                ;
+                console.log(resJson);
+                //  console.log(resJson[0].CustomerType);
+                if (resJson)
+                    dispatch({ type: "SET_QUOTE", payload: resJson });
+            // dispatch({ type: 'GET_QUOTE' });
+
+            //    this.setState({dataSource:JSON.parse(this.state.dataSource)})
+
+        },
+            error: function (err) {
+                alert('please try again later');
+                console.log(err)
+            },
+
+        });
+
+    }
+    return next(action);
+}
+
+
+
+
+
