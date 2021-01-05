@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const initialState={
     project:{
-        name:"ma",
+        name:"",
 
     }
 }
