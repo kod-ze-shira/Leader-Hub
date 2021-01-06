@@ -3,7 +3,8 @@ import { act } from 'react-dom/test-utils';
 import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
-    userName:""
+    userName: "",
+    worksapces: {}
 
 }
 // export default produce((state, action) => {
@@ -27,8 +28,11 @@ const publicData = {
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
-    setUserName(state,action){
-        state.userName=action.payload;
+    setUserName(state, action) {
+        state.userName = action.payload;
+    },
+    setWorkspaces(state, action) {
+        state.worksapces = action.payload;
     }
 
 
