@@ -93,11 +93,11 @@ function Header(props) {
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
                                 </div></div>
-                        <button onClick={() => props.editWorkspaceFromServer()}>edit workpace</button>
-                              <button onClick={() => props.EditProjectFromServer()}>edit project</button>
-                        <button onClick={() => props.EditTaskFromServer()}>edit Task</button>
-                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
-                                <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
+                        <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
+                              <button onClick={() =>{ props.EditProjectFromServer1()}}>edit project</button>
+                        <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button>
+                                {/* <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> */}
+                                {/* <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button> */}
                         </div>
 
            
@@ -134,9 +134,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       
-        EditTaskFromServer: (t) => dispatch(actions.EditTaskFromServer(t)),
-        EditProjectFromServer: (p) => dispatch(actions.EditProjectFromServer(p)),
-        editWorkspaceFromServer: (w) => dispatch(actions.editWorkspaceFromServer(w)),
+        EditTaskFromServer: () => dispatch(actions.EditTaskFromServer()),
+        EditProjectFromServer1: () => dispatch(actions.EditProjectFromServer()),
+        editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
   

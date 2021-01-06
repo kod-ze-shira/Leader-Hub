@@ -13,6 +13,9 @@ import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { setProjectCrud } from '../middleware/crud'
 import { setTaskCrud } from '../middleware/crud'
+import { editWorkspaceFromServer} from '../middleware/crud'
+import { EditProjectFromServer}    from '../middleware/crud'
+import { EditTaskFromServer} from '../middleware/crud'
 
 
 const reducers = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer, public_reducer });
@@ -22,11 +25,14 @@ const store = createStore(
     reducers,
     composeWithDevTools(
         applyMiddleware
-            (
+            (  
+                EditTaskFromServer,
+                EditProjectFromServer,
+                editWorkspaceFromServer,
                 setWorkspaCrud,
                 setTaskCrud,
                 setProjectCrud,
-
+                
 
                 // getUser//פונקציה לקריאה//
 

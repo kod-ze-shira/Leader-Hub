@@ -26,9 +26,9 @@ const initialState = {
 
 
 }
-const workpace2 = {
-    setCompanyName(state, action) {
-        state.company.name = action.payload;
+const workspace= {
+    setName(state, action) {
+        state.workspace.name = action.payload;
     },
     
 };

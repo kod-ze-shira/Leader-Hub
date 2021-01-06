@@ -132,10 +132,11 @@ function checkPermission(result) {
 
 export const editWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'EDIT_WORKSPACE') {
+    if (action.type === 'EDIT_WORKSPACE_FROM_SERVER') {
         debugger
 
-        var w = getState().workspace;
+        let workspace = getState().workspace_reducer.workspace;
+        // var w = getState().workspace_reducer.workspace;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -145,11 +146,13 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ w }),
-            dataType: 'json',
+            data: JSON.stringify({ workspace }),
+            // dataType: 'json',
             success: function (data) {
+                
                 console.log("success")
                 console.log(data);
+                
 
             },
             error: function (err) {
@@ -157,6 +160,7 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
                 checkPermission(err).then((ifOk) => {
 
                 })
+                
             }
         });
         // })
@@ -169,11 +173,10 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
 
 export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
    
-
-    if (action.type === 'EDIT_PROJECT') {
+    if (action.type === 'EDIT_PROJECT_FROM_SERVER') {
         debugger
 
-        var p = getState().project;
+        let p = getState().project_reducer.project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -205,10 +208,10 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
 
 export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'EDIT_TASK') {
+    if (action.type === 'EDIT_TASK_FROM_SERVER') {
         debugger
 
-        var t = getState().task;
+        var t = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -219,7 +222,7 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
             },
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ t }),
-            dataType: 'json',
+            // dataType: 'json',
             success: function (data) {
                 console.log("success")
                 console.log(data);
