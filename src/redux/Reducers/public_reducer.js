@@ -4,7 +4,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
     userName: "",
-    worksapces: {}
+    worksapces: []
 
 }
 // export default produce((state, action) => {

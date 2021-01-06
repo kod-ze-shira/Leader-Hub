@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
+import { ViewWorkspace } from '../viewWorkspace/viewWorkspace'
 
 // let workspace;
 
@@ -16,12 +17,13 @@ function allWorkspaces(props) {
     // props.worksapces.forEach(element => {
     //     <wor ghg={element}>element</wor>
     // })
-    const getAllWorkspaces = () => {
-        props.getAllWorkspaces();
-    }
+    const renderedListWorkspaces = props.workspaces.map(todo => {
+        return <ViewWorkspace key={todo.id} workspace={todo} />
+      })
     return (
         <>
-            <button onClick={getAllWorkspaces}>get all worksapaces</button>
+            <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
+            <ul>{renderedListWorkspaces}</ul>
         </>
     )
 }
@@ -29,16 +31,13 @@ function allWorkspaces(props) {
 const mapStateToProps = (state) => {
     // workspace = state.public_reducer.worksapces
     return {
-        workpaces: state.public_reducer.worksapces
+        workspaces: state.public_reducer.worksapces
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer())
-        //GET_ALL_WORKSPACES_FROM_SERVER
-
-    }
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+            }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(allWorkspaces)

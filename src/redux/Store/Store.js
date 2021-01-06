@@ -11,7 +11,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { getUser } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
+import { getAllWorkspacesFromServer } from '../middleware/crud'
+
 import { setProjectCrud } from '../middleware/crud'
+
 import { setTaskCrud } from '../middleware/crud'
 
 
@@ -24,9 +27,9 @@ const store = createStore(
         applyMiddleware
             (
                 setWorkspaCrud,
+                getAllWorkspacesFromServer,
                 setTaskCrud,
                 setProjectCrud,
-
 
                 // getUser//פונקציה לקריאה//
 

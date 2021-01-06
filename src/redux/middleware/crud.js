@@ -1,9 +1,9 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
-export const getAllWorkspacesByUserNameFromServer = ({ dispatch, getState }) => next => action => {
 
-    // /:userName/: userId / getAllWorkspacesForUser
-    //? userIdאולי נשמיט את ה
+export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
+    debugger
+
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         // let workspace = getState().workspace_reducer.workspace;
@@ -29,11 +29,10 @@ export const getAllWorkspacesByUserNameFromServer = ({ dispatch, getState }) => 
             })
     }
     return next(action);
-};
+}
 
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'SET_WORKSPACE_CRUD') {
         debugger
 

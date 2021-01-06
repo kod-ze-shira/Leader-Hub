@@ -2,7 +2,7 @@ import React from 'react';
 import Search from '../Search/search';
 // import TableHeader from '../Table/tableheader/tableheader' 
 import TableBody from '../Table/tablebody/tablebody';
-import AllWorkspaces from '../worspace/allWorkspaces/allWorkspaces';
+import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
 import './body.css';
 
 // import { connect } from 'react-redux';

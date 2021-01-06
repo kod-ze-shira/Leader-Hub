@@ -52,7 +52,9 @@ function Header(props) {
         debugger
         props.createW(event.target.name, event.target.value)
     }
-
+    const getAllWorkspaces = () => {
+        props.getAllWorkspaces();
+    }
     return (
         task ?
             workpas ?
@@ -98,7 +100,7 @@ function Header(props) {
                         <button onClick={() => props.EditTaskFromServer()}>edit Task</button>
                                 <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
                                 <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
-                        </div>
+                                                 </div>
 
            
 
@@ -140,9 +142,6 @@ const mapDispatchToProps = (dispatch) => {
         editWorkpaceFromServer: (w) => dispatch(actions.editWorkpaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
-  
-
-
 
     }
 }
