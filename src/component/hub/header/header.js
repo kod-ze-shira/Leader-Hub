@@ -86,14 +86,14 @@ function Header(props) {
                                     </Dropdown>
 
                                 </div>
-                                
+                    
                                 <div className="col-2"></div>
-                            {/* <input value={props.workspace.name} /> */}
+                             
                                 <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
                                 </div></div>
-                                <button onClick={()=>props.editWorkpaceFromServer()}>edit workpace</button>
+                        <button onClick={() => props.editWorkspaceFromServer()}>edit workpace</button>
                               <button onClick={() => props.EditProjectFromServer()}>edit project</button>
                         <button onClick={() => props.EditTaskFromServer()}>edit Task</button>
                                 <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
@@ -125,19 +125,18 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        workpace: state.workpaceReducer.workpace,
+
+
         workspace1: state.workspace_reducer.workspace,
-
-
-
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+      
         EditTaskFromServer: (t) => dispatch(actions.EditTaskFromServer(t)),
         EditProjectFromServer: (p) => dispatch(actions.EditProjectFromServer(p)),
-        editWorkpaceFromServer: (w) => dispatch(actions.editWorkpaceFromServer(w)),
+        editWorkspaceFromServer: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
   

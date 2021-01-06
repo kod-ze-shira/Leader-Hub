@@ -130,12 +130,12 @@ function checkPermission(result) {
 }
 
 
-export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
+export const editWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE') {
         debugger
 
-        var w = getState().workpace;
+        var w = getState().workspace;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -168,6 +168,7 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
 
 
 export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
+   
 
     if (action.type === 'EDIT_PROJECT') {
         debugger

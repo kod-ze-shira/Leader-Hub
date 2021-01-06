@@ -16,7 +16,7 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
-        name: "aba tazor",
+        name: "",
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -26,6 +26,12 @@ const initialState = {
 
 
 }
+const workpace2 = {
+    setCompanyName(state, action) {
+        state.company.name = action.payload;
+    },
+    
+};
 // setname(state, action) {
 //     state.contactDetails.youTube = action.payload;
 // }

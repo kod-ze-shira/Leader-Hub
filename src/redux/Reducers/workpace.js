@@ -2,7 +2,7 @@ import produce from 'immer';
 
 const initialState = {
        workpace: {
-        name: "אבא תעזור לי שזה יעבוד",
+        name: "",
      
     }
 }
