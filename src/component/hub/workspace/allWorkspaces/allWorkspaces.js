@@ -9,6 +9,11 @@ import { ViewWorkspace } from '../viewWorkspace/viewWorkspace'
 
 function allWorkspaces(props) {
     // useEffect(() => {
+      
+    // }
+
+        // , [props]);
+    // useEffect(() => {
     //     // props.getAllWorkspaces();
     // }
 
@@ -18,12 +23,12 @@ function allWorkspaces(props) {
     //     <wor ghg={element}>element</wor>
     // })
     const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspace key={todo.id} workspace={todo} />
+        return <ViewWorkspace key={todo._id} workspace={todo} />
       })
     return (
         <>
             <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-            <ul>{renderedListWorkspaces}</ul>
+            <div>{renderedListWorkspaces}</div>
         </>
     )
 }
