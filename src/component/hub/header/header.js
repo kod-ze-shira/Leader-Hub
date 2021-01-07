@@ -52,7 +52,9 @@ function Header(props) {
         debugger
         props.createW(event.target.name, event.target.value)
     }
-
+    const getAllWorkspaces = () => {
+        props.getAllWorkspaces();
+    }
     return (
         task ?
             workpas ?
@@ -93,12 +95,18 @@ function Header(props) {
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
                                 </div></div>
-                        <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
+                        {/* <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
                               <button onClick={() =>{ props.EditProjectFromServer1()}}>edit project</button>
-                        <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button>
+                        <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button> */}
                                 {/* <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> */}
                                 {/* <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button> */}
-                        </div>
+        
+                                <button onClick={()=>props.editWorkpaceFromServer()}>edit workpace</button>
+                              <button onClick={() => props.EditProjectFromServer()}>edit project</button>
+                        <button onClick={() => props.EditTaskFromServer()}>edit Task</button>
+                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
+                                <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
+                                                 </div>
 
            
 
@@ -139,9 +147,6 @@ const mapDispatchToProps = (dispatch) => {
         editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
-  
-
-
 
     }
 }

@@ -11,7 +11,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { getUser } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
+import { getAllWorkspacesFromServer } from '../middleware/crud'
+
 import { setProjectCrud } from '../middleware/crud'
+
 import { setTaskCrud } from '../middleware/crud'
 import { editWorkspaceFromServer} from '../middleware/crud'
 import { EditProjectFromServer}    from '../middleware/crud'
@@ -30,9 +33,13 @@ const store = createStore(
                 EditProjectFromServer,
                 editWorkspaceFromServer,
                 setWorkspaCrud,
+                getAllWorkspacesFromServer,
                 setTaskCrud,
                 setProjectCrud,
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 91a8273e3d02d32ab16955f103ff02d73f20e988
 
                 // getUser//פונקציה לקריאה//
 
@@ -40,8 +47,9 @@ const store = createStore(
 )
 var url = window.location;
 console.log(url);
-var userName = (url.pathname.split('/')[1]);
-console.log(userName);
+store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
+// var userName = (url.pathname.split('/')[1]);
+// console.log(userName);
 //ליירק בעת  עבודה לוקאלית 
 // if (document.cookie) {
 //     let jwtFromCookie = document.cookie.includes('jwt') ?
@@ -53,6 +61,5 @@ window.store = store;
 //ליירק בעת  עבודה בשרת  
 let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjA5NjY4Mjc3fQ.W7RfgZLb8q6ew51Xwyef-PDVI0qkzcHHbOUdkm4n1U0";
 store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
-store.dispatch(actions.getUserFromServer(userName));
 
 export default store;

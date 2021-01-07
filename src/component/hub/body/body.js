@@ -2,6 +2,7 @@ import React from 'react';
 import Search from '../Search/search';
 // import TableHeader from '../Table/tableheader/tableheader' 
 import TableBody from '../Table/tablebody/tablebody';
+import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
 import './body.css';
 
 // import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import './body.css';
 // function mapStateToProps(state) {
 //   return {
 //     workpace: state.workpaceReducer.workpace
-   
+
 //   };
 // }
 // const mapDispatchToProps = (dispatch) => ({
@@ -21,13 +22,12 @@ import './body.css';
 // })
 
 // export default connect(mapStateToProps, mapDispatchToProps)(function Body(props)
-export default function Body()
-{
+export default function Body() {
   // const { workpace, setName, setlastname}=props;
-    return(
-     
+  return (
+
     <div className="body">
-        {/* <label>first name</label><input
+      {/* <label>first name</label><input
           value={workpace.name}
           onChange={(e) => setName(e.target.value)}
         ></input><br></br>
@@ -40,10 +40,11 @@ export default function Body()
          <br></br>
          aba toda {workpace.name} {workpace.lastName} */}
 
-     <Search />
-       {/* <TableHeader/> */}
-      <TableBody/>
+      <Search />
+      {/* <TableHeader/> */}
+      <TableBody />
+      <AllWorkspaces />
     </div>
-    );
+  );
 }
 // )
