@@ -2,7 +2,6 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
-    debugger
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
@@ -34,7 +33,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-        debugger
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
@@ -62,14 +60,12 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
-        debugger
 
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
@@ -98,14 +94,12 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
 export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
-        debugger
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
         let name = action.payload;
@@ -133,7 +127,6 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
@@ -155,7 +148,7 @@ function checkPermission(result) {
     })
 }
 
-
+//edit workspace
 export const editWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE_FROM_SERVER') {
@@ -164,7 +157,6 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
         let workspace = getState().workspace_reducer.workspace;
         // var w = getState().workspace_reducer.workspace;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -195,13 +187,13 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
 }
 
 
-
-export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
+//edit project
+export const editProjectInServer = ({ dispatch, getState }) => next => action => {
    
-    if (action.type === 'EDIT_PROJECT_FROM_SERVER') {
+    if (action.type === 'EDIT_PROJECT_IN_SERVER') {
   
 
-        let p = getState().project_reducer.project;
+        let project = getState().project_reducer.project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -211,11 +203,11 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ p }),
-            dataType: 'json',
+            data: JSON.stringify({ project }),
             success: function (data) {
                 console.log("success")
-                console.log(data);
+                console.log("data",data);
+                dispatch(actions.setProject(data.result))
 
             },
             error: function (err) {
@@ -225,17 +217,16 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
                 })
             }
         });
-        // }
+        
     }
     return next(action);
 }
 
-export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
+export const editTaskFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_TASK_FROM_SERVER') {
 
-
-        var t = getState().task_reducer.task;
+        var task = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -249,7 +240,7 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
             // dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log(data);
+                console.log("data",data);
 
             },
             error: function (err) {

@@ -49,7 +49,6 @@ function Header(props) {
     //     }}
     // props.createW(jsonW);
     const change = (event) => {
-        debugger
         props.createW(event.target.name, event.target.value)
     }
     const getAllWorkspaces = () => {
@@ -136,8 +135,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       
-        EditTaskFromServer: (t) => dispatch(actions.EditTaskFromServer(t)),
-        EditProjectFromServer1: (p) => dispatch(actions.EditProjectFromServer(p)),
+        EditTaskFromServer: (t) => dispatch(actions.editTaskFromServer(t)),
+        EditProjectFromServer1: (p) => dispatch(actions.editProjectInServer(p)),
         editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
