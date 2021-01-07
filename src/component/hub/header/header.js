@@ -98,8 +98,8 @@ function Header(props) {
                         <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
                               <button onClick={() =>{ props.EditProjectFromServer1()}}>edit project</button>
                         <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button>
-                                {/* <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> */}
-                                {/* <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button> */}
+                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> 
+                                 <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
                         </div>
 
            
@@ -136,7 +136,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       
-        EditTaskFromServer: () => dispatch(actions.EditTaskFromServer()),
+        EditTaskFromServer: (t) => dispatch(actions.EditTaskFromServer(t)),
         EditProjectFromServer1: (p) => dispatch(actions.EditProjectFromServer(p)),
         editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
