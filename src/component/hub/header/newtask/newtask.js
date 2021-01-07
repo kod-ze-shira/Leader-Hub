@@ -9,7 +9,6 @@ import { actions } from '..//..//..//..//redux/actions/action'
 
 function Newtask(props) {
     const change = (event) => {
-        debugger
         props.createT(event.target.name, event.target.value)
     }
     function backheader() {

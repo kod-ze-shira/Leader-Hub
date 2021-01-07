@@ -19,7 +19,6 @@ const initialState = {
 // }, initialState);
 const publicData = {
     // setWorkspace(state, action) {
-    //     debugger
     //     // state.workpace[action.payload] = action.value;
     //     state.workspace = action.value
     //     // dispatch({ type: "GET_ALL" })

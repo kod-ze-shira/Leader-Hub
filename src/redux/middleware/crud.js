@@ -2,7 +2,6 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
-    debugger
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
@@ -34,7 +33,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-        debugger
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
@@ -62,14 +60,12 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
-        debugger
 
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
@@ -98,14 +94,12 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
 export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
-        debugger
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
         let name = action.payload;
@@ -133,7 +127,6 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
@@ -159,7 +152,6 @@ function checkPermission(result) {
 export const editWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE_FROM_SERVER') {
-        debugger
 
         let workspace = getState().workspace_reducer.workspace;
         // var w = getState().workspace_reducer.workspace;
@@ -190,7 +182,6 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
@@ -200,7 +191,6 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
 export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
    
     if (action.type === 'EDIT_PROJECT_FROM_SERVER') {
-        debugger
 
         let p = getState().project_reducer.project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
@@ -227,7 +217,6 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
             }
         });
         // })
-        debugger
     }
     return next(action);
 }
@@ -235,7 +224,6 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
 export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_TASK_FROM_SERVER') {
-        debugger
 
         var t = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
@@ -262,7 +250,6 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
             }
         });
         // })
-        debugger
     }
     return next(action);
 }

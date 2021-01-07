@@ -48,7 +48,6 @@ const workspace= {
 // }, initialState);
 const workspaces = {
     setWorkspace(state, action) {
-        debugger
         // state.workpace[action.payload] = action.value;
         
         // dispatch({ type: "GET_ALL" })

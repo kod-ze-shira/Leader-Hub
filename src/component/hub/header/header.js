@@ -49,7 +49,6 @@ function Header(props) {
     //     }}
     // props.createW(jsonW);
     const change = (event) => {
-        debugger
         props.createW(event.target.name, event.target.value)
     }
     const getAllWorkspaces = () => {

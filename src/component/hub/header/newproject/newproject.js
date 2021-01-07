@@ -12,7 +12,6 @@ function NewProject(props) {
     }
     const [project, setproject] = useState(true);
     const change = (event) => {
-        debugger
         props.createP(event.target.name, event.target.value)
     }
     return (

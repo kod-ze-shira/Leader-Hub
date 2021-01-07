@@ -24,7 +24,6 @@ const initialState = {
 // }, initialState);
 const projects = {
     setProject1(state, action) {
-        debugger
         // state.workpace[action.payload] = action.value;
         state.project.name = action.value
         // dispatch({ type: "GET_ALL" })
