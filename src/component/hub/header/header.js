@@ -137,7 +137,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
       
         EditTaskFromServer: () => dispatch(actions.EditTaskFromServer()),
-        EditProjectFromServer1: () => dispatch(actions.EditProjectFromServer()),
+        EditProjectFromServer1: (p) => dispatch(actions.EditProjectFromServer(p)),
         editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
