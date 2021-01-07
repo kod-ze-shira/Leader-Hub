@@ -36,10 +36,7 @@ const store = createStore(
                 getAllWorkspacesFromServer,
                 setTaskCrud,
                 setProjectCrud,
-<<<<<<< HEAD
                 
-=======
->>>>>>> 91a8273e3d02d32ab16955f103ff02d73f20e988
 
                 // getUser//פונקציה לקריאה//
 

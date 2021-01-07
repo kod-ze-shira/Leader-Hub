@@ -95,18 +95,12 @@ function Header(props) {
                                 <div className="mt-2"></div>
                                 <b>START TASK</b></div>
                                 </div></div>
-                        {/* <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
+                        <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
                               <button onClick={() =>{ props.EditProjectFromServer1()}}>edit project</button>
-                        <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button> */}
+                        <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button>
                                 {/* <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> */}
                                 {/* <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button> */}
-        
-                                <button onClick={()=>props.editWorkpaceFromServer()}>edit workpace</button>
-                              <button onClick={() => props.EditProjectFromServer()}>edit project</button>
-                        <button onClick={() => props.EditTaskFromServer()}>edit Task</button>
-                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
-                                <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
-                                                 </div>
+                        </div>
 
            
 
