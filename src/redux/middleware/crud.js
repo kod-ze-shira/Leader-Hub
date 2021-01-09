@@ -167,10 +167,10 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
             data: JSON.stringify({ workspace }),
             // dataType: 'json',
             success: function (data) {
-                
+
                 console.log("success")
                 console.log(data);
-                
+
 
             },
             error: function (err) {
@@ -178,7 +178,7 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
                 checkPermission(err).then((ifOk) => {
 
                 })
-                
+
             }
         });
         // })
@@ -189,7 +189,7 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
 
 
 export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
-   
+
     if (action.type === 'EDIT_PROJECT_FROM_SERVER') {
 
         let p = getState().project_reducer.project;
@@ -253,7 +253,20 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
     }
     return next(action);
 }
-
+export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
+        fetch(url, {
+            headers: { authorization: getState().public_reducer.tokenFromCookies }
+        })
+            .then((result) => {
+                console.log(result);
+            }).then((result) => {
+                console.log(result);
+            })
+    }
+    return next(action)
+}
 
 
 
