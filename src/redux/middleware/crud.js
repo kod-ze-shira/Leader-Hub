@@ -2,11 +2,12 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
-    debugger
+
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         // let workspace = getState().workspace_reducer.workspace;
+        // renana-il
         fetch(urlData,
             {
                 method: 'GET',
@@ -175,10 +176,10 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
             data: JSON.stringify({ workspace }),
             // dataType: 'json',
             success: function (data) {
-                
+
                 console.log("success")
                 console.log(data);
-                
+
 
             },
             error: function (err) {
@@ -186,7 +187,7 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
                 checkPermission(err).then((ifOk) => {
 
                 })
-                
+
             }
         });
         // })
@@ -198,7 +199,7 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
 
 
 export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
-   
+
     if (action.type === 'EDIT_PROJECT_FROM_SERVER') {
         debugger
 
