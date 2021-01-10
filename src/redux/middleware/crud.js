@@ -6,6 +6,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         // let workspace = getState().workspace_reducer.workspace;
+        // renana-il
         fetch(urlData,
             {
                 method: 'GET',
@@ -152,7 +153,7 @@ function checkPermission(result) {
 export const editWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE_FROM_SERVER') {
-      
+
 
         let workspace = getState().workspace_reducer.workspace;
         // var w = getState().workspace_reducer.workspace;
@@ -167,10 +168,10 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
             data: JSON.stringify({ workspace }),
             // dataType: 'json',
             success: function (data) {
-                
+
                 console.log("success")
                 console.log(data);
-                
+
 
             },
             error: function (err) {
@@ -178,7 +179,7 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
                 checkPermission(err).then((ifOk) => {
 
                 })
-                
+
             }
         });
         // })
@@ -189,9 +190,9 @@ export const editWorkspaceFromServer = ({ dispatch, getState }) => next => actio
 
 //edit project
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
-   
+
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
-  
+
 
         let project = getState().project_reducer.project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
@@ -206,7 +207,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
             data: JSON.stringify({ project }),
             success: function (data) {
                 console.log("success")
-                console.log("data",data);
+                console.log("data", data);
                 dispatch(actions.setProject(data.result))
 
             },
@@ -217,7 +218,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
                 })
             }
         });
-        
+
     }
     return next(action);
 }
@@ -240,7 +241,7 @@ export const editTaskFromServer = ({ dispatch, getState }) => next => action => 
             // dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log("data",data);
+                console.log("data", data);
 
             },
             error: function (err) {
@@ -251,12 +252,25 @@ export const editTaskFromServer = ({ dispatch, getState }) => next => action => 
             }
         });
         // })
-      
-        
+
+
     }
     return next(action);
 }
-
+export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
+        fetch(url, {
+            headers: { authorization: getState().public_reducer.tokenFromCookies }
+        })
+            .then((result) => {
+                console.log(result);
+            }).then((result) => {
+                console.log(result);
+            })
+    }
+    return next(action)
+}
 
 
 

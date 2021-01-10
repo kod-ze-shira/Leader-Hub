@@ -4,7 +4,7 @@ import Search from '../Search/search';
 import TableBody from '../Table/tablebody/tablebody';
 import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
 import './body.css';
-
+import TeamExample from '../team/teamExample'
 // import { connect } from 'react-redux';
 // import { setlastname, setName } from '../../../redux/actions/action'
 
@@ -44,6 +44,7 @@ export default function Body() {
       {/* <TableHeader/> */}
       <TableBody />
       <AllWorkspaces />
+      <TeamExample />
     </div>
   );
 }
