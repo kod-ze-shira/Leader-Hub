@@ -6,6 +6,7 @@ import Share from '../../team/share'
 
 export function ViewWorkspace({ props, workspace }) {
   const [viewProjects, setViewProjects] = useState(false)
+  const [showShare, setShowShare] = useState(false)
 
 
   const viewProjectsByWorkspace = () => {
@@ -22,13 +23,14 @@ export function ViewWorkspace({ props, workspace }) {
           </div>
           <div className="col">
             <div>
-              {/* <button onClick={setShowShare(!showShare)}>share</button></div> */}
-              {/* {
-              showShare && <Share nameWorkspace={workspace.name}></Share>
-            } */}
-              {/* <Share nameWorkspace={workspace.name}></Share> */}
+              {/* <button onClick={setShowShare(!showShare)}>share</button></div>
+            {
+              showShare ? <Share nameWorkspace={workspace.name}></Share> : null
+            }
+            <Share nameWorkspace={workspace.name}></Share> */}
               <div><button>share</button></div>
             </div>
+
           </div>
         </div>
         <div>

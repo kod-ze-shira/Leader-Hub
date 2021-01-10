@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom';
-import React, { useState } from 'react';
+import React from 'react';
+
 import './newtask.css';
-import Header from '../header';
+
 import { connect } from 'react-redux';
 import { actions } from '..//..//..//..//redux/actions/action'
 
@@ -11,16 +11,12 @@ function Newtask(props) {
     const change = (event) => {
         props.createT(event.target.name, event.target.value)
     }
-    function backheader() {
-        setNewtask(false);
-    }
-    const [Newtask, setNewtask] = useState(true);
+
     return (
-        Newtask ?
-            <div className="headerserch">
+ <>
 
                 <div className="row">
-                    <div className="col-0.5 x"> <b onClick={backheader}>x</b></div>
+                   
                     <div className="col-md-1 col-xs-2 mt-2 Type1" style={{ color: "#707074" }}>Type</div>
                     <div className="col-md-2 col-xs-2 mt-2 name" style={{ color: "#707074" }}>Name</div>
                     <div className="col-md-2 col-xs-1"></div>
@@ -38,7 +34,7 @@ function Newtask(props) {
 
 
 
-                    <div className="col-md-4 col-xs-1 input_task">
+                    <div className="col-md-5 col-xs-1 input_task">
                         <div className="mt-2"></div>
                         <input type="text"
                             id="inputText" placeholder="Type the name of the task" onChange={(e) => change(e)} />
@@ -55,11 +51,8 @@ function Newtask(props) {
                         <b onClick={() => { props.setTaskCrud1(props.task1); debugger }}>START TASK</b></div></div>
 
                 </div>
-            </div>
-            :
-            <>
-                <Header />
             </>
+        
 
     )
 }

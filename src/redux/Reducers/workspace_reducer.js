@@ -13,17 +13,20 @@ const initialState = {
 
 
 }
-const workspace= {
+const workspace = {
     setWorkspaceName(state, action) {
         state.workspace.name = action.payload;
     },
-    
+    setState(state, action) {
+        state.workspace = action.payload
+    }
+
 };
 
 const workspaces = {
     setWorkspace(state, action) {
         // state.workpace[action.payload] = action.value;
-        
+
         // dispatch({ type: "GET_ALL" })
     },
 

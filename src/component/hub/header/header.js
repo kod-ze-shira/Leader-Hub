@@ -15,26 +15,17 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import './header.css'
 
 
-// function mapStateToProps(state) {
-//     return {
-//         project: state.projectReducer.project,
-//     };
-// }
-
-// const mapDispatchToProps = (dispatch) => ({
-//     setproject: (project_name) => dispatch(setproject(project_name))
-
-// })
 function Header(props) {
-    function newtask() {
-        settask(false);
-    }
     function newworkpas() {
         set_workpas(false);
     }
     function newpoject() {
         set_project(false);
     }
+    function newtask() {
+        settask(false);
+    }
+  
 
     const [project, set_project] = useState(true);
     const [task, settask] = useState(true);
@@ -55,6 +46,7 @@ function Header(props) {
     }
    
     return (
+       
         task ?
             workpas ?
                 project ?
@@ -68,7 +60,8 @@ function Header(props) {
                               
                             </div>
                             <div className="row mt-2">
-                             
+                            <button onClick={props.setisConfiguratorOpen}></button>
+                            <h1>{props.project.isConfiguratorOpen}</h1>
                                 <div className="col-md-1 col-xs-0.5">
 
                                     <Dropdown>
@@ -89,35 +82,95 @@ function Header(props) {
                                         </Dropdown.Menu>
                                     </Dropdown>
 
-                                </div>
-                    
-                                <div className="col-2"></div>
-                             
-                                <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
-                                <div className="mt-2"></div>
-                                <b>START TASK</b></div>
-                                </div></div>
-                        <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
-                              <button onClick={() =>{ props.EditProjectFromServer1()}}>edit project</button>
-                        <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button>
-                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> 
-                                 <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
+                                
+                        </div>
+                        </div>
                         </div>
 
            
 
                     :
                     <>
+                     <div className="headerserch row ">
+                         <div className="col-2 mt-4">
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    <img src={require('../../img/angle-down-solid.png')}></img>
+                           select <img src={require('../../img/star-solid.png')}></img>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item id="project" onClick={newpoject}>
+                                        Project</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2" id="task" onClick={newtask}>
+                                        <img src={require('../../img/1star-solid.png')}></img>
+                                Task</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2" id="workpas" onClick={newworkpas}>
+
+                                        workpas</Dropdown.Item>
+
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            </div>
+                            <div className="col-10">
                         <NewProject />
+                            </div>
+                        </div>
                     </>
                 :
                 <>
+                    <div className="headerserch row">
+                        <div className="col-2 mt-4">
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                <img src={require('../../img/angle-down-solid.png')}></img>
+                           select <img src={require('../../img/star-solid.png')}></img>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item id="project" onClick={newpoject}>
+                                    Project</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2" id="task" onClick={newtask}>
+                                    <img src={require('../../img/1star-solid.png')}></img>
+                                Task</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2" id="workpas" onClick={newworkpas}>
+
+                                    workpas</Dropdown.Item>
+
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        </div>
+                        <div className="col-10">
                     <NewWorkpas />
+                        </div>
+                    </div>
 
                 </>
             :
             <>
-                <Newtask />
+                <div className="headerserch row ">
+                    <div className="col-2 mt-4">
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            <img src={require('../../img/angle-down-solid.png')}></img>
+                           select <img src={require('../../img/star-solid.png')}></img>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item id="project" onClick={newpoject}>
+                                Project</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2" id="task" onClick={newtask}>
+                                <img src={require('../../img/1star-solid.png')}></img>
+                                Task</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2" id="workpas" onClick={newworkpas}>
+
+                                workpas</Dropdown.Item>
+
+                        </Dropdown.Menu>
+                    </Dropdown>
+                
+                    </div>
+                    <div className="col-10">
+                    <Newtask />
+                    </div>
+                </div>
             </>
 
 
@@ -137,6 +190,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
         setProjectName: (name) => dispatch(actions.setProjectName(name)),
         setProjectId:(id)=>dispatch(actions.setProjectId(id)),
         setTaskName:(name)=>dispatch(actions.setTaskName(name)),

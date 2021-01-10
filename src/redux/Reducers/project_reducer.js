@@ -1,9 +1,11 @@
 import produce from 'immer';
+import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
     project: {
         name: "malka",
-        id:"5ff5"
+        id:"5ff5",
+        isConfiguratorOpen:"false",
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -38,7 +40,13 @@ const project={
     },
     setProjectId(state,action){
         state.project.id=action.payload;
-    }
+    },
+    setisConfiguratorOpen(state,action){
+        debugger;
+        state.project.isConfiguratorOpen = !state.project.isConfiguratorOpen
+    },
+    
+  
 }
 
 
