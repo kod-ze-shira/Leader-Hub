@@ -129,7 +129,6 @@ const mapStateToProps = (state) => {
     return {
         project:state.project_reducer.project,
      
-        project: state.project_reducer.project,
         workspace1: state.workspace_reducer.workspace,
     }
 }
