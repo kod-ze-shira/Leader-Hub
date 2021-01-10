@@ -1,6 +1,5 @@
 
 // import reducer from './reducers';
-import workpaceReducer from '../Reducers/workpace';
 import project_reducer from '../Reducers/project_reducer';
 import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
@@ -21,7 +20,7 @@ import { editProjectInServer}    from '../middleware/crud'
 import { editTaskFromServer} from '../middleware/crud'
 
 
-const reducers = combineReducers({ workpaceReducer, project_reducer, task_reducer, workspace_reducer, public_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer });
 
 
 const store = createStore(
@@ -37,9 +36,6 @@ const store = createStore(
                 setTaskCrud,
                 setProjectCrud,
                 getProjetsByWorkspace               
-
-                // getUser//פונקציה לקריאה//
-
             ))
 )
 var url = window.location;
