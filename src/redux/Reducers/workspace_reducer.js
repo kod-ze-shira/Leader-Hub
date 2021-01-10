@@ -27,7 +27,7 @@ const initialState = {
 
 }
 const workspace= {
-    setName(state, action) {
+    setWorkspaceName(state, action) {
         state.workspace.name = action.payload;
     },
     

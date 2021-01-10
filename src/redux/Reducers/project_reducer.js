@@ -3,7 +3,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     project: {
         name: "malka",
-        id:"5ff5b702b8c8a9b179358795"
+        id:"5ff5"
         //  uaserId:"",
         //  projects:[],
         //  team:""

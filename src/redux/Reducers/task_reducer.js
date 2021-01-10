@@ -39,7 +39,7 @@ const initialState = {
 const tasks = {
     setTask(state, action) {
         // state.workpace[action.payload] = action.value;
-        state.task.name = action.value
+        state.task.name = action.value;
         // dispatch({ type: "GET_ALL" })
     },
 

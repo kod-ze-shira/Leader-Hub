@@ -9,7 +9,6 @@ import Newtask from './newtask/newtask'
 import NewProject from './newproject/newproject';
 import NewWorkpas from './nweworkspace/newworkspace';
 
-
 import { actions } from '..//..//..//redux/actions/action'
 import { propTypes } from 'react-bootstrap/esm/Image';
 
@@ -61,6 +60,7 @@ function Header(props) {
                 project ?
                    <div className="headerserch">
                             <div className="row">
+                          
 
                                 <div className="col-md-1 col-xs-2 mt-2 Type" style={{ color: "#707074" }}>Type</div>
                               
@@ -127,7 +127,8 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
     return {
-     
+        project:state.project_reducer.project,
+        workspace:state.workpas_reducer.workpas,
         project: state.project_reducer.project,
         workspace1: state.workspace_reducer.workspace,
     }
@@ -137,9 +138,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setProjectName: (name) => dispatch(actions.setProjectName(name)),
         setProjectId:(id)=>dispatch(actions.setProjectId(id)),
-  
+        setTaskName:(name)=>dispatch(actions.setTaskName(name)),
+        setWorkspaceName: (name) => dispatch(actions.setWorkspaceName(name)),
         EditTaskFromServer: (task) => dispatch(actions.editTaskFromServer(task)),
-        EditProjectFromServer1: (p) => dispatch(actions.editProjectInServer(p)),
+        EditProjectFromServer1: (project) => dispatch(actions.editProjectInServer(project)),
         editWorkspaceFromServer1: (workspace) => dispatch(actions.editWorkspaceFromServer(workspace)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
