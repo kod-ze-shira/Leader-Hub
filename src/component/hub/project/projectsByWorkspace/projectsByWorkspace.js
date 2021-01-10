@@ -1,20 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import {ViewProject} from '../viewProject/viewProject'
-function ProjectsByWorkspace(props,idWorkspace) {
-    useEffect(()=>{
-        console.log("idWorkspace",props.idWorkspace);
-props.getProjectsByWorkspaceId(props.idWorkspace);
-    },[props])
+import { ViewProject } from '../viewProject/viewProject'
+function ProjectsByWorkspace(props, idWorkspace) {
+    const [isFullProjects, setIsFullProjects] = useState(false);
 
-    const viewProjectsByWorkspace=props.projects.map((project)=>{
-return <ViewProject key={project._id} project={project}/>
+    useEffect(() => {
+        if (!isFullProjects) {
+            setIsFullProjects(true)
+            console.log("idWorkspace", props.idWorkspace)
+            props.getProjectsByWorkspaceId(props.idWorkspace)
+        }
+
+    }, [props])
+
+    const viewProjectsByWorkspace = props.projects.map((project) => {
+        return <ViewProject key={project._id} project={project} />
     })
-    return(
+    return (
         <>
-        <div>hello</div>
-        <div>{viewProjectsByWorkspace}</div>
+            <div>hello</div>
+            <div>{viewProjectsByWorkspace}</div>
         </>
     )
 }

@@ -200,7 +200,6 @@ const mapDispatchToProps = (dispatch) => {
         editWorkspaceFromServer1: (workspace) => dispatch(actions.editWorkspaceFromServer(workspace)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
