@@ -236,7 +236,7 @@ export const editTaskFromServer = ({ dispatch, getState }) => next => action => 
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ t }),
+            data: JSON.stringify({ task }),
             // dataType: 'json',
             success: function (data) {
                 console.log("success")

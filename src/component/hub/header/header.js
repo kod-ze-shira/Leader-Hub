@@ -54,6 +54,7 @@ function Header(props) {
     const getAllWorkspaces = () => {
         props.getAllWorkspaces();
     }
+   
     return (
         task ?
             workpas ?
@@ -126,18 +127,20 @@ function Header(props) {
 }
 const mapStateToProps = (state) => {
     return {
-
-
+     
+        project: state.project_reducer.project,
         workspace1: state.workspace_reducer.workspace,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      
-        EditTaskFromServer: (t) => dispatch(actions.editTaskFromServer(t)),
+        setProjectName: (name) => dispatch(actions.setProjectName(name)),
+        setProjectId:(id)=>dispatch(actions.setProjectId(id)),
+  
+        EditTaskFromServer: (task) => dispatch(actions.editTaskFromServer(task)),
         EditProjectFromServer1: (p) => dispatch(actions.editProjectInServer(p)),
-        editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
+        editWorkspaceFromServer1: (workspace) => dispatch(actions.editWorkspaceFromServer(workspace)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
 
