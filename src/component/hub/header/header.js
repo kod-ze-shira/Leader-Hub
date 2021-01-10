@@ -128,7 +128,7 @@ function Header(props) {
 const mapStateToProps = (state) => {
     return {
         project:state.project_reducer.project,
-     
+        task: state.task_reducer.task,
         workspace1: state.workspace_reducer.workspace,
     }
 }
