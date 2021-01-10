@@ -49,7 +49,6 @@ function Header(props) {
     //     }}
     // props.createW(jsonW);
     const change = (event) => {
-        debugger
         props.createW(event.target.name, event.target.value)
     }
     const getAllWorkspaces = () => {
@@ -98,8 +97,8 @@ function Header(props) {
                         <button onClick={() => { props.editWorkspaceFromServer1()}}>edit workpace</button>
                               <button onClick={() =>{ props.EditProjectFromServer1()}}>edit project</button>
                         <button onClick={() =>{ props.EditTaskFromServer()}}>edit Task</button>
-                                {/* <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> */}
-                                {/* <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button> */}
+                                <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button> 
+                                 <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
                         </div>
 
            
@@ -136,8 +135,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       
-        EditTaskFromServer: () => dispatch(actions.EditTaskFromServer()),
-        EditProjectFromServer1: (p) => dispatch(actions.EditProjectFromServer(p)),
+        EditTaskFromServer: (t) => dispatch(actions.editTaskFromServer(t)),
+        EditProjectFromServer1: (p) => dispatch(actions.editProjectInServer(p)),
         editWorkspaceFromServer1: (w) => dispatch(actions.editWorkspaceFromServer(w)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),

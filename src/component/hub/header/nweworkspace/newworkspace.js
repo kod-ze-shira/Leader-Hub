@@ -8,7 +8,6 @@ import { actions } from '..//..//..//..//redux/actions/action'
 
 function NewWorkpas(props) {
     const change = (event) => {
-        debugger
         props.createW(event.target.name, event.target.value)
     }
     function backheader() {
