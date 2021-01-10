@@ -24,16 +24,16 @@ opacity: 1;
 color:WHITE;
 cursor: pointer;
 text-align: center;
-margin: 0px 10px;
 }
 #inputTextproject{
   
-  margin: 0px 10px;
+
     width: 90%;
     height:60%;
     border: none;
     border-bottom: none;
     background-color:#FCF7E5;
+   
 }
 #inputTextproject:focus{
   outline:none;
@@ -48,7 +48,7 @@ margin: 0px 10px;
   border-radius: 12px;
   opacity: 1;
   color: #FEAB06;
- margin: 0px 60px;
+ 
 }
 #datetask{
       border:white;
@@ -64,7 +64,7 @@ border: 1px solid #979797;
 border-radius: 8px;
 opacity: 1;
 text-align: center;
-    margin: 0px 100px;
+    
 }
 .input_project{
   width: 18vw;
@@ -73,5 +73,5 @@ background: #FCF7E5 0% 0% no-repeat padding-box;
 border-radius: 8px;
 opacity: 1;
 color:#ffb380;
-margin: 0px -19px;
+margin: 0px 40px;
 }

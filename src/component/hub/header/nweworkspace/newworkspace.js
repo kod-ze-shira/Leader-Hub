@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom';
+import React from 'react';
+
 import './newworkspace.css';
-import React, { useState } from 'react';
-import Header from '../header';
+
 import { connect } from 'react-redux';
 import { actions } from '..//..//..//..//redux/actions/action'
 
@@ -10,15 +10,13 @@ function NewWorkpas(props) {
     const change = (event) => {
         props.createW(event.target.name, event.target.value)
     }
-    function backheader() {
-        setworkpas(false);
-    }
-    const [workpas, setworkpas] = useState(true);
+  
+    
     return (
-        workpas ?
-            <div className="headerserch">
+    
+          <>
                 <div className="row">
-                    <div className="col-0.5 x"><b onClick={backheader}>x</b></div>
+               
                     <div className="col-md-1 col-xs-2 mt-2 Type1" style={{ color: "#707074" }}>Type</div>
                     <div className="col-md-2 col-xs-2 mt-2 name" style={{ color: "#707074" }}>Name</div>
                     <div className="col-md-2 col-xs-1"></div>
@@ -52,10 +50,8 @@ function NewWorkpas(props) {
                         <b onClick={() => { props.setWorkspaCrud(); debugger }}>START WORKSPACE</b></div></div>
 
                 </div>
-            </div>
-            : <>
-                <Header />
             </>
+            
     )
 }
 const mapStateToProps = (state) => {

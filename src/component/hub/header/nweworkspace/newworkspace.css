@@ -4,7 +4,7 @@ height: 13vh;
 background: #FFFFFF 0% 0% no-repeat padding-box;
 border-radius: 8px;
 opacity: 1;
-margin: 0px -40px;
+
 }
 .project{
       width: 18vw;
@@ -15,12 +15,12 @@ margin: 0px -40px;
   border-radius: 12px;
   opacity: 1;
   color: #ff3333;
- margin: 0px 60px;
+
 }
 #datetask{
       border:white;
   cursor: pointer;
-  width: 9vw;
+  
    
 }
 .newdate{
@@ -31,7 +31,7 @@ border: 1px solid #979797;
 border-radius: 8px;
 opacity: 1;
 text-align: center;
-    margin: 0px 100px;
+   
 }
 .input_workpace{
   width: 18vw;
@@ -40,7 +40,7 @@ background: #ffe6e6 0% 0% no-repeat padding-box;
 border-radius: 8px;
 opacity: 1;
 color:#ff8080;
-margin: 0px -19px;
+
 }
 #inputTextworkpase{
 color: #ff8080;
@@ -59,7 +59,7 @@ opacity: 1;
 color:WHITE;
 cursor: pointer;
 text-align: center;
-margin: 0px 10px;
+
 }
 .workspace{
       width: 18vw;
@@ -70,5 +70,5 @@ margin: 0px 10px;
   border-radius: 12px;
   opacity: 1;
   color: #ff8080;
- margin: 0px 60px;
+
 }
