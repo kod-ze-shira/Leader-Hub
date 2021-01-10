@@ -15,8 +15,8 @@ export function ViewWorkspace({ props, workspace }) {
   }
   return (
     <>
-      <div className="container" onClick={viewProjectsByWorkspace}>
-        <div className="row">
+      <div className="container" >
+        <div className="row" onClick={viewProjectsByWorkspace}>
           <div className="col-2">
             <div>{workspace.name}</div>
             <div>{workspace._id}</div>

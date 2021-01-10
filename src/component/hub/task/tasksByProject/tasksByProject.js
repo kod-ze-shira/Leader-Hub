@@ -8,6 +8,7 @@ function TasksByProject(props) {
     useEffect(() => {
         if (!isFullTasks) {
             setIsFullTasks(true);
+            console.log(props.projectId);
             props.getTasksByProject(props.projectId)
         }
     })

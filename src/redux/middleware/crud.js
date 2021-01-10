@@ -282,6 +282,7 @@ export const getTasksByProject = ({ dispatch, getState }) => next => action => {
                 return result.json()
             }).then(result => {
                 checkPermission(result).then((ifOk) => {
+                    console.log(result)
                     dispatch(actions.setTasks(result))
                 })
             })

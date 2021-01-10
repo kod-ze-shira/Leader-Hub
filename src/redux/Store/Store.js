@@ -7,7 +7,7 @@ import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getProjetsByWorkspace } from '../middleware/crud'
+import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
@@ -35,7 +35,8 @@ const store = createStore(
                 getAllWorkspacesFromServer,
                 setTaskCrud,
                 setProjectCrud,
-                getProjetsByWorkspace               
+                getProjetsByWorkspace,
+                getTasksByProject          
             ))
 )
 var url = window.location;
