@@ -60,6 +60,8 @@ function Header(props) {
                 project ?
                    <div className="headerserch">
                             <div className="row">
+                               
+                
                           
 
                                 <div className="col-md-1 col-xs-2 mt-2 Type" style={{ color: "#707074" }}>Type</div>
@@ -129,7 +131,7 @@ const mapStateToProps = (state) => {
     return {
         project:state.project_reducer.project,
         task: state.task_reducer.task,
-        workspace1: state.workspace_reducer.workspace,
+        workspace: state.workspace_reducer.workspace,
     }
 }
 

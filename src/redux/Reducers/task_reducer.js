@@ -16,7 +16,7 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     task: {
-        name: "",
+        name: "david",
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -37,9 +37,9 @@ const initialState = {
 //     }
 // }, initialState);
 const tasks = {
-    setTask(state, action) {
+    setTaskName(state, action) {
         // state.workpace[action.payload] = action.value;
-        state.task.name = action.value;
+        state.task.name = action.payload;
         // dispatch({ type: "GET_ALL" })
     },
 

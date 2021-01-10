@@ -16,7 +16,7 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
-        name: "",
+        name: "rabin",
         //  uaserId:"",
         //  projects:[],
         //  team:""
