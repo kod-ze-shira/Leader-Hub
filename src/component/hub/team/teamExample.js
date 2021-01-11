@@ -11,55 +11,54 @@ export default function TeamExample() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    let [state, setState] = useState(false);
-
-    state = {
-        items: [],
+    const [mail, setMail] = useState({
+        items: [""],
         value: "",
         error: null
-    };
+    });
+    // setMail({ items: ['ff@hhh.hh'] })
+    // state = {
+    //     items: [],
+    //     value: "",
+    //     error: null
+    // };
 
     function handleKeyDown(evt) {
         if (["Enter", "Tab", ","].includes(evt.key)) {
             evt.preventDefault();
+            // ?????????????????
+            // מה זה אומר this 
+            // האם אפשר להשמיט אותו בהקשר פה? 
+            var value = mail.value.trim();
+            console.log(value);
+            if (value && isValid(value)) {
+                if (mail.items) {
+                    setMail({
+                        items: [...mail.items, mail.value],
+                        value: ""
+                    });
+                }
 
-            var value = this.state.value.trim();
-
-            if (value && this.isValid(value)) {
-                this.setState({
-                    items: [...this.state.items, this.state.value],
+                else setMail({
+                    items: [mail.value],
                     value: ""
                 });
             }
         }
     };
     // const handleChange = evt => {
-    //     this.setState({
+    //     this.setMail({
     //         value: evt.target.value,
     //         error: null
     //     });
     // };
 
-    // handleKeyDown = evt => {
-    //     if (["Enter", "Tab", ","].includes(evt.key)) {
-    //         evt.preventDefault();
-
-    //         var value = this.state.value.trim();
-
-    //         if (value && isValid(value)) {
-    //             this.setState({
-    //                 items: [...this.state.items, this.state.value],
-    //                 value: ""
-    //             });
-    //         }
-    //     }
-    // };
 
 
 
     // handleDelete = item => {
-    //     this.setState({
-    //         items: this.state.items.filter(i => i !== item)
+    //     this.setMail({
+    //         items: this.mail.items.filter(i => i !== item)
     //     });
     // };
 
@@ -72,8 +71,9 @@ export default function TeamExample() {
         if (emails) {
             var toBeAdded = emails.filter(email => !isInList(email));
 
-            this.setState({
-                items: [...this.state.items, ...toBeAdded]
+            setMail({
+                // items: [...mail.items, ...toBeAdded]
+                items: [...mail.items, ...toBeAdded]
             });
         }
     }
@@ -90,7 +90,7 @@ export default function TeamExample() {
         }
 
         if (error) {
-            this.setState({ error });
+            setMail({ error });
 
             return false;
         }
@@ -99,7 +99,9 @@ export default function TeamExample() {
     }
 
     function isInList(email) {
-        return this.state.items.includes(email);
+        if (mail.items)
+            return mail.items.includes(email);
+        else return false
     }
 
     function isEmail(email) {
@@ -125,7 +127,7 @@ export default function TeamExample() {
                     I will not close if you click outside me. Don't even try to press
                     escape key.
 
-                    {/* {this.state.items.map(item => (
+                    {/* {this.mail.items.map(item => (
                     <div className="tag-item" key={item}>
                         {item}
                         <button
@@ -143,19 +145,18 @@ export default function TeamExample() {
                         </Form.Group>
                     </Form>
                     <input
-                        className={"inputMails "}
-                        //+ (this.state.error && " has-error")}
-                        // value={this.state.value}
+                        className={`inputMails ${mail.error ? "has-error" : null}`}
+                        // value={this.mail.value}
                         placeholder="Type or paste email addresses and press `Enter`..."
                         onKeyDown={(e) => handleKeyDown(e)}
                         // onKeyDown={this.handleKeyDown}
                         // onChange={handleChange}
-                        onChange={(e) => setState({ value: e.target.value })}
+                        onChange={(e) => setMail({ value: e.target.value })}
 
                         onPaste={(e) => handlePaste(e.target.value)}
                     />
 
-                    {/* {this.state.error && <p className="error">{this.state.error}</p>} */}
+                    {/* {this.mail.error && <p className="error">{this.mail.error}</p>} */}
 
 
                 </Modal.Body>
