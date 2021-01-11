@@ -19,7 +19,6 @@ function ProjectsByWorkspace(props, idWorkspace) {
     })
     return (
         <>
-            <div>hello</div>
             <div>{viewProjectsByWorkspace}</div>
         </>
     )

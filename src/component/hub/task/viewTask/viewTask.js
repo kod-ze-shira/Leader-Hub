@@ -5,7 +5,8 @@ export function ViewTask(props) {
         <>
             <div className="continer">
                 <div className="row">
-                    <div className="col">subject:{props.task.subject}</div>
+                    <div className="col-2">subject:{props.task.subject}</div>
+                    <div className="col"><button>view details</button></div>
                 </div>
             </div>
         </>
