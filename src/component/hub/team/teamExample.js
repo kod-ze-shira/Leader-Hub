@@ -1,34 +1,25 @@
 import React, { useState } from 'react'
-// import Button from 'react-bootstrap/Button';
 import ReactDOM from "react-dom";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./style.css";
 import { Button, Modal, Form } from 'react-bootstrap';
+// קישור מאיפה שלקחתי את הקוד
+// https://codesandbox.io/s/ypyxr11109?from-embed=&file=/src/index.js:1094-1101&resolutionWidth=609&resolutionHeight=675
+export default function TeamExample(props) {
 
-export default function TeamExample() {
-
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleShow = () => setShow(true);
     const [mail, setMail] = useState({
-        items: [""],
+        items: [],
         value: "",
         error: null
     });
-    // setMail({ items: ['ff@hhh.hh'] })
-    // state = {
-    //     items: [],
-    //     value: "",
-    //     error: null
-    // };
+
 
     function handleKeyDown(evt) {
         if (["Enter", "Tab", ","].includes(evt.key)) {
             evt.preventDefault();
-            // ?????????????????
-            // מה זה אומר this 
-            // האם אפשר להשמיט אותו בהקשר פה? 
             var value = mail.value.trim();
             console.log(value);
             if (value && isValid(value)) {
@@ -46,25 +37,19 @@ export default function TeamExample() {
             }
         }
     };
-    // const handleChange = evt => {
-    //     this.setMail({
-    //         value: evt.target.value,
-    //         error: null
-    //     });
-    // };
 
 
 
 
-    // handleDelete = item => {
-    //     this.setMail({
-    //         items: this.mail.items.filter(i => i !== item)
-    //     });
-    // };
+    function handleDelete(item) {
+        setMail({
+            items: mail.items.filter(i => i !== item)
+        });
+    };
 
     function handlePaste(evt) {
         evt.preventDefault();
-
+        debugger
         var paste = evt.clipboardData.getData("text");
         var emails = paste.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
 
@@ -90,7 +75,7 @@ export default function TeamExample() {
         }
 
         if (error) {
-            setMail({ error });
+            setMail({ error: error, ...mail.value, items: [...mail.items] });
 
             return false;
         }
@@ -99,9 +84,9 @@ export default function TeamExample() {
     }
 
     function isInList(email) {
-        if (mail.items)
-            return mail.items.includes(email);
-        else return false
+        // if (mail.items)
+        return mail.items.includes(email);
+        // else return false
     }
 
     function isEmail(email) {
@@ -110,9 +95,9 @@ export default function TeamExample() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Share
-        </Button>
+        </Button> */}
 
             <Modal
                 show={show}
@@ -121,42 +106,37 @@ export default function TeamExample() {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>shared workspace</Modal.Title>
+                    <Modal.Title>shared workspace:
+                    {" " + props.nameWorkspace}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    I will not close if you click outside me. Don't even try to press
-                    escape key.
 
-                    {/* {this.mail.items.map(item => (
-                    <div className="tag-item" key={item}>
-                        {item}
-                        <button
-                            type="button"
-                            className="buttonMail"
-                        // onClick={() => this.handleDelete(item)}
-                        >
-                            &times;
+
+                    {mail.items && mail.items[0] ? mail.items.map(item => (
+                        <div className="tag-item" key={item}>
+                            {item}
+                            <button
+                                type="button"
+                                className="buttonMail"
+                                onClick={() => handleDelete(item)}
+                            >
+                                &times;
             </button>
-                    </div>
-                ))} */}
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter email" />
-                        </Form.Group>
-                    </Form>
+                        </div>
+                    )) : null}
+
                     <input
                         className={`inputMails ${mail.error ? "has-error" : null}`}
-                        // value={this.mail.value}
+                        value={mail.value}
                         placeholder="Type or paste email addresses and press `Enter`..."
                         onKeyDown={(e) => handleKeyDown(e)}
-                        // onKeyDown={this.handleKeyDown}
-                        // onChange={handleChange}
-                        onChange={(e) => setMail({ value: e.target.value })}
+                        onChange={(e) => setMail({ value: e.target.value, items: [...mail.items], error: null })}
 
                         onPaste={(e) => handlePaste(e.target.value)}
                     />
 
-                    {/* {this.mail.error && <p className="error">{this.mail.error}</p>} */}
+                    {mail.error && <p className="error">{mail.error}</p>}
 
 
                 </Modal.Body>
