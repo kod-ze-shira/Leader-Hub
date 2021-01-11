@@ -5,14 +5,10 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        // let workspace = getState().workspace_reducer.workspace;
-        // renana-il
         fetch(urlData,
             {
                 method: 'GET',
                 headers: { 'authorization': getState().public_reducer.tokenFromCookies }
-                // headers:{'authorization':jwtFromCookie}
-                // ,body:JSON.stringify(userName)
             })
             .then((res) => {
                 console.log("res11111", res)
@@ -24,8 +20,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                     dispatch(actions.setWorkspaces(result.workspaces))
 
                 })
-
-                // dispatch({type: '[user] SET_USER', payload:result})
             })
     }
     return next(action);
@@ -260,13 +254,37 @@ export const editTaskFromServer = ({ dispatch, getState }) => next => action => 
 export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
-        fetch(url, {
-            headers: { authorization: getState().public_reducer.tokenFromCookies }
-        })
+        fetch(url,
+            {
+                method: 'GET',
+                headers: { authorization: getState().public_reducer.tokenFromCookies }
+            })
             .then((result) => {
-                console.log(result);
-            }).then((result) => {
-                console.log(result);
+                return result.json()
+            })
+            .then((result) => {
+                console.log(result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setProjects(result))
+                    //
+                })
+            })
+    }
+    return next(action)
+}
+export const getTasksByProject = ({ dispatch, getState }) => next => action => {
+    if (action.type === "GET_TASKS_BY_PROJECT") {
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getTasksByProjectId`
+        fetch(url,
+            {
+                headers: { authorization: getState().public_reducer.tokenFromCookies }
+            }).then(result => {
+                return result.json()
+            }).then(result => {
+                checkPermission(result).then((ifOk) => {
+                    console.log(result)
+                    dispatch(actions.setTasks(result))
+                })
             })
     }
     return next(action)
