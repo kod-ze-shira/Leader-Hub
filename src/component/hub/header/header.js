@@ -46,6 +46,7 @@ function Header(props) {
     }
    
     return (
+    
        
         task ?
             workpas ?
@@ -60,8 +61,7 @@ function Header(props) {
                               
                             </div>
                             <div className="row mt-2">
-                            <button onClick={props.setisConfiguratorOpen}></button>
-                            <h1>{props.project.isConfiguratorOpen}</h1>
+                         
                                 <div className="col-md-1 col-xs-0.5">
 
                                     <Dropdown>
@@ -84,6 +84,7 @@ function Header(props) {
 
                                 
                         </div>
+                            <button onClick={props.project.setisConfiguratorOpen}></button>
                         </div>
                         </div>
 
@@ -168,6 +169,7 @@ function Header(props) {
                 
                     </div>
                     <div className="col-10">
+                      
                     <Newtask />
                     </div>
                 </div>
@@ -190,7 +192,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
+        // setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
         setProjectName: (name) => dispatch(actions.setProjectName(name)),
         setProjectId:(id)=>dispatch(actions.setProjectId(id)),
         setTaskName:(name)=>dispatch(actions.setTaskName(name)),
