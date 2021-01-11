@@ -43,30 +43,36 @@ function NewProject(props) {
                         <div className="row mt-2"></div>
                         <input type="date" id="datetask"></input>
                     </div>
+         
 
-                    <div className="col-md-2 col-xs-1 STARTPROJECT"><div className="textstart mt-2">
+                    {/* <div className="col-md-2 col-xs-1 STARTPROJECT"><div className="textstart mt-2">
                         <div className="mt-2"></div>
-                        <b >START PROJECT</b></div></div>
-                    <button onClick={() => { props.setProjectCrud1(props.project1); }}>NEW A</button>
+                   
+                   </div></div> */}
+                    {/* <button onClick={() => { props.setProjectCrud1(props.project1); }}>NEW A</button> */}
 
-
+             
+             
                 </div>
+            <button onClick={props.setisConfiguratorOpen}>START PROJECT</button>
+           
             </>
           
     );
 }
 const mapStateToProps = (state) => {
     return {
-        project1: state.workspace_reducer.project,
-
+        // project1: state.workspace_reducer.project,
+        project: state.project_reducer.project,
 
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setProjectCrud1: (props) => dispatch(actions.setProjectCrud(props)),
-        createP: (name, value) => dispatch(actions.setProject1(name, value)),
+        setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen))
+        // setProjectCrud1: (props) => dispatch(actions.setProjectCrud(props)),
+        // createP: (name, value) => dispatch(actions.setProject1(name, value)),
         // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
 
 

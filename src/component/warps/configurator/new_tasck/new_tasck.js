@@ -1,18 +1,40 @@
 import React from 'react'
 import './new_tasck.css';
-export default function NewTasck()
-{
-    return(
-        
-       < div className="right_nav" >
+import Configurator from '../configurator';
+import { connect } from 'react-redux';
+import { actions} from '../../../../redux/actions/action'
 
+// const mapStateToProps = (state) => {
+//     return {
+//         project: state.project_reducer.project
+
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen))
+
+//     }
+// }
+export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props)
+{
+   
+   
+    return(
+        <>
+    
+       
+            {/* {props.project.isConfiguratorOpen ? */}
+       < div className="right_nav" >
+      
             <div className="row mt-5 img_right">
                 <div className="col-1"></div>
-                <div className="col-1"><img src={require('../../img/sun.png')}></img></div>
+                {/* <div className="col-1"><img src={require('../../img/sun.png')}></img></div> */}
                 <div className="col-1"></div>
                 <div className="col-6" style={{ color: "white" }}>Tast details</div>
 
-                <div className="col"><img src={require('../../img/adjust-solid.png')}></img> </div>
+                {/* <div className="col"><img src={require('../../img/adjust-solid.png')}></img> </div> */}
             </div>
             <div className="row mt-4">
                 <div className="col-1"></div>
@@ -74,6 +96,16 @@ export default function NewTasck()
             </div>
     
         </div>
+        :    <>
+                <Configurator/>
+             </>
+}
+        </>
+        
 
     )
-}
+})
+
+
+
+
