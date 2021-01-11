@@ -251,6 +251,43 @@ export const editTaskFromServer = ({ dispatch, getState }) => next => action => 
     }
     return next(action);
 }
+//
+export const getTaskByIdInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'GET_TASK_BY_ID_IN_SERVER') {
+
+        var taskid = getState().task_reducer.task;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/:tId/getTaskById "
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ taskid }),
+            // dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+
+
+    }
+    return next(action);
+}
+
+//
 export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;

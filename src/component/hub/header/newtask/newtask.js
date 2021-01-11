@@ -1,7 +1,5 @@
 import React from 'react';
-
 import './newtask.css';
-
 import { connect } from 'react-redux';
 import { actions } from '..//..//..//..//redux/actions/action'
 
@@ -49,7 +47,7 @@ function Newtask(props) {
                     <div className="col-md-2 col-xs-1 STARTtask"><div className="textstart mt-2">
                         <div className="mt-2"></div>
                         <b onClick={() => { props.setTaskCrud1(props.task1); debugger }}>START TASK</b></div></div>
-
+              
                 </div>
             </>
         
@@ -66,6 +64,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setisConfiguratorOpenTask: (isConfiguratorOpenTask) => dispatch(actions.setisConfiguratorOpenTask(isConfiguratorOpenTask)),
         setTaskCrud1: (props) => dispatch(actions.setTaskCrud(props)),
         createT: (name, value) => dispatch(actions.setTask(name, value)),
         // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })

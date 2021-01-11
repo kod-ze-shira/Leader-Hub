@@ -49,10 +49,10 @@ function NewProject(props) {
                         <div className="mt-2"></div>
                    
                    </div></div> */}
-                    {/* <button onClick={() => { props.setProjectCrud1(props.project1); }}>NEW A</button> */}
+                    <button onClick={() => { props.setProjectCrud1(props.project1); }}>NEW A</button>
 
              
-             
+
                 </div>
             <button onClick={props.setisConfiguratorOpen}>START PROJECT</button>
            
