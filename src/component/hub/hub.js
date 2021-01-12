@@ -3,7 +3,7 @@ import Header from './header/header';
 import Body from './body/body';
 import Nav from '../warps/nav/nav';
 import Left_nav from '../warps/left_nav/left_nav';
-import Configurator from '../warps/configurator/configurator';
+import NewProject from '../warps/configurator/new_project/new_project';
 import Tools from './tools/tools';
 
 export default function Hub() {
@@ -32,7 +32,7 @@ export default function Hub() {
                 <div className="col-md-6"></div>
                 <div className="col-md-2">
 
-                    <Configurator />
+                    <NewProject />
                 </div>
             </div>
 
