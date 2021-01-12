@@ -3,7 +3,7 @@ export default function DetailsTask(props)
 {
     return(
         <div className="detailsTask">
-                      
+                  
         </div>
     )
 }

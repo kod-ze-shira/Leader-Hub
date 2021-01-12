@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom'
 import React, { useState } from 'react';
+import DetailsTask from '../detailsTask/detailsTask'
 import { connect } from 'react-redux';
 import { actions } from '..//..//..//..//redux/actions/action'
 
@@ -22,7 +23,7 @@ export function ViewTask(props) {
             </div>
             :
             <>
-            <h1>malka</h1>
+                <DetailsTask/>
 
             </>
         
