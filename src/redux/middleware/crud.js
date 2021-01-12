@@ -253,12 +253,12 @@ export const editTaskInServer = ({ dispatch, getState }) => next => action => {
 }
 //
 export const getTaskByIdInServer = ({ dispatch, getState }) => next => action => {
-
+    debugger;
     if (action.type === 'GET_TASK_BY_ID_IN_SERVER') {
         debugger;
 
         var taskid = getState().task_reducer.task;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/:tId/getTaskById "
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskid +"/getTaskById "
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,

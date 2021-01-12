@@ -4,7 +4,16 @@ export default function DetailsTask(props)
 {
     return(
         <div className="detailsTask">
-            <h1>nnnn</h1>     
+            subject:
+             description:
+             status:
+             startDate:
+             dueDate:
+              endDate:
+              updateDates:
+              files:
+            project:
+            team:    
         </div>
     )
 }
