@@ -25,7 +25,7 @@ function ViewTask(props) {
             </div>
             :
             <>
-                <button onClick={props.getTaskByIdInServer}>ok</button>
+        
                 <DetailsTask/>
 
             </>
