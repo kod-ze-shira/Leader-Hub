@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'
 import Search from '../Search/search';
 // import TableHeader from '../Table/tableheader/tableheader' 
 import TableBody from '../Table/tablebody/tablebody';
@@ -6,6 +6,8 @@ import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
 import './body.css';
 // import { connect } from 'react-redux';
 // import { setlastname, setName } from '../../../redux/actions/action'
+import TeamExample from '../team/teamExample'
+import { Button, Modal, Form } from 'react-bootstrap';
 
 
 // function mapStateToProps(state) {
@@ -22,6 +24,8 @@ import './body.css';
 
 // export default connect(mapStateToProps, mapDispatchToProps)(function Body(props)
 export default function Body() {
+  const [showShare, setShowShare] = useState(false)
+
   // const { workpace, setName, setlastname}=props;
   return (
 
@@ -43,7 +47,12 @@ export default function Body() {
       {/* <TableHeader/> */}
       <TableBody />
       <AllWorkspaces />
-
+      <Button onClick={() => setShowShare(!showShare)} variant="primary">
+        Add team
+        </Button>
+      {
+        showShare ? <TeamExample></TeamExample> : null
+      }
     </div>
   );
 }

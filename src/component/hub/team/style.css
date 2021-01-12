@@ -53,7 +53,16 @@ body {
 }
 
 .inputMails.has-error {
+  border: 2px solid;
   border-color: tomato;
+}
+.has-error {
+  border: 2px solid;
+  border-color: tomato;
+}
+
+.inputName{
+  width: 100% !important;
 }
 
 .error {
@@ -89,4 +98,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.choose{
+  border: #007bff 2px solid;
+   background: white;
+   color: #007bff;
+}
+
+.choose:focus{
+  border: #007bff 2px solid;
+   background: white;
+   color: #007bff;
 }

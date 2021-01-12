@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWorkspace'
 import TeamExample from '../../team/teamExample'
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 export function ViewWorkspace({ props, workspace }) {
   const [viewProjects, setViewProjects] = useState(false)
@@ -27,7 +27,6 @@ export function ViewWorkspace({ props, workspace }) {
               <Button onClick={() => setShowShare(!showShare)} variant="primary">
                 Share
         </Button>
-              {/* <button onClick={() => setShowShare(!showShare)}>share</button> */}
             </div>
             {
               showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
