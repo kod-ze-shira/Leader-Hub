@@ -17,12 +17,15 @@ export function ViewTask(props) {
     
             <div className="continer">
                 <div className="row">
+                
+                  
                     <div className="col-2">subject:{props.task.subject}</div>
                     <div className="col"><button onClick={ViewDetails}>view details</button></div>
                 </div>
             </div>
             :
             <>
+                <button onClick={() => { props.getTaskByIdInServer() }}>ok</button>
                 <DetailsTask/>
 
             </>
@@ -39,11 +42,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+     
         // setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
-        getTaskByIdInServer: (taskid) => dispatch(actions.getTaskByIdInServer(taskid))
+        getTaskByIdInServer: () => dispatch(actions.getTaskByIdInServer())
 
     }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTask)
 
 
 

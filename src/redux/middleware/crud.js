@@ -144,9 +144,9 @@ function checkPermission(result) {
 }
 
 //edit workspace
-export const editWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
+export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'EDIT_WORKSPACE_FROM_SERVER') {
+    if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
 
 
         let workspace = getState().workspace_reducer.workspace;
@@ -217,9 +217,9 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
     return next(action);
 }
 
-export const editTaskFromServer = ({ dispatch, getState }) => next => action => {
+export const editTaskInServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'EDIT_TASK_FROM_SERVER') {
+    if (action.type === 'EDIT_TASK_IN_SERVER') {
 
         var task = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
@@ -255,6 +255,7 @@ export const editTaskFromServer = ({ dispatch, getState }) => next => action => 
 export const getTaskByIdInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_TASK_BY_ID_IN_SERVER') {
+        debugger;
 
         var taskid = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/:tId/getTaskById "

@@ -15,9 +15,9 @@ import { getAllWorkspacesFromServer } from '../middleware/crud'
 import { setProjectCrud } from '../middleware/crud'
 
 import { setTaskCrud } from '../middleware/crud'
-import { editWorkspaceFromServer} from '../middleware/crud'
+import { editWorkspaceInServer} from '../middleware/crud'
 import { editProjectInServer}    from '../middleware/crud'
-import { editTaskFromServer} from '../middleware/crud'
+import { editTaskInServer} from '../middleware/crud'
 import { getTaskByIdInServer } from '../middleware/crud'
 
 
@@ -29,9 +29,9 @@ const store = createStore(
     composeWithDevTools(
         applyMiddleware
             (  
-                editTaskFromServer,
+                editTaskInServer,
                 editProjectInServer,
-                editWorkspaceFromServer,
+                editWorkspaceInServer,
                 setWorkspaCrud,
                 getAllWorkspacesFromServer,
                 setTaskCrud,
