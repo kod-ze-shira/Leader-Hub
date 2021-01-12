@@ -3,8 +3,11 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     task: {
-        name: "david",
+        subject: "david",
         isConfiguratorOpenTask: "false",
+        project:"5ff5b702b8c8a9b179358795",
+        startDate:"01/01/2020",
+        dueDate:"03/01/2020"
         //  uaserId:"",
         //  projects:[],
         //  team:""

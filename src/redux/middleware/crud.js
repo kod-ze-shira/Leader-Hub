@@ -64,7 +64,7 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
-        let name = action.payload;
+        let task = action.payload;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -73,12 +73,12 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
-                name,
+                task,
             }),
-            dataType: 'json',
             success: function (data) {
                 console.log("success")
                 console.log(data);
+                createNewEventWhenNewTask(data.message,getState().public_reducer.userName,getState().public_reducer.tokenFromCookies)
                 // dispatch({ type: '', payload: data })
             },
             error: function (err) {
@@ -125,7 +125,22 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+function createNewEventWhenNewTask(task,userName,jwt){
+    let startDate=new Date(task.startDate).toISOString();
+    let dueDate=new Date(task.dueDate).toISOString();
 
+    let event={title:"task",start:startDate,end:dueDate,categoryName:"hub"}
+    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+    {
+        method:'POST',
+        headers:{authorization:jwt},                                   
+        body: JSON.stringify({"title":"task","start":startDate,"end":dueDate,"categoryName":"hub"})
+    }).then((result)=>{
+        return result.json();
+    }).then((result)=>{
+        console.log(result);
+    })
+}
 
 
 //this func to check the headers jwt and username, if them not good its throw to login
