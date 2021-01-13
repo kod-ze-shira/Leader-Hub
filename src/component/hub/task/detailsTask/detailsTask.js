@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './detailsTask.css'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
- function DetailsTask(props)
-{
-    return(
+function DetailsTask(props) {
+    const [isHasTask, setIsHasTask] = useState(false);
+    useEffect(() => {
+        if (!isHasTask) {
+            setIsHasTask(true)
+            props.getTaskByIdFromServer(props.taskId)
+        }
+    })
+    return (
         <div className="detailsTask">
-         
+
             {/* subject:{props.getTaskByIdInServer.subject}
+<<<<<<< HEAD
             description:{props.getTaskByIdInServer.description}
             status:{props.getTaskByIdInServer.status}
             startDate:{props.getTaskByIdInServer.startDate}
@@ -18,27 +25,32 @@ import { actions } from '../../../../redux/actions/action'
             project:{props.getTaskByIdInServer.project}
             team: {props.getTaskByIdInServer.team}  */}
             <button onClick={props.getTaskByIdInServer}>ok</button> 
+=======
+            description:
+            status:
+            startDate:
+            dueDate:
+            endDate:
+            updateDates:
+            files:
+            project:
+            team:    */}
+            <div>{props.task._id}</div>
+            <button onClick={props.getTaskByIdFromServer}>ok</button>
+>>>>>>> 2953c666f161313b755f8c5adf1872a379315405
         </div>
-        
+
     )
 }
 const mapStateToProps = (state) => {
     return {
-
         task: state.task_reducer.task
-
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
-
-        // setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
-        getTaskByIdInServer: () => dispatch({ type: "GET_TASK_BY_ID_IN_SERVER" })
-
+        getTaskByIdFromServer: (taskId) => dispatch(actions.getTaskByIdFromServer(taskId))
     }
-
-
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsTask)

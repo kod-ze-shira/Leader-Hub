@@ -3,8 +3,11 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     task: {
-        name: "david",
+        subject: "ttr",
         isConfiguratorOpenTask: "false",
+        project:"5ff5b702b8c8a9b179358795",
+        startDate:"01/12/2021",
+        dueDate:"01/14/2021"
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -22,8 +25,10 @@ const tasks = {
         
         // dispatch({ type: "GET_ALL" })
     },
+    setTask(state,action){
+        state.task = action.payload;
+    },
     setisConfiguratorOpenTask(state, action) {
-        debugger;
         state.task.isConfiguratorOpenTask = !state.task.isConfiguratorOpenTask
     },
 

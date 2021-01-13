@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWorkspace'
-import Share from '../../team/share'
+import TeamExample from '../../team/teamExample'
+import { Button } from 'react-bootstrap';
 
 export function ViewWorkspace({ props, workspace }) {
   const [viewProjects, setViewProjects] = useState(false)
@@ -23,13 +24,14 @@ export function ViewWorkspace({ props, workspace }) {
           </div>
           <div className="col">
             <div>
-              {/* <button onClick={setShowShare(!showShare)}>share</button></div>
-            {
-              showShare ? <Share nameWorkspace={workspace.name}></Share> : null
-            }
-            <Share nameWorkspace={workspace.name}></Share> */}
-              <div><button>share</button></div>
+              <Button onClick={() => setShowShare(!showShare)} variant="primary">
+                Share
+        </Button>
             </div>
+            {
+              showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
+            }
+
 
           </div>
         </div>

@@ -4,6 +4,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
         name: "rabin",
+        showShare: false
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -19,7 +20,10 @@ const workspace = {
     },
     setState(state, action) {
         state.workspace = action.payload
-    }
+    },
+    // setShowShare(state, action) {
+    //     state.workspace = action.payload
+    // },
 
 };
 

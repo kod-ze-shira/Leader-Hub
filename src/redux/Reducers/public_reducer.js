@@ -5,8 +5,8 @@ const initialState = {
     tokenFromCookies: "",
     userName: "",
     worksapces: [],
-    projects:[],
-    tasks:[]
+    projects: [],
+    tasks: []
 
 }
 // export default produce((state, action) => {
@@ -35,12 +35,15 @@ const publicData = {
     setWorkspaces(state, action) {
         state.worksapces = action.payload;
     },
-    setProjects(state,action){
-        state.projects=action.payload;
+    setProjects(state, action) {
+        state.projects = action.payload;
     },
-    setTasks(state,action){
-        state.tasks=action.payload;
-    }
+    setTasks(state, action) {
+        state.tasks = action.payload;
+    },
+    // setShowModalTeam(state, action) {
+    //     state.tasks = action.payload;
+    // },
 
 
 }

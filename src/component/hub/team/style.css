@@ -6,13 +6,24 @@
   font-size: 14px;
   line-height: 1.7;
 }
-
+/* 
 body {
   background-color: #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+} */
+
+
+.viewer{
+  border: #007bff solid 1px;
+}
+.editor{
+  border: #15cc3e solid 1px;
+}
+.maneger{
+  border: #9f61ff solid 1px;
 }
 
 .wrapper {
@@ -42,7 +53,16 @@ body {
 }
 
 .inputMails.has-error {
+  border: 2px solid;
   border-color: tomato;
+}
+.has-error {
+  border: 2px solid;
+  border-color: tomato;
+}
+
+.inputName{
+  width: 100% !important;
 }
 
 .error {
@@ -78,4 +98,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.choose{
+  border: #007bff 2px solid;
+   background: white;
+   color: #007bff;
+}
+
+.choose:focus{
+  border: #007bff 2px solid;
+   background: white;
+   color: #007bff;
 }
