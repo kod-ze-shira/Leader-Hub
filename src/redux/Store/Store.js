@@ -5,40 +5,44 @@ import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
 import public_reducer from '../Reducers/public_reducer';
 
+import team_reducer from '../Reducers/team_reducer';
+
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
+import { setTeamCrud } from '../middleware/crud'
 
 import { setProjectCrud } from '../middleware/crud'
 
 import { setTaskCrud } from '../middleware/crud'
-import { editWorkspaceInServer} from '../middleware/crud'
-import { editProjectInServer}    from '../middleware/crud'
-import { editTaskInServer} from '../middleware/crud'
+import { editWorkspaceInServer } from '../middleware/crud'
+import { editProjectInServer } from '../middleware/crud'
+import { editTaskInServer } from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
 
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, team_reducer, public_reducer });
 
 
 const store = createStore(
     reducers,
     composeWithDevTools(
         applyMiddleware
-            (  
+            (
                 editTaskInServer,
                 editProjectInServer,
                 editWorkspaceInServer,
                 setWorkspaCrud,
                 getAllWorkspacesFromServer,
                 setTaskCrud,
+                setTeamCrud,
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
-                getTaskByIdFromServer        
+                getTaskByIdFromServer
             ))
 )
 var url = window.location;

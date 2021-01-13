@@ -11,9 +11,6 @@ const initialState = {
         //  team:""
 
     }
-
-
-
 }
 // export default produce((state, action) => {
 //     switch (action.type) {

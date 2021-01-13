@@ -25,10 +25,58 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
+export const setTeamCrud = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'SET_TEAM_CRUD') {
+        console.log('SET_TEAM_CRUD')
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTeam"
+        // let team = getState().team_reducer.team;
+        let team = action.payload;
+        // team 
+        // props.setTeamCrud({ teamName: team.teamName, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
+        // 
+        // emailAndPermissionsArr: Array(2)
+        // 0: {email: "4rtg@ftt.bb", permission: "viewer"}
+        // 1: {email: "ghh@nnn.nnn", permission: "editor"}
+        // length: 2
+        // __proto__: Array(0)
+        // name: "erfgth"
+        // __proto__: Object
+        let t = team;
+        // $.ajax({
+        //     url: urlData,
+        //     type: 'POST',
+        //     headers: {
+        //         Authorization: getState().public_reducer.tokenFromCookies
+        //     },
+        //     contentType: "application/json; charset=utf-8",
+        //     data: JSON.stringify({
+        //         teamName:team.name,
+        //     }),
+        //     // dataType: 'json',
+        //     success: function (data) {
+        //        console.log("success")
+        // console.log(data);
+        // dispatch(actions.setTteam.message));
+        // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
+        // dispatch({ type: '', payload: data })
+        //     },
+        //     error: function (err) {
+        //         //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+        //         checkPermission(err).then((ifOk) => {
+
+        //         })
+        //     }
+        // });
+        // })
+    }
+    return next(action);
+}
+
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-
+        alert('SET_WORKSPACE_CRUD')
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
         $.ajax({
@@ -156,7 +204,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
         }).then((result) => {
             console.log(result);
         })
-    
+
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
         {
             method: 'POST',
