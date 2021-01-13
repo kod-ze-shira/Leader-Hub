@@ -1,46 +1,48 @@
-// import produce from 'immer'
-// const initialState = {
-// }
 
-
-// export default produce((state, action) => {
-//     switch (action.type) {
-//         case 'SET_USER_ID':
-//             state.userid = action.payload;
-//             break;
-//         default:
-//             return state;
-//     }
-// }, initialState);
 import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
+<<<<<<< HEAD
         name: {},
         // _Id: "",
         // // projects: [],
         // // team: ""
+=======
+        name: "rabin",
+        showShare: false
+        //  uaserId:"",
+        //  projects:[],
+        //  team:""
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
     }
 
 
 
 }
-// export default produce((state, action) => {
-//     switch (action.type) {
-//         case 'SET_WORKSPACE':
-//             state.workpace.name = action.payload.name;
-//             break;
-//         // case 'SET_LAST_NAME':
-//         //     state.workpace.lastName = action.payload;
+const workspace = {
+    setWorkspaceName(state, action) {
+        state.workspace.name = action.payload;
+    },
+    setState(state, action) {
+        state.workspace = action.payload
+    },
+    // setShowShare(state, action) {
+    //     state.workspace = action.payload
+    // },
 
-//     }
-// }, initialState);
+};
+
 const workspaces = {
     setWorkspace(state, action) {
+<<<<<<< HEAD
 
         // state.workpace[action.payload] = action.value;
         state.workspace = action.value
+=======
+        // state.workpace[action.payload] = action.value;
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
         // dispatch({ type: "GET_ALL" })
     },

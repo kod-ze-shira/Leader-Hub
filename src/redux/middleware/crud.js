@@ -1,15 +1,44 @@
 import $ from 'jquery'
+<<<<<<< HEAD
 import { actions } from "../actions/action";
+=======
+import { actions } from '../actions/action'
+
+export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setWorkspaces(result.workspaces))
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
+
+                })
+            })
+    }
+    return next(action);
+}
+
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'SET_WORKSPACE_CRUD') {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
-        let user_name = "renana-il"
-        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newWorkspace "
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -39,19 +68,24 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
+<<<<<<< HEAD
+
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
 
-        let user_name = "renana-il"
-        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newTask "
-        let name = action.payload;
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
+        let task = action.payload;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -60,12 +94,13 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
-                name,
+                task,
             }),
-            dataType: 'json',
             success: function (data) {
                 console.log("success")
                 console.log(data);
+                dispatch(actions.setTask(data.message));
+                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
                 // dispatch({ type: '', payload: data })
             },
             error: function (err) {
@@ -76,19 +111,23 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
 export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
-        let user_name = "renana-il"
-        let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newProject "
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
         let name = action.payload;
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -113,11 +152,61 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
+function createNewEventWhenNewTask(task, userName, jwt) {
+    let timeStart = new Date(task.startDate);
+    timeStart.setHours(11);
+    let startTime = timeStart.toISOString()
+    timeStart.setHours(23);
+    let endTime = timeStart.toISOString();
+    // let timeEnd=new Date(task.startDate).setHours(21);
+    // let startDate=new Date(task.startDate).toISOString();
+    // let dueDate=new Date(task.dueDate).toISOString();
 
+    // let startDateTimeStart=startDate
+    let timeEnd = new Date(task.dueDate);
+    timeEnd.setHours(11);
+    let startTimeEnd = timeEnd.toISOString()
+    timeEnd.setHours(23);
+    let endTimeEnd = timeEnd.toISOString();
+    //create event on task's startDate
+    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+        {
+            method: 'POST',
+            headers: {
+                authorization: jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "start task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+        })
+        //create event on task's endDate
+
+    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+        {
+            method: 'POST',
+            headers: {
+                authorization: jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "end task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+        })
+}
 
 
 //this func to check the headers jwt and username, if them not good its throw to login
@@ -135,15 +224,20 @@ function checkPermission(result) {
     })
 }
 
+//edit workspace
+export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
 
-export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
 
+<<<<<<< HEAD
     if (action.type === 'EDIT_WORKSPACE') {
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
-        var w = getState().workpace;
+        let workspace = getState().workspace_reducer.workspace;
+        // var w = getState().workspace_reducer.workspace;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -151,11 +245,13 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ w }),
-            dataType: 'json',
+            data: JSON.stringify({ workspace }),
+            // dataType: 'json',
             success: function (data) {
+
                 console.log("success")
                 console.log(data);
+
 
             },
             error: function (err) {
@@ -163,22 +259,31 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
                 checkPermission(err).then((ifOk) => {
 
                 })
+
             }
         });
         // })
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
 
 
+//edit project
+export const editProjectInServer = ({ dispatch, getState }) => next => action => {
 
-export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'EDIT_PROJECT_IN_SERVER') {
 
+<<<<<<< HEAD
     if (action.type === 'EDIT_PROJECT') {
 
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
-        var p = getState().project;
+        let project = getState().project_reducer.project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -188,11 +293,11 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ p }),
-            dataType: 'json',
+            data: JSON.stringify({ project }),
             success: function (data) {
                 console.log("success")
-                console.log(data);
+                console.log("data", data);
+                dispatch(actions.setProject(data.result))
 
             },
             error: function (err) {
@@ -202,18 +307,25 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
                 })
             }
         });
+<<<<<<< HEAD
         // })
+=======
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
     }
     return next(action);
 }
 
-export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
+export const editTaskInServer = ({ dispatch, getState }) => next => action => {
 
+<<<<<<< HEAD
     if (action.type === 'EDIT_TASK') {
 
+=======
+    if (action.type === 'EDIT_TASK_IN_SERVER') {
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
-        var t = getState().task;
+        var task = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -223,11 +335,11 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ t }),
-            dataType: 'json',
+            data: JSON.stringify({ task }),
+            // dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log(data);
+                console.log("data", data);
 
             },
             error: function (err) {
@@ -239,10 +351,87 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
         });
         // })
 
+<<<<<<< HEAD
+=======
+
+    }
+    return next(action);
+}
+//
+export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
+
+        var taskId = action.payload;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskId + "/getTaskById"
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                dispatch(actions.setTask(data.result))
+
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+
+
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
 
+//
+export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
+        fetch(url,
+            {
+                method: 'GET',
+                headers: { authorization: getState().public_reducer.tokenFromCookies }
+            })
+            .then((result) => {
+                return result.json()
+            })
+            .then((result) => {
+                console.log(result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setProjects(result))
+                    //
+                })
+            })
+    }
+    return next(action)
+}
+export const getTasksByProject = ({ dispatch, getState }) => next => action => {
+    if (action.type === "GET_TASKS_BY_PROJECT") {
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getTasksByProjectId`
+        fetch(url,
+            {
+                headers: { authorization: getState().public_reducer.tokenFromCookies }
+            }).then(result => {
+                return result.json()
+            }).then(result => {
+                checkPermission(result).then((ifOk) => {
+                    console.log(result)
+                    dispatch(actions.setTasks(result))
+                })
+            })
+    }
+    return next(action)
+}
 
 
 

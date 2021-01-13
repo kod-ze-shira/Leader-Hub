@@ -1,22 +1,13 @@
-// import produce from 'immer'
-// const initialState = {
-// }
 
-
-// export default produce((state, action) => {
-//     switch (action.type) {
-//         case 'SET_USER_ID':
-//             state.userid = action.payload;
-//             break;
-//         default:
-//             return state;
-//     }
-// }, initialState);
 import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     task: {
-        name: "",
+        subject: "ttr",
+        isConfiguratorOpenTask: "false",
+        project:"5ff5b702b8c8a9b179358795",
+        startDate:"01/12/2021",
+        dueDate:"01/14/2021"
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -26,22 +17,24 @@ const initialState = {
 
 
 }
-// export default produce((state, action) => {
-//     switch (action.type) {
-//         case 'SET_WORKSPACE':
-//             state.workpace.name = action.payload.name;
-//             break;
-//         // case 'SET_LAST_NAME':
-//         //     state.workpace.lastName = action.payload;
 
-//     }
-// }, initialState);
 const tasks = {
+<<<<<<< HEAD
     setTask(state, action) {
 
+=======
+    setTaskName(state, action) {
+>>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
         // state.workpace[action.payload] = action.value;
-        state.task.name = action.value
+        state.task.name = action.payload
+        
         // dispatch({ type: "GET_ALL" })
+    },
+    setTask(state,action){
+        state.task = action.payload;
+    },
+    setisConfiguratorOpenTask(state, action) {
+        state.task.isConfiguratorOpenTask = !state.task.isConfiguratorOpenTask
     },
 
 
