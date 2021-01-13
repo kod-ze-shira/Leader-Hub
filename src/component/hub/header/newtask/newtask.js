@@ -9,7 +9,7 @@ import { actions } from '..//..//..//..//redux/actions/action'
 
 function Newtask(props) {
     const change = (event) => {
-        debugger
+
         props.createT(event.target.name, event.target.value)
     }
     function backheader() {
@@ -53,7 +53,7 @@ function Newtask(props) {
 
                     <div className="col-md-2 col-xs-1 STARTtask"><div className="textstart mt-2">
                         <div className="mt-2"></div>
-                        <b onClick={() => { props.setTaskCrud1(props.task1); debugger }}>START TASK</b></div></div>
+                        <b onClick={() => { props.setTaskCrud1(props.task1); }}>START TASK</b></div></div>
 
                 </div>
             </div>

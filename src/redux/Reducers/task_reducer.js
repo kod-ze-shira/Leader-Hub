@@ -38,7 +38,7 @@ const initialState = {
 // }, initialState);
 const tasks = {
     setTask(state, action) {
-        debugger
+
         // state.workpace[action.payload] = action.value;
         state.task.name = action.value
         // dispatch({ type: "GET_ALL" })

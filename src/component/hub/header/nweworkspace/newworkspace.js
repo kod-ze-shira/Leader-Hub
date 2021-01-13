@@ -8,7 +8,7 @@ import { actions } from '..//..//..//..//redux/actions/action'
 
 function NewWorkpas(props) {
     const change = (event) => {
-        debugger
+
         props.createW(event.target.name, event.target.value)
     }
     function backheader() {
@@ -50,7 +50,7 @@ function NewWorkpas(props) {
 
                     <div className="col-md-2 col-xs-1 WORKSPACE1"><div className="textstart mt-2">
                         <div className="mt-2"></div>
-                        <b onClick={() => { props.setWorkspaCrud(); debugger }}>START WORKSPACE</b></div></div>
+                        <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div></div>
 
                 </div>
             </div>

@@ -49,7 +49,7 @@ function Header(props) {
     //     }}
     // // props.createW(jsonW);
     // const change = (event) => {
-    //     debugger
+    //     
     //     props.createW(event.target.name, event.target.value)
     // }
 
@@ -95,7 +95,7 @@ function Header(props) {
                             </div></div>
                         <button id="btnedit" onClick={() => props.editWorkpaceFromServer()}>edit workpace</button>
                         <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
-                        <button onClick={() => { props.setWorkspaCrud(props.workspace1); debugger }}>NEW</button>
+                        <button onClick={() => { props.setWorkspaCrud(props.workspace1); }}>NEW</button>
                     </div>
 
 

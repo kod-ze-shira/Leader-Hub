@@ -38,7 +38,7 @@ const initialState = {
 // }, initialState);
 const workspaces = {
     setWorkspace(state, action) {
-        debugger
+
         // state.workpace[action.payload] = action.value;
         state.workspace = action.value
 

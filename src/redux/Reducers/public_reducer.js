@@ -16,7 +16,7 @@ const initialState = {
 // }, initialState);
 const cookies = {
     // setWorkspace(state, action) {
-    //     debugger
+    //     
     //     // state.workpace[action.payload] = action.value;
     //     state.workspace = action.value
     //     // dispatch({ type: "GET_ALL" })
@@ -24,7 +24,7 @@ const cookies = {
 
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
-        debugger
+
     },
 
 

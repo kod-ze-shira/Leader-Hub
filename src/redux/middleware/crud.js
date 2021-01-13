@@ -4,7 +4,7 @@ import { actions } from "../actions/action";
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_WORKSPACE_CRUD') {
-        debugger
+
 
         let user_name = "renana-il"
         let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newWorkspace "
@@ -23,9 +23,10 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             // dataType: 'json',
             success: function (data) {
                 console.log("success")
-                dispatch({ type: 'SET_WORKSPACE', payload: data.message });
+                dispatch(actions.setWorkspace(data.message))
+                // dispatch({ type: 'SET_WORKSPACE', payload: data.message });
                 // dispatch(actions.setWorkspace(data));
-                debugger
+
                 console.log("hhhhh", data.message);
                 console.log("data", data);
 
@@ -38,14 +39,14 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
+
     }
     return next(action);
 }
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
-        debugger
+
 
         let user_name = "renana-il"
         let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newTask "
@@ -75,14 +76,14 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
+
     }
     return next(action);
 }
 export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
-        debugger
+
 
         let user_name = "renana-il"
         let urlData = "https://reacthub.dev.leader.codes/api/" + user_name + "/newProject "
@@ -112,7 +113,7 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-        debugger
+
     }
     return next(action);
 }
@@ -138,7 +139,7 @@ function checkPermission(result) {
 export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE') {
-        debugger
+
 
         var w = getState().workpace;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
@@ -165,7 +166,7 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
             }
         });
         // })
-        debugger
+
     }
     return next(action);
 }
@@ -175,7 +176,7 @@ export const editWorkpaceFromServer = ({ dispatch, getState }) => next => action
 export const EditProjectFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_PROJECT') {
-        debugger
+
 
         var p = getState().project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
@@ -202,7 +203,7 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
             }
         });
         // })
-        debugger
+
     }
     return next(action);
 }
@@ -210,7 +211,7 @@ export const EditProjectFromServer = ({ dispatch, getState }) => next => action 
 export const EditTaskFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_TASK') {
-        debugger
+
 
         var t = getState().task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
@@ -237,7 +238,7 @@ export const EditTaskFromServer = ({ dispatch, getState }) => next => action => 
             }
         });
         // })
-        debugger
+
     }
     return next(action);
 }
