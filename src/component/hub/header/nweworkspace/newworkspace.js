@@ -47,11 +47,18 @@ function NewWorkpas(props) {
 
                 <div className="col-md-2 col-xs-1 WORKSPACE1"><div className="textstart mt-2">
                     <div className="mt-2"></div>
-                    <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div></div>
+                    <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div>
+                </div>
 
+                {/* <<<<<<< HEAD */}
             </div>
+            {/* </> */}
+            {/* // ======= */}
+            <div className="col-md-2 col-xs-1 WORKSPACE1"><div className="textstart mt-2">
+                <div className="mt-2"></div>
+                <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div></div>
+            {/* >>>>>>> c05191fdd5e3522706b858af48b7a3aae5f844b8 */}
         </>
-
     )
 }
 const mapStateToProps = (state) => {
@@ -63,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspaCrud: () => dispatch(actions.setWorkspaceCrud()),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
-        // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
+        // setWorkspaCrud: (props) => dispatch({type: 'SET_WORKSPACE_CRUD', payloud: props })
 
 
 
