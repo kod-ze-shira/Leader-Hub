@@ -4,8 +4,8 @@ import createReducer from './reducerUtils';
 const initialState = {
     project: {
         name: "malka",
-        id:"5ff5",
-        isConfiguratorOpen:"false",
+        id: "5ff5",
+        isConfiguratorOpen: "false",
         //  uaserId:"",
         //  projects:[],
         //  team:""
@@ -34,18 +34,18 @@ const initialState = {
 // }
 
 
-const project={
-    setProjectName(state,action){
-        state.project.name=action.payload;
+const project = {
+    setProjectName(state, action) {
+        state.project.name = action.payload;
     },
-    setProjectId(state,action){
-        state.project.id=action.payload;
+    setProjectId(state, action) {
+        state.project.id = action.payload;
     },
-    setisConfiguratorOpen(state,action){
+    setisConfiguratorOpen(state, action) {
         state.project.isConfiguratorOpen = !state.project.isConfiguratorOpen
     },
-    
-  
+
+
 }
 
 
