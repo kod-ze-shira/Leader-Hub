@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import { ViewProject } from '../viewProject/viewProject'
+import ViewProject from '../viewProject/viewProject'
 function ProjectsByWorkspace(props, idWorkspace) {
     const [isFullProjects, setIsFullProjects] = useState(false);
 

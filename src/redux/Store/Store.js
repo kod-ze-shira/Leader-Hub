@@ -19,6 +19,7 @@ import { editWorkspaceInServer} from '../middleware/crud'
 import { editProjectInServer}    from '../middleware/crud'
 import { editTaskInServer} from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
+import { getProjectByIdInServer} from '../middleware/crud'
 
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer });
@@ -38,7 +39,8 @@ const store = createStore(
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
-                getTaskByIdFromServer        
+                getTaskByIdFromServer,
+                getProjectByIdInServer,       
             ))
 )
 var url = window.location;

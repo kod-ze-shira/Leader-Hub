@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import project_reducer from '../Reducers/project_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
@@ -327,14 +328,44 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
                 })
             }
         });
-        // })
+       
+
 
 
     }
     return next(action);
 }
+//
+export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + project_reducer.project.userName + "/" +project_reducer.project.id + "/getProjectById"
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setProject(result.project))
+
+                })
+            })
+    }
+    return next(action);
+}
+
 
 //
+
+
+
+
 export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
