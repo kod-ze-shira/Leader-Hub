@@ -46,12 +46,12 @@ function Newtask(props) {
 
                 <div className="col-md-2 col-xs-1 STARTtask"><div className="textstart mt-2">
                     <div className="mt-2"></div>
-                    <button onClick={() => { props.setTaskCrud1(props.task1); debugger }}>START TASK</button>
+                    <button onClick={() => { props.setTaskCrud1(props.task1); }}>START TASK</button>
                 </div>
                 </div>
 
             </div>
-            <button onClick={() => { props.setTaskCrud1(props.task1); debugger }}>fff</button>
+            <button onClick={() => { props.setTaskCrud1(props.task1);  }}>fff</button>
         </>
 
 

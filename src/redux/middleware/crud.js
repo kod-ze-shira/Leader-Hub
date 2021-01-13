@@ -78,7 +78,8 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                createNewEventWhenNewTask(data.message,getState().public_reducer.userName,getState().public_reducer.tokenFromCookies)
+                dispatch(actions.setTask(data.message));
+                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
                 // dispatch({ type: '', payload: data })
             },
             error: function (err) {
@@ -125,21 +126,51 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
-function createNewEventWhenNewTask(task,userName,jwt){
-    let startDate=new Date(task.startDate).toISOString();
-    let dueDate=new Date(task.dueDate).toISOString();
+function createNewEventWhenNewTask(task, userName, jwt) {
+    let timeStart = new Date(task.startDate);
+    timeStart.setHours(11);
+    let startTime = timeStart.toISOString()
+    timeStart.setHours(23);
+    let endTime = timeStart.toISOString();
+    // let timeEnd=new Date(task.startDate).setHours(21);
+    // let startDate=new Date(task.startDate).toISOString();
+    // let dueDate=new Date(task.dueDate).toISOString();
 
-    let event={title:"task",start:startDate,end:dueDate,categoryName:"hub"}
+    // let startDateTimeStart=startDate
+    let timeEnd = new Date(task.dueDate);
+    timeEnd.setHours(11);
+    let startTimeEnd = timeEnd.toISOString()
+    timeEnd.setHours(23);
+    let endTimeEnd = timeEnd.toISOString();
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
-    {
-        method:'POST',
-        headers:{authorization:jwt},                                   
-        body: JSON.stringify({"title":"task","start":startDate,"end":dueDate,"categoryName":"hub"})
-    }).then((result)=>{
-        return result.json();
-    }).then((result)=>{
-        console.log(result);
-    })
+        {
+            method: 'POST',
+            headers: {
+                authorization: jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+        })
+    
+    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+        {
+            method: 'POST',
+            headers: {
+                authorization: jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+        })
 }
 
 
@@ -267,24 +298,22 @@ export const editTaskInServer = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 //
-export const getTaskByIdInServer = ({ dispatch, getState }) => next => action => {
-    debugger;
-    if (action.type === 'GET_TASK_BY_ID_IN_SERVER') {
-        debugger;
+export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
 
-        var taskid = getState().task_reducer.task;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskid +"/getTaskById "
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        var taskId = action.payload;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskId + "/getTaskById"
         $.ajax({
             url: urlData,
-            type: 'POST',
+            type: 'GET',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ taskid }),
-            // dataType: 'json',
+
             success: function (data) {
+                dispatch(actions.setTask(data.result))
+
                 console.log("success")
                 console.log("data", data);
 

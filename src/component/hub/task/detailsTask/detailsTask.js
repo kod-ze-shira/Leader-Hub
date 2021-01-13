@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './detailsTask.css'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
- function DetailsTask(props)
-{
-    return(
+function DetailsTask(props) {
+    const [isHasTask, setIsHasTask] = useState(false);
+    useEffect(() => {
+        if (!isHasTask) {
+            setIsHasTask(true)
+            props.getTaskByIdFromServer(props.taskId)
+        }
+    })
+    return (
         <div className="detailsTask">
-         
+
             {/* subject:{props.getTaskByIdInServer.subject}
             description:
             status:
@@ -17,28 +23,21 @@ import { actions } from '../../../../redux/actions/action'
             files:
             project:
             team:    */}
-            <button onClick={props.getTaskByIdInServer}>ok</button> 
+            <div>{props.task._id}</div>
+            <button onClick={props.getTaskByIdFromServer}>ok</button>
         </div>
-        
+
     )
 }
 const mapStateToProps = (state) => {
     return {
-
         task: state.task_reducer.task
-
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
-
-        // setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
-        getTaskByIdInServer: () => dispatch({ type: "GET_TASK_BY_ID_IN_SERVER" })
-
+        getTaskByIdFromServer: (taskId) => dispatch(actions.getTaskByIdFromServer(taskId))
     }
-
-
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsTask)
