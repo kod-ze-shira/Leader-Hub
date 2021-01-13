@@ -8,15 +8,15 @@ import { actions } from '../../../../redux/actions/action'
         <div className="detailsTask">
          
             {/* subject:{props.getTaskByIdInServer.subject}
-            description:
-            status:
-            startDate:
-            dueDate:
-            endDate:
-            updateDates:
-            files:
-            project:
-            team:    */}
+            description:{props.getTaskByIdInServer.description}
+            status:{props.getTaskByIdInServer.status}
+            startDate:{props.getTaskByIdInServer.startDate}
+            dueDate:{props.getTaskByIdInServer.dueDate}
+            endDate:{props.getTaskByIdInServer.endDate}
+            updateDates:{props.getTaskByIdInServer.updateDates}
+            files:{props.getTaskByIdInServer.files}
+            project:{props.getTaskByIdInServer.project}
+            team: {props.getTaskByIdInServer.team}  */}
             <button onClick={props.getTaskByIdInServer}>ok</button> 
         </div>
         
