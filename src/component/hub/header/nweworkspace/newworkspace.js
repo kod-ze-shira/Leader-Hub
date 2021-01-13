@@ -50,14 +50,9 @@ function NewWorkpas(props) {
                     <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div>
                 </div>
 
-                {/* <<<<<<< HEAD */}
             </div>
-            {/* </> */}
-            {/* // ======= */}
-            <div className="col-md-2 col-xs-1 WORKSPACE1"><div className="textstart mt-2">
-                <div className="mt-2"></div>
-                <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div></div>
-            {/* >>>>>>> c05191fdd5e3522706b858af48b7a3aae5f844b8 */}
+          
+           
         </>
     )
 }
