@@ -42,7 +42,6 @@ const project = {
         state.project.id = action.payload;
     },
     setisConfiguratorOpen(state, action) {
-        debugger;
         state.project.isConfiguratorOpen = !state.project.isConfiguratorOpen
     },
 

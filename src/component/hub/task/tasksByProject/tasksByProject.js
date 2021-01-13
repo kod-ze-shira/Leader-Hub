@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import { ViewTask } from '../viewTask/viewTask'
+import  ViewTask  from '../viewTask/viewTask'
 
 function TasksByProject(props) {
     const [isFullTasks, setIsFullTasks] = useState(false);

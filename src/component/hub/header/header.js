@@ -197,9 +197,9 @@ const mapDispatchToProps = (dispatch) => {
         setProjectId:(id)=>dispatch(actions.setProjectId(id)),
         setTaskName:(name)=>dispatch(actions.setTaskName(name)),
         setWorkspaceName: (name) => dispatch(actions.setWorkspaceName(name)),
-        EditTaskFromServer: (task) => dispatch(actions.editTaskFromServer(task)),
+        EditTaskFromServer: (task) => dispatch(actions.editTaskInServer(task)),
         EditProjectFromServer1: (project) => dispatch(actions.editProjectInServer(project)),
-        editWorkspaceFromServer1: (workspace) => dispatch(actions.editWorkspaceFromServer(workspace)),
+        editWorkspaceInServer1: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
     }
