@@ -51,8 +51,8 @@ function NewProject(props) {
 
                     <div className="col-md-2 col-xs-1 STARTPROJECT"><div className="textstart mt-2">
                         <div className="mt-2"></div>
-                        <b >START PROJECT</b></div></div>
-                    <button onClick={() => { props.setProjectCrud1(props.project1); }}>NEW A</button>
+                        <b onClick={() => { props.setProjectCrud1(props.project1); }} >START PROJECT</b></div></div>
+                    {/* <button>NEW A</button> */}
 
 
                 </div>

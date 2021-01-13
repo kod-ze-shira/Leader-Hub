@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import { actions } from "../actions/action";
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
 
@@ -22,8 +23,12 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             // dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log(data);
-                // dispatch({ type: '', payload: data })
+                dispatch({ type: 'SET_WORKSPACE', payload: data.message });
+                // dispatch(actions.setWorkspace(data));
+                debugger
+                console.log("hhhhh", data.message);
+                console.log("data", data);
+
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
