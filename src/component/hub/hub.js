@@ -9,22 +9,22 @@ import Tools from './tools/tools';
 export default function Hub() {
     return (
         <>
-            {/* <Nav /> */}
+            <Nav />
             <div className="row">
                 <div className="col-md-1">
-                    {/* <Left_nav /> */}
+                    <Left_nav />
 
 
                 </div>
                 <div className="col-md-3  mt-2">
-                    {/* <Header /> */}
+                    <Header />
 
                     <div className="row mt-3">
-                        {/* <div className="col-2"> <Tools /></div> */}
-                        <div className="col-6"> <Body /></div>
+                        <div className="col-2"> <Tools /></div>
+                        <div className="col-4"> <Body /></div>
                     </div>
                     <div className="mt-3"></div>
-                    {/* <Body /> */}
+                    <Body />
 
 
 
