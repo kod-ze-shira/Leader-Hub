@@ -9,7 +9,7 @@ import team_reducer from '../Reducers/team_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
+import { getProjetsByWorkspace, getTasksByProject, getWorkspaceByIdFromServer } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
@@ -42,7 +42,8 @@ const store = createStore(
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
-                getTaskByIdFromServer
+                getTaskByIdFromServer,
+                getWorkspaceByIdFromServer
             ))
 )
 var url = window.location;
@@ -59,7 +60,8 @@ store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 // }
 window.store = store;
 //ליירק בעת  עבודה בשרת 
-let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
+
+let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwNTc2OTI2fQ.wwLhRxMi5o-O1IIXXgGASqdCKiz4rHkkuUFxyIlTpmE"
 store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 
 export default store;

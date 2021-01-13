@@ -29,16 +29,11 @@ const workspace = {
 
 const workspaces = {
     setWorkspace(state, action) {
-
-        // state.workpace[action.payload] = action.value;
-        state.workspace = action.value
-
-        // dispatch({ type: "GET_ALL" })
+        state.workspace = action.payload;
     },
-
-
-
-
+    setWorkspaceOnChangeFiled(state,action){
+        state.workspace[action.payload]=action.value
+    }
 }
 
 

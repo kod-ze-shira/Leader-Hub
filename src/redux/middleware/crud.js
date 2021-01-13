@@ -419,6 +419,26 @@ export const getTasksByProject = ({ dispatch, getState }) => next => action => {
     }
     return next(action)
 }
+export const getWorkspaceByIdFromServer=({dispatch,getState})=>next=>action=>{
+    if(action.type=="GET_WORKSPACE_BY_ID_FROM_SERVER"){
+        let workspaceId=action.payload;
+        let url=`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
+        fetch(url,{
+            method:'GET',
+                headers:{authorization:getState().public_reducer.tokenFromCookies}
+            }
+        ).then((result)=>{
+            return result.json();
+        }).then((result)=>{
+            console.log(result)
+            checkPermission(result).then((ifOk) => {
+                dispatch(actions.setWorkspace(result.result))
+
+            })
+        })
+    }
+    return next(action);
+}
 
 
 
