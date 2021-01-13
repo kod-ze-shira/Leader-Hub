@@ -142,6 +142,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
     let startTimeEnd = timeEnd.toISOString()
     timeEnd.setHours(23);
     let endTimeEnd = timeEnd.toISOString();
+    //create event on task's startDate
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
         {
             method: 'POST',
@@ -150,13 +151,14 @@ function createNewEventWhenNewTask(task, userName, jwt) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: "task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
+            body: JSON.stringify({ title: "start task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
         }).then((result) => {
             return result.json();
         }).then((result) => {
             console.log(result);
         })
-    
+        //create event on task's endDate
+
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
         {
             method: 'POST',
@@ -165,7 +167,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: "task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
+            body: JSON.stringify({ title: "end task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
         }).then((result) => {
             return result.json();
         }).then((result) => {
