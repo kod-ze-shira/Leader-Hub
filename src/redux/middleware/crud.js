@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import project_reducer from '../Reducers/project_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
@@ -373,14 +374,59 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
                 })
             }
         });
-        // })
+       
+
+
+
+    }
+    return next(action);
+}
+//
+export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
+
+        var projectId = action.payload;
+      
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectById"
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                dispatch(actions.setTask(data.result))
+
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+
 
 
     }
     return next(action);
 }
 
+
+   
+
+
 //
+
+
+
+
 export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
@@ -418,6 +464,26 @@ export const getTasksByProject = ({ dispatch, getState }) => next => action => {
             })
     }
     return next(action)
+}
+export const getWorkspaceByIdFromServer=({dispatch,getState})=>next=>action=>{
+    if(action.type=="GET_WORKSPACE_BY_ID_FROM_SERVER"){
+        let workspaceId=action.payload;
+        let url=`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
+        fetch(url,{
+            method:'GET',
+                headers:{authorization:getState().public_reducer.tokenFromCookies}
+            }
+        ).then((result)=>{
+            return result.json();
+        }).then((result)=>{
+            console.log(result)
+            checkPermission(result).then((ifOk) => {
+                dispatch(actions.setWorkspace(result.result))
+
+            })
+        })
+    }
+    return next(action);
 }
 
 

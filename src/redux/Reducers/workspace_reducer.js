@@ -3,10 +3,11 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
-        name: {},
-        // _Id: "",
-        // // projects: [],
-        // // team: ""
+        name: "rabin",
+        showShare: false
+        //  uaserId:"",
+        //  projects:[],
+        //  team:""
 
     }
 
@@ -28,16 +29,11 @@ const workspace = {
 
 const workspaces = {
     setWorkspace(state, action) {
-
-        // state.workpace[action.payload] = action.value;
-        state.workspace = action.value
-
-        // dispatch({ type: "GET_ALL" })
+        state.workspace = action.payload;
     },
-
-
-
-
+    setWorkspaceOnChangeFiled(state, action) {
+        state.workspace[action.payload] = action.value
+    }
 }
 
 

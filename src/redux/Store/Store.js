@@ -9,7 +9,7 @@ import team_reducer from '../Reducers/team_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
+import { getProjetsByWorkspace, getTasksByProject, getWorkspaceByIdFromServer } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
@@ -22,6 +22,7 @@ import { editWorkspaceInServer } from '../middleware/crud'
 import { editProjectInServer } from '../middleware/crud'
 import { editTaskInServer } from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
+import { getProjectByIdInServer} from '../middleware/crud'
 
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, team_reducer, public_reducer });
@@ -42,7 +43,12 @@ const store = createStore(
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
-                getTaskByIdFromServer
+                getTaskByIdFromServer,
+<<<<<<< HEAD
+                getProjectByIdInServer,       
+=======
+                getWorkspaceByIdFromServer
+>>>>>>> 93e3591db8c1f1b30c7f596f602ce735c0ea3fe2
             ))
 )
 var url = window.location;
@@ -59,7 +65,8 @@ store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 // }
 window.store = store;
 //ליירק בעת  עבודה בשרת 
-let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
+
+let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwNTc2OTI2fQ.wwLhRxMi5o-O1IIXXgGASqdCKiz4rHkkuUFxyIlTpmE"
 store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 
 export default store;
