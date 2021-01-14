@@ -15,7 +15,7 @@ import { actions } from '../../../../redux/actions/action'
     return(
         <div className="detailsTask">
          
-            <div>{props.rojectId}</div>
+            <div>{props.projectId}</div>
             <button onClick={props.getProjectByIdInServer}>project</button>
         </div>
  
