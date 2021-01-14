@@ -1,0 +1,13 @@
+#dropdown-basic {
+background-color:transparent !important;
+border-color: #979797 !important;
+color: #979797;
+text-align: left !important;
+}
+
+.dropright .dropdown-toggle::after {
+    display: block !important;
+    transform: rotate(180deg) !important;
+    float:right !important
+
+}

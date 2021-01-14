@@ -7,10 +7,6 @@ import { actions } from '..//..//..//..//redux/actions/action'
 
 function Newtask(props) {
     const change = (event) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
         props.createT(event.target.name, event.target.value)
     }
 
@@ -43,16 +39,10 @@ function Newtask(props) {
                 </div>
 
 
-<<<<<<< HEAD
-                    <div className="col-md-2 col-xs-1 STARTtask"><div className="textstart mt-2">
-                        <div className="mt-2"></div>
-                        <b onClick={() => { props.setTaskCrud1(props.task1); }}>START TASK</b></div></div>
-=======
                 <div className="newdate">
                     <div className="row mt-2"></div>
                     <input type="date" id="datetask"></input>
                 </div>
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
                 <div className="col-md-2 col-xs-1 STARTtask"><div className="textstart mt-2">
                     <div className="mt-2"></div>

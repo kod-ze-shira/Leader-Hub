@@ -21,10 +21,6 @@ const initialState = {
 // }, initialState);
 const publicData = {
     // setWorkspace(state, action) {
-<<<<<<< HEAD
-    //     
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     //     // state.workpace[action.payload] = action.value;
     //     state.workspace = action.value
     //     // dispatch({ type: "GET_ALL" })
@@ -32,10 +28,6 @@ const publicData = {
 
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     },
     setUserName(state, action) {
         state.userName = action.payload;

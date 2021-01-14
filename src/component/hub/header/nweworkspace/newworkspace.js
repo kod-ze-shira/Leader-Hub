@@ -8,10 +8,6 @@ import { actions } from '..//..//..//..//redux/actions/action'
 
 function NewWorkpas(props) {
     const change = (event) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
         props.createW(event.target.name, event.target.value)
     }
   
@@ -51,11 +47,7 @@ function NewWorkpas(props) {
 
                     <div className="col-md-2 col-xs-1 WORKSPACE1"><div className="textstart mt-2">
                         <div className="mt-2"></div>
-<<<<<<< HEAD
-                        <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div></div>
-=======
                         <b onClick={() => { props.setWorkspaCrud();  }}>START WORKSPACE</b></div></div>
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
                 </div>
             </>

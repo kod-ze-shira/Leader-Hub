@@ -1,7 +1,4 @@
 import $ from 'jquery'
-<<<<<<< HEAD
-import { actions } from "../actions/action";
-=======
 import { actions } from '../actions/action'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
@@ -21,7 +18,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setWorkspaces(result.workspaces))
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
                 })
             })
@@ -32,10 +28,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
@@ -52,13 +44,8 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             // dataType: 'json',
             success: function (data) {
                 console.log("success")
-                dispatch(actions.setWorkspace(data.message))
-                // dispatch({ type: 'SET_WORKSPACE', payload: data.message });
-                // dispatch(actions.setWorkspace(data));
-
-                console.log("hhhhh", data.message);
-                console.log("data", data);
-
+                console.log(data);
+                // dispatch({ type: '', payload: data })
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -68,20 +55,12 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
@@ -111,20 +90,12 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
 export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
         let name = action.payload;
@@ -152,10 +123,6 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
             }
         });
         // })
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
@@ -229,11 +196,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
 
-<<<<<<< HEAD
-    if (action.type === 'EDIT_WORKSPACE') {
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
         let workspace = getState().workspace_reducer.workspace;
         // var w = getState().workspace_reducer.workspace;
@@ -263,10 +225,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             }
         });
         // })
-<<<<<<< HEAD
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }
@@ -277,11 +235,6 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
 
-<<<<<<< HEAD
-    if (action.type === 'EDIT_PROJECT') {
-
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
         let project = getState().project_reducer.project;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
@@ -307,10 +260,6 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
                 })
             }
         });
-<<<<<<< HEAD
-        // })
-=======
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
     }
     return next(action);
@@ -318,12 +267,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
 export const editTaskInServer = ({ dispatch, getState }) => next => action => {
 
-<<<<<<< HEAD
-    if (action.type === 'EDIT_TASK') {
-
-=======
     if (action.type === 'EDIT_TASK_IN_SERVER') {
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
         var task = getState().task_reducer.task;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
@@ -351,8 +295,6 @@ export const editTaskInServer = ({ dispatch, getState }) => next => action => {
         });
         // })
 
-<<<<<<< HEAD
-=======
 
     }
     return next(action);
@@ -388,7 +330,6 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
         // })
 
 
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     }
     return next(action);
 }

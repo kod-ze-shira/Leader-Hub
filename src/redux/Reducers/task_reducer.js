@@ -19,12 +19,7 @@ const initialState = {
 }
 
 const tasks = {
-<<<<<<< HEAD
-    setTask(state, action) {
-
-=======
     setTaskName(state, action) {
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
         // state.workpace[action.payload] = action.value;
         state.task.name = action.payload
         

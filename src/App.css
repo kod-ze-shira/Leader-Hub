@@ -1,5 +1,7 @@
 body{
   background-color: #E8EAEC;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 .btn-success:not(:disabled):not(.disabled):active:focus, .show>.btn-success.dropdown-toggle:focus {
     box-shadow:none;
@@ -11,8 +13,14 @@ body{
     box-shadow: none;
 }
 .dropdown-toggle::after {
-    display: none;
-  
+        /* display: block !important; */
+        transform: rotate(-90deg) !important;
+        float:right !important;
+        padding-top: 2vh !important;
+        /* vertical-align: middle !important; */
+        /* margin-left: 20px; */
+    
+
 }
 
 

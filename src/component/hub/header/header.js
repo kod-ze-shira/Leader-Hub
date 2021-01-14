@@ -37,14 +37,6 @@ function Header(props) {
     //         "name": nameW,
 
     //     }}
-<<<<<<< HEAD
-    // // props.createW(jsonW);
-    // const change = (event) => {
-    //     
-    //     props.createW(event.target.name, event.target.value)
-    // }
-
-=======
     // props.createW(jsonW);
     const change = (event) => {
         props.createW(event.target.name, event.target.value)
@@ -53,7 +45,6 @@ function Header(props) {
         props.getAllWorkspaces();
     }
    
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     return (
     
        
@@ -91,22 +82,11 @@ function Header(props) {
                                         </Dropdown.Menu>
                                     </Dropdown>
 
-<<<<<<< HEAD
-                            <div className="col-md-2 col-xs-1 START"><div className="textstart mt-2">
-                                <div className="mt-2"></div>
-                                <b>START TASK</b></div>
-                            </div></div>
-                        <button id="btnedit" onClick={() => props.editWorkpaceFromServer()}>edit workpace</button>
-                        <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
-                        <button onClick={() => { props.setWorkspaCrud(props.workspace1); }}>NEW</button>
-                    </div>
-=======
                                 
                         </div>
                             <button onClick={props.project.setisConfiguratorOpen}></button>
                         </div>
                         </div>
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
 
            
 

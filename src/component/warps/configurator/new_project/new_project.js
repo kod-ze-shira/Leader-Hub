@@ -19,13 +19,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(props)
-{
-    return(
+export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(props) {
+    return (
         <>
-        {props.project.isConfiguratorOpen ?
+            {props.project.isConfiguratorOpen ?
                 <Configurator />
-           :
+                :
                 <>
                     <div className="right_nav">
                         <div className="conitner">
@@ -129,13 +128,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(
                                 <hr style={{ color: "#6A6E83" }}></hr><hr></hr>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </>
-             }
-               
-               </>
+            }
 
-        
-        
+        </>
+
+
+
     )
 })
