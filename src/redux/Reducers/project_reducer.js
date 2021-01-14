@@ -22,14 +22,6 @@ const initialState = {
 
 //     }
 // }, initialState);
-<<<<<<< HEAD
-const projects = {
-    setProject1(state, action) {
-
-        // state.workpace[action.payload] = action.value;
-        state.project.name = action.value
-        // dispatch({ type: "GET_ALL" })
-=======
 // const projects = {
 //     setProject1(state, action) {
 //         // state.workpace[action.payload] = action.value;
@@ -48,7 +40,6 @@ const project = {
     },
     setisConfiguratorOpen(state, action) {
         state.project.isConfiguratorOpen = !state.project.isConfiguratorOpen
->>>>>>> ad7e9e7b36a966136653f33cb591c38e24351eed
     },
 
 

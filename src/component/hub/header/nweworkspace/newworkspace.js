@@ -50,7 +50,7 @@ function NewWorkpas(props) {
                     <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div>
                 </div>
 
-                {/* <<<<<<< HEAD */}
+                {/* createNewTeam<<< HEAD */}
             </div>
             {/* </> */}
             {/* // ======= */}

@@ -123,7 +123,7 @@ function TeamExample(props) {
                 value: team.value
             })
             console.log(`add tem: ${team.name}, members: ${team.emailAndPermissionsArr}`)
-            props.setTeamCrud({ teamName: team.name, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
+            props.createNewTeam({ teamName: team.name, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
         }
 
         //add team to server
@@ -234,8 +234,8 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {//props.setTeamCrud
-        setTeamCrud: (props) => dispatch(actions.setTeamCrud(props)),
+    return {//props.createNewTeam
+        createNewTeam: (props) => dispatch(actions.createNewTeam(props)),
 
     }
 }

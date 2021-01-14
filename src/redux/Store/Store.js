@@ -13,7 +13,7 @@ import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
-import { setTeamCrud } from '../middleware/crud'
+import { createNewTeam } from '../middleware/crud'
 
 import { setProjectCrud } from '../middleware/crud'
 
@@ -38,7 +38,7 @@ const store = createStore(
                 setWorkspaCrud,
                 getAllWorkspacesFromServer,
                 setTaskCrud,
-                setTeamCrud,
+                createNewTeam,
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
