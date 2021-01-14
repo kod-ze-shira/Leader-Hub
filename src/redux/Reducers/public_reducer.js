@@ -40,10 +40,7 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload;
-    },
-    // setShowModalTeam(state, action) {
-    //     state.tasks = action.payload;
-    // },
+    }
 
 
 }
