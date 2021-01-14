@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './header/header';
-import Body from './newBody/newBody';
+import Body from './body/body';
 import Nav from '../warps/nav/nav';
 import Left_nav from '../warps/left_nav/left_nav';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
@@ -10,6 +10,7 @@ export default function Hub() {
     return (
         <>
             <Nav />
+
             <div className="row justify-content-end">
                 <div className="col-1">
                     <Left_nav />
