@@ -384,6 +384,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 //
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
+        
 
         var projectId = action.payload;
       

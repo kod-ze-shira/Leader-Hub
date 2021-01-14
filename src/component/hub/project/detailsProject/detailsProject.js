@@ -9,14 +9,14 @@ import { actions } from '../../../../redux/actions/action'
      useEffect(() => {
          if (!isHasProject) {
              setIsHasProject(true)
-             props.getProjectByIdInServer(props.ProjectId)
+             props.getProjectByIdInServer(props.projectId)
          }
      })
     return(
         <div className="detailsTask">
          
-            <div>{props.Project._id}</div>
-            <button onClick={props.getProjectByIdInServer}>ok</button>
+            <div>{props.rojectId}</div>
+            <button onClick={props.getProjectByIdInServer}>project</button>
         </div>
  
     )
@@ -29,7 +29,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+    
     return {
+        
         getProjectByIdInServer: (projectId) => dispatch(actions.getProjectByIdInServer(projectId))
     }
 }
