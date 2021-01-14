@@ -2,20 +2,32 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Dropdown, DropdownButton, ButtonGroup, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './dropDawnList.css'
-// import { actions } from '../../../../redux/actions/action'
+import { actions } from '../../../../redux/actions/action'
+import { ViewWorkspaceName } from '../viewWorkspaceName/viewWorkspaceName'
 
 const mapStateToProps = (state) => {
     return {
+        workspaces: state.public_reducer.worksapces
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
+    const renderedWorkspacesName = props.workspaces.map(todo => {
+        return <ViewWorkspaceName key={todo._id} workspace={todo} />
+      })
+   
     return (
         <>
+            <button onClick={() => props.getAllWorkspaces()}> hi</button>
+            <div>{renderedWorkspacesName}</div>
+
             <Dropdown>
                 <div className="row justify-content-around mt-5">
                     <Dropdown.Toggle variant="success" id="dropdown-basic" className="col-8">
