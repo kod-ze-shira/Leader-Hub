@@ -10,10 +10,10 @@ body{
     border-color: none;
     box-shadow: none;
 }
-.dropdown-toggle::after {
-    display: none;
+/* .dropdown-toggle::after {
+    display: block;
   
-}
+} */
 
 
 
