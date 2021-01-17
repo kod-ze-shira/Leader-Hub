@@ -11,7 +11,10 @@ function TeamExample(props) {
     const [show, setShow] = useState(true);
     const [permission, setPermission] = useState('viewer');
     const handleClose = () => setShow(false);
+    const [flug, setFlug] = useState(false)
+
     // const handleShow = () => setShow(true);
+
     const [team, setTeam] = useState({
         name: '',
         emailAndPermissionsArr: [],
@@ -19,6 +22,37 @@ function TeamExample(props) {
         errorName: false,
         value: "",
     })
+    const [teams, setTeams] = useState([
+        {
+            name: 'team 1',
+            emailAndPermissionsArr: [{ email: 'ss@ff.ccc', permission: 'viewer' }],
+            value: "",
+            errorMail: null,
+            errorName: false
+        },
+        {
+            name: 'team 2',
+            emailAndPermissionsArr: [
+                { email: 'asdfs@ff.ccc', permission: 'viewer' },
+                { email: 'sdfg@gfd.ccdgdgc', permission: 'editor' },
+            ],
+            value: "",
+            errorMail: null,
+            errorName: false,
+        },
+    ])
+
+    // useEffect(() => {
+    //     if (!isFullTasks) {
+    //         setIsFullTasks(true);
+    //         console.log(props.projectId);
+    //         props.getTasksByProject(props.projectId)
+    //     }
+    // })
+
+
+    // fun()
+    // function fun() { }
 
     function handleKeyDown(evt) {
         if (["Enter", "Tab", ","].includes(evt.key)) {
@@ -48,10 +82,18 @@ function TeamExample(props) {
     }
 
     function handleDelete(item) {
+
         setTeam({
-            emailAndPermissionsArr: team.emailAndPermissionsArr.filter(i => i.email !== item)
+            emailAndPermissionsArr: teams.emailAndPermissionsArr.filter(i => i.email !== item)
         });
 
+    }
+
+    function handleDeleteTeams(index, item) {
+        // איך עושים מחיקה של אוביקט בתוך אוביקט 
+        setTeams(teams[index].emailAndPermissionsArr.filter(i => i.email !== item));
+        // setTeams([teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
+        // setTeams([...teams, teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
     }
 
     function handlePaste(evt) {
@@ -129,6 +171,64 @@ function TeamExample(props) {
         //add team to server
     }
 
+    // function renderedListTeams() {
+    //     teams.map(t => {
+    //         return <> <Button
+    //             size="sm"
+
+    //         > {t.name}</Button>
+    //             {t.emailAndPermissionsArr.map(e =>
+    //                 <p>{e.email}</p>
+    //             )}
+    //         </>
+    //     })
+    // }
+    function renderMail(r) {
+        alert(r)
+    }
+    const renderedListTeams = teams.map(t => {
+
+        return <> <Button
+            size="sm"
+            onClick={() => setFlug(!flug)}
+        >open team: {t.name}</Button>
+            {flug ? t.emailAndPermissionsArr.map((e, index) =>
+                <div>
+                    <div>{renderMail('jj')}</div>
+                    <div className="tag-item" key={e.email}>
+                        {e.email}
+                        <button
+                            type="button"
+                            className="buttonMail"
+                            onClick={() => handleDeleteTeams(index, e.email)}
+                        >
+                            &times;
+             </button>
+                    </div>
+                    <input
+                        className={`inputMails ${t.errorMail ? "has-error" : null}`}
+                        value={t.value}
+                        placeholder="Type or paste email addresses and press `Enter`..."
+                        onKeyDown={(e) => handleKeyDown(e)}
+                        onChange={(e) => setTeams({
+                            value: e.target.value,
+                            emailAndPermissionsArr: [...team.emailAndPermissionsArr],
+                            errorMail: null,
+                            name: team.name,
+                            errorName: team.errorName
+                        })}
+
+                        onPaste={(e) => handlePaste(e.target.value)}
+                    />
+                </div>
+            ) : null}
+
+
+
+        </>
+    })
+
+
     return (
         <>
             {/* <Button variant="primary" onClick={handleShow}>
@@ -144,8 +244,14 @@ function TeamExample(props) {
                 <Modal.Header closeButton>
                     <Modal.Title>
                         {props.nameWorkspace ? "shared workspace:" + props.nameWorkspace : "add team"}
+                        {/* {teams.nameWorkspace ? "shared workspace:" + props.nameWorkspace : "add team"} */}
+
                     </Modal.Title>
+                    <div>{renderedListTeams}</div>
+
                 </Modal.Header>
+
+
                 <Modal.Body>
                     <InputGroup className="mb-3">
                         name team
@@ -190,7 +296,7 @@ function TeamExample(props) {
                                 onClick={() => handleDelete(item.email)}
                             >
                                 &times;
-            </button>
+                         </button>
                         </div>
                     )) : null}
 
