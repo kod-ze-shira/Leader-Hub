@@ -28,14 +28,13 @@ export function ViewWorkspace({ props, workspace }) {
           
              
             <div className="workspace" style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-             ‏
-
-               {workspace.name[0]} </div>
+             ‏ {workspace.name[0]} 
+             </div>
             <div>{workspace.name}</div>
             <div>{workspace._id}</div>
             <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button>
             <button onClick={viewProjectsByWorkspace}>view projects of workspace</button>
-          </div>
+          </div> 
           <div className="col-8">
             <div>
              
