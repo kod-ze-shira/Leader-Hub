@@ -15,13 +15,11 @@ export function ViewWorkspaceName({ props, workspace }) {
     }
     return (
         <>
-            <div className="container" >
-                <div className="row" onClick={viewProjectsByWorkspace}>
-                    <div className="col-10">
-                        <div>{workspace.name}</div>
-                    </div>
-                </div>
-            </div>
+            <ul className="pl-0">
+                <li className="">
+                    {workspace.name}
+                </li>
+            </ul>
         </>
 
     )
