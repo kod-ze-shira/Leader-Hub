@@ -31,8 +31,8 @@ const workspaces = {
     setWorkspace(state, action) {
         state.workspace = action.payload;
     },
-    setWorkspaceOnChangeFiled(state,action){
-        state.workspace[action.payload]=action.value
+    setWorkspaceOnChangeFiled(state, action) {
+        state.workspace[action.payload] = action.value
     }
 }
 

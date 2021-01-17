@@ -13,10 +13,12 @@ import { actions } from '../../../../redux/actions/action'
          }
      })
     return(
-        <div className="detailsTask">
+        <div className="detailsproject">
          
-            <div>{props.projectId}</div>
-            <button onClick={props.getProjectByIdInServer}>project</button>
+            <div>subject: {props.project.subject}</div>
+            <div>{props.project.description}</div>
+
+            {/* <button onClick={props.getProjectByIdInServer}>project</button> */}
         </div>
  
     )

@@ -5,12 +5,10 @@ const initialState = {
    
     project: {
         name: "malka",
-        
         subject:"",
         project:"mmmmm",
         dueDate:"12/10/20",
         endDate:"10/12/21",
-        isConfiguratorOpen: "false",
     }
 }
 
@@ -26,9 +24,7 @@ const project = {
     setProjectId(state, action) {
         state.project.id = action.payload;
     },
-    setisConfiguratorOpen(state, action) {
-        state.project.isConfiguratorOpen = !state.project.isConfiguratorOpen
-    },
+    
 
 
 }

@@ -26,7 +26,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
-export const setTeamCrud = ({ dispatch, getState }) => next => action => {
+export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TEAM_CRUD') {
         console.log('SET_TEAM_CRUD')
@@ -34,7 +34,7 @@ export const setTeamCrud = ({ dispatch, getState }) => next => action => {
         // let team = getState().team_reducer.team;
         let team = action.payload;
         // team 
-        // props.setTeamCrud({ teamName: team.teamName, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
+        // props.createNewTeam({ teamName: team.teamName, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
         // 
         // emailAndPermissionsArr: Array(2)
         // 0: {email: "4rtg@ftt.bb", permission: "viewer"}
@@ -398,7 +398,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setTask(data.result))
+                dispatch(actions.setProject(data))
 
                 console.log("success")
                 console.log("data", data);

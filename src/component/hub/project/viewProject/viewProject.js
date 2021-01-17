@@ -4,9 +4,11 @@ import DetailsProject from '../detailsProject/detailsProject'
 import ReactDOM from 'react-dom'
 
 export default function ViewProject(props) {
+
     function detailsProject() {
         set_getProjectById(false);
     }
+    
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     return(

@@ -52,8 +52,8 @@ function NewWorkpas(props) {
                 </div>
 
             </div>
-          
-           
+
+
         </>
     )
 }
