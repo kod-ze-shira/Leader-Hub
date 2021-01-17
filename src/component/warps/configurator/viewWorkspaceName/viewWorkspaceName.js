@@ -4,6 +4,9 @@ import { actions } from '../../../../redux/actions/action'
 import ProjectsByWorkspace from '../../../hub/project/projectsByWorkspace/projectsByWorkspace'
 import { Button } from 'react-bootstrap';
 
+
+import './viewWorkspaceName.css'
+
 export function ViewWorkspaceName({ props, workspace }) {
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
@@ -15,13 +18,12 @@ export function ViewWorkspaceName({ props, workspace }) {
     }
     return (
         <>
-            <div className="container" >
-                <div className="row" onClick={viewProjectsByWorkspace}>
-                    <div className="col-10">
-                        <div>{workspace.name}</div>
-                    </div>
-                </div>
-            </div>
+            
+            <ul className="pl-0">
+                <li className="">
+                    {workspace.name}
+                </li>
+            </ul>
         </>
 
     )

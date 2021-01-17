@@ -19,8 +19,9 @@ export default function Hub() {
                     {/* <Header /> */}
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Body />
+
                 </div>
-                <div className="col-2">
+                <div className="col-2 pl-0">
                     <Configurator />
                 </div>
             </div>
