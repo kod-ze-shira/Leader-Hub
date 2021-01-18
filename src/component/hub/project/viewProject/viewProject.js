@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import TasksByProject from '../../task/tasksByProject/tasksByProject'
+import { connect } from 'react-redux'
+import { actions } from '../../../../redux/actions/action'
 
-export function ViewProject(props) {
+function ViewProject(props) {
     const [viewTasks, setViewTasks] = useState(false)
     return(
         <>
@@ -14,8 +16,25 @@ export function ViewProject(props) {
             </div>
             <div>
           {viewTasks ? <TasksByProject projectId={props.project._id} /> : null}
-        </div>
-        </div>
+
+                    <button onClick={() => { props.deleteProjectInServer()}}>deleteproject</button>
+     
+                    </div>
+                    </div>
+    
+    
         </>
     )
 }
+const mapStateToProps = (state) => {
+   
+    return {
+        project: state.project_reducer.project
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ViewProject)
