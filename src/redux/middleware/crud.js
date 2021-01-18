@@ -43,33 +43,33 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
         // __proto__: Array(0)
         // name: "erfgth"
         // __proto__: Object
-        let t = team;
-        // $.ajax({
-        //     url: urlData,
-        //     type: 'POST',
-        //     headers: {
-        //         Authorization: getState().public_reducer.tokenFromCookies
-        //     },
-        //     contentType: "application/json; charset=utf-8",
-        //     data: JSON.stringify({
-        //         teamName:team.name,
-        //     }),
-        //     // dataType: 'json',
-        //     success: function (data) {
-        //        console.log("success")
-        // console.log(data);
-        // dispatch(actions.setTteam.message));
-        // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
-        // dispatch({ type: '', payload: data })
-        //     },
-        //     error: function (err) {
-        //         //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-        //         checkPermission(err).then((ifOk) => {
+        debugger
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(team),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
 
-        //         })
-        //     }
-        // });
-        // })
+                // dispatch(actions.setTteam.message));
+                // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
+                // dispatch({ type: '', payload: data })
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+
+                // checkPermission(err).then((ifOk) => {
+
+                // })
+            }
+        });
+
     }
     return next(action);
 }
@@ -374,7 +374,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
                 })
             }
         });
-       
+
 
 
 
@@ -387,7 +387,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
         
 
         var projectId = action.payload;
-      
+
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectById"
         $.ajax({
             url: urlData,
@@ -420,7 +420,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 }
 
 
-   
+
 
 
 //
@@ -466,17 +466,17 @@ export const getTasksByProject = ({ dispatch, getState }) => next => action => {
     }
     return next(action)
 }
-export const getWorkspaceByIdFromServer=({dispatch,getState})=>next=>action=>{
-    if(action.type=="GET_WORKSPACE_BY_ID_FROM_SERVER"){
-        let workspaceId=action.payload;
-        let url=`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
-        fetch(url,{
-            method:'GET',
-                headers:{authorization:getState().public_reducer.tokenFromCookies}
-            }
-        ).then((result)=>{
+export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type == "GET_WORKSPACE_BY_ID_FROM_SERVER") {
+        let workspaceId = action.payload;
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
+        fetch(url, {
+            method: 'GET',
+            headers: { authorization: getState().public_reducer.tokenFromCookies }
+        }
+        ).then((result) => {
             return result.json();
-        }).then((result)=>{
+        }).then((result) => {
             console.log(result)
             checkPermission(result).then((ifOk) => {
                 dispatch(actions.setWorkspace(result.result))
