@@ -29,9 +29,10 @@ export function ViewWorkspace({ props, workspace }) {
         </Button>
             </div>
             {
+              
               showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
             }
-
+                 
 
           </div>
         </div>
