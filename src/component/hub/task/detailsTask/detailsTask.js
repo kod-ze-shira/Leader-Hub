@@ -12,7 +12,7 @@ function DetailsTask(props) {
     })
     return (
         <div className="detailsTask">
-              <div>{props.task._id}</div>
+            <div>{props.task._id}</div>
             <button onClick={props.getTaskByIdFromServer}>ok</button>
         </div>
 

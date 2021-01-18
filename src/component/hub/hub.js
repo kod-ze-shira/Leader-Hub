@@ -24,7 +24,7 @@ export default function Hub() {
                         <div className="col-4"> <Body /></div>
                     </div>
                     <div className="mt-3"></div>
-                    {/* <Body /> */}
+                    <Body />
 
 
 

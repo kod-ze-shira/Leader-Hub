@@ -12,7 +12,7 @@ function TeamExample(props) {
     const [permission, setPermission] = useState('viewer');
     const handleClose = () => setShow(false);
     const [flug, setFlug] = useState(false)
-
+    const [indexer, setIndexer] = useState(0)
     // const handleShow = () => setShow(true);
 
     const [team, setTeam] = useState({
@@ -28,7 +28,8 @@ function TeamExample(props) {
             emailAndPermissionsArr: [{ email: 'ss@ff.ccc', permission: 'viewer' }],
             value: "",
             errorMail: null,
-            errorName: false
+            errorName: false,
+            flug: false
         },
         {
             name: 'team 2',
@@ -39,6 +40,7 @@ function TeamExample(props) {
             value: "",
             errorMail: null,
             errorName: false,
+            flug: false
         },
     ])
 
@@ -51,8 +53,8 @@ function TeamExample(props) {
     // })
 
 
-    // fun()
-    // function fun() { }
+    // getTeamsFromData()
+    // function getTeamsFromData() { }
 
     function handleKeyDown(evt) {
         if (["Enter", "Tab", ","].includes(evt.key)) {
@@ -81,6 +83,8 @@ function TeamExample(props) {
         }
     }
 
+
+
     function handleDelete(item) {
 
         setTeam({
@@ -91,8 +95,8 @@ function TeamExample(props) {
 
     function handleDeleteTeams(index, item) {
         // איך עושים מחיקה של אוביקט בתוך אוביקט 
-        setTeams(teams[index].emailAndPermissionsArr.filter(i => i.email !== item));
-        // setTeams([teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
+        // teams[index].emailAndPermissionsArr.filter(i => i.email !== item)
+        // קריאה ואז מקבלת את האוביקט מחדש
         // setTeams([...teams, teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
     }
 
@@ -184,17 +188,21 @@ function TeamExample(props) {
     //     })
     // }
     function renderMail(r) {
-        alert(r)
+        console.log(r)
     }
+    function fun() {
+
+    }
+
     const renderedListTeams = teams.map(t => {
 
         return <> <Button
             size="sm"
             onClick={() => setFlug(!flug)}
-        >open team: {t.name}</Button>
+        >  {flug ? "close team:" : "open team:"} {t.name}</Button>
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
-                <div>
-                    <div>{renderMail('jj')}</div>
+                <>
+                    {/* <div>{renderMail('jj')}</div> */}
                     <div className="tag-item" key={e.email}>
                         {e.email}
                         <button
@@ -205,25 +213,25 @@ function TeamExample(props) {
                             &times;
              </button>
                     </div>
-                    <input
-                        className={`inputMails ${t.errorMail ? "has-error" : null}`}
-                        value={t.value}
-                        placeholder="Type or paste email addresses and press `Enter`..."
-                        onKeyDown={(e) => handleKeyDown(e)}
-                        onChange={(e) => setTeams({
-                            value: e.target.value,
-                            emailAndPermissionsArr: [...team.emailAndPermissionsArr],
-                            errorMail: null,
-                            name: team.name,
-                            errorName: team.errorName
-                        })}
 
-                        onPaste={(e) => handlePaste(e.target.value)}
-                    />
-                </div>
+                </>
             ) : null}
+            {flug ?
+                <input
+                    className={`inputMails ${t.errorMail ? "has-error" : null}`}
+                    value={t.value}
+                    placeholder="Type or paste email addresses and press `Enter`..."
+                    onKeyDown={(e) => handleKeyDown(e)}
+                    onChange={(e) => setTeams({
+                        value: e.target.value,
+                        emailAndPermissionsArr: [...team.emailAndPermissionsArr],
+                        errorMail: null,
+                        name: team.name,
+                        errorName: team.errorName
+                    })}
 
-
+                    onPaste={(e) => handlePaste(e.target.value)}
+                /> : null}
 
         </>
     })
