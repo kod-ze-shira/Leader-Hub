@@ -45,7 +45,6 @@ const store = createStore(
                 getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,       
-                getWorkspaceByIdFromServer
             ))
 )
 var url = window.location;

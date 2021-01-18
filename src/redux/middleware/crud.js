@@ -384,6 +384,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 //
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
+        
 
         var projectId = action.payload;
 
@@ -397,7 +398,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setTask(data.result))
+                dispatch(actions.setProject(data))
 
                 console.log("success")
                 console.log("data", data);

@@ -64,7 +64,7 @@ const mapStateToProps = (state) => {
     return {
         // project1: state.workspace_reducer.project,
         project: state.project_reducer.project,
-
+        isConfiguratorOpen: state.public_reducer.isConfiguratorOpen
 
     }
 }

@@ -6,7 +6,9 @@ const initialState = {
     userName: "",
     worksapces: [],
     projects: [],
-    tasks: []
+    tasks: [],
+    isConfiguratorOpen: "false",
+
 
 }
 // export default produce((state, action) => {
@@ -40,7 +42,10 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload;
-    }
+    },
+    setisConfiguratorOpen(state, action) {
+        state.isConfiguratorOpen = !state.isConfiguratorOpen
+    },
 
 
 }

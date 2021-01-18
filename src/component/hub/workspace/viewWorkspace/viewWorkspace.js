@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './viewWorkspace.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWorkspace'
@@ -17,11 +18,19 @@ export function ViewWorkspace({ props, workspace }) {
   const toOpenEditWorkspace = () => {
     setOpenEditWorkspace(!openEditWorkspace)
   }
+  
   return (
+    
     <>
       <div className="container" >
         <div className="row">
-          <div className="col-4">
+          <div className="col-6">
+          
+             
+            <div className="workspace" style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+             ‏
+
+               {workspace.name[0]} </div>
             <div>{workspace.name}</div>
             <div>{workspace._id}</div>
             <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button>
