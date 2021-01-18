@@ -11,3 +11,40 @@ text-align: left !important;
     float:right !important
 
 }
+button{
+    text-align: left !important;
+}
+.btn-outline-secondary :focus{
+    box-shadow: none !important;
+}
+
+li{
+    list-style-type: none;
+    color: white;
+    text-align: left !important;
+}
+button{
+    border: none;
+    
+}
+button:hover{
+    background-color: transparent !important;
+}
+input{
+    background-color: transparent!important;
+    /* border: ; */
+}
+.icon{
+    color: #979797!important;
+    transform: rotate(90deg);
+    display: none;
+    
+}
+input{
+    display: none;
+    float: right;
+}
+#search{
+    height: 3vh;
+}
+

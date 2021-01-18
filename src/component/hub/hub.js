@@ -38,7 +38,7 @@ export default function Hub() {
                         </Switch>
                     </Router>
                 </div>
-                <div className="col-2">
+                <div className="col-2 pl-0">
                     <Configurator />
                 </div>
             </div>

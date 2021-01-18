@@ -1,7 +1,7 @@
 body{
   background-color: #E8EAEC;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 .btn-success:not(:disabled):not(.disabled):active:focus, .show>.btn-success.dropdown-toggle:focus {
     box-shadow:none;
