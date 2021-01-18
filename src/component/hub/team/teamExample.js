@@ -44,6 +44,8 @@ function TeamExample(props) {
         },
     ])
 
+
+
     // useEffect(() => {
     //     if (!isFullTasks) {
     //         setIsFullTasks(true);
@@ -190,9 +192,6 @@ function TeamExample(props) {
     function renderMail(r) {
         console.log(r)
     }
-    function fun() {
-
-    }
 
     const renderedListTeams = teams.map(t => {
 
@@ -205,6 +204,8 @@ function TeamExample(props) {
                     {/* <div>{renderMail('jj')}</div> */}
                     <div className="tag-item" key={e.email}>
                         {e.email}
+                        <Button variant="secondary">Close</Button>
+
                         <button
                             type="button"
                             className="buttonMail"
