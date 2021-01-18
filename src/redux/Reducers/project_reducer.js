@@ -11,9 +11,6 @@ const initialState = {
         //  team:""
 
     }
-
-
-
 }
 // export default produce((state, action) => {
 //     switch (action.type) {
@@ -38,6 +35,10 @@ const project = {
     setProjectName(state, action) {
         state.project.name = action.payload;
     },
+    setProject1(state, action) {
+
+        // state.workpace[action.payload] = action.value;
+        state.project.name = action.value},
     setProjectId(state, action) {
         state.project.id = action.payload;
     },

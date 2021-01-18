@@ -12,17 +12,6 @@ function DetailsTask(props) {
     })
     return (
         <div className="detailsTask">
-
-            {/* subject:{props.getTaskByIdInServer.subject}
-            description:
-            status:
-            startDate:
-            dueDate:
-            endDate:
-            updateDates:
-            files:
-            project:
-            team:    */}
             <div>{props.task._id}</div>
             <button onClick={props.getTaskByIdFromServer}>ok</button>
         </div>
