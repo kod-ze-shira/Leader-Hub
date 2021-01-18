@@ -48,3 +48,13 @@ input{
     height: 3vh;
 }
 
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 7px solid #979797;
+    display: inline-block;
+    float: right; 
+    /* margin-top: 4px;  */
+}
