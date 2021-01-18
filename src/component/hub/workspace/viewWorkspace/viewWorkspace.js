@@ -18,6 +18,7 @@ export function ViewWorkspace({ props, workspace }) {
   const toOpenEditWorkspace = () => {
     setOpenEditWorkspace(!openEditWorkspace)
   }
+
   
   return (
     
@@ -29,6 +30,8 @@ export function ViewWorkspace({ props, workspace }) {
              
             <div className="workspace" style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
              ‏ {workspace.name[0]} 
+             
+           
              </div>
             <div>{workspace.name}</div>
             <div>{workspace._id}</div>
