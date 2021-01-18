@@ -6,6 +6,10 @@
   font-size: 14px;
   line-height: 1.7;
 }
+.modal-header{
+  display: block !important;
+}
+
 /* 
 body {
   background-color: #eaeaea;
