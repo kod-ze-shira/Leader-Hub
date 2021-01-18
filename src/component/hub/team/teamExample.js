@@ -84,7 +84,46 @@ function TeamExample(props) {
             }
         }
     }
+    function addMailToTeams(index, evt) {
 
+        if (["Enter", "Tab", ","].includes(evt.key)) {
+            debugger
+            evt.preventDefault();
+            // var value = team.value.trim();
+            var value = teams[index].value.trim()
+            if (value && isValid(value)) {
+
+                if (teams[index].emailAndPermissionsArr) {
+                    // if (team.emailAndPermissionsArr) {
+                    teams[index].emailAndPermissionsArr[teams[index].emailAndPermissionsArr.length] = teams[index].value
+                    teams[index].value = ""
+
+                    // setTeam({
+                    //     emailAndPermissionsArr: [...team.emailAndPermissionsArr, { email: team.value, permission: permission }],
+                    //     value: "",
+                    //     errorMail: team.errorMail,
+                    //     name: team.name,
+                    //     errorName: team.errorName
+                    // });
+
+                }
+                else {
+
+                    teams[index].emailAndPermissionsArr[0] = teams[index].value
+                    teams[index].value = ""
+                }
+                // setTeam({
+                //     emailAndPermissionsArr: [{ email: team.value, permission: permission }],
+                //     value: "",
+                //     errorMail: team.errorMail,
+                //     name: team.name,
+                //     errorName: team.errorName
+                // });
+                setTeams([...teams])
+                setPermission('viewer');
+            }
+        }
+    }
 
 
     function handleDelete(item) {
@@ -170,7 +209,8 @@ function TeamExample(props) {
                 errorMail: team.errorMail,
                 value: team.value
             })
-            console.log(`add tem: ${team.name}, members: ${team.emailAndPermissionsArr}`)
+
+            // console.log(`add tem: ${team.name}, members: ${team.emailAndPermissionsArr}`)
             props.createNewTeam({ teamName: team.name, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
         }
 
@@ -189,22 +229,72 @@ function TeamExample(props) {
     //         </>
     //     })
     // }
+
     function renderMail(r) {
         console.log(r)
     }
 
-    const renderedListTeams = teams.map(t => {
+    function addValueToMail(index, e) {
+        // let t = teams[index]
+        // t.value =
+        teams[index].value = e.target.value
+        //    setTeams()
+    }
 
-        return <> <Button
-            size="sm"
-            onClick={() => setFlug(!flug)}
-        >  {flug ? "close team:" : "open team:"} {t.name}</Button>
+    // const renderedListTeams = teams.map((t, indexT) => {
+
+    //     return <> <Button
+    //         size="sm"
+    //         onClick={() => setFlug(!flug)}
+    //     >  {flug ? "close team:" : "open team:"} {t.name}</Button>
+    //         {flug ? t.emailAndPermissionsArr.map((e, index) =>
+    //             <>
+    //                 {/* <div>{renderMail('jj')}</div> */}
+    //                 <div className="tag-item" key={e.email}>
+    //                     {e.email}
+    //                     {/* <Button variant="secondary">Close</Button> */}
+
+    //                     <button
+    //                         type="button"
+    //                         className="buttonMail"
+    //                         onClick={() => handleDeleteTeams(index, e.email)}
+    //                     >
+    //                         &times;
+    //          </button>
+    //                 </div>
+
+    //             </>
+    //         ) : null}
+    //         {flug ?
+    //             <input
+    //                 className={`inputMails ${t.errorMail ? "has-error" : null}`}
+    //                 // value={t.value}
+    //                 placeholder="Type or paste email addresses and press `Enter`..."
+    //                 // onKeyDown={(e) => handleKeyDown(e)}
+    //                 onKeyDown={(e) => addMailToTeams(indexT, e)}
+    //                 onChange={(e) =>
+    //                     addValueToMail(indexT, e)
+    //                 }
+
+    //                 onPaste={(e) => handlePaste(e.target.value)}
+    //             /> : null}
+
+    //     </>
+
+    // })
+
+    function renderedListTeams(t, indexT) {
+        return <>
+            <Button
+                size="sm"
+                onClick={() => setFlug(!flug)}
+            >  {flug ? "close team:" : "open team:"} {t.name}</Button>
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
                 <>
                     {/* <div>{renderMail('jj')}</div> */}
                     <div className="tag-item" key={e.email}>
                         {e.email}
-                        <Button variant="secondary">Close</Button>
+                        {/* <Button variant="secondary">Close</Button> */}
 
                         <button
                             type="button"
@@ -212,7 +302,7 @@ function TeamExample(props) {
                             onClick={() => handleDeleteTeams(index, e.email)}
                         >
                             &times;
-             </button>
+     </button>
                     </div>
 
                 </>
@@ -220,23 +310,20 @@ function TeamExample(props) {
             {flug ?
                 <input
                     className={`inputMails ${t.errorMail ? "has-error" : null}`}
-                    value={t.value}
+                    // value={t.value}
                     placeholder="Type or paste email addresses and press `Enter`..."
-                    onKeyDown={(e) => handleKeyDown(e)}
-                    onChange={(e) => setTeams({
-                        value: e.target.value,
-                        emailAndPermissionsArr: [...team.emailAndPermissionsArr],
-                        errorMail: null,
-                        name: team.name,
-                        errorName: team.errorName
-                    })}
+                    // onKeyDown={(e) => handleKeyDown(e)}
+                    onKeyDown={(e) => addMailToTeams(indexT, e)}
+                    onChange={(e) =>
+                        addValueToMail(indexT, e)
+                    }
 
                     onPaste={(e) => handlePaste(e.target.value)}
                 /> : null}
 
         </>
-    })
 
+    }
 
     return (
         <>
@@ -256,7 +343,7 @@ function TeamExample(props) {
                         {/* {teams.nameWorkspace ? "shared workspace:" + props.nameWorkspace : "add team"} */}
 
                     </Modal.Title>
-                    <div>{renderedListTeams}</div>
+                    <div>{teams.map((t, indexT) => renderedListTeams(t, indexT))}</div>
 
                 </Modal.Header>
 
