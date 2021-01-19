@@ -374,8 +374,9 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {//props.createNewTeam
-        createNewTeam: (props) => dispatch(actions.createNewTeam(props)),
-
+        createNewTeam: function (team) {
+            dispatch(actions.createNewTeam(team))
+        }
     }
 }
 
