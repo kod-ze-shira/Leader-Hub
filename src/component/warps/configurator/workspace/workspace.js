@@ -33,7 +33,7 @@ export function workspace(props) {
 
                 $(".show").show();
                 $(".workspace-list").show();
-                $(".workspace-list").css("border", "0.5px solid #979797");
+                // $(".workspace-list").css("border", "0.5px solid #979797");
                 $(".arrow-down").css("transform", "rotate(90deg)")
                 // flag = !flag;
             }
@@ -52,13 +52,7 @@ export function workspace(props) {
             {/* <button onClick={showInPlatform} className="workspaces col-8 mt-5 btn btn-outline-secondary ">Workspace<div className="mt-1 arrow-down"></div></button> */}
             {/* {flag ? */}
             <div className="workspace-list  mt-2 col-8">
-                <input className="show col-10 mt-2" type="" id="search" name="search" placeholder="search"
-                >
-                </input>
-                <FontAwesomeIcon className="icon show"
-                    icon={['fas', 'search']}
-                ></FontAwesomeIcon>
-                <div className="workspace-list" >{renderedWorkspacesName}</div>
+                <div className="" >{renderedWorkspacesName}</div>
             </div>
             {/* : null } */}
 
