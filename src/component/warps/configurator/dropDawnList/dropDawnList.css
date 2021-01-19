@@ -31,21 +31,27 @@ button:hover{
     background-color: transparent !important;
 }
 input{
+    display: none;
     background-color: transparent!important;
     /* border: ; */
 }
 .icon{
-    color: #979797!important;
-    transform: rotate(90deg);
-    display: none;
+    color: #b9b9b9!important;
+
     
 }
-input{
+.search{
     display: none;
-    float: right;
+   }
+.input-group-text{
+    background-color: transparent !important;
+    border-right: none !important;
+
 }
-#search{
-    height: 3vh;
+
+.form-control{
+    border-left: none !important;
+
 }
 
 .arrow-down {

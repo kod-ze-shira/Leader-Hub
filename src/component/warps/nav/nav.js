@@ -6,8 +6,8 @@ import './nav.css';
 export default function Nav() {
     return (
         <div className="nav">
-            <div className="logo">
-                <img src={require('../../img/Path.png')}></img>
+            <div className="logo p-2">
+                <img src={require('../../img/logo-leader.png')}></img>
             </div>
             
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import './configuratorTop.css'
 // import { actions } from '../../../../redux/actions/action'
-import DropDownList from '../dropDawnList/dropDawnList'
+import DropDownList from '../dropDawnList/dropDownList'
 const mapStateToProps = (state) => {
     return {
     }

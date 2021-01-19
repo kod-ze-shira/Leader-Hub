@@ -24,7 +24,29 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     }
     return next(action);
 }
+export const getUserNameFromServer = ({ dispatch, getState }) => next => action => {
 
+    if (action.type === 'GET_USER_NAME_FROM_SERVER') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setWorkspaces(result.workspaces))
+
+                })
+            })
+    }
+    return next(action);
+}
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
