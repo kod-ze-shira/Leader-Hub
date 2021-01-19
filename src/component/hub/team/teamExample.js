@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import "./style.css";
+import Email from './email.js';
 import { Button, Modal, InputGroup, FormControl } from 'react-bootstrap';
 // קישור מאיפה שלקחתי את הקוד
 // https://codesandbox.io/s/ypyxr11109?from-embed=&file=/src/index.js:1094-1101&resolutionWidth=609&resolutionHeight=675
@@ -61,6 +62,7 @@ function TeamExample(props) {
     function handleKeyDown(evt) {
         if (["Enter", "Tab", ","].includes(evt.key)) {
             evt.preventDefault();
+
             var value = team.value.trim();
             if (value && isValid(value)) {
                 if (team.emailAndPermissionsArr) {
@@ -87,7 +89,7 @@ function TeamExample(props) {
     function addMailToTeams(index, evt) {
 
         if (["Enter", "Tab", ","].includes(evt.key)) {
-            debugger
+
             evt.preventDefault();
             // var value = team.value.trim();
             var value = teams[index].value.trim()
@@ -95,7 +97,7 @@ function TeamExample(props) {
 
                 if (teams[index].emailAndPermissionsArr) {
                     // if (team.emailAndPermissionsArr) {
-                    teams[index].emailAndPermissionsArr[teams[index].emailAndPermissionsArr.length] = teams[index].value
+                    teams[index].emailAndPermissionsArr[teams[index].emailAndPermissionsArr.length] = { email: teams[index].value, permission: "" }
                     teams[index].value = ""
 
                     // setTeam({
@@ -112,13 +114,7 @@ function TeamExample(props) {
                     teams[index].emailAndPermissionsArr[0] = teams[index].value
                     teams[index].value = ""
                 }
-                // setTeam({
-                //     emailAndPermissionsArr: [{ email: team.value, permission: permission }],
-                //     value: "",
-                //     errorMail: team.errorMail,
-                //     name: team.name,
-                //     errorName: team.errorName
-                // });
+
                 setTeams([...teams])
                 setPermission('viewer');
             }
@@ -129,12 +125,13 @@ function TeamExample(props) {
     function handleDelete(item) {
 
         setTeam({
-            emailAndPermissionsArr: teams.emailAndPermissionsArr.filter(i => i.email !== item)
+            emailAndPermissionsArr: team.emailAndPermissionsArr.filter(i => i.email !== item)
         });
 
     }
 
-    function handleDeleteTeams(index, item) {
+    function deleteTeam(index, item) {
+        console.log('Delete ' + item)
         // איך עושים מחיקה של אוביקט בתוך אוביקט 
         // teams[index].emailAndPermissionsArr.filter(i => i.email !== item)
         // קריאה ואז מקבלת את האוביקט מחדש
@@ -157,6 +154,7 @@ function TeamExample(props) {
     }
 
     function isValid(email) {
+
         let error = null;
 
         if (isInList(email)) {
@@ -173,7 +171,7 @@ function TeamExample(props) {
                 ...team.value,
                 emailAndPermissionsArr: [...team.emailAndPermissionsArr],
                 name: team.name,
-                errorName: team.errorMail
+                errorName: team.errorName
             });
             return false;
         }
@@ -241,48 +239,6 @@ function TeamExample(props) {
         //    setTeams()
     }
 
-    // const renderedListTeams = teams.map((t, indexT) => {
-
-    //     return <> <Button
-    //         size="sm"
-    //         onClick={() => setFlug(!flug)}
-    //     >  {flug ? "close team:" : "open team:"} {t.name}</Button>
-    //         {flug ? t.emailAndPermissionsArr.map((e, index) =>
-    //             <>
-    //                 {/* <div>{renderMail('jj')}</div> */}
-    //                 <div className="tag-item" key={e.email}>
-    //                     {e.email}
-    //                     {/* <Button variant="secondary">Close</Button> */}
-
-    //                     <button
-    //                         type="button"
-    //                         className="buttonMail"
-    //                         onClick={() => handleDeleteTeams(index, e.email)}
-    //                     >
-    //                         &times;
-    //          </button>
-    //                 </div>
-
-    //             </>
-    //         ) : null}
-    //         {flug ?
-    //             <input
-    //                 className={`inputMails ${t.errorMail ? "has-error" : null}`}
-    //                 // value={t.value}
-    //                 placeholder="Type or paste email addresses and press `Enter`..."
-    //                 // onKeyDown={(e) => handleKeyDown(e)}
-    //                 onKeyDown={(e) => addMailToTeams(indexT, e)}
-    //                 onChange={(e) =>
-    //                     addValueToMail(indexT, e)
-    //                 }
-
-    //                 onPaste={(e) => handlePaste(e.target.value)}
-    //             /> : null}
-
-    //     </>
-
-    // })
-
     function renderedListTeams(t, indexT) {
         return <>
             <Button
@@ -291,26 +247,15 @@ function TeamExample(props) {
             >  {flug ? "close team:" : "open team:"} {t.name}</Button>
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
                 <>
-                    {/* <div>{renderMail('jj')}</div> */}
-                    <div className="tag-item" key={e.email}>
-                        {e.email}
-                        {/* <Button variant="secondary">Close</Button> */}
-
-                        <button
-                            type="button"
-                            className="buttonMail"
-                            onClick={() => handleDeleteTeams(index, e.email)}
-                        >
-                            &times;
-     </button>
-                    </div>
+                    <Email email={e.email}
+                        onClick={() => deleteTeam(index, e.email)} />
 
                 </>
             ) : null}
             {flug ?
                 <input
                     className={`inputMails ${t.errorMail ? "has-error" : null}`}
-                    // value={t.value}
+                    // value={teams[indexT].value} לא ברור למה זה לא עובד
                     placeholder="Type or paste email addresses and press `Enter`..."
                     // onKeyDown={(e) => handleKeyDown(e)}
                     onKeyDown={(e) => addMailToTeams(indexT, e)}
@@ -384,16 +329,7 @@ function TeamExample(props) {
                     </Button>
                     <br />
                     {team.emailAndPermissionsArr && team.emailAndPermissionsArr[0] ? team.emailAndPermissionsArr.map(item => (
-                        <div className="tag-item" key={item.email}>
-                            {item.email}
-                            <button
-                                type="button"
-                                className="buttonMail"
-                                onClick={() => handleDelete(item.email)}
-                            >
-                                &times;
-                         </button>
-                        </div>
+                        <Email email={item.email} onClick={() => handleDelete(item.email)} />
                     )) : null}
 
                     <input
