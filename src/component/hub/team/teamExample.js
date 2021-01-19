@@ -140,7 +140,7 @@ function TeamExample(props) {
 
     function handlePaste(evt) {
         evt.preventDefault();
-        debugger
+
         var paste = evt.clipboardData.getData("text");
         var emails = paste.match(/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g);
 
@@ -247,6 +247,7 @@ function TeamExample(props) {
             >  {flug ? "close team:" : "open team:"} {t.name}</Button>
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
                 <>
+
                     <Email email={e.email}
                         onClick={() => deleteTeam(index, e.email)} />
 
@@ -372,9 +373,12 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {//props.createNewTeam
-        createNewTeam: (props) => dispatch(actions.createNewTeam(props)),
+    return {
+        createNewTeam: function (team) {
 
+            dispatch(actions.createNewTeam(team))
+
+        }
     }
 }
 
