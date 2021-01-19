@@ -28,9 +28,9 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
 export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'SET_TEAM_CRUD') {
-        console.log('SET_TEAM_CRUD')
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTeam"
+    if (action.type === 'CREATE_NEW_TEAM') {
+        console.log('CREATE_NEW_TEAM')
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/addNewTeam"
         // let team = getState().team_reducer.team;
         let team = action.payload;
         // team 
@@ -43,14 +43,14 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
         // __proto__: Array(0)
         // name: "erfgth"
         // __proto__: Object
-        debugger
+
         $.ajax({
             url: urlData,
             type: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
-            contentType: "application/json; charset=utf-8",
+            // contentType: "application/json; charset=utf-8",
             data: JSON.stringify(team),
             success: function (data) {
                 console.log("success")
