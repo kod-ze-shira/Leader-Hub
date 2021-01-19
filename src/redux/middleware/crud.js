@@ -28,9 +28,9 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
 export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'SET_TEAM_CRUD') {
-        console.log('SET_TEAM_CRUD')
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTeam"
+    if (action.type === 'CREATE_NEW_TEAM') {
+        console.log('CREATE_NEW_TEAM')
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/addNewTeam"
         // let team = getState().team_reducer.team;
         let team = action.payload;
         // team 
@@ -43,7 +43,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
         // __proto__: Array(0)
         // name: "erfgth"
         // __proto__: Object
-        debugger
+
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -283,7 +283,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 
 
         let project = getState().project_reducer.project;
-        let urlData =" https://reacthub.dev.leader.codes/api/renana-il/5ff5bc6547daea4ac861c74c/removeProjectById" 
+        let urlData = " https://reacthub.dev.leader.codes/api/renana-il/5ff5bc6547daea4ac861c74c/removeProjectById"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -418,7 +418,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 //
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
-        
+
 
         var projectId = action.payload;
 
