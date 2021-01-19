@@ -10,10 +10,10 @@ import { ViewWorkspace } from '../viewWorkspace/viewWorkspace'
 function allWorkspaces(props) {
 
     // useEffect(() => {
-      
+
     // }
 
-        // , [props]);
+    // , [props]);
     // useEffect(() => {
     //     // props.getAllWorkspaces();
     // }
@@ -25,7 +25,7 @@ function allWorkspaces(props) {
     // })
     const renderedListWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspace key={todo._id} workspace={todo} />
-      })
+    })
     return (
         <>
             <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
@@ -43,7 +43,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-            }
+    }
+
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(allWorkspaces)
