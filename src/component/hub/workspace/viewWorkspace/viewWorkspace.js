@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './viewWorkspace.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
+import './viewWorkspace.css'
 import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWorkspace'
 import TeamExample from '../../team/teamExample'
 import { Button } from 'react-bootstrap';
@@ -18,6 +19,7 @@ export function ViewWorkspace({ props, workspace }) {
   const toOpenEditWorkspace = () => {
     setOpenEditWorkspace(!openEditWorkspace)
   }
+
   
   return (
     
@@ -28,14 +30,15 @@ export function ViewWorkspace({ props, workspace }) {
           
              
             <div className="workspace" style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-             ‏
-
-               {workspace.name[0]} </div>
+             ‏ {workspace.name[0]} 
+             
+           
+             </div>
             <div>{workspace.name}</div>
             <div>{workspace._id}</div>
             <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button>
             <button onClick={viewProjectsByWorkspace}>view projects of workspace</button>
-          </div>
+          </div> 
           <div className="col-8">
             <div>
              
@@ -46,9 +49,10 @@ export function ViewWorkspace({ props, workspace }) {
 
 
             {
+
               showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
             }
-
+                 
 
           </div>
         </div>

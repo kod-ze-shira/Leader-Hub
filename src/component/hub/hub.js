@@ -23,7 +23,11 @@ export default function Hub() {
                         <div className="col-2"> <Tools /></div>
                         <div className="col-4"> <Body /></div>
                     </div>
-                   
+                    <div className="mt-3"></div>
+                    {/* <Body /> */}
+
+
+
                 </div>
                 <div className="col-md-6"></div>
                 <div className="col-md-2">
