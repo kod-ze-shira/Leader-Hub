@@ -247,6 +247,7 @@ function TeamExample(props) {
             >  {flug ? "close team:" : "open team:"} {t.name}</Button>
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
                 <>
+
                     <Email email={e.email}
                         onClick={() => deleteTeam(index, e.email)} />
 
