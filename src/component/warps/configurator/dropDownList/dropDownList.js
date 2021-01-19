@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Dropdown, DropdownButton, ButtonGroup, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import './dropDawnList.css'
+import './dropDownList.css'
 import { actions } from '../../../../redux/actions/action'
 import { ViewWorkspaceName } from '../viewWorkspaceName/viewWorkspaceName'
 import $ from 'jquery';
@@ -32,7 +32,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
     })
     const showInPlatform = () => {
         props.getAllWorkspaces();
-        history.push('/workspacePlatform')
+        // history.push('/workspacePlatform')
 
     }
     $(document).ready(function () {
@@ -46,7 +46,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
             if (flag) {
                 $(".icon").show();
                 $("input").show()
-                // $(".search").show()
+                $(".search").show()
                 $(".workspace-list").show();
                 $(".workspace-list").css("border", "0.5px solid #979797");
             }
@@ -66,7 +66,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
                 <div className="row justify-content-center">
                     <button onClick={showInPlatform} className="workspaces col-8 mt-5 btn btn-outline-secondary">Workspace</button>
                     <div className="workspace-list  mt-2 col-8">
-                        {/* <div className="search">
+                        <div className="search">
                             <InputGroup size="sm" className="mb-3 mt-2" >
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="inputGroup-sizing-sm"> <FontAwesomeIcon className=""
@@ -75,7 +75,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
                                 </InputGroup.Prepend>
                                 <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="search" />
                             </InputGroup>
-                        </div> */}
+                        </div>
                         <div className="" >{renderedWorkspacesName}</div>
                     </div>
                 </div>
