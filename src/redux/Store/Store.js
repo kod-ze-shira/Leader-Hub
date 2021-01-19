@@ -14,6 +14,7 @@ import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
 import { createNewTeam } from '../middleware/crud'
+import { deleteProjectInServer} from '../middleware/crud'
 
 import { setProjectCrud } from '../middleware/crud'
 
@@ -22,12 +23,8 @@ import { editWorkspaceInServer } from '../middleware/crud'
 import { editProjectInServer } from '../middleware/crud'
 import { editTaskInServer } from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
-<<<<<<< HEAD
-import { deleteProjectInServer} from '../middleware/crud'
-=======
 import { getProjectByIdInServer} from '../middleware/crud'
 
->>>>>>> hub_
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, team_reducer, public_reducer });
 
@@ -36,12 +33,8 @@ const store = createStore(
     reducers,
     composeWithDevTools(
         applyMiddleware
-<<<<<<< HEAD
             (  
                 deleteProjectInServer,
-=======
-            (
->>>>>>> hub_
                 editTaskInServer,
                 editProjectInServer,
                 editWorkspaceInServer,
