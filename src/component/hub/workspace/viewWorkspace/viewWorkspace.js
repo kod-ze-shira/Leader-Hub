@@ -25,11 +25,6 @@ export function ViewWorkspace({ props, workspace }) {
     
     <>
       <div className="container" >
-<<<<<<< HEAD
-        <div className="row" onClick={viewProjectsByWorkspace}>
-          <div className="col-2">
-            <div className="workspaceColor" style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>{workspace.name[0]}</div>
-=======
         <div className="row">
           <div className="col-6">
           
@@ -39,7 +34,6 @@ export function ViewWorkspace({ props, workspace }) {
              
            
              </div>
->>>>>>> hub_
             <div>{workspace.name}</div>
             <div>{workspace._id}</div>
             <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button>

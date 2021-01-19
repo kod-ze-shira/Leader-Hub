@@ -1,22 +1,16 @@
 import React, { useState } from 'react'
 import TasksByProject from '../../task/tasksByProject/tasksByProject'
-<<<<<<< HEAD
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-
-function ViewProject(props) {
-=======
 import DetailsProject from '../detailsProject/detailsProject'
 import ReactDOM from 'react-dom'
-
-export default function ViewProject(props) {
+import { connect } from 'react-redux';
+import { actions } from '../../../../redux/actions/action'
+function ViewProject(props) {
 
     function detailsProject() {
         set_getProjectById(false);
     }
     
     const [getProjectById, set_getProjectById] = useState(true);
->>>>>>> hub_
     const [viewTasks, setViewTasks] = useState(false)
     return(
         <>
@@ -34,7 +28,6 @@ export default function ViewProject(props) {
                 </div>
             </div>
             <div>
-<<<<<<< HEAD
           {viewTasks ? <TasksByProject projectId={props.project._id} /> : null}
 
                     <button onClick={() => { props.deleteProjectInServer()}}>deleteproject</button>
@@ -58,13 +51,3 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewProject)
-=======
-          {viewTasks ? <TasksByProject projectId={props.projectId} /> : null}
-        </div>
-        </div>
-        </>
-    )
-}
-
-
->>>>>>> hub_
