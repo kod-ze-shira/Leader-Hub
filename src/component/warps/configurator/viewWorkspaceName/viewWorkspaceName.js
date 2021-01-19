@@ -18,6 +18,7 @@ export function ViewWorkspaceName({ props, workspace }) {
     }
     return (
         <>
+
             
             <ul className="pl-0">
                 <li className="">
