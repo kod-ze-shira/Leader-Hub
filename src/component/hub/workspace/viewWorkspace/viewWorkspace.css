@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .workspaceColor{
    width: 40px;
@@ -7,4 +8,13 @@
    text-align: center;
    color:white;
    margin-top: auto;
+=======
+.workspace{
+    width: 40px;
+    height: 40px;
+   border-radius: 16px;
+   font-size: x-large;
+   color: white;
+     
+>>>>>>> hub_
 }
