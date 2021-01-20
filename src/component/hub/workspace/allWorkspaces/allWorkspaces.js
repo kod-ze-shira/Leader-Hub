@@ -29,13 +29,13 @@ function allWorkspaces(props) {
     return (
         <>
             <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-            <div>{renderedListWorkspaces}</div>
+            <div className='row'>{renderedListWorkspaces}</div>
         </>
     )
 }
 
 const mapStateToProps = (state) => {
-   
+
     return {
         workspaces: state.public_reducer.worksapces
     }
