@@ -35,7 +35,7 @@ function allWorkspaces(props) {
 }
 
 const mapStateToProps = (state) => {
-    // workspace = state.public_reducer.worksapces
+   
     return {
         workspaces: state.public_reducer.worksapces
     }
