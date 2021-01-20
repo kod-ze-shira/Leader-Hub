@@ -37,35 +37,44 @@ export function ViewWorkspace({ props, workspace }) {
               {workspace.name[0].toUpperCase()}
 
               {workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null}</div>
+                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null}
+
+              ‏
+
+
+
+
+
+
+             </div>
             <div>{workspace.name}</div>
-            <div>{workspace.startDate}</div>
-            <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button>
-            <button onClick={viewProjectsByWorkspace}>view projects of workspace</button>
           </div>
-          <div className="col-8">
+          {/* <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button>
+            <button onClick={viewProjectsByWorkspace}>view projects of workspace</button> */}
+        </div>
+        {/* <div className="col-8">
             <div>
 
-            </div>
-            <Button onClick={() => setShowShare(!showShare)} variant="primary">
+            </div> */}
+        {/* <Button onClick={() => setShowShare(!showShare)} variant="primary">
               Share
-        </Button>
+        </Button> */}
 
 
-            {
+        {
 
-              showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
-            }
+          // showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
+        }
 
 
-          </div>
-        </div>
-        <div>
+        {/* </div>
+        </div> */}
+        {/* <div>
           {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
         </div>
         <div>
           {openEditWorkspace ? <EditWorkspace idWorkspace={workspace._id}></EditWorkspace> : null}
-        </div>
+        </div> */}
       </div>
     </>
 
