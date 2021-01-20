@@ -130,12 +130,11 @@ function TeamExample(props) {
 
     }
 
-    function deleteTeam(index, item) {
+    function deleteTeam(index, indexEmail, item) {
         console.log('Delete ' + item)
-        // איך עושים מחיקה של אוביקט בתוך אוביקט 
-        // teams[index].emailAndPermissionsArr.filter(i => i.email !== item)
-        // קריאה ואז מקבלת את האוביקט מחדש
-        // setTeams([...teams, teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
+        teams[index].emailAndPermissionsArr.splice(indexEmail, 1);
+        setTeams([...teams]);
+
     }
 
     function handlePaste(evt) {
@@ -209,7 +208,7 @@ function TeamExample(props) {
             })
 
             // console.log(`add tem: ${team.name}, members: ${team.emailAndPermissionsArr}`)
-            props.createNewTeam({ teamName: team.name, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
+            props.createNewTeam({ teamName: team.name, emailAndPermissionsList: [...team.emailAndPermissionsArr] })
         }
 
         //add team to server
@@ -249,7 +248,7 @@ function TeamExample(props) {
                 <>
 
                     <Email email={e.email}
-                        onClick={() => deleteTeam(index, e.email)} />
+                        onClick={() => deleteTeam(indexT, index, e.email)} />
 
                 </>
             ) : null}
@@ -373,11 +372,9 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
+    return {//props.createNewTeam
         createNewTeam: function (team) {
-
             dispatch(actions.createNewTeam(team))
-
         }
     }
 }

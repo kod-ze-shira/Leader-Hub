@@ -5,9 +5,11 @@ import Configurator from '../configurator';
 import './new_project.css';
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
+import public_reducer from '../../../../redux/Reducers/public_reducer';
 const mapStateToProps = (state) => {
     return {
-        project: state.project_reducer.project
+        project: state.project_reducer.project,
+        isConfiguratorOpen:state.public_reducer.isConfiguratorOpen
 
     }
 }
@@ -23,7 +25,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(
 {
     return(
         <>
-        {props.project.isConfiguratorOpen ?
+        {props.isConfiguratorOpen ?
                 <Configurator />
            :
                 <>

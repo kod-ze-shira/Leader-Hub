@@ -83,7 +83,6 @@ function Header(props) {
                             <button id="btnedit" onClick={() => props.editWorkpaceFromServer()}>edit workpace</button>
                             <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
                             <button onClick={() => { props.setWorkspaCrud(props.workspace1); }}>NEW</button>
-                            <button onClick={props.project.setisConfiguratorOpen}></button>
                         </div>
 
                     </div>
@@ -190,7 +189,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen)),
         setProjectName: (name) => dispatch(actions.setProjectName(name)),
         setProjectId: (id) => dispatch(actions.setProjectId(id)),
         setTaskName: (name) => dispatch(actions.setTaskName(name)),

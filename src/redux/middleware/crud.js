@@ -63,6 +63,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 console.log("error")
+                console.log(err)
 
                 // checkPermission(err).then((ifOk) => {
 
@@ -277,6 +278,40 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 }
 
 
+export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'DELETE_PROJECT_IN_SERVER') {
+
+
+        let project = getState().project_reducer.project;
+        let urlData = " https://reacthub.dev.leader.codes/api/renana-il/5ff5bc6547daea4ac861c74c/removeProjectById"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ project }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                dispatch(actions.setProject(data.result))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
+
 //edit project
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
 
@@ -385,6 +420,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
 
+
         var projectId = action.payload;
 
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectById"
@@ -397,7 +433,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setTask(data.result))
+                dispatch(actions.setProject(data))
 
                 console.log("success")
                 console.log("data", data);
