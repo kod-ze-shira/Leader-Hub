@@ -16,6 +16,7 @@ function allWorkspaces(props) {
     })
 
     return (
+<<<<<<< HEAD
 
         <div>
 
@@ -37,6 +38,12 @@ function allWorkspaces(props) {
         </div>
 
 
+=======
+        <>
+            <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
+            <div className='row'>{renderedListWorkspaces}</div>
+        </>
+>>>>>>> dev
     )
 }
 
