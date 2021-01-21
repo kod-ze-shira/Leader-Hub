@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import ReactDOM from "react-dom";
+import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import "./style.css";
-import Email from './email.js';
 import { Button, Modal, InputGroup, FormControl } from 'react-bootstrap';
 // קישור מאיפה שלקחתי את הקוד
 // https://codesandbox.io/s/ypyxr11109?from-embed=&file=/src/index.js:1094-1101&resolutionWidth=609&resolutionHeight=675
-export default function TeamExample(props) {
+// export default
+function TeamExample(props) {
     const [show, setShow] = useState(true);
     const [permission, setPermission] = useState('viewer');
     const handleClose = () => setShow(false);
@@ -16,7 +17,7 @@ export default function TeamExample(props) {
 
     const [team, setTeam] = useState({
         name: '',
-        items: [],
+        emailAndPermissionsArr: [],
         errorMail: null,
         errorName: false,
         value: "",
@@ -57,16 +58,14 @@ export default function TeamExample(props) {
     // getTeamsFromData()
     // function getTeamsFromData() { }
 
-
     function handleKeyDown(evt) {
         if (["Enter", "Tab", ","].includes(evt.key)) {
             evt.preventDefault();
-
             var value = team.value.trim();
             if (value && isValid(value)) {
-                if (team.items) {
+                if (team.emailAndPermissionsArr) {
                     setTeam({
-                        items: [...team.items, { mail: team.value, permission: permission }],
+                        emailAndPermissionsArr: [...team.emailAndPermissionsArr, { email: team.value, permission: permission }],
                         value: "",
                         errorMail: team.errorMail,
                         name: team.name,
@@ -75,7 +74,7 @@ export default function TeamExample(props) {
 
                 }
                 else setTeam({
-                    items: [{ mail: team.value, permission: permission }],
+                    emailAndPermissionsArr: [{ email: team.value, permission: permission }],
                     value: "",
                     errorMail: team.errorMail,
                     name: team.name,
@@ -88,7 +87,7 @@ export default function TeamExample(props) {
     function addMailToTeams(index, evt) {
 
         if (["Enter", "Tab", ","].includes(evt.key)) {
-
+            debugger
             evt.preventDefault();
             // var value = team.value.trim();
             var value = teams[index].value.trim()
@@ -96,7 +95,7 @@ export default function TeamExample(props) {
 
                 if (teams[index].emailAndPermissionsArr) {
                     // if (team.emailAndPermissionsArr) {
-                    teams[index].emailAndPermissionsArr[teams[index].emailAndPermissionsArr.length] = { email: teams[index].value, permission: "" }
+                    teams[index].emailAndPermissionsArr[teams[index].emailAndPermissionsArr.length] = teams[index].value
                     teams[index].value = ""
 
                     // setTeam({
@@ -113,7 +112,13 @@ export default function TeamExample(props) {
                     teams[index].emailAndPermissionsArr[0] = teams[index].value
                     teams[index].value = ""
                 }
-
+                // setTeam({
+                //     emailAndPermissionsArr: [{ email: team.value, permission: permission }],
+                //     value: "",
+                //     errorMail: team.errorMail,
+                //     name: team.name,
+                //     errorName: team.errorName
+                // });
                 setTeams([...teams])
                 setPermission('viewer');
             }
@@ -124,16 +129,16 @@ export default function TeamExample(props) {
     function handleDelete(item) {
 
         setTeam({
-            items: team.items.filter(i => i.mail !== item)
+            emailAndPermissionsArr: teams.emailAndPermissionsArr.filter(i => i.email !== item)
         });
 
-    };
+    }
 
-    function deleteTeam(index, indexEmail, item) {
-        console.log('Delete ' + item)
-        teams[index].emailAndPermissionsArr.splice(indexEmail, 1);
-        setTeams([...teams]);
-
+    function handleDeleteTeams(index, item) {
+        // איך עושים מחיקה של אוביקט בתוך אוביקט 
+        // teams[index].emailAndPermissionsArr.filter(i => i.email !== item)
+        // קריאה ואז מקבלת את האוביקט מחדש
+        // setTeams([...teams, teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
     }
 
     function handlePaste(evt) {
@@ -146,13 +151,12 @@ export default function TeamExample(props) {
             var toBeAdded = emails.filter(email => !isInList(email));
 
             setTeam({
-                items: [...team.items, ...toBeAdded]
+                emailAndPermissionsArr: [...team.emailAndPermissionsArr, ...toBeAdded]
             });
         }
     }
 
     function isValid(email) {
-
         let error = null;
 
         if (isInList(email)) {
@@ -167,9 +171,9 @@ export default function TeamExample(props) {
             setTeam({
                 errorMail: error,
                 ...team.value,
-                items: [...team.items],
+                emailAndPermissionsArr: [...team.emailAndPermissionsArr],
                 name: team.name,
-                errorName: team.errorName
+                errorName: team.errorMail
             });
             return false;
         }
@@ -179,7 +183,7 @@ export default function TeamExample(props) {
 
     function isInList(email) {
 
-        return team.items.find(el => el.mail == email)
+        return team.emailAndPermissionsArr.find(el => el.email == email)
 
     }
 
@@ -187,11 +191,11 @@ export default function TeamExample(props) {
         return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
     }
 
-    function addTeam() {
+    function addTeam(props) {
         if (!team.name) {
             setTeam({
                 errorName: true,
-                items: [...team.items],
+                emailAndPermissionsArr: [...team.emailAndPermissionsArr],
                 errorMail: team.errorMail,
                 value: team.value
             })
@@ -201,13 +205,13 @@ export default function TeamExample(props) {
             setTeam({
                 name: team.name,
                 errorName: false,
-                items: [...team.items],
+                emailAndPermissionsArr: [...team.emailAndPermissionsArr],
                 errorMail: team.errorMail,
                 value: team.value
             })
 
             // console.log(`add tem: ${team.name}, members: ${team.emailAndPermissionsArr}`)
-            props.createNewTeam({ teamName: team.name, emailAndPermissionsList: [...team.emailAndPermissionsArr] })
+            props.createNewTeam({ teamName: team.name, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
         }
 
         //add team to server
@@ -237,6 +241,48 @@ export default function TeamExample(props) {
         //    setTeams()
     }
 
+    // const renderedListTeams = teams.map((t, indexT) => {
+
+    //     return <> <Button
+    //         size="sm"
+    //         onClick={() => setFlug(!flug)}
+    //     >  {flug ? "close team:" : "open team:"} {t.name}</Button>
+    //         {flug ? t.emailAndPermissionsArr.map((e, index) =>
+    //             <>
+    //                 {/* <div>{renderMail('jj')}</div> */}
+    //                 <div className="tag-item" key={e.email}>
+    //                     {e.email}
+    //                     {/* <Button variant="secondary">Close</Button> */}
+
+    //                     <button
+    //                         type="button"
+    //                         className="buttonMail"
+    //                         onClick={() => handleDeleteTeams(index, e.email)}
+    //                     >
+    //                         &times;
+    //          </button>
+    //                 </div>
+
+    //             </>
+    //         ) : null}
+    //         {flug ?
+    //             <input
+    //                 className={`inputMails ${t.errorMail ? "has-error" : null}`}
+    //                 // value={t.value}
+    //                 placeholder="Type or paste email addresses and press `Enter`..."
+    //                 // onKeyDown={(e) => handleKeyDown(e)}
+    //                 onKeyDown={(e) => addMailToTeams(indexT, e)}
+    //                 onChange={(e) =>
+    //                     addValueToMail(indexT, e)
+    //                 }
+
+    //                 onPaste={(e) => handlePaste(e.target.value)}
+    //             /> : null}
+
+    //     </>
+
+    // })
+
     function renderedListTeams(t, indexT) {
         return <>
             <Button
@@ -245,16 +291,26 @@ export default function TeamExample(props) {
             >  {flug ? "close team:" : "open team:"} {t.name}</Button>
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
                 <>
+                    {/* <div>{renderMail('jj')}</div> */}
+                    <div className="tag-item" key={e.email}>
+                        {e.email}
+                        {/* <Button variant="secondary">Close</Button> */}
 
-                    <Email email={e.email}
-                        onClick={() => deleteTeam(indexT, index, e.email)} />
+                        <button
+                            type="button"
+                            className="buttonMail"
+                            onClick={() => handleDeleteTeams(index, e.email)}
+                        >
+                            &times;
+     </button>
+                    </div>
 
                 </>
             ) : null}
             {flug ?
                 <input
                     className={`inputMails ${t.errorMail ? "has-error" : null}`}
-                    // value={teams[indexT].value} לא ברור למה זה לא עובד
+                    // value={t.value}
                     placeholder="Type or paste email addresses and press `Enter`..."
                     // onKeyDown={(e) => handleKeyDown(e)}
                     onKeyDown={(e) => addMailToTeams(indexT, e)}
@@ -304,7 +360,7 @@ export default function TeamExample(props) {
                             onChange={(e) => setTeam({
                                 name: e.target.value,
                                 errorName: false,
-                                items: [...team.items],
+                                emailAndPermissionsArr: [...team.emailAndPermissionsArr],
                                 errorMail: team.errorMail,
                                 value: team.value
                             })}
@@ -322,13 +378,22 @@ export default function TeamExample(props) {
                         onClick={() => setPermission('editor')} variant="primary">
                         editor
                     </Button>
-                    <Button className={permission == 'manager' ? "choose" : ""}
-                        onClick={() => setPermission('manager')} variant="primary">
-                        manager
+                    <Button className={permission == 'admin' ? "choose" : ""}
+                        onClick={() => setPermission('admin')} variant="primary">
+                        admin
                     </Button>
                     <br />
                     {team.emailAndPermissionsArr && team.emailAndPermissionsArr[0] ? team.emailAndPermissionsArr.map(item => (
-                        <Email email={item.email} onClick={() => handleDelete(item.email)} />
+                        <div className="tag-item" key={item.email}>
+                            {item.email}
+                            <button
+                                type="button"
+                                className="buttonMail"
+                                onClick={() => handleDelete(item.email)}
+                            >
+                                &times;
+                         </button>
+                        </div>
                     )) : null}
 
                     <input
@@ -338,7 +403,7 @@ export default function TeamExample(props) {
                         onKeyDown={(e) => handleKeyDown(e)}
                         onChange={(e) => setTeam({
                             value: e.target.value,
-                            items: [...team.items],
+                            emailAndPermissionsArr: [...team.emailAndPermissionsArr],
                             errorMail: null,
                             name: team.name,
                             errorName: team.errorName
@@ -356,7 +421,7 @@ export default function TeamExample(props) {
                         Close
                     </Button>
                     <Button variant="primary"
-                        onClick={() => addTeam()}>add teams</Button>
+                        onClick={() => addTeam(props)}>add teams</Button>
                 </Modal.Footer>
             </Modal>
         </>
@@ -372,9 +437,9 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {//props.createNewTeam
-        createNewTeam: function (team) {
-            dispatch(actions.createNewTeam(team))
-        }
+        createNewTeam: (props) => dispatch(actions.createNewTeam(props)),
+
     }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(TeamExample)

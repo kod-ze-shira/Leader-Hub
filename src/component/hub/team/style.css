@@ -39,6 +39,7 @@ body {
 }
 
 .inputMails {
+  display: block;
   width: 100%;
   height: 45px;
   padding: 0 1rem;

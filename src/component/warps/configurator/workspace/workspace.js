@@ -12,7 +12,7 @@ export function workspace(props) {
     const showInPlatform = () => {
         props.getAllWorkspaces();
         // history.push('/workspacePlatform')
-    
+
     }
     // const [flag, setflag] = useState(false)
 
