@@ -24,26 +24,51 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     }
     return next(action);
 }
-export const getUserNameFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'GET_USER_NAME_FROM_SERVER') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        fetch(urlData,
-            {
-                method: 'GET',
-                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
-            })
-            .then((res) => {
-                console.log("res11111", res)
-                return res.json();
-            })
-            .then((result) => {
-                console.log("res", result)
-                checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setWorkspaces(result.workspaces))
+export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
-                })
-            })
+    if (action.type === 'CREATE_NEW_TEAM') {
+        console.log('CREATE_NEW_TEAM')
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/addNewTeam"
+        // let team = getState().team_reducer.team;
+        let team = action.payload;
+        // team 
+        // props.createNewTeam({ teamName: team.teamName, emailAndPermissionsArr: [...team.emailAndPermissionsArr] })
+        // 
+        // emailAndPermissionsArr: Array(2)
+        // 0: {email: "4rtg@ftt.bb", permission: "viewer"}
+        // 1: {email: "ghh@nnn.nnn", permission: "editor"}
+        // length: 2
+        // __proto__: Array(0)
+        // name: "erfgth"
+        // __proto__: Object
+
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(team),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+
+                // dispatch(actions.setTteam.message));
+                // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
+                // dispatch({ type: '', payload: data })
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+
+                // checkPermission(err).then((ifOk) => {
+
+                // })
+            }
+        });
+
     }
     return next(action);
 }
@@ -179,7 +204,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
         }).then((result) => {
             console.log(result);
         })
-        //create event on task's endDate
+    //create event on task's endDate
 
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
         {
@@ -251,6 +276,40 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
     return next(action);
 }
 
+
+export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'DELETE_PROJECT_IN_SERVER') {
+
+
+        let project = getState().project_reducer.project;
+        let urlData = " https://reacthub.dev.leader.codes/api/renana-il/5ff5bc6547daea4ac861c74c/removeProjectById"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ project }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                dispatch(actions.setProject(data.result))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
 
 //edit project
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
@@ -349,12 +408,54 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
                 })
             }
         });
-        // })
+
+
 
 
     }
     return next(action);
 }
+//
+export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
+
+
+        var projectId = action.payload;
+
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectById"
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                dispatch(actions.setProject(data))
+
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+
+
+
+    }
+    return next(action);
+}
+
+
+
+
 
 //
 export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
@@ -394,6 +495,26 @@ export const getTasksByProject = ({ dispatch, getState }) => next => action => {
             })
     }
     return next(action)
+}
+export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type == "GET_WORKSPACE_BY_ID_FROM_SERVER") {
+        let workspaceId = action.payload;
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
+        fetch(url, {
+            method: 'GET',
+            headers: { authorization: getState().public_reducer.tokenFromCookies }
+        }
+        ).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result)
+            checkPermission(result).then((ifOk) => {
+                dispatch(actions.setWorkspace(result.result))
+
+            })
+        })
+    }
+    return next(action);
 }
 
 

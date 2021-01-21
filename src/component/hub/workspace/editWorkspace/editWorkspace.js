@@ -16,7 +16,7 @@ function EditWorkspace(props) {
     return (
         <>
             <input name="name" placeholder={props.workspace.name} onChange={(input) => changeFiledInWorkspace(input)}></input>
-            <button >save</button>
+            <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button>
         </>
     )
 }
@@ -30,7 +30,7 @@ export default connect(
         return {
             getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
-            // saveWorkspaceInServerUfterEdit:()=>dispatch(ac)
+            saveWorkspaceInServerUfterEdit:(workspace)=>dispatch(actions.editWorkspaceInServer(workspace))
         }
     }
 )(EditWorkspace)

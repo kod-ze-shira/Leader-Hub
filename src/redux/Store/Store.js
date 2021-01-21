@@ -11,13 +11,19 @@ import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
+import { createNewTeam } from '../middleware/crud'
+import { deleteProjectInServer } from '../middleware/crud'
+
+import { getProjectByIdInServer } from '../middleware/crud'
+
+import { getWorkspaceByIdFromServer } from '../middleware/crud'
 
 import { setProjectCrud } from '../middleware/crud'
 
 import { setTaskCrud } from '../middleware/crud'
-import { editWorkspaceInServer} from '../middleware/crud'
-import { editProjectInServer}    from '../middleware/crud'
-import { editTaskInServer} from '../middleware/crud'
+import { editWorkspaceInServer } from '../middleware/crud'
+import { editProjectInServer } from '../middleware/crud'
+import { editTaskInServer } from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
 
 
@@ -28,7 +34,8 @@ const store = createStore(
     reducers,
     composeWithDevTools(
         applyMiddleware
-            (  
+            (
+                deleteProjectInServer,
                 editTaskInServer,
                 editProjectInServer,
                 editWorkspaceInServer,
@@ -38,7 +45,9 @@ const store = createStore(
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
-                getTaskByIdFromServer        
+                getTaskByIdFromServer,
+                getProjectByIdInServer,
+                getWorkspaceByIdFromServer
             ))
 )
 var url = window.location;

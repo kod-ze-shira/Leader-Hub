@@ -39,6 +39,11 @@ function NewWorkpas(props) {
                             id="inputTextworkpase" placeholder="Type the name of the workspace" onChange={(e) => change(e)} />
                     </div>
 
+                <div className="col-md-2 col-xs-1 WORKSPACE1"><div className="textstart mt-2">
+                    <div className="mt-2"></div>
+                    <b onClick={() => { props.setWorkspaCrud(); }}>START WORKSPACE</b></div>
+              
+                </div>
 
                     <div className="newdate">
                         <div className="row mt-2"></div>
