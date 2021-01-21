@@ -4,6 +4,7 @@ import './App.css';
 import { Provider } from 'react-redux';
 import ConfiguratorList from './component/warps/configurator/configuratorList/configurator_list'
 import Store from './redux/Store/Store';
+import Hub from './component/hub/hub';
 
 
 function App() {
@@ -11,9 +12,9 @@ function App() {
   return (
     <Provider store={Store}>
       <>
-        <ConfiguratorList></ConfiguratorList>
+        {/* <ConfiguratorList></ConfiguratorList> */}
 
-        {/* <Hub></Hub> */}
+        <Hub></Hub>
       </>
     </Provider>
   );

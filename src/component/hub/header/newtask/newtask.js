@@ -51,7 +51,7 @@ function Newtask(props) {
                 </div>
 
             </div>
-            <button onClick={() => { props.setTaskCrud1(props.task1); }}>fff</button>
+            <button onClick={() => { props.setTaskCrud1(props.task1);  }}>fff</button>
         </>
 
 
