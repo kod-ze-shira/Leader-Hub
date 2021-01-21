@@ -44,8 +44,9 @@ function TeamExample(props) {
             flug: false
         },
     ])
-
-
+    getAllTeamsForUser();
+    function getAllTeamsForUser() {
+    }
 
     // useEffect(() => {
     //     if (!isFullTasks) {
@@ -375,7 +376,9 @@ function mapDispatchToProps(dispatch) {
     return {//props.createNewTeam
         createNewTeam: function (team) {
             dispatch(actions.createNewTeam(team))
-        }
+        },
+        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser()),
+
     }
 }
 

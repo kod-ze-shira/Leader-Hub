@@ -14,12 +14,13 @@
     width: 54px;
     height: 54px;
    border-radius: 50%;
-   font-size: x-large;
+   font-size: 26px;
+   padding-top: 8px;
    color: white;
    letter-spacing: 1.72px;
    text-align: center;
    font-family: 'Roboto', sans-serif;
-   font-size: xx-large;
+   /* font-size: xx-large; */
      
 }
 
@@ -46,13 +47,15 @@
 
 }
   .cardWorkspace:hover{
-   background: #F6F6FA 0% 0% no-repeat padding-box;
-   border: 1px solid #9DA0AF;
-   border-radius: 10px;
+   background: #F6F6FA 0% 0% no-repeat padding-box !important;
+   border: 1px solid #9DA0AF !important;
+   border-radius: 10px !important;
 }
 
 .checkWorkspace{
    margin-left: -103px;
+   position: absolute;
+   margin-top: -84px;
 }
 
 .nameWorkspace{

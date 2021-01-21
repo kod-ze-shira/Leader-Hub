@@ -1,9 +1,35 @@
-.body{
-  width:60vw;
+ .body{
+  /* width:60vw;
   height:70vh;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
-  margin:0px 150px;
-  /* margin: 0px -40px; */
+  margin:0px 150px; */
+  width:70vw;
+  height:80vh;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border-radius: 12px;
+  opacity: 1;
+
+} 
+
+/* ::-webkit-scrollbar-track { */
+   /* background: #535252;  */
+
+ /* } */
+ 
+ /* Handle */
+
+
+ body::-webkit-scrollbar-thumb {
+   background: rgb(216, 214, 214);
+   border-radius: 10px;
+ }
+ 
+ /* Handle on hover */
+ body::-webkit-scrollbar-thumb:hover {
+   background: rgb(197, 194, 194);
+ }‏
+ body::-webkit-scrollbar {
+   width: 1px;
 }

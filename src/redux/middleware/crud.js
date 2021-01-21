@@ -26,6 +26,32 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
+export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
+        // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllTeamsForUser"
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                // checkPermission(result).then((ifOk) => {
+                //     dispatch(actions.setWorkspaces(result.workspaces))
+
+                // })
+            })
+        return next(action);
+
+    }
+}
+
 export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'CREATE_NEW_TEAM') {
@@ -74,6 +100,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
 
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {

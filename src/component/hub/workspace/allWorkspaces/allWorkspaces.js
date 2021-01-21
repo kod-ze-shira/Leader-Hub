@@ -2,7 +2,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import { ViewWorkspace } from '../viewWorkspace/viewWorkspace'
+import { ViewWorkspace } from '../viewWorkspace/viewWorkspace';
+import './allWorkspace.css';
 
 // let workspace;
 
@@ -29,7 +30,7 @@ function allWorkspaces(props) {
     return (
         <>
             <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-            <div className='row'>{renderedListWorkspaces}</div>
+            <div className='row allWorkspaces'>{renderedListWorkspaces}</div>
         </>
     )
 }

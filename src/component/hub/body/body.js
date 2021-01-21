@@ -43,9 +43,9 @@ export default function Body() {
          <br></br>
          aba toda {workpace.name} {workpace.lastName} */}
 
-      <Search />
+      {/* <Search /> */}
       {/* <TableHeader/> */}
-      <TableBody />
+      {/* <TableBody /> */}
       <AllWorkspaces />
       <Button onClick={() => setShowShare(!showShare)} variant="primary">
         Add team
