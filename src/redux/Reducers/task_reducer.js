@@ -5,20 +5,27 @@ const initialState = {
     task: {
         subject: "ttr",
         isConfiguratorOpenTask: "false",
-        project: "5ff5b702b8c8a9b179358795",
-        startDate: "01/12/2021",
-        dueDate: "01/14/2021"
+        project:"5ff5b702b8c8a9b179358795",
+        startDate:"01/12/2021",
+        dueDate:"01/14/2021"
+        //  uaserId:"",
+        //  projects:[],
+        //  team:""
+
     }
+
+
+
 }
 
 const tasks = {
     setTaskName(state, action) {
         // state.workpace[action.payload] = action.value;
         state.task.name = action.payload
-
+        
         // dispatch({ type: "GET_ALL" })
     },
-    setTask(state, action) {
+    setTask(state,action){
         state.task = action.payload;
     },
     setisConfiguratorOpenTask(state, action) {

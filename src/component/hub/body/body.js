@@ -29,7 +29,7 @@ export default function Body() {
   // const { workpace, setName, setlastname}=props;
   return (
 
-    <div className="body">
+    <div to="/" className="body"  >
       {/* <label>first name</label><input
           value={workpace.name}
           onChange={(e) => setName(e.target.value)}
