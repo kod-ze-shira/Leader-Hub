@@ -1,4 +1,17 @@
 .allWorkspaces{
     overflow: auto;
     height: 87%;
+    }
+.MyWorkspace{
+    color: #778CA2;
+    font-size: x-large;
+    
+}
+.Edit{
+    color: #778CA2;
+    font-size:x-large;
+}
+hr{
+    width: 60vw;
+    color:#707070;
 }

@@ -16,9 +16,9 @@ export function ViewWorkspace({ props, workspace }) {
     // return  <projectsByWorkspace/>
     setViewProjects(!viewProjects);
   }
-  const toOpenEditWorkspace = () => {
-    setOpenEditWorkspace(!openEditWorkspace)
-  }
+  // const toOpenEditWorkspace = () => {
+  //   setOpenEditWorkspace(!openEditWorkspace)
+  // }
 
 
   return (

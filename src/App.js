@@ -2,20 +2,21 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Provider } from 'react-redux';
-import Hub from './component/hub/hub'
+import ConfiguratorList from './component/warps/configurator/configuratorList/configurator_list'
 import Store from './redux/Store/Store';
+import Hub from './component/hub/hub';
 
 
 function App() {
-  
+
   return (
     <Provider store={Store}>
-    <> 
-    
-    <Hub></Hub>
-    </>
+      <>
+        {/* <ConfiguratorList></ConfiguratorList> */}
+
+        <Hub></Hub>
+      </>
     </Provider>
-     
   );
 }
 

@@ -14,13 +14,7 @@ function ViewProject(props) {
     const [viewTasks, setViewTasks] = useState(false)
     return(
         <>
-      <div className="container">
-                {getProjectById ?
-                        <div className="col-2"><button onClick={detailsProject}>projectDEtels</button></div>
-                    : <DetailsProject projectId={props.project._id} />
-                        
-
-                    }
+        <div className="container">
             <div className="row" onClick={()=>setViewTasks(!viewTasks)}>
                 <div className="col">
                     <div>name:{props.project.name}</div>
