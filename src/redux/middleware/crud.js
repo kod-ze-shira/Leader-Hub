@@ -62,6 +62,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 console.log("error")
+                console.log(err)
 
                 // checkPermission(err).then((ifOk) => {
 
