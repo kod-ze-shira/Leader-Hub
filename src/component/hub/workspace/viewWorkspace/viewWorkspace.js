@@ -40,6 +40,7 @@ export function ViewWorkspace({ props, workspace }) {
 
           style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
           {workspace.name[0].toUpperCase()}
+
         </div>
 
         <div className='nameWorkspace'
