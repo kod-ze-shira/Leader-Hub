@@ -21,33 +21,28 @@ export function ViewWorkspace({ props, workspace }) {
   // }
 
 
-
   return (
 
 
     <>
       <Card className="cardWorkspace"
         onMouseOver={() => setShowInput(true)}
-        onMouseLeave={() => setShowInput(false)}
+        onMouseOut={() => setShowInput(false)}
       >
         {showInput ?
-          // <Form.Group controlId="formBasicCheckbox">
-
-          //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
-          // </Form.Group>
           <input type="checkbox"
             onMouseOver={() => setShowInput(true)}
             onClick={() => setShowInput(true)}
             className='checkWorkspace' />
-
           : null}
         <div className="logoWorkspace"
           onMouseOver={() => setShowInput(true)}
 
           style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
           {workspace.name[0].toUpperCase()}
-          {/* {workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-              workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null} */}
+
+          {workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
+            workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null}‏
         </div>
 
         <div className='nameWorkspace'

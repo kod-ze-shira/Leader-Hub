@@ -18,7 +18,7 @@ import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
 export default function Hub() {
     return (
         <>
-        
+
             <Nav />
 
             <div className="row justify-content-end">
@@ -31,7 +31,7 @@ export default function Hub() {
                     <Router>
                         <Switch>
                             <Route path="/workspacePlatform" >
-                                <WorkspacePlatform  />
+                                <WorkspacePlatform />
                             </Route>
                             <Route path="/" >
                                 <Body />

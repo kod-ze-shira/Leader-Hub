@@ -13,11 +13,7 @@ import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
 import { createNewTeam } from '../middleware/crud'
 import { deleteProjectInServer } from '../middleware/crud'
-
-import { getProjectByIdInServer } from '../middleware/crud'
-
-import { getWorkspaceByIdFromServer } from '../middleware/crud'
-
+import { getAllTeamsForUser } from '../middleware/crud'
 import { setProjectCrud } from '../middleware/crud'
 
 import { setTaskCrud } from '../middleware/crud'
@@ -25,6 +21,7 @@ import { editWorkspaceInServer } from '../middleware/crud'
 import { editProjectInServer } from '../middleware/crud'
 import { editTaskInServer } from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
+import { getProjectByIdInServer } from '../middleware/crud'
 
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer });
@@ -42,12 +39,13 @@ const store = createStore(
                 setWorkspaCrud,
                 getAllWorkspacesFromServer,
                 setTaskCrud,
+                createNewTeam,
+                getAllTeamsForUser,
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
-                getWorkspaceByIdFromServer
             ))
 )
 var url = window.location;

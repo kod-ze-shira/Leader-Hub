@@ -1,3 +1,7 @@
+.allWorkspaces{
+    overflow: auto;
+    height: 87%;
+    }
 .MyWorkspace{
     color: #778CA2;
     font-size: x-large;

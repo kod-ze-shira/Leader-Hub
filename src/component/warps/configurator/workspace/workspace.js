@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import $ from 'jquery';
 import ViewWorkspaceName from '../viewWorkspaceName/viewWorkspaceName'
 import './workspace.css';
