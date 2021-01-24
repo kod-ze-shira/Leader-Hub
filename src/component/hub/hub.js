@@ -20,7 +20,7 @@ import CardsByProject from './Cards/cardsByProject/cardsByProject'
 export default function Hub() {
     return (
         <>
-        
+
             <Nav />
 
             <div className="row justify-content-end">
@@ -33,7 +33,7 @@ export default function Hub() {
                     <Router>
                         <Switch>
                             <Route path="/workspacePlatform" >
-                                <WorkspacePlatform  />
+                                <WorkspacePlatform />
                             </Route>
                             <Route path="/projectPlatform" >
                                 <ProjectPlatform  />

@@ -29,7 +29,7 @@ export default function Body() {
   // const { workpace, setName, setlastname}=props;
   return (
 
-    <div to="/" className="body"  >
+    <div className="body">
       {/* <label>first name</label><input
           value={workpace.name}
           onChange={(e) => setName(e.target.value)}
@@ -43,9 +43,9 @@ export default function Body() {
          <br></br>
          aba toda {workpace.name} {workpace.lastName} */}
 
-      <Search />
+      {/* <Search /> */}
       {/* <TableHeader/> */}
-      <TableBody />
+      {/* <TableBody /> */}
       <AllWorkspaces />
       <Button onClick={() => setShowShare(!showShare)} variant="primary">
         Add team
