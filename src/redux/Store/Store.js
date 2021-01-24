@@ -5,17 +5,19 @@ import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
 import public_reducer from '../Reducers/public_reducer';
 
-import team_reducer from '../Reducers/team_reducer';
-
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getProjetsByWorkspace, getTasksByProject, getWorkspaceByIdFromServer } from '../middleware/crud'
+import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
 import { createNewTeam } from '../middleware/crud'
 import { deleteProjectInServer } from '../middleware/crud'
+<<<<<<< HEAD
 
+=======
+import { getAllTeamsForUser } from '../middleware/crud'
+>>>>>>> dev
 import { setProjectCrud } from '../middleware/crud'
 
 import { setTaskCrud } from '../middleware/crud'
@@ -26,7 +28,7 @@ import { getTaskByIdFromServer } from '../middleware/crud'
 import { getProjectByIdInServer } from '../middleware/crud'
 
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, team_reducer, public_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer });
 
 
 const store = createStore(
@@ -42,12 +44,16 @@ const store = createStore(
                 getAllWorkspacesFromServer,
                 setTaskCrud,
                 createNewTeam,
+                getAllTeamsForUser,
                 setProjectCrud,
                 getProjetsByWorkspace,
                 getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
             ))
 )
 var url = window.location;
@@ -64,8 +70,7 @@ store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 // }
 window.store = store;
 //ליירק בעת  עבודה בשרת 
-
-let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwNTc2OTI2fQ.wwLhRxMi5o-O1IIXXgGASqdCKiz4rHkkuUFxyIlTpmE"
+let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
 store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 
 export default store;

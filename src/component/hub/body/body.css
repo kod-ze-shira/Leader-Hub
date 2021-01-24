@@ -1,6 +1,11 @@
 .body{
+<<<<<<< HEAD
   width:70vw;
   height:80vh;
+=======
+  /* width:60vw; */
+  height:70vh;
+>>>>>>> dev
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;

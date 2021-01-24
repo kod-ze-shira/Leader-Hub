@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
-import project_reducer from '../Reducers/project_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
@@ -24,6 +23,32 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
             })
     }
     return next(action);
+}
+
+export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
+        // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllTeamsForUser"
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                // checkPermission(result).then((ifOk) => {
+                //     dispatch(actions.setWorkspaces(result.workspaces))
+
+                // })
+            })
+        return next(action);
+
+    }
 }
 
 export const createNewTeam = ({ dispatch, getState }) => next => action => {
@@ -50,7 +75,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
-            contentType: "application/json; charset=utf-8",
+            // contentType: "application/json; charset=utf-8",
             data: JSON.stringify(team),
             success: function (data) {
                 console.log("success")
@@ -76,9 +101,10 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 }
 
 
+
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-        alert('SET_WORKSPACE_CRUD')
+
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
         $.ajax({
@@ -192,6 +218,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
     let startTimeEnd = timeEnd.toISOString()
     timeEnd.setHours(23);
     let endTimeEnd = timeEnd.toISOString();
+    //create event on task's startDate
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
         {
             method: 'POST',
@@ -200,12 +227,13 @@ function createNewEventWhenNewTask(task, userName, jwt) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: "task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
+            body: JSON.stringify({ title: "start task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
         }).then((result) => {
             return result.json();
         }).then((result) => {
             console.log(result);
         })
+    //create event on task's endDate
 
     fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
         {
@@ -215,7 +243,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: "task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
+            body: JSON.stringify({ title: "end task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
         }).then((result) => {
             return result.json();
         }).then((result) => {
@@ -459,10 +487,6 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 
 
 //
-
-
-
-
 export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
