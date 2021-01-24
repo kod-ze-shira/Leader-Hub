@@ -15,6 +15,8 @@ import {
 
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
+import ProjectPlatform from './projectPlatform/projectPlatform'
+import CardsByProject from './Cards/cardsByProject/cardsByProject'
 export default function Hub() {
     return (
         <>
@@ -32,6 +34,12 @@ export default function Hub() {
                         <Switch>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform  />
+                            </Route>
+                            <Route path="/projectPlatform" >
+                                <ProjectPlatform  />
+                            </Route>
+                            <Route path="/cardsByProject" >
+                                <CardsByProject  />
                             </Route>
                             <Route path="/" >
                                 <Body />

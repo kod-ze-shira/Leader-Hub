@@ -14,7 +14,7 @@ function DetailsProject(props) {
     return(
         <div className="detailsproject">
          
-            <div>subject: {props.project.subject}</div>
+            <div >subject: {props.project.subject}</div>
             <div>{props.project.description}</div>
 
             {/* <button onClick={props.getProjectByIdInServer}>project</button> */}

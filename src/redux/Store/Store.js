@@ -17,7 +17,7 @@ import { deleteProjectInServer } from '../middleware/crud'
 import { getProjectByIdInServer } from '../middleware/crud'
 
 import { getWorkspaceByIdFromServer } from '../middleware/crud'
-
+import {getCardsByprojectId} from '../middleware/crud'
 import { setProjectCrud } from '../middleware/crud'
 
 import { setTaskCrud } from '../middleware/crud'
@@ -47,7 +47,8 @@ const store = createStore(
                 getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
-                getWorkspaceByIdFromServer
+                getWorkspaceByIdFromServer,
+                getCardsByprojectId
             ))
 )
 var url = window.location;

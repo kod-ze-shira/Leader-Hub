@@ -416,6 +416,45 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
     }
     return next(action);
 }
+// router.get('/:userName/:projectId/getCardsByprojectId',cardFunctions.getCardsByprojectId)
+// /:projectId/getCardsByprojectId
+
+
+//
+export const getCardsByprojectId = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_CARDS_BYPROJECT_ID') {
+
+        var projectId = action.payload;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getCardsByprojectId"
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                dispatch(actions.setTask(data.result))
+
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+
+
+
+    }
+    return next(action);
+}
 //
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
