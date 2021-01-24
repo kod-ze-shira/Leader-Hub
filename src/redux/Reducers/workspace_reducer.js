@@ -32,26 +32,10 @@ const workspaces = {
     // setShowShare(state, action) {
     //     state.workspace = action.payload
     // },
-<<<<<<< HEAD
     setisConfiguratorOpenWorkspace(state, action) {
         debugger;
         state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
     },
-=======
-
-};
-
-const workspaces = {
-    setWorkspace(state, action) {
-        // state.workpace[action.payload] = action.value;
-
-        // dispatch({ type: "GET_ALL" })
-    },
-
-
-
-
->>>>>>> dev
 }
 
 

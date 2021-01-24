@@ -3,12 +3,7 @@ import React, { useEffect } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-<<<<<<< HEAD
 import ViewWorkspace from '../viewWorkspace/viewWorkspace'
-=======
-import { ViewWorkspace } from '../viewWorkspace/viewWorkspace';
-import './allWorkspace.css';
->>>>>>> dev
 
 // let workspace;
 
@@ -16,16 +11,8 @@ import './allWorkspace.css';
 
 function allWorkspaces(props) {
 
-<<<<<<< HEAD
 
 
-=======
-    function componentDidMount() {
-
-        this.props.getAllWorkspaces();
-
-    }
->>>>>>> dev
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspace key={todo._id} workspace={todo} />
@@ -34,7 +21,6 @@ function allWorkspaces(props) {
 
 
     return (
-<<<<<<< HEAD
 
         <div >
 
@@ -75,12 +61,6 @@ function allWorkspaces(props) {
         </div>
 
 
-=======
-        <>
-            <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-            <div className='row allWorkspaces'>{renderedListWorkspaces}</div>
-        </>
->>>>>>> dev
     )
 }
 
