@@ -25,7 +25,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
         <>
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <Workspace></Workspace>
+                    <Workspace className="col-12"></Workspace>
                 </div>
                 <div className="row justify-content-center">
                     <button className=" col-8 mt-2 btn btn-outline-secondary">Projects<div className="mt-1 arrow-down"></div></button>

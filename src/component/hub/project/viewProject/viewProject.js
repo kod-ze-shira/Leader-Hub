@@ -9,32 +9,32 @@ function ViewProject(props) {
     function detailsProject() {
         set_getProjectById(false);
     }
-    
+
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
-    return(
+    return (
         <>
-        <div className="container">
-            <div className="row" onClick={()=>setViewTasks(!viewTasks)}>
-                <div className="col">
-                    <div>name:{props.project.name}</div>
-                    <div>description:{props.project.description}</div>
+            <div className="container">
+                <div className="row" onClick={() => setViewTasks(!viewTasks)}>
+                    <div className="col">
+                        <div>name:{props.project.name}</div>
+                        <div>description:{props.project.description}</div>
+                    </div>
+                </div>
+                <div>
+                    {viewTasks ? <TasksByProject projectId={props.project._id} /> : null}
+
+                    <button onClick={() => { props.deleteProjectInServer() }}>deleteproject</button>
+
                 </div>
             </div>
-            <div>
-          {viewTasks ? <TasksByProject projectId={props.project._id} /> : null}
 
-                    <button onClick={() => { props.deleteProjectInServer()}}>deleteproject</button>
-     
-                    </div>
-                    </div>
-    
-    
+
         </>
     )
 }
 const mapStateToProps = (state) => {
-   
+
     return {
         project: state.project_reducer.project
     }
