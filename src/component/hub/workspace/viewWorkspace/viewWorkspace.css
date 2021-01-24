@@ -45,9 +45,9 @@
 
 }
 .cardWorkspace:hover{
-   background: #F6F6FA 0% 0% no-repeat padding-box;
-   border: 1px solid #9DA0AF;
-   border-radius: 10px;
+   background: #F6F6FA 0% 0% no-repeat padding-box !important;
+   border: 1px solid #9DA0AF ‏;
+   border-radius: 10px !important;
 }
 
 .checkWorkspace{

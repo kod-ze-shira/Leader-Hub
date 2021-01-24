@@ -4,17 +4,25 @@ import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
         name: "rabin",
-        showShare: false
+        showShare: false,
         //  uaserId:"",
         //  projects:[],
         //  team:""
 
-    }
+    },
 
-
+    isConfiguratorOpenWorkspace: true
 
 }
-const workspace = {
+
+
+const workspaces = {
+    setWorkspace(state, action) {
+        state.workspace = action.payload;
+    },
+    setWorkspaceOnChangeFiled(state, action) {
+        state.workspace[action.payload] = action.value
+    },
     setWorkspaceName(state, action) {
         state.workspace.name = action.payload;
     },
@@ -24,16 +32,10 @@ const workspace = {
     // setShowShare(state, action) {
     //     state.workspace = action.payload
     // },
-
-};
-
-const workspaces = {
-    setWorkspace(state, action) {
-        state.workspace = action.payload;
+    setisConfiguratorOpenWorkspace(state, action) {
+        debugger;
+        state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
     },
-    setWorkspaceOnChangeFiled(state, action) {
-        state.workspace[action.payload] = action.value
-    }
 }
 
 
