@@ -20,16 +20,16 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
-    const viewProjectsByWorkspace = props.projects.map((project) => {
-        return <ViewProject key={project._id} project={project} />
-    })
+    // const viewProjectsByWorkspace = props.projects.map((project) => {
+    //     return <ViewProject key={project._id} project={project} />
+    // })
 
 
     return (
         <>
-            <div to="/projectPlatform" >
+            <div to={`${props.user}/projectPlatform`} >
             <div></div>
-        
+        <h1>hyush</h1>
 
             </div>
         </>

@@ -46,10 +46,16 @@
    margin-right: 1rem;
 
 }
+
+.cardWorkspace:hover{
+   background: #F6F6FA 0% 0% no-repeat padding-box !important;
+   border: 1px solid #9DA0AF ‏;
+}
+
   .cardWorkspace:hover{
    background: #F6F6FA 0% 0% no-repeat padding-box !important;
-   border: 1px solid #9DA0AF !important;
-   border-radius: 10px !important;
+   border: 1px solid #9DA0AF !important
+
 }
 
 .checkWorkspace{

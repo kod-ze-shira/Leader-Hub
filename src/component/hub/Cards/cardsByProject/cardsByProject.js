@@ -4,10 +4,10 @@ import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
 import './cardsByProject.css'
 
-function CardsByProject(props, projectId) {
+function CardsByProject(props) {
 
     useEffect(() => {
-       
+
         console.log("projectId", props.projectId)
         props.getCardsByprojectId(props.projectId)
 
@@ -18,7 +18,8 @@ function CardsByProject(props, projectId) {
     })
     return (
         <>
-            <div to="/cardsByProject">
+            {/* ${props.projectId} */}
+            <div to={`${props.user}/cardsByProject`}>
                 {viewCardsByProject}
             </div>
         </>
@@ -30,7 +31,9 @@ export default connect(
     (state) => {
         return {
             cards: state.public_reducer.cards,
-            project:state.project_reducer.project
+            project: state.project_reducer.project,
+            user: state.public_reducer.userName
+
         }
     },
     (dispatch) => {
