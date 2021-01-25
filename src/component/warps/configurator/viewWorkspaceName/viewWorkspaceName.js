@@ -34,8 +34,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
             <>
                 {isConfiguratorOpenWorkspace ?
-                    <Configurator /> :
+
                     <>
+
                         <ul className="p-0 col-12">
                             <li className="p-0 ">
                                 <button className="workspace-btn" onClick={func} >{workspace.name}</button>
@@ -45,7 +46,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             </li>
                         </ul>
                         {/* <BtnLiveChat idWorkspace={workspace._id} />  */}
-                    </>
+                    </> : null
                 }
             </>
 

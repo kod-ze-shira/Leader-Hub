@@ -11,7 +11,7 @@ const initialState = {
 
     },
 
-    isConfiguratorOpenWorkspace: true
+    isConfiguratorOpenWorkspace: false
 
 }
 
