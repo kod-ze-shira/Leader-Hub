@@ -6,10 +6,9 @@ const initialState = {
     userName: "",
     worksapces: [],
     projects: [],
+    cards:[],
     tasks: [],
     isConfiguratorOpen: "false",
-
-
 }
 // export default produce((state, action) => {
 //     switch (action.type) {

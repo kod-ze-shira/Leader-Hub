@@ -6,9 +6,11 @@ import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWor
 import TeamExample from '../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../editWorkspace/editWorkspace'
+import project_reducer from '../../../../redux/Reducers/project_reducer';
 
 export function ViewWorkspace({ props, workspace }) {
   const [viewProjects, setViewProjects] = useState(false)
+  const [viewCards, setViewCards] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
   const [showInput, setShowInput] = useState(false)
@@ -61,6 +63,9 @@ export function ViewWorkspace({ props, workspace }) {
 
         <div>
           {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
+        </div>
+        <div>
+          {/* {viewCards ? <ProjectsByWorkspace idProject={project} /> : null} */}
         </div>
         <div>
           {openEditWorkspace ? <EditWorkspace idWorkspace={workspace._id}></EditWorkspace> : null}

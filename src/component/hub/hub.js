@@ -39,7 +39,7 @@ export default function Hub() {
                                 <ProjectPlatform  />
                             </Route>
                             <Route path="/cardsByProject" >
-                                <CardsByProject  />
+                                <CardsByProject />
                             </Route>
                             <Route path="/" >
                                 <Body />
