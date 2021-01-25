@@ -28,8 +28,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
     return (
         <>
             <div to={`${props.user}/projectPlatform`} >
-            <div></div>
-        <h1>hyush</h1>
+                <div></div>
+                <h1>hi</h1>
 
             </div>
         </>
