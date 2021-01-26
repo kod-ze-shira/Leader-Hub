@@ -49,8 +49,10 @@ function AllWorkspaces(props, getAllWorkspaces) {
                     <div className="col-2"></div>
                     <div className="col-0.5 LIST" onClick={chenge_list1}>LIST</div>
                     <div className="col-2 GRID" onClick={chenge_grid}>GRID</div>
-                    <div className="row mt-2">
+                    <div className="row mt-4">
 
+                        <div className="renderedListWorkspaces" ></div>
+                        {renderedListWorkspaces}
 
                     </div>
 
@@ -58,8 +60,6 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
                     {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
 
-                    <div className="renderedListWorkspaces"></div>
-                    {renderedListWorkspaces}
                 </div>
             </>
 
@@ -79,10 +79,10 @@ function AllWorkspaces(props, getAllWorkspaces) {
                         <div className="col-4"><hr></hr></div>
 
                     </div>
-                    <div className="row">
+                    <div className="row mt-5">
                         <div className="col-1" ></div>
                         {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
-                        <div className="col-1 ccc">  {renderedGridWorkspaces}</div>
+                        <div className="col-1">  {renderedGridWorkspaces}</div>
                     </div>
 
                 </div>
