@@ -31,7 +31,8 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
 
       <>
 
-        <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
+        <Card
+          className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
           onMouseOver={() => setShowInput(true)}
           onMouseLeave={() => setShowInput(false)}
         >

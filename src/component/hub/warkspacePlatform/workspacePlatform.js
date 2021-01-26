@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { actions } from '../../../redux/actions/action'
-import ViewWorkspaceName  from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName'
+import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName'
 import './workspacePlatform.css'
 
 const mapStateToProps = (state) => {
@@ -16,8 +16,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
@@ -26,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
     })
 
     return (
-        <div className="warkspace-platform " to="/workspacePlatform" >
+        <div className="warkspace-platform" to="/workspacePlatform" >
             <div className="container-fluid">
                 <button className="warkspace-paltform-show pt-5 pl-5 row" onClick={() => props.getAllWorkspaces()}
                 >

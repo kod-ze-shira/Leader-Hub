@@ -14,7 +14,15 @@ function ViewProject(props) {
     const [viewTasks, setViewTasks] = useState(false)
     return (
         <>
-            <div className="container">
+
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                {Array.from({ length: 12 }).map((_, index) => (
+                    <td key={index}>Table cell {index}</td>
+                ))}
+            </tr>
+            {/* <div className="container">
                 <div className="row" onClick={() => setViewTasks(!viewTasks)}>
                     <div className="col">
                         <div>name:{props.project.name}</div>
@@ -27,7 +35,7 @@ function ViewProject(props) {
                     <button onClick={() => { props.deleteProjectInServer() }}>deleteproject</button>
 
                 </div>
-            </div>
+            </div> */}
 
 
         </>

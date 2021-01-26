@@ -41,7 +41,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                             <li className="p-0 ">
                                 <button className="workspace-btn" onClick={func} >{workspace.name}</button>
                                 {flag ?
-                                    <ProjectsByWorkspace idWorkspace={workspace._id} />
+                                    <ProjectsByWorkspace idWorkspace={workspace._id} workspaceName={workspace.name} />
                                     : null}
                             </li>
                         </ul>

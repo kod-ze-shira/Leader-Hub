@@ -17,6 +17,8 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
     }, []);
 
+
+
     const renderedListWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceList key={todo._id} workspace={todo} />
     })
