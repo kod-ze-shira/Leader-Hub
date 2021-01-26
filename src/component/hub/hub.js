@@ -36,6 +36,7 @@ export default function Hub() {
                             </Route>
                             <Route path="/" >
                                 <Body />
+                                <ProjectsByWorkspace />
 
                             </Route>
                             <Route path=":userName/workspace1/:nameOfWorkspace" >
