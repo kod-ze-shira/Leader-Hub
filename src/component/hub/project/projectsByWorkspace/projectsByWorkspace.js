@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import  ViewProject  from '../viewProject/viewProject'
+import ViewProject from '../viewProject/viewProject'
+import Logo from '../../logo/logo'
+
+import { Table } from 'react-bootstrap';
+
 function ProjectsByWorkspace(props, idWorkspace) {
     const [isFullProjects, setIsFullProjects] = useState(false);
 
+    const workspace = [
+
+
+        {
+            name: "ffff",
+            cards: ['ff', 'fff']
+
+        },
+
+
+        {
+            name: "ffff",
+            cards: ['ff', 'fff']
+        }
+
+
+    ]
     useEffect(() => {
         if (!isFullProjects) {
             setIsFullProjects(true)
@@ -14,12 +35,31 @@ function ProjectsByWorkspace(props, idWorkspace) {
 
     }, [props])
 
-    const viewProjectsByWorkspace = props.projects.map((project) => {
-        return <ViewProject key={project._id} project={project} />
+    // const viewProjectsByWorkspace = props.projects.map((project) => {
+    const viewProjectsByWorkspace = workspace.map((project) => {
+
+        // return <ViewProject key={project._id} project={project} />
+        return <ViewProject project={project} />
     })
     return (
-        <>
-            <div>{viewProjectsByWorkspace}</div>
+        < >
+            <div to={`${props.user}/workspace`}>
+
+                <Logo nameWorkspace='Leader hub' />
+                <Table responsive style={{ background: 'white' }}>
+                    {props.projects.length ?
+                        <>
+                            <thead>
+                                <tr><th colspan="7"></th></tr>
+                            </thead>
+                            <tbody>
+                                {viewProjectsByWorkspace}
+                            </tbody>
+                        </> : <h2>There are no workspaces</h2>}
+                </Table>
+
+
+            </div>
         </>
     )
 }
@@ -28,12 +68,14 @@ function ProjectsByWorkspace(props, idWorkspace) {
 export default connect(
     (state) => {
         return {
-            projects: state.public_reducer.projects
+            projects: state.public_reducer.projects,
+            user: state.public_reducer.userName
         }
     },
     (dispatch) => {
         return {
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+
         }
     }
 )(ProjectsByWorkspace)

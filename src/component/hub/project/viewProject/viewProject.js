@@ -4,17 +4,33 @@ import DetailsProject from '../detailsProject/detailsProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
+import './viewProject.css'
 function ViewProject(props) {
 
     function detailsProject() {
         set_getProjectById(false);
     }
-    
+
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
-    return(
+    return (
         <>
-        <div className="container">
+            <tr>
+                <td>
+                    <span class='stripeProject'
+                        // style={{ 'background-color':props.project.color}}></span>
+                        style={{ 'background-color': '#1AFFFC' }}></span>
+                </td>
+                <td>{props.name}</td>
+                {/* <td>{props.project.name}</td> */}
+                <td>{props.cards.length}</td>
+                {/* <td>{props.project.cards.length}</td> */}
+
+                {Array.from({ length: 6 }).map((_, index) => (
+                    <td key={index}>Table cell {index}</td>
+                ))}
+            </tr>
+            {/* <div className="container">
             <div className="row" onClick={()=>setViewTasks(!viewTasks)}>
                 <div className="col">
                     <div>name:{props.project.name}</div>
@@ -28,13 +44,13 @@ function ViewProject(props) {
      
                     </div>
                     </div>
-    
-    
+     */}
+
         </>
     )
 }
 const mapStateToProps = (state) => {
-   
+
     return {
         project: state.project_reducer.project
     }
