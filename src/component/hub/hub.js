@@ -12,6 +12,7 @@ import {
     Link,
     Redirect,
 } from 'react-router-dom';
+import history from "../history"
 
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
@@ -30,13 +31,13 @@ export default function Hub() {
                 <div className="col-9  col align-self-center">
                     {/* <Header /> */}
                     {/* <div className="col-2"> <Tools /></div> */}
-                    <Router>
+                    <Router history={history}>
                         <Switch>
                             <Route path="/:userName/workspacePlatform" >
                                 <WorkspacePlatform />
                             </Route>
                             <Route path="/:userName/projectPlatform" >
-                                <ProjectPlatform />
+                                <ProjectPlatform  />
                             </Route>
                             <Route path="/:userName/cardsByProject" >
                                 <CardsByProject />

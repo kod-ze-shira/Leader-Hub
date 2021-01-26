@@ -11,14 +11,14 @@ function ProjectsByWorkspace(props, idWorkspace) {
 
     useEffect(() => {
         // if (!isFullProjects) {
-            // setIsFullProjects(true)
-            console.log("idWorkspace", props.idWorkspace)
-            props.getProjectsByWorkspaceId(props.idWorkspace)
+        // setIsFullProjects(true)
+        console.log("idWorkspace", props.idWorkspace)
+        props.getProjectsByWorkspaceId(props.idWorkspace)
         // }
-// 
+        // 
     }, [])
 
- 
+
 
     const viewProjectsByWorkspace = props.projects.map((project) => {
         return <ViewProject key={project._id} project={project} />

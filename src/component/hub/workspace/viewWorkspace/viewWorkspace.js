@@ -7,8 +7,9 @@ import TeamExample from '../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../editWorkspace/editWorkspace'
 import project_reducer from '../../../../redux/Reducers/project_reducer';
-  import history from '../../../history'
-function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+import history from '../../../history'
+
+function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
   const [viewProjects, setViewProjects] = useState(false)
   const [viewCards, setViewCards] = useState(false)
@@ -25,15 +26,14 @@ function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfigurat
   }
 
   const routeToProject = () => {
-        history.push('/projectPlatform')
-
+    history.push("/" + user + "/projectPlatform"+"/"+workspace._id)
   }
   return (
     <>
 
       <>
 
-        <Card className="cardWorkspace" onClick={() => routeToProject }
+        <Card className="cardWorkspace" onClick={() => routeToProject()}
           // <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
 
           onMouseOver={() => setShowInput(true)}
@@ -85,14 +85,15 @@ function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfigurat
 const mapStateToProps = (state) => {
 
   return {
+    user: state.public_reducer.userName,
     workspaces: state.public_reducer.worksapces,
-
     isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
 
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
     setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
   }
