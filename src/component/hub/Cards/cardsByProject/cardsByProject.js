@@ -9,19 +9,18 @@ function CardsByProject(props) {
     useEffect(() => {
 
         console.log("projectId", props.projectId)
-        props.getCardsByprojectId(props.projectId)
+        props.getCardsByProjectId(props.projectId)
+        console.log(props.cards);
 
     }, [])
 
-    const viewCardsByProject = props.cards.map((cards) => {
-        return <ViewCards cards={cards} />
+    const viewCardsByProject = props.cards.map((card) => {
+        console.log(card);
+        return <ViewCards key={card._id} card={card} />
     })
     return (
         <>
-            {/* ${props.projectId} */}
-            <div to={`${props.user}/cardsByProject`}>
-                {viewCardsByProject}
-            </div>
+            {viewCardsByProject}
         </>
     )
 }
@@ -31,14 +30,13 @@ export default connect(
     (state) => {
         return {
             cards: state.public_reducer.cards,
-            project: state.project_reducer.project,
-            user: state.public_reducer.userName
-
+            // project: state.project_reducer.project,
+            // user: state.public_reducer.userName
         }
     },
     (dispatch) => {
         return {
-            getCardsByprojectId: (projectId) => dispatch(actions.getCardsByprojectId(projectId))
+            getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId))
         }
     }
 )(CardsByProject)

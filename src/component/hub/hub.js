@@ -38,9 +38,9 @@ export default function Hub() {
                             <Route path="/:userName/projectPlatform" >
                                 <ProjectPlatform />
                             </Route>
-                            <Route path="/:userName/cardsByProject" >
+                            {/* <Route path="/:userName/cardsByProject" >
                                 <CardsByProject />
-                            </Route>
+                            </Route> */}
                             <Route path="/:userName" >
                                 <Body />
                             </Route>

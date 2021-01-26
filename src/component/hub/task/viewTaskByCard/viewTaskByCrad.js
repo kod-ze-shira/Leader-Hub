@@ -3,17 +3,16 @@ import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
-import './viewCards.css'
+// import './viewCards.css'
 
-function ViewCards(props) {
+function ViewTaskByCrad(props) {
 
-    const [ViewCards, setViewCards] = useState(false)
     return (
         <>
             <div className="container" >
-                <div className="row" onClick={() => setViewCards(!ViewCards)}>
-                    <div className="col card-name border-bottom mx-5 mt-5 pb-2">
-                        <div>{props.card.name}</div>
+                <div className="row">
+                    <div className="col ">
+                        <div>{props.task}</div>
                     </div>
                 </div>
             </div>
@@ -25,14 +24,14 @@ function ViewCards(props) {
 const mapStateToProps = (state) => {
 
     return {
-        project: state.project_reducer.project,
+        // tasks: state.public_reducer.tasks,
         // card: state.card_reducer.card
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCardsByProjectId: () => dispatch(actions.getCardsByProjectId()),
+        // getTasksByCard: (cardId) => dispatch(actions.getTasksByCard(cardId))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)
+export default connect(mapStateToProps, mapDispatchToProps)( ViewTaskByCrad)

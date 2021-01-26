@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 import { actions } from './../../../redux/actions/action'
 import ViewProject from '../project/viewProject/viewProject'
 import './projectPlatform.css'
+import CardsByProject from '../Cards/cardsByProject/cardsByProject';
+import TasksByCard from '../task/tasksByCard/tasksByCard'
+
 // import projectsByWorkspace from '../project/projectsByWorkspace/projectsByWorkspace';
+// import Logo from '../../logo/logo'
 
 const mapStateToProps = (state) => {
     return {
-        project: state.project_reducer.name,
-        // user: state.public_reducer.userName
+        project: state.project_reducer.project,
+        user: state.public_reducer.userName
     }
 }
 
@@ -19,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
+export default connect(mapStateToProps, mapDispatchToProps)(function ProjectPlatform(props) {
     // const viewProjectsByWorkspace = props.projects.map((project) => {
     //     return <ViewProject key={project._id} project={project} />
     // })
@@ -27,9 +31,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
 
     return (
         <>
-            <div to={`${props.user}/projectPlatform`} >
-                <div></div>
-                <h1>hi</h1>
+            <div className="body" to={`${props.user}/projectPlatform`} >
+                {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
+                {/* <Logo nameWorkspace='Leader hub' /> */}
+                
+                <CardsByProject projectId={"600fe82b609f055838b967ff"}></CardsByProject>
+                {/* <TasksByCard cardId={"6006061269370dacf7af0609"}></TasksByCard> */}
 
             </div>
         </>

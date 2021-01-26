@@ -1,0 +1,8 @@
+.card-name{
+    color: var(--unnamed-color-000000);
+    text-align: left;
+   font-size: medium;
+    color: #000000;
+    /* border-bottom: gray solid 1px; */
+    background-color:transparent;
+}
