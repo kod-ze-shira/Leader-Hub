@@ -8,7 +8,7 @@ import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getProjetsByWorkspace, getTasksByProject } from '../middleware/crud'
+import { getCardsByProjectId, getProjetsByWorkspace, getTasksByProject,getTasksByCardId } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
@@ -24,7 +24,7 @@ import { getTaskByIdFromServer } from '../middleware/crud'
 import { getProjectByIdInServer } from '../middleware/crud'
 
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer,card_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer });
 
 
 const store = createStore(
@@ -43,9 +43,11 @@ const store = createStore(
                 // getAllTeamsForUser,
                 setProjectCrud,
                 getProjetsByWorkspace,
-                getTasksByProject,
+                // getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
+                getCardsByProjectId,
+                getTasksByCardId
             ))
 )
 var url = window.location;

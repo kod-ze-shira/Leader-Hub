@@ -22,12 +22,12 @@ function ProjectsList(props) {
         // return <viewProject key={project._id} project={project} />
         if (project.name)
             return <option >{project.name}</option>
-            
+
 
     })
     return (
         <>
-            <div className="col-10 mt-5 row-projects">
+            <div className="col-11 mt-5 row-projects">
                 <select className="col-2 py-1">{viewProjectsByWorkspace}</select>
                 {/* <label className="col-10">Add Project</label> */}
             </div>
