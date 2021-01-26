@@ -4,7 +4,7 @@ import { Dropdown, DropdownButton, ButtonGroup, Nav, Navbar, NavDropdown } from 
 import './dropDownList.css'
 import { actions } from '../../../../redux/actions/action'
 import Workspace from '../workspace/workspace'
-import TeamExample from 'C:/Users/ATRA2/Desktop/hub-react/Leader-Hub/src/component/hub/team/teamExample'
+// import TeamExample from 'C:/Users/ATRA2/Desktop/hub-react/Leader-Hub/src/component/hub/team/teamExample'
 const mapStateToProps = (state) => {
     return {
         workspaces: state.public_reducer.worksapces
@@ -44,9 +44,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
                     <button className=" col-8 mt-2 btn btn-outline-secondary">Emails<div className="mt-1 arrow-down"></div></button>
                 </div>
                 <div className="row justify-content-center">
-                    <button onClick={() => setShowShare(!showShare)} variant="primary"
+                    {/* <button onClick={() => setShowShare(!showShare)} variant="primary"
                         className=" col-8 mt-2 btn btn-outline-secondary">Teams<div className="mt-1 arrow-down"></div></button>
-                    {showShare ? <TeamExample></TeamExample> : null}
+                    {showShare ? <TeamExample></TeamExample> : null} */}
                 </div>
             </div>
 
