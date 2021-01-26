@@ -5,6 +5,7 @@ import Nav from '../warps/nav/nav';
 import Left_nav from '../warps/left_nav/left_nav';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import Tools from './tools/tools';
+import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 import {
     BrowserRouter as Router,
     Switch,
@@ -35,6 +36,11 @@ export default function Hub() {
                             </Route>
                             <Route path="/" >
                                 <Body />
+
+                            </Route>
+                            <Route path=":userName/workspace1/:nameOfWorkspace" >
+                                <ProjectsByWorkspace />
+                                {/* <Projcts /> */}
                             </Route>
                         </Switch>
                     </Router>

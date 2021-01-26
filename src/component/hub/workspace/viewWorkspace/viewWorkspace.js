@@ -28,7 +28,8 @@ function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfigurat
 
       <>
 
-        <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
+        <Card
+          className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
           onMouseOver={() => setShowInput(true)}
           onMouseLeave={() => setShowInput(false)}
         >
@@ -93,7 +94,3 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspace)
-
-
-
-

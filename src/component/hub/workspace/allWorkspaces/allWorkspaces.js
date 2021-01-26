@@ -14,6 +14,8 @@ function allWorkspaces(props) {
 
 
 
+
+
     const renderedListWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspace key={todo._id} workspace={todo} />
     })
@@ -44,19 +46,9 @@ function allWorkspaces(props) {
 
                 <div className="col-1" style={{ marginRight: '4px' }}></div>
                 <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-                <div className="col-3"></div>
-                {renderedListWorkspaces}
-
-
-
-
-
-
-
-
-
-
-            </div>
+                <div className="col-3">
+                    {renderedListWorkspaces}
+                </div></div>
 
         </div>
 
