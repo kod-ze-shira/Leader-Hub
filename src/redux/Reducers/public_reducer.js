@@ -6,6 +6,7 @@ const initialState = {
     userName: "",
     worksapces: [],
     projects: [],
+    cards:[],
     tasks: [],
     isConfiguratorOpen: "false",
 }

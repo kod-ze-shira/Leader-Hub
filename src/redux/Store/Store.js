@@ -3,6 +3,7 @@
 import project_reducer from '../Reducers/project_reducer';
 import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
+import card_reducer from '../Reducers/card_reducer';
 import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -23,7 +24,7 @@ import { getTaskByIdFromServer } from '../middleware/crud'
 import { getProjectByIdInServer } from '../middleware/crud'
 
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer,card_reducer });
 
 
 const store = createStore(
