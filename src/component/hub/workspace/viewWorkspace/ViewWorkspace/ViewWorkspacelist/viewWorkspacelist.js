@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import './viewWorkspace.css';
+import './viewWorkspacelist.css';
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWorkspace'
-import TeamExample from '../../team/teamExample'
+import { actions } from '../../../../../../redux/actions/action'
+import ProjectsByWorkspace from '../../../../project/projectsByWorkspace/projectsByWorkspace'
+import TeamExample from '../../../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
-import EditWorkspace from '../editWorkspace/editWorkspace'
+import EditWorkspace from '../../../editWorkspace/editWorkspace'
 
-function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
   const [viewProjects, setViewProjects] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -21,6 +21,9 @@ function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfigurat
   const toOpenEditWorkspace = () => {
     setOpenEditWorkspace(!openEditWorkspace)
   }
+
+
+
 
 
   return (
@@ -88,11 +91,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+
   }
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspace)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspaceList)
 
 
 
