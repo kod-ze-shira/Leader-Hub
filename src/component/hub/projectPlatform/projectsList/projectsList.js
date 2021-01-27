@@ -4,32 +4,47 @@ import { actions } from '../../../../redux/actions/action'
 import { Button, Card, Form } from 'react-bootstrap';
 import viewProject from '../../project/viewProject/viewProject';
 import { useParams } from 'react-router-dom';
+import $ from 'jquery';
 import './projectsList.css'
 // import EditWorkspace from '.././editWorkspace/editWorkspace'
 // import project_reducer from '../../../../redux/Reducers/project_reducer';
 
 function ProjectsList(props) {
 
-    let { name } = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
-        props.getProjectsByWorkspaceId("60097fcf88229595ce677d42");
+        props.getProjectsByWorkspaceId(id);
     }, [])
 
-
-    const viewProjectsByWorkspace = props.projects.map((project) => {
-        // console.log(project.name);
-        // return <viewProject key={project._id} project={project} />
-        if (project.name)
-            return <option >{project.name}</option>
+    const [projectId, setProjectId] = useState();
 
 
-    })
+    // const func = (color,id) => {
+    //     // alert("ghj")
+    //     console.log(id);
+    //     $(document).ready(function () {
+    //         $(".select").css("color", color)
+    //     });
+    // }
+    const func = (id) => {
+        setProjectId(id)
+        console.log(id);
+    }
+
     return (
         <>
             <div className="col-11 mt-5 row-projects">
-                <select className="col-2 py-1">{viewProjectsByWorkspace}</select>
-                {/* <label className="col-10">Add Project</label> */}
+                <select onChange={(e) => func(e.target.value)} className="select col-2 py-1">
+                    {props.projects.map((project) => {
+                        // return <viewProject key={project._id} project={project} />
+                        if (project.name)
+                        return<> 
+                         <option className="option" value={project._id}
+                            style={{ color: project.color ? project.color : "#F7B500" }}>
+                            {project.name} </option></>
+                    })}
+                </select>
             </div>
         </>
     )
