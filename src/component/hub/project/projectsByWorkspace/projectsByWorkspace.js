@@ -11,6 +11,23 @@ function ProjectsByWorkspace(props, idWorkspace) {
     const [isFullProjects, setIsFullProjects] = useState(true);
     const [flag, setFlag] = useState(false);
 
+    const workspace = [
+
+
+        {
+            name: "ffff",
+            cards: ['ff', 'fff']
+
+        },
+
+
+        {
+            name: "ffff",
+            cards: ['ff', 'fff']
+        }
+
+
+    ]
     useEffect(() => {
         // if (!isFullProjects) {
         // setIsFullProjects(true)
@@ -22,34 +39,35 @@ function ProjectsByWorkspace(props, idWorkspace) {
 
     const nameLogo = 'Leader Hub'
 
-    const viewProjectsByWorkspace =
-        Array.from({ length: 5 }).map((project) => {
-            //props.projects.map((project) => {
-            // return <ViewProject key={project._id} project={project} />
-            return <ViewProject project={props.projects} />
+    const viewProjectsByWorkspace = Array.from({ length: 5 }).map((project) => {
+        //props.projects.map((project) => {
+        // return <ViewProject key={project._id} project={project} />
+        return <ViewProject project={props.projects} />
+    })
+    // const viewProjectsByWorkspace = props.projects.map((project) => {
+    const viewProjectsByWorkspace = workspace.map((project) => {
 
-
-        })
+        // return <ViewProject key={project._id} project={project} />
+        return <ViewProject project={project} />
+    })
     return (
-        <>
-            {/* <div to={`${props.user}/workspace/${props.workspaceName}`} > */}
-            {/* <div to={`/${props.user}/workspace/${history}`} > */}
-            <div>
-                <Table responsive
-                    style={{ 'background-color': 'white' }}>
-                    <thead>
-                        <tr>
-                            <th colspan="6">
-                                {/* <Logo nameWorkspace={props.workspaceName} /> */}
-                                <Logo nameWorkspace={nameLogo} />
-                            </th>
+        < >
+            <div to={`${props.user}/workspace`}>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {viewProjectsByWorkspace}
-                    </tbody>
+                <Logo nameWorkspace='Leader hub' />
+                <Table responsive style={{ background: 'white' }}>
+                    {props.projects.length ?
+                        <>
+                            <thead>
+                                <tr><th colspan="7"></th></tr>
+                            </thead>
+                            <tbody>
+                                {viewProjectsByWorkspace}
+                            </tbody>
+                        </> : <h2>There are no workspaces</h2>}
                 </Table>
+
+
             </div>
         </>
     )
@@ -61,15 +79,12 @@ export default connect(
         return {
             projects: state.public_reducer.projects,
             user: state.public_reducer.userName
-
         }
     },
     (dispatch) => {
         return {
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+
         }
     }
-
-
-
 )(ProjectsByWorkspace)

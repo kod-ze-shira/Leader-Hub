@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> BM_teams
 import React from 'react'
 import "./logo.css";
 

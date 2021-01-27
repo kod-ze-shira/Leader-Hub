@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import './viewProject.css'
 import Cell from './cell'
 import { actions } from '../../../../redux/actions/action'
+import './viewProject.css'
 function ViewProject(props) {
 
     function detailsProject() {
@@ -51,15 +52,7 @@ function ViewProject(props) {
                         <div>name:{props.project.name}</div>
                         <div>description:{props.project.description}</div>
                     </div>
-                </div>
-                <div>
-                    {viewTasks ? <TasksByProject projectId={props.project._id} /> : null}
-
-                    <button onClick={() => { props.deleteProjectInServer() }}>deleteproject</button>
-
-                </div>
-            </div> */}
-
+     */}
 
         </>
     )

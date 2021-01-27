@@ -13,7 +13,7 @@ import {
     Link,
     Redirect,
 } from 'react-router-dom';
-
+import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
 export default function Hub() {
@@ -40,7 +40,15 @@ export default function Hub() {
                             </Route>
                             <Route path="/" >
                                 <Body />
+<<<<<<< HEAD
                                 {/* <ProjectsByWorkspace /> */}
+=======
+                                <ProjectsByWorkspace />
+
+                            </Route>
+                            <Route path="/workspace" >
+                                <ProjectsByWorkspace />
+>>>>>>> BM_teams
 
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
