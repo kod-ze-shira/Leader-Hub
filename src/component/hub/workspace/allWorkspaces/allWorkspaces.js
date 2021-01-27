@@ -40,6 +40,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
         list ?
             <>
                 <div className="row mt-5"></div>
+                <h1>abbbbbbbbbb</h1>
                 <div className="row mt-5"></div>
                 <div className="row mt-5 d-flex">
                     <div className="col-1"></div>
@@ -64,7 +65,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                     <div className="col-1"></div>
                     <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
                     <div className="col-2"></div>
-
+                    <h1>mmmmmmmmmmmmm</h1>
                     <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
                     <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
                     <div className="row">
@@ -74,6 +75,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                     </div>
                     <div className="row mt-5">
                         <div className="col-1" ></div>
+
                         {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
                         <div className="col-1 allWorkspace">  {renderedGridWorkspaces}</div>
                     </div>
