@@ -6,8 +6,8 @@ import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWor
 import TeamExample from '../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../editWorkspace/editWorkspace'
-
-function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+// import history from '../../../history'
+function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
   const [viewProjects, setViewProjects] = useState(false)
   const [showShare, setShowShare] = useState(false)
@@ -21,7 +21,10 @@ function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfigurat
   const toOpenEditWorkspace = () => {
     setOpenEditWorkspace(!openEditWorkspace)
   }
-
+  const routeToProject = () => {
+    // history.push("/" + user + "/workspace")
+    // + "/" + workspace._id)
+  }
 
   return (
     <>
@@ -29,6 +32,7 @@ function ViewWorkspace({ isConfiguratorOpenWorkspace, workspace, setisConfigurat
       <>
 
         <Card
+          onClick={() => routeToProject()}
           className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
           onMouseOver={() => setShowInput(true)}
           onMouseLeave={() => setShowInput(false)}

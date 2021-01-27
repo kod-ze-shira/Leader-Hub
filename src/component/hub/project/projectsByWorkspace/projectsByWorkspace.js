@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import ViewProject from '../viewProjectNew/viewProjectNew'
+import ViewProject from '../viewProject/viewProject'
 import { Table } from 'react-bootstrap';
 import "./projectsByWorkspace.css";
 import Logo from '../../logo/logo'
@@ -23,19 +23,23 @@ function ProjectsByWorkspace(props, idWorkspace) {
     const nameLogo = 'Leader Hub'
 
     const viewProjectsByWorkspace =
-        Array.from({ length: 12 }).map((project) => {
+        Array.from({ length: 5 }).map((project) => {
             //props.projects.map((project) => {
             // return <ViewProject key={project._id} project={project} />
-            return <ViewProject />
+            return <ViewProject project={props.projects} />
+
 
         })
     return (
         <>
-            <div to={`${props.user}/workspace/${props.workspaceName}`} >
-                <Table responsive>
+            {/* <div to={`${props.user}/workspace/${props.workspaceName}`} > */}
+            {/* <div to={`/${props.user}/workspace/${history}`} > */}
+            <div>
+                <Table responsive
+                    style={{ 'background-color': 'white' }}>
                     <thead>
                         <tr>
-                            <th>
+                            <th colspan="6">
                                 {/* <Logo nameWorkspace={props.workspaceName} /> */}
                                 <Logo nameWorkspace={nameLogo} />
                             </th>
@@ -44,15 +48,6 @@ function ProjectsByWorkspace(props, idWorkspace) {
                     </thead>
                     <tbody>
                         {viewProjectsByWorkspace}
-
-
-                        {/* <tr>
-                            <td>2</td>
-                            {Array.from({ length: 12 }).map((_, index) => (
-                                <td key={index}>Table cell {index}</td>
-                            ))}
-                        </tr>
-                       */}
                     </tbody>
                 </Table>
             </div>
@@ -74,4 +69,7 @@ export default connect(
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
         }
     }
+
+
+
 )(ProjectsByWorkspace)
