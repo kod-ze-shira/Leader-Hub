@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCardsByProjectId: () => dispatch(actions.getCardsByProjectId()),
+        // getCardsByProjectId: () => dispatch(actions.getCardsByProjectId()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)
