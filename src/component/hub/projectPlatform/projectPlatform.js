@@ -26,7 +26,7 @@ function projectPlatform(props) {
                 {/* <Logo nameWorkspace='Leader hub' /> */}
                 
                 <CardsByProject projectId={"600fe82b609f055838b967ff"}></CardsByProject>
-                {/* <TasksByCard cardId={"6006061269370dacf7af0609"}></TasksByCard> */}
+                <TasksByCard cardId={"6006061269370dacf7af0609"}></TasksByCard>
             </div>
         </>
     )
