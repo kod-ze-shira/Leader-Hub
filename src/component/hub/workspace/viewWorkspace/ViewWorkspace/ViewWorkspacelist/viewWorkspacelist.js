@@ -55,10 +55,10 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
 
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
-            {
+            {/* {
               workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
-            }
+            } */}
           </div >
 
           <div className='nameWorkspace'

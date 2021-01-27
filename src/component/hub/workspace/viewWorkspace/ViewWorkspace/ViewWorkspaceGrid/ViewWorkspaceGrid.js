@@ -23,10 +23,10 @@ function ViewWorkspaceGrid({ workspace }) {
                     < div className="logoWorkspaceGrid"
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                         {workspace.name[0].toUpperCase()}
-                        {
+                        {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
-                        }
+                        } */}
                     </div>
                 </div>
                 <div className="col-3">{workspace.name}</div>
