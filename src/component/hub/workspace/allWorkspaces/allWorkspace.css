@@ -9,11 +9,30 @@
     font-size: x-large;
     
 }
-.Edit{
-    color: #778CA2;
-    font-size:x-large;
+.renderedListWorkspaces{
+    margin-Right: '4px' 
 }
 hr{
     width: 60vw;
     color:#707070;
+}
+.LIST{
+    color:#98A9BC;
+    font-size: x-large;
+    cursor: pointer;
+}
+.GRID1{
+    color:#98A9BC;
+    font-size: x-large;
+    cursor: pointer;
+}
+.GRID{
+color:#0A102E;
+font-size: x-large;
+cursor: pointer;
+}
+.LIST1{
+    color:#0A102E;
+font-size: x-large;
+cursor: pointer;
 }
