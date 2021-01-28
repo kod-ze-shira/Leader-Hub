@@ -32,27 +32,8 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
       <>
 
         <Card
-          className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
-          onMouseOver={() => setShowInput(true)}
-          onMouseLeave={() => setShowInput(false)}
-        >
-          {
-            showInput ?
-              // <Form.Group controlId="formBasicCheckbox">
-
-              //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
-              // </Form.Group>
-              <input type="checkbox"
-                onMouseOver={() => setShowInput(true)}
-                onClick={() => setShowInput(true)}
-                className='checkWorkspace' />
-
-              : null
-          }
+          className="cardWorkspace ml-2 "  >
           < div className="logoWorkspace"
-            onMouseOver={() => setShowInput(true)
-            }
-
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
             {/* {
@@ -61,9 +42,7 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
             } */}
           </div >
 
-          <div className='nameWorkspace'
-            onMouseOver={() => setShowInput(true)}
-          >{workspace.name}</div>
+          <div className='nameWorkspace' ><b>{workspace.name}</b></div>
           <div>{workspace.startDate}</div>
           <div>
             {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
