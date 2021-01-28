@@ -1,56 +1,86 @@
-
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import ViewWorkspace from '../viewWorkspace/viewWorkspace'
+import ViewWorkspaceList from '../veiwWorkspace/viewWorkspacelist/viewWorkspacelist'
+import ViewWorkspaceGrid from '../veiwWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 
 // let workspace;
 
 
+function AllWorkspaces(props, getAllWorkspaces) {
 
-function allWorkspaces(props) {
+    useEffect(() => {
+        { props.getAllWorkspaces() };
 
-
-
+    }, []);
 
 
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspace key={todo._id} workspace={todo} />
+        return <ViewWorkspaceList key={todo._id} workspace={todo} />
+    })
+    const renderedGridWorkspaces = props.workspaces.map(todo => {
+        return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
     })
 
+    const [list, setlist] = useState(false);
 
-
+    function chenge_list1() {
+        setlist(false);
+    }
+    function chenge_grid() {
+        setlist(true);
+    }
     return (
 
-        <div >
 
-
-            <div className="row mt-5"></div>
-            <div className="row mt-5"></div>
-            <div className="row mt-5">
-                <div className="col-1"></div>
-                <div className="col-6 MyWorkspace">My Workspace</div>
-                <div className="col-3"></div>
-                <div className="col-2 Edit">Edit</div>
-                <div className="row mt-2">
+        list ?
+            <>
+                <div className="row mt-5"></div>
+                <h1>abbbbbbbbbb</h1>
+                <div className="row mt-5"></div>
+                <div className="row mt-5 d-flex">
                     <div className="col-1"></div>
-                    <div className="col-4"><hr></hr></div>
+                    <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
+                    <div className="col-2"></div>
+                    <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                    <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+
+
+                    <div className="renderedListWorkspaces" >   </div>
+                    {renderedListWorkspaces}
+
 
                 </div>
-                <h1>
-                    {props.isConfiguratorOpenWorkspace}
-                </h1>
+            </>
+            :
+            <>
 
+                <div className="row mt-5"></div>
+                <div className="row mt-5"></div>
+                <div className="row mt-5">
+                    <div className="col-1"></div>
+                    <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
+                    <div className="col-2"></div>
+                    <h1>mmmmmmmmmmmmm</h1>
+                    <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
+                    <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                    <div className="row">
+                        <div className="col-1"></div>
+                        <div className="col-4"><hr></hr></div>
 
-                <div className="col-1" style={{ marginRight: '4px' }}></div>
-                <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-                <div className="col-3">
-                    {renderedListWorkspaces}
-                </div></div>
+                    </div>
+                    <div className="row mt-5">
+                        <div className="col-1" ></div>
 
-        </div>
+                        {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
+                        <div className="col-1 allWorkspace">  {renderedGridWorkspaces}</div>
+                    </div>
+
+                </div>
+            </>
+
 
 
     )
@@ -60,16 +90,15 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.worksapces,
-        isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+
     }
 
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(allWorkspaces)
+export default connect(mapStateToProps, mapDispatchToProps)(AllWorkspaces)

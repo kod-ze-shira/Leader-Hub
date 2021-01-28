@@ -5,7 +5,6 @@ import Nav from '../warps/nav/nav';
 import Left_nav from '../warps/left_nav/left_nav';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import Tools from './tools/tools';
-import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 import {
     BrowserRouter as Router,
     Switch,
@@ -15,6 +14,7 @@ import {
 } from 'react-router-dom';
 import history from "../history"
 
+import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
 import ProjectPlatform from './projectPlatform/projectPlatform'
@@ -34,8 +34,12 @@ export default function Hub() {
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Router history={history}>
                         <Switch>
-                            <Route path="/:userName/workspacePlatform" >
-                                <WorkspacePlatform />
+                            <Route path="/:userName/workspace/:workspaceId" >
+                                <ProjectsByWorkspace />
+                                {/* <Projcts /> */}
+                            </Route>
+                            <Route path="/workspacePlatform" >
+g                                <WorkspacePlatform />
                             </Route>
                             <Route path="/:userName/projectPlatform" >
                                 <ProjectPlatform  />
@@ -45,13 +49,11 @@ export default function Hub() {
                             </Route> */}
                             <Route path="/:userName" >
                                 <Body />
-                                <ProjectsByWorkspace />
+                                {/* <ProjectsByWorkspace /> */}
 
                             </Route>
-                            <Route path=":userName/workspace1/:nameOfWorkspace" >
-                                <ProjectsByWorkspace />
-                                {/* <Projcts /> */}
-                            </Route>
+                            {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
+
                         </Switch>
                     </Router>
                 </div>
