@@ -3,29 +3,12 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewProject from '../viewProject/viewProject'
 import Logo from '../../logo/logo'
-
 import { Table } from 'react-bootstrap';
 
 function ProjectsByWorkspace(props, idWorkspace) {
     const [isFullProjects, setIsFullProjects] = useState(false);
 
-    const workspace = [
 
-
-        {
-            name: "ffff",
-            cards: ['ff', 'fff']
-
-        },
-
-
-        {
-            name: "ffff",
-            cards: ['ff', 'fff']
-        }
-
-
-    ]
     useEffect(() => {
         if (!isFullProjects) {
             setIsFullProjects(true)
@@ -36,17 +19,18 @@ function ProjectsByWorkspace(props, idWorkspace) {
     }, [props])
 
     // const viewProjectsByWorkspace = props.projects.map((project) => {
-    const viewProjectsByWorkspace = workspace.map((project) => {
+    const viewProjectsByWorkspace = props.projects.map((project) => {
 
         // return <ViewProject key={project._id} project={project} />
         return <ViewProject project={project} />
     })
     return (
         < >
-            <div to={`${props.user}/workspace`}>
+            <div to={`/${props.user}/workspace/rr`}>
 
                 <Logo nameWorkspace='Leader hub' />
                 <Table responsive style={{ background: 'white' }}>
+
                     {props.projects.length ?
                         <>
                             <thead>
@@ -56,6 +40,8 @@ function ProjectsByWorkspace(props, idWorkspace) {
                                 {viewProjectsByWorkspace}
                             </tbody>
                         </> : <h2>There are no workspaces</h2>}
+
+
                 </Table>
 
 
