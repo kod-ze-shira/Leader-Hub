@@ -42,7 +42,6 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
           {
             showInput ?
               // <Form.Group controlId="formBasicCheckbox">
-
               //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
               // </Form.Group>
               <input type="checkbox"
