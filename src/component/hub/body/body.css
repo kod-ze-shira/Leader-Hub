@@ -4,6 +4,6 @@
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 12px;
   opacity: 1;
-  overflow: auto;
+  overflow: hidden;
 
 }

@@ -45,7 +45,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                 <div className="row">
                     <div className="col-1"></div>
                     <div className="col-11">
-                        <div className="row mt-5 d-flex">
+                        <div className="row d-flex">
 
                             <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
                             <div className="col-3 ml-5"></div>
@@ -73,7 +73,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
             <>
 
                 <div className="row mt-5"></div>
-                <div className="row mt-5"></div>
+
                 <div className="row mt-5">
                     <div className="col-1"></div>
                     <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
