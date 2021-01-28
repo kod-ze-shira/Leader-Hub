@@ -11,23 +11,7 @@ function ProjectsByWorkspace(props, idWorkspace) {
     const [isFullProjects, setIsFullProjects] = useState(true);
     const [flag, setFlag] = useState(false);
 
-    const workspace = [
 
-
-        {
-            name: "ffff",
-            cards: ['ff', 'fff']
-
-        },
-
-
-        {
-            name: "ffff",
-            cards: ['ff', 'fff']
-        }
-
-
-    ]
     useEffect(() => {
         // if (!isFullProjects) {
         // setIsFullProjects(true)
@@ -43,12 +27,6 @@ function ProjectsByWorkspace(props, idWorkspace) {
         //props.projects.map((project) => {
         // return <ViewProject key={project._id} project={project} />
         return <ViewProject project={props.projects} />
-    })
-    // const viewProjectsByWorkspace = props.projects.map((project) => {
-    const viewProjectsByWorkspace = workspace.map((project) => {
-
-        // return <ViewProject key={project._id} project={project} />
-        return <ViewProject project={project} />
     })
     return (
         < >

@@ -5,15 +5,25 @@
     }
 
 .MyWorkspace{
-    color: #778CA2;
+    color:black;
     font-size: x-large;
     
 }
-.Edit{
-    color: #778CA2;
-    font-size:x-large;
+.renderedListWorkspaces{
+    margin-Right: 25px; 
+   margin-top:20px;
+
 }
 hr{
     width: 60vw;
     color:#707070;
 }
+.grid{
+    cursor: pointer;
+   
+}
+.list{
+    cursor: pointer;
+    
+}
+
