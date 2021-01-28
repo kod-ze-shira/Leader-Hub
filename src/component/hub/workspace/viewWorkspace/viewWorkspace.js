@@ -33,6 +33,10 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
 
       <>
 
+<<<<<<< HEAD:src/component/hub/workspace/viewWorkspace/ViewWorkspace/ViewWorkspacelist/viewWorkspacelist.js
+        <Card
+          className="cardWorkspace ml-2 "  >
+=======
         <Card className="cardWorkspace" onClick={() => routeToProject()}
           // <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
 
@@ -52,10 +56,8 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
 
               : null
           }
+>>>>>>> dev:src/component/hub/workspace/viewWorkspace/viewWorkspace.js
           < div className="logoWorkspace"
-            onMouseOver={() => setShowInput(true)
-            }
-
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
             {
@@ -64,9 +66,7 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
             }
           </div >
 
-          <div className='nameWorkspace'
-            onMouseOver={() => setShowInput(true)}
-          >{workspace.name}</div>
+          <div className='nameWorkspace' ><b>{workspace.name}</b></div>
           <div>{workspace.startDate}</div>
           <div>
             {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
