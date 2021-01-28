@@ -4,19 +4,27 @@ import { actions } from '../../../../redux/actions/action'
 import ViewProject from '../viewProject/viewProject'
 import Logo from '../../logo/logo'
 import { Table } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
-function ProjectsByWorkspace(props, idWorkspace) {
+
+function ProjectsByWorkspace(props) {
     const [isFullProjects, setIsFullProjects] = useState(false);
-
+    let { idWorkspace } = useParams();
 
     useEffect(() => {
-        if (!isFullProjects) {
-            setIsFullProjects(true)
-            console.log("idWorkspace", props.idWorkspace)
-            props.getProjectsByWorkspaceId(props.idWorkspace)
-        }
+        // props.getProjectsByWorkspaceId(idWorkspace);
+        props.getProjetsByWorkspace('60097fcf88229595ce677d42‏');
 
-    }, [props])
+    }, [])
+
+    // useEffect(() => {
+    //     if (!isFullProjects) {
+    //         setIsFullProjects(true)
+    //         console.log("idWorkspace", props.idWorkspace)
+    //         props.getProjectsByWorkspaceId(props.idWorkspace)
+    //     }
+
+    // }, [props])
 
     // const viewProjectsByWorkspace = props.projects.map((project) => {
     const viewProjectsByWorkspace = props.projects.map((project) => {
@@ -24,23 +32,27 @@ function ProjectsByWorkspace(props, idWorkspace) {
         // return <ViewProject key={project._id} project={project} />
         return <ViewProject project={project} />
     })
+
+
     return (
-        < >
-            <div to={`/${props.user}/workspace/rr`}>
+        <>
+            <button onClick={() => console.log(props.projects)}>click me</button>
+            <div>
+                {/* <div to={`/${props.user}/worksace/workspaceId`}> */}
 
                 <Logo nameWorkspace='Leader hub' />
                 <Table responsive style={{ background: 'white' }}>
 
-                    {props.projects.length ?
-                        <>
-                            <thead>
-                                <tr><th colspan="7"></th></tr>
-                            </thead>
-                            <tbody>
-                                {viewProjectsByWorkspace}
-                            </tbody>
-                        </> : <h2>There are no workspaces</h2>}
-
+                    {/* {props.projects.length ? */}
+                    <>
+                        <thead>
+                            <tr><th colspan="7"></th></tr>
+                        </thead>
+                        <tbody>
+                            {viewProjectsByWorkspace}
+                        </tbody>
+                        {/* </> : <h2>There are no workspaces</h2>} */}
+                    </>
 
                 </Table>
 
@@ -60,7 +72,7 @@ export default connect(
     },
     (dispatch) => {
         return {
-            getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+            getProjetsByWorkspace: (idWorkspace) => dispatch(actions.getProjetsByWorkspace(idWorkspace))
 
         }
     }

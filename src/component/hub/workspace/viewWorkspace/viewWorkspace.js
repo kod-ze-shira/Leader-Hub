@@ -6,8 +6,9 @@ import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWor
 import TeamExample from '../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../editWorkspace/editWorkspace'
+import history from '../../../history'
 
-export function ViewWorkspace({ props, workspace }) {
+function ViewWorkspace({ user, workspace }) {
   const [viewProjects, setViewProjects] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
@@ -19,13 +20,16 @@ export function ViewWorkspace({ props, workspace }) {
   // const toOpenEditWorkspace = () => {
   //   setOpenEditWorkspace(!openEditWorkspace)
   // }
-
+  const routeToProject = () => {
+    history.push("/" + user + "/worksace/" + workspace._id)
+  }
 
   return (
 
 
     <>
       <Card className="cardWorkspace"
+        onClick={() => routeToProject()}
         onMouseOver={() => setShowInput(true)}
         onMouseOut={() => setShowInput(false)}
       >
@@ -70,3 +74,25 @@ export function ViewWorkspace({ props, workspace }) {
 
   )
 }
+
+
+
+const mapStateToProps = (state) => {
+
+  return {
+    user: state.public_reducer.userName,
+    workspaces: state.public_reducer.worksapces,
+    isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
+
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
+    setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
+    getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+  }
+
+
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspace)

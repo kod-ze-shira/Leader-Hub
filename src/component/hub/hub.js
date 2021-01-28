@@ -30,7 +30,7 @@ export default function Hub() {
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Router>
                         <Switch>
-                            <Route path="/:userName/workspace/:idWorkspace" >
+                            <Route path="/:userName/worksace/:idWorkspace" >
                                 <ProjectsByWorkspace />
 
                             </Route>

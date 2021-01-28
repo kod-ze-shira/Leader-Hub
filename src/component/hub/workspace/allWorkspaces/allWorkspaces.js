@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import { ViewWorkspace } from '../viewWorkspace/viewWorkspace';
+import ViewWorkspace from '../viewWorkspace/viewWorkspace';
 import './allWorkspace.css';
 
 // let workspace;
