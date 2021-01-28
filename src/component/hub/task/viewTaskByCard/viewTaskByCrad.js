@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl } from 'react-bootstrap'
 // import './viewTaskByCard.css'
-import './viewTaskByCrad.css'
+// import './viewTaskByCrad.css'
 
 function ViewTaskByCrad(props) {
 
