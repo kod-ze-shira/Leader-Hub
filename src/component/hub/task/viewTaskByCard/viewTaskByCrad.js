@@ -3,7 +3,10 @@ import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
-// import ''
+import { InputGroup, FormControl } from 'react-bootstrap'
+// import './viewTaskByCard.css'
+import './viewTaskByCrad.css'
+
 function ViewTaskByCrad(props) {
 
     return (
@@ -11,7 +14,14 @@ function ViewTaskByCrad(props) {
             <div className="container" >
                 <div className="row">
                     <div className="col  ">
-                        <div>{props.task.status}</div>
+                        <div>
+                            <label class="container pl-5 my-2 ml-5">{props.task.description}
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
+                            </label>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -33,4 +43,4 @@ const mapDispatchToProps = (dispatch) => {
         // getTasksByCard: (cardId) => dispatch(actions.getTasksByCard(cardId))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)( ViewTaskByCrad)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

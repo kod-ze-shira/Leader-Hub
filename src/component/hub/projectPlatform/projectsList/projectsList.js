@@ -15,20 +15,24 @@ function ProjectsList(props) {
     useEffect(() => {
         props.getProjectsByWorkspaceId("60097fcf88229595ce677d42");
     }, [])
+    //to chang the project that user selected
+    const changeSelectedProject = (event) => {
+     let projectIdSelected=  event.target.options[event.target.selectedIndex].id;
+    // alert(event.target.options[event.target.selectedIndex].color)
+      props.changeProject(projectIdSelected)  
 
-
+    }
     const viewProjectsByWorkspace = props.projects.map((project) => {
         // console.log(project.name);
         // return <viewProject key={project._id} project={project} />
         if (project.name)
-            return <option >{project.name}</option>
-
+            return <option id={project._id} value={project.color}>{project.name}</option>
 
     })
     return (
         <>
-            <div className="col-11 mt-5 row-projects">
-                <select className="col-2 py-1">{viewProjectsByWorkspace}</select>
+            <div className="mx-5 mt-5 row-projects ">
+                <select onChange={(e) => changeSelectedProject(e)} className="col-2 py-1">{viewProjectsByWorkspace}</select>
                 {/* <label className="col-10">Add Project</label> */}
             </div>
         </>

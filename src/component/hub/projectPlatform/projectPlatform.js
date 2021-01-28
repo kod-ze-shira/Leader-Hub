@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-
-import { actions } from './../../../redux/actions/action'
-import ViewProject from '../project/viewProjectNew/viewProjectNew'
-import './projectPlatform.css'
-import { workspace } from '../../warps/configurator/workspace/workspace';
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { actions } from '../../../redux/actions/action'
 import ProjectsList from './projectsList/projectsList'
-import { Link } from 'react-router-dom';
 import CardsByProject from '../Cards/cardsByProject/cardsByProject';
 import TasksByCard from '../task/tasksByCard/tasksByCard'
+import Logo from '../logo/logo'
+import './projectPlatform.css'
 
-// import projectsByWorkspace from '../project/projectsByWorkspace/projectsByWorkspace';
-// import Logo from '../../logo/logo'
+function ProjectPlatform(props) {
+    const [projectId, setProjectId] = useState(0)
+    const [viewCardsByProject, setViewCardsByProject] = useState(false)
 
-function projectPlatform(props) {
-
+    const changeProjectId = (value) => {
+        setProjectId(value)
+        setViewCardsByProject(true)
+    }
     return (
         <>
             {/* <Link to={`${props.user}/projectPlatform`} > */}
             <div className="body container-fluid">
-                <div className="row justify-content-center">
-                    < ProjectsList />
-                </div>
-                 {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
-                {/* <Logo nameWorkspace='Leader hub' /> */}
-                
-                <CardsByProject projectId={"600fe82b609f055838b967ff"}></CardsByProject>
-                <TasksByCard cardId={"6006061269370dacf7af0609"}></TasksByCard>
+                <Logo className="logo-workspace" nameWorkspace='Leader hub' />
+                < ProjectsList changeProject={changeProjectId} />
+                {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
+
+                {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
+                {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
+                {/* <div className="add-new-btn ">+</div> */}
+
             </div>
         </>
     )
+
 }
 const mapStateToProps = (state) => {
     return {
@@ -45,8 +46,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(projectPlatform)
-
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectPlatform)
