@@ -12,9 +12,13 @@ import {
     Link,
     Redirect,
 } from 'react-router-dom';
+import history from "../history"
+
 import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
+import ProjectPlatform from './projectPlatform/projectPlatform'
+import CardsByProject from './Cards/cardsByProject/cardsByProject'
 export default function Hub() {
     return (
         <>
@@ -28,16 +32,22 @@ export default function Hub() {
                 <div className="col-9  col align-self-center">
                     {/* <Header /> */}
                     {/* <div className="col-2"> <Tools /></div> */}
-                    <Router>
+                    <Router history={history}>
                         <Switch>
                             <Route path="/:userName/workspace/:workspaceId" >
                                 <ProjectsByWorkspace />
                                 {/* <Projcts /> */}
                             </Route>
                             <Route path="/workspacePlatform" >
-                                <WorkspacePlatform />
+g                                <WorkspacePlatform />
                             </Route>
-                            <Route path="/" >
+                            <Route path="/:userName/projectPlatform" >
+                                <ProjectPlatform  />
+                            </Route>
+                            {/* <Route path="/:userName/cardsByProject" >
+                                <CardsByProject />
+                            </Route> */}
+                            <Route path="/:userName" >
                                 <Body />
                                 {/* <ProjectsByWorkspace /> */}
 

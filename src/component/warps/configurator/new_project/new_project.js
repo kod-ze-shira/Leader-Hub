@@ -9,7 +9,7 @@ import public_reducer from '../../../../redux/Reducers/public_reducer';
 const mapStateToProps = (state) => {
     return {
         project: state.project_reducer.project,
-        isConfiguratorOpen:state.public_reducer.isConfiguratorOpen
+        isConfiguratorOpen: state.public_reducer.isConfiguratorOpen
 
     }
 }
@@ -21,13 +21,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(props)
-{
-    return(
+export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(props) {
+    return (
         <>
-        {props.isConfiguratorOpen ?
+            {props.isConfiguratorOpen ?
                 <Configurator />
-           :
+                :
                 <>
                     <div className="right_nav">
                         <div className="conitner">
@@ -35,8 +34,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(
                             <div className="row mt-5 img_right">
                                 <div className="col-1"></div>
                                 <div className="col-3"><img src={require('../../../img/sun.png')}></img></div>
-
-
                                 <div className="col-5"></div>
                                 <div className="col"><img src={require('../../../img/adjust-solid.png')}></img> </div>
                             </div>
@@ -131,13 +128,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(
                                 <hr style={{ color: "#6A6E83" }}></hr><hr></hr>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </>
-             }
-               
-               </>
+            }
 
-        
-        
+        </>
+
+
+
     )
 })

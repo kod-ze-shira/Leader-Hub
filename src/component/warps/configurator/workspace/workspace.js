@@ -11,7 +11,7 @@ import './workspace.css';
 export function workspace(props) {
 
     const showInPlatform = () => {
-        props.getAllWorkspaces();
+        // props.getAllWorkspaces();
         // history.push('/workspacePlatform')
 
     }
@@ -50,11 +50,9 @@ export function workspace(props) {
     return (
         <>
             {/* <button onClick={() => props.getAllWorkspaces()} className="workspaces col-8 mt-5 btn btn-outline-secondary ">Workspace<div className="mt-1 arrow-down"></div></button> */}
-
             <button onClick={showInPlatform} className="workspaces col-8 mt-5 btn btn-outline-secondary ">Workspace<div className="mt-1 arrow-down"></div></button>
-
             <div className="workspace-list  mt-2 col-8">
-                <div className="" >{renderedWorkspacesName}</div>
+                {/* <div className="" >{renderedWorkspacesName}</div> */}
             </div>
 
 
