@@ -26,7 +26,7 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
   }
 
   const routeToProject = () => {
-    history.push("/" + user + "/projectPlatform"+"/"+workspace._id)
+    history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
   }
   return (
     <>

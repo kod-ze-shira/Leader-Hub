@@ -39,7 +39,7 @@ export default function Hub() {
                                 {/* <Projcts /> */}
                             </Route>
                             <Route path="/workspacePlatform" >
-g                                <WorkspacePlatform />
+                                <WorkspacePlatform />
                             </Route>
                             <Route path="/:userName/projectPlatform" >
                                 <ProjectPlatform  />
