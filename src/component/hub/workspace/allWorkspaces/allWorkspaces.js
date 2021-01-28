@@ -38,32 +38,47 @@ function AllWorkspaces(props, getAllWorkspaces) {
         list ?
             <>
                 <div className="row mt-5"></div>
-                <h1>abbbbbbbbbb</h1>
+
                 <div className="row mt-5"></div>
-                <div className="row mt-5 d-flex">
+                <div className="row">
                     <div className="col-1"></div>
-                    <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
-                    <div className="col-2"></div>
-                    <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
-                    <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                    <div className="col-10">
+                        <div className="row d-flex">
+
+                            <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
+                            <div className="col-4 ml-4"></div>
 
 
-                    <div className="renderedListWorkspaces" >   </div>
-                    {renderedListWorkspaces}
+                            <div className="col-0.5  grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                            <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                        </div>
+                        <div className="row">
+
+                            <div className="col-4"><hr></hr></div>
+
+                        </div>
+
+                        <div className="row mt-2 ml-2">
 
 
+                            {renderedListWorkspaces}
+                        </div>
+                    </div>
                 </div>
+
+
+
             </>
             :
             <>
 
                 <div className="row mt-5"></div>
-                <div className="row mt-5"></div>
+
                 <div className="row mt-5">
                     <div className="col-1"></div>
                     <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
-                    <div className="col-2"></div>
-                    <h1>mmmmmmmmmmmmm</h1>
+                    <div className="col-2 ml-5"></div>
+
                     <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
                     <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
                     <div className="row">
@@ -71,11 +86,11 @@ function AllWorkspaces(props, getAllWorkspaces) {
                         <div className="col-4"><hr></hr></div>
 
                     </div>
-                    <div className="row mt-5">
-                        <div className="col-1" ></div>
+                    <div className="row ">
+                        <div className="col-3" ></div>
 
                         {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
-                        <div className="col-1 allWorkspace">  {renderedGridWorkspaces}</div>
+                        <div className="col-9 allWorkspace">  {renderedGridWorkspaces}</div>
                     </div>
 
                 </div>
