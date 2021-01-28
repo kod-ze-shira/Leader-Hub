@@ -1,6 +1,3 @@
-<<<<<<< HEAD:src/component/hub/workspace/viewWorkspace/ViewWorkspace/ViewWorkspacelist/viewWorkspacelist.css
-
-=======
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 .workspaceColor{
    width: 40px;
@@ -11,7 +8,6 @@
    color:white;
    margin-top: auto;
 }
->>>>>>> dev:src/component/hub/workspace/veiwWorkspace/viewWorkspacelist/viewWorkspacelist.css
 
 .logoWorkspace{
     width: 4rem;
