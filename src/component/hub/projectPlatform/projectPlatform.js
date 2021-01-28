@@ -9,21 +9,27 @@ import './projectPlatform.css'
 
 function ProjectPlatform(props) {
     const [projectId, setProjectId] = useState(0)
+    const [cardId, setCardId] = useState(0)
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
+    const [viewTasksByCard, setViewTasksByCard] = useState(false)
+
 
     const changeProjectId = (value) => {
         setProjectId(value)
         setViewCardsByProject(true)
     }
+    const changeCardId = (value) => {
+        setCardId(value)
+        setViewTasksByCard(true)
+    } 
     return (
         <>
             {/* <Link to={`${props.user}/projectPlatform`} > */}
             <div className="body container-fluid">
                 <Logo className="logo-workspace" nameWorkspace='Leader hub' />
                 < ProjectsList changeProject={changeProjectId} />
-                {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
-
-                {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
+                {viewCardsByProject ? <CardsByProject changeCard={changeCardId} projectId={projectId} /> : null}
+                {viewTasksByCard ? <TasksByCard cardId={cardId} /> : null}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 {/* <div className="add-new-btn ">+</div> */}
 

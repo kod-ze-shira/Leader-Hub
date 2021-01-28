@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './ViewTaskByCrad.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';

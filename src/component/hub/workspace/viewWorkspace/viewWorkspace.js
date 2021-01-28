@@ -42,7 +42,6 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
           {
             showInput ?
               // <Form.Group controlId="formBasicCheckbox">
-
               //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
               // </Form.Group>
               <input type="checkbox"
@@ -53,9 +52,6 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
               : null
           }
           < div className="logoWorkspace"
-            onMouseOver={() => setShowInput(true)
-            }
-
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
             {
@@ -64,9 +60,7 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
             }
           </div >
 
-          <div className='nameWorkspace'
-            onMouseOver={() => setShowInput(true)}
-          >{workspace.name}</div>
+          <div className='nameWorkspace' ><b>{workspace.name}</b></div>
           <div>{workspace.startDate}</div>
           <div>
             {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}

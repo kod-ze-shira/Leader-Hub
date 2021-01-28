@@ -19,9 +19,6 @@ function ProjectsList(props) {
     const changeSelectedProject = (event) => {
         console.log("hi")
         let projectIdSelected = event.target.options[event.target.selectedIndex].id;
-        // let projectColorSelected = event.target.options[event.target.select].color;
-        console.log(event.target.options[event.target.select])
-        // alert(event.target.options[event.target.selectedIndex].color)
         props.changeProject(projectIdSelected)
 
     }
@@ -38,7 +35,6 @@ function ProjectsList(props) {
             <div className="row justify-content-center">
                 <div className="col-11 mt-5 row-projects ">
                     <select onChange={(e) => changeSelectedProject(e)} className=" py-1">{viewProjectsByWorkspace}</select>
-                    {/* <label className="col-10">Add Project</label> */}
                     <a className="ml-0 pt-1">Add Project +</a>
 
                 </div>
