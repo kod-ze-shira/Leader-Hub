@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import './ViewWorkspaceGrid.css';
+import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
-import { actions } from '../../../../../../redux/actions/action'
+import { actions } from '../../../../../redux/actions/action'
 function ViewWorkspaceGrid({ workspace }) {
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)

@@ -10,8 +10,7 @@ const initialState = {
         //  team:""
 
     },
-
-    isConfiguratorOpenWorkspace: false
+            isConfiguratorOpenWorkspace: false
 
 }
 
@@ -25,6 +24,9 @@ const workspaces = {
     },
     setWorkspaceName(state, action) {
         state.workspace.name = action.payload;
+    },
+    setWorkspaceId(state, action) {
+        state.workspace.id = action.payload;
     },
     setState(state, action) {
         state.workspace = action.payload

@@ -6,10 +6,9 @@ const initialState = {
     userName: "",
     worksapces: [],
     projects: [],
+    cards: [],
     tasks: [],
     isConfiguratorOpen: "false",
-
-
 }
 
 const publicData = {
@@ -32,6 +31,9 @@ const publicData = {
     setisConfiguratorOpen(state, action) {
         state.isConfiguratorOpen = !state.isConfiguratorOpen
     },
+    setCards(state, action) {
+        state.cards = action.payload;
+    }
 
 
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import "./style.css";
 import { Button, Modal, InputGroup, FormControl } from 'react-bootstrap';
+import Email from './email'
 // קישור מאיפה שלקחתי את הקוד
 // https://codesandbox.io/s/ypyxr11109?from-embed=&file=/src/index.js:1094-1101&resolutionWidth=609&resolutionHeight=675
 // export default
@@ -135,11 +136,11 @@ function TeamExample(props) {
 
     }
 
-    function handleDeleteTeams(index, item) {
-        // איך עושים מחיקה של אוביקט בתוך אוביקט 
-        // teams[index].emailAndPermissionsArr.filter(i => i.email !== item)
-        // קריאה ואז מקבלת את האוביקט מחדש
-        // setTeams([...teams, teams[index].emailAndPermissionsArr.filter(i => i.email !== item)]);
+    function deleteMail(index, indexEmail, item) {
+        console.log('Delete ' + item)
+        teams[index].emailAndPermissionsArr.splice(indexEmail, 1);
+        setTeams([...teams]);
+
     }
 
     function handlePaste(evt) {
@@ -218,18 +219,11 @@ function TeamExample(props) {
         //add team to server
     }
 
-    // function renderedListTeams() {
-    //     teams.map(t => {
-    //         return <> <Button
-    //             size="sm"
-
-    //         > {t.name}</Button>
-    //             {t.emailAndPermissionsArr.map(e =>
-    //                 <p>{e.email}</p>
-    //             )}
-    //         </>
-    //     })
-    // }
+    function deleteTeams(index) {
+        console.log('Delete teams in index' + index)
+        teams.splice(index, 1);
+        setTeams([...teams]);
+    }
 
     function renderMail(r) {
         console.log(r)
@@ -242,76 +236,30 @@ function TeamExample(props) {
         //    setTeams()
     }
 
-    // const renderedListTeams = teams.map((t, indexT) => {
-
-    //     return <> <Button
-    //         size="sm"
-    //         onClick={() => setFlug(!flug)}
-    //     >  {flug ? "close team:" : "open team:"} {t.name}</Button>
-    //         {flug ? t.emailAndPermissionsArr.map((e, index) =>
-    //             <>
-    //                 {/* <div>{renderMail('jj')}</div> */}
-    //                 <div className="tag-item" key={e.email}>
-    //                     {e.email}
-    //                     {/* <Button variant="secondary">Close</Button> */}
-
-    //                     <button
-    //                         type="button"
-    //                         className="buttonMail"
-    //                         onClick={() => handleDeleteTeams(index, e.email)}
-    //                     >
-    //                         &times;
-    //          </button>
-    //                 </div>
-
-    //             </>
-    //         ) : null}
-    //         {flug ?
-    //             <input
-    //                 className={`inputMails ${t.errorMail ? "has-error" : null}`}
-    //                 // value={t.value}
-    //                 placeholder="Type or paste email addresses and press `Enter`..."
-    //                 // onKeyDown={(e) => handleKeyDown(e)}
-    //                 onKeyDown={(e) => addMailToTeams(indexT, e)}
-    //                 onChange={(e) =>
-    //                     addValueToMail(indexT, e)
-    //                 }
-
-    //                 onPaste={(e) => handlePaste(e.target.value)}
-    //             /> : null}
-
-    //     </>
-
-    // })
-
     function renderedListTeams(t, indexT) {
         return <>
+            <Button
+                variant="outline-secondary"
+                size="sm"
+                onClick={() => deleteTeams(indexT)}
+            >delete team</Button>
             <Button
                 size="sm"
                 onClick={() => setFlug(!flug)}
             >  {flug ? "close team:" : "open team:"} {t.name}</Button>
+            <br />
             {flug ? t.emailAndPermissionsArr.map((e, index) =>
                 <>
-                    {/* <div>{renderMail('jj')}</div> */}
-                    <div className="tag-item" key={e.email}>
-                        {e.email}
-                        {/* <Button variant="secondary">Close</Button> */}
 
-                        <button
-                            type="button"
-                            className="buttonMail"
-                            onClick={() => handleDeleteTeams(index, e.email)}
-                        >
-                            &times;
-     </button>
-                    </div>
+                    <Email email={e.email}
+                        onClick={() => deleteMail(index, e.email)} />
 
                 </>
             ) : null}
             {flug ?
                 <input
                     className={`inputMails ${t.errorMail ? "has-error" : null}`}
-                    // value={t.value}
+                    // value={teams[indexT].value} לא ברור למה זה לא עובד
                     placeholder="Type or paste email addresses and press `Enter`..."
                     // onKeyDown={(e) => handleKeyDown(e)}
                     onKeyDown={(e) => addMailToTeams(indexT, e)}
@@ -321,11 +269,11 @@ function TeamExample(props) {
 
                     onPaste={(e) => handlePaste(e.target.value)}
                 /> : null}
+            <br />
 
         </>
 
     }
-
     return (
         <>
             {/* <Button variant="primary" onClick={handleShow}>
@@ -384,18 +332,12 @@ function TeamExample(props) {
                         admin
                     </Button>
                     <br />
+
                     {team.emailAndPermissionsArr && team.emailAndPermissionsArr[0] ? team.emailAndPermissionsArr.map(item => (
-                        <div className="tag-item" key={item.email}>
-                            {item.email}
-                            <button
-                                type="button"
-                                className="buttonMail"
-                                onClick={() => handleDelete(item.email)}
-                            >
-                                &times;
-                         </button>
-                        </div>
+                        <Email email={item.email} onClick={() => handleDelete(item.email)} />
                     )) : null}
+
+
 
                     <input
                         className={`inputMails ${team.errorMail ? "has-error" : null}`}
@@ -430,18 +372,18 @@ function TeamExample(props) {
 }
 
 const mapStateToProps = (state) => {
-    return {
-
-        team: state.team_reducer.workspace,
-    }
+    // return {
+    //     team: state.team_reducer.workspace,
+    // }
 }
 
 function mapDispatchToProps(dispatch) {
     return {//props.createNewTeam
+
         createNewTeam: function (team) {
             dispatch(actions.createNewTeam(team))
         },
-        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser()),
+        // getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser()),
 
     }
 }
