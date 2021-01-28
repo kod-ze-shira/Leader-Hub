@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom'
 import React, { useState } from 'react';
 import DetailsTask from '../detailsTask/detailsTask'
 import { connect } from 'react-redux';
+import './viewTask.css'
 import { actions } from '../../../../redux/actions/action'
 
 export default function ViewTask(props) {

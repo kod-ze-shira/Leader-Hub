@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import './ViewTaskByCrad.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl } from 'react-bootstrap'
-// import './viewTaskByCard.css'
-import './viewTaskByCrad.css'
+
+
+
 
 function ViewTaskByCrad(props) {
 
