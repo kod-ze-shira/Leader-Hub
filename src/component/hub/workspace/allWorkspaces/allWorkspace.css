@@ -15,7 +15,7 @@
 
 }
 hr{
-    width: 60vw;
+    width: 57vw;
     color:#707070;
 }
 .grid{
@@ -26,4 +26,12 @@ hr{
     cursor: pointer;
     
 }
+.scrollbar{
+    overflow-y: scroll;
+    height: 435px;
+}
+.scrollbar::-webkit-scrollbar {
+    width: 6px;
+    /* height: 6px; */
+  }
 

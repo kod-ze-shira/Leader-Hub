@@ -14,6 +14,13 @@ function ViewWorkspaceGrid({ workspace }) {
         setViewProjects(!viewProjects);
     }
 
+    // const routeToProject = (id) => {
+    //     debugger
+    //     history.push("/" + user + "/workspace/" + id)
+    //     // history.push("/renana-il/workspace/" + id)
+
+    // }
+
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
@@ -23,7 +30,7 @@ function ViewWorkspaceGrid({ workspace }) {
 
             <div className="row" >
                 <div className="col-4 Workspace" >
-                    < div className="logoWorkspaceGrid"
+                    < div className="logoWorkspaceGrid mt-2"
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                         {workspace.name[0].toUpperCase()}
                         {/* {
@@ -32,7 +39,7 @@ function ViewWorkspaceGrid({ workspace }) {
                         } */}
                     </div>
                 </div>
-                <div className="col-3">{workspace.name}</div>
+                <div className="col-5 mt-3"><b>{workspace.name}</b></div>
 
 
 

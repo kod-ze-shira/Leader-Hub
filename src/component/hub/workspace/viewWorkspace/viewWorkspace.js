@@ -26,8 +26,12 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
   }
 
   const routeToProject = () => {
+<<<<<<< HEAD
     debugger
     history.push("/" + user + "/workspace" + "/" + workspace._id)
+=======
+    history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
+>>>>>>> 9a6c830badb64ef6fc02cf801a470bf8c1cb3797
   }
 
   return (
@@ -55,9 +59,6 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
               : null
           }
           < div className="logoWorkspace"
-            onMouseOver={() => setShowInput(true)
-            }
-
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
             {
@@ -66,9 +67,7 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
             }
           </div >
 
-          <div className='nameWorkspace'
-            onMouseOver={() => setShowInput(true)}
-          >{workspace.name}</div>
+          <div className='nameWorkspace' ><b>{workspace.name}</b></div>
           <div>{workspace.startDate}</div>
           <div>
             {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
