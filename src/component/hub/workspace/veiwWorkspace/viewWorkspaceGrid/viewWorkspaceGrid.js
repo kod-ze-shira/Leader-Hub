@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
+
 function ViewWorkspaceGrid({ workspace }) {
+
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
@@ -15,10 +17,11 @@ function ViewWorkspaceGrid({ workspace }) {
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
+
     return (
         <>
 
-            <div className="row">
+            <div className="row" >
                 <div className="col-4 Workspace" >
                     < div className="logoWorkspaceGrid"
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>

@@ -6,8 +6,9 @@ import ProjectsByWorkspace from '../../../project/projectsByWorkspace/projectsBy
 // import TeamExample from '../../../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../../editWorkspace/editWorkspace'
+import history from '../../../../history'
 
-function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+function ViewWorkspaceList(props, { user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
@@ -22,7 +23,12 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
         setOpenEditWorkspace(!openEditWorkspace)
     }
 
+    const routeToProject = (id) => {
+        debugger
+        history.push("/" + user + "/workspace/" + id)
+        // history.push("/renana-il/workspace/" + id)
 
+    }
 
 
 
@@ -32,7 +38,10 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
             <>
 
                 <Card
-                    className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
+                    onClick={() => routeToProject(workspace._id)}
+
+                    className="cardWorkspace"
+                    // onClick={() => { setisConfiguratorOpenWorkspace() }}
                     onMouseOver={() => setShowInput(true)}
                     onMouseLeave={() => setShowInput(false)}
                 >
@@ -83,6 +92,7 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.worksapces,
+        user: state.public_reducer.userName,
 
         isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
 
