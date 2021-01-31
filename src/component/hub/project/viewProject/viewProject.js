@@ -3,9 +3,12 @@ import TasksByProject from '../../task/tasksByProject/tasksByProject'
 import DetailsProject from '../detailsProject/detailsProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
-import { actions } from '../../../../redux/actions/action'
 import './viewProject.css'
 import Cell from './cell'
+// import { actions } from '../../../redux/actions/action'
+import './viewProject.css'
+import { actions } from '../../../../redux/actions/action';
+// import Cell from './cells'
 
 function ViewProject(props) {
 
@@ -20,32 +23,42 @@ function ViewProject(props) {
             <tr>
                 <td>7yuik
                     <span class='stripeProject'
-                        style={{ 'background-color': props.project.color }}></span>
-                    {/* style={{ 'background-color': '#1AFFFC' }}></span> */}
+                        // style={{ 'background-color': props.project.color }}></span>
+                        style={{ 'background-color': props.myProject.color }}></span>
                 </td>
-                <td>{props.project.name}</td>
-                <Cell item={props.project.dueDate} description='Due date' />
-                <Cell item={props.project.updateDates} description='Last updateDates' />
-                <Cell item={props.project.cards.length} description='Cards' />
+                <td>
 
+                    {/* {props.project.name}</td> */}
+                    {props.myProject.description}</td>
+                <td>
+                    <Cell
 
-                {/* {Array.from({ length: 6 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                ))} */}
+                        // item={props.myProject.dueDate ? props.myProject.dueDate : Date.now()}
+                        item={props.myProject.dueDate}
+                        description='Due date' />
+                    {/* {props.myProject.dueDate}
+                dueDate */}
+                </td>
+                <td>
+                    <Cell
+                        // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
+                        item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
+                        description='update Dates' />
+                    {/*                     
+                     {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
+                Last updateDates</td> */}
+                </td>
+                <td>
+                    <Cell
+                        item={props.myProject.cards.length ? props.myProject.cards.length : "0"}
+                        description='card' />
+                </td>
             </tr>
             {/* <div className="container">
-            <div className="row" onClick={()=>setViewTasks(!viewTasks)}>
-                <div className="col">
-                    <div>name:{props.project.name}</div>
-                    <div>description:{props.project.description}</div>
-                </div>
-            </div>
-            <div>
-          {viewTasks ? <TasksByProject projectId={props.project._id} /> : null}
-
-                    <button onClick={() => { props.deleteProjectInServer()}}>deleteproject</button>
-     
-                    </div>
+                <div className="row" onClick={() => setViewTasks(!viewTasks)}>
+                    <div className="col">
+                        <div>name:{props.myProject.name}</div>
+                        <div>description:{props.myProject.description}</div>
                     </div>
      */}
 
@@ -60,6 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewProject)

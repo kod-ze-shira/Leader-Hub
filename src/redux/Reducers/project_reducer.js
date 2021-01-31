@@ -4,14 +4,15 @@ import createReducer from './reducerUtils';
 const initialState = {
 
     project: {
-        name: "project 1",
-        subject: "",
-        project: "mmmmm",
+        name: "name project",
+        subject: "tttttt",
+        project: "bbbbbb",
         dueDate: "12/10/20",
+        updateDates: ["12/10/20", "14/10/20"],
         endDate: "10/12/21",
-        cards: [{ 'ddd': 'jjj' }, { 'ddd': 'jjjj' }],
-        updateDates: ['14/10/20', '15/10/20']
-    }
+        color: '#1AFFFC',
+        cards: ['jj', 'gttt', 'ttt']
+    },
 
 }
 

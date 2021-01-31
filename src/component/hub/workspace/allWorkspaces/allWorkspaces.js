@@ -1,49 +1,119 @@
-
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import ViewWorkspace from '../viewWorkspace/viewWorkspace';
-import './allWorkspace.css';
+import ViewWorkspaceList from '../veiwWorkspace/viewWorkspacelist/viewWorkspacelist'
+import ViewWorkspaceGrid from '../veiwWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 
 // let workspace;
 
 
+function AllWorkspaces(props, getAllWorkspaces) {
 
-function allWorkspaces(props) {
+    useEffect(() => {
+        { props.getAllWorkspaces() };
 
-    function componentDidMount() {
+    }, []);
 
-        this.props.getAllWorkspaces();
 
-    }
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspace key={todo._id} workspace={todo} />
+        return <ViewWorkspaceList key={todo._id} workspace={todo} />
+    })
+    const renderedGridWorkspaces = props.workspaces.map(todo => {
+        return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
     })
 
+    const [list, setlist] = useState(false);
 
-
+    function chenge_list1() {
+        setlist(false);
+    }
+    function chenge_grid() {
+        setlist(true);
+    }
     return (
-        <>
-            <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button>
-            <div className='row allWorkspaces'>{renderedListWorkspaces}</div>
-        </>
+
+
+        list ?
+            <>
+                <div className="row mt-5"></div>
+
+                <div className="row mt-5"></div>
+                <div className="row">
+                    <div className="col-1"></div>
+                    <div className="col-10">
+                        <div className="row d-flex">
+
+                            <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
+                            <div className="col-4 ml-4"></div>
+
+
+                            <div className="col-0.5  grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                            <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                        </div>
+                        <div className="row">
+
+                            <div className="col-4"><hr></hr></div>
+
+                        </div>
+
+                        <div className="row mt-2 ml-2">
+
+
+                            {renderedListWorkspaces}
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </>
+            :
+            <>
+
+                <div className="row mt-5"></div>
+
+                <div className="row mt-5">
+                    <div className="col-1"></div>
+                    <div className="col-6 MyWorkspace"><b>My Workspace</b></div>
+                    <div className="col-2 ml-5"></div>
+
+                    <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
+                    <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                    <div className="row">
+                        <div className="col-1"></div>
+                        <div className="col-4"><hr></hr></div>
+
+                    </div>
+                    <div className="row ">
+                        <div className="col-3" ></div>
+
+                        {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
+                        <div className="col-9 allWorkspace  scrollbar">  {renderedGridWorkspaces}</div>
+                    </div>
+
+                </div>
+            </>
+
+
+
     )
 }
 
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces
+        workspaces: state.public_reducer.worksapces,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+
     }
 
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(allWorkspaces)
+export default connect(mapStateToProps, mapDispatchToProps)(AllWorkspaces)

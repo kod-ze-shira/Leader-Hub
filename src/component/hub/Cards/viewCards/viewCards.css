@@ -1,0 +1,25 @@
+.card-name{
+    color: var(--unnamed-color-000000);
+    text-align: left;
+   font-size: medium;
+    color: #000000;
+    /* border-bottom: gray solid 1px; */
+    background-color:transparent;
+}
+.triangle{
+        width: 0; 
+        height: 0; 
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent; 
+        border-top: 6px solid #778CA2;
+}
+.show-card{
+    background-color: transparent;
+}
+p{
+    /* font-size: medium; */
+    /* background-color: teal; */
+    color:#98A9BC;
+    padding-left: 6vw;
+    margin-top: 2vh;
+}

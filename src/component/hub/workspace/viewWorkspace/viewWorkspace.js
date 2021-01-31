@@ -6,10 +6,13 @@ import ProjectsByWorkspace from '../../project/projectsByWorkspace/projectsByWor
 import TeamExample from '../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../editWorkspace/editWorkspace'
+import project_reducer from '../../../../redux/Reducers/project_reducer';
 import history from '../../../history'
 
-function ViewWorkspace({ user, workspace }) {
+function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+
   const [viewProjects, setViewProjects] = useState(false)
+  const [viewCards, setViewCards] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
   const [showInput, setShowInput] = useState(false)
@@ -17,66 +20,66 @@ function ViewWorkspace({ user, workspace }) {
     // return  <projectsByWorkspace/>
     setViewProjects(!viewProjects);
   }
-  // const toOpenEditWorkspace = () => {
-  //   setOpenEditWorkspace(!openEditWorkspace)
-  // }
+
+  const toOpenEditWorkspace = () => {
+    setOpenEditWorkspace(!openEditWorkspace)
+  }
+
   const routeToProject = () => {
-    history.push("/" + user + "/worksace/" + workspace._id)
+    debugger
+    // history.push("/" + user + "/workspace" + "/" + workspace._id)
+    history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
   }
 
   return (
-
-
     <>
-      <Card className="cardWorkspace"
-        onClick={() => routeToProject()}
-        onMouseOver={() => setShowInput(true)}
-        onMouseOut={() => setShowInput(false)}
-      >
-        {showInput ?
-          <input type="checkbox"
-            onMouseOver={() => setShowInput(true)}
-            onClick={() => setShowInput(true)}
-            className='checkWorkspace' />
-          : null}
-        <div className="logoWorkspace"
+
+      <>
+
+        <Card className="cardWorkspace" onClick={() => routeToProject()}
+          // <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
+
           onMouseOver={() => setShowInput(true)}
+          onMouseLeave={() => setShowInput(false)}
+        >
+          {
+            showInput ?
+              // <Form.Group controlId="formBasicCheckbox">
 
-          style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-          {workspace.name[0].toUpperCase()}
+              //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
+              // </Form.Group>
+              <input type="checkbox"
+                onMouseOver={() => setShowInput(true)}
+                onClick={() => setShowInput(true)}
+                className='checkWorkspace' />
 
-          {workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-            workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null}‏
-        </div>
+              : null
+          }
+          < div className="logoWorkspace"
+            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+            {workspace.name[0].toUpperCase()}
+            {
+              workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
+                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
+            }
+          </div >
 
-        <div className='nameWorkspace'
-          onMouseOver={() => setShowInput(true)}
-        >{workspace.name}</div>
-        <div>{workspace.startDate}</div>
-        {/* <button onClick={() => setOpenEditWorkspace(!openEditWorkspace)}>edit</button> */}
-        {/* <button onClick={viewProjectsByWorkspace}>view projects of workspace</button> */}
+          <div className='nameWorkspace' ><b>{workspace.name}</b></div>
+          <div>{workspace.startDate}</div>
+          <div>
+            {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
+          </div>
+          <div>
+            {openEditWorkspace ? <EditWorkspace idWorkspace={workspace._id}></EditWorkspace> : null}
+          </div>
+        </Card >
+      </>
 
-        {/* <Button onClick={() => setShowShare(!showShare)} variant="primary">
-          Share
-         </Button>
-        {
-          showShare ? <TeamExample nameWorkspace={workspace.name}></TeamExample> : null
-        } */}
 
-        <div>
-          {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
-        </div>
-        <div>
-          {openEditWorkspace ? <EditWorkspace idWorkspace={workspace._id}></EditWorkspace> : null}
-        </div>
-      </Card>
+
     </>
-
   )
 }
-
-
-
 const mapStateToProps = (state) => {
 
   return {
@@ -89,8 +92,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
-    setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+    setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
   }
 
 
