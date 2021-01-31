@@ -5,8 +5,11 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import './viewProject.css'
 import Cell from './cell'
-import { actions } from '../../../../redux/actions/action'
+// import { actions } from '../../../redux/actions/action'
 import './viewProject.css'
+import { actions } from '../../../../redux/actions/action';
+// import Cell from './cells'
+
 function ViewProject(props) {
 
     function detailsProject() {
@@ -18,7 +21,7 @@ function ViewProject(props) {
     return (
         <>
             <tr>
-                <td>
+                <td>7yuik
                     <span class='stripeProject'
                         // style={{ 'background-color': props.project.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span>
@@ -63,7 +66,6 @@ function ViewProject(props) {
     )
 }
 const mapStateToProps = (state) => {
-
     return {
         project: state.project_reducer.project
     }
