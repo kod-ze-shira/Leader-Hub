@@ -19,7 +19,7 @@ function ViewWorkspaceGrid(props) {
     }
 
     const routeToProject = (id) => {
-        debugger
+
         props.history.push("/" + props.user + "/workspace/" + id)
         // history.push("/renana-il/workspace/" + id)
 

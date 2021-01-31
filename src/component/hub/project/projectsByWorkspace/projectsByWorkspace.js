@@ -4,7 +4,7 @@ import { actions } from '../../../../redux/actions/action'
 import ViewProject from '../viewProject/viewProject'
 import { Table } from 'react-bootstrap';
 import "./projectsByWorkspace.css";
-import Logo from '../../logo/logo'
+import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 // import DetailsProject from '../detailsProject/detailsProject'
@@ -40,14 +40,13 @@ function ProjectsByWorkspace(props) {
 
 
     return (
-        < >
-
-
+        <>
             <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
-                {/* <div> */}
+                <HeaderBody nameWorkspace='Leader hub' />
 
-                <Logo nameWorkspace='Leader hub' />
-                <Table responsive style={{ background: 'white' }}>
+                <Table responsive className='tableProject'>
+
+
                     {/* {props.projects.length ? */}
                     <>
                         <thead>
