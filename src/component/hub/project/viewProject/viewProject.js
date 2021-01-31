@@ -21,7 +21,7 @@ function ViewProject(props) {
     return (
         <>
             <tr>
-                <td>7yuik
+                <td>
                     <span class='stripeProject'
                         // style={{ 'background-color': props.project.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span>
