@@ -7,9 +7,10 @@ import ProjectsByWorkspace from '../../../project/projectsByWorkspace/projectsBy
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../../editWorkspace/editWorkspace'
 import history from '../../../../history'
+import { withRouter } from 'react-router-dom';
 
-function ViewWorkspaceList({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
-
+function ViewWorkspaceList(props) {
+    const { workspace } = props;
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
@@ -22,10 +23,9 @@ function ViewWorkspaceList({ user, isConfiguratorOpenWorkspace, workspace, setis
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
-
     const routeToProject = (id) => {
         debugger
-        history.push("/" + 'renana-il' + "/workspace/" + id)
+        props.history.push("/" + props.user + "/workspace/" + id)
         // history.push("/renana-il/workspace/" + id)
 
     }
@@ -38,7 +38,7 @@ function ViewWorkspaceList({ user, isConfiguratorOpenWorkspace, workspace, setis
             <>
 
                 <Card
-                    // onClick={() => routeToProject(workspace._id)}
+                    onClick={() => routeToProject(workspace._id)}
 
                     className="cardWorkspace"
                     // onClick={() => { setisConfiguratorOpenWorkspace() }}
@@ -108,5 +108,5 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspaceList)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 
