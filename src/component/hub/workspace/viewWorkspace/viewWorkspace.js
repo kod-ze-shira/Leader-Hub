@@ -27,7 +27,9 @@ function ViewWorkspace({props, user, isConfiguratorOpenWorkspace, workspace, set
 
   const routeToProject = () => {
     // props.setWorkspaceName("Leader 1")
-    history.push("/" + user + "/projectPlatform"+"/"+workspace._id)
+    // history.push("/" + user + "/projectPlatform"+"/"+workspace._id)
+    history.push("/" + user + "/projectPlatform")
+
     
   }
   return (
@@ -44,7 +46,6 @@ function ViewWorkspace({props, user, isConfiguratorOpenWorkspace, workspace, set
           {
             showInput ?
               // <Form.Group controlId="formBasicCheckbox">
-
               //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
               // </Form.Group>
               <input type="checkbox"
@@ -55,9 +56,6 @@ function ViewWorkspace({props, user, isConfiguratorOpenWorkspace, workspace, set
               : null
           }
           < div className="logoWorkspace"
-            onMouseOver={() => setShowInput(true)
-            }
-
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
             {
@@ -66,9 +64,7 @@ function ViewWorkspace({props, user, isConfiguratorOpenWorkspace, workspace, set
             }
           </div >
 
-          <div className='nameWorkspace'
-            onMouseOver={() => setShowInput(true)}
-          >{workspace.name}</div>
+          <div className='nameWorkspace' ><b>{workspace.name}</b></div>
           <div>{workspace.startDate}</div>
           <div>
             {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}

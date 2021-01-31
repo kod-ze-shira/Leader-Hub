@@ -10,7 +10,7 @@ import { Button, Modal, Form } from 'react-bootstrap';
 
 
 export default function Body() {
-  const [showShare, setShowShare] = useState(false)
+  // const [showShare, setShowShare] = useState(false)
 
   return (
 

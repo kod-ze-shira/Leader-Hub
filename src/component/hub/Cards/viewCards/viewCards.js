@@ -4,16 +4,28 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
+import history from '../../../history'
+import TasksByCard from '../../task/tasksByCard/tasksByCard'
 
 function ViewCards(props) {
 
     const [ViewCards, setViewCards] = useState(false)
+    const changeSelectedCard = (event) => {
+        let cardIdSelected = event.target.value;
+        props.changeCard(cardIdSelected)
+
+    }
+  
     return (
         <>
             <div className="container" >
-                <div className="row" onClick={() => setViewCards(!ViewCards)}>
-                    <div className="col card-name border-bottom mx-5 mt-5 pb-2">
-                        <div>{props.card.name}</div>
+                <div onClick={() => setViewCards(!ViewCards)}>
+                    <div className=" row justify-content-start card-name border-bottom mx-5 mt-4 pb-0">
+                        <div className="triangle mt-4"></div>
+                        <button  onClick={(e) => changeSelectedCard(e)} className="ml-3 show-card">{props.card.name}</button>
+                        <p>Team</p>
+                        <p>Label</p>
+                        <p>Due Date</p>
                     </div>
                 </div>
             </div>

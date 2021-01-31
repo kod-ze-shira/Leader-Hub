@@ -35,3 +35,10 @@ option::after {
     border-radius: 10px;
     position: absolute;
 }
+a{
+    color: #98A9BC!important;
+    display: inline-block;
+    float: right;
+
+}
+

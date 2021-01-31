@@ -1,0 +1,30 @@
+
+.logoWorkspaceGrid{
+    width: 3vw;
+    height: 6vh;
+   border-radius: 50%;
+   font-size: 26px;
+   padding-top: 4px;
+   color: white;
+   letter-spacing: 1.72px;
+   text-align: center;
+   font-family: 'Roboto', sans-serif;
+   /* font-size: xx-large; */
+     
+}
+
+
+.Workspace{
+   width: 6vw;
+   background: #F6F6FA;
+   height: 8vh;
+   margin-bottom: 10px;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+
+   margin-left: 3rem;
+
+
+}

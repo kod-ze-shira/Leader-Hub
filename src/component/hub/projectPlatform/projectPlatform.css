@@ -14,3 +14,27 @@
       
   }
   
+ 
+  .logoW{
+    margin-top: 3vh !important;
+    margin-left: 5vh !important;
+  }
+  .add-new-btn{
+    background: transparent linear-gradient(217deg, #1AFFFC 0%, #1AFFFC 0%, #007FFF 100%) 0% 0% no-repeat padding-box;
+box-shadow: 0px 3px 6px #00000029;
+border-radius: 50px;
+opacity: 1;
+width: 65px;
+height: 65px;
+/* right:0; */
+margin-left: 58vw;
+/* position: relative; */
+color:white;
+font-size: 45px;
+  }
+  
+  .add-new-btn::first-letter{
+    margin-block-end:auto;
+    margin-left: 1.2vw;
+
+  } 
