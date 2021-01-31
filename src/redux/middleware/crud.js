@@ -465,7 +465,6 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
 
             success: function (data) {
                 dispatch(actions.setCards(data.cards))
-
                 console.log("success")
                 console.log("data", data);
 
@@ -505,7 +504,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setTasks(data.tasks))
+                dispatch(actions.setTasks(data.taskOfCards))
 
                 console.log("success")
                 console.log("data", data);
@@ -525,6 +524,40 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+// export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
+//     if (action.type === 'GET_TASKS_BY_CARD_ID') {
+
+//         var cardId = action.payload;
+//         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + cardId + "/getTasksByCardId"
+//         $.ajax({
+//             url: urlData,
+//             type: 'GET',
+//             headers: {
+//                 Authorization: getState().public_reducer.tokenFromCookies
+//             },
+//             contentType: "application/json; charset=utf-8",
+
+//             success: function (data) {
+//                 dispatch(actions.setTasks(data.tasks))
+
+//                 console.log("success")
+//                 console.log("data", data);
+
+//             },
+//             error: function (err) {
+
+//                 checkPermission(err).then((ifOk) => {
+
+//                 })
+//             }
+//         });
+
+
+
+
+//     }
+//     return next(action);
+// }
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
 

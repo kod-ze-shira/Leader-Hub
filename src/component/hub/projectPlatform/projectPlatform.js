@@ -22,10 +22,10 @@ function projectPlatform(props) {
                 <div className="row justify-content-center">
                     < ProjectsList />
                 </div>
-                 {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
+                {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
                 {/* <Logo nameWorkspace='Leader hub' /> */}
-                
-                <CardsByProject projectId={"600fe82b609f055838b967ff"}></CardsByProject>
+
+                {/* <CardsByProject projectId={"600fe82b609f055838b967ff"}></CardsByProject> */}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"}></TasksByCard> */}
             </div>
         </>

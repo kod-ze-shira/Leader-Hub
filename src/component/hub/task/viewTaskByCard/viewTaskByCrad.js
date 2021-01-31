@@ -3,16 +3,15 @@ import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
-// import './viewCards.css'
-
+// import ''
 function ViewTaskByCrad(props) {
 
     return (
         <>
             <div className="container" >
                 <div className="row">
-                    <div className="col ">
-                        <div>{props.task}</div>
+                    <div className="col  ">
+                        <div>{props.task.status}</div>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ import EditWorkspace from '../editWorkspace/editWorkspace'
 import project_reducer from '../../../../redux/Reducers/project_reducer';
 import history from '../../../history'
 
-function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+function ViewWorkspace({props, user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
   const [viewProjects, setViewProjects] = useState(false)
   const [viewCards, setViewCards] = useState(false)
@@ -26,7 +26,9 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
   }
 
   const routeToProject = () => {
+    // props.setWorkspaceName("Leader 1")
     history.push("/" + user + "/projectPlatform"+"/"+workspace._id)
+    
   }
   return (
     <>
@@ -93,6 +95,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    // setWorkspaceName:(name)=> dispatch(actions.setWorkspaceName(name)),
     setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
     setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),

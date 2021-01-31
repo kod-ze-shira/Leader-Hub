@@ -44,9 +44,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
                     <button className=" col-8 mt-2 btn btn-outline-secondary">Emails<div className="mt-1 arrow-down"></div></button>
                 </div>
                 <div className="row justify-content-center">
-                    <button onClick={() => setShowShare(!showShare)} variant="primary"
+                    {/* <button onClick={() => setShowShare(!showShare)} variant="primary"
                         className=" col-8 mt-2 btn btn-outline-secondary">Teams<div className="mt-1 arrow-down"></div></button>
-                    {/* {showShare ? <TeamExample></TeamExample> : null} */}
+                    {showShare ? <TeamExample></TeamExample> : null} */}
                 </div>
             </div>
 
