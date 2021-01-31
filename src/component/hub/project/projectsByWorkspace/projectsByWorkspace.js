@@ -55,16 +55,7 @@ function ProjectsByWorkspace(props) {
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td><span class="stripeProject"
-                                    style={{ 'background-color': 'red' }}></span>
 
-                                </td>
-                                <td>fix old rdfght</td>
-                                <td><span class="item">04/01/2021</span><span class="description">Due יונטע7נומחdate</span></td>
-                                <td><span class="item">12.12,2023</span><span class="description">update Dates</span></td>
-                                <td><span class="item">0</span><span class="description">Card</span></td>
-                            </tr>
                             {viewProjectsByWorkspace}
 
                         </tbody>

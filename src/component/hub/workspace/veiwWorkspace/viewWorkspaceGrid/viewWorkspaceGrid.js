@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
+import history from '../../../../history'
+
+
 
 function ViewWorkspaceGrid({ workspace }) {
 
@@ -14,12 +17,12 @@ function ViewWorkspaceGrid({ workspace }) {
         setViewProjects(!viewProjects);
     }
 
-    // const routeToProject = (id) => {
-    //     debugger
-    //     history.push("/" + user + "/workspace/" + id)
-    //     // history.push("/renana-il/workspace/" + id)
+    const routeToProject = (id) => {
+        debugger
+        // history.push("/" + props.user + "/workspace/" + id)
+        history.push("/renana-il/workspace/" + id)
 
-    // }
+    }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
@@ -28,7 +31,9 @@ function ViewWorkspaceGrid({ workspace }) {
     return (
         <>
 
-            <div className="row" >
+            <div className="row"
+                onClick={() => routeToProject(workspace._id)}
+            >
                 <div className="col-4 Workspace" >
                     < div className="logoWorkspaceGrid mt-2"
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>

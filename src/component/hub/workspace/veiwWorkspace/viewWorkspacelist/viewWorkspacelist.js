@@ -25,7 +25,7 @@ function ViewWorkspaceList(props, { user, isConfiguratorOpenWorkspace, workspace
 
     const routeToProject = (id) => {
         debugger
-        history.push("/" + user + "/workspace/" + id)
+        history.push("/" + 'renana-il' + "/workspace/" + id)
         // history.push("/renana-il/workspace/" + id)
 
     }
@@ -62,7 +62,8 @@ function ViewWorkspaceList(props, { user, isConfiguratorOpenWorkspace, workspace
                         onMouseOver={() => setShowInput(true)
                         }
 
-                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                    // style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
+                    >
                         {workspace.name[0].toUpperCase()}
                         {/* {
               workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
