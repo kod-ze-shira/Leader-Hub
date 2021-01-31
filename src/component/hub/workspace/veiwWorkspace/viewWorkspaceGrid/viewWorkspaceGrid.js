@@ -3,11 +3,12 @@ import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import history from '../../../../history'
+import { withRouter } from 'react-router-dom';
 
 
 
-function ViewWorkspaceGrid({ workspace }) {
-
+function ViewWorkspaceGrid(props) {
+    const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
@@ -19,8 +20,8 @@ function ViewWorkspaceGrid({ workspace }) {
 
     const routeToProject = (id) => {
         debugger
-        // history.push("/" + props.user + "/workspace/" + id)
-        history.push("/renana-il/workspace/" + id)
+        props.history.push("/" + props.user + "/workspace/" + id)
+        // history.push("/renana-il/workspace/" + id)
 
     }
 
@@ -57,8 +58,7 @@ function ViewWorkspaceGrid({ workspace }) {
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces,
-
+        user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspaceGrid)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))

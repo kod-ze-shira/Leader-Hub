@@ -8,7 +8,7 @@ import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../../editWorkspace/editWorkspace'
 import history from '../../../../history'
 
-function ViewWorkspaceList(props, { user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+function ViewWorkspaceList({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
@@ -38,7 +38,7 @@ function ViewWorkspaceList(props, { user, isConfiguratorOpenWorkspace, workspace
             <>
 
                 <Card
-                    onClick={() => routeToProject(workspace._id)}
+                    // onClick={() => routeToProject(workspace._id)}
 
                     className="cardWorkspace"
                     // onClick={() => { setisConfiguratorOpenWorkspace() }}
@@ -58,7 +58,7 @@ function ViewWorkspaceList(props, { user, isConfiguratorOpenWorkspace, workspace
 
                             : null
                     }
-                    < div className="logoWorkspace"
+                    <div className="logoWorkspace"
                         onMouseOver={() => setShowInput(true)
                         }
 
