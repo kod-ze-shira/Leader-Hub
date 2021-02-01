@@ -3,18 +3,22 @@ import React, { useState } from 'react'
 import Logo from '../logo/logo';
 import './headerBody.css'
 import DropDownWorkspace from './dropDownWorkspace/dropDownWorkspace'
+
 export default function HeaderBody(props) {
-    const [projectId, setProjectId] = useState(0)
+    const [workspaceId, setWorkspaceId] = useState(0)
+    // const [viewProjectByWorkspace, setViewProjectByWorkspace] = useState(false)
 
 
     const changeProjectId = (value) => {
-        setProjectId(value)
-        // setViewCardsByProject(true)
+
+        setWorkspaceId(value)
+        // setViewProjectByWorkspace(true)
     }
     return (
         <div className='headerBody'>
             <Logo nameWorkspace={props.nameWorkspace} />
-            <DropDownWorkspace changeProject={changeProjectId} />
+            {/* {viewProjectByWorkspace ? <CardsByProject workspaceId={workspaceId} /> : null} */}
+            <DropDownWorkspace />
 
         </div>
     )
