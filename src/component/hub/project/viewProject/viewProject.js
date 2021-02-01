@@ -9,6 +9,8 @@ import Cell from './cell'
 import './viewProject.css'
 import { actions } from '../../../../redux/actions/action';
 import history from '../../../history'
+import { withRouter } from 'react-router-dom';
+
 
 function ViewProject(props) {
 
@@ -17,7 +19,7 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
-        history.push("/" + props.user + "/projectPlatform/"+ idProject)
+      props.history.push("/" + props.user + "/projectPlatform/"+ idProject)
     }
 
     const [getProjectById, set_getProjectById] = useState(true);
@@ -83,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewProject)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))

@@ -4,7 +4,7 @@ import createReducer from './reducerUtils';
 const initialState = {
 
     project: {
-        name: "name project",
+        name: "",
         subject: "tttttt",
         project: "bbbbbb",
         dueDate: "12/10/20",
