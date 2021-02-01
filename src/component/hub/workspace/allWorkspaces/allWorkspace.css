@@ -29,12 +29,5 @@ hr{
     cursor: pointer;
     
 }
-.scrollbar{
-    overflow-y: scroll;
-    height: 435px;
 }
-.scrollbar::-webkit-scrollbar {
-    width: 6px;
-    /* height: 6px; */
-  }
 
