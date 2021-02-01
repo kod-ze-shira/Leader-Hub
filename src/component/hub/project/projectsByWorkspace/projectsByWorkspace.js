@@ -5,44 +5,62 @@ import ViewProject from '../viewProject/viewProject'
 import { Table } from 'react-bootstrap';
 import "./projectsByWorkspace.css";
 import Logo from '../../logo/logo'
+import { useParams } from 'react-router-dom';
+import '../../body/body.css'
 // import DetailsProject from '../detailsProject/detailsProject'
 
-function ProjectsByWorkspace(props, idWorkspace) {
+function ProjectsByWorkspace(props) {
     const [isFullProjects, setIsFullProjects] = useState(true);
     const [flag, setFlag] = useState(false);
+    const nameLogo = 'Leader Hub';
 
+    // useEffect(() => {
+    //     // if (!isFullProjects) {
+    //     // setIsFullProjects(true)
+    //     console.log("idWorkspace", props.idWorkspace)
+    //     props.getProjectsByWorkspaceId(props.idWorkspace)
+    //     // }
+    //     // 
+    // }, [])
+    let { idWorkspace } = useParams();
+    // fun()
+    // function fun(){
 
+    // }
     useEffect(() => {
-        // if (!isFullProjects) {
-        // setIsFullProjects(true)
-        console.log("idWorkspace", props.idWorkspace)
-        props.getProjectsByWorkspaceId(props.idWorkspace)
-        // }
-        // 
-    }, [])
+        props.getProjectsByWorkspace(idWorkspace);
+        // props.getProjectsByWorkspace("60097fcf88229595ce677d42");
+    }, [props])
 
-    const nameLogo = 'Leader Hub'
 
-    const viewProjectsByWorkspace = Array.from({ length: 5 }).map((project) => {
-        //props.projects.map((project) => {
-        // return <ViewProject key={project._id} project={project} />
-        return <ViewProject project={props.projects} />
+
+    const viewProjectsByWorkspace = props.projects.map((project) => {
+        return <ViewProject  myProject={project} />
     })
+
+
     return (
         < >
-            <div to={`${props.user}/workspace`}>
+
+
+            <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
+                {/* <div> */}
 
                 <Logo nameWorkspace='Leader hub' />
                 <Table responsive style={{ background: 'white' }}>
-                    {props.projects.length ?
-                        <>
-                            <thead>
-                                <tr><th colspan="7"></th></tr>
-                            </thead>
-                            <tbody>
-                                {viewProjectsByWorkspace}
-                            </tbody>
-                        </> : <h2>There are no workspaces</h2>}
+                    {/* {props.projects.length ? */}
+                    <>
+                        <thead>
+                            <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
+                        </thead>
+                        <tbody>
+
+
+                            {viewProjectsByWorkspace}
+
+                        </tbody>
+                    </>
+                    {/* : <h2>There are no workspaces</h2>} */}
                 </Table>
 
 
@@ -51,18 +69,21 @@ function ProjectsByWorkspace(props, idWorkspace) {
     )
 }
 
+const mapStateToProps = (state) => {
 
-export default connect(
-    (state) => {
-        return {
-            projects: state.public_reducer.projects,
-            user: state.public_reducer.userName
-        }
-    },
-    (dispatch) => {
-        return {
-            getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
-
-        }
+    return {
+        projects: state.public_reducer.projects,
+        user: state.public_reducer.userName
     }
-)(ProjectsByWorkspace)
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+
+    }
+
+
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsByWorkspace)

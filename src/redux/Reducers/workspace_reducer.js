@@ -36,7 +36,6 @@ const workspaces = {
     //     state.workspace = action.payload
     // },
     setisConfiguratorOpenWorkspace(state, action) {
-        debugger;
         state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
     },
 }

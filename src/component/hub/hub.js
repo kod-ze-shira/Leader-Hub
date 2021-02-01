@@ -34,14 +34,15 @@ export default function Hub() {
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Router history={history}>
                         <Switch>
-                            <Route path="/:userName/workspace/:workspaceId" >
+                            <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsByWorkspace />
                                 {/* <Projcts /> */}
+
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
                             </Route>
-                            <Route path="/:userName/projectPlatform" >
+                            <Route path="/:userName/projectPlatform/:idProject" >
                                 <ProjectPlatform />
                             </Route>
                             {/* <Route path="/:userName/cardsByProject" >

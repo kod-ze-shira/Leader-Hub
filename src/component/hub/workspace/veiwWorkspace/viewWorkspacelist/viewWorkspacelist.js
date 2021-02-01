@@ -6,9 +6,11 @@ import ProjectsByWorkspace from '../../../project/projectsByWorkspace/projectsBy
 // import TeamExample from '../../../../team/teamExample'
 import { Button, Card, Form } from 'react-bootstrap';
 import EditWorkspace from '../../editWorkspace/editWorkspace'
+import history from '../../../../history'
+import { withRouter } from 'react-router-dom';
 
-function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
-
+function ViewWorkspaceList(props) {
+    const { workspace } = props;
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
@@ -21,8 +23,12 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
+    const routeToProject = (id) => {
+        // debugger
+        props.history.push("/" + props.user + "/workspace/" + id)
+        // history.push("/renana-il/workspace/" + id)
 
-
+    }
 
 
 
@@ -32,7 +38,10 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
             <>
 
                 <Card
-                    className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
+                    onClick={() => routeToProject(workspace._id)}
+
+                    className="cardWorkspace"
+                    // onClick={() => { setisConfiguratorOpenWorkspace() }}
                     onMouseOver={() => setShowInput(true)}
                     onMouseLeave={() => setShowInput(false)}
                 >
@@ -49,11 +58,12 @@ function ViewWorkspaceList({ isConfiguratorOpenWorkspace, workspace, setisConfig
 
                             : null
                     }
-                    < div className="logoWorkspace"
+                    <div className="logoWorkspace"
                         onMouseOver={() => setShowInput(true)
                         }
 
-                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                    // style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
+                    >
                         {workspace.name[0].toUpperCase()}
                         {/* {
               workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
@@ -83,6 +93,7 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.worksapces,
+        user: state.public_reducer.userName,
 
         isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
 
@@ -97,5 +108,5 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspaceList)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 

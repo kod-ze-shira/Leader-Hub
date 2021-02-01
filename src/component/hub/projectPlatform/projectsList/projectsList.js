@@ -14,40 +14,43 @@ import { Alert } from 'bootstrap';
 
 function ProjectsList(props) {
 
-    // const { id } = useParams();
+    const { idProject } = useParams();
 
     useEffect(() => {
-        props.getProjectById("6011270ba72ba9f8be885e06")
-        // console.log("60098264d4d8ce179bcb7fdd")      
-    }, [])
-    //to chang the project that user selected
-    const changeSelectedProject = (event) => {
-        let projectIdSelected = event.target.options[event.target.selectedIndex].id;
-        props.changeProject(projectIdSelected)
+        props.getProjectById(idProject)
+        if (props.project.workspace._id)
+            props.getProjectsByWorkspaceId(props.project.workspace._id)
+    }, [props.project.workspace._id])
 
+    //to chang the project that user selected
+    const changeSelectedProject = (id) => {
+        // let projectIdSelected = event.target.options[event.target.selectedIndex].id;
+       console.log(id)
+        props.changeProject(id)
     }
 
     const viewProjectsByWorkspace = props.projects.map((project) => {
-        if (project.name)
+        if (project.name && project._id != idProject)
             return <>
-                <option className="option" value={project._id} color={project.color}
+                <option className="option" value={project._id}
                     style={{ color: project.color ? project.color : "#F7B500" }}>
-                    {project.name} </option></>
+                    {project.name} </option>
+            </>
     })
 
 
     return (
         <>
             <div className="row justify-content-center">
-                <button onClick={() =>  props.getProjectsByWorkspaceId(props.project.workspace._id)}>click me</button>
                 <div className="col-11 mt-5 row-projects ">
-                    <select onChange={(e) => changeSelectedProject(e)} className=" py-1">{viewProjectsByWorkspace}</select>
+                    <select defaultValue={idProject} onChange={(e) => changeSelectedProject(e.target.value)} className=" py-1">
+                        <option className="option" value={props.project._id}
+                            style={{ color: props.project.color ? props.project.color : "#F7B500" }}>
+                            {props.project.name} </option>
+                        {viewProjectsByWorkspace}</select>
                     <a className="ml-0 pt-1">Add Project +</a>
-
                 </div>
             </div>
-            {/* <CardsByProject projectId={projectId}></CardsByProject> */}
-            {/* 6011270ba72ba9f8be885e06 */}
         </>
     )
 }
