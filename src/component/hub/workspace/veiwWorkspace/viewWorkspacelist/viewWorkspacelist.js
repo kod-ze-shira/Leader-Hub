@@ -23,11 +23,10 @@ function ViewWorkspaceList(props) {
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
-    const routeToProject = (id) => {
-        // debugger
-        props.history.push("/" + props.user + "/workspace/" + id)
-        // history.push("/renana-il/workspace/" + id)
+    const routeToWorkspace = (workspace) => {
+        props.setWorkspace(workspace)
 
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
 
@@ -38,29 +37,16 @@ function ViewWorkspaceList(props) {
             <>
 
                 <Card
-                    onClick={() => routeToProject(workspace._id)}
+                    onClick={() => routeToWorkspace(workspace)}
 
                     className="cardWorkspace"
                     // onClick={() => { setisConfiguratorOpenWorkspace() }}
                     onMouseOver={() => setShowInput(true)}
                     onMouseLeave={() => setShowInput(false)}
                 >
-                    {
-                        showInput ?
-                            // <Form.Group controlId="formBasicCheckbox">
 
-                            //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
-                            // </Form.Group>
-                            <input type="checkbox"
-                                onMouseOver={() => setShowInput(true)}
-                                onClick={() => setShowInput(true)}
-                                className='checkWorkspace' />
+                    < div className="logoWorkspace"
 
-                            : null
-                    }
-                    <div className="logoWorkspace"
-                        onMouseOver={() => setShowInput(true)
-                        }
 
                     // style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
                     >
@@ -103,6 +89,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
 
     }
 
