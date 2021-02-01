@@ -36,6 +36,10 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
 
       <>
 
+<<<<<<< HEAD
+        <Card
+          className="cardWorkspace ml-2 "  >
+=======
         <Card className="cardWorkspace" onClick={() => routeToProject()}
           // <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
 
@@ -55,6 +59,7 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
 
               : null
           }
+>>>>>>> dev
           < div className="logoWorkspace"
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
