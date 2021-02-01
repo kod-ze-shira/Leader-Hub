@@ -1,23 +1,10 @@
-<<<<<<< HEAD
-=======
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-.workspaceColor{
-   width: 40px;
-   height: 40px;
-   border-radius: 16px;
-   font-size: x-large;
-   text-align: center;
-   color:white;
-   margin-top: auto;
-}
->>>>>>> dev
 
-.logoWorkspace{
-    width: 4rem;
+.logoWorkspacelist{
+     width: 4rem;
     height:4rem;
    border-radius: 50%;
    font-size: 26px;
-   padding-top: 8px;
+   padding-top: 10px;
    color: white;
    letter-spacing: 1.72px;
    text-align: center;
@@ -27,42 +14,21 @@
      
 }
 
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: none;
-    border-radius: .25rem;
-}
 
-.cardWorkspace{
-   width: 8rem;
+.Workspace{
+   width: 1vw;
+ 
    background: #F6F6FA;
-   height: 8rem;
+   height: auto;
    margin-bottom: 10px;
    text-align: center;
    justify-content: center;
    align-items: center;
    border-radius: 10px;
-   margin-right: 1rem;
+
+   margin-left: 3rem;
+
 
 }
 
-
-.checkWorkspace{
-   margin-left: -103px;
-   position: absolute;
-   margin-top: -84px;
-}
-
-.nameWorkspace{
-   font: normal normal normal 13px/34px Roboto;
-   letter-spacing: 0px;
-   color: #1c1d21d5;
-   text-transform: capitalize;
-}
 

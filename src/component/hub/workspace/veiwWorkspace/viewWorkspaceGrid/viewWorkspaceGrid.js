@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
@@ -30,28 +31,22 @@ function ViewWorkspaceGrid(props) {
     }
 
     return (
-        <>
 
-            <div className="row"
-                onClick={() => routeToProject(workspace._id)}
-            >
-                <div className="col-4 Workspace" >
-                    < div className="logoWorkspaceGrid "
-                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                        {workspace.name[0].toUpperCase()}
-                        {/* {
+        <div className="Workspacegrid" >
+
+            < div className="logoWorkspace "
+                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                {workspace.name[0].toUpperCase()}
+                {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
-                    </div>
-                </div>
-                <div className="col-5 mt-3"><b>{workspace.name}</b></div>
-
-
-
 
             </div>
-        </>
+            <b>{workspace.name}</b>
+        </div>
+
+
 
     )
 }

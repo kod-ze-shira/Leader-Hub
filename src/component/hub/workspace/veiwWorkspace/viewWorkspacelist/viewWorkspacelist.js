@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './viewWorkspacelist.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
-import ProjectsByWorkspace from '../../../project/projectsByWorkspace/projectsByWorkspace'
-// import TeamExample from '../../../../team/teamExample'
-import { Button, Card, Form } from 'react-bootstrap';
-import EditWorkspace from '../../editWorkspace/editWorkspace'
 import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
 
+
+
 function ViewWorkspaceList(props) {
-    const { workspace } = props;
+    const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
@@ -20,75 +18,52 @@ function ViewWorkspaceList(props) {
         setViewProjects(!viewProjects);
     }
 
-    const toOpenEditWorkspace = () => {
-        setOpenEditWorkspace(!openEditWorkspace)
-    }
     const routeToProject = (id) => {
-        debugger
+
         props.history.push("/" + props.user + "/workspace/" + id)
         // history.push("/renana-il/workspace/" + id)
 
     }
 
-
+    const toOpenEditWorkspace = () => {
+        setOpenEditWorkspace(!openEditWorkspace)
+    }
 
     return (
         <>
 
-            <>
-
-                <Card
-                    onClick={() => routeToProject(workspace._id)}
-
-                    className="cardWorkspace"
-                    // onClick={() => { setisConfiguratorOpenWorkspace() }}
-                    onMouseOver={() => setShowInput(true)}
-                    onMouseLeave={() => setShowInput(false)}
-                >
-
-                    < div className="logoWorkspace"
-
-
-                    // style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
-                    >
+            <div className="row"
+                onClick={() => routeToProject(workspace._id)}
+            >
+                <div className="col-4 Workspace" >
+                    < div className="logoWorkspacelist "
+                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                         {workspace.name[0].toUpperCase()}
                         {/* {
-              workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
-            } */}
-                    </div >
-
-                    <div className='nameWorkspace'
-                        onMouseOver={() => setShowInput(true)}
-                    >{workspace.name}</div>
-                    <div>{workspace.startDate}</div>
-                    <div>
-                        {viewProjects ? <ProjectsByWorkspace idWorkspace={workspace._id} /> : null}
+                            workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
+                                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
+                        } */}
                     </div>
-                    <div>
-                        {openEditWorkspace ? <EditWorkspace idWorkspace={workspace._id}></EditWorkspace> : null}
-                    </div>
-                </Card >
-            </>
+                </div>
+                {/* <div className="col-5 mt-3"><b>{workspace.name}</b></div> */}
 
 
 
+
+            </div>
         </>
+
     )
 }
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces,
-        user: state.public_reducer.userName,
-
-        isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
-
+        user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
+
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
 
     }
