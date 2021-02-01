@@ -5,52 +5,66 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import './viewProject.css'
 import Cell from './cell'
-import { actions } from '../../../../redux/actions/action'
+// import { actions } from '../../../redux/actions/action'
 import './viewProject.css'
+import { actions } from '../../../../redux/actions/action';
+import history from '../../../history'
+
 function ViewProject(props) {
 
     function detailsProject() {
         set_getProjectById(false);
+    }
+    const routeToCards = (e) => {
+        let idProject = props.myProject._id;
+        history.push("/" + props.user + "/projectPlatform/"+ idProject)
     }
 
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     return (
         <>
-            <tr>
+            <tr >
                 <td>
                     <span class='stripeProject'
-                        style={{ 'background-color': props.project.color }}></span>
+                        // style={{ 'background-color': props.project.color }}></span>
+                        style={{ 'background-color': props.myProject.color }}></span>
                 </td>
-                <td>
 
-                    {props.project.name}</td>
+                <td onClick={(e) => routeToCards(e)}>
+                    {props.myProject.name}
+                    {/* {props.myProject.description} */}
+                </td>
+
                 <td>
                     <Cell
-                        item={props.project.dueDate}
+
+                        // item={props.myProject.dueDate ? props.myProject.dueDate : Date.now()}
+                        item={props.myProject.dueDate}
                         description='Due date' />
-                    {/* {props.project.dueDate}
+                    {/* {props.myProject.dueDate}
                 dueDate */}
                 </td>
                 <td>
                     <Cell
-                        item={props.project.updateDates[props.project.updateDates.length - 1]}
-                        description='CardLast updateDates' />
+                        // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
+                        item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
+                        description='update Dates' />
                     {/*                     
-                     {props.project.updateDates[props.project.updateDates.length - 1]}
+                     {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
                 Last updateDates</td> */}
                 </td>
                 <td>
                     <Cell
-                        item={props.project.cards ? props.project.cards.length : null}
-                        description='Card' />
+                        item={props.myProject.cards.length ? props.myProject.cards.length : "0"}
+                        description='card' />
                 </td>
             </tr>
             {/* <div className="container">
                 <div className="row" onClick={() => setViewTasks(!viewTasks)}>
                     <div className="col">
-                        <div>name:{props.project.name}</div>
-                        <div>description:{props.project.description}</div>
+                        <div>name:{props.myProject.name}</div>
+                        <div>description:{props.myProject.description}</div>
                     </div>
      */}
 
@@ -58,9 +72,9 @@ function ViewProject(props) {
     )
 }
 const mapStateToProps = (state) => {
-
     return {
-        project: state.project_reducer.project
+        project: state.project_reducer.project,
+        user:state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {

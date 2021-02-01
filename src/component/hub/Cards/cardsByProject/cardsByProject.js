@@ -8,13 +8,14 @@ function CardsByProject(props) {
 
     useEffect(() => {
 
-        console.log("projectId", props.projectId)
+        console.log("projectIdInCards", props.projectId)
         props.getCardsByProjectId(props.projectId)
+        // console.log(props.cards);
 
     }, [props.projectId])
 
     const viewCardsByProject = props.cards.map((card) => {
-        console.log(card);
+        // console.log(card._id);
         return <ViewCards key={card._id} card={card} />
     })
     return (

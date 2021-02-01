@@ -25,7 +25,7 @@ function ProjectPlatform(props) {
     const changeCardId = (value) => {
         setCardId(value)
         setViewTasksByCard(true)
-    } 
+    }
     return (
         <>
             {/* <Link to={`${props.user}/projectPlatform`} > */}
@@ -34,7 +34,7 @@ function ProjectPlatform(props) {
                 < ProjectsList  changeProject={changeProjectId} />
                 {viewCardsByProject ? <CardsByProject changeCard={changeCardId} projectId={projectId} /> : null}
                 {viewTasksByCard ? <TasksByCard cardId={cardId} /> : null}
-                <TasksByCard cardId={"6006061269370dacf7af0609"} />
+                {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 {/* <div className="add-new-btn ">+</div> */}
 
             </div>
@@ -44,8 +44,7 @@ function ProjectPlatform(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        projects: state.project_reducer.project,
-        project: state.project_reducer.project,
+        projects: state.public_reducer.project,
         user: state.public_reducer.userName
 
     }

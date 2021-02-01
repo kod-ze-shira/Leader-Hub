@@ -18,6 +18,7 @@ const initialState = {
 const workspaces = {
     setWorkspace(state, action) {
         state.workspace = action.payload;
+        console.log( state.workspace)
     },
     setWorkspaceOnChangeFiled(state, action) {
         state.workspace[action.payload] = action.value
@@ -35,7 +36,6 @@ const workspaces = {
     //     state.workspace = action.payload
     // },
     setisConfiguratorOpenWorkspace(state, action) {
-        debugger;
         state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
     },
 }
