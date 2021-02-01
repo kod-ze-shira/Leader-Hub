@@ -10,20 +10,26 @@ import './projectsList.css'
 
 function ProjectsList(props) {
 
-    let { id } = useParams();
+    // let { idProject } = useParams();
 
     useEffect(() => {
+
+        // props.getProjectByIdInServer("6011270ba72ba9f8be885e06");
+
         props.getProjectsByWorkspaceId("60097fcf88229595ce677d42");
     }, [])
     //to chang the project that user selected
     const changeSelectedProject = (event) => {
         console.log("hi")
         let projectIdSelected = event.target.options[event.target.selectedIndex].id;
+        // let projectColorSelected = event.target.options[event.target.select].color;
+        // console.log(event.target.options[event.target.select])
+        // alert(event.target.options[event.target.selectedIndex].color)
         props.changeProject(projectIdSelected)
 
     }
     const viewProjectsByWorkspace = props.projects.map((project) => {
-        if (project.name)
+        if (project.name && project.workspace)
             return <option className="option" id={project._id} color={project.color}
                 style={{ color: project.color ? project.color : "#F7B500" }}>
                 {project.name} </option>
@@ -35,6 +41,7 @@ function ProjectsList(props) {
             <div className="row justify-content-center">
                 <div className="col-11 mt-5 row-projects ">
                     <select onChange={(e) => changeSelectedProject(e)} className=" py-1">{viewProjectsByWorkspace}</select>
+                    {/* <label className="col-10">Add Project</label> */}
                     <a className="ml-0 pt-1">Add Project +</a>
 
                 </div>
@@ -49,7 +56,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace)),
+        getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject))
+
     }
 
 
