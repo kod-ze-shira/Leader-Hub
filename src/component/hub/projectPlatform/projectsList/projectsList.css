@@ -2,7 +2,7 @@
     /* height: 10vh; */
     background-color:#fffcfd ;
     border: 1px solid #FF65A6;
-    border-radius: 3px;
+    border-radius: 6px;
     
 }
 select{
@@ -16,4 +16,10 @@ select:focus{
 option{
     border: none !important;
     color: #FF65A6;
+}
+a{
+    color: #98A9BC!important;
+    display: inline-block;
+    float: right;
+    
 }

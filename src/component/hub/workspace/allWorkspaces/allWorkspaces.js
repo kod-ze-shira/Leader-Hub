@@ -90,7 +90,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                         <div className="col-3" ></div>
 
                         {/* <button onClick={() => props.getAllWorkspaces()}>get all worksapaces</button> */}
-                        <div className="col-9 allWorkspace">  {renderedGridWorkspaces}</div>
+                        <div className="col-9 allWorkspace  scrollbar">  {renderedGridWorkspaces}</div>
                     </div>
 
                 </div>
