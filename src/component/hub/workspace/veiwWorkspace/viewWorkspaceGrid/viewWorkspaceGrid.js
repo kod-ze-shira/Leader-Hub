@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
-import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
 
 
@@ -14,15 +13,12 @@ function ViewWorkspaceGrid(props) {
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showInput, setShowInput] = useState(false)
     const viewProjectsByWorkspace = () => {
-        // return  <projectsByWorkspace/>
         setViewProjects(!viewProjects);
     }
 
-    const routeToProject = (id) => {
-
-        props.history.push("/" + props.user + "/workspace/" + id)
-        // history.push("/renana-il/workspace/" + id)
-
+    const routeToWorkspace = (workspace) => {
+        props.setWorkspace(workspace)
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
     const toOpenEditWorkspace = () => {
@@ -33,7 +29,7 @@ function ViewWorkspaceGrid(props) {
         <>
 
             <div className="row"
-                onClick={() => routeToProject(workspace._id)}
+                onClick={() => routeToWorkspace(workspace)}
             >
                 <div className="col-4 Workspace" >
                     < div className="logoWorkspaceGrid "
@@ -46,10 +42,6 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
                 <div className="col-5 mt-3"><b>{workspace.name}</b></div>
-
-
-
-
             </div>
         </>
 
@@ -65,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
     }
 
 
