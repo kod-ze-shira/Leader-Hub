@@ -1,0 +1,31 @@
+.row-worspaces{
+    /* height: 10vh; */
+    background-color:#fffcfd ;
+    border: 1px solid #FF65A6;
+    border-radius: 6px;
+    
+}
+select{
+    border: none!important;
+    color: #FF65A6;
+
+}
+select:focus{
+    outline: none;
+}
+option{
+    border: none !important;
+    color: #FF65A6;
+}
+a{
+    color: #98A9BC!important;
+    display: inline-block;
+    float: right;
+    
+}
+.textLogo{
+    margin-left: 10px;
+    text-align: end;
+    font-weight: bold;
+    color: black;
+}
