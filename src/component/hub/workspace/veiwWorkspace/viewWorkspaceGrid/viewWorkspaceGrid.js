@@ -34,7 +34,7 @@ function ViewWorkspaceGrid(props) {
 
         <div className="Workspacegrid" >
 
-            < div className="logoWorkspace "
+            < div className="logoWorkspace1 ml-5 mt-3"
                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                 {workspace.name[0].toUpperCase()}
                 {/* {
@@ -43,7 +43,7 @@ function ViewWorkspaceGrid(props) {
                         } */}
 
             </div>
-            <b>{workspace.name}</b>
+            <div className="mt-3"><b>{workspace.name}</b></div>
         </div>
 
 

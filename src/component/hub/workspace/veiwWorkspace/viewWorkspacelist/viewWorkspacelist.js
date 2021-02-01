@@ -32,20 +32,24 @@ function ViewWorkspaceList(props) {
     return (
         <>
 
-            <div className="row"
+            <div className="row ml-2"
                 onClick={() => routeToProject(workspace._id)}
             >
-                <div className="col-4 Workspace" >
-                    < div className="logoWorkspacelist "
-                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                        {workspace.name[0].toUpperCase()}
-                        {/* {
+                <div className="row " >
+                    <div className="Workspace" >
+                        < div className="logoWorkspacelist"
+                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                            {workspace.name[0].toUpperCase()}
+                            {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
+                        </div>
                     </div>
+                    <b className="mt-3 ml-2">{workspace.name}</b>
+
                 </div>
-                {/* <div className="col-5 mt-3"><b>{workspace.name}</b></div> */}
+
 
 
 

@@ -1,19 +1,25 @@
 .Workspacegrid{
-  width: 9rem;
-height: 9rem;
-background-color: #F6F6FA;
-border-radius: 10px;
-opacity: 1;
+
 color:black;
 font-size: small;
-text-align: center;
-  justify-content: center;
+
+      width: 10rem;
+   background-color: #F6F6FA;
+   height: 10rem;
+   margin-bottom: 10px;
+   text-align: center;
+   justify-content: center;
    align-items: center;
+   border-radius: 10px;
+   margin-right: 1rem;
+
     
 }
 
-.logoWorkspace{
-         width: 4rem;
+
+.logoWorkspace1{
+    
+    width: 4rem;
     height:4rem;
    border-radius: 50%;
    font-size: 26px;
@@ -24,4 +30,7 @@ text-align: center;
    font-family: 'Roboto', sans-serif;
    /* font-size: xx-large; */
    border:none;
+   
+
+
 }
