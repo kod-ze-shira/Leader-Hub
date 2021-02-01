@@ -29,8 +29,8 @@ function ProjectsList(props) {
         props.changeProject(id)
     }
 
-    const viewProjectsByWorkspace = props.projects.map((project) => {
-        if (project.name && project._id != idProject)
+    const viewProjectsByWorkspace1 = props.projects.map((project) => {
+        if (project.name && (project._id != idProject))
             return <>
                 <option className="option" value={project._id}
                     style={{ color: project.color ? project.color : "#F7B500" }}>
@@ -47,7 +47,7 @@ function ProjectsList(props) {
                         <option className="option" value={props.project._id}
                             style={{ color: props.project.color ? props.project.color : "#F7B500" }}>
                             {props.project.name} </option>
-                        {viewProjectsByWorkspace}</select>
+                        {viewProjectsByWorkspace1}</select>
                     <a className="ml-0 pt-1">Add Project +</a>
                 </div>
             </div>
