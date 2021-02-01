@@ -44,15 +44,9 @@ function ViewWorkspaceList(props) {
                     onMouseOver={() => setShowInput(true)}
                     onMouseLeave={() => setShowInput(false)}
                 >
-<<<<<<< HEAD
                     <div className="logoWorkspace"
                         onMouseOver={() => setShowInput(true)
                         }
-=======
-
-                    < div className="logoWorkspace"
-
->>>>>>> e8823f8c6cc24e6f904e51170cb6fb8063f81584
 
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
                     >
