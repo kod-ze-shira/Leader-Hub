@@ -17,9 +17,28 @@ option{
     border: none !important;
     color: #FF65A6;
 }
+option::after {
+    content: " "!important;
+    height: 5px !important;
+    width: 5px !important;
+    border-radius: 5px!important;
+    display: inline-block!important;
+    color: #FF65A6!important;
+}
+
+.color-shipe{
+    /* transform: matrix(0, -1, 1, 0, 0, 0); */
+/* background: var(--unnamed-color-ff65a6) 0% 0% no-repeat padding-box; */
+    width: 9px;
+    height: 27px;
+    background: #FF65A6 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    position: absolute;
+}
 a{
     color: #98A9BC!important;
     display: inline-block;
     float: right;
-    
+
 }
+

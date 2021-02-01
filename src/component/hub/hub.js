@@ -27,10 +27,10 @@ export default function Hub() {
             <Nav />
 
             <div className="row justify-content-end">
-                <div className="col-1">
+                <div className="col-1 ">
                     <Left_nav />
                 </div>
-                <div className="col-9  col align-self-center">
+                <div className="col-9 col align-self-center">
                     {/* <Header /> */}
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Router history={history}>
@@ -43,7 +43,7 @@ export default function Hub() {
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
                             </Route>
-                            <Route path="/:userName/projectPlatform" >
+                            <Route path="/:userName/projectPlatform/:idProject" >
                                 <ProjectPlatform />
                             </Route>
                             {/* <Route path="/:userName/cardsByProject" >
@@ -63,7 +63,7 @@ export default function Hub() {
                         </Switch>
                     </Router>
                 </div>
-                <div className="col-2 pl-0">
+                <div className="col-2 px-0">
                     <Configurator />
                 </div>
             </div>

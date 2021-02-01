@@ -18,7 +18,7 @@ function ProjectsByWorkspace(props) {
     }, [])
 
     const viewProjectsByWorkspace = props.projects.map((project) => {
-        return <ViewProject myProject={project} />
+        return <ViewProject  myProject={project} />
     })
 
     return (

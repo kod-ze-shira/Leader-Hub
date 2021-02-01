@@ -9,7 +9,7 @@ import EditWorkspace from '../editWorkspace/editWorkspace'
 import project_reducer from '../../../../redux/Reducers/project_reducer';
 import history from '../../../history'
 
-function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
+function ViewWorkspace({ props, user, isConfiguratorOpenWorkspace, workspace, setisConfiguratorOpenWorkspace }) {
 
   const [viewProjects, setViewProjects] = useState(false)
   const [viewCards, setViewCards] = useState(false)
@@ -26,9 +26,8 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
   }
 
   const routeToProject = () => {
-    debugger
-    // history.push("/" + user + "/workspace" + "/" + workspace._id)
-    history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
+    // debugger
+    // history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
   }
 
   return (
@@ -45,7 +44,6 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
           {
             showInput ?
               // <Form.Group controlId="formBasicCheckbox">
-
               //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
               // </Form.Group>
               <input type="checkbox"
@@ -91,6 +89,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    // setWorkspaceName:(name)=> dispatch(actions.setWorkspaceName(name)),
     setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
     setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
@@ -99,3 +98,7 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspace)
+
+
+
+
