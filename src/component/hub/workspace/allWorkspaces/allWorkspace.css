@@ -29,9 +29,6 @@ hr{
     cursor: pointer;
     
 }
-<<<<<<< HEAD
-}
-=======
 .scrollbar{
     overflow-y: scroll;
     height: 435px;
@@ -40,5 +37,4 @@ hr{
     width: 6px;
     /* height: 6px; */
   }
->>>>>>> dev
 
