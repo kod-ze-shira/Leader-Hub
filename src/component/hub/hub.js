@@ -19,6 +19,7 @@ import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspa
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
 import ProjectPlatform from './projectPlatform/projectPlatform'
 import CardsByProject from './Cards/cardsByProject/cardsByProject'
+import HeaderBody from './headerBody/headerBody'
 export default function Hub() {
     return (
         <>
@@ -34,24 +35,29 @@ export default function Hub() {
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Router history={history}>
                         <Switch>
-                            <Route path="/:userName/workspace/:workspaceId" >
+                            <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsByWorkspace />
                                 {/* <Projcts /> */}
+
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
                             </Route>
                             <Route path="/:userName/projectPlatform" >
-                                <ProjectPlatform  />
+                                <ProjectPlatform />
                             </Route>
                             {/* <Route path="/:userName/cardsByProject" >
                                 <CardsByProject />
                             </Route> */}
                             <Route path="/:userName" >
                                 <Body />
-                                {/* <ProjectsByWorkspace /> */}
 
                             </Route>
+
+                            {/* <Route path="" >
+                                <HeaderBody nameWorkspace="Leader boxx" />
+
+                            </Route> */}
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
 
                         </Switch>

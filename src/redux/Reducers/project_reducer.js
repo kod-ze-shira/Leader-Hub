@@ -5,8 +5,8 @@ const initialState = {
 
     project: {
         name: "name project",
-        subject: "",
-        project: "mmmmm",
+        subject: "tttttt",
+        project: "bbbbbb",
         dueDate: "12/10/20",
         updateDates: ["12/10/20", "14/10/20"],
         endDate: "10/12/21",

@@ -26,8 +26,11 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
   }
 
   const routeToProject = () => {
+    debugger
+    // history.push("/" + user + "/workspace" + "/" + workspace._id)
     history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
   }
+
   return (
     <>
 
@@ -88,8 +91,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
-    setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+    setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
   }
 
 

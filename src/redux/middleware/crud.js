@@ -600,8 +600,10 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 
 
 //
-export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action => {
+export const getProjectsByWorkspace = ({ dispatch, getState }) => next => action => {
+
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
+
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
         fetch(url,
             {
@@ -614,7 +616,7 @@ export const getProjetsByWorkspace = ({ dispatch, getState }) => next => action 
             .then((result) => {
                 console.log(result)
                 checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setProjects(result))
+                    dispatch(actions.setProjects(result.projectList))
                     //
                 })
             })

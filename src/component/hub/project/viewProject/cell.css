@@ -5,6 +5,8 @@
     color: #98A9BC;
     text-align: center;
     text-transform: capitalize;
+    display: block;
+
 }
 
 .item{

@@ -2,25 +2,37 @@ import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
-function ViewWorkspaceGrid({ workspace }) {
+import { withRouter } from 'react-router-dom';
+
+
+
+function ViewWorkspaceGrid(props) {
+    const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showInput, setShowInput] = useState(false)
     const viewProjectsByWorkspace = () => {
-        // return  <projectsByWorkspace/>
         setViewProjects(!viewProjects);
+    }
+
+    const routeToWorkspace = (workspace) => {
+        props.setWorkspace(workspace)
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
+
     return (
         <>
 
-            <div className="row">
+            <div className="row"
+                onClick={() => routeToWorkspace(workspace)}
+            >
                 <div className="col-4 Workspace" >
-                    < div className="logoWorkspaceGrid mt-2"
+                    < div className="logoWorkspaceGrid "
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                         {workspace.name[0].toUpperCase()}
                         {/* {
@@ -30,10 +42,6 @@ function ViewWorkspaceGrid({ workspace }) {
                     </div>
                 </div>
                 <div className="col-5 mt-3"><b>{workspace.name}</b></div>
-
-
-
-
             </div>
         </>
 
@@ -42,17 +50,16 @@ function ViewWorkspaceGrid({ workspace }) {
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces,
-
+        user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
 
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
     }
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewWorkspaceGrid)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))

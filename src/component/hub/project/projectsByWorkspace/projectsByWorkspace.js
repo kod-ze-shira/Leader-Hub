@@ -4,65 +4,55 @@ import { actions } from '../../../../redux/actions/action'
 import ViewProject from '../viewProject/viewProject'
 import { Table } from 'react-bootstrap';
 import "./projectsByWorkspace.css";
-import Logo from '../../logo/logo'
-// import DetailsProject from '../detailsProject/detailsProject'
+import HeaderBody from '../../headerBody/headerBody'
+import { useParams } from 'react-router-dom';
+import '../../body/body.css'
 
-function ProjectsByWorkspace(props, idWorkspace) {
-    const [isFullProjects, setIsFullProjects] = useState(true);
-    const [flag, setFlag] = useState(false);
+function ProjectsByWorkspace(props) {
+    
 
+    let { idWorkspace } = useParams();
 
     useEffect(() => {
-        // if (!isFullProjects) {
-        // setIsFullProjects(true)
-        console.log("idWorkspace", props.idWorkspace)
-        props.getProjectsByWorkspaceId(props.idWorkspace)
-        // }
-        // 
+            props.getProjectsByWorkspace(idWorkspace);
     }, [])
 
-    const nameLogo = 'Leader Hub'
-
-    const viewProjectsByWorkspace = Array.from({ length: 5 }).map((project) => {
-        //props.projects.map((project) => {
-        // return <ViewProject key={project._id} project={project} />
-        return <ViewProject project={props.projects} />
+    const viewProjectsByWorkspace = props.projects.map((project) => {
+        return <ViewProject myProject={project} />
     })
+
     return (
-        < >
-            <div to={`${props.user}/workspace`}>
-
-                <Logo nameWorkspace='Leader hub' />
-                <Table responsive style={{ background: 'white' }}>
-                    {props.projects.length ?
-                        <>
-                            <thead>
-                                <tr><th colspan="7"></th></tr>
-                            </thead>
-                            <tbody>
-                                {viewProjectsByWorkspace}
-                            </tbody>
-                        </> : <h2>There are no workspaces</h2>}
+        <>
+            <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
+                <HeaderBody nameWorkspace={props.workspace.name} />
+                <Table responsive className='tableProject'>
+                    <>
+                        <thead>
+                            <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
+                        </thead>
+                        <tbody>
+                            {viewProjectsByWorkspace}
+                        </tbody>
+                    </>
                 </Table>
-
-
             </div>
         </>
     )
 }
 
+const mapStateToProps = (state) => {
 
-export default connect(
-    (state) => {
-        return {
-            projects: state.public_reducer.projects,
-            user: state.public_reducer.userName
-        }
-    },
-    (dispatch) => {
-        return {
-            getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
-
-        }
+    return {
+        projects: state.public_reducer.projects,
+        user: state.public_reducer.userName,
+        workspace: state.workspace_reducer.workspace,
     }
-)(ProjectsByWorkspace)
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsByWorkspace)
