@@ -30,10 +30,10 @@ function CardsByProject(props) {
     return (
         <>
             {viewCardsByProject}
-            {
-                viewCardsByProject? <TasksByCard cardId={cardId} />:
+              {
+                viewTasksByCard? <TasksByCard cardId={cardId} />:
                 null
-            }
+            }  
            
 
         </>
