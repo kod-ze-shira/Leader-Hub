@@ -616,7 +616,7 @@ export const getProjectsByWorkspace = ({ dispatch, getState }) => next => action
             .then((result) => {
                 console.log(result)
                 checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setProjects(result))
+                    dispatch(actions.setProjects(result.projectList))
                     //
                 })
             })
