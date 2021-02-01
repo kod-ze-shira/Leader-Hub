@@ -9,17 +9,16 @@ import TasksByCard from '../../task/tasksByCard/tasksByCard'
 
 function ViewCards(props) {
 
-    const [ViewCards, setViewCards] = useState(false)
     const changeSelectedCard = (event) => {
-        let cardIdSelected = event.target.value;
-        props.changeCard(cardIdSelected)
+        // let cardIdSelected = event.target.value;
+        props.changeCard(props.card._id)
 
     }
   
     return (
         <>
             <div className="container" >
-                <div onClick={() => setViewCards(!ViewCards)}>
+                <div >
                     <div className=" row justify-content-start card-name border-bottom mx-5 mt-4 pb-0">
                         <div className="triangle mt-4"></div>
                         <button  onClick={(e) => changeSelectedCard(e)} className="ml-3 show-card">{props.card.name}</button>

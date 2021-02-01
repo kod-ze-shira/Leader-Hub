@@ -13,7 +13,7 @@ function TasksByCard(props) {
         props.getTasksByCardId(props.cardId)
         console.log("tasks", props.task);
 
-    },[props,props.cardId])
+    },[props ,props.cardId])
 
     const renderTasksByCrad = props.tasks.map((task) => {
         console.log(task);

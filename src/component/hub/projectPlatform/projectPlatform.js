@@ -33,7 +33,7 @@ function ProjectPlatform(props) {
                 <Logo className="logo-workspace" nameWorkspace='Leader hub' />
                 < ProjectsList  changeProject={changeProjectId} />
                 {viewCardsByProject ? <CardsByProject changeCard={changeCardId} projectId={projectId} /> : null}
-                {viewTasksByCard ? <TasksByCard cardId={cardId} /> : null}
+                {/* {viewTasksByCard ? <TasksByCard cardId={cardId} /> : null} */}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 {/* <div className="add-new-btn ">+</div> */}
 
