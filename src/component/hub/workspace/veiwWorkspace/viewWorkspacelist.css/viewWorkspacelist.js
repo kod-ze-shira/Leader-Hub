@@ -1,25 +1,28 @@
-
 import React, { useEffect, useState } from 'react'
-import './viewWorkspaceGrid.css';
+import './viewWorkspacelist.css';
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
+import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
 
 
 
-function ViewWorkspaceGrid(props) {
+function ViewWorkspaceList(props) {
     const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showInput, setShowInput] = useState(false)
     const viewProjectsByWorkspace = () => {
+        // return  <projectsByWorkspace/>
         setViewProjects(!viewProjects);
     }
 
-    const routeToWorkspace = (workspace) => {
-        props.setWorkspace(workspace)
-        props.history.push("/" + props.user + "/workspace/" + workspace._id)
+    const routeToProject = (id) => {
+
+        props.history.push("/" + props.user + "/workspace/" + id)
+        // history.push("/renana-il/workspace/" + id)
+
     }
 
     const toOpenEditWorkspace = () => {
@@ -27,22 +30,32 @@ function ViewWorkspaceGrid(props) {
     }
 
     return (
+        <>
 
-        <div className="Workspacegrid" >
-
-            < div className="logoWorkspace1 ml-5 mt-3"
-                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                {workspace.name[0].toUpperCase()}
-                {/* {
+            <div className="row ml-2"
+                onClick={() => routeToProject(workspace._id)}
+            >
+                <div className="row" >
+                    <div className="Workspace" >
+                        < div className="logoWorkspacelist"
+                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                            {workspace.name[0].toUpperCase()}
+                            {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
+                        </div>
+                    </div>
+                    <b className="mt-3 ml-2 d-none d-md-block">{workspace.name}</b>
+
+                </div>
+
+
+
+
 
             </div>
-            <div className="mt-3"><b>{workspace.name}</b></div>
-        </div>
-
-
+        </>
 
     )
 }
@@ -56,9 +69,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
+
     }
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
+
