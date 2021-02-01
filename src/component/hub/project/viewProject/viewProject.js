@@ -8,28 +8,36 @@ import Cell from './cell'
 // import { actions } from '../../../redux/actions/action'
 import './viewProject.css'
 import { actions } from '../../../../redux/actions/action';
-// import Cell from './cells'
+import history from '../../../history'
+import { withRouter } from 'react-router-dom';
+
 
 function ViewProject(props) {
 
     function detailsProject() {
         set_getProjectById(false);
     }
+    const routeToCards = (e) => {
+        let idProject = props.myProject._id;
+      props.history.push("/" + props.user + "/projectPlatform/"+ idProject)
+    }
 
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     return (
         <>
-            <tr>
+            <tr >
                 <td>
                     <span class='stripeProject'
                         // style={{ 'background-color': props.project.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span>
                 </td>
-                <td>
 
-                    {/* {props.project.name}</td> */}
-                    {props.myProject.description}</td>
+                <td onClick={(e) => routeToCards(e)}>
+                    {props.myProject.name}
+                    {/* {props.myProject.description} */}
+                </td>
+
                 <td>
                     <Cell
 
@@ -43,7 +51,7 @@ function ViewProject(props) {
                     <Cell
                         // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
                         item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
-                        description='update Dates' />
+                        description='Last update' />
                     {/*                     
                      {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
                 Last updateDates</td> */}
@@ -67,7 +75,8 @@ function ViewProject(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        project: state.project_reducer.project
+        project: state.project_reducer.project,
+        user:state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -76,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ViewProject)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))

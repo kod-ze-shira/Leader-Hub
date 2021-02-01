@@ -8,10 +8,6 @@ import { InputGroup, FormControl } from 'react-bootstrap'
 // import './viewTaskByCard.css'
 // import './viewTaskByCrad.css'
 
-
-
-
-
 function ViewTaskByCrad(props) {
 
     return (
@@ -20,7 +16,7 @@ function ViewTaskByCrad(props) {
                 <div className="row">
                     <div className="col  ">
                         <div>
-                            <label class="container pl-5 my-2 ml-5">{props.task.description}
+                            <label class="container pl-5 my-2 ml-5 ">{props.task.description}
                                 <input type="checkbox" />
                                 <span class="checkmark"></span>
                             </label>

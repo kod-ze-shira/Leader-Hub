@@ -3,5 +3,6 @@
     width: 70vw;
     background-color: white;
     z-index: 999;
-    border-radius: 12px;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
 }

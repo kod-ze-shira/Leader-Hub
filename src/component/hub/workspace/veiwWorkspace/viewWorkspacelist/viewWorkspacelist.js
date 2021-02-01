@@ -23,11 +23,10 @@ function ViewWorkspaceList(props) {
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
-    const routeToProject = (id) => {
-        debugger
-        props.history.push("/" + props.user + "/workspace/" + id)
-        // history.push("/renana-il/workspace/" + id)
+    const routeToWorkspace = (workspace) => {
+        props.setWorkspace(workspace)
 
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
 
@@ -38,16 +37,22 @@ function ViewWorkspaceList(props) {
             <>
 
                 <Card
-                    onClick={() => routeToProject(workspace._id)}
+                    onClick={() => routeToWorkspace(workspace)}
 
                     className="cardWorkspace"
                     // onClick={() => { setisConfiguratorOpenWorkspace() }}
                     onMouseOver={() => setShowInput(true)}
                     onMouseLeave={() => setShowInput(false)}
                 >
+<<<<<<< HEAD
                     <div className="logoWorkspace"
                         onMouseOver={() => setShowInput(true)
                         }
+=======
+
+                    < div className="logoWorkspace"
+
+>>>>>>> e8823f8c6cc24e6f904e51170cb6fb8063f81584
 
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
                     >
@@ -90,6 +95,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
 
     }
 
