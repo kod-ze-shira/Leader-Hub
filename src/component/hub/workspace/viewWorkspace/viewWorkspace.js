@@ -33,30 +33,8 @@ function ViewWorkspace({ user, isConfiguratorOpenWorkspace, workspace, setisConf
 
       <>
 
-<<<<<<< HEAD
         <Card
           className="cardWorkspace ml-2 "  >
-=======
-        <Card className="cardWorkspace" onClick={() => routeToProject()}
-          // <Card className="cardWorkspace" onClick={() => { setisConfiguratorOpenWorkspace() }}
-
-          onMouseOver={() => setShowInput(true)}
-          onMouseLeave={() => setShowInput(false)}
-        >
-          {
-            showInput ?
-              // <Form.Group controlId="formBasicCheckbox">
-
-              //   <Form.Check type="checkbox" className='checkWorkspace' label="" />
-              // </Form.Group>
-              <input type="checkbox"
-                onMouseOver={() => setShowInput(true)}
-                onClick={() => setShowInput(true)}
-                className='checkWorkspace' />
-
-              : null
-          }
->>>>>>> dev
           < div className="logoWorkspace"
             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
             {workspace.name[0].toUpperCase()}
