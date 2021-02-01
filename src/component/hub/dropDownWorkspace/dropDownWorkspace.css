@@ -23,3 +23,9 @@ a{
     float: right;
     
 }
+.textLogo{
+    margin-left: 10px;
+    text-align: end;
+    font-weight: bold;
+    color: black;
+}

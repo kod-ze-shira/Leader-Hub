@@ -23,11 +23,10 @@ function ViewWorkspaceList(props) {
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
-    const routeToProject = (id) => {
-        debugger
-        props.history.push("/" + props.user + "/workspace/" + id)
-        // history.push("/renana-il/workspace/" + id)
+    const routeToWorkspace = (workspace) => {
+        props.setWorkspace(workspace)
 
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
 
@@ -38,7 +37,7 @@ function ViewWorkspaceList(props) {
             <>
 
                 <Card
-                    onClick={() => routeToProject(workspace._id)}
+                    onClick={() => routeToWorkspace(workspace)}
 
                     className="cardWorkspace"
                     // onClick={() => { setisConfiguratorOpenWorkspace() }}
@@ -103,6 +102,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
 
     }
 

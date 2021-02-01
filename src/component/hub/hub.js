@@ -54,10 +54,10 @@ export default function Hub() {
 
                             </Route>
 
-                            <Route path="" >
+                            {/* <Route path="" >
                                 <HeaderBody nameWorkspace="Leader boxx" />
 
-                            </Route>
+                            </Route> */}
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
 
                         </Switch>
