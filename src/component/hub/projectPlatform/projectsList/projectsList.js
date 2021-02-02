@@ -17,7 +17,7 @@ function ProjectsList(props) {
     const { idProject } = useParams();
 
     useEffect(() => {
-        props.getProjectById(idProject)
+        props.getProjectByIdInServer(idProject)
         if (props.project.workspace._id)
             props.getProjectsByWorkspaceId(props.project.workspace._id)
     }, [props.project.workspace._id])
@@ -25,7 +25,7 @@ function ProjectsList(props) {
     //to chang the project that user selected
     const changeSelectedProject = (id) => {
         // let projectIdSelected = event.target.options[event.target.selectedIndex].id;
-       console.log(id)
+        console.log(id)
         props.changeProject(id)
     }
 
@@ -62,12 +62,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-<<<<<<< HEAD
+        getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
-=======
-        getProjectById: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
->>>>>>> dev
     }
 
 

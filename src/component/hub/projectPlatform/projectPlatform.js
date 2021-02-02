@@ -35,7 +35,6 @@ function ProjectPlatform(props) {
         <>
             {/* <Link to={`${props.user}/projectPlatform`} > */}
             <div className="body container-fluid">
-<<<<<<< HEAD
 
                 <Logo nameWorkspace='Leader hub' />
 
@@ -43,15 +42,6 @@ function ProjectPlatform(props) {
                 {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
 
                 {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
-=======
-                <Logo className="logo-workspace" nameWorkspace='Leader hub' />
-                < ProjectsList changeProject={changeProjectId} />
-                {/* changeCard={changeCardId} */}
-                {viewCardsByProject ? <CardsByProject  projectId={projectId} /> : null}
-                {/* {viewTasksByCard ? */}
-                 {/* <TasksByCard cardId={cardId} /> */}
-                {/* //   : null} */}
->>>>>>> dev
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 {/* <div className="add-new-btn ">+</div> */}
 
@@ -62,27 +52,17 @@ function ProjectPlatform(props) {
 }
 const mapStateToProps = (state) => {
     return {
-<<<<<<< HEAD
         projects: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
-=======
-        projects: state.public_reducer.project,
-        user: state.public_reducer.userName
->>>>>>> dev
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-<<<<<<< HEAD
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
 
-=======
-        // getProjectByIdInServer:(idProject)=>dispatch(actions.getProjectByIdInServer(idProject)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
->>>>>>> dev
     }
 
 

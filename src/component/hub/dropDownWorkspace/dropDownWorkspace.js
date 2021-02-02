@@ -25,7 +25,7 @@ function DropDownWorkspace(props) {
                     {props.nameWorkspace}
                 </option>
                 {props.worksapces.map(item => (
-                    <option value={item._id} >
+                    <option className='textLogo' value={item._id} >
                         {item.name}
                     </option>
                 ))}
