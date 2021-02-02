@@ -10,20 +10,20 @@ import '../../body/body.css'
 
 function ProjectsByWorkspace(props) {
     const [isFullProjects, setIsFullProjects] = useState(true);
-    const [flag, setFlag] = useState(false);
+    // const [flag, setFlag] = useState(false);
     const nameLogo = 'Leader Hub';
 
 
     let { idWorkspace } = useParams();
 
     useEffect(() => {
-        if (flag == false) {
-            props.getProjectsByWorkspace(idWorkspace);
-            setFlag(true)
-        }
-    }, [props])
+        // if (flag == false) {
+        props.getProjectsByWorkspaceId(idWorkspace);
+        // setFlag(true)
+        // }
+    }, [])
 
-    const viewProjectsByWorkspace = props.projects.map((project) => {
+    const viewProjectsByWorkspace = props.workspace.projects.map((project) => {
         return <ViewProject myProject={project} />
     })
 
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
 

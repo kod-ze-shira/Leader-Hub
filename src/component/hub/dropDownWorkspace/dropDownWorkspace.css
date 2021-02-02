@@ -20,7 +20,7 @@ option{
 a{
     color: #98A9BC!important;
     display: inline-block;
-    float: right;
+    /* float: right; */
     
 }
 .textLogo{
