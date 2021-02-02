@@ -1,33 +1,27 @@
 
-.allWorkspaces{
-    overflow: auto;
-    height: 87%;
-    }
-
-.MyWorkspace{
-    color:black;
-    font-size: x-large;
-    
-}
-.renderedListWorkspaces{
-    margin-Right: 25px; 
-   margin-top:20px;
-
-}
 hr{
-    width: 72rem;
-    color:#707070;
+width: 72rem;
+color:black;
 }
-@media screen and (min-width: 108px){
+
 .grid{
-    cursor: pointer;
-    
+cursor: pointer;
+
 }
-}
- @media screen and (min-width: 768px){
+
+ 
 .list{
-    cursor: pointer;
-    
+cursor: pointer;
+
 }
+.MyWorkspace{
+    font-size: x-large;
+       font-weight: 505;
+}
+.borderBottom{
+    border-bottom:black 1px solid ;
+      display: flex;
+  justify-content:space-between; 
+   
 }
 
