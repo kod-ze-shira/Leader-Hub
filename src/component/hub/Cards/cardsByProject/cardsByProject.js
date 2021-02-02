@@ -18,9 +18,14 @@ function CardsByProject(props) {
     const [viewTasksByCard, setViewTasksByCard] = useState(false)
     const [cardId, setCardId] = useState("")
 
-    const changeCardId = (value) => {
+    const changeCardId = (value, flag) => {
         setCardId(value)
-        setViewTasksByCard(true)
+        if (flag)
+            setViewTasksByCard(true)
+        
+        else
+        setViewTasksByCard(false)
+
     }
     const viewCardsByProject = props.cards.map((card) => {
         // console.log(card._id);
@@ -30,11 +35,11 @@ function CardsByProject(props) {
     return (
         <>
             {viewCardsByProject}
-              {
-                viewTasksByCard? <TasksByCard cardId={cardId} />:
-                null
-            }  
-           
+            {
+                viewTasksByCard ? <TasksByCard cardId={cardId} /> :
+                    null
+            }
+
 
         </>
     )
@@ -44,7 +49,7 @@ function CardsByProject(props) {
 export default connect(
     (state) => {
         return {
-            
+
             cards: state.public_reducer.cards,
             // project: state.project_reducer.project,
             // user: state.public_reducer.userName
