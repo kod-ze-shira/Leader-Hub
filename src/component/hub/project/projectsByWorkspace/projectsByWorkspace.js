@@ -9,20 +9,13 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
 function ProjectsByWorkspace(props) {
-    const [isFullProjects, setIsFullProjects] = useState(true);
-    const [flag, setFlag] = useState(false);
-    const nameLogo = 'Leader Hub';
-
+    
 
     let { idWorkspace } = useParams();
 
     useEffect(() => {
-        if (flag == false) {
-            console.log(idWorkspace)
             props.getProjectsByWorkspace(idWorkspace);
-            setFlag(true)
-        }
-    }, [props])
+    }, [])
 
     const viewProjectsByWorkspace = props.projects.map((project) => {
         return <ViewProject myProject={project} />

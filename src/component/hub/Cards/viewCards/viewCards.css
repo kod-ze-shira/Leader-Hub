@@ -16,6 +16,9 @@
 .show-card{
     background-color: transparent;
 }
+.show-card:focus{
+    outline: 0;
+}
 p{
     /* font-size: medium; */
     /* background-color: teal; */

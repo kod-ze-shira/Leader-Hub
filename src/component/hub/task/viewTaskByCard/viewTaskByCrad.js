@@ -16,7 +16,7 @@ function ViewTaskByCrad(props) {
                 <div className="row">
                     <div className="col  ">
                         <div>
-                            <label class="container pl-5 my-2 ml-5 border-bottom mx-5">{props.task.description}
+                            <label class="container pl-5 my-2 ml-5 ">{props.task.description}
                                 <input type="checkbox" />
                                 <span class="checkmark"></span>
                             </label>

@@ -18,7 +18,6 @@ function ViewCards(props) {
 
     return (
         <>
-            <div className="container" >
                     <div className=" row justify-content-start card-name border-bottom mx-5 mt-4 pb-0">
                         <div className="triangle mt-4"></div>
                         <button onClick={(e) => changeSelectedCard(e)} className="ml-3 show-card">{props.card.name}</button>
@@ -26,9 +25,6 @@ function ViewCards(props) {
                         <p>Label</p>
                         <p>Due Date</p>
                     </div>
-            </div>
-
-
         </>
     )
 }
