@@ -51,7 +51,7 @@ function ViewProject(props) {
                     <Cell
                         // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
                         item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
-                        description='update Dates' />
+                        description='Last update' />
                     {/*                     
                      {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
                 Last updateDates</td> */}

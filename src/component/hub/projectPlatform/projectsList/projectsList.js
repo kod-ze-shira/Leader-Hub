@@ -20,12 +20,13 @@ function ProjectsList(props) {
         props.getProjectById(idProject)
         if (props.project.workspace._id)
             props.getProjectsByWorkspaceId(props.project.workspace._id)
+        props.changeProject(idProject)
     }, [props.project.workspace._id])
 
     //to chang the project that user selected
     const changeSelectedProject = (id) => {
         // let projectIdSelected = event.target.options[event.target.selectedIndex].id;
-       console.log(id)
+        console.log(id)
         props.changeProject(id)
     }
 
