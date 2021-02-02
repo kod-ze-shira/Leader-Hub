@@ -15,23 +15,19 @@
 
 }
 hr{
-    width: 57vw;
+    width: 72rem;
     color:#707070;
 }
+@media screen and (min-width: 108px){
 .grid{
     cursor: pointer;
-   
+    
 }
+}
+ @media screen and (min-width: 768px){
 .list{
     cursor: pointer;
     
 }
-.scrollbar{
-    overflow-y: scroll;
-    height: 435px;
 }
-.scrollbar::-webkit-scrollbar {
-    width: 6px;
-    /* height: 6px; */
-  }
 

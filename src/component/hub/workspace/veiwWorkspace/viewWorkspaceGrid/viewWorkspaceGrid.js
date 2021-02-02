@@ -32,7 +32,7 @@ function ViewWorkspaceGrid(props) {
                 onClick={() => routeToWorkspace(workspace)}
             >
                 <div className="col-4 Workspace" >
-                    < div className="logoWorkspaceGrid mt-2"
+                    < div className="logoWorkspaceGrid "
                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                         {workspace.name[0].toUpperCase()}
                         {/* {
