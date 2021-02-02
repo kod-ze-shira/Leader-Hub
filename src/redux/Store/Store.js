@@ -8,7 +8,7 @@ import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getCardsByProjectId, getProjectsByWorkspace, getTasksByProject, getTasksByCardId } from '../middleware/crud'
+import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTasksByCardId } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
@@ -42,7 +42,7 @@ const store = createStore(
                 createNewTeam,
                 // getAllTeamsForUser,
                 setProjectCrud,
-                getProjectsByWorkspace,
+                getProjectsByWorkspaceId,
                 // getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,

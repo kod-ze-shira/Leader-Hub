@@ -9,16 +9,19 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
 function ProjectsByWorkspace(props) {
-    
+
 
     let { idWorkspace } = useParams();
 
     useEffect(() => {
-            props.getProjectsByWorkspace(idWorkspace);
+        // if (flag == false) {
+        props.getProjectsByWorkspaceId(idWorkspace);
+        // setFlag(true)
+        // }
     }, [])
 
-    const viewProjectsByWorkspace = props.projects.map((project) => {
-        return <ViewProject  myProject={project} />
+    const viewProjectsByWorkspace = props.workspace.projects.map((project) => {
+        return <ViewProject myProject={project} />
     })
 
     return (
@@ -50,7 +53,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
 
