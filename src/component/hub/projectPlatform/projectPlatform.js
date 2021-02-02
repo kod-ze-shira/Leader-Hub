@@ -6,7 +6,7 @@ import CardsByProject from '../Cards/cardsByProject/cardsByProject';
 import TasksByCard from '../task/tasksByCard/tasksByCard'
 import Logo from '../logo/logo'
 import './projectPlatform.css'
-
+import HeaderBody from '../headerBody/headerBody'
 function ProjectPlatform(props) {
     const [projectId, setProjectId] = useState(0)
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
@@ -16,6 +16,11 @@ function ProjectPlatform(props) {
         // props.getProjectByIdInServer("6011270ba72ba9f8be885e06");
     }, [])
 
+
+    useEffect(() => {
+        { props.getAllWorkspaces() };
+
+    }, []);
     const changeProjectId = (value) => {
         setProjectId(value)
         setViewCardsByProject(true)
@@ -40,15 +45,17 @@ function ProjectPlatform(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        projects: state.public_reducer.project,
-        user: state.public_reducer.userName
+        projects: state.project_reducer.project,
+        user: state.public_reducer.userName,
+        workspaces: state.public_reducer.worksapces,
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getProjectByIdInServer:(idProject)=>dispatch(actions.getProjectByIdInServer(idProject)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+
     }
 
 

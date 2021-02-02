@@ -8,8 +8,9 @@ import { withRouter } from 'react-router-dom';
 
 function DropDownWorkspace(props) {
     function routeToWrkspace(e) {
-        let r = props.worksapces.filter(x => e.target.value == x._id)
-        props.setWorkspace(r)
+        debugger
+        let r = props.worksapces.findIndex(x => e.target.value == x._id)
+        props.setWorkspace(props.worksapces[r])
         // איך מביאים וורקספייס לי 
         // ID
         // לא כמו הנ"ל
@@ -24,7 +25,7 @@ function DropDownWorkspace(props) {
                     {props.nameWorkspace}
                 </option>
                 {props.worksapces.map(item => (
-                    <option value={item._id} >
+                    <option className='textLogo' value={item._id} >
                         {item.name}
                     </option>
                 ))}
