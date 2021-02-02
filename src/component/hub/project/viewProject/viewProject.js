@@ -13,13 +13,16 @@ import { withRouter } from 'react-router-dom';
 
 
 function ViewProject(props) {
+    const { workspace } = props
 
     function detailsProject() {
         set_getProjectById(false);
     }
-    const routeToCards = (e) => {
+    const routeToCards = (workspace) => {
         let idProject = props.myProject._id;
-      props.history.push("/" + props.user + "/projectPlatform/"+ idProject)
+        props.setWorkspace(workspace)
+
+        props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
 
     const [getProjectById, set_getProjectById] = useState(true);
@@ -33,7 +36,7 @@ function ViewProject(props) {
                         style={{ 'background-color': props.myProject.color }}></span>
                 </td>
 
-                <td onClick={(e) => routeToCards(e)}>
+                <td onClick={() => routeToCards(workspace)}>
                     {props.myProject.name}
                     {/* {props.myProject.description} */}
                 </td>
@@ -76,12 +79,13 @@ function ViewProject(props) {
 const mapStateToProps = (state) => {
     return {
         project: state.project_reducer.project,
-        user:state.public_reducer.userName
+        user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
 
     }
 }

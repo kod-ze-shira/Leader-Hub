@@ -1,4 +1,18 @@
 .tableProject{
     background: white;
-     margin-top: 10vh;
+     height: 50vh;
+     overflow: auto;
+     width: 88%;
+    margin-left: 6%;
+}
+
+.table-responsive{
+    height: 65vh;
+    overflow: auto;
+    margin-top: 65px;
+}
+
+
+table td, .table th {
+    padding: 0.20rem !important;
 }

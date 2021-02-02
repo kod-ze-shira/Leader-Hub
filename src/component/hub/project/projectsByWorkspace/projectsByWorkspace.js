@@ -14,25 +14,25 @@ function ProjectsByWorkspace(props) {
     let { idWorkspace } = useParams();
 
     useEffect(() => {
-        // if (flag == false) {
         props.getProjectsByWorkspaceId(idWorkspace);
-        // setFlag(true)
-        // }
     }, [])
 
     const viewProjectsByWorkspace = props.workspace.projects.map((project) => {
         return <ViewProject myProject={project} />
     })
 
+
+
     return (
         <>
+
             <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
                 <HeaderBody nameWorkspace={props.workspace.name} />
-                <Table responsive className='tableProject'>
+                <Table responsive className='tableProject' >
                     <>
-                        <thead>
+                        {/* <thead>
                             <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
-                        </thead>
+                        </thead> */}
                         <tbody>
                             {viewProjectsByWorkspace}
                         </tbody>

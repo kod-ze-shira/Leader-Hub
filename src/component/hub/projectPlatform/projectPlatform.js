@@ -36,7 +36,7 @@ function ProjectPlatform(props) {
             {/* <Link to={`${props.user}/projectPlatform`} > */}
             <div className="body container-fluid">
 
-                <Logo nameWorkspace='Leader hub' />
+                <Logo nameWorkspace={props.projects.workspace.name} />
 
                 <ProjectsList changeProject={changeProjectId} />
                 {/* <CardsByProject projectId={props.project._id}></CardsByProject> */}
