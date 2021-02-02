@@ -46,7 +46,7 @@ function ViewWorkspaceList(props) {
                         } */}
                         </div>
                     </div>
-                    <b className="mt-3 ml-2">{workspace.name}</b>
+                    <b className="mt-4 ml-2">{workspace.name}</b>
 
                 </div>
 

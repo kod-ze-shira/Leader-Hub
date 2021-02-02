@@ -11,15 +11,18 @@
    font-family: 'Roboto', sans-serif;
    /* font-size: xx-large; */
    border:none;
+   margin:8px ;
+    font-weight: 600;
+   
      
 }
 
 
 
 .Workspace1{
-   width: 4rem;
+   width: 5rem;
    background: #F6F6FA;
-   height: 4rem;
+   height: 5rem;
    margin-bottom: 10px;
    text-align: center;
    justify-content: center;

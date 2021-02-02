@@ -43,23 +43,18 @@ function AllWorkspaces(props, getAllWorkspaces) {
                 <div className="row">
                     <div className="col-1"></div>
                     <div className="col-10">
-                        <div className="row">
-
-                            <div className="col-8 MyWorkspace"><b>My Workspace</b></div>
-
-                            <div className="col-2 d-none d-lg-block "></div>
+                        <div className="row  borderBottom">
 
 
-                            <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
-                            <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
-                        </div>
-                        <div className="row">
-
-                            <div className="col-4"><hr></hr></div>
-
+                            <div className="MyWorkspace">My Workspace</div>
+                            <div className="row">
+                                <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                                <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                            </div>
                         </div>
 
-                        <div className="row mt-2 ml-2">
+
+                        <div className="row mt-5 ml-5">
                             {renderedGridWorkspaces}
 
                         </div>
@@ -76,20 +71,19 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
                 <div className="row mt-5">
                     <div className="col-1"></div>
+                    <div className="col-10">
+                        <div className="row borderBottom ">
 
-                    <div className="col-7 MyWorkspace"><b>My Workspace</b></div>
-                    <div className="col-1 ml-5 d-none d-lg-block"></div>
+                            <div className="MyWorkspace">My Workspace</div>
 
-
-                    <div className="col-0.5 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
-                    <div className="col-2 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
-                    <div className="row">
-                        <div className="col-1"></div>
-                        <div className="col-4"><hr></hr></div>
-
+                            <div className="row">
+                                <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
+                                <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="row ">
+                <div className="row mt-4">
                     <div className="col-1"></div>
                     <div className="col ml-5">
                         {renderedListWorkspaces} </div>
