@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject';
 import './projectsList.css'
-import { FileFill } from 'react-bootstrap-icons';
+// import { FileFill } from 'react-bootstrap-icons';
 import { Alert } from 'bootstrap';
 // import EditWorkspace from '.././editWorkspace/editWorkspace'
 // import project_reducer from '../../../../redux/Reducers/project_reducer';
