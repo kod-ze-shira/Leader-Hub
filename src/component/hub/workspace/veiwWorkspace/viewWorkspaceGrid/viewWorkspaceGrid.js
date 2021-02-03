@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
