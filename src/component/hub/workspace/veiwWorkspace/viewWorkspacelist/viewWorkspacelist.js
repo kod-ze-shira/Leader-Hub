@@ -32,7 +32,7 @@ function ViewWorkspaceList(props) {
     return (
         <>
 
-            <div className="row ml-5"
+            <div className="row "
                 onClick={() => routeToProject(workspace._id)}
             >
                 <div className="row " >
@@ -46,7 +46,7 @@ function ViewWorkspaceList(props) {
                         } */}
                         </div>
                     </div>
-                    <b className="mt-3 ml-2">{workspace.name}</b>
+                    <b className="mt-3 ml-2">{workspace.name} </b>
 
                 </div>
 
