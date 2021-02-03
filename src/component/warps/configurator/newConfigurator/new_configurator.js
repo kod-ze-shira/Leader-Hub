@@ -5,18 +5,13 @@ import './new_configurator.css'
 import DropDownList from '../dropDownList/dropDownList'
 import ConfiguratorTop from '../configuratorTop/configuratorTop'
 import $ from 'jquery'
+import history from '../../../history'
+import { withRouter } from 'react-router-dom';
 
-const mapStateToProps = (state) => {
-    return {
-    }
-}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
+function NewConfigorator(props) {
     const changeBackground = (e) => {
+        props.history.push("/"+props.user)
         $(document).ready(function () {
             $("li").removeClass("li-back")
             $(e).addClass("li-back")
@@ -26,8 +21,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
 
     return (
         <>
-            <div className="right_nav ">
-                <div className="row justify-content-center mt-5">
+            <div className="left_nav ">
+                <div className="ml-5 pt-4 mt-5">
                     <img src={require('../../../img/logoLeader.svg')}></img>
                 </div>
                 <ul className="list_config">
@@ -57,8 +52,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
             </div>
         </>
     )
-})
+}
 
+const mapStateToProps = (state) => {
 
+    return {
+        user: state.public_reducer.userName,
 
-
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewConfigorator))
