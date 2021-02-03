@@ -4,9 +4,6 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 
-
-
-
 function ViewWorkspaceGrid(props) {
     const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
@@ -17,8 +14,7 @@ function ViewWorkspaceGrid(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToWorkspace = (workspace) => {
-        props.setWorkspace(workspace)
+    const routeToWorkspace = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
@@ -34,17 +30,15 @@ function ViewWorkspaceGrid(props) {
         setOver(false);
     }
 
-
-
-
-
     return (
         <>
             {
                 over ?
                     <>
                         <div>
-                            <div className="row">
+                            <div className="row"
+                                onClick={() => routeToWorkspace()}
+                            >
                                 <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
 
                                 <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
@@ -62,10 +56,13 @@ function ViewWorkspaceGrid(props) {
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
 
+
+
                                     </div>
                                     <div className="mt-3"><b>{workspace.name}</b></div>
                                 </div>
                             </div>
+
 
                         </div>
 
@@ -108,9 +105,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
     }
 
 

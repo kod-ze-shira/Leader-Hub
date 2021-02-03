@@ -20,6 +20,7 @@ function ViewWorkspaceList(props) {
 
     const routeToProject = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
+
     }
 
     const toOpenEditWorkspace = () => {
@@ -29,12 +30,12 @@ function ViewWorkspaceList(props) {
     return (
         <>
 
-            <div className="row ml-5"
+            <div className="row"
                 onClick={() => routeToProject()}
             >
-                <div className="row " >
-                    <div className="Workspace" >
-                        <div className="logoWorkspacelist"
+                <div className="row" >
+                    <div className="Workspace1" >
+                        < div className="logoWorkspacelist"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                             {workspace.name[0].toUpperCase()}
                             {/* {
@@ -43,7 +44,7 @@ function ViewWorkspaceList(props) {
                         } */}
                         </div>
                     </div>
-                    <b className="mt-3 ml-2">{workspace.name} </b>
+                    <b className="mt-4 ml-2">{workspace.name}</b>
 
                 </div>
 
@@ -65,7 +66,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+
     }
+
+
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 

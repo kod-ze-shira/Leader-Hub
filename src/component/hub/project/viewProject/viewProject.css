@@ -1,3 +1,12 @@
+
+.description{
+    letter-spacing: 0px;
+    color: #98A9BC;
+    text-align: center;
+    text-transform: capitalize;
+    display: block;
+}
+
 .stripeProject{
     display: inline-block;
     width: 7px;

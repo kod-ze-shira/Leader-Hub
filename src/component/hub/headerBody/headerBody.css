@@ -1,8 +1,13 @@
 .headerBody{
     position: fixed;
-    /* width: 70vw; */
+    padding-bottom: 2vh;
+    width: 65.2vw;
+    height: 14vh;
     background-color: white;
     z-index: 999;
     border-top-right-radius:10px;
     border-top-left-radius:10px;
+    border-bottom: 2px solid;
+    border-color: #80808045;
+    margin-left: 4.5vw;
 }
