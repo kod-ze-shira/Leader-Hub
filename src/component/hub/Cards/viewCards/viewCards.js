@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
@@ -9,11 +8,12 @@ import TasksByCard from '../../task/tasksByCard/tasksByCard'
 
 function ViewCards(props) {
 
-    const [flag, setFlag] = useState(true)
+    const [flag, setFlag] = useState(false)
+    const [cardId, setCardId] = useState("")
 
     const changeSelectedCard = (event) => {
         setFlag(!flag)
-        props.changeCard(props.card._id, flag)
+        setCardId(props.card._id)
 
     }
 
@@ -30,6 +30,7 @@ function ViewCards(props) {
                 <p className="p-2  border-left col"></p>
             </div>
 
+           {flag? <TasksByCard cardId={cardId} /> :null}
 
         </>
     )
