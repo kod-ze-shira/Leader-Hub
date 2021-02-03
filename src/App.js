@@ -13,7 +13,6 @@ function App() {
     <Provider store={Store}>
       <>
         {/* <ConfiguratorList></ConfiguratorList> */}
-
         <Hub></Hub>
       </>
     </Provider>

@@ -23,49 +23,47 @@ import HeaderBody from './headerBody/headerBody'
 export default function Hub() {
     return (
         <>
-
+            <Router history={history}>
             <Nav />
-           
             <div className="row ">
-            <div className="col-2 px-0 mt-0">
+
+                <div className="col-2 px-0 mt-0">
                     <Configurator />
                 </div>
-                <div className="col-9 ml-5 col align-self-center">
+                <div className="col-10 px-5 col align-self-center">
                     {/* <Header /> */}
                     {/* <div className="col-2"> <Tools /></div> */}
-                    <Router history={history}>
-                        <Switch>
-                            <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsByWorkspace />
-                                {/* <Projcts /> */}
 
-                            </Route>
-                            <Route path="/workspacePlatform" >
-                                <WorkspacePlatform />
-                            </Route>
-                            <Route path="/:userName/projectPlatform/:idProject" >
-                                <ProjectPlatform />
-                            </Route>
-                            {/* <Route path="/:userName/cardsByProject" >
+                    <Switch>
+                        <Route path="/:userName/workspace/:idWorkspace" >
+                            <ProjectsByWorkspace />
+                            {/* <Projcts /> */}
+
+                        </Route>
+                        <Route path="/workspacePlatform" >
+                            <WorkspacePlatform />
+                        </Route>
+                        <Route path="/:userName/projectPlatform/:idProject" >
+                            <ProjectPlatform />
+                        </Route>
+                        {/* <Route path="/:userName/cardsByProject" >
                                 <CardsByProject />
                             </Route> */}
-                            <Route path="/:userName" >
-                                <Body />
+                        <Route path="/:userName" >
+                            <Body />
 
-                            </Route>
+                        </Route>
 
-                            {/* <Route path="" >
+                        {/* <Route path="" >
                                 <HeaderBody nameWorkspace="Leader boxx" />
 
                             </Route> */}
-                            {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
+                        {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
 
-                        </Switch>
-                    </Router>
+                    </Switch>
                 </div>
-               
             </div>
-
+        </Router>
 
         </>
     )
