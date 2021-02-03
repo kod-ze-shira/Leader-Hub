@@ -27,10 +27,11 @@ height: 50px;
 /* right:0; */
 margin-left: 68vw;
 
-top:85vh;
+top:82vh;
 position: fixed;
 color:white;
 font-size: 30px;
+cursor: pointer;
   }
   
   .add-new-btn::first-letter{
