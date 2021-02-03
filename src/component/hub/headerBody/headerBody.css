@@ -1,6 +1,6 @@
 .headerBody{
     position: fixed;
-    width: 70vw;
+    /* width: 70vw; */
     background-color: white;
     z-index: 999;
     border-top-right-radius:10px;

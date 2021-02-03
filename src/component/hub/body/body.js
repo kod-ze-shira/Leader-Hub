@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import './body.css'
 import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
-import './body.css';
-
-
 import TeamExample from '../team/teamExample'
 import { Button, Modal, Form } from 'react-bootstrap';
 
