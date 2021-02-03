@@ -17,8 +17,7 @@ function ViewWorkspaceGrid(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToWorkspace = (workspace) => {
-        props.setWorkspace(workspace)
+    const routeToWorkspace = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
@@ -28,7 +27,9 @@ function ViewWorkspaceGrid(props) {
 
     return (
 
-        <div className="Workspacegrid" >
+        <div className="Workspacegrid"
+            onClick={() => routeToWorkspace()}
+        >
 
             < div className="logoWorkspace1 ml-5 mt-3"
                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
@@ -54,9 +55,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
     }
 
 

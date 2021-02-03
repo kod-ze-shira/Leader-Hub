@@ -18,11 +18,8 @@ function ViewWorkspaceList(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToProject = (id) => {
-
-        props.history.push("/" + props.user + "/workspace/" + id)
-        // history.push("/renana-il/workspace/" + id)
-
+    const routeToProject = () => {
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
     const toOpenEditWorkspace = () => {
@@ -33,7 +30,7 @@ function ViewWorkspaceList(props) {
         <>
 
             <div className="row ml-5"
-                onClick={() => routeToProject(workspace._id)}
+                onClick={() => routeToProject()}
             >
                 <div className="row " >
                     <div className="Workspace" >
@@ -67,12 +64,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-
     }
-
-
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 

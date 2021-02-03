@@ -19,7 +19,7 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
-      props.history.push("/" + props.user + "/projectPlatform/"+ idProject)
+        props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
 
     const [getProjectById, set_getProjectById] = useState(true);
@@ -61,7 +61,15 @@ function ViewProject(props) {
                         item={props.myProject.cards.length ? props.myProject.cards.length : "0"}
                         description='card' />
                 </td>
-            </tr>
+
+                <td>
+                    <span className='stripeProject'>
+                        <span style={{ 'font-weight': 'bold' }}>
+                            7</span>/20
+                </span>
+                    <span style='description '>Task</span>
+                </td>
+            </tr >
             {/* <div className="container">
                 <div className="row" onClick={() => setViewTasks(!viewTasks)}>
                     <div className="col">
@@ -76,7 +84,7 @@ function ViewProject(props) {
 const mapStateToProps = (state) => {
     return {
         project: state.project_reducer.project,
-        user:state.public_reducer.userName
+        user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {

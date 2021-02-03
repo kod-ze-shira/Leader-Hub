@@ -89,7 +89,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    // setWorkspaceName:(name)=> dispatch(actions.setWorkspaceName(name)),
     setWorkspaceId: () => dispatch(actions.setWorkspaceId()),
     getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
     setisConfiguratorOpenWorkspace: () => dispatch(actions.setisConfiguratorOpenWorkspace()),
