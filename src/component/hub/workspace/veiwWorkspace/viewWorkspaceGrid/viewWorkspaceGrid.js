@@ -17,7 +17,7 @@ function ViewWorkspaceGrid(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToWorkspace = (workspace) => {
+    const routeToWorkspace = () => {
         props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
@@ -62,10 +62,13 @@ function ViewWorkspaceGrid(props) {
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
 
+
+
                                     </div>
                                     <div className="mt-3"><b>{workspace.name}</b></div>
                                 </div>
                             </div>
+
 
                         </div>
 

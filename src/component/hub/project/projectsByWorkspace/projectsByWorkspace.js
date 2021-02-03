@@ -9,27 +9,30 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
 function ProjectsByWorkspace(props) {
-    
+
 
     let { idWorkspace } = useParams();
 
     useEffect(() => {
-            props.getProjectsByWorkspace(idWorkspace);
+        props.getProjectsByWorkspaceId(idWorkspace);
     }, [])
 
-    const viewProjectsByWorkspace = props.projects.map((project) => {
+    const viewProjectsByWorkspace = props.workspace.projects.map((project) => {
         return <ViewProject myProject={project} />
     })
 
+
+
     return (
         <>
+
             <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
                 <HeaderBody nameWorkspace={props.workspace.name} />
-                <Table responsive className='tableProject'>
+                <Table responsive className='tableProject' >
                     <>
-                        <thead>
+                        {/* <thead>
                             <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
-                        </thead>
+                        </thead> */}
                         <tbody>
                             {viewProjectsByWorkspace}
                         </tbody>

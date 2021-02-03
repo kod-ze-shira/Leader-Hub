@@ -19,6 +19,7 @@ function ViewWorkspaceList(props) {
     }
 
     const routeToProject = (id) => {
+        // props.setWorkspace(workspace)
 
         props.history.push("/" + props.user + "/workspace/" + id)
         // history.push("/renana-il/workspace/" + id)

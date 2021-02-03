@@ -24,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
     const [showShare, setShowShare] = useState(false)
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid containerMenu">
                 <div className="row justify-content-center">
                     <Workspace className="col-12"></Workspace>
                 </div>
