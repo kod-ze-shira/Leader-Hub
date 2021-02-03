@@ -18,13 +18,22 @@
     line-height: 2.8; 
   }
   .li-back{
-    background: transparent linear-gradient(90deg, #bceff8 0%,
-     #006C8000 100%) 0% 0% no-repeat padding-box; 
-       
+    /* background: transparent linear-gradient(90deg, #bceff8 0%,
+     #006C8000 100%) 0% 0% no-repeat padding-box;  */
+     background: transparent linear-gradient(90deg, #dff5fa 0%,
+     #006C8000 100%) 0% 0% no-repeat padding-box;
+     /* border-left:10px solid #40D9ED;  */
+     /* margin-left: 2vh; */
+        
   }
   li:focus{
     background-color:white;
   }
+  
+  li img{
+    display: inline-block;
+  }
+ 
   
 
  
