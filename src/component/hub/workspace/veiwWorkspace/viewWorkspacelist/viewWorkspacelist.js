@@ -34,7 +34,7 @@ function ViewWorkspaceList(props) {
             >
                 <div className="row " >
                     <div className="Workspace" >
-                        < div className="logoWorkspacelist"
+                        <div className="logoWorkspacelist"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                             {workspace.name[0].toUpperCase()}
                             {/* {
@@ -43,7 +43,7 @@ function ViewWorkspaceList(props) {
                         } */}
                         </div>
                     </div>
-                    <b className="mt-3 ml-2">{workspace.name}</b>
+                    <b className="mt-3 ml-2">{workspace.name} </b>
 
                 </div>
 
