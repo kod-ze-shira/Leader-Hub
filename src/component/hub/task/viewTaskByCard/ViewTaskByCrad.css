@@ -2,7 +2,7 @@
    /* font-size: medium; */
 /* } */ 
 /* The container */
-.check-task:first-child, .check-task:last-child {
+.check-task:first-child, .check-task button {
     color: #778CA2;
     display: block;
     position: relative;
@@ -15,8 +15,17 @@
     -ms-user-select: none;
     user-select: none;
   }
+  .check-task button {
+    background-color: transparent;
+    /* text-align: center; */
+  }
+  .check-task button:focus{
+    outline: 0;
+  }
+  
   .check-task{
     /* margin-right:0.5vw; */
+    margin-bottom: 0px !important;
   }
   
   /* Hide the browser's default checkbox */
