@@ -25,12 +25,12 @@ export default function Hub() {
         <>
 
             <Nav />
-
-            <div className="row justify-content-end">
-                <div className="col-1 ">
-                    <Left_nav />
+           
+            <div className="row ">
+            <div className="col-2 px-0 mt-0">
+                    <Configurator />
                 </div>
-                <div className="col-9 col align-self-center">
+                <div className="col-9 ml-5 col align-self-center">
                     {/* <Header /> */}
                     {/* <div className="col-2"> <Tools /></div> */}
                     <Router history={history}>
@@ -63,9 +63,7 @@ export default function Hub() {
                         </Switch>
                     </Router>
                 </div>
-                <div className="col-2 px-0">
-                    <Configurator />
-                </div>
+               
             </div>
 
 

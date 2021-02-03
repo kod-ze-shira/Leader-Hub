@@ -5,6 +5,8 @@
     color: #000000;
     /* border-bottom: gray solid 1px; */
     background-color:transparent;
+    border-bottom: 1px  solid #d3d2d2 ;
+
 }
 .triangle{
         width: 0; 
@@ -16,10 +18,15 @@
 .show-card{
     background-color: transparent;
 }
+.show-card:focus{
+    outline: 0;
+}
 p{
     /* font-size: medium; */
     /* background-color: teal; */
     color:#98A9BC;
-    padding-left: 6vw;
-    margin-top: 2vh;
+    /* padding-left: 6vw; */
+    /* bottom:0; */
+    margin-bottom: 0;
+    /* margin-top: 2vh; */
 }
