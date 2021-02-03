@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
@@ -57,10 +56,13 @@ function ViewWorkspaceGrid(props) {
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
 
+
+
                                     </div>
                                     <div className="mt-3"><b>{workspace.name}</b></div>
                                 </div>
                             </div>
+
 
                         </div>
 

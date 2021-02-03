@@ -13,11 +13,12 @@ import { withRouter } from 'react-router-dom';
 
 
 function ViewProject(props) {
+    const { workspace } = props
 
     function detailsProject() {
         set_getProjectById(false);
     }
-    const routeToCards = (e) => {
+    const routeToCards = () => {
         let idProject = props.myProject._id;
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
@@ -33,14 +34,13 @@ function ViewProject(props) {
                         style={{ 'background-color': props.myProject.color }}></span>
                 </td>
 
-                <td onClick={(e) => routeToCards(e)}>
+                <td onClick={() => routeToCards(workspace)}>
                     {props.myProject.name}
                     {/* {props.myProject.description} */}
                 </td>
 
                 <td>
                     <Cell
-
                         // item={props.myProject.dueDate ? props.myProject.dueDate : Date.now()}
                         item={props.myProject.dueDate}
                         description='Due date' />
@@ -50,7 +50,9 @@ function ViewProject(props) {
                 <td>
                     <Cell
                         // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
-                        item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
+                        item={props.myProject.updateDates.length ?
+                            props.myProject.updateDates[props.myProject.updateDates.length - 1]
+                            : '12.12.2023'}
                         description='Last update' />
                     {/*                     
                      {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
@@ -90,6 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
 
     }
 }
