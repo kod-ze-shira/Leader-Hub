@@ -9,27 +9,33 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
 function ProjectsByWorkspace(props) {
-    
+
 
     let { idWorkspace } = useParams();
+    let myWorkspace;
+    // if (props.workspaces)
+    myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
+    // else {
+    // props.getAllWorkspaces();
+    // }
+    // useEffect(() => {
+    //     props.getProjectsByWorkspace(idWorkspace);
+    // }, [])
 
-    useEffect(() => {
-            props.getProjectsByWorkspace(idWorkspace);
-    }, [])
-
-    const viewProjectsByWorkspace = props.projects.map((project) => {
+    const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
         return <ViewProject myProject={project} />
     })
 
     return (
         <>
+
             <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
-                <HeaderBody nameWorkspace={props.workspace.name} />
-                <Table responsive className='tableProject'>
+                <HeaderBody nameWorkspace={myWorkspace.name} />
+                <Table responsive className='tableProject' >
                     <>
-                        <thead>
+                        {/* <thead>
                             <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
-                        </thead>
+                        </thead> */}
                         <tbody>
                             {viewProjectsByWorkspace}
                         </tbody>
@@ -45,11 +51,13 @@ const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
         user: state.public_reducer.userName,
-        workspace: state.workspace_reducer.workspace,
+        workspaces: state.public_reducer.worksapces,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
     }
 }

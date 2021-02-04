@@ -22,12 +22,16 @@ function ProjectsList(props) {
             props.getProjectsByWorkspaceId(props.project.workspace._id)
         props.changeProject(idProject)
         props.sendWorspaceName(props.project.workspace.name)
+
     }, [props.project.workspace._id])
 
     //to chang the project that user selected
     const changeSelectedProject = (id) => {
+        props.getProjectByIdInServer(id)
+        $(document).ready(function () {
+            $(".project-select").css("color", props.project.color)
+        })
         // let projectIdSelected = event.target.options[event.target.selectedIndex].id;
-        console.log(id)
         props.changeProject(id)
     }
 
