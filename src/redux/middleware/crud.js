@@ -598,10 +598,8 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 
 
 
-
 //
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
-
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
         fetch(url,

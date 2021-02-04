@@ -27,7 +27,7 @@ function ViewWorkspace({ props, user, isConfiguratorOpenWorkspace, workspace, se
 
   const routeToProject = () => {
     // debugger
-    // history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
+    history.push("/" + user + "/projectPlatform" + "/" + workspace._id)
   }
 
   return (
