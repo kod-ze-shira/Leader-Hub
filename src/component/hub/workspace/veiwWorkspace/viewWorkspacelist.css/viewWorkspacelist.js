@@ -18,9 +18,9 @@ function ViewWorkspaceList(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToProject = (id) => {
+    const routeToProject = () => {
 
-        props.history.push("/" + props.user + "/workspace/" + id)
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
         // history.push("/renana-il/workspace/" + id)
 
     }
@@ -33,7 +33,7 @@ function ViewWorkspaceList(props) {
         <>
 
             <div className="row"
-                onClick={() => routeToProject(workspace._id)}
+                onClick={() => routeToProject()}
             >
                 <div className="row" >
                     <div className="Workspace1" >
