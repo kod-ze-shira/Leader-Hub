@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
@@ -9,25 +8,29 @@ import TasksByCard from '../../task/tasksByCard/tasksByCard'
 
 function ViewCards(props) {
 
-    // const [ViewCards, setViewCards] = useState(false)
+    const [flag, setFlag] = useState(false)
+    const [cardId, setCardId] = useState("")
 
     const changeSelectedCard = (event) => {
-        props.changeCard(props.card._id)
+        setFlag(!flag)
+        setCardId(props.card._id)
 
     }
 
     return (
         <>
-            <div className="container" >
-                    <div className=" row justify-content-start card-name border-bottom mx-5 mt-4 pb-0">
-                        <div className="triangle mt-4"></div>
-                        <button onClick={(e) => changeSelectedCard(e)} className="ml-3 show-card">{props.card.name}</button>
-                        <p>Team</p>
-                        <p>Label</p>
-                        <p>Due Date</p>
-                    </div>
+            <div className=" row justify-content-start card-name  mx-5 mt-4 pb-0">
+
+                <div className="triangle ml-1 mt-3"></div>
+                <button onClick={(e) => changeSelectedCard(e)} className="ml-2 p-2 show-card col-3 border-right">{props.card.name}</button>
+
+                <p className="p-2 col ">Team</p>
+                <p className=" p-2 border-left col">Label</p>
+                <p className="p-2  border-left col">Due Date</p>
+                <p className="p-2  border-left col"></p>
             </div>
 
+           {flag? <TasksByCard cardId={cardId} /> :null}
 
         </>
     )

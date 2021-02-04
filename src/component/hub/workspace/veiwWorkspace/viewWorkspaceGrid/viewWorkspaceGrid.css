@@ -1,6 +1,38 @@
+.Workspacegrid{
 
-.logoWorkspaceGrid{
-     width: 4rem;
+color:black;
+font-size: small;
+
+      width: 10rem;
+   background-color: #F6F6FA;
+   height: 10rem;
+   margin-bottom: 10px;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+   margin-right: 1rem;
+
+    
+}
+.add
+{
+  cursor: pointer;
+}
+.delet{
+   cursor: pointer;
+}
+.edit{
+     cursor: pointer;
+}
+
+
+
+
+
+.logoWorkspace1{
+    
+    width: 4rem;
     height:4rem;
    border-radius: 50%;
    font-size: 26px;
@@ -11,22 +43,7 @@
    font-family: 'Roboto', sans-serif;
    /* font-size: xx-large; */
    border:none;
-     
-}
-
-
-.Workspace{
-   width: 1vw;
- 
-   background: #F6F6FA;
-   height: auto;
-   margin-bottom: 10px;
-   text-align: center;
-   justify-content: center;
-   align-items: center;
-   border-radius: 10px;
-
-   margin-left: 3rem;
+   font-weight: 50;
 
 
 }

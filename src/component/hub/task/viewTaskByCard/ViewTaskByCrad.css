@@ -2,7 +2,7 @@
    /* font-size: medium; */
 /* } */ 
 /* The container */
-.container {
+.check-task:first-child, .check-task button {
     color: #778CA2;
     display: block;
     position: relative;
@@ -15,9 +15,21 @@
     -ms-user-select: none;
     user-select: none;
   }
+  .check-task button {
+    background-color: transparent;
+    /* text-align: center; */
+  }
+  .check-task button:focus{
+    outline: 0;
+  }
+  
+  .check-task{
+    /* margin-right:0.5vw; */
+    margin-bottom: 0px !important;
+  }
   
   /* Hide the browser's default checkbox */
-  .container input {
+  .check-task input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -28,24 +40,24 @@
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    top: 0;
+    top: 7px;
     left: 0;
     height: 23px;
     width: 23px;
     background-color: #eee;
-    
+
     border: 1px solid #2BB4FB;
     border-radius: 50%;
 
 
   }
   
-  .container:hover input ~ .checkmark {
+  .check-task:hover input ~ .checkmark {
     background-color: #ccc;
   }
   
   /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
+  .check-task input:checked ~ .checkmark {
     background: transparent linear-gradient(180deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box;
   }
   
@@ -57,12 +69,12 @@
   }
   
   /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+  .check-task input:checked ~ .checkmark:after {
     display: block;
   }
   
   /* Style the checkmark/indicator */
-  .container .checkmark:after {
+  .check-task .checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -72,4 +84,20 @@
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+  }
+  .show-task{
+    background-color: transparent !important;
+  }
+  label{
+    text-align: center;
+  }
+  .status-task{
+    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+    background: #ffa5ca 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    color:#FE4D97 !important;
+    font-weight: 300;
+    opacity: 0.9;
+    margin: auto;
+  
   }

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
 import './cardsByProject.css'
-import TasksByCard from '../../task/tasksByCard/tasksByCard'
 
 function CardsByProject(props) {
 
@@ -14,28 +13,15 @@ function CardsByProject(props) {
         // console.log(props.cards);
 
     }, [props.projectId])
-
-    const [viewTasksByCard, setViewTasksByCard] = useState(false)
-    const [cardId, setCardId] = useState("")
-
-    const changeCardId = (value) => {
-        setCardId(value)
-        setViewTasksByCard(true)
-    }
+  
     const viewCardsByProject = props.cards.map((card) => {
-        // console.log(card._id);
-        return <ViewCards changeCard={changeCardId} key={card._id} card={card} />
+        return <ViewCards key={card._id} card={card} />
     })
 
     return (
         <>
             {viewCardsByProject}
-            {
-                viewCardsByProject? <TasksByCard cardId={cardId} />:
-                null
-            }
-           
-
+          
         </>
     )
 }
@@ -44,7 +30,7 @@ function CardsByProject(props) {
 export default connect(
     (state) => {
         return {
-            
+
             cards: state.public_reducer.cards,
             // project: state.project_reducer.project,
             // user: state.public_reducer.userName

@@ -6,39 +6,39 @@ import CardsByProject from '../Cards/cardsByProject/cardsByProject';
 import TasksByCard from '../task/tasksByCard/tasksByCard'
 import Logo from '../logo/logo'
 import './projectPlatform.css'
+import HeaderBody from '../headerBody/headerBody'
+import ViewDetails from  '../viewDetails/viewDetails'
 
 function ProjectPlatform(props) {
     const [projectId, setProjectId] = useState(0)
-    // const [cardId, setCardId] = useState(0)
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
-    // const [viewTasksByCard, setViewTasksByCard] = useState(false)
-
+    const [workspaceName, setWorkspaceName] = useState()
     useEffect(() => {
 
         // props.getProjectByIdInServer("6011270ba72ba9f8be885e06");
     }, [])
 
+
+    useEffect(() => {
+        { props.getAllWorkspaces() };
+
+    }, []);
     const changeProjectId = (value) => {
         setProjectId(value)
         setViewCardsByProject(true)
     }
-    // const changeCardId = (value) => {
-    //     setCardId(value)
-    //     setViewTasksByCard(true)
-    // }
+    const sendWorspaceName = (value) => {
+        setWorkspaceName(value)
+    }
+
     return (
         <>
-            {/* <Link to={`${props.user}/projectPlatform`} > */}
             <div className="body container-fluid">
-                <Logo className="logo-workspace" nameWorkspace='Leader hub' />
-                < ProjectsList changeProject={changeProjectId} />
-                {/* changeCard={changeCardId} */}
-                {viewCardsByProject ? <CardsByProject  projectId={projectId} /> : null}
-                {/* {viewTasksByCard ? */}
-                 {/* <TasksByCard cardId={cardId} /> */}
-                {/* //   : null} */}
+                <Logo className="logo-workspace" nameWorkspace={workspaceName} />
+                < ProjectsList changeProject={changeProjectId} sendWorspaceName={sendWorspaceName} />
+                {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
-                {/* <div className="add-new-btn ">+</div> */}
+                <div className="add-new-btn  ">+</div>
 
             </div>
         </>
@@ -47,15 +47,17 @@ function ProjectPlatform(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        projects: state.public_reducer.project,
-        user: state.public_reducer.userName
+        projects: state.project_reducer.project,
+        user: state.public_reducer.userName,
+        workspaces: state.public_reducer.worksapces,
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getProjectByIdInServer:(idProject)=>dispatch(actions.getProjectByIdInServer(idProject)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+
     }
 
 
