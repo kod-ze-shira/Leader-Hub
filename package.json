@@ -12,6 +12,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.10",
     "@material-ui/styles": "^4.11.1",
     "@material/radio": "^9.0.0",
+    "@react-md/icon": "^2.5.5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -38,6 +39,7 @@
     "react-multi-email": "^0.5.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-scrollbar": "^0.5.6",
     "react-select-material-ui": "^6.7.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
