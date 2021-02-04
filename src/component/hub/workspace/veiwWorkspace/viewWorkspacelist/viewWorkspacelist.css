@@ -16,6 +16,28 @@
       
      
 }
+.WorkspaceList
+{
+  width: 62vw;
+}
+.WorkspaceList:hover{
+     background-color:#F6F6FA;
+}
+
+.WorkspaceList{
+      /* display: flex; */
+  justify-content:space-between; 
+   border-bottom:#F6F6FA 1px solid ;
+}
+.stripe{
+  color:#A9A9A91C;
+}
+.edit{
+  cursor: pointer;
+}
+.delet{
+  cursor: pointer;
+}
 
 
 
@@ -29,7 +51,7 @@
    justify-content: center;
    align-items: center;
    border-radius: 10px;
-     border-bottom: #DCDCDC 1px solid ;
+    
 
    margin-left: 3rem;
 
