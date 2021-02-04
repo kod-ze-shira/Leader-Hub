@@ -9,23 +9,22 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
 function ProjectsByWorkspace(props) {
-    const { idWorkspace } = useParams();
+
+
+    let { idWorkspace } = useParams();
     let myWorkspace;
-    if (props.workspaces.length)
-        myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
-    else {
-        props.getAllWorkspaces();
-    }
+    // if (props.workspaces)
+    myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
+    // else {
+    // props.getAllWorkspaces();
+    // }
     useEffect(() => {
         props.getProjectsByWorkspaceId(idWorkspace);
     }, [])
 
-    const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
-        return <ViewProject myProject={project} />
-    })
-
-
-
+    // const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
+    //     return <ViewProject myProject={project} />
+    // })
     return (
         <>
 
@@ -37,7 +36,7 @@ function ProjectsByWorkspace(props) {
                             <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
                         </thead> */}
                         <tbody>
-                            {viewProjectsByWorkspace}
+                            {/* {viewProjectsByWorkspace} */}
                         </tbody>
                     </>
                 </Table>
@@ -52,12 +51,12 @@ const mapStateToProps = (state) => {
         projects: state.public_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
