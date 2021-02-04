@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 
-
-
 function ViewWorkspaceGrid(props) {
     const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
@@ -17,23 +15,71 @@ function ViewWorkspaceGrid(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToWorkspace = (workspace) => {
-        props.setWorkspace(workspace)
+    const routeToWorkspace = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
+    function over_workspace() {
+        setOver(true);
+    }
+    const [over, setOver] = useState(false);
+
+    function outOver() {
+        setOver(false);
+    }
 
     return (
+        <>
+            {
+                over ?
+                    <>
+                        <div>
+                            <div className="row"
+                                onClick={() => routeToWorkspace()}
+                            >
+                                <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
 
-        <div className="Workspacegrid" >
+                                <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
 
-            < div className="logoWorkspace1 ml-5 mt-3"
-                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                {workspace.name[0].toUpperCase()}
-                {/* {
+                                <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
+                            </div>
+                            <div className="Workspacegrid" onMouseOut={outOver} >
+                                <div className="mt-2">
+                                    < div className="logoWorkspace1 ml-5"
+
+                                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                        {workspace.name[0].toUpperCase()}
+                                        {/* {
+                            workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
+                                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
+                        } */}
+
+
+
+                                    </div>
+                                    <div className="mt-3"><b>{workspace.name}</b></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </>
+
+
+
+
+
+                    :
+                    <div className=" Workspacegrid mt-4" onMouseOver={over_workspace} >
+
+                        < div className="logoWorkspace1 ml-5 mt-3"
+                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                            {workspace.name[0].toUpperCase()}
+                            {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
@@ -54,9 +100,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
     }
 
 

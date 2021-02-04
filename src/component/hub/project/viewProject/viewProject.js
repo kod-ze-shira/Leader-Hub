@@ -13,13 +13,14 @@ import { withRouter } from 'react-router-dom';
 
 
 function ViewProject(props) {
+    const { workspace } = props
 
     function detailsProject() {
         set_getProjectById(false);
     }
-    const routeToCards = (e) => {
+    const routeToCards = () => {
         let idProject = props.myProject._id;
-      props.history.push("/" + props.user + "/projectPlatform/"+ idProject)
+        props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
 
     const [getProjectById, set_getProjectById] = useState(true);
@@ -33,14 +34,13 @@ function ViewProject(props) {
                         style={{ 'background-color': props.myProject.color }}></span>
                 </td>
 
-                <td onClick={(e) => routeToCards(e)}>
+                <td onClick={() => routeToCards(workspace)}>
                     {props.myProject.name}
                     {/* {props.myProject.description} */}
                 </td>
 
                 <td>
                     <Cell
-
                         // item={props.myProject.dueDate ? props.myProject.dueDate : Date.now()}
                         item={props.myProject.dueDate}
                         description='Due date' />
@@ -50,7 +50,9 @@ function ViewProject(props) {
                 <td>
                     <Cell
                         // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
-                        item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
+                        item={props.myProject.updateDates.length ?
+                            props.myProject.updateDates[props.myProject.updateDates.length - 1]
+                            : '12.12.2023'}
                         description='Last update' />
                     {/*                     
                      {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
@@ -61,7 +63,15 @@ function ViewProject(props) {
                         item={props.myProject.cards.length ? props.myProject.cards.length : "0"}
                         description='card' />
                 </td>
-            </tr>
+
+                <td>
+                    <span className='stripeProject'>
+                        <span style={{ 'font-weight': 'bold' }}>
+                            7</span>/20
+                </span>
+                    <span style='description '>Task</span>
+                </td>
+            </tr >
             {/* <div className="container">
                 <div className="row" onClick={() => setViewTasks(!viewTasks)}>
                     <div className="col">
@@ -76,12 +86,13 @@ function ViewProject(props) {
 const mapStateToProps = (state) => {
     return {
         project: state.project_reducer.project,
-        user:state.public_reducer.userName
+        user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w))
 
     }
 }
