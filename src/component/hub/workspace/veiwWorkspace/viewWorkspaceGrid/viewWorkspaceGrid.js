@@ -73,7 +73,11 @@ function ViewWorkspaceGrid(props) {
 
 
                     :
-                    <div className=" Workspacegrid mt-4" onMouseOver={over_workspace} >
+                    <div className=" Workspacegrid mt-4"
+                        onClick={() => routeToWorkspace()}
+
+                    // onMouseOver={over_workspace} 
+                    >
 
                         < div className="logoWorkspace1 ml-5 mt-3"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>

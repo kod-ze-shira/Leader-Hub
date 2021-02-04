@@ -67,5 +67,6 @@ const mapDispatchToProps = (dispatch) => {
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 
