@@ -18,13 +18,14 @@ function ProjectsByWorkspace(props) {
     // else {
     // props.getAllWorkspaces();
     // }
-    useEffect(() => {
-        props.getProjectsByWorkspaceId(idWorkspace);
-    }, [])
+    // useEffect(() => {
+    //     props.getProjectsByWorkspace(idWorkspace);
+    // }, [])
 
-    // const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
-    //     return <ViewProject myProject={project} />
-    // })
+    const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
+        return <ViewProject myProject={project} />
+    })
+
     return (
         <>
 
@@ -36,7 +37,7 @@ function ProjectsByWorkspace(props) {
                             <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
                         </thead> */}
                         <tbody>
-                            {/* {viewProjectsByWorkspace} */}
+                            {viewProjectsByWorkspace}
                         </tbody>
                     </>
                 </Table>
@@ -57,7 +58,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
     }
 }
 

@@ -67,7 +67,7 @@ function ViewProject(props) {
                         <span style={{ 'font-weight': 'bold' }}>
                             7</span>/20
                 </span>
-                    <span style='description '>Task</span>
+                    <span className='description'>Task</span>
                 </td>
             </tr >
             {/* <div className="container">
