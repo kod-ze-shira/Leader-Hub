@@ -48,7 +48,7 @@ function ViewWorkspaceList(props) {
                     < div className="logoWorkspace"
 
 
-                    // style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
+                    style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
                     >
                         {workspace.name[0].toUpperCase()}
                         {/* {
