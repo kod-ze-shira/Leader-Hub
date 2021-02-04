@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import ViewWorkspaceList from '../veiwWorkspace/viewWorkspacelist/viewWorkspacelist'
-import ViewWorkspaceGrid from '../veiwWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
+import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
+import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 
 // let workspace;
 

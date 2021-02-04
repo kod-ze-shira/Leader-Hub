@@ -1,0 +1,48 @@
+
+.logoWorkspacelist{
+    width: 4rem;
+    height:4rem;
+   border-radius: 50%;
+   font-size: 26px;
+   padding-top: 8px;
+   color: white;
+   letter-spacing: 1.72px;
+   text-align: center;
+   font-family: 'Roboto', sans-serif;
+   /* font-size: xx-large; */
+   border:none;
+   margin:8px ;
+    font-weight: 600;
+   
+     
+}
+
+
+
+.Workspace1{
+   width: 5rem;
+   background: #F6F6FA;
+   height: 5rem;
+   margin-bottom: 10px;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+   margin-right: 1rem;
+
+}
+.WorkspaceList{
+     border-bottom:#F6F6FA 1px solid ;
+      display: flex;
+  justify-content:space-between; 
+}
+.WorkspaceList
+{
+    width: 62vw;
+}
+.stripe{
+    color:#F6F6FA ;
+}
+
+
+
