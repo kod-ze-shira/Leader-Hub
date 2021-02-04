@@ -40,14 +40,15 @@ function ViewWorkspaceGrid(props) {
                                 onClick={() => routeToWorkspace()}
                             >
                                 <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
-
-                                <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
-
+                                <div className="ml-1 stripe">|</div>
+                                <div className="col-1 delet" onClick={(w) => { props.deleteWorkspaceInServer(w); }}><img src={require('../../../../img/bin.png')}></img></div>
+                                <div className="ml-1 stripe">|</div>
                                 <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
                             </div>
                             <div className="Workspacegrid" onMouseOut={outOver} >
-                                <div className="mt-2">
-                                    < div className="logoWorkspace1 ml-5"
+                                <div>
+                                    < div className="logoWorkspace1 ml-5 "
+
 
                                         style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                         {workspace.name[0].toUpperCase()}
@@ -67,9 +68,6 @@ function ViewWorkspaceGrid(props) {
                         </div>
 
                     </>
-
-
-
 
 
                     :
@@ -100,14 +98,20 @@ function ViewWorkspaceGrid(props) {
 const mapStateToProps = (state) => {
 
     return {
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+        // workspace: state.workspace_reducer.workspace
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
+        deleteWorkspaceInServer: (w) => dispatch(actions.deleteWorkspaceInServer(w))
     }
 
 
 }
+
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))
