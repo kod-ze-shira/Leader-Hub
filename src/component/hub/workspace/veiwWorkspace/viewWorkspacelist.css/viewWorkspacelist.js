@@ -18,8 +18,10 @@ function ViewWorkspaceList(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToProject = () => {
-        props.history.push("/" + props.user + "/workspace/" + workspace._id)
+    const routeToProject = (id) => {
+
+        props.history.push("/" + props.user + "/workspace/" + id)
+        // history.push("/renana-il/workspace/" + id)
 
     }
 
@@ -31,7 +33,7 @@ function ViewWorkspaceList(props) {
         <>
 
             <div className="row"
-                onClick={() => routeToProject()}
+                onClick={() => routeToProject(workspace._id)}
             >
                 <div className="row" >
                     <div className="Workspace1" >
@@ -65,6 +67,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
 
     }
