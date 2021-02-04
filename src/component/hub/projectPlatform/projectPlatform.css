@@ -1,10 +1,11 @@
 .body{
-
+    /* width:70vw; */
     height:80vh;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 12px;
     opacity: 1;
- 
+    
+    /* margin: 0px -40px; */
   }
   a{
       color: #98A9BC!important;
@@ -12,6 +13,7 @@
       float: right;
       
   }
+  
  
   .logoW{
     margin-top: 3vh !important;
@@ -27,11 +29,10 @@ height: 50px;
 /* right:0; */
 margin-left: 68vw;
 
-top:82vh;
+top:85vh;
 position: fixed;
 color:white;
 font-size: 30px;
-cursor: pointer;
   }
   
   .add-new-btn::first-letter{

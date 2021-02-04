@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject';
 import './projectsList.css'
-// import { FileFill } from 'react-bootstrap-icons';
+import { FileFill } from 'react-bootstrap-icons';
 import { Alert } from 'bootstrap';
 // import EditWorkspace from '.././editWorkspace/editWorkspace'
 // import project_reducer from '../../../../redux/Reducers/project_reducer';
@@ -49,7 +49,7 @@ function ProjectsList(props) {
             <div className="">
                 <div className="row justify-content-between mx-5  mt-5 py-1 row-projects ">
                     <select defaultValue={idProject}
-                        onChange={(e) => changeSelectedProject(e.target.value)} className="pl-4 py-1">
+                        onChange={(e) => changeSelectedProject(e.target.value)} className="project-select pl-4 py-1">
 
                         <option className="option " value={props.project._id}
                             style={{ color: props.project.color ? props.project.color : "#F7B500" }}>

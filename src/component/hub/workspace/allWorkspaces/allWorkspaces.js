@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import ViewWorkspaceList from '../veiwWorkspace/viewWorkspacelist/viewWorkspacelist'
+import ViewWorkspaceList from '../veiwWorkspace/viewWorkspacelist.css/viewWorkspacelist'
 import ViewWorkspaceGrid from '../veiwWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 
 // let workspace;
@@ -54,8 +54,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                         </div>
 
 
-                        <div className="row mt-5 ml-5 ">
-
+                        <div className="row mt-5 ml-5">
                             {renderedGridWorkspaces}
 
                         </div>
@@ -86,7 +85,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                 </div>
                 <div className="row mt-4">
                     <div className="col-1"></div>
-                    <div className="col">
+                    <div className="col ml-5">
                         {renderedListWorkspaces} </div>
                 </div>
 
