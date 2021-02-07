@@ -102,7 +102,9 @@ function ViewWorkspaceGrid(props) {
 
                             <div className="nameworkspace row"><b>Name Workspace:</b>
                             </div>
+
                             <div className="row mt-5">
+                                <input value={workspace.name}></input>
 
                             </div>
                             <div className="row mt-5">
