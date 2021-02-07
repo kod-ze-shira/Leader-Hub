@@ -38,10 +38,10 @@ function ViewWorkspaceList(props) {
 
 
             <div className="row WorkspaceList mt-3 " onMouseOver={func_over} onMouseOut={func_out_over}
-                onClick={() => routeToProject(workspace._id)}
+
             >
                 <div className="row "  >
-                    <div className="Workspace" >
+                    <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
                         <div className="logoWorkspacelist"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                             {workspace.name[0].toUpperCase()}

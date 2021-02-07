@@ -16,6 +16,19 @@ font-size: small;
     
 }
 
+.editWorkspace{
+   height: 100vh;
+   width: 30vw;
+   background-color: white;
+   margin-left: auto;
+
+}
+.path{
+   height: 100vh;
+   width: 6vw;
+   background-color: transparent linear-gradient(181deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box;;
+}
+
 .add
 {
   cursor: pointer;
@@ -26,9 +39,26 @@ font-size: small;
 .edit{
      cursor: pointer;
 }
+.name{
+   font-weight: 650;
+   margin: 28px ;
+}
+.logo{
+      width: 4rem;
+    height:4rem;
+   border-radius: 50%;
+   font-size: 26px;
+   padding-top: 8px;
+   color: white;
+   letter-spacing: 1.72px;
+   text-align: center;
+   font-family: 'Roboto', sans-serif;
+   /* font-size: xx-large; */
+   border:none;
+   font-weight: 50;
+      
 
-
-
+}
 
 
 .logoWorkspace1{

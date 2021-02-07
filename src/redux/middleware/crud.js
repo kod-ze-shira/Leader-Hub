@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import workspace_reducer from '../Reducers/workspace_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
@@ -349,8 +350,8 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
         let workspace = getState().workspace_reducer.workspace;
 
 
+        let urlData = "https://reacthub.dev.leader.codes / api /" + "/" + workspace._id + "/removeWorkspaceById‏"
 
-        let urlData = "https://reacthub.dev.leader.codes / api / ${ getState().public_reducer.userName } /${workspaceId}/removeWorkspaceById‏"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
