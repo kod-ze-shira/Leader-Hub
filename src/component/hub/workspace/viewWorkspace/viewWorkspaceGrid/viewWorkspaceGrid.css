@@ -16,20 +16,8 @@ font-size: small;
     
 }
 
-.editWorkspace{
-   height: 100vh;
-   width: 12vw;
-    position: absolute;
-  top: -85px;
-  right: 0;
-   background-color: white;
-   /* border: 2px solid;
-border-style: solid dotted inset double; */
-    border-left:solid #1AFFFC  8px;
-   
 
- 
-}
+
 .okEditWorkspace{
    width: 35px;
    height: 20px;
