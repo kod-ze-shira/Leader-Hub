@@ -7,6 +7,7 @@ import './viewDetails.css'
 
 
 
+
 const mapStateToProps = (state) => {
     return {
 

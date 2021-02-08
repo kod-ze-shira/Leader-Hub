@@ -84,7 +84,7 @@ function ViewWorkspaceList(props) {
 
             </div>
             {  edit ?
-                <ViewDetails >
+                <ViewDetails from="editworkspace">
 
                 </ViewDetails>
                 // <div className="editWorkspace ">
