@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
+import ViewDetails from '../../../viewDetails/viewDetails'
 
 
 
@@ -20,6 +21,15 @@ function ViewWorkspaceList(props) {
 
     const routeToProject = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
+    }
+    const [edit, setEdit] = useState(false);
+
+
+    function EditWorkspace() {
+        setEdit(true);
+    }
+    function outEdit() {
+        setEdit(false);
     }
 
     const toOpenEditWorkspace = () => {
@@ -59,7 +69,7 @@ function ViewWorkspaceList(props) {
                         <div className="row mt-4">
                             <div className="col-1  delet"><img src={require('../../../../img/pencil-write.png')}></img></div>
                             <div className="ml-2 stripe">|</div>
-                            <div className="col-0.5 ml-1 edit"><img src={require('../../../../img/bin.png')}></img></div>
+                            <div className="col-0.5 ml-1 edit" onClick={EditWorkspace} ><img src={require('../../../../img/bin.png')}></img></div>
 
 
                         </div>
@@ -70,7 +80,36 @@ function ViewWorkspaceList(props) {
 
 
 
+
             </div>
+            {  edit ?
+                <ViewDetails >
+
+                </ViewDetails>
+                // <div className="editWorkspace ">
+                //     <div className="row mt-5">
+                //         <div className="col-3"></div>
+
+                //         <div className="nameworkspace row"><b>Name Workspace:</b>
+                //         </div>
+                //     </div>
+
+                //     <div className="row mt-5">
+                //         <div className="col-3"></div>
+                //         <div>{workspace.name}</div>
+
+                //     </div>
+                //     <div className="row mt-5">
+
+                //     </div>
+                //     <div className="row mt-5">
+                //         <div className="col-5"></div>
+                //         <button onClick={outEdit} className="okEditWorkspace">ok</button>
+                //     </div>
+                // </div>
+
+                : null
+            }
 
         </>
 

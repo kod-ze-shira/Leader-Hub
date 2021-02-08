@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
+import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 
@@ -16,6 +17,9 @@ function ViewWorkspaceGrid(props) {
 
     const routeToWorkspace = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
+    }
+    const changeFiledInWorkspace = (input) => {
+        props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
     }
 
     const toOpenEditWorkspace = () => {
@@ -59,10 +63,7 @@ function ViewWorkspaceGrid(props) {
 
                                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                             {workspace.name[0].toUpperCase()}
-                                            {/* {
-                            workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-                                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
-                        } */}
+
                                         </div>
                                     </div>
                                     <div className="mt-4">
@@ -96,30 +97,40 @@ function ViewWorkspaceGrid(props) {
             }
             {
                 edit ?
-                    <div className="editWorkspace ">
-                        <div className="row mt-5">
-                            <div className="col-3"></div>
+                    <ViewDetails >
 
-                            <div className="nameworkspace row"><b>Name Workspace:</b>
-                            </div>
-
-                            <div className="row mt-5">
-                                <input value={workspace.name}></input>
-
-                            </div>
-                            <div className="row mt-5">
-
-                            </div>
-                            <div className="row mt-5">
-                                <div className="col-5"></div>
-                                <button onClick={outEdit} className="okEditWorkspace">ok</button>
-                            </div>
+                    </ViewDetails>
 
 
-                        </div>
+                    // <div className="editWorkspace ">
+                    //     <div className="row mt-5">
+                    //         <div className="col-3"></div>
+
+                    //         <div className="nameworkspace row"><b>Name Workspace:</b>
+                    //         </div>
+                    //     </div>
+
+                    //     <div className="row mt-5">
+                    //         <div className="col-3"></div>
+                    //         <div>{workspace.name}</div>
+                    //         {/* <input value={workspace.name} onChange={(input) => changeFiledInWorkspace(input)}></input>
+                    //         <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button> */}
+
+                    //     </div>
+                    //     <div className="row mt-5">
 
 
-                    </div>
+                    //     </div>
+                    //     <div className="row mt-5">
+                    //         <div className="col-5"></div>
+                    //         <button onClick={outEdit} className="okEditWorkspace">exit</button>
+                    //     </div>
+
+
+
+
+
+                    // </div>
 
                     : null
             }
@@ -143,9 +154,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
         setWorkspace: () => dispatch(actions.setWorkspace()),
-        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())
+        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
+        getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+        setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
+        saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace))
     }
 
 
