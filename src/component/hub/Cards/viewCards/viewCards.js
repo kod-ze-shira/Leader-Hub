@@ -5,6 +5,8 @@ import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
 import history from '../../../history'
 import TasksByCard from '../../task/tasksByCard/tasksByCard'
+import { DragDropContext, Droppable ,Draggable} from 'react-beautiful-dnd';
+
 
 function ViewCards(props) {
 
@@ -29,9 +31,16 @@ function ViewCards(props) {
                 <p className="p-2  border-left col">Due Date</p>
                 <p className="p-2  border-left col"></p>
             </div>
-
-           {flag? <TasksByCard cardId={cardId} /> :null}
-
+            <DragDropContext>
+                <Droppable droppableId="characters">
+                    {(provided) => (
+                        /* ul */
+                         flag ? <TasksByCard className="characters" cardId={cardId} {...provided.droppableProps} ref={provided.innerRef} /> : null                   
+                    )}
+                </Droppable>
+            </DragDropContext>
+        
+                {/* {flag ? <TasksByCard className="characters" cardId={cardId} /> : null} */}
         </>
     )
 }

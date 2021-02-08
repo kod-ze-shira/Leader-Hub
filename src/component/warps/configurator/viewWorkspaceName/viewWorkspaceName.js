@@ -5,7 +5,6 @@ import { actions } from '../../../../redux/actions/action'
 import { Button } from 'react-bootstrap';
 import ProjectsByWorkspace from '../../../hub/project/projectsByWorkspace/projectsByWorkspace'
 import './viewWorkspaceName.css'
-import BtnLiveChat from '../../../hub/project/btnLiveChat/btnLiveChat';
 
 const mapStateToProps = (state) => {
     return {
@@ -45,7 +44,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                     : null}
                             </li>
                         </ul>
-                        {/* <BtnLiveChat idWorkspace={workspace._id} />  */}
                     </> : null
                 }
             </>

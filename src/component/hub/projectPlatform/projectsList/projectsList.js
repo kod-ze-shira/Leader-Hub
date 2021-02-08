@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject';
 import './projectsList.css'
-// import { FileFill } from 'react-bootstrap-icons';
+import { FileFill } from 'react-bootstrap-icons';
 import { Alert } from 'bootstrap';
 // import EditWorkspace from '.././editWorkspace/editWorkspace'
 // import project_reducer from '../../../../redux/Reducers/project_reducer';
@@ -18,9 +18,10 @@ function ProjectsList(props) {
 
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
-        if (props.project.workspace._id)
-            props.getProjectsByWorkspaceId(props.project.workspace._id)
         props.changeProject(idProject)
+        props.getProjectsByWorkspaceId(props.project.workspace)
+        console.log("project" + props.projects)
+        // console.log(props.workspace)
         props.sendWorspaceName(props.project.workspace.name)
 
     }, [props.project.workspace._id])
@@ -36,7 +37,7 @@ function ProjectsList(props) {
     }
 
     const viewProjectsByWorkspace1 = props.projects.map((project) => {
-        if (project.name && project._id != idProject)
+        if (project.name && project._id != props.project._id)
             return <>
                 <option className="option" value={project._id}
                     style={{ color: project.color ? project.color : "#F7B500" }}>
@@ -49,8 +50,7 @@ function ProjectsList(props) {
             <div className="">
                 <div className="row justify-content-between mx-5  mt-5 py-1 row-projects ">
                     <select defaultValue={idProject}
-                        onChange={(e) => changeSelectedProject(e.target.value)} className="pl-4 py-1">
-
+                        onChange={(e) => changeSelectedProject(e.target.value)} className="project-select pl-4 py-1">
                         <option className="option " value={props.project._id}
                             style={{ color: props.project.color ? props.project.color : "#F7B500" }}>
                             {props.project.name}
@@ -68,7 +68,8 @@ function ProjectsList(props) {
 const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
-        project: state.project_reducer.project
+        project: state.project_reducer.project,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {

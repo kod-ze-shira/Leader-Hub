@@ -5,6 +5,7 @@ import Nav from '../warps/nav/nav';
 import Left_nav from '../warps/left_nav/left_nav';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import Tools from './tools/tools';
+import TeamExample from './team/teamExample'
 import {
     BrowserRouter as Router,
     Switch,
@@ -18,7 +19,6 @@ import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspa
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
 import ProjectPlatform from './projectPlatform/projectPlatform'
-import TryBootstrap from "./projectPlatform/projectsList/tryBootstrap";
 import CardsByProject from './Cards/cardsByProject/cardsByProject'
 import HeaderBody from './headerBody/headerBody'
 export default function Hub() {
@@ -37,7 +37,6 @@ export default function Hub() {
 
                     <Switch>
                         <Route path="/:userName/workspace/:idWorkspace" >
-                            {/* <TryBootstrap/> */}
                             <ProjectsByWorkspace />
                             {/* <Projcts /> */}
 
@@ -55,6 +54,7 @@ export default function Hub() {
                             <Body />
 
                         </Route>
+                      
 
                         {/* <Route path="" >
                                 <HeaderBody nameWorkspace="Leader boxx" />

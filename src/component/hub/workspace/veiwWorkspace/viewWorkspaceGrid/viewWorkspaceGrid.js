@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
@@ -34,42 +35,37 @@ function ViewWorkspaceGrid(props) {
         <>
             {
                 over ?
-                    <>
-                        <div>
-                            <div className="row"
-                                onClick={() => routeToWorkspace()}
-                            >
-                                <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
 
-                                <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
+                    <div>
+                        <div className="row"
+                            onClick={() => routeToWorkspace()}
+                        >
+                            {/* <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
 
-                                <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
-                            </div>
-                            <div className="Workspacegrid" onMouseOut={outOver} >
-                                <div className="mt-2">
-                                    < div className="logoWorkspace1 ml-5"
+                            <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
 
-                                        style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                        {workspace.name[0].toUpperCase()}
-                                        {/* {
+                            <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div> */}
+                        </div>
+                        <div className="Workspacegrid" onMouseOut={outOver} >
+                            <div className="mt-2">
+                                < div className="logoWorkspace1 ml-5"
+
+                                    style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                    {workspace.name[0].toUpperCase()}
+                                    {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
 
 
 
-                                    </div>
-                                    <div className="mt-3"><b>{workspace.name}</b></div>
                                 </div>
+                                <div className="mt-3"><b>{workspace.name}</b></div>
                             </div>
-
-
                         </div>
 
-                    </>
 
-
-
+                    </div>
 
 
                     :
@@ -87,14 +83,8 @@ function ViewWorkspaceGrid(props) {
                         <div className="mt-3"><b>{workspace.name}</b></div>
                     </div>
             }
+
         </>
-
-
-
-
-
-
-
     )
 }
 const mapStateToProps = (state) => {

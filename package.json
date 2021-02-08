@@ -23,6 +23,7 @@
     "jquery": "^3.5.1",
     "material-ui-form": "^1.0.0-alpha.26",
     "react": "^16.14.0",
+    "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.0",
     "react-bootstrap-card": "^0.2.1",
     "react-bootstrap-dropdown": "^0.3.0",
