@@ -32,6 +32,7 @@
     "react-bootstrap-table": "^4.3.1",
     "react-color": "^2.19.3",
     "react-dom": "^16.14.0",
+    "react-dropdown": "^1.9.2",
     "react-flag-icon-css": "^1.0.25",
     "react-icons": "^4.1.0",
     "react-input-color": "^3.0.1",

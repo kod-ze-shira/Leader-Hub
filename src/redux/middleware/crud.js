@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import workspace_reducer from '../Reducers/workspace_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
@@ -340,6 +341,44 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     }
     return next(action);
 }
+//delet workspace
+export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
+
+
+        let workspace = getState().workspace_reducer.workspace;
+
+
+        let urlData = "https://reacthub.dev.leader.codes / api /" + "/" + workspace._id + "/removeWorkspaceById‏"
+
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ workspace }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                dispatch(actions.setProject(data.result))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
+
 
 //edit project
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
@@ -602,7 +641,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 //
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
         fetch(url,
             {

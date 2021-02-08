@@ -19,7 +19,7 @@ function ProjectsList(props) {
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
         if (props.project.workspace._id)
-            props.getProjectsByWorkspaceId(props.project.workspace._id)
+            props.getProjectsByWorkspaceId(props.project.workspace)
         props.changeProject(idProject)
         props.sendWorspaceName(props.project.workspace.name)
 

@@ -18,26 +18,31 @@ function ViewWorkspaceList(props) {
         setViewProjects(!viewProjects);
     }
 
-    const routeToProject = (id) => {
-
-        props.history.push("/" + props.user + "/workspace/" + id)
-        // history.push("/renana-il/workspace/" + id)
-
+    const routeToProject = () => {
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
+    const [over, setover] = useState(false);
+    function func_over() {
+        setover(true)
+    }
+    function func_out_over() {
+        setover(false);
+    }
 
     return (
         <>
 
-            <div className="row"
-                onClick={() => routeToProject(workspace._id)}
+
+            <div className="row WorkspaceList mt-3 " onMouseOver={func_over} onMouseOut={func_out_over}
+
             >
-                <div className="row" >
-                    <div className="Workspace1" >
-                        < div className="logoWorkspacelist"
+                <div className="row "  >
+                    <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
+                        <div className="logoWorkspacelist"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                             {workspace.name[0].toUpperCase()}
                             {/* {
@@ -46,15 +51,27 @@ function ViewWorkspaceList(props) {
                         } */}
                         </div>
                     </div>
-                    <b className="mt-4 ml-2">{workspace.name}</b>
+                    <b className="mt-4 ml-2">{workspace.name} </b>
 
                 </div>
+                {
+                    over ?
+                        <div className="row mt-4">
+                            {/* <div className="col-1  delet"><img src={require('../../../../img/pencil-write.png')}></img></div> */}
+                            <div className="ml-2 stripe">|</div>
+                            {/* <div className="col-0.5 ml-1 edit"><img src={require('../../../../img/bin.png')}></img></div> */}
+
+
+                        </div>
+                        : null
+                }
 
 
 
 
 
             </div>
+
         </>
 
     )
@@ -67,12 +84,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
         getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-
     }
-
-
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 
