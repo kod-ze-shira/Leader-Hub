@@ -17,6 +17,14 @@
      
 }
 
+.delete{
+    cursor: pointer;
+}
+.edit{
+    cursor: pointer;
+       
+}
+
 
 
 .Workspace{

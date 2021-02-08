@@ -47,29 +47,30 @@ function ViewWorkspaceList(props) {
         <>
 
 
-            <div className="row WorkspaceList mt-3 " onMouseOver={func_over} onMouseOut={func_out_over}
+            <div className="row WorkspaceList mt-3 " onMouseOver={func_over}>
+                <div onMouseOut={func_out_over}>
 
-            >
-                <div className="row "  >
-                    <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
-                        <div className="logoWorkspacelist"
-                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                            {workspace.name[0].toUpperCase()}
-                            {/* {
+                    <div className="row "  >
+                        <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
+                            <div className="logoWorkspacelist"
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.name[0].toUpperCase()}
+                                {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
+                            </div>
                         </div>
+                        <b className="mt-4 ml-2">{workspace.name} </b>
                     </div>
-                    <b className="mt-4 ml-2">{workspace.name} </b>
 
                 </div>
                 {
                     over ?
-                        <div className="row mt-4">
-                            <div className="col-1  delet"><img src={require('../../../../img/pencil-write.png')}></img></div>
+                        <div className="row mt-4 " onMouseOut={func_out_over} >
+                            <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                             <div className="ml-2 stripe">|</div>
-                            <div className="col-0.5 ml-1 edit" onClick={EditWorkspace} ><img src={require('../../../../img/bin.png')}></img></div>
+                            <div className="col-1 ml-1 delete"  ><img src={require('../../../../img/bin.png')}></img></div>
 
 
                         </div>
