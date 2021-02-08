@@ -2,22 +2,27 @@
    /* font-size: medium; */
 /* } */ 
 /* The container */
-.check-task:first-child, .check-task button {
+.check-task:first-child {
     color: #778CA2;
-    display: block;
-    position: relative;
+    /* display: block;
+    position: relative; */
     /* padding-left: 35px; */
     /* margin-bottom: 12px; */
     cursor: pointer;
     /* font-size: 22px; */
-    -webkit-user-select: none;
+    /* -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none; */
   }
   .check-task button {
+    color: #778CA2;
     background-color: transparent;
+    /* padding-left: 2vw; */
     /* text-align: center; */
+  }
+  .check-task:nth-child(3) {
+ /* position: sticky !important;  */
   }
   .check-task button:focus{
     outline: 0;
@@ -30,7 +35,7 @@
   
   /* Hide the browser's default checkbox */
   .check-task input {
-    position: absolute;
+    /* position: absolute; */
     opacity: 0;
     cursor: pointer;
     height: 0;
@@ -91,7 +96,7 @@
   label{
     text-align: center;
   }
-  .status-task{
+  /* .status-task{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
     background: #ffa5ca 0% 0% no-repeat padding-box;
     border-radius: 3px;
@@ -100,4 +105,45 @@
     opacity: 0.9;
     margin: auto;
   
+  } */
+  .status-task-in-progress{
+    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+    background: #ffa5ca 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    color:#FE4D97 !important;
+    font-weight: 300;
+    opacity: 0.9;
+    margin: auto;
+    width: 75%;
+    padding-top: 0.7vh;
+    padding-bottom: 0.7vh;
+
+
   }
+  .status-task-to-do{
+    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+    background: #F0D923 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    color:#BDAA1C !important;
+    font-weight: 300;
+    opacity: 0.9;
+    margin: auto;
+    width: 75%;
+    padding-top: 0.7vh;
+    padding-bottom: 0.7vh;
+  }
+  .status-task-done{
+    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+    background:#44D7B6 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    color:#34A38B !important;
+    font-weight: 300;
+    opacity: 0.9;
+    margin: auto;
+    width: 75%;
+    padding-top: 0.7vh;
+    padding-bottom: 0.7vh;
+
+  }
+  /* .view-details:active{
+ } */

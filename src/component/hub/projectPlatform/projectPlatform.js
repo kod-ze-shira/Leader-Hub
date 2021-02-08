@@ -20,7 +20,7 @@ function ProjectPlatform(props) {
 
 
     useEffect(() => {
-        { props.getAllWorkspaces() };
+        { props.getAllWorkspaces() }; 
 
     }, []);
     const changeProjectId = (value) => {
