@@ -33,6 +33,9 @@ function ViewWorkspaceGrid(props) {
     function EditWorkspace() {
         setEdit(true);
     }
+    function outEdit() {
+        setEdit(false);
+    }
 
     return (
         <>
@@ -94,9 +97,24 @@ function ViewWorkspaceGrid(props) {
             {
                 edit ?
                     <div className="editWorkspace ">
-                        <div className="path">
-                        </div>
-                        <div className="nameworkspace row"><b>Name Workspace:</b>
+                        <div className="row mt-5">
+                            <div className="col-3"></div>
+
+                            <div className="nameworkspace row"><b>Name Workspace:</b>
+                            </div>
+
+                            <div className="row mt-5">
+                                <input value={workspace.name}></input>
+
+                            </div>
+                            <div className="row mt-5">
+
+                            </div>
+                            <div className="row mt-5">
+                                <div className="col-5"></div>
+                                <button onClick={outEdit} className="okEditWorkspace">ok</button>
+                            </div>
+
 
                         </div>
 
