@@ -45,9 +45,6 @@ function ViewWorkspaceList(props) {
     function func_out_over() {
         setover(false);
     }
-    const changeFiledInWorkspace = (input) => {
-        props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
-    }
 
 
 
@@ -99,14 +96,9 @@ function ViewWorkspaceList(props) {
             </div>
             {  edit ?
                 <>
-                    {/* <ViewDetails  >
+                    <ViewDetails  >
 
-                    </ViewDetails> */}
-                    <div>
-
-                        <input name="name" placeholder={props.workspace.name} onChange={(input) => changeFiledInWorkspace(input)}></input>
-                        <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button>
-                    </div>
+                    </ViewDetails>
 
                 </>
 
