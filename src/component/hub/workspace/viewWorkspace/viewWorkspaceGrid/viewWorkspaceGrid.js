@@ -22,12 +22,7 @@ function ViewWorkspaceGrid(props) {
         props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
     }
 
-    const toOpenEditWorkspace = () => {
-        setOpenEditWorkspace(!openEditWorkspace)
-    }
-    function over_workspace() {
-        setOver(true);
-    }
+
     const [over, setOver] = useState(false);
     const [edit, setEdit] = useState(false);
 
@@ -76,6 +71,7 @@ function ViewWorkspaceGrid(props) {
                         </div>
 
                     </>
+
 
 
                     :
