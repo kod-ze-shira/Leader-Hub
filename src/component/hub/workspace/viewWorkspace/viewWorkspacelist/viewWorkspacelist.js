@@ -96,7 +96,7 @@ function ViewWorkspaceList(props) {
             </div>
             {  edit ?
                 <>
-                    <ViewDetails  >
+                    <ViewDetails workspace="Workspace Name:" name={workspace.name} color="color:" color1={workspace.color} >
 
                     </ViewDetails>
 
