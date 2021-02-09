@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
+import EditWorkspace from '../../editWorkspace/editWorkspace'
+import ViewDetails from '../../../viewDetails/viewDetails'
 
 
 
@@ -21,6 +23,17 @@ function ViewWorkspaceList(props) {
     const routeToProject = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
+    const [edit, setEdit] = useState(false);
+
+
+    function EditWorkspace() {
+
+
+        setEdit(true);
+    }
+    function outEdit() {
+        setEdit(false);
+    }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
@@ -33,34 +46,43 @@ function ViewWorkspaceList(props) {
         setover(false);
     }
 
+
+
     return (
         <>
 
 
-            <div className="row WorkspaceList mt-3 " onMouseOver={func_over} onMouseOut={func_out_over}
-                onClick={() => routeToProject(workspace._id)}
-            >
-                <div className="row "  >
-                    <div className="Workspace" >
-                        <div className="logoWorkspacelist"
-                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                            {workspace.name[0].toUpperCase()}
-                            {/* {
+            <div className="row WorkspaceList mt-3 " onMouseOver={func_over}>
+                <div onMouseOut={func_out_over}>
+
+
+                    <div className="row "  >
+                        <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
+                            <div className="logoWorkspacelist"
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.name[0].toUpperCase()}
+                                {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
+                            </div>
                         </div>
+                        <b className="mt-4 ml-2">{workspace.name} </b>
+
                     </div>
-                    <b className="mt-4 ml-2">{workspace.name} </b>
+
+                    {/* {workspace ? <EditWorkspace /> : null} */}
+
+
 
                 </div>
                 {
                     over ?
-                        <div className="row mt-4">
-                            <div className="col-1  delet"><img src={require('../../../../img/pencil-write.png')}></img></div>
+                        <div className="row mt-4 " onMouseOut={func_out_over} >
+                            <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                             <div className="ml-2 stripe">|</div>
-                            <div className="col-0.5 ml-1 edit"><img src={require('../../../../img/bin.png')}></img></div>
-
+                            <div className="col-1 ml-1 delete"  ><img src={require('../../../../img/bin.png')}></img></div>
+                            {/* <button onClick={props.editWorkspaceInServer()}></button> */}
 
                         </div>
                         : null
@@ -70,7 +92,41 @@ function ViewWorkspaceList(props) {
 
 
 
+
             </div>
+            {  edit ?
+                <>
+                    <ViewDetails workspace="Workspace Name:" name={workspace.name} color="color:" color1={workspace.color} >
+
+                    </ViewDetails>
+
+                </>
+
+                // <div className="editWorkspace ">
+                //     <div className="row mt-5">
+                //         <div className="col-3"></div>
+
+                //         <div className="nameworkspace row"><b>Name Workspace:</b>
+                //         </div>
+                //     </div>
+
+                //     <div className="row mt-5">
+                //         <div className="col-3"></div>
+                //         <div>{workspace.name}</div>
+
+                //     </div>
+                //     <div className="row mt-5">
+
+                //     </div>
+                //     <div className="row mt-5">
+                //         <div className="col-5"></div>
+                //         <button onClick={outEdit} className="okEditWorkspace">ok</button>
+                //     </div>
+                // </div>
+
+                : null
+            }
+
 
         </>
 
@@ -78,12 +134,20 @@ function ViewWorkspaceList(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+        workspaces: state.workspace_reducer.workspaces
+
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+        editWorkspaceInServer: () => dispatch(actions.editWorkspaceInServer()),
+        setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
+        saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
+        setWorkspace: () => dispatch(actions.setWorkspace())
+
     }
 }
 

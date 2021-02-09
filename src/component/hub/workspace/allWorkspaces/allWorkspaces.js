@@ -24,7 +24,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
         return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
     })
 
-    const [list, setlist] = useState(false);
+    const [list, setlist] = useState(true);
 
     function chenge_list1() {
         setlist(false);

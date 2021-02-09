@@ -30,7 +30,7 @@ export default connect(
         return {
             getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
-            saveWorkspaceInServerUfterEdit:(workspace)=>dispatch(actions.editWorkspaceInServer(workspace))
+            saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace))
         }
     }
 )(EditWorkspace)

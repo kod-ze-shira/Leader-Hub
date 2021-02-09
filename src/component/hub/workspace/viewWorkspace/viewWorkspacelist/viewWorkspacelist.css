@@ -17,6 +17,14 @@
      
 }
 
+.delete{
+    cursor: pointer;
+}
+.edit{
+    cursor: pointer;
+       
+}
+
 
 
 .Workspace{
@@ -46,6 +54,7 @@
 .stripe{
     color:#F6F6FA ;
 }
+
 
 
 
