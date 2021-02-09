@@ -27,7 +27,7 @@ function ViewWorkspaceList(props) {
 
 
     function EditWorkspace() {
-
+props.setWorkspace(workspace)//to select workspace to edit and send him to server
 
         setEdit(true);
     }
@@ -54,8 +54,6 @@ function ViewWorkspaceList(props) {
 
             <div className="row WorkspaceList mt-3 " onMouseOver={func_over}>
                 <div onMouseOut={func_out_over}>
-
-
                     <div className="row "  >
                         <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
                             <div className="logoWorkspacelist"
@@ -88,15 +86,10 @@ function ViewWorkspaceList(props) {
                         : null
                 }
 
-
-
-
-
-
             </div>
             {  edit ?
                 <>
-                    <ViewDetails workspace="Workspace Name:" name={workspace.name} color="color:" color1={workspace.color} >
+                    <ViewDetails from="editWorkspace">
 
                     </ViewDetails>
 
@@ -136,17 +129,12 @@ const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
         workspaces: state.workspace_reducer.workspaces
-
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-        editWorkspaceInServer: () => dispatch(actions.editWorkspaceInServer()),
-        setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
-        saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
-        setWorkspace: () => dispatch(actions.setWorkspace())
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace))
 
     }
 }
