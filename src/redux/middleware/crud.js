@@ -348,7 +348,9 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
 
         let workspace = getState().workspace_reducer.workspace;
 
-        let urlData = " https://reacthub.dev.leader.codes/api/renana-il/removeWorkspaceById"
+
+
+        let urlData = "https://reacthub.dev.leader.codes / api / ${ getState().public_reducer.userName } /${workspaceId}/removeWorkspaceById‏"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,

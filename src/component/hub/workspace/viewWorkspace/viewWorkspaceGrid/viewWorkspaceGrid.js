@@ -32,7 +32,7 @@ function ViewWorkspaceGrid(props) {
                     <>
                         <div>
                             <div className="row"
-                                onClick={() => routeToWorkspace()}
+                                onClick={() => routeToWorkspace()} onMouseOut={outOver}
                             >
                                 <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
@@ -70,7 +70,7 @@ function ViewWorkspaceGrid(props) {
                     <div className=" Workspacegrid mt-4"
                         onClick={() => routeToWorkspace()}
 
-                    // onMouseOver={over_workspace} 
+                        onMouseOver={over_workspace}
                     >
 
                         < div className="logoWorkspace1 ml-5 mt-3"
