@@ -22,12 +22,7 @@ function ViewWorkspaceGrid(props) {
         props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
     }
 
-    const toOpenEditWorkspace = () => {
-        setOpenEditWorkspace(!openEditWorkspace)
-    }
-    function over_workspace() {
-        setOver(true);
-    }
+
     const [over, setOver] = useState(false);
     const [edit, setEdit] = useState(false);
 
@@ -78,11 +73,12 @@ function ViewWorkspaceGrid(props) {
                     </>
 
 
+
                     :
                     <div className=" Workspacegrid mt-4"
                         onClick={() => routeToWorkspace()}
 
-                        onMouseOver={over_workspace}
+                    // onMouseOver={over_workspace}
                     >
 
                         < div className="logoWorkspace1 ml-5 mt-3"
