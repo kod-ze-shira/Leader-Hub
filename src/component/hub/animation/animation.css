@@ -3,6 +3,7 @@
     position: relative;
     animation-name: example;
     animation-duration: 4s;
+    z-index: 99999;
   }
   
   @keyframes example {
