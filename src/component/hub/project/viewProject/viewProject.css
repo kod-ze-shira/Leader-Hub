@@ -19,3 +19,9 @@
     vertical-align: middle;
     border-top: 1px solid #dee2e6;
 }
+
+.task{
+    display: block !important;
+    width: 100% !important;
+    text-align: center;
+}

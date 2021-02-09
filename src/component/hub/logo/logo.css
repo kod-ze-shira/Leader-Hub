@@ -1,21 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.logoW {
-    display: inline-block;
-    width: 42px;
-    height: 42px;
-    background: #2BB4FB 0% 0% no-repeat padding-box;
-    text-align: center;
-    font: normal normal medium 30px/39px Roboto;
-    letter-spacing: 1.26px;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    opacity: 1;
-    border-radius: 50%;
-    padding-top: 5px;
-    font-size: 19px;
-    font-weight: bold;
-}
 
 
 
