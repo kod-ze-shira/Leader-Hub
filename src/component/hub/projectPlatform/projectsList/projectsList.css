@@ -4,6 +4,7 @@
     /* border: 1px solid #FF65A6; */
     border: none;
     border-radius: 6px;
+    width: 15%;
     
 }
 select{
@@ -13,39 +14,30 @@ select{
     background-color: transparent!important;
 
 }
-option:hover{
-        border: none !important;
-}
-select:focus{
-    outline: none;
-}
-option{
-    color: #FF65A6;
-    /* background-color: gray; */
-    border: 0px !important;
-    outline: 0 !important;
-}
-option:focus{
-    outline: 0!important;
-    border: none !important;
-}
-option::after {
-    content: " "!important;
-    color: #FF65A6!important;
-    border: none !important;
 
-
-}
 .stripeProject{
     display: inline-block;
     width: 7px;
     height: 16px;
     border-radius: 37%;
 }
-a{
+/* a{
     color: #98A9BC!important;
     display: inline-block;
     float: right;
+
+} */
+select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+border-color: #FF65A6!important
+;    width: 15%;
+  }
+  select#xyz {
+    border: 0px !important;
+    outline: 0px!important;
 
 }
 

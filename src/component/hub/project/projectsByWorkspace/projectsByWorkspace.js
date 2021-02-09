@@ -8,33 +8,17 @@ import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
-function ProjectsByWorkspace(props, getAllWorkspaces) {
-
-    let { idWorkspace } = useParams();
+function ProjectsByWorkspace(props) {
+    const { idWorkspace } = useParams();
     let myWorkspace;
-
-    // useEffect(() => {
-    if (window.performance) {
-        if (performance.navigation.type == 1) {
-            // alert("This page is reloaded");
-            { props.getAllWorkspaces() }
-        }
+    if (props.workspaces.length)
+        myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
+    else {
+        props.getAllWorkspaces();
     }
-    // }, []);
-
-
-    // useEffect(() => {
-    //     if (window.performance) {
-    //         if (performance.navigation.type == 1) {
-    //             alert("This page is reloaded");
-    //             { props.getAllWorkspaces() }
-    //             myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
-
-    //         }
-
-    //     }
-
-    // }, [])
+    useEffect(() => {
+        props.getProjectsByWorkspaceId(idWorkspace);
+    }, [])
 
     myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
 
@@ -48,6 +32,8 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
         return <ViewProject myProject={project} />
     })
+
+
 
     return (
         <>
@@ -75,13 +61,13 @@ const mapStateToProps = (state) => {
         projects: state.public_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
 

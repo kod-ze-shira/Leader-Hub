@@ -23,11 +23,12 @@ function ViewTaskByCrad(props) {
     }
     return (
         <>
-            {/* <div className="container-fluid" > */}
             <div className="show-task row mx-5 border-bottom">
                 <label className="check-task ml-4 p-2 col-3">{props.task.description}
                     <input type="checkbox" />
                     <span className="checkmark "></span>
+                </label>
+                <label className="check-task  p-2 col "><button onClick={(e) => showDetails(e)}>view details +</button>
                 </label>
                 <label className="check-task border-left  p-2 col ">{props.task.status}
                 </label>
@@ -36,8 +37,7 @@ function ViewTaskByCrad(props) {
 
                 <label className="check-task border-left  p-2 col">{props.task.startDate}
                 </label>
-                <label className="check-task border-left p-2 col "><button onClick={(e) => showDetails(e)}>view details +</button>
-                </label>
+               
                 {viewDetails ? <div onClick={(e) => closeDetails(e)}><ViewDetails > </ViewDetails></div>
                     : null}
 

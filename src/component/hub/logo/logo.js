@@ -13,7 +13,7 @@ export default function Logo(props) {
                         props.nameWorkspace[props.nameWorkspace.indexOf(" ") + 1].toUpperCase() : null
                 }</span>
             {/* <span className='textLogo'>{props.nameWorkspace}</span> */}
-            <DropDownWorkspace nameWorkspace={props.nameWorkspace} />
+            {/* <DropDownWorkspace nameWorkspace={props.nameWorkspace} /> */}
 
         </>)
 

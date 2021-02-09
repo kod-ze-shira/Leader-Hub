@@ -6,6 +6,7 @@
   margin-top:-7vh; 
  
   }
+
   .list_config{
     padding-top: 8vh;
   }
@@ -20,16 +21,21 @@
   .li-back{
     /* background: transparent linear-gradient(90deg, #bceff8 0%,
      #006C8000 100%) 0% 0% no-repeat padding-box;  */
-     background: transparent linear-gradient(90deg, #dff5fa 0%,
-     #006C8000 100%) 0% 0% no-repeat padding-box;
-     /* border-left:10px solid #40D9ED;  */
+     /* background: linear-gradient(90deg, #65E8FF 0%, #006C8000 100%) 0% 0% no-repeat padding-box; */
+     /* opacity: 0.18; */
+     background: url('../../../img/Mask.svg');
+     border-left:1px solid #40D9ED; 
      /* margin-left: 2vh; */
-        
+
   }
   li:focus{
     background-color:white;
   }
-  
+  li p{
+    color: white;
+    display: inline-block;
+    opacity: 1!important;
+  }
   li img{
     display: inline-block;
   }
