@@ -65,8 +65,12 @@ function ViewProject(props) {
                 <td>
                     <span className='stripeProject'>
                         <span style={{ 'font-weight': 'bold' }}>
-                            7</span>/20
-                </span>
+                            7</span>
+
+                        <span>
+                            /20</span>
+
+                    </span>
                     <span className='description'>Task</span>
                 </td>
             </tr >

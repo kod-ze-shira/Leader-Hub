@@ -18,12 +18,7 @@ function ViewWorkspaceGrid(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
-    const toOpenEditWorkspace = () => {
-        setOpenEditWorkspace(!openEditWorkspace)
-    }
-    function over_workspace() {
-        setOver(true);
-    }
+
     const [over, setOver] = useState(false);
 
     function outOver() {
@@ -68,6 +63,7 @@ function ViewWorkspaceGrid(props) {
                         </div>
 
                     </>
+
 
 
                     :
