@@ -14,7 +14,6 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     let myWorkspace;
 
     // useEffect(() => {
-<<<<<<< HEAD
     // if (window.performance) {
     // if (performance.navigation.type == 1) {
     // alert("This page is reloaded");
@@ -22,9 +21,6 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     // }
     // }
     // }, []);
-=======
-    //     { props.getAllWorkspaces() };
->>>>>>> dev
 
     // }, []);
 

@@ -35,6 +35,9 @@ function ViewWorkspaceGrid(props) {
     function outEdit() {
         setEdit(false);
     }
+    function over_workspace() {
+        setOver(true);
+    }
 
     return (
         <>
@@ -78,7 +81,7 @@ function ViewWorkspaceGrid(props) {
                     <div className=" Workspacegrid mt-4"
                         onClick={() => routeToWorkspace()}
 
-                    // onMouseOver={over_workspace}
+                        onMouseOver={over_workspace}
                     >
 
                         < div className="logoWorkspace1 ml-5 mt-3"
