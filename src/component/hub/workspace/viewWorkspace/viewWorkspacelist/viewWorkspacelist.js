@@ -77,7 +77,6 @@ function ViewWorkspaceList(props) {
     )
 }
 const mapStateToProps = (state) => {
-
     return {
         user: state.public_reducer.userName
     }

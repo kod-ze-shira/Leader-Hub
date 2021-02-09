@@ -36,7 +36,7 @@ function ViewWorkspaceGrid(props) {
                             >
                                 <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
-                                <div className="col-1 delet" onClick={(w) => { props.deleteWorkspaceInServer(w); }}><img src={require('../../../../img/bin.png')}></img></div>
+                                <div className="col-1 delete" onClick={(w) => { props.deleteWorkspaceInServer(w); }}><img src={require('../../../../img/bin.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
                                 <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
                             </div>

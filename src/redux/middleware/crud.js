@@ -344,12 +344,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
-
-
         let workspace = getState().workspace_reducer.workspace;
-
-
-
         let urlData = "https://reacthub.dev.leader.codes / api / ${ getState().public_reducer.userName } /${workspaceId}/removeWorkspaceById‏"
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
