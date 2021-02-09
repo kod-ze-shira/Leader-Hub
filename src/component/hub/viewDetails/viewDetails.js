@@ -7,6 +7,7 @@ import './viewDetails.css'
 
 
 
+
 const mapStateToProps = (state) => {
     return {
 
@@ -22,10 +23,14 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(function viewDetails(props) {
 
+
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="view-details col-5">
+
+                    {props.work}
+
                     ‏
                 </div>
             </div>
