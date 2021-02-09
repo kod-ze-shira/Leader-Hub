@@ -96,7 +96,7 @@ function ViewWorkspaceGrid(props) {
             }
             {
                 edit ?
-                    <ViewDetails >
+                    <ViewDetails id="id:" id1={workspace._id} workspace="Workspace Name:" name={workspace.name} color="color:" color1={workspace.color} >
 
                     </ViewDetails>
 
