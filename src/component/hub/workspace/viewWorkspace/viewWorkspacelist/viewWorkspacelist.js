@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
+import EditWorkspace from '../../editWorkspace/editWorkspace'
 import ViewDetails from '../../../viewDetails/viewDetails'
 
 
@@ -26,6 +27,8 @@ function ViewWorkspaceList(props) {
 
 
     function EditWorkspace() {
+
+
         setEdit(true);
     }
     function outEdit() {
@@ -42,6 +45,11 @@ function ViewWorkspaceList(props) {
     function func_out_over() {
         setover(false);
     }
+    const changeFiledInWorkspace = (input) => {
+        props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
+    }
+
+
 
     return (
         <>
@@ -49,6 +57,7 @@ function ViewWorkspaceList(props) {
 
             <div className="row WorkspaceList mt-3 " onMouseOver={func_over}>
                 <div onMouseOut={func_out_over}>
+
 
                     <div className="row "  >
                         <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
@@ -62,7 +71,12 @@ function ViewWorkspaceList(props) {
                             </div>
                         </div>
                         <b className="mt-4 ml-2">{workspace.name} </b>
+
                     </div>
+
+                    {/* {workspace ? <EditWorkspace /> : null} */}
+
+
 
                 </div>
                 {
@@ -71,7 +85,7 @@ function ViewWorkspaceList(props) {
                             <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                             <div className="ml-2 stripe">|</div>
                             <div className="col-1 ml-1 delete"  ><img src={require('../../../../img/bin.png')}></img></div>
-
+                            {/* <button onClick={props.editWorkspaceInServer()}></button> */}
 
                         </div>
                         : null
@@ -84,9 +98,18 @@ function ViewWorkspaceList(props) {
 
             </div>
             {  edit ?
-                <ViewDetails from="editworkspace">
+                <>
+                    {/* <ViewDetails  >
 
-                </ViewDetails>
+                    </ViewDetails> */}
+                    <div>
+
+                        <input name="name" placeholder={props.workspace.name} onChange={(input) => changeFiledInWorkspace(input)}></input>
+                        <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button>
+                    </div>
+
+                </>
+
                 // <div className="editWorkspace ">
                 //     <div className="row mt-5">
                 //         <div className="col-3"></div>
@@ -112,6 +135,7 @@ function ViewWorkspaceList(props) {
                 : null
             }
 
+
         </>
 
     )
@@ -119,12 +143,20 @@ function ViewWorkspaceList(props) {
 const mapStateToProps = (state) => {
 
     return {
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+        workspaces: state.workspace_reducer.workspaces
+
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+        editWorkspaceInServer: () => dispatch(actions.editWorkspaceInServer()),
+        setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
+        saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
+        setWorkspace: () => dispatch(actions.setWorkspace())
+
     }
 }
 

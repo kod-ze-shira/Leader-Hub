@@ -52,7 +52,7 @@ function ViewWorkspaceGrid(props) {
                             >
                                 <div className="col-1 edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
-                                <div className="col-1 delet" onClick={() => { props.deleteWorkspaceInServer(); }}><img src={require('../../../../img/bin.png')}></img></div>
+                                <div className="col-1 delete" onClick={() => { props.deleteWorkspaceInServer(); }}><img src={require('../../../../img/bin.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
                                 <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
                             </div>
@@ -148,6 +148,7 @@ const mapStateToProps = (state) => {
 
     return {
         user: state.public_reducer.userName,
+
 
 
     }
