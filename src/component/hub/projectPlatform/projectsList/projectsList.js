@@ -18,25 +18,32 @@ function ProjectsList(props) {
 
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
-        props.changeProject(idProject)
+        // props.changeProject(idProject)
         props.getProjectsByWorkspaceId(props.project.workspace)
         console.log("project" + props.projects)
 
-        props.sendWorspaceId(props.project.workspace)
+        // props.sendWorspaceId(props.project.workspace)
 
 
     }, [props.project.workspace._id])
-   
+
     //to chang the project that user selected
+    let myProject = props.project;
+    // myWorkspace = props.workspaces.find(w => w._id == workspaceId)
+
     const changeSelectedProject = (id) => {
+        // props.changeProjectId()
         props.getProjectByIdInServer(id)
         $(document).ready(function () {
             $(".project-select").css("color", props.project.color)
         })
         // let projectIdSelected = event.target.options[event.target.selectedIndex].id;
-        props.changeProject(id)
-    }
+        // props.changeProject(id)
+        myProject = props.projects.find(p => p._id == id)
 
+        props.setProject(myProject)
+    }
+    console.log(props.projects)
     const viewProjectsByWorkspace1 = props.projects.map((project) => {
         if (project.name && project._id != props.project._id)
             return <>
@@ -49,7 +56,7 @@ function ProjectsList(props) {
     return (
         <>
             <div className="">
-                <div className="row justify-content-between mx-5  mt-5 py-1 row-projects ">
+                {/* <div className="row justify-content-between mx-5  mt-5 py-1 row-projects "> */}
                     <select defaultValue={idProject}
                         onChange={(e) => changeSelectedProject(e.target.value)} className="project-select pl-4 py-1">
                         <option className="option " value={props.project._id}
@@ -60,8 +67,8 @@ function ProjectsList(props) {
                         </option>
                         {viewProjectsByWorkspace1}
                     </select>
-                    <a className="ml-0 pr-4 pt-1">Add Project +</a>
-                </div>
+                    {/* <a className="ml-0 pr-4 pt-1">Add Project +</a> */}
+                {/* </div> */}
             </div>
         </>
     )
@@ -76,6 +83,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setProject: (project) => dispatch(actions.setProject(project)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))

@@ -5,13 +5,13 @@ const initialState = {
 
     project: {
         name: "",
-        subject: "tttttt",
-        project: "bbbbbb",
-        dueDate: "12/10/20",
-        updateDates: ["12/10/20", "14/10/20"],
-        endDate: "10/12/21",
-        color: '#1AFFFC',
-        cards: ['jj', 'gttt', 'ttt'],
+        subject: "",
+        project: "",
+        dueDate: "",
+        updateDates: [],
+        endDate: "",
+        color: '',
+        cards: [],
         workspace:""
     },
 
@@ -23,8 +23,9 @@ const project = {
     setProjectName(state, action) {
         state.project.name = action.payload;
     },
-    setProject(state, action) {
+    setProject(state, action) { 
         state.project = action.payload;
+        console.log(state.project)
     },
     setProjectId(state, action) {
         state.project.id = action.payload;
