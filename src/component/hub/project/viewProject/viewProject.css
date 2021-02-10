@@ -12,12 +12,12 @@
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 6px;
+    margin-right: 10px;
   }
 .divProgress{
     text-align: center;
 }
-.progress {
+.progressProject {
     display: inline-flex;
     height: 1rem;
     overflow: hidden;
@@ -25,9 +25,11 @@
     font-size: .75rem;
     background-color: #e9ecef;
     border-radius: .25rem;
-    
+    height: 5px;  
+    width:  64% 
+     
 }
-.progress-bar {
+.progressProject-bar {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,9 +39,11 @@
     white-space: nowrap;
     transition: width .6s ease;
 }
+.projectForWorkspace:hover{
+    background-color: rgba(0,0,0,.075);
+}
 
-
-.table td, .table th {
+.projectForWorkspace  td, .projectForWorkspace th {
     padding: .75rem;
     vertical-align: middle;
     border-top: 1px solid #dee2e6;

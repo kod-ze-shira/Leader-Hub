@@ -9,10 +9,12 @@ import { InputGroup, FormControl, Table } from 'react-bootstrap'
 // import './viewTaskByCrad.css'
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
+import Animation from '../../animation/animation'
 
 
 function ViewTaskByCrad(props) {
     const [viewDetails, setViewDetails] = useState(false)
+    const [showchalalit, setShowChalalit] = useState(false) 
 
     const showDetails = (event) => {
         setViewDetails(true)
@@ -21,12 +23,16 @@ function ViewTaskByCrad(props) {
         setViewDetails(false)
 
     }
+    function addChalalit() {
+        setShowChalalit(true)
+    }
+
     return (
         <>
             <div className="show-task row mx-5 border-bottom">
                 <label className="check-task ml-4 p-2 col-3">{props.task.description}
                     <input type="checkbox" />
-                    <span className="checkmark "></span>
+                    <span className="checkmark " onClick={() => addChalalit()}></span>
                 </label>
                 <label className="check-task  p-2 col "><button onClick={(e) => showDetails(e)}>view details +</button>
                 </label>
@@ -42,6 +48,7 @@ function ViewTaskByCrad(props) {
                     : null}
 
             </div>
+            {showchalalit ? <Animation /> : null}
 
         </>
     )
