@@ -13,6 +13,7 @@ import { Alert } from 'bootstrap';
 // import project_reducer from '../../../../redux/Reducers/project_reducer';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import Select from 'react-select';
 function ProjectsList(props) {
 
     const { idProject } = useParams();
@@ -23,7 +24,7 @@ function ProjectsList(props) {
         props.getProjectsByWorkspaceId(props.project.workspace)
         console.log("project" + props.projects)
         // console.log(props.workspace)
-        props.sendWorspaceId(props.project.workspace)
+        // props.sendWorspaceId(props.project.workspace)
 
     }, [props.project.workspace._id])
 
@@ -37,24 +38,26 @@ function ProjectsList(props) {
         // let projectIdSelected = event.target.options[event.target.selectedIndex].id;
         props.changeProject(id)
     }
-    const options = props.projects.map((project => 
-    
-      project.name
-    ))
-    console.log("asd"+ props.project.name)
-    const viewProjectsByWorkspace1 = props.projects.map((project) => {
-        if (project.name && project._id != props.project._id)
-            return <>
-                <option className="option" value={project._id}
-                    style={{ color: project.color ? project.color : "#F7B500" }}>
-                    {project.name} </option>
-            </>
-    })
+    // const viewProjectsByWorkspace1 = props.projects.map((project) => {
+    //     // if (project.name && project._id != props.project._id)
+    //       return   project.name
+               
+    // })
+
+    // const viewProjectsByWorkspace1 = props.projects.map((project) => {
+    //     if (project.name && project._id != props.project._id)
+    //         return <>
+    //             <option className="option" value={project._id}
+    //                 style={{ color: project.color ? project.color : "#F7B500" }}>
+    //                 {project.name} </option>
+    //         </>
+    // })
 
     return (
         <>
-            <Dropdown className="m-4" onChange={(e) => changeSelectedProject(e.target.value)} options={options} value={props.project.name} />
-            {options}
+           
+            {/* <Dropdown className="m-4" onChange={(e) => changeSelectedProject(e.target.value)} options={options} value={props.project.name} /> */}
+            {/* {options} */}
             {/* <div className="">
                 <div className=" mt-5 py-1 row-projects " >
                     <select defaultValue={idProject}

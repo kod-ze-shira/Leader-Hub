@@ -13,6 +13,7 @@ import 'react-dropdown/style.css';
 // import { Link } from 'react-bootstrap';
 import Select from 'react-select';
 import $ from 'jquery';
+import DropDownWorkspace from '../../hub/dropDownWorkspace/dropDownWorkspace'
 
 
 function ProjectPlatform(props) {
@@ -32,21 +33,19 @@ function ProjectPlatform(props) {
         setProjectId(value)
         setViewCardsByProject(true)
     }
-    const sendWorspaceId = (value) => {
-        setWorkspaceId(value)
-    }
+  
 
-     $(function() {
-        $('.add-new-btn').hover(function() {
-          $('.add-new-pop-up').css('display', 'block')
-        }, function() {
-          // on mouseout, reset the background colour
-          $('.add-new-pop-up').css('display', 'none');
+    $(function () {
+        $('.add-new-btn').hover(function () {
+            $('.add-new-pop-up').css('display', 'block')
+        }, function () {
+            // on mouseout, reset the background colour
+            $('.add-new-pop-up').css('display', 'none');
         });
-      });
-      
-// });
-    let myWorkspace;
+    });
+
+    // });
+    // let myWorkspace;
 
     // const options =
     //     props.worksapces.map(item => ({
@@ -70,27 +69,28 @@ function ProjectPlatform(props) {
 
     // if (props.workspaces.length())
     //     myWorkspace = props.workspaces.find(w => w._id == workspaceId)
-    const defaultOption = workspaceId;
+    // const defaultOption = workspaceId;
 
     return (
         <>
 
             <div className="body container-fluid">
                 <div className="row drop-dwon-header">
-                    {/* <Logo className="logo-workspace Dropdown-control" nameWorkspace={workspaceName} /> */}
+                    {/* <DropDownWorkspace ></DropDownWorkspace> */}
+                    <Logo className="logo-workspace Dropdown-control" nameWorkspace={"workspaceName"} />
 
                     {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
                     {/* <Dropdown  className="m-4" options={options} value="card" placeholder="Select an option" /> */}
                     {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
                 </div>
-                < ProjectsList changeProject={changeProjectId} sendWorspaceId={sendWorspaceId} />
+                < ProjectsList changeProject={changeProjectId}  />
                 {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 <div className="add-new-pop-up ">
-                   <a >New Workspace</a><br></br>
-                   <a>New Project</a><br></br>
-                   <a>New Card</a><br></br>
-                   <a>New Task</a><br></br>
+                    <a >New Workspace</a><br></br>
+                    <a>New Project</a><br></br>
+                    <a>New Card</a><br></br>
+                    <a>New Task</a><br></br>
                 </div>
                 <div className="add-new-btn">+</div>
             </div>
@@ -103,6 +103,7 @@ const mapStateToProps = (state) => {
         projects: state.project_reducer.project,
         user: state.public_reducer.userName,
         worksapces: state.public_reducer.worksapces,
+        workspace: state.workspace_reducer.workspace
 
 
     }

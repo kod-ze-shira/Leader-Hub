@@ -38,7 +38,6 @@ function AllWorkspaces(props, getAllWorkspaces) {
         list ?
             <>
                 <div className="row mt-5"></div>
-
                 <div className="row mt-5"></div>
                 <div className="row">
                     <div className="col-1"></div>
