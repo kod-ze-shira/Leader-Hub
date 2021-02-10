@@ -411,7 +411,7 @@ export const editTaskInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK_IN_SERVER') {
 
         var task = getState().task_reducer.task;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -594,7 +594,8 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 
         var projectId = action.payload;
 
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectById"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/getProjectById`
+
         $.ajax({
             url: urlData,
             type: 'GET',
