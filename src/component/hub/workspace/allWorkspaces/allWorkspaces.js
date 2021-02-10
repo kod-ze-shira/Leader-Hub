@@ -11,7 +11,7 @@ import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceG
 function AllWorkspaces(props, getAllWorkspaces) {
 
     useEffect(() => {
-        { props.getAllWorkspaces() };
+        props.getAllWorkspaces()
 
     }, []);
 
@@ -24,74 +24,68 @@ function AllWorkspaces(props, getAllWorkspaces) {
         return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
     })
 
-    const [list, setlist] = useState(true);
+    const [list, setlist] = useState(false);
+    const [grid, setgrid] = useState(true)
 
     function chenge_list1() {
-        setlist(false);
+        setlist(true);
+        setgrid(false)
+
     }
     function chenge_grid() {
-        setlist(true);
+        setlist(false);
+        setgrid(true);
     }
     return (
 
 
-        list ?
-            <>
-                <div className="row mt-5"></div>
 
-                <div className="row mt-5"></div>
-                <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        <div className="row  borderBottom">
+        <>
+            <div className="row mt-5"></div>
 
-
-                            <div className="MyWorkspace">My Workspace</div>
-                            <div className="row">
-                                <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
-                                <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
-                            </div>
-                        </div>
+            <div className="row mt-5"></div>
+            <div className="row">
+                <div className="col-1"></div>
+                <div className="col-10">
+                    <div className="row borderBottom">
 
 
-                        <div className="row mt-5 ml-5 ">
+                        <div className="MyWorkspace">My Workspace</div>
+                        <div className="row">
+                            {
+                                grid ?
+                                    <>
+                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                                        <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                    </>
+                                    :
+                                    <>
+                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
+                                        <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                                    </>
+                            }
 
-                            {renderedGridWorkspaces}
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </>
-            :
-            <>
-
-                <div className="row mt-5"></div>
-
-                <div className="row mt-5">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        <div className="row borderBottom ">
-
-                            <div className="MyWorkspace">My Workspace</div>
-
-                            <div className="row">
-                                <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
-                                <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="row mt-4">
-                    <div className="col-1"></div>
-                    <div className="col">
-                        {renderedListWorkspaces} </div>
-                </div>
 
 
-            </>
+                    <div className="row mt-5 ml-5 ">
+                        {list ?
+                            renderedListWorkspaces
+
+                            :
+                            renderedGridWorkspaces
+
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+
+        </>
+
+
 
 
 

@@ -346,26 +346,17 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
 
     if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
         let workspace = getState().workspace_reducer.workspace;
-
-
-
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il" + workspace._id + workspace.name + "/removeWorkspaceById‏"
-
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
         $.ajax({
-
             url: urlData,
             type: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ workspace }),
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.setProject(data.result))
-
             },
             error: function (err) {
 
@@ -420,7 +411,7 @@ export const editTaskInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK_IN_SERVER') {
 
         var task = getState().task_reducer.task;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editTask "
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -603,7 +594,8 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 
         var projectId = action.payload;
 
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectById"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/getProjectById`
+
         $.ajax({
             url: urlData,
             type: 'GET',
