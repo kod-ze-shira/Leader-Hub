@@ -19,6 +19,7 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
+        props.setProjet(props.myProject)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
 
@@ -90,6 +91,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setProjet: (project) => dispatch(actions.setProjet(project))
 
     }
 }

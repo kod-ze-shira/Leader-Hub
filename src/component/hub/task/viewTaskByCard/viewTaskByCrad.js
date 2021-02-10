@@ -30,14 +30,17 @@ function ViewTaskByCrad(props) {
                 </label>
                 <label className="check-task border-left  p-2 col ">{props.task.status}
                 </label>
-                <label className="check-task border-left  p-2 col " ><div  className={(props.task.status) == "in progress" ? 'status-task-in-progress' :props.task.status == "done" ?'status-task-done':'status-task-to-do'}>{props.task.status}</div>
+                <label className="check-task border-left  p-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                 </label>
 
                 <label className="check-task border-left  p-2 col">{props.task.startDate}
                 </label>
                 <label className="check-task border-left p-2 col "><button onClick={(e) => showDetails(e)}>view details +</button>
                 </label>
-                {viewDetails ? <div onClick={(e) => closeDetails(e)}><ViewDetails > </ViewDetails></div>
+                {viewDetails ?
+                    <div className="close-details" onClick={(e) => closeDetails(e)}>
+                        <ViewDetails > </ViewDetails>
+                    </div>
                     : null}
 
             </div>

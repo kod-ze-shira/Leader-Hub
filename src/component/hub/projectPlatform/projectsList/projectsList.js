@@ -21,11 +21,12 @@ function ProjectsList(props) {
         props.changeProject(idProject)
         props.getProjectsByWorkspaceId(props.project.workspace)
         console.log("project" + props.projects)
-        // console.log(props.workspace)
-        props.sendWorspaceName(props.project.workspace.name)
+
+        props.sendWorspaceId(props.project.workspace)
+
 
     }, [props.project.workspace._id])
-
+   
     //to chang the project that user selected
     const changeSelectedProject = (id) => {
         props.getProjectByIdInServer(id)
@@ -69,11 +70,13 @@ const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
+        workspaces: state.public_reducer.worksapces,
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }

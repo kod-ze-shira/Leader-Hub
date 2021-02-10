@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useParams } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import ProjectsList from './projectsList/projectsList'
@@ -8,27 +8,39 @@ import Logo from '../logo/logo'
 import './projectPlatform.css'
 import HeaderBody from '../headerBody/headerBody'
 function ProjectPlatform(props) {
-    const [projectId, setProjectId] = useState(0)
+    const { idProject } = useParams();
+    const [projectId, setProjectId] = useState(idProject)
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
-    const [workspaceName, setWorkspaceName] = useState()
+    const [workspaceId, setWorkspaceId] = useState()
+
+    
 
     useEffect(() => {
-        { props.getAllWorkspaces() }; 
+        {
 
+            console.log(props.project);
+            // props.getAllWorkspaces()
+            console.log("wor" + props.worksapces)
+        };
     }, []);
+
     const changeProjectId = (value) => {
         setProjectId(value)
         setViewCardsByProject(true)
     }
-    const sendWorspaceName = (value) => {
-        setWorkspaceName(value)
+    const sendWorspaceId = (value) => {
+        setWorkspaceId(value)
     }
+    let myWorkspace;
+    if (props.workspaces.length)
+        myWorkspace = props.workspaces.find(w => w._id == workspaceId)
 
+    console.log("my" + myWorkspace)
     return (
         <>
             <div className="body container-fluid">
-                <Logo className="logo-workspace" nameWorkspace={workspaceName} />
-                < ProjectsList changeProject={changeProjectId} sendWorspaceName={sendWorspaceName} />
+                <Logo className="logo-workspace" nameWorkspace={"myWorkspace.name"} />
+                < ProjectsList changeProject={changeProjectId} sendWorspaceId={sendWorspaceId} />
                 {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 {/* <div className="add-new-btn ">+</div> */}

@@ -25,7 +25,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function viewDetails
     return (
         <div className="container-fluid">
             <div className="row">
-            <div className="view-details col-5"></div>
+                <div className="view-details col-5"></div>
             </div>
         </div>
     )

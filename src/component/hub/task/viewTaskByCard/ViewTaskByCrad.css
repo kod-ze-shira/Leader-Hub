@@ -77,7 +77,9 @@
   .check-task input:checked ~ .checkmark:after {
     display: block;
   }
-  
+  .close-details{
+    width: 0 !important;
+  }
   /* Style the checkmark/indicator */
   .check-task .checkmark:after {
     left: 9px;
