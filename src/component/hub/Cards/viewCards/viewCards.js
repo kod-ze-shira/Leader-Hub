@@ -35,7 +35,11 @@ function ViewCards(props) {
                 <Droppable droppableId="characters">
                     {(provided) => (
                         /* ul */
-                        flag ? <TasksByCard className="characters" cardId={cardId} {...provided.droppableProps} ref={provided.innerRef} /> : null
+                        flag ? <TasksByCard className="characters" cardId={cardId}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            //   {...provided.droppableProps} 
+                            ref={provided.innerRef} /> : null
                     )}
                 </Droppable>
             </DragDropContext>

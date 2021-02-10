@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useParams } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import ProjectsList from './projectsList/projectsList'
@@ -17,23 +17,24 @@ import DropDownWorkspace from '../../hub/dropDownWorkspace/dropDownWorkspace'
 
 
 function ProjectPlatform(props) {
-    const [projectId, setProjectId] = useState(0)
+    // const { idProject } = useParams();
+    const [projectId, setProjectId] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
-    const [selectedOption, setSelectedOption] = useState()
+
 
 
     useEffect(() => {
-
-        props.getAllWorkspacesFromServer();
-
-
+        {
+            props.getAllWorkspacesFromServer()
+        };
     }, []);
-    const changeProjectId = (value) => {
-        setProjectId(value)
+
+    const changeProjectId = () => {
+        // setProjectId(value)
         setViewCardsByProject(true)
     }
-  
+
 
     $(function () {
         $('.add-new-btn').hover(function () {
@@ -83,8 +84,10 @@ function ProjectPlatform(props) {
                     {/* <Dropdown  className="m-4" options={options} value="card" placeholder="Select an option" /> */}
                     {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
                 </div>
-                < ProjectsList changeProject={changeProjectId}  />
-                {viewCardsByProject ? <CardsByProject projectId={projectId} /> : null}
+                {/* < ProjectsList changeProject={changeProjectId} /> */}
+                {/* {viewCardsByProject ? */}
+                <CardsByProject projectId={props.project._id} />
+                {/* : null} */}
                 {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>
@@ -102,9 +105,8 @@ const mapStateToProps = (state) => {
     return {
         projects: state.project_reducer.project,
         user: state.public_reducer.userName,
-        worksapces: state.public_reducer.worksapces,
-        workspace: state.workspace_reducer.workspace
-
+        workspaces: state.public_reducer.worksapces,
+        project: state.project_reducer.project,
 
     }
 }

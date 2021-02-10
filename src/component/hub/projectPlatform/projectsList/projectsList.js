@@ -20,17 +20,21 @@ function ProjectsList(props) {
 
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
-        props.changeProject(idProject)
+        // props.changeProject(idProject)
         props.getProjectsByWorkspaceId(props.project.workspace)
         console.log("project" + props.projects)
-        // console.log(props.workspace)
+
         // props.sendWorspaceId(props.project.workspace)
+
 
     }, [props.project.workspace._id])
 
     //to chang the project that user selected
+    let myProject = props.project;
+    // myWorkspace = props.workspaces.find(w => w._id == workspaceId)
+
     const changeSelectedProject = (id) => {
-        alert()
+        // props.changeProjectId()
         props.getProjectByIdInServer(id)
         $(document).ready(function () {
             $(".project-select").css("color", props.project.color)
@@ -80,11 +84,14 @@ const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
+        workspaces: state.public_reducer.worksapces,
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setProject: (project) => dispatch(actions.setProject(project)),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }

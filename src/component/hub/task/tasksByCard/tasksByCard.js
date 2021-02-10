@@ -19,7 +19,10 @@ function TasksByCard(props) {
         console.log(task);
         return <Draggable key={task._id} draggableId={task._id} index={index}>
             {(provided) => (
-                    <ViewTaskByCrad  key={task._id} task={task} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} />
+                <ViewTaskByCrad key={task._id} task={task}
+                    // {...props} ref={props.innerRef}
+                ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                />
             )}
         </Draggable>
     })

@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-import TasksByProject from '../../task/tasksByProject/tasksByProject'
-import DetailsProject from '../detailsProject/detailsProject'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import './viewProject.css'
 import Cell from './cell'
-// import { actions } from '../../../redux/actions/action'
+import CellDescription from './cellDescription'
 import './viewProject.css'
 import { actions } from '../../../../redux/actions/action';
-import history from '../../../history'
 import { withRouter } from 'react-router-dom';
-
+import { ProgressBar, Spinner } from 'react-bootstrap';
 
 function ViewProject(props) {
 
@@ -19,64 +15,65 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
+        props.setProject(props.myProject)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
-
+    // const div = styled.div`
+    // background: #32AABA
+    // `
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     return (
         <>
             <tr >
-                <td>
-                    <span class='stripeProject'
-                        // style={{ 'background-color': props.project.color }}></span>
-                        style={{ 'background-color': props.myProject.color }}></span>
-                </td>
-
                 <td onClick={(e) => routeToCards(e)}>
-                    {props.myProject.name}
-                    {/* {props.myProject.description} */}
-                </td>
-
-                <td>
-                    <Cell
-
-                        // item={props.myProject.dueDate ? props.myProject.dueDate : Date.now()}
-                        item={props.myProject.dueDate}
-                        description='Due date' />
-                    {/* {props.myProject.dueDate}
-                dueDate */}
+                    <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
+                    <span style={{ 'color': props.myProject.color }}>
+                        {props.myProject.name}</span>
+                    {/* <span class='stripeProject'
+                        // style={{ 'background-color': props.project.color }}></span>
+                        style={{ 'background-color': props.myProject.color }}></span> */}
                 </td>
                 <td>
-                    <Cell
-                        // item={props.myProject.updateDates[props.myProject.updateDates.length - 1]}
-                        item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'}
-                        description='Last update' />
-                    {/*                     
-                     {props.myProject.updateDates[props.myProject.updateDates.length - 1]}
-                Last updateDates</td> */}
+                    <Cell item={props.myProject.dueDate} />
+                    <CellDescription description='Due date' />
                 </td>
                 <td>
-                    <Cell
-                        item={props.myProject.cards.length ? props.myProject.cards.length : "0"}
-                        description='card' />
+                    <Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} />
+                    <CellDescription description='card' />
                 </td>
-
                 <td>
-                    <span className='stripeProject'>
+                    <span className='task'>
                         <span style={{ 'font-weight': 'bold' }}>
-                            7</span>/20
-                </span>
-                    <span className='description'>Task</span>
+                            7</span>
+                        <span>
+                            /20</span>
+                    </span>
+                    <CellDescription description='Task' />
                 </td>
-            </tr >
-            {/* <div className="container">
-                <div className="row" onClick={() => setViewTasks(!viewTasks)}>
-                    <div className="col">
-                        <div>name:{props.myProject.name}</div>
-                        <div>description:{props.myProject.description}</div>
+                <td>
+
+                    <div className='divProgress'>
+                        <div class="progress" style={{ "height": "5px", "width": "54%" }}>
+                            <div role="progressbar" class="progress-bar" style={{ 'background': '#32AABA', "width": "50%" }}
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
                     </div>
-     */}
+                    <CellDescription description='50% comlete' />
+                </td>
+                <td>
+                    <Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} />
+                    <CellDescription description='Team' />
+                </td>
+                <td>
+                    <Cell item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'} />
+                    <CellDescription description='Last update' />
+                </td>
+
+
+
+            </tr >
 
         </>
     )
@@ -90,6 +87,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setProject: (project) => dispatch(actions.setProject(project))
 
     }
 }

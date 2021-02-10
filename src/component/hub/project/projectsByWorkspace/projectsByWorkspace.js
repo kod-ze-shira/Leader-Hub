@@ -8,26 +8,36 @@ import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 
-function ProjectsByWorkspace(props) {
-    const { idWorkspace } = useParams();
+function ProjectsByWorkspace(props, getAllWorkspaces) {
+
+    let { idWorkspace } = useParams();
     let myWorkspace;
-    if (props.workspaces.length)
-        myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
-    else {
-        props.getAllWorkspaces();
-    }
-    useEffect(() => {
-        props.getProjectsByWorkspaceId(idWorkspace);
-    }, [])
+
+    // useEffect(() => {
+    // if (window.performance) {
+    // if (performance.navigation.type == 1) {
+    // alert("This page is reloaded");
+    // { props.getAllWorkspaces() }
+    // }
+    // }
+    // }, []);
+
+    // }, []);
+
+    // useEffect(() => {
+    // if (window.performance) {
+    // if (performance.navigation.type == 1) {
+    // alert("This page is reloaded");
+    // { props.getAllWorkspaces() }
+    // state.public_reducer.worksapces
+    // }
+    // }
+    // }, []);
+
+
+
 
     myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
-
-
-    // if (props.workspaces.length == 0)
-    //     props.getAllWorkspaces();
-
-
-
 
     const viewProjectsByWorkspace = myWorkspace.projects.map((project) => {
         return <ViewProject myProject={project} />

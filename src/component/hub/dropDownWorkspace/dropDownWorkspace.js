@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import './dropDownWorkspace.css'
@@ -30,24 +30,24 @@ function DropDownWorkspace(props) {
             {/* <Select
                 className="basic-single col-4"
                 // classNamePrefix="select"
-                onChange={(e) => routeToWrkspace(e)}
+            onChange={(e) => routeToWrkspace(e)}
                 // defaultValue={selectedOption}
                 name="color"
                 value={selectedOption}
                 options={viewProjectsByWorkspace1}
-            /> */}
-            
-            <select className="form-select selectpicker textLogo" name="country"
-                onChange={(e) => routeToWrkspace(e)}>
-                <option default className='textLogo'>
-                    {props.nameWorkspace}
-                </option>
-                {props.worksapces.map(item => (item.name != props.nameWorkspace ?
-                    <option className='textLogo' value={item._id} >
-                        {item.name}
-                    </option> : null
-                ))}
-            </select>‏
+            />  */}
+
+    <select className="form-select selectpicker textLogo" name="country"
+        onChange={(e) => routeToWrkspace(e)}>
+        <option default className='textLogo'>
+            {props.nameWorkspace}
+        </option>
+        {props.worksapces.map(item => (item.name != props.nameWorkspace ?
+            <option className='textLogo' value={item._id} >
+                {item.name}
+            </option> : null
+        ))}
+    </select>‏
         </>
     )
 }

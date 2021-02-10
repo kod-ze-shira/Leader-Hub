@@ -32,7 +32,7 @@ function ViewTaskByCrad(props) {
                 </label>
                 <label className="check-task border-left  p-2 col ">{props.task.status}
                 </label>
-                <label className="check-task border-left  p-2 col " ><div  className={(props.task.status) == "in progress" ? 'status-task-in-progress' :props.task.status == "done" ?'status-task-done':'status-task-to-do'}>{props.task.status}</div>
+                <label className="check-task border-left  p-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                 </label>
 
                 <label className="check-task border-left  p-2 col">{props.task.startDate}

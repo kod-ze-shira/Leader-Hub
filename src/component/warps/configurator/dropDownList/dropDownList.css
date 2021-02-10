@@ -30,11 +30,11 @@ button{
 button:hover{
     background-color: transparent !important;
 }
-input{
+/* input{
     display: none;
     background-color: transparent!important;
-    /* border: ; */
-}
+    /* border: ; 
+} */
 .icon{
     color: #b9b9b9!important;
 

@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
+import EditWorkspace from '../../editWorkspace/editWorkspace'
+import ViewDetails from '../../../viewDetails/viewDetails'
 
 
 
@@ -19,7 +21,20 @@ function ViewWorkspaceList(props) {
     }
 
     const routeToProject = () => {
+        // console.log("waaaaaaaaaa  " + workspace)
+        // props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
+    }
+    const [edit, setEdit] = useState(false);
+
+
+    function EditWorkspace() {
+        props.setWorkspace(workspace)//to select workspace to edit and send him to server
+
+        setEdit(true);
+    }
+    function outEdit() {
+        setEdit(false);
     }
 
     const toOpenEditWorkspace = () => {
@@ -33,57 +48,80 @@ function ViewWorkspaceList(props) {
         setover(false);
     }
 
+
+
     return (
         <>
 
-            <div className="row ml-5 curser"
-                onClick={() => routeToProject()}
-            >
-                <div className="row "  >
-                    <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
-                        <div className="logoWorkspacelist"
-                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                            {workspace.name[0].toUpperCase()}
-                            {/* {
+
+            <div className="row WorkspaceList mt-3 " onMouseOver={func_over} >
+                <div className="col-10" onClick={() => routeToProject(workspace._id)} onMouseOut={func_out_over} >
+
+                    <div className="row "  >
+                        <div className="Workspace"  >
+                            <div className="logoWorkspacelist"
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.name[0].toUpperCase()}
+                                {/* {
                             workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                 workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                         } */}
+                            </div>
                         </div>
+                        <b className="mt-4 ml-2">{workspace.name} </b>
+
                     </div>
-                    <b className="mt-4 ml-2">{workspace.name} </b>
 
                 </div>
                 {
                     over ?
-                        <div className="row mt-4">
-                            {/* <div className="col-1  delet"><img src={require('../../../../img/pencil-write.png')}></img></div> */}
+                        <div className="row  mt-4" onMouseOut={func_out_over}>
+
+                            <div className="col-1  edit" onClick={EditWorkspace}>
+                                {/* <img src={require('../../../../img/pencil-write.png')}></img> */}
+                            </div>
                             <div className="ml-2 stripe">|</div>
-                            {/* <div className="col-0.5 ml-1 edit"><img src={require('../../../../img/bin.png')}></img></div> */}
-
-
+                            <div className="col-1 ml-1 delete" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }} >
+                                {/* <img src={require('../../../../img/bin.png')}></img> */}
+                            </div>
+                            {/* <button onClick={props.editWorkspaceInServer()}></button> */}
                         </div>
+
                         : null
                 }
 
-
-
-
-
             </div>
+            {edit ?
+                <>
+                    <ViewDetails from="editWorkspace">
+
+                    </ViewDetails>
+
+                </>
+
+
+
+
+                : null
+            }
 
         </>
 
     )
 }
 const mapStateToProps = (state) => {
-
     return {
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+        workspaces: state.workspace_reducer.workspaces
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+
+        getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
+        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())
+
     }
 }
 

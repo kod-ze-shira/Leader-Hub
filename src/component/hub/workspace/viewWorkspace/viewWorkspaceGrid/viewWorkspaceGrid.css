@@ -16,20 +16,8 @@ font-size: small;
     
 }
 
-.editWorkspace{
-   height: 100vh;
-   width: 12vw;
-    position: absolute;
-  top: -85px;
-  right: 0;
-   background-color: white;
-   /* border: 2px solid;
-border-style: solid dotted inset double; */
-    border-left:solid #1AFFFC  8px;
-   
 
- 
-}
+
 .okEditWorkspace{
    width: 35px;
    height: 20px;
@@ -56,21 +44,23 @@ border-style: solid dotted inset double; */
     height:4rem;
    border-radius: 50%;
    font-size: 26px;
-   padding-top: 8px;
+   padding-top:8px;
    color: white;
    letter-spacing: 1.72px;
-   text-align: center;
+   text-align: 30px;
    font-family: 'Roboto', sans-serif;
-   /* font-size: xx-large; */
-   border:none;
-   font-weight: 50;
-      
+   font-size: xx-large;
+   margin-top: 30px;
+}
 
+      
+.name{
+   margin-top: 33px;
 }
 
 
+
 .logoWorkspace1{
-    
     width: 4rem;
     height:4rem;
    border-radius: 50%;
@@ -80,10 +70,10 @@ border-style: solid dotted inset double; */
    letter-spacing: 1.72px;
    text-align: center;
    font-family: 'Roboto', sans-serif;
-   /* font-size: xx-large; */
-   border:none;
-   font-weight: 50;
+   font-size: xx-large;
+   /* margin-top: 30px; */
+}
    
 
 
-}
+
