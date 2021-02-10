@@ -21,12 +21,7 @@ const workspaces = {
     setWorkspaceOnChangeFiled(state, action) {
         state.workspace[action.payload] = action.value
     },
-    setWorkspaceName(state, action) {
-        state.workspace.name = action.payload;
-    },
-    setWorkspaceId(state, action) {
-        state.workspace.id = action.payload;
-    },
+   
     setState(state, action) {
         state.workspace = action.payload
     },

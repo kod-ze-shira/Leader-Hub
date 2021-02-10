@@ -50,7 +50,9 @@ function ViewWorkspaceGrid(props) {
                             >
                                 <div className="col-1 edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
-                                <div className="col-1 delete" onClick={() => { props.deleteWorkspaceInServer(); }}><img src={require('../../../../img/bin.png')}></img></div>
+                                <div className="col-1 delete" 
+                                onClick={() => { props.setWorkspace(workspace);props.deleteWorkspaceInServer(); }}>
+                                    <img src={require('../../../../img/bin.png')}></img></div>
                                 <div className="ml-1 stripe">|</div>
                                 <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
                             </div>
@@ -155,7 +157,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        setWorkspace: () => dispatch(actions.setWorkspace()),
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
