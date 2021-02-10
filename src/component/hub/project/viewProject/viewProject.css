@@ -1,18 +1,43 @@
 
-.description{
-    letter-spacing: 0px;
-    color: #98A9BC;
-    text-align: center;
-    text-transform: capitalize;
-    display: block;
-}
-
 .stripeProject{
     display: inline-block;
     width: 7px;
     height: 16px;
     border-radius: 37%;
 }
+
+.dot {
+    height: 5px;
+    width: 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+  }
+.divProgress{
+    text-align: center;
+}
+.progress {
+    display: inline-flex;
+    height: 1rem;
+    overflow: hidden;
+    line-height: 0;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+    
+}
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    transition: width .6s ease;
+}
+
 
 .table td, .table th {
     padding: .75rem;
