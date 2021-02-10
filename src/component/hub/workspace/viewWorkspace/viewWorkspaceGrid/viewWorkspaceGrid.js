@@ -25,13 +25,19 @@ function ViewWorkspaceGrid(props) {
 
     const [over, setOver] = useState(false);
     const [edit, setEdit] = useState(false);
+    const toOpenEditWorkspace = () => {
+        setOpenEditWorkspace(!openEditWorkspace)
+    }
 
     function outOver() {
         setOver(false);
     }
     function EditWorkspace() {
         setEdit(true);
+        props.setWorkspace(workspace)
     }
+
+
     function outEdit() {
         setEdit(false);
     }
@@ -65,7 +71,7 @@ function ViewWorkspaceGrid(props) {
                                         </div>
                                     </div>
                                     <div className="mt-4">
-                                        <div className=" name "> {workspace.name}</div>
+                                        <div className="name"><b>{workspace.name}</b> </div>
                                     </div>
                                 </div>
                             </div>
@@ -90,40 +96,18 @@ function ViewWorkspaceGrid(props) {
 
 
                         </div>
-                        <div className="mt-3"><b>{workspace.name}</b></div>
+                        <div className="mt-3 name"><b>{workspace.name}</b></div>
                     </div>
 
             }
             {
                 edit ?
-                    <ViewDetails id="id:" id1={workspace._id} workspace="Workspace Name:" name={workspace.name} color="color:" color1={workspace.color} >
+                    <ViewDetails from="editWorkspace" >
 
                     </ViewDetails>
 
 
-                    // <div className="editWorkspace ">
-                    //     <div className="row mt-5">
-                    //         <div className="col-3"></div>
 
-                    //         <div className="nameworkspace row"><b>Name Workspace:</b>
-                    //         </div>
-                    //     </div>
-
-                    //     <div className="row mt-5">
-                    //         <div className="col-3"></div>
-                    //         <div>{workspace.name}</div>
-                    //         {/* <input value={workspace.name} onChange={(input) => changeFiledInWorkspace(input)}></input>
-                    //         <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button> */}
-
-                    //     </div>
-                    //     <div className="row mt-5">
-
-
-                    //     </div>
-                    //     <div className="row mt-5">
-                    //         <div className="col-5"></div>
-                    //         <button onClick={outEdit} className="okEditWorkspace">exit</button>
-                    //     </div>
 
 
 
@@ -146,6 +130,7 @@ function ViewWorkspaceGrid(props) {
 const mapStateToProps = (state) => {
 
     return {
+        workspaces: state.workspace_reducer.workspaces,
         user: state.public_reducer.userName,
 
 
@@ -154,12 +139,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        setWorkspace: () => dispatch(actions.setWorkspace()),
-        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-        setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
-        saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace))
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace))
     }
 
 

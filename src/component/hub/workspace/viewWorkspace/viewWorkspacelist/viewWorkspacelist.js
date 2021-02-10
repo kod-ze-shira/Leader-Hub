@@ -27,7 +27,7 @@ function ViewWorkspaceList(props) {
 
 
     function EditWorkspace() {
-props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        props.setWorkspace(workspace)//to select workspace to edit and send him to server
 
         setEdit(true);
     }
@@ -52,10 +52,11 @@ props.setWorkspace(workspace)//to select workspace to edit and send him to serve
         <>
 
 
-            <div className="row WorkspaceList mt-3 " onMouseOver={func_over}>
-                <div onMouseOut={func_out_over}>
+            <div className="row WorkspaceList mt-3 " onMouseOver={func_over} >
+                <div className="col-10" onClick={() => routeToProject(workspace._id)} onMouseOut={func_out_over} >
+
                     <div className="row "  >
-                        <div className="Workspace" onClick={() => routeToProject(workspace._id)} >
+                        <div className="Workspace"  >
                             <div className="logoWorkspacelist"
                                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                 {workspace.name[0].toUpperCase()}
@@ -69,25 +70,22 @@ props.setWorkspace(workspace)//to select workspace to edit and send him to serve
 
                     </div>
 
-                    {/* {workspace ? <EditWorkspace /> : null} */}
-
-
-
                 </div>
                 {
                     over ?
-                        <div className="row mt-4 " onMouseOut={func_out_over} >
+                        <div className="row  mt-4" onMouseOut={func_out_over}>
+
                             <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                             <div className="ml-2 stripe">|</div>
                             <div className="col-1 ml-1 delete"  ><img src={require('../../../../img/bin.png')}></img></div>
                             {/* <button onClick={props.editWorkspaceInServer()}></button> */}
-
                         </div>
+
                         : null
                 }
 
             </div>
-            {  edit ?
+            {edit ?
                 <>
                     <ViewDetails from="editWorkspace">
 
@@ -95,31 +93,11 @@ props.setWorkspace(workspace)//to select workspace to edit and send him to serve
 
                 </>
 
-                // <div className="editWorkspace ">
-                //     <div className="row mt-5">
-                //         <div className="col-3"></div>
 
-                //         <div className="nameworkspace row"><b>Name Workspace:</b>
-                //         </div>
-                //     </div>
 
-                //     <div className="row mt-5">
-                //         <div className="col-3"></div>
-                //         <div>{workspace.name}</div>
-
-                //     </div>
-                //     <div className="row mt-5">
-
-                //     </div>
-                //     <div className="row mt-5">
-                //         <div className="col-5"></div>
-                //         <button onClick={outEdit} className="okEditWorkspace">ok</button>
-                //     </div>
-                // </div>
 
                 : null
             }
-
 
         </>
 
