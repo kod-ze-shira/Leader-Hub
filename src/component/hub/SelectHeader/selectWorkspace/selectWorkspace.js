@@ -47,7 +47,7 @@ function SelectWorkspace(props) {
                     name="color"
                     value={selectedOption}
                     options={viewProjectsList}
-                    placeholder={props.project.name}
+                    placeholder={"my workspace"}
                 // selectedValue={props.project.name}
                 />
             </div>

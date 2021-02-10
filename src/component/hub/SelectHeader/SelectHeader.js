@@ -11,12 +11,12 @@ function SelectHeader(props) {
 
     })
     return (
-        <div className="s-header mb-3 row">
+        <div className="s-header mx-0 mb-3 row align-items-center ">
 
             {/* <Logo className="logo-workspace" nameWorkspace={"myWorkspace.name"} /> */}
             <div className="col-3">
                 <SelectWorkspace />
-            </div> 
+            </div>
             <div className="col-3">
                 <SelectProject />
             </div>

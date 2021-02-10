@@ -1,0 +1,11 @@
+.description{
+    text-align: center;
+    /* font: normal normal normal 14px/19px Roboto; */
+    letter-spacing: 0px;
+    color: #98A9BC;
+    text-align: center;
+    text-transform: capitalize;
+    display: block;
+    font-size: small;
+
+}

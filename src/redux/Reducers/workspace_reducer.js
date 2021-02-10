@@ -14,17 +14,11 @@ const initialState = {
 const workspaces = {
     setWorkspace(state, action) {
         state.workspace = action.payload;
-        console.log( state.workspace)
     },
     setWorkspaceOnChangeFiled(state, action) {
         state.workspace[action.payload] = action.value
     },
-    setWorkspaceName(state, action) {
-        state.workspace.name = action.payload;
-    },
-    setWorkspaceId(state, action) {
-        state.workspace.id = action.payload;
-    },
+
     setState(state, action) {
         state.workspace = action.payload
     },

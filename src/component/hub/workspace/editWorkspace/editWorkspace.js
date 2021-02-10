@@ -3,19 +3,19 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 
 function EditWorkspace(props) {
-    const [ifHasWorkspace, setIfHasWorkspace] = useState(false);
-    useEffect(() => {
-        if (!ifHasWorkspace) {
-            props.getWorkspaceByIdFromServer(props.idWorkspace)
-            setIfHasWorkspace(true)
-        }
-    })
+ 
     const changeFiledInWorkspace = (input) => {
         props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
     }
     return (
         <>
-            <input name="name" placeholder={props.workspace.name} onChange={(input) => changeFiledInWorkspace(input)}></input>
+            <input 
+            className="edit_workspace_name" 
+            name="name" 
+            placeholder={props.workspaceToEdit.name} 
+            onChange={(input) => changeFiledInWorkspace(input)}
+            >
+            </input>
             <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button>
         </>
     )
@@ -23,14 +23,14 @@ function EditWorkspace(props) {
 export default connect(
     (state) => {
         return {
-            workspace: state.workspace_reducer.workspace
+            workspaceToEdit:state.workspace_reducer.workspace
         }
     },
     (dispatch) => {
         return {
-            getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+            // getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
-            saveWorkspaceInServerUfterEdit:(workspace)=>dispatch(actions.editWorkspaceInServer(workspace))
+            saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer())
         }
     }
 )(EditWorkspace)
