@@ -5,10 +5,8 @@ const initialState = {
     workspace: {
 
 
-
     },
     isConfiguratorOpenWorkspace: false
-
 
 }
 
@@ -16,12 +14,11 @@ const initialState = {
 const workspaces = {
     setWorkspace(state, action) {
         state.workspace = action.payload;
-        console.log(state.workspace)
     },
     setWorkspaceOnChangeFiled(state, action) {
         state.workspace[action.payload] = action.value
     },
-   
+
     setState(state, action) {
         state.workspace = action.payload
     },

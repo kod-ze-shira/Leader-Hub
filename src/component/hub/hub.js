@@ -21,6 +21,8 @@ import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
 import ProjectPlatform from './projectPlatform/projectPlatform'
 import CardsByProject from './Cards/cardsByProject/cardsByProject'
 import HeaderBody from './headerBody/headerBody'
+import CardsPage from './cardsPage/cardsPage'
+
 export default function Hub() {
     return (
         <>
@@ -45,7 +47,8 @@ export default function Hub() {
                                 <WorkspacePlatform />
                             </Route>
                             <Route path="/:userName/projectPlatform/:idProject" >
-                                <ProjectPlatform />
+                                {/* <ProjectPlatform /> */}
+                                <CardsPage />
                             </Route>
                             {/* <Route path="/:userName/cardsByProject" >
                                 <CardsByProject />

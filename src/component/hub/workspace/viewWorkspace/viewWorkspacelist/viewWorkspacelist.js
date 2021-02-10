@@ -21,6 +21,8 @@ function ViewWorkspaceList(props) {
     }
 
     const routeToProject = () => {
+        // console.log("waaaaaaaaaa  " + workspace)
+        // props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const [edit, setEdit] = useState(false);
@@ -75,9 +77,13 @@ function ViewWorkspaceList(props) {
                     over ?
                         <div className="row  mt-4" onMouseOut={func_out_over}>
 
-                            <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
+                            <div className="col-1  edit" onClick={EditWorkspace}>
+                                {/* <img src={require('../../../../img/pencil-write.png')}></img> */}
+                            </div>
                             <div className="ml-2 stripe">|</div>
-                            <div className="col-1 ml-1 delete" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }} ><img src={require('../../../../img/bin.png')}></img></div>
+                            <div className="col-1 ml-1 delete" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }} >
+                                {/* <img src={require('../../../../img/bin.png')}></img> */}
+                            </div>
                             {/* <button onClick={props.editWorkspaceInServer()}></button> */}
                         </div>
 
@@ -111,6 +117,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())

@@ -15,8 +15,6 @@ export default function ViewTask(props) {
 
         <div className="continer">
             <div className="row">
-
-
                 <div className="col-2">subject:{props.task.subject}</div>
                 <div className="col"><button onClick={ViewDetails}>view details</button></div>
             </div>
