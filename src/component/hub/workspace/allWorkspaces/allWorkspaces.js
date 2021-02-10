@@ -24,13 +24,17 @@ function AllWorkspaces(props, getAllWorkspaces) {
         return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
     })
 
-    const [list, setlist] = useState(true);
+    const [list, setlist] = useState(false);
+    const [grid, setgrid] = useState(true)
 
     function chenge_list1() {
-        setlist(false);
+        setlist(true);
+        setgrid(false)
+
     }
     function chenge_grid() {
-        setlist(true);
+        setlist(false);
+        setgrid(true);
     }
     return (
 
@@ -48,18 +52,31 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
                         <div className="MyWorkspace">My Workspace</div>
                         <div className="row">
-                            <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
-                            <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                            {
+                                grid ?
+                                    <>
+                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                                        <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                    </>
+                                    :
+                                    <>
+                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
+                                        <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                                    </>
+                            }
+
                         </div>
                     </div>
 
 
                     <div className="row mt-5 ml-5 ">
                         {list ?
-                             renderedGridWorkspaces 
+                            renderedListWorkspaces
+
                             :
-                             renderedListWorkspaces 
-                            }
+                            renderedGridWorkspaces
+
+                        }
                     </div>
                 </div>
             </div>
