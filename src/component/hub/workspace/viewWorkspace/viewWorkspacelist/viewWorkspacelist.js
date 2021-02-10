@@ -77,7 +77,7 @@ function ViewWorkspaceList(props) {
 
                             <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
                             <div className="ml-2 stripe">|</div>
-                            <div className="col-1 ml-1 delete"  ><img src={require('../../../../img/bin.png')}></img></div>
+                            <div className="col-1 ml-1 delete" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }} ><img src={require('../../../../img/bin.png')}></img></div>
                             {/* <button onClick={props.editWorkspaceInServer()}></button> */}
                         </div>
 
@@ -112,7 +112,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace))
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
+        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())
 
     }
 }

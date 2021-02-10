@@ -346,26 +346,17 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
 
     if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
         let workspace = getState().workspace_reducer.workspace;
-
-
-
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il" + workspace._id + workspace.name + "/removeWorkspaceById‏"
-
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
         $.ajax({
-
             url: urlData,
             type: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ workspace }),
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.setProject(data.result))
-
             },
             error: function (err) {
 
