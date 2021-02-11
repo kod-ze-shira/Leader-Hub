@@ -10,13 +10,12 @@ cursor: pointer;
 cursor: pointer;
 
 }
-
 .MyWorkspace{
     font-size: x-large;
        font-weight: 505;
 }
 .borderBottom{
-    border-bottom:#808080 1px solid ;
+    border-bottom:black 1px solid ;
       display: flex;
   justify-content:space-between; 
    

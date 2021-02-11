@@ -43,6 +43,8 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         return <ViewProject myProject={project} />
     })
 
+
+
     return (
         <>
 
@@ -69,13 +71,13 @@ const mapStateToProps = (state) => {
         projects: state.public_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getProjectsByWorkspace: (idWorkspace) => dispatch(actions.getProjectsByWorkspace(idWorkspace))
+
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
 

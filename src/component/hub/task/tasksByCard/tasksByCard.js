@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 // import  ViewTask  from '../viewTask/viewTask'
 import ViewTaskByCrad from '../viewTaskByCard/viewTaskByCrad'
-// import { InputGroup, FormControl,FormControlLabel } from 'react-bootstrap'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 function TasksByCard(props) {
@@ -15,13 +15,20 @@ function TasksByCard(props) {
 
     }, [props.cardId])
 
-    const renderTasksByCrad = props.tasks.map((task) => {
+    const renderTasksByCrad = props.tasks.map((task, index) => {
         console.log(task);
-        return <ViewTaskByCrad key={task._id} task={task} />
-
+        return <Draggable key={task._id} draggableId={task._id} index={index}>
+            {(provided) => (
+                <ViewTaskByCrad key={task._id} task={task}
+                    // {...props} ref={props.innerRef}
+                ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                />
+            )}
+        </Draggable>
     })
     return (
         <>
+
             <div>{renderTasksByCrad}</div>
 
         </>

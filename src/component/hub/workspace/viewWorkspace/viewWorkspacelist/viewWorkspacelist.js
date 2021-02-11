@@ -6,6 +6,7 @@ import history from '../../../../history'
 import { withRouter } from 'react-router-dom';
 import EditWorkspace from '../../editWorkspace/editWorkspace'
 import ViewDetails from '../../../viewDetails/viewDetails'
+import Toast from 'react-bootstrap/Toast'
 
 
 
@@ -13,6 +14,7 @@ function ViewWorkspaceList(props) {
     const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
     const [showShare, setShowShare] = useState(false)
+    const [remove, setremove] = useState(false);
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showInput, setShowInput] = useState(false)
     const viewProjectsByWorkspace = () => {
@@ -21,6 +23,8 @@ function ViewWorkspaceList(props) {
     }
 
     const routeToProject = () => {
+        // console.log("waaaaaaaaaa  " + workspace)
+        // props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const [edit, setEdit] = useState(false);
@@ -33,6 +37,13 @@ function ViewWorkspaceList(props) {
     }
     function outEdit() {
         setEdit(false);
+    }
+    function func_remove() {
+        setremove(true);
+
+    }
+    function out_remove() {
+        setremove(false);
     }
 
     const toOpenEditWorkspace = () => {
@@ -75,10 +86,14 @@ function ViewWorkspaceList(props) {
                     over ?
                         <div className="row  mt-4" onMouseOut={func_out_over}>
 
-                            <div className="col-1  edit" onClick={EditWorkspace}><img src={require('../../../../img/pencil-write.png')}></img></div>
+                            <div className="col-1  edit" onClick={EditWorkspace}>
+                                <img src={require('../../../../img/pencil-write.png')}></img>
+                            </div>
                             <div className="ml-2 stripe">|</div>
-                            <div className="col-1 ml-1 delete" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }} ><img src={require('../../../../img/bin.png')}></img></div>
-                            {/* <button onClick={props.editWorkspaceInServer()}></button> */}
+                            <div className="col-1 ml-1 delete" onClick={func_remove} >
+                                <img src={require('../../../../img/bin.png')}></img>
+                            </div>
+
                         </div>
 
                         : null
@@ -98,6 +113,43 @@ function ViewWorkspaceList(props) {
 
                 : null
             }
+            {
+                remove ?
+
+
+                    <>
+                        <div className="mt-5"></div>
+                        <div
+                            aria-live="polite"
+                            aria-atomic="true"
+
+                            className="remove"
+                            onClick={out_remove}
+
+                        >
+                            <Toast className="tost"
+
+                            >
+                                <Toast.Header >
+
+
+                                </Toast.Header>
+
+
+                                <Toast.Body>
+                                    <div className="row ">
+                                        <div className="col-8"> workspace leader was deleted  </div>
+                                        <div className="col-2 Undo" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }}>Undo</div>
+
+
+                                    </div></Toast.Body>
+                            </Toast>
+                        </div>
+
+                    </>
+
+                    : null
+            }
 
         </>
 
@@ -111,6 +163,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())

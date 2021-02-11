@@ -24,6 +24,7 @@ const publicData = {
     },
     setProjects(state, action) {
         state.projects = action.payload;
+        // console.log("projjjj" + action.payload)
     },
     setTasks(state, action) {
         state.tasks = action.payload;

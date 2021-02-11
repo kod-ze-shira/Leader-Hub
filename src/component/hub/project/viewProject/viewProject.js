@@ -18,6 +18,7 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
+        props.setProject(props.myProject)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
     function deleteProject(event) {
@@ -99,9 +100,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+<<<<<<< HEAD
         setProject: (p) => dispatch(actions.setProject(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
+=======
+        setProject: (project) => dispatch(actions.setProject(project))
+
+>>>>>>> dev
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))
