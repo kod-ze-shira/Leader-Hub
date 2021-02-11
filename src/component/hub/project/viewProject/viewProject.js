@@ -7,7 +7,7 @@ import './viewProject.css'
 import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
 import { ProgressBar, Spinner } from 'react-bootstrap';
-
+import TeamView from '../../teamView/teamView'
 function ViewProject(props) {
 
     function detailsProject() {
@@ -23,10 +23,12 @@ function ViewProject(props) {
     // `
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
+    let complited = 20;
+    complited = complited < 30 ? '#29EFFF' : complited < 60 ? '#32AABA' : 'black'
     return (
         <>
-            <tr >
-                <td onClick={(e) => routeToCards(e)}>
+            <tr className='projectForWorkspace' onClick={(e) => routeToCards(e)}>
+                <td >
                     <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
                     <span style={{ 'color': props.myProject.color }}>
                         {props.myProject.name}</span>
@@ -54,20 +56,23 @@ function ViewProject(props) {
                 <td>
 
                     <div className='divProgress'>
-                        <div class="progress" style={{ "height": "5px", "width": "54%" }}>
-                            <div role="progressbar" class="progress-bar" style={{ 'background': '#32AABA', "width": "50%" }}
+                        <div class="progressProject" >
+                            <div role="progressbar" class="progressProject-bar" style={{ "width": 20 + "%", background: complited }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
                     </div>
                     <CellDescription description='50% comlete' />
                 </td>
-                <td>
-                    <Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} />
+                <td style={{ 'text-align': 'center' }}>
+                    <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
+                    <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
+                    <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
+
                     <CellDescription description='Team' />
                 </td>
                 <td>
-                    <Cell item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12.12,2023'} />
+                    <Cell item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12/12/2023'} />
                     <CellDescription description='Last update' />
                 </td>
 

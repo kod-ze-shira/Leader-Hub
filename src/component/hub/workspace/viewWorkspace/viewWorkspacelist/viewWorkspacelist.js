@@ -78,13 +78,13 @@ function ViewWorkspaceList(props) {
                         <div className="row  mt-4" onMouseOut={func_out_over}>
 
                             <div className="col-1  edit" onClick={EditWorkspace}>
-                                <img src={require('../../../../img/pencil-write.png')}></img>
+                                {/* <img src={require('../../../../img/pencil-write.png')}></img> */}
                             </div>
                             <div className="ml-2 stripe">|</div>
                             <div className="col-1 ml-1 delete" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }} >
-                                <img src={require('../../../../img/bin.png')}></img>
+                                {/* <img src={require('../../../../img/bin.png')}></img> */}
                             </div>
-                            <button onClick={props.editWorkspaceInServer()}></button>
+                            {/* <button onClick={props.editWorkspaceInServer()}></button> */}
                         </div>
 
                         : null

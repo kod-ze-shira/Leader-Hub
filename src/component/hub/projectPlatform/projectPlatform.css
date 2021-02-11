@@ -7,12 +7,12 @@
     
     /* margin: 0px -40px; */
   }
-  a{
+  /* a{
       color: #98A9BC!important;
       display: inline-block;
       float: right;
       
-  }
+  } */
   
  
   .logoW{
@@ -33,7 +33,7 @@ bottom:10vh;
 position: fixed;
 color:white;
 font-size: 30px;
-cursor: pointer;;
+cursor: pointer;
   }
   .add-new-btn:hover{
     background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
@@ -52,14 +52,44 @@ cursor: pointer;;
     margin-block-end:auto;
     margin-left: 1.05vw;
 
+
   } 
 
   .add-new-btn:hover:first-letter {
     margin-bottom: 1.5vh;
-    transform: rotate(45deg); 
+    /* transform: rotate(45deg);  */
     margin-left:0.85vw;
-    transform: rotate(45deg) !important;
-
 
     
+    
 } 
+/* .drop-dwon-header >.aa{
+  border: 1px solid #98A9BC;
+  border-radius: 8px;
+  opacity: 0.8;
+} */
+.Dropdown-arrow{
+  border-width: 5px  5px !important;
+}
+.Dropdown-control{
+  border: 1px solid #98A9BC;
+  border-radius: 8px !important;
+  opacity: 0.8 !important;
+}
+.add-new-pop-up{
+margin-top: 15vh;
+margin-left: 66.5vw;
+}
+.add-new-btn:hover ~.add-new-pop-up{
+display: block;
+}
+.add-new-pop-up {
+margin-bottom: 10vh;
+/* width: 10vw; */
+display: none;
+}
+.add-new-pop-up >a{
+  color: black !important;
+  font-weight: bold;
+  cursor: pointer;
+}

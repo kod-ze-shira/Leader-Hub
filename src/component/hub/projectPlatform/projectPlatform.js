@@ -7,6 +7,15 @@ import TasksByCard from '../task/tasksByCard/tasksByCard'
 import Logo from '../logo/logo'
 import './projectPlatform.css'
 import HeaderBody from '../headerBody/headerBody'
+import ViewDetails from '../viewDetails/viewDetails'
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+// import { Link } from 'react-bootstrap';
+import Select from 'react-select';
+import $ from 'jquery';
+import DropDownWorkspace from '../../hub/dropDownWorkspace/dropDownWorkspace'
+
+
 function ProjectPlatform(props) {
     // const { idProject } = useParams();
     const [projectId, setProjectId] = useState()
@@ -17,10 +26,7 @@ function ProjectPlatform(props) {
 
     useEffect(() => {
         {
-
-            console.log(props.project);
-            // props.getAllWorkspaces()
-            console.log("wor" + props.worksapces)
+            props.getAllWorkspacesFromServer()
         };
     }, []);
 
@@ -28,24 +34,68 @@ function ProjectPlatform(props) {
         // setProjectId(value)
         setViewCardsByProject(true)
     }
-    const sendWorspaceId = (value) => {
-        setWorkspaceId(value)
-    }
-    let myWorkspace;
-    // if (props.workspaces.length)
+
+
+    $(function () {
+        $('.add-new-btn').hover(function () {
+            $('.add-new-pop-up').css('display', 'block')
+        }, function () {
+            // on mouseout, reset the background colour
+            $('.add-new-pop-up').css('display', 'none');
+        });
+    });
+
+    // });
+    // let myWorkspace;
+
+    // const options =
+    //     props.worksapces.map(item => ({
+    //         value: item.name,
+    //         label: item.name
+
+    //     }
+
+    //     ))
+    //     ;
+
+
+
+    // const mtWorkspace = props.worksapces.map((item) => {
+    //     if (item._id == workspaceId)
+
+    //         return item.name
+
+    // });
+    // console.log("ytytu" + mtWorkspace)
+
+    // if (props.workspaces.length())
     //     myWorkspace = props.workspaces.find(w => w._id == workspaceId)
-    console.log(props.project._id, projectId)
-    console.log("my" + myWorkspace)
+    // const defaultOption = workspaceId;
+
     return (
         <>
-            <div className="body container-fluid">
-                {/* <Logo className="logo-workspace" nameWorkspace={"myWorkspace.name"} /> */}
-                {/* < ProjectsList sendWorspaceId={sendWorspaceId} /> */}
-                {/* {viewCardsByProject ?
-                    <CardsByProject projectId={props.project._id} />
-                    : null} */}
-                    <CardsByProject projectId={props.project._id} />
 
+            <div className="body container-fluid">
+                <div className="row drop-dwon-header">
+                    {/* <DropDownWorkspace ></DropDownWorkspace> */}
+                    <Logo className="logo-workspace Dropdown-control" nameWorkspace={"workspaceName"} />
+
+                    {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
+                    {/* <Dropdown  className="m-4" options={options} value="card" placeholder="Select an option" /> */}
+                    {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
+                </div>
+                {/* < ProjectsList changeProject={changeProjectId} /> */}
+                {/* {viewCardsByProject ? */}
+                <CardsByProject projectId={props.project._id} />
+                {/* : null} */}
+                {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
+                <div className="add-new-pop-up ">
+                    <a >New Workspace</a><br></br>
+                    <a>New Project</a><br></br>
+                    <a>New Card</a><br></br>
+                    <a>New Task</a><br></br>
+                </div>
+                <div className="add-new-btn">+</div>
             </div>
         </>
     )
@@ -63,7 +113,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
+
 
     }
 

@@ -56,16 +56,16 @@ function ViewWorkspaceGrid(props) {
                                 onMouseOut={outOver}
                             >
                                 <div className="col-1 edit" onClick={EditWorkspace}>
-                                    <img src={require('../../../../img/pencil-write.png')}></img>
+                                    {/* <img src={require('../../../../img/pencil-write.png')}></img> */}
                                     </div>
                                 <div className="ml-1 stripe">|</div>
                                 <div className="col-1 delete"
                                     onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }}>
-                                    <img src={require('../../../../img/bin.png')}></img>
+                                    {/* <img src={require('../../../../img/bin.png')}></img> */}
                                     </div>
                                 <div className="ml-1 stripe">|</div>
                                 <div className="col-1 add"> 
-                                <img src={require('../../../../img/duplicate-outline.png')}></img>
+                                {/* <img src={require('../../../../img/duplicate-outline.png')}></img> */}
                                 </div>
                             </div>
                             <div className="Workspacegrid" onMouseOut={outOver} >
@@ -88,7 +88,6 @@ function ViewWorkspaceGrid(props) {
                         </div>
 
                     </>
-
 
 
                     :
