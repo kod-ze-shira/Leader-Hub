@@ -151,6 +151,7 @@ function ViewWorkspaceList(props) {
                     : null
             }
 
+
         </>
 
     )
@@ -166,7 +167,8 @@ const mapDispatchToProps = (dispatch) => {
 
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())
+        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
+        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace())
 
     }
 }
