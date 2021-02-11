@@ -1,0 +1,28 @@
+.logoW{
+    height: 30px;
+    width: 30px;
+    font-size: small;
+    position: absolute;
+    z-index: 999;
+    left: -0.5vw;
+    bottom:0.5vh;
+}
+.select-workspace{
+    position: relative;
+
+}
+.css-1uccc91-singleValue, .css-1wa3eu0-placeholder{
+   margin-left: 3vw !important;
+
+}
+.css-5duvv3-control{
+    border:none !important;
+}
+.css-5duvv3-control:hover{
+    border:none !important;
+
+}
+.css-1okebmr-indicatorSeparator{
+display: none!important
+; 
+}

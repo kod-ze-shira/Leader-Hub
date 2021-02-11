@@ -12,7 +12,7 @@ const initialState = {
         endDate: "",
         color: '',
         cards: [],
-        workspace:""
+        workspace: ""
     },
 
 }
@@ -23,9 +23,9 @@ const project = {
     setProjectName(state, action) {
         state.project.name = action.payload;
     },
-    setProject(state, action) { 
+    setProject(state, action) {
         state.project = action.payload;
-        console.log(state.project)
+        console.log("redux pro " + state.project)
     },
     setProjectId(state, action) {
         state.project.id = action.payload;

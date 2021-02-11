@@ -24,7 +24,7 @@ function ViewWorkspaceList(props) {
 
     const routeToProject = () => {
         // console.log("waaaaaaaaaa  " + workspace)
-        // props.setWorkspace(workspace)
+        props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const [edit, setEdit] = useState(false);
@@ -107,9 +107,6 @@ function ViewWorkspaceList(props) {
                     </ViewDetails>
 
                 </>
-
-
-
 
                 : null
             }

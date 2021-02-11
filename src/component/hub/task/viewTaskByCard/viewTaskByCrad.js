@@ -44,7 +44,10 @@ function ViewTaskByCrad(props) {
                 <label className="check-task border-left  p-2 col">{props.task.startDate}
                 </label>
                
-                {viewDetails ? <div onClick={(e) => closeDetails(e)}><ViewDetails > </ViewDetails></div>
+                {viewDetails ? 
+                <div className="closeDet" onClick={(e) => closeDetails(e)}>
+                    <ViewDetails > </ViewDetails>
+                 </div>
                     : null}
 
             </div>
