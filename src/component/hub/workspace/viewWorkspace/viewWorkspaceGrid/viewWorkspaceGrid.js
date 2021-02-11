@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
+import Toast from 'react-bootstrap/Toast'
 
 function ViewWorkspaceGrid(props) {
     const { workspace } = props
@@ -25,6 +26,7 @@ function ViewWorkspaceGrid(props) {
 
 
     const [over, setOver] = useState(false);
+    const [remove, setremove] = useState(false);
     const [edit, setEdit] = useState(false);
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
@@ -37,6 +39,9 @@ function ViewWorkspaceGrid(props) {
         setEdit(true);
         props.setWorkspace(workspace)
     }
+    function out_remove() {
+        setremove(false);
+    }
 
 
     function outEdit() {
@@ -44,6 +49,10 @@ function ViewWorkspaceGrid(props) {
     }
     function over_workspace() {
         setOver(true);
+    }
+    function func_remove() {
+        setremove(true);
+
     }
 
     return (
@@ -56,19 +65,21 @@ function ViewWorkspaceGrid(props) {
                                 onMouseOut={outOver}
                             >
                                 <div className="col-1 edit" onClick={EditWorkspace}>
-                                    {/* <img src={require('../../../../img/pencil-write.png')}></img> */}
-                                    </div>
+                                    <img src={require('../../../../img/pencil-write.png')}></img>
+                                </div>
                                 <div className="ml-1 stripe">|</div>
                                 <div className="col-1 delete"
-                                    onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }}>
-                                    {/* <img src={require('../../../../img/bin.png')}></img> */}
-                                    </div>
+                                    onClick={func_remove}>
+                                    <img src={require('../../../../img/bin.png')}></img>
+                                </div>
                                 <div className="ml-1 stripe">|</div>
-                                <div className="col-1 add"> 
-                                {/* <img src={require('../../../../img/duplicate-outline.png')}></img> */}
+                                <div className="col-1 add">
+                                    <img src={require('../../../../img/duplicate-outline.png')}></img>
                                 </div>
                             </div>
-                            <div className="Workspacegrid" onMouseOut={outOver} >
+                            <div className="Workspacegrid"
+                            //  onMouseOut={outOver}
+                            >
                                 <div>
                                     < div className="logoWorkspace1  ml-5 ">
                                         <div className="mt-2 logo"
@@ -107,20 +118,72 @@ function ViewWorkspaceGrid(props) {
                     </div>
 
             }
+
             {
                 edit ?
                     <ViewDetails from="editWorkspace" >
 
                     </ViewDetails>
 
+                    : null
+            }
+
+
+            {
+                remove ?
+
+                    // <Toast className="toast_delete"
+                    //     // onClose={deleteOrganization}
+                    //     // show={showToast}
+                    //     delay={3000} autohide>
+
+                    //     <Toast.Header className="toast_header" />
+
+                    //     <div className="row">
+                    //         <div className="col-8">
+                    //             <div className="close" onClick={out_remove}>x</div>
+                    //         </div>
+                    //         <div className="col-8">
+                    //             <span className="pr-2">workspace leader was deleted</span>
+                    //         </div>
+                    //         <div className="col-4 div_btn_undo pr-2">
+                    //            
+                    //         </div>
+                    //     </div>
 
 
 
+                    // </Toast>
+                    <>
+                        <div className="mt-5"></div>
+                        <div
+                            aria-live="polite"
+                            aria-atomic="true"
+
+                            className="remove"
+                            onClick={out_remove}
+
+                        >
+                            <Toast className="tost"
+
+                            >
+                                <Toast.Header >
 
 
+                                </Toast.Header>
 
 
-                    // </div>
+                                <Toast.Body>
+                                    <div className="row ">
+                                        <div className="col-8"> workspace leader was deleted  </div>
+                                        <div className="col-2 Undo" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }}>Undo</div>
+
+
+                                    </div></Toast.Body>
+                            </Toast>
+                        </div>
+
+                    </>
 
                     : null
             }
