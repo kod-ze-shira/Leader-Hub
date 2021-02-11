@@ -134,28 +134,6 @@ function ViewWorkspaceGrid(props) {
             {
                 remove ?
 
-                    // <Toast className="toast_delete"
-                    //     // onClose={deleteOrganization}
-                    //     // show={showToast}
-                    //     delay={3000} autohide>
-
-                    //     <Toast.Header className="toast_header" />
-
-                    //     <div className="row">
-                    //         <div className="col-8">
-                    //             <div className="close" onClick={out_remove}>x</div>
-                    //         </div>
-                    //         <div className="col-8">
-                    //             <span className="pr-2">workspace leader was deleted</span>
-                    //         </div>
-                    //         <div className="col-4 div_btn_undo pr-2">
-                    //            
-                    //         </div>
-                    //     </div>
-
-
-
-                    // </Toast>
                     <>
                         <div className="mt-5"></div>
                         <div
