@@ -147,5 +147,6 @@
     padding-bottom: 0.7vh;
 
   }
-  /* .view-details:active{
- } */
+.closeDet{
+  width: 0;
+}

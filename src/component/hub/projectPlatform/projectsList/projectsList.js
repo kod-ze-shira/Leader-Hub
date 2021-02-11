@@ -11,8 +11,6 @@ import { FileFill } from 'react-bootstrap-icons';
 import { Alert } from 'bootstrap';
 // import EditWorkspace from '.././editWorkspace/editWorkspace'
 // import project_reducer from '../../../../redux/Reducers/project_reducer';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 import Select from 'react-select';
 function ProjectsList(props) {
 

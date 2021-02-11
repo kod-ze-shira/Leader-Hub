@@ -7,9 +7,6 @@ import TasksByCard from '../task/tasksByCard/tasksByCard'
 import Logo from '../logo/logo'
 import './projectPlatform.css'
 import HeaderBody from '../headerBody/headerBody'
-import ViewDetails from '../viewDetails/viewDetails'
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 // import { Link } from 'react-bootstrap';
 import Select from 'react-select';
 import $ from 'jquery';
@@ -80,15 +77,10 @@ function ProjectPlatform(props) {
                     {/* <DropDownWorkspace ></DropDownWorkspace> */}
                     <Logo className="logo-workspace Dropdown-control" nameWorkspace={"workspaceName"} />
 
-                    {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
-                    {/* <Dropdown  className="m-4" options={options} value="card" placeholder="Select an option" /> */}
-                    {/* <Dropdown className="m-4" options={options} value={defaultOption} placeholder="Select an option" /> */}
                 </div>
-                {/* < ProjectsList changeProject={changeProjectId} /> */}
-                {/* {viewCardsByProject ? */}
+                {props.project.name!="No Projects" ?
                 <CardsByProject projectId={props.project._id} />
-                {/* : null} */}
-                {/* <TasksByCard cardId={"6006061269370dacf7af0609"} /> */}
+                : null} 
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>
                     <a>New Project</a><br></br>
@@ -106,6 +98,7 @@ const mapStateToProps = (state) => {
         projects: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
+        workspace: state.workspace_reducer.worksapce,
         project: state.project_reducer.project,
 
     }

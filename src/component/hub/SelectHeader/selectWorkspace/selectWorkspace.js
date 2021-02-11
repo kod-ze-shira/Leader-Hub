@@ -8,47 +8,38 @@ import Select from 'react-select';
 
 function SelectWorkspace(props) {
 
-    const { idProject } = useParams();
 
     useEffect(() => {
-        // props.getProjectByIdInServer(idProject)
-        // props.getProjectsByWorkspaceId(props.project.workspace)
-        // console.log("project" + props.projects)
+        
+    }, [])
 
-    }, [props.workspace])
+    //to chang the workspace that user selected
+    let myWorkspace = props.worksapce;
+    const changeSelectedWorkspace = (id) => {
 
-    //to chang the project that user selected
-    let myProject = props.project;
+        myWorkspace = props.workspaces.find(p => p._id == id.value)
+        props.setWorkspace(myWorkspace)
+        console.log(myWorkspace)
+        if (myWorkspace.projects.length > 0)
+            props.setProject(myWorkspace.projects[0])
 
-    console.log("workspace  " + props.workspace)
-
-    const changeSelectedProject = (id) => {
-
-        // setSelectedOption(id.value)
-        myProject = props.projects.find(p => p._id == id.value)
-
-        props.setProject(myProject)
+        else
+            props.setProjectName("No Projects")
     }
 
-    const [selectedOption, setSelectedOption] = useState("")
-
-    const viewProjectsList = props.projects.map((project) => (
-        { value: project._id, label: project.name }
+    const viewWorkspacesList = props.workspaces.map((workspace) => (
+        { value: workspace._id, label: workspace.name }
     ))
     return (
         <>
             <div className="react-select">
 
                 <Select
-                    // className="basic-single "
                     classNamePrefix="select"
-                    onChange={(e) => changeSelectedProject(e)}
-                    defaultValue={selectedOption}
+                    onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
-                    value={selectedOption}
-                    options={viewProjectsList}
-                    placeholder={"my workspace"}
-                // selectedValue={props.project.name}
+                    options={viewWorkspacesList}
+                    placeholder={props.workspace.name}
                 />
             </div>
         </>
@@ -59,14 +50,16 @@ const mapStateToProps = (state) => {
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
         workspaces: state.public_reducer.worksapces,
-        workspace: state.workspace_reducer.worksapce,
+        workspace: state.workspace_reducer.workspace
 
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
         setProject: (project) => dispatch(actions.setProject(project)),
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))

@@ -6,9 +6,8 @@ import $ from 'jquery';
 import Select from 'react-select';
 
 
-function SelectProject(props) {
+function SelectCards(props) {
 
-    const { idProject } = useParams();
 
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
@@ -68,7 +67,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SelectProject)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectCards)
 
 
 
