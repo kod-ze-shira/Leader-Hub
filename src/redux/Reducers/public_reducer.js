@@ -33,8 +33,12 @@ const publicData = {
     },
     setCards(state, action) {
         state.cards = action.payload;
-    }
-
+    },
+    deleteProjectFromWorkspace(state, action) {
+        state.projects = state.projects.filter((_, i) =>
+            state.projects[i]._id !== action.payload._id
+        )
+    },
 
 }
 

@@ -314,7 +314,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 
 
         let project = getState().project_reducer.project;
-        let urlData = " https://reacthub.dev.leader.codes/api/renana-il/5ff5bc6547daea4ac861c74c/removeProjectById"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${project._id}/removeProjectById`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -647,6 +647,7 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
                 console.log(result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setProjects(result.projectList))
+                    dispatch(actions.setProject())
                     //
                 })
             })
