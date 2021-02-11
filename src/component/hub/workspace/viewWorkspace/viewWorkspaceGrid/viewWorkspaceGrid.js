@@ -60,7 +60,9 @@ function ViewWorkspaceGrid(props) {
             {
                 over ?
                     <>
-                        <div>
+                        <div
+                            onClick={() => routeToWorkspace()}
+                        >
                             <div className="row"
                                 onMouseOut={outOver}
                             >

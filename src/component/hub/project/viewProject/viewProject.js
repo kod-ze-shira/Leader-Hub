@@ -8,7 +8,10 @@ import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
 import { ProgressBar, Spinner } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
+import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
 function ViewProject(props) {
+    const [getProjectById, set_getProjectById] = useState(true);
+    const [viewTasks, setViewTasks] = useState(false)
 
     function detailsProject() {
         set_getProjectById(false);
@@ -18,11 +21,15 @@ function ViewProject(props) {
         props.setProject(props.myProject)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
-    // const div = styled.div`
-    // background: #32AABA
-    // `
-    const [getProjectById, set_getProjectById] = useState(true);
-    const [viewTasks, setViewTasks] = useState(false)
+    function deleteProject(event) {
+        debugger
+        props.setProject(props.myProject)
+        props.setProjects(props.projects)
+        props.deleteProjectInServer()
+        event.stopPropagation();
+        // props.deleteProjectFromWorkspace(props.project)
+    }
+
     let complited = 20;
     complited = complited < 30 ? '#29EFFF' : complited < 60 ? '#32AABA' : 'black'
     return (
@@ -76,7 +83,7 @@ function ViewProject(props) {
                     <CellDescription description='Last update' />
                 </td>
 
-
+                <td><button onClick={(event) => deleteProject(event)}> delete</button></td>
 
             </tr >
 
@@ -86,14 +93,21 @@ function ViewProject(props) {
 const mapStateToProps = (state) => {
     return {
         project: state.project_reducer.project,
+        projects: state.project_reducer.projects,
         user: state.public_reducer.userName
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+<<<<<<< HEAD
+        setProject: (p) => dispatch(actions.setProject(p)),
+        setProjects: (p) => dispatch(actions.setProjects(p)),
+        deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
+=======
         setProject: (project) => dispatch(actions.setProject(project))
 
+>>>>>>> dev
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))
