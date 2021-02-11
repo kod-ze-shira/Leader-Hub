@@ -15,7 +15,7 @@ function CardsByProject(props) {
     }, [props.projectId])
   
     const viewCardsByProject = props.cards.map((card) => {
-        return <ViewCards key={card._id} card={card} />
+        return <ViewCards  key={card._id} card={card} />
     })
 
     return (

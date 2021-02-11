@@ -14,21 +14,18 @@ function SelectProject(props) {
         props.getProjectByIdInServer(idProject)
         props.getProjectsByWorkspaceId(props.project.workspace)
         console.log("project" + props.projects)
-    }, [props.project.workspace])
+    }, [])
 
 
     //to chang the project that user selected
     let myProject = props.project;
 
     const changeSelectedProject = (id) => {
-        props.getProjectByIdInServer(id.value)
-        $(document).ready(function () {
-            $(".project-select").css("color", props.project.color)
-        })
-        // setSelectedOption(id.value)
 
-        myProject = props.projects.find(p => p._id == id.value)
+        myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
+        console.log(myProject)
+
     }
 
     const viewProjectsList = props.workspace.projects.map((project) => (
@@ -51,6 +48,7 @@ function SelectProject(props) {
 }
 const mapStateToProps = (state) => {
     return {
+
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
         workspaces: state.public_reducer.worksapces,
@@ -60,8 +58,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCard: (card) => dispatch(actions.setCard(card)),
         setProject: (project) => dispatch(actions.setProject(project)),
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        setCardName: (cardName) => dispatch(actions.setCardName(cardName)),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
