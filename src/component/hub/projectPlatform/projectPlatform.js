@@ -26,12 +26,12 @@ function ProjectPlatform(props) {
             props.getAllWorkspacesFromServer()
         };
     }, []);
-
+    console.log(props.project)
     const changeProjectId = () => {
         // setProjectId(value)
         setViewCardsByProject(true)
     }
-
+    const [showDetails, setShowDetails] = useState(false)
 
     $(function () {
         $('.add-new-btn').hover(function () {
@@ -42,43 +42,15 @@ function ProjectPlatform(props) {
         });
     });
 
-    // });
-    // let myWorkspace;
-
-    // const options =
-    //     props.worksapces.map(item => ({
-    //         value: item.name,
-    //         label: item.name
-
-    //     }
-
-    //     ))
-    //     ;
-
-
-
-    // const mtWorkspace = props.worksapces.map((item) => {
-    //     if (item._id == workspaceId)
-
-    //         return item.name
-
-    // });
-    // console.log("ytytu" + mtWorkspace)
-
-    // if (props.workspaces.length())
-    //     myWorkspace = props.workspaces.find(w => w._id == workspaceId)
-    // const defaultOption = workspaceId;
 
     return (
         <>
 
             <div className="body container-fluid">
-                <div className="row drop-dwon-header">
-                    {/* <DropDownWorkspace ></DropDownWorkspace> */}
-                </div>
-                {props.project.name!="No Projects" ?
+
+                {/* {props.project.name!="No Projects" ? */}
                 <CardsByProject projectId={props.project._id} />
-                : null} 
+                {/* : null}  */}
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>
                     <a>New Project</a><br></br>

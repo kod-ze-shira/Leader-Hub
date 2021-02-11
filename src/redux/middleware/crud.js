@@ -483,7 +483,6 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 //
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
-
         var projectId = action.payload;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getCardsByProjectId"
         $.ajax({

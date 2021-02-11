@@ -20,10 +20,10 @@ function SelectWorkspace(props) {
 
         myWorkspace = props.workspaces.find(p => p._id == id.value)
         props.setWorkspace(myWorkspace)
-        console.log(myWorkspace)
-        if (myWorkspace.projects.length > 0)
+        if (myWorkspace.projects[0]) {
             props.setProject(myWorkspace.projects[0])
-
+            console.log("hi " + props.project)
+        }
         else
             props.setProjectName("No Projects")
     }

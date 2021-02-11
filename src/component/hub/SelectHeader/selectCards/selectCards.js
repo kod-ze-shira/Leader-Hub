@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
-import $ from 'jquery';
 import Select from 'react-select';
 
 
@@ -10,39 +9,38 @@ function SelectCards(props) {
 
 
     useEffect(() => {
-        props.getProjectByIdInServer(idProject)
-        props.getProjectsByWorkspaceId(props.project.workspace)
-        console.log("project" + props.projects)
-    }, [props.project.workspace])
+        if (props.cards[0])
+            props.setCard(props.cards[0])
+    }, [])
 
 
     //to chang the project that user selected
-    let myProject = props.project;
+    let myCard = props.card;
 
-    const changeSelectedProject = (id) => {
-        props.getProjectByIdInServer(id.value)
-        $(document).ready(function () {
-            $(".project-select").css("color", props.project.color)
-        })
-        // setSelectedOption(id.value)
+    const changeSelectedCard = (id) => {
+        myCard = props.cards.find(p => p._id == id.value)
+        props.setCard(myCard)
 
-        myProject = props.projects.find(p => p._id == id.value)
-        props.setProject(myProject)
+        if (myCard.tasks[0])
+            props.setTask(myCard.tasks[0])
+        else
+            props.setTaskName("No Cards")
     }
 
-    const viewProjectsList = props.workspace.projects.map((project) => (
-        { value: project._id, label: project.name }
+    const viewCardsList = props.cards.map((card) => (
+        { value: card._id, label: card.name }
     ))
+
     return (
         <>
             <div className="react-select">
 
                 <Select
                     classNamePrefix="select"
-                    onChange={(e) => changeSelectedProject(e)}
+                    onChange={(e) => changeSelectedCard(e)}
                     name="color"
-                    options={viewProjectsList}
-                    placeholder={props.project.name}
+                    options={viewCardsList}
+                    placeholder={"All Cards"}
                 />
             </div>
         </>
@@ -51,18 +49,22 @@ function SelectCards(props) {
 const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
-        project: state.project_reducer.project,
-        workspaces: state.public_reducer.worksapces,
-        workspace: state.workspace_reducer.workspace
+        card: state.card_reducer.card,
+        workspace: state.workspace_reducer.workspace,
+        cards: state.public_reducer.cards,
+
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCard: (card) => dispatch(actions.setCard(card)),
         setProject: (project) => dispatch(actions.setProject(project)),
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+        // getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        setTask: (task) => dispatch(actions.setTask(task)),
+        setTaskName: (taskName) => dispatch(actions.setTask(taskName)),
+        // getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
+        // getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 
 

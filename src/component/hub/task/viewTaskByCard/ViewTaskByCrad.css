@@ -21,9 +21,7 @@
     /* padding-left: 2vw; */
     /* text-align: center; */
   }
-  .check-task:nth-child(3) {
- /* position: sticky !important;  */
-  }
+
   .check-task button:focus{
     outline: 0;
   }
