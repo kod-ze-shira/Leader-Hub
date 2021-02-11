@@ -99,9 +99,6 @@ function ViewWorkspaceList(props) {
 
                 </>
 
-
-
-
                 : null
             }
 
