@@ -32,7 +32,7 @@ function SelectTask(props) {
                     onChange={(e) => changeSelectedTask(e)}
                     name="color"
                     options={viewTasksList}
-                    placeholder={"All Tasks"}
+                    placeholder={"All Task"}
                 />
             </div>
         </>

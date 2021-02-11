@@ -40,7 +40,7 @@ function SelectCards(props) {
                     onChange={(e) => changeSelectedCard(e)}
                     name="color"
                     options={viewCardsList}
-                    placeholder={"All Cards"}
+                    placeholder={"All Card"}
                 />
             </div>
         </>

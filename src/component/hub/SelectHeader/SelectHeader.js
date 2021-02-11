@@ -15,16 +15,16 @@ function SelectHeader(props) {
     return (
         <div className="s-header mx-0 mb-3 row align-items-center ">
 
-            <div className="col-3">
+            <div className="col-2">
                 <SelectWorkspace />
             </div>
-            <div className="col-3">
+            <div className="col-2">
                 <SelectProject />
             </div>
-            <div className="col-3">
+            <div className="col-2">
                 <SelectCards />
             </div>
-            <div className="col-3">
+            <div className="col-2">
                 <SelectTask />
             </div>
 
