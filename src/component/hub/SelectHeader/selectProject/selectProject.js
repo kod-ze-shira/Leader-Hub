@@ -16,20 +16,73 @@ function SelectProject(props) {
         console.log("project" + props.projects)
     }, [props.project.workspace])
 
-
     //to chang the project that user selected
     let myProject = props.project;
 
     const changeSelectedProject = (id) => {
         props.getProjectByIdInServer(id.value)
-        $(document).ready(function () {
-            $(".project-select").css("color", props.project.color)
-        })
-        // setSelectedOption(id.value)
+        console.log("color" + props.project.color)
+        // $(document).ready(function () {
+        //     $(".select-project").css("color", "red")
+        // })
 
         myProject = props.projects.find(p => p._id == id.value)
         props.setProject(myProject)
     }
+   
+    const dot = (color = '#ccc') => ({
+        alignItems: 'center',
+        display: 'flex',
+        color: props.project.color,
+
+        ':before': {
+            backgroundColor: props.project.color,
+            borderRadius: 10,
+            content: '" "',
+            display: 'block',
+            marginRight: 8,
+            height: 10,
+            width: 10,
+        },
+        
+    });
+
+    const colourStyles = {
+        control: styles => ({ ...styles, backgroundColor: 'white' }),
+        option: (styles, { isDisabled, isFocused, isSelected }) => {
+            const color = props.project.color;
+            return {
+                ...styles,
+                backgroundColor: isDisabled,
+
+                // color:props.project.color  ? props.project.color : "red"
+                //     ? null
+                //     : isSelected
+                //         ? color
+                //         : isFocused
+                //             ? "white"
+                //             : null,
+                color: isDisabled
+                    ? '#ccc'
+                    : isSelected
+                        ? color > 2
+                            ? 'white'
+                            : 'black'
+                        : "black",
+                cursor: isDisabled ? 'not-allowed' : 'default',
+
+                ':active': {
+                    ...styles[':active'],
+                    color:
+                        !isDisabled && (isSelected ? color : "black"),
+                },
+            };
+        },
+        input: styles => ({ ...styles, ...dot() }),
+        placeholder: styles => ({ ...styles, ...dot() }),
+        singleValue: (styles, { color }) => ({ ...styles, ...dot(color) }),
+    };
+
 
     const viewProjectsList = props.workspace.projects.map((project) => (
         { value: project._id, label: project.name }
@@ -39,11 +92,13 @@ function SelectProject(props) {
             <div className="react-select">
 
                 <Select
+                    className="select-project"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedProject(e)}
                     name="color"
                     options={viewProjectsList}
                     placeholder={props.project.name}
+                    styles={colourStyles}
                 />
             </div>
         </>

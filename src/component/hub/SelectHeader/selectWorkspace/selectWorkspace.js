@@ -4,16 +4,17 @@ import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import Select from 'react-select';
-
+import LetterLogo from '../../logo/letterLogo'
+import './selectWorkspace.css'
 
 function SelectWorkspace(props) {
 
 
     useEffect(() => {
-        
+
     }, [])
 
-    //to chang the workspace that user selected
+    //to change the workspace that user selected
     let myWorkspace = props.worksapce;
     const changeSelectedWorkspace = (id) => {
 
@@ -33,13 +34,15 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-
+                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace.name} />
                 <Select
+                    className="select-workspace"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
                     placeholder={props.workspace.name}
+
                 />
             </div>
         </>

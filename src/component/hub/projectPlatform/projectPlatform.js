@@ -75,8 +75,6 @@ function ProjectPlatform(props) {
             <div className="body container-fluid">
                 <div className="row drop-dwon-header">
                     {/* <DropDownWorkspace ></DropDownWorkspace> */}
-                    <Logo className="logo-workspace Dropdown-control" nameWorkspace={"workspaceName"} />
-
                 </div>
                 {props.project.name!="No Projects" ?
                 <CardsByProject projectId={props.project._id} />

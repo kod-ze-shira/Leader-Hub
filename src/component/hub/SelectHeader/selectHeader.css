@@ -6,5 +6,7 @@
         border-radius: 12px;
         opacity: 1;
         
-    
+}
+.select__control{
+        border:none !important;
 }
