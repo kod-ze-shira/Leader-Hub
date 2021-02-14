@@ -17,7 +17,7 @@ function ViewWorkspaceGrid(props) {
     }
 
     const routeToWorkspace = () => {
-
+        props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const changeFiledInWorkspace = (input) => {
