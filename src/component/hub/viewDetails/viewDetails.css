@@ -16,3 +16,7 @@ border-left: 9px solid #1AFFFC  ;
     background-color: blue;
     color: black;
 }
+.close{
+    cursor: pointer;
+    
+}

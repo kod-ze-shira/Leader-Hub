@@ -21,10 +21,15 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(
 
 
-    function viewDetails(props) {
+
+
+    function ViewDetails(props) {
+
         const { from } = props//to know from which component its come
 
         const renderSwitch = () => {
@@ -35,19 +40,34 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return null;
             }
         }
+        const [close, setclose] = useState(false);
+        function func_close() {
+            setclose(true)
+
+        }
+
 
         return (
             <>
 
+                {
+                    close ?
+                        null
+                        : <>
+                            <div className="container-fluid">
+                                <div className="row ">
 
-                <div className="container-fluid">
-                    <div className="row ">
-                        <div className="view-details col-5">
-                            {renderSwitch()}
-                        </div>
-                    </div>
-                </div >
+                                    <div className="view-details col-5">
+                                        <div className="close" onClick={func_close} >x</div>
+                                        {renderSwitch()}
+                                    </div>
+                                </div>
+                            </div >
+                        </>
+                }
             </>
+
+
         )
     })
 

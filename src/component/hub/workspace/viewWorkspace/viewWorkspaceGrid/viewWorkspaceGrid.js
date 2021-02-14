@@ -61,7 +61,7 @@ function ViewWorkspaceGrid(props) {
                 over ?
                     <>
                         <div
-                            onClick={() => routeToWorkspace()}
+
                         >
                             <div className="row"
                                 onMouseOut={outOver}
@@ -123,7 +123,7 @@ function ViewWorkspaceGrid(props) {
 
             {
                 edit ?
-                    <ViewDetails from="editWorkspace" >
+                    <ViewDetails from="editWorkspace"  >
 
                     </ViewDetails>
 
