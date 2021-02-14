@@ -327,7 +327,8 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.setProject(data.result))
+                // dispatch(actions.setProject(data.result))
+                dispatch(actions.deleteProjectFromWorkspace(data.project))
                 // dispatch(actions.setProjects(result.projectList))
 
             },
