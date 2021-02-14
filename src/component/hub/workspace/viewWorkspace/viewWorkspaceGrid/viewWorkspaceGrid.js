@@ -38,6 +38,7 @@ function ViewWorkspaceGrid(props) {
     function EditWorkspace() {
         setEdit(true);
         props.setWorkspace(workspace)
+        props.setclose()
     }
     function out_remove() {
         setremove(false);
@@ -183,6 +184,7 @@ const mapStateToProps = (state) => {
     return {
         workspaces: state.workspace_reducer.workspaces,
         user: state.public_reducer.userName,
+        close: state.public_reducer.close,
 
 
 
@@ -194,6 +196,7 @@ const mapDispatchToProps = (dispatch) => {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+        setclose: () => dispatch(actions.setclose()),
 
     }
 

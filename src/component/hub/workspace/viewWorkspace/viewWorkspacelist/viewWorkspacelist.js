@@ -32,7 +32,7 @@ function ViewWorkspaceList(props) {
 
     function EditWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-
+        props.setclose()
         setEdit(true);
     }
     function outEdit() {
@@ -102,7 +102,9 @@ function ViewWorkspaceList(props) {
             </div>
             {edit ?
                 <>
-                    <ViewDetails from="editWorkspace">
+
+
+                    <ViewDetails from="editWorkspace"  >
 
                     </ViewDetails>
 
@@ -156,7 +158,8 @@ function ViewWorkspaceList(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
-        workspaces: state.workspace_reducer.workspaces
+        workspaces: state.workspace_reducer.workspaces,
+        close: state.public_reducer.close,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -165,7 +168,9 @@ const mapDispatchToProps = (dispatch) => {
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
-        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace())
+        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
+        setclose: () => dispatch(actions.setclose()),
+
 
     }
 }
