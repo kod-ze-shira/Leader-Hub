@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 .s-header{
    
         /* width:70vw; */
-        height:10vh;
+        /* height:10vh; */
+        padding-top: 1.5vh;
+        padding-bottom: 1.5vh;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         border-radius: 12px;
         opacity: 1;
@@ -9,4 +13,49 @@
 }
 .select__control{
         border:none !important;
+}
+.s-header div{
+margin-right: 0px;
+}
+.links a{
+        border-bottom: 1px solid rgb(214, 214, 214);
+        color: #98A9BC !important;
+}
+.links .a{
+        color:#00C6EA !important;
+}
+/* .MuiButtonBase-root .MuiTab-root .MuiTab-textColorPrimary{
+        width: 15px !important;
+;
+} */
+/* .MuiTouchRipple-root{
+   width: 15px !important;
+} */
+.MuiTab-root{
+        min-width: 75px !important;
+        /* color:'#00C6EA' !important; */
+        text-align: left !important;
+        font: normal normal medium 18px/24px ;
+padding-bottom: 0 !important;
+background-attachment: '#00C6EA' !important;
+
+}
+.MuiTab-root:focus{
+        outline: 0 !important;
+
+}
+
+
+.MuiTab-textColorInherit, .MuiButtonBase-root:focus{
+        color:'#00C6EA' !important;
+
+}
+.PrivateTabIndicator-colorSecondary-5:focus , .PrivateTabIndicator-colorSecondary-4{
+        color:'#00C6EA' !important;
+    
+}
+.PrivateTabIndicator-root-3 .PrivateTabIndicator-colorSecondary-5 .MuiTabs-indicator{
+background-color:'#00C6EA' !important;
+}
+.MuiTab-textColorPrimary.Mui-selected{
 }

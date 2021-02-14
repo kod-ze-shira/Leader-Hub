@@ -21,15 +21,15 @@ function ViewCards(props) {
 
     return (
         <>
-            <div className=" row justify-content-start card-name  mx-5 mt-4 pb-0">
-                <button className=" show-card col-3 ml-2 mr-3" onClick={(e) => changeSelectedCard(e)}>
-                    <div className="triangle mb-1"></div>
-                    <div className="pl-2">{props.card.name}</div>
+            <div className=" row justify-content-start card-name  mx-2 mt-4 pb-0 ">
+                <button className=" show-card col-3 ml-2 mr-3 pb-1" onClick={(e) => changeSelectedCard(e)}>
+                    <div className="ml-2 triangle mb-1"></div>
+                    <div className="pl-4">{props.card.name}</div>
                 </button>
-                <p className="p-2 col "></p>
-                <p className=" p-2 border-left  col">Team</p>
-                <p className="p-2  border-left col">Label</p>
-                <p className="p-2  border-left col">Due Date</p>
+                <p className=" col-4 "></p>
+                <p className=" border-left  col pb-1">Team</p>
+                <p className="  border-left col pb-1">Label</p>
+                <p className="  border-left col pb-1">Due Date</p>
             </div>
             <DragDropContext>
                 <Droppable droppableId="characters">

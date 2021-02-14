@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
-
-
+import './selectCard.css'
 function SelectCards(props) {
 
 
@@ -36,11 +35,12 @@ function SelectCards(props) {
             <div className="react-select">
 
                 <Select
+                className="select-card"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedCard(e)}
                     name="color"
                     options={viewCardsList}
-                    placeholder={"All Card"}
+                    placeholder={"All Cards"}
                 />
             </div>
         </>

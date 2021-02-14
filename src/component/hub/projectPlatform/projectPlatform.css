@@ -1,11 +1,9 @@
 .body{
     /* width:70vw; */
-    height:70vh;
+    height:75vh;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 12px;
-    opacity: 1;
-    
-    /* margin: 0px -40px; */
+    opacity: 1;  
   }
   /* a{
       color: #98A9BC!important;
