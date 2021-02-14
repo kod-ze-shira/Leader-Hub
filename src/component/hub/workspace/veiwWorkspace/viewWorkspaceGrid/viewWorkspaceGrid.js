@@ -38,13 +38,13 @@ function ViewWorkspaceGrid(props) {
 
                     <div>
                         <div className="row"
-                            onClick={() => routeToWorkspace()}
+
                         >
-                            {/* <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
+                            <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
 
                             <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
 
-                            <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div> */}
+                            <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
                         </div>
                         <div className="Workspacegrid" onMouseOut={outOver} >
                             <div className="mt-2">
@@ -53,9 +53,9 @@ function ViewWorkspaceGrid(props) {
                                     style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                     {workspace.name[0].toUpperCase()}
                                     {/* {
-                            workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-                                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
-                        } */}
+                                        workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
+                                            workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
+                                    } */}
 
 
 
@@ -69,7 +69,7 @@ function ViewWorkspaceGrid(props) {
 
 
                     :
-                    <div className=" Workspacegrid mt-4" onMouseOver={over_workspace} >
+                    <div className=" Workspacegrid mt-4" onMouseOver={over_workspace} onClick={() => routeToWorkspace()}>
 
                         < div className="logoWorkspace1 ml-5 mt-3"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>

@@ -65,7 +65,7 @@ function ProjectPlatform(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        projects: state.project_reducer.project,
+        projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
         workspace: state.workspace_reducer.worksapce,
