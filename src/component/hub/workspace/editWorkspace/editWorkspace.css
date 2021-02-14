@@ -5,8 +5,8 @@
     color:black;
     border:none;
     border-bottom: 1px solid #8181A5;
-  width: 15vw;
-  margin: 0px -50px;
+    width: 15vw;
+    margin: 0px -50px;
     }
 
    .edit_workspace_name:focus {
