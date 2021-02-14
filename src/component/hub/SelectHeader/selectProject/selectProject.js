@@ -23,7 +23,16 @@ function SelectProject(props) {
 
         myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
-        console.log(myProject)
+
+        console.log("my project  "+props.workspace)
+        // if (myProject.cards[0]) {
+        //     props.setProject(myProject.cards[0])
+        //     // alert("hi ")
+        // }
+        // else {
+        //     props.setProjectName("No Projects")
+        //     // alert("else")
+        // }
 
     }
    

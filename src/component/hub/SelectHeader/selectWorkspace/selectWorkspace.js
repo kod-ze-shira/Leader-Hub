@@ -22,10 +22,12 @@ function SelectWorkspace(props) {
         props.setWorkspace(myWorkspace)
         if (myWorkspace.projects[0]) {
             props.setProject(myWorkspace.projects[0])
-            console.log("hi " + props.project)
+            // alert("hi ")
         }
-        else
+        else {
             props.setProjectName("No Projects")
+            // alert("else")
+        }
     }
 
     const viewWorkspacesList = props.workspaces.map((workspace) => (
