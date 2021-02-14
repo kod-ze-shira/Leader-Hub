@@ -12,16 +12,19 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
 
     let { idWorkspace } = useParams();
 
-    useEffect(() => {
-        // if (window.performance) {
-        // if (performance.navigation.type == 1) {
-        // alert("This page is reloaded");
-        // { props.getAllWorkspaces() }
-        // }
-        // }
+    // useEffect(() => {
+    // if (window.performance) {
+    // if (performance.navigation.type == 1) {
+    // alert("This page is reloaded");
+    // { props.getAllWorkspaces() }
+    // }
+    // }
+    useEffect(()=>{
         props.setProjects(props.workspace.projects)
+    },[])
+    
 
-    }, []);
+    // }, []);
 
     // }, []);
 

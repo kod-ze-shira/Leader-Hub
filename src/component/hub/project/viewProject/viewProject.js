@@ -28,7 +28,7 @@ function ViewProject(props) {
 
         props.deleteProjectInServer()
         event.stopPropagation();
-        props.deleteProjectFromWorkspace(props.myProject)
+        // props.deleteProjectFromWorkspace(props.myProject)
     }
 
     let complited = 20;
@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
         setProject: (p) => dispatch(actions.setProject(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
+        // deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))
