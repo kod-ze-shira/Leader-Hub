@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 .s-header{
    
         /* width:70vw; */
-        height:10vh;
+        /* height:10vh; */
+        padding-top: 1.5vh;
+        padding-bottom: 1.5vh;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         border-radius: 12px;
         opacity: 1;
@@ -10,3 +14,49 @@
 .select__control{
         border:none !important;
 }
+.select__control:active , .css-yk16xz-control:active{
+        border:none !important;
+        outline: 0 !important;
+      
+}
+.s-header div{
+margin-right: 0px;
+}
+
+/* .MuiButtonBase-root .MuiTab-root .MuiTab-textColorPrimary{
+        width: 15px !important;
+;
+} */
+/* .MuiTouchRipple-root{
+   width: 15px !important;
+} */
+.MuiTab-root{
+        min-width: 75px !important;
+        /* color:'#00C6EA' !important; */
+        text-align: left !important;
+       font-size: 10px;
+padding-bottom: 0 !important;
+padding-top:0 !important;
+background-attachment: '#00C6EA' !important;
+line-height: 0.95 !important;
+
+
+}
+.tabs-in-header{
+/* margin-left: 20vw !important;} */
+}
+.MuiButtonBase-root .MuiTab-root .MuiTab-textColorInherit{
+        /* margin-bottom: 3vh !important; */
+}
+.MuiTab-root:focus{
+        outline: 0 !important;
+        color:#00C6EA   !important;
+
+
+}
+.select__placeholder{
+        /* font-size: small !important; */
+}
+
+
+

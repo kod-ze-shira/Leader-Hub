@@ -11,7 +11,7 @@
     position: relative;
 
 }
-.css-1uccc91-singleValue, .css-1wa3eu0-placeholder{
+.select-workspace .css-1uccc91-singleValue, .select-workspace .css-1wa3eu0-placeholder,.select-workspace .css-b8ldur-Input{
    margin-left: 3vw !important;
 
 }
@@ -23,6 +23,9 @@
 
 }
 .css-1okebmr-indicatorSeparator{
-display: none!important
+display: none!important;
+
 ; 
 }
+
+
