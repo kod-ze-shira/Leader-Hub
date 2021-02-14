@@ -12,34 +12,45 @@ function EditWorkspace(props) {
     function func_close_edit_workspace() {
         setclose(false);
     }
+    function edit_seve() {
+        props.saveWorkspaceInServerUfterEdit()
+        props.setclose()
+    }
     return (
         <>
-            <div className="row">
-                <div className="col-11"></div>
-                {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
-            </div>
+            {
+                props.close ?
+                    <>
+                        <div className="row">
+                            <div className="col-11"></div>
+                            {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
+                        </div>
 
 
-            <div className="row mt-5">
-                <div className="nameworkspace col-5"><b>Name Workspace:</b></div>
-                <div className="col-6">
-                    <input
-                        className="edit_workspace_name"
-                        name="name"
-                        placeholder={props.workspaceToEdit.name}
-                        onChange={(input) => changeFiledInWorkspace(input)}
-                    >
-                    </input>
-                </div>
+                        <div className="row mt-5">
+                            <div className="nameworkspace col-5"><b>Name Workspace:</b></div>
+                            <div className="col-6">
+                                <input
+                                    className="edit_workspace_name"
+                                    name="name"
+                                    placeholder={props.workspaceToEdit.name}
+                                    onChange={(input) => changeFiledInWorkspace(input)}
+                                >
+                                </input>
+                            </div>
 
-            </div>
-            <div className="row mt-5">
-                <div classNae="col-3"></div>
-                <div className="col-3">  <button onClick={props.saveWorkspaceInServerUfterEdit}>save</button></div>
+                        </div>
+                        <div className="row mt-5">
+                            <div classNae="col-3"></div>
+                            <div className="col-3">  <button onClick={edit_seve} >save</button></div>
 
-            </div>
+                        </div>
 
+                    </> : null
+            }
         </>
+
+
 
 
 
@@ -48,7 +59,9 @@ function EditWorkspace(props) {
 export default connect(
     (state) => {
         return {
-            workspaceToEdit: state.workspace_reducer.workspace
+            workspaceToEdit: state.workspace_reducer.workspace,
+
+            close: state.public_reducer.close,
         }
     },
     (dispatch) => {
@@ -56,7 +69,8 @@ export default connect(
             // getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
-            setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace())
+            setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
+            setclose: () => dispatch(actions.setclose()),
 
         }
     }
