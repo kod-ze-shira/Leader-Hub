@@ -37,17 +37,17 @@ function DropDownWorkspace(props) {
                 options={viewProjectsByWorkspace1}
             />  */}
 
-    <select className="form-select selectpicker textLogo" name="country"
-        onChange={(e) => routeToWrkspace(e)}>
-        <option default className='textLogo'>
-            {props.nameWorkspace}
-        </option>
-        {props.worksapces.map(item => (item.name != props.nameWorkspace ?
-            <option className='textLogo' value={item._id} >
-                {item.name}
-            </option> : null
-        ))}
-    </select>‏
+            <select className="form-select selectpicker textLogo" name="country"
+                onChange={(e) => routeToWrkspace(e)}>
+                <option default className='textLogo'>
+                    {props.nameWorkspace}
+                </option>
+                {props.worksapces.map(item => (item.name != props.nameWorkspace ?
+                    <option className='textLogo' value={item._id} >
+                        {item.name}
+                    </option> : null
+                ))}
+            </select>‏
         </>
     )
 }
