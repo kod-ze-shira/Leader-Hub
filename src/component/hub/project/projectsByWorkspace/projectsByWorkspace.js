@@ -19,7 +19,10 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     // { props.getAllWorkspaces() }
     // }
     // }
-    props.setProjects(props.workspace.projects)
+    useEffect(()=>{
+        props.setProjects(props.workspace.projects)
+    },[])
+    
 
     // }, []);
 
