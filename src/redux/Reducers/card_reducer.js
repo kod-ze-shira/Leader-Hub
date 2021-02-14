@@ -4,13 +4,16 @@ import createReducer from './reducerUtils';
 const initialState = {
 
     card: {
-        //   name:""
+        name: "All Cards"
     }
 
 }
 const card = {
     setCard(state, action) {
         state.card = action.payload;
+    },
+    setCardName(state, action) {
+        state.card.name = action.payload;
     }
 }
 

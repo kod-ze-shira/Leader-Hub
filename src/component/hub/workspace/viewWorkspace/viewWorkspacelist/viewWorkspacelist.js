@@ -24,7 +24,7 @@ function ViewWorkspaceList(props) {
 
     const routeToProject = () => {
         // console.log("waaaaaaaaaa  " + workspace)
-        // props.setWorkspace(workspace)
+        props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const [edit, setEdit] = useState(false);
@@ -108,9 +108,6 @@ function ViewWorkspaceList(props) {
 
                 </>
 
-
-
-
                 : null
             }
             {
@@ -151,6 +148,7 @@ function ViewWorkspaceList(props) {
                     : null
             }
 
+
         </>
 
     )
@@ -166,7 +164,8 @@ const mapDispatchToProps = (dispatch) => {
 
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer())
+        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
+        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace())
 
     }
 }

@@ -327,7 +327,8 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.setProject(data.result))
+                // dispatch(actions.setProject(data.result))
+                dispatch(actions.deleteProjectFromWorkspace(data.project))
                 // dispatch(actions.setProjects(result.projectList))
 
             },
@@ -484,7 +485,6 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 //
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
-
         var projectId = action.payload;
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getCardsByProjectId"
         $.ajax({
