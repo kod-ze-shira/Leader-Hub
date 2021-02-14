@@ -29,7 +29,20 @@ function SelectCards(props) {
     const viewCardsList = props.cards.map((card) => (
         { value: card._id, label: card.name }
     ))
+    const style = {
+        control: (base, state) => ({
+            ...base,
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: state.isFocused ? 0 : 0,
+            // This line disable the blue border
+            boxShadow: state.isFocused ? 0 : 0,
+            "&:hover": {
+                border: state.isFocused ? 0 : 0,
+                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
 
+            }
+        })
+    };
     return (
         <>
             <div className="react-select">
@@ -41,6 +54,7 @@ function SelectCards(props) {
                     name="color"
                     options={viewCardsList}
                     placeholder={"All Cards"}
+                    styles={style}
                 />
             </div>
         </>

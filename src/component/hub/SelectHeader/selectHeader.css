@@ -14,16 +14,15 @@
 .select__control{
         border:none !important;
 }
+.select__control:active , .css-yk16xz-control:active{
+        border:none !important;
+        outline: 0 !important;
+      
+}
 .s-header div{
 margin-right: 0px;
 }
-.links a{
-        border-bottom: 1px solid rgb(214, 214, 214);
-        color: #98A9BC !important;
-}
-.links .a{
-        color:#00C6EA !important;
-}
+
 /* .MuiButtonBase-root .MuiTab-root .MuiTab-textColorPrimary{
         width: 15px !important;
 ;
@@ -35,27 +34,29 @@ margin-right: 0px;
         min-width: 75px !important;
         /* color:'#00C6EA' !important; */
         text-align: left !important;
-        font: normal normal medium 18px/24px ;
+       font-size: 10px;
 padding-bottom: 0 !important;
+padding-top:0 !important;
 background-attachment: '#00C6EA' !important;
+line-height: 0.95 !important;
 
+
+}
+.tabs-in-header{
+/* margin-left: 20vw !important;} */
+}
+.MuiButtonBase-root .MuiTab-root .MuiTab-textColorInherit{
+        /* margin-bottom: 3vh !important; */
 }
 .MuiTab-root:focus{
         outline: 0 !important;
+        color:#00C6EA   !important;
+
 
 }
+.select__placeholder{
+        /* font-size: small !important; */
+}
 
 
-.MuiTab-textColorInherit, .MuiButtonBase-root:focus{
-        color:'#00C6EA' !important;
 
-}
-.PrivateTabIndicator-colorSecondary-5:focus , .PrivateTabIndicator-colorSecondary-4{
-        color:'#00C6EA' !important;
-    
-}
-.PrivateTabIndicator-root-3 .PrivateTabIndicator-colorSecondary-5 .MuiTabs-indicator{
-background-color:'#00C6EA' !important;
-}
-.MuiTab-textColorPrimary.Mui-selected{
-}

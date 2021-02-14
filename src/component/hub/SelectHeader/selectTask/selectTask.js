@@ -23,6 +23,20 @@ function SelectTask(props) {
     const viewTasksList = props.tasks.map((task) => (
         { value: task._id, label: task.name }
     ))
+    const style = {
+        control: (base, state) => ({
+            ...base,
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: state.isFocused ? 0 : 0,
+            // This line disable the blue border
+            boxShadow: state.isFocused ? 0 : 0,
+            "&:hover": {
+                border: state.isFocused ? 0 : 0,
+                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+
+            }
+        })
+    };
 
     return (
         <>
@@ -33,6 +47,7 @@ function SelectTask(props) {
                     name="color"
                     options={viewTasksList}
                     placeholder={"All Tasks"}
+                    styles={style}
                 />
             </div>
         </>

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         // backgroundColor: theme.palette.background.cyan,
         color: '#778CA2',
 
-        
+
 
     },
     label: {
@@ -71,7 +71,6 @@ function SelectHeader(props) {
             <div className="col pr-0">
                 <SelectTask />
             </div>
-            <div className="col pr-0"></div>
             {/* <div className="col-6 ">
                 <a className="offset-5 a" href="#">List</a>
                 <a className="ml-5 " href="#">Calender</a>
@@ -80,23 +79,19 @@ function SelectHeader(props) {
             </div> */}
             <div className={classes.root}>
                 <Tabs
-                    className="offset-3"
+                    className="tabs-in-header offset-3"
                     value={value}
                     onChange={handleChange}
                     variant="scrollable"
                     scrollButtons="off"
-                    indicatorColor={classes.indicator}
-            
-                    textColor='4FC3F7'
+                    TabIndicatorProps={{ style: { backgroundColor: '#00C6EA' } }}
                     aria-label="scrollable prevent tabs example"
                 >
-                    {/* <div className={classes.demo}> */}
                     <Tab
                         label="List" />
                     <Tab label="Calender" />
                     <Tab label="Gant" />
                     <Tab label="Tabs" />
-                    {/* </div> */}
                 </Tabs>
             </div>
         </div >

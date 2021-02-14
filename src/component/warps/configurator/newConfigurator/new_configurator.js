@@ -22,7 +22,7 @@ function NewConfigorator(props) {
     return (
         <>
             <div className="left_nav ">
-                <div className=" col-8 pt-4 mt-5">
+                <div className=" col-8 pt-4 mt-5 ml-2">
                     <img src={require('../../../img/logoLeader.svg')}></img>
                 </div>
                 <ul className="list_config">

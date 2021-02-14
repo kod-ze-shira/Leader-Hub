@@ -31,6 +31,21 @@ function SelectWorkspace(props) {
     const viewWorkspacesList = props.workspaces.map((workspace) => (
         { value: workspace._id, label: workspace.name }
     ))
+    const style = {
+        control: (base, state) => ({
+            ...base,
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: state.isFocused ? 0 : 0,
+            // This line disable the blue border
+            boxShadow: state.isFocused ? 0 : 0,
+            "&:hover": {
+                border: state.isFocused ? 0 : 0,
+                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+
+            }
+        })
+    };
+
     return (
         <>
             <div className="react-select">
@@ -42,7 +57,7 @@ function SelectWorkspace(props) {
                     name="color"
                     options={viewWorkspacesList}
                     placeholder={props.workspace.name}
-
+                    styles={style}
                 />
             </div>
         </>

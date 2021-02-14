@@ -33,7 +33,7 @@ export default function Hub() {
                     <div className="col-2 px-0 mt-0">
                         <Configurator />
                     </div>
-                    <div className="col-10  col align-self-center pr-4 ">
+                    <div className="col-10  col align-self-center pr-4">
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
 
