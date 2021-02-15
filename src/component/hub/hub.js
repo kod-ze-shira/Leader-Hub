@@ -28,8 +28,7 @@ export default function Hub() {
         <>
             <Router history={history}>
                 <Nav />
-                <div className="row ">
-
+                <div className="row">
                     <div className="col-2 px-0 mt-0">
                         <Configurator />
                     </div>

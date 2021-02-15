@@ -41,7 +41,6 @@ function SelectWorkspace(props) {
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-
             }
         })
     };

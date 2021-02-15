@@ -71,12 +71,7 @@ function SelectHeader(props) {
             <div className="col pr-0">
                 <SelectTask />
             </div>
-            {/* <div className="col-6 ">
-                <a className="offset-5 a" href="#">List</a>
-                <a className="ml-5 " href="#">Calender</a>
-                <a className="ml-5" href="#">Gant</a>
-                <a className="ml-5" href="#">Tabs</a>
-            </div> */}
+        
             <div className={classes.root}>
                 <Tabs
                     className="tabs-in-header offset-3"
@@ -84,7 +79,7 @@ function SelectHeader(props) {
                     onChange={handleChange}
                     variant="scrollable"
                     scrollButtons="off"
-                    TabIndicatorProps={{ style: { backgroundColor: '#00C6EA' } }}
+                    TabIndicatorProps={{ style: { backgroundColor: '#6DD41F' } }}
                     aria-label="scrollable prevent tabs example"
                 >
                     <Tab

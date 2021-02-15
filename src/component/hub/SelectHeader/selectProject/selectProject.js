@@ -26,17 +26,7 @@ function SelectProject(props) {
         console.log(myProject)
 
     }
-    const style = {
-        control: (base, state) => ({
-            ...base,
-            border: state.isFocused ? 0 : 0,
-            // This line disable the blue border
-            boxShadow: state.isFocused ? 0 : 0,
-            "&:hover": {
-                border: state.isFocused ? 0 : 0
-            }
-        })
-    };
+   
     const dot = (color = '#ccc') => ({
         alignItems: 'center',
         display: 'flex',
@@ -51,11 +41,9 @@ function SelectProject(props) {
             height: 10,
             width: 10,
         },
-
     });
 
     const colourStyles = {
-
         control: (base, state) => ({
             ...base,
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
@@ -100,9 +88,13 @@ function SelectProject(props) {
         input: styles => ({ ...styles, ...dot() }),
         placeholder: styles => ({ ...styles, ...dot() }),
         singleValue: (styles, { color }) => ({ ...styles, ...dot(color) }),
+        option:(styles, { color }) => ({ ...styles, ...dot(color) }),
+
     };
 
-
+    const colorsOfWorkspace = props.workspace.projects.map((project) => (
+        project.color
+    ))
     const viewProjectsList = props.workspace.projects.map((project) => (
         { value: project._id, label: project.name }
     ))
@@ -118,7 +110,6 @@ function SelectProject(props) {
                     options={viewProjectsList}
                     placeholder={props.project.name}
                     styles={colourStyles}
-                // styles={style}
                 />
             </div>
         </>
