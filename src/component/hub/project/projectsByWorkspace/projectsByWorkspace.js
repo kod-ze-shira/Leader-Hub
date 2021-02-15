@@ -21,21 +21,13 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         //             alert('/workspace')
         //             props.setProjects(props.workspace.projects)
 
-    // useEffect(() => {
-    // if (window.performance) {
-    // if (performance.navigation.type == 1) {
-    // alert("This page is reloaded");
-    // { props.getAllWorkspaces() }
-    // }
-    // }
-    useEffect(()=>{
-        props.setProjects(props.workspace.projects)
-    },[])
-    
-
-    // }, []);
-
-    // }, []);
+        //         }
+        //         else {
+        //             alert('/allWorkspace')
+        //             setAllWorkspace(true)
+        //             let allProjects = []
+        //             props.workspaces.map((myWorkspace) => allProjects.push(myWorkspace.projects))
+        //             props.setProjects(allProjects)
 
         //         }
         //         setFlug(true)

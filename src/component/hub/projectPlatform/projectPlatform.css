@@ -4,6 +4,7 @@
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 12px;
     opacity: 1;  
+    position: relative !important;
   }
   .logoW{
     margin-top: 3vh !important;
