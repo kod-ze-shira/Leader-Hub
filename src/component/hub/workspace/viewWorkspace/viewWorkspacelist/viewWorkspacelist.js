@@ -44,12 +44,25 @@ function ViewWorkspaceList(props) {
     }
     function out_remove() {
         setremove(false);
+        props.deleteWorkspaceInServer();
+        props.getAllWorkspaces()
+
+    }
+    function Undo() {
+        setremove(false);
+
+
     }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
     const [over, setover] = useState(false);
+    function DeleteWorkspace() {
+        props.setWorkspace(workspace);
+        props.deleteWorkspaceInServer();
+        props.getAllWorkspaces()
+    }
     function func_over() {
         setover(true)
     }
@@ -148,28 +161,23 @@ function ViewWorkspaceList(props) {
                             </Toast> */}
                         {/* </div> */}
                         <Toast className="toast_delete"
-                            // onClose={deleteOrganization}
+                            onClose={DeleteWorkspace}
                             // show={showToast} 
-                            delay={3000} autohide>
-                            <div
-                                aria-live="polite"
-                                aria-atomic="true"
+                            delay={5000} autohide>
 
-                                className="remove"
-                                onClick={out_remove}
+                            <Toast.Header className="tost" >
 
-                            ></div>
+                                {/* <div className="close" onClick={out_remove}> x</div> */}
 
-                            <Toast.Header className="tost" closeButton={false}>
                                 <div className="row">
                                     <div className="col-4">
                                         <div className="pr-2"></div>
                                     </div>
-                                    <div className="col-4">
-                                        <span className="pr-2">was deleted</span>
+                                    <div className="col-10">
+                                        workspace leader was deleted
                                     </div>
                                     <div className="col-4 div_btn_undo pr-2">
-                                        <div className="Undo" >Undo</div>
+                                        <div className="Undo" onClick={Undo}>Undo</div>
                                     </div>
                                 </div>
 
