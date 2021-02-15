@@ -3,9 +3,7 @@ import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
 
-    project: {
-      
-    },
+    project: {}
 
 }
 

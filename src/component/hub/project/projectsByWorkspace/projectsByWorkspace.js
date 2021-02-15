@@ -7,10 +7,19 @@ import "./projectsByWorkspace.css";
 import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
+import { workspace } from '../../../warps/configurator/workspace/workspace';
 
 function ProjectsByWorkspace(props, getAllWorkspaces) {
-
     let { idWorkspace } = useParams();
+    let [flug, setFlug] = useState(false)
+    let [allWorkspace, setAllWorkspace] = useState(false)
+    useEffect(() => {
+        props.getAllWorkspaces()
+        // if (props.worksapces)
+        //     if (!flug) {
+        //         if (window.location.href.indexOf("/workspace") != -1) {
+        //             alert('/workspace')
+        //             props.setProjects(props.workspace.projects)
 
     // useEffect(() => {
     // if (window.performance) {
@@ -28,30 +37,31 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
 
     // }, []);
 
-    // useEffect(() => {
-    // if (window.performance) {
-    // if (performance.navigation.type == 1) {
-    // alert("This page is reloaded");
-    // { props.getAllWorkspaces() }
-    // state.public_reducer.worksapces
-    // }
-    // }
-    // }, []);
+        //         }
+        //         setFlug(true)
+        //     }
+
+
+    }, [props.worksapces]);
 
 
 
 
-    // myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
-    const viewProjectsByWorkspace = props.projects.map((project) => {
-        return <ViewProject myProject={project} />
-    })
-
-
+    // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
+    const viewProjectsByWorkspace =
+        props.workspaces.find(w => w._id == idWorkspace).projects.map((project) => {
+            return <ViewProject myProject={project} />
+        })
+    // const viewAllProjectsByWorkspace = props.workspaces.map((w) =>
+    //     w.projects.map((project) => {
+    //         return <ViewProject myProject={project} />
+    //     })
+    // )
 
     return (
         <>
 
-            <div className='body' to={`${props.user}/workspace/${idWorkspace}`}>
+            <div className='body' >
                 <HeaderBody nameWorkspace={props.workspace.name} />
                 <Table responsive className='tableProject' >
                     <>
@@ -59,7 +69,9 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
                             <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
                         </thead> */}
                         <tbody>
+                            {/* {allWorkspace ? viewAllProjectsByWorkspace : */}
                             {viewProjectsByWorkspace}
+                            {/* } */}
                         </tbody>
                     </>
                 </Table>
@@ -82,6 +94,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
 
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }

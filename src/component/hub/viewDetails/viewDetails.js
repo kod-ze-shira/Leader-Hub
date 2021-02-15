@@ -11,12 +11,13 @@ import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 const mapStateToProps = (state) => {
     return {
 
-
+        close: state.public_reducer.close,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setclose: () => dispatch(actions.setclose()),
 
 
     }
@@ -41,30 +42,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return null;
             }
         }
-        const [close, setclose] = useState(false);
-        function func_close() {
-            setclose(true)
 
-        }
 
 
         return (
             <>
 
+
                 {
-                    close ?
-                        null
-                        : <>
+                    props.close ?
+                        <>
                             <div className="container-fluid">
                                 <div className="row ">
 
                                     <div className="view-details col-5">
-                                        <div className="close" onClick={func_close} >x</div>
+                                        <div className="close" onClick={props.setclose} >x</div>
                                         {renderSwitch()}
                                     </div>
                                 </div>
                             </div >
+
                         </>
+                        : null
+
+
+
                 }
             </>
 

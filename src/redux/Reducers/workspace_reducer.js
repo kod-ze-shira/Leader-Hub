@@ -2,15 +2,8 @@
 import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
-    workspace: {
-        projects:[],
-        teams:[],
-        _id:"",
-        name:"",
-        userId:"",
-        color:""
-    },
-    isConfiguratorOpenWorkspace: false,
+    workspace: {},
+
     closeEditWorkspace: false
 
 
@@ -28,12 +21,8 @@ const workspaces = {
     setState(state, action) {
         state.workspace = action.payload
     },
-    // setShowShare(state, action) {
-    //     state.workspace = action.payload
-    // },
-    setisConfiguratorOpenWorkspace(state, action) {
-        state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
-    },
+
+
     setcloseEditWorkspace(state, action) {
         state.closeEditWorkspace = !state.closeEditWorkspace
     }

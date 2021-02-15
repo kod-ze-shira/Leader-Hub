@@ -9,7 +9,7 @@ const initialState = {
     cards: [],
     tasks: [],
     isConfiguratorOpen: "false",
-    close: "true"
+    close: "false"
 }
 
 const publicData = {
