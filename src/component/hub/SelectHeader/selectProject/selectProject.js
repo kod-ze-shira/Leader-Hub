@@ -13,7 +13,6 @@ function SelectProject(props) {
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
         props.getProjectsByWorkspaceId(props.project.workspace)
-        console.log("project" + props.projects)
     }, [])
 
     //to chang the project that user selected

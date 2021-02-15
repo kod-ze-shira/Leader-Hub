@@ -4,15 +4,7 @@ import createReducer from './reducerUtils';
 const initialState = {
 
     project: {
-        name: "",
-        subject: "",
-        project: "",
-        dueDate: "",
-        updateDates: [],
-        endDate: "",
-        color: '',
-        cards: [],
-        workspace: ""
+      
     },
 
 }

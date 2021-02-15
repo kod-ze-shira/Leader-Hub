@@ -23,7 +23,7 @@ function NewConfigorator(props) {
         <>
             <div className="left_nav ">
                 <div className=" col-8 pt-4 mt-5">
-                    <img src={require('../../../img/logoLeader.svg')}></img>
+                    <img src={require('../../../img/Group 19564.svg')}></img>
                 </div>
                 <ul className="list_config">
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>

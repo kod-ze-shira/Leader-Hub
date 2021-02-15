@@ -10,7 +10,8 @@ const initialState = {
         userId:"",
         color:""
     },
-    isConfiguratorOpenWorkspace: false
+    isConfiguratorOpenWorkspace: false,
+
 
 }
 
@@ -32,6 +33,7 @@ const workspaces = {
     setisConfiguratorOpenWorkspace(state, action) {
         state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
     },
+
 }
 
 

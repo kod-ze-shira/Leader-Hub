@@ -52,6 +52,52 @@ font-size: small;
    font-size: xx-large;
    margin-top: 30px;
 }
+/* .close{
+   cursor: pointer;
+} */
+
+/* .toast_header{
+   
+    display: contents;
+  background-color:  transparent linear-gradient(269deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box;
+} */
+.tost{
+   position: 'absolute';
+   top: 0;
+   right: 0;
+    background-color: #F5F5F5;
+
+}
+
+.remove{
+     position: relative;
+    
+     
+ 
+       width: 29vw
+}
+.Undo{
+   color: var(--unnamed-color-2bb4fb);
+text-align: left;
+font: normal normal medium 20px/26px Roboto;
+letter-spacing: 0.36px;
+background-color:  #F5F5F5 ;
+cursor: pointer;
+border: 1px solid;
+color: #2BB4FB;
+border-radius:20px ;
+font-weight: 620;
+cursor: pointer;
+text-align: center;
+
+text-transform: capitalize;
+opacity: 0.9;
+}
+.remove:focus{
+   border: none;
+   border-bottom: none;
+}
+
 
       
 .name{

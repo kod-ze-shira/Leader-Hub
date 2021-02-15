@@ -12,19 +12,18 @@ import tasksByCard from '../../task/tasksByCard/tasksByCard';
 function ViewCards(props) {
     useEffect(() => {
 
-    }, [])
+    }, [props.flag])
     const [flag, setFlag] = useState(true)
-    console.log("flag" + flag)
     const [cardId, setCardId] = useState("")
-
     const changeSelectedCard = (event) => {
         setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
-        if ( flag)
-            setFlag(false)
-        else
-            setFlag(true)
-
+        setFlag(!flag)
+        // props.flag = !(props.flag)
+        // if (flag)
+        //     setFlag(false)
+        // else
+        //     setFlag(true)
     }
 
     console.log("reducer card " + props.card.name + " map card " + props.cardFromMap.name)
@@ -35,20 +34,22 @@ function ViewCards(props) {
                     <div className="triangle mb-1"></div>
                     <div className="pl-2">{props.cardFromMap.name}</div>
                 </button>
-                <p className="p-2 col "></p>
-                <p className=" p-2 border-left  col">Team</p>
-                <p className="p-2  border-left col">Label</p>
-                <p className="p-2  border-left col">Due Date</p>
+                <p className=" col-4 "></p>
+                <p className=" border-left  col pb-1">Team</p>
+                <p className="  border-left col pb-1">Label</p>
+                <p className="  border-left col pb-1">Due Date</p>
             </div>
             <DragDropContext>
                 <Droppable droppableId="characters">
                     {(provided) => (
                         /* ul */
-                        props.card.name == props.cardFromMap.name  ? <TasksByCard className="characters" cardId={cardId}
+                        // props.card.name == props.cardFromMap.name  ? 
+                        props.flag && props.card.name == props.cardFromMap.name && flag ? <TasksByCard className="characters" cardId={cardId}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             //   {...provided.droppableProps} 
-                            ref={provided.innerRef} /> : null
+                            ref={provided.innerRef} />
+                            : null
                     )}
                 </Droppable>
             </DragDropContext>

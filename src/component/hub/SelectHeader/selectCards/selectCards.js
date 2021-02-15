@@ -22,7 +22,7 @@ function SelectCards(props) {
         myCard = props.cards.find(p => p._id == id.value)
         props.setCard(myCard)
         props.getTasksByCardId(myCard._id)
-
+        props.flag(true)
         // if (myCard.tasks[0])
         //     props.setTask(myCard.tasks[0])
         // else
@@ -37,11 +37,12 @@ function SelectCards(props) {
             <div className="react-select">
 
                 <Select
+                    className="select-card"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedCard(e)}
                     name="color"
                     options={viewCardsList}
-                    placeholder={props.card?props.card.name:"All Cards"}
+                    placeholder={props.card ? props.card.name : "All Cards"}
                 />
             </div>
         </>
@@ -63,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
         setProject: (project) => dispatch(actions.setProject(project)),
         setTask: (task) => dispatch(actions.setTask(task)),
         setTaskName: (taskName) => dispatch(actions.setTask(taskName)),
-        getTasksByCardId:(cardId)=> dispatch(actions.getTasksByCardId(cardId))
+        getTasksByCardId: (cardId) => dispatch(actions.getTasksByCardId(cardId))
     }
 
 
