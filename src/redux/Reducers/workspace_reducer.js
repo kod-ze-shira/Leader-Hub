@@ -3,12 +3,6 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {
-        projects:[],
-        teams:[],
-        _id:"",
-        name:"",
-        userId:"",
-        color:""
     },
     isConfiguratorOpenWorkspace: false,
     closeEditWorkspace: false

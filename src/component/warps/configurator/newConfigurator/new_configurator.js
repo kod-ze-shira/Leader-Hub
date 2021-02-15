@@ -18,7 +18,10 @@ function NewConfigorator(props) {
         })
 
     }
-
+    function goToAllProjects(e) {
+        changeBackground(e)
+        props.history.push("/" + props.user + "/allWorkspace")
+    }
     return (
         <>
             <div className="left_nav ">
@@ -29,7 +32,9 @@ function NewConfigorator(props) {
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
                     My Workspace </li>
-                    <li onDrop onClick={(e) => changeBackground(e.target)}>
+                    {/* <li onDrop onClick={(e) => changeBackground(e.target)}> */}
+                    <li onDrag onClick={(e) => goToAllProjects(e.target)}>
+
                         <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                         My Projects</li>
                     <li onClick={(e) => changeBackground(e.target)}>

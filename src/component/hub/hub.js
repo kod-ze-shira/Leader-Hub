@@ -22,7 +22,7 @@ import ProjectPlatform from './projectPlatform/projectPlatform'
 import CardsByProject from './Cards/cardsByProject/cardsByProject'
 import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
-
+import Toast from "./toast/toast";
 export default function Hub() {
     return (
         <>
@@ -40,8 +40,9 @@ export default function Hub() {
                         <Switch>
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsByWorkspace />
-                                {/* <Projcts /> */}
-
+                            </Route>
+                            <Route path="/:userName/allWorkspace" >
+                                <ProjectsByWorkspace />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
@@ -60,7 +61,7 @@ export default function Hub() {
 
                             <Route path="/" >
                                 <Animation />
-
+                                {/* <Toast /> */}
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
 
