@@ -6,13 +6,18 @@ import SelectHeader from '../SelectHeader/SelectHeader'
 
 function CardsPage() {
     const [isHasTask, setIsHasTask] = useState(false);
+    const [flag, setFlag] = useState(true);
+
     useEffect(() => {
 
     })
+    const changeFlag = (value) => {
+        setFlag(value)
+    }
     return (
         <div >
-            <SelectHeader/>
-            <ProjectPlatform />
+            <SelectHeader flag={changeFlag} />
+            <ProjectPlatform flag={flag}/>
         </div>
 
     )

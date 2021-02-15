@@ -12,8 +12,8 @@ function SelectProject(props) {
 
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
-        props.getProjectsByWorkspaceId(props.project.workspace)
-        console.log("project" + props.projects)
+        if (!props.projects)
+            props.getProjectsByWorkspaceId(props.project.workspace)
     }, [])
 
     //to chang the project that user selected
@@ -23,20 +23,19 @@ function SelectProject(props) {
 
         myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
-        console.log(myProject)
+
+        console.log("my project  " + props.workspace)
+        // if (myProject.cards[0]) {
+        //     props.setProject(myProject.cards[0])
+        //     // alert("hi ")
+        // }
+        // else {
+        //     props.setProjectName("No Projects")
+        //     // alert("else")
+        // }
 
     }
-    const style = {
-        control: (base, state) => ({
-            ...base,
-            border: state.isFocused ? 0 : 0,
-            // This line disable the blue border
-            boxShadow: state.isFocused ? 0 : 0,
-            "&:hover": {
-                border: state.isFocused ? 0 : 0
-            }
-        })
-    };
+   
     const dot = (color = '#ccc') => ({
         alignItems: 'center',
         display: 'flex',
@@ -51,11 +50,9 @@ function SelectProject(props) {
             height: 10,
             width: 10,
         },
-
     });
 
     const colourStyles = {
-
         control: (base, state) => ({
             ...base,
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
@@ -100,9 +97,13 @@ function SelectProject(props) {
         input: styles => ({ ...styles, ...dot() }),
         placeholder: styles => ({ ...styles, ...dot() }),
         singleValue: (styles, { color }) => ({ ...styles, ...dot(color) }),
+        option:(styles, { color }) => ({ ...styles, ...dot(color) }),
+
     };
 
-
+    const colorsOfWorkspace = props.workspace.projects.map((project) => (
+        project.color
+    ))
     const viewProjectsList = props.workspace.projects.map((project) => (
         { value: project._id, label: project.name }
     ))
@@ -118,7 +119,6 @@ function SelectProject(props) {
                     options={viewProjectsList}
                     placeholder={props.project.name}
                     styles={colourStyles}
-                // styles={style}
                 />
             </div>
         </>

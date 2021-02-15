@@ -21,15 +21,6 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         //             alert('/workspace')
         //             props.setProjects(props.workspace.projects)
 
-<<<<<<< HEAD
-        //         }
-        //         else {
-        //             alert('/allWorkspace')
-        //             setAllWorkspace(true)
-        //             let allProjects = []
-        //             props.workspaces.map((myWorkspace) => allProjects.push(myWorkspace.projects))
-        //             props.setProjects(allProjects)
-=======
     // useEffect(() => {
     // if (window.performance) {
     // if (performance.navigation.type == 1) {
@@ -45,7 +36,6 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     // }, []);
 
     // }, []);
->>>>>>> dev
 
         //         }
         //         setFlug(true)
