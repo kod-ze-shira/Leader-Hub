@@ -12,7 +12,8 @@ function SelectProject(props) {
 
     useEffect(() => {
         props.getProjectByIdInServer(idProject)
-        props.getProjectsByWorkspaceId(props.project.workspace)
+        if (!props.projects)
+            props.getProjectsByWorkspaceId(props.project.workspace)
     }, [])
 
     //to chang the project that user selected
@@ -23,7 +24,7 @@ function SelectProject(props) {
         myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
 
-        console.log("my project  "+props.workspace)
+        console.log("my project  " + props.workspace)
         // if (myProject.cards[0]) {
         //     props.setProject(myProject.cards[0])
         //     // alert("hi ")

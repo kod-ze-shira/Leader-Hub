@@ -2,19 +2,19 @@
     height: 57px;
     position: relative;
     animation-name: example;
-    animation-duration: 4s;
+    animation-duration: 3s;
     z-index: 99999;
-    
+
   }
   
   @keyframes example {
-     /* 0%   { left:0px; top:0px;} */
-    25%  { left:30%; top:0px;}
+     0%   { left:0px; top:0px;}
+    /* 25%  { left:30%; top:0px;} */
    40%  { left:50%; top:0px;} 
 
     50%       { transform: translatex(300px) translatey(-500px) }
-    75%      { transform: translatex(400px) translatey(-400px); }
-    100%     { transform: translatex(500px) translatey(-300px) }
+    /* 75%      { transform: translatex(400px) translatey(-400px); } */
+    100%     { transform: translatex(500px) translatey(-500px) }
     /* 100%{opacity: 0;} */
         /* transform:rot.ate(360deg);} */
 
