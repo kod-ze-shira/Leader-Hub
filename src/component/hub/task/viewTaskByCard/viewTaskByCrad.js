@@ -29,19 +29,19 @@ function ViewTaskByCrad(props) {
 
     return (
         <>
-            <div className="show-task row mx-5 border-bottom">
-                <label className="check-task ml-4 p-2 col-3">{props.task.description}
+            <div className="show-task row mx-2 border-bottom">
+                <label className="check-task ml-4  py-1   col-3">{props.task.description}
                     <input type="checkbox" />
                     <span className="checkmark " onClick={() => addChalalit()}></span>
                 </label>
-                <label className="check-task  p-2 col "><button onClick={(e) => showDetails(e)}>view details +</button>
+                <label className="check-task py-1  px-2 col-4 "><button onClick={(e) => showDetails(e)}>view details +</button>
                 </label>
-                <label className="check-task border-left  p-2 col ">{props.task.status}
+                <label className="check-task border-left  py-1  px-2 col ">{props.task.status}
                 </label>
-                <label className="check-task border-left  p-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                <label className="check-task border-left  py-1  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                 </label>
 
-                <label className="check-task border-left  p-2 col">{props.task.startDate}
+                <label className="check-task border-left  py-1  px-2 col">{props.task.startDate}
                 </label>
                
                 {viewDetails ? 

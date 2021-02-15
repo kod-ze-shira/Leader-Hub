@@ -21,6 +21,7 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         //             alert('/workspace')
         //             props.setProjects(props.workspace.projects)
 
+<<<<<<< HEAD
         //         }
         //         else {
         //             alert('/allWorkspace')
@@ -28,6 +29,23 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         //             let allProjects = []
         //             props.workspaces.map((myWorkspace) => allProjects.push(myWorkspace.projects))
         //             props.setProjects(allProjects)
+=======
+    // useEffect(() => {
+    // if (window.performance) {
+    // if (performance.navigation.type == 1) {
+    // alert("This page is reloaded");
+    // { props.getAllWorkspaces() }
+    // }
+    // }
+    useEffect(()=>{
+        props.setProjects(props.workspace.projects)
+    },[])
+    
+
+    // }, []);
+
+    // }, []);
+>>>>>>> dev
 
         //         }
         //         setFlug(true)

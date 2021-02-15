@@ -18,7 +18,7 @@ option{
     color: #FF65A6;
 }
 a{
-    color: #98A9BC!important;
+    /* color: #98A9BC; */
     display: inline-block;
     /* float: right; */
     

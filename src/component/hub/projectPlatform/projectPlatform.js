@@ -33,14 +33,14 @@ function ProjectPlatform(props) {
     }
     const [showDetails, setShowDetails] = useState(false)
 
-    $(function () {
-        $('.add-new-btn').hover(function () {
-            $('.add-new-pop-up').css('display', 'block')
-        }, function () {
-            // on mouseout, reset the background colour
-            $('.add-new-pop-up').css('display', 'none');
-        });
-    });
+    // $(function () {
+    //     $('.add-new-btn').hover(function () {
+    //         $('.add-new-pop-up').css('display', 'block')
+    //     }, function () {
+    //         // on mouseout, reset the background colour
+    //         $('.add-new-pop-up').css('display', 'none');
+    //     });
+    // });
 
 
     return (
@@ -65,7 +65,7 @@ function ProjectPlatform(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        projects: state.project_reducer.project,
+        projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
         workspace: state.workspace_reducer.worksapce,

@@ -32,7 +32,7 @@ function ViewWorkspaceList(props) {
 
     function EditWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-
+        props.setclose()
         setEdit(true);
     }
     function outEdit() {
@@ -44,12 +44,25 @@ function ViewWorkspaceList(props) {
     }
     function out_remove() {
         setremove(false);
+        props.deleteWorkspaceInServer();
+        props.getAllWorkspaces()
+
+    }
+    function Undo() {
+        setremove(false);
+
+
     }
 
     const toOpenEditWorkspace = () => {
         setOpenEditWorkspace(!openEditWorkspace)
     }
     const [over, setover] = useState(false);
+    function DeleteWorkspace() {
+        props.setWorkspace(workspace);
+        props.deleteWorkspaceInServer();
+        props.getAllWorkspaces()
+    }
     function func_over() {
         setover(true)
     }
@@ -102,7 +115,9 @@ function ViewWorkspaceList(props) {
             </div>
             {edit ?
                 <>
-                    <ViewDetails from="editWorkspace">
+
+
+                    <ViewDetails from="editWorkspace"  >
 
                     </ViewDetails>
 
@@ -116,32 +131,34 @@ function ViewWorkspaceList(props) {
 
                     <>
                         <div className="mt-5"></div>
-                        <div
-                            aria-live="polite"
-                            aria-atomic="true"
 
-                            className="remove"
-                            onClick={out_remove}
+                        <Toast className="toast_delete"
+                            onClose={DeleteWorkspace}
+                            // show={showToast} 
+                            delay={5000} autohide>
 
-                        >
-                            <Toast className="tost"
+                            <Toast.Header className="tost" >
 
-                            >
-                                <Toast.Header >
+                                {/* <div className="close" onClick={out_remove}> x</div> */}
+
+                                <div className="row">
+                                    <div className="col-4">
+                                        <div className="pr-2"></div>
+                                    </div>
+                                    <div className="col-10">
+                                        workspace leader was deleted
+                                    </div>
+                                    <div className="col-4 div_btn_undo pr-2">
+                                        <div className="Undo" onClick={Undo}>Undo</div>
+                                    </div>
+                                </div>
 
 
-                                </Toast.Header>
 
 
-                                <Toast.Body>
-                                    <div className="row ">
-                                        <div className="col-8"> workspace leader was deleted  </div>
-                                        <div className="col-2 Undo" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }}>Undo</div>
-
-
-                                    </div></Toast.Body>
-                            </Toast>
-                        </div>
+                            </Toast.Header>
+                            {/* <Toast.Body>was deleted</Toast.Body> */}
+                        </Toast>
 
                     </>
 
@@ -156,16 +173,20 @@ function ViewWorkspaceList(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
-        workspaces: state.workspace_reducer.workspaces
+        add_workspaces: state.public_reducer.worksapces,
+        workspaces: state.workspace_reducer.workspaces,
+        close: state.public_reducer.close,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
-        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace())
+        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
+        setclose: () => dispatch(actions.setclose()),
+
 
     }
 }

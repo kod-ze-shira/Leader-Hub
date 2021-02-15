@@ -9,9 +9,14 @@ const initialState = {
     cards: [],
     tasks: [],
     isConfiguratorOpen: "false",
+    close: "false"
 }
 
 const publicData = {
+    setclose(state, action) {
+        state.close = !state.close
+    },
+
 
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
