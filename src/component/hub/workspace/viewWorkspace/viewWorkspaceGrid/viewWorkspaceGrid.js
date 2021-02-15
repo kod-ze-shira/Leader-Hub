@@ -61,12 +61,8 @@ function ViewWorkspaceGrid(props) {
             {
                 over ?
                     <>
-                        <div
-
-                        >
-                            <div className="row"
-                                onMouseOut={outOver}
-                            >
+                        <div className="ViewWorkspace" onMouseOut={outOver} >
+                            <div className="row" >
                                 <div className="col-1 edit" onClick={EditWorkspace}>
                                     <img src={require('../../../../img/pencil-write.png')}></img>
                                 </div>
@@ -76,15 +72,17 @@ function ViewWorkspaceGrid(props) {
                                     <img src={require('../../../../img/bin.png')}></img>
                                 </div>
                                 <div className="ml-1 stripe">|</div>
-                                <div className="col-1 add">
+                                <div className="col-1 add" onClick={props.getAllWorkspaces}>
                                     <img src={require('../../../../img/duplicate-outline.png')}></img>
                                 </div>
                             </div>
                             <div className="Workspacegrid"
                                 onClick={() => routeToWorkspace()}
-                            //  onMouseOut={outOver}
+
+
+
                             >
-                                <div>
+                                <div >
                                     < div className="logoWorkspace1  ml-5 ">
                                         <div className="mt-2 logo"
 
@@ -158,7 +156,12 @@ function ViewWorkspaceGrid(props) {
                                 <Toast.Body>
                                     <div className="row ">
                                         <div className="col-8"> workspace leader was deleted  </div>
-                                        <div className="col-2 Undo" onClick={() => { props.setWorkspace(workspace); props.deleteWorkspaceInServer(); }}>Undo</div>
+                                        <div className="col-2 Undo" onClick={() => {
+                                            props.setWorkspace(workspace); props.deleteWorkspaceInServer();
+                                            props.getAllWorkspaces();
+
+
+                                        }}>Undo</div>
 
 
                                     </div></Toast.Body>
@@ -182,9 +185,10 @@ function ViewWorkspaceGrid(props) {
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.workspace_reducer.workspaces,
+
         user: state.public_reducer.userName,
         close: state.public_reducer.close,
+        workspaces: state.workspace_reducer.workspaces,
 
 
 
@@ -193,6 +197,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),

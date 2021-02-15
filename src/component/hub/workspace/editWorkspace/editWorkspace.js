@@ -15,6 +15,7 @@ function EditWorkspace(props) {
     function edit_seve() {
         props.saveWorkspaceInServerUfterEdit()
         props.setclose()
+        props.getAllWorkspaces()
     }
     return (
         <>
@@ -60,13 +61,14 @@ export default connect(
     (state) => {
         return {
             workspaceToEdit: state.workspace_reducer.workspace,
+            workspaces: state.workspace_reducer.workspaces,
 
             close: state.public_reducer.close,
         }
     },
     (dispatch) => {
         return {
-            // getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
+            getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
             setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
