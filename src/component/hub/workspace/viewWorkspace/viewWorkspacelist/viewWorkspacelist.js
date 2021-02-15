@@ -131,35 +131,7 @@ function ViewWorkspaceList(props) {
 
                     <>
                         <div className="mt-5"></div>
-                        {/* <div
-                            aria-live="polite"
-                            aria-atomic="true"
 
-                            className="remove"
-                            onClick={out_remove}
-
-                        >
-                            <Toast className="tost"
-
-                            >
-                                <Toast.Header >
-
-
-                                </Toast.Header>
-
-
-                                <Toast.Body>
-                                    <div className="row ">
-                                        <div className="col-8"> workspace leader was deleted  </div>
-                                        <div className="col-2 Undo" onClick={() => {
-                                            props.setWorkspace(workspace); props.deleteWorkspaceInServer();
-                                            props.getAllWorkspaces();
-                                        }}>Undo</div>
-
-
-                                    </div></Toast.Body>
-                            </Toast> */}
-                        {/* </div> */}
                         <Toast className="toast_delete"
                             onClose={DeleteWorkspace}
                             // show={showToast} 
