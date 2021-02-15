@@ -17,7 +17,7 @@ function ViewWorkspaceGrid(props) {
     }
 
     const routeToWorkspace = () => {
-
+        props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const changeFiledInWorkspace = (input) => {
@@ -61,7 +61,7 @@ function ViewWorkspaceGrid(props) {
                 over ?
                     <>
                         <div
-                            onClick={() => routeToWorkspace()}
+
                         >
                             <div className="row"
                                 onMouseOut={outOver}
@@ -80,6 +80,7 @@ function ViewWorkspaceGrid(props) {
                                 </div>
                             </div>
                             <div className="Workspacegrid"
+                                onClick={() => routeToWorkspace()}
                             //  onMouseOut={outOver}
                             >
                                 <div>
@@ -105,7 +106,7 @@ function ViewWorkspaceGrid(props) {
 
                     :
                     <div className=" Workspacegrid mt-4"
-                        onClick={() => routeToWorkspace()}
+
 
                         onMouseOver={over_workspace}
                     >
@@ -134,28 +135,6 @@ function ViewWorkspaceGrid(props) {
             {
                 remove ?
 
-                    // <Toast className="toast_delete"
-                    //     // onClose={deleteOrganization}
-                    //     // show={showToast}
-                    //     delay={3000} autohide>
-
-                    //     <Toast.Header className="toast_header" />
-
-                    //     <div className="row">
-                    //         <div className="col-8">
-                    //             <div className="close" onClick={out_remove}>x</div>
-                    //         </div>
-                    //         <div className="col-8">
-                    //             <span className="pr-2">workspace leader was deleted</span>
-                    //         </div>
-                    //         <div className="col-4 div_btn_undo pr-2">
-                    //            
-                    //         </div>
-                    //     </div>
-
-
-
-                    // </Toast>
                     <>
                         <div className="mt-5"></div>
                         <div

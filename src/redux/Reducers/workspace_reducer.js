@@ -11,6 +11,7 @@ const initialState = {
         color:""
     },
     isConfiguratorOpenWorkspace: false,
+    closeEditWorkspace: false
 
 
 }
@@ -33,6 +34,9 @@ const workspaces = {
     setisConfiguratorOpenWorkspace(state, action) {
         state.isConfiguratorOpenWorkspace = !state.isConfiguratorOpenWorkspace
     },
+    setcloseEditWorkspace(state, action) {
+        state.closeEditWorkspace = !state.closeEditWorkspace
+    }
 
 }
 

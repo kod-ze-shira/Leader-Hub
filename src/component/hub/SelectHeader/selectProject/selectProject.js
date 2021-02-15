@@ -34,7 +34,17 @@ function SelectProject(props) {
         // }
 
     }
-   
+    const style = {
+        control: (base, state) => ({
+            ...base,
+            border: state.isFocused ? 0 : 0,
+            // This line disable the blue border
+            boxShadow: state.isFocused ? 0 : 0,
+            "&:hover": {
+                border: state.isFocused ? 0 : 0
+            }
+        })
+    };
     const dot = (color = '#ccc') => ({
         alignItems: 'center',
         display: 'flex',
@@ -49,11 +59,23 @@ function SelectProject(props) {
             height: 10,
             width: 10,
         },
-        
+
     });
 
     const colourStyles = {
-        control: styles => ({ ...styles, backgroundColor: 'white' }),
+
+        control: (base, state) => ({
+            ...base,
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: state.isFocused ? 0 : 0,
+            // This line disable the blue border
+            boxShadow: state.isFocused ? 0 : 0,
+            "&:hover": {
+                border: state.isFocused ? 0 : 0,
+                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+
+            }
+        }),
         option: (styles, { isDisabled, isFocused, isSelected }) => {
             const color = props.project.color;
             return {
@@ -104,6 +126,7 @@ function SelectProject(props) {
                     options={viewProjectsList}
                     placeholder={props.project.name}
                     styles={colourStyles}
+                // styles={style}
                 />
             </div>
         </>

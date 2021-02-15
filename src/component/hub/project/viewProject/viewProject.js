@@ -8,8 +8,6 @@ import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
 import { ProgressBar, Spinner } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
-import { FaTrashAlt } from 'react-icons/fa';
-
 import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
@@ -24,13 +22,13 @@ function ViewProject(props) {
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
     function deleteProject(event) {
-        // debugger
+
         props.setProject(props.myProject)
         // props.setProjects(props.projects)
+
         props.deleteProjectInServer()
         event.stopPropagation();
-        // props.myProject = {}
-        // props.deleteProjectFromWorkspace(props.project)
+        // props.deleteProjectFromWorkspace(props.myProject)
     }
 
     let complited = 20;
@@ -86,11 +84,7 @@ function ViewProject(props) {
                     <CellDescription description='Last update' />
                 </td>
 
-                <td>
-                    <FaTrashAlt onClick={(event) => deleteProject(event)} />
-
-                    {/* <button onClick={(event) => deleteProject(event)}> delete</button> */}
-                </td>
+                <td><button onClick={(event) => deleteProject(event)}> delete</button></td>
 
             </tr >
 
@@ -109,7 +103,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
         setProject: (p) => dispatch(actions.setProject(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
+        // deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))
