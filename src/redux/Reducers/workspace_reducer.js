@@ -2,8 +2,14 @@
 import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
+<<<<<<< HEAD
+    workspace: {
+    },
+    isConfiguratorOpenWorkspace: false,
+=======
     workspace: {},
 
+>>>>>>> dev
     closeEditWorkspace: false
 
 
