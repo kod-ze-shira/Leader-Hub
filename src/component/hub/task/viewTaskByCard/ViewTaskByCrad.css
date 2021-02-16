@@ -56,7 +56,7 @@
     width: 23px;
     background-color: #eee;
 
-    border: 1px solid #2BB4FB;
+    border: 1px solid #489921;
     border-radius: 50%;
 
 
@@ -68,7 +68,8 @@
   
   /* When the checkbox is checked, add a blue background */
   .check-task input:checked ~ .checkmark {
-    background: transparent linear-gradient(180deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box;
+    background-color: #6DD41F;
+    /* background: transparent linear-gradient(180deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box; */
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -115,9 +116,9 @@
   } */
   .status-task-in-progress{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background: #ffa5ca 0% 0% no-repeat padding-box;
+    background: #F0D923 0% 0% no-repeat padding-box;
     border-radius: 3px;
-    color:#fa086d !important;
+    color:#BDAA1C !important;
     font-weight: 300;
     opacity: 0.9;
     margin: auto;
@@ -130,35 +131,38 @@
   }
   .status-task-to-do{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background: #F0D923 0% 0% no-repeat padding-box;
+    background: #ffb6d0 0% 0% no-repeat padding-box;
     border-radius: 3px;
-    color:#ac9806 !important;
+    color:#BF2E63 !important;
     font-weight: 300;
     opacity: 0.9;
     margin: auto;
     width: 75%;
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
-    opacity: 0.6;
+    opacity: 0.9;
     font-weight: 400;
 
   }
   .status-task-done{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background:#44D7B6 0% 0% no-repeat padding-box;
+    background:#D9F7F0 0% 0% no-repeat padding-box;
     border-radius: 3px;
-    color:#038f70 !important;
+    color:#34A38B !important;
     font-weight: 300;
     opacity: 0.9;
     margin: auto;
     width: 75%;
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
-        opacity: 0.6;
+        /* opacity: 0.6; */
         font-weight: 400;
 
 
   }
 .closeDet{
   width: 0;
+}
+.animation{
+  height: 0;
 }

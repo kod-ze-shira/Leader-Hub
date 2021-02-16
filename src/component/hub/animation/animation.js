@@ -7,16 +7,13 @@ export default function Animation(props) {
     function fun() {
         setTimeout(() => {
             $(".rocketShip").remove();
-
-
-
             // $('.rocketShip').css('display', 'none')
         }, 3000);
     }
     return (
         <>
 
-            <img className='rocketShip' src={require('../../img/done.png')}></img>‏
+            <img className='rocketShip' src={require('../../img/Group 19471.svg')}></img>‏
             {/* <i class="far fa-trash-alt"></i> */}
         </>
     )

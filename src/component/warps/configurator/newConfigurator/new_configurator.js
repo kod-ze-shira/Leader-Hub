@@ -18,18 +18,23 @@ function NewConfigorator(props) {
         })
 
     }
-
+    function goToAllProjects(e) {
+        changeBackground(e)
+        props.history.push("/" + props.user + "/allWorkspace")
+    }
     return (
         <>
             <div className="left_nav ">
-                <div className=" col-8 pt-4 mt-5 ml-2">
-                    <img src={require('../../../img/logoLeader.svg')}></img>
+                <div className=" col-8 pt-4 mt-3 ml-1">
+                    <img src={require('../../../img/leader-hub-logo.png')}></img>
                 </div>
                 <ul className="list_config">
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
                     My Workspace </li>
-                    <li onDrop onClick={(e) => changeBackground(e.target)}>
+                    {/* <li onDrop onClick={(e) => changeBackground(e.target)}> */}
+                    <li onDrag onClick={(e) => goToAllProjects(e.target)}>
+
                         <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                         My Projects</li>
                     <li onClick={(e) => changeBackground(e.target)}>
