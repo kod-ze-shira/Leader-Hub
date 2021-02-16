@@ -1,9 +1,10 @@
 
 import produce from 'immer';
+import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
     task: {
-      
+
 
     }
 
@@ -15,12 +16,15 @@ const tasks = {
     setTaskName(state, action) {
         // state.workpace[action.payload] = action.value;
         state.task.name = action.payload
-        
+
         // dispatch({ type: "GET_ALL" })
     },
-    setTask(state,action){
+
+    setTask(state, action) {
         state.task = action.payload;
     },
+
+  
     setisConfiguratorOpenTask(state, action) {
         state.task.isConfiguratorOpenTask = !state.task.isConfiguratorOpenTask
     },

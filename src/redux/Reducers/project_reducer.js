@@ -3,9 +3,7 @@ import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
 
-    project: {
-      
-    },
+    project: {}
 
 }
 
@@ -22,6 +20,10 @@ const project = {
     setProjectId(state, action) {
         state.project.id = action.payload;
     },
+    addCardInProject(state, action) {
+        state.project.cards.push(action.payload);
+    }
+
 
 
 

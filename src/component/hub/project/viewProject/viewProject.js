@@ -24,8 +24,6 @@ function ViewProject(props) {
     function deleteProject(event) {
 
         props.setProject(props.myProject)
-        // props.setProjects(props.projects)
-
         props.deleteProjectInServer()
         event.stopPropagation();
         // props.deleteProjectFromWorkspace(props.myProject)

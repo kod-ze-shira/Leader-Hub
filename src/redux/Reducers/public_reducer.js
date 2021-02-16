@@ -9,7 +9,7 @@ const initialState = {
     cards: [],
     tasks: [],
     isConfiguratorOpen: "false",
-    close: "true"
+    close: "false"
 }
 
 const publicData = {
@@ -17,7 +17,10 @@ const publicData = {
         state.close = !state.close
     },
 
-
+    setTaskStatus(state, action) {
+        console.log(action.payload)
+        state.tasks[action.payload].status = "Done"
+    },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -29,7 +32,6 @@ const publicData = {
     },
     setProjects(state, action) {
         state.projects = action.payload;
-        // console.log("projjjj" + action.payload)
     },
     setTasks(state, action) {
         state.tasks = action.payload;

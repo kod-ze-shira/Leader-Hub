@@ -555,40 +555,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
-// export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
-//     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
-//         var cardId = action.payload;
-//         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + cardId + "/getTasksByCardId"
-//         $.ajax({
-//             url: urlData,
-//             type: 'GET',
-//             headers: {
-//                 Authorization: getState().public_reducer.tokenFromCookies
-//             },
-//             contentType: "application/json; charset=utf-8",
-
-//             success: function (data) {
-//                 dispatch(actions.setTasks(data.tasks))
-
-//                 console.log("success")
-//                 console.log("data", data);
-
-//             },
-//             error: function (err) {
-
-//                 checkPermission(err).then((ifOk) => {
-
-//                 })
-//             }
-//         });
-
-
-
-
-//     }
-//     return next(action);
-// }
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
 
@@ -692,7 +659,41 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
+// router.post('/:userName/newCard', cardFunctions.newCard)
+
+// export const newCard = ({ dispatch, getState }) => next => action => {
+
+//     if (action.type === 'NEW_CARD') {
+//     }
+// }
 
 
 
+export const NewCard = ({ dispatch, getState }) => next => action => {
 
+    if (action.type === 'NEW_CARD') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard"
+        let cardName = action.payload;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            // contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ "name": cardName }),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch(actions.addCardInProject(cardName));
+
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}

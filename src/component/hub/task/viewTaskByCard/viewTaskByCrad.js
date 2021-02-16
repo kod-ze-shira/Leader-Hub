@@ -24,34 +24,43 @@ function ViewTaskByCrad(props) {
         setViewDetails(false)
 
     }
+    let myTask
     function addChalalit() {
+        let i
+        for (i = 0; i < props.tasks.length; i++) {
+            if (props.tasks[i]._id == props.task._id) {
+                break
+            }
+        }
+        // myTask = props.tasks.find(t => t._id == props.task._id)._id
+        props.setTaskStatus(i)
         setShowChalalit(true)
     }
 
     return (
         <>
-            <div className="show-task row mx-5 border-bottom">
-                <label className="check-task ml-4 p-2 col-3">{props.task.name}
+            <div className="show-task row mx-4 border-bottom">
+                <label className="check-task ml-4 py-2 pl-4.5 col-3">{props.task.name}
                     <input type="checkbox" />
                     <span className="checkmark " onClick={() => addChalalit()}></span>
                 </label>
-                <label className="check-task py-1  px-2 col-4 "><button onClick={(e) => showDetails(e)}>view details +</button>
+                <label className="check-task py-2  px-2 col-4 "><button onClick={(e) => showDetails(e)}>view details +</button>
                 </label>
-                <label className="check-task border-left  py-1  px-2 col ">{props.task.status}
+                <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
                 </label>
-                <label className="check-task border-left  py-1  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                <label className="check-task border-left  py-2  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                 </label>
 
-                <label className="check-task border-left  py-1  px-2 col">{props.task.startDate}
+                <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                 </label>
 
                 {viewDetails ?
                     <div className="closeDet" onClick={(e) => closeDetails(e)}>
                         <ViewDetails from={"viewTaskByCard"} task={props.task}> </ViewDetails>
-                    </div>: null}
+                    </div> : null}
             </div>
-            
-            {showchalalit ? <div className="animation"><Animation/> </div>: null}
+
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
     )
@@ -59,7 +68,7 @@ function ViewTaskByCrad(props) {
 const mapStateToProps = (state) => {
 
     return {
-        // tasks: state.public_reducer.tasks,
+        tasks: state.public_reducer.tasks,
         // card: state.card_reducer.card
 
         // task:state.task_reducer.task
@@ -68,7 +77,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setTask:(task)=>dispatch(actions.setTask(task))
+        setTaskStatus: (index) => dispatch(actions.setTaskStatus(index))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)
