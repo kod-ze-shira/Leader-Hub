@@ -97,7 +97,7 @@ function SelectProject(props) {
         input: styles => ({ ...styles, ...dot() }),
         placeholder: styles => ({ ...styles, ...dot() }),
         singleValue: (styles, { color }) => ({ ...styles, ...dot(color) }),
-        option:(styles, { color }) => ({ ...styles, ...dot(color) }),
+        // option:(styles, { color }) => ({ ...styles, ...dot(color) }),
 
     };
 
@@ -117,7 +117,8 @@ function SelectProject(props) {
                     onChange={(e) => changeSelectedProject(e)}
                     name="color"
                     options={viewProjectsList}
-                    placeholder={props.project.name}
+                    // placeholder={props.project.name}
+                    
                     styles={colourStyles}
                 />
             </div>

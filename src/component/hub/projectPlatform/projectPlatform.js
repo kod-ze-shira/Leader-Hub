@@ -24,6 +24,7 @@ function ProjectPlatform(props) {
     useEffect(() => {
         {
             props.getAllWorkspacesFromServer()
+
         };
     }, []);
     console.log(props.project)
@@ -42,7 +43,11 @@ function ProjectPlatform(props) {
     //     });
     // });
 
-
+    const newCard = () => {
+        let value = "eti"
+        props.newCard(value)
+        console.log("add card" + props.project.cards)
+    }
     return (
         <>
 
@@ -51,6 +56,7 @@ function ProjectPlatform(props) {
                 {/* {props.project.name!="No Projects" ? */}
                 <CardsByProject projectId={props.project._id} flag={props.flag} />
                 {/* : null}  */}
+                <a onClick={newCard}>add card+</a>
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>
                     <a>New Project</a><br></br>
@@ -78,7 +84,7 @@ const mapDispatchToProps = (dispatch) => {
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
-
+        newCard: (cardname) => dispatch(actions.newCard(cardname)),
 
     }
 

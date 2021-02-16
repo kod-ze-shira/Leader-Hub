@@ -20,6 +20,10 @@ const project = {
     setProjectId(state, action) {
         state.project.id = action.payload;
     },
+    addCardInProject(state, action) {
+        state.project.cards.push(action.payload);
+    }
+
 
 
 

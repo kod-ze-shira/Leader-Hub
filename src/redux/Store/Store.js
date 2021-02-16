@@ -8,7 +8,7 @@ import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTasksByCardId } from '../middleware/crud'
+import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTasksByCardId, NewCard } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
@@ -50,7 +50,8 @@ const store = createStore(
                 getProjectByIdInServer,
                 getCardsByProjectId,
                 getTasksByCardId,
-                deleteWorkspaceInServer
+                deleteWorkspaceInServer,
+                NewCard
             ))
 )
 var url = window.location;
