@@ -7,26 +7,20 @@ const initialState = {
 
 }
 
-
-
 const project = {
     setProjectName(state, action) {
         state.project.name = action.payload;
     },
     setProject(state, action) {
         state.project = action.payload;
-        console.log("redux pro " + state.project)
+        console.log("redux pro" + state.project)
     },
     setProjectId(state, action) {
         state.project.id = action.payload;
-    },
-    addCardInProject(state, action) {
-        state.project.cards.push(action.payload);
     }
-
-
-
-
+    // addCardInProject(state, action) {
+    //     state.project.cards.push(action.payload);
+    // }
 }
 
 
