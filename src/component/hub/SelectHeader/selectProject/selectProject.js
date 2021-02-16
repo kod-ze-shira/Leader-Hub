@@ -100,7 +100,6 @@ function SelectProject(props) {
         // option:(styles, { color }) => ({ ...styles, ...dot(color) }),
 
     };
-
     const colorsOfWorkspace = props.workspace.projects.map((project) => (
         project.color
     ))
@@ -117,8 +116,7 @@ function SelectProject(props) {
                     onChange={(e) => changeSelectedProject(e)}
                     name="color"
                     options={viewProjectsList}
-                    // placeholder={props.project.name}
-
+                    placeholder={props.project.name}
                     styles={colourStyles}
                 />
             </div>
@@ -144,8 +142,6 @@ const mapDispatchToProps = (dispatch) => {
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
-
-
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SelectProject)
 
