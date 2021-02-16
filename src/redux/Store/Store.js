@@ -13,6 +13,7 @@ import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
 import { createNewTeam } from '../middleware/crud'
+import { duplicateWorkspaceInServer } from '../middleware/crud'
 import { deleteProjectInServer } from '../middleware/crud'
 import { setProjectCrud } from '../middleware/crud'
 import { setTaskCrud } from '../middleware/crud'
@@ -47,7 +48,8 @@ const store = createStore(
                 getProjectByIdInServer,
                 getCardsByProjectId,
                 getTasksByCardId,
-                deleteWorkspaceInServer
+                deleteWorkspaceInServer,
+                duplicateWorkspaceInServer
             ))
 )
 var url = window.location;
