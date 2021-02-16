@@ -4,7 +4,6 @@ import createReducer from './reducerUtils';
 const initialState = {
     workspace: {},
 
-    closeEditWorkspace: false
 
 
 }
@@ -22,10 +21,6 @@ const workspaces = {
         state.workspace = action.payload
     },
 
-
-    setcloseEditWorkspace(state, action) {
-        state.closeEditWorkspace = !state.closeEditWorkspace
-    }
 
 }
 
