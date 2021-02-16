@@ -8,12 +8,13 @@ function CardsByProject(props) {
 
     useEffect(() => {
 
-        props.getCardsByProjectId(props.projectId)
+        // props.getCardsByProjectId(props.projectId)//from server
+        // props.getCardsOfProject(props.projectId)//from redux
 
-    }, [props.projectId])
+    }, [props.projectId, props.cards])
 
     const viewCardsByProject = props.cards.map((card) => {
-        return <ViewCards key={card._id} cardFromMap={card} flag={props.flag}/>
+        return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
     })
     console.log("cards" + props.cards)
     return (
@@ -36,7 +37,8 @@ export default connect(
     },
     (dispatch) => {
         return {
-            getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId))
+            getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
+            getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId))
         }
     }
 )(CardsByProject)

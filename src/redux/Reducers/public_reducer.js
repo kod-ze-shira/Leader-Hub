@@ -45,6 +45,24 @@ const publicData = {
             state.projects[i]._id !== action.payload._id
         )
     },
+    getCardsOfProject(state, action) {
+        state.projects.find(project => {
+            if (project._id == action.payload)
+                state.cards = project.cards
+        })
+    },
+    addCardToProjectInProjectList(state, action) {
+        let index = 0;
+        state.projects.map(project => {
+
+            if (project._id == action.payload.project)
+                project.cards.push(action.payload);
+            // index++
+        })
+    },
+    addCardToCardsWhenAddCardToSetver(state, action) {
+        state.cards.push(action.payload)
+    }
 
 }
 

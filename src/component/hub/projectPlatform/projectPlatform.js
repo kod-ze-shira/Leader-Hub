@@ -23,7 +23,7 @@ function ProjectPlatform(props) {
 
     useEffect(() => {
         {
-            props.getAllWorkspacesFromServer()
+            // props.getAllWorkspacesFromServer()
 
         };
     }, []);
@@ -44,8 +44,8 @@ function ProjectPlatform(props) {
     // });
 
     const newCard = () => {
-        let value = "eti"
-        props.newCard(value)
+        let card = { "project": props.project._id, name: "renana" }
+        props.newCard(card)
         console.log("add card" + props.project.cards)
     }
     return (

@@ -18,6 +18,7 @@ function ViewWorkspaceGrid(props) {
 
     const routeToWorkspace = () => {
         props.setWorkspace(workspace)
+        props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const changeFiledInWorkspace = (input) => {
@@ -212,7 +213,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setclose: () => dispatch(actions.setclose()),
-
+        setProjects: (projects) => dispatch(actions.setProjects(projects))
     }
 
 

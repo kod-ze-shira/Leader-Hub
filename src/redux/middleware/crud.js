@@ -706,21 +706,37 @@ export const NewCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_CARD') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard"
-        let cardName = action.payload;
+        let card = action.payload;
+        // fetch(`https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard`,
+        // {
+        //     method: 'POST',
+        //     headers: {
+        //         authorization: getState().public_reducer.tokenFromCookies,
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ "name": cardName }),
+        // }).then((result) => {
+        //     return result.json();
+        // }).then((result) => {
+        //     console.log(result);
+        // })
 
         $.ajax({
             url: urlData,
-            type: 'POST',
+            method: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             // contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({"name":cardName}),
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ card }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                dispatch(actions.addCardInProject(data.card));
+                // dispatch(actions.addCardToProjectInProjectList(data.card));
 
+                dispatch(actions.addCardToCardsWhenAddCardToSetver(data.card));
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
