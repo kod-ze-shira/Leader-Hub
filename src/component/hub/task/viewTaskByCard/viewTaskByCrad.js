@@ -18,6 +18,7 @@ function ViewTaskByCrad(props) {
 
     const showDetails = (event) => {
         setViewDetails(true)
+        props.setTask(props.task)
     }
     const closeDetails = (e) => {
         setViewDetails(false)
@@ -46,7 +47,7 @@ function ViewTaskByCrad(props) {
 
                 {viewDetails ?
                     <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                        <ViewDetails > </ViewDetails>
+                        <ViewDetails from={"viewTaskByCard"} task={props.task}> </ViewDetails>
                     </div>: null}
             </div>
             
@@ -61,11 +62,13 @@ const mapStateToProps = (state) => {
         // tasks: state.public_reducer.tasks,
         // card: state.card_reducer.card
 
+        // task:state.task_reducer.task
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getTasksByCard: (cardId) => dispatch(actions.getTasksByCard(cardId))
+        setTask:(task)=>dispatch(actions.setTask(task))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)
