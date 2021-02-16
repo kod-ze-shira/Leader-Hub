@@ -13,6 +13,19 @@
     outline:none;
    
   } 
+     .edit_workspace_color:focus {
+    outline:none;
+   
+  } 
+  .edit_workspace_color{
+        background-color: white;
+    color:black;
+    border:none;
+    border-bottom: 1px solid #8181A5;
+    width: 15vw;
+    margin: 0px -50px;
+
+  }
   .close_edit{
       font-size: x-large;
       font-weight: 600;
