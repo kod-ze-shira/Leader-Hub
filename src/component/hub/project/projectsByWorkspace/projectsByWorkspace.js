@@ -13,7 +13,9 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     let [allWorkspace, setAllWorkspace] = useState(false)
+
     useEffect(() => {
+        // props.getProjectByWId()
         props.getAllWorkspaces()
         // if (props.worksapces)
         //     if (!flug) {
@@ -21,28 +23,18 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         //             alert('/workspace')
         //             props.setProjects(props.workspace.projects)
 
-    // useEffect(() => {
-    // if (window.performance) {
-    // if (performance.navigation.type == 1) {
-    // alert("This page is reloaded");
-    // { props.getAllWorkspaces() }
-    // }
-    // }
-    useEffect(()=>{
-        props.setProjects(props.workspace.projects)
-    },[])
-    
-
-    // }, []);
-
-    // }, []);
+        //         }
+        //         else {
+        //             alert('/allWorkspace')
+        //             setAllWorkspace(true)
+        //             let allProjects = []
+        //             props.workspaces.map((myWorkspace) => allProjects.push(myWorkspace.projects))
+        //             props.setProjects(allProjects)
 
         //         }
         //         setFlug(true)
         //     }
-
-
-    }, [props.worksapces]);
+    }, [props]);
 
 
 
@@ -94,8 +86,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-
+        // getProjectByWId: (id) => dispatch(actions.getProjectByWId),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
