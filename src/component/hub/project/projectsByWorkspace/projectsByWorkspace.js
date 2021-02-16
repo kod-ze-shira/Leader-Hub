@@ -15,8 +15,9 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     let [allWorkspace, setAllWorkspace] = useState(false)
 
     useEffect(() => {
-        // props.getProjectByWId()
-        props.getAllWorkspaces()
+        // debugger
+        props.getProjectsByWorkspaceId(idWorkspace)
+        // props.getAllWorkspaces()
         // if (props.worksapces)
         //     if (!flug) {
         //         if (window.location.href.indexOf("/workspace") != -1) {
@@ -85,9 +86,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
+
+
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        // getProjectByWId: (id) => dispatch(actions.getProjectByWId),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }
 

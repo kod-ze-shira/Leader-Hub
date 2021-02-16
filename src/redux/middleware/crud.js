@@ -25,6 +25,8 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
                 })
             })
+
+
     }
     return next(action);
 }
@@ -201,42 +203,32 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     return next(action);
 }
 
-export const getProjectByWId = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'GET_PROJECT_BY_W_ID') {
-        alert('ghhhhhhiii')
-        // var projectId = action.payload;
-        // let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getProjectByWId"
-        // $.ajax({
-        //     url: urlData,
-        //     type: 'GET',
-        //     headers: {
-        //         Authorization: getState().public_reducer.tokenFromCookies
-        //     },
-        //     contentType: "application/json; charset=utf-8",
+export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
-        //     success: function (data) {
-        //         // dispatch(actions.setTask(data.result))
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setWorkspaces(result.workspaces))
 
-        //         console.log("success")
-        //         console.log("data", data);
-
-        //     },
-        //     error: function (err) {
-
-        //         checkPermission(err).then((ifOk) => {
-
-        //         })
-        //     }
-        // });
-
+                })
+            })
 
 
 
     }
-    // return next(action)
-
+    return next(action)
 }
-
 
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
 
@@ -686,28 +678,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 
 
 //
-export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
-        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
-        fetch(url,
-            {
-                method: 'GET',
-                headers: { authorization: getState().public_reducer.tokenFromCookies }
-            })
-            .then((result) => {
-                return result.json()
-            })
-            .then((result) => {
-                console.log(result)
-                checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setProjects(result.projectList))
-                    //
-                })
-            })
-    }
-    return next(action)
-}
 // export const getTasksByProject = ({ dispatch, getState }) => next => action => {
 //     if (action.type === "GET_TASKS_BY_PROJECT") {
 //         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getTasksByProjectId`

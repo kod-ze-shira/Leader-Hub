@@ -12,13 +12,9 @@ import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTa
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
-import { getProjectByWId } from '../middleware/crud'
-
 import { createNewTeam } from '../middleware/crud'
 import { deleteProjectInServer } from '../middleware/crud'
-
 import { setProjectCrud } from '../middleware/crud'
-// import { getAllTeamsForUser } from '../middleware/crud'
 import { setTaskCrud } from '../middleware/crud'
 import { editWorkspaceInServer } from '../middleware/crud'
 import { editProjectInServer } from '../middleware/crud'
@@ -44,8 +40,6 @@ const store = createStore(
                 getAllWorkspacesFromServer,
                 setTaskCrud,
                 createNewTeam,
-                getProjectByWId,
-                // getAllTeamsForUser,
                 setProjectCrud,
                 getProjectsByWorkspaceId,
                 // getTasksByProject,
