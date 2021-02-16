@@ -717,6 +717,35 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
+//
+export const duplicateWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'DUPLICATE_WORKSPACE_IN_SERVER') {
+        let workspace = getState().workspace_reducer.workspace;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/duplicateWorkspace`
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
+
 
 
 
