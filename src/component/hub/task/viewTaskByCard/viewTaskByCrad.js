@@ -14,7 +14,7 @@ import Animation from '../../animation/animation'
 
 function ViewTaskByCrad(props) {
     const [viewDetails, setViewDetails] = useState(false)
-    const [showchalalit, setShowChalalit] = useState(false) 
+    const [showchalalit, setShowChalalit] = useState(false)
 
     const showDetails = (event) => {
         setViewDetails(true)
@@ -29,8 +29,8 @@ function ViewTaskByCrad(props) {
 
     return (
         <>
-            <div className="show-task row mx-2 border-bottom">
-                <label className="check-task ml-4  py-1   col-3">{props.task.description}
+            <div className="show-task row mx-5 border-bottom">
+                <label className="check-task ml-4 p-2 col-3">{props.task.name}
                     <input type="checkbox" />
                     <span className="checkmark " onClick={() => addChalalit()}></span>
                 </label>
@@ -43,15 +43,14 @@ function ViewTaskByCrad(props) {
 
                 <label className="check-task border-left  py-1  px-2 col">{props.task.startDate}
                 </label>
-               
-                {viewDetails ? 
-                <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                    <ViewDetails > </ViewDetails>
-                 </div>
-                    : null}
 
+                {viewDetails ?
+                    <div className="closeDet" onClick={(e) => closeDetails(e)}>
+                        <ViewDetails > </ViewDetails>
+                    </div>: null}
             </div>
-            {showchalalit ? <Animation /> : null}
+            
+            {showchalalit ? <div className="animation"><Animation/> </div>: null}
 
         </>
     )

@@ -66,8 +66,7 @@ function Header(props) {
 
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                        <img src={require('../../img/angle-down-solid.png')}></img>
-                           select <img src={require('../../img/star-solid.png')}></img>
+                            select <img src={require('../../img/star-solid.png')}></img>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item id="project" onClick={newpoject}>
