@@ -49,7 +49,7 @@ function ProjectPlatform(props) {
             <div className="body container-fluid">
 
                 {/* {props.project.name!="No Projects" ? */}
-                <CardsByProject projectId={props.project._id} />
+                <CardsByProject projectId={props.project._id} flag={props.flag} />
                 {/* : null}  */}
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>

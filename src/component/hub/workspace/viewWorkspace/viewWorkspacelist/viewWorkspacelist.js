@@ -105,11 +105,10 @@ function ViewWorkspaceList(props) {
                             <div className="col-1  edit" onClick={EditWorkspace}>
                                 <img src={require('../../../../img/pencil-write.png')}></img>
                             </div>
-                            <div className="ml-2 stripe">|</div>
+                            <div className="ml-2"><img src={require('../../../../img/Line.png')}></img></div>
                             <div className="col-1 ml-1 delete" onClick={func_remove} >
                                 <img src={require('../../../../img/bin.png')}></img>
                             </div>
-
                         </div>
 
                         : null

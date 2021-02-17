@@ -50,12 +50,15 @@ line-height: 0.95 !important;
 }
 .MuiTab-root:focus{
         outline: 0 !important;
-        color:#00C6EA   !important;
+        color:#6DD41F  !important;
 
 
 }
 .select__placeholder{
         /* font-size: small !important; */
+}
+.s-header svg{
+        margin-right: 30px !important;
 }
 
 

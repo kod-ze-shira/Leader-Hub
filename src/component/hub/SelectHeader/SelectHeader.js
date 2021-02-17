@@ -33,20 +33,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#00C6EA'
     }
 
-    // demo:focus {
-    //     border: 0,
-    //     color:'#00C6EA' ,
-    //     // indicatorColor:'#00C6EA'
-    // }
-    // '&:focus': {
-    //     color: '#00C6EA',
-    // },
 
 }));
 
 function SelectHeader(props) {
-    // const [value, setValue] = React.useState(2);
-
+    const [flag, setFlag] = useState(true);
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const color = '#00C6EA'
@@ -55,6 +46,10 @@ function SelectHeader(props) {
         setValue(newValue);
     };
 
+    const changeFlag = (value) => {
+        setFlag(value)
+        props.flag(flag)
+    }
 
     return (
         <div className="s-header mx-0 mb-3 row align-items-center ">
@@ -66,17 +61,12 @@ function SelectHeader(props) {
                 <SelectProject />
             </div>
             <div className="col pr-0">
-                <SelectCards />
+                <SelectCards flag={changeFlag} />
             </div>
             <div className="col pr-0">
                 <SelectTask />
             </div>
-            {/* <div className="col-6 ">
-                <a className="offset-5 a" href="#">List</a>
-                <a className="ml-5 " href="#">Calender</a>
-                <a className="ml-5" href="#">Gant</a>
-                <a className="ml-5" href="#">Tabs</a>
-            </div> */}
+        
             <div className={classes.root}>
                 <Tabs
                     className="tabs-in-header offset-3"
@@ -84,7 +74,7 @@ function SelectHeader(props) {
                     onChange={handleChange}
                     variant="scrollable"
                     scrollButtons="off"
-                    TabIndicatorProps={{ style: { backgroundColor: '#00C6EA' } }}
+                    TabIndicatorProps={{ style: { backgroundColor: '#6DD41F' } }}
                     aria-label="scrollable prevent tabs example"
                 >
                     <Tab

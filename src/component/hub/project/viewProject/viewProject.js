@@ -24,15 +24,13 @@ function ViewProject(props) {
     function deleteProject(event) {
 
         props.setProject(props.myProject)
-        // props.setProjects(props.projects)
-
         props.deleteProjectInServer()
         event.stopPropagation();
         // props.deleteProjectFromWorkspace(props.myProject)
     }
 
     let complited = 20;
-    complited = complited < 30 ? '#29EFFF' : complited < 60 ? '#32AABA' : 'black'
+    complited = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
     return (
         <>
             <tr className='projectForWorkspace' onClick={(e) => routeToCards(e)}>

@@ -56,11 +56,7 @@ function ViewWorkspaceGrid(props) {
         setremove(false);
 
     }
-    function add() {
-        props.setWorkspace(workspace);
-        props.duplicateWorkspaceInServer();
-        props.getAllWorkspaces()
-    }
+
 
 
     function outEdit() {
@@ -84,13 +80,15 @@ function ViewWorkspaceGrid(props) {
                                 <div className="col-1 edit" onClick={EditWorkspace}>
                                     <img src={require('../../../../img/pencil-write.png')}></img>
                                 </div>
-                                <div className="ml-1 stripe">|</div>
+                                <div className="ml-1 "> <img src={require('../../../../img/Line.png')}></img></div>
                                 <div className="col-1 delete"
                                     onClick={func_remove}>
                                     <img src={require('../../../../img/bin.png')}></img>
                                 </div>
-                                <div className="ml-1 stripe">|</div>
-                                <div className="col-1 add" onClick={add}>
+                                <div className="ml-1"><img src={require('../../../../img/Line.png')}></img></div>
+                                <div className="col-1 add"
+                                //  onClick={add}
+                                >
                                     <img src={require('../../../../img/duplicate-outline.png')}></img>
                                 </div>
                             </div>
@@ -217,7 +215,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        duplicateWorkspaceInServer: () => dispatch(actions.duplicateWorkspaceInServer()),
+
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
