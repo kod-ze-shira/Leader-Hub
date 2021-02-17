@@ -23,6 +23,7 @@ import CardsByProject from './Cards/cardsByProject/cardsByProject'
 import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toast";
+import ProjectsPage from './project/projectsPage/projectsPage'
 export default function Hub() {
     return (
         <>
@@ -38,7 +39,8 @@ export default function Hub() {
 
                         <Switch>
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsByWorkspace />
+                                <ProjectsPage />
+                                {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allWorkspace" >
                                 <ProjectsByWorkspace />

@@ -21,13 +21,19 @@ function ViewCards(props) {
     const changeSelectedCard = (event) => {
         setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
-        if (props.flag == props.cardFromMap._id)
+        // alert(props.flag + "  " + props.cardFromMap._id)
+
+        if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
+        }
         else
             if (!flag && props.cardFromMap.tasks[0])
                 setFlag(true)
-            else
+            else {
                 setFlag(false)
+                // setFlagFromSelect(true)
+            }
+        // setFlag(false)
 
 
         // props.flag = !(props.flag)
