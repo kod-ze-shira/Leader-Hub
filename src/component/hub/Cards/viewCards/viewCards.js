@@ -30,7 +30,7 @@ function ViewCards(props) {
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <button className=" show-card col-3 ml-2 mr-3" onClick={(e) => changeSelectedCard(e)}>
+                <button className=" show-card col-3  mr-3" onClick={(e) => changeSelectedCard(e)}>
                     <div className="triangle mb-1"></div>
                     <div className="pl-2">{props.cardFromMap.name}</div>
                 </button>

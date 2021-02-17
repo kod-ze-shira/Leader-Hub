@@ -10,6 +10,7 @@ function ProjectPlatform(props) {
     const [projectId, setProjectId] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
+    const [showInput, setShowInput] = useState(false)
 
 
 
@@ -25,6 +26,7 @@ function ProjectPlatform(props) {
         setViewCardsByProject(true)
     }
     const [showDetails, setShowDetails] = useState(false)
+    const [inputValue, setInputValue] = useState()
 
     // $(function () {
     //     $('.add-new-btn').hover(function () {
@@ -34,10 +36,21 @@ function ProjectPlatform(props) {
     //         $('.add-new-pop-up').css('display', 'none');
     //     });
     // });
+    const updateInputValue = (evt) => {
+        setInputValue(evt.target.value)
+    }
+    const showInputToAddCard = () => {
+        setShowInput(true)
 
+    }
     const newCard = () => {
-        let card = { "project": props.project._id, name: "renana" }
-        props.newCard(card)
+        let card;
+        if (inputValue) {
+            card = { "project": props.project._id, name: inputValue }
+            props.newCard(card)
+        }
+        setInputValue("")
+        setShowInput(false)
         console.log("add card" + props.project.cards)
     }
     return (
@@ -48,13 +61,20 @@ function ProjectPlatform(props) {
                 {/* {props.project.name!="No Projects" ? */}
                 <CardsByProject projectId={props.project._id} flag={props.flag} />
                 {/* : null}  */}
-                <a onClick={newCard}>add card+</a>
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>
                     <a>New Project</a><br></br>
                     <a>New Card</a><br></br>
                     <a>New Task</a><br></br>
                 </div>
+                {showInput ?
+                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="ml-4 input-group-prepend" onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                            newCard()
+                        }
+                    }}></input>
+                    : null}
+                <a className="ml-4"onClick={showInputToAddCard}>add card+</a>
                 <div className="add-new-btn">+</div>
             </div>
         </>
