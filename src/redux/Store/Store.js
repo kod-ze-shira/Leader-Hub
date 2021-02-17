@@ -8,14 +8,11 @@ import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTasksByCardId } from '../middleware/crud'
+import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTasksByCardId, NewCard } from '../middleware/crud'
 import { actions } from '../actions/action.js';
 import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
-import { getProjectByWId } from '../middleware/crud'
-
 import { createNewTeam } from '../middleware/crud'
-import { duplicateWorkspaceInServer } from '../middleware/crud'
 import { deleteProjectInServer } from '../middleware/crud'
 
 import { setProjectCrud } from '../middleware/crud'
@@ -45,7 +42,6 @@ const store = createStore(
                 getAllWorkspacesFromServer,
                 setTaskCrud,
                 createNewTeam,
-                getProjectByWId,
                 // getAllTeamsForUser,
                 setProjectCrud,
                 getProjectsByWorkspaceId,
@@ -55,7 +51,7 @@ const store = createStore(
                 getCardsByProjectId,
                 getTasksByCardId,
                 deleteWorkspaceInServer,
-                duplicateWorkspaceInServer
+                NewCard
             ))
 )
 var url = window.location;
@@ -63,8 +59,8 @@ console.log(url);
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
     console.log("localhost");
-    let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
-    store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
+    let jwtFromCookie="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
+store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }
 else {
     if (document.cookie) {

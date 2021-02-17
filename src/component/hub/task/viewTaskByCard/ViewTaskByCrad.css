@@ -4,22 +4,11 @@
 /* The container */
 .check-task:first-child {
     color: #778CA2;
-    /* display: block;
-    position: relative; */
-    /* padding-left: 35px; */
-    /* margin-bottom: 12px; */
     cursor: pointer;
-    /* font-size: 22px; */
-    /* -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none; */
   }
   .check-task button {
     color: #778CA2;
     background-color: transparent;
-    /* padding-left: 2vw; */
-    /* text-align: center; */
   }
 
   .check-task button:focus{
@@ -33,7 +22,6 @@
     text-align: right !important;
   }
   .check-task{
-    /* margin-right:0.5vw; */
     font-size: 14px;
     margin-bottom: 0px !important;
   }
