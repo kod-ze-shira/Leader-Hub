@@ -8,10 +8,9 @@ function CardsByProject(props) {
 
     useEffect(() => {
 
-        // props.getCardsByProjectId(props.projectId)//from server
-        // props.getCardsOfProject(props.projectId)//from redux
+        props.getCardsByProjectId(props.projectId)
 
-    }, [props.projectId, props.cards])
+    }, [props.projectId])
 
     const viewCardsByProject = props.cards.map((card) => {
         return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />

@@ -25,7 +25,6 @@ function ViewWorkspaceList(props) {
     const routeToProject = () => {
         // console.log("waaaaaaaaaa  " + workspace)
         props.setWorkspace(workspace)
-        props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const [edit, setEdit] = useState(false);
@@ -33,7 +32,7 @@ function ViewWorkspaceList(props) {
 
     function EditWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        props.setclose()
+        // props.setclose()
         setEdit(true);
     }
     function outEdit() {
@@ -43,10 +42,11 @@ function ViewWorkspaceList(props) {
         setremove(true);
 
     }
-    function out_remove() {
-        setremove(false);
+    function out_remove_workspace() {
+        props.setWorkspace(workspace);
         props.deleteWorkspaceInServer();
         props.getAllWorkspaces()
+        setremove(false);
 
     }
     function Undo() {
@@ -70,6 +70,8 @@ function ViewWorkspaceList(props) {
     function func_out_over() {
         setover(false);
     }
+
+
 
 
 
@@ -103,11 +105,10 @@ function ViewWorkspaceList(props) {
                             <div className="col-1  edit" onClick={EditWorkspace}>
                                 <img src={require('../../../../img/pencil-write.png')}></img>
                             </div>
-                            <div className="ml-2 stripe">|</div>
+                            <div className="ml-2"><img src={require('../../../../img/Line.png')}></img></div>
                             <div className="col-1 ml-1 delete" onClick={func_remove} >
                                 <img src={require('../../../../img/bin.png')}></img>
                             </div>
-
                         </div>
 
                         : null
@@ -118,7 +119,7 @@ function ViewWorkspaceList(props) {
                 <>
 
 
-                    <ViewDetails from="editWorkspace"  >
+                    <ViewDetails from="editWorkspace" >
 
                     </ViewDetails>
 
@@ -137,18 +138,19 @@ function ViewWorkspaceList(props) {
                             onClose={DeleteWorkspace}
                             // show={showToast} 
                             delay={5000} autohide>
+                            <span
+                                className="close_remove"
+                                onClick={out_remove_workspace}>×</span>
 
                             <Toast.Header className="tost" >
 
-                                {/* <div className="close" onClick={out_remove}> x</div> */}
+
 
                                 <div className="row">
                                     <div className="col-4">
                                         <div className="pr-2"></div>
                                     </div>
-                                    <div className="col-10">
-                                        workspace leader was deleted
-                                    </div>
+
                                     <div className="col-4 div_btn_undo pr-2">
                                         <div className="Undo" onClick={Undo}>Undo</div>
                                     </div>
@@ -186,8 +188,7 @@ const mapDispatchToProps = (dispatch) => {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
-        setclose: () => dispatch(actions.setclose()),
-        setProjects: (projects) => dispatch(actions.setProjects(projects))
+        // setclose: () => dispatch(actions.setclose()),
 
 
     }

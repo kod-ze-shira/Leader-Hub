@@ -13,7 +13,9 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     let [allWorkspace, setAllWorkspace] = useState(false)
+
     useEffect(() => {
+        // props.getProjectByWId()
         props.getAllWorkspaces()
         // if (props.worksapces)
         //     if (!flug) {
@@ -32,9 +34,7 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         //         }
         //         setFlug(true)
         //     }
-
-
-    }, [props.worksapces]);
+    }, [props]);
 
 
 
@@ -86,8 +86,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-
+        // getProjectByWId: (id) => dispatch(actions.getProjectByWId),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
 }

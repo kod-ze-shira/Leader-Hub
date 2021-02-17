@@ -7,6 +7,7 @@ const initialState = {
     closeEditWorkspace: false
 
 
+    // closeEditWorkspace: false
 }
 
 

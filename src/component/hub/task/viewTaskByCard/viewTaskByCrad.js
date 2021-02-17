@@ -39,8 +39,8 @@ function ViewTaskByCrad(props) {
 
     return (
         <>
-            <div className="show-task row mx-4 border-bottom">
-                <label className="check-task ml-4 py-2 pl-4.5 col-3">{props.task.name}
+            <div className="show-task row mx-5 border-bottom">
+                <label className="check-task ml-4 p-2 col-3">{props.task.name}
                     <input type="checkbox" />
                     <span className="checkmark " onClick={() => addChalalit()}></span>
                 </label>
@@ -56,7 +56,7 @@ function ViewTaskByCrad(props) {
 
                 {viewDetails ?
                     <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                        <ViewDetails from={"viewTaskByCard"} task={props.task}> </ViewDetails>
+                        <ViewDetails > </ViewDetails>
                     </div> : null}
             </div>
 
