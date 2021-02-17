@@ -3,13 +3,7 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {},
-<<<<<<< HEAD
-
-
-
-=======
     closeEditWorkspace: false
->>>>>>> dev
 }
 
 
