@@ -117,7 +117,7 @@ function SelectProject(props) {
                     onChange={(e) => changeSelectedProject(e)}
                     name="color"
                     options={viewProjectsList}
-                    // placeholder={props.project.name}
+                    placeholder={props.project.name}
 
                     styles={colourStyles}
                 />
