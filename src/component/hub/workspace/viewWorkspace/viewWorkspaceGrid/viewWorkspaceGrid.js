@@ -18,6 +18,7 @@ function ViewWorkspaceGrid(props) {
 
     const routeToWorkspace = () => {
         props.setWorkspace(workspace)
+        props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     const changeFiledInWorkspace = (input) => {
@@ -30,6 +31,8 @@ function ViewWorkspaceGrid(props) {
     }
     function Undo() {
         setremove(false);
+
+
     }
 
 
@@ -46,13 +49,9 @@ function ViewWorkspaceGrid(props) {
     function EditWorkspace() {
         setEdit(true);
         props.setWorkspace(workspace)
-
+        props.setclose()
     }
-    function out_remove_workspace() {
-        props.setWorkspace(workspace);
-        props.deleteWorkspaceInServer();
-        props.getAllWorkspaces()
-
+    function out_remove() {
         setremove(false);
 
     }
@@ -76,7 +75,7 @@ function ViewWorkspaceGrid(props) {
                 over ?
                     <>
                         <div className="ViewWorkspace"  >
-                            <div className="row" onMouseOut={outOver} >
+                            <div className="row" >
                                 <div className="col-1 edit" onClick={EditWorkspace}>
                                     <img src={require('../../../../img/pencil-write.png')}></img>
                                 </div>
@@ -94,13 +93,13 @@ function ViewWorkspaceGrid(props) {
                             </div>
                             <div className="Workspacegrid"
                                 onClick={() => routeToWorkspace()}
-
+                                onMouseOut={outOver}
 
 
 
                             >
                                 <div >
-                                    < div className="logoWorkspace1  ml-5 " >
+                                    < div className="logoWorkspace1  ml-5 ">
                                         <div className="mt-2 logo"
 
                                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
@@ -158,28 +157,26 @@ function ViewWorkspaceGrid(props) {
                             // show={showToast} 
                             delay={5000} autohide>
 
-                            {/* <Toast.Header className="tost" > */}
-                            <span
-                                className="close_remove"
-                                onClick={out_remove_workspace}>×</span>
+                            <Toast.Header className="tost" >
 
+                                {/* <div className="close" onClick={out_remove}> x</div> */}
 
-                            <div className="row">
-                                <div className="col-4">
-                                    <div className="pr-2"></div>
-                                </div>
-                                <div className="col-10">
-                                    {workspace.name} leader was deleted
+                                <div className="row">
+                                    <div className="col-4">
+                                        <div className="pr-2"></div>
                                     </div>
-                                <div className="col-4 div_btn_undo pr-2">
-                                    <div className="Undo" onClick={Undo}>Undo</div>
+                                    <div className="col-10">
+                                        workspace leader was deleted
+                                    </div>
+                                    <div className="col-4 div_btn_undo pr-2">
+                                        <div className="Undo" onClick={Undo}>Undo</div>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
 
-                            {/* </Toast.Header> */}
+                            </Toast.Header>
                             {/* <Toast.Body>was deleted</Toast.Body> */}
                         </Toast>
 
@@ -205,7 +202,7 @@ const mapStateToProps = (state) => {
     return {
 
         user: state.public_reducer.userName,
-
+        close: state.public_reducer.close,
         workspaces: state.workspace_reducer.workspaces,
 
 
@@ -215,13 +212,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-
-
+        setclose: () => dispatch(actions.setclose()),
+        setProjects: (projects) => dispatch(actions.setProjects(projects))
     }
 
 

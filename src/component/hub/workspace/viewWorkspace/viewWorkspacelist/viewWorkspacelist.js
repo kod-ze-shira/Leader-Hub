@@ -150,9 +150,7 @@ function ViewWorkspaceList(props) {
                                     <div className="col-4">
                                         <div className="pr-2"></div>
                                     </div>
-                                    <div className="col-10">
-                                        {workspace.name} leader was deleted
-                                    </div>
+
                                     <div className="col-4 div_btn_undo pr-2">
                                         <div className="Undo" onClick={Undo}>Undo</div>
                                     </div>

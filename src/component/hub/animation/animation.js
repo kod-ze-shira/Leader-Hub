@@ -9,6 +9,7 @@ export default function Animation(props) {
             $(".rocketShip").remove();
             // $('.rocketShip').css('display', 'none')
         }, 3000);
+
     }
     return (
         <>
