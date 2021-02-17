@@ -13,12 +13,23 @@ function ViewCards(props) {
     useEffect(() => {
 
     }, [props.flag])
-    const [flag, setFlag] = useState(true)
+
+    const [flag, setFlag] = useState(false)
+    const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
+
     const changeSelectedCard = (event) => {
         setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
-        setFlag(!flag)
+        if (props.flag == props.cardFromMap._id)
+            setFlagFromSelect(false)
+        else
+            if (!flag && props.cardFromMap.tasks[0])
+                setFlag(true)
+            else
+                setFlag(false)
+
+
         // props.flag = !(props.flag)
         // if (flag)
         //     setFlag(false)
@@ -26,7 +37,6 @@ function ViewCards(props) {
         //     setFlag(true)
     }
 
-    console.log("reducer card " + props.card.name + " map card " + props.cardFromMap.name)
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
@@ -43,18 +53,16 @@ function ViewCards(props) {
                 <Droppable droppableId="characters">
                     {(provided) => (
                         /* ul */
-                        // props.card.name == props.cardFromMap.name  ? 
-                        props.flag && props.card._id == props.cardFromMap._id && flag ? <TasksByCard className="characters" cardId={cardId}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            //   {...provided.droppableProps} 
-                            ref={provided.innerRef} />
+                        props.flag == props.cardFromMap._id && flagFromSelect || flag ?
+                            <TasksByCard className="characters" cardId={cardId}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                //   {...provided.droppableProps} 
+                                ref={provided.innerRef} />
                             : null
                     )}
                 </Droppable>
             </DragDropContext>
-
-            {/* {flag ? <TasksByCard className="characters" cardId={cardId} /> : null} */}
         </>
     )
 }
