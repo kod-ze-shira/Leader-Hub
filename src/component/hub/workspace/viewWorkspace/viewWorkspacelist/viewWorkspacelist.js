@@ -153,10 +153,6 @@ function ViewWorkspaceList(props) {
                                         <div className="Undo" onClick={Undo}>Undo</div>
                                     </div>
                                 </div>
-
-
-
-
                             </Toast.Header>
                             {/* <Toast.Body>was deleted</Toast.Body> */}
                         </Toast>
