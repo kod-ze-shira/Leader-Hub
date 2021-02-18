@@ -8,6 +8,9 @@ import TasksByCard from '../../task/tasksByCard/tasksByCard'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import tasksByCard from '../../task/tasksByCard/tasksByCard';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
+import ViewDetails from '../../viewDetails/viewDetails'
+
+
 
 function ViewCards(props) {
     useEffect(() => {
@@ -18,6 +21,15 @@ function ViewCards(props) {
     const [flag, setFlag] = useState(false)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
+    const [viewDetails, setViewDetails] = useState(false)
+    const showDetails = (event) => {
+        setViewDetails(true)
+        // props.setTask(props.task)
+    }
+    const closeDetails = (e) => {
+        // setViewDetails(false)
+
+    }
 
     const changeSelectedCard = (event) => {
         setCardId(props.cardFromMap._id)
@@ -40,6 +52,14 @@ function ViewCards(props) {
                 setFlag(false)
             }
     }
+    const newTask = () => {
+        let task;
+        alert("new task");
+        task = { name: "mami!", description: "to do", status: "to do", startDate: "18/02/2021", updateDates: "18/02/2021", "card": props.card._id }
+        props.newTask(task)
+        console.log(task);
+        console.log("add task:" + props.card.tasks)
+    }
 
     // alert("cardd task " + props.cardFromMap._id)
     return (
@@ -52,7 +72,8 @@ function ViewCards(props) {
                 <p className=" col-4 "></p>
                 <p className=" border-left  col pb-1">Team</p>
                 <p className="  border-left col pb-1">Label</p>
-                <p className="  border-left col pb-1">Due Date</p>
+                <p className="  border-left col pb-1">Due Date<button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button>
+                </p>
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
                 <Droppable droppableId={props.card._id}>
@@ -68,6 +89,10 @@ function ViewCards(props) {
                         </div>
                     )}
                 </Droppable> : null}
+            {viewDetails ?
+                <div className="closeDet" onClick={(e) => closeDetails(e)}>
+                    <ViewDetails from={"editTaskToCard"}> </ViewDetails>
+                </div> : null}
 
             {/* { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
 
@@ -89,11 +114,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setTasks: (task) => dispatch(actions.setTasks(task)),
         setCard: (card) => dispatch(actions.setCard(card)),
-        getTasksByCardId: (cardId) => dispatch(actions.getTasksByCardId(cardId))
-
-        // getCardsByProjectId: () => dispatch(actions.getCardsByProjectId()),
+        newTask: (task) => dispatch(actions.newTask(task)),
+        getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)

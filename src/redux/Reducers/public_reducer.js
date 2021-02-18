@@ -60,6 +60,12 @@ const publicData = {
                 state.cards = project.cards
         })
     },
+    getTasksOfCard(state, action) {
+        state.cards.find(card => {
+            if (card._id == action.payload)
+                state.tasks = card.tasks
+        })
+    },
     addCardToProjectInProjectList(state, action) {
         let index = 0;
         state.projects.map(project => {
@@ -69,10 +75,13 @@ const publicData = {
             // index++
         })
     },
-    addCardToCardsWhenAddCardToSetver(state, action) {
+    addCardToCardsWhenAddCardToServer(state, action) {
         state.cards.push(action.payload)
+    },
+    addTaskToTasksWhenAddTaskToServer(state, action) {
+        state.tasks.push(action.payload)
+        console.log(action.payload);
     }
-
 }
 
 

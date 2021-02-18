@@ -681,14 +681,40 @@ export const NewCard = ({ dispatch, getState }) => next => action => {
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
-            // contentType: "application/json; charset=utf-8",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ card }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                // dispatch(actions.addCardToProjectInProjectList(data.card));
-                dispatch(actions.addCardToCardsWhenAddCardToSetver(data.card));
+                dispatch(actions.addCardToCardsWhenAddCardToServer(data.card));
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
+export const NewTask = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'NEW_TASK') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask"
+        let task = action.payload;
+
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ task }),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
