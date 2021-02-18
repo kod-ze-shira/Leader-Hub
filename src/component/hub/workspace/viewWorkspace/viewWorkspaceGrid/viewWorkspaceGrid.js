@@ -80,7 +80,9 @@ function ViewWorkspaceGrid(props) {
                 over ?
                     <>
                         <div className="ViewWorkspace"  >
-                            <div className="row" onMouseOut={outOver} >
+                            <div className="row"
+                            //  onMouseOut={outOver}
+                            >
                                 <div className="col-1 edit" onClick={EditWorkspace}>
                                     <img src={require('../../../../img/pencil-write.png')}></img>
                                 </div>
@@ -102,7 +104,7 @@ function ViewWorkspaceGrid(props) {
 
                             >
                                 <div >
-                                    < div className="logoWorkspace1  ml-5 " >
+                                    < div className="logoWorkspace1  ml-5 " onMouseOut={outOver}>
                                         <div className="mt-2 logo"
 
                                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
@@ -161,9 +163,10 @@ function ViewWorkspaceGrid(props) {
                             delay={5000} autohide>
 
                             {/* <Toast.Header className="tost" > */}
-                            <span
+                            <div className=" headerRemove">    </div>
+                            <div
                                 className="close_remove"
-                                onClick={out_remove_workspace}>×</span>
+                                onClick={out_remove_workspace}>×</div>
 
 
                             <div className="row">
