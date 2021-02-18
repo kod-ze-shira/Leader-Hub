@@ -7,12 +7,14 @@ import history from '../../../history'
 import TasksByCard from '../../task/tasksByCard/tasksByCard'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import tasksByCard from '../../task/tasksByCard/tasksByCard';
+import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 
 
 
 function ViewCards(props) {
     useEffect(() => {
+        props.getTasksByCardId(props.cardFromMap._id)
 
     }, [props.flag])
 
@@ -28,30 +30,27 @@ function ViewCards(props) {
         // setViewDetails(false)
 
     }
-    
+
     const changeSelectedCard = (event) => {
         setCardId(props.cardFromMap._id)
-        props.setCard(props.cardFromMap)
+
+        // props.setCard(props.cardFromMap)
+        // props.setTasks(props.card.tasks)
         // alert(props.flag + "  " + props.cardFromMap._id)
 
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
         }
         else
-            if (!flag && props.cardFromMap.tasks[0])
+            if (!flag && props.cardFromMap.tasks[0]) {
                 setFlag(true)
-            else {
-                setFlag(false)
-                // setFlagFromSelect(true)
+                // alert("hi")
             }
-        // setFlag(false)
 
-
-        // props.flag = !(props.flag)
-        // if (flag)
-        //     setFlag(false)
-        // else
-        //     setFlag(true)
+            else {
+                console.log(props.cardFromMap.tasks[0])
+                setFlag(false)
+            }
     }
     const newTask = () => {
         let task;
@@ -62,6 +61,7 @@ function ViewCards(props) {
         console.log("add task:" + props.card.tasks)
     }
 
+    // alert("cardd task " + props.cardFromMap._id)
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
@@ -75,24 +75,30 @@ function ViewCards(props) {
                 <p className="  border-left col pb-1">Due Date<button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button>
                 </p>
             </div>
-              {viewDetails ?
-                    <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                        <ViewDetails from={"editTaskToCard"}> </ViewDetails>
-                    </div> : null}
-            <DragDropContext>
-                <Droppable droppableId="characters">
-                    {(provided) => (
-                        /* ul */
-                        props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                            <TasksByCard className="characters" cardId={cardId}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                //   {...provided.droppableProps} 
-                                ref={provided.innerRef} />
-                            : null
+            { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
+                <Droppable droppableId={props.card._id}>
+                    {provided => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}>
+                            {/* {props.cards.tasks.map() */}
+                            {props.tasks.map((task, index) => (
+                                <ViewTaskByCrad key={task._id} task={task} index={index} />
+                            ))}
+                            {provided.placeholder}
+                        </div>
                     )}
-                </Droppable>
-            </DragDropContext>
+                </Droppable> : null}
+            {viewDetails ?
+                <div className="closeDet" onClick={(e) => closeDetails(e)}>
+                    <ViewDetails from={"editTaskToCard"}> </ViewDetails>
+                </div> : null}
+
+            {/* { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
+
+                <TasksByCard className="characters" cardId={cardId} />
+                : null
+            } */}
         </>
     )
 }
@@ -102,15 +108,15 @@ const mapStateToProps = (state) => {
         project: state.project_reducer.project,
         card: state.card_reducer.card,
         task: state.task_reducer.task,
-        // tasks:state.task_reducer.tasks,
+        tasks: state.public_reducer.tasks,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
-
-        // getCardsByProjectId: () => dispatch(actions.getCardsByProjectId()),
+        getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)

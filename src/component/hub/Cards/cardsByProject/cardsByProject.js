@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
 import './cardsByProject.css'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 
 function CardsByProject(props) {
 
@@ -13,9 +15,25 @@ function CardsByProject(props) {
     const viewCardsByProject = props.cards.map((card) => {
         return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
     })
+    function onDragEndׂ(e) {
+        const replace = [e.source.index, e.destination.index]
+        props.changeTaskplace(replace)
+
+    };
+    // function onDragStart(e) {
+    //     console.log(e)
+    // };
     return (
         <>
-            {viewCardsByProject}
+
+            <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}
+            // onDragStart={(e) => onDragStart(e)}
+            >
+                {props.cards.map(card => {
+                    return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
+                })}
+            </DragDropContext>
+            {/* {viewCardsByProject} */}
         </>
     )
 }
@@ -34,7 +52,8 @@ export default connect(
     (dispatch) => {
         return {
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-            getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId))
+            getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
+            changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj))
         }
     }
 )(CardsByProject)
