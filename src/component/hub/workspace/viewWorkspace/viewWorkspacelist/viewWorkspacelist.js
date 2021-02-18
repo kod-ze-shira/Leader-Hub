@@ -102,10 +102,10 @@ function ViewWorkspaceList(props) {
                     over ?
                         <div className="row  mt-4" onMouseOut={func_out_over}>
 
-                            <div className="col-1  edit" onClick={EditWorkspace}>
+                            <div className="col-1 ml-1  edit" onClick={EditWorkspace}>
                                 <img src={require('../../../../img/pencil-write.png')}></img>
                             </div>
-                            <div className="ml-2 stripe">|</div>
+                            <div className="ml-3"> <img src={require('../../../../img/Line.png')}></img></div>
                             <div className="col-1 ml-1 delete" onClick={func_remove} >
                                 <img src={require('../../../../img/bin.png')}></img>
                             </div>
@@ -139,9 +139,12 @@ function ViewWorkspaceList(props) {
                             onClose={DeleteWorkspace}
                             // show={showToast} 
                             delay={5000} autohide>
-                            <span
-                                className="close_remove"
-                                onClick={out_remove_workspace}>×</span>
+                            <div className="row header">
+                                <div className="col-11"></div>
+                                <div className="col-1 close_remove"
+                                    onClick={out_remove_workspace}>×</div>
+                            </div>
+
 
                             <Toast.Header className="tost" >
 

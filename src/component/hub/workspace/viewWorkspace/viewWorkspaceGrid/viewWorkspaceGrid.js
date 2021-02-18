@@ -84,12 +84,12 @@ function ViewWorkspaceGrid(props) {
                                 <div className="col-1 edit" onClick={EditWorkspace}>
                                     <img src={require('../../../../img/pencil-write.png')}></img>
                                 </div>
-                                <div className="ml-1 stripe">|</div>
+                                <div className="ml-3 stripe"> <img src={require('../../../../img/Line.png')}></img></div>
                                 <div className="col-1 delete"
                                     onClick={func_remove}>
                                     <img src={require('../../../../img/bin.png')}></img>
                                 </div>
-                                <div className="ml-1 stripe">|</div>
+                                <div className="ml-3 "> <img src={require('../../../../img/Line.png')}></img></div>
                                 <div className="col-1 add" onClick={add}>
                                     <img src={require('../../../../img/duplicate-outline.png')}></img>
                                 </div>

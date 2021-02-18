@@ -49,8 +49,12 @@
 {
     width: 67vw;
 }
-.stripe{
-    color:#F6F6FA ;
+.header{
+    background-color: #6DD41F 0%, #409500 100% ;
+    height: 13px;
+}
+.close {
+   display: none;
 }
 
 
