@@ -14,6 +14,11 @@
    
      
 }
+.close_remove{
+   background-color:  #F5F5F5;
+   
+  
+}
 
 .delete{
     cursor: pointer;
@@ -49,9 +54,20 @@
 {
     width: 67vw;
 }
-.stripe{
-    color:#F6F6FA ;
+.headerRemove{
+    background-color:  #409500 ;
+   height: 10px;
+
 }
+.close_toast{
+    background-color: #F5F5F5;
+    width: 18vw;
+   
+}
+.close {
+   display: none;
+}
+
 
 
 

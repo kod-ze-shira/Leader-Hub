@@ -80,16 +80,18 @@ function ViewWorkspaceGrid(props) {
                 over ?
                     <>
                         <div className="ViewWorkspace"  >
-                            <div className="row" onMouseOut={outOver} >
+                            <div className="row"
+                            //  onMouseOut={outOver}
+                            >
                                 <div className="col-1 edit" onClick={EditWorkspace}>
                                     <img src={require('../../../../img/pencil-write.png')}></img>
                                 </div>
-                                <div className="ml-1 stripe">|</div>
+                                <div className="ml-3 stripe"> <img src={require('../../../../img/Line.png')}></img></div>
                                 <div className="col-1 delete"
                                     onClick={func_remove}>
                                     <img src={require('../../../../img/bin.png')}></img>
                                 </div>
-                                <div className="ml-1 stripe">|</div>
+                                <div className="ml-3 "> <img src={require('../../../../img/Line.png')}></img></div>
                                 <div className="col-1 add" onClick={add}>
                                     <img src={require('../../../../img/duplicate-outline.png')}></img>
                                 </div>
@@ -102,7 +104,7 @@ function ViewWorkspaceGrid(props) {
 
                             >
                                 <div >
-                                    < div className="logoWorkspace1  ml-5 " >
+                                    < div className="logoWorkspace1  ml-5 " onMouseOut={outOver}>
                                         <div className="mt-2 logo"
 
                                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
@@ -161,9 +163,10 @@ function ViewWorkspaceGrid(props) {
                             delay={5000} autohide>
 
                             {/* <Toast.Header className="tost" > */}
-                            <span
+                            <div className=" headerRemove">    </div>
+                            <div
                                 className="close_remove"
-                                onClick={out_remove_workspace}>×</span>
+                                onClick={out_remove_workspace}>×</div>
 
 
                             <div className="row">
