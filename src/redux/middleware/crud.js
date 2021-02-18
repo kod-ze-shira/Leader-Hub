@@ -674,20 +674,6 @@ export const NewCard = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_CARD') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard"
         let card = action.payload;
-        // fetch(`https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard`,
-        // {
-        //     method: 'POST',
-        //     headers: {
-        //         authorization: getState().public_reducer.tokenFromCookies,
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ "name": cardName }),
-        // }).then((result) => {
-        //     return result.json();
-        // }).then((result) => {
-        //     console.log(result);
-        // })
 
         $.ajax({
             url: urlData,
@@ -702,7 +688,6 @@ export const NewCard = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log(data);
                 // dispatch(actions.addCardToProjectInProjectList(data.card));
-
                 dispatch(actions.addCardToCardsWhenAddCardToSetver(data.card));
             },
             error: function (err) {

@@ -17,10 +17,6 @@ const publicData = {
         state.close = !state.close
     },
 
-    setTaskStatus(state, action) {
-        console.log(action.payload)
-        state.tasks[action.payload].status = "done"
-    },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -35,6 +31,17 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload;
+    },
+    setTaskStatus(state, action) {
+        console.log(action.payload)
+        state.tasks[action.payload].status = "done"
+    },
+    changeTaskplace(state, action) {
+        let source = action.payload[0]
+        let destinition = action.payload[1]
+        let temp = state.tasks[destinition]
+        state.tasks[destinition] = state.tasks[source]
+        state.tasks[source]=temp
     },
     setisConfiguratorOpen(state, action) {
         state.isConfiguratorOpen = !state.isConfiguratorOpen
