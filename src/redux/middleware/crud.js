@@ -219,7 +219,7 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
             .then((result) => {
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setWorkspaces(result.workspaces))
+                    dispatch(actions.setProjects(result.projectList))
 
                 })
             })

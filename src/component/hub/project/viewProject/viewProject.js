@@ -17,45 +17,49 @@ function ViewProject(props) {
         set_getProjectById(false);
     }
     const routeToCards = (e) => {
-        let idProject = props.myProject._id;
-        props.setProject(props.myProject)
+        let idProject = props.myProject.project._id;
+        props.setProject(props.myProject.project)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
     function deleteProject(event) {
 
-        props.setProject(props.myProject)
+        props.setProject(props.myProject.project)
         props.deleteProjectInServer()
         event.stopPropagation();
-        // props.deleteProjectFromWorkspace(props.myProject)
+        // props.deleteProjectFromWorkspace(props.myProject.project)
     }
 
-    let complited = 20;
-    complited = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
+    let complited = 0, complitedColor;
+    complited = props.myProject.countTasks / 100;
+    complited = complited * props.myProject.countReadyTask
+    complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
+
+    // 200\100*23
     return (
         <>
             <tr className='projectForWorkspace' onClick={(e) => routeToCards(e)}>
                 <td >
-                    <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
-                    <span style={{ 'color': props.myProject.color }}>
-                        {props.myProject.name}</span>
+                    <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
+                    <span style={{ 'color': props.myProject.project.color }}>
+                        {props.myProject.project.name}</span>
                     {/* <span class='stripeProject'
                         // style={{ 'background-color': props.project.color }}></span>
-                        style={{ 'background-color': props.myProject.color }}></span> */}
+                        style={{ 'background-color': props.myProject.project.color }}></span> */}
                 </td>
                 <td>
-                    <Cell item={props.myProject.dueDate} />
+                    <Cell item={props.myProject.project.dueDate} />
                     <CellDescription description='Due date' />
                 </td>
                 <td>
-                    <Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} />
+                    <Cell item={props.myProject.project.cards ? props.myProject.project.cards.length ? props.myProject.project.cards.length : "0" : "0"} />
                     <CellDescription description='card' />
                 </td>
                 <td>
                     <span className='task'>
                         <span style={{ 'font-weight': 'bold' }}>
-                            7</span>
+                            {props.myProject.countReadyTask}</span>
                         <span>
-                            /20</span>
+                            /{props.myProject.countTasks}</span>
                     </span>
                     <CellDescription description='Task' />
                 </td>
@@ -63,12 +67,12 @@ function ViewProject(props) {
 
                     <div className='divProgress'>
                         <div class="progressProject" >
-                            <div role="progressbar" class="progressProject-bar" style={{ "width": 20 + "%", background: complited }}
+                            <div role="progressbar" class="progressProject-bar" style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
                     </div>
-                    <CellDescription description='50% comlete' />
+                    <CellDescription description={complited + '% comlete'} />
                 </td>
                 <td style={{ 'text-align': 'center' }}>
                     <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
@@ -78,7 +82,7 @@ function ViewProject(props) {
                     <CellDescription description='Team' />
                 </td>
                 <td>
-                    <Cell item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12/12/2023'} />
+                    <Cell item={props.myProject.project.updateDates ? props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023' : '12/12/2023'} />
                     <CellDescription description='Last update' />
                 </td>
 
