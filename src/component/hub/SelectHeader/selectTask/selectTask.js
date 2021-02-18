@@ -20,9 +20,9 @@ function SelectTask(props) {
         props.setCard(myTask)
     }
 
-    const viewTasksList = props.tasks.map((task) => (
-        { value: task._id, label: task.name }
-    ))
+    // const viewTasksList = props.tasks.map((task) => (
+    // { value: task._id, label: task.name }
+    // ))
     const style = {
         control: (base, state) => ({
             ...base,
@@ -37,7 +37,7 @@ function SelectTask(props) {
             }
         })
     };
-
+    console.log(props.tasks)
     return (
         <>
             <div className="react-select">
@@ -45,7 +45,7 @@ function SelectTask(props) {
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedTask(e)}
                     name="color"
-                    options={viewTasksList}
+                    // options={viewTasksList}
                     placeholder={"All Tasks"}
                     styles={style}
                 />

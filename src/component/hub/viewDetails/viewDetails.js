@@ -6,6 +6,7 @@ import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWo
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import TaskDetails from '../task/taskDetails/taskDetails'
+import EditTask from '../task/editTask/editTask'
 
 
 const mapStateToProps = (state) => {
@@ -39,7 +40,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
                 case 'viewTaskByCard':
-                    return <TaskDetails task={props.task}/>
+                    return <TaskDetails task={props.task} />
+                case 'editTaskToCard':
+                    return <EditTask />
                 default:
                     return null;
             }

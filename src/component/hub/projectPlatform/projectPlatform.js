@@ -12,8 +12,6 @@ function ProjectPlatform(props) {
     const [workspaceId, setWorkspaceId] = useState()
     const [showInput, setShowInput] = useState(false)
 
-
-
     useEffect(() => {
         {
             // props.getAllWorkspacesFromServer()
@@ -68,13 +66,13 @@ function ProjectPlatform(props) {
                     <a>New Task</a><br></br>
                 </div>
                 {showInput ?
-                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="ml-4 input-group-prepend" onKeyPress={event => {
+                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="col-7 ml-4 mt-2 input-group-prepend" onKeyPress={event => {
                         if (event.key === 'Enter') {
                             newCard()
                         }
                     }}></input>
                     : null}
-                <a className="ml-4"onClick={showInputToAddCard}>add card+</a>
+                <a className="ml-4 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                 <div className="add-new-btn">+</div>
             </div>
         </>
