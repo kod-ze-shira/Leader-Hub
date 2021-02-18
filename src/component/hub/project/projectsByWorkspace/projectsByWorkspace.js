@@ -54,7 +54,7 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         <>
 
             <div className='body' >
-                <HeaderBody nameWorkspace={props.workspace.name} />
+                {/* <HeaderBody nameWorkspace={props.workspace.name} /> */}
                 <Table responsive className='tableProject' >
                     <>
                         {/* <thead>

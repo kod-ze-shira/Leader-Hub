@@ -19,7 +19,7 @@ const publicData = {
 
     setTaskStatus(state, action) {
         console.log(action.payload)
-        state.tasks[action.payload].status = "Done"
+        state.tasks[action.payload].status = "done"
     },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;

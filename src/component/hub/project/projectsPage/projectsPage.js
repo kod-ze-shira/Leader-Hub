@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
-import { actions } from '../../../redux/actions/action'
-import ProjectPlatform from '../projectPlatform/projectPlatform'
-import SelectHeader from '../SelectHeader/SelectHeader'
-function CardsPage() {
+// import { actions } from '../../../redux/actions/action'
+import SelectHeader from '../../SelectHeader/SelectHeader'
+import ProjectsByWorkspace from '../projectsByWorkspace/projectsByWorkspace'
+function ProjectsPage() {
     const [isHasTask, setIsHasTask] = useState(false);
-    const [flag, setFlag] = useState();
+    const [flag, setFlag] = useState(true);
 
     useEffect(() => {
 
@@ -16,7 +16,8 @@ function CardsPage() {
     return (
         <div >
             <SelectHeader flag={changeFlag} />
-            <ProjectPlatform flag={flag} />
+            <ProjectsByWorkspace></ProjectsByWorkspace>
+
         </div>
 
     )
@@ -30,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
     return {
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsPage)
