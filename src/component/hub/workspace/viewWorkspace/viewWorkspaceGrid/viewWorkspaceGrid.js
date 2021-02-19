@@ -5,6 +5,7 @@ import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 import Toast from 'react-bootstrap/Toast'
+import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
     const { workspace } = props
@@ -41,7 +42,9 @@ function ViewWorkspaceGrid(props) {
     }
 
     function outOver() {
-        setOver(false);
+        // setOver(false);
+        $('.iconsAction').css({ 'display': 'none' })
+
     }
     function EditWorkspace() {
         setEdit(true);
@@ -67,7 +70,10 @@ function ViewWorkspaceGrid(props) {
         setEdit(false);
     }
     function over_workspace() {
-        setOver(true);
+        // setOver(true);
+
+        $('.iconsAction').css({ 'display': 'inline' })
+
     }
     function func_remove() {
         setremove(true);
@@ -76,58 +82,50 @@ function ViewWorkspaceGrid(props) {
 
     return (
         <>
-            {
+            {/* {
                 over ?
-                    <>
-                        <div className="ViewWorkspace"  >
-                            <div className="row" onMouseOut={outOver} >
-                                <div className="col-1 edit" onClick={EditWorkspace}>
-                                    <img src={require('../../../../img/pencil-write.png')}></img>
-                                </div>
-                                <div className="ml-1 stripe">|</div>
-                                <div className="col-1 delete"
-                                    onClick={func_remove}>
-                                    <img src={require('../../../../img/bin.png')}></img>
-                                </div>
-                                <div className="ml-1 stripe">|</div>
-                                <div className="col-1 add" onClick={add}>
-                                    <img src={require('../../../../img/duplicate-outline.png')}></img>
-                                </div>
+                    <> */}
+            <div className="ViewWorkspace" onMouseOver={over_workspace} onMouseOut={outOver}>
+
+                {/* {over ? */}
+                <div className="row ">
+                    <div className="col-1 edit iconsAction" onClick={EditWorkspace}>
+                        <img src={require('../../../../img/pencil-write.png')}></img>
+                    </div>
+                    <div className="ml-1 stripe">|</div>
+                    <div className="col-1 delete iconsAction"
+                        onClick={func_remove}>
+                        <img src={require('../../../../img/bin.png')}></img>
+                    </div>
+                    <div className="ml-1 stripe">|</div>
+                    <div className="col-1 add iconsAction" onClick={add}>
+                        <img src={require('../../../../img/duplicate-outline.png')}></img>
+                    </div>
+                </div>
+                {/* : null} */}
+                <div className="Workspacegrid"
+                    onClick={() => routeToWorkspace()} >
+                    <div>
+                        <div className="logoWorkspace1  ml-5 " >
+                            <div className="mt-2 logo"
+
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.name[0].toUpperCase()}
+
                             </div>
-                            <div className="Workspacegrid"
-                                onClick={() => routeToWorkspace()}
-
-
-
-
-                            >
-                                <div >
-                                    < div className="logoWorkspace1  ml-5 " >
-                                        <div className="mt-2 logo"
-
-                                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                            {workspace.name[0].toUpperCase()}
-
-                                        </div>
-                                    </div>
-                                    <div className="mt-4">
-                                        <div className="name"><b>{workspace.name}</b> </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                         </div>
+                        <div className="mt-4">
+                            <div className="name"><b>{workspace.name}</b> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    </>
+            {/* </>
 
 
                     :
-                    <div className=" Workspacegrid mt-4"
-
-
-                        onMouseOver={over_workspace}
-                    >
+                    <div className=" Workspacegrid mt-4"  >
 
                         < div className="logoWorkspace1 ml-5 mt-3"
                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
@@ -136,9 +134,9 @@ function ViewWorkspaceGrid(props) {
 
                         </div>
                         <div className="mt-3 name"><b>{workspace.name}</b></div>
-                    </div>
+                    </div> */}
 
-            }
+            {/* } */}
 
             {
                 edit ?
