@@ -137,20 +137,6 @@ function ViewWorkspaceList(props) {
                             onClose={DeleteWorkspace}
                             // show={showToast} 
                             delay={5000} autohide>
-<<<<<<< HEAD
-                            <div className=" headerRemove">    </div>
-
-                            <div className="close_remove"
-
-                                onClick={out_remove_workspace}>×</div>
-
-
-
-
-
-
-=======
->>>>>>> dev
 
                             <Toast.Header className="tost" >
 

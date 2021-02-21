@@ -13,7 +13,6 @@
     outline:none;
    
   } 
-<<<<<<< HEAD
      .edit_workspace_color:focus {
     outline:none;
    
@@ -27,8 +26,6 @@
     margin: 2px -70px;
 
   }
-=======
->>>>>>> dev
   .close_edit{
       font-size: x-large;
       font-weight: 600;

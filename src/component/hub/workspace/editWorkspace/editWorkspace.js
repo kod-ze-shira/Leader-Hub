@@ -19,7 +19,6 @@ function EditWorkspace(props) {
     }
     return (
         <>
-<<<<<<< HEAD
             <div className="row">
                 <div className="col-11"></div>
                 {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
@@ -61,38 +60,6 @@ function EditWorkspace(props) {
             </div>
 
 
-=======
-            {
-                props.close ?
-                    <>
-                        <div className="row">
-                            <div className="col-11"></div>
-                            {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
-                        </div>
-
-
-                        <div className="row mt-5">
-                            <div className="nameworkspace col-5"><b>Name Workspace:</b></div>
-                            <div className="col-6">
-                                <input
-                                    className="edit_workspace_name"
-                                    name="name"
-                                    placeholder={props.workspaceToEdit.name}
-                                    onChange={(input) => changeFiledInWorkspace(input)}
-                                >
-                                </input>
-                            </div>
-
-                        </div>
-                        <div className="row mt-5">
-                            <div classNae="col-3"></div>
-                            <div className="col-3">  <button onClick={edit_seve} >save</button></div>
-
-                        </div>
-
-                    </> : null
-            }
->>>>>>> dev
         </>
 
 

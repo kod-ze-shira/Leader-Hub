@@ -73,7 +73,6 @@ function ViewWorkspaceGrid(props) {
                 over ?
                     <>
                         <div className="ViewWorkspace"  >
-<<<<<<< HEAD
                             <div className="row"
                             //  onMouseOut={outOver}
                             >
@@ -87,19 +86,6 @@ function ViewWorkspaceGrid(props) {
                                 </div>
                                 <div className="ml-3 "> <img src={require('../../../../img/Line.png')}></img></div>
                                 <div className="col-1 add" onClick={add}>
-=======
-                            <div className="row" >
-                                <div className="col-1   edit" onClick={EditWorkspace}>
-                                    <img src={require('../../../../img/pencil-write.png')}></img>
-                                </div>
-                                <div className=" "> <img src={require('../../../../img/Line.png')}></img></div>
-                                <div className="col-1   delete"
-                                    onClick={func_remove}>
-                                    <img src={require('../../../../img/bin.png')}></img>
-                                </div>
-                                <div className=""> <img src={require('../../../../img/Line.png')}></img></div>
-                                <div className="col-1 add" onClick={props.getAllWorkspaces}>
->>>>>>> dev
                                     <img src={require('../../../../img/duplicate-outline.png')}></img>
                                 </div>
                             </div>
@@ -111,11 +97,7 @@ function ViewWorkspaceGrid(props) {
 
                             >
                                 <div >
-<<<<<<< HEAD
                                     < div className="logoWorkspace1  ml-5 " onMouseOut={outOver}>
-=======
-                                    < div className="logoWorkspace1  ml-5 ">
->>>>>>> dev
                                         <div className="mt-2 logo"
 
                                             style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
@@ -164,24 +146,20 @@ function ViewWorkspaceGrid(props) {
 
 
             {
+
+
                 remove ?
+
 
                     <>
                         <div className="mt-5"></div>
+
                         <Toast className="toast_delete"
                             onClose={DeleteWorkspace}
                             // show={showToast} 
                             delay={5000} autohide>
 
-<<<<<<< HEAD
-                            {/* <Toast.Header className="tost" > */}
-                            <div className=" headerRemove">    </div>
-                            <div
-                                className="close_remove"
-                                onClick={out_remove_workspace}>×</div>
-=======
                             <Toast.Header className="tost" >
->>>>>>> dev
 
                                 {/* <div className="close" onClick={out_remove}> x</div> */}
 
@@ -206,11 +184,9 @@ function ViewWorkspaceGrid(props) {
 
                     </>
 
-
-
-
                     : null
             }
+}
         </>
 
 
