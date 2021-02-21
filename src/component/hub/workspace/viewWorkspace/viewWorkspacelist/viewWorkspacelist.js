@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import EditWorkspace from '../../editWorkspace/editWorkspace'
 import ViewDetails from '../../../viewDetails/viewDetails'
 import Toast from 'react-bootstrap/Toast'
-
+import $ from "jquery";
 
 
 function ViewWorkspaceList(props) {
@@ -16,13 +16,13 @@ function ViewWorkspaceList(props) {
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showToast, setShowToast] = useState(false);//to show toast delete
     const [deleted, setDeleted] = useState(true)//to undo delete// if user want undo delete
+    const [edit, setEdit] = useState(false);
 
     const routeToProject = () => {
         // console.log("waaaaaaaaaa  " + workspace)
         props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
-    const [edit, setEdit] = useState(false);
 
 
     function EditWorkspace() {
@@ -53,18 +53,31 @@ function ViewWorkspaceList(props) {
         }
 
     }
-    function func_over() {
-        setover(true)
+
+
+
+    function func_over(id) {
+        $(`#${id} .iconsAction`).css({ 'display': 'inline' })
+
     }
-    function func_out_over() {
-        setover(false);
+    // function func_out_over() {
+    //     setover(false);
+    // }
+    function outOver(id) {
+        $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
+
+
+
+
     return (
         <>
-
-
-            <div className="row WorkspaceList mt-3 " onMouseOver={func_over} >
-                <div className="col-10" onClick={routeToProject} onMouseOut={func_out_over} >
+            <div className="row WorkspaceList mt-3 "
+                id={workspace._id}
+                onMouseOver={() => func_over(workspace._id)}
+                onMouseOut={() => outOver(workspace._id)}  >
+                <div className="col-10" onClick={() => routeToProject(workspace._id)}
+                >
 
                     <div className="row "  >
                         <div className="Workspace"  >
@@ -82,35 +95,36 @@ function ViewWorkspaceList(props) {
                     </div>
 
                 </div>
-                {
-                    over ?
-                        <div className="row  mt-4" onMouseOut={func_out_over}>
+                {/* { */}
+                {/* // over ? */}
+                <div className="row  mt-4" >
 
-                            <div className="col-1  edit" onClick={EditWorkspace}>
-                                <img src={require('../../../../img/pencil-write.png')}></img>
-                            </div>
-                            <div className="ml-2 stripe">|</div>
-                            <div className="col-1 ml-1 delete" onClick={func_remove} >
-                                <img src={require('../../../../img/bin.png')}></img>
-                            </div>
+                    <div className="col-1  edit iconsAction" onClick={EditWorkspace}>
+                        <img src={require('../../../../img/pencil-write.png')}></img>
+                    </div>
+                    <div className="ml-2 stripe ">|</div>
+                    <div className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
+                        <img src={require('../../../../img/bin.png')}></img>
+                    </div>
 
-                        </div>
+                </div>
 
-                        : null
-                }
+                {/* : null */}
+                {/* } */}
 
             </div>
-            {edit ?
-                <>
+            {
+                edit ?
+                    <>
 
 
-                    <ViewDetails from="editWorkspace" >
+                        <ViewDetails from="editWorkspace" >
 
-                    </ViewDetails>
+                        </ViewDetails>
 
-                </>
+                    </>
 
-                : null
+                    : null
             }
 
 

@@ -55,14 +55,16 @@ function ViewWorkspaceGrid(props) {
         setEdit(false);
     }
 
-    $(`.ViewWorkspace`).mouseover(function () {
-        console.log(this.id)
-        $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
+    // $(`.ViewWorkspace`).mouseover(function () {
+    //     console.log(this.id)
+    //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
 
 
-    })
+    // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
+        // $(`#${id} .stripe`).css({ 'color': 'red' })
+
     }
     function func_remove() {
         setDeleted(true)
@@ -71,29 +73,26 @@ function ViewWorkspaceGrid(props) {
 
     return (
         <>
-            {/* {
-                over ?
-                    <> */}
+
             <div className="ViewWorkspace" id={workspace._id}
                 onMouseOver={() => over_workspace(workspace._id)}
+
                 onMouseOut={() => outOver(workspace._id)}>
 
-                {/* {over ? */}
                 <div className="row " >
                     <div className="col-1 edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>
-                    <div className="ml-1 stripe">|</div>
+                    <div className="ml-1 stripe ">|</div>
                     <div className="col-1 delete iconsAction"
                         onClick={func_remove}>
                         <img src={require('../../../../img/bin.png')}></img>
                     </div>
-                    <div className="ml-1 stripe">|</div>
+                    <div className="ml-1 stripe ">|</div>
                     <div className="col-1 add iconsAction" onClick={add}>
                         <img src={require('../../../../img/duplicate-outline.png')}></img>
                     </div>
                 </div>
-                {/* : null} */}
                 <div className="Workspacegrid"
                     onClick={routeToProject} >
                     <div>
@@ -112,22 +111,7 @@ function ViewWorkspaceGrid(props) {
                 </div>
             </div>
 
-            {/* </>
 
-
-                    :
-                    <div className=" Workspacegrid mt-4"  >
-
-                        < div className="logoWorkspace1 ml-5 mt-3"
-                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                            {workspace.name[0].toUpperCase()}
-
-
-                        </div>
-                        <div className="mt-3 name"><b>{workspace.name}</b></div>
-                    </div> */}
-
-            {/* } */}
 
             {
                 edit ?
