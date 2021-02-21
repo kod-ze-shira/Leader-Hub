@@ -49,8 +49,11 @@ function ViewWorkspaceList(props) {
         props.getAllWorkspaces()
 <<<<<<< HEAD
         setremove(false);
+<<<<<<< HEAD
+=======
 =======
 
+>>>>>>> dev1
 >>>>>>> dev1
     }
     function Undo() {
@@ -84,7 +87,10 @@ function ViewWorkspaceList(props) {
 
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> dev1
 >>>>>>> dev1
     return (
         <>
@@ -137,7 +143,11 @@ function ViewWorkspaceList(props) {
 <<<<<<< HEAD
                         <ViewDetails from="editWorkspace" >
 =======
+<<<<<<< HEAD
+                        <ViewDetails from="editWorkspace" >
+=======
                     <ViewDetails from="editWorkspace"  >
+>>>>>>> dev1
 >>>>>>> dev1
 
                         </ViewDetails>

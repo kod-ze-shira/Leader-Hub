@@ -44,7 +44,11 @@ function EditWorkspace(props) {
                     <input
                         type="color"
                         className="edit_workspace_color"
+<<<<<<< HEAD
+
+=======
                         name="color"
+>>>>>>> dev1
                         value={props.workspaceToEdit.color}
                         onChange={(input) => changeFiledInWorkspace(input)}
                     >

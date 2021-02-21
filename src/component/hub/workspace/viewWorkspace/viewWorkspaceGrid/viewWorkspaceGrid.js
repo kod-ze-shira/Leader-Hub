@@ -84,6 +84,37 @@ function ViewWorkspaceGrid(props) {
 
             <div className="ViewWorkspace" id={workspace._id}
                 onMouseOver={() => over_workspace(workspace._id)}
+
+                onMouseOut={() => outOver(workspace._id)}>
+
+                <div className="row " >
+                    <div className="col-1 edit iconsAction" onClick={EditWorkspace}>
+                        <img src={require('../../../../img/pencil-write.png')}></img>
+                    </div>
+                    <div className="ml-1 stripe ">|</div>
+                    <div className="col-1 delete iconsAction"
+                        onClick={func_remove}>
+                        <img src={require('../../../../img/bin.png')}></img>
+                    </div>
+                    <div className="ml-1 stripe ">|</div>
+                    <div className="col-1 add iconsAction" onClick={add}>
+                        <img src={require('../../../../img/duplicate-outline.png')}></img>
+                    </div>
+                </div>
+                <div className="Workspacegrid"
+                    onClick={() => routeToWorkspace()} >
+                    <div>
+                        <div className="logoWorkspace1  ml-5 " >
+                            <div className="mt-2 logo"
+
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.name[0].toUpperCase()}
+
+=======
+<<<<<<< HEAD
+
+            <div className="ViewWorkspace" id={workspace._id}
+                onMouseOver={() => over_workspace(workspace._id)}
 =======
             {
                 over ?
@@ -135,6 +166,7 @@ function ViewWorkspaceGrid(props) {
                                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                 {workspace.name[0].toUpperCase()}
 
+>>>>>>> dev1
                             </div>
                         </div>
                         <div className="mt-4">
@@ -170,6 +202,9 @@ function ViewWorkspaceGrid(props) {
                             delay={5000} autohide>
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> dev1
                             <span
                                 className="close_remove"
                                 onClick={out_remove_workspace}>×</span>
@@ -197,8 +232,12 @@ function ViewWorkspaceGrid(props) {
 <<<<<<< HEAD
 
 =======
+<<<<<<< HEAD
+
+=======
                             </Toast.Header>
                             {/* <Toast.Body>was deleted</Toast.Body> */}
+>>>>>>> dev1
 >>>>>>> dev1
                         </Toast>
 
