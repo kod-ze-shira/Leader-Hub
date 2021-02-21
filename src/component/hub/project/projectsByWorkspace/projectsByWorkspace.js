@@ -12,6 +12,7 @@ import { workspace } from '../../../warps/configurator/workspace/workspace';
 function ProjectsByWorkspace(props, getAllWorkspaces) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
+<<<<<<< HEAD
 
     useEffect(() => {
         // debugger
@@ -21,12 +22,31 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
             // props.getProjectsByWorkspaceId(idWorkspace)
             if (window.location.href.indexOf('workspace') != -1) {
                 props.getProjectsByWorkspaceId(idWorkspace)
+=======
+    let [allWorkspace, setAllWorkspace] = useState(false)
+    useEffect(() => {
+        props.getAllWorkspaces()
+        // if (props.worksapces)
+        //     if (!flug) {
+        //         if (window.location.href.indexOf("/workspace") != -1) {
+        //             alert('/workspace')
+        //             props.setProjects(props.workspace.projects)
+>>>>>>> dev
 
             }
             setFlug(true)
         }
 
+<<<<<<< HEAD
     }, []);
+=======
+        //         }
+        //         setFlug(true)
+        //     }
+
+
+    }, [props.worksapces]);
+>>>>>>> dev
 
 
     if (window.location.href.indexOf('workspace') == -1) {
@@ -90,6 +110,12 @@ const mapDispatchToProps = (dispatch) => {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+<<<<<<< HEAD
+=======
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+>>>>>>> dev
     }
 }
 

@@ -15,7 +15,7 @@ function SelectCards(props) {
     }, [])
 
 
-    //to chang the project that user selected
+    //to chang the card that user selected
     let myCard = props.card;
 
     const changeSelectedCard = (id) => {

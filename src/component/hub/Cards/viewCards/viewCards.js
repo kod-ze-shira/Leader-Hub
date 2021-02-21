@@ -29,7 +29,7 @@ function ViewCards(props) {
     console.log("reducer card " + props.card.name + " map card " + props.cardFromMap.name)
     return (
         <>
-            <div className=" row justify-content-start card-name  mx-5 mt-4 pb-0">
+            <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <button className=" show-card col-3 ml-2 mr-3" onClick={(e) => changeSelectedCard(e)}>
                     <div className="triangle mb-1"></div>
                     <div className="pl-2">{props.cardFromMap.name}</div>
@@ -44,7 +44,7 @@ function ViewCards(props) {
                     {(provided) => (
                         /* ul */
                         // props.card.name == props.cardFromMap.name  ? 
-                        props.flag && props.card.name == props.cardFromMap.name && flag ? <TasksByCard className="characters" cardId={cardId}
+                        props.flag && props.card._id == props.cardFromMap._id && flag ? <TasksByCard className="characters" cardId={cardId}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             //   {...provided.droppableProps} 

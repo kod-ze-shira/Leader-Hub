@@ -3,7 +3,14 @@ import produce from 'immer';
 import createReducer from './reducerUtils';
 const initialState = {
     workspace: {},
+<<<<<<< HEAD
     closeEditWorkspace: false
+=======
+
+    closeEditWorkspace: false
+
+
+>>>>>>> dev
 }
 
 
@@ -19,6 +26,10 @@ const workspaces = {
         state.workspace = action.payload
     },
 
+
+    setcloseEditWorkspace(state, action) {
+        state.closeEditWorkspace = !state.closeEditWorkspace
+    }
 
 }
 

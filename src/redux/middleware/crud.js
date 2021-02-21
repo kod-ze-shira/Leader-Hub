@@ -2,8 +2,6 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 import workspace_reducer from '../Reducers/workspace_reducer'
 
-// ************
-// WORKSPACE 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
@@ -31,398 +29,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
-export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'SET_WORKSPACE_CRUD') {
-
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
-        let workspace = getState().workspace_reducer.workspace;
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                workspace
-            }),
-            // dataType: 'json',
-            success: function (data) {
-                console.log("success")
-                console.log(data);
-                // dispatch({ type: '', payload: data })
-            },
-            error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-        // })
-    }
-    return next(action);
-}
-
-//delet workspace
-export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
-        let workspace = getState().workspace_reducer.workspace;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log("success")
-                console.log("data", data);
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-
-    }
-    return next(action);
-}
-
-//edit workspace
-export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
-
-
-        let workspace = getState().workspace_reducer.workspace;
-        // var w = getState().workspace_reducer.workspace;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ workspace }),
-            // dataType: 'json',
-            success: function (data) {
-
-                console.log("success")
-                console.log(data);
-
-
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
-
-            }
-        });
-        // })
-    }
-    return next(action);
-}
-
-// ************
-// PROJECT
-export const setProjectCrud = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'SET_PROJECT_CRUD') {
-
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
-        let name = action.payload;
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                name,
-            }),
-            dataType: 'json',
-            success: function (data) {
-                console.log("success")
-                console.log(data);
-                // dispatch({ type: '', payload: data })
-            },
-            error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-        // })
-    }
-    return next(action);
-}
-
-export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'DELETE_PROJECT_IN_SERVER') {
-
-
-        let project = getState().project_reducer.project;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${project._id}/removeProjectById`
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ project }),
-            success: function (data) {
-                console.log("success")
-                console.log("data", data);
-                // dispatch(actions.setProject(data.result))
-                dispatch(actions.deleteProjectFromWorkspace(data.project))
-                // dispatch(actions.setProjects(result.projectList))
-
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-
-    }
-    return next(action);
-}
-
-export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
-        fetch(urlData,
-            {
-                method: 'GET',
-                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
-            })
-            .then((res) => {
-                console.log("res11111", res)
-                return res.json();
-            })
-            .then((result) => {
-                console.log("res", result)
-                checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setProjects(result.projectList))
-
-                })
-            })
-
-
-
-    }
-    return next(action)
-}
-
-export const editProjectInServer = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'EDIT_PROJECT_IN_SERVER') {
-
-
-        let project = getState().project_reducer.project;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ project }),
-            success: function (data) {
-                console.log("success")
-                console.log("data", data);
-                dispatch(actions.setProject(data.result))
-
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-
-    }
-    return next(action);
-}
-
-// ************
-// TASK
-export const setTaskCrud = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'SET_TASK_CRUD') {
-
-
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
-        let task = action.payload;
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                task,
-            }),
-            success: function (data) {
-                console.log("success")
-                console.log(data);
-                dispatch(actions.setTask(data.message));
-                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
-                // dispatch({ type: '', payload: data })
-            },
-            error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-        // })
-    }
-    return next(action);
-}
-
-export const editTaskInServer = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'EDIT_TASK_IN_SERVER') {
-
-        var task = getState().task_reducer.task;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ task }),
-            // dataType: 'json',
-            success: function (data) {
-                console.log("success")
-                console.log("data", data);
-
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-        // })
-
-
-    }
-    return next(action);
-}
-
-export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
-
-        var taskId = action.payload;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskId + "/getTaskById"
-        $.ajax({
-            url: urlData,
-            type: 'GET',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-
-            success: function (data) {
-                dispatch(actions.setTask(data.result))
-
-                console.log("success")
-                console.log("data", data);
-
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
-            }
-        });
-
-
-
-
-    }
-    return next(action);
-}
-
-function createNewEventWhenNewTask(task, userName, jwt) {
-    let timeStart = new Date(task.startDate);
-    timeStart.setHours(11);
-    let startTime = timeStart.toISOString()
-    timeStart.setHours(23);
-    let endTime = timeStart.toISOString();
-    // let timeEnd=new Date(task.startDate).setHours(21);
-    // let startDate=new Date(task.startDate).toISOString();
-    // let dueDate=new Date(task.dueDate).toISOString();
-
-    // let startDateTimeStart=startDate
-    let timeEnd = new Date(task.dueDate);
-    timeEnd.setHours(11);
-    let startTimeEnd = timeEnd.toISOString()
-    timeEnd.setHours(23);
-    let endTimeEnd = timeEnd.toISOString();
-    //create event on task's startDate
-    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
-        {
-            method: 'POST',
-            headers: {
-                authorization: jwt,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: "start task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
-        }).then((result) => {
-            return result.json();
-        }).then((result) => {
-            console.log(result);
-        })
-    //create event on task's endDate
-
-    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
-        {
-            method: 'POST',
-            headers: {
-                authorization: jwt,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: "end task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
-        }).then((result) => {
-            return result.json();
-        }).then((result) => {
-            console.log(result);
-        })
-}
-
-// ************
-// TEAM
 export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
@@ -499,6 +105,157 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 }
 
 
+
+export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'SET_WORKSPACE_CRUD') {
+
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
+        let workspace = getState().workspace_reducer.workspace;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                workspace
+            }),
+            // dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                // dispatch({ type: '', payload: data })
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+    }
+    return next(action);
+}
+export const setTaskCrud = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'SET_TASK_CRUD') {
+
+
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
+        let task = action.payload;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                task,
+            }),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch(actions.setTask(data.message));
+                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
+                // dispatch({ type: '', payload: data })
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+    }
+    return next(action);
+}
+export const setProjectCrud = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'SET_PROJECT_CRUD') {
+
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
+        let name = action.payload;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                name,
+            }),
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                // dispatch({ type: '', payload: data })
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+    }
+    return next(action);
+}
+function createNewEventWhenNewTask(task, userName, jwt) {
+    let timeStart = new Date(task.startDate);
+    timeStart.setHours(11);
+    let startTime = timeStart.toISOString()
+    timeStart.setHours(23);
+    let endTime = timeStart.toISOString();
+    // let timeEnd=new Date(task.startDate).setHours(21);
+    // let startDate=new Date(task.startDate).toISOString();
+    // let dueDate=new Date(task.dueDate).toISOString();
+
+    // let startDateTimeStart=startDate
+    let timeEnd = new Date(task.dueDate);
+    timeEnd.setHours(11);
+    let startTimeEnd = timeEnd.toISOString()
+    timeEnd.setHours(23);
+    let endTimeEnd = timeEnd.toISOString();
+    //create event on task's startDate
+    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+        {
+            method: 'POST',
+            headers: {
+                authorization: jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "start task", start: startTime, end: endTime, categoryName: "hub", taskId: task._id })
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+        })
+    //create event on task's endDate
+
+    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+        {
+            method: 'POST',
+            headers: {
+                authorization: jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "end task", start: startTimeEnd, end: endTimeEnd, categoryName: "hub" })
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+        })
+}
+
+
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
@@ -514,15 +271,252 @@ function checkPermission(result) {
     })
 }
 
+//edit workspace
+export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
+
+
+        let workspace = getState().workspace_reducer.workspace;
+        // var w = getState().workspace_reducer.workspace;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ workspace }),
+            // dataType: 'json',
+            success: function (data) {
+
+                console.log("success")
+                console.log(data);
+
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+
+            }
+        });
+        // })
+    }
+    return next(action);
+}
+
+
+export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'DELETE_PROJECT_IN_SERVER') {
+
+
+        let project = getState().project_reducer.project;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${project._id}/removeProjectById`
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ project }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                // dispatch(actions.setProject(data.result))
+                dispatch(actions.deleteProjectFromWorkspace(data.project))
+                // dispatch(actions.setProjects(result.projectList))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
+//delet workspace
+export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+
+<<<<<<< HEAD
+export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setProjects(result.projectList))
+
+                })
+            })
+
+
+
+    }
+    return next(action)
+}
+
+export const editProjectInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_PROJECT_IN_SERVER') {
+
+
+        let project = getState().project_reducer.project;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+=======
+    if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
+        let workspace = getState().workspace_reducer.workspace;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
+>>>>>>> dev
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
+
+
+//edit project
+export const editProjectInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_PROJECT_IN_SERVER') {
+
+
+        let project = getState().project_reducer.project;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ project }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                dispatch(actions.setProject(data.result))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
+
+export const editTaskInServer = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_TASK_IN_SERVER') {
+
+        var task = getState().task_reducer.task;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ task }),
+            // dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+        // })
+
+
+    }
+    return next(action);
+}
+//
+export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
+
+        var taskId = action.payload;
+        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskId + "/getTaskById"
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                dispatch(actions.setTask(data.result))
+
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
 
 
 
 
-
-
-
-
-
+    }
+    return next(action);
+}
 
 // router.get('/:userName/:projectId/getCardsByprojectId',cardFunctions.getCardsByprojectId)
 // /:projectId/getCardsByprojectId
@@ -601,40 +595,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
-// export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
-//     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
-//         var cardId = action.payload;
-//         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + cardId + "/getTasksByCardId"
-//         $.ajax({
-//             url: urlData,
-//             type: 'GET',
-//             headers: {
-//                 Authorization: getState().public_reducer.tokenFromCookies
-//             },
-//             contentType: "application/json; charset=utf-8",
-
-//             success: function (data) {
-//                 dispatch(actions.setTasks(data.tasks))
-
-//                 console.log("success")
-//                 console.log("data", data);
-
-//             },
-//             error: function (err) {
-
-//                 checkPermission(err).then((ifOk) => {
-
-//                 })
-//             }
-//         });
-
-
-
-
-//     }
-//     return next(action);
-// }
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
 
@@ -717,36 +678,58 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
     return next(action);
 }
 
-//
-export const duplicateWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+// router.post('/:userName/newCard', cardFunctions.newCard)
 
-    if (action.type === 'DUPLICATE_WORKSPACE_IN_SERVER') {
-        let workspace = getState().workspace_reducer.workspace;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/duplicateWorkspace`
+// export const newCard = ({ dispatch, getState }) => next => action => {
+
+//     if (action.type === 'NEW_CARD') {
+//     }
+// }
+
+
+
+export const NewCard = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'NEW_CARD') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard"
+        let card = action.payload;
+        // fetch(`https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard`,
+        // {
+        //     method: 'POST',
+        //     headers: {
+        //         authorization: getState().public_reducer.tokenFromCookies,
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ "name": cardName }),
+        // }).then((result) => {
+        //     return result.json();
+        // }).then((result) => {
+        //     console.log(result);
+        // })
+
         $.ajax({
             url: urlData,
-            type: 'POST',
+            method: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
+            // contentType: "application/json; charset=utf-8",
             contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ card }),
             success: function (data) {
                 console.log("success")
-                console.log("data", data);
+                console.log(data);
+                // dispatch(actions.addCardToProjectInProjectList(data.card));
+
+                dispatch(actions.addCardToCardsWhenAddCardToSetver(data.card));
             },
             error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-
-                })
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
             }
         });
-
     }
     return next(action);
 }
-
-
-
-
-

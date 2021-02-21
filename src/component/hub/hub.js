@@ -55,15 +55,12 @@ export default function Hub() {
                             </Route> */}
                             <Route path="/:userName" >
                                 <Body />
-
                             </Route>
-
                             <Route path="/" >
                                 <Animation />
                                 {/* <Toast /> */}
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
-
                         </Switch>
                     </div>
                 </div>

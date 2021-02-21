@@ -17,8 +17,14 @@ function ViewProject(props) {
         set_getProjectById(false);
     }
     const routeToCards = (e) => {
+<<<<<<< HEAD
         let idProject = props.myProject.project._id;
         props.setProject(props.myProject.project)
+=======
+        let idProject = props.myProject._id;
+        props.setProject(props.myProject)
+        props.setCards(props.myProject.cards)
+>>>>>>> dev
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
     function deleteProject(event) {
@@ -29,12 +35,17 @@ function ViewProject(props) {
         // props.deleteProjectFromWorkspace(props.myProject.project)
     }
 
+<<<<<<< HEAD
     let complited = 0, complitedColor;
     complited = props.myProject.countTasks / 100;
     complited = complited * props.myProject.countReadyTask
     complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
 
     // 200\100*23
+=======
+    let complited = 20;
+    complited = complited < 30 ? '#29EFFF' : complited < 60 ? '#32AABA' : 'black'
+>>>>>>> dev
     return (
         <>
             <tr className='projectForWorkspace' onClick={(e) => routeToCards(e)}>
@@ -105,6 +116,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
         setProject: (p) => dispatch(actions.setProject(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+        setCards: (cards) => dispatch(actions.setCards(cards))
         // deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
     }
 }
