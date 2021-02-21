@@ -3,24 +3,21 @@ import './editWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
-import viewDetails from '../../viewDetails/viewDetails'
 function EditWorkspace(props) {
 
     const changeFiledInWorkspace = (input) => {
         props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
     }
-    // const [close, setclose] = useState(true)
-    // function func_close_edit_workspace() {
-    //     setclose(false);
-    // }
+    const [close, setclose] = useState(true)
+    function func_close_edit_workspace() {
+        setclose(false);
+    }
     function edit_seve() {
         props.saveWorkspaceInServerUfterEdit()
+        props.setclose()
         props.getAllWorkspaces()
     }
     return (
-
-
-
         <>
             <div className="row">
                 <div className="col-11"></div>
@@ -47,7 +44,11 @@ function EditWorkspace(props) {
                     <input
                         type="color"
                         className="edit_workspace_color"
+<<<<<<< HEAD
 
+=======
+                        name="color"
+>>>>>>> dev1
                         value={props.workspaceToEdit.color}
                         onChange={(input) => changeFiledInWorkspace(input)}
                     >
@@ -77,7 +78,7 @@ export default connect(
             workspaceToEdit: state.workspace_reducer.workspace,
             workspaces: state.workspace_reducer.workspaces,
 
-
+            close: state.public_reducer.close,
         }
     },
     (dispatch) => {
@@ -86,7 +87,7 @@ export default connect(
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
             setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
-
+            setclose: () => dispatch(actions.setclose()),
 
         }
     }

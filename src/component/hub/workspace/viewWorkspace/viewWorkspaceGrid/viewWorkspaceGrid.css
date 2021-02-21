@@ -16,11 +16,8 @@ font-size: small;
 
     
 }
-.close_remove{
-   font-size: x-large;
-   cursor: pointer;
 
-}
+
 
 
 
@@ -132,4 +129,8 @@ opacity: 0.9;
 /*  */
 .iconsAction{
    display: none;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev1

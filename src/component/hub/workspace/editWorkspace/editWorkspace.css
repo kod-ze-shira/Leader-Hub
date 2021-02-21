@@ -16,12 +16,18 @@
   
   .edit_workspace_color{
         background-color: white;
-    color:black;
+  color:none ;
     border:none;
+<<<<<<< HEAD
     border-bottom: none;
     width: 5vw;
     margin: 0px -60px;
    
+=======
+  
+    width: 3vw;
+    margin: 2px -70px;
+>>>>>>> dev1
 
   }
   .close_edit{

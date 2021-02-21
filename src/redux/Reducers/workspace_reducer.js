@@ -20,6 +20,10 @@ const workspaces = {
     },
 
 
+    setcloseEditWorkspace(state, action) {
+        state.closeEditWorkspace = !state.closeEditWorkspace
+    }
+
 }
 
 
