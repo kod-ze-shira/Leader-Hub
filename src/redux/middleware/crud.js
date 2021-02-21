@@ -80,10 +80,12 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
+                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
 
                 checkPermission(err).then((ifOk) => {
+                   
 
                 })
             }
