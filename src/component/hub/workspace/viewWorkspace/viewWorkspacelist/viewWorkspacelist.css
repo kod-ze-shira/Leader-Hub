@@ -11,13 +11,10 @@
    font-family: 'Roboto', sans-serif;
    font-size: xx-large;
    margin: 8px;
-   
-     
 }
-.close_remove{
-   background-color:  #F5F5F5;
-   
-  
+
+.iconsAction{
+    display: none;
 }
 
 .delete{
@@ -46,27 +43,16 @@
   background-color:#F6F6FA;
 }
 .WorkspaceList{
-     border-bottom:#F6F6FA 1px solid ;
-      display: flex;
-  justify-content:space-between; 
-}
-.WorkspaceList
-{
+    border-bottom:#F6F6FA 1px solid ;
+    display: flex;
+    justify-content:space-between; 
     width: 67vw;
 }
-.headerRemove{
-    background-color:  #409500 ;
-   height: 10px;
 
+.stripe{
+    color:#F6F6FA ;
 }
-.close_toast{
-    background-color: #F5F5F5;
-    width: 18vw;
-   
-}
-.close {
-   display: none;
-}
+
 
 
 
