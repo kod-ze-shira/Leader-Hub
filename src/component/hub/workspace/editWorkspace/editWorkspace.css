@@ -19,11 +19,11 @@
   } 
   .edit_workspace_color{
         background-color: white;
-    color:black;
+  color:none ;
     border:none;
-    border-bottom: 1px solid #8181A5;
-    width: 15vw;
-    margin: 0px -50px;
+  
+    width: 3vw;
+    margin: 2px -70px;
 
   }
   .close_edit{

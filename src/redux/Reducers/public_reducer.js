@@ -17,7 +17,10 @@ const publicData = {
         state.close = !state.close
     },
 
-
+    setTaskStatus(state, action) {
+        console.log(action.payload)
+        state.tasks[action.payload].status = "Done"
+    },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -29,7 +32,6 @@ const publicData = {
     },
     setProjects(state, action) {
         state.projects = action.payload;
-        // console.log("projjjj" + action.payload)
     },
     setTasks(state, action) {
         state.tasks = action.payload;
@@ -45,6 +47,24 @@ const publicData = {
             state.projects[i]._id !== action.payload._id
         )
     },
+    getCardsOfProject(state, action) {
+        state.projects.find(project => {
+            if (project._id == action.payload)
+                state.cards = project.cards
+        })
+    },
+    addCardToProjectInProjectList(state, action) {
+        let index = 0;
+        state.projects.map(project => {
+
+            if (project._id == action.payload.project)
+                project.cards.push(action.payload);
+            // index++
+        })
+    },
+    addCardToCardsWhenAddCardToSetver(state, action) {
+        state.cards.push(action.payload)
+    }
 
 }
 

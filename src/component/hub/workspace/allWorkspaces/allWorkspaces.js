@@ -55,12 +55,12 @@ function AllWorkspaces(props, getAllWorkspaces) {
                             {
                                 grid ?
                                     <>
-                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
+                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/grid.png')}></img></div>
                                         <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
                                     </>
                                     :
                                     <>
-                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
+                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/grid1.png')}></img></div>
                                         <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
                                     </>
                             }

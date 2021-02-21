@@ -105,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
         setProject: (p) => dispatch(actions.setProject(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+        setCards: (cards) => dispatch(actions.setCards(cards))
         // deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
     }
 }
