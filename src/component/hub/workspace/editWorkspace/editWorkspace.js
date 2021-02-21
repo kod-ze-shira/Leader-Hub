@@ -45,9 +45,10 @@ function EditWorkspace(props) {
                 <div className="nameworkspace col-5"><b>Color Workspace:</b></div>
                 <div className="col-6">
                     <input
+                        type="color"
                         className="edit_workspace_color"
-                        name="color"
-                        placeholder={props.workspaceToEdit.color}
+
+                        value={props.workspaceToEdit.color}
                         onChange={(input) => changeFiledInWorkspace(input)}
                     >
                     </input>
