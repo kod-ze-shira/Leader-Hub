@@ -515,8 +515,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
     }
     return next(action);
 }
-//
-//
+
 // url:
 // https://reacthub.dev.leader.codes/api/renana-il/{{cardId}}/getTasksByCardId
 
@@ -548,10 +547,6 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
                 })
             }
         });
-
-
-
-
     }
     return next(action);
 }

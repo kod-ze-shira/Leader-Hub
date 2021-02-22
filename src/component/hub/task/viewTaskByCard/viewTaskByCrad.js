@@ -37,6 +37,7 @@ function ViewTaskByCrad(props) {
         props.setTaskStatus(i)
         setShowChalalit(true)
     }
+    console.log("task" + props.task)
 
     return (
         <>
@@ -49,7 +50,7 @@ function ViewTaskByCrad(props) {
                         ref={provided.innerRef}
                     >
                         <div className="show-task row mx-4 border-bottom">
-                            <label className="check-task ml-3 py-2 pl-4.5 col-3">{props.task._id}
+                            <label className="check-task ml-3 py-2 pl-4.5 col-3">{props.task.description}
                                 <input type="checkbox" />
                                 <span className="checkmark " onClick={() => addChalalit()}></span>
                             </label>

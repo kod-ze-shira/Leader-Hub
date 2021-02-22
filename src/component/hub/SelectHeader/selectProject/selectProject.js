@@ -101,9 +101,9 @@ function SelectProject(props) {
 
     };
 
-    const colorsOfWorkspace = props.workspace.projects.map((project) => (
-        project.color
-    ))
+    // const colorsOfWorkspace = props.workspace.projects.map((project) => (
+    //     project.color
+    // ))
     const viewProjectsList = props.workspace.projects.map((project) => (
         { value: project._id, label: project.name }
     ))

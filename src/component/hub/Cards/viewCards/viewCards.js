@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
 import history from '../../../history'
-import TasksByCard from '../../task/tasksByCard/tasksByCard'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import tasksByCard from '../../task/tasksByCard/tasksByCard';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 
@@ -60,7 +58,6 @@ function ViewCards(props) {
         console.log(task);
         console.log("add task:" + props.card.tasks)
     }
-
     // alert("cardd task " + props.cardFromMap._id)
     return (
         <>
@@ -82,7 +79,7 @@ function ViewCards(props) {
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
                             {/* {props.cards.tasks.map() */}
-                            {props.tasks.map((task, index) => (
+                            {props.card.tasks.map((task, index) => (
                                 <ViewTaskByCrad key={task._id} task={task} index={index} />
                             ))}
                             {provided.placeholder}

@@ -20,15 +20,11 @@ function CardsByProject(props) {
         props.changeTaskplace(replace)
 
     };
-    // function onDragStart(e) {
-    //     console.log(e)
-    // };
+ 
     return (
         <>
 
-            <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}
-            // onDragStart={(e) => onDragStart(e)}
-            >
+            <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                 {props.cards.map(card => {
                     return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
                 })}
