@@ -5,61 +5,46 @@ import './editTask.css'
 
 function EditTask(props) {
     useEffect(() => {
-        props.getTasksByCardId(props.card._id)
 
     }, [])
-
-    const [newTask, setNewTask] = useState({ name: "", description: "", status: "", startDate: "", updateDates: "", card: props.card._id })
+    console.log("card", props.cardId)
+    const [addTask, setAddTask] = useState({ name: "", description: "", status: "", startDate: "", dueDate: "", card: props.cardId })
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setNewTask(prevState => ({
+        setAddTask(prevState => ({
             ...prevState,
             [name]: value
         }));
     }
 
-    const addTaskToServer = () => {
-        props.newTask(newTask)
-        console.log(newTask);
-        console.log("add task:" + props.card.tasks)
+    const newTask = () => {
+        props.newTask(addTask)
+        console.log(addTask);
 
     };
 
     return (
         <div className="edit-task">
-            <h1 className="mt-2">Edit details</h1>
-            <form className="container">
-                <div class="form-group row">
-                    <label for="task-name">name</label>
-                    <input type="text" name="name" class="form-control" id="task-name" placeholder="name"
-                        onChange={handleChange} />
-                </div>
-                <div class="form-group row">
-                    <label for="description">description</label>
-                    <input type="text" name="description" class="form-control" id="description" placeholder="description"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div class="form-group row">
-                    <label for="status">status</label>
-                    <input type="text" name="status" class="form-control" id="status" placeholder="status" />
-                </div>
-                <div class="form-group row">
-                    <label for="startDate">startDate</label>
-                    <input type="date" name="startDate" class="form-control" id="startDate" placeholder="startDate"
-                        onChange={handleChange} />
-                </div>
-                <div class="form-group row">
-                    <label for="updateDates">updateDates</label>
-                    <input type="date" class="form-control" id="updateDates" placeholder="updateDates"
-                        onChange={handleChange} />
-                </div>
-                <button type="submit" class="btn btn-primary"
-                >Submit</button>
-                <button onClick={addTaskToServer} >asdfghjkl</button>
-            </form>
-        </div>
+            <h5 className="mt-2">Add Task</h5>
+            <label for="task-name">name</label>
+            <input type="text" name="name" class="form-control" id="task-name" placeholder="name"
+                onChange={handleChange} />
+            <label for="description">description</label>
+            <input type="text" name="description" class="form-control" id="description" placeholder="description"
+                onChange={handleChange} />
+            <label for="status">status</label>
+            <input type="text" name="status" class="form-control" id="status" placeholder="status"
+                onChange={handleChange} />
+            <label for="startDate">startDate</label>
+            <input type="date" name="startDate" class="form-control" id="startDate" placeholder="startDate"
+                onChange={handleChange} />
+            <label for="dueDate">dueDate</label>
+            <input type="date" class="form-control" id="dueDate" placeholder="dueDate"
+                onChange={handleChange} />
+
+            <button onClick={newTask} >save</button>
+        </div >
     )
 }
 const mapStateToProps = (state) => {
