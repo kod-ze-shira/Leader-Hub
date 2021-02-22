@@ -18,7 +18,6 @@ function ProjectPlatform(props) {
 
         };
     }, []);
-    console.log(props.project)
     const changeProjectId = () => {
         // setProjectId(value)
         setViewCardsByProject(true)
@@ -49,7 +48,6 @@ function ProjectPlatform(props) {
         }
         setInputValue("")
         setShowInput(false)
-        console.log("add card" + props.project.cards)
     }
     return (
         <>

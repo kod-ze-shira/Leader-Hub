@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
 import history from '../../../history'
-import TasksByCard from '../../task/tasksByCard/tasksByCard'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import tasksByCard from '../../task/tasksByCard/tasksByCard';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 
@@ -14,7 +12,7 @@ import ViewDetails from '../../viewDetails/viewDetails'
 
 function ViewCards(props) {
     useEffect(() => {
-        props.getTasksByCardId(props.cardFromMap._id)
+        // props.getTasksByCardId(props.cardFromMap._id)
 
     }, [props.flag])
 
@@ -34,7 +32,7 @@ function ViewCards(props) {
     const changeSelectedCard = (event) => {
         setCardId(props.cardFromMap._id)
 
-        // props.setCard(props.cardFromMap)
+        props.setCard(props.cardFromMap)
         // props.setTasks(props.card.tasks)
         // alert(props.flag + "  " + props.cardFromMap._id)
 
@@ -44,9 +42,7 @@ function ViewCards(props) {
         else
             if (!flag && props.cardFromMap.tasks[0]) {
                 setFlag(true)
-                // alert("hi")
             }
-
             else {
                 console.log(props.cardFromMap.tasks[0])
                 setFlag(false)
@@ -58,8 +54,9 @@ function ViewCards(props) {
         task = { name: "mami!", description: "to do", status: "to do", startDate: "18/02/2021", updateDates: "18/02/2021", "card": props.card._id }
         props.newTask(task)
         console.log(task);
-        console.log("add task:" + props.card.tasks)
     }
+    // if (props.cardFromMap.tasks)
+    // console.log("add task:" + props.cardFromMap.tasks[0]._id)
 
     // alert("cardd task " + props.cardFromMap._id)
     return (
@@ -76,13 +73,12 @@ function ViewCards(props) {
                 </p>
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                <Droppable droppableId={props.card._id}>
+                <Droppable droppableId={props.card._id} >
                     {provided => (
                         <div
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
-                            {/* {props.cards.tasks.map() */}
-                            {props.tasks.map((task, index) => (
+                            {props.cardFromMap.tasks.map((task, index) => (
                                 <ViewTaskByCrad key={task._id} task={task} index={index} />
                             ))}
                             {provided.placeholder}
