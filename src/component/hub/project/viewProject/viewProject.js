@@ -38,7 +38,7 @@ function ViewProject(props) {
     return (
         <>
             <tr className='projectForWorkspace' onClick={(e) => routeToCards(e)}>
-                <td >
+                <td className='nameWorkspace'>
                     <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
                     <span style={{ 'color': props.myProject.project.color }}>
                         {props.myProject.project.name}</span>

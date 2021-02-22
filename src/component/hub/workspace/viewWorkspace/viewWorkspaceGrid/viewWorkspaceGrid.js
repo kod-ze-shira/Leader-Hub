@@ -41,11 +41,7 @@ function ViewWorkspaceGrid(props) {
         setOpenEditWorkspace(!openEditWorkspace)
     }
 
-    function outOver(id) {
 
-        $(`#${id} .iconsAction`).css({ 'display': 'none' })
-
-    }
     function EditWorkspace() {
         setEdit(true);
         props.setWorkspace(workspace)
@@ -78,8 +74,12 @@ function ViewWorkspaceGrid(props) {
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
-        // $(`#${id} .stripe`).css({ 'color': 'red' })
+        $(`#${id} .stripe`).css({ 'color': '#F6F6FA' })
+    }
 
+    function outOver(id) {
+        $(`#${id} .iconsAction`).css({ 'display': 'none' })
+        $(`#${id} .stripe`).css({ 'color': '#f6f6fa00' })
     }
     function func_remove() {
         setremove(true);
@@ -93,7 +93,7 @@ function ViewWorkspaceGrid(props) {
 
                 onMouseOut={() => outOver(workspace._id)}>
 
-                <div className="row " >
+                <div className="row iconActions" >
                     <div className="col-1 edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>

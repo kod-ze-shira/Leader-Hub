@@ -128,7 +128,9 @@ opacity: 0.9;
    /* margin-top: 30px; */
 }
    
-
+.iconActions .stripe{
+   color:#f6f6fa00
+}
 /*  */
 .iconsAction{
    display: none;
