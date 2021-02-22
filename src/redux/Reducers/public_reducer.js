@@ -45,6 +45,12 @@ const publicData = {
             state.projects[i]._id !== action.payload._id
         )
     },
+    //remove one workspace when go back from server
+    removeOneWorkspaceFromWorkspaces(state,action){
+        state.worksapces=state.worksapces.filter((_,i)=>
+        state.worksapces[i]._id!==action.payload._id
+        )
+    }
 
 }
 

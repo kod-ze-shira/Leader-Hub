@@ -13,34 +13,26 @@ function ViewWorkspaceGrid(props) {
     const [showShare, setShowShare] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showInput, setShowInput] = useState(false)
+    const [showToast, setShowToast] = useState(false);//to show toast delete
+    const [deleted, setDeleted] = useState(true)//to undo delete// if user want undo delete
     const viewProjectsByWorkspace = () => {
         setViewProjects(!viewProjects);
     }
 
-    const routeToWorkspace = () => {
+    const routeToProject = () => {
         props.setWorkspace(workspace)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
-    const changeFiledInWorkspace = (input) => {
-        props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
-    }
+
     function DeleteWorkspace() {
-        props.setWorkspace(workspace);
-        props.deleteWorkspaceInServer();
-        props.getAllWorkspaces()
+        setShowToast(false)
+        if (deleted) {
+            props.setWorkspace(workspace);
+            props.deleteWorkspaceInServer();
+        }
     }
-    function Undo() {
-        setremove(false);
-    }
-
-
-    const [over, setOver] = useState(false);
-    const [remove, setremove] = useState(false);
     const [edit, setEdit] = useState(false);
-    const toOpenEditWorkspace = () => {
-        setOpenEditWorkspace(!openEditWorkspace)
-    }
-
+    
     function outOver(id) {
 
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
@@ -51,14 +43,7 @@ function ViewWorkspaceGrid(props) {
         props.setWorkspace(workspace)
 
     }
-    function out_remove_workspace() {
-        props.setWorkspace(workspace);
-        props.deleteWorkspaceInServer();
-        props.getAllWorkspaces()
 
-        setremove(false);
-
-    }
     function add() {
         props.setWorkspace(workspace);
         props.duplicateWorkspaceInServer();
@@ -82,7 +67,8 @@ function ViewWorkspaceGrid(props) {
 
     }
     function func_remove() {
-        setremove(true);
+        setDeleted(true)
+        setShowToast(true)
     }
 
     return (
@@ -108,7 +94,7 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
                 <div className="Workspacegrid"
-                    onClick={() => routeToWorkspace()} >
+                    onClick={routeToProject} >
                     <div>
                         <div className="logoWorkspace1  ml-5 " >
                             <div className="mt-2 logo"
@@ -137,45 +123,29 @@ function ViewWorkspaceGrid(props) {
             }
 
 
-            {
-                remove ?
+            <>
+                <div className="mt-5"></div>
 
-                    <>
-                        <div className="mt-5"></div>
-                        <Toast className="toast_delete"
-                            onClose={DeleteWorkspace}
-                            delay={5000} autohide>
-
-                            <span
-                                className="close_remove"
-                                onClick={out_remove_workspace}>×</span>
-
-
-                            <div className="row">
-                                <div className="col-4">
-                                    <div className="pr-2"></div>
-                                </div>
-                                <div className="col-10">
-                                    {workspace.name} leader was deleted
-                                    </div>
-                                <div className="col-4 div_btn_undo pr-2">
-                                    <div className="Undo" onClick={Undo}>Undo</div>
-                                </div>
+                <Toast className="toast_delete"
+                    onClose={DeleteWorkspace}
+                    show={showToast}
+                    delay={5000} autohide>
+                    <Toast.Header className="tost" closeButton={false}>
+                        <div className="row">
+                            <div className="col-4">
+                                <div className="pr-2"></div>
                             </div>
+                            <div className="col-10">
+                                {workspace.name} was deleted
+                                    </div>
+                            <div className="col-4 div_btn_undo pr-2">
+                                <button className="btn_undo" onClick={() => { setShowToast(false); setDeleted(false) }}>Undo</button>
+                            </div>
+                        </div>
+                         </Toast.Header>
+                </Toast>
 
-
-
-
-
-                        </Toast>
-
-                    </>
-
-
-
-
-                    : null
-            }
+            </>
         </>
 
 
