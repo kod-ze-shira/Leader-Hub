@@ -72,21 +72,14 @@ const publicData = {
                 state.tasks = card.tasks
         })
     },
-    addCardToProjectInProjectList(state, action) {
-        let index = 0;
-        state.projects.map(project => {
-
-            if (project._id == action.payload.project)
-                project.cards.push(action.payload);
-            // index++
-        })
-    },
     addCardToCardsWhenAddCardToServer(state, action) {
         state.cards.push(action.payload)
     },
     addTaskToTasksWhenAddTaskToServer(state, action) {
-        state.tasks.push(action.payload)
-        console.log(action.payload);
+        state.cards.map(card => {
+            if (card._id == action.payload.card)
+                card.tasks.push(action.payload);
+        })
     }
 }
 

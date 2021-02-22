@@ -42,7 +42,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'viewTaskByCard':
                     return <TaskDetails task={props.task} />
                 case 'editTaskToCard':
-                    return <EditTask />
+                    return <EditTask cardId={props.cardId} />
                 default:
                     return null;
             }
@@ -61,7 +61,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                 <div className="row ">
 
                                     <div className="view-details col-5">
-                                        <div className="close" onClick={props.setclose} >x</div>
+                                        <div className="close"
+                                        //  onClick={props.setclose}
+                                        onClick={props.setViewDetailsToClose}
+                                          >x</div>
                                         {renderSwitch()}
                                     </div>
                                 </div>

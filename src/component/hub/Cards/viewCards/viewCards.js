@@ -20,19 +20,21 @@ function ViewCards(props) {
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
     const [viewDetails, setViewDetails] = useState(false)
+
     const showDetails = (event) => {
         setViewDetails(true)
+        setCardId(props.cardFromMap._id)
+
         // props.setTask(props.task)
     }
     const closeDetails = (e) => {
         // setViewDetails(false)
 
     }
-
     const changeSelectedCard = (event) => {
-        setCardId(props.cardFromMap._id)
+        // setCardId(props.cardFromMap._id)
 
-        props.setCard(props.cardFromMap)
+        // props.setCard(props.cardFromMap)
         // props.setTasks(props.card.tasks)
         // alert(props.flag + "  " + props.cardFromMap._id)
 
@@ -84,7 +86,7 @@ function ViewCards(props) {
                 </Droppable> : null}
             {viewDetails ?
                 <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                    <ViewDetails from={"editTaskToCard"}> </ViewDetails>
+                    <ViewDetails setViewDetailsToClose={()=>setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
                 </div> : null}
 
             {/* { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
