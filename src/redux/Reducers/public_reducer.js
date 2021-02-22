@@ -33,21 +33,27 @@ const publicData = {
         state.tasks = action.payload;
     },
     setTaskStatus(state, action) {
-        console.log(action.payload)
-        state.tasks[action.payload].status = "done"
+        // console.log(action.payload[0], " ", action.payload[1])
+        let cardId, taskId, card
+        cardId = action.payload[0]
+        taskId = action.payload[1]
+        card = state.cards.find(card => card._id == cardId)
+        console.log(card)
+        // state.tasks[action.payload].status = "done"
     },
     changeTaskplace(state, action) {
         let source = action.payload[0]
         let destinition = action.payload[1]
         let temp = state.tasks[destinition]
         state.tasks[destinition] = state.tasks[source]
-        state.tasks[source]=temp
+        state.tasks[source] = temp
     },
     setisConfiguratorOpen(state, action) {
         state.isConfiguratorOpen = !state.isConfiguratorOpen
     },
     setCards(state, action) {
         state.cards = action.payload;
+        console.log("aa", state.cards)
     },
     deleteProjectFromWorkspace(state, action) {
         state.projects = state.projects.filter((_, i) =>

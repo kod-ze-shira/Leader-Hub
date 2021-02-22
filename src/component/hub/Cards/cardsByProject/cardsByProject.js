@@ -9,26 +9,26 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 function CardsByProject(props) {
 
     useEffect(() => {
+        // props.getCardsByProjectId(props.projectId)
 
-    }, [props.projectId, props.cards])
+    }, [props.projectId])
 
     const viewCardsByProject = props.cards.map((card) => {
         return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
     })
     function onDragEndׂ(e) {
-        const replace = [e.source.index, e.destination.index]
+        const replace = [e.source.index, e.destination.index, props.card._id]
         props.changeTaskplace(replace)
 
     };
- 
     return (
         <>
-
-            <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
-                {props.cards.map(card => {
-                    return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
-                })}
-            </DragDropContext>
+            {props.cards ?
+                <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
+                    {props.cards.map(card => {
+                        return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
+                    })}
+                </DragDropContext> : null}
             {/* {viewCardsByProject} */}
         </>
     )
@@ -39,8 +39,9 @@ function CardsByProject(props) {
 export default connect(
     (state) => {
         return {
-
             cards: state.public_reducer.cards,
+            card: state.card_reducer.card,
+
             // project: state.project_reducer.project,
             // user: state.public_reducer.userName
         }
