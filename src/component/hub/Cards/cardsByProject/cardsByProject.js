@@ -16,8 +16,15 @@ function CardsByProject(props) {
     const viewCardsByProject = props.cards.map((card) => {
         return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
     })
+
     function onDragEndׂ(e) {
-        const replace = [e.source.index, e.destination.index, props.card._id]
+        let i
+        for (i = 0; i < props.cards.length; i++) {
+            if (props.cards[i]._id == e.source.droppableId)
+                break
+        }
+        console.log(e.source.index, e.destination.index, " ", i)
+        const replace = [e.source.index, e.destination.index, i]
         props.changeTaskplace(replace)
 
     };
@@ -29,7 +36,6 @@ function CardsByProject(props) {
                         return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
                     })}
                 </DragDropContext> : null}
-            {/* {viewCardsByProject} */}
         </>
     )
 }
@@ -40,7 +46,7 @@ export default connect(
     (state) => {
         return {
             cards: state.public_reducer.cards,
-            card: state.card_reducer.card,
+            // card: state.card_reducer.card,
 
             // project: state.project_reducer.project,
             // user: state.public_reducer.userName

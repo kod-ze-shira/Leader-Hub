@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { act } from 'react-dom/test-utils';
+import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
@@ -33,27 +34,25 @@ const publicData = {
         state.tasks = action.payload;
     },
     setTaskStatus(state, action) {
-        // console.log(action.payload[0], " ", action.payload[1])
-        let cardId, taskId, card
+        let cardId, taskId
         cardId = action.payload[0]
         taskId = action.payload[1]
-        card = state.cards.find(card => card._id == cardId)
-        console.log(card)
-        // state.tasks[action.payload].status = "done"
+        state.cards[cardId].tasks[taskId].status = "done"
     },
     changeTaskplace(state, action) {
-        let source = action.payload[0]
-        let destinition = action.payload[1]
-        let temp = state.tasks[destinition]
-        state.tasks[destinition] = state.tasks[source]
-        state.tasks[source] = temp
+        let source, destinition, cardId, temp
+        source = action.payload[0]
+        destinition = action.payload[1]
+        cardId = action.payload[2]
+        temp = state.cards[cardId].tasks[destinition]
+        state.cards[cardId].tasks[destinition] = state.cards[cardId].tasks[source]
+        state.cards[cardId].tasks[source] = temp
     },
     setisConfiguratorOpen(state, action) {
         state.isConfiguratorOpen = !state.isConfiguratorOpen
     },
     setCards(state, action) {
         state.cards = action.payload;
-        console.log("aa", state.cards)
     },
     deleteProjectFromWorkspace(state, action) {
         state.projects = state.projects.filter((_, i) =>

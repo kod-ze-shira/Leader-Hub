@@ -30,9 +30,10 @@ function ViewCards(props) {
     }
 
     const changeSelectedCard = (event) => {
-        setCardId(props.cardFromMap._id)
+        // setCardId(props.cardFromMap._id)
 
         props.setCard(props.cardFromMap)
+        // console.log(props.card)
         // props.setTasks(props.card.tasks)
         // alert(props.flag + "  " + props.cardFromMap._id)
 
@@ -70,7 +71,7 @@ function ViewCards(props) {
                 </p>
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                <Droppable droppableId={props.card._id} >
+                <Droppable droppableId={props.cardFromMap._id} >
                     {provided => (
                         <div
                             ref={provided.innerRef}

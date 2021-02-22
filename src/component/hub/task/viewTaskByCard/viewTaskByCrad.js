@@ -23,22 +23,23 @@ function ViewTaskByCrad(props) {
     const closeDetails = (e) => {
         setViewDetails(false)
     }
-    let myTask
+
     function addChalalit() {
-        let object
-        object = [ props.task.card, props.task._id ]
+        let object, iCard, iTask
+        for (iCard = 0; iCard < props.cards.length; iCard++) {
+            if (props.cards[iCard]._id == props.task.card) {
+                break
+            }
+        }
+        for (iTask = 0; iTask < props.cards[iCard].tasks.length; iTask++) {
+            if (props.cards[iCard].tasks[iTask]._id == props.task._id) {
+                break
+            }
+        }
+        object = [iCard, iTask]
         props.setTaskStatus(object)
         setShowChalalit(true)
-
-        // for (i = 0; i < props.tasks.length; i++) {
-        //     if (props.tasks[i]._id == props.task._id) {
-        //         break
-        //     }
-        // }
-        // myTask = props.tasks.find(t => t._id == props.task._id)._id
-       
     }
-    console.log("task" + props.task)
 
     return (
         <>
@@ -81,7 +82,8 @@ function ViewTaskByCrad(props) {
 const mapStateToProps = (state) => {
 
     return {
-        tasks: state.public_reducer.tasks
+        tasks: state.public_reducer.tasks,
+        cards: state.public_reducer.cards
     }
 }
 const mapDispatchToProps = (dispatch) => {
