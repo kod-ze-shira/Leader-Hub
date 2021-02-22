@@ -58,11 +58,3 @@
     width: 100% !important;
     text-align: center;
 }
-
-
-.nameWorkspace{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 11rem;
-}
