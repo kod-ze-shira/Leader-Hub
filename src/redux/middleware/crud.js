@@ -155,14 +155,13 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }),
             success: function (data) {
                 console.log("success")
-                console.log(data);
-                dispatch(actions.setTask(data.message));
-                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
-                // dispatch({ type: '', payload: data })
+                console.log("data", data);
+                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 checkPermission(err).then((ifOk) => {
+                   
 
                 })
             }

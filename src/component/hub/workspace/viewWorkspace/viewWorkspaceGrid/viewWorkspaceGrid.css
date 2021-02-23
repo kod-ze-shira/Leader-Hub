@@ -19,6 +19,8 @@ font-size: small;
 
 
 
+
+
 .okEditWorkspace{
    width: 35px;
    height: 20px;
@@ -122,5 +124,7 @@ opacity: 0.9;
 }
    
 
-
-
+/*  */
+.iconsAction{
+   display: none;
+}
