@@ -14,27 +14,38 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     let [flug, setFlug] = useState(false)
     let [allWorkspace, setAllWorkspace] = useState(false)
     useEffect(() => {
-        props.getAllWorkspaces()
+
+
+        // if (window.performance) {
+        // if (performance.navigation.type == 1) {
+        // alert("This page is reloaded");
+        // props.getAllWorkspaces()
+
+        // }
+        // }
         // if (props.worksapces)
-        //     if (!flug) {
-        //         if (window.location.href.indexOf("/workspace") != -1) {
-        //             alert('/workspace')
-        //             props.setProjects(props.workspace.projects)
+        if (props.workspaces)
+            if (window.location.href.indexOf('workspace') != -1) {
+                props.getProjectsByWorkspaceId(idWorkspace)
+                // let w = props.workspaces.find(w => w._id == idWorkspace)
+                // props.setWorkspace(w)
 
-        //         }
-        //         else {
-        //             alert('/allWorkspace')
-        //             setAllWorkspace(true)
-        //             let allProjects = []
-        //             props.workspaces.map((myWorkspace) => allProjects.push(myWorkspace.projects))
-        //             props.setProjects(allProjects)
+            } else {
+                // if (window.location.href.indexOf('allWorkspace') != -1) {
+                let allProjects = []
+                for (let index = 0; index < props.workspaces.length; index++) {
+                    for (let j = 0; j < props.workspaces[index].projects.length; j++) {
+                        allProjects.push(props.workspaces[index].projects[j])
+                    }
+                }
+                // props.workspaces.map((myWorkspace) => )
+                props.setProjects(allProjects)
+            }
 
-        //         }
-        //         setFlug(true)
-        //     }
+        // setFlug(true)
+        // }
 
-
-    }, [props.worksapces]);
+    }, []);
 
 
 
@@ -88,7 +99,9 @@ const mapDispatchToProps = (dispatch) => {
         setProjects: (p) => dispatch(actions.setProjects(p)),
         // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
 
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
+
     }
 }
 

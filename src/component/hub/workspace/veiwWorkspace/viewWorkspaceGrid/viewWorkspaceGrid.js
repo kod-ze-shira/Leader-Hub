@@ -24,6 +24,7 @@ function ViewWorkspaceGrid(props) {
     }
     function over_workspace() {
         setOver(true);
+        $('.cc').css({ 'display': 'block' })
     }
     const [over, setOver] = useState(false);
 
@@ -33,56 +34,58 @@ function ViewWorkspaceGrid(props) {
 
     return (
         <>
-            {
-                over ?
+            {/* { */}
+            {/* // over ? */}
 
-                    <div>
-                        <div className="row"
+            <div className='cc'  >
+                {/* {over ? <> */}
+                <div className="row icons">
 
-                        >
-                            <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
+                    <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
 
-                            <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
+                    <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
 
-                            <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
-                        </div>
-                        <div className="Workspacegrid" onMouseOut={outOver} >
-                            <div className="mt-2">
-                                < div className="logoWorkspace1 ml-5"
+                    <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
+                </div>
+                {/* </> : null} */}
 
-                                    style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                    {workspace.name[0].toUpperCase()}
-                                    {/* {
+                <div className="Workspacegrid" onMouseOver={over_workspace} onMouseOut={outOver}>
+                    <div className="mt-2">
+                        < div className="logoWorkspace1 ml-5"
+
+                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                            {workspace.name[0].toUpperCase()}
+                            {/* {
                                         workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
                                             workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
                                     } */}
 
-
-
-                                </div>
-                                <div className="mt-3"><b>{workspace.name}</b></div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                    :
-                    <div className=" Workspacegrid mt-4" onMouseOver={over_workspace} onClick={() => routeToWorkspace()}>
-
-                        < div className="logoWorkspace1 ml-5 mt-3"
-                            style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                            {workspace.name[0].toUpperCase()}
-                            {/* {
-                            workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ?
-                                workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null
-                        } */}
-
                         </div>
                         <div className="mt-3"><b>{workspace.name}</b></div>
                     </div>
-            }
+                </div>
+
+
+            </div>
+
+
+            {/* //             : */}
+            {/* //             <div className=" Workspacegrid mt-4" onMouseOver={over_workspace} onClick={() => routeToWorkspace()}> */}
+
+            {/* //                 < div className="logoWorkspace1 ml-5 mt-3" */}
+            {/* //                     style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}> */}
+            {/* //                     {workspace.name[0].toUpperCase()} */}
+            {/* //                     {/* { */}
+            {/* //                     workspace.name && workspace.name.indexOf(" ") && workspace.name.indexOf(" ") + 1 ? */}
+            {/* //                         workspace.name[workspace.name.indexOf(" ") + 1].toUpperCase() : null */}
+            {/* } */}
+
+            {/* //                 </div> */}
+            {/* <div className="mt-3"><b>{workspace.name}</b></div> */}
+            {/* //             </div> */}
+
+
+            {/* //    } */}
 
         </>
     )

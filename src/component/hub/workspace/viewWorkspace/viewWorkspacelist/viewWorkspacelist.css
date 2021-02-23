@@ -11,8 +11,10 @@
    font-family: 'Roboto', sans-serif;
    font-size: xx-large;
    margin: 8px;
-   
-     
+}
+
+.iconsAction{
+    display: none;
 }
 
 .delete{
@@ -41,14 +43,12 @@
   background-color:#F6F6FA;
 }
 .WorkspaceList{
-     border-bottom:#F6F6FA 1px solid ;
-      display: flex;
-  justify-content:space-between; 
-}
-.WorkspaceList
-{
+    border-bottom:#F6F6FA 1px solid ;
+    display: flex;
+    justify-content:space-between; 
     width: 67vw;
 }
+
 .stripe{
     color:#F6F6FA ;
 }

@@ -5,8 +5,8 @@ import workspace_reducer from '../Reducers/workspace_reducer'
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        // let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
         fetch(urlData,
             {
                 method: 'GET',
@@ -155,14 +155,13 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             }),
             success: function (data) {
                 console.log("success")
-                console.log(data);
-                dispatch(actions.setTask(data.message));
-                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
-                // dispatch({ type: '', payload: data })
+                console.log("data", data);
+                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 checkPermission(err).then((ifOk) => {
+                   
 
                 })
             }
