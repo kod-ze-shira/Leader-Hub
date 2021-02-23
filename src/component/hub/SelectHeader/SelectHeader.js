@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SelectHeader(props) {
-    const [flag, setFlag] = useState();
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const color = '#00C6EA'

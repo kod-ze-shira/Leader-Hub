@@ -6,7 +6,6 @@ import './projectPlatform.css'
 
 
 function ProjectPlatform(props) {
-    // const { idProject } = useParams();
     const [projectId, setProjectId] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
@@ -14,7 +13,6 @@ function ProjectPlatform(props) {
 
     useEffect(() => {
         {
-            // props.getAllWorkspacesFromServer()
 
         };
     }, []);
@@ -73,6 +71,7 @@ function ProjectPlatform(props) {
                 <a className="ml-4 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                 <div className="add-new-btn">+</div>
             </div>
+           
         </>
     )
 

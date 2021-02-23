@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     return {
 
         close: state.public_reducer.close,
+        task: state.task_reducer.task
     }
 }
 
@@ -62,9 +63,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
                                     <div className="view-details col-5">
                                         <div className="close"
-                                        //  onClick={props.setclose}
-                                        onClick={props.setViewDetailsToClose}
-                                          >x</div>
+                                            //  onClick={props.setclose}
+                                            onClick={props.setViewDetailsToClose}
+                                        >x</div>
                                         {renderSwitch()}
                                     </div>
                                 </div>

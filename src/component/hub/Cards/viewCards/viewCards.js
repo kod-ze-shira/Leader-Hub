@@ -33,12 +33,7 @@ function ViewCards(props) {
     }
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
-
         props.setCard(props.cardFromMap)
-        // console.log(props.card)
-        // props.setTasks(props.card.tasks)
-        // alert(props.flag + "  " + props.cardFromMap._id)
-
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
         }
