@@ -5,8 +5,8 @@ import workspace_reducer from '../Reducers/workspace_reducer'
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        // let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
         fetch(urlData,
             {
                 method: 'GET',
