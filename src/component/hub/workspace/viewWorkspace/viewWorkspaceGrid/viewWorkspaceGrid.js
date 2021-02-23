@@ -33,7 +33,7 @@ function ViewWorkspaceGrid(props) {
         }
     }
     const [edit, setEdit] = useState(false);
-    
+
     function outOver(id) {
 
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
@@ -127,7 +127,7 @@ function ViewWorkspaceGrid(props) {
             <>
                 <div className="mt-5"></div>
 
-                <Toast className="toast_delete"
+                {/* <Toast className="toast_delete"
                     onClose={DeleteWorkspace}
                     show={showToast}
                     delay={5000} autohide>
@@ -144,7 +144,7 @@ function ViewWorkspaceGrid(props) {
                             </div>
                         </div>
                          </Toast.Header>
-                </Toast>
+                </Toast> */}
 
             </>
         </>
