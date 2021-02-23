@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useParams } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
-import ProjectsList from './projectsList/projectsList'
 import CardsByProject from '../Cards/cardsByProject/cardsByProject';
-import TasksByCard from '../task/tasksByCard/tasksByCard'
-import Logo from '../logo/logo'
 import './projectPlatform.css'
-import HeaderBody from '../headerBody/headerBody'
-// import { Link } from 'react-bootstrap';
-import Select from 'react-select';
-import $ from 'jquery';
-import DropDownWorkspace from '../../hub/dropDownWorkspace/dropDownWorkspace'
 
 
 function ProjectPlatform(props) {
@@ -18,20 +10,20 @@ function ProjectPlatform(props) {
     const [projectId, setProjectId] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
-
-
+    const [showInput, setShowInput] = useState(false)
 
     useEffect(() => {
         {
-            props.getAllWorkspacesFromServer()
+            // props.getAllWorkspacesFromServer()
+
         };
     }, []);
-    console.log(props.project)
     const changeProjectId = () => {
         // setProjectId(value)
         setViewCardsByProject(true)
     }
     const [showDetails, setShowDetails] = useState(false)
+    const [inputValue, setInputValue] = useState()
 
     // $(function () {
     //     $('.add-new-btn').hover(function () {
@@ -41,8 +33,22 @@ function ProjectPlatform(props) {
     //         $('.add-new-pop-up').css('display', 'none');
     //     });
     // });
+    const updateInputValue = (evt) => {
+        setInputValue(evt.target.value)
+    }
+    const showInputToAddCard = () => {
+        setShowInput(true)
 
-
+    }
+    const newCard = () => {
+        let card;
+        if (inputValue) {
+            card = { "project": props.project._id, name: inputValue }
+            props.newCard(card)
+        }
+        setInputValue("")
+        setShowInput(false)
+    }
     return (
         <>
 
@@ -57,6 +63,14 @@ function ProjectPlatform(props) {
                     <a>New Card</a><br></br>
                     <a>New Task</a><br></br>
                 </div>
+                {showInput ?
+                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="col-7 ml-4 mt-2 input-group-prepend" onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                            newCard()
+                        }
+                    }}></input>
+                    : null}
+                <a className="ml-4 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                 <div className="add-new-btn">+</div>
             </div>
         </>
@@ -78,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
-
+        newCard: (cardname) => dispatch(actions.newCard(cardname)),
 
     }
 

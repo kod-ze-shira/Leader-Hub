@@ -15,14 +15,14 @@ function SelectCards(props) {
     }, [])
 
 
-    //to chang the project that user selected
+    //to chang the card that user selected
     let myCard = props.card;
 
     const changeSelectedCard = (id) => {
         myCard = props.cards.find(p => p._id == id.value)
         props.setCard(myCard)
         props.getTasksByCardId(myCard._id)
-        props.flag(true)
+        props.flag(myCard._id)
         // if (myCard.tasks[0])
         //     props.setTask(myCard.tasks[0])
         // else
@@ -55,7 +55,8 @@ function SelectCards(props) {
                     onChange={(e) => changeSelectedCard(e)}
                     name="color"
                     options={viewCardsList}
-                    placeholder={props.card ? props.card.name : "All Cards"}
+                    // props.card ? props.card.name :
+                    placeholder={"All Cards"}
                     styles={style}
                 />
             </div>

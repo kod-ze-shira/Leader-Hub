@@ -12,7 +12,7 @@ import { workspace } from '../../../warps/configurator/workspace/workspace';
 function ProjectsByWorkspace(props, getAllWorkspaces) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
-
+    let [allWorkspace, setAllWorkspace] = useState(false)
     useEffect(() => {
 
 
@@ -48,11 +48,11 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     }, []);
 
 
-    // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)  
-    // props.workspaces.find(w => w._id == idWorkspace)
 
+
+    // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
     const viewProjectsByWorkspace =
-        props.projects.map((project) => {
+        props.workspaces.find(w => w._id == idWorkspace).projects.map((project) => {
             return <ViewProject myProject={project} />
         })
     // const viewAllProjectsByWorkspace = props.workspaces.map((w) =>
@@ -65,8 +65,7 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         <>
 
             <div className='body' >
-                {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
-                <HeaderBody nameWorkspace={props.workspace.name} />
+                {/* <HeaderBody nameWorkspace={props.workspace.name} /> */}
                 <Table responsive className='tableProject' >
                     <>
                         {/* <thead>
@@ -97,8 +96,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
 
     }

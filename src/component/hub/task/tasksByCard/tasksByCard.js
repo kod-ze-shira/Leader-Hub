@@ -15,22 +15,28 @@ function TasksByCard(props) {
 
     }, [props.cardId])
 
-    const renderTasksByCrad = props.tasks.map((task, index) => {
+    const renderTasksByCrad = props.tasks.map((task) => {
         console.log(task);
-        return <Draggable key={task._id} draggableId={task._id} index={index}>
-            {(provided) => (
-                <ViewTaskByCrad key={task._id} task={task}
-                    // {...props} ref={props.innerRef}
-                ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                />
-            )}
-        </Draggable>
+        return <ViewTaskByCrad key={task._id} task={task} />
+
+
     })
+    console.log("props.cardId" + props.cardId)
     return (
         <>
-
+            {/* onDragEnd={alert("hu")} */}
             <div>{renderTasksByCrad}</div>
 
+            {/* <Droppable droppableId={props.cardId}>
+                {provided => (
+                    <div innerRef={provided.innerRef} {...provided.droppableProps}>
+                        {props.tasks.map((task, index) => (
+                            <ViewTaskByCrad key={task._id} task={task} index={index} />
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable> */}
         </>
     )
 }

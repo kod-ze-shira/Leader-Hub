@@ -33,3 +33,9 @@ p{
     margin-bottom: 0;
     /* margin-top: 2vh; */
 }
+.new-task{
+    background-color: transparent;
+}
+.new-task:focus{
+    outline: 0 !important;
+}

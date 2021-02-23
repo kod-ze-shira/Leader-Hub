@@ -10,6 +10,7 @@ import { InputGroup, FormControl, Table } from 'react-bootstrap'
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 function ViewTaskByCrad(props) {
@@ -21,36 +22,59 @@ function ViewTaskByCrad(props) {
     }
     const closeDetails = (e) => {
         setViewDetails(false)
-
     }
+
     function addChalalit() {
+        let object, iCard, iTask
+        for (iCard = 0; iCard < props.cards.length; iCard++) {
+            if (props.cards[iCard]._id == props.task.card) {
+                break
+            }
+        }
+        for (iTask = 0; iTask < props.cards[iCard].tasks.length; iTask++) {
+            if (props.cards[iCard].tasks[iTask]._id == props.task._id) {
+                break
+            }
+        }
+        object = [iCard, iTask]
+        props.setTaskStatus(object)
         setShowChalalit(true)
     }
 
     return (
         <>
-            <div className="show-task row mx-5 border-bottom">
-                <label className="check-task ml-4 p-2 col-3">{props.task.name}
-                    <input type="checkbox" />
-                    <span className="checkmark " onClick={() => addChalalit()}></span>
-                </label>
-                <label className="check-task py-1  px-2 col-4 "><button onClick={(e) => showDetails(e)}>view details +</button>
-                </label>
-                <label className="check-task border-left  py-1  px-2 col ">{props.task.status}
-                </label>
-                <label className="check-task border-left  py-1  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
-                </label>
+            <Draggable draggableId={props.task._id} index={props.index}>
+                {provided => (
+                    <div
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        // innerRef={provided.innerRef}
+                        ref={provided.innerRef}
+                    >
+                        <div className="show-task row mx-4 border-bottom">
+                            <label className="check-task ml-3 py-2 pl-4.5 col-3">{props.task.name}
+                                <input type="checkbox" />
+                                <span className="checkmark " onClick={() => addChalalit()}></span>
+                            </label>
+                            <label className="check-task py-2  px-2 col-4 "><button onClick={(e) => showDetails(e)}>view details +</button>
+                            </label>
+                            <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
+                            </label>
+                            <label className="check-task border-left  py-2  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                            </label>
 
-                <label className="check-task border-left  py-1  px-2 col">{props.task.startDate}
-                </label>
+                            <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+                            </label>
 
-                {viewDetails ?
-                    <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                        <ViewDetails > </ViewDetails>
-                    </div>: null}
-            </div>
-            
-            {showchalalit ? <div className="animation"><Animation/> </div>: null}
+                            {viewDetails ?
+                                <div className="closeDet" onClick={(e) => closeDetails(e)}>
+                                    <ViewDetails from={"viewTaskByCard"} task={props.task}> </ViewDetails>
+                                </div> : null}
+                        </div>
+                    </div>
+                )}
+            </Draggable>
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
     )
@@ -58,14 +82,13 @@ function ViewTaskByCrad(props) {
 const mapStateToProps = (state) => {
 
     return {
-        // tasks: state.public_reducer.tasks,
-        // card: state.card_reducer.card
-
+        tasks: state.public_reducer.tasks,
+        cards: state.public_reducer.cards
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getTasksByCard: (cardId) => dispatch(actions.getTasksByCard(cardId))
+        setTaskStatus: (index) => dispatch(actions.setTaskStatus(index))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

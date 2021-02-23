@@ -4,6 +4,7 @@
    
         /* width:70vw; */
         /* height:10vh; */
+        margin-top: 0;
         padding-top: 1.5vh;
         padding-bottom: 1.5vh;
         background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -23,13 +24,7 @@
 margin-right: 0px;
 }
 
-/* .MuiButtonBase-root .MuiTab-root .MuiTab-textColorPrimary{
-        width: 15px !important;
-;
-} */
-/* .MuiTouchRipple-root{
-   width: 15px !important;
-} */
+
 .MuiTab-root{
         min-width: 75px !important;
         /* color:'#00C6EA' !important; */
@@ -42,12 +37,7 @@ line-height: 0.95 !important;
 
 
 }
-.tabs-in-header{
-/* margin-left: 20vw !important;} */
-}
-.MuiButtonBase-root .MuiTab-root .MuiTab-textColorInherit{
-        /* margin-bottom: 3vh !important; */
-}
+
 .MuiTab-root:focus{
         outline: 0 !important;
         color:#6DD41F  !important;
@@ -58,7 +48,7 @@ line-height: 0.95 !important;
         /* font-size: small !important; */
 }
 .s-header svg{
-        margin-right: 30px !important;
+        /* margin-right: 30px !important; */
 }
 
 

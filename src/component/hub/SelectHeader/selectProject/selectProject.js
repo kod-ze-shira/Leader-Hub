@@ -23,7 +23,7 @@ function SelectProject(props) {
 
         myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
-
+        props.setCards(myProject.cards)
         console.log("my project  " + props.workspace)
         // if (myProject.cards[0]) {
         //     props.setProject(myProject.cards[0])
@@ -35,7 +35,7 @@ function SelectProject(props) {
         // }
 
     }
-   
+
     const dot = (color = '#ccc') => ({
         alignItems: 'center',
         display: 'flex',
@@ -97,13 +97,13 @@ function SelectProject(props) {
         input: styles => ({ ...styles, ...dot() }),
         placeholder: styles => ({ ...styles, ...dot() }),
         singleValue: (styles, { color }) => ({ ...styles, ...dot(color) }),
-        option:(styles, { color }) => ({ ...styles, ...dot(color) }),
+        // option:(styles, { color }) => ({ ...styles, ...dot(color) }),
 
     };
 
-    const colorsOfWorkspace = props.workspace.projects.map((project) => (
-        project.color
-    ))
+    // const colorsOfWorkspace = props.workspace.projects.map((project) => (
+    //     project.color
+    // ))
     const viewProjectsList = props.workspace.projects.map((project) => (
         { value: project._id, label: project.name }
     ))
@@ -117,7 +117,7 @@ function SelectProject(props) {
                     onChange={(e) => changeSelectedProject(e)}
                     name="color"
                     options={viewProjectsList}
-                    placeholder={props.project.name}
+                    placeholder={props.project.name ? props.project.name : "All Projects"}
                     styles={colourStyles}
                 />
             </div>
@@ -137,6 +137,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setCard: (card) => dispatch(actions.setCard(card)),
+        setCards: (cards) => dispatch(actions.setCards(cards)),
         setProject: (project) => dispatch(actions.setProject(project)),
         setCardName: (cardName) => dispatch(actions.setCardName(cardName)),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),

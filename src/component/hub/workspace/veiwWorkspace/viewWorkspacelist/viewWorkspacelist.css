@@ -1,39 +1,53 @@
-
 .logoWorkspacelist{
-     width: 4rem;
-    height:4rem;
-   border-radius: 50%;
-   font-size: 26px;
-   padding-top: 10px;
-   color: white;
-   letter-spacing: 1.72px;
-   text-align: center;
-   font-family: 'Roboto', sans-serif;
-   /* font-size: xx-large; */
-   border:none;
-      font-weight: 600; 
-      
-     
+   width: 4rem;
+   height:4rem;
+  border-radius: 50%;
+  font-size: 26px;
+  padding-top: 8px;
+  color: white;
+  letter-spacing: 1.72px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: xx-large;
+  margin: 8px;
 }
-.Workspace{
+
+.iconsAction{
+   display: none;
+}
+
+.delete{
    cursor: pointer;
 }
-
-
-.Workspace{
-   width: 4rem;
- height: 4rem;
-   background: #F6F6FA;
-   height: auto;
-   margin-bottom: 10px;
-   text-align: center;
-   justify-content: center;
-   align-items: center;
-   border-radius: 10px;
-
-   margin-left: 3rem;
-
-
+.edit{
+   cursor: pointer;
+      
 }
 
 
+
+.Workspace{
+  width: 5rem;
+  background: #F6F6FA;
+  height: 5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-right: 1rem;
+
+}
+.WorkspaceList:hover{
+ background-color:#F6F6FA;
+}
+.WorkspaceList{
+   border-bottom:#F6F6FA 1px solid ;
+   display: flex;
+   justify-content:space-between; 
+   width: 67vw;
+}
+
+.stripe{
+   color:#F6F6FA ;
+}

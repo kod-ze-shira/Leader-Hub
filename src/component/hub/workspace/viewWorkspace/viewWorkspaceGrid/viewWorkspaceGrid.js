@@ -21,6 +21,7 @@ function ViewWorkspaceGrid(props) {
 
     const routeToProject = () => {
         props.setWorkspace(workspace)
+        props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
@@ -32,7 +33,7 @@ function ViewWorkspaceGrid(props) {
         }
     }
     const [edit, setEdit] = useState(false);
-    
+
     function outOver(id) {
 
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
@@ -41,7 +42,7 @@ function ViewWorkspaceGrid(props) {
     function EditWorkspace() {
         setEdit(true);
         props.setWorkspace(workspace)
-
+        props.setclose()
     }
 
     function add() {
@@ -126,7 +127,7 @@ function ViewWorkspaceGrid(props) {
             <>
                 <div className="mt-5"></div>
 
-                <Toast className="toast_delete"
+                {/* <Toast className="toast_delete"
                     onClose={DeleteWorkspace}
                     show={showToast}
                     delay={5000} autohide>
@@ -143,7 +144,7 @@ function ViewWorkspaceGrid(props) {
                             </div>
                         </div>
                          </Toast.Header>
-                </Toast>
+                </Toast> */}
 
             </>
         </>
@@ -161,7 +162,7 @@ const mapStateToProps = (state) => {
     return {
 
         user: state.public_reducer.userName,
-
+        close: state.public_reducer.close,
         workspaces: state.workspace_reducer.workspaces,
 
 
@@ -171,13 +172,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
-        duplicateWorkspaceInServer: () => dispatch(actions.duplicateWorkspaceInServer()),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-
-
+        setclose: () => dispatch(actions.setclose()),
+        setProjects: (projects) => dispatch(actions.setProjects(projects))
     }
 
 

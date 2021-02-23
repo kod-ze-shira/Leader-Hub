@@ -17,12 +17,11 @@ function SelectTask(props) {
 
     const changeSelectedTask = (id) => {
         myTask = props.tasks.find(p => p._id == id.value)
-        props.setCard(myTask)
+        props.setTask(myTask)
     }
-
-    const viewTasksList = props.tasks.map((task) => (
+    const viewTasksList = props.card.tasks ? props.card.tasks.map((task) => (
         { value: task._id, label: task.name }
-    ))
+    )) : null
     const style = {
         control: (base, state) => ({
             ...base,
@@ -37,7 +36,6 @@ function SelectTask(props) {
             }
         })
     };
-
     return (
         <>
             <div className="react-select">

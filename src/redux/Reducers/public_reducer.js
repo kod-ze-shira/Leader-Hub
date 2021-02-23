@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { act } from 'react-dom/test-utils';
+import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
@@ -17,7 +18,6 @@ const publicData = {
         state.close = !state.close
     },
 
-
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -29,10 +29,24 @@ const publicData = {
     },
     setProjects(state, action) {
         state.projects = action.payload;
-        // console.log("projjjj" + action.payload)
     },
     setTasks(state, action) {
         state.tasks = action.payload;
+    },
+    setTaskStatus(state, action) {
+        let cardId, taskId
+        cardId = action.payload[0]
+        taskId = action.payload[1]
+        state.cards[cardId].tasks[taskId].status = "done"
+    },
+    changeTaskplace(state, action) {
+        let source, destinition, cardId, temp
+        source = action.payload[0]
+        destinition = action.payload[1]
+        cardId = action.payload[2]
+        temp = state.cards[cardId].tasks[destinition]
+        state.cards[cardId].tasks[destinition] = state.cards[cardId].tasks[source]
+        state.cards[cardId].tasks[source] = temp
     },
     setisConfiguratorOpen(state, action) {
         state.isConfiguratorOpen = !state.isConfiguratorOpen
@@ -44,6 +58,27 @@ const publicData = {
         state.projects = state.projects.filter((_, i) =>
             state.projects[i]._id !== action.payload._id
         )
+    },
+    getCardsOfProject(state, action) {
+        state.projects.find(project => {
+            if (project._id == action.payload)
+                state.cards = project.cards
+        })
+    },
+    getTasksOfCard(state, action) {
+        state.cards.find(card => {
+            if (card._id == action.payload)
+                state.tasks = card.tasks
+        })
+    },
+    addCardToCardsWhenAddCardToServer(state, action) {
+        state.cards.push(action.payload)
+    },
+    addTaskToTasksWhenAddTaskToServer(state, action) {
+        state.cards.map(card => {
+            if (card._id == action.payload.card)
+                card.tasks.push(action.payload);
+        })
     },
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state,action){

@@ -21,13 +21,14 @@ function ViewWorkspaceList(props) {
     const routeToProject = () => {
         // console.log("waaaaaaaaaa  " + workspace)
         props.setWorkspace(workspace)
+        props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
 
     function EditWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        // props.setclose()
+        props.setclose()
         setEdit(true);
     }
     function outEdit() {
@@ -66,7 +67,6 @@ function ViewWorkspaceList(props) {
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
-
 
 
 
@@ -141,7 +141,7 @@ function ViewWorkspaceList(props) {
 
                     <Toast.Header className="tost" closeButton={false}>
 
-
+                                {/* <div className="close" onClick={out_remove}> x</div> */}
 
                         <div className="row">
                             <div className="col-4">
@@ -186,7 +186,8 @@ const mapDispatchToProps = (dispatch) => {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
-        // setclose: () => dispatch(actions.setclose()),
+        setclose: () => dispatch(actions.setclose()),
+        setProjects: (projects) => dispatch(actions.setProjects(projects))
 
 
     }
