@@ -5,7 +5,7 @@ import { actions } from '../../../redux/actions/action'
 import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName'
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
-
+import NewProject from '../project/newProject/newProject'
 
 
 const mapStateToProps = (state) => {
@@ -38,6 +38,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             switch (from) {
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
+                case 'newProject':
+                    return <NewProject workspaceId={props.workspaceId} />
                 default:
                     return null;
             }

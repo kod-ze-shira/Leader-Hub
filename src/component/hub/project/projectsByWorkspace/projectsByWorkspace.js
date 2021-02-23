@@ -8,10 +8,14 @@ import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import { workspace } from '../../../warps/configurator/workspace/workspace';
+import ViewDetails from '../../viewDetails/viewDetails'
+// import EditProject from '../editProject'
 
 function ProjectsByWorkspace(props, getAllWorkspaces) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
+    let [newProjet, setNewProjet] = useState(false);
+    let [editProjet, setEditProjet] = useState(false);
 
     useEffect(() => {
 
@@ -61,9 +65,12 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     //     })
     // )
 
+    function openVeiwDetils() {
+        setNewProjet(true)
+    }
+
     return (
         <>
-
             <div className='body' >
                 {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
                 <HeaderBody nameWorkspace={props.workspace.name} />
@@ -79,6 +86,12 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
                         </tbody>
                     </>
                 </Table>
+                <button onClick={() => openVeiwDetils()}>new project</button>
+                {newProjet ? <ViewDetails from="newProject" workspaceId={idWorkspace}>
+                </ViewDetails> : null}
+                {/* {editProjet ? <EditProject from="editProject" workspaceId={idWorkspace}>
+                </EditProject> : null} */}
+
             </div>
         </>
     )
