@@ -25,10 +25,7 @@ import CardsPage from './cardsPage/cardsPage'
 // import Toast from "./toast/toast";
 export default function Hub() {
 
-    let cons = '2021-02-24'
-    var res = cons.split("-")[2] + '/' + cons.split("-")[1] + '/' + cons.split("-")[0];
-    console.log(res)
-    console.log("res")
+
     return (
         <>
             <Router history={history}>

@@ -20,7 +20,6 @@ function NewProject(props) {
         console.log(date + '/' + month + '/' + year)
         // project.updateDates[0] = date + '/' + month + '/' + year
         project.workspace = props.workspaceId
-        debugger
         if (!project.name)
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
         else

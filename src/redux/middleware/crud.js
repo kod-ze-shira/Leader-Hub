@@ -8,6 +8,8 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        // let urlData = "https://reacthub.dev.leader.codSes/api/" + getState().public_reducer.userName + "/getFullWorkspacesForUser"
+
         let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
         fetch(urlData,
             {
