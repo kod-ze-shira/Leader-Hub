@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import './newProejct.css'
+import './editProject.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
-import viewDetails from '../../viewDetails/viewDetails'
+import viewDetails from '../../viewDetails/viewDetails';
 import $ from "jquery";
-function NewProject(props) {
-    let project = { 'updateDates': [] }
-    const changeFiledInWorkspace = (input) => {
-        $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
-        project[input.target.name] = input.target.value
-    }
 
-    function addProject() {
+function EditProject(props) {
+
+    let project = props.project;
+
+    const detailProject = (input) => {
+        $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
+        project[input.target.name] = input.target.value;
+    }
+    function saveProject() {
         let newDate = new Date()
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
-        console.log(date + '/' + month + '/' + year)
-        // project.updateDates[0] = date + '/' + month + '/' + year
-        project.workspace = props.workspaceId
-        debugger
+        project.updateDates[project.updateDates.length] = date + '-' + month + '-' + year;
+        // project.workspace = props.workspaceId;
+
         if (!project.name)
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
         else
             props.setProjectCrud(project)
-        // alert('fgh')
-
+        // props.saveWorkspaceInServerUfterEdit()
+        // props.getAllWorkspaces()
     }
     return (
+
 
 
         <>
@@ -46,8 +48,8 @@ function NewProject(props) {
                         className="edit_workspace_name"
                         name="name"
                         placeholder='name project'
-                        // value={project.name}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        value={project.name}
+                        onChange={(e) => detailProject(e)}
                     >
                     </input>
                 </div>
@@ -60,9 +62,9 @@ function NewProject(props) {
                         className="edit_workspace_name"
                         name="description"
                         placeholder='description'
-                        // value={project.name}
+                        value={project.name}
 
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        onChange={(e) => detailProject(e)}
                     >
                     </input>
                 </div>
@@ -75,8 +77,8 @@ function NewProject(props) {
                         className="edit_workspace_name"
                         name="dueDate"
                         type="date"
-                        // value={project.dueDate}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        value={project.dueDate}
+                        onChange={(e) => detailProject(e)}
                     >
                     </input>
                 </div>
@@ -90,8 +92,8 @@ function NewProject(props) {
                         className="edit_workspace_name"
                         name="color"
                         type="color"
-                        // value={project.color}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        value={project.color}
+                        onChange={(e) => detailProject(e)}
                     >
                     </input>
                 </div>
@@ -101,7 +103,7 @@ function NewProject(props) {
             <div className="row mt-1">
                 <div classNae="col-3"></div>
                 <div className="col-3">
-                    <button onClick={() => addProject()}>save</button></div>
+                    <button onClick={() => saveProject()}>save</button></div>
             </div>
 
 
@@ -126,8 +128,12 @@ export default connect(
         return {
             setProjectCrud: (props) => dispatch(actions.setProjectCrud(props)),
 
+            // getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+            // setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
+            // saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
+            // setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
 
 
         }
     }
-)(NewProject)
+)(EditProject)

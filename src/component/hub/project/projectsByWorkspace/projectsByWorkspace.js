@@ -89,7 +89,7 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
                 <button onClick={() => openVeiwDetils()}>new project</button>
                 {newProjet ? <ViewDetails from="newProject" workspaceId={idWorkspace}>
                 </ViewDetails> : null}
-                {/* {editProjet ? <EditProject from="editProject" workspaceId={idWorkspace}>
+                {/* {props.editProjet ? <EditProject from="editProject" workspaceId={idWorkspace}>
                 </EditProject> : null} */}
 
             </div>

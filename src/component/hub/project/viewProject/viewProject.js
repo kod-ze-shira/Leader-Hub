@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { ProgressBar, Spinner } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
 import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
+import editProject from '../editProject/editProject';
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
@@ -28,6 +29,16 @@ function ViewProject(props) {
         event.stopPropagation();
         // props.deleteProjectFromWorkspace(props.myProject.project)
     }
+
+    function editProject(event) {
+
+        props.setProject(props.myProject.project)
+        // props.deleteProjectInServer()
+        props.editProject = true;
+        event.stopPropagation();
+        // props.deleteProjectFromWorkspace(props.myProject.project)
+    }
+
 
     let complited = 0, complitedColor;
     complited = props.myProject.countTasks / 100;
@@ -87,6 +98,7 @@ function ViewProject(props) {
                 </td>
 
                 <td><button onClick={(event) => deleteProject(event)}> delete</button></td>
+                <td><button onClick={(event) => editProject(event)}> edit</button></td>
 
             </tr >
 
