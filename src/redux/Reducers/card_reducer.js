@@ -9,7 +9,6 @@ const initialState = {
 const card = {
     setCard(state, action) {
         state.card = action.payload;
-        console.log(state.card)
     },
     setCardName(state, action) {
         state.card.name = action.payload;

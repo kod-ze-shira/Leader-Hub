@@ -11,7 +11,6 @@ import EditTask from '../task/editTask/editTask'
 
 const mapStateToProps = (state) => {
     return {
-
         close: state.public_reducer.close,
         task: state.task_reducer.task
     }
@@ -20,22 +19,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setclose: () => dispatch(actions.setclose()),
-
-
     }
 }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(
-
-
-
-
     function ViewDetails(props) {
-
         const { from } = props//to know from which component its come
-
         const renderSwitch = () => {
             switch (from) {
                 case 'editWorkspace'://on click edit button of workspace
@@ -53,33 +42,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         return (
             <>
-
-
-                {
-                    props.close ?
-                        <>
-                            <div className="container-fluid">
-                                <div className="row ">
-
-                                    <div className="view-details col-5">
-                                        <div className="close"
-                                            //  onClick={props.setclose}
-                                            onClick={props.setViewDetailsToClose}
-                                        >x</div>
-                                        {renderSwitch()}
-                                    </div>
-                                </div>
-                            </div >
-
-                        </>
-                        : null
-
-
-
-                }
+                {/* { props.close ? */}
+                <>
+                    <div className="container-fluid">
+                        <div className="row ">
+                            <div className="view-details col-5">
+                                <div className="close"
+                                    //  onClick={props.setclose}
+                                    onClick={props.setViewDetailsToClose}
+                                >x</div>
+                                {renderSwitch()}
+                            </div>
+                        </div>
+                    </div >
+                </>
+                {/* // : null } */}
             </>
-
-
         )
     })
 

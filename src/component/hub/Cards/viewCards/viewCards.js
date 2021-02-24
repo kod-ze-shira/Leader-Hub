@@ -7,12 +7,11 @@ import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
-
+import ToastDelete from '../../toastDelete/toastDelete1'
 
 
 function ViewCards(props) {
     useEffect(() => {
-        // props.getTasksByCardId(props.cardFromMap._id)
 
     }, [props.flag])
 
@@ -20,11 +19,11 @@ function ViewCards(props) {
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
     const [viewDetails, setViewDetails] = useState(false)
+    const [showToastDelete, setShowToastDelete] = useState(false)
 
     const showDetails = (event) => {
         setViewDetails(true)
         setCardId(props.cardFromMap._id)
-
         // props.setTask(props.task)
     }
     const closeDetails = (e) => {
@@ -53,7 +52,7 @@ function ViewCards(props) {
         props.newTask(task)
         console.log(task);
     }
-    // alert("cardd task " + props.cardFromMap._id)
+
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
@@ -68,28 +67,26 @@ function ViewCards(props) {
                 </p>
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                <Droppable droppableId={props.cardFromMap._id} >
-                    {provided => (
-                        <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}>
-                            {props.cardFromMap.tasks.map((task, index) => (
-                                <ViewTaskByCrad key={task._id} task={task} index={index} />
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable> : null}
+               
+                            <Droppable droppableId={props.cardFromMap._id} >
+                                {provided => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}>
+                                        {props.cardFromMap.tasks.map((task, index) => (
+                                            <ViewTaskByCrad key={task._id} task={task} index={index} />
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                : null}
             {viewDetails ?
                 <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                    <ViewDetails setViewDetailsToClose={()=>setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
+                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
                 </div> : null}
 
-            {/* { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
 
-                <TasksByCard className="characters" cardId={cardId} />
-                : null
-            } */}
         </>
     )
 }

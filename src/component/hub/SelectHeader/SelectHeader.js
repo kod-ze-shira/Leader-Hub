@@ -64,7 +64,6 @@ function SelectHeader(props) {
             <div className="col pr-0">
                 <SelectTask />
             </div>
-
             <div className={classes.root}>
                 <Tabs
                     className="tabs-in-header offset-3"
