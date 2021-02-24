@@ -7,12 +7,11 @@ import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
-
+import ToastDelete from '../../toastDelete/toastDelete1'
 
 
 function ViewCards(props) {
     useEffect(() => {
-        // props.getTasksByCardId(props.cardFromMap._id)
 
     }, [props.flag])
 
@@ -50,15 +49,12 @@ function ViewCards(props) {
     const showDetails = (event) => {
         setViewDetails(true)
         setCardId(props.cardFromMap._id)
+        // props.setTask(props.task)
     }
 
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
-        // console.log(props.card)
-        // props.setTasks(props.card.tasks)
-        // alert(props.flag + "  " + props.cardFromMap._id)
-
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
         }
@@ -71,14 +67,7 @@ function ViewCards(props) {
                 setFlag(false)
             }
     }
-    // const newTask = () => {
-    //     let task;
-    //     alert("new task");
-    //     task = { name: "mami!", description: "to do", status: "to do", startDate: "18/02/2021", updateDates: "18/02/2021", "card": props.card._id }
-    //     props.newTask(task)
-    //     console.log(task);
-    // }
-    // alert("cardd task " + props.cardFromMap._id)
+
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
@@ -92,8 +81,9 @@ function ViewCards(props) {
                 <p className=" col-4 "></p>
                 <p className=" border-left  col pb-1">Team</p>
                 <p className="  border-left col pb-1">Label</p>
-                <p className="  border-left col pb-1">Due Date<button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button>
+                <p className="  border-left col pb-1">Due Date
                 </p>
+                <p className="  border-left pb-1 " ><button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button></p>
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
                 <Droppable droppableId={props.cardFromMap._id} >
@@ -123,11 +113,7 @@ function ViewCards(props) {
                     <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
                 </div> : null}
 
-            {/* { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
 
-                <TasksByCard className="characters" cardId={cardId} />
-                : null
-            } */}
         </>
     )
 }

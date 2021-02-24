@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import CardsByProject from '../Cards/cardsByProject/cardsByProject';
 import './projectPlatform.css'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 function ProjectPlatform(props) {
-    // const { idProject } = useParams();
     const [projectId, setProjectId] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
@@ -14,7 +14,6 @@ function ProjectPlatform(props) {
 
     useEffect(() => {
         {
-            // props.getAllWorkspacesFromServer()
 
         };
     }, []);
@@ -53,10 +52,7 @@ function ProjectPlatform(props) {
         <>
 
             <div className="body container-fluid">
-
-                {/* {props.project.name!="No Projects" ? */}
                 <CardsByProject projectId={props.project._id} flag={props.flag} />
-                {/* : null}  */}
                 <div className="add-new-pop-up ">
                     <a >New Workspace</a><br></br>
                     <a>New Project</a><br></br>
@@ -70,9 +66,10 @@ function ProjectPlatform(props) {
                         }
                     }}></input>
                     : null}
-                <a className="ml-4 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                <a className="ml-5 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                 <div className="add-new-btn">+</div>
             </div>
+
         </>
     )
 

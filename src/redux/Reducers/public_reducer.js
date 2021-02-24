@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { removeData } from 'jquery';
 import { act } from 'react-dom/test-utils';
 import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
@@ -10,7 +11,7 @@ const initialState = {
     cards: [],
     tasks: [],
     isConfiguratorOpen: "false",
-    close: "false"
+    // close: "false"
 }
 
 const publicData = {
@@ -32,6 +33,14 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload;
+    },
+    deletTask(state, action) {
+        state.cards.map(card => {
+            if (card._id == action.payload.card) 
+                card.tasks = card.tasks.filter((_, i) =>
+                    card.tasks[i]._id !== action.payload._id
+                )
+        })
     },
     setTaskStatus(state, action) {
         let cardId, taskId
@@ -81,12 +90,11 @@ const publicData = {
         })
     },
     //remove one workspace when go back from server
-    removeOneWorkspaceFromWorkspaces(state,action){
-        state.worksapces=state.worksapces.filter((_,i)=>
-        state.worksapces[i]._id!==action.payload._id
+    removeOneWorkspaceFromWorkspaces(state, action) {
+        state.worksapces = state.worksapces.filter((_, i) =>
+            state.worksapces[i]._id !== action.payload._id
         )
     }
-
 }
 
 
