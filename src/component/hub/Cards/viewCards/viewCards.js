@@ -20,20 +20,40 @@ function ViewCards(props) {
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
     const [viewDetails, setViewDetails] = useState(false)
+    const [addTaskInInput, setAddTaskInInput] = useState(false)
+    const [inputValue, setInputValue] = useState()
+
+    const updateInputValue = (evt) => {
+        setInputValue(evt.target.value)
+    }
+
+    const newTask = () => {
+        const today = new Date()
+        const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
+        const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
+        const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
+
+        let task;
+        if (inputValue) {
+            task = { name: inputValue, description: "to do", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
+            props.newTask(task)
+        }
+        setInputValue("")
+        setAddTaskInInput(false)
+    }
+    const addTask = () => {
+        if (flag)
+            setAddTaskInInput(!addTaskInInput)
+    }
 
     const showDetails = (event) => {
         setViewDetails(true)
         setCardId(props.cardFromMap._id)
-
-        // props.setTask(props.task)
     }
-    const closeDetails = (e) => {
-        // setViewDetails(false)
 
-    }
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
-
         props.setCard(props.cardFromMap)
         // console.log(props.card)
         // props.setTasks(props.card.tasks)
@@ -51,21 +71,24 @@ function ViewCards(props) {
                 setFlag(false)
             }
     }
-    const newTask = () => {
-        let task;
-        alert("new task");
-        task = { name: "mami!", description: "to do", status: "to do", startDate: "18/02/2021", updateDates: "18/02/2021", "card": props.card._id }
-        props.newTask(task)
-        console.log(task);
-    }
+    // const newTask = () => {
+    //     let task;
+    //     alert("new task");
+    //     task = { name: "mami!", description: "to do", status: "to do", startDate: "18/02/2021", updateDates: "18/02/2021", "card": props.card._id }
+    //     props.newTask(task)
+    //     console.log(task);
+    // }
     // alert("cardd task " + props.cardFromMap._id)
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <button className=" show-card col-3  mr-3" onClick={(e) => changeSelectedCard(e)}>
-                    <div className="triangle mb-1"></div>
-                    <div className="pl-2">{props.cardFromMap.name}</div>
-                </button>
+                <div className=" col-3  mr-3">
+                    <button className=" show-card" onClick={(e) => changeSelectedCard(e)}>
+                        <div className="triangle mb-1"></div>
+                        <div className="pl-2">{props.cardFromMap.name}</div>
+                    </button>
+                    <button className=" ml-3 new-task" onClick={addTask} > +</button>
+                </div>
                 <p className=" col-4 "></p>
                 <p className=" border-left  col pb-1">Team</p>
                 <p className="  border-left col pb-1">Label</p>
@@ -85,9 +108,19 @@ function ViewCards(props) {
                         </div>
                     )}
                 </Droppable> : null}
+            {addTaskInInput ?
+                <input type="text" class="form-control mt-2 w-50 ml-4" placeholder="Add Task"
+                    value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                            newTask()
+                        }
+                    }}
+                />
+                : null}
+
             {viewDetails ?
-                <div className="closeDet" onClick={(e) => closeDetails(e)}>
-                    <ViewDetails setViewDetailsToClose={()=>setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
+                <div className="closeDet">
+                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
                 </div> : null}
 
             {/* { props.flag == props.cardFromMap._id && flagFromSelect || flag ?

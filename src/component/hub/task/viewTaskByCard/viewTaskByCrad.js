@@ -63,8 +63,9 @@ function ViewTaskByCrad(props) {
                             <label className="check-task border-left  py-2  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                             </label>
 
-                            <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+                            <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
                             </label>
+
 
                             {viewDetails ?
                                 <div className="closeDet" onClick={(e) => closeDetails(e)}>
@@ -74,6 +75,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
+
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>

@@ -1,9 +1,9 @@
-#dropdown-basic {
+/* #dropdown-basic {
 background-color:transparent !important;
 border-color: #979797 !important;
 color: #979797;
 text-align: left !important;
-}
+} */
 
 .dropright .dropdown-toggle::after {
     display: block !important;
@@ -49,12 +49,12 @@ button:hover{
 
 }
 
-.form-control{
+/* .form-control{
     border-left: none !important;
 
-}
+} */
 
-.arrow-down {
+/* .arrow-down {
     width: 0; 
     height: 0; 
     border-top: 6px solid transparent;
@@ -63,7 +63,7 @@ button:hover{
     display: inline-block;
     float: right; 
     /* margin-top: 4px;  */
-}
+/* } */ 
 
 .containerMenu{
     height: 53vh;
