@@ -10,9 +10,11 @@ import '../../body/body.css'
 import { workspace } from '../../../warps/configurator/workspace/workspace';
 
 function ProjectsByWorkspace(props, getAllWorkspaces) {
+
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     let [allWorkspace, setAllWorkspace] = useState(false)
+    console.log('bla nla')
     useEffect(() => {
 
 
