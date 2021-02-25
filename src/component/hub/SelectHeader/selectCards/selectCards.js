@@ -21,7 +21,6 @@ function SelectCards(props) {
     const changeSelectedCard = (id) => {
         myCard = props.cards.find(p => p._id == id.value)
         props.setCard(myCard)
-        props.getTasksByCardId(myCard._id)
         props.flag(myCard._id)
         // if (myCard.tasks[0])
         //     props.setTask(myCard.tasks[0])

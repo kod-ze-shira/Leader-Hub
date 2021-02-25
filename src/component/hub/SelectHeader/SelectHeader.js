@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SelectHeader(props) {
-    const [flag, setFlag] = useState();
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const color = '#00C6EA'
@@ -65,7 +64,6 @@ function SelectHeader(props) {
             <div className="col pr-0">
                 <SelectTask />
             </div>
-
             <div className={classes.root}>
                 <Tabs
                     className="tabs-in-header offset-3"
@@ -73,7 +71,7 @@ function SelectHeader(props) {
                     onChange={handleChange}
                     variant="scrollable"
                     scrollButtons="off"
-                    TabIndicatorProps={{ style: { backgroundColor: '#6DD41F' } }}
+                    TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                     aria-label="scrollable prevent tabs example"
                 >
                     <Tab

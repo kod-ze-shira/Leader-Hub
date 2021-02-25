@@ -3,18 +3,14 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
-
+import ViewDetails from '../../viewDetails/viewDetails';
 
 function SelectTask(props) {
-
-
     useEffect(() => {
 
     }, [])
 
-
     let myTask = props.task;
-
     const changeSelectedTask = (id) => {
         myTask = props.tasks.find(p => p._id == id.value)
         props.setTask(myTask)
@@ -48,6 +44,7 @@ function SelectTask(props) {
                     styles={style}
                 />
             </div>
+          
         </>
     )
 }

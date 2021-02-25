@@ -14,6 +14,7 @@ import { setWorkspaCrud } from '../middleware/crud'
 import { getAllWorkspacesFromServer } from '../middleware/crud'
 import { createNewTeam } from '../middleware/crud'
 import { deleteProjectInServer } from '../middleware/crud'
+import { removeTaskById } from '../middleware/crud'
 
 import { setProjectCrud } from '../middleware/crud'
 // import { getAllTeamsForUser } from '../middleware/crud'
@@ -52,7 +53,9 @@ const store = createStore(
                 getTasksByCardId,
                 deleteWorkspaceInServer,
                 NewCard,
-                NewTask
+                NewTask,
+                removeTaskById,
+                
             ))
 )
 var url = window.location;

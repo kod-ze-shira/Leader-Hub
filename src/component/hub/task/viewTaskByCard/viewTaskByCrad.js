@@ -16,7 +16,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 function ViewTaskByCrad(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
+    useEffect(() => {
 
+    }, [props.task])
     const showDetails = (event) => {
         setViewDetails(true)
     }
@@ -40,7 +42,9 @@ function ViewTaskByCrad(props) {
         props.setTaskStatus(object)
         setShowChalalit(true)
     }
-
+    function deleteTask(task) {
+        props.showToast(task)
+    }
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.index}>
@@ -51,6 +55,7 @@ function ViewTaskByCrad(props) {
                         // innerRef={provided.innerRef}
                         ref={provided.innerRef}
                     >
+
                         <div className="show-task row mx-4 border-bottom">
                             <label className="check-task ml-3 py-2 pl-4.5 col-3">{props.task.name}
                                 <input type="checkbox" />
@@ -62,10 +67,14 @@ function ViewTaskByCrad(props) {
                             </label>
                             <label className="check-task border-left  py-2  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                             </label>
-
                             <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
-                            </label>
 
+                            </label>
+                            <label className=" check-task py-2 border-left">
+                            <button onClick={(e) => deleteTask(props.task)}>
+                                <img src={require('../../../img/bin.png')}></img>
+                            </button>
+                            </label>
                             {viewDetails ?
                                 <div className="closeDet" onClick={(e) => closeDetails(e)}>
                                     <ViewDetails from={"viewTaskByCard"} task={props.task}> </ViewDetails>
@@ -74,6 +83,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
+
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
@@ -88,7 +98,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setTaskStatus: (index) => dispatch(actions.setTaskStatus(index))
+        setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

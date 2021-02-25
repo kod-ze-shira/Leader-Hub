@@ -24,6 +24,8 @@ function SelectProject(props) {
         myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
         props.setCards(myProject.cards)
+        // if (!myProject.cards[0])
+        //     props.setCards(null)
         console.log("my project  " + props.workspace)
         // if (myProject.cards[0]) {
         //     props.setProject(myProject.cards[0])
@@ -110,7 +112,6 @@ function SelectProject(props) {
     return (
         <>
             <div className="react-select">
-
                 <Select
                     className="select-project"
                     classNamePrefix="select"

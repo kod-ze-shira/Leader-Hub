@@ -6,12 +6,15 @@ import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWo
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import NewProject from '../project/newProject/newProject'
+import AddTask from '../task/addTask/addTask'
+import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
+import TaskDetails from '../task/taskDetails/taskDetails'
 
 
 const mapStateToProps = (state) => {
     return {
-
-        // close: state.public_reducer.close,
+        close: state.public_reducer.close,
+        // task: state.task_reducer.task
     }
 }
 
@@ -23,39 +26,30 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(
-
-
-
-
     function ViewDetails(props) {
-
         const { from } = props//to know from which component its come
-
         const renderSwitch = () => {
             switch (from) {
+                case 'viewTaskByCard':
+                    return <TaskDetails task={props.task}/>
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
-                case 'newProject'://on click edit button of workspace
+                case 'newProject':
                     return <NewProject workspaceId={props.workspaceId} />
+                case 'addTask':
+                    return <AddTask cardId={props.cardId} />
                 default:
                     return null;
+
             }
         }
-
         const [close, setclose] = useState(true)
         function closEdit() {
             setclose(false);
         }
-
-
-
         return (
             <>
-
-
                 {
                     close ?
                         <>
@@ -76,8 +70,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
                 }
             </>
-
-
         )
     })
 

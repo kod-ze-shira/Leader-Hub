@@ -31,7 +31,7 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllTeamsForUser"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTeamsForUser`
         fetch(urlData,
             {
                 method: 'GET',
@@ -161,7 +161,7 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 checkPermission(err).then((ifOk) => {
-                   
+
 
                 })
             }
@@ -276,7 +276,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
         let workspace = getState().workspace_reducer.workspace;
         // var w = getState().workspace_reducer.workspace;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editWorkspace"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -379,7 +379,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
 
         let project = getState().project_reducer.project;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/editProject"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -446,7 +446,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
     if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
 
         var taskId = action.payload;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + taskId + "/getTaskById"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + taskId + "/getTaskById"
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -457,10 +457,34 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 
             success: function (data) {
                 dispatch(actions.setTask(data.result))
-
                 console.log("success")
                 console.log("data", data);
 
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                })
+            }
+        });
+    }
+    return next(action);
+}
+export const removeTaskById = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'REMOVE_TASK_BY_ID') {
+        // let workspace = getState().workspace_reducer.workspace;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                dispatch(actions.deletTask(data.result))
+                console.log("success")
+                console.log("data", data.result);
             },
             error: function (err) {
 
@@ -470,12 +494,10 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
             }
         });
 
-
-
-
     }
     return next(action);
 }
+
 
 // router.get('/:userName/:projectId/getCardsByprojectId',cardFunctions.getCardsByprojectId)
 // /:projectId/getCardsByprojectId
@@ -485,7 +507,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + projectId + "/getCardsByProjectId"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -524,7 +546,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
         var cardId = action.payload;
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/" + cardId + "/getTasksByCardId"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + cardId + `/getTasksByCardId`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -661,12 +683,10 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 //     }
 // }
 
-
-
 export const NewCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_CARD') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newCard"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newCard`
         let card = action.payload;
 
         $.ajax({
@@ -694,7 +714,7 @@ export const NewCard = ({ dispatch, getState }) => next => action => {
 export const NewTask = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_TASK') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
 
         $.ajax({
