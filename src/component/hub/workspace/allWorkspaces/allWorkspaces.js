@@ -41,7 +41,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
 
         <>
-            <div className="row mt-5"></div>
+            <div className="row"></div>
 
             <div className="row mt-5"></div>
             <div className="row">

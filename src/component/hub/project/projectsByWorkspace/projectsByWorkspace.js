@@ -8,11 +8,12 @@ import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import { workspace } from '../../../warps/configurator/workspace/workspace';
+import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props, getAllWorkspaces) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
-    let [allWorkspace, setAllWorkspace] = useState(false)
+    let [newProject, setNewProject] = useState(false)
     useEffect(() => {
 
 
@@ -48,11 +49,11 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     }, []);
 
 
+    // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)  
+    // props.workspaces.find(w => w._id == idWorkspace)
 
-
-    // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
     const viewProjectsByWorkspace =
-        props.workspaces.find(w => w._id == idWorkspace).projects.map((project) => {
+        props.projects.map((project) => {
             return <ViewProject myProject={project} />
         })
     // const viewAllProjectsByWorkspace = props.workspaces.map((w) =>
@@ -65,7 +66,10 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
         <>
 
             <div className='body' >
+                {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
                 {/* <HeaderBody nameWorkspace={props.workspace.name} /> */}
+                <button onClick={() => setNewProject(true)}>New Project</button>
+
                 <Table responsive className='tableProject' >
                     <>
                         {/* <thead>
@@ -78,6 +82,11 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
                         </tbody>
                     </>
                 </Table>
+                <p>fghjhgfdsertyt</p>
+                {
+                    newProject ? <ViewDetails from="newProject" workspaceId={idWorkspace} />
+                        : null
+                }
             </div>
         </>
     )
@@ -96,10 +105,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
 
     }

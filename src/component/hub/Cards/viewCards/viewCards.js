@@ -46,11 +46,12 @@ function ViewCards(props) {
             setAddTaskInInput(!addTaskInInput)
     }
 
-    const showDetails = (event) => {
-        setViewDetails(true)
-        setCardId(props.cardFromMap._id)
-        // props.setTask(props.task)
-    }
+    const showDetails =
+        (event) => {
+            setViewDetails(true)
+            setCardId(props.cardFromMap._id)
+            // props.setTask(props.task)
+        }
 
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
@@ -110,7 +111,7 @@ function ViewCards(props) {
 
             {viewDetails ?
                 <div className="closeDet">
-                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
+                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
                 </div> : null}
 
 

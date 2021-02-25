@@ -4,7 +4,12 @@ body{
   overflow-y: hidden;
 }
 
+:root {
+  --lighat-blue: #1e90ff;
+  --light-light-blue:#44D7B6;
+  --white: #ffffff;
 
+}
 
 
 

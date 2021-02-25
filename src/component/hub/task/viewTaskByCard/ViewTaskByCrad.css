@@ -44,7 +44,7 @@
     width: 23px;
     background-color: #eee;
 
-    border: 1px solid #489921;
+    border: 1px solid var(--lighat-blue);
     border-radius: 50%;
 
 
@@ -56,8 +56,7 @@
   
   /* When the checkbox is checked, add a blue background */
   .check-task input:checked ~ .checkmark {
-    background-color: #6DD41F;
-    /* background: transparent linear-gradient(180deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box; */
+    background: transparent linear-gradient(180deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
