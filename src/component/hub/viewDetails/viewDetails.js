@@ -6,7 +6,7 @@ import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWo
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import TaskDetails from '../task/taskDetails/taskDetails'
-import EditTask from '../task/editTask/editTask'
+import EditTask from '../task/addTask/addTask'
 
 
 const mapStateToProps = (state) => {

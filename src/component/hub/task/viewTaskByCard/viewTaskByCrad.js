@@ -68,10 +68,13 @@ function ViewTaskByCrad(props) {
                             <label className="check-task border-left  py-2  px-2 col " ><div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                             </label>
                             <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+
                             </label>
+                            <label className=" check-task py-2 border-left">
                             <button onClick={(e) => deleteTask(props.task)}>
                                 <img src={require('../../../img/bin.png')}></img>
                             </button>
+                            </label>
                             {viewDetails ?
                                 <div className="closeDet" onClick={(e) => closeDetails(e)}>
                                     <ViewDetails from={"viewTaskByCard"} task={props.task}> </ViewDetails>
@@ -80,6 +83,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
+
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>

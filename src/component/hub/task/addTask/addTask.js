@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import './editTask.css'
+import './addTask.css'
 
 function EditTask(props) {
     useEffect(() => {
 
     }, [])
+    const today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+        date2 = date.split("-")[2] + '/' + date.split("-")[1] + '/' + date.split("-")[0];
+
+    ;
+
     console.log("card", props.cardId)
     const [addTask, setAddTask] = useState({ name: "", description: "", status: "", startDate: "", dueDate: "", card: props.cardId })
-
     const handleChange = (event) => {
+
         const { name, value } = event.target;
+        let cons1 = event.target.name
+        let cons2 = event.target.value
+
+        if (cons1 == "dueDate" || cons1 == "startDate") {
+            cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
+
+        }
+        // if (cons1 == "startDate" && cons2 < date)
+        //     alert("yes")
+
         setAddTask(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: cons2
         }));
     }
-
     const newTask = () => {
         props.newTask(addTask)
         console.log(addTask);
@@ -27,23 +42,28 @@ function EditTask(props) {
     return (
         <div className="edit-task">
             <h5 className="mt-2">Add Task</h5>
-            <label for="task-name">name</label>
+            <label for="task-name">name:</label>
             <input type="text" name="name" class="form-control" id="task-name" placeholder="name"
                 onChange={handleChange} />
-            <label for="description">description</label>
+            <label for="description">description:</label>
             <input type="text" name="description" class="form-control" id="description" placeholder="description"
                 onChange={handleChange} />
-            <label for="status">status</label>
-            <input type="text" name="status" class="form-control" id="status" placeholder="status"
+            <label for="status">status:</label>
+            <select type="text" name="status" class="form-control" id="status" placeholder="status"
+                onChange={handleChange} >
+                <option>to do</option>
+                <option>in progress</option>
+                <option>done</option>
+            </select>
+            <label for="startDate">startDate:</label>
+            <input type="date" name="startDate" class="form-control" id="startDate" placeholder={date2}
+                min={date2} required
                 onChange={handleChange} />
-            <label for="startDate">startDate</label>
-            <input type="date" name="startDate" class="form-control" id="startDate" placeholder="startDate"
+            <label for="dueDate">dueDate:</label>
+            <input name="dueDate" type="date" class="form-control" id="dueDate" placeholder="dueDate"
                 onChange={handleChange} />
-            <label for="dueDate">dueDate</label>
-            <input type="date" class="form-control" id="dueDate" placeholder="dueDate"
-                onChange={handleChange} />
-
-            <button onClick={newTask} >save</button>
+            <br></br>
+            <button onClick={newTask} className="add-task">add task</button>
         </div >
     )
 }

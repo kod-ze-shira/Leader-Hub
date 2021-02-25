@@ -74,13 +74,13 @@ function ProjectPlatform(props) {
                     <a>New Task</a><br></br>
                 </div>
                 {showInput ?
-                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="col-7 ml-4 mt-2 input-group-prepend" onKeyPress={event => {
+                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control mt-2 col-6 ml-4" onKeyPress={event => {
                         if (event.key === 'Enter') {
                             newCard()
                         }
                     }}></input>
                     : null}
-                <a className="ml-4 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                <a className="ml-5 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                 <div className="add-new-btn">+</div>
                 {showToastDelete ?
                     <ToastDelete
