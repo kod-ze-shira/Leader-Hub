@@ -25,7 +25,6 @@ function ViewCards(props) {
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
-
     const newTask = () => {
         const today = new Date()
         const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -45,14 +44,12 @@ function ViewCards(props) {
         if (flag)
             setAddTaskInInput(!addTaskInInput)
     }
-
     const showDetails =
         (event) => {
             setViewDetails(true)
             setCardId(props.cardFromMap._id)
             // props.setTask(props.task)
         }
-
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
