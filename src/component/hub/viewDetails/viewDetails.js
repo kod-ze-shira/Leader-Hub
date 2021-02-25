@@ -13,8 +13,8 @@ import TaskDetails from '../task/taskDetails/taskDetails'
 
 const mapStateToProps = (state) => {
     return {
-
-        // close: state.public_reducer.close,
+        close: state.public_reducer.close,
+        // task: state.task_reducer.task
     }
 }
 
@@ -31,6 +31,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const { from } = props//to know from which component its come
         const renderSwitch = () => {
             switch (from) {
+                case 'viewTaskByCard':
+                    return <TaskDetails task={props.task}/>
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
                 case 'newProject':
@@ -38,18 +40,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 default:
-                case 'viewTaskByCard':
-                    return <TaskDetails task={props.task} />
+                    return null;
+
             }
         }
-
         const [close, setclose] = useState(true)
         function closEdit() {
             setclose(false);
         }
-
-
-
         return (
             <>
                 {

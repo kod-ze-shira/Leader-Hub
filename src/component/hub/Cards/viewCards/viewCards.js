@@ -35,7 +35,7 @@ function ViewCards(props) {
 
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "to do", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
+            task = { name: inputValue, description: "", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -77,7 +77,7 @@ function ViewCards(props) {
                         <div className="triangle mb-1"></div>
                         <div className="pl-2">{props.cardFromMap.name}</div>
                     </button>
-                    <button className=" ml-3 new-task" onClick={addTask} > +</button>
+                    <button className=" ml-3 new-task" onClick={addTask}> +</button>
                 </div>
                 <p className=" col-4 "></p>
                 <p className=" border-left  col pb-1">Team</p>
@@ -93,7 +93,7 @@ function ViewCards(props) {
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
                             {props.cardFromMap.tasks.map((task, index) => (
-                                <ViewTaskByCrad key={task._id} task={task} index={index} />
+                                <ViewTaskByCrad showToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
                             ))}
                             {provided.placeholder}
                         </div>
@@ -112,9 +112,8 @@ function ViewCards(props) {
             {viewDetails ?
                 <div className="closeDet">
                     <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
-                </div> : null}
-
-
+                </div>
+                : null}
         </>
     )
 }

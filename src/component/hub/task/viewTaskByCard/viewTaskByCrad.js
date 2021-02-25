@@ -42,8 +42,8 @@ function ViewTaskByCrad(props) {
         props.setTaskStatus(object)
         setShowChalalit(true)
     }
-    function deleteTask(task_id) {
-        props.removeTaskById(task_id)
+    function deleteTask(task) {
+        props.showToast(task)
     }
     return (
         <>
@@ -71,7 +71,7 @@ function ViewTaskByCrad(props) {
 
                             </label>
                             <label className=" check-task py-2 border-left">
-                            <button onClick={(e) => deleteTask(props.task._id)}>
+                            <button onClick={(e) => deleteTask(props.task)}>
                                 <img src={require('../../../img/bin.png')}></img>
                             </button>
                             </label>
@@ -99,7 +99,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
-        removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)
