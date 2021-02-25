@@ -48,11 +48,10 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
     }, []);
 
 
-
-
     // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
     const viewProjectsByWorkspace =
-        props.workspaces.find(w => w._id == idWorkspace).projects.map((project) => {
+        // props.workspaces.find(w => w._id == idWorkspace).projects.map((project) => {
+        props.workspace.projects.map((project) => {
             return <ViewProject myProject={project} />
         })
     // const viewAllProjectsByWorkspace = props.workspaces.map((w) =>

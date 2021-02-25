@@ -12,7 +12,7 @@ import EditTask from '../task/editTask/editTask'
 const mapStateToProps = (state) => {
     return {
         close: state.public_reducer.close,
-        task: state.task_reducer.task
+        // task: state.task_reducer.task
     }
 }
 

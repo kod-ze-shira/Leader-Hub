@@ -67,19 +67,19 @@ function ViewCards(props) {
                 </p>
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-               
-                            <Droppable droppableId={props.cardFromMap._id} >
-                                {provided => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}>
-                                        {props.cardFromMap.tasks.map((task, index) => (
-                                            <ViewTaskByCrad key={task._id} task={task} index={index} />
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
+
+                <Droppable droppableId={props.cardFromMap._id} >
+                    {provided => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}>
+                            {props.cardFromMap.tasks.map((task, index) => (
+                                <ViewTaskByCrad showToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
                 : null}
             {viewDetails ?
                 <div className="closeDet" onClick={(e) => closeDetails(e)}>

@@ -683,8 +683,6 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 //     }
 // }
 
-
-
 export const NewCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_CARD') {
