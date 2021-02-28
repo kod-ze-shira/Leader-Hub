@@ -101,7 +101,7 @@ function ViewTaskByCrad(props) {
                             {viewDetails ?
                                 // onClick={(e) => closeDetails(e)}
                                 <div className="closeDet" >
-                                    <ViewDetails from={detailsOrEditTask} task={props.task}> </ViewDetails>
+                                    <ViewDetails from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                 </div>
                                 : null}
                         </div>
