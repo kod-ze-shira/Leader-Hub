@@ -1,3 +1,26 @@
 .details-task p{
     text-align: left !important;
 }
+
+.simpleTextarea{
+    font-size: 24px;
+    font-weight: 500;
+    /* line-height: 15px; */
+    min-height: 0;
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+.simpleTextarea.simpleTextarea--dynamic {
+    border-color: transparent !important;
+}
+textarea{
+    overflow:auto;
+    text-rendering: optimizeSpeed;
+    width: 100%;
+    /* color: #98A9BC !important; */
+}
+textarea:focus{
+       outline-color: #98A9BC !important; 
+       outline:  1px solid #98A9BC  !important;
+       border-radius:5px ;
+}

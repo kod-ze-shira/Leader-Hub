@@ -44,17 +44,19 @@ const publicData = {
     },
 
     setNewTask(state, action) {
-        state.cards.map(card => {
-            if (card._id == action.payload.card)
-                card.tasks.map(task => {
-                    if (task._id == action.payload._id) {
-                        task = action.payload
-                        console.log(task, action.payload)
+        let i, j
+        console.log("state.cards[i].tasks[j]._id action.payload._id")
+        for (i = 0; i < state.cards.length; i++)
+            if (state.cards[i]._id == action.payload.card) {
+                for (j = 0; j < state.cards[i].tasks.length; j++) {
+                    if (state.cards[i].tasks[j]._id == action.payload._id) {
+                        state.cards[i].tasks[j] = action.payload
+                        break
                     }
-                })
-        })
+                }
+            }
     },
-    
+
     setTaskStatus(state, action) {
         let cardId, taskId
         cardId = action.payload[0]

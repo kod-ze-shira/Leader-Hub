@@ -41,8 +41,9 @@ function ViewCards(props) {
         setAddTaskInInput(false)
     }
     const addTask = () => {
-        if (flag)
-            setAddTaskInInput(!addTaskInInput)
+        setAddTaskInInput(!addTaskInInput)
+        // if (!flag && !props.flag == props.cardFromMap._id && flagFromSelect)
+        //     changeSelectedCard()
     }
     const showDetails =
         (event) => {
