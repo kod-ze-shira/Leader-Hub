@@ -5,6 +5,7 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 import viewDetails from '../../viewDetails/viewDetails'
 import $ from "jquery";
+
 function NewProject(props) {
     let project = { 'updateDates': [] }
     const changeFiledInWorkspace = (input) => {

@@ -9,7 +9,6 @@ import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 
-
 function ViewCards(props) {
     useEffect(() => {
 
