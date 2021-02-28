@@ -9,6 +9,8 @@ import NewProject from '../project/newProject/newProject'
 import AddTask from '../task/addTask/addTask'
 import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
 import TaskDetails from '../task/taskDetails/taskDetails'
+import EditTask from '../task/addTask/addTask'
+import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 
 
 const mapStateToProps = (state) => {
@@ -35,6 +37,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <TaskDetails task={props.task}/>
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
+                case 'viewTaskByCard':
+                    return <TaskDetails task={props.task} />
+                case 'editTaskToCard':
+                    return <EditTask cardId={props.cardId} />
+                case 'editCurrentTask':
+                    return <EditCurrentTask task={props.task} />
                 case 'newProject':
                     return <NewProject workspaceId={props.workspaceId} />
                 case 'addTask':

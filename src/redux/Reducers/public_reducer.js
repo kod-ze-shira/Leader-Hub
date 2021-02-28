@@ -36,12 +36,25 @@ const publicData = {
     },
     deletTask(state, action) {
         state.cards.map(card => {
-            if (card._id == action.payload.card) 
+            if (card._id == action.payload.card)
                 card.tasks = card.tasks.filter((_, i) =>
                     card.tasks[i]._id !== action.payload._id
                 )
         })
     },
+
+    setNewTask(state, action) {
+        state.cards.map(card => {
+            if (card._id == action.payload.card)
+                card.tasks.map(task => {
+                    if (task._id == action.payload._id) {
+                        task = action.payload
+                        console.log(task, action.payload)
+                    }
+                })
+        })
+    },
+    
     setTaskStatus(state, action) {
         let cardId, taskId
         cardId = action.payload[0]
