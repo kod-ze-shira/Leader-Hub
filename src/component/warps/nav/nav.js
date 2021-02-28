@@ -4,7 +4,8 @@ import './nav.css';
 
 
 export default function
-    Nav() {
+    
+Nav() {
     return (
         <div className="nav container-fluid">
             {/* <div className="row "> */}

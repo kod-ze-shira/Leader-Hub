@@ -112,7 +112,6 @@ function SelectProject(props) {
     return (
         <>
             <div className="react-select">
-
                 <Select
                     className="select-project"
                     classNamePrefix="select"

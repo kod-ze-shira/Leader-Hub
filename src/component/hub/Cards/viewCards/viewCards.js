@@ -25,7 +25,6 @@ function ViewCards(props) {
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
-
     const newTask = () => {
         const today = new Date()
         const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -35,7 +34,7 @@ function ViewCards(props) {
 
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "to do", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
+            task = { name: inputValue, description: "", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -45,13 +44,12 @@ function ViewCards(props) {
         if (flag)
             setAddTaskInInput(!addTaskInInput)
     }
-
-    const showDetails = (event) => {
-        setViewDetails(true)
-        setCardId(props.cardFromMap._id)
-        // props.setTask(props.task)
-    }
-
+    const showDetails =
+        (event) => {
+            setViewDetails(true)
+            setCardId(props.cardFromMap._id)
+            // props.setTask(props.task)
+        }
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
@@ -76,7 +74,7 @@ function ViewCards(props) {
                         <div className="triangle mb-1"></div>
                         <div className="pl-2">{props.cardFromMap.name}</div>
                     </button>
-                    <button className=" ml-3 new-task" onClick={addTask} > +</button>
+                    <button className=" ml-3 new-task" onClick={addTask}> +</button>
                 </div>
                 <p className=" col-4 "></p>
                 <p className=" border-left  col pb-1">Team</p>
@@ -110,10 +108,9 @@ function ViewCards(props) {
 
             {viewDetails ?
                 <div className="closeDet">
-                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"editTaskToCard"}> </ViewDetails>
-                </div> : null}
-
-
+                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
+                </div>
+                : null}
         </>
     )
 }

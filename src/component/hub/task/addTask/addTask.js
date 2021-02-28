@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import './addTask.css'
 
-function EditTask(props) {
+function AddTask(props) {
     useEffect(() => {
 
     }, [])
@@ -82,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(EditTask)
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask)

@@ -71,7 +71,7 @@ function SelectHeader(props) {
                     onChange={handleChange}
                     variant="scrollable"
                     scrollButtons="off"
-                    TabIndicatorProps={{ style: { backgroundColor: '#6DD41F' } }}
+                    TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                     aria-label="scrollable prevent tabs example"
                 >
                     <Tab
