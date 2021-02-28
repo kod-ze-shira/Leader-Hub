@@ -9,7 +9,6 @@ import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 
-
 function ViewCards(props) {
     useEffect(() => {
 
@@ -25,7 +24,6 @@ function ViewCards(props) {
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
-
     const newTask = () => {
         const today = new Date()
         const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -39,20 +37,32 @@ function ViewCards(props) {
             props.newTask(task)
         }
         setInputValue("")
-        setAddTaskInInput(false)
+        setAddTaskInInput(!addTaskInInput)
     }
+    // const addTask = () => {
+    //     if (!props.card.tasks) {
+    //         setAddTaskInInput(!addTaskInInput)
+    //     }
+    //     else if (flag) {
+    //         setAddTaskInInput(!addTaskInInput)
+    //         // setFlag(!flag)
+    //     }
+
+    // }
     const addTask = () => {
-        if (flag)
-            setAddTaskInInput(!addTaskInInput)
+        setAddTaskInInput(!addTaskInInput)
+        // if (!flag && !props.flag == props.cardFromMap._id && flagFromSelect)
+        //     changeSelectedCard()
     }
 
+
+ 
     const showDetails =
         (event) => {
             setViewDetails(true)
             setCardId(props.cardFromMap._id)
             // props.setTask(props.task)
         }
-
     const changeSelectedCard = (event) => {
         // setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)

@@ -17,7 +17,6 @@ function SelectWorkspace(props) {
     //to change the workspace that user selected
     let myWorkspace = props.worksapce;
     const changeSelectedWorkspace = (id) => {
-
         myWorkspace = props.workspaces.find(p => p._id == id.value)
         props.setWorkspace(myWorkspace)
         if (myWorkspace.projects[0]) {
@@ -26,8 +25,10 @@ function SelectWorkspace(props) {
         }
         else {
             props.setProjectName("No Projects")
+            // props.setCards({});
             // alert("else")
         }
+
     }
 
     const viewWorkspacesList = props.workspaces.map((workspace) => (
@@ -69,13 +70,15 @@ const mapStateToProps = (state) => {
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
         workspaces: state.public_reducer.worksapces,
-        workspace: state.workspace_reducer.workspace
+        workspace: state.workspace_reducer.workspace,
+        cards: state.public_reducer.cards
 
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCards: (c) => dispatch(actions.setCards(c)),
         setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
         setProject: (project) => dispatch(actions.setProject(project)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),

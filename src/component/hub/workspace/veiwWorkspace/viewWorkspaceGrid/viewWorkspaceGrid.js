@@ -41,9 +41,11 @@ function ViewWorkspaceGrid(props) {
                 {/* {over ? <> */}
                 <div className="row icons">
 
-                    <div className="col-1 edit"><img src={require('../../../../img/pencil-write.png')}></img></div>
+                    <div className="col-1 edit" data-toggle="tooltip" data-placement="top" title="Edit"
+                    ><img src={require('../../../../img/pencil-write.png')}></img></div>
 
-                    <div className="col-1 delet"><img src={require('../../../../img/bin.png')}></img></div>
+                    <div className="col-1 delet" data-toggle="tooltip" data-placement="top" title="Garbage">
+                        <img src={require('../../../../img/bin.png')}></img></div>
 
                     <div className="col-1 add"> <img src={require('../../../../img/duplicate-outline.png')}></img></div>
                 </div>

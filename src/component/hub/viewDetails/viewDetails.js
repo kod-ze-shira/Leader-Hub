@@ -9,6 +9,8 @@ import NewProject from '../project/newProject/newProject'
 import AddTask from '../task/addTask/addTask'
 import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
 import TaskDetails from '../task/taskDetails/taskDetails'
+import EditTask from '../task/addTask/addTask'
+import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 
 
 const mapStateToProps = (state) => {
@@ -28,13 +30,31 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
+
+        const [close, setclose] = useState(true)
+        const [open, setOpen] = useState(true)
+
+
+        useEffect(() => {
+            setclose(true)
+        }, [props.open])
+
+        function closEdit() {
+            setclose(false);
+        }
+
         const { from } = props//to know from which component its come
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails task={props.task}/>
+                    return <TaskDetails task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
+                case 'viewTaskByCard':
+                    return <TaskDetails task={props.task} />
+               
+                case 'editCurrentTask':
+                    return <EditCurrentTask task={props.task} />
                 case 'newProject':
                     return <NewProject workspaceId={props.workspaceId} />
                 case 'addTask':
@@ -44,14 +64,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
             }
         }
-        const [close, setclose] = useState(true)
-        function closEdit() {
-            setclose(false);
-        }
+
         return (
             <>
                 {
-                    close ?
+                    close?
                         <>
                             <div className="container-fluid">
                                 <div className="row ">
@@ -65,7 +82,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
                         </>
                         : null
-
 
 
                 }

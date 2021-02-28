@@ -99,11 +99,13 @@ function ViewWorkspaceList(props) {
                 {/* // over ? */}
                 <div className="row  mt-4" >
 
-                    <div className="col-1  edit iconsAction" onClick={EditWorkspace}>
+                    <div data-toggle="tooltip" data-placement="top" title="Edit"
+                     className="col-1  edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>
                     <div className="ml-2 stripe ">|</div>
-                    <div className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
+                    <div data-toggle="tooltip" data-placement="top" title="Garbage"
+                    className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
                         <img src={require('../../../../img/bin.png')}></img>
                     </div>
 

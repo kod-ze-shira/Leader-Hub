@@ -41,7 +41,6 @@ function ProjectPlatform(props) {
     }
     const showInputToAddCard = () => {
         setShowInput(true)
-
     }
     const newCard = () => {
         let card;
@@ -60,35 +59,35 @@ function ProjectPlatform(props) {
     const deleteTask = () => {
         setShowToastDelete(false)
         props.removeTaskById(taskDeleted._id)
-
     }
     return (
         <>
 
             <div className="body container-fluid">
-                <CardsByProject showToast={(task) => showToastToDeleteTask(task)} projectId={props.project._id} flag={props.flag} />
-                <div className="add-new-pop-up ">
-                    <a >New Workspace</a><br></br>
-                    <a>New Project</a><br></br>
-                    <a>New Card</a><br></br>
-                    <a>New Task</a><br></br>
+                <div className="cards">
+                    <CardsByProject showToast={(task) => showToastToDeleteTask(task)} projectId={props.project._id} flag={props.flag} />
+                    <div className="add-new-pop-up ">
+                        <a >New Workspace</a><br></br>
+                        <a>New Project</a><br></br>
+                        <a>New Card</a><br></br>
+                        <a>New Task</a><br></br>
+                    </div>
+                    {showInput ?
+                        <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control mt-2 col-6 ml-4" onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                newCard()
+                            }
+                        }}></input>
+                        : null}
+                    <a className="ml-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <div className="add-new-btn">+</div>
                 </div>
-                {showInput ?
-                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control mt-2 col-6 ml-4" onKeyPress={event => {
-                        if (event.key === 'Enter') {
-                            newCard()
-                        }
-                    }}></input>
-                    : null}
-                <a className="ml-5 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
-                <div className="add-new-btn">+</div>
                 {showToastDelete ?
                     <ToastDelete
                         toOnClose={deleteTask}
                         toSetShowToastDelete={() => { setShowToastDelete(false) }}
                         name={taskDeleted.name} /> : null}
             </div>
-
         </>
     )
 }

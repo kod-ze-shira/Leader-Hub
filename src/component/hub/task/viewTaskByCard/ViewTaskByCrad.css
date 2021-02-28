@@ -19,6 +19,9 @@
     padding-left: 3vw;
   }
   .check-task:nth-child(2){
+    text-align: left !important;
+  }
+  .check-task:nth-child(3){
     text-align: right !important;
   }
   .check-task{
@@ -152,4 +155,8 @@
 }
 .animation{
   height: 0;
+}
+.dnd-icon{
+  opacity: 0.5;
+  display: none;
 }

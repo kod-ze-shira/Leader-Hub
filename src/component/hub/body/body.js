@@ -4,7 +4,7 @@ import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
 
 export default function Body() {
   return (
-    <div className="body">
+    <div className="body-workspace">
       <AllWorkspaces />
      
     </div>

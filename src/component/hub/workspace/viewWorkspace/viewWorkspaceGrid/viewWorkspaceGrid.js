@@ -81,12 +81,14 @@ function ViewWorkspaceGrid(props) {
                 onMouseOut={() => outOver(workspace._id)}>
 
                 <div className="row " >
-                    <div className="col-1 edit iconsAction" onClick={EditWorkspace}>
+                    <div data-toggle="tooltip" data-placement="top" title="Edit"
+                    className="col-1 edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>
                     <div className="ml-1 stripe ">|</div>
                     <div className="col-1 delete iconsAction"
-                        onClick={func_remove}>
+                        onClick={func_remove}
+                        data-toggle="tooltip" data-placement="top" title="Garbage">
                         <img src={require('../../../../img/bin.png')}></img>
                     </div>
                     <div className="ml-1 stripe ">|</div>
