@@ -739,3 +739,34 @@ export const NewTask = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
+export const EditTask = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_TASK') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
+        let task = action.payload;
+        let taskId = task._id
+
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ task }),
+            success: function (data) {
+                console.log("success")
+                console.log(data.result);
+                dispatch(actions.setNewTask(data.result))
+                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}

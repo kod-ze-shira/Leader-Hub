@@ -7,6 +7,7 @@ import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import TaskDetails from '../task/taskDetails/taskDetails'
 import EditTask from '../task/addTask/addTask'
+import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 
 
 const mapStateToProps = (state) => {
@@ -33,6 +34,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <TaskDetails task={props.task} />
                 case 'editTaskToCard':
                     return <EditTask cardId={props.cardId} />
+                case 'editCurrentTask':
+                    return <EditCurrentTask task={props.task} />
                 default:
                     return null;
             }
@@ -56,7 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         </div>
                     </div >
                 </>
-                {/* // : null } */}
+                {/* //  : null }  */}
             </>
         )
     })
