@@ -28,7 +28,7 @@
 p{
     /* font-size: medium; */
     /* background-color: teal; */
-    color:#98A9BC;
+    color:#98A9BC !important;
     /* padding-left: 6vw; */
     /* bottom:0; */
     margin-bottom: 0;

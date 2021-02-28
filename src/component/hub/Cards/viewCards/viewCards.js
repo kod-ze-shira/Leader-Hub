@@ -37,12 +37,26 @@ function ViewCards(props) {
             props.newTask(task)
         }
         setInputValue("")
-        setAddTaskInInput(false)
+        setAddTaskInInput(!addTaskInInput)
     }
+    // const addTask = () => {
+    //     if (!props.card.tasks) {
+    //         setAddTaskInInput(!addTaskInInput)
+    //     }
+    //     else if (flag) {
+    //         setAddTaskInInput(!addTaskInInput)
+    //         // setFlag(!flag)
+    //     }
+
+    // }
     const addTask = () => {
-        if (flag)
-            setAddTaskInInput(!addTaskInInput)
+        setAddTaskInInput(!addTaskInInput)
+        // if (!flag && !props.flag == props.cardFromMap._id && flagFromSelect)
+        //     changeSelectedCard()
     }
+
+
+ 
     const showDetails =
         (event) => {
             setViewDetails(true)

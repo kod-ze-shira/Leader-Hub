@@ -42,7 +42,8 @@ export default function Hub(props) {
                             <Configurator />
                         </div>
                         : null}
-                    <div className="col-10  col align-self-center pr-4">
+
+                    <div className={open ? "col-10  mt-4 pr-4" : "col-12 mt-4 px-4"}>
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
 
@@ -74,6 +75,7 @@ export default function Hub(props) {
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
                     </div>
+
                 </div>
             </Router>
 

@@ -49,7 +49,7 @@ const publicData = {
                 card.tasks.map(task => {
                     if (task._id == action.payload._id) {
                         task = action.payload
-                        console.log(task, action.payload)
+                        console.log(task)
                     }
                 })
         })
