@@ -53,7 +53,8 @@ export default function Hub(props) {
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allWorkspace" >
-                                <ProjectsByWorkspace />
+                                {/* <ProjectsByWorkspace /> */}
+                                <ProjectsPage />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />

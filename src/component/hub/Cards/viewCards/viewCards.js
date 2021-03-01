@@ -123,7 +123,7 @@ function ViewCards(props) {
 
             {viewDetails ?
                 <div className="closeDet">
-                    <ViewDetails setViewDetailsToClose={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
+                    <ViewDetails closeViewDetails={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
                 </div>
                 : null}
         </>

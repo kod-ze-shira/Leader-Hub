@@ -49,8 +49,8 @@ function ViewTaskByCrad(props) {
         props.setTaskStatus(object)
         setShowChalalit(true)
     }
-    function deleteTask(task) {
-        props.showToast(task)
+    function deleteTask(value) {
+        props.showToast(props.task)
     }
     function overTask(id) {
         $(`#${id}`).css({ 'display': 'inline' })
@@ -93,15 +93,14 @@ function ViewTaskByCrad(props) {
 
                             </label>
                             <label className=" check-task py-2 border-left">
-                                <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask(props.task)}>
+                                {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask(props.task)}>
                                     <img src={require('../../../img/bin.png')}></img>
-                                </button>
+                                </button> */}
                             </label>
-                            {/* </div> */}
+                            
                             {viewDetails ?
-                                // onClick={(e) => closeDetails(e)}
                                 <div className="closeDet" >
-                                    <ViewDetails from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
+                                    <ViewDetails toastDelete={deleteTask} closeViewDetails={()=>setViewDetails(false)} from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                 </div>
                                 : null}
                         </div>
