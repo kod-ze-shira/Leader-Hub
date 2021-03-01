@@ -105,9 +105,10 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
-        let workspace = getState().workspace_reducer.workspace;
+        let workspace = action.payload;
+        console.log(workspace)
+
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -714,6 +715,7 @@ export const NewTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
+        console.log(task)
 
         $.ajax({
             url: urlData,

@@ -25,8 +25,6 @@ function AddTask(props) {
             cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
         }
-        // if (cons1 == "startDate" && cons2 < date)
-        //     alert("yes")
 
         setAddTask(prevState => ({
             ...prevState,
