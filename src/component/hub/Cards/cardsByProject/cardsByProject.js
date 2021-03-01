@@ -5,7 +5,6 @@ import ViewCards from '../viewCards/viewCards'
 import './cardsByProject.css'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-
 function CardsByProject(props) {
 
     useEffect(() => {
@@ -30,7 +29,6 @@ function CardsByProject(props) {
     };
     return (
         <>
-
             {props.cards ?
                 <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                     {props.cards.map((card, index) => {

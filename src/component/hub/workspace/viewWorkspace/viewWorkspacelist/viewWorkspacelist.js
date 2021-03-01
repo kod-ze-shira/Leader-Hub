@@ -78,7 +78,7 @@ function ViewWorkspaceList(props) {
                 onMouseOut={() => outOver(workspace._id)}  >
                 <div className="col-10" onClick={() => routeToProject(workspace._id)}
                 >
-
+                    
                     <div className="row "  >
                         <div className="Workspace"  >
                             <div className="logoWorkspacelist"
@@ -100,12 +100,12 @@ function ViewWorkspaceList(props) {
                 <div className="row  mt-4" >
 
                     <div data-toggle="tooltip" data-placement="top" title="Edit"
-                     className="col-1  edit iconsAction" onClick={EditWorkspace}>
+                        className="col-1  edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>
                     <div className="ml-2 stripe ">|</div>
                     <div data-toggle="tooltip" data-placement="top" title="Garbage"
-                    className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
+                        className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
                         <img src={require('../../../../img/bin.png')}></img>
                     </div>
 
@@ -118,14 +118,8 @@ function ViewWorkspaceList(props) {
             {
                 edit ?
                     <>
-
-
-                        <ViewDetails from="editWorkspace" >
-
-                        </ViewDetails>
-
+                        <ViewDetails closeViewDetails={()=>setEdit(false)} from="editWorkspace" > </ViewDetails>
                     </>
-
                     : null
             }
 
@@ -143,7 +137,7 @@ function ViewWorkspaceList(props) {
 
                     <Toast.Header className="tost" closeButton={false}>
 
-                                {/* <div className="close" onClick={out_remove}> x</div> */}
+                        {/* <div className="close" onClick={out_remove}> x</div> */}
 
                         <div className="row">
                             <div className="col-4">

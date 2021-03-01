@@ -1,12 +1,11 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
-import workspace_reducer from '../Reducers/workspace_reducer'
+// import workspace_reducer from '../Reducers/workspace_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        // let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
         fetch(urlData,
             {
                 method: 'GET',
@@ -106,9 +105,10 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
-        let workspace = getState().workspace_reducer.workspace;
+        let workspace = action.payload;
+        console.log(workspace)
+
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -310,8 +310,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_PROJECT_IN_SERVER') {
-
-
         let project = getState().project_reducer.project;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${project._id}/removeProjectById`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
@@ -406,6 +404,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
     }
     return next(action);
 }
+
 
 export const editTaskInServer = ({ dispatch, getState }) => next => action => {
 
@@ -716,6 +715,7 @@ export const NewTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
+        console.log(task)
 
         $.ajax({
             url: urlData,
@@ -758,8 +758,36 @@ export const EditTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
-                dispatch(actions.setNewTask(data.result))
-                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
+                dispatch(actions.setTaskName(data.result))
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
+export const EditCard = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_CARD') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
+        let card = action.payload;
+        // let taskId = task._id
+
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ card }),
+            success: function (data) {
+                console.log("success")
+                console.log(data.result);
+                dispatch(actions.setCardName(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין

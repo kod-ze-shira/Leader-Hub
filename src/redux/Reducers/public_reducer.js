@@ -109,6 +109,9 @@ const publicData = {
         state.worksapces = state.worksapces.filter((_, i) =>
             state.worksapces[i]._id !== action.payload._id
         )
+    },
+    setCardName(state, action) {
+        state.card.name = action.payload;
     }
 }
 

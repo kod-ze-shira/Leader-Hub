@@ -37,7 +37,9 @@ function TaskDetails(props) {
     const saveNewTask = () => {
         props.EditTask(editTask)
     }
-
+    function deleteTask() {
+        props.showToast(true)
+    }
     const statusList = [{ value: "done", name: "status", label: "done" },
     { value: "to do", name: "status", label: "todo" },
     { value: "in progress", name: "status", label: "in progress" }]
@@ -45,14 +47,14 @@ function TaskDetails(props) {
     return (
         <div className="details-task">
             {/* <h1 className="mt-5 pt-5">Task details</h1> */}
-            <textarea name="description" id="description"
+            <textarea name="name" id="name"
                 placeholder="Write a task name"
                 onChange={handleChange} class="mt-4 simpleTextarea--dynamic simpleTextarea AutogrowTextarea-input">
-                {task.description}
+                {task.name}
             </textarea>
-            <p>name:</p>
+            <p>description:</p>
             <input onChange={handleChange}
-                type="text" name="name" class="form-control" id="task-name" placeholder={task.name} />
+                type="text" name="description" class="form-control" id="task-name" placeholder={task.description} />
             <p>status:</p>
             <Select
                 onChange={(e) => handleChange(e)}
@@ -61,8 +63,6 @@ function TaskDetails(props) {
                 placeholder={task.status}
 
             />
-            {/* <input onChange={handleChange}
-                type="text" name="status" class="form-control" id="task-name" placeholder={task.status} /> */}
             <p>startDate:</p>
             <input onChange={handleChange}
                 name="startDate" type="text" class="form-control" id="task-name" placeholder={task.startDate} />
@@ -70,6 +70,9 @@ function TaskDetails(props) {
             <input
                 name="dueDate" type="date" class="form-control" id="dueDate" value={task.startDate}
                 onChange={handleChange} />
+            <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
+                <img src={require('../../../img/bin.png')}></img>
+            </button>
             <button onClick={(e) => saveNewTask(e)} className="add-task">Save Changes</button>
         </div>
 

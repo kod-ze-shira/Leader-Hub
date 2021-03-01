@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useRef} from 'react'
 import './ViewTaskByCrad.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
@@ -16,13 +16,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 
 function ViewTaskByCrad(props) {
-    useEffect(() => {
-
-    }, [props.task])
 
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
+
+    useEffect(() => {
+
+    }, [props.task])
+
 
 
     const showDetails = (from) => {
@@ -49,8 +51,8 @@ function ViewTaskByCrad(props) {
         props.setTaskStatus(object)
         setShowChalalit(true)
     }
-    function deleteTask(task) {
-        props.showToast(task)
+    function deleteTask(value) {
+        props.showToast(props.task)
     }
     function overTask(id) {
         $(`#${id}`).css({ 'display': 'inline' })
@@ -67,11 +69,14 @@ function ViewTaskByCrad(props) {
                         {...provided.dragHandleProps}
                         // innerRef={provided.innerRef}
                         ref={provided.innerRef}
+                        ref={props.refToNewRow}
                     >
 
                         <div onMouseOver={(e) => overTask(props.task._id)}
                             onMouseOut={() => outOver(props.task._id)}
-                            className="show-task row mx-4 border-bottom">
+                            className="show-task row mx-4 border-bottom"
+                        // ref={refToNewRow}
+                        >
                             <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
@@ -92,16 +97,15 @@ function ViewTaskByCrad(props) {
                             <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
 
                             </label>
-                            <label className=" check-task py-2 border-left">
-                                <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask(props.task)}>
+                            <label className=" check-task py-2 ">
+                                {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask(props.task)}>
                                     <img src={require('../../../img/bin.png')}></img>
-                                </button>
+                                </button> */}
                             </label>
-                            {/* </div> */}
+
                             {viewDetails ?
-                                // onClick={(e) => closeDetails(e)}
                                 <div className="closeDet" >
-                                    <ViewDetails from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
+                                    <ViewDetails toastDelete={deleteTask} closeViewDetails={() => setViewDetails(false)} from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                 </div>
                                 : null}
                         </div>

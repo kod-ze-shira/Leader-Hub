@@ -26,7 +26,13 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
     const [list, setlist] = useState(false);
     const [grid, setgrid] = useState(true)
-
+    const [workspace, setWorkspace] = useState({
+        name: "ceck add",
+        userId: "5fa79b45f8acce4894181b81",
+        projet: [],
+        team: []
+    })
+    // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
         setlist(true);
         setgrid(false)
@@ -36,9 +42,22 @@ function AllWorkspaces(props, getAllWorkspaces) {
         setlist(false);
         setgrid(true);
     }
+    function addNewWorkspace() {
+        console.log(workspace)
+        props.setWorkspaCrud(workspace)
+    }
+    const handleChange = (event) => {
+
+        const { name, value } = event.target;
+        let cons1 = event.target.name
+        let cons2 = event.target.value
+
+        setWorkspace(prevState => ({
+            ...prevState,
+            [name]: cons2
+        }));
+    }
     return (
-
-
 
         <>
             <div className="row"></div>
@@ -51,7 +70,9 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
 
                         <div className="MyWorkspace">My Workspace</div>
+
                         <div className="row">
+
                             {
                                 grid ?
                                     <>
@@ -72,11 +93,16 @@ function AllWorkspaces(props, getAllWorkspaces) {
                     <div className="row mt-5 ml-5 ">
                         {list ?
                             renderedListWorkspaces
-
                             :
                             renderedGridWorkspaces
 
                         }
+
+                        <input type="text" name="name" class="form-control" id="workspace-name" placeholder="Enter workspace name"
+                            onChange={handleChange} />
+
+                        <button onClick={addNewWorkspace}>add workspace</button>
+
                     </div>
                 </div>
             </div>
@@ -100,6 +126,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
 
     }

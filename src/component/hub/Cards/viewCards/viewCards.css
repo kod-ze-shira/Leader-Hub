@@ -15,7 +15,6 @@
         border-right: 6px solid transparent; 
         border-top: 6px solid black;
 }
-
 .show-card{
     background-color: transparent;
 }
@@ -34,4 +33,10 @@ p{
 }
 .new-task:focus{
     outline: 0 !important;
+}
+.show-card-no-pressure{
+    pointer-events: none;
+}
+.show-card-pressure{
+    cursor: pointer ;
 }
