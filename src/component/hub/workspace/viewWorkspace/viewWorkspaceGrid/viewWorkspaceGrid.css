@@ -4,9 +4,9 @@
 color:black;
 font-size: small;
 
-      width: 10rem;
+      width: 7rem;
    background-color: #F6F6FA;
-   height: 10rem;
+   height: 7rem;
    margin-bottom: 10px;
    text-align: center;
    justify-content: center;
@@ -39,21 +39,21 @@ font-size: small;
      cursor: pointer;
 }
 .name{
-   font-weight: 650;
-   margin: 28px ;
+   /* font-weight: 650; */
+   margin: auto ;
+   margin-top: 2.2vh;
 }
 .logo{
-      width: 4rem;
-    height:4rem;
+      width: 2.6rem;
+    height:2.6rem;
    border-radius: 50%;
    font-size: 26px;
-   padding-top:8px;
    color: white;
    letter-spacing: 1.72px;
-   text-align: 30px;
+   /* text-align: 30px; */
    font-family: 'Roboto', sans-serif;
-   font-size: xx-large;
-   margin-top: 30px;
+   font-size: 1.8rem;
+   /* margin-top: 30px; */
 }
 /* .close{
    cursor: pointer;
@@ -104,17 +104,18 @@ opacity: 0.9;
 
       
 .name{
-   margin-top: 33px;
+   /* margin-top: 33px; */
 }
 
 
 
 .logoWorkspace1{
-    width: 4rem;
-    height:4rem;
+   margin: auto !important;
+    width: 3rem;
+    height:3rem;
    border-radius: 50%;
-   font-size: 26px;
-   padding-top: 8px;
+   font-size: 20px;
+   padding-top: 4px;
    color: white;
    letter-spacing: 1.72px;
    text-align: center;
@@ -122,9 +123,18 @@ opacity: 0.9;
    font-size: xx-large;
    /* margin-top: 30px; */
 }
-   
+   .name> p{
+      color:black !important;
+   font:  normal normal 14px/17px Roboto;
+   font-weight: 400;
+
+}
 
 /*  */
 .iconsAction{
    display: none;
+}
+.description-and-productionDate >p{
+   display: inline-block !important;
+   text-align: left !important;
 }
