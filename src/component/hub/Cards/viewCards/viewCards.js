@@ -39,24 +39,19 @@ function ViewCards(props) {
         setInputValue("")
         setAddTaskInInput(!addTaskInInput)
     }
-    // const addTask = () => {
-    //     if (!props.card.tasks) {
-    //         setAddTaskInInput(!addTaskInInput)
-    //     }
-    //     else if (flag) {
-    //         setAddTaskInInput(!addTaskInInput)
-    //         // setFlag(!flag)
-    //     }
 
-    // }
     const addTask = () => {
-        setAddTaskInInput(!addTaskInInput)
-        // if (!flag && !props.flag == props.cardFromMap._id && flagFromSelect)
-        //     changeSelectedCard()
+        if (addTaskInInput)
+            setAddTaskInInput(false)
+        else {
+            setAddTaskInInput(true)
+            if (!flag || !(props.flag == props.cardFromMap._id && flagFromSelect))
+                // if (inputValue)
+                changeSelectedCard()
+        }
     }
 
 
- 
     const showDetails =
         (event) => {
             setViewDetails(true)
@@ -68,6 +63,7 @@ function ViewCards(props) {
         props.setCard(props.cardFromMap)
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
+
         }
         else
             if (!flag && props.cardFromMap.tasks[0]) {
@@ -76,6 +72,8 @@ function ViewCards(props) {
             else {
                 console.log(props.cardFromMap.tasks[0])
                 setFlag(false)
+
+
             }
     }
 
@@ -83,7 +81,11 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3">
-                    <button className=" show-card" onClick={(e) => changeSelectedCard(e)}>
+
+                    <button
+                        className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "show-card show-card-pressure" : "show-card show-card-no-pressure"}
+                        onClick={(e) => changeSelectedCard(e)}
+                    >
                         <div className="triangle mb-1"></div>
                         <div className="pl-2">{props.cardFromMap.name}</div>
                     </button>
