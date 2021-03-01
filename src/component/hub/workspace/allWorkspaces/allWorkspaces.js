@@ -51,10 +51,13 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
 
                         <div className="MyWorkspace">My Workspace</div>
+
                         <div className="row">
+
                             {
                                 grid ?
                                     <>
+                                        {/* <button>add workspace</button> */}
                                         <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
                                         <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
                                     </>

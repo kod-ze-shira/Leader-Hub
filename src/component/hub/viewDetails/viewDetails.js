@@ -16,15 +16,11 @@ import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 const mapStateToProps = (state) => {
     return {
         close: state.public_reducer.close,
-        // task: state.task_reducer.task
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // setclose: () => dispatch(actions.setclose()),
-
-
     }
 }
 
@@ -34,25 +30,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
 
-
-        useEffect(() => {
-            setclose(true)
-        }, [props.open])
-
-        function closEdit() {
-            setclose(false);
-        }
-
         const { from } = props//to know from which component its come
+        function toastDelete(val) {
+            props.toastDelete(val)
+        }
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails task={props.task} />
+                    return <TaskDetails showToast={ toastDelete} task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
-                case 'viewTaskByCard':
-                    return <TaskDetails task={props.task} />
-               
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':
@@ -67,24 +54,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         return (
             <>
-                {
-                    close?
-                        <>
-                            <div className="container-fluid">
-                                <div className="row ">
+                <div className="container-fluid">
+                    <div className="row ">
 
-                                    <div className="view-details col-5">
-                                        <div className="close" onClick={closEdit} >x</div>
-                                        {renderSwitch()}
-                                    </div>
-                                </div>
-                            </div >
-
-                        </>
-                        : null
-
-
-                }
+                        <div className="view-details col-5">
+                            <div className="close" onClick={(e) => props.closeViewDetails()} >x</div>
+                            {renderSwitch()}
+                        </div>
+                    </div>
+                </div >
             </>
         )
     })

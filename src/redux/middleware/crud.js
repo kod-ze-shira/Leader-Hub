@@ -1,12 +1,11 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
-import workspace_reducer from '../Reducers/workspace_reducer'
+// import workspace_reducer from '../Reducers/workspace_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        // let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllWorkspacesForUser"
         fetch(urlData,
             {
                 method: 'GET',
@@ -310,8 +309,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_PROJECT_IN_SERVER') {
-
-
         let project = getState().project_reducer.project;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${project._id}/removeProjectById`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;

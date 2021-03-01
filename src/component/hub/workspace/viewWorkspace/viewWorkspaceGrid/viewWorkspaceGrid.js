@@ -79,10 +79,10 @@ function ViewWorkspaceGrid(props) {
                 onMouseOver={() => over_workspace(workspace._id)}
 
                 onMouseOut={() => outOver(workspace._id)}>
-
+               
                 <div className="row " >
                     <div data-toggle="tooltip" data-placement="top" title="Edit"
-                    className="col-1 edit iconsAction" onClick={EditWorkspace}>
+                        className="col-1 edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>
                     <div className="ml-1 stripe ">|</div>
@@ -115,13 +115,9 @@ function ViewWorkspaceGrid(props) {
             </div>
 
 
-
             {
                 edit ?
-                    <ViewDetails from="editWorkspace" >
-
-                    </ViewDetails>
-
+                    <ViewDetails closeViewDetails={()=>setEdit(false)} from="editWorkspace" ></ViewDetails>
                     : null
             }
 

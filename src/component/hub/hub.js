@@ -29,7 +29,7 @@ export default function Hub() {
         <>
             <Router history={history}>
                 <Nav />
-                <div className="row">
+                <div className="row" >
                     <div className="col-2 px-0 mt-0">
                         <Configurator />
                     </div>
@@ -43,7 +43,8 @@ export default function Hub() {
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allWorkspace" >
-                                <ProjectsByWorkspace />
+                                {/* <ProjectsByWorkspace /> */}
+                                <ProjectsPage />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />

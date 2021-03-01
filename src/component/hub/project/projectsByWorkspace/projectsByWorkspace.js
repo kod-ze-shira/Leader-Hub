@@ -83,7 +83,7 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
                 </Table>
                 <p>fghjhgfdsertyt</p>
                 {
-                    newProject ? <ViewDetails from="newProject" workspaceId={idWorkspace} />
+                    newProject ? <ViewDetails closeViewDetails={()=>setNewProject(false)} from="newProject" workspaceId={idWorkspace} />
                         : null
                 }
             </div>
