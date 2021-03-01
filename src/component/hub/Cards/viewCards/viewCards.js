@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
@@ -11,9 +11,12 @@ import ToastDelete from '../../toastDelete/toastDelete1'
 
 function ViewCards(props) {
     useEffect(() => {
-
+        if (refToNewRow.current != null)
+            refToNewRow.current.scrollIntoView()
     }, [props.flag])
-
+    const refToNewRow = useRef(null);
+    const refToDescription = useRef(null)
+    const refToName = useRef(null)
     const [flag, setFlag] = useState(false)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
@@ -46,7 +49,7 @@ function ViewCards(props) {
         if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
             changeSelectedCard()
         }
-   
+
     }
 
 
@@ -79,8 +82,7 @@ function ViewCards(props) {
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <div className=" col-3  mr-3">
-
+                <div className=" col-3  mr-3 " >
                     <button
                         className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "show-card show-card-pressure" : "show-card show-card-no-pressure"}
                         onClick={(e) => changeSelectedCard(e)}
@@ -88,7 +90,7 @@ function ViewCards(props) {
                         <div className="triangle mb-1"></div>
                         <div className="pl-2">{props.cardFromMap.name}</div>
                     </button>
-                    <button className=" ml-3 new-task" onClick={addTask}> +</button>
+                    <button className="ml-3 new-task" onClick={addTask}>+</button>
                 </div>
                 <p className=" col-4 "></p>
                 <p className=" border-left  col pb-1">Team</p>
@@ -104,7 +106,7 @@ function ViewCards(props) {
                             ref={provided.innerRef}
                             {...provided.droppableProps}>
                             {props.cardFromMap.tasks.map((task, index) => (
-                                <ViewTaskByCrad showToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
+                                <ViewTaskByCrad showToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} refToNewRow={refToNewRow} />
                             ))}
                             {provided.placeholder}
                         </div>
@@ -112,6 +114,7 @@ function ViewCards(props) {
                 </Droppable> : null}
             {addTaskInInput ?
                 <input type="text" class="form-control mt-2 w-50 ml-4" placeholder="Add Task"
+                    ref={refToName}
                     value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                         if (event.key === 'Enter') {
                             newTask()

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useRef} from 'react'
 import './ViewTaskByCrad.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
@@ -16,13 +16,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 
 function ViewTaskByCrad(props) {
-    useEffect(() => {
-
-    }, [props.task])
 
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
+
+    useEffect(() => {
+
+    }, [props.task])
+
 
 
     const showDetails = (from) => {
@@ -67,13 +69,14 @@ function ViewTaskByCrad(props) {
                         {...provided.dragHandleProps}
                         // innerRef={provided.innerRef}
                         ref={provided.innerRef}
+                        ref={props.refToNewRow}
                     >
 
                         <div onMouseOver={(e) => overTask(props.task._id)}
                             onMouseOut={() => outOver(props.task._id)}
                             className="show-task row mx-4 border-bottom"
-                            // ref={refToNewRow}
-                            >
+                        // ref={refToNewRow}
+                        >
                             <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>

@@ -404,6 +404,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
     return next(action);
 }
 
+
 export const editTaskInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_TASK_IN_SERVER') {
@@ -755,8 +756,36 @@ export const EditTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
-                dispatch(actions.setNewTask(data.result))
-                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
+                dispatch(actions.setTaskName(data.result))
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
+export const EditCard = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_CARD') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
+        let card = action.payload;
+        // let taskId = task._id
+
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ card }),
+            success: function (data) {
+                console.log("success")
+                console.log(data.result);
+                dispatch(actions.setCardName(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
