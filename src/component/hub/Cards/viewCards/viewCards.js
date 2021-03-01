@@ -95,7 +95,7 @@ function ViewCards(props) {
                 <p className="  border-left col pb-1">Label</p>
                 <p className="  border-left col pb-1">Due Date
                 </p>
-                <p className="  border-left pb-1 " ><button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button></p>
+                {/* <p className="  border-left pb-1 " ><button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button></p> */}
             </div>
             { props.flag == props.cardFromMap._id && flagFromSelect || flag ?
                 <Droppable droppableId={props.cardFromMap._id} >
