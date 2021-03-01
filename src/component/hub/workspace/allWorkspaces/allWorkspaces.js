@@ -60,50 +60,47 @@ function AllWorkspaces(props, getAllWorkspaces) {
     return (
 
         <>
-            <div className="row"></div>
 
             <div className="row mt-5"></div>
-            <div className="row">
-                <div className="col-1"></div>
-                <div className="col-10">
-                    <div className="row borderBottom">
+            <div className="col-12">
+                <div className="row borderBottom mx-5">
 
 
-                        <div className="MyWorkspace">My Workspace</div>
+                    <div className="MyWorkspace">My Workspace</div>
 
-                        <div className="row">
+                    <div className="row">
 
-                            {
-                                grid ?
-                                    <>
-                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group (2).png')}></img></div>
-                                        <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
-                                    </>
-                                    :
-                                    <>
-                                        <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group.png')}></img></div>
-                                        <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
-                                    </>
-                            }
-
-                        </div>
-                    </div>
-
-
-                    <div className="row mt-5 ml-5 ">
-                        {list ?
-                            renderedListWorkspaces
-                            :
-                            renderedGridWorkspaces
-
+                        {
+                            grid ?
+                                <>
+                                    <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19506.png')}></img></div>
+                                    <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                                </>
+                                :
+                                <>
+                                    <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19507.png')}></img></div>
+                                    <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                </>
                         }
 
-                        <input type="text" name="name" class="form-control" id="workspace-name" placeholder="Enter workspace name"
-                            onChange={handleChange} />
-
-                        <button onClick={addNewWorkspace}>add workspace</button>
-
                     </div>
+                </div>
+
+
+                <div className="row mt-4 ml-5 ">
+                    {list ?
+                        renderedListWorkspaces
+                        :
+                        renderedGridWorkspaces
+
+                    }
+
+                    <input type="text" name="name" class="form-control mr-5 mt-2" id="workspace-name" placeholder="Enter workspace name"
+                        onChange={handleChange} />
+
+                    <button onClick={addNewWorkspace}>add workspace</button>
+
+
                 </div>
             </div>
 

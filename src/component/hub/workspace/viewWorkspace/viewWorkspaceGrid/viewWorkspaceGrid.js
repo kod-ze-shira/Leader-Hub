@@ -79,7 +79,7 @@ function ViewWorkspaceGrid(props) {
                 onMouseOver={() => over_workspace(workspace._id)}
 
                 onMouseOut={() => outOver(workspace._id)}>
-               
+
                 <div className="row " >
                     <div data-toggle="tooltip" data-placement="top" title="Edit"
                         className="col-1 edit iconsAction" onClick={EditWorkspace}>
@@ -99,16 +99,18 @@ function ViewWorkspaceGrid(props) {
                 <div className="Workspacegrid"
                     onClick={routeToProject} >
                     <div>
-                        <div className="logoWorkspace1  ml-5 " >
-                            <div className="mt-2 logo"
+                        <div className="logoWorkspace1 " >
+                            <div className="mt-1 logo"
 
                                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                 {workspace.name[0].toUpperCase()}
 
                             </div>
                         </div>
-                        <div className="mt-4">
-                            <div className="name"><b>{workspace.name}</b> </div>
+                        <div className="name "><p>{workspace.name}</p> </div>
+                        <div className=" description-and-productionDate">
+                            <p>{workspace.productionDate}</p>
+                            <p>{"description"}</p>
                         </div>
                     </div>
                 </div>
@@ -117,7 +119,7 @@ function ViewWorkspaceGrid(props) {
 
             {
                 edit ?
-                    <ViewDetails closeViewDetails={()=>setEdit(false)} from="editWorkspace" ></ViewDetails>
+                    <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" ></ViewDetails>
                     : null
             }
 
