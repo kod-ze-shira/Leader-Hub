@@ -9,7 +9,6 @@ import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 
-
 function ViewCards(props) {
     useEffect(() => {
 
@@ -38,13 +37,26 @@ function ViewCards(props) {
             props.newTask(task)
         }
         setInputValue("")
-        setAddTaskInInput(false)
+        setAddTaskInInput(!addTaskInInput)
     }
+    // const addTask = () => {
+    //     if (!props.card.tasks) {
+    //         setAddTaskInInput(!addTaskInInput)
+    //     }
+    //     else if (flag) {
+    //         setAddTaskInInput(!addTaskInInput)
+    //         // setFlag(!flag)
+    //     }
+
+    // }
     const addTask = () => {
         setAddTaskInInput(!addTaskInInput)
         // if (!flag && !props.flag == props.cardFromMap._id && flagFromSelect)
         //     changeSelectedCard()
     }
+
+
+ 
     const showDetails =
         (event) => {
             setViewDetails(true)
