@@ -9,8 +9,7 @@ height:90vh;
 top:0;
 right: 0;
 z-index: 999;
-border-left: 9px solid   var(--light-light-blue);
-
+border-left: 9px solid  #329A80  ;
 }
 .inputTextproject{
     background-color: var(--light-light-blue);

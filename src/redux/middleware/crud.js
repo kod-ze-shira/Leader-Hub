@@ -101,41 +101,36 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-
-
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
+
     if (action.type === 'SET_WORKSPACE_CRUD') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newWorkspace`
         let workspace = action.payload;
         console.log(workspace)
 
         $.ajax({
             url: urlData,
-            type: 'POST',
+            method: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                workspace
-            }),
-            // dataType: 'json',
+            data: JSON.stringify({ workspace }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                // dispatch({ type: '', payload: data })
+                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                checkPermission(err).then((ifOk) => {
-
-                })
+                console.log("error")
+                console.log(err)
             }
         });
-        // })
     }
     return next(action);
 }
+
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
