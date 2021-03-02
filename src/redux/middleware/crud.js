@@ -272,10 +272,7 @@ function checkPermission(result) {
 export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
-
-
         let workspace = getState().workspace_reducer.workspace;
-        // var w = getState().workspace_reducer.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
@@ -285,23 +282,16 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ workspace }),
-            // dataType: 'json',
             success: function (data) {
-
                 console.log("success")
                 console.log(data);
-
-
+                dispatch(actions.updateWorkspaceUfterEditInServer(data.result))
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
-
             }
         });
-        // })
     }
     return next(action);
 }

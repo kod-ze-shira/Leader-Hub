@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
+import bin from '../../../../img/bin.png'
+import duplicate from '../../../../img/duplicate-outline.png'
+import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
@@ -17,10 +20,9 @@ function ViewWorkspaceGrid(props) {
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
-    function EditWorkspace() {
+    function editWorkspace() {
         setEdit(true);
         props.setWorkspace(workspace)
-        props.setclose()
     }
     function add() {
         props.setWorkspace(workspace);
@@ -51,19 +53,18 @@ function ViewWorkspaceGrid(props) {
                 onMouseOver={() => over_workspace(workspace._id)}
                 onMouseOut={() => outOver(workspace._id)}>
                 <div className="row " >
-                    <div data-toggle="tooltip" data-placement="top" title="Edit"
-                        className="col-1 edit iconsAction" onClick={EditWorkspace}>
-                        <img src={require('../../../../img/pencil-write.png')}></img>
+                    <div
+                        className="col-1 edit iconsAction" onClick={editWorkspace}>
+                        <img src={pencil}></img>
                     </div>
                     <div className="ml-1 stripe ">|</div>
                     <div className="col-1 delete iconsAction"
-                        onClick={delete_workspace}
-                        data-toggle="tooltip" data-placement="top" title="Garbage">
-                        <img src={require('../../../../img/bin.png')}></img>
+                        onClick={delete_workspace}>
+                        <img src={bin}></img>
                     </div>
-                    <div className="ml-1 stripe ">|</div>
+                    <div className="ml-1 stripe">|</div>
                     <div className="col-1 add iconsAction" onClick={add}>
-                        <img src={require('../../../../img/duplicate-outline.png')}></img>
+                        <img src={duplicate}></img>
                     </div>
                 </div>
                 <div className="Workspacegrid"
@@ -96,7 +97,6 @@ const mapStateToProps = (state) => {
     return {
 
         user: state.public_reducer.userName,
-        close: state.public_reducer.close,
         workspaces: state.workspace_reducer.workspaces,
 
 
@@ -105,12 +105,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
-        getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-        setclose: () => dispatch(actions.setclose()),
         setProjects: (projects) => dispatch(actions.setProjects(projects))
     }
 

@@ -112,6 +112,14 @@ const publicData = {
     },
     setCardName(state, action) {
         state.card.name = action.payload;
+    },
+    updateWorkspaceUfterEditInServer(state, action) {
+        state.worksapces.forEach((workspace,index) => {
+            if (workspace._id === action.payload._id)
+            state.worksapces[index] = action.payload
+        }
+
+        )
     }
 }
 

@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 import ViewDetails from '../../../viewDetails/viewDetails'
+import bin from '../../../../img/bin.png'
+import duplicate from '../../../../img/duplicate-outline.png'
+import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 
 
@@ -17,20 +20,13 @@ function ViewWorkspaceList(props) {
         props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
-    function EditWorkspace() {
+    function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        props.setclose()
         setEdit(true);
     }
-    function outEdit() {
-        setEdit(false);
-    }
-    function func_remove() {
+    function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
         props.setWorkspace(workspace);
-    }
-    const toOpenEditWorkspace = () => {
-        setOpenEditWorkspace(!openEditWorkspace)
     }
     const [over, setover] = useState(false);
 
@@ -69,15 +65,14 @@ function ViewWorkspaceList(props) {
                 {/* { */}
                 {/* // over ? */}
                 <div className="row  mt-4" >
-
-                    <div data-toggle="tooltip" data-placement="top" title="Edit"
-                        className="col-1  edit iconsAction" onClick={EditWorkspace}>
-                        <img src={require('../../../../img/pencil-write.png')}></img>
+                    <div
+                        className="col-1  edit iconsAction" onClick={editWorkspace}>
+                        <img src={pencil}></img>
                     </div>
-                    <div className="ml-2 stripe ">|</div>
-                    <div data-toggle="tooltip" data-placement="top" title="Garbage"
-                        className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
-                        <img src={require('../../../../img/bin.png')}></img>
+                    <div className="ml-2 stripe">|</div>
+                    <div
+                        className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
+                        <img src={bin}></img>
                     </div>
 
                 </div>
@@ -99,16 +94,11 @@ function ViewWorkspaceList(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
-        close: state.public_reducer.close,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
-        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
-        setclose: () => dispatch(actions.setclose()),
+       setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
     }
 }
