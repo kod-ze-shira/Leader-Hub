@@ -12,17 +12,16 @@ function AllWorkspaces(props) {
 
     useEffect(() => {
         props.getAllWorkspaces()
-
     }, []);
-
-
     const renderedListWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceList 
         setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
         key={todo._id} workspace={todo} />
     })
     const renderedGridWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
+        return <ViewWorkspaceGrid 
+        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+        key={todo._id} workspace={todo} />
     })
 
     const [list, setlist] = useState(false);
@@ -33,7 +32,6 @@ function AllWorkspaces(props) {
         projet: [],
         team: []
     })
-    // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
         setlist(true);
         setgrid(false)
