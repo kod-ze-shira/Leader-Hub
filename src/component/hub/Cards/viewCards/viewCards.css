@@ -40,3 +40,10 @@ p{
 .show-card-pressure{
     cursor: pointer ;
 }
+.name-and-triangle{
+    display: inline-block !important;
+}
+.scroll-container {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
