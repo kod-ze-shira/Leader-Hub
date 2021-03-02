@@ -2,7 +2,6 @@ import produce from 'immer';
 import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
-
     project: {}
 
 }
@@ -13,7 +12,6 @@ const project = {
     },
     setProject(state, action) {
         state.project = action.payload;
-        console.log("redux pro" + state.project)
     },
     setProjectId(state, action) {
         state.project.id = action.payload;

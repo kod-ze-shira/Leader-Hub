@@ -9,11 +9,11 @@ height:90vh;
 top:0;
 right: 0;
 z-index: 999;
-border-left: 9px solid  #6DD41F;
+border-left: 9px solid   var(--light-light-blue);
 
 }
 .inputTextproject{
-    background-color: blue;
+    background-color: var(--light-light-blue);
     color: black;
 }
 .close{

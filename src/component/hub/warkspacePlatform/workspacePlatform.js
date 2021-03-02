@@ -35,7 +35,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
 
         <div className="warkspace-platform " to={`${props.user}/workspacePlatform`} >
             <div className="container-fluid">
-                <button className="warkspace-paltform-show pt-5 pl-5 row" onClick={() => props.getAllWorkspaces()}
+                <button className="warkspace-paltform-show  pl-5 row" onClick={() => props.getAllWorkspaces()}
                 >
                     <div class="arrow-down mt-3 mr-3 ml-5"></div>
                 Recent workspace

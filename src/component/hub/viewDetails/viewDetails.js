@@ -6,78 +6,64 @@ import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWo
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import NewProject from '../project/newProject/newProject'
+import AddTask from '../task/addTask/addTask'
+import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
+import TaskDetails from '../task/taskDetails/taskDetails'
+import EditTask from '../task/addTask/addTask'
+import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 
 
 const mapStateToProps = (state) => {
     return {
-
-        // close: state.public_reducer.close,
+        close: state.public_reducer.close,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // setclose: () => dispatch(actions.setclose()),
-
-
     }
 }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(
-
-
-
-
     function ViewDetails(props) {
 
-        const { from } = props//to know from which component its come
+        const [close, setclose] = useState(true)
+        const [open, setOpen] = useState(true)
 
+        const { from } = props//to know from which component its come
+        function toastDelete(val) {
+            props.toastDelete(val)
+        }
         const renderSwitch = () => {
             switch (from) {
+                case 'viewTaskByCard':
+                    return <TaskDetails showToast={ toastDelete} task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
-                case 'newProject'://on click edit button of workspace
+                case 'editCurrentTask':
+                    return <EditCurrentTask task={props.task} />
+                case 'newProject':
                     return <NewProject workspaceId={props.workspaceId} />
+                case 'addTask':
+                    return <AddTask cardId={props.cardId} />
                 default:
                     return null;
+
             }
         }
 
-        const [close, setclose] = useState(true)
-        function closEdit() {
-            setclose(false);
-        }
-
-
-
         return (
             <>
+                <div className="container-fluid">
+                    <div className="row ">
 
-
-                {
-                    close ?
-                        <>
-                            <div className="container-fluid">
-                                <div className="row ">
-
-                                    <div className="view-details col-5">
-                                        <div className="close" onClick={closEdit} >x</div>
-                                        {renderSwitch()}
-                                    </div>
-                                </div>
-                            </div >
-
-                        </>
-                        : null
-
-
-
-                }
+                        <div className="view-details col-5">
+                            <div className="close" onClick={(e) => props.closeViewDetails()} >x</div>
+                            {renderSwitch()}
+                        </div>
+                    </div>
+                </div >
             </>
-
-
         )
     })
 

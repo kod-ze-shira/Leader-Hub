@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
 import './cardsByProject.css'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function CardsByProject(props) {
 
@@ -13,9 +12,9 @@ function CardsByProject(props) {
 
     }, [props.projectId])
 
-    const viewCardsByProject = props.cards.map((card) => {
-        return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
-    })
+    // const viewCardsByProject = props.cards.map((card) => {
+    //     return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
+    // })
 
     function onDragEndׂ(e) {
         let i
@@ -32,10 +31,11 @@ function CardsByProject(props) {
         <>
             {props.cards ?
                 <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
-                    {props.cards.map(card => {
-                        return <ViewCards key={card._id} cardFromMap={card} flag={props.flag} />
+                    {props.cards.map((card, index) => {
+                        return <ViewCards showToastDelete={(task) => props.showToast(task)} key={card._id} cardFromMap={card} flag={props.flag} index={index} />
                     })}
-                </DragDropContext> : null}
+                </DragDropContext>
+                : null}
         </>
     )
 }
@@ -46,10 +46,6 @@ export default connect(
     (state) => {
         return {
             cards: state.public_reducer.cards,
-            // card: state.card_reducer.card,
-
-            // project: state.project_reducer.project,
-            // user: state.public_reducer.userName
         }
     },
     (dispatch) => {

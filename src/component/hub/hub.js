@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './header/header';
 import Body from './body/body';
 import Nav from '../warps/nav/nav';
@@ -24,16 +24,26 @@ import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toast";
 import ProjectsPage from './project/projectsPage/projectsPage'
-export default function Hub() {
+export default function Hub(props) {
+    const [open, setOpen] = useState(true);
+    // useEffect(() => {
+
+    // }, [props.openConfigurator]);
+    const openConfigurator = () => {
+        setOpen(!open);
+    }
     return (
         <>
             <Router history={history}>
-                <Nav />
+                <Nav openConfigurator={openConfigurator} />
                 <div className="row">
-                    <div className="col-2 px-0 mt-0">
-                        <Configurator />
-                    </div>
-                    <div className="col-10  col align-self-center pr-4">
+                    {open ?
+                        <div className="col-2 px-0 mt-0">
+                            <Configurator />
+                        </div>
+                        : null}
+
+                    <div className={open ? "col-10  mt-4 pr-4" : "col-12 mt-4 px-4"}>
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
 
@@ -43,7 +53,8 @@ export default function Hub() {
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allWorkspace" >
-                                <ProjectsByWorkspace />
+                                {/* <ProjectsByWorkspace /> */}
+                                <ProjectsPage />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
@@ -65,6 +76,7 @@ export default function Hub() {
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
                     </div>
+
                 </div>
             </Router>
 

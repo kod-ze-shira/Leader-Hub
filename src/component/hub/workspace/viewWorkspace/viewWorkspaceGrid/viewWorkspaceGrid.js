@@ -81,12 +81,14 @@ function ViewWorkspaceGrid(props) {
                 onMouseOut={() => outOver(workspace._id)}>
 
                 <div className="row " >
-                    <div className="col-1 edit iconsAction" onClick={EditWorkspace}>
+                    <div data-toggle="tooltip" data-placement="top" title="Edit"
+                        className="col-1 edit iconsAction" onClick={EditWorkspace}>
                         <img src={require('../../../../img/pencil-write.png')}></img>
                     </div>
                     <div className="ml-1 stripe ">|</div>
                     <div className="col-1 delete iconsAction"
-                        onClick={func_remove}>
+                        onClick={func_remove}
+                        data-toggle="tooltip" data-placement="top" title="Garbage">
                         <img src={require('../../../../img/bin.png')}></img>
                     </div>
                     <div className="ml-1 stripe ">|</div>
@@ -97,29 +99,27 @@ function ViewWorkspaceGrid(props) {
                 <div className="Workspacegrid"
                     onClick={routeToProject} >
                     <div>
-                        <div className="logoWorkspace1  ml-5 " >
-                            <div className="mt-2 logo"
+                        <div className="logoWorkspace1 " >
+                            <div className="mt-1 logo"
 
                                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                 {workspace.name[0].toUpperCase()}
 
                             </div>
                         </div>
-                        <div className="mt-4">
-                            <div className="name"><b>{workspace.name}</b> </div>
+                        <div className="name "><p>{workspace.name}</p> </div>
+                        <div className=" description-and-productionDate">
+                            <p>{workspace.productionDate}</p>
+                            <p>{"description"}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-
             {
                 edit ?
-                    <ViewDetails from="editWorkspace" >
-
-                    </ViewDetails>
-
+                    <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" ></ViewDetails>
                     : null
             }
 

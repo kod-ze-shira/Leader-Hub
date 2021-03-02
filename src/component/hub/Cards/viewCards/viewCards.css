@@ -25,17 +25,18 @@
     outline: 0;
 }
 p{
-    /* font-size: medium; */
-    /* background-color: teal; */
-    color:#98A9BC;
-    /* padding-left: 6vw; */
-    /* bottom:0; */
+    color:#98A9BC !important;
     margin-bottom: 0;
-    /* margin-top: 2vh; */
 }
 .new-task{
     background-color: transparent;
 }
 .new-task:focus{
     outline: 0 !important;
+}
+.show-card-no-pressure{
+    pointer-events: none;
+}
+.show-card-pressure{
+    cursor: pointer ;
 }

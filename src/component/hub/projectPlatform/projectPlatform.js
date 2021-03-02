@@ -3,21 +3,24 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import CardsByProject from '../Cards/cardsByProject/cardsByProject';
 import './projectPlatform.css'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import ToastDelete from '../toastDelete/toastDelete1';
 
 
 function ProjectPlatform(props) {
-    // const { idProject } = useParams();
     const [projectId, setProjectId] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
     const [showInput, setShowInput] = useState(false)
+    const [showToastDelete, setShowToastDelete] = useState(false)
+    const [taskDeleted, setTaskDeleted] = useState()
 
     useEffect(() => {
         {
-            // props.getAllWorkspacesFromServer()
 
         };
     }, []);
+
     const changeProjectId = () => {
         // setProjectId(value)
         setViewCardsByProject(true)
@@ -38,7 +41,6 @@ function ProjectPlatform(props) {
     }
     const showInputToAddCard = () => {
         setShowInput(true)
-
     }
     const newCard = () => {
         let card;
@@ -49,33 +51,45 @@ function ProjectPlatform(props) {
         setInputValue("")
         setShowInput(false)
     }
+    //show toast delete to true and save the sask that shold be deleted
+    const showToastToDeleteTask = (task) => {
+        setTaskDeleted(task)
+        setShowToastDelete(true)
+    }
+    const deleteTask = () => {
+        setShowToastDelete(false)
+        props.removeTaskById(taskDeleted._id)
+    }
     return (
         <>
 
             <div className="body container-fluid">
-
-                {/* {props.project.name!="No Projects" ? */}
-                <CardsByProject projectId={props.project._id} flag={props.flag} />
-                {/* : null}  */}
-                <div className="add-new-pop-up ">
-                    <a >New Workspace</a><br></br>
-                    <a>New Project</a><br></br>
-                    <a>New Card</a><br></br>
-                    <a>New Task</a><br></br>
+                <div className="cards">
+                    <CardsByProject showToast={(task) => showToastToDeleteTask(task)} projectId={props.project._id} flag={props.flag} />
+                    <div className="add-new-pop-up ">
+                        <a >New Workspace</a><br></br>
+                        <a>New Project</a><br></br>
+                        <a>New Card</a><br></br>
+                        <a>New Task</a><br></br>
+                    </div>
+                    {showInput ?
+                        <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control mt-2 col-6 ml-4" onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                newCard()
+                            }
+                        }}></input>
+                        : null}
+                    <a className="ml-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <div className="add-new-btn">+</div>
                 </div>
-                {showInput ?
-                    <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="col-7 ml-4 mt-2 input-group-prepend" onKeyPress={event => {
-                        if (event.key === 'Enter') {
-                            newCard()
-                        }
-                    }}></input>
-                    : null}
-                <a className="ml-4 mt-2 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
-                <div className="add-new-btn">+</div>
+                {showToastDelete ?
+                    <ToastDelete
+                        toOnClose={deleteTask}
+                        toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                        name={taskDeleted.name} /> : null}
             </div>
         </>
     )
-
 }
 const mapStateToProps = (state) => {
     return {
@@ -89,6 +103,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),

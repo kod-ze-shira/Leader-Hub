@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { removeData } from 'jquery';
 import { act } from 'react-dom/test-utils';
 import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
@@ -10,7 +11,7 @@ const initialState = {
     cards: [],
     tasks: [],
     isConfiguratorOpen: "false",
-    close: "false"
+    // close: "false"
 }
 
 const publicData = {
@@ -33,6 +34,29 @@ const publicData = {
     setTasks(state, action) {
         state.tasks = action.payload;
     },
+    deletTask(state, action) {
+        state.cards.map(card => {
+            if (card._id == action.payload.card)
+                card.tasks = card.tasks.filter((_, i) =>
+                    card.tasks[i]._id !== action.payload._id
+                )
+        })
+    },
+
+    setNewTask(state, action) {
+        let i, j
+        console.log("state.cards[i].tasks[j]._id action.payload._id")
+        for (i = 0; i < state.cards.length; i++)
+            if (state.cards[i]._id == action.payload.card) {
+                for (j = 0; j < state.cards[i].tasks.length; j++) {
+                    if (state.cards[i].tasks[j]._id == action.payload._id) {
+                        state.cards[i].tasks[j] = action.payload
+                        break
+                    }
+                }
+            }
+    },
+
     setTaskStatus(state, action) {
         let cardId, taskId
         cardId = action.payload[0]
@@ -81,12 +105,14 @@ const publicData = {
         })
     },
     //remove one workspace when go back from server
-    removeOneWorkspaceFromWorkspaces(state,action){
-        state.worksapces=state.worksapces.filter((_,i)=>
-        state.worksapces[i]._id!==action.payload._id
+    removeOneWorkspaceFromWorkspaces(state, action) {
+        state.worksapces = state.worksapces.filter((_, i) =>
+            state.worksapces[i]._id !== action.payload._id
         )
+    },
+    setCardName(state, action) {
+        state.card.name = action.payload;
     }
-
 }
 
 

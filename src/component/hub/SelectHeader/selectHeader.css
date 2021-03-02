@@ -40,9 +40,7 @@ line-height: 0.95 !important;
 
 .MuiTab-root:focus{
         outline: 0 !important;
-        color:#6DD41F  !important;
-
-
+        color:var(--light-light-blue)  !important;
 }
 .select__placeholder{
         /* font-size: small !important; */
