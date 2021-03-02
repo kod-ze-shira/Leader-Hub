@@ -24,10 +24,9 @@ function ViewWorkspaceGrid(props) {
         setEdit(true);
         props.setWorkspace(workspace)
     }
-    function add() {
+    function duplicateWorkspace() {
         props.setWorkspace(workspace);
-        props.duplicateWorkspaceInServer();
-        props.getAllWorkspaces()
+        props.duplicateWorkspace();
     }
     function outEdit() {
         setEdit(false);
@@ -63,7 +62,7 @@ function ViewWorkspaceGrid(props) {
                         <img src={bin}></img>
                     </div>
                     <div className="ml-1 stripe">|</div>
-                    <div className="col-1 add iconsAction" onClick={add}>
+                    <div className="col-1 add iconsAction" onClick={duplicateWorkspace}>
                         <img src={duplicate}></img>
                     </div>
                 </div>
@@ -95,19 +94,15 @@ function ViewWorkspaceGrid(props) {
 const mapStateToProps = (state) => {
 
     return {
-
         user: state.public_reducer.userName,
         workspaces: state.workspace_reducer.workspaces,
-
-
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        setProjects: (projects) => dispatch(actions.setProjects(projects))
+        setProjects: (projects) => dispatch(actions.setProjects(projects)),
+        duplicateWorkspace:()=>dispatch(actions.duplicateWorkspace())
     }
 
 

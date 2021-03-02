@@ -120,6 +120,9 @@ const publicData = {
         }
 
         )
+    },
+    addWorkspaceToWorkspaces(state,action){
+        state.worksapces.push(action.payload)
     }
 }
 

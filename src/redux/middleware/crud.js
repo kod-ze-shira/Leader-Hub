@@ -3,7 +3,6 @@ import { actions } from '../actions/action'
 // import workspace_reducer from '../Reducers/workspace_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
@@ -486,12 +485,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-
-// router.get('/:userName/:projectId/getCardsByprojectId',cardFunctions.getCardsByprojectId)
-// /:projectId/getCardsByprojectId
-
-
-//
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
@@ -525,11 +518,6 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
     return next(action);
 }
 
-// url:
-// https://reacthub.dev.leader.codes/api/renana-il/{{cardId}}/getTasksByCardId
-
-// *cardId
-// 6006061269370dacf7af0609
 export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
@@ -597,12 +585,6 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
     }
     return next(action);
 }
-
-
-
-
-
-//
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
@@ -662,14 +644,6 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
     }
     return next(action);
 }
-
-// router.post('/:userName/newCard', cardFunctions.newCard)
-
-// export const newCard = ({ dispatch, getState }) => next => action => {
-
-//     if (action.type === 'NEW_CARD') {
-//     }
-// }
 
 export const NewCard = ({ dispatch, getState }) => next => action => {
 
@@ -786,4 +760,29 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
         });
     }
     return next(action);
+}
+export const duplicateWorkspace=({dispatch,getState})=>next=>action=>{
+    if(action.type==='DUPLICATE_WORKSPACE')
+    {
+        fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().workspace_reducer.workspace._id}/duplicateWorkspace`,
+        {
+            method: 'POST',
+            headers: {
+                authorization: getState().public_reducer.tokenFromCookies,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        }).then((result) => {
+            return result.json();
+        }).then((result) => {
+            checkPermission(result).then((ifOk) => {
+                console.log(result);
+                dispatch(actions.addWorkspaceToWorkspaces(result.duplicateWorkspace))
+
+            })
+           
+        })
+    }
+    return next(action);
+    
 }
