@@ -19,22 +19,19 @@ function AllWorkspaces(props, getAllWorkspaces) {
     const [list, setlist] = useState(false);
     const [grid, setgrid] = useState(true);
     const [showAddWorkspace, setShowWorkspace] = useState(false)
+    const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
+
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceList key={todo._id} workspace={todo} />
+        return <ViewWorkspaceList key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
     const renderedGridWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
+        return <ViewWorkspaceGrid key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
-
-
-    const [workspace, setWorkspace] = useState({
-        name: "ceck add",
-        userId: "5fa79b45f8acce4894181b81",
-        description: "",
-        projet: [],
-        team: []
-    })
+    function openEditWorkspace(){
+        setAddOrEditWorkspace("editWorkspace")
+        setShowWorkspace(true)
+    }
     // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
         setlist(true);
@@ -45,16 +42,11 @@ function AllWorkspaces(props, getAllWorkspaces) {
         setlist(false);
         setgrid(true);
     }
-    function addNewWorkspace() {
+    function openaddNewWorkspace() {
+        setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
     }
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setWorkspace(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
+
     return (
 
         <>
@@ -88,7 +80,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
                     {/* add workspace button */}
                     {list ?
                         <div className="row WorkspaceList mt-3 " >
-                            <div className="col-10" onClick={addNewWorkspace}
+                            <div className="col-10" onClick={openaddNewWorkspace}
                             >
                                 <div className="row "  >
                                     <div className="Workspace"  >
@@ -107,7 +99,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
                         :
                         <div className="Workspacegrid mt-4" >
-                            <div onClick={addNewWorkspace}>
+                            <div onClick={openaddNewWorkspace}>
                                 <div className="logoWorkspace1 " >
                                     <div className="mt-1 logo"
                                         style={{ backgroundColor: "#778CA2" }}
@@ -118,13 +110,11 @@ function AllWorkspaces(props, getAllWorkspaces) {
                             </div>
                         </div>
                     }
-                    {showAddWorkspace ?
-                        <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from="addWorkspace" /> : null
-                    }
-                    {/* <input type="text" name="name" class="form-control mr-5 mt-2" id="workspace-name" placeholder="Enter workspace name"
-                        onChange={handleChange} /> */}
-                </div>
             </div>
+     </div>
+                   {showAddWorkspace ?
+                        <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from={addOrEditWorkspace} /> : null
+                    }
         </>
 
     )

@@ -32,7 +32,6 @@ function ViewWorkspaceGrid(props) {
             props.deleteWorkspaceInServer();
         }
     }
-    const [edit, setEdit] = useState(false);
 
     function outOver(id) {
 
@@ -40,7 +39,7 @@ function ViewWorkspaceGrid(props) {
 
     }
     function EditWorkspace() {
-        setEdit(true);
+        props.editWorkspace()
         props.setWorkspace(workspace)
         props.setclose()
     }
@@ -51,11 +50,6 @@ function ViewWorkspaceGrid(props) {
         props.getAllWorkspaces()
     }
 
-
-    function outEdit() {
-        setEdit(false);
-    }
-
     // $(`.ViewWorkspace`).mouseover(function () {
     //     console.log(this.id)
     //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
@@ -64,7 +58,6 @@ function ViewWorkspaceGrid(props) {
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
-        // $(`#${id} .stripe`).css({ 'color': 'red' })
 
     }
     function func_remove() {
@@ -117,15 +110,9 @@ function ViewWorkspaceGrid(props) {
             </div>
 
 
-            {
-                edit ?
-                    <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" ></ViewDetails>
-                    : null
-            }
-
 
             <>
-                <div className="mt-5"></div>
+                {/* <div className="mt-5"></div> */}
 
                 {/* <Toast className="toast_delete"
                     onClose={DeleteWorkspace}
