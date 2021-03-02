@@ -31,7 +31,8 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
-        let urlData = "https://reacthub.dev.leader.codes/api/renana-il/getAllTeamsForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
+
         fetch(urlData,
             {
                 method: 'GET',
@@ -106,7 +107,6 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
 export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_WORKSPACE_CRUD') {
-
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
         let workspace = getState().workspace_reducer.workspace;
         $.ajax({
@@ -141,7 +141,7 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_TASK_CRUD') {
 
 
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask"
         let task = action.payload;
         $.ajax({
             url: urlData,
@@ -161,7 +161,7 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 checkPermission(err).then((ifOk) => {
-                   
+
 
                 })
             }
@@ -174,8 +174,8 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
 
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
-        let name = action.payload;
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject"
+        let project = action.payload;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -183,13 +183,14 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                name,
-            }),
+            data:
+                JSON.stringify({
+                    "project": project,
+                }),
             dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log(data);
+                console.log(data.message);
                 // dispatch({ type: '', payload: data })
             },
             error: function (err) {

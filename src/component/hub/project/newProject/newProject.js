@@ -18,7 +18,7 @@ function NewProject(props) {
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
         console.log(date + '/' + month + '/' + year)
-        // project.updateDates[0] = date + '/' + month + '/' + year
+        project.updateDates[0] = date + '/' + month + '/' + year
         project.workspace = props.workspaceId
         if (!project.name)
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
