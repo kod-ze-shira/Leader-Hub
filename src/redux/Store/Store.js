@@ -25,7 +25,7 @@ import { editTaskInServer } from '../middleware/crud'
 import { editCard } from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
 import { getProjectByIdInServer } from '../middleware/crud'
-import { deleteWorkspaceInServer } from '../middleware/crud'
+import { deleteWorkspaceFromServer } from '../middleware/crud'
 
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer });
@@ -52,7 +52,7 @@ const store = createStore(
                 getProjectByIdInServer,
                 getCardsByProjectId,
                 getTasksByCardId,
-                deleteWorkspaceInServer,
+                deleteWorkspaceFromServer,
                 NewCard,
                 NewTask,
                 removeTaskById,

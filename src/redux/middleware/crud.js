@@ -30,12 +30,7 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
-<<<<<<< HEAD
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
-
-=======
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTeamsForUser`
->>>>>>> newDev
         fetch(urlData,
             {
                 method: 'GET',
@@ -161,7 +156,6 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -347,9 +341,9 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     return next(action);
 }
 //delet workspace
-export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
+    if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
         let workspace = getState().workspace_reducer.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
         $.ajax({
@@ -362,11 +356,10 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
+                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });

@@ -29,7 +29,7 @@ function ViewWorkspaceGrid(props) {
         setShowToast(false)
         if (deleted) {
             props.setWorkspace(workspace);
-            props.deleteWorkspaceInServer();
+            props.deleteWorkspaceFromServer();
         }
     }
     const [edit, setEdit] = useState(false);
@@ -174,7 +174,7 @@ const mapDispatchToProps = (dispatch) => {
         // getWorkspaceByIdFromServer: () => dispatch(actions.getWorkspaceByIdFromServer()),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
+        deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setclose: () => dispatch(actions.setclose()),
         setProjects: (projects) => dispatch(actions.setProjects(projects))

@@ -14,7 +14,7 @@ function ViewWorkspaceList(props) {
     const { workspace } = props
     const [viewProjects, setViewProjects] = useState(false)
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
-    const [showToast, setShowToast] = useState(false);//to show toast delete
+    // const [showToast, setShowToast] = useState(false);//to show toast delete
     const [deleted, setDeleted] = useState(true)//to undo delete// if user want undo delete
     const [edit, setEdit] = useState(false);
 
@@ -36,8 +36,10 @@ function ViewWorkspaceList(props) {
     }
     function func_remove() {
         // setremove(true);
-        setDeleted(true)
-        setShowToast(true)
+        props.setShowToastDeleteWhenClickDelete()
+        props.setWorkspace(workspace);
+        // setDeleted(true)
+        // setShowToast(true)
 
     }
 
@@ -46,14 +48,6 @@ function ViewWorkspaceList(props) {
         setOpenEditWorkspace(!openEditWorkspace)
     }
     const [over, setover] = useState(false);
-    function DeleteWorkspace() {
-        setShowToast(false)
-        if (deleted) {
-            props.setWorkspace(workspace);
-            props.deleteWorkspaceInServer();
-        }
-
-    }
 
 
 
@@ -67,8 +61,6 @@ function ViewWorkspaceList(props) {
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
-
-
 
     return (
         <>
@@ -125,19 +117,14 @@ function ViewWorkspaceList(props) {
 
 
             <>
-                <div className="mt-5"></div>
+                {/* <div className="mt-5"></div> */}
 
-                <Toast className="toast_delete"
+                {/* <Toast className="toast_delete"
                     onClose={DeleteWorkspace}
                     show={showToast}
                     delay={5000} autohide>
-                    {/* <span
-                                className="close_remove"
-                                onClick={out_remove_workspace}>×</span> */}
-
+                  
                     <Toast.Header className="tost" closeButton={false}>
-
-                        {/* <div className="close" onClick={out_remove}> x</div> */}
 
                         <div className="row">
                             <div className="col-4">
@@ -147,7 +134,6 @@ function ViewWorkspaceList(props) {
                                 {workspace.name} was deleted
                                     </div>
                             <div className="col-4 div_btn_undo pr-2">
-                                {/* <div className="Undo" onClick={Undo}>Undo</div> */}
                                 <button className="btn_undo" onClick={() => { setShowToast(false); setDeleted(false) }}>Undo</button>
                             </div>
                         </div>
@@ -156,8 +142,7 @@ function ViewWorkspaceList(props) {
 
 
                     </Toast.Header>
-                    {/* <Toast.Body>was deleted</Toast.Body> */}
-                </Toast>
+                </Toast> */}
 
             </>
 
@@ -180,12 +165,9 @@ const mapDispatchToProps = (dispatch) => {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getWorkspaceByIdFromServer: (workspaceId) => dispatch(actions.getWorkspaceByIdFromServer(workspaceId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        deleteWorkspaceInServer: () => dispatch(actions.deleteWorkspaceInServer()),
         setcloseEditWorkspace: () => dispatch(actions.setcloseEditWorkspace()),
         setclose: () => dispatch(actions.setclose()),
-        setProjects: (projects) => dispatch(actions.setProjects(projects))
-
-
+        setProjects: (projects) => dispatch(actions.setProjects(projects)), 
     }
 }
 

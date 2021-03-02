@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
+import ToastDelete from '../../toastDelete/toastDelete1'
 
-// let workspace;
 
-
-function AllWorkspaces(props, getAllWorkspaces) {
+function AllWorkspaces(props) {
+    const [showToastDelete, setShowToastDelete] = useState(false)
 
     useEffect(() => {
         props.getAllWorkspaces()
@@ -16,9 +16,10 @@ function AllWorkspaces(props, getAllWorkspaces) {
     }, []);
 
 
-
     const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceList key={todo._id} workspace={todo} />
+        return <ViewWorkspaceList 
+        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+        key={todo._id} workspace={todo} />
     })
     const renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
@@ -57,6 +58,10 @@ function AllWorkspaces(props, getAllWorkspaces) {
             [name]: cons2
         }));
     }
+    const deleteWorkspace=()=>{
+        setShowToastDelete(false)
+        props.deleteWorkspaceFromServer();
+    }
     return (
 
         <>
@@ -64,12 +69,8 @@ function AllWorkspaces(props, getAllWorkspaces) {
             <div className="row mt-5"></div>
             <div className="col-12">
                 <div className="row borderBottom mx-5">
-
-
                     <div className="MyWorkspace">My Workspace</div>
-
                     <div className="row">
-
                         {
                             grid ?
                                 <>
@@ -86,7 +87,6 @@ function AllWorkspaces(props, getAllWorkspaces) {
                     </div>
                 </div>
 
-
                 <div className="row mt-4 ml-5 ">
                     {list ?
                         renderedListWorkspaces
@@ -94,24 +94,19 @@ function AllWorkspaces(props, getAllWorkspaces) {
                         renderedGridWorkspaces
 
                     }
-
                     <input type="text" name="name" class="form-control mr-5 mt-2" id="workspace-name" placeholder="Enter workspace name"
                         onChange={handleChange} />
-
                     <button onClick={addNewWorkspace}>add workspace</button>
-
-
                 </div>
+                {showToastDelete ?
+                    <ToastDelete
+                        toOnClose={deleteWorkspace}
+                        toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                        name={props.workspaceDeleted.name} 
+                        /> 
+                         : null} 
             </div>
-
-
-
         </>
-
-
-
-
-
     )
 }
 
@@ -119,12 +114,14 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.worksapces,
+        workspaceDeleted:state.workspace_reducer.workspace
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
 
     }
 
