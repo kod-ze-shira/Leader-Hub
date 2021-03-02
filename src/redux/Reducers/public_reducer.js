@@ -34,6 +34,9 @@ const publicData = {
     setTasks(state, action) {
         state.tasks = action.payload;
     },
+    addNewWorkspace(state, action) {
+        state.worksapces.push(action.payload)
+    },
     deletTask(state, action) {
         state.cards.map(card => {
             if (card._id == action.payload.card)

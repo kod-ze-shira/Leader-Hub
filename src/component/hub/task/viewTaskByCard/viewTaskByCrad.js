@@ -69,7 +69,6 @@ function ViewTaskByCrad(props) {
                         {...provided.dragHandleProps}
                         // innerRef={provided.innerRef}
                         ref={provided.innerRef}
-                        ref={props.refToNewRow}
                     >
 
                         <div onMouseOver={(e) => overTask(props.task._id)}

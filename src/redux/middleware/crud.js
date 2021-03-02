@@ -101,11 +101,11 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
+export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'SET_WORKSPACE_CRUD') {
+    if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newWorkspace`
-        let workspace = action.payload;
+        let workspace = action.payload
         console.log(workspace)
 
         $.ajax({
@@ -114,11 +114,13 @@ export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
+
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ workspace }),
+            data: JSON.stringify(workspace),
             success: function (data) {
                 console.log("success")
                 console.log(data);
+                dispatch(actions.addNewWorkspace(data.message))
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
@@ -493,11 +495,7 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 }
 
 
-// router.get('/:userName/:projectId/getCardsByprojectId',cardFunctions.getCardsByprojectId)
-// /:projectId/getCardsByprojectId
 
-
-//
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
@@ -523,9 +521,6 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
                 })
             }
         });
-
-
-
 
     }
     return next(action);

@@ -11,7 +11,7 @@ import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
 import TaskDetails from '../task/taskDetails/taskDetails'
 import EditTask from '../task/addTask/addTask'
 import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
-
+import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
 
 const mapStateToProps = (state) => {
     return {
@@ -37,7 +37,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails showToast={ toastDelete} task={props.task} />
+                    return <TaskDetails showToast={toastDelete} task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace />
                 case 'editCurrentTask':
@@ -46,6 +46,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <NewProject workspaceId={props.workspaceId} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
+                case 'addWorkspace':
+                    return <AddWorkspace />
                 default:
                     return null;
 

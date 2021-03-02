@@ -66,7 +66,7 @@ function Header(props) {
 
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            select <img src={require('../../img/star-solid.png')}></img>
+                                        select <img src={require('../../img/star-solid.png')}></img>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item id="project" onClick={newpoject}>
@@ -86,8 +86,8 @@ function Header(props) {
                                     <b>START TASK</b></div>
                                 </div></div>
                             <button id="btnedit" onClick={() => props.editWorkpaceFromServer()}>edit workpace</button>
-                            <button onClick={() => props.setWorkspaCrud(props.workspace1)}>NEW</button>
-                            <button onClick={() => { props.setWorkspaCrud(props.workspace1); }}>NEW</button>
+                            <button onClick={() => props.addNewWorkspaceToServer(props.workspace1)}>NEW</button>
+                            <button onClick={() => { props.addNewWorkspaceToServer(props.workspace1); }}>NEW</button>
                         </div>
                     </div>
 
@@ -202,7 +202,7 @@ const mapDispatchToProps = (dispatch) => {
         EditTaskFromServer: (task) => dispatch(actions.editTaskInServer(task)),
         EditProjectFromServer1: (project) => dispatch(actions.editProjectInServer(project)),
         editWorkspaceInServer1: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
-        setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
+        addNewWorkspaceToServer: (props) => dispatch(actions.setWorkspaceCrud(props)),
         createW: (name, value) => dispatch(actions.setWorkspace(name, value)),
     }
 }

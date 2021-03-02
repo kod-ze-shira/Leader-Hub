@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
+import ViewDetails from '../../viewDetails/viewDetails'
 
 // let workspace;
 
@@ -15,7 +16,9 @@ function AllWorkspaces(props, getAllWorkspaces) {
 
     }, []);
 
-
+    const [list, setlist] = useState(false);
+    const [grid, setgrid] = useState(true);
+    const [showAddWorkspace, setShowWorkspace] = useState(false)
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceList key={todo._id} workspace={todo} />
@@ -24,8 +27,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
         return <ViewWorkspaceGrid key={todo._id} workspace={todo} />
     })
 
-    const [list, setlist] = useState(false);
-    const [grid, setgrid] = useState(true)
+
     const [workspace, setWorkspace] = useState({
         name: "ceck add",
         userId: "5fa79b45f8acce4894181b81",
@@ -44,8 +46,7 @@ function AllWorkspaces(props, getAllWorkspaces) {
         setgrid(true);
     }
     function addNewWorkspace() {
-        console.log(workspace)
-        props.setWorkspaCrud(workspace)
+        setShowWorkspace(true)
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -80,12 +81,48 @@ function AllWorkspaces(props, getAllWorkspaces) {
                 <div className="row mt-4 ml-5 ">
                     {list ?
                         renderedListWorkspaces
+
                         :
                         renderedGridWorkspaces
                     }
-                    <input type="text" name="name" class="form-control mr-5 mt-2" id="workspace-name" placeholder="Enter workspace name"
-                        onChange={handleChange} />
-                    <button onClick={addNewWorkspace}>add workspace</button>
+                    {/* add workspace button */}
+                    {list ?
+                        <div className="row WorkspaceList mt-3 " >
+                            <div className="col-10" onClick={addNewWorkspace}
+                            >
+                                <div className="row "  >
+                                    <div className="Workspace"  >
+                                        <div className="logoWorkspacelist"
+                                            style={{ backgroundColor: "#778CA2" }}
+                                            >
+                                            +
+                                            
+                                        </div>
+                                    </div>
+                                    <b className="mt-4 ml-2">Add Workspace</b>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        :
+                        <div className="Workspacegrid mt-4" >
+                            <div onClick={addNewWorkspace}>
+                                <div className="logoWorkspace1 " >
+                                    <div className="mt-1 logo"
+                                        style={{ backgroundColor: "#778CA2" }}
+                                    >+
+                                </div>
+                                </div>
+                                <div className="name1 pt-1 "><p>Add Workspace</p> </div>
+                            </div>
+                        </div>
+                    }
+                    {showAddWorkspace ?
+                        <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from="addWorkspace" /> : null
+                    }
+                    {/* <input type="text" name="name" class="form-control mr-5 mt-2" id="workspace-name" placeholder="Enter workspace name"
+                        onChange={handleChange} /> */}
                 </div>
             </div>
         </>
@@ -101,7 +138,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
+        addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
 
     }

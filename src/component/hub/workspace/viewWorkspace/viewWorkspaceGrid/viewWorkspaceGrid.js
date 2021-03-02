@@ -110,7 +110,7 @@ function ViewWorkspaceGrid(props) {
                         <div className="name "><p>{workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
                             <p>{workspace.productionDate}</p>
-                            <p>{"description"}</p>
+                            {/* <p>{"description"}</p> */}
                         </div>
                     </div>
                 </div>
@@ -150,11 +150,6 @@ function ViewWorkspaceGrid(props) {
         </>
 
 
-
-
-
-
-
     )
 }
 const mapStateToProps = (state) => {
@@ -182,7 +177,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))
