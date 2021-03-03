@@ -102,12 +102,7 @@ function ViewWorkspaceGrid(props) {
                         </div>
                         <div className="name "><p>{workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
-<<<<<<< HEAD
-                            <p>Create {workspace.productionDate}</p>
-=======
                             <p>{workspace.productionDate}</p>
-                            {/* <p>{"description"}</p> */}
->>>>>>> bc5d78427c095a3c56ee1f755d9737afecce659f
                         </div>
                     </div>
                 </div>
