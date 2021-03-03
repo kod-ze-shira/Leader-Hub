@@ -11,7 +11,7 @@ import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
     const { workspace } = props
-     const routeToProject = () => {
+    const routeToProject = () => {
         props.setWorkspace(workspace)
         props.setProjects(workspace.projects)
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
@@ -39,7 +39,6 @@ function ViewWorkspaceGrid(props) {
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
-        // $(`#${id} .stripe`).css({ 'color': 'red' })
 
     }
     function delete_workspace() {
@@ -78,7 +77,6 @@ function ViewWorkspaceGrid(props) {
                         <div className="name "><p>{workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
                             <p>{workspace.productionDate}</p>
-                            <p>{"description"}</p>
                         </div>
                     </div>
                 </div>
@@ -102,12 +100,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace:()=>dispatch(actions.duplicateWorkspace())
+        duplicateWorkspace: () => dispatch(actions.duplicateWorkspace())
     }
 
 
 }
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))

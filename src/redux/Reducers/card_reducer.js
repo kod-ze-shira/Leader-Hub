@@ -12,7 +12,8 @@ const card = {
     },
     setCardName(state, action) {
         state.card.name = action.payload;
-    }
+    },
+  
 }
 
 export default produce((state, action) => createReducer(state, action, card), initialState);

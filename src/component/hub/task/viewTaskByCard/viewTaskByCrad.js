@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './ViewTaskByCrad.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
@@ -69,7 +69,6 @@ function ViewTaskByCrad(props) {
                         {...provided.dragHandleProps}
                         // innerRef={provided.innerRef}
                         ref={provided.innerRef}
-                        ref={props.refToNewRow}
                     >
 
                         <div onMouseOver={(e) => overTask(props.task._id)}

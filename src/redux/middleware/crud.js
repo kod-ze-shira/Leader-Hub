@@ -100,41 +100,38 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
 
-
-export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'SET_WORKSPACE_CRUD') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
-        let workspace = action.payload;
+    if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newWorkspace`
+        let workspace = action.payload
         console.log(workspace)
 
         $.ajax({
             url: urlData,
-            type: 'POST',
+            method: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
+
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                workspace
-            }),
-            // dataType: 'json',
+            data: JSON.stringify(workspace),
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                // dispatch({ type: '', payload: data })
+                dispatch(actions.addNewWorkspace(data.message))
+                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                checkPermission(err).then((ifOk) => {
-
-                })
+                console.log("error")
+                console.log(err)
             }
         });
-        // })
     }
     return next(action);
 }
+
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
@@ -395,9 +392,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
 
 export const editTaskInServer = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_TASK_IN_SERVER') {
-
         var task = getState().task_reducer.task;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
@@ -510,9 +505,6 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
                 })
             }
         });
-
-
-
 
     }
     return next(action);
@@ -733,11 +725,11 @@ export const EditTask = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 export const EditCard = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_CARD') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
+        console.log("a" + card)
 
         $.ajax({
             url: urlData,
@@ -750,7 +742,7 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
-                dispatch(actions.setCardName(data.result))
+                dispatch(actions.setCardNameInput(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -761,28 +753,27 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
-export const duplicateWorkspace=({dispatch,getState})=>next=>action=>{
-    if(action.type==='DUPLICATE_WORKSPACE')
-    {
+export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DUPLICATE_WORKSPACE') {
         fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().workspace_reducer.workspace._id}/duplicateWorkspace`,
-        {
-            method: 'POST',
-            headers: {
-                authorization: getState().public_reducer.tokenFromCookies,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-        }).then((result) => {
-            return result.json();
-        }).then((result) => {
-            checkPermission(result).then((ifOk) => {
-                console.log(result);
-                dispatch(actions.addWorkspaceToWorkspaces(result.duplicateWorkspace))
+            {
+                method: 'POST',
+                headers: {
+                    authorization: getState().public_reducer.tokenFromCookies,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then((result) => {
+                return result.json();
+            }).then((result) => {
+                checkPermission(result).then((ifOk) => {
+                    console.log(result);
+                    dispatch(actions.addWorkspaceToWorkspaces(result.duplicateWorkspace))
+
+                })
 
             })
-           
-        })
     }
     return next(action);
-    
+
 }

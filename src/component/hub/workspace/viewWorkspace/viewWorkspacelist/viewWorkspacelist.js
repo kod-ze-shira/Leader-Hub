@@ -74,12 +74,7 @@ function ViewWorkspaceList(props) {
                         className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
                         <img src={bin}></img>
                     </div>
-
                 </div>
-
-                {/* : null */}
-                {/* } */}
-
             </div>
             {
                 edit ?

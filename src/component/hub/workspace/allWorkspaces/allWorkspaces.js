@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
+import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 
 
@@ -13,25 +14,34 @@ function AllWorkspaces(props) {
     useEffect(() => {
         props.getAllWorkspaces()
     }, []);
-    const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceList 
-        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
-        key={todo._id} workspace={todo} />
-    })
-    const renderedGridWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceGrid 
-        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
-        key={todo._id} workspace={todo} />
-    })
 
     const [list, setlist] = useState(false);
-    const [grid, setgrid] = useState(true)
-    const [workspace, setWorkspace] = useState({
-        name: "ceck add",
-        userId: "5fa79b45f8acce4894181b81",
-        projet: [],
-        team: []
+    const [grid, setgrid] = useState(true);
+    const [showAddWorkspace, setShowWorkspace] = useState(false)
+    const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
+    // const [workspace, setWorkspace] = useState({
+    //     name: "ceck add",
+    //     userId: "5fa79b45f8acce4894181b81",
+    //     projet: [],
+    //     team: []
+    // })
+
+    const renderedListWorkspaces = props.workspaces.map(todo => {
+
+        return <ViewWorkspaceList
+        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+         key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
+    const renderedGridWorkspaces = props.workspaces.map(todo => {
+        return <ViewWorkspaceGrid
+        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+         key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
+    })
+    function openEditWorkspace(){
+        setAddOrEditWorkspace("editWorkspace")
+        setShowWorkspace(true)
+    }
+    // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
         setlist(true);
         setgrid(false)
@@ -41,29 +51,24 @@ function AllWorkspaces(props) {
         setlist(false);
         setgrid(true);
     }
-    function addNewWorkspace() {
-        console.log(workspace)
-        props.setWorkspaCrud(workspace)
+    function openaddNewWorkspace() {
+        setAddOrEditWorkspace("addWorkspace")
+        setShowWorkspace(true)
     }
-    const handleChange = (event) => {
 
-        const { name, value } = event.target;
-        let cons1 = event.target.name
-        let cons2 = event.target.value
-
-        setWorkspace(prevState => ({
-            ...prevState,
-            [name]: cons2
-        }));
-    }
+        // setWorkspace(prevState => ({
+        //     ...prevState,
+        //     [name]: cons2
+        // }));
+    
     const deleteWorkspace=()=>{
         setShowToastDelete(false)
         props.deleteWorkspaceFromServer();
     }
-    return (
+   
+return (
 
         <>
-
             <div className="row mt-5"></div>
             <div className="col-12">
                 <div className="row borderBottom mx-5">
@@ -81,33 +86,66 @@ function AllWorkspaces(props) {
                                     <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
                                 </>
                         }
-
                     </div>
                 </div>
 
                 <div className="row mt-4 ml-5 ">
                     {list ?
                         renderedListWorkspaces
+
                         :
                         renderedGridWorkspaces
+                    }
+                    {/* add workspace button */}
+                    {list ?
+                        <div className="row WorkspaceList mt-3 " >
+                            <div className="col-10" onClick={openaddNewWorkspace}
+                            >
+                                <div className="row "  >
+                                    <div className="Workspace"  >
+                                        <div className="logoWorkspacelist"
+                                            style={{ backgroundColor: "#778CA2" }}
+                                            >
+                                            +
+                                            
+                                        </div>
+                                    </div>
+                                    <b className="mt-4 ml-2">Add Workspace</b>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        :
+                        <div className="Workspacegrid mt-4" >
+                            <div onClick={openaddNewWorkspace}>
+                                <div className="logoWorkspace1 " >
+                                    <div className="mt-1 logo"
+                                        style={{ backgroundColor: "#778CA2" }}
+                                    >+
+                                </div>
+                                </div>
+                                <div className="name1 pt-1 "><p>Add Workspace</p> </div>
+                            </div>
+                        </div>
+                    }
+            </div>
+     </div>
+                   {showAddWorkspace ?
+                        <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from={addOrEditWorkspace} /> : null
+                    }
+                    {showToastDelete ?
+                        <ToastDelete
+                            toOnClose={deleteWorkspace}
+                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                            name={props.workspaceDeleted.name} 
+                            /> 
+                             : null} 
+        </>
+
+    )
 
                     }
-                    <input type="text" name="name" class="form-control mr-5 mt-2" id="workspace-name" placeholder="Enter workspace name"
-                        onChange={handleChange} />
-                    <button onClick={addNewWorkspace}>add workspace</button>
-                </div>
-                {showToastDelete ?
-                    <ToastDelete
-                        toOnClose={deleteWorkspace}
-                        toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                        name={props.workspaceDeleted.name} 
-                        /> 
-                         : null} 
-            </div>
-        </>
-    )
-}
-
 const mapStateToProps = (state) => {
 
     return {
@@ -117,7 +155,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setWorkspaCrud: (props) => dispatch(actions.setWorkspaceCrud(props)),
+        addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
 
