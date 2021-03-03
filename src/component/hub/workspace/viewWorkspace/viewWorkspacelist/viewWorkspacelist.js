@@ -16,7 +16,6 @@ function ViewWorkspaceList(props) {
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [showToast, setShowToast] = useState(false);//to show toast delete
     const [deleted, setDeleted] = useState(true)//to undo delete// if user want undo delete
-    const [edit, setEdit] = useState(false);
 
     const routeToProject = () => {
         // console.log("waaaaaaaaaa  " + workspace)
@@ -29,16 +28,12 @@ function ViewWorkspaceList(props) {
     function EditWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.setclose()
-        setEdit(true);
+        props.editWorkspace()
     }
-    function outEdit() {
-        setEdit(false);
-    }
+ 
     function func_remove() {
-        // setremove(true);
         setDeleted(true)
         setShowToast(true)
-
     }
 
 
@@ -108,20 +103,9 @@ function ViewWorkspaceList(props) {
                         className="col-1 ml-1 delete iconsAction" onClick={func_remove} >
                         <img src={require('../../../../img/bin.png')}></img>
                     </div>
-
                 </div>
-
-                {/* : null */}
-                {/* } */}
-
             </div>
-            {
-                edit ?
-                    <>
-                        <ViewDetails closeViewDetails={()=>setEdit(false)} from="editWorkspace" > </ViewDetails>
-                    </>
-                    : null
-            }
+         
 
 
             <>

@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
         setisConfiguratorOpen: (isConfiguratorOpen) => dispatch(actions.setisConfiguratorOpen(isConfiguratorOpen))
         // setProjectCrud1: (props) => dispatch(actions.setProjectCrud(props)),
         // createP: (name, value) => dispatch(actions.setProject1(name, value)),
-        // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
+        // addNewWorkspaceToServer: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
 
 
 

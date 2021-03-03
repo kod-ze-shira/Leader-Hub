@@ -10,7 +10,7 @@ export default function ToastDelete1(props) {
                 toShow={showToast} name={organization.organizationName}></ToastDelete> */}
             <Toast className="toast_delete"
                 onClose={props.toOnClose}
-                delay={5000} autohide>
+                delay={4000} autohide>
 
                 <Toast.Header className="toast_header" closeButton={false}>
                     <div className="row">
