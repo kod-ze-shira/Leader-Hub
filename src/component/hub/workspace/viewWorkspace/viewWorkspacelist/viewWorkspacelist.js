@@ -22,7 +22,7 @@ function ViewWorkspaceList(props) {
     }
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        setEdit(true);
+        props.editWorkspace()
     }
     function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
@@ -76,13 +76,7 @@ function ViewWorkspaceList(props) {
                     </div>
                 </div>
             </div>
-            {
-                edit ?
-                    <>
-                        <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" > </ViewDetails>
-                    </>
-                    : null
-            }
+      
         </>
     )
 }
