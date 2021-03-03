@@ -8,6 +8,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
+import { event } from 'jquery';
 
 function ViewCards(props) {
     useEffect(() => {
@@ -20,6 +21,7 @@ function ViewCards(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
+    const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -48,8 +50,15 @@ function ViewCards(props) {
         }
 
     }
+    const updateCardName = (event) => {
+        setEditCardName(event.target.value)
 
-
+    }
+    const editCard = (event) => {
+        let card = { "_id": props.card._id, "name": props.card.name, "project": props.project._id }
+        console.log("edut-card", card)
+        props.EditCard(card);
+    }
     const showDetails =
         (event) => {
             setViewDetails(true)
@@ -79,24 +88,31 @@ function ViewCards(props) {
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <a href="#input-task">
-                    <div className=" col-3  mr-3 ">
-                        <div className="triangle "></div>
-                        <input
-                            className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
-                            onClick={(e) => changeSelectedCard(e)}
-                            value={props.cardFromMap.name}
-                        >
+                <div className=" col-3  mr-3 ">
+                    <div className="triangle "></div>
+                    <input
+                        className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
+                        onClick={(e) => changeSelectedCard(e)}
+                        value={editCardName}
+                        onChange={updateCardName}
+                        onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                editCard()
+                            }
+                        }}
 
-                            {/* <div className="pl-2">{props.cardFromMap.name}</div> */}
-                        </input>
+                    >
+
+                        {/* <div className="pl-2">{props.cardFromMap.name}</div> */}
+                    </input>
+                    <a href="#input-task">
                         <button className=" new-task " onClick={addTask}>+</button>
-                    </div>
-                </a>
+                    </a>
+                </div>
                 <p className=" col-4 "></p>
-                <p className=" border-left  col ">Team</p>
-                <p className="  border-left col ">Label</p>
-                <p className="  border-left col ">Due Date
+                <p className="border-left  col">Team</p>
+                <p className="border-left col">Label</p>
+                <p className="border-left col">Due Date
                 </p>
                 {/* <p className="  border-left pb-1 " ><button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button></p> */}
             </div>
@@ -146,6 +162,7 @@ const mapDispatchToProps = (dispatch) => {
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
+        EditCard: (card) => dispatch(actions.EditCard(card))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)

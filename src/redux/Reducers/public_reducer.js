@@ -110,8 +110,11 @@ const publicData = {
             state.worksapces[i]._id !== action.payload._id
         )
     },
-    setCardName(state, action) {
-        state.card.name = action.payload;
+    setCardNameInput(state, action) {
+        state.cards.map(card => {
+            if (card._id == action.payload.card)
+                card.name = action.payload;
+        })
     }
 }
 

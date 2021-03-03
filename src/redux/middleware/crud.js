@@ -770,11 +770,11 @@ export const EditTask = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 export const EditCard = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_CARD') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
+        console.log("a"+card)
 
         $.ajax({
             url: urlData,
@@ -787,7 +787,7 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
-                dispatch(actions.setCardName(data.result))
+                dispatch(actions.setCardNameInput(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
