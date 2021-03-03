@@ -21,16 +21,16 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
     function editWorkspace() {
-        setEdit(true);
+        // setEdit(true);
         props.setWorkspace(workspace)
+        props.editWorkspace()
+
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
         props.duplicateWorkspace();
     }
-    function outEdit() {
-        setEdit(false);
-    }
+  
     // $(`.ViewWorkspace`).mouseover(function () {
     //     console.log(this.id)
     //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
@@ -81,11 +81,6 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
             </div>
-            {
-                edit ?
-                    <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" ></ViewDetails>
-                    : null
-            }
         </>
     )
 }

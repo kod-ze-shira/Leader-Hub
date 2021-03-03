@@ -23,7 +23,9 @@ function SelectProject(props) {
 
         myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject)
-        props.setCards(myProject.cards)
+        console.log(myProject.cards)
+        props.getCardsByProjectId(myProject._id)
+        // props.setCards(myProject.cards)
         // if (!myProject.cards[0])
         //     props.setCards(null)
         console.log("my project  " + props.workspace)
@@ -141,6 +143,7 @@ const mapDispatchToProps = (dispatch) => {
         setCards: (cards) => dispatch(actions.setCards(cards)),
         setProject: (project) => dispatch(actions.setProject(project)),
         setCardName: (cardName) => dispatch(actions.setCardName(cardName)),
+        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
