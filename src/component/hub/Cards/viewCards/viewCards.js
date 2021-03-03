@@ -100,6 +100,7 @@ function ViewCards(props) {
                                 editCard()
                             }
                         }}
+
                     >
 
                         {/* <div className="pl-2">{props.cardFromMap.name}</div> */}

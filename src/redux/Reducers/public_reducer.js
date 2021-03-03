@@ -117,7 +117,17 @@ const publicData = {
         state.cards.map(card => {
             if (card._id == action.payload.card)
                 card.name = action.payload;
-        })
+        })},
+    updateWorkspaceUfterEditInServer(state, action) {
+        state.worksapces.forEach((workspace,index) => {
+            if (workspace._id === action.payload._id)
+            state.worksapces[index] = action.payload
+        }
+
+        )
+    },
+    addWorkspaceToWorkspaces(state,action){
+        state.worksapces.push(action.payload)
     }
 }
 

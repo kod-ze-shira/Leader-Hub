@@ -3,7 +3,6 @@ import { actions } from '../actions/action'
 // import workspace_reducer from '../Reducers/workspace_reducer'
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
@@ -138,7 +137,7 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
     if (action.type === 'SET_TASK_CRUD') {
 
 
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask "
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newTask"
         let task = action.payload;
         $.ajax({
             url: urlData,
@@ -153,7 +152,6 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -171,8 +169,8 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_PROJECT_CRUD') {
 
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject "
-        let name = action.payload;
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject"
+        let project = action.payload;
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -180,13 +178,14 @@ export const setProjectCrud = ({ dispatch, getState }) => next => action => {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                name,
-            }),
+            data:
+                JSON.stringify({
+                    "project": project,
+                }),
             dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log(data);
+                console.log(data.message);
                 // dispatch({ type: '', payload: data })
             },
             error: function (err) {
@@ -269,10 +268,7 @@ function checkPermission(result) {
 export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
-
-
         let workspace = getState().workspace_reducer.workspace;
-        // var w = getState().workspace_reducer.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
@@ -282,23 +278,16 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ workspace }),
-            // dataType: 'json',
             success: function (data) {
-
                 console.log("success")
                 console.log(data);
-
-
+                dispatch(actions.updateWorkspaceUfterEditInServer(data.result))
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
-
             }
         });
-        // })
     }
     return next(action);
 }
@@ -338,9 +327,9 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     return next(action);
 }
 //delet workspace
-export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
+    if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
         let workspace = getState().workspace_reducer.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
         $.ajax({
@@ -353,11 +342,10 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
+                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });
@@ -404,9 +392,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
 
 export const editTaskInServer = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_TASK_IN_SERVER') {
-
         var task = getState().task_reducer.task;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
@@ -494,8 +480,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-
-
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
@@ -526,11 +510,6 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
     return next(action);
 }
 
-// url:
-// https://reacthub.dev.leader.codes/api/renana-il/{{cardId}}/getTasksByCardId
-
-// *cardId
-// 6006061269370dacf7af0609
 export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
@@ -598,12 +577,6 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
     }
     return next(action);
 }
-
-
-
-
-
-//
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
@@ -663,14 +636,6 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
     }
     return next(action);
 }
-
-// router.post('/:userName/newCard', cardFunctions.newCard)
-
-// export const newCard = ({ dispatch, getState }) => next => action => {
-
-//     if (action.type === 'NEW_CARD') {
-//     }
-// }
 
 export const NewCard = ({ dispatch, getState }) => next => action => {
 
@@ -764,7 +729,7 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
-        console.log("a"+card)
+        console.log("a" + card)
 
         $.ajax({
             url: urlData,
@@ -787,4 +752,28 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
         });
     }
     return next(action);
+}
+export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DUPLICATE_WORKSPACE') {
+        fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().workspace_reducer.workspace._id}/duplicateWorkspace`,
+            {
+                method: 'POST',
+                headers: {
+                    authorization: getState().public_reducer.tokenFromCookies,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then((result) => {
+                return result.json();
+            }).then((result) => {
+                checkPermission(result).then((ifOk) => {
+                    console.log(result);
+                    dispatch(actions.addWorkspaceToWorkspaces(result.duplicateWorkspace))
+
+                })
+
+            })
+    }
+    return next(action);
+
 }

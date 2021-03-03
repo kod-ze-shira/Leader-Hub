@@ -5,28 +5,37 @@ import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
+import ToastDelete from '../../toastDelete/toastDelete1'
 
-// let workspace;
 
-
-function AllWorkspaces(props, getAllWorkspaces) {
+function AllWorkspaces(props) {
+    const [showToastDelete, setShowToastDelete] = useState(false)
 
     useEffect(() => {
         props.getAllWorkspaces()
-
     }, []);
 
     const [list, setlist] = useState(false);
     const [grid, setgrid] = useState(true);
     const [showAddWorkspace, setShowWorkspace] = useState(false)
     const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
-
+    // const [workspace, setWorkspace] = useState({
+    //     name: "ceck add",
+    //     userId: "5fa79b45f8acce4894181b81",
+    //     projet: [],
+    //     team: []
+    // })
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceList key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
+
+        return <ViewWorkspaceList
+        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+         key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
     const renderedGridWorkspaces = props.workspaces.map(todo => {
-        return <ViewWorkspaceGrid key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
+        return <ViewWorkspaceGrid
+        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+         key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
     function openEditWorkspace(){
         setAddOrEditWorkspace("editWorkspace")
@@ -47,7 +56,17 @@ function AllWorkspaces(props, getAllWorkspaces) {
         setShowWorkspace(true)
     }
 
-    return (
+        // setWorkspace(prevState => ({
+        //     ...prevState,
+        //     [name]: cons2
+        // }));
+    
+    const deleteWorkspace=()=>{
+        setShowToastDelete(false)
+        props.deleteWorkspaceFromServer();
+    }
+   
+return (
 
         <>
             <div className="row mt-5"></div>
@@ -115,21 +134,30 @@ function AllWorkspaces(props, getAllWorkspaces) {
                    {showAddWorkspace ?
                         <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from={addOrEditWorkspace} /> : null
                     }
+                    {showToastDelete ?
+                        <ToastDelete
+                            toOnClose={deleteWorkspace}
+                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                            name={props.workspaceDeleted.name} 
+                            /> 
+                             : null} 
         </>
 
     )
-}
 
+                    }
 const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.worksapces,
+        workspaceDeleted:state.workspace_reducer.workspace
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
 
     }
 

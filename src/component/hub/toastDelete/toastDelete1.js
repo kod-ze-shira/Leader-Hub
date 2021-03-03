@@ -29,7 +29,6 @@ export default function ToastDelete1(props) {
                         </div>
                     </div>
                 </Toast.Header>
-                {/* <Toast.Body>was deleted</Toast.Body> */}
             </Toast>
         </>
     )
