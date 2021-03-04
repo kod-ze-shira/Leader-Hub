@@ -22,7 +22,7 @@ import { setTaskCrud } from '../middleware/crud'
 import { editWorkspaceInServer } from '../middleware/crud'
 import { editProjectInServer } from '../middleware/crud'
 import { editTaskInServer } from '../middleware/crud'
-import { editCard } from '../middleware/crud'
+import { editCard ,removeCardById} from '../middleware/crud'
 import { getTaskByIdFromServer } from '../middleware/crud'
 import { getProjectByIdInServer } from '../middleware/crud'
 import { deleteWorkspaceFromServer } from '../middleware/crud'
@@ -59,6 +59,7 @@ const store = createStore(
                 removeTaskById,
                 EditTask,
                 EditCard,
+                removeCardById,
                 duplicateWorkspace
             ))
 )

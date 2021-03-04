@@ -9,6 +9,7 @@ import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 import { event } from 'jquery';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ViewCards(props) {
     useEffect(() => {
@@ -54,6 +55,10 @@ function ViewCards(props) {
         setEditCardName(event.target.value)
 
     }
+    const deleteCard = () => {
+        props.showToastDelete(props.cardFromMap)
+        // props.removeCardById(props.cardFromMap._id)
+    }
     const editCard = (event) => {
         let card = { "_id": props.card._id, "name": props.card.name, "project": props.project._id }
         console.log("edut-card", card)
@@ -89,6 +94,7 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
+
                     <div className="triangle "></div>
                     <input
                         className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
@@ -100,11 +106,11 @@ function ViewCards(props) {
                                 editCard()
                             }
                         }}
-
-                    >
-
-                        {/* <div className="pl-2">{props.cardFromMap.name}</div> */}
-                    </input>
+                    ></input>
+                    {/* <button onClick={deleteCard}>delete card</button> */}
+                    {/* <FontAwesomeIcon className=" mt-2 "
+                        icon={['fas', 'ellipsis-v']}
+                    ></FontAwesomeIcon> */}
                     <a href="#input-task">
                         <button className=" new-task " onClick={addTask}>+</button>
                     </a>

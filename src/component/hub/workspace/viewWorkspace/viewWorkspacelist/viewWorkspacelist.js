@@ -53,8 +53,8 @@ function ViewWorkspaceList(props) {
                     <div className="row "  >
                         <div className="Workspace"  >
                             <div className="logoWorkspacelist"
-                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                {workspace.name[0].toUpperCase()}
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}> 
+                                {workspace.name?workspace.name[0].toUpperCase():null}
                             </div>
                         </div>
                         <b className="mt-4 ml-2">{workspace.name} </b>

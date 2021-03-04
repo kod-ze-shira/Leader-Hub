@@ -1,14 +1,10 @@
 
-
 .grid{
   cursor: pointer;
   
   }
-  
-   
   .list{
   cursor: pointer;
-  
   }
   .MyWorkspace{
       font-size: x-large;
@@ -17,7 +13,7 @@
   .borderBottom{
       border-bottom:black 1px solid ;
         display: flex;
-    justify-content:space-between; 
+      justify-content:space-between; 
      
   }
   .add_w{

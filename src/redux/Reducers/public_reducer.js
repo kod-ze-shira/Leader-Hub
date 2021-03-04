@@ -45,6 +45,12 @@ const publicData = {
                 )
         })
     },
+    deletCard(state, action) {
+        console.log(action.payload.dc)
+        state.cards = state.cards.filter((_, i) =>
+            state.cards[i]._id !== action.payload.dc._id
+        )
+    },
 
     setNewTask(state, action) {
         let i, j
@@ -117,16 +123,17 @@ const publicData = {
         state.cards.map(card => {
             if (card._id == action.payload.card)
                 card.name = action.payload;
-        })},
+        })
+    },
     updateWorkspaceUfterEditInServer(state, action) {
-        state.worksapces.forEach((workspace,index) => {
+        state.worksapces.forEach((workspace, index) => {
             if (workspace._id === action.payload._id)
-            state.worksapces[index] = action.payload
+                state.worksapces[index] = action.payload
         }
 
         )
     },
-    addWorkspaceToWorkspaces(state,action){
+    addWorkspaceToWorkspaces(state, action) {
         state.worksapces.push(action.payload)
     }
 }

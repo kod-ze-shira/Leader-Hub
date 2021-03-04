@@ -37,12 +37,15 @@
    align-items: center;
    border-radius: 10px;
    margin-right: 1rem;
+   cursor: pointer ;
+
 
 }
 .WorkspaceList:hover{
   background-color:#F6F6FA;
 }
 .WorkspaceList{
+    cursor: pointer ;
     border-bottom:#F6F6FA 1px solid ;
     display: flex;
     justify-content:space-between; 
