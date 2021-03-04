@@ -22,7 +22,7 @@
 .show-card>div{
     display: inline-block;
 }
-.show-card:focus{
+.show-card:active{
     border:1px #98A9BC solid;
     border-radius: 5px;
 }

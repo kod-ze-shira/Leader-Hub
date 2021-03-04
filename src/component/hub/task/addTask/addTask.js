@@ -14,14 +14,14 @@ function AddTask(props) {
     ;
 
     console.log("card", props.cardId)
-    const [addTask, setAddTask] = useState({ name: "", description: "", status: "", startDate: "", dueDate: "", card: props.cardId })
+    const [addTask, setAddTask] = useState({ name: "", description: "", status: "", startDate: props.startDate, dueDate: "", card: props.cardId })
     const handleChange = (event) => {
 
         const { name, value } = event.target;
         let cons1 = event.target.name
         let cons2 = event.target.value
 
-        if (cons1 == "dueDate" || cons1 == "startDate") {
+        if (cons1 == "dueDate") {
             cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
         }

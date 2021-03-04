@@ -19,12 +19,7 @@ function AllWorkspaces(props) {
     const [grid, setgrid] = useState(true);
     const [showAddWorkspace, setShowWorkspace] = useState(false)
     const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
-    // const [workspace, setWorkspace] = useState({
-    //     name: "ceck add",
-    //     userId: "5fa79b45f8acce4894181b81",
-    //     projet: [],
-    //     team: []
-    // })
+    
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
 
@@ -56,11 +51,6 @@ function AllWorkspaces(props) {
         setShowWorkspace(true)
     }
 
-        // setWorkspace(prevState => ({
-        //     ...prevState,
-        //     [name]: cons2
-        // }));
-    
     const deleteWorkspace=()=>{
         setShowToastDelete(false)
         props.deleteWorkspaceFromServer();
@@ -89,7 +79,7 @@ return (
                     </div>
                 </div>
 
-                <div className="row mt-4 ml-5 ">
+                <div className="row mt-4 ml-5 view_workspace">
                     {list ?
                         renderedListWorkspaces
 

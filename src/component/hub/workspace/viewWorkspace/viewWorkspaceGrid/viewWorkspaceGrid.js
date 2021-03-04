@@ -21,16 +21,16 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
     function editWorkspace() {
-        setEdit(true);
+        // setEdit(true);
         props.setWorkspace(workspace)
+        props.editWorkspace()
+
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
         props.duplicateWorkspace();
     }
-    function outEdit() {
-        setEdit(false);
-    }
+
     // $(`.ViewWorkspace`).mouseover(function () {
     //     console.log(this.id)
     //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
@@ -70,8 +70,9 @@ function ViewWorkspaceGrid(props) {
                     <div>
                         <div className="logoWorkspace1 " >
                             <div className="mt-1 logo"
-                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                {workspace.name[0].toUpperCase()}
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
+                                >
+                                {workspace.name?workspace.name[0].toUpperCase():null}
                             </div>
                         </div>
                         <div className="name "><p>{workspace.name}</p> </div>
@@ -81,11 +82,6 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
             </div>
-            {
-                edit ?
-                    <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" ></ViewDetails>
-                    : null
-            }
         </>
     )
 }

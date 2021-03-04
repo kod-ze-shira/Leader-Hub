@@ -21,12 +21,11 @@ function SelectWorkspace(props) {
         props.setWorkspace(myWorkspace)
         if (myWorkspace.projects[0]) {
             props.setProject(myWorkspace.projects[0])
-            // alert("hi ")
+            props.getCardsByProjectId(myWorkspace.projects[0]._id)
         }
         else {
             props.setProjectName("No Projects")
-            // props.setCards({});
-            // alert("else")
+            props.setCards({});
         }
 
     }
@@ -81,6 +80,7 @@ const mapDispatchToProps = (dispatch) => {
         setCards: (c) => dispatch(actions.setCards(c)),
         setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
         setProject: (project) => dispatch(actions.setProject(project)),
+        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),

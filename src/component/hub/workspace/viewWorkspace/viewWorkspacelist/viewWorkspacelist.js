@@ -22,7 +22,7 @@ function ViewWorkspaceList(props) {
     }
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        setEdit(true);
+        props.editWorkspace()
     }
     function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
@@ -52,10 +52,9 @@ function ViewWorkspaceList(props) {
 
                     <div className="row "  >
                         <div className="Workspace"  >
-                            <div className="logoWorkspacelist"
+                            <div className="logoWorkspacelist logo "
                                 style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                {workspace.name[0].toUpperCase()}
-                            </div>
+                                {workspace.name ? workspace.name[0].toUpperCase() : null}                            </div>
                         </div>
                         <b className="mt-4 ml-2">{workspace.name} </b>
 
@@ -76,13 +75,7 @@ function ViewWorkspaceList(props) {
                     </div>
                 </div>
             </div>
-            {
-                edit ?
-                    <>
-                        <ViewDetails closeViewDetails={() => setEdit(false)} from="editWorkspace" > </ViewDetails>
-                    </>
-                    : null
-            }
+
         </>
     )
 }
@@ -93,7 +86,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-       setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
     }
 }
