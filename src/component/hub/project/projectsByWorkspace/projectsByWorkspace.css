@@ -7,10 +7,10 @@
 
 
 
-.table-responsive{
+.body .table-responsive{
     height: 65vh;
     overflow: auto;
-    margin-top: 14vh;
+    /* margin-top: 14vh; */
 }
 
 

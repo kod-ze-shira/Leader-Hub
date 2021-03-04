@@ -28,6 +28,10 @@ function ViewWorkspaceList(props) {
         props.setShowToastDeleteWhenClickDelete()
         props.setWorkspace(workspace);
     }
+    function duplicateWorkspace() {
+        props.setWorkspace(workspace);
+        props.duplicateWorkspace();
+    }
     const [over, setover] = useState(false);
 
     function func_over(id) {
@@ -72,17 +76,25 @@ function ViewWorkspaceList(props) {
                 </div>
                 {/* { */}
                 {/* // over ? */}
+                <div className="col-2">
                 <div className="row  mt-4" >
                     <div
                         className="col-1  edit iconsAction" onClick={editWorkspace}>
                         <img src={pencil}></img>
                     </div>
-                    <div className="ml-2 stripe">|</div>
+                    <div className="ml-1 stripe">|</div>
+                    <div
+                        className="col-1 ml-1 delete iconsAction" onClick={duplicateWorkspace} >
+                        <img src={duplicate}></img>
+                    </div>
+                    <div className="ml-1 stripe">|</div>
                     <div
                         className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
                         <img src={bin}></img>
                     </div>
                 </div>
+                </div>
+
             </div>
 
         </>
@@ -97,6 +109,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
+        duplicateWorkspace: () => dispatch(actions.duplicateWorkspace())
     }
 }
 

@@ -67,7 +67,6 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
             <div className='body' >
                 {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
                 {/* <HeaderBody nameWorkspace={props.workspace.name} /> */}
-                <button onClick={() => setNewProject(true)}>New Project</button>
 
                 <Table responsive className='tableProject' >
                     <>
@@ -81,9 +80,10 @@ function ProjectsByWorkspace(props, getAllWorkspaces) {
                         </tbody>
                     </>
                 </Table>
-                <p>fghjhgfdsertyt</p>
+                <button onClick={() => setNewProject(true)}>New Project</button>
+
                 {
-                    newProject ? <ViewDetails closeViewDetails={()=>setNewProject(false)} from="newProject" workspaceId={idWorkspace} />
+                    newProject ? <ViewDetails closeViewDetails={() => setNewProject(false)} from="newProject" workspaceId={idWorkspace} />
                         : null
                 }
             </div>
