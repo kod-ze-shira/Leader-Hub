@@ -45,9 +45,10 @@ function ViewCards(props) {
 
     const addTask = () => {
         setAddTaskInInput(!addTaskInInput)
-        if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
-            changeSelectedCard()
-        }
+        if (props.cardFromMap.tasks.length)
+            if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
+                changeSelectedCard()
+            }
     }
     const updateCardName = (event) => {
         setEditCardName(event.target.value)
@@ -58,7 +59,7 @@ function ViewCards(props) {
         // props.removeCardById(props.cardFromMap._id)
     }
     const editCard = (event) => {
-        let card = { "_id": props.card._id, "name": editCardName, "project": props.project._id }
+        let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
         console.log("edut-card", card)
         props.EditCard(card);
     }
@@ -69,7 +70,6 @@ function ViewCards(props) {
             // props.setTask(props.task)
         }
     const changeSelectedCard = (event) => {
-        // setCardId(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
@@ -83,7 +83,7 @@ function ViewCards(props) {
             else {
                 console.log(props.cardFromMap.tasks[0])
                 setFlag(false)
-                setAddTaskInInput(!addTaskInInput)
+                setAddTaskInInput(false)
             }
 
     }
@@ -91,20 +91,20 @@ function ViewCards(props) {
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <div className=" col-3  mr-3 ">
-                    <div className="triangle" onClick={(e) => changeSelectedCard(e)} ></div>
-
+                <div className="title-card col-3 mr-4">
+                    <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div>
                     <input
-                        className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
+                        className="ml-3 show-card mb-2"
                         value={editCardName}
                         onChange={updateCardName}
-                        // onBlur={editCard}
+                        onBlur={editCard}
                         onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 editCard()
                             }
                         }}
-                    ></input>
+                    >
+                    </input>
                     {/* <button onClick={deleteCard}>delete card</button> */}
                     {/* <FontAwesomeIcon className=" mt-2 "
                         icon={['fas', 'ellipsis-v']}

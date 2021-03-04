@@ -4,13 +4,6 @@ import { actions } from '../actions/action'
 
 
 
-<<<<<<< HEAD
-                })
-            })
-    }
-    return next(action);
-}
-
 export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
@@ -86,41 +79,38 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
 
-
-export const setWorkspaCrud = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'SET_WORKSPACE_CRUD') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newWorkspace"
-        let workspace = action.payload;
+    if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newWorkspace`
+        let workspace = action.payload
         console.log(workspace)
 
         $.ajax({
             url: urlData,
-            type: 'POST',
+            method: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
+
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                workspace
-            }),
-            // dataType: 'json',
+            data: JSON.stringify({ workspace }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                // dispatch({ type: '', payload: data })
+                dispatch(actions.addNewWorkspace(data.message))
+                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                checkPermission(err).then((ifOk) => {
-
-                })
+                console.log("error")
+                console.log(err)
             }
         });
-        // })
     }
     return next(action);
 }
+
 export const setTaskCrud = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'SET_TASK_CRUD') {
@@ -141,7 +131,6 @@ export const setTaskCrud = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -258,10 +247,7 @@ function checkPermission(result) {
 export const editWorkspaceInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
-
-
         let workspace = getState().workspace_reducer.workspace;
-        // var w = getState().workspace_reducer.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
@@ -271,23 +257,16 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ workspace }),
-            // dataType: 'json',
             success: function (data) {
-
                 console.log("success")
                 console.log(data);
-
-
+                dispatch(actions.updateWorkspaceUfterEditInServer(data.result))
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
-
             }
         });
-        // })
     }
     return next(action);
 }
@@ -327,9 +306,9 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     return next(action);
 }
 //delet workspace
-export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => action => {
+export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'DELETE_WORKSPACE_IN_SERVER') {
+    if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
         let workspace = getState().workspace_reducer.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
         $.ajax({
@@ -342,11 +321,10 @@ export const deleteWorkspaceInServer = ({ dispatch, getState }) => next => actio
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
+                dispatch(actions.removeOneWorkspaceFromWorkspaces(data.result))
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });
@@ -393,9 +371,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
 
 export const editTaskInServer = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_TASK_IN_SERVER') {
-
         var task = getState().task_reducer.task;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
@@ -483,12 +459,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-
-// router.get('/:userName/:projectId/getCardsByprojectId',cardFunctions.getCardsByprojectId)
-// /:projectId/getCardsByprojectId
-
-
-//
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
@@ -515,18 +485,10 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             }
         });
 
-
-
-
     }
     return next(action);
 }
 
-// url:
-// https://reacthub.dev.leader.codes/api/renana-il/{{cardId}}/getTasksByCardId
-
-// *cardId
-// 6006061269370dacf7af0609
 export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
@@ -594,12 +556,6 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
     }
     return next(action);
 }
-
-
-
-
-
-//
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
@@ -659,14 +615,6 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
     }
     return next(action);
 }
-
-// router.post('/:userName/newCard', cardFunctions.newCard)
-
-// export const newCard = ({ dispatch, getState }) => next => action => {
-
-//     if (action.type === 'NEW_CARD') {
-//     }
-// }
 
 export const NewCard = ({ dispatch, getState }) => next => action => {
 
@@ -756,11 +704,11 @@ export const EditTask = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 export const EditCard = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_CARD') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
+        console.log("a" + card)
 
         $.ajax({
             url: urlData,
@@ -773,7 +721,7 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
-                dispatch(actions.setCardName(data.result))
+                dispatch(actions.setCardNameInput(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -784,5 +732,27 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
-=======
->>>>>>> newDev
+export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DUPLICATE_WORKSPACE') {
+        fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().workspace_reducer.workspace._id}/duplicateWorkspace`,
+            {
+                method: 'POST',
+                headers: {
+                    authorization: getState().public_reducer.tokenFromCookies,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }).then((result) => {
+                return result.json();
+            }).then((result) => {
+                checkPermission(result).then((ifOk) => {
+                    console.log(result);
+                    dispatch(actions.addWorkspaceToWorkspaces(result.duplicateWorkspace))
+
+                })
+
+            })
+    }
+    return next(action);
+
+}

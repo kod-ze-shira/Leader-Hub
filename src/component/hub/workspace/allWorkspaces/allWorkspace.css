@@ -11,7 +11,7 @@
          font-weight: 505;
   }
   .borderBottom{
-      border-bottom:black 1px solid ;
+      border-bottom:#707070 1px solid ;
         display: flex;
       justify-content:space-between; 
      
@@ -19,7 +19,10 @@
   .add_w{
     color: #778CA2 !important;
   }
+.addWorkspace{
+  border:1px #778CA2 dashed ;
 
+}
  
   
   

@@ -13,8 +13,10 @@ font-size: small;
    align-items: center;
    border-radius: 10px;
    margin-right: 1rem;
-
     
+}
+.Workspacegrid:last-child{
+
 }
 
 
@@ -108,6 +110,7 @@ opacity: 0.9;
 
 
 .logoWorkspace1{
+
    margin: auto !important;
     width: 3rem;
     height:3rem;

@@ -48,6 +48,10 @@ function SelectHeader(props) {
     const changeFlag = (value) => {
         props.flag(value)
     }
+    const changePresent = (e) => {
+        console.log(e)
+        props.from(e)
+    }
 
     return (
         <div className="s-header mx-0 mb-3 row align-items-center ">
@@ -74,11 +78,10 @@ function SelectHeader(props) {
                     TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                     aria-label="scrollable prevent tabs example"
                 >
-                    <Tab
-                        label="List" />
+                    <Tab label="List" onClick={(e) => changePresent("list")} />
                     <Tab label="Calender" />
                     <Tab label="Gant" />
-                    <Tab label="Tabs" />
+                    <Tab label="Tabs" onClick={(e) => changePresent("tabs")} />
                 </Tabs>
             </div>
         </div >
