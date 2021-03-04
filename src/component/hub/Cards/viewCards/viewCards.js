@@ -52,8 +52,8 @@ function ViewCards(props) {
         setEditCardName(event.target.value)
 
     }
-    const editCard = (event) => {
-        let card = { "_id": props.card._id, "name": props.card.name, "project": props.project._id }
+    const editCard = () => {
+        let card = { "_id": props.card._id, "name": editCardName, "project": props.project._id }
         console.log("edut-card", card)
         props.EditCard(card);
     }
@@ -78,33 +78,32 @@ function ViewCards(props) {
             else {
                 console.log(props.cardFromMap.tasks[0])
                 setFlag(false)
-                setAddTaskInInput(false)
-
+                setAddTaskInInput(!addTaskInInput)
             }
+
     }
 
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
-                    <div className="triangle "></div>
+                    <div className="triangle" onClick={(e) => changeSelectedCard(e)} ></div>
+
                     <input
                         className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
-                        onClick={(e) => changeSelectedCard(e)}
                         value={editCardName}
                         onChange={updateCardName}
+                        // onBlur={editCard}
                         onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 editCard()
                             }
                         }}
-
                     >
-
                         {/* <div className="pl-2">{props.cardFromMap.name}</div> */}
                     </input>
                     <a href="#input-task">
-                        <button className=" new-task " onClick={addTask}>+</button>
+                        <button className="new-task" onClick={addTask}>+</button>
                     </a>
                 </div>
                 <p className=" col-4 "></p>
@@ -160,7 +159,7 @@ const mapDispatchToProps = (dispatch) => {
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
-        EditCard: (card) => dispatch(actions.EditCard(card))
+        EditCard: (card) => dispatch(actions.editCard(card))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)
