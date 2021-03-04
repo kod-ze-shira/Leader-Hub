@@ -59,7 +59,7 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
             },
 
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(workspace),
+            data: JSON.stringify({ workspace }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
