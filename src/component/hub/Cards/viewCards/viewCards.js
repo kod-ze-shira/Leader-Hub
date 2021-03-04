@@ -45,9 +45,11 @@ function ViewCards(props) {
 
     const addTask = () => {
         setAddTaskInInput(!addTaskInInput)
-        if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
-            changeSelectedCard()
-        }
+        if (props.cardFromMap.tasks.length)
+            if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
+                changeSelectedCard()
+            }
+
     }
     const updateCardName = (event) => {
         setEditCardName(event.target.value)
@@ -83,7 +85,7 @@ function ViewCards(props) {
             else {
                 console.log(props.cardFromMap.tasks[0])
                 setFlag(false)
-                setAddTaskInInput(!addTaskInInput)
+                setAddTaskInInput(false)
             }
 
     }
@@ -98,7 +100,7 @@ function ViewCards(props) {
                         className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
                         value={editCardName}
                         onChange={updateCardName}
-                        // onBlur={editCard}
+                        onBlur={editCard}
                         onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 editCard()
