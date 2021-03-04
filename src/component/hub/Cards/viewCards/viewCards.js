@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
+import $ from 'jquery'
 import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
@@ -67,9 +68,20 @@ function ViewCards(props) {
         (event) => {
             setViewDetails(true)
             setCardId(props.cardFromMap._id)
-            // props.setTask(props.task)
         }
+    const triangleSide = () => {
+        if ($(".base-triangle").hasClass("triangle")) {
+            $(".base-triangle").removeClass("triangle")
+            $(".base-triangle").addClass("newTriangle")
+        }
+        else {
+            $(".base-triangle").removeClass("newTriangle")
+            $(".base-triangle").addClass("triangle")
+        }
+
+    }
     const changeSelectedCard = (event) => {
+        triangleSide()
         props.setCard(props.cardFromMap)
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
@@ -92,7 +104,7 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
-                    <div className="triangle" onClick={(e) => changeSelectedCard(e)} ></div>
+                    <div className="triangle base-triangle" onClick={(e) => changeSelectedCard(e)} ></div>
 
                     <input
                         className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}

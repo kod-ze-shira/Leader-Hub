@@ -98,7 +98,7 @@ function ViewTaskByCrad(props) {
                                 className="show-card col-3"
                                 value={editTaskName}
                                 onChange={(e) => setEditTaskName(e.target.value)}
-                                onBlur={editTask}
+                                onBlur={(e) => editTask(e)}
                                 onKeyPress={event => {
                                     if (event.key === 'Enter') {
                                         editTask()
@@ -129,7 +129,7 @@ function ViewTaskByCrad(props) {
                 )}
             </Draggable>
 
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
+            { showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
     )
