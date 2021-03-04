@@ -14,6 +14,9 @@ function ProjectPlatform(props) {
     const [showInput, setShowInput] = useState(false)
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [taskDeleted, setTaskDeleted] = useState()
+    const [cardDeleted, setCardDeleted] = useState()
+    const [taskOrCard, setTaskOrCard] = useState()
+
 
     useEffect(() => {
         {
@@ -52,13 +55,18 @@ function ProjectPlatform(props) {
         setShowInput(false)
     }
     //show toast delete to true and save the sask that shold be deleted
-    const showToastToDeleteTask = (task) => {
-        setTaskDeleted(task)
+    const showToastToDeleteTask = (taskOrCard) => {
+        setTaskOrCard(taskOrCard)
         setShowToastDelete(true)
     }
-    const deleteTask = () => {
+
+    const deleteTaskOrCard = () => {
         setShowToastDelete(false)
-        props.removeTaskById(taskDeleted._id)
+        if (props.cards.find(card => card._id == taskOrCard._id)) {
+            props.removeCardById(taskOrCard._id)
+        }
+        else
+            props.removeTaskById(taskOrCard._id)
     }
     return (
         <>
@@ -84,15 +92,16 @@ function ProjectPlatform(props) {
                 </div>
                 {showToastDelete ?
                     <ToastDelete
-                        toOnClose={deleteTask}
+                        toOnClose={deleteTaskOrCard}
                         toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                        name={taskDeleted.name} /> : null}
+                        name={taskOrCard.name} /> : null}
             </div>
         </>
     )
 }
 const mapStateToProps = (state) => {
     return {
+        cards: state.public_reducer.cards,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.worksapces,
@@ -103,6 +112,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
         removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
         getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),

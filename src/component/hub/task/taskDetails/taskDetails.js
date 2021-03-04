@@ -73,7 +73,7 @@ function TaskDetails(props) {
             <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
                 <img src={require('../../../img/bin.png')}></img>
             </button>
-            <button onClick={(e) => saveNewTask(e)} className="add-task">Save Changes</button>
+            <button onClick={(e) => saveNewTask(e)} className="save_canges_btn">Save Changes</button>
         </div>
 
     )

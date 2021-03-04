@@ -27,9 +27,10 @@ function SelectCards(props) {
         // else
         //     props.setTaskName("No Cards")
     }
-    const viewCardsList = props.cards.map((card) => (
+    const viewCardsList = props.cards.length ? props.cards.map((card) => (
         { value: card._id, label: card.name }
-    ))
+    )) : null
+
     const style = {
         control: (base, state) => ({
             ...base,

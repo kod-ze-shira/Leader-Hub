@@ -2,24 +2,9 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 // import workspace_reducer from '../Reducers/workspace_reducer'
 
-export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
-        fetch(urlData,
-            {
-                method: 'GET',
-                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
-            })
-            .then((res) => {
-                console.log("res11111", res)
-                return res.json();
-            })
-            .then((result) => {
-                console.log("res", result)
-                checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setWorkspaces(result.workspaces))
 
+<<<<<<< HEAD
                 })
             })
     }
@@ -799,3 +784,5 @@ export const EditCard = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+=======
+>>>>>>> newDev

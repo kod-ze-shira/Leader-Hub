@@ -1,7 +1,7 @@
 .Workspacegrid{
    cursor: pointer;;
 
-color:black;
+/* color:black; */
 font-size: small;
 
       width: 7rem;
@@ -39,6 +39,11 @@ font-size: small;
      cursor: pointer;
 }
 .name{
+   /* font-weight: 650; */
+   margin: auto ;
+   margin-top: 2.2vh;
+}
+.name1{
    /* font-weight: 650; */
    margin: auto ;
    margin-top: 2.2vh;
@@ -102,13 +107,6 @@ opacity: 0.9;
 }
 
 
-      
-.name{
-   /* margin-top: 33px; */
-}
-
-
-
 .logoWorkspace1{
    margin: auto !important;
     width: 3rem;
@@ -129,7 +127,12 @@ opacity: 0.9;
    font-weight: 400;
 
 }
+.name1> p{
+   color:#778CA2 !important;
+font:  normal normal 14px/17px Roboto;
+font-weight: 400;
 
+}
 /*  */
 .iconsAction{
    display: none;

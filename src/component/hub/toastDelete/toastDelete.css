@@ -7,12 +7,8 @@
     border-width: 3px;
     border-style: solid;
     border-image: 
-      linear-gradient(
-        to left, 
-        #1AFFFC, 
-        #007FFF
-        /* rgba(0, 0, 0, 0) */
-      ) 100% 1 1 1;
+    linear-gradient(91deg, #44D7B6 0%, #329A80 100%)100% 1 1 1;
+   
   }
 
 
@@ -29,6 +25,6 @@
 .btn_undo{
   border: none;
     background: none;
-    color: #2BB4FB;
+    color: var(--green);
 }
 

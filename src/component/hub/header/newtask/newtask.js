@@ -51,7 +51,7 @@ function Newtask(props) {
                 </div>
 
             </div>
-            <button onClick={() => { props.setTaskCrud1(props.task1);  }}>fff</button>
+            <button onClick={() => { props.setTaskCrud1(props.task1); }}>fff</button>
         </>
 
 
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
         setisConfiguratorOpenTask: (isConfiguratorOpenTask) => dispatch(actions.setisConfiguratorOpenTask(isConfiguratorOpenTask)),
         setTaskCrud1: (props) => dispatch(actions.setTaskCrud(props)),
         createT: (name, value) => dispatch(actions.setTask(name, value)),
-        // setWorkspaCrud: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
+        // addNewWorkspaceToServer: (props) => dispatch({ type: 'SET_WORKSPACE_CRUD', payloud: props })
 
 
 

@@ -34,6 +34,9 @@ const publicData = {
     setTasks(state, action) {
         state.tasks = action.payload;
     },
+    addNewWorkspace(state, action) {
+        state.worksapces.push(action.payload)
+    },
     deletTask(state, action) {
         state.cards.map(card => {
             if (card._id == action.payload.card)
@@ -41,6 +44,12 @@ const publicData = {
                     card.tasks[i]._id !== action.payload._id
                 )
         })
+    },
+    deletCard(state, action) {
+        console.log(action.payload.dc)
+        state.cards = state.cards.filter((_, i) =>
+            state.cards[i]._id !== action.payload.dc._id
+        )
     },
 
     setNewTask(state, action) {
@@ -110,8 +119,22 @@ const publicData = {
             state.worksapces[i]._id !== action.payload._id
         )
     },
-    setCardName(state, action) {
-        state.card.name = action.payload;
+    setCardNameInput(state, action) {
+        state.cards.map(card => {
+            if (card._id == action.payload.card)
+                card.name = action.payload;
+        })
+    },
+    updateWorkspaceUfterEditInServer(state, action) {
+        state.worksapces.forEach((workspace, index) => {
+            if (workspace._id === action.payload._id)
+                state.worksapces[index] = action.payload
+        }
+
+        )
+    },
+    addWorkspaceToWorkspaces(state, action) {
+        state.worksapces.push(action.payload)
     }
 }
 

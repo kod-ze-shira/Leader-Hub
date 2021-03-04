@@ -8,28 +8,14 @@ import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { getCardsByProjectId, getProjectsByWorkspaceId, getTasksByProject, getTasksByCardId, NewCard, NewTask ,EditTask, EditCard} from '../middleware/crud'
 import { actions } from '../actions/action.js';
-import { setWorkspaCrud } from '../middleware/crud'
-import { getAllWorkspacesFromServer } from '../middleware/crud'
-import { createNewTeam } from '../middleware/crud'
-import { deleteProjectInServer } from '../middleware/crud'
-import { removeTaskById } from '../middleware/crud'
-
-import { setProjectCrud } from '../middleware/crud'
-// import { getAllTeamsForUser } from '../middleware/crud'
-import { setTaskCrud } from '../middleware/crud'
-import { editWorkspaceInServer } from '../middleware/crud'
-import { editProjectInServer } from '../middleware/crud'
-import { editTaskInServer } from '../middleware/crud'
-import { editCard } from '../middleware/crud'
-import { getTaskByIdFromServer } from '../middleware/crud'
-import { getProjectByIdInServer } from '../middleware/crud'
-import { deleteWorkspaceInServer } from '../middleware/crud'
-
+import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
+import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById } from '../middleware/taskCrud';
+import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
+import { createNewTeam } from '../middleware/teamCrud';
+import { editCard, getCardsByProjectId, newCard ,removeCardById} from '../middleware/cardCrud';
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer });
-
 
 const store = createStore(
     reducers,
@@ -37,27 +23,25 @@ const store = createStore(
         applyMiddleware
             (
                 deleteProjectInServer,
-                editTaskInServer,
                 editProjectInServer,
                 editWorkspaceInServer,
-                setWorkspaCrud,
+                addNewWorkspaceToServer,
                 getAllWorkspacesFromServer,
-                setTaskCrud,
                 createNewTeam,
-                // getAllTeamsForUser,
-                setProjectCrud,
+                newProject,
                 getProjectsByWorkspaceId,
-                // getTasksByProject,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
                 getCardsByProjectId,
                 getTasksByCardId,
-                deleteWorkspaceInServer,
-                NewCard,
-                NewTask,
+                deleteWorkspaceFromServer,
+                newCard,
+                newTask,
                 removeTaskById,
-                EditTask,
-                EditCard
+                editTask,
+                duplicateWorkspace,
+                editCard,
+                removeCardById
             ))
 )
 var url = window.location;
@@ -65,8 +49,8 @@ console.log(url);
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
     console.log("localhost");
-    let jwtFromCookie="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
-store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
+    let jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
+    store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }
 else {
     if (document.cookie) {

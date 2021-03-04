@@ -8,9 +8,14 @@ body{
   --lighat-blue: #1e90ff;
   --light-light-blue:#44D7B6;
   --white: #ffffff;
-
+  --green:#34A38B;
 }
-
+.save_canges_btn{
+  background-color: #44D7B6;
+  color:white;
+  border-radius: 5px;
+  margin: auto;
+}
 
 
 

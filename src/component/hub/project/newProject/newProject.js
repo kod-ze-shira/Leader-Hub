@@ -24,7 +24,7 @@ function NewProject(props) {
         if (!project.name)
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
         else
-            props.setProjectCrud(project)
+            props.newProject(project)
 
     }
     return (
@@ -123,7 +123,7 @@ export default connect(
     },
     (dispatch) => {
         return {
-            setProjectCrud: (props) => dispatch(actions.setProjectCrud(props)),
+            newProject: (props) => dispatch(actions.newProject(props)),
 
 
 

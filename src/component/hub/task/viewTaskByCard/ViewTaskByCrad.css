@@ -59,7 +59,7 @@
   
   /* When the checkbox is checked, add a blue background */
   .check-task input:checked ~ .checkmark {
-    background: transparent linear-gradient(180deg, #1AFFFC 8%, #007FFF 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(270deg, #44D7B6 0%, #329A80 100%) 0% 0% no-repeat padding-box;
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -157,6 +157,6 @@
   height: 0;
 }
 .dnd-icon{
-  opacity: 0.5;
-  display: none;
+  opacity: 0;
+  /* display: none; */
 }
