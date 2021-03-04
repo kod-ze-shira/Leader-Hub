@@ -92,8 +92,8 @@ return (
                             <div className="col-10" onClick={openaddNewWorkspace}
                             >
                                 <div className="row "  >
-                                    <div className="Workspace"  >
-                                        <div className="logoWorkspacelist"
+                                    <div className="Workspace addWorkspace"  >
+                                        <div className="logoWorkspacelist addWorkspace "
                                             style={{ backgroundColor: "#778CA2" }}
                                             >
                                             +
@@ -107,7 +107,7 @@ return (
                         </div>
 
                         :
-                        <div className="Workspacegrid mt-4" >
+                        <div className="Workspacegrid mt-4 addWorkspace" >
                             <div onClick={openaddNewWorkspace}>
                                 <div className="logoWorkspace1 " >
                                     <div className="mt-1 logo"

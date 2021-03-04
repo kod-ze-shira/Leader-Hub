@@ -1,16 +1,19 @@
 
 .logoWorkspacelist{
     margin: auto !important;
-    width: 3rem;
-    height:3rem;
+    width: 2.6rem;
+    height:2.6rem;
    border-radius: 50%;
-   font-size: 2.5rem;
+ font-size: 1.8rem;
+   
+   
    color: white;
    letter-spacing: 1.72px;
    text-align: center;
    font-family: 'Roboto', sans-serif;
    margin-top: 3vh !important;
    /* margin-top: 30px; */
+   
 }
 
 .iconsAction{
@@ -39,6 +42,18 @@
    cursor: pointer ;
 
 
+}
+.description-and-date{
+    font-size: small !important;
+    text-align: left !important;
+}
+.ul-workspace-list{
+    /* line-height: ; */
+}
+.workspace-name-list{
+    font-weight: 400;
+    color: black !important;
+    font-size: 17px;
 }
 .WorkspaceList:hover{
   background-color:#F6F6FA;
