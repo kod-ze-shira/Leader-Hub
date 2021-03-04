@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
+import Tabs from '../tabs/tabs'
 function CardsPage() {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
+    const [present, setPresent] = useState("list");
+
 
     useEffect(() => {
 
@@ -13,10 +16,26 @@ function CardsPage() {
     const changeFlag = (value) => {
         setFlag(value)
     }
+    const howToPresent = (value) => {
+        setPresent(value)
+    }
+    const renderSwitch = () => {
+        switch (present) {
+            case 'tabs':
+                return <Tabs />
+            case 'list'://on click edit button of workspace
+                return <ProjectPlatform flag={flag} />
+            default:
+                return <ProjectPlatform flag={flag} />
+
+        }
+    }
     return (
         <div >
-            <SelectHeader flag={changeFlag} />
-            <ProjectPlatform flag={flag} />
+            <SelectHeader flag={changeFlag} from={howToPresent} />
+            {/* <ProjectPlatform flag={flag} /> */}
+            {renderSwitch()}
+
         </div>
 
     )
