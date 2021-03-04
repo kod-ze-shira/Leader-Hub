@@ -85,7 +85,10 @@ function ViewProject(props) {
                     <CellDescription description='Last update' />
                 </td>
 
-                <td><button onClick={(event) => deleteProject(event)}> delete</button></td>
+                <td>
+                    <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img>
+                    {/* <button onClick={(event) => deleteProject(event)}> delete</button> */}
+                </td>
 
             </tr >
 

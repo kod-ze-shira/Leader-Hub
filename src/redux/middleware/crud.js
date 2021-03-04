@@ -30,12 +30,7 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
-<<<<<<< HEAD
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
-
-=======
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTeamsForUser`
->>>>>>> newDev
         fetch(urlData,
             {
                 method: 'GET',
