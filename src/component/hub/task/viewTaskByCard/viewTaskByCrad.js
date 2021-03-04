@@ -12,7 +12,6 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fas } from '@fortawesome/free-solid-svg-icons'
 
 
 function ViewTaskByCrad(props) {
@@ -55,10 +54,10 @@ function ViewTaskByCrad(props) {
         props.showToast(props.task)
     }
     function overTask(id) {
-        $(`#${id}`).css({ 'display': 'inline' })
+        $(`#${id}`).css({ 'opacity': '0.5' })
     }
     function outOver(id) {
-        $(`#${id}`).css({ 'display': 'none' })
+        $(`#${id}`).css({ 'opacity': '0' })
     }
     return (
         <>
@@ -67,19 +66,16 @@ function ViewTaskByCrad(props) {
                     <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        // innerRef={provided.innerRef}
                         ref={provided.innerRef}
                     >
-
                         <div onMouseOver={(e) => overTask(props.task._id)}
                             onMouseOut={() => outOver(props.task._id)}
                             className="show-task row mx-4 border-bottom"
-                        // ref={refToNewRow}
                         >
+
                             <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
-                            {/* <div className=""> */}
                             <label
                                 className="check-task ml-3 py-2 pl-5 col-3">{props.task.name}
                                 <input type="checkbox" />
@@ -96,11 +92,7 @@ function ViewTaskByCrad(props) {
                             <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
 
                             </label>
-                            <label className=" check-task py-2 ">
-                                {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask(props.task)}>
-                                    <img src={require('../../../img/bin.png')}></img>
-                                </button> */}
-                            </label>
+
 
                             {viewDetails ?
                                 <div className="closeDet" >

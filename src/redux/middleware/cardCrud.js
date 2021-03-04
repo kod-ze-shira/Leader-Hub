@@ -61,7 +61,7 @@ export const newCard = ({ dispatch, getState }) => next => action => {
 }
 
 export const editCard = ({ dispatch, getState }) => next => action => {
-ט
+
     if (action.type === 'EDIT_CARD') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
@@ -89,7 +89,9 @@ export const editCard = ({ dispatch, getState }) => next => action => {
         });
     }
     return next(action);
-}export const removeCardById = ({ dispatch, getState }) => next => action => {
+}
+
+export const removeCardById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_CARD_BY_ID') {
         // let workspace = getState().workspace_reducer.workspace;

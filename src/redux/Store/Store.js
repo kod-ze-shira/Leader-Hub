@@ -13,7 +13,7 @@ import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, get
 import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam } from '../middleware/teamCrud';
-import { editCard, getCardsByProjectId, newCard } from '../middleware/cardCrud';
+import { editCard, getCardsByProjectId, newCard ,removeCardById} from '../middleware/cardCrud';
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer });
 
@@ -40,7 +40,8 @@ const store = createStore(
                 removeTaskById,
                 editTask,
                 duplicateWorkspace,
-                editCard
+                editCard,
+                removeCardById
             ))
 )
 var url = window.location;
