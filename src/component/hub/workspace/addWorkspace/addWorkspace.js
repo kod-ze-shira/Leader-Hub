@@ -16,7 +16,7 @@ function AddWorkspace(props) {
 
     const [workspace, setWorkspace] = useState({
         name: "",
-        userId: "5fa79b45f8acce4894181b81",
+        userId: "",
         description: "",
         projet: [],
         team: []
