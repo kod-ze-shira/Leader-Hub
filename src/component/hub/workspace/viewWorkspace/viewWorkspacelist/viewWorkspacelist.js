@@ -52,10 +52,9 @@ function ViewWorkspaceList(props) {
 
                     <div className="row "  >
                         <div className="Workspace"  >
-                            <div className="logoWorkspacelist"
-                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}> 
-                                {workspace.name?workspace.name[0].toUpperCase():null}
-                            </div>
+                            <div className="logoWorkspacelist logo "
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.name ? workspace.name[0].toUpperCase() : null}                            </div>
                         </div>
                         <b className="mt-4 ml-2">{workspace.name} </b>
 
@@ -76,7 +75,7 @@ function ViewWorkspaceList(props) {
                     </div>
                 </div>
             </div>
-      
+
         </>
     )
 }
@@ -87,7 +86,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-       setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
+        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
     }
 }

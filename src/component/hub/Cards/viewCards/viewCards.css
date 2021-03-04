@@ -17,14 +17,16 @@
 }
 .show-card{
     background-color: transparent;
-    border:none;
+    border: none !important;
+    outline: 0!important;
 }
 .show-card>div{
     display: inline-block;
 }
 .show-card:focus{
-    border:1px #98A9BC solid;
-    border-radius: 5px;
+    border:1px  solid #98A9BC!important;
+    /* border-radius: 2px !important; */
+    /* border: 1px solid blue; */
 }
 p{
     color:#98A9BC !important;

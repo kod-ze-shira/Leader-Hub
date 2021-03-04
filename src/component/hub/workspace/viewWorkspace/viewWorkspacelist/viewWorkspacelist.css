@@ -1,16 +1,16 @@
 
 .logoWorkspacelist{
-    width: 4rem;
-    height:4rem;
+    margin: auto !important;
+    width: 3rem;
+    height:3rem;
    border-radius: 50%;
-   font-size: 26px;
-   padding-top: 8px;
+   font-size: 2.5rem;
    color: white;
    letter-spacing: 1.72px;
    text-align: center;
    font-family: 'Roboto', sans-serif;
-   font-size: xx-large;
-   margin: 8px;
+   margin-top: 3vh !important;
+   /* margin-top: 30px; */
 }
 
 .iconsAction{
@@ -31,7 +31,6 @@
    width: 5rem;
    background: #F6F6FA;
    height: 5rem;
-   margin-bottom: 10px;
    text-align: center;
    justify-content: center;
    align-items: center;
@@ -54,6 +53,18 @@
 
 .stripe{
     color:#F6F6FA ;
+}
+.logo{
+    width: 2.6rem;
+  height:2.6rem;
+ border-radius: 50%;
+ font-size: 26px;
+ color: white;
+ letter-spacing: 1.72px;
+ /* text-align: 30px; */
+ font-family: 'Roboto', sans-serif;
+ font-size: 1.8rem;
+ /* margin-top: 30px; */
 }
 
 

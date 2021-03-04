@@ -27,9 +27,7 @@ button{
     border: none;
     
 }
-button:hover{
-    background-color: transparent !important;
-}
+
 /* input{
     display: none;
     background-color: transparent!important;
@@ -40,9 +38,7 @@ button:hover{
 
     
 }
-.search{
-    display: none;
-   }
+
 .input-group-text{
     background-color: transparent !important;
     border-right: none !important;

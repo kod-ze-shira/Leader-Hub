@@ -30,7 +30,7 @@ function ViewWorkspaceGrid(props) {
         props.setWorkspace(workspace);
         props.duplicateWorkspace();
     }
-  
+
     // $(`.ViewWorkspace`).mouseover(function () {
     //     console.log(this.id)
     //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
