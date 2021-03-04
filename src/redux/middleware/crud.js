@@ -480,34 +480,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-export const removeCardById = ({ dispatch, getState }) => next => action => {
-
-    if (action.type === 'REMOVE_CARD_BY_ID') {
-        // let workspace = getState().workspace_reducer.workspace;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/removeCardById`
-        $.ajax({
-            url: urlData,
-            type: 'POST',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                dispatch(actions.deletCard(data))
-                console.log("success")
-                console.log("data", data);
-            },
-            error: function (err) {
-
-                checkPermission(err).then((ifOk) => {
-                })
-            }
-        });
-
-    }
-    return next(action);
-}
-
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
