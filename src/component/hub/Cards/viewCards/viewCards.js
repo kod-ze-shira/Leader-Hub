@@ -97,7 +97,7 @@ function ViewCards(props) {
                         className="ml-3 show-card mb-2"
                         value={editCardName}
                         onChange={updateCardName}
-                        onBlur={editCard}
+                        // onBlur={editCard}
                         onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 editCard()
