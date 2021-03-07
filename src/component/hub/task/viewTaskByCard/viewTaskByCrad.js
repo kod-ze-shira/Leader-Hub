@@ -19,7 +19,11 @@ function ViewTaskByCrad(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
-
+    const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [task, setTask] = useState({
+        "_id": props.task._id, "name": editTaskName, "description": props.task.description
+        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+    })
     useEffect(() => {
 
     }, [props.task])
@@ -59,6 +63,15 @@ function ViewTaskByCrad(props) {
     function outOver(id) {
         $(`#${id}`).css({ 'opacity': '0' })
     }
+    const editTask = (event) => {
+        let task1 = {
+            "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+        }
+        setTask(task1)
+        console.log("edut-card", task)
+        props.EditTask(task);
+    }
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.index}>
@@ -77,11 +90,22 @@ function ViewTaskByCrad(props) {
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
                             <label
-                                className="check-task ml-3 py-2 pl-5 col-3">{props.task.name}
+                                className="check-task ml-3 py-2 pl-5 col-1 ">
                                 <input type="checkbox" />
                                 <span className="checkmark " onClick={() => addChalalit()}></span>
                             </label>
-                            <label className="check-task py-2  px-2 col-4 ">
+                            <input
+                                className="show-card col-3"
+                                value={editTaskName}
+                                onChange={(e) => setEditTaskName(e.target.value)}
+                                onBlur={editTask}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') {
+                                        editTask()
+                                    }
+                                }}
+                            ></input>
+                            <label className="check-task py-2  px-2 col-3 ">
                                 <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                             </label>
                             <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
@@ -96,7 +120,8 @@ function ViewTaskByCrad(props) {
 
                             {viewDetails ?
                                 <div className="closeDet" >
-                                    <ViewDetails toastDelete={deleteTask} closeViewDetails={() => setViewDetails(false)} from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
+                                    <ViewDetails toastDelete={deleteTask} closeViewDetails={() => setViewDetails(false)}
+                                        from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
                                 </div>
                                 : null}
                         </div>
@@ -118,6 +143,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
     }
 }
