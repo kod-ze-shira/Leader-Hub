@@ -53,6 +53,7 @@ function ViewCardsTabs(props) {
     }
     const deleteCard = () => {
         props.showToastDelete(props.cardFromMap)
+        // props.removeCardById(props.cardFromMap._id)
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
@@ -69,68 +70,54 @@ function ViewCardsTabs(props) {
 
     return (
         <>
-
             <div className="col-3 mt-4">
-                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
-                    {provided => (
-                        <div
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                        >
-                            <div className="view-cards-tabs">
-                                <div class="card " >
-                                    <div class="container">
-                                        <div class="card-header row">
-                                            <input
-                                                className="form-control col-9"
-                                                value={editCardName}
-                                                onChange={updateCardName}
-                                                // onBlur={editCard}
-                                                onKeyPress={event => {
-                                                    if (event.key === 'Enter') {
-                                                        editCard()
-                                                    }
-                                                }}
-                                            >
-                                            </input>
-                                            <button className="more col-3">. . .</button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <Droppable droppableId={props.cardFromMap._id} >
-                                            {provided => (
-                                                <div
-                                                    ref={provided.innerRef}
-                                                    {...provided.droppableProps}>
-                                                    {props.cardFromMap.tasks.map((task, index) => (
-                                                        <ViewTaskByCradTabs key={task._id} task={task} index={index} />
-                                                    ))}
-                                                    {
-                                                        addTaskInInput ?
-                                                            <div class="">
-                                                                <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
-                                                                    value={inputValue} onChange={updateInputValue} onKeyPress={event => {
-                                                                        if (event.key === 'Enter') {
-                                                                            newTask()
-                                                                        }
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                            : null
-                                                    }
-                                                    {provided.placeholder}
-                                                </div>
-                                            )}
-                                        </Droppable>
-                                        <p className="add-task-tabs mt-1" onClick={addTask}>Add Task +</p>
-                                    </div>
-                                </div>
+                <div className="view-cards-tabs">
+                    <div class="card " >
+                        <div class="container">
+                            <div class="card-header row">
+                                <input
+                                    className="form-control col-9"
+                                    value={editCardName}
+                                    onChange={updateCardName}
+                                    // onBlur={editCard}
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') {
+                                            editCard()
+                                        }
+                                    }}
+                                >
+                                </input>
+                                <button className="more col-3">. . .</button>
                             </div>
                         </div>
-                    )}
-                </Draggable>
+                        <div class="card-body">
+                            {props.cardFromMap.tasks.map((task) => (
+                                <ViewTaskByCradTabs key={task._id} task={task} />
+                            ))}
+                            {
+                                addTaskInInput ?
+                                    <div class="">
+                                        <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
+                                            value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                                                if (event.key === 'Enter') {
+                                                    newTask()
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                    : null
+                            }
+                            <p className="add-task-tabs mt-1" onClick={addTask}>Add Task +</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
             </div >
+
         </>
     )
 }
