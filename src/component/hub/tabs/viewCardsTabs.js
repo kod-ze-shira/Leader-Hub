@@ -1,46 +1,149 @@
-import React, { useState, useEffect, useParams } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
-import CardsByProject from '../Cards/cardsByProject/cardsByProject';
-// import './projectPlatform.css'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ToastDelete from '../toastDelete/toastDelete1';
-import viewCards from '../Cards/viewCards/viewCards';
 
+import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action'
+import './viewCardsTabs.css'
+// import history from '../../../history'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
+// import ViewDetails from '../../viewDetails/viewDetails'
+// import ToastDelete from '../../toastDelete/toastDelete1'
+import { event } from 'jquery';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ViewCardsTabs(props) {
-
     useEffect(() => {
-    }, [props.card])
 
+    }, [props.flag])
+
+    const [flag, setFlag] = useState(false)
+    const [flagFromSelect, setFlagFromSelect] = useState(true)
+    const [cardId, setCardId] = useState("")
+    const [viewDetails, setViewDetails] = useState(false)
+    const [addTaskInInput, setAddTaskInInput] = useState(false)
+    const [inputValue, setInputValue] = useState()
+    const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
+
+    const updateInputValue = (evt) => {
+        setInputValue(evt.target.value)
+    }
+    const newTask = () => {
+        const today = new Date()
+        const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
+        const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
+        const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
+
+        let task;
+        if (inputValue) {
+            task = { name: inputValue, description: "", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
+            props.newTask(task)
+        }
+        setInputValue("")
+        setAddTaskInInput(!addTaskInInput)
+    }
+
+    const addTask = () => {
+        setAddTaskInInput(!addTaskInInput)
+        if (props.cardFromMap.tasks.length)
+            if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
+                changeSelectedCard()
+            }
+    }
+    const updateCardName = (event) => {
+        setEditCardName(event.target.value)
+
+    }
+    const deleteCard = () => {
+        props.showToastDelete(props.cardFromMap)
+    }
+    const editCard = (event) => {
+        let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
+        console.log("edut-card", card)
+        props.EditCard(card);
+    }
+    const showDetails =
+        (event) => {
+            setViewDetails(true)
+            setCardId(props.cardFromMap._id)
+            // props.setTask(props.task)
+        }
+    const changeSelectedCard = (event) => {
+        props.setCard(props.cardFromMap)
+        if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
+            setFlagFromSelect(false)
+            setAddTaskInInput(false)
+
+        }
+        else
+            if (!flag && props.cardFromMap.tasks[0]) {
+                setFlag(true)
+            }
+            else {
+                console.log(props.cardFromMap.tasks[0])
+                setFlag(false)
+                setAddTaskInInput(false)
+            }
+
+    }
 
     return (
         <>
-            <div className="body container-fluid">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        {props.card.name}
-                    </div>
-                </div>
-            </div>
+
+            <div className="col-3 mt-4">
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
+                    {provided => (
+                        <div
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                        >
+                            <div className="view-cards-tabs">
+                                <div class="card " >
+                                    <div class="card-header">
+                                        {props.cardFromMap.name}<button className="more">. . .</button></div>
+                                    <div class="card-body">
+                                        <Droppable droppableId={props.cardFromMap._id} >
+                                            {provided => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.droppableProps}>
+                                                    {props.cardFromMap.tasks.map((task, index) => (
+                                                        <ViewTaskByCradTabs key={task._id} task={task} index={index} />
+                                                    ))}
+                                                    {provided.placeholder}
+                                                </div>
+                                            )}
+                                        </Droppable>
+                                        <p className="add-task-tabs mt-1">Add Task +</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    )}
+                </Draggable>
+            </div >
         </>
     )
 }
 const mapStateToProps = (state) => {
+
     return {
-        cards: state.public_reducer.cards,
         project: state.project_reducer.project,
         card: state.card_reducer.card,
+        task: state.task_reducer.task,
+        tasks: state.public_reducer.tasks,
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-        getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
-
+        setCard: (card) => dispatch(actions.setCard(card)),
+        newTask: (task) => dispatch(actions.newTask(task)),
+        getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
+        EditCard: (card) => dispatch(actions.editCard(card))
     }
-
-
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCardsTabs)
