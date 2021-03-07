@@ -78,7 +78,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log(data);
                 dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
-                createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
+                // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין

@@ -28,15 +28,19 @@ function ViewCards(props) {
         setInputValue(evt.target.value)
     }
     const newTask = () => {
-        const today = new Date()
-        const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
-        const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
-        const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
-
+        // const today = new Date()
+        // const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        // const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
+        // const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
+        // const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth()+1
+        const yyyy = today.getFullYear()
+        today= (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
+            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")

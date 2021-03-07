@@ -15,12 +15,15 @@ overflow-y: auto;
     background-color: white !important;
     font-size: 16px;
     font-weight: 500;
-
 }
 .more{
     background-color: transparent;
-    float: right;
+    float: right !important;
     color:#778ca2;
+    /* margin-top: 1px; */
+}
+.more:focus{
+    outline: 0;
 }
 .card-body .add-task-tabs{
     color: #34A38B !important;
@@ -62,7 +65,35 @@ border-radius: 5px;
   .color-task{
     width: 80px;
     height: 6px;
-    background-color:#F8B520;
+    /* background-color:#F8B520; */
     border-radius: 4px;
     opacity: 1;
+
+}
+.card-header .form-control
+{
+    border:none !important;
+    /* width:70%; */
+
+}
+.card-header .form-control:focus
+{
+   border: 1px solid #ced4da !important;
+    /* border-radius: .25rem !important; */
+}
+
+.task-card .status-task-in-progress{
+    background-color:#FFD56D !important;
+
+  }
+  .task-card.status-task-to-do{
+  
+    background-color:#FD808B !important;
+   
+
+  }
+ .task-card .status-task-done{
+
+    background-color:#52C4A9 !important;
+  
   }

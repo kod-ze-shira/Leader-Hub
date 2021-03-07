@@ -19,13 +19,21 @@ function ViewTaskByCradTabs(props) {
 
     return (
         <>
+            {/* <div class="container"> */}
+            <div className="task-card mt-2 ">
+                <div className="container">
+                    <div className="row">
+                        {/* "color-task col-5 mt-3 ml-2" */}
+                        <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
 
-            <div className="task-card mt-2">
-                {/* <div className="color-task mb-2 ml-2" ></div> */}
-                <p className="ml-2 mt-1">{props.task.name}</p>
+                        {/* <p className="col-8">{props.task.name}</p> */}
+                        <button className="more col-4 mr-0">. . .</button>
+                    </div>
+                    <p className="">{props.task.name}</p>
 
+                </div>
+                {/* </div> */}
             </div>
-
         </>
     )
 }
