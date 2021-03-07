@@ -15,6 +15,7 @@
         border-left: 6px solid transparent;
         border-right: 6px solid transparent; 
         border-top: 6px solid black;
+        cursor: pointer;
 }
 .triangle{
         width: 0; 
@@ -29,6 +30,9 @@
     border: none !important;
     outline: 0!important;
 }
+.title-card{
+    display: inline !important;
+}
 .show-card>div{
     display: inline-block;
 }
@@ -37,10 +41,12 @@
     /* border-radius: 2px !important; */
     /* border: 1px solid blue; */
 }
-p{
-    color:#98A9BC !important;
-    margin-bottom: 0;
+.card-name >p{
+   
+    text-align: center;
 }
+p{ color:#98A9BC !important;
+    margin-bottom: 0;}
 .new-task{
     background-color: transparent;
 }

@@ -106,17 +106,20 @@ function ViewCards(props) {
                 <div className=" col-3  mr-3 ">
                     <div className="triangle base-triangle" onClick={(e) => changeSelectedCard(e)} ></div>
 
+                    {/* <div className="title-card col-3 mr-4">
+                    <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div> */}
                     <input
-                        className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "mb-2 ml-3  show-card show-card-pressure" : "mb-2 ml-3 show-card show-card-no-pressure"}
+                        className="ml-3 show-card mb-2"
                         value={editCardName}
                         onChange={updateCardName}
-                        // onBlur={editCard}
+                        onBlur={editCard}
                         onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 editCard()
                             }
                         }}
-                    ></input>
+                    >
+                    </input>
                     {/* <button onClick={deleteCard}>delete card</button> */}
                     {/* <FontAwesomeIcon className=" mt-2 "
                         icon={['fas', 'ellipsis-v']}
