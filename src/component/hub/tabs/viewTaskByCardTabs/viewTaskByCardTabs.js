@@ -29,11 +29,17 @@ function ViewTaskByCradTabs(props) {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <div className="task-card mt-2">
-                            <p className="ml-2 mt-1">{props.task.name}</p>
+                        <div className="task-card mt-2 ">
+                            <div className="container">
+                                <div className="row">
+                                    <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
+                                    <button className="more col-4 mr-0">. . .</button>
+                                </div>
+                                <p className="">{props.task.name}</p>
+
+                            </div>
                         </div>
                     </div>
-
                 )}
             </Draggable>
 

@@ -66,7 +66,7 @@ export const editCard = ({ dispatch, getState }) => next => action => {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
-        console.log("a" + card)
+        console.log("a" + card.name)
 
         $.ajax({
             url: urlData,

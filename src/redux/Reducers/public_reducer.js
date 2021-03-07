@@ -139,9 +139,10 @@ const publicData = {
         )
     },
     setCardNameInput(state, action) {
+        console.log(action.payload)
         state.cards.map(card => {
-            if (card._id == action.payload.card)
-                card.name = action.payload;
+            if (card._id == action.payload._id)
+                card.name = action.payload.name;
         })
     },
     updateWorkspaceUfterEditInServer(state, action) {
