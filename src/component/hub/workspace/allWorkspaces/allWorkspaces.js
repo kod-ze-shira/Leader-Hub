@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
@@ -10,6 +10,8 @@ import ToastDelete from '../../toastDelete/toastDelete1'
 
 function AllWorkspaces(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
+    const refToDeleteToast = useRef(null);
+
 
     useEffect(() => {
         props.getAllWorkspaces()
@@ -29,7 +31,10 @@ function AllWorkspaces(props) {
     })
     const renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
-        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+        setShowToastDeleteWhenClickDelete={()=>{setShowToastDelete(true);
+            // if (refToDeleteToast.current != null)
+            // refToDeleteToast.current.scrollIntoView()
+        }} 
          key={todo._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
     function openEditWorkspace(){
@@ -125,7 +130,7 @@ return (
                         <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from={addOrEditWorkspace} /> : null
                     }
                     {showToastDelete ?
-                        <ToastDelete
+                        <ToastDelete ref={refToDeleteToast}
                             toOnClose={deleteWorkspace}
                             toSetShowToastDelete={() => { setShowToastDelete(false) }}
                             name={props.workspaceDeleted.name} 
