@@ -70,19 +70,52 @@ function Tabs(props) {
         props.changeTaskplace(replace)
 
     };
+
+    function onDragEndׂ(e) {
+        let iSourse, iDestination
+        console.log(e.destination.droppableId)
+        for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
+            if (props.cards[iSourse]._id == e.source.droppableId)
+                break
+        }
+        for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
+            if (props.cards[iDestination]._id == e.destination.droppableId)
+                break
+        }
+        console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
+        const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+        props.changeTaskplace(replace)
+
+    };
+    function onDragEndׂCard(e) {
+        console.log(e)
+    }
     return (
         <>
-            <div className="body">
-                <div className="row mx-3">
-                    {props.cards.length ?
-                        props.cards.map((card) => {
+            <DragDropContext onDragEnd={(e) => onDragEndׂCard(e)}>
+                <Droppable droppableId={props.cards[0]._id} >
+                    {provided => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}>
+                            <div className="body">
+                                <div className="row mx-3">
+                                    {props.cards.length ?
+                                        <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
+                                            {props.cards.map((card, index) => {
+                                                return <ViewCardsTabs key={card._id} cardFromMap={card} index={index} />
+                                            })}
+                                        </DragDropContext>
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
 
-                            return <ViewCardsTabs key={card._id} cardFromMap={card} />
-                        })
-                        : null
-                    }
-                </div>
-            </div>
         </>
     )
 }

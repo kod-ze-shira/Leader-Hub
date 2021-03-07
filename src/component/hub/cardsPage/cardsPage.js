@@ -23,7 +23,7 @@ function CardsPage() {
         switch (present) {
             case 'tabs':
                 return <Tabs />
-            case 'list'://on click edit button of workspace
+            case 'list':
                 return <ProjectPlatform flag={flag} />
             default:
                 return <ProjectPlatform flag={flag} />
@@ -33,7 +33,6 @@ function CardsPage() {
     return (
         <div >
             <SelectHeader flag={changeFlag} from={howToPresent} />
-            {/* <ProjectPlatform flag={flag} /> */}
             {renderSwitch()}
 
         </div>

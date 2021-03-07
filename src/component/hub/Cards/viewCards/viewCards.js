@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
+import $ from 'jquery'
 import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
@@ -28,15 +29,19 @@ function ViewCards(props) {
         setInputValue(evt.target.value)
     }
     const newTask = () => {
-        const today = new Date()
-        const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
-        const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
-        const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
-
+        // const today = new Date()
+        // const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        // const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
+        // const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
+        // const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth()+1
+        const yyyy = today.getFullYear()
+        today= (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "", status: "to do", startDate: dateWithSleshToStart, dueDate: dateWithSleshToDue, "card": props.card._id }
+            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -67,9 +72,20 @@ function ViewCards(props) {
         (event) => {
             setViewDetails(true)
             setCardId(props.cardFromMap._id)
-            // props.setTask(props.task)
         }
+    const triangleSide = () => {
+        if ($(".base-triangle").hasClass("triangle")) {
+            $(".base-triangle").removeClass("triangle")
+            $(".base-triangle").addClass("newTriangle")
+        }
+        else {
+            $(".base-triangle").removeClass("newTriangle")
+            $(".base-triangle").addClass("triangle")
+        }
+
+    }
     const changeSelectedCard = (event) => {
+        triangleSide()
         props.setCard(props.cardFromMap)
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
@@ -91,8 +107,11 @@ function ViewCards(props) {
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <div className="title-card col-3 mr-4">
-                    <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div>
+                <div className=" col-3  mr-3 ">
+                    <div className="triangle base-triangle" onClick={(e) => changeSelectedCard(e)} ></div>
+
+                    {/* <div className="title-card col-3 mr-4">
+                    <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div> */}
                     <input
                         className="ml-3 show-card mb-2"
                         value={editCardName}
