@@ -100,3 +100,6 @@ border-radius: 5px;
     background-color:#52C4A9 !important;
   
   }
+  .MuiMenuItem-root{
+      font-size: 0.9rem !important;
+  }

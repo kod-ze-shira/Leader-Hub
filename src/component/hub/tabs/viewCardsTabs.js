@@ -11,6 +11,10 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
 // import ToastDelete from '../../toastDelete/toastDelete1'
 import { event } from 'jquery';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Menu, MenuItem, Button } from '@material-ui/core';
+import $ from "jquery";
+
+
 
 function ViewCardsTabs(props) {
     useEffect(() => {
@@ -24,6 +28,7 @@ function ViewCardsTabs(props) {
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
+    const [indexToEdit, setIndexToEdit] = useState(props.index)
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -67,7 +72,27 @@ function ViewCardsTabs(props) {
             // props.setTask(props.task)
         }
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleClick = (event) => {
+        setIndexToEdit(indexToEdit)
+        $('.rename-card').click(function () {
+            $(`#${indexToEdit}`).focus();
+        });
+        setAnchorEl(event.currentTarget);
+
+
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    // $(document).ready(function () {
+    //     $('.more').click(function () {
+    //         $('.form-control').focus();
+    //     });
+    // });
     return (
         <>
             <div className="col-3 mt-4">
@@ -76,7 +101,8 @@ function ViewCardsTabs(props) {
                         <div class="container">
                             <div class="card-header row">
                                 <input
-                                    className="form-control col-9"
+                                    className="form-control col-8 "
+                                    id={indexToEdit}
                                     value={editCardName}
                                     onChange={updateCardName}
                                     // onBlur={editCard}
@@ -87,7 +113,19 @@ function ViewCardsTabs(props) {
                                     }}
                                 >
                                 </input>
-                                <button className="more col-3">. . .</button>
+                                <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                    . . .
+                             </Button>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+                                    <MenuItem className="rename-card" onClick={handleClose}>Rename Card</MenuItem>
+                                    <MenuItem onClick={handleClose}>Delete Card</MenuItem>
+                                </Menu>
                             </div>
                         </div>
                         <div class="card-body">

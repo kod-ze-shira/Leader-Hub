@@ -1,50 +1,4 @@
-// import React, { useState, useEffect, useParams } from 'react'
-// import { connect } from 'react-redux'
-// import { actions } from '../../../redux/actions/action'
-// import CardsByProject from '../Cards/cardsByProject/cardsByProject';
-// // import './projectPlatform.css'
-// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// import ToastDelete from '../toastDelete/toastDelete1';
-// import viewCards from '../Cards/viewCards/viewCards';
-// import ViewCardsTabs from './viewCardsTabs';
 
-
-// function Tabs(props) {
-
-//     useEffect(() => {
-//         {
-
-//         };
-//     });
-
-
-//     return (
-//         <>
-
-//                 {/* {props.cards.map((card, index) => { */}
-//                 {/* key={card._id} card={card} */}
-//                   <ViewCardsTabs />
-//                 {/* // })} */}
-//         </>
-//     )
-// }
-// const mapStateToProps = (state) => {
-//     return {
-//         cards: state.public_reducer.cards,
-
-
-//     }
-// }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-//         getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
-
-//     }
-
-
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Tabs)
 
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
@@ -52,13 +6,29 @@ import { actions } from '../../../redux/actions/action'
 import ViewCardsTabs from './viewCardsTabs'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
+
 function Tabs(props) {
 
     useEffect(() => {
 
     }, [props.projectId])
 
-
+    // const updateInputValue = (evt) => {
+    //     setInputValue(evt.target.value)
+    // }
+    // const showInputToAddCard = () => {
+    //     setShowInput(true)
+    // }
+    // const newCard = () => {
+    //     let card;
+    //     if (inputValue) {
+    //         card = { "project": props.project._id, name: inputValue }
+    //         props.newCard(card)
+    //     }
+    //     setInputValue("")
+    //     setShowInput(false)
+    // } 
+  
     function onDragEndׂ(e) {
         let i
         for (i = 0; i < props.cards.length; i++) {
@@ -110,6 +80,15 @@ function Tabs(props) {
                                     }
                                 </div>
                             </div>
+                        
+                            {/* {showInput ?
+                                <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control mt-2 col-6 ml-4" onKeyPress={event => {
+                                    if (event.key === 'Enter') {
+                                        newCard()
+                                    }
+                                }}></input>
+                                : null}
+                            <a className="ml-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a> */}
                             {provided.placeholder}
                         </div>
                     )}
