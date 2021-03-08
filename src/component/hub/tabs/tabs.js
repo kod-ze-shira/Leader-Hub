@@ -51,48 +51,44 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import ViewCardsTabs from './viewCardsTabs'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-
+import './tabs.css'
 function Tabs(props) {
 
     useEffect(() => {
 
     }, [props.projectId])
 
-
     function onDragEndׂ(e) {
-        let i
-        for (i = 0; i < props.cards.length; i++) {
-            if (props.cards[i]._id == e.source.droppableId)
-                break
+        if (props.cards.find(card => card._id == e.draggableId))
+            onDragEndׂCard(e)
+        else {
+            let iSourse, iDestination
+            for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
+                if (props.cards[iSourse]._id == e.source.droppableId)
+                    break
+            }
+            for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
+                if (props.cards[iDestination]._id == e.destination.droppableId)
+                    break
+            }
+            console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
+            const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+            props.changeTaskplace(replace)
         }
-        console.log(e.source.index, e.destination.index, " ", i)
-        const replace = [e.source.index, e.destination.index, i]
-        props.changeTaskplace(replace)
-
-    };
-
-    function onDragEndׂ(e) {
-        let iSourse, iDestination
-        console.log(e.destination.droppableId)
-        for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
-            if (props.cards[iSourse]._id == e.source.droppableId)
-                break
-        }
-        for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
-            if (props.cards[iDestination]._id == e.destination.droppableId)
-                break
-        }
-        console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
-        const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-        props.changeTaskplace(replace)
-
     };
     function onDragEndׂCard(e) {
-        console.log(e)
+        let icard
+        for (icard = 0; icard < props.cards.length; icard++)
+            if (props.cards[icard]._id == e.destination.droppableId)
+                break
+        const replace = [e.source.index, icard]
+        props.changeCardPlace(replace)
     }
+
     return (
         <>
-            <DragDropContext onDragEnd={(e) => onDragEndׂCard(e)}>
+            {/* לא מגיע אל הפונקציה הזאת בדרופ */}
+            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                 <Droppable droppableId={props.cards[0]._id} >
                     {provided => (
                         <div
@@ -132,7 +128,8 @@ export default connect(
         return {
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
-            changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj))
+            changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),
+            changeCardPlace: (obj) => dispatch(actions.changeCardPlace(obj)),
         }
     }
 )(Tabs)

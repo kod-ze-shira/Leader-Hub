@@ -36,9 +36,9 @@ function ViewCards(props) {
         // const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
         let today = new Date()
         let dd = today.getDate()
-        let mm = today.getMonth()+1
+        let mm = today.getMonth() + 1
         const yyyy = today.getFullYear()
-        today= (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
+        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
             task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
