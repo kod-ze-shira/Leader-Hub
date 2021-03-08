@@ -81,7 +81,7 @@ function SelectHeader(props) {
                     <Tab label="List" onClick={(e) => changePresent("list")} />
                     <Tab label="Calender" />
                     <Tab label="Gant" />
-                    <Tab label="Tabs" onClick={(e) => changePresent("tabs")} />
+                    <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
                 </Tabs>
             </div>
         </div >
@@ -90,6 +90,7 @@ function SelectHeader(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        cards: state.public_reducer.cards
     }
 }
 
