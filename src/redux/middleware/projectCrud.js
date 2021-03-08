@@ -40,7 +40,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 }
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === "GET_PROJECTS_BY_WORKSPACE") {
+    if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
         let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
         fetch(url,
             {
@@ -54,7 +54,8 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
                 console.log(result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setProjects(result.projectList))
-                    //
+                    // dispatch(actions.addProjectToProjects(result.projectList))
+                    // addProjectToProjects
                 })
             })
     }
@@ -81,8 +82,12 @@ export const newProject = ({ dispatch, getState }) => next => action => {
             dataType: 'json',
             success: function (data) {
                 console.log("success")
-                console.log(data.message);
-                // dispatch({ type: '', payload: data })
+                console.log(data.message)
+                let p = {
+                    'project': data.message, countReadyTask: 0, countTasks: 0
+                }
+                dispatch(actions.addProjectToProjects(p))
+                // dispatch(() => addProjectToProjects(data.message))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין

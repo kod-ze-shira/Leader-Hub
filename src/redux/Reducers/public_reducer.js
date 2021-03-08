@@ -51,6 +51,9 @@ const publicData = {
             state.cards[i]._id !== action.payload.dc._id
         )
     },
+    addProjectToProjects(state, action) {
+        state.projects.push(action.payload)
+    },
 
     setNewTask(state, action) {
         let i, j
