@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -9,13 +8,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
 // import ViewDetails from '../../viewDetails/viewDetails'
 // import ToastDelete from '../../toastDelete/toastDelete1'
-import { event } from 'jquery';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import $ from "jquery";
-
-
-
 function ViewCardsTabs(props) {
     useEffect(() => {
 
@@ -29,6 +24,9 @@ function ViewCardsTabs(props) {
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [indexToEdit, setIndexToEdit] = useState(props.index)
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -58,7 +56,6 @@ function ViewCardsTabs(props) {
     }
     const deleteCard = () => {
         props.showToastDelete(props.cardFromMap)
-        // props.removeCardById(props.cardFromMap._id)
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
@@ -71,91 +68,100 @@ function ViewCardsTabs(props) {
             setCardId(props.cardFromMap._id)
             // props.setTask(props.task)
         }
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
     const handleClick = (event) => {
-        setIndexToEdit(indexToEdit)
-        $('.rename-card').click(function () {
-            $(`#${indexToEdit}`).focus();
-        });
         setAnchorEl(event.currentTarget);
 
 
     };
 
+    // $('.more').click(function () {
+    //     $(`#${indexToEdit}`).focus();
+    // });
     const handleClose = () => {
         setAnchorEl(null);
+        setIndexToEdit(indexToEdit)
+        $('.more').click(function () {
+            $(`#${indexToEdit}`).focus();
+        });
+        // $(`#${indexToEdit}`).focus();
     };
 
-    // $(document).ready(function () {
-    //     $('.more').click(function () {
-    //         $('.form-control').focus();
-    //     });
-    // });
     return (
         <>
             <div className="col-3 mt-4">
-                <div className="view-cards-tabs">
-                    <div class="card " >
-                        <div class="container">
-                            <div class="card-header row">
-                                <input
-                                    className="form-control col-8 "
-                                    id={indexToEdit}
-                                    value={editCardName}
-                                    onChange={updateCardName}
-                                    // onBlur={editCard}
-                                    onKeyPress={event => {
-                                        if (event.key === 'Enter') {
-                                            editCard()
-                                        }
-                                    }}
-                                >
-                                </input>
-                                <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                    . . .
-                             </Button>
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                >
-                                    <MenuItem className="rename-card" onClick={handleClose}>Rename Card</MenuItem>
-                                    <MenuItem onClick={handleClose}>Delete Card</MenuItem>
-                                </Menu>
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
+                    {provided => (
+                        <div
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                        >
+                            <div className="view-cards-tabs">
+                                <div class="card " >
+                                    <div class="container">
+                                        <div class="card-header row">
+                                            <input
+                                                className="form-control col-8"
+                                                value={editCardName}
+                                                onChange={updateCardName}
+                                                // onBlur={editCard}
+                                                onKeyPress={event => {
+                                                    if (event.key === 'Enter') {
+                                                        editCard()
+                                                    }
+                                                }}
+                                            >
+                                            </input>
+                                            <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                                . . .
+                                            </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={anchorEl}
+                                                keepMounted
+                                                open={Boolean(anchorEl)}
+                                                onClose={handleClose}
+                                            >
+                                                <MenuItem className="rename-card" onClick={handleClose}>Rename Card</MenuItem>
+                                                <MenuItem onClick={handleClose}>Delete Card</MenuItem>
+                                            </Menu>
+
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <Droppable droppableId={props.cardFromMap._id} >
+                                            {provided => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.droppableProps}>
+                                                    {props.cardFromMap.tasks.map((task, index) => (
+                                                        <ViewTaskByCradTabs key={task._id} task={task} index={index} />
+                                                    ))}
+                                                    {
+                                                        addTaskInInput ?
+                                                            <div class="">
+                                                                <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
+                                                                    value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                                                                        if (event.key === 'Enter') {
+                                                                            newTask()
+                                                                        }
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                            : null
+                                                    }
+                                                    {provided.placeholder}
+                                                </div>
+                                            )}
+                                        </Droppable>
+                                        <p className="add-task-tabs mt-1" onClick={addTask}>Add Task +</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            {props.cardFromMap.tasks.map((task) => (
-                                <ViewTaskByCradTabs key={task._id} task={task} />
-                            ))}
-                            {
-                                addTaskInInput ?
-                                    <div class="">
-                                        <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
-                                            value={inputValue} onChange={updateInputValue} onKeyPress={event => {
-                                                if (event.key === 'Enter') {
-                                                    newTask()
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                    : null
-                            }
-                            <p className="add-task-tabs mt-1" onClick={addTask}>Add Task +</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
+                    )}
+                </Draggable>
             </div >
-
         </>
     )
 }
