@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
         // width: '%',
         // backgroundColor: theme.palette.background.cyan,
         color: '#778CA2',
-
-
-
     },
     label: {
         color: '#FFF000'
@@ -80,7 +77,7 @@ function SelectHeader(props) {
                 >
                     <Tab label="List" onClick={(e) => changePresent("list")} />
                     <Tab label="Calender" />
-                    <Tab label="Gant" />
+                    <Tab label="Gant"  onClick={(e) => changePresent("gantt")}/>
                     <Tab label="Tabs" onClick={(e) => changePresent("tabs")} />
                 </Tabs>
             </div>
