@@ -88,6 +88,7 @@ function Tabs(props) {
     return (
         <>
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
+
             <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                 <Droppable droppableId={props.cards[0]._id} >
                     {provided => (

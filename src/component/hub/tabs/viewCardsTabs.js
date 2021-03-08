@@ -9,9 +9,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
 // import ViewDetails from '../../viewDetails/viewDetails'
 // import ToastDelete from '../../toastDelete/toastDelete1'
-import { event } from 'jquery';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Menu, MenuItem, Button } from '@material-ui/core';
+import $ from "jquery";
 function ViewCardsTabs(props) {
     useEffect(() => {
 
@@ -24,6 +24,10 @@ function ViewCardsTabs(props) {
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
+    const [indexToEdit, setIndexToEdit] = useState(props.index)
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -65,7 +69,23 @@ function ViewCardsTabs(props) {
             setCardId(props.cardFromMap._id)
             // props.setTask(props.task)
         }
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
 
+
+    };
+
+    // $('.more').click(function () {
+    //     $(`#${indexToEdit}`).focus();
+    // });
+    const handleClose = () => {
+        setAnchorEl(null);
+        setIndexToEdit(indexToEdit)
+        $('.more').click(function () {
+            $(`#${indexToEdit}`).focus();
+        });
+        // $(`#${indexToEdit}`).focus();
+    };
 
     return (
         <>
@@ -82,7 +102,7 @@ function ViewCardsTabs(props) {
                                     <div class="container">
                                         <div class="card-header row">
                                             <input
-                                                className="form-control col-9"
+                                                className="form-control col-8"
                                                 value={editCardName}
                                                 onChange={updateCardName}
                                                 // onBlur={editCard}
@@ -93,7 +113,20 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            <button className="more col-3">. . .</button>
+                                            <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                                . . .
+                                            </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={anchorEl}
+                                                keepMounted
+                                                open={Boolean(anchorEl)}
+                                                onClose={handleClose}
+                                            >
+                                                <MenuItem className="rename-card" onClick={handleClose}>Rename Card</MenuItem>
+                                                <MenuItem onClick={handleClose}>Delete Card</MenuItem>
+                                            </Menu>
+
                                         </div>
                                     </div>
                                     <div class="card-body">

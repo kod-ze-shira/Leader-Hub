@@ -43,7 +43,6 @@ function ViewTaskByCradTabs(props) {
                 )}
             </Draggable>
 
-
         </>
     )
 }
