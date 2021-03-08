@@ -1,6 +1,6 @@
 .body{
     /* width:70vw; */
-    height:74vh;
+    height:75vh;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 12px;
     opacity: 1;  
@@ -63,7 +63,7 @@
   border-width: 5px  5px !important;
 }
 .Dropdown-control{
-  border: 1px solid #98A9BC;
+  border: 1px solid rgba(0,0,0,.125);
   border-radius: 8px !important;
   opacity: 0.8 !important;
 }

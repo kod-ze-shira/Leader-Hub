@@ -89,13 +89,19 @@ const publicData = {
             }
     },
     changeTaskplace(state, action) {
-        let source, destinition, cardId, temp
+        let source, destinition, cardId, temp, cardDestinitionId, cardSourseId
         source = action.payload[0]
         destinition = action.payload[1]
-        cardId = action.payload[2]
-        temp = state.cards[cardId].tasks[destinition]
-        state.cards[cardId].tasks[destinition] = state.cards[cardId].tasks[source]
-        state.cards[cardId].tasks[source] = temp
+        cardSourseId = action.payload[2]
+        cardDestinitionId = action.payload[3]
+        console.log(cardSourseId, cardDestinitionId)
+        // temp = state.cards[cardId].tasks[destinition]
+        let temp1 = state.cards[cardSourseId].tasks[source]
+
+        // state.cards[cardId].tasks[destinition] = state.cards[cardId].tasks[source]
+        // state.cards[cardId].tasks[source] = temp
+        state.cards[cardSourseId].tasks.splice(source, 1)
+        state.cards[cardDestinitionId].tasks.splice(destinition, 0, temp1)
     },
     setisConfiguratorOpen(state, action) {
         state.isConfiguratorOpen = !state.isConfiguratorOpen
@@ -136,9 +142,10 @@ const publicData = {
         )
     },
     setCardNameInput(state, action) {
+        console.log(action.payload)
         state.cards.map(card => {
-            if (card._id == action.payload.card)
-                card.name = action.payload;
+            if (card._id == action.payload._id)
+                card.name = action.payload.name;
         })
     },
     updateWorkspaceUfterEditInServer(state, action) {
