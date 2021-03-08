@@ -13,8 +13,8 @@ function ViewWorkspaceGrid(props) {
     const { workspace } = props
     const routeToProject = () => {
         props.setWorkspace(workspace)
-        props.setProjects(workspace.projects)
-        props.history.push("/" + props.user + "/workspace/" + workspace._id)
+        props.setProjects(workspace.projectList)
+        props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     const [edit, setEdit] = useState(false);
     function outOver(id) {
@@ -47,9 +47,9 @@ function ViewWorkspaceGrid(props) {
     }
     return (
         <>
-            <div className="ViewWorkspace" id={workspace._id}
-                onMouseOver={() => over_workspace(workspace._id)}
-                onMouseOut={() => outOver(workspace._id)}>
+            <div className="ViewWorkspace" id={workspace.workspace._id}
+                onMouseOver={() => over_workspace(workspace.workspace._id)}
+                onMouseOut={() => outOver(workspace.workspace._id)}>
                 <div className="row " >
                     <div
                         className="col-1 edit iconsAction" onClick={editWorkspace}>
@@ -70,14 +70,14 @@ function ViewWorkspaceGrid(props) {
                     <div>
                         <div className="logoWorkspace1 " >
                             <div className="mt-1 logo"
-                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
-                                >
-                                {workspace.name?workspace.name[0].toUpperCase():null}
+                                style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}
+                            >
+                                {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}
                             </div>
                         </div>
-                        <div className="name "><p>{workspace.name}</p> </div>
+                        <div className="name "><p>{workspace.workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
-                            <p>{workspace.productionDate}</p>
+                            <p>{workspace.workspace.productionDate}</p>
                         </div>
                     </div>
                 </div>
