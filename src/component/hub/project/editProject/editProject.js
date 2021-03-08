@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import './newProject.css'
+import '../newProject/newProject.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 import viewDetails from '../../viewDetails/viewDetails'
 import $ from "jquery";
 
-function NewProject(props) {
+function EditProject(props) {
     let project = { 'updateDates': [] }
-    let myColor;
-    const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
-        "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
-        "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
-        "#F8B520", "#F88C20", "#F84A20", "#F13B7F", "#FD808B",
-        "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
-        "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"]
 
     const changeFiledInWorkspace = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
@@ -33,19 +26,14 @@ function NewProject(props) {
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
         else {
             props.newProject(project)
-            $(`#nameProject`).val('')
-            $(`#descriptionProject`).val('')
-            $(`#dueDateProject`).val('')
-            myColor = getRandomColor();
-            $(`#colorProject`).val(myColor)
+            // $(`#nameProject`).val('')
+            // $(`#descriptionProject`).val('')
+            // $(`#dueDateProject`).val('')
+            // myColor = getRandomColor();
+            // $(`#colorProject`).val(myColor)
         }
     }
-    myColor = getRandomColor();
-    function getRandomColor() {
-        const randColor = Math.floor((Math.random() * colorList.length) + 0)
-        const color = colorList[randColor]
-        return color;
-    }
+
     return (
 
 
@@ -62,7 +50,7 @@ function NewProject(props) {
                         className="name"
                         name="name"
                         placeholder='name project'
-                        // value={project.name}
+                        value={props.prject.name}
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
                     </input>
@@ -77,7 +65,7 @@ function NewProject(props) {
                         name="description"
                         id='descriptionProject'
                         placeholder='description'
-                        // value={project.name}
+                        value={props.prject.name}
 
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
@@ -93,7 +81,7 @@ function NewProject(props) {
                         name="dueDate"
                         type="date"
                         id='dueDateProject'
-                        // value={project.dueDate}
+                        value={props.prject.dueDate}
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
                     </input>
@@ -109,7 +97,7 @@ function NewProject(props) {
                         name="color"
                         type="color"
                         id='colorProject'
-                        value={myColor}
+                        value={props.prject.color}
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
                     </input>

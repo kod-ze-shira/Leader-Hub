@@ -24,7 +24,28 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getFullWorkspacesForUser"
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
+            })
+            .then((res) => {
+                console.log("res11111", res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log("res", result)
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setWorkspaces(result.userWorkspaces))
+                })
+            })
+    }
+    return next(action);
+}
+export const getFullWorkspacesForUser = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_FULL_WORKSPACES_FOR_USER') {
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getFullWorkspacesForUser"
         fetch(urlData,
             {
                 method: 'GET',
@@ -38,12 +59,13 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setWorkspaces(result.workspaces))
-
                 })
             })
     }
     return next(action);
 }
+
+
 export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
@@ -59,7 +81,7 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
             },
 
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({workspace}),
+            data: JSON.stringify({ workspace }),
             success: function (data) {
                 console.log("success")
                 console.log(data);

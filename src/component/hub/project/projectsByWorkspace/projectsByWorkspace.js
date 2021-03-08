@@ -10,49 +10,45 @@ import '../../body/body.css'
 import { workspace } from '../../../warps/configurator/workspace/workspace';
 import ViewDetails from '../../viewDetails/viewDetails'
 
-function ProjectsByWorkspace(props, getAllWorkspaces) {
+function ProjectsByWorkspace(props) {
+
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     let [newProject, setNewProject] = useState(false)
     useEffect(() => {
+        if (!flug) {
+            if (!props.workspaces) {
+                props.getAllWorkspaces()
+                // if (props.workspaces.length)
+                // alert('hhh')s
+                if (window.location.href.indexOf('workspace') != -1) {
+                    // props.getProjectsByWorkspaceId(idWorkspace)
+                    let w = props.workspaces.find(w => w._id == idWorkspace)
+                    props.setWorkspace(w)
 
-
-        // if (window.performance) {
-        // if (performance.navigation.type == 1) {
-        // alert("This page is reloaded");
-        // props.getAllWorkspaces()
-
-        // }
-        // }
-        // if (props.worksapces)
-        if (props.workspaces)
-            if (window.location.href.indexOf('workspace') != -1) {
-                props.getProjectsByWorkspaceId(idWorkspace)
-                // let w = props.workspaces.find(w => w._id == idWorkspace)
-                // props.setWorkspace(w)
-
-            } else {
-                // if (window.location.href.indexOf('allWorkspace') != -1) {
-                let allProjects = []
-                for (let index = 0; index < props.workspaces.length; index++) {
-                    for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                        allProjects.push(props.workspaces[index].projects[j])
+                } else {
+                    if (window.location.href.indexOf('allWorkspace') != -1) {
+                        // props.getFullWorkspacesForUser()
+                        let allProjects = []
+                        for (let index = 0; index < props.workspaces.length; index++) {
+                            for (let j = 0; j < props.workspaces[index].projects.length; j++) {
+                                allProjects.push(props.workspaces[index].projects[j])
+                            }
+                        }
+                        // props.workspaces.map((myWorkspace) => )
+                        // props.setProjects(allProjects)
                     }
                 }
-                // props.workspaces.map((myWorkspace) => )
-                props.setProjects(allProjects)
+
+                setFlug(true)
             }
-
-        // setFlug(true)
-        // }
-
-    }, []);
+        }
+    }, [props.projects]);
 
 
     // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
     const viewProjectsByWorkspace =
-        // props.workspaces.find(w => w._id == idWorkspace).projects.map((project) => {
-        props.workspace.projects.map((project) => {
+        props.projects.map((project) => {
             return <ViewProject myProject={project} />
         })
     // const viewAllProjectsByWorkspace = props.workspaces.map((w) =>
@@ -104,6 +100,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        getFullWorkspacesForUser: () => dispatch(actions.getFullWorkspacesForUser()),
+
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
