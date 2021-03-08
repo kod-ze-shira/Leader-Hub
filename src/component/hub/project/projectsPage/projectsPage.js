@@ -13,13 +13,14 @@ function ProjectsPage() {
     const changeFlag = (value) => {
         setFlag(value)
     }
-    const cards = (value) => {
+    const from = (value) => {
+        console.log(value)
         // setFlag(value)
     }
     return (
         <div >
-            <SelectHeader flag={changeFlag} from />
-            <ProjectsByWorkspace></ProjectsByWorkspace>
+            <SelectHeader flag={changeFlag} from={from} />
+            <ProjectsByWorkspace ></ProjectsByWorkspace>
 
         </div>
 

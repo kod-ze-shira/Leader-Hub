@@ -1,5 +1,5 @@
 
-    .edit_workspace_name{
+    .name{
 
         background-color: white;
         color:black;
@@ -9,7 +9,7 @@
         margin: 0px -50px;
         }
     
-       .edit_workspace_name:focus {
+       .name:focus {
         outline:none;
        
       } 

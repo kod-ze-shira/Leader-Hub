@@ -13,6 +13,7 @@ const project = {
     setProject(state, action) {
         state.project = action.payload;
     },
+
     setProjectId(state, action) {
         state.project.id = action.payload;
     }

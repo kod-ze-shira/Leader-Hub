@@ -21,10 +21,10 @@ function SelectProject(props) {
 
     const changeSelectedProject = (id) => {
 
-        myProject = props.workspace.projects.find(p => p._id == id.value)
-        props.setProject(myProject)
-        console.log(myProject.cards)
-        props.getCardsByProjectId(myProject._id)
+        myProject = props.workspace.projectList.find(p => p.project._id == id.value)
+        props.setProject(myProject.project)
+        console.log(myProject.project.cards)
+        props.getCardsByProjectId(myProject.project._id)
         // props.setCards(myProject.cards)
         // if (!myProject.cards[0])
         //     props.setCards(null)
@@ -108,8 +108,8 @@ function SelectProject(props) {
     // const colorsOfWorkspace = props.workspace.projects.map((project) => (
     //     project.color
     // ))
-    const viewProjectsList = props.workspace.projects.map((project) => (
-        { value: project._id, label: project.name }
+    const viewProjectsList = props.workspace.projectList.map((project) => (
+        { value: project.project._id, label: project.project.name }
     ))
     return (
         <>
