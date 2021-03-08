@@ -28,12 +28,11 @@
 .more:focus{
     outline: 0;
 }
-.card-body .add-task-tabs{
-    color: #34A38B !important;
-    text-align: left;
-    font: normal normal normal 18px/24px Rubik;
-    opacity: 1 !important;
-    cursor: pointer;
+.card-body .add-task-tabs, .card-body .add-card-tabs{ color: #34A38B !important;
+text-align: left;
+font: normal normal normal 18px/24px Rubik;
+opacity: 1 !important;
+cursor: pointer;
 }
 .task-card{
     background-color: white;
@@ -99,4 +98,7 @@
 
     background-color:#52C4A9 !important;
   
+  }
+  .MuiMenuItem-root{
+      font-size: 0.9rem !important;
   }
