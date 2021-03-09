@@ -16,6 +16,8 @@ function NewProject(props) {
         "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
         "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"]
 
+
+
     const changeFiledInWorkspace = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
         project[input.target.name] = input.target.value
