@@ -71,8 +71,6 @@ function ViewCardsTabs(props) {
         }
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
-
-
     };
 
     // $('.more').click(function () {
