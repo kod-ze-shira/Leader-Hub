@@ -140,7 +140,7 @@ function ViewCardsTabs(props) {
                                                     ))}
                                                     {
                                                         addTaskInInput ?
-                                                            <div class="">
+                                                            <div class="mt-2">
                                                                 <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
                                                                     value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                                                                         if (event.key === 'Enter') {

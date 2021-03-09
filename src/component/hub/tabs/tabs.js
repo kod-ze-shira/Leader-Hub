@@ -104,7 +104,7 @@ function Tabs(props) {
                                                 </div>
 
                                                 <div class="card-body">
-                                                    <a className="add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                                                    <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
                                                 </div>
                                             </div>
                                         </div>
