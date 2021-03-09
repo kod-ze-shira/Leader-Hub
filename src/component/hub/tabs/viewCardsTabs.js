@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
@@ -10,7 +10,7 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
 // import ViewDetails from '../../viewDetails/viewDetails'
 // import ToastDelete from '../../toastDelete/toastDelete1'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu, MenuItem, Button } from '@material-ui/core';
+import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
 function ViewCardsTabs(props) {
     useEffect(() => {
@@ -26,7 +26,9 @@ function ViewCardsTabs(props) {
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
+    let actionCard = { renameCard: "rename", deleteCard: "delete" };
 
+    const textInput = useRef(null);
 
 
     const updateInputValue = (evt) => {
@@ -71,18 +73,21 @@ function ViewCardsTabs(props) {
         }
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+        console.log(event)
+        textInput.current.focus()
+
     };
 
     // $('.more').click(function () {
     //     $(`#${indexToEdit}`).focus();
     // });
-    const handleClose = () => {
+    const handleClose = (e) => {
         setAnchorEl(null);
-        setIndexToEdit(indexToEdit)
-        $('.more').click(function () {
-            $(`#${indexToEdit}`).focus();
-        });
-        // $(`#${indexToEdit}`).focus();
+        console.log(e)
+        if (e == "delete")
+            deleteCard()
+
+
     };
 
     return (
@@ -100,6 +105,7 @@ function ViewCardsTabs(props) {
                                     <div class="container">
                                         <div class="card-header row">
                                             <input
+                                                ref={textInput}
                                                 className="form-control col-8"
                                                 value={editCardName}
                                                 onChange={updateCardName}
@@ -121,8 +127,8 @@ function ViewCardsTabs(props) {
                                                 open={Boolean(anchorEl)}
                                                 onClose={handleClose}
                                             >
-                                                <MenuItem className="rename-card" onClick={handleClose}>Rename Card</MenuItem>
-                                                <MenuItem onClick={handleClose}>Delete Card</MenuItem>
+                                                <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
+                                                <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
                                             </Menu>
 
                                         </div>
