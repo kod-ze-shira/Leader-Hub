@@ -12,33 +12,44 @@ import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {
 
+    const  getWorkspacesAwait=()=> {
+        return new Promise((resolve, reject) => {
+            props.getAllWorkspaces()
+            resolve(true)
+
+        })
+    }
+
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     let [newProject, setNewProject] = useState(false)
     useEffect(() => {
         if (!flug) {
-            if (!props.workspaces) {
-                props.getAllWorkspaces()
+            if (props.workspaces.length == 0) {
+                // props.getAllWorkspaces()
                 // if (props.workspaces.length)
                 // alert('hhh')s
-                if (window.location.href.indexOf('workspace') != -1) {
-                    // props.getProjectsByWorkspaceId(idWorkspace)
-                    let w = props.workspaces.find(w => w._id == idWorkspace)
-                    props.setWorkspace(w)
+                getWorkspacesAwait().then((result) => {
+                    if (window.location.href.indexOf('workspace') != -1) {
+                        // props.getProjectsByWorkspaceId(idWorkspace)
+                        let w = props.workspaces.find(w => w._id == idWorkspace)
+                        // props.setWorkspace(w)
 
-                } else {
-                    if (window.location.href.indexOf('allWorkspace') != -1) {
-                        // props.getFullWorkspacesForUser()
-                        let allProjects = []
-                        for (let index = 0; index < props.workspaces.length; index++) {
-                            for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                allProjects.push(props.workspaces[index].projects[j])
+                    } else {
+                        if (window.location.href.indexOf('allWorkspace') != -1) {
+                            // props.getFullWorkspacesForUser()
+                            let allProjects = []
+                            for (let index = 0; index < props.workspaces.length; index++) {
+                                for (let j = 0; j < props.workspaces[index].projects.length; j++) {
+                                    allProjects.push(props.workspaces[index].projects[j])
+                                }
                             }
+                            // props.workspaces.map((myWorkspace) => )
+                            // props.setProjects(allProjects)
                         }
-                        // props.workspaces.map((myWorkspace) => )
-                        // props.setProjects(allProjects)
                     }
-                }
+                })
+
 
                 setFlug(true)
             }
@@ -92,7 +103,7 @@ const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
         user: state.public_reducer.userName,
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
 
     }

@@ -38,6 +38,9 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setWorkspaces(result.userWorkspaces))
+                    //if user refresh page give him the first project
+                    dispatch(actions.setWorkspace(result.userWorkspaces[0]))
+                    // dispatch(actions.setProjects(result.userWorkspaces[0]).projectList)
                 })
             })
     }

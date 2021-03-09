@@ -5,7 +5,7 @@ import GanttDesign from '../gantt/gantt';
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
-function CardsPage() {
+function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
     const [present, setPresent] = useState("list");
@@ -44,6 +44,7 @@ function CardsPage() {
 }
 const mapStateToProps = (state) => {
     return {
+        workspaces:state.public_reducer.workspaces
     }
 }
 

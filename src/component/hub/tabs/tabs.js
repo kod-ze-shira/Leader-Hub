@@ -128,7 +128,7 @@ export default connect(
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
             user: state.public_reducer.userName,
-            workspaces: state.public_reducer.worksapces,
+            workspaces: state.public_reducer.workspaces,
             workspace: state.workspace_reducer.worksapce,
             project: state.project_reducer.project,
         }

@@ -6,7 +6,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
     userName: "",
-    worksapces: [],
+    workspaces: [],
     projects: [],
     cards: [],
     tasks: [],
@@ -26,7 +26,7 @@ const publicData = {
         state.userName = action.payload;
     },
     setWorkspaces(state, action) {
-        state.worksapces = action.payload;
+        state.workspaces = action.payload;
     },
     setProjects(state, action) {
         state.projects = action.payload;
@@ -35,7 +35,7 @@ const publicData = {
         state.tasks = action.payload;
     },
     addNewWorkspace(state, action) {
-        state.worksapces.push(action.payload)
+        state.workspaces.push(action.payload)
     },
     deletTask(state, action) {
         state.cards.map(card => {
@@ -141,8 +141,8 @@ const publicData = {
     },
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
-        state.worksapces = state.worksapces.filter((_, i) =>
-            state.worksapces[i]._id !== action.payload._id
+        state.workspaces = state.workspaces.filter((_, i) =>
+            state.workspaces[i]._id !== action.payload._id
         )
     },
     setCardNameInput(state, action) {
@@ -153,15 +153,15 @@ const publicData = {
         })
     },
     updateWorkspaceUfterEditInServer(state, action) {
-        state.worksapces.forEach((workspace, index) => {
+        state.workspaces.forEach((workspace, index) => {
             if (workspace._id === action.payload._id)
-                state.worksapces[index] = action.payload
+                state.workspaces[index] = action.payload
         }
 
         )
     },
     addWorkspaceToWorkspaces(state, action) {
-        state.worksapces.push(action.payload)
+        state.workspaces.push(action.payload)
     }
 }
 

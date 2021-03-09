@@ -84,9 +84,9 @@ export default function Hub(props) {
                         </Switch>
                       
                     </div>
-                    <div className="toastDeleteOnStage">
+                    {/* <div className="toastDeleteOnStage">
                         <ToastDelete1 name="fggfgfg"/>
-                    </div>
+                    </div> */}
                 </div>
                
             </Router>

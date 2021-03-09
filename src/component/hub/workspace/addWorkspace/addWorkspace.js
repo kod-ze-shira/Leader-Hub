@@ -53,7 +53,7 @@ function AddWorkspace(props) {
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
     }
 }
 const mapDispatchToProps = (dispatch) => {

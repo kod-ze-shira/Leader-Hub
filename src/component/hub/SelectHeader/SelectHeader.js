@@ -38,6 +38,11 @@ function SelectHeader(props) {
     const [value, setValue] = React.useState(0);
     const color = '#00C6EA'
 
+useEffect(()=>{
+ if(props.workspaces.length==0)
+    props.getAllWorkspacesFromServer()
+},[])
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -51,13 +56,15 @@ function SelectHeader(props) {
     }
 
     return (
+        <>
+        {props.workspaces.length>0?
         <div className="s-header mx-0 mb-3 row align-items-center ">
 
             <div className="col pr-0">
-                <SelectWorkspace />
+                <SelectWorkspace workspaces={props.workspaces}/>
             </div>
             <div className="col pr-0">
-                <SelectProject />
+           <SelectProject workspaces={props.workspaces}/>
             </div>
             <div className="col pr-0">
                 <SelectCards flag={changeFlag} />
@@ -80,19 +87,24 @@ function SelectHeader(props) {
                     <Tab label="Gant"  onClick={(e) => changePresent("gantt")}/>
                     <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
                 </Tabs>
-            </div>
+            </div> 
+            
         </div >
+        :null}
+        </>
 
     )
 }
 const mapStateToProps = (state) => {
     return {
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        workspaces:state.public_reducer.workspaces,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SelectHeader)

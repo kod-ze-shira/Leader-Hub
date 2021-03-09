@@ -9,7 +9,7 @@ import './workspacePlatform.css'
 
 const mapStateToProps = (state) => {
     return {
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         user: state.public_reducer.userName
 
     }
