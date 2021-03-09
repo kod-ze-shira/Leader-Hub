@@ -109,15 +109,10 @@ function ViewCards(props) {
             deleteCard()
         else
             if (e == "rename") {
-                $('.more').click(function () {
-                    $('.show-card').focus();
-                });
+                // $('.show-card').focus();
             }
 
     };
-    // $('.more').click(function () {
-    //     // $(`.show-card`).focus();
-    // });
 
     return (
         <>

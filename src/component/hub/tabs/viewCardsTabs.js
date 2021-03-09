@@ -73,16 +73,10 @@ function ViewCardsTabs(props) {
         setAnchorEl(event.currentTarget);
     };
 
-    // $('.more').click(function () {
-    //     $(`#${indexToEdit}`).focus();
-    // });
     const handleClose = () => {
         setAnchorEl(null);
         setIndexToEdit(indexToEdit)
-        $('.more').click(function () {
-            $(`#${indexToEdit}`).focus();
-        });
-        // $(`#${indexToEdit}`).focus();
+
     };
 
     return (
