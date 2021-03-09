@@ -31,11 +31,12 @@ function ViewProject(props) {
         // props.deleteProjectFromWorkspace(props.myProject.project)
     }
     function editProject(project, event) {
-        // console.log(project)
         props.setProject(project)
+        // projectToEdit
+        props.editProject()
         event.stopPropagation();
-
     }
+
     let complited = 0, complitedColor;
     complited = props.myProject.project.countTasks / 100;
     complited = complited * props.myProject.project.countReadyTask

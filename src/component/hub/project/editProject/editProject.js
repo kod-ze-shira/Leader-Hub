@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import '../newProject/newProject.css'
+import $ from "jquery"
+import React from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import Toast from 'react-bootstrap/Toast'
-import viewDetails from '../../viewDetails/viewDetails'
-import $ from "jquery";
+import '../newProject/newProject.css'
 
 function EditProject(props) {
-    let project = { 'updateDates': [] }
-
+    let project = props.projectToEdit
     const changeFiledInWorkspace = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
         project[input.target.name] = input.target.value
     }
 
-    function addProject() {
+    function saveProject() {
         let newDate = new Date()
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
@@ -25,12 +22,9 @@ function EditProject(props) {
         if (!project.name)
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
         else {
-            props.newProject(project)
-            // $(`#nameProject`).val('')
-            // $(`#descriptionProject`).val('')
-            // $(`#dueDateProject`).val('')
-            // myColor = getRandomColor();
-            // $(`#colorProject`).val(myColor)
+            // props.saveProject(project)
+            alert('save project')
+
         }
     }
 
@@ -47,10 +41,10 @@ function EditProject(props) {
                 <div className="col-6">
                     <input
                         id='nameProject'
-                        className="name"
+                        className="inputProject"
                         name="name"
                         placeholder='name project'
-                        value={props.prject.name}
+                        value={project.name}
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
                     </input>
@@ -61,11 +55,11 @@ function EditProject(props) {
                 <div className=" col-5"><b>Description:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="description"
                         id='descriptionProject'
                         placeholder='description'
-                        value={props.prject.name}
+                        value={project.name}
 
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
@@ -77,11 +71,11 @@ function EditProject(props) {
                 <div className=" col-5"><b>Due date:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="dueDate"
                         type="date"
                         id='dueDateProject'
-                        value={props.prject.dueDate}
+                        value={project.dueDate}
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
                     </input>
@@ -93,11 +87,11 @@ function EditProject(props) {
                 <div className=" col-5"><b>Color:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="color"
                         type="color"
                         id='colorProject'
-                        value={props.prject.color}
+                        value={project.color}
                         onChange={(e) => changeFiledInWorkspace(e)}
                     >
                     </input>
@@ -108,7 +102,7 @@ function EditProject(props) {
             <div className="row mt-1">
                 <div classNae="col-3"></div>
                 <div className="col-3">
-                    <button onClick={() => addProject()}>save</button></div>
+                    <button onClick={() => saveProject()}>save</button></div>
             </div>
 
 
@@ -123,18 +117,12 @@ function EditProject(props) {
 export default connect(
     (state) => {
         return {
-            // workspaceToEdit: state.workspace_reducer.workspace,
-            // workspaces: state.workspace_reducer.workspaces,
-
-
+            projectToEdit: state.project_reducer.project,
         }
     },
     (dispatch) => {
         return {
             newProject: (props) => dispatch(actions.newProject(props)),
-
-
-
         }
     }
-)(NewProject)
+)(EditProject)

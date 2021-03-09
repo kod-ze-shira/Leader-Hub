@@ -1,6 +1,5 @@
 
-    .name{
-
+    .inputProject{
         background-color: white;
         color:black;
         border:none;
@@ -9,9 +8,8 @@
         margin: 0px -50px;
         }
     
-       .name:focus {
+       .inputProject:focus {
         outline:none;
-       
       } 
          .edit_workspace_color:focus {
         outline:none;

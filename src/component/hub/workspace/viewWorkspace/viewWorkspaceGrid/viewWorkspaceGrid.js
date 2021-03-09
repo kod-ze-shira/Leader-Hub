@@ -24,7 +24,6 @@ function ViewWorkspaceGrid(props) {
         // setEdit(true);
         props.setWorkspace(workspace)
         props.editWorkspace()
-
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);

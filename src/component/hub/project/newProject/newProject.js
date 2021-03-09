@@ -59,7 +59,7 @@ function NewProject(props) {
                 <div className="col-6">
                     <input
                         id='nameProject'
-                        className="name"
+                        className="inputProject"
                         name="name"
                         placeholder='name project'
                         // value={project.name}
@@ -73,7 +73,7 @@ function NewProject(props) {
                 <div className=" col-5"><b>Description:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="description"
                         id='descriptionProject'
                         placeholder='description'
@@ -89,7 +89,7 @@ function NewProject(props) {
                 <div className=" col-5"><b>Due date:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="dueDate"
                         type="date"
                         id='dueDateProject'
@@ -105,7 +105,7 @@ function NewProject(props) {
                 <div className=" col-5"><b>Color:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="color"
                         type="color"
                         id='colorProject'

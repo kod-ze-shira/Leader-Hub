@@ -49,8 +49,8 @@ export default function Hub(props) {
 
                         <Switch>
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage />
-                                {/* <ProjectsByWorkspace /> */}
+                                {/* <ProjectsPage /> */}
+                                <ProjectsByWorkspace />
                             </Route>
                             <Route path="/:userName/allWorkspace" >
                                 {/* <ProjectsByWorkspace /> */}
