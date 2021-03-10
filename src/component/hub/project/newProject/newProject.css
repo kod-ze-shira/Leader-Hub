@@ -1,5 +1,5 @@
 
-    .name{
+    /* .name{
 
         background-color: white;
         color:black;
@@ -7,7 +7,7 @@
         border-bottom: 1px solid #8181A5;
         width: 15vw;
         margin: 0px -50px;
-        }
+        } */
     
        .name:focus {
         outline:none;
