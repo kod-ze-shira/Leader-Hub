@@ -68,21 +68,33 @@ function SelectHeader(props) {
             <div className="col pr-0">
                 <SelectTask />
             </div>
+
             <div className={classes.root}>
-                <Tabs
-                    className="tabs-in-header offset-3"
-                    value={value}
-                    onChange={handleChange}
-                    variant="scrollable"
-                    scrollButtons="off"
-                    TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                    aria-label="scrollable prevent tabs example"
-                >
-                    <Tab label="List" onClick={(e) => changePresent("list")} />
-                    <Tab label="Calender" />
-                    <Tab label="Gant" />
-                    <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
-                </Tabs>
+                {props.menue ?
+                    <Tabs
+                        className="tabs-in-header offset-3"
+                        value={value}
+                        onChange={handleChange}
+                        variant="scrollable"
+                        scrollButtons="off"
+                        TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
+                        aria-label="scrollable prevent tabs example"
+                    >
+                        <Tab label="List" onClick={(e) => changePresent("list")} />
+                        <Tab label="Calender" />
+                        <Tab label="Gant" />
+                        <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
+                    </Tabs>
+                    :
+                    <Tabs
+                        className="tabs-in-header offset-3 opacity">
+                        <Tab label="List" className="tab" />
+                        <Tab label="Calender" className="tab" />
+                        <Tab label="Gant" className="tab" />
+                        <Tab label="Tabs" className="tab" />
+                    </Tabs>
+                }
+
             </div>
         </div >
 

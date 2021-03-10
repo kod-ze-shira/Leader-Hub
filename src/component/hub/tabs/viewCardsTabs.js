@@ -74,11 +74,9 @@ function ViewCardsTabs(props) {
     const handleClick = (event) => {
         if (event == "rename") {
             textInput.current.focus()
-            console.log("kk")
         }
-        else setAnchorEl(event.currentTarget)
-
-
+        else
+            setAnchorEl(event.currentTarget)
 
     };
 
