@@ -44,10 +44,12 @@ cursor: pointer;
     font-size: medium;
 }
 /* width */
-/* ::-webkit-scrollbar */
- /* {
-    width: 5px;
-  } */
+::-webkit-scrollbar {
+  width: 5px;
+
+}
+ 
+  
   
   /* Track */
   /* ::-webkit-scrollbar-track { */
@@ -75,9 +77,13 @@ cursor: pointer;
 }
 .card-header .form-control, .task-card .form-control
 {
+  color:black !important;
     border:none !important;
     /* width:70%; */
 
+}
+.card-header .form-control{
+  font-weight: 500 !important;
 }
 .card-header .form-control:focus
 {
