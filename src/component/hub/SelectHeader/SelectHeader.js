@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
         // width: '%',
         // backgroundColor: theme.palette.background.cyan,
         color: '#778CA2',
-
-
-
     },
     label: {
         color: '#FFF000'
@@ -41,6 +38,11 @@ function SelectHeader(props) {
     const [value, setValue] = React.useState(0);
     const color = '#00C6EA'
 
+    useEffect(() => {
+        if (props.workspaces.length == 0)
+            props.getAllWorkspacesFromServer()
+    }, [])
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -54,60 +56,64 @@ function SelectHeader(props) {
     }
 
     return (
-        <div className="s-header mx-0 mb-3 row align-items-center ">
+        <>
+            {props.workspaces.length > 0 ?
+                <div className="s-header mx-0 mb-3 row align-items-center ">
 
-            <div className="col pr-0">
-                <SelectWorkspace />
-            </div>
-            <div className="col pr-0">
-                <SelectProject />
-            </div>
-            <div className="col pr-0">
-                <SelectCards flag={changeFlag} />
-            </div>
-            <div className="col pr-0">
-                <SelectTask />
-            </div>
+                    <div className="col pr-0">
+                        <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
+                    </div>
+                    <div className="col pr-0">
+                        <SelectProject workspaces={props.workspaces} />
+                    </div>
+                    <div className="col pr-0">
+                        <SelectCards flag={changeFlag} />
+                    </div>
+                    <div className="col pr-0">
+                        <SelectTask />
+                    </div>
 
-            <div className={classes.root}>
-                {props.menue ?
-                    <Tabs
-                        className="tabs-in-header offset-3"
-                        value={value}
-                        onChange={handleChange}
-                        variant="scrollable"
-                        scrollButtons="off"
-                        TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                        aria-label="scrollable prevent tabs example"
-                    >
-                        <Tab label="List" onClick={(e) => changePresent("list")} />
-                        <Tab label="Calender" />
-                        <Tab label="Gant" />
-                        <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
-                    </Tabs>
-                    :
-                    <Tabs
-                        className="tabs-in-header offset-3 opacity">
-                        <Tab label="List" className="tab" />
-                        <Tab label="Calender" className="tab" />
-                        <Tab label="Gant" className="tab" />
-                        <Tab label="Tabs" className="tab" />
-                    </Tabs>
-                }
-
-            </div>
-        </div >
-
+                    <div className={classes.root}>
+                        {props.menue ?
+                            <Tabs
+                                className="tabs-in-header offset-3"
+                                value={value}
+                                onChange={handleChange}
+                                variant="scrollable"
+                                scrollButtons="off"
+                                TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
+                                aria-label="scrollable prevent tabs example"
+                            >
+                                <Tab label="List" onClick={(e) => changePresent("list")} />
+                                <Tab label="Calender" />
+                                <Tab label="Gant" />
+                                <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
+                            </Tabs>
+                            :
+                            <Tabs
+                                className="tabs-in-header offset-3 opacity">
+                                <Tab label="List" className="tab" />
+                                <Tab label="Calender" className="tab" />
+                                <Tab label="Gant" className="tab" />
+                                <Tab label="Tabs" className="tab" />
+                            </Tabs>
+                        }
+                    </div>
+                </div >
+                : null}
+        </>
     )
 }
 const mapStateToProps = (state) => {
     return {
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        workspaces: state.public_reducer.workspaces,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SelectHeader)

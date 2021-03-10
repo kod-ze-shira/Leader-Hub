@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
+import GanttDesign from '../gantt/gantt';
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
-function CardsPage() {
+function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
     const [present, setPresent] = useState("list");
@@ -25,6 +26,8 @@ function CardsPage() {
                 return <Tabs />
             case 'list':
                 return <ProjectPlatform flag={flag} />
+            case 'gantt':
+                return <GanttDesign />
             default:
                 return <ProjectPlatform flag={flag} />
 
@@ -41,6 +44,7 @@ function CardsPage() {
 }
 const mapStateToProps = (state) => {
     return {
+        workspaces:state.public_reducer.workspaces
     }
 }
 

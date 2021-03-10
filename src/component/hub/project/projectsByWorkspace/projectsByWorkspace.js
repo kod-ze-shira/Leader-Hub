@@ -12,19 +12,29 @@ import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {
 
+    function getWorkspacesAwait(result) {
+        return new Promise((resolve, reject) => {
+            props.getAllWorkspaces()
+            resolve(true)
+    
+        })
+    }
+
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     let [newProject, setNewProject] = useState(false)
     useEffect(() => {
+        if(props.projects.length==0)
+        props.getProjectsByWorkspaceId(idWorkspace)
         if (!flug) {
-            if (!props.workspaces) {
+            if (props.workspaces.length==0) {
                 props.getAllWorkspaces()
                 // if (props.workspaces.length)
                 // alert('hhh')s
                 if (window.location.href.indexOf('workspace') != -1) {
                     // props.getProjectsByWorkspaceId(idWorkspace)
                     let w = props.workspaces.find(w => w._id == idWorkspace)
-                    props.setWorkspace(w)
+                    // props.setWorkspace(w)
 
                 } else {
                     if (window.location.href.indexOf('allWorkspace') != -1) {
@@ -43,7 +53,7 @@ function ProjectsByWorkspace(props) {
                 setFlug(true)
             }
         }
-    }, [props.projects]);
+    }, []);
 
 
     // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
@@ -92,7 +102,7 @@ const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
         user: state.public_reducer.userName,
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
 
     }
