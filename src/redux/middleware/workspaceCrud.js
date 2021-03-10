@@ -23,6 +23,7 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 }
 
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
+    // return new Promise((resolve, reject) => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getFullWorkspacesForUser"
         fetch(urlData,
@@ -44,6 +45,9 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 })
             })
     }
+    // resolve(true)
+
+    // })
     return next(action);
 }
 export const getFullWorkspacesForUser = ({ dispatch, getState }) => next => action => {

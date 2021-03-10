@@ -12,11 +12,11 @@ import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {
 
-    const  getWorkspacesAwait=()=> {
+    function getWorkspacesAwait(result) {
         return new Promise((resolve, reject) => {
             props.getAllWorkspaces()
             resolve(true)
-
+    
         })
     }
 
@@ -24,37 +24,36 @@ function ProjectsByWorkspace(props) {
     let [flug, setFlug] = useState(false)
     let [newProject, setNewProject] = useState(false)
     useEffect(() => {
+        if(props.projects.length==0)
+        props.getProjectsByWorkspaceId(idWorkspace)
         if (!flug) {
-            if (props.workspaces.length == 0) {
-                // props.getAllWorkspaces()
+            if (props.workspaces.length==0) {
+                props.getAllWorkspaces()
                 // if (props.workspaces.length)
                 // alert('hhh')s
-                getWorkspacesAwait().then((result) => {
-                    if (window.location.href.indexOf('workspace') != -1) {
-                        // props.getProjectsByWorkspaceId(idWorkspace)
-                        let w = props.workspaces.find(w => w._id == idWorkspace)
-                        // props.setWorkspace(w)
+                if (window.location.href.indexOf('workspace') != -1) {
+                    // props.getProjectsByWorkspaceId(idWorkspace)
+                    let w = props.workspaces.find(w => w._id == idWorkspace)
+                    // props.setWorkspace(w)
 
-                    } else {
-                        if (window.location.href.indexOf('allWorkspace') != -1) {
-                            // props.getFullWorkspacesForUser()
-                            let allProjects = []
-                            for (let index = 0; index < props.workspaces.length; index++) {
-                                for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                    allProjects.push(props.workspaces[index].projects[j])
-                                }
+                } else {
+                    if (window.location.href.indexOf('allWorkspace') != -1) {
+                        // props.getFullWorkspacesForUser()
+                        let allProjects = []
+                        for (let index = 0; index < props.workspaces.length; index++) {
+                            for (let j = 0; j < props.workspaces[index].projects.length; j++) {
+                                allProjects.push(props.workspaces[index].projects[j])
                             }
-                            // props.workspaces.map((myWorkspace) => )
-                            // props.setProjects(allProjects)
                         }
+                        // props.workspaces.map((myWorkspace) => )
+                        // props.setProjects(allProjects)
                     }
-                })
-
+                }
 
                 setFlug(true)
             }
         }
-    }, [props.projects]);
+    }, []);
 
 
     // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
