@@ -109,7 +109,6 @@ function ViewCards(props) {
             deleteCard()
         else
             if (e == "rename") {
-                // $('.show-card').focus();
             }
 
     };

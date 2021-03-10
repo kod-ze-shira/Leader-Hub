@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
@@ -10,7 +10,7 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
 // import ViewDetails from '../../viewDetails/viewDetails'
 // import ToastDelete from '../../toastDelete/toastDelete1'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu, MenuItem, Button } from '@material-ui/core';
+import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
 function ViewCardsTabs(props) {
     useEffect(() => {
@@ -26,8 +26,10 @@ function ViewCardsTabs(props) {
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [a, setA] = useState()
+    let actionCard = { renameCard: "rename", deleteCard: "delete" };
 
-
+    const textInput = useRef();
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -70,13 +72,24 @@ function ViewCardsTabs(props) {
             // props.setTask(props.task)
         }
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        if (event == "rename") {
+            textInput.current.focus()
+            console.log("kk")
+        }
+        else setAnchorEl(event.currentTarget)
+
+
+
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-        setIndexToEdit(indexToEdit)
+    const handleClose = (nameAction) => {
+        // setA(nameAction)
+        handleClick(nameAction)
+        setAnchorEl(null)
+        // textInput.current.focus()
 
+        // if (nameAction == "delete")
+        //     deleteCard()
     };
 
     return (
@@ -94,6 +107,7 @@ function ViewCardsTabs(props) {
                                     <div class="container">
                                         <div class="card-header row">
                                             <input
+                                                ref={textInput}
                                                 className="form-control col-8"
                                                 value={editCardName}
                                                 onChange={updateCardName}
@@ -113,10 +127,10 @@ function ViewCardsTabs(props) {
                                                 anchorEl={anchorEl}
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
-                                                onClose={handleClose}
+                                            // onClose={handleClose}
                                             >
-                                                <MenuItem className="rename-card" onClick={handleClose}>Rename Card</MenuItem>
-                                                <MenuItem onClick={handleClose}>Delete Card</MenuItem>
+                                                <MenuItem name="rename" className="rename-card" onClick={() => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
+                                                <MenuItem onClick={() => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
                                             </Menu>
 
                                         </div>
@@ -132,7 +146,7 @@ function ViewCardsTabs(props) {
                                                     ))}
                                                     {
                                                         addTaskInInput ?
-                                                            <div class="">
+                                                            <div class="mt-2">
                                                                 <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
                                                                     value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                                                                         if (event.key === 'Enter') {

@@ -69,7 +69,6 @@ function ViewTaskByCrad(props) {
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         setTask(task1)
-        console.log("edut-card", task)
         props.EditTask(task);
     }
     return (

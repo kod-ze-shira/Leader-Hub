@@ -14,6 +14,14 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 
 function ViewTaskByCradTabs(props) {
 
+    const [viewDetails, setViewDetails] = useState(false)
+    const [showchalalit, setShowChalalit] = useState(false)
+    const [detailsOrEditTask, setDetailsOrEditTask] = useState()
+    const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [task, setTask] = useState({
+        "_id": props.task._id, "name": editTaskName, "description": props.task.description
+        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+    })
 
     useEffect(() => {
 
@@ -27,6 +35,14 @@ function ViewTaskByCradTabs(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const editTask = (event) => {
+        let task1 = {
+            "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+        }
+        setTask(task1)
+        props.EditTask(task);
+    }
 
     return (
         <>
@@ -47,7 +63,7 @@ function ViewTaskByCradTabs(props) {
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
                                     <Button className="more col-3 mr-0" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                         . . .
-                             </Button>
+                                    </Button>
                                     <Menu
                                         id="simple-menu"
                                         anchorEl={anchorEl}
@@ -61,7 +77,18 @@ function ViewTaskByCradTabs(props) {
 
                                     </Menu>
                                 </div>
-                                <p className="">{props.task.name}</p>
+                                <input
+                                    className="form-control col-12"
+                                    value={editTaskName}
+                                    onChange={(e) => setEditTaskName(e.target.value)}
+                                    onBlur={(e) => editTask(e)}
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') {
+                                            editTask()
+                                        }
+                                    }}
+                                ></input>
+                                {/* <p className="">{props.task.name}</p> */}
 
                             </div>
                         </div>
