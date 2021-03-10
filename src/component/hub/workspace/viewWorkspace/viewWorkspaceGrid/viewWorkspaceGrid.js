@@ -10,10 +10,13 @@ import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
-    const { workspace } = props
+    const workspace = props.workspace1
+
+
     const routeToProject = () => {
         props.setWorkspace(workspace)
         props.setProjects(workspace.projectList)
+
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     const [edit, setEdit] = useState(false);

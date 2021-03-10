@@ -16,16 +16,12 @@ function ProjectsByWorkspace(props) {
     let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
 
-    // let [newProject, setNewProject] = useState(false)
     const [addOrEditProject, setAddOrEditProject] = useState(false)
 
     useEffect(() => {
         if (!flug) {
             if (!props.workspaces.length) {
                 props.getAllWorkspaces()
-                // if (props.workspaces.length)
-                // alert('hhh')s
-
                 setFlug(true)
             }
         }
@@ -38,19 +34,15 @@ function ProjectsByWorkspace(props) {
 
     } else {
         if (window.location.href.indexOf('allWorkspace') != -1) {
-            // props.getFullWorkspacesForUser()
             let allProjects = []
             for (let index = 0; index < props.workspaces.length; index++) {
                 for (let j = 0; j < props.workspaces[index].projects.length; j++) {
                     allProjects.push(props.workspaces[index].projects[j])
                 }
             }
-            // props.workspaces.map((myWorkspace) => )
-            // props.setProjects(allProjects)
         }
     }
 
-    // let myWorkspace = props.workspaces.find(w => w._id == idWorkspace)
     const viewProjectsByWorkspace =
         props.projects.map((project) => {
             return <ViewProject myProject={project} editProject={openEditProject} />
@@ -63,11 +55,7 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
 
     }
-    // const viewAllProjectsByWorkspace = props.workspaces.map((w) =>
-    //     w.projects.map((project) => {
-    //         return <ViewProject myProject={project} />
-    //     })
-    // )
+
     function openViewDitailsAddProject() {
         setAddOrEditProject("newProject")
         setShowProject(true)
@@ -77,17 +65,12 @@ function ProjectsByWorkspace(props) {
 
             <div className='body' >
                 {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
-                {/* <HeaderBody nameWorkspace={props.workspace.name} /> */}
 
                 <Table responsive className='tableProject' >
                     <>
-                        {/* <thead>
-                            <tr><th colspan="7" style={{ 'border-top': 'white' }}></th></tr>
-                        </thead> */}
+
                         <tbody>
-                            {/* {allWorkspace ? viewAllProjectsByWorkspace : */}
                             {viewProjectsByWorkspace}
-                            {/* } */}
                         </tbody>
                     </>
                 </Table>

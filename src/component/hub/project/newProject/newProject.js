@@ -9,6 +9,8 @@ import $ from "jquery";
 function NewProject(props) {
     let project = { 'updateDates': [] }
     let myColor;
+    let [emptyValue, setEmptyValue] = useState(false)
+    let [myStyle, setMyStyle] = useState();
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
         "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
@@ -16,14 +18,24 @@ function NewProject(props) {
         "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
         "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"]
 
+    // const changeFiledInProject = (input) => {
+    //     setMyStyle({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
+    //     project[input.target.name] = input.target.value
+    // }
 
-
-    const changeFiledInWorkspace = (input) => {
+    const changeFiledInProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
         project[input.target.name] = input.target.value
     }
 
     function addProject() {
+
+        if (project.dueDate) {
+            let myDate = project.dueDate
+            let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
+            project.dueDate = res
+        }
+
         let newDate = new Date()
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
@@ -32,17 +44,23 @@ function NewProject(props) {
         project.updateDates[0] = date + '/' + month + '/' + year
         project.workspace = props.workspaceId
         if (!project.name)
-            $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
+            setMyStyle({ 'border-bottom': 'red solid 1px' })
         else {
             props.newProject(project)
-            $(`#nameProject`).val('')
-            $(`#descriptionProject`).val('')
-            $(`#dueDateProject`).val('')
+            document.getElementById('nameProject').value = ''
+            // $(`#nameProject`).val('')
+            setMyStyle('')
+            // $(`#descriptionProject`).val('')
+            document.getElementById('descriptionProject').value = ''
+
+            // $(`#dueDateProject`).val('')
+            document.getElementById('dueDateProject').value = ''
+
             myColor = getRandomColor();
-            $(`#colorProject`).val(myColor)
+
         }
     }
-    myColor = getRandomColor();
+    // myColor = getRandomColor();
     function getRandomColor() {
         const randColor = Math.floor((Math.random() * colorList.length) + 0)
         const color = colorList[randColor]
@@ -56,23 +74,26 @@ function NewProject(props) {
                 <div className="col-11"></div>
                 {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
             </div>
+
+
             <div className="row mt-1">
-                <div className="col-5"><b>Name:</b></div>
+                <div className="nameworkspace col-5"><b>Name:</b></div>
                 <div className="col-6">
                     <input
                         id='nameProject'
-                        className="inputProject"
+                        className="nameProject inputProject"
                         name="name"
+                        style={myStyle}
                         placeholder='name project'
                         // value={project.name}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        onChange={(e) => changeFiledInProject(e)}
                     >
                     </input>
                 </div>
                 {/* {props.workspaceId}*/}
             </div>
             <div className="row mt-1">
-                <div className=" col-5"><b>Description:</b></div>
+                <div className="nameworkspace col-5"><b>Description:</b></div>
                 <div className="col-6">
                     <input
                         className="inputProject"
@@ -81,14 +102,14 @@ function NewProject(props) {
                         placeholder='description'
                         // value={project.name}
 
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        onChange={(e) => changeFiledInProject(e)}
                     >
                     </input>
                 </div>
                 {/* {props.workspaceId}*/}
             </div>
             <div className="row mt-1">
-                <div className=" col-5"><b>Due date:</b></div>
+                <div className="nameworkspace col-5"><b>Due date:</b></div>
                 <div className="col-6">
                     <input
                         className="inputProject"
@@ -96,7 +117,7 @@ function NewProject(props) {
                         type="date"
                         id='dueDateProject'
                         // value={project.dueDate}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        onChange={(e) => changeFiledInProject(e)}
                     >
                     </input>
                 </div>
@@ -104,7 +125,7 @@ function NewProject(props) {
             </div>
 
             <div className="row mt-1">
-                <div className=" col-5"><b>Color:</b></div>
+                <div className="nameworkspace col-5"><b>Color:</b></div>
                 <div className="col-6">
                     <input
                         className="inputProject"
@@ -112,7 +133,7 @@ function NewProject(props) {
                         type="color"
                         id='colorProject'
                         value={myColor}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        onChange={(e) => changeFiledInProject(e)}
                     >
                     </input>
                 </div>

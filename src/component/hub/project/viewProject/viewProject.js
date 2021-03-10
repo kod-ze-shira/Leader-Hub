@@ -80,13 +80,13 @@ function ViewProject(props) {
                     </div>
                     <CellDescription description={(complited ? complited : 0) + '% comlete'} />
                 </td>
-                <td style={{ 'text-align': 'center' }}>
+                {/* <td style={{ 'text-align': 'center' }}>
                     <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                     <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                     <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
 
                     <CellDescription description='Team' />
-                </td>
+                </td> */}
                 <td>
                     <Cell item={props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023'} />
                     <CellDescription description='Last update' />
