@@ -6,11 +6,8 @@
     text-align: left;
     letter-spacing: 0px;
     color: #0A102E;
-    overflow-y: auto;
-
-   
+    overflow-y: auto; 
 }
-
 .view-cards-tabs >.card{
 /* overflow-x: hidden !important; */
 }
@@ -70,7 +67,6 @@ cursor: pointer;
     /* background-color:#F8B520; */
     border-radius: 4px;
     opacity: 1;
-
 }
 .card-header .form-control
 {
