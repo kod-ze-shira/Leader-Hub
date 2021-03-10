@@ -7,7 +7,7 @@ import './viewCardsTabs.css'
 // import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-// import ViewDetails from '../../viewDetails/viewDetails'
+import ViewDetails from '../viewDetails/viewDetails'
 // import ToastDelete from '../../toastDelete/toastDelete1'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
@@ -29,7 +29,6 @@ function ViewCardsTabs(props) {
     let actionCard = { renameCard: "rename", deleteCard: "delete" };
 
     const textInput = useRef(null);
-
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -89,6 +88,13 @@ function ViewCardsTabs(props) {
 
 
     };
+    const [task, setTask] = useState(false)
+
+    const openViewDetails = (task) => {
+        console.log(task)
+        setTask(task)
+        setViewDetails(true)
+    };
 
     return (
         <>
@@ -129,6 +135,7 @@ function ViewCardsTabs(props) {
                                             >
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
+
                                             </Menu>
 
                                         </div>
@@ -140,7 +147,7 @@ function ViewCardsTabs(props) {
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps}>
                                                     {props.cardFromMap.tasks.map((task, index) => (
-                                                        <ViewTaskByCradTabs key={task._id} task={task} index={index} />
+                                                        <ViewTaskByCradTabs openViewDetails={openViewDetails} key={task._id} task={task} index={index} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?
@@ -167,6 +174,12 @@ function ViewCardsTabs(props) {
                     )}
                 </Draggable>
             </div >
+            {viewDetails ?
+                <div className="closeDet" >
+                    <ViewDetails closeViewDetails={() => setViewDetails(false)}
+                        from={"viewTaskByCard"} task={task} open={true}> </ViewDetails>
+                </div>
+                : null}
         </>
     )
 }

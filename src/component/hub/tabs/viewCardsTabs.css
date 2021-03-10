@@ -72,7 +72,7 @@ cursor: pointer;
     opacity: 1;
 
 }
-.card-header .form-control
+.card-header .form-control, .task-card .form-control
 {
     border:none !important;
     /* width:70%; */

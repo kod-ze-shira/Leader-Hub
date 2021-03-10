@@ -9,6 +9,7 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
+import ViewDetails from '../../viewDetails/viewDetails'
 
 
 
@@ -22,6 +23,8 @@ function ViewTaskByCradTabs(props) {
         "_id": props.task._id, "name": editTaskName, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
+    let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
+
 
     useEffect(() => {
 
@@ -32,8 +35,10 @@ function ViewTaskByCradTabs(props) {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = (e) => {
         setAnchorEl(null);
+        if (e == "viewCard")
+            showDetails("viewTaskByCard")
     };
     const editTask = (event) => {
         let task1 = {
@@ -42,6 +47,13 @@ function ViewTaskByCradTabs(props) {
         }
         setTask(task1)
         props.EditTask(task);
+    }
+    const showDetails = (from) => {
+        // setDetailsOrEditTask(from)
+        setViewDetails(props.openViewDetails(task))
+    }
+    const closeDetails = (e) => {
+        setViewDetails(false)
     }
 
     return (
@@ -72,7 +84,7 @@ function ViewTaskByCradTabs(props) {
                                         onClose={handleClose}
                                     >
                                         <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
-                                        <MenuItem onClick={handleClose}>View Details</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard)} >View Details</MenuItem>
                                         <MenuItem onClick={handleClose}>Delete Task</MenuItem>
 
                                     </Menu>
@@ -91,12 +103,14 @@ function ViewTaskByCradTabs(props) {
                                 {/* <p className="">{props.task.name}</p> */}
 
                             </div>
+
                         </div>
                     </div>
                 )}
             </Draggable>
-
+      
         </>
+        
     )
 }
 const mapStateToProps = (state) => {
