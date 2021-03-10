@@ -26,6 +26,7 @@ function ViewCardsTabs(props) {
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [a, setA] = useState()
     let actionCard = { renameCard: "rename", deleteCard: "delete" };
 
     const textInput = useRef(null);
@@ -71,22 +72,24 @@ function ViewCardsTabs(props) {
             // props.setTask(props.task)
         }
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        console.log(event)
-        textInput.current.focus()
+        if (event == "rename") {
+            textInput.current.focus()
+            console.log("kk")
+        }
+        else setAnchorEl(event.currentTarget)
+
+
 
     };
 
-    // $('.more').click(function () {
-    //     $(`#${indexToEdit}`).focus();
-    // });
-    const handleClose = (e) => {
-        setAnchorEl(null);
-        console.log(e)
-        if (e == "delete")
-            deleteCard()
+    const handleClose = (nameAction) => {
+        // setA(nameAction)
+        handleClick(nameAction)
+        setAnchorEl(null)
+        // textInput.current.focus()
 
-
+        // if (nameAction == "delete")
+        //     deleteCard()
     };
     const [task, setTask] = useState(false)
 
@@ -131,7 +134,7 @@ function ViewCardsTabs(props) {
                                                 anchorEl={anchorEl}
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
-                                                onClose={handleClose}
+                                            // onClose={handleClose}
                                             >
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
