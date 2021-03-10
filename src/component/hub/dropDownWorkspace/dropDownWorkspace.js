@@ -14,12 +14,12 @@ function DropDownWorkspace(props) {
     // }, []);
     function routeToWrkspace(e) {
         // setSelectedOption(e.value)
-        let index = props.worksapces.findIndex(x => e.target.value == x._id)
-        props.setWorkspace(props.worksapces[index])
+        let index = props.workspaces.findIndex(x => e.target.value == x._id)
+        props.setWorkspace(props.workspaces[index])
         props.history.push("/" + props.user + "/workspace/" + e.target.value)
 
     }
-    // const viewProjectsByWorkspace1 = props.worksapces.map((workspace) => (
+    // const viewProjectsByWorkspace1 = props.workspaces.map((workspace) => (
     //     workspace.name != props.nameWorkspace ?
     //         { value: workspace._id, label: workspace.name }
     //         : null
@@ -42,7 +42,7 @@ function DropDownWorkspace(props) {
                 <option default className='textLogo'>
                     {props.nameWorkspace}
                 </option>
-                {props.worksapces.map(item => (item.name != props.nameWorkspace ?
+                {props.workspaces.map(item => (item.name != props.nameWorkspace ?
                     <option className='textLogo' value={item._id} >
                         {item.name}
                     </option> : null
@@ -53,7 +53,7 @@ function DropDownWorkspace(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        worksapces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         user: state.public_reducer.userName
 
     }

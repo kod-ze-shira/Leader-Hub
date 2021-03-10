@@ -8,8 +8,8 @@ export default function ToastDelete1(props) {
 
     const scrolling = useSpring({
       from: { transform: "translate(-60%,0)" },
-      to: { transform: "translate(10%,0)" },
-      config: { duration: 500 },//מהירות
+      to: { transform: "translate(-5%,0)" },
+      config: { duration: 300 },//מהירות
       // reset: true,
       //reverse: key % 2 == 0,
       onRest: () => {
@@ -25,13 +25,9 @@ export default function ToastDelete1(props) {
 
                 <Toast.Header className="toast_header" closeButton={false}>
                     <div className="row">
-                        <div className="col-4">
                             <div className="pr-2">{props.name}</div>
-                        </div>
-                        <div className="col-4">
                             <span className="pr-2">was deleted</span>
-                        </div>
-                        <div className="col-4 div_btn_undo pr-2">
+                        <div className="div_btn_undo pr-2">
                             <button className="btn_undo"
                                 onClick={() => {
                                     props.toSetShowToastDelete();

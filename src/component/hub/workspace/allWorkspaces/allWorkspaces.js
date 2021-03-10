@@ -142,7 +142,7 @@ return (
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         workspaceDeleted:state.workspace_reducer.workspace
     }
 }
