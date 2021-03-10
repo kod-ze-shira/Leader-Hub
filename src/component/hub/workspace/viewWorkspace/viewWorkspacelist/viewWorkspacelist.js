@@ -17,19 +17,19 @@ function ViewWorkspaceList(props) {
 
     const routeToProject = () => {
         props.setWorkspace(workspace)
-        props.setProjects(workspace.projects)
-        props.history.push("/" + props.user + "/workspace/" + workspace._id)
+        props.setProjects(workspace.projectList)
+        props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function editWorkspace() {
-        props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        props.setWorkspace(workspace.workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
     }
     function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
-        props.setWorkspace(workspace);
+        props.setWorkspace(workspace.workspace);
     }
     function duplicateWorkspace() {
-        props.setWorkspace(workspace);
+        props.setWorkspace(workspace.workspace);
         props.duplicateWorkspace();
     }
     const [over, setover] = useState(false);
@@ -49,25 +49,25 @@ function ViewWorkspaceList(props) {
         <>
             <div className="row WorkspaceList mt-3 "
                 id={workspace._id}
-                onMouseOver={() => func_over(workspace._id)}
-                onMouseOut={() => outOver(workspace._id)}  >
-                <div className="col-10" onClick={() => routeToProject(workspace._id)}
+                onMouseOver={() => func_over(workspace.workspace._id)}
+                onMouseOut={() => outOver(workspace.workspace._id)}  >
+                <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}
                 >
 
                     <div className="row "  >
                         <div className="Workspace "  >
                             <div className="logoWorkspacelist logo "
-                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
-                                {workspace.name ? workspace.name[0].toUpperCase() : null}                            </div>
+                                style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}>
+                                {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}                            </div>
                             
 
 
                         </div>
                         <div className="col-3">
-                                <p className="workspace-name-list">{workspace.name} </p>
+                                <p className="workspace-name-list">{workspace.workspace.name} </p>
                                 <div className="description-and-date">
                                 <p className="">Workspace Description</p>
-                                <p className="">Update {workspace.productionDate}</p>
+                                <p className="">Update {workspace.workspace.productionDate}</p>
                                 </div>
                             </div>
 
