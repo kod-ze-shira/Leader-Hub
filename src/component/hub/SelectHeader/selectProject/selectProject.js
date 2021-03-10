@@ -108,9 +108,10 @@ function SelectProject(props) {
     // const colorsOfWorkspace = props.workspace.projects.map((project) => (
     //     project.color
     // ))
-    const viewProjectsList = props.workspace.projectList.map((project) => (
+    const viewProjectsList =props.workspace.projectList? props.workspace.projectList.map((project) => (
         { value: project.project._id, label: project.project.name }
-    ))
+    )):null
+    // props.setWorkspace(workspace)
     return (
         <>
             <div className="react-select">
@@ -132,7 +133,7 @@ const mapStateToProps = (state) => {
 
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace
 
     }

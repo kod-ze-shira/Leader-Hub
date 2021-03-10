@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import { actions } from '../../../redux/actions/action'
 import SelectHeader from '../../SelectHeader/SelectHeader'
 import ProjectsByWorkspace from '../projectsByWorkspace/projectsByWorkspace'
-function ProjectsPage() {
+function ProjectsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState(true);
 
@@ -13,13 +13,14 @@ function ProjectsPage() {
     const changeFlag = (value) => {
         setFlag(value)
     }
-    const cards = (value) => {
+    const from = (value) => {
+        console.log(value)
         // setFlag(value)
     }
     return (
         <div >
-            <SelectHeader flag={changeFlag} from />
-            <ProjectsByWorkspace></ProjectsByWorkspace>
+            <SelectHeader flag={changeFlag} from={from} />
+            <ProjectsByWorkspace ></ProjectsByWorkspace>
 
         </div>
 
@@ -27,6 +28,7 @@ function ProjectsPage() {
 }
 const mapStateToProps = (state) => {
     return {
+        workspaces:state.public_reducer.workspaces,
     }
 }
 

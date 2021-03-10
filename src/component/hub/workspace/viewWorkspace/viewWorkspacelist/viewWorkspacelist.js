@@ -23,15 +23,15 @@ function ViewWorkspaceList(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function editWorkspace() {
-        props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        props.setWorkspace(workspace.workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
     }
     function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
-        props.setWorkspace(workspace);
+        props.setWorkspace(workspace.workspace);
     }
     function duplicateWorkspace() {
-        props.setWorkspace(workspace);
+        props.setWorkspace(workspace.workspace);
         props.duplicateWorkspace();
     }
     const [over, setover] = useState(false);
@@ -50,7 +50,11 @@ function ViewWorkspaceList(props) {
     return (
         <>
             <div className="row WorkspaceList mt-3 "
+<<<<<<< HEAD
                 id={workspace.workspace._id}
+=======
+                id={workspace._id}
+>>>>>>> newDev
                 onMouseOver={() => func_over(workspace.workspace._id)}
                 onMouseOut={() => outOver(workspace.workspace._id)}  >
                 <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}
@@ -61,15 +65,27 @@ function ViewWorkspaceList(props) {
                             <div className="logoWorkspacelist logo "
                                 style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}>
                                 {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}                            </div>
+<<<<<<< HEAD
 
+=======
+                            
+>>>>>>> newDev
 
 
                         </div>
                         <div className="col-3">
+<<<<<<< HEAD
                             <p className="workspace-name-list">{workspace.workspace.name} </p>
                             <div className="description-and-date">
                                 <p className="">Workspace Description</p>
                                 <p className="">Update {workspace.workspace.productionDate}</p>
+=======
+                                <p className="workspace-name-list">{workspace.workspace.name} </p>
+                                <div className="description-and-date">
+                                <p className="">Workspace Description</p>
+                                <p className="">Update {workspace.workspace.productionDate}</p>
+                                </div>
+>>>>>>> newDev
                             </div>
                         </div>
 

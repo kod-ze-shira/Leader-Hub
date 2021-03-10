@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+
 import './allWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
@@ -33,7 +34,11 @@ function AllWorkspaces(props) {
     const renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
         setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+<<<<<<< HEAD
          key={todo.workspace._id} workspace1={todo} editWorkspace={openEditWorkspace}/>
+=======
+         key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
+>>>>>>> newDev
     })
     function openEditWorkspace(){
         setAddOrEditWorkspace("editWorkspace")
@@ -142,7 +147,7 @@ return (
 const mapStateToProps = (state) => {
 
     return {
-        workspaces: state.public_reducer.worksapces,
+        workspaces: state.public_reducer.workspaces,
         workspaceDeleted:state.workspace_reducer.workspace
     }
 }

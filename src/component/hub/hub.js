@@ -24,6 +24,8 @@ import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toast";
 import ProjectsPage from './project/projectsPage/projectsPage'
+import './hub.css'
+import ToastDelete1 from './toastDelete/toastDelete1';
 export default function Hub(props) {
     const [open, setOpen] = useState(true);
     // useEffect(() => {
@@ -34,8 +36,10 @@ export default function Hub(props) {
     }
     return (
         <>
+    
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
+              
                 <div className="row">
                     {open ?
                         <div className="col-2 px-0 mt-0">
@@ -48,6 +52,9 @@ export default function Hub(props) {
                         {/* <div className="col-2"> <Tools /></div> */}
 
                         <Switch>
+                            {/* <Route path="/chedvi678@gmail.com/603f85549b557237f314eb9a/renana-il/share">
+                            <ProjectsPage />
+                            </Route> */}
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 {/* <ProjectsPage /> */}
                                 <ProjectsByWorkspace />
@@ -75,11 +82,14 @@ export default function Hub(props) {
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
+                      
                     </div>
-
+                    {/* <div className="toastDeleteOnStage">
+                        <ToastDelete1 name="fggfgfg"/>
+                    </div> */}
                 </div>
+               
             </Router>
-
         </>
     )
 }

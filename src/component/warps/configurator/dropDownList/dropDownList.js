@@ -7,7 +7,7 @@ import Workspace from '../workspace/workspace'
 // import TeamExample from 'C:/Users/ATRA2/Desktop/hub-react/Leader-Hub/src/component/hub/team/teamExample'
 const mapStateToProps = (state) => {
     return {
-        workspaces: state.public_reducer.worksapces
+        workspaces: state.public_reducer.workspaces
 
     }
 }
