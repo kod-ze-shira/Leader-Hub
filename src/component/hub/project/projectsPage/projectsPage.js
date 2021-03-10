@@ -19,7 +19,7 @@ function ProjectsPage(props) {
     }
     return (
         <div >
-            <SelectHeader flag={changeFlag} from={from} />
+            <SelectHeader flag={changeFlag} from={from} menue={false} />
             <ProjectsByWorkspace ></ProjectsByWorkspace>
 
         </div>
