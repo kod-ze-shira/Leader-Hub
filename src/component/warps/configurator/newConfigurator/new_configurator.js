@@ -27,6 +27,10 @@ function NewConfigorator(props) {
             <div className="left_nav ">
                 <div className=" col-8 pt-4 mt-3 ml-1">
                     <img src={require('../../../img/logo-hub.png')}></img>
+                    {/* <div onClick={props.openConfigurator} >
+                        <img className="ml-4 my-2" src={require('../../../img/menu.png')}></img>
+                    </div> */}
+
                 </div>
                 <ul className="list_config">
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
@@ -51,7 +55,7 @@ function NewConfigorator(props) {
                         Members</li>
 
                 </ul>
-                
+
 
                 {/* <ConfiguratorTop /> */}
                 {/* <DropDownList /> */}
