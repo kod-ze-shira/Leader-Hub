@@ -34,12 +34,8 @@ function AllWorkspaces(props) {
     const renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
         setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
-<<<<<<< HEAD
-         key={todo.workspace._id} workspace1={todo} editWorkspace={openEditWorkspace}/>
-=======
-         key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
->>>>>>> newDev
-    })
+        key={todo.workspace._id} workspace1={todo} editWorkspace={openEditWorkspace}/>
+        })
     function openEditWorkspace(){
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)
