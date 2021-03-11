@@ -9,7 +9,6 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
-import ViewDetails from '../../viewDetails/viewDetails'
 
 
 
@@ -68,7 +67,8 @@ function ViewTaskByCradTabs(props) {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <div className="task-card mt-2 ">
+                        <div className="task-card mt-2 "
+                            onClick={(e) => showDetails("viewTaskByCard")}>
                             <div className="container">
                                 <div className="row">
                                     <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
@@ -108,9 +108,9 @@ function ViewTaskByCradTabs(props) {
                     </div>
                 )}
             </Draggable>
-      
+
         </>
-        
+
     )
 }
 const mapStateToProps = (state) => {

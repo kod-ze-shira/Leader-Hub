@@ -28,7 +28,6 @@ function ViewCardsTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [a, setA] = useState()
     let actionCard = { renameCard: "rename", deleteCard: "delete" };
-
     const textInput = useRef(null);
 
     const updateInputValue = (evt) => {

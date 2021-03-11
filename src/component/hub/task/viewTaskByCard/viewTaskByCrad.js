@@ -24,6 +24,7 @@ function ViewTaskByCrad(props) {
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
+
     useEffect(() => {
 
     }, [props.task])
@@ -52,7 +53,7 @@ function ViewTaskByCrad(props) {
         props.showToast(props.task)
     }
     function overTask(id) {
-        $(`#${id}`).css({ 'opacity': '0.5' })
+        $(`#${id}`).css({ 'opacity': '0.3' })
     }
     function outOver(id) {
         $(`#${id}`).css({ 'opacity': '0' })

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useParams } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import CardsByProject from '../Cards/cardsByProject/cardsByProject';
 import './projectPlatform.css'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToastDelete from '../toastDelete/toastDelete1';
-
+import $ from 'jquery'
 
 function ProjectPlatform(props) {
-    const [projectId, setProjectId] = useState()
+    const [projectId, setProjectId,] = useState()
     const [viewCardsByProject, setViewCardsByProject] = useState(false)
     const [workspaceId, setWorkspaceId] = useState()
     const [showInput, setShowInput] = useState(false)
@@ -30,6 +30,7 @@ function ProjectPlatform(props) {
     }
     const [showDetails, setShowDetails] = useState(false)
     const [inputValue, setInputValue] = useState()
+    const textInput = useRef(null);
 
     // $(function () {
     //     $('.add-new-btn').hover(function () {
@@ -44,6 +45,10 @@ function ProjectPlatform(props) {
     }
     const showInputToAddCard = () => {
         setShowInput(true)
+        $('.add-card-btn').click(function () {
+            $('.add-card').focus()
+        })
+
     }
     const newCard = () => {
         let card;
@@ -81,13 +86,20 @@ function ProjectPlatform(props) {
                         <a>New Task</a><br></br>
                     </div>
                     {showInput ?
-                        <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control mt-2 col-6 ml-4" onKeyPress={event => {
-                            if (event.key === 'Enter') {
-                                newCard()
-                            }
-                        }}></input>
+                        <input
+                            id="input-card"
+                            ref={textInput}
+                            placeholder={"New Card"}
+                            value={inputValue}
+                            onChange={updateInputValue}
+                            className="form-control mt-2 col-6 ml-4"
+                            onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    newCard()
+                                }
+                            }}></input>
                         : null}
-                    <a className="ml-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <a href="#input-card" className="ml-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                     <div className="add-new-btn">+</div>
                 </div>
                 {showToastDelete ?

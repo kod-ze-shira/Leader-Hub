@@ -35,7 +35,7 @@ function EditWorkspace(props) {
 
             </div>
             <div className="row mt-5">
-                <div classNae="col-3"></div>
+                <div className="col-3"></div>
                 <div className="col-3">  <button onClick={save_edit} >save</button></div>
 
             </div>
@@ -52,6 +52,6 @@ export default connect(
         return {
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
-         }
+        }
     }
 )(EditWorkspace)

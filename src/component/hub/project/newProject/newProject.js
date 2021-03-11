@@ -118,7 +118,7 @@ function NewProject(props) {
             </div>
 
             <div className="row mt-1">
-                <div classNae="col-3"></div>
+                <div className="col-3"></div>
                 <div className="col-3">
                     <button onClick={() => addProject()}>save</button></div>
             </div>

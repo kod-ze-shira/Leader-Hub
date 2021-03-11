@@ -76,7 +76,7 @@ function SelectHeader(props) {
                     <div className={classes.root}>
                         {props.menue ?
                             <Tabs
-                                className="tabs-in-header offset-3"
+                                className="tabs-in-header offset-4"
                                 value={value}
                                 onChange={handleChange}
                                 variant="scrollable"
@@ -85,13 +85,13 @@ function SelectHeader(props) {
                                 aria-label="scrollable prevent tabs example"
                             >
                                 <Tab label="List" onClick={(e) => changePresent("list")} />
-                                <Tab label="Calender" />
-                                <Tab label="Gant" />
                                 <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
+                                <Tab label="" />
+                                <Tab label="" />
                             </Tabs>
                             :
                             <Tabs
-                                className="tabs-in-header offset-3 opacity">
+                                className="tabs-in-header offset-4 opacity">
                                 <Tab label="List" className="tab" />
                                 <Tab label="Calender" className="tab" />
                                 <Tab label="Gant" className="tab" />

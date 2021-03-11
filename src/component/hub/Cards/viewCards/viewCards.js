@@ -15,7 +15,7 @@ function ViewCards(props) {
 
     }, [props.flag])
 
-    const [flag, setFlag] = useState(false)
+    const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
     const [viewDetails, setViewDetails] = useState(false)
@@ -29,7 +29,6 @@ function ViewCards(props) {
         setInputValue(evt.target.value)
     }
     const newTask = () => {
-
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -45,6 +44,7 @@ function ViewCards(props) {
     }
 
     const addTask = () => {
+        props.setCard(props.cardFromMap)
         setAddTaskInInput(!addTaskInInput)
         if (props.cardFromMap.tasks.length)
             if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
@@ -180,7 +180,10 @@ function ViewCards(props) {
             }
             {
                 addTaskInInput ?
-                    <input type="text" class="form-control scroll-container mt-2 w-50 ml-4" placeholder="Add Task" id="input-task"
+                    <input
+                        type="text"
+                        class="form-control scroll-container mt-2 w-50 ml-4"
+                        placeholder="Add Task" id="input-task"
                         value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 newTask()
@@ -189,7 +192,6 @@ function ViewCards(props) {
                     />
                     : null
             }
-
             {
                 viewDetails ?
                     <div className="closeDet">

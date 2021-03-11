@@ -131,7 +131,11 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
-        state.cards.push(action.payload)
+        if (state.cards.length > 0)
+            state.cards.push(action.payload)
+        else
+            state.cards[0] = action.payload
+
     },
     addTaskToTasksWhenAddTaskToServer(state, action) {
         state.cards.map(card => {

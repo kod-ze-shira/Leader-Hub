@@ -84,12 +84,7 @@ return (
                 </div>
 
                 <div className="row mt-4 ml-5 view_workspace">
-                    {list ?
-                        renderedListWorkspaces
-
-                        :
-                        renderedGridWorkspaces
-                    }
+                  
                     {/* add workspace button */}
                     {list ?
                         <div className="row WorkspaceList mt-3 " >
@@ -122,6 +117,12 @@ return (
                                 <div className="name1 pt-1 "><p>Add Workspace</p> </div>
                             </div>
                         </div>
+                    }
+                      {list ?
+                        renderedListWorkspaces
+
+                        :
+                        renderedGridWorkspaces
                     }
             </div>
      </div>

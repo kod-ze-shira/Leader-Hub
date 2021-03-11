@@ -37,21 +37,21 @@ function NewConfigorator(props) {
 
                         <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                         My Projects</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                    {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        Goals</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                        Goals</li> */}
+                    {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/form-line.svg')}></img>
-                        Forms</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                        Forms</li> */}
+                    {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/mail-open-outline.svg')}></img>
-                        Email</li>
+                        Email</li> */}
                     <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/users-solid.svg')}></img>
                         Members</li>
 
                 </ul>
-                
+
 
                 {/* <ConfiguratorTop /> */}
                 {/* <DropDownList /> */}
