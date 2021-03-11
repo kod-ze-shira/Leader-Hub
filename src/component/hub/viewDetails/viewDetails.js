@@ -47,7 +47,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
-                    return <AddWorkspace />
+                    return <AddWorkspace closeViewDetails={props.closeViewDetails}/>
                 default:
                     return null;
 

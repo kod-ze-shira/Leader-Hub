@@ -30,7 +30,7 @@ function ProjectsByWorkspace(props) {
             if (props.workspaces.length==0) {
                 props.getAllWorkspaces()
                 // if (props.workspaces.length)
-                // alert('hhh')s
+                // alert('hhh')
                 if (window.location.href.indexOf('workspace') != -1) {
                     // props.getProjectsByWorkspaceId(idWorkspace)
                     let w = props.workspaces.find(w => w._id == idWorkspace)
