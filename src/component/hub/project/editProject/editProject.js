@@ -1,88 +1,117 @@
-import React, { useEffect, useState } from 'react'
-import '../newProject/newProject.css'
+import $ from "jquery"
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import Toast from 'react-bootstrap/Toast'
-import viewDetails from '../../viewDetails/viewDetails'
-import $ from "jquery";
+import '../newProject/newProject.css'
 
 function EditProject(props) {
-    let project = { 'updateDates': [] }
+    let [myProect, setMyProject] = useState({})
+    let project = props.projectToEdit
+    let [nameProject, setNameProject] = useState(project.name)
+    let [descriptionProject, setDescriptionProject] = useState(project.description)
+    // let [dueDateProject, setDueDateProject] = useState(project.dueDate)
+    let [colorProject, setColorProject] = useState(project.color)
+    let myDate = project.dueDate;
+    //yy dd mm
+    //mm dd yy
+    let res1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
+    let [dueDateProject, setDueDateProject] = useState(res1)
 
+    const changeNameProject = (input) => {
+        $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
+        setNameProject(input.target.value)
+    }
+    const changeDescriptionProject = (input) => {
+        setDescriptionProject(input.target.value)
+    }
+    const changeDueDateProject = (input) => {
+        setDueDateProject(input.target.value)
+    }
+    const changeColorProject = (input) => {
+        setColorProject(input.target.value)
+    }
     const changeFiledInWorkspace = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
-        project[input.target.name] = input.target.value
+        if (input.target.name == 'dueDate') {
+            let myDate = input.target.value
+            let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
+            project[input.target.name] = res
+        }
+        else
+            setNameProject(input.target.value)
+        // setMyProject({ ...myProject, myProject[input.target.name]: input.target.value })
+        // project[input.target.name] = input.target.value
     }
 
-    function addProject() {
+
+
+    function saveProject() {
         let newDate = new Date()
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
         console.log(date + '/' + month + '/' + year)
-        project.updateDates[0] = date + '/' + month + '/' + year
-        project.workspace = props.workspaceId
+        project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
+        // project.workspace = props.workspaceId
+        project.name = nameProject
+        project.description = descriptionProject
+        let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
+        project.dueDate = res
+        project.color = colorProject
         if (!project.name)
             $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
         else {
-            props.newProject(project)
-            // $(`#nameProject`).val('')
-            // $(`#descriptionProject`).val('')
-            // $(`#dueDateProject`).val('')
-            // myColor = getRandomColor();
-            // $(`#colorProject`).val(myColor)
+            props.editProjectInServer({ "project": project })
+            document.getElementById('nameProject').value = ''
+            document.getElementById('descriptionProject').value = ''
+            document.getElementById('dueDateProject').value = ''
         }
     }
 
     return (
-
-
         <>
             <div className="row">
                 <div className="col-11"></div>
-                {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
             </div>
             <div className="row mt-1">
                 <div className="col-5"><b>Name:</b></div>
                 <div className="col-6">
                     <input
                         id='nameProject'
-                        className="name"
+                        className="inputProject"
                         name="name"
                         placeholder='name project'
-                        value={props.prject.name}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        value={nameProject}
+                        onChange={(e) => changeNameProject(e)}
                     >
                     </input>
                 </div>
-                {/* {props.workspaceId}*/}
             </div>
             <div className="row mt-1">
                 <div className=" col-5"><b>Description:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="description"
                         id='descriptionProject'
-                        placeholder='description'
-                        value={props.prject.name}
-
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        // placeholder='description'
+                        // placeholder={project.description}
+                        value={descriptionProject}
+                        onChange={(e) => changeDescriptionProject(e)}
                     >
                     </input>
                 </div>
-                {/* {props.workspaceId}*/}
             </div>
             <div className="row mt-1">
                 <div className=" col-5"><b>Due date:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="dueDate"
                         type="date"
                         id='dueDateProject'
-                        value={props.prject.dueDate}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        value={dueDateProject}
+                        onChange={(e) => changeDueDateProject(e)}
                     >
                     </input>
                 </div>
@@ -93,12 +122,12 @@ function EditProject(props) {
                 <div className=" col-5"><b>Color:</b></div>
                 <div className="col-6">
                     <input
-                        className="name"
+                        className="inputProject"
                         name="color"
                         type="color"
                         id='colorProject'
-                        value={props.prject.color}
-                        onChange={(e) => changeFiledInWorkspace(e)}
+                        value={colorProject}
+                        onChange={(e) => changeColorProject(e)}
                     >
                     </input>
                 </div>
@@ -108,8 +137,11 @@ function EditProject(props) {
             <div className="row mt-1">
                 <div classNae="col-3"></div>
                 <div className="col-3">
-                    <button onClick={() => addProject()}>save</button></div>
+                    <button onClick={() => saveProject()}>save</button></div>
             </div>
+
+            {/* <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img> */}
+
 
 
         </>
@@ -123,18 +155,13 @@ function EditProject(props) {
 export default connect(
     (state) => {
         return {
-            // workspaceToEdit: state.workspace_reducer.workspace,
-            // workspaces: state.workspace_reducer.workspaces,
-
-
+            projectToEdit: state.project_reducer.project,
         }
     },
     (dispatch) => {
         return {
-            newProject: (props) => dispatch(actions.newProject(props)),
-
-
+            editProjectInServer: (task) => dispatch(actions.editProjectInServer(task))
 
         }
     }
-)(NewProject)
+)(EditProject)

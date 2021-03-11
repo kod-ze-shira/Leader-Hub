@@ -36,7 +36,7 @@ const publicData = {
         console.log(state.tasks)
     },
     addNewWorkspace(state, action) {
-        state.workspaces.push(action.payload)
+        state.workspaces.push({"workspace":action.payload,"projectList":[]})
     },
     deletTask(state, action) {
         state.cards.map(card => {
@@ -54,6 +54,7 @@ const publicData = {
     },
     addProjectToProjects(state, action) {
         state.projects.push(action.payload)
+        // state.projects.push(action.payload)
     },
 
     setNewTask(state, action) {
@@ -147,7 +148,7 @@ const publicData = {
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
         state.workspaces = state.workspaces.filter((_, i) =>
-            state.workspaces[i]._id !== action.payload._id
+            state.workspaces[i].workspace._id !== action.payload._id
         )
     },
     setCardNameInput(state, action) {
@@ -159,8 +160,8 @@ const publicData = {
     },
     updateWorkspaceUfterEditInServer(state, action) {
         state.workspaces.forEach((workspace, index) => {
-            if (workspace._id === action.payload._id)
-                state.workspaces[index] = action.payload
+            if (workspace.workspace._id === action.payload._id)
+                state.workspaces[index].workspace = action.payload
         }
 
         )

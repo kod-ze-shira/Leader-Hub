@@ -12,7 +12,8 @@ import ToastDelete from '../../toastDelete/toastDelete1'
 function AllWorkspaces(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const refToDeleteToast = useRef(null);
-
+ 
+     
 
     useEffect(() => {
         props.getAllWorkspaces()
@@ -34,8 +35,8 @@ function AllWorkspaces(props) {
     renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
         setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
-         key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
-    })
+        key={todo.workspace._id} workspace1={todo} editWorkspace={openEditWorkspace}/>
+        })
     function openEditWorkspace(){
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)

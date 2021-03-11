@@ -6,6 +6,7 @@ import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWo
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import NewProject from '../project/newProject/newProject'
+import EditProject from '../project/editProject/editProject'
 import AddTask from '../task/addTask/addTask'
 import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
 import TaskDetails from '../task/taskDetails/taskDetails'
@@ -44,10 +45,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':
                     return <NewProject workspaceId={props.workspaceId} />
+                case 'editProject':
+                    return <EditProject projectToEdit={props.projectToEdit} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
-                    return <AddWorkspace />
+                    return <AddWorkspace closeViewDetails={props.closeViewDetails}/>
                 default:
                     return null;
 
