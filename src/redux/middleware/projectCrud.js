@@ -84,7 +84,9 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log(data.message)
                 let p = {
-                    'project': data.message, countReadyTask: 0, countTasks: 0
+                    'project': data.message,
+                    countReadyTask: 0,
+                    countTasks: 0
                 }
                 dispatch(actions.addProjectToProjects(p))
                 // dispatch(() => addProjectToProjects(data.message))
@@ -104,8 +106,6 @@ export const newProject = ({ dispatch, getState }) => next => action => {
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
-
-
         let project = getState().project_reducer.project;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
@@ -116,7 +116,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ project }),
+            data: JSON.stringify({ 'project': project }),
             success: function (data) {
                 console.log("success")
                 console.log("data", data);

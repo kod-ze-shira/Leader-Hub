@@ -31,11 +31,12 @@ function ViewProject(props) {
         // props.deleteProjectFromWorkspace(props.myProject.project)
     }
     function editProject(project, event) {
-        // console.log(project)
         props.setProject(project)
+        // projectToEdit
+        props.editProject()
         event.stopPropagation();
-
     }
+
     let complited = 0, complitedColor;
     complited = props.myProject.project.countTasks / 100;
     complited = complited * props.myProject.project.countReadyTask
@@ -79,13 +80,13 @@ function ViewProject(props) {
                     </div>
                     <CellDescription description={(complited ? complited : 0) + '% comlete'} />
                 </td>
-                <td style={{ 'text-align': 'center' }}>
+                {/* <td style={{ 'text-align': 'center' }}>
                     <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                     <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                     <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
 
                     <CellDescription description='Team' />
-                </td>
+                </td> */}
                 <td>
                     <Cell item={props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023'} />
                     <CellDescription description='Last update' />

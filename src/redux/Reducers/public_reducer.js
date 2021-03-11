@@ -53,6 +53,7 @@ const publicData = {
     },
     addProjectToProjects(state, action) {
         state.projects.push(action.payload)
+        // state.projects.push(action.payload)
     },
 
     setNewTask(state, action) {

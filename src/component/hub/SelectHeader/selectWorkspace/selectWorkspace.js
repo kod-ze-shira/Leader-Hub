@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import $ from 'jquery';
+import { withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import LetterLogo from '../../logo/letterLogo'
 import './selectWorkspace.css'
@@ -15,13 +16,17 @@ function SelectWorkspace(props) {
 
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
-
     const changeSelectedWorkspace = (id) => {
         myWorkspace = props.workspaces.find(p => p.workspace._id == id.value)
         props.setWorkspace(myWorkspace)
+        console.log(myWorkspace.workspace._id)
         if (myWorkspace.projectList[0]) {
+
+            props.setProjects(myWorkspace.projectList)
             props.setProject(myWorkspace.projectList[0])
             props.getCardsByProjectId(myWorkspace.projectList[0]._id)
+            if (props.projectPage == true)
+                props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
         }
         else {
             props.setProjectName("No Projects")
@@ -50,14 +55,14 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace.workspace?props.workspace.workspace.name:null} />
+                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace.workspace ? props.workspace.workspace.name : null} />
                 <Select
                     className="select-workspace"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
-                    placeholder={props.workspace.workspace?props.workspace.workspace.name:null}
+                    placeholder={props.workspace.workspace ? props.workspace.workspace.name : null}
                     styles={style}
                 />
             </div>
@@ -80,6 +85,7 @@ const mapDispatchToProps = (dispatch) => {
         setCards: (c) => dispatch(actions.setCards(c)),
         setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
         setProject: (project) => dispatch(actions.setProject(project)),
+        setProjects: (project) => dispatch(actions.setProjects(project)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
@@ -89,8 +95,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SelectWorkspace)
-
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectWorkspace))
