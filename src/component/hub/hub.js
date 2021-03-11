@@ -36,10 +36,10 @@ export default function Hub(props) {
     }
     return (
         <>
-    
+
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
-              
+
                 <div className="row">
                     {open ?
                         <div className="col-2 px-0 mt-0">
@@ -56,8 +56,8 @@ export default function Hub(props) {
                             <ProjectsPage />
                             </Route> */}
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                {/* <ProjectsPage /> */}
-                                <ProjectsByWorkspace />
+                                <ProjectsPage />
+                                {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allWorkspace" >
                                 {/* <ProjectsByWorkspace /> */}
@@ -82,13 +82,13 @@ export default function Hub(props) {
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
-                      
+
                     </div>
                     {/* <div className="toastDeleteOnStage">
                         <ToastDelete1 name="fggfgfg"/>
                     </div> */}
                 </div>
-               
+
             </Router>
         </>
     )

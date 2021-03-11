@@ -111,7 +111,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
         let workspace = { 'workspace': getState().workspace_reducer.workspace.workspace };
 
-        delete workspace.workspace.projects
+        // delete workspace.workspace.projects
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
@@ -138,7 +138,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
-        let workspace = getState().workspace_reducer.workspace;
+        let workspace = getState().workspace_reducer.workspace.workspace;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
         $.ajax({
             url: urlData,

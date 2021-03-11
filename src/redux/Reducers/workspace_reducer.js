@@ -15,17 +15,9 @@ const workspaces = {
         state.workspace = action.payload;
     },
     setWorkspaceOnChangeFiled(state, action) {
-        state.workspace[action.payload] = action.value
+        state.workspace.workspace[action.payload] = action.value
     },
 
-    setState(state, action) {
-        state.workspace = action.payload
-    },
-
-    // addProjectToProjects(state, action) {
-    //     state.workspace.projectList.push(action.payload)
-    //     // state.projects.push(action.payload)
-    // },
     setcloseEditWorkspace(state, action) {
         state.closeEditWorkspace = !state.closeEditWorkspace
     }

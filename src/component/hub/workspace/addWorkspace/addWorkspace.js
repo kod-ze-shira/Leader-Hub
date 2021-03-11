@@ -24,6 +24,7 @@ function AddWorkspace(props) {
 
     function addNewWorkspace() {
         props.addNewWorkspaceToServer(workspace)
+        props.closeViewDetails()
     }
     const handleChange = (event) => {
         const { name, value } = event.target
