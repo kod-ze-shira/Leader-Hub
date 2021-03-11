@@ -57,7 +57,6 @@ function ViewCards(props) {
     }
     const deleteCard = () => {
         props.showToastDelete(props.cardFromMap)
-        // props.removeCardById(props.cardFromMap._id)
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }

@@ -25,6 +25,7 @@ import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toast";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
+import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
 import ToastDelete1 from './toastDelete/toastDelete1';
 export default function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -36,10 +37,10 @@ export default function Hub(props) {
     }
     return (
         <>
-    
+
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
-              
+
                 <div className="row">
                     {open ?
                         <div className="col-2 px-0 mt-0">
@@ -70,25 +71,24 @@ export default function Hub(props) {
                                 {/* <ProjectPlatform /> */}
                                 <CardsPage />
                             </Route>
-                            {/* <Route path="/:userName/cardsByProject" >
-                                <CardsByProject />
-                            </Route> */}
+                            <Route path="/:userName/myTasks" >
+                                <TaskNotBelongCardForUser />
+                            </Route>
                             <Route path="/:userName" >
                                 <Body />
                             </Route>
                             <Route path="/" >
                                 <Animation />
-                                {/* <Toast /> */}
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
-                      
+
                     </div>
                     {/* <div className="toastDeleteOnStage">
-                        <ToastDelete1 name="fggfgfg"/>
+                        <ToastDelete1 name="fggfgfg" />
                     </div> */}
                 </div>
-               
+
             </Router>
         </>
     )

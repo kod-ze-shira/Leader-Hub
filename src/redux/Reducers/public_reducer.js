@@ -32,7 +32,8 @@ const publicData = {
         state.projects = action.payload;
     },
     setTasks(state, action) {
-        state.tasks = action.payload;
+        state.tasks = action.payload.tasksForUser;
+        console.log(state.tasks)
     },
     addNewWorkspace(state, action) {
         state.workspaces.push(action.payload)
