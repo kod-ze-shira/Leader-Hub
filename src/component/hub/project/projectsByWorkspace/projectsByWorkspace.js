@@ -38,6 +38,7 @@ function ProjectsByWorkspace(props) {
                     let w = props.workspaces.find(w => w._id == idWorkspace)
                     // props.setWorkspace(w)
 
+                    
                 } else {
                     if (window.location.href.indexOf('allWorkspace') != -1) {
                         // props.getFullWorkspacesForUser()
