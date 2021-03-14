@@ -58,7 +58,6 @@ function ViewTaskByCradTabs(props) {
     return (
         <>
 
-
             {/* <div className="color-task mb-2 ml-2" ></div> */}
             <Draggable draggableId={props.task._id} index={props.index}>
                 {provided => (
@@ -100,10 +99,7 @@ function ViewTaskByCradTabs(props) {
                                         }
                                     }}
                                 ></input>
-                                {/* <p className="">{props.task.name}</p> */}
-
                             </div>
-
                         </div>
                     </div>
                 )}

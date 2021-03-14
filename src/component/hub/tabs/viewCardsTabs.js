@@ -14,7 +14,7 @@ import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
 function ViewCardsTabs(props) {
     useEffect(() => {
-
+        console.log(props.cardFromMap._id)
     }, [props.flag])
 
     const [flag, setFlag] = useState(false)
@@ -123,6 +123,7 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
+
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                                 . . .
                                             </Button>
@@ -147,7 +148,8 @@ function ViewCardsTabs(props) {
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps}>
                                                     {props.cardFromMap.tasks.map((task, index) => (
-                                                        <ViewTaskByCradTabs openViewDetails={openViewDetails} key={task._id} task={task} index={index} />
+                                                        <ViewTaskByCradTabs openViewDetails={openViewDetails}
+                                                            key={task._id} task={task} index={index} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?

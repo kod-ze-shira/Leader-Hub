@@ -24,21 +24,24 @@ function Tabs(props) {
     const [showHeader, setShowHeader] = useState(false)
 
     function onDragEndׂ(e) {
-        if (props.cards.find(card => card._id == e.draggableId))
-            onDragEndׂCard(e)
-        else {
-            let iSourse, iDestination
-            for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
-                if (props.cards[iSourse]._id == e.source.droppableId)
-                    break
+        console.log(e)
+        if (e.source.droppableId && e.destination) {
+            if (props.cards.find(card => card._id == e.draggableId))
+                onDragEndׂCard(e)
+            else {
+                let iSourse, iDestination
+                for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
+                    if (props.cards[iSourse]._id == e.source.droppableId)
+                        break
+                }
+                for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
+                    if (props.cards[iDestination]._id == e.destination.droppableId)
+                        break
+                }
+                console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
+                const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+                props.changeTaskplace(replace)
             }
-            for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
-                if (props.cards[iDestination]._id == e.destination.droppableId)
-                    break
-            }
-            console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
-            const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-            props.changeTaskplace(replace)
         }
     };
     function onDragEndׂCard(e) {
