@@ -29,13 +29,6 @@ function NewProject(props) {
     }
 
     function addProject() {
-
-        if (project.dueDate) {
-            let myDate = project.dueDate
-            let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
-            project.dueDate = res
-        }
-
         let newDate = new Date()
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
@@ -43,22 +36,53 @@ function NewProject(props) {
         console.log(date + '/' + month + '/' + year)
         project.updateDates[0] = date + '/' + month + '/' + year
         project.workspace = props.workspaceId
-        if (!project.name)
+        if (project.dueDate) {
+            let myDate = project.dueDate
+            let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
+            project.dueDate = res
+        }
+        if (!project.name) {
+            // $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
             setMyStyle({ 'border-bottom': 'red solid 1px' })
+        }
         else {
             props.newProject(project)
             document.getElementById('nameProject').value = ''
-            // $(`#nameProject`).val('')
-            setMyStyle('')
-            // $(`#descriptionProject`).val('')
             document.getElementById('descriptionProject').value = ''
-
-            // $(`#dueDateProject`).val('')
+            setMyStyle({ 'border-bottom': 'red solid 0px' })
             document.getElementById('dueDateProject').value = ''
 
             myColor = getRandomColor();
-
+            $(`#colorProject`).val(myColor)
         }
+        // if (project.dueDate) {
+        //     let myDate = project.dueDate
+        //     let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
+        //     project.dueDate = res
+        // }
+
+        // let newDate = new Date()
+        // let date = newDate.getDate();
+        // let month = newDate.getMonth() + 1;
+        // let year = newDate.getFullYear();
+        // console.log(date + '/' + month + '/' + year)
+        // project.updateDates[0] = date + '/' + month + '/' + year
+        // project.workspace = props.workspaceId
+        // if (!project.name)
+        //     setMyStyle({ 'border-bottom': 'red solid 1px' })
+        // else {
+        //     props.newProject(project)
+        //     // $(`#nameProject`).val('')
+        //     setMyStyle({'border-bottom': 'red solid 0px'})
+        //     // $(`#descriptionProject`).val('')
+        //     document.getElementById('descriptionProject').value = ''
+
+        //     // $(`#dueDateProject`).val('')
+        //     document.getElementById('dueDateProject').value = ''
+
+        //     myColor = getRandomColor();
+
+        // }
     }
     // myColor = getRandomColor();
     function getRandomColor() {

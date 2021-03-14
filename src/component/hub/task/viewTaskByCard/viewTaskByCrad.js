@@ -49,8 +49,8 @@ function ViewTaskByCrad(props) {
         props.EditTask(task)
         setShowChalalit(true)
     }
-    function deleteTask(value) {
-        props.showToast(props.task)
+    function deleteTask() {
+        props.objectToast(props.task)
     }
     function overTask(id) {
         $(`#${id}`).css({ 'opacity': '0.3' })
@@ -110,7 +110,7 @@ function ViewTaskByCrad(props) {
 
                             {viewDetails ?
                                 <div className="closeDet" >
-                                    <ViewDetails toastDelete={deleteTask} closeViewDetails={() => setViewDetails(false)}
+                                    <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
                                         from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
                                 </div>
                                 : null}
