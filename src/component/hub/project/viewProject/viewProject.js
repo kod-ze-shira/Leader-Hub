@@ -24,14 +24,11 @@ function ViewProject(props) {
         props.getCardsByProjectId(props.myProject.project._id)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
-    function deleteProject(event) {
-        props.setProject(props.myProject.project)
-        props.deleteProjectInServer()
-        event.stopPropagation();
-        // props.deleteProjectFromWorkspace(props.myProject.project)
-    }
+
     function editProject(project, event) {
         props.setProject(project)
+        // showToast={(object) => props.showToast(object)}
+        // props.showToast(project)
         // projectToEdit
         props.editProject()
         event.stopPropagation();
@@ -93,8 +90,8 @@ function ViewProject(props) {
                 </td>
 
                 <td>
-                    <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img>
                     <img onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')}></img>
+
                 </td>
 
             </tr >
@@ -111,14 +108,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
         setProject: (p) => dispatch(actions.setProject(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
 
 
-        // deleteProjectFromWorkspace: (p) => dispatch(actions.deleteProjectFromWorkspace(p))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewProject))

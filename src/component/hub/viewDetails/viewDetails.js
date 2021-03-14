@@ -35,6 +35,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         function toastDelete(val) {
             props.toastDelete(val)
         }
+
+        function toastDelete1(val) {
+            props.toastDelete1(val)
+        }
+
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
@@ -46,11 +51,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'newProject':
                     return <NewProject workspaceId={props.workspaceId} />
                 case 'editProject':
-                    return <EditProject projectToEdit={props.projectToEdit} />
+                    return <EditProject showToast={toastDelete} projectToEdit={props.projectToEdit} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
-                    return <AddWorkspace closeViewDetails={props.closeViewDetails}/>
+                    return <AddWorkspace closeViewDetails={props.closeViewDetails} />
                 default:
                     return null;
 

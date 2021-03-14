@@ -16,7 +16,6 @@ function ViewWorkspaceGrid(props) {
     const routeToProject = () => {
         props.setWorkspace(workspace)
         props.setProjects(workspace.projectList)
-
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     const [edit, setEdit] = useState(false);
