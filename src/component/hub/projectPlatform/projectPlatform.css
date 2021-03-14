@@ -1,13 +1,14 @@
 .body{
-    /* width:70vw; */
     height:75vh;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 12px;
     opacity: 1;  
+    overflow-y: auto!important;
+
   }
   .cards{
     height: 65vh;
-    overflow-y: auto;
+    /* overflow-y: auto; */
   }
   .logoW{
     margin-top: 3vh !important;
@@ -54,6 +55,7 @@
     
     
 } 
+
 /* .drop-dwon-header >.aa{
   border: 1px solid #98A9BC;
   border-radius: 8px;

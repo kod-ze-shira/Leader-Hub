@@ -77,7 +77,9 @@ function ProjectsByWorkspace(props) {
             return <ViewProject
                 myProject={project} editProject={openEditProject} />
         })
-
+    function showToast() {
+        props.showToast(props.projectToDelete)
+    }
     return (
         <>
 
@@ -97,7 +99,7 @@ function ProjectsByWorkspace(props) {
 
                 {
                     showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}
-                        showToastDelete={(object) => props.showToast(object)}
+                        showToast={showToast}
                         from={addOrEditProject} workspaceId={idWorkspace} />
                         : null
                 }
@@ -111,7 +113,7 @@ const mapStateToProps = (state) => {
 
     return {
         projects: state.public_reducer.projects,
-        project: state.project_reducer.project,
+        projectToDelete: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,

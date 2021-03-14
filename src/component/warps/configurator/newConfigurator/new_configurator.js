@@ -27,31 +27,37 @@ function NewConfigorator(props) {
             <div className="left_nav ">
                 <div className=" col-8 pt-4 mt-3 ml-1">
                     <img src={require('../../../img/logo-hub.png')}></img>
+                    {/* <div onClick={props.openConfigurator} >
+                        <img className="ml-4 my-2" src={require('../../../img/menu.png')}></img>
+                    </div> */}
+
                 </div>
                 <ul className="list_config">
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
                     My Workspace </li>
                     {/* <li onDrop onClick={(e) => changeBackground(e.target)}> */}
-                    <li onDrag onClick={(e) => goToAllProjects(e.target)}>
-
+                    <li onClick={(e) => goToAllProjects(e.target)}>
                         <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                         My Projects</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                    <li>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        Goals</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                        My Tasks</li>
+                    {/* <li onClick={(e) => changeBackground(e.target)}>
+                        <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
+                        Goals</li> */}
+                    {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/form-line.svg')}></img>
-                        Forms</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                        Forms</li> */}
+                    {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/mail-open-outline.svg')}></img>
-                        Email</li>
+                        Email</li> */}
                     <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/users-solid.svg')}></img>
-                        Members</li>
+                        Members soon</li>
 
                 </ul>
-                
+
 
                 {/* <ConfiguratorTop /> */}
                 {/* <DropDownList /> */}

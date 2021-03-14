@@ -15,7 +15,7 @@ export default function HeaderBody(props) {
     }
     return (
         <div className='headerBody'>
-            <Logo nameWorkspace={props.nameWorkspace} />
+            {/* <Logo nameWorkspace={props.nameWorkspace} /> */}
             {/* {viewProjectByWorkspace ? <CardsByProject workspaceId={workspaceId} /> : null} */}
 
         </div>

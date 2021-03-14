@@ -25,6 +25,7 @@ import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toast";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
+import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
 import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
@@ -36,14 +37,14 @@ function Hub(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
 
-    const showToastToDelete = (objectToDelete) => {
-        setObjectToDelete(objectToDelete)
+    const showToastToDelete = (objectToDelete1) => {
+        setObjectToDelete(objectToDelete1)
         setShowToastDelete(true)
     }
     const deleteObject = () => {
         setShowToastDelete(false)
-        debugger
-        props['remove' + objectToDelete.type + 'ById'](objectToDelete.id)
+
+        // props['remove' + objectToDelete.type + 'ById'](objectToDelete.id)
 
         // props.removeTaskById(taskOrCard._id)
     }
@@ -78,7 +79,7 @@ function Hub(props) {
                             </Route>
                             <Route path="/:userName/allWorkspace" >
                                 {/* <ProjectsByWorkspace /> */}
-                                <ProjectsPage />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
@@ -87,15 +88,14 @@ function Hub(props) {
                                 {/* <ProjectPlatform /> */}
                                 <CardsPage />
                             </Route>
-                            {/* <Route path="/:userName/cardsByProject" >
-                                <CardsByProject />
-                            </Route> */}
+                            <Route path="/:userName/myTasks" >
+                                <TaskNotBelongCardForUser />
+                            </Route>
                             <Route path="/:userName" >
                                 <Body />
                             </Route>
                             <Route path="/" >
                                 <Animation />
-                                {/* <Toast /> */}
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
@@ -103,18 +103,16 @@ function Hub(props) {
                     </div>
 
 
-                    {objectToDelete ?
+                    {showToastDelete ?
+                        // <h1 style={{ "position": "absolute" }}> hhhhhhhhhhhhh</h1>
                         <ToastDelete
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={objectToDelete.object.name} /> : null}
+                            name={objectToDelete.name} />
+                        : null}
 
-                    {/* <div className="toastDeleteOnStage">
-                        <ToastDelete1 name="fggfgfg"/>
-                    </div> */}
                 </div>
-
-            </Router>
+            </Router >
         </>
     )
 }

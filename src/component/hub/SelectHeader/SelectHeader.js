@@ -38,10 +38,10 @@ function SelectHeader(props) {
     const [value, setValue] = React.useState(0);
     const color = '#00C6EA'
 
-useEffect(()=>{
- if(props.workspaces.length==0)
-    props.getAllWorkspacesFromServer()
-},[])
+    useEffect(() => {
+        if (props.workspaces.length == 0)
+            props.getAllWorkspacesFromServer()
+    }, [])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -57,48 +57,57 @@ useEffect(()=>{
 
     return (
         <>
-        {props.workspaces.length>0?
-        <div className="s-header mx-0 mb-3 row align-items-center ">
+            {props.workspaces.length > 0 ?
+                <div className="s-header mx-0 mb-3 row align-items-center ">
 
-            <div className="col pr-0">
-                <SelectWorkspace workspaces={props.workspaces}/>
-            </div>
-            <div className="col pr-0">
-           <SelectProject workspaces={props.workspaces}/>
-            </div>
-            <div className="col pr-0">
-                <SelectCards flag={changeFlag} />
-            </div>
-            <div className="col pr-0">
-                <SelectTask />
-            </div>
-            <div className={classes.root}>
-                <Tabs
-                    className="tabs-in-header offset-3"
-                    value={value}
-                    onChange={handleChange}
-                    variant="scrollable"
-                    scrollButtons="off"
-                    TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                    aria-label="scrollable prevent tabs example"
-                >
-                    <Tab label="List" onClick={(e) => changePresent("list")} />
-                    <Tab label="Calender" />
-                    <Tab label="Gant"  onClick={(e) => changePresent("gantt")}/>
-                    <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
-                </Tabs>
-            </div> 
-            
-        </div >
-        :null}
+                    <div className="col pr-0">
+                        <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
+                    </div>
+                    <div className="col pr-0">
+                        <SelectProject workspaces={props.workspaces} />
+                    </div>
+                    <div className="col pr-0">
+                        <SelectCards flag={changeFlag} />
+                    </div>
+                    <div className="col pr-0">
+                        <SelectTask />
+                    </div>
+
+                    <div className={classes.root}>
+                        {props.menue ?
+                            <Tabs
+                                className="tabs-in-header offset-4"
+                                value={value}
+                                onChange={handleChange}
+                                variant="scrollable"
+                                scrollButtons="off"
+                                TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
+                                aria-label="scrollable prevent tabs example"
+                            >
+                                <Tab label="List" onClick={(e) => changePresent("list")} />
+                                <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
+                                <Tab label="" />
+                                <Tab label="" />
+                            </Tabs>
+                            :
+                            <Tabs
+                                className="tabs-in-header offset-4 opacity">
+                                <Tab label="List" className="tab" />
+                                <Tab label="Calender" className="tab" />
+                                <Tab label="Gant" className="tab" />
+                                <Tab label="Tabs" className="tab" />
+                            </Tabs>
+                        }
+                    </div>
+                </div >
+                : null}
         </>
-
     )
 }
 const mapStateToProps = (state) => {
     return {
         cards: state.public_reducer.cards,
-        workspaces:state.public_reducer.workspaces,
+        workspaces: state.public_reducer.workspaces,
     }
 }
 

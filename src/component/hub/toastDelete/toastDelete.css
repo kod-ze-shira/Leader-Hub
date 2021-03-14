@@ -3,12 +3,12 @@
     background-color: #F5F5F5;
     max-width: 300px;
     padding: 1rem;
-    /* color: white; */
     border-width: 3px;
     border-style: solid;
     border-image: 
     linear-gradient(91deg, #44D7B6 0%, #329A80 100%)100% 1 1 1;
-   
+    margin-top: -11rem;
+    margin-left: 6rem;
   }
 
 
