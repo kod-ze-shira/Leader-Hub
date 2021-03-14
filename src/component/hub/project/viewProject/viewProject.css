@@ -5,7 +5,9 @@
     height: 16px;
     border-radius: 37%;
 }
-
+.nameProjectInList{
+   padding-left: 2rem !important
+}
 .dot {
     height: 5px;
     width: 5px;
