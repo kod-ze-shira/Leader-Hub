@@ -49,5 +49,10 @@ line-height: 0.95 !important;
         /* margin-right: 30px !important; */
 }
 
+.opacity{
+        opacity: 0;
+}
 
-
+.opacity > .tab{
+   cursor: none !important;
+}

@@ -151,7 +151,7 @@
 
   }
 .closeDet{
-  width: 0;
+  width: 0 !important;
 }
 .animation{
   height: 0;

@@ -32,7 +32,8 @@ const publicData = {
         state.projects = action.payload;
     },
     setTasks(state, action) {
-        state.tasks = action.payload;
+        state.tasks = action.payload.tasksForUser;
+        console.log(state.tasks)
     },
     addNewWorkspace(state, action) {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
@@ -78,13 +79,13 @@ const publicData = {
     },
     setTaskName(state, action) {
         let i, j
-        console.log("state.cards[i].tasks[j]._id action.payload._id")
+        // console.log(state.cards[i].tasks[j]._id== action.payload._id)
         for (i = 0; i < state.cards.length; i++)
             if (state.cards[i]._id == action.payload.card) {
                 for (j = 0; j < state.cards[i].tasks.length; j++) {
                     if (state.cards[i].tasks[j]._id == action.payload._id) {
                         state.cards[i].tasks[j] = action.payload
-                        break
+                        console.log()
                     }
                 }
             }
@@ -132,7 +133,11 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
-        state.cards.push(action.payload)
+        if (state.cards.length > 0)
+            state.cards.push(action.payload)
+        else
+            state.cards[0] = action.payload
+
     },
     addTaskToTasksWhenAddTaskToServer(state, action) {
         state.cards.map(card => {

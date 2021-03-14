@@ -83,7 +83,7 @@ function EditWorkspace(props) {
 
 
             <div className="row mt-5">
-                <div classNae="col-3"></div>
+                <div className="col-3"></div>
                 <div className="col-3">  <button onClick={save_edit} >save</button></div>
 
             </div>

@@ -58,6 +58,32 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+export const getAllTasksNotBelongsCardForUser = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_ALL_TASKS_NOT_BELONGS_CARD_FOR_USER') {
+
+        var cardId = action.payload;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTasksNotBelongsCardForUser`
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                dispatch(actions.setTasks(data))
+                console.log("success")
+                console.log("data", data);
+
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                })
+            }
+        });
+    }
+    return next(action);
+}
 
 export const newTask = ({ dispatch, getState }) => next => action => {
 

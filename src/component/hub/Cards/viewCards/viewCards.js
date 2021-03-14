@@ -4,36 +4,31 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import './viewCards.css'
 import $ from 'jquery'
-import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
-import { event } from 'jquery';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Menu, MenuItem, Button, Select } from '@material-ui/core';
 
 function ViewCards(props) {
     useEffect(() => {
 
     }, [props.flag])
 
-    const [flag, setFlag] = useState(false)
+    const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
     const [viewDetails, setViewDetails] = useState(false)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    let actionINcard = { renameCard: "rename", deleteCard: "delete" };
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
     const newTask = () => {
-        // const today = new Date()
-        // const startDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        // const dueDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() + 7);
-        // const dateWithSleshToStart = startDate.split("-")[2] + '/' + startDate.split("-")[1] + '/' + startDate.split("-")[0];
-        // const dateWithSleshToDue = dueDate.split("-")[2] + '/' + dueDate.split("-")[1] + '/' + dueDate.split("-")[0];
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -49,6 +44,7 @@ function ViewCards(props) {
     }
 
     const addTask = () => {
+        props.setCard(props.cardFromMap)
         setAddTaskInInput(!addTaskInInput)
         if (props.cardFromMap.tasks.length)
             if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
@@ -61,7 +57,6 @@ function ViewCards(props) {
     }
     const deleteCard = () => {
         props.showToastDelete(props.cardFromMap)
-        // props.removeCardById(props.cardFromMap._id)
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
@@ -104,6 +99,19 @@ function ViewCards(props) {
 
     }
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = (e) => {
+        setAnchorEl(null);
+        if (e == "delete")
+            deleteCard()
+        else
+            if (e == "rename") {
+            }
+
+    };
+
     return (
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
@@ -113,7 +121,7 @@ function ViewCards(props) {
                     {/* <div className="title-card col-3 mr-4">
                     <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div> */}
                     <input
-                        className="ml-3 show-card mb-2"
+                        className="show-card ml-3 mb-2"
                         value={editCardName}
                         onChange={updateCardName}
                         // onBlur={editCard}
@@ -132,11 +140,26 @@ function ViewCards(props) {
                         <button className="new-task" onClick={addTask}>+</button>
                     </a>
                 </div>
-                <p className=" col-4 "></p>
+
+                <Button className="more col-1"
+                    aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                    . . .
+                </Button>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    value={actionINcard}
+                >
+                    <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
+                    <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
+                </Menu>
+                <p className=" col-3 "></p>
                 <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>
-                <p className="border-left col">Due Date
-                </p>
+                <p className="border-left col">Due Date</p>
                 {/* <p className="  border-left pb-1 " ><button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button></p> */}
             </div >
             {
@@ -156,7 +179,10 @@ function ViewCards(props) {
             }
             {
                 addTaskInInput ?
-                    <input type="text" class="form-control scroll-container mt-2 w-50 ml-4" placeholder="Add Task" id="input-task"
+                    <input
+                        type="text"
+                        class="form-control scroll-container mt-2 w-50 ml-4"
+                        placeholder="Add Task" id="input-task"
                         value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 newTask()
@@ -165,7 +191,6 @@ function ViewCards(props) {
                     />
                     : null
             }
-
             {
                 viewDetails ?
                     <div className="closeDet">

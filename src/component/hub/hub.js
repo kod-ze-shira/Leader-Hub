@@ -25,6 +25,7 @@ import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toast";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
+import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
 import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
@@ -87,15 +88,14 @@ function Hub(props) {
                                 {/* <ProjectPlatform /> */}
                                 <CardsPage />
                             </Route>
-                            {/* <Route path="/:userName/cardsByProject" >
-                                <CardsByProject />
-                            </Route> */}
+                            <Route path="/:userName/myTasks" >
+                                <TaskNotBelongCardForUser />
+                            </Route>
                             <Route path="/:userName" >
                                 <Body />
                             </Route>
                             <Route path="/" >
                                 <Animation />
-                                {/* <Toast /> */}
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
@@ -112,7 +112,7 @@ function Hub(props) {
                         : null}
 
                 </div>
-            </Router>
+            </Router >
         </>
     )
 }

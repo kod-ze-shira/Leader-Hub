@@ -18,8 +18,6 @@ function TasksByCard(props) {
     const renderTasksByCrad = props.tasks.map((task) => {
         console.log(task);
         return <ViewTaskByCrad key={task._id} task={task} />
-
-
     })
     console.log("props.cardId" + props.cardId)
     return (

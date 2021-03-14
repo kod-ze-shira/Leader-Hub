@@ -21,7 +21,8 @@
      background: url('../../../img/Mask1.svg');
      border-left:1px solid #40D9ED; 
      /* margin-left: 2vh; */
-  }
+    background-repeat: no-repeat;
+    }
   li:focus{
     background-color:white;
   }

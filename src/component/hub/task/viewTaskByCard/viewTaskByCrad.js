@@ -21,13 +21,13 @@ function ViewTaskByCrad(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
-        "_id": props.task._id, "name": editTaskName, "description": props.task.description
+        "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
+
     useEffect(() => {
 
     }, [props.task])
-
 
 
     const showDetails = (from) => {
@@ -38,38 +38,29 @@ function ViewTaskByCrad(props) {
         setViewDetails(false)
     }
 
+
     function addChalalit() {
-        let object, iCard, iTask
-        for (iCard = 0; iCard < props.cards.length; iCard++) {
-            if (props.cards[iCard]._id == props.task.card) {
-                break
-            }
-        }
-        for (iTask = 0; iTask < props.cards[iCard].tasks.length; iTask++) {
-            if (props.cards[iCard].tasks[iTask]._id == props.task._id) {
-                break
-            }
-        }
-        object = [iCard, iTask]
-        props.setTaskStatus(object)
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth() + 1
+        const yyyy = today.getFullYear()
+        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
+        setTask(task.status = "done", task.endDate = today)
+        props.EditTask(task)
         setShowChalalit(true)
     }
     function deleteTask() {
         props.objectToast(props.task)
     }
     function overTask(id) {
-        $(`#${id}`).css({ 'opacity': '0.5' })
+        $(`#${id}`).css({ 'opacity': '0.3' })
     }
     function outOver(id) {
         $(`#${id}`).css({ 'opacity': '0' })
     }
-    const editTask = (event) => {
-        let task1 = {
-            "_id": props.task._id, "name": editTaskName, "description": props.task.description
-            , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-        }
-        setTask(task1)
-        console.log("edut-card", task)
+    const editTask = () => {
+
+        setTask(task.name = editTaskName)
         props.EditTask(task);
     }
     return (
@@ -116,7 +107,6 @@ function ViewTaskByCrad(props) {
                             <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
 
                             </label>
-
 
                             {viewDetails ?
                                 <div className="closeDet" >

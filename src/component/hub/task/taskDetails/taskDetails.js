@@ -17,6 +17,7 @@ function TaskDetails(props) {
         if (event.name == "status") {
             cons1 = event.name
             cons2 = event.value
+            console.log(cons1, cons2)
         }
         else {
             // const { name, value } = event.target;
@@ -33,8 +34,10 @@ function TaskDetails(props) {
             [cons1]: cons2
         }));
 
+
     }
     const saveNewTask = () => {
+        console.log(editTask)
         props.EditTask(editTask)
     }
     function deleteTask() {
@@ -46,16 +49,18 @@ function TaskDetails(props) {
 
     return (
         <div className="details-task">
-            {/* <h1 className="mt-5 pt-5">Task details</h1> */}
-            <textarea name="name" id="name"
-                placeholder="Write a task name"
-                onChange={handleChange} class="mt-4 simpleTextarea--dynamic simpleTextarea AutogrowTextarea-input">
-                {task.name}
-            </textarea>
-            <p>description:</p>
-            <input onChange={handleChange}
-                type="text" name="description" class="form-control" id="task-name" placeholder={task.description} />
-            <p>status:</p>
+            <h5 className="mt-3">Task details</h5>
+            <div class="form-group">
+                <label for="name">name:</label>
+                <input name="name" onChange={handleChange} type="text" class="form-control" id="name" placeholder={task.name} />
+            </div>
+            {/* <input onChange={handleChange}
+                    type="text" name="name" class="form-control" id="task-name" placeholder={task.name} /> */}
+            <div class="form-group">
+                <label for="description">description:</label>
+                <textarea class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange}>{task.description}</textarea>
+            </div>
+            <label>status:</label>
             <Select
                 onChange={(e) => handleChange(e)}
                 name="status"
@@ -63,13 +68,15 @@ function TaskDetails(props) {
                 placeholder={task.status}
 
             />
-            <p>startDate:</p>
-            <input onChange={handleChange}
-                name="startDate" type="text" class="form-control" id="task-name" placeholder={task.startDate} />
-            <p>dueDate:</p>
-            <input
-                name="dueDate" type="date" class="form-control" id="dueDate" value={task.startDate}
-                onChange={handleChange} />
+            <div class="form-group">
+                <label for="startDate">start-date:</label>
+                <input onChange={handleChange} type="text" class="form-control" name="startDate" id="startDate" placeholder={task.startDate} />
+            </div>
+            <div class="form-group">
+                <label for="startDate">dueDate:</label>
+                <input onChange={handleChange} type="text" class="form-control" name="dueDate" id="dueDate" placeholder={task.dueDate} />
+            </div>
+
             <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
                 <img src={require('../../../img/bin.png')}></img>
             </button>
