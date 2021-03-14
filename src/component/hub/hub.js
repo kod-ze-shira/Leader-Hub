@@ -86,7 +86,7 @@ function Hub(props) {
                             </Route>
                             <Route path="/:userName/projectPlatform/:idProject" >
                                 {/* <ProjectPlatform /> */}
-                                <CardsPage />
+                                <CardsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />

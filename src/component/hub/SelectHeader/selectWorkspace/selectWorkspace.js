@@ -25,8 +25,16 @@ function SelectWorkspace(props) {
             props.setProjects(myWorkspace.projectList)
             props.setProject(myWorkspace.projectList[0])
             props.getCardsByProjectId(myWorkspace.projectList[0]._id)
-            if (props.projectPage == true)
+            // if (props.projectPage == true)
+            if (window.location.href.indexOf('workspace') != -1)
                 props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
+            // else if (window.location.href.indexOf('workspace') != -1) {
+            // props.setWorkspace
+            // if(אין פרויקטים)
+            // props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
+            // props.history.push("/" + props.user + "/projectPlatform/" + myWorkspace.workspace._id)
+            // }
+
         }
         else {
             props.setProjectName("No Projects")

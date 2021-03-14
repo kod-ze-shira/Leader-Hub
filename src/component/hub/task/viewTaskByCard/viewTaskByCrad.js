@@ -50,7 +50,9 @@ function ViewTaskByCrad(props) {
         setShowChalalit(true)
     }
     function deleteTask() {
-        props.objectToast(props.task)
+        props.objectToast({ 'type': 'Task', 'object': props.task })
+
+        // props.objectToast(props.task)
     }
     function overTask(id) {
         $(`#${id}`).css({ 'opacity': '0.3' })

@@ -61,8 +61,10 @@ function ProjectPlatform(props) {
     }
     //show toast delete to true and save the sask that shold be deleted
     const showToastToDeleteTask = (taskOrCard) => {
+
         setTaskOrCard(taskOrCard)
-        setShowToastDelete(true)
+        props.showToast(taskOrCard)
+        // setShowToastDelete(true)
     }
 
     const deleteTaskOrCard = () => {
