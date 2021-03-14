@@ -27,7 +27,7 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs />
+                return <Tabs showToast={showToast} />
             case 'list':
                 return <ProjectPlatform showToast={showToast} flag={flag} />
             case 'gantt':

@@ -42,11 +42,15 @@ function Hub(props) {
         setShowToastDelete(true)
     }
     const deleteObject = () => {
+        // console.log(objectToDelete)
         setShowToastDelete(false)
+        if (objectToDelete.type == "Project") {
+            console.log(objectToDelete)
+            props['remove' + objectToDelete.type](objectToDelete.object)
+        }
+        else
+            props['remove' + objectToDelete.type](objectToDelete.object._id)
 
-        // props['remove' + objectToDelete.type + 'ById'](objectToDelete.id)
-
-        // props.removeTaskById(taskOrCard._id)
     }
     const openConfigurator = () => {
         setOpen(!open);
@@ -108,7 +112,7 @@ function Hub(props) {
                         <ToastDelete
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={objectToDelete.name} />
+                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name} />
                         : null}
 
                 </div>
@@ -125,9 +129,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
-        removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
-        removeProjectById: () => dispatch(actions.deleteProjectInServer()),
+        removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
+        removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
+        removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
 
 
     }

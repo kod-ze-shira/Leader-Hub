@@ -78,8 +78,8 @@ function ProjectsByWorkspace(props) {
                 myProject={project} editProject={openEditProject} />
         })
     function showToast() {
+        props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
 
-        props.showToast(props.projectToDelete)
     }
     return (
         <>
