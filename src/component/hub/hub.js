@@ -37,16 +37,13 @@ function Hub(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
 
-    const showToastToDelete = (objectToDelete1) => {
-        setObjectToDelete(objectToDelete1)
+    const showToastToDelete = (objectToDelete) => {
+        setObjectToDelete(objectToDelete)
         setShowToastDelete(true)
     }
     const deleteObject = () => {
         setShowToastDelete(false)
-
-        // props['remove' + objectToDelete.type + 'ById'](objectToDelete.id)
-
-        // props.removeTaskById(taskOrCard._id)
+        props['remove' + objectToDelete.type](objectToDelete.object)
     }
     const openConfigurator = () => {
         setOpen(!open);
@@ -125,9 +122,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
-        removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
-        removeProjectById: () => dispatch(actions.deleteProjectInServer()),
+        removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
+        removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
+        removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
 
 
     }
