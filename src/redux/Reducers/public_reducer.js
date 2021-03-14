@@ -36,7 +36,7 @@ const publicData = {
         console.log(state.tasks)
     },
     addNewWorkspace(state, action) {
-        state.workspaces.push({"workspace":action.payload,"projectList":[]})
+        state.workspaces.push({ "workspace": action.payload, "projectList": [] })
     },
     deletTask(state, action) {
         state.cards.map(card => {
@@ -54,8 +54,8 @@ const publicData = {
     },
     addProjectToProjects(state, action) {
         state.projects.push(action.payload)
-        // state.projects.push(action.payload)
     },
+    // state.projects.push(action.payload)
 
     setNewTask(state, action) {
         let i, j
@@ -117,7 +117,7 @@ const publicData = {
     },
     deleteProjectFromWorkspace(state, action) {
         state.projects = state.projects.filter((_, i) =>
-            state.projects[i]._id !== action.payload._id
+            state.projects[i].project._id !== action.payload._id
         )
     },
     getCardsOfProject(state, action) {

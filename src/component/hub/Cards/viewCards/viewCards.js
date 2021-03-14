@@ -171,7 +171,7 @@ function ViewCards(props) {
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}>
                                 {props.cardFromMap.tasks.map((task, index) => (
-                                    <ViewTaskByCrad showToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
+                                    <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
                                 ))}
                                 {provided.placeholder}
                             </div>

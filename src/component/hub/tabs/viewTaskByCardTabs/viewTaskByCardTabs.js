@@ -14,8 +14,6 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 
 function ViewTaskByCradTabs(props) {
 
-    const [viewDetails, setViewDetails] = useState(false)
-    const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
@@ -38,6 +36,10 @@ function ViewTaskByCradTabs(props) {
         setAnchorEl(null);
         if (e == "viewCard")
             showDetails("viewTaskByCard")
+        else
+            if (e == "delete")
+                props.objectToast({ 'type': 'Task', 'object': props.task })
+
     };
     const editTask = (event) => {
         let task1 = {
@@ -49,15 +51,13 @@ function ViewTaskByCradTabs(props) {
     }
     const showDetails = (from) => {
         // setDetailsOrEditTask(from)
-        setViewDetails(props.openViewDetails(task))
+        props.openViewDetails(task)
+
     }
-    const closeDetails = (e) => {
-        setViewDetails(false)
-    }
+
 
     return (
         <>
-
 
             {/* <div className="color-task mb-2 ml-2" ></div> */}
             <Draggable draggableId={props.task._id} index={props.index}>
@@ -85,7 +85,7 @@ function ViewTaskByCradTabs(props) {
                                     >
                                         <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
                                         <MenuItem onClick={(e) => handleClose(actionCard.viewCard)} >View Details</MenuItem>
-                                        <MenuItem onClick={handleClose}>Delete Task</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Task</MenuItem>
 
                                     </Menu>
                                 </div>
@@ -100,10 +100,7 @@ function ViewTaskByCradTabs(props) {
                                         }
                                     }}
                                 ></input>
-                                {/* <p className="">{props.task.name}</p> */}
-
                             </div>
-
                         </div>
                     </div>
                 )}

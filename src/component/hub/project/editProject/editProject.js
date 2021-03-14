@@ -68,6 +68,19 @@ function EditProject(props) {
         }
     }
 
+    function deleteProject(event) {
+        // props.showToast(true)
+        props.setProject(props.projectToEdit)
+        props.deleteProjectInServer()
+        event.stopPropagation();
+    }
+
+    const deleteMyProject = () => {
+        // props.showToast({ 'type': 'Project', 'object': props.projectToEdit })
+        // props.showToast(props.projectToEdit)
+        props.showToast(true)
+    }
+
     return (
         <>
             <div className="row">
@@ -133,12 +146,14 @@ function EditProject(props) {
                 </div>
                 {/* {props.workspaceId}*/}
             </div>
+            {/* <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img> */}
 
             <div className="row mt-1">
                 <div classNae="col-3"></div>
                 <div className="col-3">
                     <button onClick={() => saveProject()}>save</button></div>
             </div>
+            <button onClick={deleteMyProject}>delete </button>
 
             {/* <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img> */}
 
@@ -160,7 +175,10 @@ export default connect(
     },
     (dispatch) => {
         return {
-            editProjectInServer: (task) => dispatch(actions.editProjectInServer(task))
+            editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
+            setProject: (p) => dispatch(actions.setProject(p)),
+            deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+
 
         }
     }

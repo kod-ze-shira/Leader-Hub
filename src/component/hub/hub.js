@@ -26,12 +26,32 @@ import Toast from "./toast/toast";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
-import ToastDelete1 from './toastDelete/toastDelete1';
-export default function Hub(props) {
-    const [open, setOpen] = useState(true);
-    // useEffect(() => {
+import ToastDelete from './toastDelete/toastDelete1';
+import { actions } from '../../redux/actions/action'
+import { connect } from 'react-redux'
 
-    // }, [props.openConfigurator]);
+
+
+function Hub(props) {
+    const [open, setOpen] = useState(true);
+    const [showToastDelete, setShowToastDelete] = useState(false)
+    const [objectToDelete, setObjectToDelete] = useState()
+
+    const showToastToDelete = (objectToDelete1) => {
+        setObjectToDelete(objectToDelete1)
+        setShowToastDelete(true)
+    }
+    const deleteObject = () => {
+        // console.log(objectToDelete)
+        setShowToastDelete(false)
+        if (objectToDelete.type == "Project") {
+            console.log(objectToDelete)
+            props['remove' + objectToDelete.type](objectToDelete.object)
+        }
+        else
+            props['remove' + objectToDelete.type](objectToDelete.object._id)
+
+    }
     const openConfigurator = () => {
         setOpen(!open);
     }
@@ -58,19 +78,19 @@ export default function Hub(props) {
                             </Route> */}
 
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allWorkspace" >
                                 {/* <ProjectsByWorkspace /> */}
-                                <ProjectsPage />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
                             </Route>
                             <Route path="/:userName/projectPlatform/:idProject" >
                                 {/* <ProjectPlatform /> */}
-                                <CardsPage />
+                                <CardsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
@@ -85,12 +105,38 @@ export default function Hub(props) {
                         </Switch>
 
                     </div>
-                    {/* <div className="toastDeleteOnStage">
-                        <ToastDelete1 name="fggfgfg" />
-                    </div> */}
-                </div>
 
-            </Router>
+
+                    {showToastDelete ?
+                        // <h1 style={{ "position": "absolute" }}> hhhhhhhhhhhhh</h1>
+                        <ToastDelete
+                            toOnClose={deleteObject}
+                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name} />
+                        : null}
+
+                </div>
+            </Router >
         </>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+
+
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
+        removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
+        removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
+
+
+    }
+
+
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Hub)
+

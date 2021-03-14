@@ -5,6 +5,7 @@ import GanttDesign from '../gantt/gantt';
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
+
 function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
@@ -20,17 +21,19 @@ function CardsPage(props) {
     const howToPresent = (value) => {
         setPresent(value)
     }
+    function showToast(valueToDelet) {
+        props.showToastDelete(valueToDelet)
+    }
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs />
+                return <Tabs showToast={showToast} />
             case 'list':
-                return <ProjectPlatform flag={flag} />
+                return <ProjectPlatform showToast={showToast} flag={flag} />
             case 'gantt':
                 return <GanttDesign />
             default:
-                return <ProjectPlatform flag={flag} />
-
+                return <ProjectPlatform showToast={showToast} flag={flag} />
         }
     }
     return (
@@ -44,7 +47,7 @@ function CardsPage(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        workspaces:state.public_reducer.workspaces
+        workspaces: state.public_reducer.workspaces
     }
 }
 

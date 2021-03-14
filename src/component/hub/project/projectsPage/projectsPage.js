@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 // import { actions } from '../../../redux/actions/action'
 import SelectHeader from '../../SelectHeader/SelectHeader'
 import ProjectsByWorkspace from '../projectsByWorkspace/projectsByWorkspace'
+
 function ProjectsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState(true);
@@ -20,15 +21,15 @@ function ProjectsPage(props) {
     return (
         <div >
             <SelectHeader flag={changeFlag} from={from} menue={false} />
-            <ProjectsByWorkspace ></ProjectsByWorkspace>
-
+            <ProjectsByWorkspace
+                showToast={(object) => props.showToastDelete(object)}
+            />
         </div>
-
     )
 }
 const mapStateToProps = (state) => {
     return {
-        workspaces:state.public_reducer.workspaces,
+        workspaces: state.public_reducer.workspaces,
     }
 }
 
