@@ -20,15 +20,10 @@ function ProjectsPage(props) {
     }
     return (
         <div >
-<<<<<<< HEAD
             <SelectHeader flag={changeFlag} from={from} menue={false} />
-            <ProjectsByWorkspace ></ProjectsByWorkspace>
-=======
-            <SelectHeader flag={changeFlag} from={from} />
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}
             />
->>>>>>> newDev
 
         </div>
 
