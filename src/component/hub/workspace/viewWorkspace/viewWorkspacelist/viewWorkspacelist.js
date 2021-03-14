@@ -71,7 +71,7 @@ function ViewWorkspaceList(props) {
                         <div className="col-3">
                             <p className="workspace-name-list">{workspace.workspace.name} </p>
                             <div className="description-and-date">
-                                <p className="">Workspace Description</p>
+                                <p className=""> {workspace.workspace.description}</p>
                                 <p className="">Update {workspace.workspace.productionDate}</p>
                             </div>
                         </div>

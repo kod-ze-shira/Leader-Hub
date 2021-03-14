@@ -38,7 +38,7 @@ function ProjectsByWorkspace(props) {
                     let w = props.workspaces.find(w => w._id == idWorkspace)
                     // props.setWorkspace(w)
 
-                    
+
                 } else {
                     if (window.location.href.indexOf('allWorkspace') != -1) {
                         // props.getFullWorkspacesForUser()
@@ -59,23 +59,25 @@ function ProjectsByWorkspace(props) {
     }, []);
 
 
-    const viewProjectsByWorkspace =
-        props.projects.map((project) => {
-            return <ViewProject myProject={project} editProject={openEditProject} />
-        })
 
 
     function openEditProject() {
         setAddOrEditProject("editProject")
-        // setProject(props.project)
-        setShowProject(true)
 
+        setShowProject(true)
     }
 
     function openViewDitailsAddProject() {
         setAddOrEditProject("newProject")
         setShowProject(true)
     }
+
+    const viewProjectsByWorkspace =
+        props.projects.map((project) => {
+            return <ViewProject
+                myProject={project} editProject={openEditProject} />
+        })
+
     return (
         <>
 
@@ -94,9 +96,12 @@ function ProjectsByWorkspace(props) {
                 <button onClick={() => openViewDitailsAddProject()}>New Project</button>
 
                 {
-                    showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)} from={addOrEditProject} workspaceId={idWorkspace} />
+                    showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}
+                        showToastDelete={(object) => props.showToast(object)}
+                        from={addOrEditProject} workspaceId={idWorkspace} />
                         : null
                 }
+
             </div>
         </>
     )

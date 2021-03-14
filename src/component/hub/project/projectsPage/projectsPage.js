@@ -20,7 +20,9 @@ function ProjectsPage(props) {
     return (
         <div >
             <SelectHeader flag={changeFlag} from={from} />
-            <ProjectsByWorkspace ></ProjectsByWorkspace>
+            <ProjectsByWorkspace
+                showToast={(object) => props.showToastDelete(object)}
+            />
 
         </div>
 
@@ -28,7 +30,7 @@ function ProjectsPage(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        workspaces:state.public_reducer.workspaces,
+        workspaces: state.public_reducer.workspaces,
     }
 }
 
