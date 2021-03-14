@@ -36,14 +36,14 @@ function Hub(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
 
-    const showToastToDelete = (objectToDelete) => {
-        setObjectToDelete(objectToDelete)
+    const showToastToDelete = (objectToDelete1) => {
+        setObjectToDelete(objectToDelete1)
         setShowToastDelete(true)
     }
     const deleteObject = () => {
         setShowToastDelete(false)
-        debugger
-        props['remove' + objectToDelete.type + 'ById'](objectToDelete.id)
+
+        // props['remove' + objectToDelete.type + 'ById'](objectToDelete.id)
 
         // props.removeTaskById(taskOrCard._id)
     }
@@ -78,7 +78,7 @@ function Hub(props) {
                             </Route>
                             <Route path="/:userName/allWorkspace" >
                                 {/* <ProjectsByWorkspace /> */}
-                                <ProjectsPage />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/workspacePlatform" >
                                 <WorkspacePlatform />
@@ -103,17 +103,15 @@ function Hub(props) {
                     </div>
 
 
-                    {objectToDelete ?
+                    {showToastDelete ?
+                        // <h1 style={{ "position": "absolute" }}> hhhhhhhhhhhhh</h1>
                         <ToastDelete
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={objectToDelete.object.name} /> : null}
+                            name={objectToDelete.name} />
+                        : null}
 
-                    {/* <div className="toastDeleteOnStage">
-                        <ToastDelete1 name="fggfgfg"/>
-                    </div> */}
                 </div>
-
             </Router>
         </>
     )
