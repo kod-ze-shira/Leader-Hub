@@ -5,7 +5,7 @@ export function ToastDelete() {
             <Toast className="toast_delete"
                 onClose={DeleteWorkspace}
                 show={showToast}
-                delay={5000} autohide>
+                delay={500000} autohide>
                 {/* <span
             className="close_remove"
             onClick={out_remove_workspace}>×</span> */}
