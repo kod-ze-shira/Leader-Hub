@@ -61,8 +61,10 @@ function ProjectPlatform(props) {
     }
     //show toast delete to true and save the sask that shold be deleted
     const showToastToDeleteTask = (taskOrCard) => {
+        // props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
         setTaskOrCard(taskOrCard)
-        setShowToastDelete(true)
+        props.showToast(taskOrCard)
+        // setShowToastDelete(true)
     }
 
     const deleteTaskOrCard = () => {
@@ -99,7 +101,7 @@ function ProjectPlatform(props) {
                                 }
                             }}></input>
                         : null}
-                    <a href="#input-card" className="ml-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <a href="#input-card" className="ml-5 mt-3 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                     <div className="add-new-btn">+</div>
                 </div>
                 {showToastDelete ?

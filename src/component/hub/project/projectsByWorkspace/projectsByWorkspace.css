@@ -7,12 +7,15 @@
 
 
 .body .table-responsive{
-    height: 65vh;
-    overflow: auto;
+    /* height: 65vh;
+    overflow: auto; */
     /* margin-top: 14vh; */
 }
 
 
 table td, .table th {
-    padding: 0.20rem !important;
+    /* padding: 0.20rem !important; */
+}
+.table{
+    margin-bottom: 0 !important;
 }

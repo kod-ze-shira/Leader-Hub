@@ -25,8 +25,16 @@ function SelectWorkspace(props) {
             props.setProjects(myWorkspace.projectList)
             props.setProject(myWorkspace.projectList[0])
             props.getCardsByProjectId(myWorkspace.projectList[0]._id)
-            if (props.projectPage == true)
+            // if (props.projectPage == true)
+            if (window.location.href.indexOf('workspace') != -1)
                 props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
+            // else if (window.location.href.indexOf('workspace') != -1) {
+            // props.setWorkspace
+            // if(אין פרויקטים)
+            // props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
+            // props.history.push("/" + props.user + "/projectPlatform/" + myWorkspace.workspace._id)
+            // }
+
         }
         else {
             props.setProjectName("No Projects")
@@ -50,6 +58,8 @@ function SelectWorkspace(props) {
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             }
         })
+
+
     };
 
     return (
@@ -75,7 +85,8 @@ const mapStateToProps = (state) => {
         project: state.project_reducer.project,
         // workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        user: state.public_reducer.userName
 
 
     }

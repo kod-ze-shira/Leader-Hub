@@ -24,9 +24,7 @@ function ProjectsPage(props) {
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}
             />
-
         </div>
-
     )
 }
 const mapStateToProps = (state) => {

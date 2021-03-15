@@ -65,6 +65,8 @@ function EditProject(props) {
             document.getElementById('nameProject').value = ''
             document.getElementById('descriptionProject').value = ''
             document.getElementById('dueDateProject').value = ''
+            props.closeViewDetails(false)
+
         }
     }
 
@@ -72,92 +74,95 @@ function EditProject(props) {
         // props.showToast(true)
         props.setProject(props.projectToEdit)
         props.deleteProjectInServer()
+        props.closeViewDetails(true)
         event.stopPropagation();
     }
 
     const deleteMyProject = () => {
-        // props.showToast({ 'type': 'Project', 'object': props.projectToEdit })
-        // props.showToast(props.projectToEdit)
+        props.closeViewDetails(false)
         props.showToast(true)
     }
 
     return (
         <>
-            <div className="row">
-                <div className="col-11"></div>
-            </div>
-            <div className="row mt-1">
-                <div className="col-5"><b>Name:</b></div>
-                <div className="col-6">
-                    <input
-                        id='nameProject'
-                        className="inputProject"
-                        name="name"
-                        placeholder='name project'
-                        value={nameProject}
-                        onChange={(e) => changeNameProject(e)}
-                    >
-                    </input>
+            <div className='details-task'>
+                <h5 className="mt-3">Edit Project</h5>
+                <div className="row">
+                    <div className="col-11"></div>
                 </div>
-            </div>
-            <div className="row mt-1">
-                <div className=" col-5"><b>Description:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="description"
-                        id='descriptionProject'
-                        // placeholder='description'
-                        // placeholder={project.description}
-                        value={descriptionProject}
-                        onChange={(e) => changeDescriptionProject(e)}
-                    >
-                    </input>
+                <div className="row mt-1">
+                    <div className="col-5"><b>Name:</b></div>
+                    <div className="col-6">
+                        <input
+                            id='nameProject'
+                            className="inputProject"
+                            name="name"
+                            placeholder='name project'
+                            value={nameProject}
+                            onChange={(e) => changeNameProject(e)}
+                        >
+                        </input>
+                    </div>
                 </div>
-            </div>
-            <div className="row mt-1">
-                <div className=" col-5"><b>Due date:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="dueDate"
-                        type="date"
-                        id='dueDateProject'
-                        value={dueDateProject}
-                        onChange={(e) => changeDueDateProject(e)}
-                    >
-                    </input>
+                <div className="row mt-1">
+                    <div className=" col-5"><b>Description:</b></div>
+                    <div className="col-6">
+                        <input
+                            className="inputProject"
+                            name="description"
+                            id='descriptionProject'
+                            // placeholder='description'
+                            // placeholder={project.description}
+                            value={descriptionProject}
+                            onChange={(e) => changeDescriptionProject(e)}
+                        >
+                        </input>
+                    </div>
                 </div>
-                {/* {props.workspaceId}*/}
-            </div>
-
-            <div className="row mt-1">
-                <div className=" col-5"><b>Color:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="color"
-                        type="color"
-                        id='colorProject'
-                        value={colorProject}
-                        onChange={(e) => changeColorProject(e)}
-                    >
-                    </input>
+                <div className="row mt-1">
+                    <div className=" col-5"><b>Due date:</b></div>
+                    <div className="col-6">
+                        <input
+                            className="inputProject"
+                            name="dueDate"
+                            type="date"
+                            id='dueDateProject'
+                            value={dueDateProject}
+                            onChange={(e) => changeDueDateProject(e)}
+                        >
+                        </input>
+                    </div>
+                    {/* {props.workspaceId}*/}
                 </div>
-                {/* {props.workspaceId}*/}
+
+                <div className="row mt-1">
+                    <div className=" col-5"><b>Color:</b></div>
+                    <div className="col-6">
+                        <input
+                            className="inputProject"
+                            name="color"
+                            type="color"
+                            id='colorProject'
+                            value={colorProject}
+                            onChange={(e) => changeColorProject(e)}
+                        >
+                        </input>
+                    </div>
+                    {/* {props.workspaceId}*/}
+                </div>
+                {/* <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img> */}
+
+                <div className="row mt-1">
+                    <div classNae="col-3"></div>
+                    <div className="col-3">
+                        <button onClick={() => saveProject()} className="save_canges_btn">Save</button></div>
+                </div>
+
+                <button onClick={deleteMyProject}>delete </button>
+
+                {/* <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img> */}
+
             </div>
-            {/* <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img> */}
-
-            <div className="row mt-1">
-                <div classNae="col-3"></div>
-                <div className="col-3">
-                    <button onClick={() => saveProject()}>save</button></div>
-            </div>
-            <button onClick={deleteMyProject}>delete </button>
-
-            {/* <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img> */}
-
-
 
         </>
 

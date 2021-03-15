@@ -85,7 +85,8 @@ function Tabs(props) {
                                     {props.cards.length ?
                                         <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs key={card._id} cardFromMap={card} index={index} />
+                                                return <ViewCardsTabs showToast={(obj) => props.showToast(obj)}
+                                                    key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
                                         : null

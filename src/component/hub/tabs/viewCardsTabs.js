@@ -12,7 +12,9 @@ import ViewDetails from '../viewDetails/viewDetails'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
+
 function ViewCardsTabs(props) {
+
     useEffect(() => {
         console.log(props.cardFromMap._id)
     }, [props.flag])
@@ -85,8 +87,9 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
 
-        // if (nameAction == "delete")
-        //     deleteCard()
+        if (nameAction == "delete")
+            props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
+
     };
     const [task, setTask] = useState(false)
 
@@ -94,6 +97,7 @@ function ViewCardsTabs(props) {
         console.log(task)
         setTask(task)
         setViewDetails(true)
+
     };
 
     return (
@@ -149,6 +153,7 @@ function ViewCardsTabs(props) {
                                                     {...provided.droppableProps}>
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
+                                                            objectToast={(obj) => props.showToast(obj)}
                                                             key={task._id} task={task} index={index} />
                                                     ))}
                                                     {

@@ -8,9 +8,10 @@ import $ from "jquery";
 
 function NewProject(props) {
     let project = { 'updateDates': [] }
-    let myColor;
+    let [myColor, setMyColor] = useState()
     let [emptyValue, setEmptyValue] = useState(false)
     let [myStyle, setMyStyle] = useState();
+    let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
         "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
@@ -26,6 +27,17 @@ function NewProject(props) {
     const changeFiledInProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
         project[input.target.name] = input.target.value
+    }
+
+    function dueDateForAnotherTwoMonths() {
+        let date = new Date()
+        date.setMonth(date.getMonth() + 3)
+        console.log("date : ", date)
+        let month = date.getMonth() + 1
+        let day = date.getDate()
+        let year = date.getFullYear()
+        const finalDate = (day <= 9 ? '0' + day : day) + '/' + (month <= 9 ? '0' + month : month) + '/' + year
+        return finalDate;
     }
 
     function addProject() {
@@ -47,18 +59,31 @@ function NewProject(props) {
             setMyStyle({ 'border-bottom': 'red solid 1px' })
         }
         else {
+
             props.newProject(project)
             document.getElementById('nameProject').value = ''
             document.getElementById('descriptionProject').value = ''
-            setMyStyle({ 'border-bottom': 'red solid 0px' })
+            setMyStyle({ 'border-bottom': ' rgb(129, 129, 165) solid 1px' })
             document.getElementById('dueDateProject').value = ''
+            props.closeViewDetails(false)
 
-            myColor = getRandomColor();
-            $(`#colorProject`).val(myColor)
+            // tempColor = getRandomColor();
+            // setMyColor(tempColor)
+
+            // $(`#colorProject`).val(myColor)
         }
 
     }
+    // fun()
+    // function fun() {
+    // tempColor = getRandomColor();
+    // setMyColor(tempColor)
+
+    // }
+
     // myColor = getRandomColor();
+    // setMyColor(getRandomColor())
+
     function getRandomColor() {
         const randColor = Math.floor((Math.random() * colorList.length) + 0)
         const color = colorList[randColor]
@@ -73,78 +98,82 @@ function NewProject(props) {
                 {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
             </div>
 
+            <div className='details-task'>
+                <h5 className="mt-3">New Project</h5>
 
-            <div className="row mt-1">
-                <div className="nameworkspace col-5"><b>Name:</b></div>
-                <div className="col-6">
-                    <input
-                        id='nameProject'
-                        className="nameProject inputProject"
-                        name="name"
-                        style={myStyle}
-                        placeholder='name project'
-                        // value={project.name}
-                        onChange={(e) => changeFiledInProject(e)}
-                    >
-                    </input>
+                <div className="row mt-1">
+                    <div className="nameworkspace col-5"><b>Name:</b></div>
+                    <div className="col-6">
+
+                        <input
+                            id='nameProject'
+                            className="nameProject inputProject "
+                            name="name"
+                            style={myStyle}
+                            placeholder='name project'
+                            // value={project.name}
+                            onChange={(e) => changeFiledInProject(e)}
+                        >
+                        </input>
+                    </div>
+                    {/* {props.workspaceId}*/}
                 </div>
-                {/* {props.workspaceId}*/}
-            </div>
-            <div className="row mt-1">
-                <div className="nameworkspace col-5"><b>Description:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="description"
-                        id='descriptionProject'
-                        placeholder='description'
-                        // value={project.name}
+                <div className="row mt-1">
+                    <div className="nameworkspace col-5"><b>Description:</b></div>
+                    <div className="col-6">
+                        <input
+                            className="inputProject"
+                            name="description"
+                            id='descriptionProject'
+                            placeholder='description'
+                            // value={project.name}
 
-                        onChange={(e) => changeFiledInProject(e)}
-                    >
-                    </input>
+                            onChange={(e) => changeFiledInProject(e)}
+                        >
+                        </input>
+                    </div>
+                    {/* {props.workspaceId}*/}
                 </div>
-                {/* {props.workspaceId}*/}
-            </div>
-            <div className="row mt-1">
-                <div className="nameworkspace col-5"><b>Due date:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="dueDate"
-                        type="date"
-                        id='dueDateProject'
-                        // value={project.dueDate}
-                        onChange={(e) => changeFiledInProject(e)}
-                    >
-                    </input>
+                <div className="row mt-1">
+                    <div className="nameworkspace col-5"><b>Due date:</b></div>
+                    <div className="col-6">
+                        <input
+                            className="inputProject"
+                            name="dueDate"
+                            type="date"
+                            id='dueDateProject'
+                            // value={project.dueDate}
+                            onChange={(e) => changeFiledInProject(e)}
+                        >
+                        </input>
+                    </div>
+                    {/* {props.workspaceId}*/}
                 </div>
-                {/* {props.workspaceId}*/}
-            </div>
 
-            <div className="row mt-1">
-                <div className="nameworkspace col-5"><b>Color:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="color"
-                        type="color"
-                        id='colorProject'
-                        value={myColor}
-                        onChange={(e) => changeFiledInProject(e)}
-                    >
-                    </input>
+                <div className="row mt-1">
+                    <div className="nameworkspace col-5"><b>Color:</b></div>
+                    <div className="col-6">
+                        <input
+                            className="inputProject"
+                            name="color"
+                            type="color"
+                            id='colorProject'
+                            value={myColor}
+                            onChange={(e) => changeFiledInProject(e)}
+                        >
+                        </input>
+                    </div>
+                    {/* {props.workspaceId}*/}
                 </div>
-                {/* {props.workspaceId}*/}
+
+                <div className="row mt-1">
+                    <div className="col-3"></div>
+                    <div className="col-3">
+
+                        <button onClick={() => addProject()} className="save_canges_btn">Save</button></div>
+                </div>
+
             </div>
-
-            <div className="row mt-1">
-                <div className="col-3"></div>
-                <div className="col-3">
-                    <button onClick={() => addProject()}>save</button></div>
-            </div>
-
-
         </>
 
 

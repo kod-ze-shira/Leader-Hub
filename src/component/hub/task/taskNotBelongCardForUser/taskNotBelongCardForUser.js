@@ -10,19 +10,21 @@ function TaskNotBelongCardForUser(props) {
         props.getAllTasksNotBelongsCardForUser()
 
     }, [])
-    // const getTasksForUser = () => {
-    // props.getAllTasksNotBelongsCardForUser()
+
     console.log(props.tasks)
-    // }
+
     const renderTasks = props.tasks.map((task) => {
         console.log(task);
-        return <ViewTaskByCrad key={task._id} task={task} />
+        // return <h1>{task.name}</h1>
+        return <TasksNotBelongCardByMap key={task._id} task={task} />
     })
     return (
-        <div className="body ">
-            {props.tasks.length ?
-                renderTasks
-                : null}
+        <div className="body-workspace ">
+            <div className="mt-5">
+                {props.tasks.length ?
+                    renderTasks
+                    : null}
+            </div>
         </div>
     );
 

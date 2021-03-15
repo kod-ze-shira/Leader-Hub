@@ -8,11 +8,12 @@ import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
 import { ProgressBar, Spinner } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
+import duplicate from '../../../img/duplicate-outline.png'
+
 import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
-
     function detailsProject() {
         set_getProjectById(false);
     }
@@ -34,9 +35,19 @@ function ViewProject(props) {
         event.stopPropagation();
     }
 
+    function duplicateProject(event) {
+        props.duplicateProject()
+        event.stopPropagation();
+    }
+
     let complited = 0, complitedColor;
-    complited = props.myProject.project.countTasks / 100;
-    complited = complited * props.myProject.project.countReadyTask
+    if (props.myProject.countTasks) {
+        complited = 100 / props.myProject.countTasks;
+        complited = complited * props.myProject.countReadyTask
+        if (complited % 1 != 0)
+            complited = complited.toFixed(2);
+    }
+
     complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
     return (
         <>
@@ -59,9 +70,9 @@ function ViewProject(props) {
                 </td>
                 <td>
                     <span className='task'>
-                        <span style={{ 'font-weight': 'bold' }}>
+                        <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }}>
                             {props.myProject.countReadyTask}</span>
-                        <span>
+                        <span className='designPropertiesProject'>
                             /{props.myProject.countTasks}</span>
                     </span>
                     <CellDescription description='Task' />
@@ -70,7 +81,7 @@ function ViewProject(props) {
 
                     <div className='divProgress'>
                         <div class="progressProject" >
-                            <div role="progressbar" class="progressProject-bar" style={{ "width": complited + "%", background: complitedColor }}
+                            <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
@@ -91,7 +102,7 @@ function ViewProject(props) {
 
                 <td>
                     <img onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')}></img>
-
+                    {/* <img onClick={(event) => duplicateProject(event)} src={duplicate}></img> */}
                 </td>
 
             </tr >

@@ -50,11 +50,7 @@ function ViewWorkspaceList(props) {
     return (
         <>
             <div className="row WorkspaceList mt-3"
-
-
                 id={workspace.workspace._id}
-
-
                 onMouseOver={() => func_over(workspace.workspace._id)}
                 onMouseOut={() => outOver(workspace.workspace._id)}  >
                 <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}

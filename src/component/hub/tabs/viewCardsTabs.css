@@ -18,7 +18,7 @@
 }
 .more{
     background-color: transparent;
-    float: right !important;
+    /* float: right !important; */
     color:#778ca2;
     /* margin-top: 1px; */
 }
