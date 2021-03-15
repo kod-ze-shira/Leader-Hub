@@ -150,6 +150,13 @@
 
 
   }
+  .task-name-in-list{
+    width: 600px;
+  }
+  .another-fileds
+  {
+    /* width: 100px; */
+  }
 .closeDet{
   width: 0 !important;
 }
@@ -159,4 +166,21 @@
 .dnd-icon{
   opacity: 0;
   /* display: none; */
+}
+.view-details-in-list{
+  float:right;
+}
+.another-fileds label{
+  width: 130px;
+}
+/* @media only screen and (min-width: 600px) {
+  .another-fileds label{
+    width: 100px;
+  }
+  .task-name-in-list{
+    width: 450px;
+  }
+} */
+.view-details-in-list{
+  float: right !important;
 }

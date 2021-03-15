@@ -43,9 +43,9 @@ function NewConfigorator(props) {
                     <li>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         My Tasks</li>
-                    {/* <li onClick={(e) => changeBackground(e.target)}>
+                    <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        Goals</li> */}
+                        Milestones</li>
                     {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/form-line.svg')}></img>
                         Forms</li> */}

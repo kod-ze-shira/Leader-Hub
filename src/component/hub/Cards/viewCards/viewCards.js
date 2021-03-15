@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -116,12 +117,12 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
-                    <div className="triangle base-triangle" onClick={(e) => changeSelectedCard(e)} ></div>
+                    <div className="triangle base-triangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
 
                     {/* <div className="title-card col-3 mr-4">
                     <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div> */}
                     <input
-                        className="show-card ml-3 mb-2"
+                        className="show-card"
                         value={editCardName}
                         onChange={updateCardName}
                         // onBlur={editCard}
