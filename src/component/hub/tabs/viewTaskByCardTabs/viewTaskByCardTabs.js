@@ -77,7 +77,7 @@ function ViewTaskByCradTabs(props) {
                                 <div className="row">
                                     <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
-                                    <Button id="btn" className="more col-3 mr-0"
+                                    <Button className="more col-3 mr-0"
                                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                         . . .
                                     </Button>

@@ -4,7 +4,6 @@ import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect, useRef } from 'react'
 // import './ViewTaskByCrad.css'
-import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { InputGroup, FormControl, Table } from 'react-bootstrap'
@@ -66,62 +65,62 @@ function TasksNotBelongCardByMap(props) {
     }
     return (
         <>
-            <h1>{task}</h1>
             {/* <Draggable draggableId={props.task._id} index={props.index}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                    >
-                        <div onMouseOver={(e) => overTask(props.task._id)}
-                            onMouseOut={() => outOver(props.task._id)}
-                            className="show-task row mx-4 border-bottom"
-                        >
+                    > */}
+            <div onMouseOver={(e) => overTask(props.task._id)}
+                onMouseOut={() => outOver(props.task._id)}
+                className="show-task row mx-4 border-bottom"
+            >
 
-                            <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
-                                icon={['fas', 'grip-vertical']}
-                            ></FontAwesomeIcon>
-                            <label
-                                className="check-task ml-3 py-2 pl-5 col-1 ">
-                                <input type="checkbox" />
-                                <span className="checkmark " onClick={() => addChalalit()}></span>
-                            </label>
-                            <input
-                                className="show-card col-3"
-                                value={editTaskName}
-                                onChange={(e) => setEditTaskName(e.target.value)}
-                                onBlur={(e) => editTask(e)}
-                                onKeyPress={event => {
-                                    if (event.key === 'Enter') {
-                                        editTask()
-                                    }
-                                }}
-                            ></input>
-                            <label className="check-task py-2  px-2 col-3 ">
-                                <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col " >
-                                <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
+                    icon={['fas', 'grip-vertical']}
+                ></FontAwesomeIcon>
+                <label
+                    className="check-task ml-3 py-2 pl-5 col-1 ">
+                    <input type="checkbox" />
+                    <span className="checkmark " onClick={() => addChalalit()}></span>
+                </label>
+                <input
+                    className="show-card col-3"
+                    value={editTaskName}
+                    onChange={(e) => setEditTaskName(e.target.value)}
+                    onBlur={(e) => editTask(e)}
+                    onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                            editTask()
+                        }
+                    }}
+                ></input>
+                <label className="check-task py-2  px-2 col-3 ">
+                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
+                </label>
+                <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
+                </label>
+                <label className="check-task border-left  py-2  px-2 col " >
+                    <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                </label>
+                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
 
-                            </label>
+                </label>
 
-                            {viewDetails ?
-                                <div className="closeDet" >
-                                    <ViewDetails toastDelete={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                        from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
-                                </div>
-                                : null}
-                        </div>
+                {viewDetails ?
+                    <div className="closeDet" >
+                        <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
+                            from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
                     </div>
+                    : null}
+            </div>
+            {/* </div>
                 )}
             </Draggable> */}
 
-            {/* { showchalalit ? <div className="animation"><Animation /> </div> : null} */}
+            { showchalalit ? <div className="animation"><Animation /> </div> : null}
+
 
         </>
     )
@@ -130,7 +129,7 @@ const mapStateToProps = (state) => {
 
     return {
         tasks: state.public_reducer.tasks,
-        cards: state.public_reducer.cards
+        // cards: state.public_reducer.cards
     }
 }
 const mapDispatchToProps = (dispatch) => {
