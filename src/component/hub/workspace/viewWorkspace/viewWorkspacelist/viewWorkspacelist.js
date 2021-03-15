@@ -23,7 +23,7 @@ function ViewWorkspaceList(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function editWorkspace() {
-        props.setWorkspace(workspace.workspace)//to select workspace to edit and send him to server
+        props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
     }
     function delete_workspace() {

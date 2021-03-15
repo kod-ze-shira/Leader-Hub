@@ -36,7 +36,14 @@ function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
+    const [componentFlag, setComponentFlag] = useState("")
+    const {location}=props
+    // useEffect(() => {
+    //    if(location)
+    //   {  if (location.hash.includes("#workspace"))
+    //     setComponentFlag("#workspace")}
 
+    // },[location])
     const showToastToDelete = (objectToDelete) => {
         setObjectToDelete(objectToDelete)
         setShowToastDelete(true)
@@ -64,7 +71,11 @@ function Hub(props) {
                     <div className={open ? "col-10  mt-4 pr-4" : "col-12 mt-4 px-4"}>
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
-
+{/* {                     componentFlag==="#workspace"?   
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                :
+<span/>
+} */}
                         <Switch>
                             {/* <Route path="/chedvi678@gmail.com/603f85549b557237f314eb9a/renana-il/share">
                             <ProjectsPage />
