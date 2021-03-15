@@ -76,7 +76,6 @@ function EditProject(props) {
     }
 
     const deleteMyProject = () => {
-        // props.showToast({ 'type': 'Project', 'object': props.projectToEdit })
         // props.showToast(props.projectToEdit)
         props.showToast(true)
     }

@@ -82,7 +82,7 @@ function ViewTaskByCrad(props) {
                             ></FontAwesomeIcon>
                             <div className="col-4 pl-5 ml-3">
                                 <label
-                                    className="py-2 ">
+                                    className="py-2">
                                     {/* className="check-task py-2  "> */}
 
                                     {/* <input type="checkbox" /> */}

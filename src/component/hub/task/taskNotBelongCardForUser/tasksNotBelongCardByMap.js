@@ -74,7 +74,7 @@ function TasksNotBelongCardByMap(props) {
                     > */}
             <div onMouseOver={(e) => overTask(props.task._id)}
                 onMouseOut={() => outOver(props.task._id)}
-                className="show-task row mx-4 border-bottom"
+                className="show-task row mx-4 border-bottom "
             >
 
                 <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}

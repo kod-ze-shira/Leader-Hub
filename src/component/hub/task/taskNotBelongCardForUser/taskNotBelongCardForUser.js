@@ -20,9 +20,11 @@ function TaskNotBelongCardForUser(props) {
     })
     return (
         <div className="body-workspace ">
-            {props.tasks.length ?
-                renderTasks
-                : null}
+            <div className="mt-5">
+                {props.tasks.length ?
+                    renderTasks
+                    : null}
+            </div>
         </div>
     );
 
