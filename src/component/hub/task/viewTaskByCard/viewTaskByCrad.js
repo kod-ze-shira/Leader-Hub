@@ -50,7 +50,7 @@ function ViewTaskByCrad(props) {
         setShowChalalit(true)
     }
     function deleteTask() {
-        props.objectToast(props.task)
+        props.objectToast({ 'type': 'Task', 'object': props.task })
     }
     function overTask(id) {
         $(`#${id}`).css({ 'opacity': '0.3' })
@@ -80,23 +80,27 @@ function ViewTaskByCrad(props) {
                             <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
-                            <label
-                                className="check-task ml-3 py-2 pl-5 col-1 ">
-                                <input type="checkbox" />
-                                <span className="checkmark " onClick={() => addChalalit()}></span>
-                            </label>
-                            <input
-                                className="show-card col-3"
-                                value={editTaskName}
-                                onChange={(e) => setEditTaskName(e.target.value)}
-                                onBlur={(e) => editTask(e)}
-                                onKeyPress={event => {
-                                    if (event.key === 'Enter') {
-                                        editTask()
-                                    }
-                                }}
-                            ></input>
-                            <label className="check-task py-2  px-2 col-3 ">
+                            <div className="col-4 pl-5 ml-3">
+                                <label
+                                    className="py-2">
+                                    {/* className="check-task py-2  "> */}
+
+                                    {/* <input type="checkbox" /> */}
+                                    <span className="checkmark " onClick={() => addChalalit()}></span>
+                                </label>
+                                <input
+                                    className="show-card "
+                                    value={editTaskName}
+                                    onChange={(e) => setEditTaskName(e.target.value)}
+                                    onBlur={(e) => editTask(e)}
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') {
+                                            editTask()
+                                        }
+                                    }}
+                                ></input>
+                            </div>
+                            <label className="check-task py-2  px-2 col-3 view-details-btn">
                                 <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                             </label>
                             <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
@@ -119,7 +123,7 @@ function ViewTaskByCrad(props) {
                 )}
             </Draggable>
 
-            { showchalalit ? <div className="animation"><Animation /> </div> : null}
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
     )

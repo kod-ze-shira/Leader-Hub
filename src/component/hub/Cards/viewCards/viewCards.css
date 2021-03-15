@@ -5,8 +5,11 @@
     color: #000000;
     /* border-bottom: gray solid 1px; */
     background-color:transparent;
-    border-bottom: 1px  solid #c7c6c6 ;
+    border-bottom: 1px  solid #98A9BC ;
 
+}
+.title-table-in-list{
+    width: 600px;
 }
 .newTriangle{
         width: 0; 
