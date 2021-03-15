@@ -13,18 +13,17 @@ function ViewWorkspaceGrid(props) {
     const workspace = props.workspace1
 
 
+
     const routeToProject = () => {
         props.setWorkspace(workspace)
         props.setProjects(workspace.projectList)
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
-    const [edit, setEdit] = useState(false);
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
     function editWorkspace() {
-        // setEdit(true);
-        props.setWorkspace(workspace)
+        props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
     }
     function duplicateWorkspace() {
@@ -40,7 +39,6 @@ function ViewWorkspaceGrid(props) {
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
-
     }
     function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
