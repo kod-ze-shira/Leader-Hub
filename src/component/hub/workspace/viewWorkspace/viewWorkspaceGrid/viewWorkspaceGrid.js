@@ -13,14 +13,16 @@ function ViewWorkspaceGrid(props) {
     const workspace = props.workspace1
 
 
-
     const routeToProject = () => {
         props.setWorkspace(workspace)
         props.setProjects(workspace.projectList)
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function outOver(id) {
-        $(`#${id} .iconsAction`).css({ 'display': 'none' })
+        // $(`#${id} .iconsAction`).css({ 'display': 'none' })
+        // $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
+
+
     }
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
@@ -39,6 +41,7 @@ function ViewWorkspaceGrid(props) {
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
+        $(`#${id} .stripeToSavePlace`).css({ 'color': 'rgb(220 220 226)' })
     }
     function delete_workspace() {
         props.setShowToastDeleteWhenClickDelete()
@@ -49,26 +52,27 @@ function ViewWorkspaceGrid(props) {
             <div className="ViewWorkspace" id={workspace.workspace._id}
                 onMouseOver={() => over_workspace(workspace.workspace._id)}
                 onMouseOut={() => outOver(workspace.workspace._id)}>
-                <div className="row " >
+                <div className="row iconsActions" >
                     <div
-                        className="col-1 edit iconsAction" onClick={editWorkspace}>
-                        <img src={pencil}></img>
+                        className=" edit iconsAction" onClick={editWorkspace}>
+                        <img class='imageIcon' src={pencil}></img>
                     </div>
-                    <div className="ml-1 stripe ">|</div>
-                    <div className="col-1 delete iconsAction"
+                    <div className="stripe stripeToSavePlace">|</div>
+                    <div className=" delete iconsAction"
                         onClick={delete_workspace}>
-                        <img src={bin}></img>
+                        <img class='imageIcon' src={bin}></img>
                     </div>
-                    <div className="ml-1 stripe">|</div>
-                    <div className="col-1 add iconsAction" onClick={duplicateWorkspace}>
-                        <img src={duplicate}></img>
+                    <div className="stripe stripeToSavePlace" >|</div>
+                    <div className="add iconsAction" onClick={duplicateWorkspace}>
+                        <img class='imageIcon' src={duplicate}></img>
+
                     </div>
                 </div>
                 <div className="Workspacegrid"
                     onClick={routeToProject} >
                     <div>
                         <div className="logoWorkspace1 " >
-                            <div className="mt-1 logo"
+                            <div className="logo"
                                 style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}
                             >
                                 {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}
