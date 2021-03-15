@@ -65,6 +65,8 @@ function EditProject(props) {
             document.getElementById('nameProject').value = ''
             document.getElementById('descriptionProject').value = ''
             document.getElementById('dueDateProject').value = ''
+            props.closeViewDetails(false)
+
         }
     }
 
@@ -77,8 +79,7 @@ function EditProject(props) {
     }
 
     const deleteMyProject = () => {
-        // props.showToast({ 'type': 'Project', 'object': props.projectToEdit })
-        // props.showToast(props.projectToEdit)
+        props.closeViewDetails(false)
         props.showToast(true)
     }
 

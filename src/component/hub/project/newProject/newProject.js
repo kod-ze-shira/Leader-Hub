@@ -63,8 +63,9 @@ function NewProject(props) {
             props.newProject(project)
             document.getElementById('nameProject').value = ''
             document.getElementById('descriptionProject').value = ''
-            setMyStyle({ 'border-bottom': 'red solid 0px' })
+            setMyStyle({ 'border-bottom': ' rgb(129, 129, 165) solid 1px' })
             document.getElementById('dueDateProject').value = ''
+            props.closeViewDetails(false)
 
             // tempColor = getRandomColor();
             // setMyColor(tempColor)

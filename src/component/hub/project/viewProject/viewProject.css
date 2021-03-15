@@ -6,7 +6,13 @@
     border-radius: 37%;
 }
 .nameProjectInList{
-   padding-left: 2rem !important
+   padding-left: 2rem !important;
+   width: 21%;
+}
+
+
+.designPropertiesProject{
+    font-size: 16px
 }
 .dot {
     height: 5px;
@@ -27,11 +33,13 @@
     font-size: .75rem;
     background-color: #e9ecef;
     border-radius: .25rem;
-    height: 5px;  
+    /* height: 5px; */
+    height: 9px;  
     width:  64% 
     
 }
 .progressProject-bar {
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
     justify-content: center;
