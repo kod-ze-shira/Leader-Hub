@@ -23,7 +23,7 @@ function ViewWorkspaceList(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function editWorkspace() {
-        props.setWorkspace(workspace.workspace)//to select workspace to edit and send him to server
+        props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
     }
     function delete_workspace() {
@@ -50,11 +50,7 @@ function ViewWorkspaceList(props) {
     return (
         <>
             <div className="row WorkspaceList mt-3"
-
-
                 id={workspace.workspace._id}
-
-
                 onMouseOver={() => func_over(workspace.workspace._id)}
                 onMouseOut={() => outOver(workspace.workspace._id)}  >
                 <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}
