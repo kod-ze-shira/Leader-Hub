@@ -36,6 +36,9 @@ letter-spacing: 0.32px;
     opacity: 0.9;
     border-bottom: 1px solid #707070;
   }
+  input[type="color"] :focus{
+      border:none;
+  }
   input[type="color"] {
 	-webkit-appearance: none;
 	border: none;

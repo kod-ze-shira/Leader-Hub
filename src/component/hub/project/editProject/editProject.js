@@ -85,85 +85,7 @@ function EditProject(props) {
 
     return (
         <>
-            {/* <div className='details-task'>
-                <h5 className="mt-3">Edit Project</h5>
-                <div className="row">
-                    <div className="col-11"></div>
-                </div>
-                <div className="row mt-1">
-                    <div className="col-5"><b>Name:</b></div>
-                    <div className="col-6">
-                        <input
-                            id='nameProject'
-                            className="inputProject"
-                            name="name"
-                            placeholder='name project'
-                            value={nameProject}
-                            onChange={(e) => changeNameProject(e)}
-                        >
-                        </input>
-                    </div>
-                </div>
-                <div className="row mt-1">
-                    <div className=" col-5"><b>Description:</b></div>
-                    <div className="col-6">
-                        <input
-                            className="inputProject"
-                            name="description"
-                            id='descriptionProject'
-                            placeholder='description'
-                            placeholder={project.description}
-                            value={descriptionProject}
-                            onChange={(e) => changeDescriptionProject(e)}
-                        >
-                        </input>
-                    </div>
-                </div>
-                <div className="row mt-1">
-                    <div className=" col-5"><b>Due date:</b></div>
-                    <div className="col-6">
-                        <input
-                            className="inputProject"
-                            name="dueDate"
-                            type="date"
-                            id='dueDateProject'
-                            value={dueDateProject}
-                            onChange={(e) => changeDueDateProject(e)}
-                        >
-                        </input>
-                    </div>
-                    {props.workspaceId}
-                </div>
-
-                <div className="row mt-1">
-                    <div className=" col-5"><b>Color:</b></div>
-                    <div className="col-6">
-                        <input
-                            className="inputProject"
-                            name="color"
-                            type="color"
-                            id='colorProject'
-                            value={colorProject}
-                            onChange={(e) => changeColorProject(e)}
-                        >
-                        </input>
-                    </div>
-                    {props.workspaceId}
-                </div>
-                <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img>
-
-                <div className="row mt-1">
-                    <div classNae="col-3"></div>
-                    <div className="col-3">
-                        <button onClick={() => saveProject()} className="save_canges_btn">Save</button></div>
-                </div>
-
-                <button onClick={deleteMyProject}>delete </button>
-
-                <img onClick={(event) => deleteProject(event)} src={require('../../../img/bin.png')}></img>
-
-            </div> */}
-            {/* ******************************************* */}
+            
             <div className="details mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Project details</h5>
                 <div class="form-group">
@@ -176,7 +98,7 @@ function EditProject(props) {
                     <textarea class="form-control" name="description" id="descriptionProject" rows="2" value={descriptionProject} placeholder="Write a description"
                         onChange={(e) => changeDescriptionProject(e)}></textarea>
                 </div>
-                <div className="row">
+                <div className="row justify-content-between">
                     <div class="form-group col-5">
                         <label for="color">Color</label>
                         <input name="color"
