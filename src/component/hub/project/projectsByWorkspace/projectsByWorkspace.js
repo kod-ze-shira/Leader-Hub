@@ -7,7 +7,6 @@ import "./projectsByWorkspace.css";
 import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
-import { workspace } from '../../../warps/configurator/workspace/workspace';
 import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {

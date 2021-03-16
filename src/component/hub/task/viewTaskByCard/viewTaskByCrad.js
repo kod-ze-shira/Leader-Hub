@@ -12,9 +12,14 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 
 function ViewTaskByCrad(props) {
+    useEffect(() => {
+        props.setTaskName(task.name)
+
+    }, [props.task])
 
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
@@ -25,17 +30,11 @@ function ViewTaskByCrad(props) {
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
 
-    useEffect(() => {
-
-    }, [props.task])
-
 
     const showDetails = (from) => {
+        props.setTaskName(task.name)
         setDetailsOrEditTask(from)
         setViewDetails(true)
-    }
-    const closeDetails = (e) => {
-        setViewDetails(false)
     }
 
 
@@ -49,19 +48,34 @@ function ViewTaskByCrad(props) {
         props.EditTask(task)
         setShowChalalit(true)
     }
+
     function deleteTask() {
         props.objectToast({ 'type': 'Task', 'object': props.task })
     }
+
     function overTask(id) {
         $(`#${id}`).css({ 'opacity': '0.3' })
     }
     function outOver(id) {
         $(`#${id}`).css({ 'opacity': '0' })
     }
-    const editTask = () => {
 
-        setTask(task.name = editTaskName)
+    useEffect(() => {
+
+        // props.EditTask(task);
+    }, [task])
+
+    const editTask = (e) => {
+
         props.EditTask(task);
+
+    }
+    const editTaskNameInReduxs = (taskName) => {
+        setEditTaskName(taskName)
+        props.setTaskName(taskName)
+        let temp = { ...task }
+        temp.name = editTaskName
+        setTask(temp);
     }
     return (
         <>
@@ -82,8 +96,8 @@ function ViewTaskByCrad(props) {
                             ></FontAwesomeIcon>
                             <div className="col-4 pl-5 ml-3">
                                 <label
-                                    className="py-2">
-                                    {/* className="check-task py-2  "> */}
+                                    // className="py-2">
+                                    className="check-task py-2  ">
 
                                     {/* <input type="checkbox" /> */}
                                     <span className="checkmark " onClick={() => addChalalit()}></span>
@@ -91,8 +105,8 @@ function ViewTaskByCrad(props) {
                                 <input
                                     className="show-card "
                                     value={editTaskName}
-                                    onChange={(e) => setEditTaskName(e.target.value)}
-                                    onBlur={(e) => editTask(e)}
+                                    onChange={(e) => editTaskNameInReduxs(e.target.value)}
+                                    // onBlur={(e) => editTask(e)}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
                                             editTask()
@@ -132,6 +146,7 @@ const mapStateToProps = (state) => {
 
     return {
         tasks: state.public_reducer.tasks,
+        taskReducer: state.task_reducer.task,
         cards: state.public_reducer.cards
     }
 }
@@ -139,6 +154,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
+        setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

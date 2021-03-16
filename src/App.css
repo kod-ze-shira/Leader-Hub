@@ -3,7 +3,10 @@ body{
   overflow-x: hidden;
   /* overflow-y: hidden; */
 }
-
+button{
+  outline: 0 !important;
+  border: none !important;
+}
 :root {
   --lighat-blue: #1e90ff;
   --light-light-blue:#44D7B6;

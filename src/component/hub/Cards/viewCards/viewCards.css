@@ -52,7 +52,10 @@ p{ color:#98A9BC !important;
     margin-bottom: 0;}
 .new-task{
     background-color: transparent;
+     outline: 0 !important;
+    border: none !important;
 }
+
 .new-task:focus{
     outline: 0 !important;
 }
@@ -69,4 +72,4 @@ p{ color:#98A9BC !important;
 .scroll-container {
     overflow-y: scroll;
     scroll-behavior: smooth;
-  }
+}
