@@ -68,7 +68,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     <div className="row "> */}
 
                 <div className="view-details col-5">
-                    <div className="close" onClick={(e) => props.closeViewDetails()} >x</div>
+                    <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
                     {renderSwitch()}
                 </div>
                 {/* </div>

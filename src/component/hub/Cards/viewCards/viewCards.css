@@ -25,8 +25,8 @@
         height: 0; 
         display: inline-block;
         border-top: 6px solid transparent;
-	    border-left: 6px solid #000000;
-	    border-bottom: 6px solid transparent;
+        border-left: 6px solid #000000;
+        border-bottom: 6px solid transparent;
 }
 .show-card{
     background-color: transparent;
@@ -69,4 +69,4 @@ p{ color:#98A9BC !important;
 .scroll-container {
     overflow-y: scroll;
     scroll-behavior: smooth;
-  }
+} 

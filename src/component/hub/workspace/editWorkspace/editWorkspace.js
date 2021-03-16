@@ -31,61 +31,35 @@ function EditWorkspace(props) {
     }
     return (
         <>
-
-            <div className="row">
-                <div className="col-11"></div>
-                {/* <div className="col-1" className="close_edit"  onClick={props.setcloseEditWorkspace()}>x</div> */}
-            </div>
-
-
-            <div className="row mt-5">
-                <div className="nameworkspace col-5"><b>Name Workspace:</b></div>
-                <div className="col-6">
-                    <input
-                        className="edit_workspace_name"
-                        name="name"
-                        placeholder='Name Workspace'
-                        value={nameWorkspace}
-                        onChange={(input) => changeNameWorkspace(input)}
-                    >
-                    </input>
+            <div className="details d-workspace mr-5 ml-4">
+                <h5 className="my-5 title-view-details pb-2">Workspace details</h5>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input name="name"
+                        onChange={(input) => changeNameWorkspace(input)} type="text" class="form-control" id="name" value={nameWorkspace} />
                 </div>
-                <div className="row mt-5">
-                    <div className="nameworkspace col-5"><b>Description Workspace:</b></div>
-                    <div className="col-6">
-                        <input
-                            className="edit_workspace_name"
-                            name="name"
-                            placeholder='Description Workspace'
-                            value={descriptionWorkspace}
-                            onChange={(input) => changeDescriptionWorkspace(input)}
-                        >
-                        </input>
-                    </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description" value={descriptionWorkspace}
+                        onChange={(input) => changeDescriptionWorkspace(input)}></textarea>
                 </div>
-            </div>
-            <div className="row mt-1">
-                <div className=" col-5"><b>Color:</b></div>
-                <div className="col-6">
-                    <input
-                        className="inputProject"
-                        name="color"
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input name="color"
+                        className="ml-2 w-25 "
+                        styles="height: 50px"
                         type="color"
                         id='colorProject'
                         value={colorWorkspace}
-                        onChange={(e) => changeColorWorkspace(e)}
-                    >
-                    </input>
+                        onChange={(e) => changeColorWorkspace(e)} />
                 </div>
-                {/* {props.workspaceId}*/}
-            </div>
-
-
-
-            <div className="row mt-5">
-                <div className="col-3"></div>
-                <div className="col-3">  <button onClick={save_edit} >save</button></div>
-
+                <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
+                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
+                        <img src={require('../../../img/bin.png')}></img> Delete
+                </button>
+                    <button onClick={save_edit} className="save_canges_btn col-3">Save</button>
+                </div>
             </div>
         </>
     )

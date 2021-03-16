@@ -10,7 +10,7 @@ import { ProgressBar, Spinner } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
 import duplicate from '../../../img/duplicate-outline.png'
 
-import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
+// import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)

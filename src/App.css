@@ -11,10 +11,30 @@ body{
   --green:#34A38B;
 }
 .save_canges_btn{
-  background-color: #44D7B6;
-  color:white;
-  border-radius: 5px;
-  margin: auto;
+  /* width: 118px; */
+height: 40px;
+background-color:var(--light-light-blue);
+border-radius: 5px;
+opacity: 1;
+color:white;
+text-align: center !important;
+}
+.delete-btn{
+height: 40px;
+background-color:#F6F6FA;
+border-radius: 5px;
+color:#75798E;
+text-align: center !important;
+
+}
+.btns-in-view-details-workspace{
+margin-top: 20vh;}
+.btns-in-view-details-project{
+  margin-top: 12vh;
+}
+
+.details label{
+color:#75798E !important;
 }
 
 

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -154,9 +153,9 @@ function ViewCards(props) {
                     <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
                     <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                 </Menu>
-                <p className="  col">Team</p>
-                <p className=" col">Label</p>
-                <p className=" col">Due Date</p>
+                <p className="col">Team</p>
+                <p className="col">Label</p>
+                <p className="col">Due Date</p>
                 {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>
                 <p className="border-left col">Due Date</p> */}

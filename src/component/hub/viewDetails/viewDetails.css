@@ -5,7 +5,7 @@ box-shadow: -5px 0px 40px #0000002C;
 border-radius: 12px;
 opacity: 1;
 position: absolute;
-height:90vh;
+height:88vh;
 top:0;
 right: 0;
 z-index: 999;
@@ -17,5 +17,7 @@ border-left: 9px solid  #329A80  ;
 }
 .close{
     cursor: pointer;
+    font-weight: 100;
+
     
 }

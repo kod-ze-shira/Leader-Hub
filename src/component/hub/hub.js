@@ -67,7 +67,7 @@ function Hub(props) {
                         </div>
                         : null}
 
-                    <div className={open ? "col-10  mt-4 pr-4" : "col-12 mt-4 px-4"}>
+                    <div className={open ? "col-10  mt-3 pr-4" : "col-12 mt-3 px-4"}>
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
 
