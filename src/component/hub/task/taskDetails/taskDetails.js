@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
+import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 function TaskDetails(props) {
 
     useEffect(() => {
 
-    }, [])
+    }, [props.task])
     const task = props.task
     const [editTask, setEditTask] = useState(task)
 
@@ -23,6 +24,8 @@ function TaskDetails(props) {
             // const { name, value } = event.target;
             cons1 = event.target.name
             cons2 = event.target.value
+            if (event.name == "name")
+                props.setTaskName(cons1)
 
             if (cons1 == "dueDate" || cons1 == "startDate") {
                 cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
@@ -46,16 +49,17 @@ function TaskDetails(props) {
     const statusList = [{ value: "done", name: "status", label: "done" },
     { value: "to do", name: "status", label: "todo" },
     { value: "in progress", name: "status", label: "in progress" }]
-
+    console.log(props.taskr)
     return (
         <div className="details-task">
             <h5 className="mt-3">Task details</h5>
             <div class="form-group">
                 <label for="name">name:</label>
-                <input name="name" onChange={handleChange} type="text" class="form-control" id="name" placeholder={task.name} />
+                <input name="name" onChange={handleChange}
+                    type="text" class="form-control" id="name"
+                    placeholder={props.taskr.name}
+                />
             </div>
-            {/* <input onChange={handleChange}
-                    type="text" name="name" class="form-control" id="task-name" placeholder={task.name} /> */}
             <div class="form-group">
                 <label for="description">description:</label>
                 <textarea class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange}>{task.description}</textarea>
@@ -87,12 +91,14 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-
+        taskr: state.task_reducer.task,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        EditTask: (task) => dispatch(actions.editTask(task))
+        EditTask: (task) => dispatch(actions.editTask(task)),
+        setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

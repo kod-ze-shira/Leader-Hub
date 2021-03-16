@@ -69,19 +69,20 @@ function ViewCards(props) {
             setViewDetails(true)
             setCardId(props.cardFromMap._id)
         }
-    const triangleSide = () => {
-        if ($(".base-triangle").hasClass("triangle")) {
-            $(".base-triangle").removeClass("triangle")
-            $(".base-triangle").addClass("newTriangle")
+    const triangleSide = (id) => {
+        if ($(`#${id}`).hasClass("newTriangle")) {
+            $(`#${id}`).addClass("triangle")
+            $(`#${id}`).removeClass("newTriangle")
+
         }
         else {
-            $(".base-triangle").removeClass("newTriangle")
-            $(".base-triangle").addClass("triangle")
+            $(`#${id}`).removeClass("triangle")
+            $(`#${id}`).addClass("newTriangle")
         }
 
     }
-    const changeSelectedCard = (event) => {
-        triangleSide()
+    const changeSelectedCard = (e) => {
+        triangleSide(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
         if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
             setFlagFromSelect(false)
@@ -117,10 +118,7 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
-                    <div className="triangle base-triangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
-
-                    {/* <div className="title-card col-3 mr-4">
-                    <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div> */}
+                    <div id={props.cardFromMap._id} className=" newTriangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
                     <input
                         className="ml-3 show-card"
                         value={editCardName}

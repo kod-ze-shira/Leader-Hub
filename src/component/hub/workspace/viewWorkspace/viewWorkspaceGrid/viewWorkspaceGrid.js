@@ -19,8 +19,8 @@ function ViewWorkspaceGrid(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function outOver(id) {
-        // $(`#${id} .iconsAction`).css({ 'display': 'none' })
-        // $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
+        $(`#${id} .iconsAction`).css({ 'display': 'none' })
+        $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
 
 
     }

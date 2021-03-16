@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 import './new_configurator.css'
 // import { actions } from '../../../../redux/actions/action'
-import DropDownList from '../dropDownList/dropDownList'
-import ConfiguratorTop from '../configuratorTop/configuratorTop'
 import $ from 'jquery'
 import history from '../../../history'
 import { withRouter } from 'react-router-dom';
@@ -64,8 +62,6 @@ function NewConfigorator(props) {
                 </ul>
 
 
-                {/* <ConfiguratorTop /> */}
-                {/* <DropDownList /> */}
             </div>
         </>
     )

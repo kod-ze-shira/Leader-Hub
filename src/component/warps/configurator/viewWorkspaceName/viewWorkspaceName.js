@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Configurator from '../configurator';
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import { Button } from 'react-bootstrap';

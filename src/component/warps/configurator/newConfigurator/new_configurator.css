@@ -5,7 +5,9 @@
   
  
   }
-
+.left_nav li{
+  color: #FFFFFF;
+}
   .list_config{
     padding-top: 8vh;
   }

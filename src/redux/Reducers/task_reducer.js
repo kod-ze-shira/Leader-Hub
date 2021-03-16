@@ -13,18 +13,15 @@ const initialState = {
 }
 
 const tasks = {
-    setTaskName(state, action) {
-        // state.workpace[action.payload] = action.value;
+    setTaskNameInTaskReducer(state, action) {
         state.task.name = action.payload
-
-        // dispatch({ type: "GET_ALL" })
     },
 
     setTask(state, action) {
         state.task = action.payload;
     },
 
-  
+
     setisConfiguratorOpenTask(state, action) {
         state.task.isConfiguratorOpenTask = !state.task.isConfiguratorOpenTask
     },

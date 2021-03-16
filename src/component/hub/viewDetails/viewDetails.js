@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
 import { actions } from '../../../redux/actions/action'
-import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName'
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import NewProject from '../project/newProject/newProject'
