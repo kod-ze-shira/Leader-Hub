@@ -31,7 +31,6 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 
 
-
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -99,7 +98,8 @@ function Hub(props) {
                                 <Body />
                             </Route>
                             <Route path="/" >
-                                <Animation />
+                                {/* <Animation /> */}
+
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>

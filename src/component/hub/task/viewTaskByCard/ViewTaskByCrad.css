@@ -45,7 +45,7 @@
     left: 0;
     height: 23px;
     width: 23px;
-    background-color: #eee;
+    background-color: #FFFFFF;
 
     border: 1px solid var(--lighat-blue);
     border-radius: 50%;
@@ -54,7 +54,7 @@
   }
   
   .check-task:hover input ~ .checkmark {
-    background-color: #ccc;
+    background-color: #FFFFFF;
   }
   
   /* When the checkbox is checked, add a blue background */
@@ -75,6 +75,9 @@
   }
   .close-details{
     width: 0 !important;
+  }
+  .view-details-btn{
+    text-align: right!important;
   }
   /* Style the checkmark/indicator */
   .check-task .checkmark:after {
@@ -153,10 +156,7 @@
   .task-name-in-list{
     width: 600px;
   }
-  .another-fileds
-  {
-    /* width: 100px; */
-  }
+ 
 .closeDet{
   width: 0 !important;
 }

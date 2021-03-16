@@ -58,6 +58,8 @@ function SelectWorkspace(props) {
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             }
         })
+
+
     };
 
     return (
@@ -83,7 +85,8 @@ const mapStateToProps = (state) => {
         project: state.project_reducer.project,
         // workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        user: state.public_reducer.userName
 
 
     }

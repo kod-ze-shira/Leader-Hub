@@ -49,9 +49,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':
-                    return <NewProject workspaceId={props.workspaceId} />
+                    return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
-                    return <EditProject showToast={showToast} projectToEdit={props.projectToEdit} />
+                    return <EditProject closeViewDetails={props.closeViewDetails} showToast={showToast} projectToEdit={props.projectToEdit} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':

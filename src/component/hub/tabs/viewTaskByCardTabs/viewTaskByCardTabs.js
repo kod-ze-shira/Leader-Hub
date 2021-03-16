@@ -13,7 +13,7 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 
 
 function ViewTaskByCradTabs(props) {
-
+    const [flag, setFlag] = useState(true)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
@@ -29,6 +29,7 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
+        setFlag(false)
         setAnchorEl(event.currentTarget);
     };
 
@@ -51,9 +52,11 @@ function ViewTaskByCradTabs(props) {
     }
     const showDetails = (from) => {
         // setDetailsOrEditTask(from)
-        props.openViewDetails(task)
+        if (flag)
+            props.openViewDetails(task)
 
     }
+
 
 
     return (
@@ -69,11 +72,13 @@ function ViewTaskByCradTabs(props) {
                     >
                         <div className="task-card mt-2 "
                             onClick={(e) => showDetails("viewTaskByCard")}>
+
                             <div className="container">
                                 <div className="row">
                                     <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
-                                    <Button className="more col-3 mr-0" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                    <Button className="more col-3 mr-0"
+                                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                         . . .
                                     </Button>
                                     <Menu
