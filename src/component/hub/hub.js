@@ -29,6 +29,7 @@ import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBel
 import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 
 
 function Hub(props) {
@@ -39,6 +40,7 @@ function Hub(props) {
     const showToastToDelete = (objectToDelete1) => {
         setObjectToDelete(objectToDelete1)
         setShowToastDelete(true)
+
     }
     const deleteObject = () => {
         setShowToastDelete(false)
@@ -52,6 +54,11 @@ function Hub(props) {
     }
     const openConfigurator = () => {
         setOpen(!open);
+    }
+    const setShowToastDeletefunc = (value) => {
+        setShowToastDelete(value)
+        $(`#${objectToDelete.object._id}`).css("display", "block")
+
     }
     return (
         <>
@@ -69,7 +76,7 @@ function Hub(props) {
                     <div className={open ? "col-10  mt-3 pr-4" : "col-12 mt-3 px-4"}>
 
                         <Switch>
-                        
+
 
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -105,10 +112,10 @@ function Hub(props) {
                     {showToastDelete ?
                         <ToastDelete
                             toOnClose={deleteObject}
-                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                            toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
-                            // objectToDelete.type
-                            />
+                        // objectToDelete.type
+                        />
                         : null}
 
                 </div>
