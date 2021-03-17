@@ -11,7 +11,8 @@ export default function LetterLogo(props) {
                 {
                     props.nameWorkspace.name && props.nameWorkspace.name.indexOf(" ") && props.nameWorkspace.name.indexOf(" ") + 1 ?
                         props.nameWorkspace.name[props.nameWorkspace.name.indexOf(" ") + 1].toUpperCase() : null
-                }</span>
+                }
+                </span>
 
 
 
