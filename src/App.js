@@ -5,17 +5,21 @@ import { Provider } from 'react-redux';
 import ConfiguratorList from './component/warps/configurator/configuratorList/configurator_list'
 import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
+import HeaderLeader from '@leadercodes/leader-header'
 
 
 function App() {
 
-  return (
+  return (<>
+    <HeaderLeader appName='hub' userName='' />
+
     <Provider store={Store}>
       <>
         {/* <ConfiguratorList></ConfiguratorList> */}
         <Hub></Hub>
       </>
     </Provider>
+  </>
   );
 }
 

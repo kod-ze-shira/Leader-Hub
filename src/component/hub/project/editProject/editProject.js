@@ -20,7 +20,13 @@ function EditProject(props) {
     const changeNameProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
         setNameProject(input.target.value)
+        let p = props.projectToEdit
+        p.name = input.target.value
+        props.setProject(p)
     }
+
+
+
     const changeDescriptionProject = (input) => {
         setDescriptionProject(input.target.value)
     }
