@@ -4,10 +4,10 @@ import { actions } from '../../../../redux/actions/action'
 import ViewProject from '../viewProject/viewProject'
 import { Table } from 'react-bootstrap';
 import "./projectsByWorkspace.css";
-import HeaderBody from '../../headerBody/headerBody'
+// import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
-import { workspace } from '../../../warps/configurator/workspace/workspace';
+// import { workspace } from '../../../warps/configurator/workspace/workspace';
 import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {
@@ -40,16 +40,16 @@ function ProjectsByWorkspace(props) {
 
 
                 } else {
-                    if (window.location.href.indexOf('allWorkspace') != -1) {
+                    if (window.location.href.indexOf('allProjects') != -1) {
                         // props.getFullWorkspacesForUser()
                         let allProjects = []
                         for (let index = 0; index < props.workspaces.length; index++) {
                             for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                allProjects.push(props.workspaces[index].projects[j])
+                                allProjects.projects.push(props.workspaces[index].projects[j])
                             }
                         }
                         // props.workspaces.map((myWorkspace) => )
-                        // props.setProjects(allProjects)
+                        props.setProjects(allProjects)
                     }
                 }
 
@@ -63,7 +63,6 @@ function ProjectsByWorkspace(props) {
 
     function openEditProject() {
         setAddOrEditProject("editProject")
-
         setShowProject(true)
     }
 
@@ -74,13 +73,31 @@ function ProjectsByWorkspace(props) {
 
     const viewProjectsByWorkspace =
         props.projects.map((project) => {
-            return <ViewProject
-                myProject={project} editProject={openEditProject} />
+            return <ViewProject showToast={showToast}
+                closeViewDetails={false} myProject={project} editProject={openEditProject} />
         })
+
+
+    const viewAllProjects = props.workspaces.map((workspace) => {
+        return workspace.projectList.map((project) => {
+            return <ViewProject showToast={showToast}
+                closeViewDetails={false} myProject={project} editProject={openEditProject} />
+        })
+    })
+
+    // function viewProjectsByWorkspace() {
+    //     let componentProject = {}
+    //     props.projects.map((project) => {
+    //         componentProject += <ViewProject
+    //             myProject={project} editProject={openEditProject} />
+    //     })
+
+    //     return componentProject
+    // }
     function showToast() {
         // props.showToast(props.projectToDelete)
+        // props.showToast({ 'type': 'Project', 'object': props.project })
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
-
     }
     return (
         <>
@@ -92,7 +109,7 @@ function ProjectsByWorkspace(props) {
                     <>
 
                         <tbody>
-                            {viewProjectsByWorkspace}
+                            {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
                         </tbody>
                     </>
                 </Table>
@@ -128,7 +145,6 @@ const mapDispatchToProps = (dispatch) => {
         getFullWorkspacesForUser: () => dispatch(actions.getFullWorkspacesForUser()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        setProject: (p) => dispatch(actions.setProject(p)),
         setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
 
     }

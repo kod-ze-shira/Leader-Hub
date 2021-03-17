@@ -20,7 +20,7 @@ function NewConfigorator(props) {
     }
     function goToAllProjects(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/allWorkspace")
+        props.history.push("/" + props.user + "/allProjects")
     }
     return (
         <>

@@ -73,7 +73,7 @@ function Hub(props) {
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
-                            <Route path="/:userName/allWorkspace" >
+                            <Route path="/:userName/allProjects" >
                                 {/* <ProjectsByWorkspace /> */}
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>

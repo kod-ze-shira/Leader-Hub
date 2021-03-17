@@ -6,14 +6,16 @@ import CellDescription from './cellDescription'
 import './viewProject.css'
 import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
-import { ProgressBar, Spinner } from 'react-bootstrap';
+// import { ProgressBar } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
-import duplicate from '../../../img/duplicate-outline.png'
-
-import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
+// import duplicate from '../../../img/duplicate-outline.png'
+// import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
+    let complited = 0, complitedColor;
+    let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
+    let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     function detailsProject() {
         set_getProjectById(false);
     }
@@ -36,22 +38,40 @@ function ViewProject(props) {
     }
 
     function duplicateProject(event) {
-        props.duplicateProject()
+        props.duplicateProject();
         event.stopPropagation();
     }
 
-    let complited = 0, complitedColor;
+    function deleteMyProject(event) {
+        props.setProject(props.myProject)
+        // props.projectToDelete(props.myProject)
+        props.showToast(true)
+        event.stopPropagation();
+    }
+
+
     if (props.myProject.countTasks) {
         complited = 100 / props.myProject.countTasks;
         complited = complited * props.myProject.countReadyTask
         if (complited % 1 != 0)
             complited = complited.toFixed(2);
     }
-
+    function overProject(id) {
+        setMyStyleIcons({ 'opacity': '1' })
+        setMyStyleStripe({ 'color': 'rgb(152 169 188 / 38%)' })
+    }
+    function outOver(id) {
+        setMyStyleIcons({ 'opacity': '0' })
+        setMyStyleStripe({ 'color': 'white' })
+    }
     complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
     return (
         <>
-            <tr className='projectForWorkspace' onClick={(e) => routeToCards(e)}>
+            <tr className='projectForWorkspace'
+                onClick={(e) => routeToCards(e)}
+                onMouseOver={() => overProject(props.myProject.project._id)}
+                onMouseOut={() => outOver(props.myProject.project._id)}
+                id={props.myProject.project._id}>
                 <td className='nameProjectInList' >
                     <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
                     <span style={{ 'color': props.myProject.project.color }}>
@@ -100,10 +120,13 @@ function ViewProject(props) {
                     <CellDescription description='Last update' />
                 </td>
 
-                <td>
-                    <img onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')}></img>
-                    {/* <img onClick={(event) => duplicateProject(event)} src={duplicate}></img> */}
-                </td>
+                <td className='actionsProject'>
+                    <img style={myStyleIcons}
+                        className='iconsProject' onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')} />
+                    <div style={myStyleStripe} className='stripeActionsProject'>|</div>
+
+                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
+                        src={require('../../../img/bin.png')} />                </td>
 
             </tr >
 
@@ -113,6 +136,7 @@ function ViewProject(props) {
 const mapStateToProps = (state) => {
     return {
         project: state.project_reducer.project,
+        projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName
     }
@@ -123,6 +147,7 @@ const mapDispatchToProps = (dispatch) => {
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
+        deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
 
 
     }
