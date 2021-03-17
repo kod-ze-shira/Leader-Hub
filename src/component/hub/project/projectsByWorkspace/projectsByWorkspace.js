@@ -95,8 +95,6 @@ function ProjectsByWorkspace(props) {
     //     return componentProject
     // }
     function showToast() {
-        // props.showToast(props.projectToDelete)
-        // props.showToast({ 'type': 'Project', 'object': props.project })
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
     return (

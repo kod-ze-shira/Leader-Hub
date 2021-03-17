@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -56,7 +57,8 @@ function ViewCards(props) {
 
     }
     const deleteCard = () => {
-        props.showToastDelete(props.cardFromMap)
+        props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
+
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
@@ -116,12 +118,12 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
-                    <div className="triangle base-triangle" onClick={(e) => changeSelectedCard(e)} ></div>
+                    <div className="triangle base-triangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
 
                     {/* <div className="title-card col-3 mr-4">
                     <div className={props.cardFromMap.tasks && props.cardFromMap.tasks.length ? "triangle  show-card-pressure" : "triangle  show-card-no-pressure"} onClick={(e) => changeSelectedCard(e)} ></div> */}
                     <input
-                        className="show-card ml-3 mb-2"
+                        className="ml-3 show-card"
                         value={editCardName}
                         onChange={updateCardName}
                         // onBlur={editCard}
@@ -132,16 +134,12 @@ function ViewCards(props) {
                         }}
                     >
                     </input>
-                    {/* <button onClick={deleteCard}>delete card</button> */}
-                    {/* <FontAwesomeIcon className=" mt-2 "
-                        icon={['fas', 'ellipsis-v']}
-                    ></FontAwesomeIcon> */}
                     <a href="#input-task">
                         <button className="new-task" onClick={addTask}>+</button>
                     </a>
                 </div>
-
-                <Button className="more col-1"
+                <p className=" col-3 "></p>
+                <Button className="more col-1 mr-2"
                     aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                     . . .
                 </Button>
@@ -156,11 +154,12 @@ function ViewCards(props) {
                     <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
                     <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                 </Menu>
-                <p className=" col-3 "></p>
-                <p className="border-left  col">Team</p>
+                <p className="  col">Team</p>
+                <p className=" col">Label</p>
+                <p className=" col">Due Date</p>
+                {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>
-                <p className="border-left col">Due Date</p>
-                {/* <p className="  border-left pb-1 " ><button className="ml-2 new-task" onClick={(e) => showDetails(e)}>+</button></p> */}
+                <p className="border-left col">Due Date</p> */}
             </div >
             {
                 props.flag == props.cardFromMap._id && flagFromSelect || flag ?

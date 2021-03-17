@@ -22,6 +22,11 @@ function NewConfigorator(props) {
         changeBackground(e)
         props.history.push("/" + props.user + "/allProjects")
     }
+    function goToMyTasks(e) {
+        console.log(e)
+        changeBackground(e)
+        props.history.push("/" + props.user + "/myTasks")
+    }
     return (
         <>
             <div className="left_nav ">
@@ -40,12 +45,12 @@ function NewConfigorator(props) {
                     <li onClick={(e) => goToAllProjects(e.target)}>
                         <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                         My Projects</li>
-                    <li>
+                    <li onClick={(e) => goToMyTasks(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         My Tasks</li>
-                    {/* <li onClick={(e) => changeBackground(e.target)}>
+                    <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        Goals</li> */}
+                        Milestones</li>
                     {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/form-line.svg')}></img>
                         Forms</li> */}
