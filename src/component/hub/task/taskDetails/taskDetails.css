@@ -24,9 +24,7 @@ textarea:focus{
        outline:  1px solid #98A9BC  !important;
        border-radius:5px ;
 }
-.details-task .form-control{
-    /* border:none !important; */
-}
+
 .css-2b097c-container{
     border:none !important;
 }

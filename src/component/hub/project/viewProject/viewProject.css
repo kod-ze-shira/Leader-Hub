@@ -9,14 +9,30 @@
    padding-left: 2rem !important;
    width: 21%;
 }
+.stripeActionsProject{
+    display: inline-block;
+    margin-left: 7px;
+    margin-right: 7px;
+    font-size: x-large;
+    color: white;
+}
 
+.iconsProject{
+    height:1rem;
+}
+.iconActionProject{
+    opacity: 0;
+}
+.actionsProject{
+    text-align: center;
+}
 
 .designPropertiesProject{
     font-size: 16px
 }
 .dot {
-    height: 5px;
-    width: 5px;
+    height: 6px;
+    width: 6px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
