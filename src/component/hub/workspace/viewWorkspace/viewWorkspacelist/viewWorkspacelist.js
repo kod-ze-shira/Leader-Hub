@@ -27,8 +27,8 @@ function ViewWorkspaceList(props) {
         props.editWorkspace()
     }
     function delete_workspace() {
-        props.setShowToastDeleteWhenClickDelete()
-        props.setWorkspace(workspace.workspace);
+        props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace.workspace })
+        props.setWorkspace(workspace);
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace.workspace);
@@ -40,9 +40,7 @@ function ViewWorkspaceList(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
 
     }
-    // function func_out_over() {
-    //     setover(false);
-    // }
+ 
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }

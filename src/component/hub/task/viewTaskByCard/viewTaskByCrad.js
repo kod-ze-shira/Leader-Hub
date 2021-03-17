@@ -62,15 +62,18 @@ function ViewTaskByCrad(props) {
 
     useEffect(() => {
 
-        // props.EditTask(task);
+        props.EditTask(task);
     }, [task])
 
-    const editTask = (e) => {
-
-        props.EditTask(task);
+    const editTask = () => {
+        let temp = { ...task }
+        temp.name = editTaskName
+        setTask(temp);
+        // props.EditTask(task);
 
     }
     const editTaskNameInReduxs = (taskName) => {
+
         setEditTaskName(taskName)
         props.setTaskName(taskName)
         let temp = { ...task }
@@ -106,9 +109,9 @@ function ViewTaskByCrad(props) {
                                     className="show-card py-2"
                                     value={editTaskName}
                                     onChange={(e) => editTaskNameInReduxs(e.target.value)}
-                                    // onBlur={(e) => editTask(e)}
-                                    onKeyPress={event => {
-                                        if (event.key === 'Enter') {
+                                    onBlur={(e) => editTask()}
+                                    onKeyPress={e => {
+                                        if (e.key === 'Enter') {
                                             editTask()
                                         }
                                     }}

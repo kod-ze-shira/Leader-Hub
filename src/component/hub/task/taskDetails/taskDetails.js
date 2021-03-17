@@ -18,9 +18,11 @@ function TaskDetails(props) {
     const task = props.task
 
     const [editTask, setEditTask] = useState(task)
+    const [editTaskName, setEditTaskName] = useState(props.taskr.name)
 
     const handleChange = (event) => {
         let cons1, cons2
+        console.log(event.name)
         if (event.name == "status") {
             cons1 = event.name
             cons2 = event.value
@@ -30,9 +32,10 @@ function TaskDetails(props) {
             // const { name, value } = event.target;
             cons1 = event.target.name
             cons2 = event.target.value
-            if (event.name == "name")
-                props.setTaskName(cons1)
-
+            if (event.name == "name") {
+                setEditTaskName(cons2)
+                props.setTaskName(cons2)
+            }
             if (cons1 == "dueDate" || cons1 == "startDate") {
                 cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
@@ -55,11 +58,9 @@ function TaskDetails(props) {
     function deleteTask() {
         props.showToast(true)
     }
-    const statusList = props.statusListFromServer
-    // const statusList = [{ value: "done", name: "status", label: "done" },
-    // { value: "to do", name: "status", label: "todo" },
-    // { value: "in progress", name: "status", label: "in progress" }]
-    console.log(props.task)
+    const statusList = [{ value: "done", name: "status", label: "done" },
+    { value: "to do", name: "status", label: "todo" },
+    { value: "in progress", name: "status", label: "in progress" }]
     return (
         <>
 
@@ -72,10 +73,11 @@ function TaskDetails(props) {
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" onChange={handleChange}
+                    <input name="name" onChange={(e) => handleChange(e)}
                         type="text" class="form-control"
-                        id="name" placeholder="instructions for using this project"
-                        value={task.name} />
+                        id="name"
+                        // placeholder="instructions for using this project"
+                        value={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -126,16 +128,16 @@ function TaskDetails(props) {
                 </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
-            </div>
+            </div> */}
 
-            {/* </>
-            {/* <div className="details">
+            {/* {/* </> */}
+            <div className="details">
                 <h5 className="mt-3">Task details</h5>
                 <div class="form-group">
                     <label for="name">name:</label>
                     <input name="name" onChange={handleChange}
                         type="text" class="form-control" id="name"
-                        value={task.name}
+                        value={editTaskName}
                     />
                 </div>
                 <div class="form-group">
@@ -163,7 +165,7 @@ function TaskDetails(props) {
                     <img src={require('../../../img/bin.png')}></img>
                 </button>
                 <button onClick={(e) => saveNewTask(e)} className="save_canges_btn">Save Changes</button>
-            </div> */}
+            </div> 
         </>
 
     )
