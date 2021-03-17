@@ -49,7 +49,7 @@ function TaskDetails(props) {
     const statusList = [{ value: "done", name: "status", label: "done" },
     { value: "to do", name: "status", label: "todo" },
     { value: "in progress", name: "status", label: "in progress" }]
-    console.log(props.taskr)
+    console.log(props.task)
     return (
         <>
 
@@ -66,13 +66,12 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="2" 
+                        id="descriptionProject" rows="2"
                         placeholder="this is a very important task.. don’t forget!"
                         onChange={handleChange}
                         value={task.description}>
                     </textarea>
                 </div>
-                {/* class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange} */}
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
                         <label for="startDate">Due Date</label>
@@ -81,7 +80,7 @@ function TaskDetails(props) {
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={props.task.startDate}
+                            value={task.startDate}
                             onChange={handleChange}
                         />
                     </div>
@@ -105,49 +104,49 @@ function TaskDetails(props) {
                 </div>
             </div>
 
+            {/* </>
+            {/* <div className="details">
+                <h5 className="mt-3">Task details</h5>
+                <div class="form-group">
+                    <label for="name">name:</label>
+                    <input name="name" onChange={handleChange}
+                        type="text" class="form-control" id="name"
+                        value={task.name}
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="description">description:</label>
+                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange}>{task.description}</textarea>
+                </div>
+                <label>status:</label>
+                <Select
+                    onChange={(e) => handleChange(e)}
+                    name="status"
+                    options={statusList}
+                    placeholder={task.status}
+
+                />
+                <div class="form-group">
+                    <label for="startDate">start-date:</label>
+                    <input onChange={handleChange} type="text" class="form-control" name="startDate" id="startDate" placeholder={task.startDate} />
+                </div>
+                <div class="form-group">
+                    <label for="startDate">dueDate:</label>
+                    <input onChange={handleChange} type="text" class="form-control" name="dueDate" id="dueDate" placeholder={task.dueDate} />
+                </div>
+
+                <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
+                    <img src={require('../../../img/bin.png')}></img>
+                </button>
+                <button onClick={(e) => saveNewTask(e)} className="save_canges_btn">Save Changes</button>
+            </div> */}
         </>
-        // <div className="details">
-        //     <h5 className="mt-3">Task details</h5>
-        //     <div class="form-group">
-        //         <label for="name">name:</label>
-        //         <input name="name" onChange={handleChange}
-        //             type="text" class="form-control" id="name"
-        //             placeholder={props.taskr.name}
-        //         />
-        //     </div>
-        //     <div class="form-group">
-        //         <label for="description">description:</label>
-        //         <textarea class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange}>{task.description}</textarea>
-        //     </div>
-        //     <label>status:</label>
-        //     <Select
-        //         onChange={(e) => handleChange(e)}
-        //         name="status"
-        //         options={statusList}
-        //         placeholder={task.status}
-
-        //     />
-        //     <div class="form-group">
-        //         <label for="startDate">start-date:</label>
-        //         <input onChange={handleChange} type="text" class="form-control" name="startDate" id="startDate" placeholder={task.startDate} />
-        //     </div>
-        //     <div class="form-group">
-        //         <label for="startDate">dueDate:</label>
-        //         <input onChange={handleChange} type="text" class="form-control" name="dueDate" id="dueDate" placeholder={task.dueDate} />
-        //     </div>
-
-        //     <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
-        //         <img src={require('../../../img/bin.png')}></img>
-        //     </button>
-        //     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn">Save Changes</button>
-        // </div>
-
 
     )
 }
 const mapStateToProps = (state) => {
     return {
-        taskr: state.task_reducer.task,
+        task: state.task_reducer.task,
     }
 }
 const mapDispatchToProps = (dispatch) => {
