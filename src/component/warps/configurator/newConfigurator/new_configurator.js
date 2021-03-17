@@ -10,6 +10,23 @@ import { withRouter } from 'react-router-dom';
 
 
 function NewConfigorator(props) {
+    // checkTheUrl()
+    // function checkTheUrl() {
+    $(document).ready(function () {
+        if (window.location.href.indexOf('workspace') != -1 ||
+            window.location.href.indexOf('allProjects') != -1) {
+            $("li").removeClass("li-back")
+            $(`#allProjects`).addClass("li-back")
+
+        } else {
+            if (window.location.href.indexOf('myTasks') != -1) {
+                $("li").removeClass("li-back")
+                $(`#myTask`).addClass("li-back")
+            }
+        }
+
+
+    })
     const changeBackground = (e) => {
         props.history.push("/" + props.user)
         $(document).ready(function () {
@@ -41,11 +58,12 @@ function NewConfigorator(props) {
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
                     My Workspace </li>
+                    {/* id='myWorkspace' */}
                     {/* <li onDrop onClick={(e) => changeBackground(e.target)}> */}
-                    <li onClick={(e) => goToAllProjects(e.target)}>
+                    <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                         <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
-                        My Projects</li>
-                    <li onClick={(e) => goToMyTasks(e.target)}>
+                        All Projects</li>
+                    <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         My Tasks</li>
                     <li onClick={(e) => changeBackground(e.target)}>

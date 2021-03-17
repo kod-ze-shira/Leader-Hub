@@ -16,6 +16,7 @@ function ViewProject(props) {
     let complited = 0, complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
+    // props.setProject(props.myProject)
     function detailsProject() {
         set_getProjectById(false);
     }
@@ -45,7 +46,10 @@ function ViewProject(props) {
     function deleteMyProject(event) {
         props.setProject(props.myProject)
         // props.projectToDelete(props.myProject)
-        props.showToast(true)
+        // props.showToast(true)
+        debugger
+        props.showToast({ 'type': 'Project', 'object': props.myProject })
+        // showToastToDelete
         event.stopPropagation();
     }
 

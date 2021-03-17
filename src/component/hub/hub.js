@@ -74,7 +74,7 @@ function Hub(props) {
                         </div>
                         : null}
 
-                    <div className={open ? "col-10  mt-4 pr-4" : "col-12 mt-4 px-4"}>
+                    <div className={open ? "col-10 bodyHub mt-4 pr-4" : "col-12 bodyHub mt-4 px-4"}>
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
                         {/* {                     componentFlag==="#workspace"?   
@@ -88,7 +88,7 @@ function Hub(props) {
                             </Route> */}
 
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <ProjectsPage ד />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allProjects" >
@@ -134,6 +134,7 @@ function Hub(props) {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.public_reducer.userName
 
 
     }
