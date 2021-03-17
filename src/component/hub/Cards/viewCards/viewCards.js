@@ -118,7 +118,7 @@ function ViewCards(props) {
         <>
             <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
                 <div className=" col-3  mr-3 ">
-                    <div id={props.cardFromMap._id} className=" newTriangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
+                    <div id={props.cardFromMap._id} className=" newTriangle mb-1" onClick={(e) => changeSelectedCard(e)} ></div>
                     <input
                         className="ml-3 show-card"
                         value={editCardName}
@@ -135,8 +135,8 @@ function ViewCards(props) {
                         <button className="new-task" onClick={addTask}>+</button>
                     </a>
                 </div>
-                <p className=" col-3 "></p>
-                <Button className="more col-1 mr-2"
+                <p className=" col-2"></p>
+                <Button className="more col-1 "
                     aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                     . . .
                 </Button>
@@ -153,6 +153,7 @@ function ViewCards(props) {
                 </Menu>
                 <p className="col">Team</p>
                 <p className="col">Label</p>
+                <p className="col">Start Date</p>
                 <p className="col">Due Date</p>
                 {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>

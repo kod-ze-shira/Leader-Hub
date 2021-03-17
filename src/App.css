@@ -37,8 +37,13 @@ margin-top: 20vh;}
 }
 
 .details label{
-color:#75798E !important;
-}
+  text-align: left;
+  font-size: 14px !important;
+  letter-spacing: 0.32px;
+  color: #75798E;
+  text-transform: capitalize;
+  margin-bottom: 0px !important;
+  opacity: 0.9;}
 
 
 

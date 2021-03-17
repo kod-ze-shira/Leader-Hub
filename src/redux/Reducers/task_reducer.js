@@ -5,11 +5,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     task: {
 
-
     }
-
-
-
 }
 
 const tasks = {

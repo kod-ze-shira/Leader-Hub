@@ -17,7 +17,7 @@
       font-size: x-large;
       font-weight: 600;
   }
-  .details .form-control{
+  .details .form-control , .details  .css-yk16xz-control{
       background-color: #EDF8F6 !important;
       border:none !important;
 
