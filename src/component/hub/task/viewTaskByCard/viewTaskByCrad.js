@@ -62,15 +62,18 @@ function ViewTaskByCrad(props) {
 
     useEffect(() => {
 
-        // props.EditTask(task);
+        props.EditTask(task);
     }, [task])
 
-    const editTask = (e) => {
-
-        props.EditTask(task);
+    const editTask = () => {
+        let temp = { ...task }
+        temp.name = editTaskName
+        setTask(temp);
+        // props.EditTask(task);
 
     }
     const editTaskNameInReduxs = (taskName) => {
+
         setEditTaskName(taskName)
         props.setTaskName(taskName)
         let temp = { ...task }
@@ -95,20 +98,19 @@ function ViewTaskByCrad(props) {
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
                             <div className="col-4 pl-5 ml-3">
+                               
                                 <label
-                                    // className="py-2">
-                                    className="check-task py-2  ">
-
-                                    {/* <input type="checkbox" /> */}
+                                    className="check-task py-2   ">
+                                    <input type="checkbox" />
                                     <span className="checkmark " onClick={() => addChalalit()}></span>
                                 </label>
                                 <input
                                     className="show-card "
                                     value={editTaskName}
                                     onChange={(e) => editTaskNameInReduxs(e.target.value)}
-                                    // onBlur={(e) => editTask(e)}
-                                    onKeyPress={event => {
-                                        if (event.key === 'Enter') {
+                                    onBlur={(e) => editTask()}
+                                    onKeyPress={e => {
+                                        if (e.key === 'Enter') {
                                             editTask()
                                         }
                                     }}

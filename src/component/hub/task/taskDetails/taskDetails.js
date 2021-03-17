@@ -12,9 +12,11 @@ function TaskDetails(props) {
     }, [props.task])
     const task = props.task
     const [editTask, setEditTask] = useState(task)
+    const [editTaskName, setEditTaskName] = useState(props.taskr.name)
 
     const handleChange = (event) => {
         let cons1, cons2
+        console.log(event.name, event.value)
         if (event.name == "status") {
             cons1 = event.name
             cons2 = event.value
@@ -24,9 +26,10 @@ function TaskDetails(props) {
             // const { name, value } = event.target;
             cons1 = event.target.name
             cons2 = event.target.value
-            if (event.name == "name")
-                props.setTaskName(cons1)
-
+            if (event.name == "name") {
+                setEditTaskName(cons2)
+                props.setTaskName(cons2)
+            }
             if (cons1 == "dueDate" || cons1 == "startDate") {
                 cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
@@ -49,7 +52,6 @@ function TaskDetails(props) {
     const statusList = [{ value: "done", name: "status", label: "done" },
     { value: "to do", name: "status", label: "todo" },
     { value: "in progress", name: "status", label: "in progress" }]
-    console.log(props.taskr)
     return (
         <>
 
@@ -58,15 +60,16 @@ function TaskDetails(props) {
                 <h5 className="my-5 title-view-details pb-2">Task details</h5>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" onChange={handleChange}
+                    <input name="name" onChange={(e)=>handleChange(e)}
                         type="text" class="form-control"
-                        id="name" placeholder="instructions for using this project"
-                        value={task.name} />
+                        id="name"
+                        // placeholder="instructions for using this project"
+                        value={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="2" 
+                        id="descriptionProject" rows="2"
                         placeholder="this is a very important task.. don’t forget!"
                         onChange={handleChange}
                         value={task.description}>

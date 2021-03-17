@@ -41,7 +41,6 @@ function Hub(props) {
         setShowToastDelete(true)
     }
     const deleteObject = () => {
-        // console.log(objectToDelete)
         setShowToastDelete(false)
         if (objectToDelete.type == "Project") {
             console.log(objectToDelete)
@@ -68,13 +67,9 @@ function Hub(props) {
                         : null}
 
                     <div className={open ? "col-10  mt-3 pr-4" : "col-12 mt-3 px-4"}>
-                        {/* <Header /> */}
-                        {/* <div className="col-2"> <Tools /></div> */}
 
                         <Switch>
-                            {/* <Route path="/chedvi678@gmail.com/603f85549b557237f314eb9a/renana-il/share">
-                            <ProjectsPage />
-                            </Route> */}
+                        
 
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -95,7 +90,7 @@ function Hub(props) {
                                 <TaskNotBelongCardForUser />
                             </Route>
                             <Route path="/:userName" >
-                                <Body />
+                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/" >
                                 {/* <Animation /> */}
@@ -108,11 +103,12 @@ function Hub(props) {
 
 
                     {showToastDelete ?
-                        // <h1 style={{ "position": "absolute" }}> hhhhhhhhhhhhh</h1>
                         <ToastDelete
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name} />
+                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
+                            // objectToDelete.type
+                            />
                         : null}
 
                 </div>
@@ -132,6 +128,8 @@ const mapDispatchToProps = (dispatch) => {
         removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
         removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
+        removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
+
 
 
     }
