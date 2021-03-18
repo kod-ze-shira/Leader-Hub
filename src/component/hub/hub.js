@@ -52,12 +52,7 @@ function Hub(props) {
     const deleteObject = () => {
         console.log(objectToDelete)
         setShowToastDelete(false)
-        if (objectToDelete.type == "Project") {
-            console.log(objectToDelete)
-            props['remove' + objectToDelete.type](objectToDelete.object)
-        }
-        else
-            props['remove' + objectToDelete.type](objectToDelete.object._id)
+        props['remove' + objectToDelete.type](objectToDelete.object._id)
 
     }
     const openConfigurator = () => {
@@ -65,8 +60,11 @@ function Hub(props) {
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        $(`#${objectToDelete.object._id+objectToDelete.object.name}`).css("display", "block")
-
+        if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
+            $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
+        else
+            $(`#${objectToDelete.object._id}`).css("display", "block")
+            
     }
     return (
         <>

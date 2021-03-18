@@ -51,7 +51,7 @@ function ViewTaskByCrad(props) {
 
     function deleteTask() {
         console.log(props.task._id)
-        // $(`#${props.task._id} .display-on-delete`).css("display", "none")
+        $(`#${props.task._id+"disappear"}`).css("display", "none")
         props.objectToast({ 'type': 'Task', 'object': props.task })
 
     }
@@ -91,11 +91,11 @@ function ViewTaskByCrad(props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        className="display-on-delete"
                     >
                         <div onMouseOver={(e) => overTask(props.task._id)}
                             onMouseOut={() => outOver(props.task._id)}
                             className="show-task row mx-4 border-bottom"
+                            id={props.task._id + "disappear"}
                         >
 
                             <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}

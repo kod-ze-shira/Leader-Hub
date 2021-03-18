@@ -13,7 +13,6 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 
 
 function ViewTaskByCradTabs(props) {
-    const [flag, setFlag] = useState(true)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
@@ -29,18 +28,21 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
-        setFlag(false)
         setAnchorEl(event.currentTarget);
+        event.stopPropagation();
+
     };
 
-    const handleClose = (e) => {
+    const handleClose = (e,event) => {
         setAnchorEl(null);
         if (e == "viewCard")
             showDetails("viewTaskByCard")
         else
-            if (e == "delete")
+            if (e == "delete") {
+                $(`#${props.task._id + "disappear"}`).css("display", "none")
                 props.objectToast({ 'type': 'Task', 'object': props.task })
-
+            }
+        event.stopPropagation();
     };
     const editTask = (event) => {
         let task1 = {
@@ -52,8 +54,9 @@ function ViewTaskByCradTabs(props) {
     }
     const showDetails = (from) => {
         // setDetailsOrEditTask(from)
-        if (flag)
-            props.openViewDetails(task)
+        props.openViewDetails(task)
+        props.setTaskName(task.name)
+
 
     }
 
@@ -71,8 +74,8 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                     >
                         <div className="task-card mt-2 "
-                            onClick={(e) => showDetails("viewTaskByCard")}>
-
+                            onClick={(e) => showDetails("viewTaskByCard")}
+                            id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
                                     <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
@@ -89,8 +92,8 @@ function ViewTaskByCradTabs(props) {
                                         onClose={handleClose}
                                     >
                                         <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard)} >View Details</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Task</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard,e)} >View Details</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard,e)}>Delete Task</MenuItem>
 
                                     </Menu>
                                 </div>
@@ -127,6 +130,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
+        setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTabs)

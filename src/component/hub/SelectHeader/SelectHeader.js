@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './selectHeader.css'
-import ProjectsList from '../projectPlatform/projectsList/projectsList'
 import Logo from '../logo/logo'
 import SelectProject from '../SelectHeader/selectProject/selectProject';
 import SelectWorkspace from '../SelectHeader/selectWorkspace/selectWorkspace'

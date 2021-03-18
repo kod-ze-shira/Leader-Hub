@@ -9,10 +9,10 @@ import status_reducer from '../../../../redux/Reducers/status_reducer';
 function TaskDetails(props) {
 
     useEffect(() => {
-       const getAllStatusesTaskForUser= props.getAllStatusesTaskForUser()
-        const status = props.status
-        console.log("getAllStatusesTaskForUser",getAllStatusesTaskForUser);
-        console.log("status",status);
+        const getAllStatusesTaskForUser = props.getAllStatusesTaskForUser()
+        // const status = props.status
+        console.log("getAllStatusesTaskForUser", getAllStatusesTaskForUser);
+        // console.log("status", status);
         console.log();
     }, [props.task])
     const task = props.task
@@ -128,51 +128,17 @@ function TaskDetails(props) {
                 </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
-            </div> */}
+            </div>
 
             {/* {/* </> */}
-            <div className="details">
-                <h5 className="mt-3">Task details</h5>
-                <div class="form-group">
-                    <label for="name">name:</label>
-                    <input name="name" onChange={handleChange}
-                        type="text" class="form-control" id="name"
-                        value={editTaskName}
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="description">description:</label>
-                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange}>{task.description}</textarea>
-                </div>
-                <label>status:</label>
-                <Select
-                    onChange={(e) => handleChange(e)}
-                    name="status"
-                    options={statusList}
-                    placeholder={task.status}
 
-                />
-                <div class="form-group">
-                    <label for="startDate">start-date:</label>
-                    <input onChange={handleChange} type="text" class="form-control" name="startDate" id="startDate" placeholder={task.startDate} />
-                </div>
-                <div class="form-group">
-                    <label for="startDate">dueDate:</label>
-                    <input onChange={handleChange} type="text" class="form-control" name="dueDate" id="dueDate" placeholder={task.dueDate} />
-                </div>
-
-                <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
-                    <img src={require('../../../img/bin.png')}></img>
-                </button>
-                <button onClick={(e) => saveNewTask(e)} className="save_canges_btn">Save Changes</button>
-            </div> 
         </>
 
     )
 }
 const mapStateToProps = (state) => {
     return {
-        task: state.task_reducer.task,
+        taskr: state.task_reducer.task,
         status: state.status_reducer.status
     }
 }

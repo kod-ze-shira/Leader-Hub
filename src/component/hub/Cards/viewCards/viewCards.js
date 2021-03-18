@@ -56,7 +56,7 @@ function ViewCards(props) {
 
     }
     const deleteCard = () => {
-        $(`#${props.cardFromMap._id + props.cardFromMap.name}`).css("display", "none")
+        $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
 
     }
@@ -117,88 +117,89 @@ function ViewCards(props) {
 
     return (
         <>
-            <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0"
-                id={props.cardFromMap._id}>
-                <div className=" col-3  mr-3 " >
-                    <div 
-                    id={props.cardFromMap._id}
-                     className=" newTriangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
-                    <input
-                        className="ml-3 show-card"
-                        value={editCardName}
-                        onChange={updateCardName}
-                        // onBlur={editCard}
-                        onKeyPress={event => {
-                            if (event.key === 'Enter') {
-                                editCard()
-                            }
-                        }}
-                    >
-                    </input>
-                    <a href="#input-task">
-                        <button className="new-task" onClick={addTask}>+</button>
-                    </a>
-                </div>
-                <p className=" col-2"></p>
-                <Button className="more col-1 "
-                    aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    . . .
-                </Button>
-                <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                    value={actionINcard}
+            <div id={props.cardFromMap._id + "disappear"}>
+                <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0"
                 >
-                    <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
-                    <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
-                </Menu>
-                <p className="col">Team</p>
-                <p className="col">Label</p>
-                <p className="col">Start Date</p>
-                <p className="col">Due Date</p>
-                {/* <p className="border-left  col">Team</p>
+                    <div className=" col-3  mr-3 " >
+                        <div id={props.cardFromMap._id}
+                            className=" newTriangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
+                        <input
+                            className="ml-3 show-card"
+                            value={editCardName}
+                            onChange={updateCardName}
+                            // onBlur={editCard}
+                            onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    editCard()
+                                }
+                            }}
+                        >
+                        </input>
+                        <a href="#input-task">
+                            <button className="new-task" onClick={addTask}>+</button>
+                        </a>
+                    </div>
+                    <p className=" col-2"></p>
+                    <Button className="more col-1 "
+                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        . . .
+                </Button>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                        value={actionINcard}
+                    >
+                        <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
+                        <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
+                    </Menu>
+                    <p className="col">Team</p>
+                    <p className="col">Label</p>
+                    <p className="col">Start Date</p>
+                    <p className="col">Due Date</p>
+                    {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>
                 <p className="border-left col">Due Date</p> */}
-            </div >
-            {
-                props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                    <Droppable droppableId={props.cardFromMap._id} >
-                        {provided => (
-                            <div
-                                ref={provided.innerRef}
-                                {...provided.droppableProps}>
-                                {props.cardFromMap.tasks.map((task, index) => (
-                                    <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable> : null
-            }
-            {
-                addTaskInInput ?
-                    <input
-                        type="text"
-                        class="form-control scroll-container mt-2 w-50 ml-4"
-                        placeholder="Add Task" id="input-task"
-                        value={inputValue} onChange={updateInputValue} onKeyPress={event => {
-                            if (event.key === 'Enter') {
-                                newTask()
-                            }
-                        }}
-                    />
-                    : null
-            }
-            {
-                viewDetails ?
-                    <div className="closeDet">
-                        <ViewDetails closeViewDetails={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
-                    </div>
-                    : null
-            }
+                </div >
+                {
+                    props.flag == props.cardFromMap._id && flagFromSelect || flag ?
+                        <Droppable droppableId={props.cardFromMap._id} >
+                            {provided => (
+                                <div
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}>
+                                    {props.cardFromMap.tasks.map((task, index) => (
+                                        <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
+                                    ))}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable> : null
+                }
+                {
+                    addTaskInInput ?
+                        <input
+                            type="text"
+                            class="form-control scroll-container mt-2 w-50 ml-4"
+                            placeholder="Add Task" id="input-task"
+                            value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    newTask()
+                                }
+                            }}
+                        />
+                        : null
+                }
+                {
+                    viewDetails ?
+                        <div className="closeDet">
+                            <ViewDetails closeViewDetails={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
+                        </div>
+                        : null
+                }
+            </div>
         </>
     )
 }

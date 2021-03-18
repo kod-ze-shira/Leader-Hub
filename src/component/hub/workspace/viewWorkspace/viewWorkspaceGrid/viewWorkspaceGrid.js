@@ -43,9 +43,9 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': 'rgb(220 220 226)' })
     }
-  
+
     function delete_workspace() {
-        $(`#${workspace.workspace._id}`).css("display","none")
+        $(`#${workspace.workspace._id}`).css("display", "none")
         props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace.workspace })
         props.setWorkspace(workspace);
     }

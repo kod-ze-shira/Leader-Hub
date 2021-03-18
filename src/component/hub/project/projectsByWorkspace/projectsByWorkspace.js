@@ -72,14 +72,14 @@ function ProjectsByWorkspace(props) {
 
     const viewProjectsByWorkspace =
         props.projects.map((project) => {
-            return <ViewProject showToast={showToast}
+            return <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
         })
 
 
     const viewAllProjects = props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
-            return <ViewProject showToast={showToast}
+            return <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
         })
     })
@@ -93,9 +93,15 @@ function ProjectsByWorkspace(props) {
 
     //     return componentProject
     // }
+    function showToast1(obj) {
+        
+        props.showToast(obj)
+    }
+
     function showToast() {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
+
     return (
         <>
 

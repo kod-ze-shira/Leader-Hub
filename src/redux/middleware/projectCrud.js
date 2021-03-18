@@ -4,9 +4,7 @@ import { actions } from '../actions/action'
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
 
-
         var projectId = action.payload;
-
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/getProjectById`
 
         $.ajax({
@@ -138,8 +136,9 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_PROJECT_IN_SERVER') {
-        let project = getState().project_reducer.project;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${project._id}/removeProjectById`
+        var projectId = action.payload;
+        // let project = getState().project_reducer.project;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/removeProjectById`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -148,7 +147,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ project }),
+            // data: JSON.stringify({ project }),
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
