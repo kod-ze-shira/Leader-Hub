@@ -46,9 +46,9 @@ function ViewProject(props) {
     function deleteMyProject(event) {
         props.setProject(props.myProject)
         // props.projectToDelete(props.myProject)
-        // props.showToast(true)
+        props.showToast(true)
         debugger
-        props.showToast({ 'type': 'Project', 'object': props.myProject })
+        // props.showToast({ 'type': 'Project', 'object': props.myProject })
         // showToastToDelete
         event.stopPropagation();
     }

@@ -6,7 +6,7 @@ import { actions } from '../../../../redux/actions/action'
 
 function EditProject(props) {
     let [myProect, setMyProject] = useState({})
-    let project = props.projectToEdit
+    let project = props.project
     let [nameProject, setNameProject] = useState(project.name)
     let [descriptionProject, setDescriptionProject] = useState(project.description)
     // let [dueDateProject, setDueDateProject] = useState(project.dueDate)
@@ -20,9 +20,9 @@ function EditProject(props) {
     const changeNameProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
         setNameProject(input.target.value)
-        let p = props.projectToEdit
+        let p = props.project
         p.name = input.target.value
-        // props.setProject(p)
+        props.setProject(p)
     }
 
 
@@ -178,7 +178,7 @@ function EditProject(props) {
 export default connect(
     (state) => {
         return {
-            projectToEdit: state.project_reducer.project,
+            project: state.project_reducer.project,
         }
     },
     (dispatch) => {
