@@ -141,7 +141,7 @@ return (
 
     )
 
-                    }
+}
 const mapStateToProps = (state) => {
 
     return {

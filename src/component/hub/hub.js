@@ -29,7 +29,7 @@ import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBel
 import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
-
+import AddObject from './addObject/addObject'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -82,13 +82,15 @@ function Hub(props) {
                                 :
 <span/>
 } */}
+                        <AddObject />
+
                         <Switch>
                             {/* <Route path="/chedvi678@gmail.com/603f85549b557237f314eb9a/renana-il/share">
                             <ProjectsPage />
                             </Route> */}
 
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage ד />
+                                <ProjectsPage />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allProjects" >
@@ -114,7 +116,6 @@ function Hub(props) {
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
-
                     </div>
 
 
