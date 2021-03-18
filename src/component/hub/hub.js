@@ -65,7 +65,7 @@ function Hub(props) {
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        $(`#${objectToDelete.object._id+objectToDelete.object.name}`).css("display", "block")
+        $(`#${objectToDelete.object._id + objectToDelete.object.name}`).css("display", "block")
 
     }
     return (
@@ -82,10 +82,7 @@ function Hub(props) {
                         : null}
 
                     <div className={open ? "col-10  mt-3 pr-4" : "col-12 mt-3 px-4"}>
-
                         <Switch>
-
-
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}

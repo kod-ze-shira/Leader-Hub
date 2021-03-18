@@ -9,13 +9,13 @@ import status_reducer from '../../../../redux/Reducers/status_reducer';
 function TaskDetails(props) {
 
     useEffect(() => {
-       const getAllStatusesTaskForUser= props.getAllStatusesTaskForUser()
-        const status = props.status
-        console.log("getAllStatusesTaskForUser",getAllStatusesTaskForUser);
-        console.log("status",status);
+    //    const getAllStatusesTaskForUser= props.getAllStatusesTaskForUser()
+        // console.log("getAllStatusesTaskForUser",getAllStatusesTaskForUser);
+        // console.log("status",status);
         console.log();
     }, [props.task])
     const task = props.task
+    const status = props.status
 
     const [editTask, setEditTask] = useState(task)
     const [editTaskName, setEditTaskName] = useState(props.task.name)

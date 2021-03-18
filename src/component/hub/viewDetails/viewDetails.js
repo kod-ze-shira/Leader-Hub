@@ -65,10 +65,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             <>
                 {/* <div className="container-fluid">
                     <div className="row "> */}
-
-                <div className="view-details col-5">
-                    <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
-                    {renderSwitch()}
+                <div className="row flex-nowrap">
+                    <div className="view-details  col-5">
+                        <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
+                        {renderSwitch()}
+                    </div>
                 </div>
                 {/* </div>
                 </div > */}
