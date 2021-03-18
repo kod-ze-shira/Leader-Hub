@@ -2,7 +2,7 @@ import $ from "jquery"
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import '../../inputDitails/inputDitails.css'
+// import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
     let [myProect, setMyProject] = useState({})
