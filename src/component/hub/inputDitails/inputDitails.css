@@ -1,0 +1,22 @@
+.bodyDitails p{
+        text-align: left !important;
+}
+
+.saveChangesInViewDitails{
+    width: 118px;
+    height: 40px;
+    background: #44d7b6 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    color:white;
+    opacity: 1;
+    text-align: center !important;
+}
+.deleteInViewDitails{
+    color:#75798E;
+}
+.actionsViewDitails{
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 10px;
+    align-items: baseline;
+}

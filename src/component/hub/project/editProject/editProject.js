@@ -2,7 +2,7 @@ import $ from "jquery"
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import '../newProject/newProject.css'
+import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
     let [myProect, setMyProject] = useState({})
@@ -70,14 +70,6 @@ function EditProject(props) {
         }
     }
 
-    function deleteProject(event) {
-        // props.showToast(true)
-        props.setProject(props.projectToEdit)
-        props.deleteProjectInServer()
-        props.closeViewDetails(true)
-        event.stopPropagation();
-    }
-
     const deleteMyProject = () => {
         props.closeViewDetails(false)
         props.showToast(true)
@@ -85,48 +77,88 @@ function EditProject(props) {
 
     return (
         <>
-            
-            <div className="details mr-5 ml-4">
-                <h5 className="my-5 title-view-details pb-2">Project details</h5>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input name="name" value={nameProject} onChange={(e) => changeNameProject(e)}
-                        id='nameProject' type="text" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" value={descriptionProject} placeholder="Write a description"
-                        onChange={(e) => changeDescriptionProject(e)}></textarea>
-                </div>
-                <div className="row justify-content-between">
-                    <div class="form-group col-5">
-                        <label for="color">Color</label>
-                        <input name="color"
-                            className=" form-control "
-                            value={colorProject}
-                            onChange={(e) => changeColorProject(e)}
-                            type="color"
-                            id='colorProject'
-                        />
+            <div className='details-task'>
+                <div>
+                    <h5 className="mt-3">Edit Project</h5>
+                    <hr />
+
+                    <div className="row">
+                        <div className="col-11"></div>
                     </div>
-                    <div class="form-group col-5">
-                        <label for="color">Due Date</label>
-                        <input
-                            className="form-control "
-                            name="dueDate"
-                            type="date"
-                            id='dueDateProject'
-                            value={dueDateProject}
-                            onChange={(e) => changeDueDateProject(e)}
-                        />
+                    <div className="row mt-1">
+                        <div className="col-5"><b>Name:</b></div>
+                        <div className="col-6">
+                            <input
+                                id='nameProject'
+                                className="inputProject"
+                                name="name"
+                                placeholder='name project'
+                                value={nameProject}
+                                onChange={(e) => changeNameProject(e)}
+                            >
+                            </input>
+                        </div>
                     </div>
+                    <div className="row mt-1">
+                        <div className=" col-5"><b>Description:</b></div>
+                        <div className="col-6">
+                            <input
+                                className="inputProject"
+                                name="description"
+                                id='descriptionProject'
+                                // placeholder='description'
+                                // placeholder={project.description}
+                                value={descriptionProject}
+                                onChange={(e) => changeDescriptionProject(e)}
+                            >
+                            </input>
+                        </div>
+                    </div>
+                    <div className="row mt-1">
+                        <div className=" col-5"><b>Due date:</b></div>
+                        <div className="col-6">
+                            <input
+                                className="inputProject"
+                                name="dueDate"
+                                type="date"
+                                id='dueDateProject'
+                                value={dueDateProject}
+                                onChange={(e) => changeDueDateProject(e)}
+                            >
+                            </input>
+                        </div>
+                        {/* {props.workspaceId}*/}
+                    </div>
+
+                    <div className="row mt-1">
+                        <div className=" col-5"><b>Color:</b></div>
+                        <div className="col-6">
+                            <input
+                                className="inputProject"
+                                name="color"
+                                type="color"
+                                id='colorProject'
+                                value={colorProject}
+                                onChange={(e) => changeColorProject(e)}
+                            >
+                            </input>
+                        </div>
+                        {/* {props.workspaceId}*/}
+                    </div>
+                    {/* <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img> */}
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-project">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
-                        <img src={require('../../../img/bin.png')}></img> Delete
-                </button>
-                    <button onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
+                <div className="row actionsViewDitails" >
+                    <div className='col-6 deleteInViewDitails' onClick={deleteMyProject}>
+                        <img className='mr-1'
+                            src={require('../../../img/bin.png')} />
+                        <span >delete </span>
+                    </div>
+                    <div className='col-6'>   <button onClick={() => saveProject()} className="saveChangesInViewDitails">Save</button></div>
+
                 </div>
+
+
+
             </div>
 
         </>
@@ -147,7 +179,6 @@ export default connect(
         return {
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
             setProject: (p) => dispatch(actions.setProject(p)),
-            deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
 
 
         }

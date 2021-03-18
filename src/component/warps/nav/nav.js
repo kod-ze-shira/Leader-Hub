@@ -9,15 +9,18 @@ function Nav(props) {
     // const [openConfigurator, setOpenConfigurator] = useState(false);
 
     return (
-        <div className="nav ">
-            <div className="row ">
-                <div onClick={props.openConfigurator} >
-                <img className="ml-4 my-2" src={require('../../img/menu.png')}></img>
-                </div>
-                <img className="profile-logo my-2" src={require('../../img/profile.svg')}></img>
-            </div>
+        <>
 
-        </div>
+        </>
+        // <div className="nav ">
+        //     <div className="row ">
+        //         <div onClick={props.openConfigurator} >
+        //         <img className="ml-4 my-2" src={require('../../img/menu.png')}></img>
+        //         </div>
+        //         <img className="profile-logo my-2" src={require('../../img/profile.svg')}></img>
+        //     </div>
+
+        // </div>
     );
 
 }

@@ -50,7 +50,10 @@ function ViewTaskByCrad(props) {
     }
 
     function deleteTask() {
+        console.log(props.task._id)
+        // $(`#${props.task._id} .display-on-delete`).css("display", "none")
         props.objectToast({ 'type': 'Task', 'object': props.task })
+
     }
 
     function overTask(id) {
@@ -88,6 +91,7 @@ function ViewTaskByCrad(props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
+                        className="display-on-delete"
                     >
                         <div onMouseOver={(e) => overTask(props.task._id)}
                             onMouseOut={() => outOver(props.task._id)}
