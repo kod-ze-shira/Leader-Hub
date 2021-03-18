@@ -6,7 +6,6 @@ import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
 import HeaderLeader from '@leadercodes/leader-header'
 
-
 function App() {
 
   return (<>
