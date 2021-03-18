@@ -18,7 +18,7 @@ function TaskDetails(props) {
     const task = props.task
 
     const [editTask, setEditTask] = useState(task)
-    const [editTaskName, setEditTaskName] = useState(props.taskr.name)
+    const [editTaskName, setEditTaskName] = useState(props.task.name)
 
     const handleChange = (event) => {
         let cons1, cons2
@@ -128,44 +128,8 @@ function TaskDetails(props) {
                 </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
-            </div> */}
-
-            {/* {/* </> */}
-            <div className="details">
-                <h5 className="mt-3">Task details</h5>
-                <div class="form-group">
-                    <label for="name">name:</label>
-                    <input name="name" onChange={handleChange}
-                        type="text" class="form-control" id="name"
-                        value={editTaskName}
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="description">description:</label>
-                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description" onChange={handleChange}>{task.description}</textarea>
-                </div>
-                <label>status:</label>
-                <Select
-                    onChange={(e) => handleChange(e)}
-                    name="status"
-                    options={statusList}
-                    placeholder={task.status}
-
-                />
-                <div class="form-group">
-                    <label for="startDate">start-date:</label>
-                    <input onChange={handleChange} type="text" class="form-control" name="startDate" id="startDate" placeholder={task.startDate} />
-                </div>
-                <div class="form-group">
-                    <label for="startDate">dueDate:</label>
-                    <input onChange={handleChange} type="text" class="form-control" name="dueDate" id="dueDate" placeholder={task.dueDate} />
-                </div>
-
-                <button data-toggle="tooltip" data-placement="top" title="Garbage" onClick={(e) => deleteTask()}>
-                    <img src={require('../../../img/bin.png')}></img>
-                </button>
-                <button onClick={(e) => saveNewTask(e)} className="save_canges_btn">Save Changes</button>
             </div> 
+
         </>
 
     )
