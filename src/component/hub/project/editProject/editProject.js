@@ -22,7 +22,7 @@ function EditProject(props) {
         setNameProject(input.target.value)
         let p = props.projectToEdit
         p.name = input.target.value
-        props.setProject(p)
+        // props.setProject(p)
     }
 
 
