@@ -4,7 +4,7 @@
     display: inline-block;
     width: 42px;
     height: 42px;
-    background: #2BB4FB 0% 0% no-repeat padding-box;
+    /* background: #2BB4FB 0% 0% no-repeat padding-box; */
     text-align: center;
     font: normal normal medium 30px/39px Roboto;
     letter-spacing: 1.26px;

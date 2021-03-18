@@ -98,17 +98,19 @@ function ViewTaskByCrad(props) {
                             className="show-task row mx-4 border-bottom"
                         >
 
-                            <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
+                            <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
-                            <div className="col-4 pl-5 ml-3">
+                            <div className="col-3">
                                 <label
-                                    className="check-task py-2   ">
+                                    // className="py-2">
+                                    className="check-task py-2 ">
+
                                     <input type="checkbox" />
-                                    <span className="checkmark " onClick={() => addChalalit()}></span>
+                                    <span className="checkmark ml-1" onClick={() => addChalalit()}></span>
                                 </label>
                                 <input
-                                    className="show-card "
+                                    className="show-card py-2"
                                     value={editTaskName}
                                     onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                     onBlur={(e) => editTask()}
@@ -117,7 +119,9 @@ function ViewTaskByCrad(props) {
                                             editTask()
                                         }
                                     }}
-                                ></input>
+                                >
+
+                                </input>
                             </div>
                             <label className="check-task py-2  px-2 col-3 view-details-btn">
                                 <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
@@ -127,10 +131,10 @@ function ViewTaskByCrad(props) {
                             <label className="check-task border-left  py-2  px-2 col " >
                                 <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
                             </label>
-                            <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
-
+                            <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                             </label>
-
+                            <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                            </label>
                             {viewDetails ?
                                 <div className="closeDet" >
                                     <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
