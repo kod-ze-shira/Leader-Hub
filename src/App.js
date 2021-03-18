@@ -11,7 +11,6 @@ function App() {
 
   return (<>
     <HeaderLeader appName='hub' userName='' />
-
     <Provider store={Store}>
       <>
         {/* <ConfiguratorList></ConfiguratorList> */}

@@ -1,48 +1,43 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import './allWorkspace.css'
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
-import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
-import ViewDetails from '../../viewDetails/viewDetails'
-import ToastDelete from '../../toastDelete/toastDelete1'
+import { actions } from '../../../redux/actions/action'
+// import ViewDetails from '../../viewDetails/viewDetails'
+
 
 
 function ViewAllStatuses(props) {
 
     useEffect(() => {
-        // props.getAllWorkspaces()
+        props.getAllStatusesTaskForUser()
     }, []);
 
-   
-    
 
-    // const renderedListStatuses = props.status.map(todo => {
 
-    //     return <ViewWorkspaceList
-    //     setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-    //      key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
-    // })
-    
-return (
+
+    const renderedListStatuses = props.statuses.map(status => {
+        return status.name
+    })
+
+    return (
 
         <>
-
+            <h1>renderedListStatuses</h1>
+            {renderedListStatuses}
         </>
 
     )
 
-                    }
+}
 const mapStateToProps = (state) => {
 
     return {
-        status:state.status_reducer.status
+        status: state.status_reducer.status
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
     }
 
 
