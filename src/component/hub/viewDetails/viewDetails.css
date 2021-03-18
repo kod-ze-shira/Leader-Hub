@@ -3,7 +3,7 @@ background-color: white ;
 /* box-shadow: -5px 0px 40px #0000002C; */
 border-radius: 12px;
 opacity: 1;
-position: absolute;
+position: absolute !important;
 height:88vh;
 top:0;
 right: 0;

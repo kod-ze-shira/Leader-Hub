@@ -82,7 +82,7 @@ function ViewWorkspaceGrid(props) {
                         </div>
                         <div className="name "><p>{workspace.workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
-                            <p>{workspace.workspace.productionDate}</p>
+                            <p className="productionDateW">{workspace.workspace.productionDate}</p>
                         </div>
                     </div>
                 </div>

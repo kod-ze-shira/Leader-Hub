@@ -3,3 +3,11 @@ margin-top: 75vh;
 position: fixed;
 margin-left: 8vh;
 }
+
+.bodyHub {
+    margin-top: 77px !important;
+}
+.back-screen{
+    background-color: #E8EAEC !important;
+
+}

@@ -127,7 +127,7 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            <div class="nav-item dropdown more">
+                                            {/* <div class="nav-item dropdown more">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     ...
                                                  </a>
@@ -136,8 +136,8 @@ function ViewCardsTabs(props) {
                                                     <a class="dropdown-item" href="#">Another action</a>
                                                     <a class="dropdown-item" href="#">Something else here</a>
                                                 </div>
-                                            </div>
-                                            {/* <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                            </div> */}
+                                            <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                                 . . .
                                             </Button>
                                             <Menu
@@ -150,7 +150,7 @@ function ViewCardsTabs(props) {
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
 
-                                            </Menu> */}
+                                            </Menu>
 
                                         </div>
                                     </div>
