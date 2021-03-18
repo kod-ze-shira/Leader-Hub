@@ -56,6 +56,7 @@ function ViewCards(props) {
 
     }
     const deleteCard = () => {
+        $(`#${props.cardFromMap._id + props.cardFromMap.name}`).css("display", "none")
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
 
     }
@@ -116,8 +117,9 @@ function ViewCards(props) {
 
     return (
         <>
-            <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0">
-                <div className=" col-3  mr-3 ">
+            <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0"
+                id={props.cardFromMap._id + props.cardFromMap.name}>
+                <div className=" col-3  mr-3 " >
                     <div id={props.cardFromMap._id} className=" newTriangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
                     <input
                         className="ml-3 show-card"

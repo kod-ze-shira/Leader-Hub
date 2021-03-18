@@ -36,13 +36,21 @@ function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
+    // const [componentFlag, setComponentFlag] = useState("")
+    // const {location}=props
+    // useEffect(() => {
+    //    if(location)
+    //   {  if (location.hash.includes("#workspace"))
+    //     setComponentFlag("#workspace")}
 
-    const showToastToDelete = (objectToDelete1) => {
-        setObjectToDelete(objectToDelete1)
+    // },[location])
+    const showToastToDelete = (objectToDelete) => {
+        setObjectToDelete(objectToDelete)
         setShowToastDelete(true)
 
     }
     const deleteObject = () => {
+        console.log(objectToDelete)
         setShowToastDelete(false)
         if (objectToDelete.type == "Project") {
             console.log(objectToDelete)
@@ -57,7 +65,7 @@ function Hub(props) {
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        $(`#${objectToDelete.object._id}`).css("display", "block")
+        $(`#${objectToDelete.object._id+objectToDelete.object.name}`).css("display", "block")
 
     }
     return (
@@ -82,7 +90,7 @@ function Hub(props) {
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
-                            <Route path="/:userName/allWorkspace" >
+                            <Route path="/:userName/allProjects" >
                                 {/* <ProjectsByWorkspace /> */}
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
