@@ -10,6 +10,11 @@ import '../../body/body.css'
 import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {
+    let { idWorkspace } = useParams();
+    let [flug, setFlug] = useState(false)
+    const [showProject, setShowProject] = useState(false)
+
+    const [addOrEditProject, setAddOrEditProject] = useState(false)
 
     function getWorkspacesAwait(result) {
         return new Promise((resolve, reject) => {
@@ -19,24 +24,27 @@ function ProjectsByWorkspace(props) {
         })
     }
 
-    let { idWorkspace } = useParams();
-    let [flug, setFlug] = useState(false)
-    const [showProject, setShowProject] = useState(false)
 
-    const [addOrEditProject, setAddOrEditProject] = useState(false)
     useEffect(() => {
-        if (props.projects.length == 0)
+        props.getAllWorkspaces()
+
+        if (props.projects.length == 0) {
             props.getProjectsByWorkspaceId(idWorkspace)
+            // let w = props.workspaces.find(w => w._id == idWorkspace)
+            // props.setWorkspace(w)
+            // props.setProjects(props.workspace.projectList)
+        }
+        // props.setProjects(props.workspaces.)
         if (!flug) {
             if (props.workspaces.length == 0) {
-                props.getAllWorkspaces()
                 // if (props.workspaces.length)
                 // alert('hhh')
                 if (window.location.href.indexOf('workspace') != -1) {
                     // props.getProjectsByWorkspaceId(idWorkspace)
                     let w = props.workspaces.find(w => w._id == idWorkspace)
                     // props.setWorkspace(w)
-
+                    // props.setProjects(props.workspace.projectList)
+                    // let p=props.workspace.find(p=>p)
 
                 } else {
                     if (window.location.href.indexOf('allProjects') != -1) {
@@ -70,19 +78,19 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    const viewProjectsByWorkspace =
+    const viewProjectsByWorkspace = props.projects ?
         props.projects.map((project) => {
             return <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
-        })
+        }) : null
 
 
-    const viewAllProjects = props.workspaces.map((workspace) => {
+    const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
             return <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
         })
-    })
+    }) : null
 
     // function viewProjectsByWorkspace() {
     //     let componentProject = {}
@@ -94,7 +102,6 @@ function ProjectsByWorkspace(props) {
     //     return componentProject
     // }
     function showToast1(obj) {
-        
         props.showToast(obj)
     }
 

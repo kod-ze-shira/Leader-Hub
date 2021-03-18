@@ -1,10 +1,9 @@
 .view-details{
-    background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-background: white 0% 0% no-repeat padding-box;
-box-shadow: -5px 0px 40px #0000002C;
+background-color: white ;
+/* box-shadow: -5px 0px 40px #0000002C; */
 border-radius: 12px;
 opacity: 1;
-position: absolute;
+position: absolute !important;
 height:88vh;
 top:0;
 right: 0;

@@ -4,7 +4,7 @@ import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
 
 export default function Body(props) {
   return (
-    <div className="body-workspace">
+    <div className="body-workspace mt-4 ">
       <AllWorkspaces showToast={(obj)=>props.showToastDelete(obj)}  />
 
     </div>

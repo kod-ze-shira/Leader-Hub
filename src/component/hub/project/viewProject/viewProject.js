@@ -16,6 +16,7 @@ function ViewProject(props) {
     let complited = 0, complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
+    // props.setProject(props.myProject)
     function detailsProject() {
         set_getProjectById(false);
     }

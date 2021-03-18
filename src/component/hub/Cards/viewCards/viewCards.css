@@ -49,7 +49,9 @@
     text-align: center;
 }
 p{ color:#98A9BC !important;
-    margin-bottom: 0;}
+    margin-bottom: 0 !important;
+    
+}
 .new-task{
     background-color: transparent;
      outline: 0 !important;

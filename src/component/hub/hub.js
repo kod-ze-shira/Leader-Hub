@@ -64,7 +64,8 @@ function Hub(props) {
             $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
         else
             $(`#${objectToDelete.object._id}`).css("display", "block")
-            
+
+
     }
     return (
         <>
@@ -72,18 +73,16 @@ function Hub(props) {
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
 
-                <div className="row">
+                <div className="row back-screen
+">
                     {open ?
                         <div className="col-2 px-0 mt-0">
                             <Configurator />
                         </div>
                         : null}
 
-                    <div className={open ? "col-10  mt-3 pr-4" : "col-12 mt-3 px-4"}>
-
+                    <div className={open ? "col-10 bodyHub mt-5 pr-4" : "col-12 bodyHub mt-5. px-4"}>
                         <Switch>
-
-
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}
@@ -132,6 +131,7 @@ function Hub(props) {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.public_reducer.userName
 
 
     }

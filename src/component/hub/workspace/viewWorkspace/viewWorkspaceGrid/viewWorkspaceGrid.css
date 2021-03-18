@@ -161,4 +161,10 @@ font-weight: 400;
 .description-and-productionDate >p{
    display: inline-block !important;
    text-align: left !important;
+   margin-bottom: 0px !important;
+
+}
+.productionDateW{
+   margin-bottom: 0px !important;
+
 }

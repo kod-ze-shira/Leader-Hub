@@ -11,6 +11,7 @@ function NewProject(props) {
     let [myColor, setMyColor] = useState()
     let [emptyValue, setEmptyValue] = useState(false)
     let [myStyle, setMyStyle] = useState();
+    // let [dufultDateDueDate, setDufultDateDueDate] = useState()
     let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
@@ -23,6 +24,10 @@ function NewProject(props) {
     //     setMyStyle({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
     //     project[input.target.name] = input.target.value
     // }
+    let d = dueDateForAnotherTwoMonths();
+    // setDufultDateDueDate(d)
+    $(`#dueDateProject`).val(d)
+    // document.getElementById("dueDateProject").defaultValue = d;
 
     const changeFiledInProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
@@ -36,7 +41,7 @@ function NewProject(props) {
         let month = date.getMonth() + 1
         let day = date.getDate()
         let year = date.getFullYear()
-        const finalDate = (day <= 9 ? '0' + day : day) + '/' + (month <= 9 ? '0' + month : month) + '/' + year
+        const finalDate = (day <= 9 ? '0' + day : day) + '-' + (month <= 9 ? '0' + month : month) + '-' + year
         return finalDate;
     }
 

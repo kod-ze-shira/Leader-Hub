@@ -50,7 +50,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
-                    return <EditProject closeViewDetails={props.closeViewDetails} showToast={showToast} projectToEdit={props.projectToEdit} />
+                    return <EditProject closeViewDetails={props.closeViewDetails} showToast={showToast} project={props.project} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
@@ -65,10 +65,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             <>
                 {/* <div className="container-fluid">
                     <div className="row "> */}
-
-                <div className="view-details col-5">
-                    <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
-                    {renderSwitch()}
+                <div className="row ">
+                    <div className="view-details  col-5">
+                        <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
+                        {renderSwitch()}
+                    </div>
                 </div>
                 {/* </div>
                 </div > */}
