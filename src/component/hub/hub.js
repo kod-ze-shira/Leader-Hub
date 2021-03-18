@@ -52,12 +52,7 @@ function Hub(props) {
     const deleteObject = () => {
         console.log(objectToDelete)
         setShowToastDelete(false)
-        if (objectToDelete.type == "Project") {
-            console.log(objectToDelete)
-            props['remove' + objectToDelete.type](objectToDelete.object)
-        }
-        else
-            props['remove' + objectToDelete.type](objectToDelete.object._id)
+        props['remove' + objectToDelete.type](objectToDelete.object._id)
 
     }
     const openConfigurator = () => {
@@ -65,7 +60,11 @@ function Hub(props) {
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        $(`#${objectToDelete.object._id + objectToDelete.object.name}`).css("display", "block")
+        if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
+            $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
+        else
+            $(`#${objectToDelete.object._id}`).css("display", "block")
+
 
     }
     return (
@@ -83,16 +82,9 @@ function Hub(props) {
                         : null}
 
                     <div className={open ? "col-10 bodyHub mt-5 pr-4" : "col-12 bodyHub mt-5. px-4"}>
-                        {/* <Header /> */}
-                        {/* <div className="col-2"> <Tools /></div> */}
-                        {/* {                     componentFlag==="#workspace"?   
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
-                                :
-<span/>
-} */}
                         <Switch>
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage ד />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allProjects" >

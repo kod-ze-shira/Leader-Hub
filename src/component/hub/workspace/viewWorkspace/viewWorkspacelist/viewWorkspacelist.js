@@ -27,6 +27,8 @@ function ViewWorkspaceList(props) {
         props.editWorkspace()
     }
     function delete_workspace() {
+        $(`#${workspace.workspace._id}`).css("display", "none")
+
         props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace.workspace })
         props.setWorkspace(workspace);
     }
@@ -40,62 +42,63 @@ function ViewWorkspaceList(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
 
     }
- 
+
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
     }
 
     return (
         <>
-            <div className="row WorkspaceList mt-3"
-                id={workspace.workspace._id}
-                onMouseOver={() => func_over(workspace.workspace._id)}
-                onMouseOut={() => outOver(workspace.workspace._id)}  >
-                <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}
-                >
+            <div id={workspace.workspace._id}>
+                <div className="row WorkspaceList mt-3"
 
-                    <div className="row "  >
-                        <div className="Workspace "  >
-                            <div className="logoWorkspacelist logo "
-                                style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}>
-                                {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}                            </div>
+                    onMouseOver={() => func_over(workspace.workspace._id)}
+                    onMouseOut={() => outOver(workspace.workspace._id)}  >
+                    <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}
+                    >
 
+                        <div className="row "  >
+                            <div className="Workspace "  >
+                                <div className="logoWorkspacelist logo "
+                                    style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}>
+                                    {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}                            </div>
+
+
+                            </div>
+                            <div className="col-3">
+                                <p className="workspace-name-list">{workspace.workspace.name} </p>
+                                <div className="description-and-date">
+                                    <p className=""> {workspace.workspace.description}</p>
+                                    <p className="">Update {workspace.workspace.productionDate}</p>
+                                </div>
+                            </div>
 
                         </div>
-                        <div className="col-3">
-                            <p className="workspace-name-list">{workspace.workspace.name} </p>
-                            <div className="description-and-date">
-                                <p className=""> {workspace.workspace.description}</p>
-                                <p className="">Update {workspace.workspace.productionDate}</p>
+
+                    </div>
+                    {/* { */}
+                    {/* // over ? */}
+                    <div className="col-2">
+                        <div className="row  mt-4" >
+                            <div
+                                className="col-1  edit iconsAction" onClick={editWorkspace}>
+                                <img src={pencil}></img>
+                            </div>
+                            <div className="ml-1 stripe">|</div>
+                            <div
+                                className="col-1 ml-1 delete iconsAction" onClick={duplicateWorkspace} >
+                                <img src={duplicate}></img>
+                            </div>
+                            <div className="ml-1 stripe">|</div>
+                            <div
+                                className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
+                                <img src={bin}></img>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
-                {/* { */}
-                {/* // over ? */}
-                <div className="col-2">
-                    <div className="row  mt-4" >
-                        <div
-                            className="col-1  edit iconsAction" onClick={editWorkspace}>
-                            <img src={pencil}></img>
-                        </div>
-                        <div className="ml-1 stripe">|</div>
-                        <div
-                            className="col-1 ml-1 delete iconsAction" onClick={duplicateWorkspace} >
-                            <img src={duplicate}></img>
-                        </div>
-                        <div className="ml-1 stripe">|</div>
-                        <div
-                            className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
-                            <img src={bin}></img>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
         </>
     )
 }

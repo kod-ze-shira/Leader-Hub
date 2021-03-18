@@ -44,15 +44,10 @@ function ViewProject(props) {
     }
 
     function deleteMyProject(event) {
-        props.setProject(props.myProject)
-        // props.projectToDelete(props.myProject)
-        // props.showToast(true)
-        debugger
-        props.showToast({ 'type': 'Project', 'object': props.myProject })
-        // showToastToDelete
+        props.showToast({ 'type': 'Project', 'object': props.myProject.project })
+        $(`#${props.myProject.project._id}`).css("display", "none")
         event.stopPropagation();
     }
-
 
     if (props.myProject.countTasks) {
         complited = 100 / props.myProject.countTasks;
@@ -71,69 +66,69 @@ function ViewProject(props) {
     complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
     return (
         <>
-            <tr className='projectForWorkspace'
+            <tr
+                className='projectForWorkspace col-12 '
                 onClick={(e) => routeToCards(e)}
                 onMouseOver={() => overProject(props.myProject.project._id)}
                 onMouseOut={() => outOver(props.myProject.project._id)}
                 id={props.myProject.project._id}>
-                <td className='nameProjectInList' >
-                    <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
-                    <span style={{ 'color': props.myProject.project.color }}>
-                        {props.myProject.project.name}</span>
-                    {/* <span class='stripeProject'
+                {/* <div className="col-12" > */}
+                    <td className='nameProjectInList' >
+                        <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
+                        <span style={{ 'color': props.myProject.project.color }}>
+                            {props.myProject.project.name}</span>
+                        {/* <span class='stripeProject'
                         // style={{ 'background-color': props.project.color }}></span>
                         style={{ 'background-color': props.myProject.project.color }}></span> */}
-                </td>
-                <td>
-                    <Cell item={props.myProject.project.dueDate} />
-                    <CellDescription description='Due date' />
-                </td>
-                <td>
-                    <Cell item={props.myProject.project.cards.length ? props.myProject.project.cards.length : "0"} />
-                    <CellDescription description='card' />
-                </td>
-                <td>
-                    <span className='task'>
-                        <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }}>
-                            {props.myProject.countReadyTask}</span>
-                        <span className='designPropertiesProject'>
-                            /{props.myProject.countTasks}</span>
-                    </span>
-                    <CellDescription description='Task' />
-                </td>
-                <td>
+                    </td>
+                    <td>
+                        <Cell item={props.myProject.project.dueDate} />
+                        <CellDescription description='Due date' />
+                    </td>
+                    <td>
+                        <Cell item={props.myProject.project.cards.length ? props.myProject.project.cards.length : "0"} />
+                        <CellDescription description='card' />
+                    </td>
+                    <td>
+                        <span className='task'>
+                            <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }}>
+                                {props.myProject.countReadyTask}</span>
+                            <span className='designPropertiesProject'>
+                                /{props.myProject.countTasks}</span>
+                        </span>
+                        <CellDescription description='Task' />
+                    </td>
+                    <td>
 
-                    <div className='divProgress'>
-                        <div class="progressProject" >
-                            <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
-                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div className='divProgress'>
+                            <div class="progressProject" >
+                                <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
+                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
                         </div>
-                        {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
-                    </div>
-                    <CellDescription description={(complited ? complited : 0) + '% comlete'} />
-                </td>
-                {/* <td style={{ 'text-align': 'center' }}>
+                        <CellDescription description={(complited ? complited : 0) + '% comlete'} />
+                    </td>
+                    {/* <td style={{ 'text-align': 'center' }}>
                     <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                     <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                     <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
 
                     <CellDescription description='Team' />
                 </td> */}
-                <td>
-                    <Cell item={props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023'} />
-                    <CellDescription description='Last update' />
-                </td>
+                    <td>
+                        <Cell item={props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023'} />
+                        <CellDescription description='Last update' />
+                    </td>
 
-                <td className='actionsProject'>
-                    <img style={myStyleIcons}
-                        className='iconsProject' onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')} />
-                    <div style={myStyleStripe} className='stripeActionsProject'>|</div>
+                    <td className='actionsProject'>
+                        <img style={myStyleIcons}
+                            className='iconsProject' onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')} />
+                        <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
-                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
-                        src={require('../../../img/bin.png')} />                </td>
-
+                        <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
+                            src={require('../../../img/bin.png')} />                </td>
             </tr >
-
         </>
     )
 }

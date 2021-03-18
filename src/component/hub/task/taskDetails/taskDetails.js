@@ -136,7 +136,7 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        task: state.task_reducer.task,
+        taskr: state.task_reducer.task,
         status: state.status_reducer.status
     }
 }

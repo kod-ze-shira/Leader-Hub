@@ -51,7 +51,7 @@ function ViewTaskByCrad(props) {
 
     function deleteTask() {
         console.log(props.task._id)
-        // $(`#${props.task._id} .display-on-delete`).css("display", "none")
+        $(`#${props.task._id + "disappear"}`).css("display", "none")
         props.objectToast({ 'type': 'Task', 'object': props.task })
 
     }
@@ -91,56 +91,58 @@ function ViewTaskByCrad(props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
-                        className="display-on-delete"
                     >
-                        <div onMouseOver={(e) => overTask(props.task._id)}
-                            onMouseOut={() => outOver(props.task._id)}
-                            className="show-task row mx-4 border-bottom"
-                        >
+                        <div id={props.task._id + "disappear"}>
+                            <div onMouseOver={(e) => overTask(props.task._id)}
+                                onMouseOut={() => outOver(props.task._id)}
+                                className="show-task row mx-4 border-bottom"
 
-                            <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
-                                icon={['fas', 'grip-vertical']}
-                            ></FontAwesomeIcon>
-                            <div className="col-3">
-                                <label
-                                    // className="py-2">
-                                    className="check-task py-2 ">
+                            >
 
-                                    <input type="checkbox" />
-                                    <span className="checkmark ml-1" onClick={() => addChalalit()}></span>
-                                </label>
-                                <input
-                                    className="show-card py-2"
-                                    value={editTaskName}
-                                    onChange={(e) => editTaskNameInReduxs(e.target.value)}
-                                    onBlur={(e) => editTask()}
-                                    onKeyPress={e => {
-                                        if (e.key === 'Enter') {
-                                            editTask()
-                                        }
-                                    }}
-                                >
+                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
+                                    icon={['fas', 'grip-vertical']}
+                                ></FontAwesomeIcon>
+                                <div className="col-3">
+                                    <label
+                                        // className="py-2">
+                                        className="check-task py-2 ">
 
-                                </input>
-                            </div>
-                            <label className="check-task py-2  px-2 col-3 view-details-btn">
-                                <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col " >
-                                <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
-                            </label>
-                            <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
-                            </label>
-                            {viewDetails ?
-                                <div className="closeDet" >
-                                    <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                        from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
+                                        <input type="checkbox" />
+                                        <span className="checkmark ml-1" onClick={() => addChalalit()}></span>
+                                    </label>
+                                    <input
+                                        className="show-card py-2"
+                                        value={editTaskName}
+                                        onChange={(e) => editTaskNameInReduxs(e.target.value)}
+                                        onBlur={(e) => editTask()}
+                                        onKeyPress={e => {
+                                            if (e.key === 'Enter') {
+                                                editTask()
+                                            }
+                                        }}
+                                    >
+
+                                    </input>
                                 </div>
-                                : null}
+                                <label className="check-task py-2  px-2 col-3 view-details-btn">
+                                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
+                                </label>
+                                <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
+                                </label>
+                                <label className="check-task border-left  py-2  px-2 col " >
+                                    <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                                </label>
+                                <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+                                </label>
+                                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                                </label>
+                                {viewDetails ?
+                                    <div className="closeDet" >
+                                        <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
+                                            from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
+                                    </div>
+                                    : null}
+                            </div>
                         </div>
                     </div>
                 )}
