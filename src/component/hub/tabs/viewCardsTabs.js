@@ -186,7 +186,7 @@ function ViewCardsTabs(props) {
                                                 </div>
                                             )}
                                         </Droppable>
-                                        <p className="add-task-tabs mt-1" onClick={addTask}>Add Task +</p>
+                                        <a href="#input-task" className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,8 +1,4 @@
-.body{
-    /* overflow-x: scroll!important; */
-    /* overflow-y:hidden!important; */
- 
-}
+
 .body >.row{
 /* padding-bottom: 5vh; */
     overflow-x: auto !important;
@@ -13,4 +9,17 @@
 .body > .row > .col-3 { 
     display: inline-block !important
     ; float: none !important; 
+}
+#add-card{
+    margin-top: -5vh;
+}
+a .add-card-tabs{
+    text-align: center !important;
+    color: var(--unnamed-color-34a38b);
+    text-align: left;
+    font: normal normal normal 18px/24px Roboto;
+    letter-spacing: 0px;
+    color: #34A38B;
+    text-transform: capitalize;
+    font-weight: bold;
 }

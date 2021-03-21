@@ -72,6 +72,8 @@ function ViewTaskByCrad(props) {
         let temp = { ...task }
         temp.name = editTaskName
         setTask(temp);
+        
+
         // props.EditTask(task);
 
     }
