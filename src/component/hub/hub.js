@@ -30,7 +30,7 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-
+import AddObject from './addObject/addObject'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -110,7 +110,6 @@ function Hub(props) {
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
-
                     </div>
 
 

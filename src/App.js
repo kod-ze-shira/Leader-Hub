@@ -5,19 +5,26 @@ import { Provider } from 'react-redux';
 import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
 import HeaderLeader from '@leadercodes/leader-header'
+// import { propTypes } from 'react-bootstrap/esm/Image';
+import { connect } from 'react-redux'
 
-function App() {
 
-  return (<>
-    <HeaderLeader appName='hub' userName='' />
-    <Provider store={Store}>
-      <>
-        {/* <ConfiguratorList></ConfiguratorList> */}
-        <Hub></Hub>
-      </>
-    </Provider>
-  </>
+export default function App(props) {
+
+  return (
+    <>
+      <HeaderLeader userName='renana-il' appName='hub' />‏
+
+      <Provider store={Store}>
+        <>
+          {/* <ConfiguratorList></ConfiguratorList> */}
+          <Hub></Hub>
+        </>
+      </Provider>
+    </>
   );
 }
 
-export default App;
+
+
+
