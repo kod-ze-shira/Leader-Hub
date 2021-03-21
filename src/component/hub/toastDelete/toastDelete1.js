@@ -9,7 +9,7 @@ export default function ToastDelete1(props) {
     const scrolling = useSpring({
         from: { transform: "translate(-60%,0)" },
         to: { transform: "translate(-5%,0)" },
-        config: { duration: 300 },//מהירות
+        config: { duration: 600 },//מהירות
         // reset: true,
         //reverse: key % 2 == 0,
         onRest: () => {

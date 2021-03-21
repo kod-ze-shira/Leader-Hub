@@ -17,3 +17,40 @@
       font-size: x-large;
       font-weight: 600;
   }
+  .details .form-control , .details  .css-yk16xz-control{
+      background-color: #EDF8F6 !important;
+      border:none !important;
+
+      /* color: var(--unnamed-color-0a102e); */
+text-align: left;
+font: normal normal medium 16px/21px Roboto;
+letter-spacing: 0.32px;
+  }
+  .title-view-details{
+    color: var(--unnamed-color-34a38b);
+    text-align: left;
+    font: normal normal bold 20px/28px Roboto;
+    letter-spacing: 0.48px;
+    color: #34A38B;
+    text-transform: capitalize;
+    opacity: 0.9;
+    border-bottom: 1px solid #707070;
+  }
+  input[type="color"] :focus{
+      border:none;
+  }
+  input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	/* width: 32px;
+	height: 32px; */
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	/* padding: 0; */
+    background-color: #F6F6FA;
+/* border: 2px solid #FFFFFF; */
+
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}

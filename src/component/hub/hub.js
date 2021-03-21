@@ -29,6 +29,7 @@ import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBel
 import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 import AddObject from './addObject/addObject'
 
 function Hub(props) {
@@ -46,20 +47,25 @@ function Hub(props) {
     const showToastToDelete = (objectToDelete) => {
         setObjectToDelete(objectToDelete)
         setShowToastDelete(true)
+
     }
     const deleteObject = () => {
-        // console.log(objectToDelete)
+        console.log(objectToDelete)
         setShowToastDelete(false)
-        if (objectToDelete.type == "Project") {
-            console.log(objectToDelete)
-            props['remove' + objectToDelete.type](objectToDelete.object)
-        }
-        else
-            props['remove' + objectToDelete.type](objectToDelete.object._id)
+        props['remove' + objectToDelete.type](objectToDelete.object._id)
 
     }
     const openConfigurator = () => {
         setOpen(!open);
+    }
+    const setShowToastDeletefunc = (value) => {
+        setShowToastDelete(value)
+        if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
+            $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
+        else
+            $(`#${objectToDelete.object._id}`).css("display", "block")
+
+
     }
     return (
         <>
@@ -67,30 +73,18 @@ function Hub(props) {
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
 
-                <div className="row">
+                <div className="row back-screen
+">
                     {open ?
                         <div className="col-2 px-0 mt-0">
                             <Configurator />
                         </div>
                         : null}
 
-                    <div className={open ? "col-10 bodyHub mt-4 pr-4" : "col-12 bodyHub mt-4 px-4"}>
-                        {/* <Header /> */}
-                        {/* <div className="col-2"> <Tools /></div> */}
-                        {/* {                     componentFlag==="#workspace"?   
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
-                                :
-<span/>
-} */}
-                        <AddObject />
-
+                    <div className={open ? "col-10 bodyHub mt-5 pr-4" : "col-12 bodyHub mt-5. px-4"}>
                         <Switch>
-                            {/* <Route path="/chedvi678@gmail.com/603f85549b557237f314eb9a/renana-il/share">
-                            <ProjectsPage />
-                            </Route> */}
-
                             <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                                 {/* <ProjectsByWorkspace /> */}
                             </Route>
                             <Route path="/:userName/allProjects" >
@@ -108,7 +102,7 @@ function Hub(props) {
                                 <TaskNotBelongCardForUser />
                             </Route>
                             <Route path="/:userName" >
-                                <Body />
+                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/" >
                                 {/* <Animation /> */}
@@ -120,11 +114,12 @@ function Hub(props) {
 
 
                     {showToastDelete ?
-                        // <h1 style={{ "position": "absolute" }}> hhhhhhhhhhhhh</h1>
                         <ToastDelete
                             toOnClose={deleteObject}
-                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name} />
+                            toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
+                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
+                        // objectToDelete.type
+                        />
                         : null}
 
                 </div>
@@ -145,6 +140,8 @@ const mapDispatchToProps = (dispatch) => {
         removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
         removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
+        removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
+
 
 
     }

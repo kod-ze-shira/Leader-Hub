@@ -8,8 +8,8 @@ import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
 // import { ProgressBar } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
-// import duplicate from '../../../img/duplicate-outline.png'
-// import { getProjectsByWorkspaceId } from '../../../../redux/middleware/crud';
+import $ from 'jquery'
+
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
@@ -44,15 +44,10 @@ function ViewProject(props) {
     }
 
     function deleteMyProject(event) {
-        props.setProject(props.myProject)
-        // props.projectToDelete(props.myProject)
-        props.showToast(true)
-        debugger
-        // props.showToast({ 'type': 'Project', 'object': props.myProject })
-        // showToastToDelete
+        props.showToast({ 'type': 'Project', 'object': props.myProject.project })
+        $(`#${props.myProject.project._id}`).css("display", "none")
         event.stopPropagation();
     }
-
 
     if (props.myProject.countTasks) {
         complited = 100 / props.myProject.countTasks;
@@ -71,11 +66,13 @@ function ViewProject(props) {
     complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
     return (
         <>
-            <tr className='projectForWorkspace'
+            <tr
+                className='projectForWorkspace col-12 '
                 onClick={(e) => routeToCards(e)}
                 onMouseOver={() => overProject(props.myProject.project._id)}
                 onMouseOut={() => outOver(props.myProject.project._id)}
                 id={props.myProject.project._id}>
+                {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
                     <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
                     <span style={{ 'color': props.myProject.project.color }}>
@@ -131,9 +128,7 @@ function ViewProject(props) {
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
                         src={require('../../../img/bin.png')} />                </td>
-
             </tr >
-
         </>
     )
 }
