@@ -6,25 +6,18 @@ import { actions } from '../../../redux/actions/action'
 import ViewCardsTabs from './viewCardsTabs'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './tabs.css'
+import $ from "jquery"
 function Tabs(props) {
 
     useEffect(() => {
 
     }, [props.projectId])
-    const [projectId, setProjectId] = useState()
-    const [viewCardsByProject, setViewCardsByProject] = useState(false)
-    const [workspaceId, setWorkspaceId] = useState()
+
     const [showInput, setShowInput] = useState(false)
-    const [showToastDelete, setShowToastDelete] = useState(false)
-    const [taskDeleted, setTaskDeleted] = useState()
-    const [cardDeleted, setCardDeleted] = useState()
-    const [taskOrCard, setTaskOrCard] = useState()
-    const [showDetails, setShowDetails] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
 
     function onDragEndׂ(e) {
-        console.log(e)
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
                 onDragEndׂCard(e)
@@ -57,6 +50,9 @@ function Tabs(props) {
         setInputValue(evt.target.value)
     }
     const showInputToAddCard = () => {
+        // let headerHeight = document.getElementsByClassName("add-card").style.height
+        // let headerHeight =  $("#add-card").height()
+        // console.log(headerHeight)
         setShowInput(!showInput)
         setShowHeader(!showHeader)
 
@@ -73,54 +69,57 @@ function Tabs(props) {
     return (
         <>
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
+            {props.cards.length ?
+                <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
+                    <Droppable droppableId={props.cards[0]._id} >
+                        {provided => (
+                            <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}>
+                                <div className="body">
+                                    <div className="row mx-3">
 
-            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
-                <Droppable droppableId={props.cards[0]._id} >
-                    {provided => (
-                        <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}>
-                            <div className="body">
-                                <div className="row mx-3">
-                                    {props.cards.length ?
                                         <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
                                                 return <ViewCardsTabs showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
-                                        : null
-                                    }
-                                    <div className="col-3 mt-4">
-                                        <div className="view-cards-tabs">
-                                            <div class="card " >
-                                                <div class="container">
-                                                    <div class="card-header row">
-                                                        {showInput ?
-                                                            <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
-                                                                if (event.key === 'Enter') {
-                                                                    newCard()
-                                                                }
-                                                            }}></input>
-                                                            : null
-                                                        }
-                                                    </div>
-                                                </div>
 
-                                                <div class="card-body">
-                                                    <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
+                                        <div className="col-3" >
+                                            <div className="view-cards-tabs">
+                                                <div class="card " >
+                                                    <div class="container" >
+                                                        {showInput ?
+
+                                                            <div
+                                                                // style={showInput ? { "opacity": "1" } : { "opacity": "0" }}
+                                                                class="card-header row">
+                                                                <input id="add-card1"  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                                    if (event.key === 'Enter') {
+                                                                        newCard()
+                                                                    }
+                                                                }}></input>
+                                                            </div>
+                                                            : null}
+                                                    </div>
+                                                    {/* <div className={open ? "col-10 bodyHub mt-5 pr-4" : "col-12 bodyHub mt-5. px-4"}> */}
+
+                                                    <div className="card-body " id={!showInput ? "add-card" : ""}>
+                                                        <a className="add-card-tabs" href="#add-card1" onClick={showInputToAddCard}>Add Card+</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {provided.placeholder}
                             </div>
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
-
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                : null
+            }
 
         </>
     )

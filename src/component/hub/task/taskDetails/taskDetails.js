@@ -9,34 +9,29 @@ import status_reducer from '../../../../redux/Reducers/status_reducer';
 function TaskDetails(props) {
 
     useEffect(() => {
-        //    const getAllStatusesTaskForUser= props.getAllStatusesTaskForUser()
-        // console.log("getAllStatusesTaskForUser",getAllStatusesTaskForUser);
-        // console.log("status",status);
-        console.log();
-    }, [props.task])
+       
+    }, [props.taskr])
     const task = props.task
     const status = props.status
 
     const [editTask, setEditTask] = useState(task)
     const [editTaskName, setEditTaskName] = useState(props.taskr.name)
-    console.log(props.taskr.name)
-
+    // 
     const handleChange = (event) => {
         let cons1, cons2
         console.log(event.name)
         if (event.name == "status") {
             cons1 = event.name
             cons2 = event.value
-            console.log(cons1, cons2)
         }
         else {
             // const { name, value } = event.target;
             cons1 = event.target.name
             cons2 = event.target.value
-            // if (event.name == "name") {
-            //     setEditTaskName(cons2)
-            //     props.setTaskName(cons2)
-            // }
+            if (event.name == "name") {
+                setEditTaskName(cons2)
+                props.setTaskName(cons2)
+            }
             if (cons1 == "dueDate" || cons1 == "startDate") {
                 cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
@@ -49,11 +44,9 @@ function TaskDetails(props) {
 
 
     }
-    const a = () => {
-        console.log(task.dueDate)
-    }
+  
     const saveNewTask = () => {
-        console.log(editTask)
+        // console.log(editTask)
         props.EditTask(editTask)
     }
     function deleteTask() {
@@ -78,7 +71,7 @@ function TaskDetails(props) {
                         type="text" class="form-control"
                         id="name"
                         // placeholder="instructions for using this project"
-                        value={editTaskName} />
+                        placeholder={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
