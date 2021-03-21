@@ -96,9 +96,7 @@ function ViewTaskByCrad(props) {
                             <div onMouseOver={(e) => overTask(props.task._id)}
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom"
-
                             >
-
                                 <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
@@ -106,7 +104,6 @@ function ViewTaskByCrad(props) {
                                     <label
                                         // className="py-2">
                                         className="check-task py-2 ">
-
                                         <input type="checkbox" />
                                         <span className="checkmark ml-1" onClick={() => addChalalit()}></span>
                                     </label>

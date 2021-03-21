@@ -9,7 +9,7 @@ import status_reducer from '../../../../redux/Reducers/status_reducer';
 function TaskDetails(props) {
 
     useEffect(() => {
-    //    const getAllStatusesTaskForUser= props.getAllStatusesTaskForUser()
+        //    const getAllStatusesTaskForUser= props.getAllStatusesTaskForUser()
         // console.log("getAllStatusesTaskForUser",getAllStatusesTaskForUser);
         // console.log("status",status);
         console.log();
@@ -18,7 +18,8 @@ function TaskDetails(props) {
     const status = props.status
 
     const [editTask, setEditTask] = useState(task)
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [editTaskName, setEditTaskName] = useState(props.taskr.name)
+    console.log(props.taskr.name)
 
     const handleChange = (event) => {
         let cons1, cons2
@@ -32,10 +33,10 @@ function TaskDetails(props) {
             // const { name, value } = event.target;
             cons1 = event.target.name
             cons2 = event.target.value
-            if (event.name == "name") {
-                setEditTaskName(cons2)
-                props.setTaskName(cons2)
-            }
+            // if (event.name == "name") {
+            //     setEditTaskName(cons2)
+            //     props.setTaskName(cons2)
+            // }
             if (cons1 == "dueDate" || cons1 == "startDate") {
                 cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
@@ -128,7 +129,7 @@ function TaskDetails(props) {
                 </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
-            </div> 
+            </div>
 
         </>
 
