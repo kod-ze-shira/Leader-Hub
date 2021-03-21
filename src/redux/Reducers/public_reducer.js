@@ -10,6 +10,7 @@ const initialState = {
     projects: [],
     cards: [],
     tasks: [],
+    statuses: [],
     isConfiguratorOpen: "false",
     // close: "false"
 }
@@ -37,6 +38,10 @@ const publicData = {
     },
     addNewWorkspace(state, action) {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
+    },
+    addNewStatus(state, action) {
+        debugger
+        state.statuses.push(action.payload)
     },
     deletTask(state, action) {
         state.cards.map(card => {

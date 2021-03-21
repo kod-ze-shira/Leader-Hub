@@ -100,7 +100,7 @@ function NewProject(props) {
         <>
         
         <div className="details mr-5 ml-4">
-                <h5 className="my-5 title-view-details pb-2">Project details</h5>
+                <h5 className="my-5 title-view-details pb-2">Add Project</h5>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeFiledInProject(e)}
