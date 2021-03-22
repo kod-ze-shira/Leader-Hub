@@ -12,54 +12,6 @@ function TaskDetails(props) {
         props.getAllStatusesTaskForUser();
         console.log(props.statuses);
     }, [props.task])
-    const task = props.task
-    const status = props.status
-
-    const [editTask, setEditTask] = useState(task)
-    const [statusTemp, setStatusTemp] = useState({})
-    const [newStatus, setNewStatus] = useState({
-        statusName: "",
-        user: props.user,
-        tasks: [],
-        active: true
-    })
-    const handleChangeStatus = (event) => {
-        const { name, value } = event.target
-        setNewStatus(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
-
-    const handleChange = (event) => {
-        let cons1, cons2
-        console.log(event.name)
-        if (event.name == "status") {
-            cons1 = event.name
-            cons2 = event.value
-        }
-        else {
-            // const { name, value } = event.target;
-            cons1 = event.target.name
-            cons2 = event.target.value
-            if (event.name == "name") {
-                setEditTaskName(cons2)
-                console.log("hi");
-                props.setTaskName(cons2)
-            }
-            if (cons1 == "dueDate" || cons1 == "startDate") {
-                cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
-
-            }
-        }
-        setEditTask(prevState => ({
-            ...prevState,
-            [cons1]: cons2
-        }));
-
-
-    }
 
     useEffect(() => {
         let status = [];
@@ -76,6 +28,52 @@ function TaskDetails(props) {
         setStatusTemp(status)
     }, [props.statuses])
 
+    const task = props.task
+    const status = props.status
+
+    const [editTask, setEditTask] = useState(task)
+    const [statusTemp, setStatusTemp] = useState({})
+    const [newStatus, setNewStatus] = useState({
+        statusName: "",
+        color: "",
+    })
+    const handleChangeStatus = (event) => {
+        const { name, value } = event.target
+        setNewStatus(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+    const [editTaskName, setEditTaskName] = useState(props.task.name)
+
+    const handleChange = (event) => {
+        let name, value
+        if (event.name == "status") {
+            name = event.name
+            value = event.value
+        }
+        else {
+            name = event.target.name
+            value = event.target.value
+            if (name == "name") {
+                setEditTaskName(value)
+                props.setTaskName(value)
+            }
+            if (name == "dueDate" || name == "startDate") {
+                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
+
+            }
+        }
+        setEditTask(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+
+
+    }
+
+
+
 
     const addStatus = () => {
         console.log(newStatus);
@@ -89,8 +87,6 @@ function TaskDetails(props) {
     }
     return (
         <>
-
-
             <div className="details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between  mx-1" >
@@ -148,23 +144,25 @@ function TaskDetails(props) {
                         className="col-5"
                     />
                 </div>
-                <div class="form-group">
-                    <label for="name">NameStatus</label>
-                    <input name="statusName" onChange={(e) => handleChangeStatus(e)}
-                        type="text" class="form-control"
-                        id="statusName"
-                        placeholder="enter status name"
-                    // value={status.statusName} 
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="color">colorStatus</label>
-                    <input name="name" onChange={(e) => handleChangeStatus(e)}
-                        type="color" class="form-control"
-                        id="color"
-                    // placeholder="enter status name"
-                    // value={status.color} 
-                    />
+                <div className="row justify-content-between">
+                    <div class="form-group col-4">
+                        <label for="name">NameStatus</label>
+                        <input name="statusName" onChange={(e) => handleChangeStatus(e)}
+                            type="text" class="form-control"
+                            id="statusName"
+                            placeholder="enter status name"
+                        // value={status.statusName} 
+                        />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="color">colorStatus</label>
+                        <input name="color" onChange={(e) => handleChangeStatus(e)}
+                            type="color" class="form-control"
+                            id="color"
+                        // placeholder="enter status name"
+                        // value={status.color} 
+                        />
+                    </div>
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
                     <button onClick={(e) => addStatus(e)}>new status</button>
@@ -192,7 +190,7 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        createStatus: () => dispatch(actions.createStatus())
+        createStatus: (status) => dispatch(actions.createStatus(status))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

@@ -40,8 +40,7 @@ const publicData = {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
     },
     addNewStatus(state, action) {
-        debugger
-        state.statuses.push(action.payload)
+        state.statuses.push({ "statusTask": action.payload })
     },
     deletTask(state, action) {
         state.cards.map(card => {
@@ -171,6 +170,8 @@ const publicData = {
 
         )
     },
+
+
     addWorkspaceToWorkspaces(state, action) {
         state.workspaces.push(action.payload)
     }
