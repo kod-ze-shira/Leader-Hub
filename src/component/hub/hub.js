@@ -30,11 +30,14 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import AddObject from './addObject/addObject'
+import HeaderLeader from '@leadercodes/leader-header'
+import ViewDetails from './viewDetails/viewDetails'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
+    const [showViewDitails, setShowViewDitails] = useState(false)
     // const [componentFlag, setComponentFlag] = useState("")
     // const {location}=props
     // useEffect(() => {
@@ -63,11 +66,15 @@ function Hub(props) {
     }
     return (
         <>
+            <HeaderLeader userName={props.user} appName='hub' />‏
 
+
+            {/* } */}
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
 
                 <div className="row">
+
                     {open ?
                         <div className="col-2 px-0 mt-0">
                             <Configurator />
@@ -75,6 +82,13 @@ function Hub(props) {
                         : null}
 
                     <div className={open ? "col-10 bodyHub mt-4 pr-4" : "col-12 bodyHub mt-4 px-4"}>
+                        {showViewDitails ?
+                            <ViewDetails
+                                closeViewDetails={() => setShowViewDitails(false)}
+                            // showToast={showToast}
+                            // from={addOrEditProject} workspaceId={idWorkspace} 
+                            />
+                            : null}
                         {/* <Header /> */}
                         {/* <div className="col-2"> <Tools /></div> */}
                         {/* {                     componentFlag==="#workspace"?   
@@ -82,7 +96,7 @@ function Hub(props) {
                                 :
 <span/>
 } */}
-                        <AddObject />
+                        <AddObject showViewDitails={() => setShowViewDitails(true)} />
 
                         <Switch>
                             {/* <Route path="/chedvi678@gmail.com/603f85549b557237f314eb9a/renana-il/share">
@@ -128,6 +142,7 @@ function Hub(props) {
                         : null}
 
                 </div>
+
             </Router >
         </>
     )

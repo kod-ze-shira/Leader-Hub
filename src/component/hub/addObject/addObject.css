@@ -30,10 +30,7 @@
       bottom: 86px;
 }
 
-.add_new_btn:hover { 
-    background-color:  white;
-    color:var(--light-light-blue);
-}
+
 .addNewP{
     text-align: left;
     font: normal normal bold 13px/28px Roboto;
@@ -47,6 +44,15 @@
 #close{
     height: 17px;
     display: none;   
+    margin-bottom: 6px;
+}
+
+.borderClose{
+    background-color: white;
+    color: var(--light-light-blue);
+    border: 3px solid var(--light-light-blue);
+    color:var(--light-light-blue);
+    background-color: white;
 }
 
 #plus{

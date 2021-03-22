@@ -11,35 +11,33 @@ function AddObject(props) {
     function overButtonAdd(e) {
         document.getElementById('close').style.display = 'inline-block';
         $('.addNewP').css({ 'display': 'block' })
-        // document.getElementsByClassName('addNewP').style.display = 'inline-block';
-
         document.getElementById('plus').style.display = 'none';
-        // document.getElementsByClassName('add_new_btn').style.backgroundColor = 'white';
-        // document.getElementsByClassName('add_new_btn').style.color = 'var(--light-light-blue)';
-    }
-    function mouseOutButtonAdd1(e) {
-        e.stopPropagation();
+        // document.getElementById('add_new_btn').style.backgroundColor = 'white';
+        // document.getElementById('add_new_btn').style.color = 'var(--light-light-blue)';
+        document.getElementById("add_new_btn").classList.add("borderClose");
 
     }
+
     function mouseOutButtonAdd(e) {
         document.getElementById('close').style.display = 'none'
         document.getElementById('plus').style.display = 'inline-block'
         $('.addNewP').css({ 'display': 'none' })
-        // document.getElementsByClassName('add_new_btn').style.backgroundColor = 'white';
-        // document.getElementsByClassName('add_new_btn').style.color = 'var(--light-light-blue)';
+        document.getElementById("add_new_btn").classList.remove("borderClose");
+
     }
     function openViewDitails(type) {
 
 
         switch (type) {
             case 'Workspace':
-                alert('WORKSPACE')
+                props.showViewDitails('addWorkspace')
                 break;
             case 'Project':
                 if (window.location.href.indexOf('workspace') != -1 ||
                     window.location.href.indexOf('allProjects') != -1) {
 
-                    alert('Project')
+                    props.showViewDitails('newProject')
+
                 }
                 break;
             case 'Card':
@@ -55,25 +53,44 @@ function AddObject(props) {
                 break;
         }
     }
+
+    function startComponentAddObject() {
+
+        if (window.location.href.indexOf('workspace') != -1 ||
+            window.location.href.indexOf('allProjects') != -1) {
+            document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
+            document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
+        } else
+            if (window.location.href.indexOf('projectPlatform') == -1) {
+                document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
+                document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
+                document.getElementById("newProjectInComponentAddObject").style.cursor = "no-drop";
+            }
+    }
     return (
         <>
             <div className='addNewObject'
-            // onMouseOut={(e) => mouseOutButtonAdd(e)}
+                onMouseLeave={(e) => mouseOutButtonAdd(e)}
             >
-                <div className='add_new_btn' onMouseOver={(e) => overButtonAdd(e)}
-                    onMouseOut={(e) => mouseOutButtonAdd1(e)}
-                >
+                <div className='add_new_btn' id='add_new_btn'
+                    onMouseOver={(e) => overButtonAdd(e)} >
                     <span id='plus'>+</span>
                     <FontAwesomeIcon id='close' icon={["fas", "times"]} />
 
                 </div>
                 <div id='addNewP2'
-                    onMouseOut={(e) => mouseOutButtonAdd1(e)}
+
                 >
                     <p className='addNewP' onClick={(e) => openViewDitails('Workspace')}>New Workspace</p>
-                    <p className='addNewP' onClick={(e) => openViewDitails('Project')}>New Project</p>
-                    <p className='addNewP' onClick={(e) => openViewDitails('Card')}>New Card</p>
-                    <p className='addNewP' onClick={(e) => openViewDitails('Task')}>New Task</p>
+                    <p className='addNewP' id='newProjectInComponentAddObject'
+                        onMouseOver={() => startComponentAddObject()}
+                        onClick={(e) => openViewDitails('Project')}>New Project</p>
+                    <p className='addNewP' id='newCardInComponentAddObject'
+                        onMouseOver={() => startComponentAddObject()}
+                        onClick={(e) => openViewDitails('Card')}>New Card</p>
+                    <p className='addNewP' id='newTaskInComponentAddObject'
+                        onMouseOver={() => startComponentAddObject()}
+                        onClick={(e) => openViewDitails('Task')}>New Task</p>
                 </div>
             </div >
         </>
