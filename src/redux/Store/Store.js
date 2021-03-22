@@ -15,6 +15,7 @@ import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskB
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer, getFullWorkspacesForUser } from '../middleware/workspaceCrud';
 import { createNewTeam } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
+import { createStatus, getAllStatusesTaskForUser } from '../middleware/statusCrud';
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer });
 
@@ -44,7 +45,9 @@ const store = createStore(
                 duplicateWorkspace,
                 getAllTasksNotBelongsCardForUser,
                 editCard,
-                removeCardById
+                removeCardById,
+                getAllStatusesTaskForUser,
+                createStatus
             ))
 )
 var url = window.location;

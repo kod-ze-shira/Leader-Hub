@@ -3,23 +3,15 @@ import produce from 'immer';
 import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
-    status: {
+    statuses: {
     }
 }
 
-const status = {
-
+const statuses = {
     setStatuses(state, action) {
-        state.status = action.payload
+        state.statuses = action.payload
     },
 
-    // setTask(state, action) {
-    //     state.task = action.payload;
-    // },
-
-    // setisConfiguratorOpenTask(state, action) {
-    //     state.task.isConfiguratorOpenTask = !state.task.isConfiguratorOpenTask
-    // },
 }
 
-export default produce((state, action) => createReducer(state, action, status), initialState);
+export default produce((state, action) => createReducer(state, action, statuses), initialState);
