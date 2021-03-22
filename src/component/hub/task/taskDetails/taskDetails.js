@@ -61,7 +61,6 @@ function TaskDetails(props) {
             }
             if (name == "dueDate" || name == "startDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
-
             }
         }
         setEditTask(prevState => ({
