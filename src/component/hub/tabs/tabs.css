@@ -8,10 +8,10 @@
 
 .body > .row > .col-3 { 
     display: inline-block !important
-    ; float: none !important; 
+    ; float: none !important;  
 }
 #add-card{
-    margin-top: -5vh;
+    /* margin-top: -5vh; */
 }
 a .add-card-tabs{
     text-align: center !important;

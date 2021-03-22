@@ -10,7 +10,6 @@ const initialState = {
     projects: [],
     cards: [],
     tasks: [],
-    statuses: [],
     isConfiguratorOpen: "false",
     // close: "false"
 }
@@ -39,9 +38,7 @@ const publicData = {
     addNewWorkspace(state, action) {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
     },
-    addNewStatus(state, action) {
-        state.statuses.push({ "statusTask": action.payload })
-    },
+   
     deletTask(state, action) {
         state.cards.map(card => {
             if (card._id == action.payload.card)
@@ -149,6 +146,7 @@ const publicData = {
                 card.tasks.push(action.payload);
         })
     },
+   
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
         state.workspaces = state.workspaces.filter((_, i) =>

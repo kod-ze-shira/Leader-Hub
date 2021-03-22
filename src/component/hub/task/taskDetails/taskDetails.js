@@ -30,6 +30,7 @@ function TaskDetails(props) {
 
     const task = props.task
     const status = props.status
+    const [openPopUp, setOpenPopUp] = useState()
 
     const [editTask, setEditTask] = useState(task)
     const [statusTemp, setStatusTemp] = useState({})
@@ -143,6 +144,7 @@ function TaskDetails(props) {
                         className="col-5"
                     />
                 </div>
+
                 <div className="row justify-content-between">
                     <div class="form-group col-4">
                         <label for="name">NameStatus</label>
