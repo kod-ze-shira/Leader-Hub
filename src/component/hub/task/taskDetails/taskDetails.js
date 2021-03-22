@@ -45,6 +45,7 @@ function TaskDetails(props) {
             cons2 = event.target.value
             if (event.name == "name") {
                 setEditTaskName(cons2)
+                console.log("hi");
                 props.setTaskName(cons2)
             }
             if (cons1 == "dueDate" || cons1 == "startDate") {
@@ -77,26 +78,15 @@ function TaskDetails(props) {
 
 
     const addStatus = () => {
-        alert("hi")
         console.log(newStatus);
         props.createStatus(newStatus)
     }
     const saveNewTask = () => {
-        // console.log(editTask)
         props.EditTask(editTask)
     }
     function deleteTask() {
         props.showToast(true)
     }
-    // const viewAllStatuses = props.statuses ? props.statuses.map((status) => {
-    //     return status.tasks.map((task) => {
-    //         return task.statusName
-    //     })
-    // }) : null
-
-    // const statusList = [{ value: "done", name: "status", label: "done" },
-    // { value: "to do", name: "status", label: "todo" },
-    // { value: "in progress", name: "status", label: "in progress" }]
     return (
         <>
 
@@ -113,7 +103,7 @@ function TaskDetails(props) {
                         type="text" class="form-control"
                         id="name"
                         // placeholder="instructions for using this project"
-                        placeholder={editTaskName} />
+                        value={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
