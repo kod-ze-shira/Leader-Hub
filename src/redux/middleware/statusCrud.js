@@ -72,6 +72,39 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+// {{urlHub}}/api/renana-il/editStatus
+
+export const editStatus = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_STATUS') {
+        let status = getState().status_reducer.status;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editStatus`
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ 'status': status }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                dispatch(actions.setStatuses(data.result))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
 
 
 //this func to check the headers jwt and username, if them not good its throw to login
