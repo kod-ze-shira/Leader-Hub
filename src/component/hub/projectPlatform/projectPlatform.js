@@ -21,14 +21,7 @@ function ProjectPlatform(props) {
     const [inputValue, setInputValue] = useState()
     const textInput = useRef(null);
 
-    // $(function () {
-    //     $('.add-new-btn').hover(function () {
-    //         $('.add-new-pop-up').css('display', 'block')
-    //     }, function () {
-    //         // on mouseout, reset the background colour
-    //         $('.add-new-pop-up').css('display', 'none');
-    //     });
-    // });
+
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
@@ -65,7 +58,7 @@ function ProjectPlatform(props) {
     }
     return (
         <>
-            <div className="mt-4 body container-fluid">
+            <div className=" body container-fluid">
                 <div className="cards">
                     <CardsByProject showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag} />
                     <div className="add-new-pop-up ">
@@ -89,7 +82,6 @@ function ProjectPlatform(props) {
                             }}></input>
                         : null}
                     <a href="#input-card" className="ml-5 mt-3 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
-                    <div className="add-new-btn">+</div>
                 </div>
                 {showToastDelete ?
                     <ToastDelete

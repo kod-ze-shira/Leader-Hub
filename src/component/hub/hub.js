@@ -31,11 +31,16 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 import AddObject from './addObject/addObject'
+import HeaderLeader from '@leadercodes/leader-header'
+import ViewDetails from './viewDetails/viewDetails'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
+    const [showViewDitails, setShowViewDitails] = useState(false)
+    const [viewDetails, setViewDetails] = useState(false)
+
     // const [componentFlag, setComponentFlag] = useState("")
     // const {location}=props
     // useEffect(() => {
@@ -66,8 +71,14 @@ function Hub(props) {
             $(`#${objectToDelete.object._id}`).css("display", "block")
 
     }
+
+
     return (
         <>
+            <HeaderLeader userName={props.user} appName='hub' />‏
+
+
+            {/* } */}
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
 
@@ -77,7 +88,16 @@ function Hub(props) {
                             <Configurator />
                         </div>
                         : null}
-                    <div className={open ? "col-10 bodyHub mt-5 pr-4" : "col-12 bodyHub mt-5. px-4"}>
+                    <div className={open ? "col-10 bodyHub  pr-4" : "col-12 bodyHub  px-4"}>
+                        {viewDetails ?
+                            <ViewDetails
+                                closeViewDetails={() => setViewDetails(false)}
+                                // showToast={showToast}
+                                from={props.setShowViewDitails}
+                            // workspaceId={idWorkspace} 
+                            />
+                            : null
+                        }
                         <Switch>
                             <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -114,7 +134,11 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
+
+                    <AddObject setShowViewDitails={() => setViewDetails(true)} />
+                    {/* setShowViewDitails={} */}
                 </div>
+
             </Router >
         </>
     )

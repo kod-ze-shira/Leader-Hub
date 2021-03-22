@@ -9,16 +9,16 @@ import HeaderLeader from '@leadercodes/leader-header'
 
 export default function App(props) {
 
-  return (<>
-    <HeaderLeader appName='hub' userName='' />
-    <Provider store={Store}>
-      <>
-        {/* <ConfiguratorList></ConfiguratorList> */}
-        <Hub></Hub>
-        {/* <ViewAllStatuses/> */}
-      </>
-    </Provider>
-  </>
+  return (
+    <>
+
+      <Provider store={Store}>
+        <>
+          {/* <ConfiguratorList></ConfiguratorList> */}
+          <Hub></Hub>
+        </>
+      </Provider>
+    </>
   );
 }
 

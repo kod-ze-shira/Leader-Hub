@@ -1,3 +1,9 @@
 .left_nav{
+  /* width: 90px; */
+  height: 100%;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  /* box-shadow: 0px 3px 6px #00000029; */
+  opacity: 1;
+  margin-top: 31px !important;
 
  }
