@@ -4,6 +4,7 @@ import project_reducer from '../Reducers/project_reducer';
 import task_reducer from '../Reducers/task_reducer';
 import workspace_reducer from '../Reducers/workspace_reducer';
 import card_reducer from '../Reducers/card_reducer';
+import status_reducer from '../Reducers/status_reducer';
 import public_reducer from '../Reducers/public_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -14,8 +15,9 @@ import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskB
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer, getFullWorkspacesForUser } from '../middleware/workspaceCrud';
 import { createNewTeam } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
+import { createStatus, getAllStatusesTaskForUser } from '../middleware/statusCrud';
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer });
 
 const store = createStore(
     reducers,
@@ -43,7 +45,9 @@ const store = createStore(
                 duplicateWorkspace,
                 getAllTasksNotBelongsCardForUser,
                 editCard,
-                removeCardById
+                removeCardById,
+                getAllStatusesTaskForUser,
+                createStatus
             ))
 )
 var url = window.location;

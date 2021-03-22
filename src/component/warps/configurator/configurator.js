@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // import React, { Component } from 'react';
-import './configurator.css'
 import ReactDom from 'react-dom';
 
 export default function Configurator() {

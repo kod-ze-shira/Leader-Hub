@@ -43,8 +43,10 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': 'rgb(220 220 226)' })
     }
+
     function delete_workspace() {
-        props.setShowToastDeleteWhenClickDelete()
+        $(`#${workspace.workspace._id}`).css("display", "none")
+        props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace.workspace })
         props.setWorkspace(workspace);
     }
     return (
@@ -80,7 +82,7 @@ function ViewWorkspaceGrid(props) {
                         </div>
                         <div className="name "><p>{workspace.workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
-                            <p>{workspace.workspace.productionDate}</p>
+                            <p className="productionDateW">{workspace.workspace.productionDate}</p>
                         </div>
                     </div>
                 </div>

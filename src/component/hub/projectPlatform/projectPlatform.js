@@ -8,15 +8,9 @@ import ToastDelete from '../toastDelete/toastDelete1';
 import $ from 'jquery'
 
 function ProjectPlatform(props) {
-    const [projectId, setProjectId,] = useState()
-    const [viewCardsByProject, setViewCardsByProject] = useState(false)
-    const [workspaceId, setWorkspaceId] = useState()
     const [showInput, setShowInput] = useState(false)
     const [showToastDelete, setShowToastDelete] = useState(false)
-    const [taskDeleted, setTaskDeleted] = useState()
-    const [cardDeleted, setCardDeleted] = useState()
     const [taskOrCard, setTaskOrCard] = useState()
-
 
     useEffect(() => {
         {
@@ -24,11 +18,6 @@ function ProjectPlatform(props) {
         };
     }, []);
 
-    const changeProjectId = () => {
-        // setProjectId(value)
-        setViewCardsByProject(true)
-    }
-    const [showDetails, setShowDetails] = useState(false)
     const [inputValue, setInputValue] = useState()
     const textInput = useRef(null);
 
@@ -57,7 +46,6 @@ function ProjectPlatform(props) {
         // props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
         setTaskOrCard(taskOrCard)
         props.showToast(taskOrCard)
-        // setShowToastDelete(true)
     }
 
     const deleteTaskOrCard = () => {
@@ -118,13 +106,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
-        removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
-        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
+        // removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
+        // removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
+        // getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+        // getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
         newCard: (cardname) => dispatch(actions.newCard(cardname)),
-
     }
 
 

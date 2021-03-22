@@ -9,8 +9,7 @@ import Tabs from '../tabs/tabs'
 function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
-    const [present, setPresent] = useState("list");
-
+    const [present, setPresent] = useState("tabs");
 
     useEffect(() => {
 
@@ -33,7 +32,8 @@ function CardsPage(props) {
             case 'gantt':
                 return <GanttDesign />
             default:
-                return <ProjectPlatform showToast={showToast} flag={flag} />
+                // return <Tabs showToast={showToast} projectId={props.project._id} />
+            return <ProjectPlatform showToast={showToast} flag={flag} />
         }
     }
     return (
@@ -47,7 +47,9 @@ function CardsPage(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        workspaces: state.public_reducer.workspaces
+        workspaces: state.public_reducer.workspaces,
+        project: state.project_reducer.project,
+
     }
 }
 

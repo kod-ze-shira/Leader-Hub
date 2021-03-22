@@ -87,8 +87,11 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
 
-        if (nameAction == "delete")
+        if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
+            $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
+
+        }
 
     };
     const [task, setTask] = useState(false)
@@ -102,7 +105,7 @@ function ViewCardsTabs(props) {
 
     return (
         <>
-            <div className="col-3 mt-4">
+            <div className="col-3 mt-4" >
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -110,7 +113,8 @@ function ViewCardsTabs(props) {
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
                         >
-                            <div className="view-cards-tabs">
+                            <div className="view-cards-tabs"
+                                id={props.cardFromMap._id + "disappear"}>
                                 <div class="card " >
                                     <div class="container">
                                         <div class="card-header row">
@@ -127,7 +131,16 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-
+                                            {/* <div class="nav-item dropdown more">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    ...
+                                                 </a>
+                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                    <a class="dropdown-item" href="#" >view</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                                 . . .
                                             </Button>
@@ -173,7 +186,7 @@ function ViewCardsTabs(props) {
                                                 </div>
                                             )}
                                         </Droppable>
-                                        <p className="add-task-tabs mt-1" onClick={addTask}>Add Task +</p>
+                                        <a href="#input-task" className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
                                     </div>
                                 </div>
                             </div>

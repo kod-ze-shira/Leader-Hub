@@ -25,19 +25,17 @@ function AddObject(props) {
         document.getElementById("add_new_btn").classList.remove("borderClose");
 
     }
-    function openViewDitails(type) {
 
+    function openViewDitails(type) {
 
         switch (type) {
             case 'Workspace':
-                props.showViewDitails('addWorkspace')
+                props.setShowViewDitails('addWorkspace')
                 break;
             case 'Project':
                 if (window.location.href.indexOf('workspace') != -1 ||
                     window.location.href.indexOf('allProjects') != -1) {
-
-                    props.showViewDitails('newProject')
-
+                    props.setShowViewDitails('newProject')
                 }
                 break;
             case 'Card':
@@ -60,12 +58,13 @@ function AddObject(props) {
             window.location.href.indexOf('allProjects') != -1) {
             document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
             document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
-        } else
-            if (window.location.href.indexOf('projectPlatform') == -1) {
-                document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
-                document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
-                document.getElementById("newProjectInComponentAddObject").style.cursor = "no-drop";
-            }
+        }
+        // else
+        //     if (window.location.href.indexOf('projectPlatform') == -1) {
+        //         document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
+        //         document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
+        //         document.getElementById("newProjectInComponentAddObject").style.cursor = "no-drop";
+        //     }
     }
     return (
         <>

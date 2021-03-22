@@ -83,7 +83,48 @@ function EditProject(props) {
 
     return (
         <>
-            <div className='details-task'>
+        
+        <div className="details mr-5 ml-4">
+                <h5 className="my-5 title-view-details pb-2">Project details</h5>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input name="name"  onChange={(e) => changeNameProject(e)}
+                        id='nameProject' type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
+                         onChange={(e) => changeDescriptionProject(e)}></textarea>
+                </div>
+                <div className="row justify-content-between">
+                    <div class="form-group col-5">
+                        <label for="color">Color</label>
+                        <input name="color"
+                            className=" form-control "
+                            onChange={(e) => changeColorProject(e)}
+                            type="color"
+                            id='colorProject'
+                        />
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="color">Due Date</label>
+                        <input
+                            className="form-control "
+                            name="dueDate"
+                            type="date"
+                            id='dueDateProject'
+                            onChange={(e) => changeDueDateProject(e)}
+                            />
+                    </div>
+                </div>
+                <div className="row justify-content-between  mx-1 btns-in-view-details-project">
+                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
+                        <img src={require('../../../img/bin.png')}></img> Delete
+                </button>
+                    <button button onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
+                </div>
+            </div>
+            {/* <div className='details-task'>
                 <div>
                     <h5 className="mt-3">Edit Project</h5>
                     <hr />
@@ -112,8 +153,7 @@ function EditProject(props) {
                                 className="inputProject"
                                 name="description"
                                 id='descriptionProject'
-                                // placeholder='description'
-                                // placeholder={project.description}
+                                placeholder={project.description}
                                 value={descriptionProject}
                                 onChange={(e) => changeDescriptionProject(e)}
                             >
@@ -133,7 +173,6 @@ function EditProject(props) {
                             >
                             </input>
                         </div>
-                        {/* {props.workspaceId}*/}
                     </div>
 
                     <div className="row mt-1">
@@ -149,9 +188,9 @@ function EditProject(props) {
                             >
                             </input>
                         </div>
-                        {/* {props.workspaceId}*/}
+                        {props.workspaceId}
                     </div>
-                    {/* <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img> */}
+                    <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img>
                 </div>
                 <div className="row actionsViewDitails" >
                     <div className='col-6 deleteInViewDitails' onClick={deleteMyProject}>
@@ -163,9 +202,9 @@ function EditProject(props) {
 
                 </div>
 
+ */}
 
-
-            </div>
+            {/* </div> */}
 
         </>
 

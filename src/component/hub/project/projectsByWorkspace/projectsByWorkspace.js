@@ -7,7 +7,6 @@ import "./projectsByWorkspace.css";
 // import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
-// import { workspace } from '../../../warps/configurator/workspace/workspace';
 import ViewDetails from '../../viewDetails/viewDetails'
 
 function ProjectsByWorkspace(props) {
@@ -81,14 +80,14 @@ function ProjectsByWorkspace(props) {
 
     const viewProjectsByWorkspace = props.projects ?
         props.projects.map((project) => {
-            return <ViewProject showToast={showToast}
+            return <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
         }) : null
 
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
-            return <ViewProject showToast={showToast}
+            return <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
         })
     }) : null
@@ -102,9 +101,14 @@ function ProjectsByWorkspace(props) {
 
     //     return componentProject
     // }
+    function showToast1(obj) {
+        props.showToast(obj)
+    }
+
     function showToast() {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
+
     return (
         <>
 
@@ -120,7 +124,8 @@ function ProjectsByWorkspace(props) {
                     </>
                 </Table>
 
-                <button onClick={() => openViewDitailsAddProject()}>New Project</button>
+                <button type="button" class="btn btn-outline-primary" onClick={() => openViewDitailsAddProject()}
+                >New Project</button>
 
                 {
                     showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}

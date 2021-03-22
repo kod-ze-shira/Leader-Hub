@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './selectHeader.css'
-import ProjectsList from '../projectPlatform/projectsList/projectsList'
 import Logo from '../logo/logo'
 import SelectProject from '../SelectHeader/selectProject/selectProject';
 import SelectWorkspace from '../SelectHeader/selectWorkspace/selectWorkspace'
@@ -58,7 +57,7 @@ function SelectHeader(props) {
     return (
         <>
             {props.workspaces.length > 0 ?
-                <div className="s-header mx-0 mb-3 row align-items-center ">
+                <div className="s-header mx-0 mb-3 row align-items-center mt-4">
 
                     <div className="col pr-0">
                         <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
@@ -84,8 +83,8 @@ function SelectHeader(props) {
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                                 aria-label="scrollable prevent tabs example"
                             >
+                                <Tab label="Tabs" onClick={(e) => changePresent("tabs")} />
                                 <Tab label="List" onClick={(e) => changePresent("list")} />
-                                <Tab label="Tabs" onClick={(e) => props.cards.length ? changePresent("tabs") : null} />
                                 <Tab label="" />
                                 <Tab label="" />
                             </Tabs>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
 import { actions } from '../../../redux/actions/action'
-import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName'
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import NewProject from '../project/newProject/newProject'
@@ -66,10 +65,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             <>
                 {/* <div className="container-fluid">
                     <div className="row "> */}
-
-                <div className="view-details col-5">
-                    <div className="close" onClick={(e) => props.closeViewDetails()} >x</div>
-                    {renderSwitch()}
+                <div className="row ">
+                    <div className="view-details  col-5 mt-4">
+                        <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
+                        {renderSwitch()}
+                    </div>
                 </div>
                 {/* </div>
                 </div > */}

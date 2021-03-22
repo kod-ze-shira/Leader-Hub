@@ -1,16 +1,19 @@
  
 .toast_delete {
-    background-color: #F5F5F5;
-    max-width: 300px;
     padding: 1rem;
-    border-width: 3px;
-    border-style: solid;
-    border-image: 
-    linear-gradient(91deg, #44D7B6 0%, #329A80 100%)100% 1 1 1;
-    margin-top: -11rem;
+    /* border-width: 3px; */
+    /* border-style: solid; */
+   border-image: linear-gradient(91deg, #44D7B6 0%, #329A80 100%)100% 1 1 1 !important; 
+    margin-top: -9rem;
     margin-left: 6rem;
+    width: 274px;
+    height: 65px;
+    background: #F5F5F5 0% 0% no-repeat padding-box!important;
+    background-color:#FFFFFF !important ;
+    /* box-shadow: 0px 3px 6px #00000029; */
+    /* border-radius: 8px; */
+    opacity: 1;
   }
-
 
 .toast_header{
   display: contents;

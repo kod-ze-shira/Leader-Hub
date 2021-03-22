@@ -7,7 +7,7 @@ export default function Logo(props) {
     return (
         <>
 
-            <LetterLogo nameWorkspace={props.nameWorkspace} />
+            <LetterLogo  nameWorkspace={props.nameWorkspace} />
 
             {/* <span className='logoW'>{props.nameWorkspace ?
                 props.nameWorkspace[0].toUpperCase() : null}

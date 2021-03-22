@@ -28,13 +28,13 @@ function AllWorkspaces(props) {
     const renderedListWorkspaces = props.workspaces.map(todo => {
 
         return <ViewWorkspaceList
-        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+        setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
          key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
     })
     const 
     renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
-        setShowToastDeleteWhenClickDelete={()=>setShowToastDelete(true)} 
+        setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
         key={todo.workspace._id} workspace1={todo} editWorkspace={openEditWorkspace}/>
         })
     function openEditWorkspace(){
@@ -54,11 +54,6 @@ function AllWorkspaces(props) {
     function openaddNewWorkspace() {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
-    }
-
-    const deleteWorkspace=()=>{
-        setShowToastDelete(false)
-        props.deleteWorkspaceFromServer();
     }
    
 return (
@@ -130,13 +125,13 @@ return (
                    {showAddWorkspace ?
                         <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from={addOrEditWorkspace} /> : null
                     }
-                    {showToastDelete ?
+                    {/* {showToastDelete ?
                         <ToastDelete ref={refToDeleteToast}
                             toOnClose={deleteWorkspace}
                             toSetShowToastDelete={() => { setShowToastDelete(false) }}
                             name={props.workspaceDeleted.name} 
                             /> 
-                             : null} 
+                             : null}  */}
         </>
 
     )
