@@ -11,35 +11,29 @@ function AddObject(props) {
     function overButtonAdd(e) {
         document.getElementById('close').style.display = 'inline-block';
         $('.addNewP').css({ 'display': 'block' })
-        // document.getElementsByClassName('addNewP').style.display = 'inline-block';
-
         document.getElementById('plus').style.display = 'none';
-        // document.getElementsByClassName('add_new_btn').style.backgroundColor = 'white';
-        // document.getElementsByClassName('add_new_btn').style.color = 'var(--light-light-blue)';
+        document.getElementById('add_new_btn').style.backgroundColor = 'white';
+        document.getElementById('add_new_btn').style.color = 'var(--light-light-blue)';
     }
-    function mouseOutButtonAdd1(e) {
-        e.stopPropagation();
 
-    }
     function mouseOutButtonAdd(e) {
         document.getElementById('close').style.display = 'none'
         document.getElementById('plus').style.display = 'inline-block'
         $('.addNewP').css({ 'display': 'none' })
-        // document.getElementsByClassName('add_new_btn').style.backgroundColor = 'white';
-        // document.getElementsByClassName('add_new_btn').style.color = 'var(--light-light-blue)';
+        document.getElementById('add_new_btn').style.backgroundColor = 'var(--light-light-blue)';
+        document.getElementById('add_new_btn').style.color = 'white';
     }
-    function openViewDitails(type) {
 
+    function openViewDitails(type) {
 
         switch (type) {
             case 'Workspace':
-                alert('WORKSPACE')
+                props.setShowViewDitails('addWorkspace')
                 break;
             case 'Project':
                 if (window.location.href.indexOf('workspace') != -1 ||
                     window.location.href.indexOf('allProjects') != -1) {
-
-                    alert('Project')
+                    props.setShowViewDitails('newProject')
                 }
                 break;
             case 'Card':
@@ -58,18 +52,14 @@ function AddObject(props) {
     return (
         <>
             <div className='addNewObject'
-            // onMouseOut={(e) => mouseOutButtonAdd(e)}
-            >
-                <div className='add_new_btn' onMouseOver={(e) => overButtonAdd(e)}
-                    onMouseOut={(e) => mouseOutButtonAdd1(e)}
-                >
+                onMouseLeave={(e) => mouseOutButtonAdd(e)} >
+                <div className='add_new_btn' id='add_new_btn'
+                    onMouseOver={(e) => overButtonAdd(e)}>
                     <span id='plus'>+</span>
                     <FontAwesomeIcon id='close' icon={["fas", "times"]} />
 
                 </div>
-                <div id='addNewP2'
-                    onMouseOut={(e) => mouseOutButtonAdd1(e)}
-                >
+                <div id='addNewP2' >
                     <p className='addNewP' onClick={(e) => openViewDitails('Workspace')}>New Workspace</p>
                     <p className='addNewP' onClick={(e) => openViewDitails('Project')}>New Project</p>
                     <p className='addNewP' onClick={(e) => openViewDitails('Card')}>New Card</p>

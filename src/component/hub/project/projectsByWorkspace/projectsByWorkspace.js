@@ -124,7 +124,8 @@ function ProjectsByWorkspace(props) {
                     </>
                 </Table>
 
-                <button onClick={() => openViewDitailsAddProject()}>New Project</button>
+                <button type="button" class="btn btn-outline-primary" onClick={() => openViewDitailsAddProject()}
+                >New Project</button>
 
                 {
                     showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}
