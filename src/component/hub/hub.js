@@ -73,7 +73,7 @@ function Hub(props) {
 
                 <div className="row back-screen">
                     {open ?
-                        <div className="col-2 px-0 mt-0">
+                        <div className="col-2 px-0">
                             <Configurator />
                         </div>
                         : null}

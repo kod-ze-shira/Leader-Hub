@@ -4,6 +4,7 @@
   opacity: 1;
   overflow: auto;
   overflow-x: hidden;
+  overflow-y: auto!important;
 }
 .body-workspace{
   height: 87vh;

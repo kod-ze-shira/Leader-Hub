@@ -85,7 +85,7 @@ function ViewCardsTabs(props) {
         // setA(nameAction)
         handleClick(nameAction)
         setAnchorEl(null)
-        // textInput.current.focus()
+        textInput.current.focus()
 
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })

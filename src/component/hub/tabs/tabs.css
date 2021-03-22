@@ -11,12 +11,11 @@
     ; float: none !important; 
 }
 #add-card{
-    margin-top: -5vh;
+    /* margin-top: -5vh; */
 }
 a .add-card-tabs{
     text-align: center !important;
     color: var(--unnamed-color-34a38b);
-    text-align: left;
     font: normal normal normal 18px/24px Roboto;
     letter-spacing: 0px;
     color: #34A38B;
