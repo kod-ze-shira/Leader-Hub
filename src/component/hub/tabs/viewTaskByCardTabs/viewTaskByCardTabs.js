@@ -34,16 +34,21 @@ function ViewTaskByCradTabs(props) {
     };
 
     const handleClose = (e, event) => {
-        console.log(e);
+
         setAnchorEl(null);
-        if (e == "viewCard")
-            showDetails("viewTaskByCard")
-        else
+        if (e) {
+            console.log(e);
+            if (e == "viewCard") {
+                props.openViewDetails(task)
+                props.setTaskName(task.name)
+            }
             if (e == "delete") {
                 $(`#${props.task._id + "disappear"}`).css("display", "none")
                 props.objectToast({ 'type': 'Task', 'object': props.task })
             }
-        // e.stopPropagation()
+        }
+        else
+            e.stopPropagation()
     };
     const editTask = (event) => {
         let task1 = {
@@ -54,11 +59,10 @@ function ViewTaskByCradTabs(props) {
         props.EditTask(task);
     }
     const showDetails = (from) => {
-        // setDetailsOrEditTask(from)
-        props.openViewDetails(task)
-        props.setTaskName(task.name)
-
-
+        if (anchorEl == null) {
+            props.openViewDetails(task)
+            props.setTaskName(task.name)
+        }
     }
 
 

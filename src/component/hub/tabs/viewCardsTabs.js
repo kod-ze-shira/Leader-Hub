@@ -7,8 +7,6 @@ import './viewCardsTabs.css'
 // import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-import ViewDetails from '../viewDetails/viewDetails'
-// import ToastDelete from '../../toastDelete/toastDelete1'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
@@ -19,10 +17,7 @@ function ViewCardsTabs(props) {
         console.log(props.cardFromMap._id)
     }, [props.flag])
 
-    const [flag, setFlag] = useState(false)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
-    const [cardId, setCardId] = useState("")
-    const [viewDetails, setViewDetails] = useState(false)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
@@ -89,9 +84,8 @@ function ViewCardsTabs(props) {
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
-        console.log(task)
         setTask(task)
-        setViewDetails(true)
+        props.openViewDetails(task)
 
     };
 
@@ -176,12 +170,7 @@ function ViewCardsTabs(props) {
                     )}
                 </Draggable>
             </div >
-            {viewDetails ?
-                <div className="closeDet" >
-                    <ViewDetails closeViewDetails={() => setViewDetails(false)}
-                        from={"viewTaskByCard"} task={task} open={true}> </ViewDetails>
-                </div>
-                : null}
+         
         </>
     )
 }
