@@ -34,6 +34,7 @@ function ViewTaskByCradTabs(props) {
     };
 
     const handleClose = (e, event) => {
+        console.log(e);
         setAnchorEl(null);
         if (e == "viewCard")
             showDetails("viewTaskByCard")
@@ -42,8 +43,8 @@ function ViewTaskByCradTabs(props) {
                 $(`#${props.task._id + "disappear"}`).css("display", "none")
                 props.objectToast({ 'type': 'Task', 'object': props.task })
             }
-            e.stopPropagation()
-        };
+        // e.stopPropagation()
+    };
     const editTask = (event) => {
         let task1 = {
             "_id": props.task._id, "name": editTaskName, "description": props.task.description

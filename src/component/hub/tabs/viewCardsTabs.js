@@ -66,12 +66,7 @@ function ViewCardsTabs(props) {
         console.log("edut-card", card)
         props.editCard(card);
     }
-    const showDetails =
-        (event) => {
-            setViewDetails(true)
-            setCardId(props.cardFromMap._id)
-            // props.setTask(props.task)
-        }
+ 
     const handleClick = (event) => {
         if (event == "rename") {
             textInput.current.focus()
@@ -82,17 +77,14 @@ function ViewCardsTabs(props) {
     };
 
     const handleClose = (nameAction) => {
-        // setA(nameAction)
         handleClick(nameAction)
         setAnchorEl(null)
         textInput.current.focus()
-
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
             $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
 
         }
-
     };
     const [task, setTask] = useState(false)
 
@@ -131,16 +123,6 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            {/* <div class="nav-item dropdown more">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    ...
-                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item" href="#" >view</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </div> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                                 . . .
                                             </Button>
@@ -149,7 +131,7 @@ function ViewCardsTabs(props) {
                                                 anchorEl={anchorEl}
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
-                                            // onClose={handleClose}
+                                                onClose={handleClose}
                                             >
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
