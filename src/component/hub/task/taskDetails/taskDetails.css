@@ -1,7 +1,26 @@
 .details-task p{
     text-align: left !important;
 }
+.menu__{
+    max-height: 107px;
+    background-color: white;
+    overflow-y: auto;
+}
+.status-btn{
+    margin-top: 110px;
+}
+.create-label{
+    margin-top: 1vh;
+    margin-bottom: 5vh;
 
+    width: 150px;
+    /* background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box; */
+/* background: #75798E 0% 0% no-repeat padding-box; */
+border: 1px solid #707070;
+opacity: 0.5;
+border-top: 1px solid #707070;
+
+}
 .simpleTextarea{
     font-size: 24px;
     font-weight: 500;
@@ -27,4 +46,12 @@ textarea:focus{
 
 .css-2b097c-container{
     border:none !important;
+}
+.task-details > .form-group{
+    margin-bottom: 0.01rem !important;
+  }
+  .task-details > .dropdown{
+z-index: 9999 !important;  }
+.task-details .status-btn .save_canges_btn{
+    z-index: 99999 !important;
 }

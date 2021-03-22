@@ -5,6 +5,8 @@ import Select from 'react-select';
 import './taskDetails.css'
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
+import ViewAllStatuses from '../../status/viewAllStatuses'
+import AddStatus from '../../status/addStatus'
 
 function TaskDetails(props) {
 
@@ -30,21 +32,15 @@ function TaskDetails(props) {
 
     const task = props.task
     const status = props.status
-    const [openPopUp, setOpenPopUp] = useState()
-
+    const [openPopUp, setOpenPopUp] = useState(false)
+    const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [editTask, setEditTask] = useState(task)
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
         statusName: "",
         color: "",
     })
-    const handleChangeStatus = (event) => {
-        const { name, value } = event.target
-        setNewStatus(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
+   
     const [editTaskName, setEditTaskName] = useState(props.task.name)
 
     const handleChange = (event) => {
@@ -71,10 +67,17 @@ function TaskDetails(props) {
 
 
     }
+    const openPopUpStatus = (e) => {
+        setOpenPopUp(!openPopUp)
+        if(openPopUpToAdd==true)
+        setOpenPopUpToAdd(!openPopUpToAdd)
 
 
-
-
+    }
+    const openAddStatus = (e) => {
+        setOpenPopUpToAdd(!openPopUpToAdd)
+        setOpenPopUp(!openPopUp)
+    }
     const addStatus = () => {
         console.log(newStatus);
         props.createStatus(newStatus)
@@ -87,7 +90,7 @@ function TaskDetails(props) {
     }
     return (
         <>
-            <div className="details mr-5 ml-4">
+            <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between  mx-1" >
                     <label>Create {task.startDate}</label>   <label>Last Update {task.dueDate}</label>
@@ -136,37 +139,31 @@ function TaskDetails(props) {
 
                 </div>
                 <div className="row justify-content-start">
-                    <Select
+                    {/* <Select
                         onChange={(e) => handleChange(e)}
                         name="status"
                         options={statusTemp}
                         placeholder={task.status}
                         className="col-5"
-                    />
-                </div>
+                    /> */}
+                    <div class="dropdown col-6">
+                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            menu status
+                        </button>
+                        <div className={openPopUp ? "menu__" : ""}>
+                            {openPopUp && props.statuses.length ? props.statuses.map((status) => (
+                                <ViewAllStatuses status={status} />
 
-                <div className="row justify-content-between">
-                    <div class="form-group col-4">
-                        <label for="name">NameStatus</label>
-                        <input name="statusName" onChange={(e) => handleChangeStatus(e)}
-                            type="text" class="form-control"
-                            id="statusName"
-                            placeholder="enter status name"
-                        // value={status.statusName} 
-                        />
-                    </div>
-                    <div class="form-group col-4">
-                        <label for="color">colorStatus</label>
-                        <input name="color" onChange={(e) => handleChangeStatus(e)}
-                            type="color" class="form-control"
-                            id="color"
-                        // placeholder="enter status name"
-                        // value={status.color} 
-                        />
+                            )) : null}
+                            {openPopUp ?
+                                <button onClick={openAddStatus} className="create-label">Create New Label</button>
+                                : null}
+                            {openPopUpToAdd ? <AddStatus /> : null}
+                        </div>
                     </div>
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-task">
-                    <button onClick={(e) => addStatus(e)}>new status</button>
+                <div className="row justify-content-between  mx-1 btns-in-view-details-task status-btn">
+                    {/* <button onClick={(e) => addStatus(e)}>new status</button> */}
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
