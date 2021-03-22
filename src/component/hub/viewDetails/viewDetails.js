@@ -35,10 +35,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             props.showToast(val)
         }
 
-        function toastDelete1(val) {
-            props.toastDelete1(val)
-        }
-
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':

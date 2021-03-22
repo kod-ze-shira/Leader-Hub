@@ -28,12 +28,6 @@ function SelectWorkspace(props) {
             // if (props.projectPage == true)
             if (window.location.href.indexOf('workspace') != -1)
                 props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
-            // else if (window.location.href.indexOf('workspace') != -1) {
-            // props.setWorkspace
-            // if(אין פרויקטים)
-            // props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
-            // props.history.push("/" + props.user + "/projectPlatform/" + myWorkspace.workspace._id)
-            // }
 
         }
         else {
@@ -103,7 +97,5 @@ const mapDispatchToProps = (dispatch) => {
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }
-
-
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectWorkspace))

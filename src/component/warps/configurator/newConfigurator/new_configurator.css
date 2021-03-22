@@ -1,8 +1,10 @@
 .left_nav{
-  height: 92.05vh;
+  /* height: calc(100%-55px); */
+  height: 100vh;
     background: #0A102E 0% 0% no-repeat padding-box;
   border: 1px solid #707070;
   
+  /* overflow-y: hidden !important; */
   }
 .left_nav li{
   color: #FFFFFF;
