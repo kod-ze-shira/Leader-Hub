@@ -4,11 +4,9 @@ import { actions } from '../actions/action'
 // {{urlHub}}/api/renana-il/getAllStatusesTaskForUser
 
 export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_USER') {
 
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllStatusesTaskForUser`
-
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -18,9 +16,12 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setTask(data.result))
+                debugger
+                dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 console.log("data", data);
+                console.log("data-s", data.statuses);
+
 
             },
             error: function (err) {
@@ -31,29 +32,40 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
     }
     return next(action);
 }
-export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'GET_TASKS_BY_CARD_ID') {
+// url:
+// {{urlHub}}/api/renana-il/createStatus
 
-        var status = action.payload;
-        // console.log(status);
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTasksNotBelongsCardForUser`
+// body (ex'):
+// {
+//     "statusTask":{
+//         "statusName":"backend to do"
+//     }
+// }
 
+export const createStatus = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'CREATE_STATUS') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/createStatus`
+        let status = action.payload
+        console.log(status)
         $.ajax({
             url: urlData,
-            type: 'GET',
+            method: 'POST',
             headers: {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ status }),
             success: function (data) {
-                dispatch(actions.setStatuses(data.status))
                 console.log("success")
-                console.log("data", data);
+                console.log(data);
 
+                dispatch(actions.addNewStatus(data.statuses))
+                // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
-                checkPermission(err).then((ifOk) => {
-                })
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
             }
         });
     }

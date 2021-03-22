@@ -13,17 +13,26 @@ function ViewAllStatuses(props) {
     }, []);
 
 
-
+    useEffect(() => {
+        debugger
+        console.log(props.statuses);
+    }, [props.statuses])
 
     const renderedListStatuses = props.statuses.map(status => {
-        return status.name
+        return <span>{status.statusName}</span>
     })
+    //   const viewAllStatuses = props.statuses ? props.statuses.map((status) => {
+    //     return status.tasks.map((task) => {
+    //         return task.statusName
+    //     })
+    // }) : null
 
     return (
 
         <>
             <h1>renderedListStatuses</h1>
-            {renderedListStatuses}
+
+            {props.statuses.length && renderedListStatuses}
         </>
 
     )
@@ -32,7 +41,7 @@ function ViewAllStatuses(props) {
 const mapStateToProps = (state) => {
 
     return {
-        status: state.status_reducer.status
+        statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {
