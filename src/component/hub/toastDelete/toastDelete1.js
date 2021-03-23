@@ -23,19 +23,18 @@ export default function ToastDelete1(props) {
                 <Toast className="toast_delete"
                     onClose={props.toOnClose}
                     delay={4000} autohide>
-
+                   
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>
-                        {/* <div className=""> */}
-                            <div className=" ">{props.name}</div>
-                            <span className="px-4 ">was deleted</span>
-                            <div className="div_btn_undo  ">
-                                <button className="btn_undo "
-                                    onClick={() => {
-                                        props.toSetShowToastDelete();
-                                        //  props.toSetDeleted() 
-                                    }}>Undo</button>
-                            </div>
-                        {/* </div> */}
+                        <div className=" ">{props.name}</div>
+                        <span className="px-4 ">was deleted</span>
+                        <div className="div_btn_undo  ">
+                            <button className="btn_undo "
+                                onClick={() => {
+                                    props.toSetShowToastDelete();
+                                    //  props.toSetDeleted() 
+                                }}>Undo</button>
+                        </div>
+                         <button onClick={props.toOnClose} className="pl-2">X</button>
                     </Toast.Header>
                 </Toast>
             </animated.div>

@@ -33,6 +33,7 @@ import $ from 'jquery'
 import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
 import ViewDetails from './viewDetails/viewDetails'
+import Milestones from './Milestones/Milestones'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -84,7 +85,7 @@ function Hub(props) {
 
                 <div className="row back-screen">
                     {open ?
-                        <div className="col-2 px-0 mt-0">
+                        <div className="col-2 px-0">
                             <Configurator />
                         </div>
                         : null}
@@ -116,6 +117,9 @@ function Hub(props) {
                             </Route>
                             <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
+                            </Route>
+                            <Route path="/:userName/milestones" >
+                                <Milestones />
                             </Route>
                             <Route path="/:userName" >
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />

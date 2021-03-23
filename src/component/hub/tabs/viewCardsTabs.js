@@ -7,8 +7,6 @@ import './viewCardsTabs.css'
 // import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-import ViewDetails from '../viewDetails/viewDetails'
-// import ToastDelete from '../../toastDelete/toastDelete1'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
@@ -19,16 +17,14 @@ function ViewCardsTabs(props) {
         console.log(props.cardFromMap._id)
     }, [props.flag])
 
-    const [flag, setFlag] = useState(false)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
-    const [cardId, setCardId] = useState("")
-    const [viewDetails, setViewDetails] = useState(false)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [a, setA] = useState()
+
     let actionCard = { renameCard: "rename", deleteCard: "delete" };
     const textInput = useRef(null);
 
@@ -66,12 +62,7 @@ function ViewCardsTabs(props) {
         console.log("edut-card", card)
         props.editCard(card);
     }
-    const showDetails =
-        (event) => {
-            setViewDetails(true)
-            setCardId(props.cardFromMap._id)
-            // props.setTask(props.task)
-        }
+
     const handleClick = (event) => {
         if (event == "rename") {
             textInput.current.focus()
@@ -82,25 +73,20 @@ function ViewCardsTabs(props) {
     };
 
     const handleClose = (nameAction) => {
-        // setA(nameAction)
         handleClick(nameAction)
         setAnchorEl(null)
-        // textInput.current.focus()
-
+        textInput.current.focus()
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
             $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
 
         }
-
     };
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
-        console.log(task)
         setTask(task)
-        setViewDetails(true)
-
+        props.openViewDetails(task)
     };
 
     return (
@@ -131,16 +117,6 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            {/* <div class="nav-item dropdown more">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    ...
-                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                    <a class="dropdown-item" href="#" >view</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </div> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                                 . . .
                                             </Button>
@@ -149,7 +125,7 @@ function ViewCardsTabs(props) {
                                                 anchorEl={anchorEl}
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
-                                            // onClose={handleClose}
+                                                onClose={handleClose}
                                             >
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
@@ -194,12 +170,7 @@ function ViewCardsTabs(props) {
                     )}
                 </Draggable>
             </div >
-            {viewDetails ?
-                <div className="closeDet" >
-                    <ViewDetails closeViewDetails={() => setViewDetails(false)}
-                        from={"viewTaskByCard"} task={task} open={true}> </ViewDetails>
-                </div>
-                : null}
+
         </>
     )
 }

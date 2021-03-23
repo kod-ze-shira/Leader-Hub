@@ -12,56 +12,10 @@ function TaskDetails(props) {
         props.getAllStatusesTaskForUser();
         console.log(props.statuses);
     }, [props.task])
-    const task = props.task
-    const status = props.status
-
-    const [editTask, setEditTask] = useState(task)
-    const [statusTemp, setStatusTemp] = useState({})
-    const [newStatus, setNewStatus] = useState({
-        statusName: "",
-        user: props.user,
-        tasks: [],
-        active: true
-    })
-    const handleChangeStatus = (event) => {
-        const { name, value } = event.target
-        setNewStatus(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
-
-    const handleChange = (event) => {
-        let cons1, cons2
-        console.log(event.name)
-        if (event.name == "status") {
-            cons1 = event.name
-            cons2 = event.value
-        }
-        else {
-            // const { name, value } = event.target;
-            cons1 = event.target.name
-            cons2 = event.target.value
-            if (event.name == "name") {
-                setEditTaskName(cons2)
-                props.setTaskName(cons2)
-            }
-            if (cons1 == "dueDate" || cons1 == "startDate") {
-                cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
-
-            }
-        }
-        setEditTask(prevState => ({
-            ...prevState,
-            [cons1]: cons2
-        }));
-
-
-    }
 
     useEffect(() => {
         let status = [];
+        // console.log(props.task.milestones)
 
         props.statuses.length && props.statuses.forEach(st => {
             let stTemp = {
@@ -71,36 +25,75 @@ function TaskDetails(props) {
             }
             status.push(stTemp);
         });
+        console.log("milestones status", props.task.milestones)
 
         setStatusTemp(status)
     }, [props.statuses])
 
+    const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const task = props.task
+    const status = props.status
+    const [milestonesValue, setMilestonesValue] = useState(props.task.milestones)
+    const [editTask, setEditTask] = useState(task)
+    const [statusTemp, setStatusTemp] = useState({})
+    const [newStatus, setNewStatus] = useState({
+        statusName: "",
+        color: "",
+    })
+    const handleChangeStatus = (event) => {
+        const { name, value } = event.target
+        setNewStatus(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const handleChange = (event) => {
+        let name, value
+        debugger
+        if (event.name == "status") {
+            name = event.name
+            value = event.value
+        }
+        else {
+            name = event.target.name
+            value = event.target.value
+            if (name == "name") {
+                setEditTaskName(value)
+                props.setTaskName(value)
+            }
+            if (name == "dueDate" || name == "startDate") {
+                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
+            }
+            if (name == "milestones") {
+                setMilestonesValue(!milestonesValue)
+                setTimeout(() => {
+                    value = milestonesValue
+                }, 1000);
+                
+              
+            }
+        }
+        setEditTask(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+
+    }
 
     const addStatus = () => {
-        alert("hi")
         console.log(newStatus);
         props.createStatus(newStatus)
     }
     const saveNewTask = () => {
-        // console.log(editTask)
         props.EditTask(editTask)
     }
-    function deleteTask() {
+    const deleteTask = () => {
         props.showToast(true)
     }
-    // const viewAllStatuses = props.statuses ? props.statuses.map((status) => {
-    //     return status.tasks.map((task) => {
-    //         return task.statusName
-    //     })
-    // }) : null
 
-    // const statusList = [{ value: "done", name: "status", label: "done" },
-    // { value: "to do", name: "status", label: "todo" },
-    // { value: "in progress", name: "status", label: "in progress" }]
     return (
         <>
-
-
             <div className="details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between  mx-1" >
@@ -113,7 +106,7 @@ function TaskDetails(props) {
                         type="text" class="form-control"
                         id="name"
                         // placeholder="instructions for using this project"
-                        placeholder={editTaskName} />
+                        value={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -125,7 +118,7 @@ function TaskDetails(props) {
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
-                    <div class="form-group col-5">
+                    {/* <div class="form-group col-5">
                         <label for="startDate">Due Date</label>
                         <input
                             className="form-control"
@@ -135,8 +128,8 @@ function TaskDetails(props) {
                             value={task.startDate}
                             onChange={handleChange}
                         />
-                    </div>
-                    <div class="form-group col-5">
+                    </div> */}
+                    {/* <div class="form-group col-5">
                         <label for="dueDateProject">Due Date</label>
                         <input
                             className="form-control "
@@ -146,7 +139,7 @@ function TaskDetails(props) {
                             value={task.dueDate}
                             onChange={handleChange}
                         />
-                    </div>
+                    </div> */}
 
                 </div>
                 <div className="row justify-content-start">
@@ -158,24 +151,33 @@ function TaskDetails(props) {
                         className="col-5"
                     />
                 </div>
-                <div class="form-group">
-                    <label for="name">NameStatus</label>
-                    <input name="statusName" onChange={(e) => handleChangeStatus(e)}
-                        type="text" class="form-control"
-                        id="statusName"
-                        placeholder="enter status name"
-                    // value={status.statusName} 
-                    />
+                <div className="row justify-content-between">
+                    <div class="form-group col-4">
+                        <label for="name">NameStatus</label>
+                        <input name="statusName" onChange={(e) => handleChangeStatus(e)}
+                            type="text" class="form-control"
+                            id="statusName"
+                            placeholder="enter status name"
+                        // value={status.statusName} 
+                        />
+                    </div>
+                    <div class="form-group col-4">
+                        <label for="color">colorStatus</label>
+                        <input name="color" onChange={(e) => handleChangeStatus(e)}
+                            type="color" class="form-control"
+                            id="color"
+                        // placeholder="enter status name"
+                        // value={status.color} 
+                        />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="color">colorStatus</label>
-                    <input name="name" onChange={(e) => handleChangeStatus(e)}
-                        type="color" class="form-control"
-                        id="color"
-                    // placeholder="enter status name"
-                    // value={status.color} 
-                    />
-                </div>
+
+                <input
+                    checked={milestonesValue ? "checked" : false}
+                    type="checkbox" id="milestones" name="milestones"
+                    onClick={(e) => handleChange(e)}
+                    value={milestonesValue}></input>
+                <label for="milestones">Is Milestones</label>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
                     <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
@@ -191,7 +193,7 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        task: state.task_reducer.task,
+        // task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses
@@ -202,7 +204,7 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        createStatus: () => dispatch(actions.createStatus())
+        createStatus: (status) => dispatch(actions.createStatus(status))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)
