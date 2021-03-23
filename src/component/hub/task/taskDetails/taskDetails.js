@@ -25,10 +25,11 @@ function TaskDetails(props) {
             }
             status.push(stTemp);
         });
-        console.log(props.task.milestones)
+        console.log("milestones status", props.task.milestones)
 
         setStatusTemp(status)
     }, [props.statuses])
+
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const task = props.task
     const status = props.status
@@ -49,6 +50,7 @@ function TaskDetails(props) {
 
     const handleChange = (event) => {
         let name, value
+        debugger
         if (event.name == "status") {
             name = event.name
             value = event.value
@@ -65,6 +67,11 @@ function TaskDetails(props) {
             }
             if (name == "milestones") {
                 setMilestonesValue(!milestonesValue)
+                setTimeout(() => {
+                    value = milestonesValue
+                }, 1000);
+                
+              
             }
         }
         setEditTask(prevState => ({
@@ -111,7 +118,7 @@ function TaskDetails(props) {
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
-                    <div class="form-group col-5">
+                    {/* <div class="form-group col-5">
                         <label for="startDate">Due Date</label>
                         <input
                             className="form-control"
@@ -121,8 +128,8 @@ function TaskDetails(props) {
                             value={task.startDate}
                             onChange={handleChange}
                         />
-                    </div>
-                    <div class="form-group col-5">
+                    </div> */}
+                    {/* <div class="form-group col-5">
                         <label for="dueDateProject">Due Date</label>
                         <input
                             className="form-control "
@@ -132,7 +139,7 @@ function TaskDetails(props) {
                             value={task.dueDate}
                             onChange={handleChange}
                         />
-                    </div>
+                    </div> */}
 
                 </div>
                 <div className="row justify-content-start">

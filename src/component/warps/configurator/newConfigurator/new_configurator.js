@@ -38,9 +38,12 @@ function NewConfigorator(props) {
         props.history.push("/" + props.user + "/allProjects")
     }
     function goToMyTasks(e) {
-        console.log(e)
         changeBackground(e)
         props.history.push("/" + props.user + "/myTasks")
+    }
+    function goToMilestones(e) {
+        changeBackground(e)
+        props.history.push("/" + props.user + "/milestones")
     }
     return (
         <>
@@ -64,7 +67,7 @@ function NewConfigorator(props) {
                     <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         My Tasks</li>
-                    <li onClick={(e) => changeBackground(e.target)}>
+                    <li onClick={(e) => goToMilestones(e.target)}>
                         <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         Milestones</li>
                     {/* <li onClick={(e) => changeBackground(e.target)}>

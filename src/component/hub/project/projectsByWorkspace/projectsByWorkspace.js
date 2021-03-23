@@ -31,8 +31,6 @@ function ProjectsByWorkspace(props) {
         if (props.projects.length == 0) {
             props.getProjectsByWorkspaceId(idWorkspace)
             // let w = props.workspaces.find(w => w._id == idWorkspace)
-            // props.setWorkspace(w)
-            // props.setProjects(props.workspace.projectList)
         }
         // props.setProjects(props.workspaces.)
         if (!flug) {
@@ -42,7 +40,6 @@ function ProjectsByWorkspace(props) {
                 if (window.location.href.indexOf('workspace') != -1) {
                     // props.getProjectsByWorkspaceId(idWorkspace)
                     let w = props.workspaces.find(w => w._id == idWorkspace)
-                    // props.setWorkspace(w)
                     // props.setProjects(props.workspace.projectList)
                     // let p=props.workspace.find(p=>p)
 
@@ -124,7 +121,8 @@ function ProjectsByWorkspace(props) {
                     </>
                 </Table>
 
-                <button onClick={() => openViewDitailsAddProject()}>New Project</button>
+                <button type="button" class="btn btn-outline-primary" onClick={() => openViewDitailsAddProject()}
+                >New Project</button>
 
                 {
                     showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}
@@ -155,7 +153,6 @@ const mapDispatchToProps = (dispatch) => {
         getFullWorkspacesForUser: () => dispatch(actions.getFullWorkspacesForUser()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
-        setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
 
     }
 }

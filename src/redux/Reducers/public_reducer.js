@@ -11,8 +11,8 @@ const initialState = {
     cards: [],
     tasks: [],
     statuses: [],
+    milestones:[],
     isConfiguratorOpen: "false",
-    // close: "false"
 }
 
 const publicData = {
@@ -34,7 +34,10 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload.tasksForUser;
-        console.log(state.tasks)
+    },
+    setMilestones(state, action) {
+        state.milestones = action.payload;
+        console.log(state.milestones)
     },
     addNewWorkspace(state, action) {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
