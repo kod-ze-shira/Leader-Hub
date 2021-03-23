@@ -74,7 +74,7 @@ function ViewWorkspaceGrid(props) {
                     onClick={routeToProject} >
                     <div>
                         <div className="logoWorkspace1 " >
-                            <div className="logo"
+                            <div className="logo-w"
                                 style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}
                             >
                                 {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}

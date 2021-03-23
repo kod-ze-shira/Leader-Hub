@@ -76,11 +76,13 @@ function Hub(props) {
     return (
         <>
             <HeaderLeader userName={props.user} appName='hub' />‏
-
+            <div onClick={openConfigurator} >
+                <img className="menu-open-close" src={require('../img/menu.png')}></img>
+            </div>
 
             {/* } */}
             <Router history={history}>
-                <Nav openConfigurator={openConfigurator} />
+                {/* <Nav openConfigurator={openConfigurator} /> */}
 
                 <div className="row back-screen">
                     {open ?

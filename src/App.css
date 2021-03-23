@@ -52,8 +52,16 @@ margin-top: 20vh;}
 
 
  
+.menu-open-close{
+  top:3vh !important;
+  left: 2vh !important;
+  z-index: 999999 !important;
+  position: absolute !important;
 
+}
 
-
+.containerHeader >nav{
+  padding-left: 0px !important;
+}
 
 

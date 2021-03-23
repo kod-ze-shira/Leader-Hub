@@ -105,7 +105,7 @@ return (
                         <div className="Workspacegrid mt-4 addWorkspace" >
                             <div onClick={openaddNewWorkspace}>
                                 <div className="logoWorkspace1 " >
-                                    <div className="mt-1 logo"
+                                    <div className="mt-1 logo-w"
                                         style={{ backgroundColor: "#778CA2" }}
                                     >+
                                 </div>
