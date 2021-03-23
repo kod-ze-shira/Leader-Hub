@@ -33,7 +33,7 @@ function AddStatus(props) {
 
         <>
             <div className="container">
-                <div class="form-group row">
+                <div class="form-group row mt-1">
                     {/* <label for="name">Name</label> */}
                     <input name="statusName" onChange={(e) => handleChangeStatus(e)}
                         type="text" class="form-control"

@@ -40,7 +40,7 @@ function TaskDetails(props) {
         statusName: "",
         color: "",
     })
-   
+
     const [editTaskName, setEditTaskName] = useState(props.task.name)
 
     const handleChange = (event) => {
@@ -69,8 +69,8 @@ function TaskDetails(props) {
     }
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
-        if(openPopUpToAdd==true)
-        setOpenPopUpToAdd(!openPopUpToAdd)
+        if (openPopUpToAdd == true)
+            setOpenPopUpToAdd(!openPopUpToAdd)
 
 
     }
@@ -146,9 +146,14 @@ function TaskDetails(props) {
                         placeholder={task.status}
                         className="col-5"
                     /> */}
-                    <div class="dropdown col-6">
-                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            menu status
+                    <div class="dropdown col-5">
+                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle form-control " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {props.statuses.length ? props.statuses.map((status,index) => (
+                                <div className="placehlder-first-status ">
+                                <div  className={index==0?"color-status-first align-items-center mt-2":""}><span className="align-items-center mt-0"></span>{index==0?status.statusName:null}</div>    </div>     )) : null}
+
+                            {/* //  var cls = (index === 0) ? 'item active' : 'item'; */}
+
                         </button>
                         <div className={openPopUp ? "menu__" : ""}>
                             {openPopUp && props.statuses.length ? props.statuses.map((status) => (

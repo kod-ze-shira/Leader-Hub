@@ -68,6 +68,7 @@ function SelectWorkspace(props) {
                     options={viewWorkspacesList}
                     placeholder={props.workspace.workspace ? props.workspace.workspace.name : null}
                     styles={style}
+
                 />
             </div>
         </>

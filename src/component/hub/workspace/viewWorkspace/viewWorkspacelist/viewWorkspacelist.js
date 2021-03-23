@@ -79,7 +79,7 @@ function ViewWorkspaceList(props) {
                     {/* { */}
                     {/* // over ? */}
                     <div className="col-2">
-                        <div className="row  mt-4" >
+                        <div className="row  mt-4 icons-in-list-w" >
                             <div
                                 className="col-1  edit iconsAction" onClick={editWorkspace}>
                                 <img src={pencil}></img>
@@ -114,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
         duplicateWorkspace: () => dispatch(actions.duplicateWorkspace())
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceList))
 
