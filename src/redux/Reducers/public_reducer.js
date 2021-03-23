@@ -10,8 +10,9 @@ const initialState = {
     projects: [],
     cards: [],
     tasks: [],
+    statuses: [],
+    milestones: [],
     isConfiguratorOpen: "false",
-    // close: "false"
 }
 
 const publicData = {
@@ -33,12 +34,15 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload.tasksForUser;
-        console.log(state.tasks)
+    },
+    setMilestones(state, action) {
+        state.milestones = action.payload;
+        console.log(state.milestones)
     },
     addNewWorkspace(state, action) {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
     },
-   
+
     deletTask(state, action) {
         state.cards.map(card => {
             if (card._id == action.payload.card)
@@ -146,7 +150,7 @@ const publicData = {
                 card.tasks.push(action.payload);
         })
     },
-   
+
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
         state.workspaces = state.workspaces.filter((_, i) =>

@@ -16,6 +16,7 @@ function ViewTaskByCradTabs(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
+        "milestones": props.task.milestones,
         "_id": props.task._id, "name": editTaskName, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
@@ -52,13 +53,13 @@ function ViewTaskByCradTabs(props) {
     };
     const editTask = (event) => {
         let task1 = {
-            "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            "milestones": props.task.milestones, "_id": props.task._id, "name": editTaskName, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         setTask(task1)
         props.EditTask(task);
     }
-    const showDetails = (from) => {
+    const showDetails = () => {
         if (anchorEl == null) {
             props.openViewDetails(task)
             props.setTaskName(task.name)

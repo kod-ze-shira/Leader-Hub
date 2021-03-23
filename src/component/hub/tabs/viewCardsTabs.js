@@ -24,6 +24,7 @@ function ViewCardsTabs(props) {
     const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [a, setA] = useState()
+
     let actionCard = { renameCard: "rename", deleteCard: "delete" };
     const textInput = useRef(null);
 
@@ -61,7 +62,7 @@ function ViewCardsTabs(props) {
         console.log("edut-card", card)
         props.editCard(card);
     }
- 
+
     const handleClick = (event) => {
         if (event == "rename") {
             textInput.current.focus()
@@ -86,7 +87,6 @@ function ViewCardsTabs(props) {
     const openViewDetails = (task) => {
         setTask(task)
         props.openViewDetails(task)
-
     };
 
     return (
@@ -170,7 +170,7 @@ function ViewCardsTabs(props) {
                     )}
                 </Draggable>
             </div >
-         
+
         </>
     )
 }

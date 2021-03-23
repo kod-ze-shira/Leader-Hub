@@ -17,6 +17,7 @@ function TaskDetails(props) {
 
     useEffect(() => {
         let status = [];
+        // console.log(props.task.milestones)
 
         props.statuses.length && props.statuses.forEach(st => {
             let stTemp = {
@@ -26,25 +27,34 @@ function TaskDetails(props) {
             }
             status.push(stTemp);
         });
+        console.log("milestones status", props.task.milestones)
 
         setStatusTemp(status)
     }, [props.statuses])
 
+    const [editTaskName, setEditTaskName] = useState(props.task.name)
     const task = props.task
     const status = props.status
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
+    const [milestonesValue, setMilestonesValue] = useState(props.task.milestones)
     const [editTask, setEditTask] = useState(task)
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
         statusName: "",
         color: "",
     })
-
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const handleChangeStatus = (event) => {
+        const { name, value } = event.target
+        setNewStatus(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
 
     const handleChange = (event) => {
         let name, value
+        debugger
         if (event.name == "status") {
             name = event.name
             value = event.value
@@ -59,12 +69,19 @@ function TaskDetails(props) {
             if (name == "dueDate" || name == "startDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             }
+            if (name == "milestones") {
+                setMilestonesValue(!milestonesValue)
+                setTimeout(() => {
+                    value = milestonesValue
+                }, 1000);
+                
+              
+            }
         }
         setEditTask(prevState => ({
             ...prevState,
             [name]: value
         }));
-
 
     }
     const openPopUpStatus = (e) => {
@@ -85,9 +102,10 @@ function TaskDetails(props) {
     const saveNewTask = () => {
         props.EditTask(editTask)
     }
-    function deleteTask() {
+    const deleteTask = () => {
         props.showToast(true)
     }
+
     return (
         <>
             <div className="details task-details mr-5 ml-4">
@@ -114,7 +132,7 @@ function TaskDetails(props) {
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
-                    <div class="form-group col-5">
+                    {/* <div class="form-group col-5">
                         <label for="startDate">Due Date</label>
                         <input
                             className="form-control"
@@ -124,8 +142,8 @@ function TaskDetails(props) {
                             value={task.startDate}
                             onChange={handleChange}
                         />
-                    </div>
-                    <div class="form-group col-5">
+                    </div> */}
+                    {/* <div class="form-group col-5">
                         <label for="dueDateProject">Due Date</label>
                         <input
                             className="form-control "
@@ -135,7 +153,7 @@ function TaskDetails(props) {
                             value={task.dueDate}
                             onChange={handleChange}
                         />
-                    </div>
+                    </div> */}
 
                 </div>
                 <div className="row justify-content-start">
@@ -164,8 +182,15 @@ function TaskDetails(props) {
                         </div>
                     </div>
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-task status-btn">
-                    {/* <button onClick={(e) => addStatus(e)}>new status</button> */}
+
+                <input
+                    checked={milestonesValue ? "checked" : false}
+                    type="checkbox" id="milestones" name="milestones"
+                    onClick={(e) => handleChange(e)}
+                    value={milestonesValue}></input>
+                <label for="milestones">Is Milestones</label>
+                <div className="row justify-content-between  mx-1 btns-in-view-details-task">
+                    <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
@@ -179,7 +204,7 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        task: state.task_reducer.task,
+        // task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses

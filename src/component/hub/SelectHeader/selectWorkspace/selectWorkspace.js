@@ -13,7 +13,7 @@ function SelectWorkspace(props) {
 
     useEffect(() => {
     }, [])
-
+    
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
@@ -59,7 +59,7 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo"  nameWorkspace={props.workspace.workspace ? props.workspace.workspace : null} />
+                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace.workspace ? props.workspace.workspace : null} />
                 <Select
                     className="select-workspace"
                     classNamePrefix="select"

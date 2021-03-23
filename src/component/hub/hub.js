@@ -33,6 +33,7 @@ import $ from 'jquery'
 import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
 import ViewDetails from './viewDetails/viewDetails'
+import Milestones from './Milestones/Milestones'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -118,6 +119,9 @@ function Hub(props) {
                             </Route>
                             <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
+                            </Route>
+                            <Route path="/:userName/milestones" >
+                                <Milestones />
                             </Route>
                             <Route path="/:userName" >
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />

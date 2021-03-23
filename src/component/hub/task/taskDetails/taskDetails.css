@@ -19,7 +19,10 @@
 border: 1px solid #707070;
 opacity: 0.5;
 border-top: 1px solid #707070;
-
+}
+#milestones{
+    border-radius: 5px;
+    background-color: #EDF8F6 !important;
 }
 .simpleTextarea{
     font-size: 24px;
