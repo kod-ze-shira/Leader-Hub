@@ -132,7 +132,7 @@ function TaskDetails(props) {
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
-                    {/* <div class="form-group col-5">
+                    <div class="form-group col-5">
                         <label for="startDate">Due Date</label>
                         <input
                             className="form-control"
@@ -142,8 +142,8 @@ function TaskDetails(props) {
                             value={task.startDate}
                             onChange={handleChange}
                         />
-                    </div> */}
-                    {/* <div class="form-group col-5">
+                    </div> 
+                     <div class="form-group col-5">
                         <label for="dueDateProject">Due Date</label>
                         <input
                             className="form-control "
@@ -153,7 +153,7 @@ function TaskDetails(props) {
                             value={task.dueDate}
                             onChange={handleChange}
                         />
-                    </div> */}
+                    </div>
 
                 </div>
                 <div className="row justify-content-start">
@@ -190,7 +190,7 @@ function TaskDetails(props) {
                     value={milestonesValue}></input>
                 <label for="milestones">Is Milestones</label>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
-                    <button onClick={(e) => addStatus(e)}>new status</button>
+                    {/* <button onClick={(e) => addStatus(e)}>new status</button> */}
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
