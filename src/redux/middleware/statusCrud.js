@@ -16,7 +16,6 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                debugger
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 console.log("data", data);
