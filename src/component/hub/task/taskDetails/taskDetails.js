@@ -151,9 +151,6 @@ function TaskDetails(props) {
                             {props.statuses.length ? props.statuses.map((status,index) => (
                                 <div className="placehlder-first-status ">
                                 <div  className={index==0?"color-status-first align-items-center mt-2":""}><span className="align-items-center mt-0"></span>{index==0?status.statusName:null}</div>    </div>     )) : null}
-
-                            {/* //  var cls = (index === 0) ? 'item active' : 'item'; */}
-
                         </button>
                         <div className={openPopUp ? "menu__" : ""}>
                             {openPopUp && props.statuses.length ? props.statuses.map((status) => (
