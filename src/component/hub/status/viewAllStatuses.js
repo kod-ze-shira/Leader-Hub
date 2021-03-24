@@ -30,7 +30,7 @@ function ViewAllStatuses(props) {
 
                     </div>
                     <img
-                        className=" " src={require('../../img/pencil-write.png')} />
+                        src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>
             {/* {props.statuses.length && renderedListStatuses} */}
