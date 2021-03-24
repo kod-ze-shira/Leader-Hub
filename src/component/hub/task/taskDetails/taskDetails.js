@@ -165,19 +165,22 @@ function TaskDetails(props) {
                         className="col-5"
                     /> */}
                     <div class="dropdown col-5">
-                       
-                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle form-control row align-items-center " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                        <button onClick={openPopUpStatus} class=" form-control " type="button" >
                             {props.statuses.length ? props.statuses.map((status, index) => (
-                                <div className={index == 0 ? "placehlder-first-status ":""}>
-                                    <div className={index == 0 ? "color-status-first " : ""}><span className={index == 0 ? " " : ""}>{index == 0 ? status.statusName : null}</span></div>    </div>)) : null}
+                                <div className={index == 0 ? "placehlder-first-status " : ""}>
+                                    <div className={index == 0 ? "color-status-first" : ""}><span className={index == 0 ? " " : ""}>{index == 0 ? status.statusName : null}</span>
+                                    </div>
+                                </div>)) : null}
                         </button>
                         <div className={openPopUp ? "menu__" : ""}>
-                            {openPopUp && props.statuses.length ? props.statuses.map((status) => (
-                                <ViewAllStatuses status={status} />
-
-                            )) : null}
+                            <div className="status-list">
+                                {openPopUp && props.statuses.length ? props.statuses.map((status) => (
+                                    <ViewAllStatuses status={status} />
+                                )) : null}
+                            </div>
                             {openPopUp ?
-                                <button onClick={openAddStatus} className="create-label">Create New Label</button>
+                                <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
                                 : null}
                             {openPopUpToAdd ? <AddStatus /> : null}
                         </div>
