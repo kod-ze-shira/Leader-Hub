@@ -52,7 +52,9 @@ function NewProject(props) {
         let year = newDate.getFullYear();
         console.log(date + '/' + month + '/' + year)
         project.updateDates[0] = date + '/' + month + '/' + year
-        project.workspace = props.workspaceId
+        debugger
+        // project.workspace = props.workspaceId
+        project.workspace = props.workspace.workspace._id
         if (project.dueDate) {
             let myDate = project.dueDate
             let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
@@ -98,8 +100,8 @@ function NewProject(props) {
 
 
         <>
-        
-        <div className="details mr-5 ml-4">
+
+            <div className="details mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Add Project</h5>
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -128,7 +130,7 @@ function NewProject(props) {
                             name="dueDate"
                             type="date"
                             id='dueDateProject'
-                            onChange={(e) => changeFiledInProject(e)}                        />
+                            onChange={(e) => changeFiledInProject(e)} />
                     </div>
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-project">
@@ -151,7 +153,7 @@ export default connect(
     (state) => {
         return {
             // workspaceToEdit: state.workspace_reducer.workspace,
-            // workspaces: state.workspace_reducer.workspaces,
+            workspace: state.workspace_reducer.workspace,
 
 
         }
