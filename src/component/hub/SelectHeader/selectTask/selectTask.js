@@ -42,6 +42,7 @@ function SelectTask(props) {
                     options={viewTasksList}
                     placeholder={"All Tasks"}
                     styles={style}
+
                 />
             </div>
           

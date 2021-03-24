@@ -42,15 +42,26 @@ margin-top: 20vh;}
   letter-spacing: 0.32px;
   color: #75798E;
   text-transform: capitalize;
-  margin-bottom: 0px !important;
+  margin-bottom: 0.2rem !important;
   opacity: 0.9;}
 
 
+/* .details .form-control {
+  height:calc(1.5em + .75rem ) !important;
+} */
 
 
  
+.menu-open-close{
+  top:3vh !important;
+  left: 2vh !important;
+  z-index: 999999 !important;
+  position: absolute !important;
 
+}
 
-
+.containerHeader >nav{
+  padding-left: 0px !important;
+}
 
 

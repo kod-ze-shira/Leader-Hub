@@ -5,6 +5,8 @@ import Select from 'react-select';
 import './taskDetails.css'
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
+import ViewAllStatuses from '../../status/viewAllStatuses'
+import AddStatus from '../../status/addStatus'
 
 function TaskDetails(props) {
 
@@ -34,6 +36,8 @@ function TaskDetails(props) {
     const status = props.status
     const [milstone, setMilstone] = useState(props.task.milestones)
     const [milestonesValue, setMilestonesValue] = useState(milstone)
+    const [openPopUp, setOpenPopUp] = useState(false)
+    const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [editTask, setEditTask] = useState(task)
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
@@ -48,6 +52,7 @@ function TaskDetails(props) {
         }));
     }
     const changeMilstone = (event) => {
+        debugger
         setMilestonesValue(!milestonesValue)
         let temp = editTask
         temp.milestones = !milestonesValue
@@ -80,7 +85,17 @@ function TaskDetails(props) {
         }));
 
     }
+    const openPopUpStatus = (e) => {
+        setOpenPopUp(!openPopUp)
+        if (openPopUpToAdd == true)
+            setOpenPopUpToAdd(!openPopUpToAdd)
 
+
+    }
+    const openAddStatus = (e) => {
+        setOpenPopUpToAdd(!openPopUpToAdd)
+        setOpenPopUp(!openPopUp)
+    }
     const addStatus = () => {
         console.log(newStatus);
         props.createStatus(newStatus)
@@ -94,7 +109,7 @@ function TaskDetails(props) {
 
     return (
         <>
-            <div className="details mr-5 ml-4">
+            <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between  mx-1" >
                     <label>Create {task.startDate}</label>   <label>Last Update {task.dueDate}</label>
@@ -141,49 +156,53 @@ function TaskDetails(props) {
                     </div>
 
                 </div>
-                <div className="row justify-content-start">
-                    <Select
+                <div className="row justify-content-between">
+                    {/* <Select
                         onChange={(e) => handleChange(e)}
                         name="status"
                         options={statusTemp}
                         placeholder={task.status}
                         className="col-5"
-                    />
-                </div>
-                <div className="row justify-content-between">
-                    <div class="form-group col-4">
-                        <label for="name">NameStatus</label>
-                        <input name="statusName" onChange={(e) => handleChangeStatus(e)}
-                            type="text" class="form-control"
-                            id="statusName"
-                            placeholder="enter status name"
-                        // value={status.statusName} 
-                        />
-                    </div>
-                    <div class="form-group col-4">
-                        <label for="color">colorStatus</label>
-                        <input name="color" onChange={(e) => handleChangeStatus(e)}
-                            type="color" class="form-control"
-                            id="color"
-                        // placeholder="enter status name"
-                        // value={status.color} 
-                        />
-                    </div>
-                </div>
-                {/* <label */}
-                    {/* // className="check-task py-2 "> */}
-                    {/* <input type="checkbox" /> */}
-                    {/* <span className="checkmark ml-1"></span> */}
-                {/* </label> */}
+                    /> */}
+                    <div class="dropdown col-5">
 
-                <label for="milestones">
-                    <span className="checkmark-milstone ml-1"></span>
+                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle form-control row align-items-center " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {props.statuses.length ? props.statuses.map((status, index) => (
+                                <div className={index == 0 ? "placehlder-first-status " : ""}>
+                                    <div className={index == 0 ? "color-status-first " : ""}><span className={index == 0 ? " " : ""}>{index == 0 ? status.statusName : null}</span></div>    </div>)) : null}
+                        </button>
+                        <div className={openPopUp ? "menu__" : ""}>
+                            {openPopUp && props.statuses.length ? props.statuses.map((status) => (
+                                <ViewAllStatuses status={status} />
+
+                            )) : null}
+                            {openPopUp ?
+                                <button onClick={openAddStatus} className="create-label">Create New Label</button>
+                                : null}
+                            {openPopUpToAdd ? <AddStatus /> : null}
+                        </div>
+                    </div>
+                </div>
+
+                <label className="check-task py-2 mt-2 " for="milestones">
+                    <input
+                        type="checkbox"
+                        checked={milestonesValue ? "checked" : ''}
+                        value={milestonesValue}
+                    ></input>
+                    <span className="checkmark  ml-0"
+                        onclick={(e) => changeMilstone(e)}></span>
+                    <p className="pl-4 mils">Milestones</p>
+                </label>
+
+                <label for="milestones" className="check-task py-2">
                     <input
                         checked={milestonesValue ? "checked" : ''}
                         type="checkbox" id="milestones" name="milestones"
                         onClick={(e) => changeMilstone(e)}
                         value={milestonesValue}></input>
-                    Is Milestones</label>
+                    {/* Is Milestones */}
+                </label>
 
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
                     <button onClick={(e) => addStatus(e)}>new status</button>

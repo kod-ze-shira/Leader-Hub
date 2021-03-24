@@ -31,8 +31,8 @@
     font-size: 16px
 }
 .dot {
-    height: 6px;
-    width: 6px;
+    height: 7px;
+    width: 7px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;

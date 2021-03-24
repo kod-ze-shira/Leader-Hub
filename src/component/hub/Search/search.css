@@ -11,10 +11,10 @@ border: 1px solid #BDBDC9;
 border-radius: 4px;
 opacity: 1;
 }
-.dropdown-menu.show {
+/* .dropdown-menu.show {
     display: block;
     width: 15vw;
-}
+} */
 #inputsearch{
 width: 10vw;
 background-color:white;
