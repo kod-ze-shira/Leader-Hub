@@ -16,7 +16,6 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                debugger
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 console.log("data", data);
@@ -45,8 +44,8 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
 export const createStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'CREATE_STATUS') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/createStatus`
-        let status = action.payload
-        console.log(status)
+        let statusTask = action.payload
+        console.log(statusTask)
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -54,7 +53,7 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ status }),
+            data: JSON.stringify({ statusTask }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
@@ -72,6 +71,39 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+// {{urlHub}}/api/renana-il/editStatus
+
+export const editStatus = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'EDIT_STATUS') {
+        let status = getState().status_reducer.status;
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editStatus`
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            url: urlData,
+            type: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ 'status': status }),
+            success: function (data) {
+                console.log("success")
+                console.log("data", data);
+                dispatch(actions.setStatuses(data.result))
+
+            },
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+
+                })
+            }
+        });
+
+    }
+    return next(action);
+}
 
 
 //this func to check the headers jwt and username, if them not good its throw to login

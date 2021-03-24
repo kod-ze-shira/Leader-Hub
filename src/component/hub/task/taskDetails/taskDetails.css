@@ -1,7 +1,10 @@
 .details-task p{
     text-align: left !important;
 }
-
+#milestones{
+    border-radius: 5px;
+    background-color: #EDF8F6 !important;
+}
 .simpleTextarea{
     font-size: 24px;
     font-weight: 500;

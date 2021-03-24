@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import ViewCardsTabs from './viewCardsTabs'
+import ViewDetails from '../viewDetails/viewDetails'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './tabs.css'
 import $ from "jquery"
+import taskDetails from '../task/taskDetails/taskDetails'
 function Tabs(props) {
 
     useEffect(() => {
@@ -16,6 +18,9 @@ function Tabs(props) {
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
+    const [viewDetails, setViewDetails] = useState(false)
+    const [taskToDetails, setTaskToDetails] = useState("")
+
 
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
@@ -66,8 +71,12 @@ function Tabs(props) {
         setInputValue("")
         setShowInput(false)
     }
+    const openViewDetails = (task) => {
+        setViewDetails(true)
+        setTaskToDetails(task)
+    }
     return (
-        <>
+        <><div className="body">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {props.cards.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
@@ -76,26 +85,23 @@ function Tabs(props) {
                             <div
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}>
-                                <div className="body">
-                                    <div className="row mx-3">
-
+                                <div className="wraperr-tabs">
+                                    <div className="row row mx-3">
                                         <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs showToast={(obj) => props.showToast(obj)}
+                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                    showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
-
-                                        <div className="col-3" >
+                                        <div className="col-3 mt-4" >
                                             <div className="view-cards-tabs">
                                                 <div class="card " >
                                                     <div class="container" >
                                                         {showInput ?
-
                                                             <div
-                                                                // style={showInput ? { "opacity": "1" } : { "opacity": "0" }}
                                                                 class="card-header row">
-                                                                <input id="add-card1"  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                                <input id="add-card1" placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                     if (event.key === 'Enter') {
                                                                         newCard()
                                                                     }
@@ -103,14 +109,13 @@ function Tabs(props) {
                                                             </div>
                                                             : null}
                                                     </div>
-                                                    {/* <div className={open ? "col-10 bodyHub mt-5 pr-4" : "col-12 bodyHub mt-5. px-4"}> */}
-
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
                                                         <a className="add-card-tabs" href="#add-card1" onClick={showInputToAddCard}>Add Card+</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 {provided.placeholder}
@@ -120,6 +125,13 @@ function Tabs(props) {
                 </DragDropContext>
                 : null
             }
+            {viewDetails ?
+                <div className="closeDet" >
+                    <ViewDetails closeViewDetails={() => setViewDetails(false)}
+                        from={"viewTaskByCard"} task={taskToDetails} open={true}> </ViewDetails>
+                </div>
+                : null}
+        </div>
 
         </>
     )

@@ -111,7 +111,6 @@ function SelectProject(props) {
     const viewProjectsList =props.workspace.projectList? props.workspace.projectList.map((project) => (
         { value: project.project._id, label: project.project.name }
     )):null
-    // props.setWorkspace(workspace)
     return (
         <>
             <div className="react-select">

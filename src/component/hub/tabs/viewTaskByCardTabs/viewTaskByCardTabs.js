@@ -16,6 +16,7 @@ function ViewTaskByCradTabs(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
+        "milestones": props.task.milestones,
         "_id": props.task._id, "name": editTaskName, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
@@ -33,31 +34,36 @@ function ViewTaskByCradTabs(props) {
 
     };
 
-    const handleClose = (e,event) => {
+    const handleClose = (e, event) => {
+
         setAnchorEl(null);
-        if (e == "viewCard")
-            showDetails("viewTaskByCard")
-        else
+        if (e) {
+            console.log(e);
+            if (e == "viewCard") {
+                props.openViewDetails(task)
+                props.setTaskName(task.name)
+            }
             if (e == "delete") {
                 $(`#${props.task._id + "disappear"}`).css("display", "none")
                 props.objectToast({ 'type': 'Task', 'object': props.task })
             }
-        event.stopPropagation();
+        }
+        else
+            e.stopPropagation()
     };
     const editTask = (event) => {
         let task1 = {
-            "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            "milestones": props.task.milestones, "_id": props.task._id, "name": editTaskName, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         setTask(task1)
         props.EditTask(task);
     }
-    const showDetails = (from) => {
-        // setDetailsOrEditTask(from)
-        props.openViewDetails(task)
-        props.setTaskName(task.name)
-
-
+    const showDetails = () => {
+        if (anchorEl == null) {
+            props.openViewDetails(task)
+            props.setTaskName(task.name)
+        }
     }
 
 
@@ -92,8 +98,8 @@ function ViewTaskByCradTabs(props) {
                                         onClose={handleClose}
                                     >
                                         <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard,e)} >View Details</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard,e)}>Delete Task</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
 
                                     </Menu>
                                 </div>

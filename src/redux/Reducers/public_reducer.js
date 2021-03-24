@@ -11,8 +11,8 @@ const initialState = {
     cards: [],
     tasks: [],
     statuses: [],
+    milestones:[],
     isConfiguratorOpen: "false",
-    // close: "false"
 }
 
 const publicData = {
@@ -34,14 +34,16 @@ const publicData = {
     },
     setTasks(state, action) {
         state.tasks = action.payload.tasksForUser;
-        console.log(state.tasks)
+    },
+    setMilestones(state, action) {
+        state.milestones = action.payload;
+        console.log(state.milestones)
     },
     addNewWorkspace(state, action) {
         state.workspaces.push({ "workspace": action.payload, "projectList": [] })
     },
     addNewStatus(state, action) {
-        debugger
-        state.statuses.push(action.payload)
+        state.statuses.push({ "statusTask": action.payload })
     },
     deletTask(state, action) {
         state.cards.map(card => {
@@ -171,6 +173,8 @@ const publicData = {
 
         )
     },
+
+
     addWorkspaceToWorkspaces(state, action) {
         state.workspaces.push(action.payload)
     }
