@@ -81,7 +81,6 @@ function Hub(props) {
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
 
-            {/* } */}
             <Router history={history}>
                 {/* <Nav openConfigurator={openConfigurator} /> */}
 
