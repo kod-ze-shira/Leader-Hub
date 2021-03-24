@@ -79,7 +79,6 @@ function Hub(props) {
             <HeaderLeader userName={props.user} appName='hub' />‏
 
 
-            {/* } */}
             <Router history={history}>
                 <Nav openConfigurator={openConfigurator} />
 
