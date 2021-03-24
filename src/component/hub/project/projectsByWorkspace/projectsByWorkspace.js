@@ -8,6 +8,7 @@ import "./projectsByWorkspace.css";
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import ViewDetails from '../../viewDetails/viewDetails'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function ProjectsByWorkspace(props) {
     let { idWorkspace } = useParams();
@@ -106,23 +107,58 @@ function ProjectsByWorkspace(props) {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
 
+    function openSearchProject() {
+        setTimeout(() => {
+
+            // document.getElementById('inputSearchProjects').style.display = 'inline-block'
+
+        }, 1600);
+    }
+
+    function closeInputSearch() {
+        setTimeout(() => {
+            document.getElementById('inputSearchProjects').value = ''
+
+        }, 1700);
+
+    }
+
     return (
         <>
 
+
+
             <div className='body' >
                 {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
+                <div className='headerProjects'>
+                    <div className='betweenHeaderProjects'>
+                        <div className="titleProjects">Leader Projects</div>
+
+                        <div id=''>
+                            <span id='searchProject' >
+                                <img id='iconSearchProject' src={require('../../../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
+                                <input type='text' id='inputSearchProjects' className='inputSearchProjects'
+                                    onMouseLeave={() => closeInputSearch()}
+                                />‏
+                                    </span>
+
+
+                            <button className='buttonNewProject'
+                                onClick={() => openViewDitailsAddProject()}
+                            >+ New Project</button>
+                        </div>
+                    </div>
+
+                </div>
 
                 <Table responsive className='tableProject' >
                     <>
-
                         <tbody>
                             {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
                         </tbody>
                     </>
                 </Table>
 
-                <button type="button" class="btn btn-outline-primary" onClick={() => openViewDitailsAddProject()}
-                >New Project</button>
 
                 {
                     showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}
