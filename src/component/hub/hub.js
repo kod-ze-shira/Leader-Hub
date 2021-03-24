@@ -38,8 +38,8 @@ function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
-    const [showViewDitails, setShowViewDitails] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
+    const [formViewDitails, setFormViewDitails] = useState()
 
     // const [componentFlag, setComponentFlag] = useState("")
     // const {location}=props
@@ -72,7 +72,18 @@ function Hub(props) {
 
     }
 
+    const openViewDetails = (value) => {
+        setFormViewDitails(value)
+        setViewDetails(true)
+    }
 
+    function openSearchProject() {
+        document.getElementById('inputSearchProjects').style.display = 'inline-block'
+    }
+
+    function closeInputSearch() {
+        document.getElementById('inputSearchProjects').style.display = 'none'
+    }
     return (
         <>
             <HeaderLeader userName={props.user} appName='hub' />‏
@@ -93,7 +104,7 @@ function Hub(props) {
                             <ViewDetails
                                 closeViewDetails={() => setViewDetails(false)}
                                 // showToast={showToast}
-                                from={props.setShowViewDitails}
+                                from={formViewDitails}
                             // workspaceId={idWorkspace} 
                             />
                             : null
@@ -121,6 +132,15 @@ function Hub(props) {
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route>
                             <Route path="/" >
+                                <div id='cdggdfdfb'>
+                                    <span id='searchProject' >
+                                        <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
+                                        <input type='text' id='inputSearchProjects' className='inputSearchProjects'
+                                            onMouseLeave={() => closeInputSearch()}
+                                        />‏
+                                    </span>
+
+                                </div>
                                 {/* <Animation /> */}
                             </Route>
                             {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
@@ -135,7 +155,7 @@ function Hub(props) {
                         />
                         : null}
 
-                    <AddObject setShowViewDitails={() => setViewDetails(true)} />
+                    <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} />
                     {/* setShowViewDitails={} */}
                 </div>
 
