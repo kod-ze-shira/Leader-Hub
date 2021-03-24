@@ -22,10 +22,15 @@ function ViewAllStatuses(props) {
 
         <>
             <div className="container">
-                <div className="row mt-1">
+                <div className="row justify-content-around">
                     <div className="menu-status " style={{ backgroundColor: props.status.color }}>
                         <p >{props.status.statusName}</p>
+                        {/* onClick={(event) => editStatus(props.myProject.project, event)} */}
+                        {/* style={myStyleIcons} */}
+
                     </div>
+                    <img
+                        className=" " src={require('../../img/pencil-write.png')} />
                 </div>
             </div>
             {/* {props.statuses.length && renderedListStatuses} */}

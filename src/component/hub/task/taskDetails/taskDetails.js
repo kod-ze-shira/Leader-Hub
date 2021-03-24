@@ -74,8 +74,8 @@ function TaskDetails(props) {
                 setTimeout(() => {
                     value = milestonesValue
                 }, 1000);
-                
-              
+
+
             }
         }
         setEditTask(prevState => ({
@@ -142,8 +142,8 @@ function TaskDetails(props) {
                             value={task.startDate}
                             onChange={handleChange}
                         />
-                    </div> 
-                     <div class="form-group col-5">
+                    </div>
+                    <div class="form-group col-5">
                         <label for="dueDateProject">Due Date</label>
                         <input
                             className="form-control "
@@ -156,7 +156,7 @@ function TaskDetails(props) {
                     </div>
 
                 </div>
-                <div className="row justify-content-start">
+                <div className="row justify-content-between">
                     {/* <Select
                         onChange={(e) => handleChange(e)}
                         name="status"
@@ -165,10 +165,11 @@ function TaskDetails(props) {
                         className="col-5"
                     /> */}
                     <div class="dropdown col-5">
-                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle form-control " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {props.statuses.length ? props.statuses.map((status,index) => (
-                                <div className="placehlder-first-status ">
-                                <div  className={index==0?"color-status-first align-items-center mt-2":""}><span className="align-items-center mt-0"></span>{index==0?status.statusName:null}</div>    </div>     )) : null}
+                       
+                        <button onClick={openPopUpStatus} class="btn  dropdown-toggle form-control row align-items-center " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {props.statuses.length ? props.statuses.map((status, index) => (
+                                <div className={index == 0 ? "placehlder-first-status ":""}>
+                                    <div className={index == 0 ? "color-status-first " : ""}><span className={index == 0 ? " " : ""}>{index == 0 ? status.statusName : null}</span></div>    </div>)) : null}
                         </button>
                         <div className={openPopUp ? "menu__" : ""}>
                             {openPopUp && props.statuses.length ? props.statuses.map((status) => (
@@ -181,15 +182,16 @@ function TaskDetails(props) {
                             {openPopUpToAdd ? <AddStatus /> : null}
                         </div>
                     </div>
+                    <input
+                        checked={milestonesValue ? "checked" : false}
+                        type="checkbox" id="milestones" name="milestones"
+                        onClick={(e) => handleChange(e)}
+                        value={milestonesValue}></input>
+                    <label for="milestones col-3">Is Milestones</label>
                 </div>
 
-                <input
-                    checked={milestonesValue ? "checked" : false}
-                    type="checkbox" id="milestones" name="milestones"
-                    onClick={(e) => handleChange(e)}
-                    value={milestonesValue}></input>
-                <label for="milestones">Is Milestones</label>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-task">
+
+                <div className="row justify-content-between  mx-1 btns-in-view-details-task mt-3">
                     {/* <button onClick={(e) => addStatus(e)}>new status</button> */}
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
