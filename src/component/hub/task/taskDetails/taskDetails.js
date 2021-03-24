@@ -25,7 +25,6 @@ function TaskDetails(props) {
             }
             status.push(stTemp);
         });
-        console.log("milestones status", props.task.milestones)
 
         setStatusTemp(status)
     }, [props.statuses])
@@ -33,7 +32,8 @@ function TaskDetails(props) {
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const task = props.task
     const status = props.status
-    const [milestonesValue, setMilestonesValue] = useState(props.task.milestones)
+    const [milstone, setMilstone] = useState(props.task.milestones)
+    const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [editTask, setEditTask] = useState(task)
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
@@ -47,10 +47,14 @@ function TaskDetails(props) {
             [name]: value
         }));
     }
-
+    const changeMilstone = (event) => {
+        setMilestonesValue(!milestonesValue)
+        let temp = editTask
+        temp.milestones = !milestonesValue
+        setEditTask(temp)
+    }
     const handleChange = (event) => {
         let name, value
-        debugger
         if (event.name == "status") {
             name = event.name
             value = event.value
@@ -65,14 +69,10 @@ function TaskDetails(props) {
             if (name == "dueDate" || name == "startDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             }
-            if (name == "milestones") {
-                setMilestonesValue(!milestonesValue)
-                setTimeout(() => {
-                    value = milestonesValue
-                }, 1000);
-                
-              
-            }
+            // if (name == "milestones") {
+            //     setMilestonesValue(!milestonesValue)
+            //     value = milestonesValue
+            // }
         }
         setEditTask(prevState => ({
             ...prevState,
@@ -105,7 +105,6 @@ function TaskDetails(props) {
                     <input name="name" onChange={(e) => handleChange(e)}
                         type="text" class="form-control"
                         id="name"
-                        // placeholder="instructions for using this project"
                         value={editTaskName} />
                 </div>
                 <div class="form-group">
@@ -171,13 +170,21 @@ function TaskDetails(props) {
                         />
                     </div>
                 </div>
+                {/* <label */}
+                    {/* // className="check-task py-2 "> */}
+                    {/* <input type="checkbox" /> */}
+                    {/* <span className="checkmark ml-1"></span> */}
+                {/* </label> */}
 
-                <input
-                    checked={milestonesValue ? "checked" : false}
-                    type="checkbox" id="milestones" name="milestones"
-                    onClick={(e) => handleChange(e)}
-                    value={milestonesValue}></input>
-                <label for="milestones">Is Milestones</label>
+                <label for="milestones">
+                    <span className="checkmark-milstone ml-1"></span>
+                    <input
+                        checked={milestonesValue ? "checked" : ''}
+                        type="checkbox" id="milestones" name="milestones"
+                        onClick={(e) => changeMilstone(e)}
+                        value={milestonesValue}></input>
+                    Is Milestones</label>
+
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
                     <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
