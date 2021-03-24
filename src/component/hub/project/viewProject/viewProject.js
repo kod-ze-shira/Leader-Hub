@@ -63,7 +63,7 @@ function ViewProject(props) {
         setMyStyleIcons({ 'opacity': '0' })
         setMyStyleStripe({ 'color': 'white' })
     }
-    complitedColor = complited < 30 ? '#9DFF00' : complited < 60 ? '#6FAC41' : '#245300'
+    complitedColor = complited < 30 ? '#44D7B6' : complited < 60 ? '#34A38B' : '#005750'
     return (
         <>
             <tr

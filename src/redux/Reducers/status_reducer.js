@@ -12,6 +12,9 @@ const statuses = {
         state.statuses = action.payload
     },
 
+    addNewStatus(state, action) {
+        state.statuses.push(action.payload)
+    },
 }
 
 export default produce((state, action) => createReducer(state, action, statuses), initialState);

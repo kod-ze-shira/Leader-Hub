@@ -38,8 +38,8 @@ function SelectHeader(props) {
     const color = '#00C6EA'
 
     useEffect(() => {
-        // if (props.workspaces.length == 0)
-        //     props.getAllWorkspacesFromServer()
+        if (props.workspaces.length == 0)
+            props.getAllWorkspacesFromServer()
     }, [])
 
     const handleChange = (event, newValue) => {
@@ -59,23 +59,23 @@ function SelectHeader(props) {
             {props.workspaces.length > 0 ?
                 <div className="s-header mx-0 mb-3 row align-items-center mt-4">
 
-                    <div className="col pr-0">
+                    <div className="col-md col-sm-2 pr-0">
                         <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
                     </div>
-                    <div className="col pr-0">
+                    <div className="col-md col-sm-2 pr-0">
                         <SelectProject workspaces={props.workspaces} />
                     </div>
-                    <div className="col pr-0">
+                    <div className="col-md col-sm-2 pr-0">
                         <SelectCards flag={changeFlag} />
                     </div>
-                    <div className="col pr-0">
+                    <div className="col-md col-sm-2 pr-0">
                         <SelectTask />
                     </div>
 
                     <div className={classes.root}>
                         {props.menue ?
                             <Tabs
-                                className="tabs-in-header offset-4"
+                                className="tabs-in-header offset-md-4 w-sm-15"
                                 value={value}
                                 onChange={handleChange}
                                 variant="scrollable"
@@ -90,7 +90,7 @@ function SelectHeader(props) {
                             </Tabs>
                             :
                             <Tabs
-                                className="tabs-in-header offset-4 opacity">
+                                className="tabs-in-header offset-md-4 w-sm-15 opacity">
                                 <Tab label="List" className="tab" />
                                 <Tab label="Calender" className="tab" />
                                 <Tab label="Gant" className="tab" />

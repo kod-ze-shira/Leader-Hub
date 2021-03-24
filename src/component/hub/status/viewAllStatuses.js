@@ -1,38 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react'
-
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 // import ViewDetails from '../../viewDetails/viewDetails'
-
+import './viewAllStatuses.css'
 
 
 function ViewAllStatuses(props) {
 
     useEffect(() => {
-        props.getAllStatusesTaskForUser()
+        // props.getAllStatusesTaskForUser()
     }, []);
 
 
     useEffect(() => {
-        debugger
-        console.log(props.statuses);
+        // debugger
+        // console.log(props.statuses);
     }, [props.statuses])
 
-    const renderedListStatuses = props.statuses.map(status => {
-        return <span>{status.statusName}</span>
-    })
-    //   const viewAllStatuses = props.statuses ? props.statuses.map((status) => {
-    //     return status.tasks.map((task) => {
-    //         return task.statusName
-    //     })
-    // }) : null
 
     return (
 
         <>
-            <h1>renderedListStatuses</h1>
+            <div className="container">
+                <div className="row justify-content-around">
+                    <div className="menu-status " style={{ backgroundColor: props.status.color }}>
+                        <p >{props.status.statusName}</p>
+                        {/* onClick={(event) => editStatus(props.myProject.project, event)} */}
+                        {/* style={myStyleIcons} */}
 
-            {props.statuses.length && renderedListStatuses}
+                    </div>
+                    <img
+                        src={require('../../img/pencil-write.svg')} />
+                </div>
+            </div>
+            {/* {props.statuses.length && renderedListStatuses} */}
         </>
 
     )
@@ -41,12 +42,12 @@ function ViewAllStatuses(props) {
 const mapStateToProps = (state) => {
 
     return {
-        statuses: state.status_reducer.statuses
+        // statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
     }
 
 

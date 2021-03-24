@@ -42,6 +42,7 @@ line-height: 0.95 !important;
         outline: 0 !important;
         color:var(--light-light-blue)  !important;
 }
+
 .select__placeholder{
         /* font-size: small !important; */
 }

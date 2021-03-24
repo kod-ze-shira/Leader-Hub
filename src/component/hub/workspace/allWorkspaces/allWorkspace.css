@@ -7,11 +7,18 @@
   cursor: pointer;
   }
   .MyWorkspace{
-      font-size: x-large;
-         font-weight: 505;
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 24px/32px Roboto;
+    /* font-size: 26px; */
+    letter-spacing: 0px;
+    color: #000000;
+    text-transform: capitalize;
+    opacity: 1;
+    padding-bottom: 2vh;
   }
   .borderBottom{
-      border-bottom:#707070 1px solid ;
+      border-bottom:#98A9BC 1px solid ;
         display: flex;
       justify-content:space-between; 
      

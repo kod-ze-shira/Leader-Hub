@@ -58,6 +58,7 @@ function SelectCards(props) {
                     // props.card ? props.card.name :
                     placeholder={"All Cards"}
                     styles={style}
+
                 />
             </div>
         </>

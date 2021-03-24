@@ -73,8 +73,7 @@ function ViewTaskByCrad(props) {
         temp.name = editTaskName
         setTask(temp);
         
-
-        // props.EditTask(task);
+        props.EditTask(task);
 
     }
     const editTaskNameInReduxs = (taskName) => {
@@ -104,10 +103,9 @@ function ViewTaskByCrad(props) {
                                 ></FontAwesomeIcon>
                                 <div className="col-3">
                                     <label
-                                        // className="py-2">
                                         className="check-task py-2 ">
                                         <input type="checkbox" />
-                                        <span className="checkmark ml-1" onClick={() => addChalalit()}></span>
+                                        <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
                                         className="show-card py-2"

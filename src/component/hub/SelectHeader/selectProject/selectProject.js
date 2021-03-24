@@ -122,6 +122,7 @@ function SelectProject(props) {
                     options={viewProjectsList}
                     placeholder={props.project.name ? props.project.name : "All Projects"}
                     styles={colourStyles}
+
                 />
             </div>
         </>

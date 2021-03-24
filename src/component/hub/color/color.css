@@ -1,0 +1,10 @@
+#colour[type=color] {
+    display: none;
+}
+#color_front{
+  border-radius: 50%;
+  width: 16px;
+  height: 16px; 
+  /* background-color:red; */
+  display:inline-block;
+}

@@ -55,16 +55,17 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ statusTask }),
             success: function (data) {
+                debugger
                 console.log("success")
                 console.log(data);
-
-                dispatch(actions.addNewStatus(data.statuses))
+                dispatch(actions.addNewStatus(data.newStatusTask))
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+
+                checkPermission(err).then((ifOk) => {
+
+                })
             }
         });
     }

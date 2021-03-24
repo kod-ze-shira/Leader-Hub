@@ -2,10 +2,10 @@
     display: block;
     /* text-align: left; */
     text-align: center;
-    /* font: normal normal normal 16px/21px Roboto; */
+    font: normal normal normal 16px/21px Roboto;
     letter-spacing: 0px;
     color: #202224;
     opacity: 0.9;
     /* font-size: small; */
-    font-size: 16px;
+    /* font-size: 16px; */
 }

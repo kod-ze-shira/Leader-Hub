@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TasksNotBelongCardByMap from '../task/taskNotBelongCardForUser/tasksNotBelongCardByMap'
+import ViewMilstone from './viewMilstone'
 
 function Milestones(props) {
 
@@ -13,11 +13,11 @@ function Milestones(props) {
 
     }, [])
     const renderTasks = props.milestones.length ? props.milestones.map((milestone) => {
-        return <h1>{milestone.name}</h1>
-        // return <TasksNotBelongCardByMap key={task._id} task={task} />
+        // return <h1>{milestone.name}</h1>
+        return <ViewMilstone milestone={milestone} />
     }) : null
     return (
-        <div className="body-workspace ">
+        <div className="body-workspace mt-4">
             <div className="mt-5">
                 {props.milestones.length ?
                     renderTasks

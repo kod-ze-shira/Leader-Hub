@@ -35,6 +35,7 @@
 }
 .title-card{
     display: inline !important;
+    /* background-color: #E8EAEC; */
 }
 .show-card>div{
     display: inline-block;

@@ -58,8 +58,7 @@ function ProjectPlatform(props) {
     }
     return (
         <>
-
-            <div className="body container-fluid">
+            <div className=" body container-fluid">
                 <div className="cards">
                     <CardsByProject showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag} />
                     <div className="add-new-pop-up ">
