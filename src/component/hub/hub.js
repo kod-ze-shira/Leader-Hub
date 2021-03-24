@@ -144,7 +144,6 @@ function Hub(props) {
                                             onMouseLeave={() => closeInputSearch()}
                                         />‏
                                     </span>
-
                                 </div>
                                 {/* <Animation /> */}
                             </Route>
