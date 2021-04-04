@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import ViewDetails from '../../viewDetails/viewDetails'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import $ from 'jquery'
+
 
 function ProjectsByWorkspace(props) {
     let { idWorkspace } = useParams();
@@ -108,13 +110,21 @@ function ProjectsByWorkspace(props) {
     }
 
     function openSearchProject() {
+        // 
+        // $('#inputSearchProjects').click();
+        // $( "#inputSearchProjects" ).trigger( "click" );
+        $('#inputSearchProjects').trigger('mouseover');
+        $('#inputSearchProjects').mouseover();
+
         setTimeout(() => {
 
             // document.getElementById('inputSearchProjects').style.display = 'inline-block'
 
         }, 1600);
     }
-
+    function openSearchProject1() {
+        alert('gg')
+    }
     function closeInputSearch() {
         setTimeout(() => {
             document.getElementById('inputSearchProjects').value = ''
@@ -136,11 +146,15 @@ function ProjectsByWorkspace(props) {
 
                         <div id=''>
                             <span id='searchProject' >
-                                <img id='iconSearchProject' src={require('../../../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
                                     onMouseLeave={() => closeInputSearch()}
-                                />‏
-                                    </span>
+                                // onMouseOver={() => openSearchProject1()}
+
+                                />
+                                {/* <img id='iconSearchProject' src={require('../../../img/imge_search.png')}
+                                    onMouseOver={() => openSearchProject()} />
+                                ‏ */}
+                            </span>
 
 
                             <button className='buttonNewProject'
