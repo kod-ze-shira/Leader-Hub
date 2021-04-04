@@ -16,6 +16,7 @@ function ProjectsByWorkspace(props) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
+    let [valueSearch, setValueSearch] = useState('')
 
     const [addOrEditProject, setAddOrEditProject] = useState(false)
 
@@ -30,11 +31,11 @@ function ProjectsByWorkspace(props) {
 
     useEffect(() => {
         props.getAllWorkspaces()
-
-        if (props.projects.length == 0) {
-            props.getProjectsByWorkspaceId(idWorkspace)
-            // let w = props.workspaces.find(w => w._id == idWorkspace)
-        }
+        if (props.projects)
+            if (props.projects.length == 0) {
+                props.getProjectsByWorkspaceId(idWorkspace)
+                // let w = props.workspaces.find(w => w._id == idWorkspace)
+            }
         // props.setProjects(props.workspaces.)
         if (!flug) {
             if (props.workspaces.length == 0) {
@@ -77,30 +78,24 @@ function ProjectsByWorkspace(props) {
         setAddOrEditProject("newProject")
         setShowProject(true)
     }
-
     const viewProjectsByWorkspace = props.projects ?
         props.projects.map((project) => {
-            return <ViewProject showToast={(obj) => showToast1(obj)}
-                closeViewDetails={false} myProject={project} editProject={openEditProject} />
+            return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
+                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                    closeViewDetails={false} myProject={project} editProject={openEditProject} />
+                : null
         }) : null
 
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
-            return <ViewProject showToast={(obj) => showToast1(obj)}
+            return project.project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
+                : null
         })
     }) : null
 
-    // function viewProjectsByWorkspace() {
-    //     let componentProject = {}
-    //     props.projects.map((project) => {
-    //         componentProject += <ViewProject
-    //             myProject={project} editProject={openEditProject} />
-    //     })
 
-    //     return componentProject
-    // }
     function showToast1(obj) {
         props.showToast(obj)
     }
@@ -110,28 +105,24 @@ function ProjectsByWorkspace(props) {
     }
 
     function openSearchProject() {
-        // 
-        // $('#inputSearchProjects').click();
-        // $( "#inputSearchProjects" ).trigger( "click" );
-        $('#inputSearchProjects').trigger('mouseover');
-        $('#inputSearchProjects').mouseover();
+        document.getElementById('inputSearchProjects').value = valueSearch
 
-        setTimeout(() => {
-
-            // document.getElementById('inputSearchProjects').style.display = 'inline-block'
-
-        }, 1600);
     }
-    function openSearchProject1() {
-        alert('gg')
+    function searchProject() {
+        setValueSearch(document.getElementById('inputSearchProjects').value)
     }
     function closeInputSearch() {
+        // $("#inputSearchProjects").trigger("focusout");
+
         setTimeout(() => {
             document.getElementById('inputSearchProjects').value = ''
 
         }, 1700);
 
     }
+
+
+
 
     return (
         <>
@@ -148,8 +139,8 @@ function ProjectsByWorkspace(props) {
                             <span id='searchProject' >
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
                                     onMouseLeave={() => closeInputSearch()}
-                                // onMouseOver={() => openSearchProject1()}
-
+                                    onChange={() => searchProject()}
+                                    onMouseOver={() => openSearchProject()}
                                 />
                                 {/* <img id='iconSearchProject' src={require('../../../img/imge_search.png')}
                                     onMouseOver={() => openSearchProject()} />
