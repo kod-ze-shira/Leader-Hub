@@ -9,13 +9,11 @@ function EditProject(props) {
     let project = props.project
     let [nameProject, setNameProject] = useState(project.name)
     let [descriptionProject, setDescriptionProject] = useState(project.description)
-    // let [dueDateProject, setDueDateProject] = useState(project.dueDate)
     let [colorProject, setColorProject] = useState(project.color)
+
     let myDate = project.dueDate;
-    //yy dd mm
-    //mm dd yy
-    let res1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
-    let [dueDateProject, setDueDateProject] = useState(res1)
+    let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
+    let [dueDateProject, setDueDateProject] = useState(dueDate1)
 
     const changeNameProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
@@ -83,18 +81,19 @@ function EditProject(props) {
 
     return (
         <>
-        
-        <div className="details mr-5 ml-4">
+
+            <div className="details mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Project details</h5>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name"  onChange={(e) => changeNameProject(e)}
-                        id='nameProject' type="text" class="form-control" />
+                    <input name="name" onChange={(e) => changeNameProject(e)}
+                        id='nameProject' type="text" class="form-control"
+                        value={nameProject} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
-                         onChange={(e) => changeDescriptionProject(e)}></textarea>
+                        onChange={(e) => changeDescriptionProject(e)} value={descriptionProject}></textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
@@ -104,6 +103,7 @@ function EditProject(props) {
                             onChange={(e) => changeColorProject(e)}
                             type="color"
                             id='colorProject'
+                            value={colorProject}
                         />
                     </div>
                     <div class="form-group col-5">
@@ -113,8 +113,9 @@ function EditProject(props) {
                             name="dueDate"
                             type="date"
                             id='dueDateProject'
+                            value={dueDateProject}
                             onChange={(e) => changeDueDateProject(e)}
-                            />
+                        />
                     </div>
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-project">
