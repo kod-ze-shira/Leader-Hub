@@ -13,7 +13,7 @@ function SelectWorkspace(props) {
 
     useEffect(() => {
     }, [])
-    
+
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
