@@ -52,7 +52,6 @@ function NewProject(props) {
         let year = newDate.getFullYear();
         console.log(date + '/' + month + '/' + year)
         project.updateDates[0] = date + '/' + month + '/' + year
-        debugger
         // project.workspace = props.workspaceId
         project.workspace = props.workspace.workspace._id
         if (project.dueDate) {
