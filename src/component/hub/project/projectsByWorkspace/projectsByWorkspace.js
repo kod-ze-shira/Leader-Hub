@@ -116,7 +116,6 @@ function ProjectsByWorkspace(props) {
 
         setTimeout(() => {
             document.getElementById('inputSearchProjects').value = ''
-
         }, 1700);
 
     }

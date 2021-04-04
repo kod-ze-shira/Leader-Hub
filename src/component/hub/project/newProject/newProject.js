@@ -7,8 +7,9 @@ import viewDetails from '../../viewDetails/viewDetails'
 import $ from "jquery";
 
 function NewProject(props) {
+    let [flag, setFlag] = useState(false)
     let project = { 'updateDates': [] }
-    let [myColor, setMyColor] = useState()
+    let [myColor, setMyColor] = useState("#C967B6")
     let [emptyValue, setEmptyValue] = useState(false)
     let [myStyle, setMyStyle] = useState();
     // let [dufultDateDueDate, setDufultDateDueDate] = useState()
@@ -20,6 +21,20 @@ function NewProject(props) {
         "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
         "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"]
 
+    function getRandomColor() {
+        const randColor = Math.floor((Math.random() * colorList.length) + 0)
+        const color = colorList[randColor]
+        return color;
+    }
+    if (!flag) {
+        fun()
+        setFlag(true)
+    }
+    function fun() {
+        let p = getRandomColor()
+        setMyColor(p)
+
+    }
     // const changeFiledInProject = (input) => {
     //     setMyStyle({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
     //     project[input.target.name] = input.target.value
@@ -52,7 +67,7 @@ function NewProject(props) {
         let year = newDate.getFullYear();
         console.log(date + '/' + month + '/' + year)
         project.updateDates[0] = date + '/' + month + '/' + year
-        // project.workspace = props.workspaceId
+        project.color = myColor
         project.workspace = props.workspace.workspace._id
         if (project.dueDate) {
             let myDate = project.dueDate
@@ -80,21 +95,13 @@ function NewProject(props) {
         }
 
     }
-    // fun()
-    // function fun() {
-    // tempColor = getRandomColor();
-    // setMyColor(tempColor)
 
-    // }
 
-    // myColor = getRandomColor();
-    // setMyColor(getRandomColor())
-
-    function getRandomColor() {
-        const randColor = Math.floor((Math.random() * colorList.length) + 0)
-        const color = colorList[randColor]
-        return color;
+    const changeColorProject = (input) => {
+        setMyColor(input.target.value)
+        project[input.target.name] = input.target.value
     }
+
     return (
 
 
@@ -116,10 +123,11 @@ function NewProject(props) {
                     <div class="form-group col-5">
                         <label for="color">Color</label>
                         <input name="color"
-                            className=" form-control "
-                            onChange={(e) => changeFiledInProject(e)}
+                            className="form-control"
+                            onChange={(e) => changeColorProject(e)}
                             type="color"
                             id='colorProject'
+                            value={myColor}
                         />
                     </div>
                     <div class="form-group col-5">
