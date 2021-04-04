@@ -88,7 +88,7 @@ function EditProject(props) {
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeNameProject(e)}
                         id='nameProject' type="text" class="form-control"
-                        value={nameProject} />
+                        value={nameProject} placeholder='Write a name' />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
