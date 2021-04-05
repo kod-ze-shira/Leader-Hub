@@ -172,8 +172,6 @@ function Hub(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName
-
-
     }
 }
 const mapDispatchToProps = (dispatch) => {

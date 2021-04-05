@@ -24,7 +24,6 @@ function ViewCards(props) {
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [anchorEl, setAnchorEl] = React.useState(null);
     let actionINcard = { renameCard: "rename", deleteCard: "delete" };
-
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
@@ -36,7 +35,7 @@ function ViewCards(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
+            task = { name: inputValue, description: "", status: props.statuses[0]._id, startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -192,6 +191,7 @@ function ViewCards(props) {
                         />
                         : null
                 }
+
                 {
                     viewDetails ?
                         <div className="closeDet">
@@ -210,6 +210,8 @@ const mapStateToProps = (state) => {
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
+        statuses: state.status_reducer.statuses,
+        // user: state.public_reducer.userName,
 
     }
 }
@@ -218,7 +220,7 @@ const mapDispatchToProps = (dispatch) => {
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
-        EditCard: (card) => dispatch(actions.editCard(card))
+        EditCard: (card) => dispatch(actions.editCard(card)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)
