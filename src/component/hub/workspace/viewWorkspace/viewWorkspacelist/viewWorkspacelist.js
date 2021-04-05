@@ -36,7 +36,7 @@ function ViewWorkspaceList(props) {
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace.workspace);
-        props.duplicateWorkspace();
+        props.duplicateWorkspace(workspace.workspace._id);
     }
     const [over, setover] = useState(false);
 
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: () => dispatch(actions.duplicateWorkspace())
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
     }
 }
 

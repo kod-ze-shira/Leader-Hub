@@ -32,9 +32,10 @@ margin-right: 11px;
 }
 
 #iconSearchProject{
-    right: 175px;
-    position: fixed;
-    top: 164px;
+    /* right: 175px; */
+    /* position: fixed; */
+    /* top: 164px; */
+    /* margin-right: -40px; */
 }
 
 
@@ -46,15 +47,17 @@ margin-right: 11px;
     height: 40px;
     border: 0px;
     outline: none;
-    margin-right: -231px;
+    /* margin-right: -231px; */
     border-top-right-radius: 50rem !important;
     border-bottom-right-radius: 50rem !important;
     transition: width 2s;
-    width: 42px;
-    /* width: 400px; */
-    position: fixed;
-    right: 405px;
-    top: 164px;
+    width: 40px;
+    margin-right: -42px;
+    margin-right: 10px;
+    background: url(../../../img/imge_search.png) no-repeat #54ccb647 ;
+    background-position: right;
+
+/* padding-left:30px; */
 
 }
 

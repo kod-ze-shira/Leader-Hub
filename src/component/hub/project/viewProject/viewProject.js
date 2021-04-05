@@ -31,9 +31,6 @@ function ViewProject(props) {
 
     function editProject(project, event) {
         props.setProject(project)
-        // showToast={(object) => props.showToast(object)}
-        // props.showToast(project)
-        // projectToEdit
         props.editProject()
         event.stopPropagation();
     }

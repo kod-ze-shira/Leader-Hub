@@ -9,13 +9,11 @@ function EditProject(props) {
     let project = props.project
     let [nameProject, setNameProject] = useState(project.name)
     let [descriptionProject, setDescriptionProject] = useState(project.description)
-    // let [dueDateProject, setDueDateProject] = useState(project.dueDate)
     let [colorProject, setColorProject] = useState(project.color)
+
     let myDate = project.dueDate;
-    //yy dd mm
-    //mm dd yy
-    let res1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
-    let [dueDateProject, setDueDateProject] = useState(res1)
+    let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
+    let [dueDateProject, setDueDateProject] = useState(dueDate1)
 
     const changeNameProject = (input) => {
         $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
@@ -89,14 +87,13 @@ function EditProject(props) {
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeNameProject(e)}
-                        value={nameProject}
-                         id='nameProject' type="text" class="form-control" />
+                        id='nameProject' type="text" class="form-control"
+                        value={nameProject} placeholder='Write a name' />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
-                        value={descriptionProject}
-                        onChange={(e) => changeDescriptionProject(e)}></textarea>
+                        onChange={(e) => changeDescriptionProject(e)} value={descriptionProject}></textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
@@ -117,6 +114,7 @@ function EditProject(props) {
                             type="date"
                             value={dueDateProject}
                             id='dueDateProject'
+                            value={dueDateProject}
                             onChange={(e) => changeDueDateProject(e)}
                         />
                     </div>
