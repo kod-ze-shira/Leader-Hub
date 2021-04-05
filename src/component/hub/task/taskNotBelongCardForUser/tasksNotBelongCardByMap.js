@@ -72,8 +72,9 @@ function TasksNotBelongCardByMap(props) {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     > */}
-            <div onMouseOver={(e) => overTask(props.task._id)}
-                onMouseOut={() => outOver(props.task._id)}
+            <div
+                // onMouseOver={(e) => overTask(props.task._id)}
+                // onMouseOut={() => outOver(props.task._id)}
                 className="show-task row mx-4 border-bottom "
             >
 
@@ -83,7 +84,7 @@ function TasksNotBelongCardByMap(props) {
                 <label
                     className="check-task ml-3 py-2 pl-5 col-1 ">
                     <input type="checkbox" />
-                    <span className="checkmark " onClick={() => addChalalit()}></span>
+                    <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
                 </label>
                 <input
                     className="show-card col-3"

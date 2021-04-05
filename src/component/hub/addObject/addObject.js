@@ -100,6 +100,8 @@ export default connect(
         return {
             // workspaceToEdit: state.workspace_reducer.workspace,
             // workspaces: state.workspace_reducer.workspaces,
+
+
         }
     },
     (dispatch) => {

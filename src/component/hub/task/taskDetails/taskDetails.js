@@ -26,17 +26,18 @@ function TaskDetails(props) {
             }
             status.push(stTemp);
         });
-        console.log("milestones status", props.task.milestones)
 
         setStatusTemp(status)
     }, [props.statuses])
 
     const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [editDescription, setEditDescription] = useState(props.task.description)
     const task = props.task
     const status = props.status
+    const [milstone, setMilstone] = useState(props.task.milestones)
+    const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
-    const [milestonesValue, setMilestonesValue] = useState(props.task.milestones)
     const [editTask, setEditTask] = useState(task)
     const [statusId, setStatusId] = useState()
 
@@ -52,7 +53,12 @@ function TaskDetails(props) {
             [name]: value
         }));
     }
-
+    const changeMilstone = (event) => {
+        setMilestonesValue(!milestonesValue)
+        let temp = editTask
+        temp.milestones = !milestonesValue
+        setEditTask(temp)
+    }
     const handleChange = (event) => {
         let name, value
         if (event.name == "status") {
@@ -69,14 +75,10 @@ function TaskDetails(props) {
             if (name == "dueDate" || name == "startDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             }
-            if (name == "milestones") {
-                setMilestonesValue(!milestonesValue)
-                setTimeout(() => {
-                    value = milestonesValue
-                }, 1000);
-
-
-            }
+            // if (name == "milestones") {
+            //     setMilestonesValue(!milestonesValue)
+            //     value = milestonesValue
+            // }
         }
         setEditTask(prevState => ({
             ...prevState,
@@ -128,16 +130,15 @@ function TaskDetails(props) {
                     <input name="name" onChange={(e) => handleChange(e)}
                         type="text" class="form-control"
                         id="name"
-                        // placeholder="instructions for using this project"
                         value={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
                         id="descriptionProject" rows="2"
-                        placeholder="this is a very important task.. don’t forget!"
+                        // placeholder="this is a very important task.. don’t forget!"
                         onChange={handleChange}
-                        value={task.description}>
+                        value={editDescription}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -196,17 +197,30 @@ function TaskDetails(props) {
 
                         </div>
                     </div>
-                    <input
-                        checked={milestonesValue ? "checked" : false}
-                        type="checkbox" id="milestones" name="milestones"
-                        onClick={(e) => handleChange(e)}
-                        value={milestonesValue}></input>
-                    <label for="milestones col-3">Is Milestones</label>
                 </div>
 
+                <label className="check-task py-2 mt-2 " for="milestones">
+                    <input
+                        type="checkbox"
+                        checked={milestonesValue ? "checked" : ''}
+                        value={milestonesValue}
+                    ></input>
+                    <span className="checkmark  ml-0"
+                        onclick={(e) => changeMilstone(e)}></span>
+                    <p className="pl-4 mils">Milestones</p>
+                </label>
 
-                <div className="row justify-content-between  mx-1 btns-in-view-details-task mt-3">
-                    {/* <button onClick={(e) => addStatus(e)}>new status</button> */}
+                <label for="milestones" className="check-task py-2">
+                    <input
+                        checked={milestonesValue ? "checked" : ''}
+                        type="checkbox" id="milestones" name="milestones"
+                        onClick={(e) => changeMilstone(e)}
+                        value={milestonesValue}></input>
+                    {/* Is Milestones */}
+                </label>
+
+                <div className="row justify-content-between  mx-1 btns-in-view-details-task">
+                    <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>

@@ -62,6 +62,9 @@ textarea:focus{
 .css-2b097c-container{
     border:none !important;
 }
+.mils{
+    display: inline;
+}
 .task-details > .form-group{
     margin-bottom: 0.01rem !important;
   }

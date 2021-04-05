@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Header from './header/header';
 import Body from './body/body';
-import Nav from '../warps/nav/nav';
-import Left_nav from '../warps/left_nav/left_nav';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
-import Tools from './tools/tools';
-import Animation from './animation/animation'
 import {
     BrowserRouter as Router,
     Switch,
@@ -68,6 +63,8 @@ function Hub(props) {
         setShowToastDelete(value)
         if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
             $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
+        else if (objectToDelete.type == "Project")
+            $(`#${objectToDelete.object._id}`).css("display", "table-row")
         else
             $(`#${objectToDelete.object._id}`).css("display", "block")
 
@@ -101,7 +98,7 @@ function Hub(props) {
                             <Configurator />
                         </div>
                         : null}
-                    <div className={open ? "col-10 bodyHub  pr-4" : "col-12 bodyHub  px-4"}>
+                    <div className={open ? "col-10 bodyHub  pr-4" : "col-12 bodyHub  px-4 "}>
                         {viewDetails ?
                             <ViewDetails
                                 closeViewDetails={() => setViewDetails(false)}
@@ -144,7 +141,6 @@ function Hub(props) {
                                             onMouseLeave={() => closeInputSearch()}
                                         />‏
                                     </span>
-
                                 </div>
                                 {/* <Animation /> */}
                             </Route>

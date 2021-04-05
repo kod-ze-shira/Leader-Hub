@@ -15,18 +15,20 @@ function CardsByProject(props) {
 
     function onDragEndׂ(e) {
         let iSourse, iDestination
-        console.log(e.destination.droppableId, e.source.droppableId)
-        for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
-            if (props.cards[iSourse]._id == e.source.droppableId)
-                break
+        if (e.destination) {
+            console.log(e.destination.droppableId, e.source.droppableId)
+            for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
+                if (props.cards[iSourse]._id == e.source.droppableId)
+                    break
+            }
+            for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
+                if (props.cards[iDestination]._id == e.destination.droppableId)
+                    break
+            }
+            console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
+            const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+            props.changeTaskplace(replace)
         }
-        for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
-            if (props.cards[iDestination]._id == e.destination.droppableId)
-                break
-        }
-        console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
-        const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-        props.changeTaskplace(replace)
 
     };
     return (

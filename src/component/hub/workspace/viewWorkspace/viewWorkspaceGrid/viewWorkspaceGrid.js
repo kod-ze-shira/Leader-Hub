@@ -21,8 +21,6 @@ function ViewWorkspaceGrid(props) {
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
-
-
     }
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
@@ -30,7 +28,8 @@ function ViewWorkspaceGrid(props) {
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
-        props.duplicateWorkspace();
+        console.log(workspace)
+        props.duplicateWorkspace(workspace.workspace._id);
     }
 
     // $(`.ViewWorkspace`).mouseover(function () {
@@ -101,7 +100,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: () => dispatch(actions.duplicateWorkspace())
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
     }
 
 

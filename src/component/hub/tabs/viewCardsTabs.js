@@ -26,7 +26,7 @@ function ViewCardsTabs(props) {
     const [a, setA] = useState()
 
     let actionCard = { renameCard: "rename", deleteCard: "delete" };
-    const textInput = useRef(null);
+    const textInput = useRef();
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -54,9 +54,6 @@ function ViewCardsTabs(props) {
         setEditCardName(event.target.value)
 
     }
-    const deleteCard = () => {
-        props.showToastDelete(props.cardFromMap)
-    }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
         console.log("edut-card", card)
@@ -64,18 +61,22 @@ function ViewCardsTabs(props) {
     }
 
     const handleClick = (event) => {
-        if (event == "rename") {
             textInput.current.focus()
+
+        if (event == "rename") {
+            console.log(textInput.current)
+
+            // textInput.current.focus()
         }
         else
             setAnchorEl(event.currentTarget)
-
     };
+ 
 
     const handleClose = (nameAction) => {
         handleClick(nameAction)
         setAnchorEl(null)
-        textInput.current.focus()
+        // textInput.current.focus()
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
             $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
@@ -105,6 +106,7 @@ function ViewCardsTabs(props) {
                                     <div class="container">
                                         <div class="card-header row">
                                             <input
+                                                id="input-card-name"
                                                 ref={textInput}
                                                 className="form-control col-8"
                                                 value={editCardName}
@@ -126,7 +128,7 @@ function ViewCardsTabs(props) {
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
                                                 onClose={handleClose}
-                                            >
+                                            >                                               
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
                                             </Menu>
@@ -147,7 +149,10 @@ function ViewCardsTabs(props) {
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-2">
-                                                                <input type="text" class="form-control scroll-container" placeholder="Add Task" id="input-task"
+                                                                <input
+                                                                    autoFocus="true"
+                                                                    type="text"
+                                                                    class="form-control scroll-container" placeholder="Add Task" id="input-task"
                                                                     value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                                                                         if (event.key === 'Enter') {
                                                                             newTask()
@@ -161,7 +166,7 @@ function ViewCardsTabs(props) {
                                                 </div>
                                             )}
                                         </Droppable>
-                                        <a href="#input-task" className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
+                                        <a className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
                                     </div>
                                 </div>
                             </div>

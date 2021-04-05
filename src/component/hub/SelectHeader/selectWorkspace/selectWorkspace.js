@@ -12,7 +12,7 @@ function SelectWorkspace(props) {
 
 
     useEffect(() => {
-    }, [])
+    }, [props.workspace])
     
     //to change the workspace that user selected
     let myWorkspace = props.workspace;

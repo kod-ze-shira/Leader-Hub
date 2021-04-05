@@ -41,16 +41,16 @@
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    top: 7px;
-    left: 0;
     height: 23px;
     width: 23px;
     background-color: #FFFFFF;
-
     border: 1px solid #34A38B;
     border-radius: 50%;
-
-
+  }
+  
+  .checkmark-place{
+    top: 7px;
+    left: 0;
   }
   
   .check-task:hover input ~ .checkmark {
