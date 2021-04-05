@@ -112,6 +112,7 @@ function EditProject(props) {
                             className="form-control "
                             name="dueDate"
                             type="date"
+                            value={dueDateProject}
                             id='dueDateProject'
                             value={dueDateProject}
                             onChange={(e) => changeDueDateProject(e)}

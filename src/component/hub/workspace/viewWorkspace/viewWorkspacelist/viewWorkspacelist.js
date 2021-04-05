@@ -18,10 +18,12 @@ function ViewWorkspaceList(props) {
 
 
     const routeToProject = () => {
+        debugger
         props.setWorkspace(workspace)
         props.setProjects(workspace.projectList)
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
+
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
@@ -34,7 +36,7 @@ function ViewWorkspaceList(props) {
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace.workspace);
-        props.duplicateWorkspace();
+        props.duplicateWorkspace(workspace.workspace._id);
     }
     const [over, setover] = useState(false);
 
@@ -111,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: () => dispatch(actions.duplicateWorkspace())
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
     }
 }
 

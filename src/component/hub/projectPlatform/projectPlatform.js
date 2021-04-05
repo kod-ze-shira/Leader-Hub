@@ -26,10 +26,10 @@ function ProjectPlatform(props) {
         setInputValue(evt.target.value)
     }
     const showInputToAddCard = () => {
-        setShowInput(true)
-        $('.add-card-btn').click(function () {
-            $('.add-card').focus()
-        })
+        setShowInput(!showInput)
+        // $('.add-card-btn').click(function () {
+        //     $('.add-card').focus()
+        // })
 
     }
     const newCard = () => {
@@ -69,6 +69,7 @@ function ProjectPlatform(props) {
                     </div>
                     {showInput ?
                         <input
+                            autoFocus="true"
                             id="input-card"
                             ref={textInput}
                             placeholder={"New Card"}
@@ -81,7 +82,7 @@ function ProjectPlatform(props) {
                                 }
                             }}></input>
                         : null}
-                    <a href="#input-card" className="ml-5 mt-3 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <a className="ml-5 mt-3 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
                 </div>
                 {showToastDelete ?
                     <ToastDelete
