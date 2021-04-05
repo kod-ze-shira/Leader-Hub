@@ -32,6 +32,7 @@ function TaskDetails(props) {
     }, [props.statuses])
 
     const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [editDescription, setEditDescription] = useState(props.task.description)
     const task = props.task
     const status = props.status
     const [milstone, setMilstone] = useState(props.task.milestones)
@@ -52,7 +53,6 @@ function TaskDetails(props) {
         }));
     }
     const changeMilstone = (event) => {
-        debugger
         setMilestonesValue(!milestonesValue)
         let temp = editTask
         temp.milestones = !milestonesValue
@@ -126,9 +126,9 @@ function TaskDetails(props) {
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
                         id="descriptionProject" rows="2"
-                        placeholder="this is a very important task.. don’t forget!"
+                        // placeholder="this is a very important task.. don’t forget!"
                         onChange={handleChange}
-                        value={task.description}>
+                        value={editDescription}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">

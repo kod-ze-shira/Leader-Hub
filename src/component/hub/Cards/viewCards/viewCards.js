@@ -74,7 +74,6 @@ function ViewCards(props) {
         if ($(`#${id}`).hasClass("newTriangle")) {
             $(`#${id}`).addClass("triangle")
             $(`#${id}`).removeClass("newTriangle")
-
         }
         else {
             $(`#${id}`).removeClass("triangle")
@@ -120,10 +119,14 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0"
                 >
-                    <div className=" col-3  mr-3 " >
-                        <div id={props.cardFromMap._id}
-                            className=" newTriangle ml-2" onClick={(e) => changeSelectedCard(e)} ></div>
+                    <div className=" col-3  " >
+                        <div className="wrap-triangle">
+                            <div id={props.cardFromMap._id}
+                                className=" newTriangle "
+                                onClick={(e) => changeSelectedCard(e)} ></div>
+                                </div>
                         <input
+                            autoFocus="true"
                             className="ml-3 show-card"
                             value={editCardName}
                             onChange={updateCardName}
@@ -135,7 +138,7 @@ function ViewCards(props) {
                             }}
                         >
                         </input>
-                        <a href="#input-task">
+                        <a>
                             <button className="new-task" onClick={addTask}>+</button>
                         </a>
                     </div>
@@ -181,7 +184,9 @@ function ViewCards(props) {
                 {
                     addTaskInInput ?
                         <input
+                            autoFocus="true"
                             type="text"
+                            // className="add-task"
                             class="form-control scroll-container mt-2 w-50 ml-4"
                             placeholder="Add Task" id="input-task"
                             value={inputValue} onChange={updateInputValue} onKeyPress={event => {

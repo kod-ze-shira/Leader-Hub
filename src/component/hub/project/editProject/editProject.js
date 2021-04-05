@@ -83,18 +83,20 @@ function EditProject(props) {
 
     return (
         <>
-        
-        <div className="details mr-5 ml-4">
+
+            <div className="details mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Project details</h5>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name"  onChange={(e) => changeNameProject(e)}
-                        id='nameProject' type="text" class="form-control" />
+                    <input name="name" onChange={(e) => changeNameProject(e)}
+                        value={nameProject}
+                         id='nameProject' type="text" class="form-control" />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
-                         onChange={(e) => changeDescriptionProject(e)}></textarea>
+                        value={descriptionProject}
+                        onChange={(e) => changeDescriptionProject(e)}></textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
@@ -104,6 +106,7 @@ function EditProject(props) {
                             onChange={(e) => changeColorProject(e)}
                             type="color"
                             id='colorProject'
+                            value={colorProject}
                         />
                     </div>
                     <div class="form-group col-5">
@@ -112,9 +115,10 @@ function EditProject(props) {
                             className="form-control "
                             name="dueDate"
                             type="date"
+                            value={dueDateProject}
                             id='dueDateProject'
                             onChange={(e) => changeDueDateProject(e)}
-                            />
+                        />
                     </div>
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-project">
