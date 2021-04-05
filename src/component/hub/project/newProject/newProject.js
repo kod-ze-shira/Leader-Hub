@@ -10,8 +10,10 @@ function NewProject(props) {
     let [flag, setFlag] = useState(false)
     let project = { 'updateDates': [] }
     let [myColor, setMyColor] = useState("#C967B6")
-    let [emptyValue, setEmptyValue] = useState(false)
-    let [myStyle, setMyStyle] = useState();
+    let [nameProject, setNameProject] = useState('')
+    let [descriptioneProject, setDescriptionProject] = useState('')
+    let [myStyle, setMyStyle] = useState('');
+    let [myDueDate, setMyDueDate] = useState('')
     // let [dufultDateDueDate, setDufultDateDueDate] = useState()
     let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
@@ -33,20 +35,26 @@ function NewProject(props) {
     function fun() {
         let p = getRandomColor()
         setMyColor(p)
-
+        p = dueDate()
+        setMyDueDate(p)
     }
-    // const changeFiledInProject = (input) => {
-    //     setMyStyle({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
-    //     project[input.target.name] = input.target.value
-    // }
+    const changeNameInProject = (input) => {
+        $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
+        setNameProject(input.target.value)
+    }
     let d = dueDateForAnotherTwoMonths();
     // setDufultDateDueDate(d)
     $(`#dueDateProject`).val(d)
     // document.getElementById("dueDateProject").defaultValue = d;
 
-    const changeFiledInProject = (input) => {
-        $(`#nameProject`).css({ 'border-bottom': 'rgb(129, 129, 165) solid 1px' })
-        project[input.target.name] = input.target.value
+    const changeDescriptionInProject = (input) => {
+        setDescriptionProject(input.target.value)
+    }
+
+    const changeDueDateInProject = (input) => {
+        setMyDueDate(input.target.value)
+        // project[input.target.name] = input.target.value
+
     }
 
     function dueDateForAnotherTwoMonths() {
@@ -69,11 +77,16 @@ function NewProject(props) {
         project.updateDates[0] = date + '/' + month + '/' + year
         project.color = myColor
         project.workspace = props.workspace.workspace._id
-        if (project.dueDate) {
-            let myDate = project.dueDate
-            let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
-            project.dueDate = res
-        }
+        project.name = nameProject
+        project.description = descriptioneProject
+        debugger
+        // if (!project.dueDate) {
+        //     project.dueDate = myDueDate
+
+        // }
+        let myDate = myDueDate
+        let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
+        project.dueDate = res
 
         if (!project.name) {
             // $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
@@ -96,6 +109,18 @@ function NewProject(props) {
 
     }
 
+    function dueDate() {
+        let date = new Date()
+        date.setMonth(date.getMonth() + 3)
+        console.log("date : ", date)
+        let month = date.getMonth() + 1
+        let day = date.getDate()
+        let year = date.getFullYear()
+        const finalDate = year + '-' + (month <= 9 ? '0' + month : month) + '-' + (day <= 9 ? '0' + day : day)
+        console.log("finalDate : ", finalDate)
+        return (finalDate)
+    }
+
 
     const changeColorProject = (input) => {
         setMyColor(input.target.value)
@@ -111,13 +136,13 @@ function NewProject(props) {
                 <h5 className="my-5 title-view-details pb-2">Add Project</h5>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => changeFiledInProject(e)}
-                        id='nameProject' type="text" class="form-control" />
+                    <input name="name" onChange={(e) => changeNameInProject(e)}
+                        id='nameProject' type="text" class="form-control" value={nameProject} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
-                        onChange={(e) => changeFiledInProject(e)}></textarea>
+                        onChange={(e) => changeDescriptionInProject(e)} value={descriptioneProject}></textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
@@ -137,7 +162,8 @@ function NewProject(props) {
                             name="dueDate"
                             type="date"
                             id='dueDateProject'
-                            onChange={(e) => changeFiledInProject(e)} />
+                            value={myDueDate}
+                            onChange={(e) => changeDueDateInProject(e)} />
                     </div>
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-project">
