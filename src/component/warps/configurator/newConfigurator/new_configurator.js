@@ -48,7 +48,7 @@ function NewConfigorator(props) {
     return (
         <>
             <div className="left_nav ">
-            {/* pt-4 mt-5 */}
+                {/* pt-4 mt-5 */}
                 <div className=" col-8  ml-1">
                     {/* <img src={require('../../../img/logo-hub.png')}></img> */}
                     {/* <div onClick={props.openConfigurator} >
