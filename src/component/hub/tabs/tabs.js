@@ -95,13 +95,13 @@ function Tabs(props) {
                                             })}
                                         </DragDropContext>
                                         <div className="col-3 mt-4" >
-                                            <div className="view-cards-tabs">
+                                            <div className="view-cards-tabs ">
                                                 <div class="card " >
                                                     <div class="container" >
                                                         {showInput ?
                                                             <div
                                                                 class="card-header row">
-                                                                <input id="add-card1" placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                                <input autoFocus="true"  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                     if (event.key === 'Enter') {
                                                                         newCard()
                                                                     }
@@ -110,7 +110,8 @@ function Tabs(props) {
                                                             : null}
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
-                                                        <a className="add-card-tabs" href="#add-card1" onClick={showInputToAddCard}>Add Card+</a>
+                                                        <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
+                                                    
                                                     </div>
                                                 </div>
                                             </div>

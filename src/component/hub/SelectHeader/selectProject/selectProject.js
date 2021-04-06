@@ -14,7 +14,7 @@ function SelectProject(props) {
         props.getProjectByIdInServer(idProject)
         if (!props.projects)
             props.getProjectsByWorkspaceId(props.project.workspace)
-    }, [])
+    }, [props.workspace])
 
     //to chang the project that user selected
     let myProject = props.project;
@@ -105,9 +105,6 @@ function SelectProject(props) {
 
     };
 
-    // const colorsOfWorkspace = props.workspace.projects.map((project) => (
-    //     project.color
-    // ))
     const viewProjectsList =props.workspace.projectList? props.workspace.projectList.map((project) => (
         { value: project.project._id, label: project.project.name }
     )):null
