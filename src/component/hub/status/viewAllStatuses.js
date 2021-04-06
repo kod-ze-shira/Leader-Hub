@@ -30,6 +30,7 @@ function ViewAllStatuses(props) {
 
                     </div>
                     <img
+                        onClick={props.changeStatus(props.status._id)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>

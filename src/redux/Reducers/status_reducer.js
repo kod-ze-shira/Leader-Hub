@@ -14,6 +14,7 @@ const statuses = {
 
     addNewStatus(state, action) {
         state.statuses.push(action.payload)
+        console.log(state.statuses)
     },
 }
 

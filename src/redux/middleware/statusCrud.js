@@ -20,8 +20,6 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
                 console.log("success")
                 console.log("data", data);
                 console.log("data-s", data.statuses);
-
-
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
@@ -59,6 +57,7 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log(data);
                 dispatch(actions.addNewStatus(data.newStatusTask))
+                // console.log("data.newStatusTask",data.newStatusTask);
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
