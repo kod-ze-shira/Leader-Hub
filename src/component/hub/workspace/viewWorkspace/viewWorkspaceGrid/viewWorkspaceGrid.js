@@ -79,7 +79,7 @@ function ViewWorkspaceGrid(props) {
                                 {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}
                             </div>
                         </div>
-                        <div className="name "><p>{workspace.workspace.name}</p> </div>
+                        <div className="name "><p className='nameWorkspaceInGrid' title={workspace.workspace.name}>{workspace.workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
                             <p className="productionDateW">{workspace.workspace.productionDate}</p>
                         </div>
