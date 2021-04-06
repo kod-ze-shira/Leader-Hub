@@ -14,7 +14,9 @@ function AddTask(props) {
     ;
 
     console.log("card", props.cardId)
-    const [addTask, setAddTask] = useState({ name: "", description: "", status: "", startDate: props.startDate, dueDate: "", card: props.cardId })
+    console.log("status", props.statuses._id)
+
+    const [addTask, setAddTask] = useState({ name: "", description: "", status: props.statuses._id, startDate: props.startDate, dueDate: "", card: props.cardId })
     const handleChange = (event) => {
 
         const { name, value } = event.target;
@@ -46,13 +48,13 @@ function AddTask(props) {
             <label for="description">description:</label>
             <input type="text" name="description" class="form-control" id="description" placeholder="description"
                 onChange={handleChange} />
-            <label for="status">status:</label>
+            {/* <label for="status">status:</label>
             <select type="text" name="status" class="form-control" id="status" placeholder="status"
                 onChange={handleChange} >
                 <option>to do</option>
                 <option>in progress</option>
                 <option>done</option>
-            </select>
+            </select> */}
             <label for="startDate">startDate:</label>
             <input type="date" name="startDate" class="form-control" id="startDate" placeholder={date2}
                 min={date2} required
@@ -71,6 +73,7 @@ const mapStateToProps = (state) => {
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
+        statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -12,7 +12,6 @@ function TaskDetails(props) {
 
     useEffect(() => {
         props.getAllStatusesTaskForUser();
-        console.log(props.statuses);
     }, [props.task])
 
     useEffect(() => {
@@ -40,6 +39,8 @@ function TaskDetails(props) {
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [editTask, setEditTask] = useState(task)
+    const [statusId, setStatusId] = useState()
+
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
         statusName: "",
@@ -93,6 +94,7 @@ function TaskDetails(props) {
 
     }
     const openAddStatus = (e) => {
+
         setOpenPopUpToAdd(!openPopUpToAdd)
         setOpenPopUp(!openPopUp)
     }
@@ -105,6 +107,14 @@ function TaskDetails(props) {
     }
     const deleteTask = () => {
         props.showToast(true)
+    }
+    const changeStatusById = (statusId) => {
+        console.log(statusId)
+        // setStatusId(statusId)
+        // var temp = editTask
+        // temp.status = statusId
+        // console.log(temp);
+        // setEditTask(temp)
     }
 
     return (
@@ -166,23 +176,25 @@ function TaskDetails(props) {
                     /> */}
                     <div class="dropdown col-5">
 
-                        <button onClick={openPopUpStatus} class=" form-control " type="button" >
+                        <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {props.statuses.length ? props.statuses.map((status, index) => (
-                                <div className={index == 0 ? "placehlder-first-status " : ""}>
-                                    <div className={index == 0 ? "color-status-first" : ""}><span className={index == 0 ? " " : ""}>{index == 0 ? status.statusName : null}</span>
-                                    </div>
-                                </div>)) : null}
+                                <>
+                                    <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
+                                </>
+
+                            )) : null}
                         </button>
-                        <div className={openPopUp ? "menu__" : ""}>
+                        <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
-                                    <ViewAllStatuses status={status} />
+                                    <ViewAllStatuses changeStatus={changeStatusById} status={status} />
                                 )) : null}
-                            </div>
                             {openPopUp ?
                                 <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
                                 : null}
-                            {openPopUpToAdd ? <AddStatus /> : null}
+                            {openPopUpToAdd ? <AddStatus task={task} /> : null}
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -222,7 +234,7 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // task: state.task_reducer.task,
+        task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses

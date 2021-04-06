@@ -18,9 +18,22 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 function ViewTaskByCrad(props) {
     useEffect(() => {
         props.setTaskName(task.name)
+        props.getAllStatusesTaskForUser();
+        console.log("statuses" + props.statuses)
+        // if(props.task.status==props.statuses._)
+        if (props.statuses.length > 0) {
+            let s = props.statuses.find(status => status._id == props.task.status)
+            setStatus(s.statusName)
+            console.log(status);
 
-    }, [props.task])
+        }
 
+    }, [props.task, props.statuses])
+    const [status, setStatus] = useState()
+
+
+
+    console.log(status)
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
@@ -29,6 +42,14 @@ function ViewTaskByCrad(props) {
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
+    const findStatusById = () => {
+        let temp = { ...task }
+        props.statuses.map(status => {
+            if (status._id == task.status)
+                temp.status = status
+            setTask(temp);
+        })
+    }
 
 
     const showDetails = (from) => {
@@ -45,6 +66,7 @@ function ViewTaskByCrad(props) {
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
         setTask(task.status = "done", task.endDate = today)
+        findStatusById()
         props.EditTask(task)
         setShowChalalit(true)
     }
@@ -63,17 +85,19 @@ function ViewTaskByCrad(props) {
         $(`#${id}`).css({ 'opacity': '0' })
     }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        props.EditTask(task);
-    }, [task])
+    //     props.EditTask(task);
+    // }, [task])
 
     const editTask = () => {
+        alert("hi")
         let temp = { ...task }
+
         temp.name = editTaskName
-        setTask(temp);
-        
-        props.EditTask(task);
+        setTask(temp)
+
+        // props.EditTask(task);
 
     }
     const editTaskNameInReduxs = (taskName) => {
@@ -124,10 +148,10 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task py-2  px-2 col-3 view-details-btn">
                                     <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
+                                <label className="check-task border-left  py-2  px-2 col ">{status}
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                                    <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>{status}</div>
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                                 </label>
@@ -155,7 +179,8 @@ const mapStateToProps = (state) => {
     return {
         tasks: state.public_reducer.tasks,
         taskReducer: state.task_reducer.task,
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -163,6 +188,8 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser())
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

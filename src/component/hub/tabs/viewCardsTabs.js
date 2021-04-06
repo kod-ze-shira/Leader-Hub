@@ -130,8 +130,7 @@ function ViewCardsTabs(props) {
                                                 onClose={handleClose}
                                             >                                               
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
-                                                <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)} > Delete Card</MenuItem>
-
+                                                <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
                                             </Menu>
 
                                         </div>
