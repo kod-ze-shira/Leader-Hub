@@ -8,7 +8,6 @@ import "./projectsByWorkspace.css";
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import ViewDetails from '../../viewDetails/viewDetails'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import $ from 'jquery'
 
 
@@ -34,9 +33,7 @@ function ProjectsByWorkspace(props) {
         if (props.projects)
             if (props.projects.length == 0) {
                 props.getProjectsByWorkspaceId(idWorkspace)
-                // let w = props.workspaces.find(w => w._id == idWorkspace)
             }
-        // props.setProjects(props.workspaces.)
         if (!flug) {
             if (props.workspaces.length == 0) {
 
@@ -51,9 +48,7 @@ function ProjectsByWorkspace(props) {
                                 allProjects.projects.push(props.workspaces[index].projects[j])
                             }
                         }
-                        // if (props.workspaces)
                         props.setWorkspace(props.workspaces[0])
-                        // props.workspaces.map((myWorkspace) => )
                         props.setProjects(allProjects)
                     }
                 }
@@ -127,7 +122,6 @@ function ProjectsByWorkspace(props) {
 
 
             <div className='body' >
-                {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
                         <div className="titleProjects">Leader Projects</div>
@@ -141,9 +135,6 @@ function ProjectsByWorkspace(props) {
                                     style={valueSearch ? { 'width': '400px' } : null}
 
                                 />
-                                {/* <img id='iconSearchProject' src={require('../../../img/imge_search.png')}
-                                    onMouseOver={() => openSearchProject()} />
-                                ‏ */}
                             </span>
 
 
