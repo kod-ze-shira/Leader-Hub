@@ -5,13 +5,14 @@ import Select from 'react-select';
 import './taskDetails.css'
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
-import ViewAllStatuses from '../../status/viewAllStatuses'
+import ViewAllStatuses from '../../status/viewStatus'
 import AddStatus from '../../status/addStatus'
+import viewStatus from '../../status/viewStatus';
 
 function TaskDetails(props) {
 
     useEffect(() => {
-        props.getAllStatusesTaskForUser();
+        // props.getAllStatusesTaskForUser();
     }, [props.task])
 
     useEffect(() => {
@@ -30,8 +31,56 @@ function TaskDetails(props) {
         setStatusTemp(status)
     }, [props.statuses])
 
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
+
+    // const changeDescriptionWorkspace = (input) => {
+    //     setDescriptionWorkspace(input.target.value)
+    // }
+    // const changeColorWorkspace = (input) => {
+    //     setColorWorkspace(input.target.value)
+    // }
+    // const changeFiledInWorkspace = (input) => {
+    //     props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
+    // }
+    // function save_edit() {
+    //     myWorkspace.name = nameWorkspace
+    //     myWorkspace.description = descriptionWorkspace
+    //     myWorkspace.color = colorWorkspace
+
+    //     props.saveWorkspaceInServerUfterEdit()
+    //     props.closeViewDetails();
+    // }
+    const [editName, setEditName] = useState(props.task.name)
     const [editDescription, setEditDescription] = useState(props.task.description)
+    const [editStartDate, setEditStartDate] = useState(props.task.startDate)
+    const [editDueDate, setEditDueDate] = useState(props.task.dueDate)
+    const [editStatus, setEditStatus] = useState(props.task.status)
+
+    const myTask = props.task;
+    console.log(myTask)
+
+    // const changeNameTask = (input) => {
+    //     setEditName(input.target.value)
+    // }
+    // const changeDescriptionTask = (input) => {
+    //     setEditDescription(input.target.value)
+    // }
+    // const changeStartDateTask = (input) => {
+    //     setEditStartDate(input.target.value)
+    // }
+    // const changeDueDateTask = (input) => {
+    //     setEditDueDate(input.target.value)
+    // }
+    // const changeStatusIdInTask = (statusId_) => {
+    //     setStatusId(statusId_)
+    // }
+
+
+    const changeFiledInTask = (input) => { 
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        // props.setTaskOnChangeFiled(input.target.name, input.target.value)
+    }
+
     const task = props.task
     const status = props.status
     const [milstone, setMilstone] = useState(props.task.milestones)
@@ -40,52 +89,49 @@ function TaskDetails(props) {
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [editTask, setEditTask] = useState(task)
     const [statusId, setStatusId] = useState()
-
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
         statusName: "",
         color: "",
     })
-    const handleChangeStatus = (event) => {
-        const { name, value } = event.target
-        setNewStatus(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
+    // const handleChangeStatus = (event) => {
+    //     const { name, value } = event.target
+    //     setNewStatus(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+    // }
     const changeMilstone = (event) => {
         setMilestonesValue(!milestonesValue)
         let temp = editTask
         temp.milestones = !milestonesValue
         setEditTask(temp)
     }
-    const handleChange = (event) => {
-        let name, value
-        if (event.name == "status") {
-            name = event.name
-            value = event.value
-        }
-        else {
-            name = event.target.name
-            value = event.target.value
-            if (name == "name") {
-                setEditTaskName(value)
-                props.setTaskName(value)
-            }
-            if (name == "dueDate" || name == "startDate") {
-                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
-            }
-            // if (name == "milestones") {
-            //     setMilestonesValue(!milestonesValue)
-            //     value = milestonesValue
-            // }
-        }
-        setEditTask(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
 
-    }
+    // const handleChange = (event) => {
+    //     let name, value
+    //     if (event.name == "status") {
+    //         name = event.name
+    //         value = event.value
+    //     }
+    //     else {
+    //         name = event.target.name
+    //         value = event.target.value
+    //         if (name == "name") {
+    //             setEditTaskName(value)
+    //             props.setTaskName(value)
+    //         }
+    //         if (name == "dueDate" || name == "startDate") {
+    //             value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
+    //         }
+
+    //     }
+    //     setEditTask(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+
+    // }
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
         if (openPopUpToAdd == true)
@@ -102,20 +148,20 @@ function TaskDetails(props) {
         console.log(newStatus);
         props.createStatus(newStatus)
     }
+
+
     const saveNewTask = () => {
-        props.EditTask(editTask)
+        
+        // myTask.name = editName
+        // myTask.description = editDescription
+        // myTask.startDate = editStartDate
+        // myTask.dueDate = editDueDate
+        props.EditTask()
     }
     const deleteTask = () => {
         props.showToast(true)
     }
-    const changeStatusById = (statusId) => {
-        console.log(statusId)
-        // setStatusId(statusId)
-        // var temp = editTask
-        // temp.status = statusId
-        // console.log(temp);
-        // setEditTask(temp)
-    }
+
 
     return (
         <>
@@ -127,30 +173,31 @@ function TaskDetails(props) {
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => handleChange(e)}
+                    <input name="name"
                         type="text" class="form-control"
                         id="name"
-                        value={editTaskName} />
+                        onChange={(input) => changeFiledInTask(input)}
+                        value={props.task.name} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
                         id="descriptionProject" rows="2"
                         // placeholder="this is a very important task.. don’t forget!"
-                        onChange={handleChange}
-                        value={editDescription}>
+                        onChange={(input) => changeFiledInTask(input)}
+                        value={props.task.description}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
-                        <label for="startDate">Due Date</label>
+                        <label for="startDate">Start Date</label>
                         <input
+                            value={props.task.startDate}
                             className="form-control"
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={task.startDate}
-                            onChange={handleChange}
+                            onChange={(input) => changeFiledInTask(input)}
                         />
                     </div>
                     <div class="form-group col-5">
@@ -160,8 +207,8 @@ function TaskDetails(props) {
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={task.dueDate}
-                            onChange={handleChange}
+                            value={props.task.dueDate}
+                            onChange={(input) => changeFiledInTask(input)}
                         />
                     </div>
 
@@ -187,12 +234,13 @@ function TaskDetails(props) {
                         <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
-                                    <ViewAllStatuses changeStatus={changeStatusById} status={status} />
+                                    // changeStatusOfTask={changeFiledInTask}
+                                    <viewStatus status={status} />
                                 )) : null}
-                            {openPopUp ?
-                                <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
-                                : null}
-                            {openPopUpToAdd ? <AddStatus task={task} /> : null}
+                                {openPopUp ?
+                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
+                                    : null}
+                                {openPopUpToAdd ? <AddStatus task={task} /> : null}
                             </div>
 
                         </div>
@@ -220,7 +268,6 @@ function TaskDetails(props) {
                 </label>
 
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
-                    <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
@@ -237,7 +284,8 @@ const mapStateToProps = (state) => {
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -245,7 +293,10 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        createStatus: (status) => dispatch(actions.createStatus(status))
+        createStatus: (status) => dispatch(actions.createStatus(status)),
+        setTaskByFiledFromTasks: (taskToEdit) => dispatch(actions.setTaskByFiledFromTasks(taskToEdit))
+        // setTaskOnChangeFiled: (nameFiled, value) => dispatch(actions.setTaskOnChangeFiled(nameFiled, value)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

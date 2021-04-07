@@ -18,7 +18,6 @@ function ViewWorkspaceList(props) {
 
 
     const routeToProject = () => {
-        debugger
         props.setWorkspace(workspace)
         props.setProjects(workspace.projectList)
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)

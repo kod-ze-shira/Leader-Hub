@@ -13,7 +13,7 @@ import { Menu, MenuItem, Button, Select } from '@material-ui/core';
 function ViewCards(props) {
     useEffect(() => {
 
-    }, [props.flag])
+    }, [props.flag, props.card])
 
     const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -123,7 +123,7 @@ function ViewCards(props) {
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
-                                </div>
+                        </div>
                         <input
                             autoFocus="true"
                             className="ml-3 show-card"

@@ -38,7 +38,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails showToast={showToast} task={props.task} />
+                    return <TaskDetails showToast={showToast} />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails} />
                 case 'editCurrentTask':

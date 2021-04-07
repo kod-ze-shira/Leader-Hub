@@ -17,23 +17,21 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 function ViewTaskByCrad(props) {
     useEffect(() => {
-        props.setTaskName(task.name)
+        // props.setTaskName(task.name)
         props.getAllStatusesTaskForUser();
-        console.log("statuses" + props.statuses)
-        // if(props.task.status==props.statuses._)
-        if (props.statuses.length > 0) {
-            let s = props.statuses.find(status => status._id == props.task.status)
-            setStatus(s.statusName)
-            console.log(status);
-
-        }
-
+        // console.log("statuses" + props.statuses)
+        // if (props.task.status == props.statuses._)
+        //     if (props.statuses.length > 0) {
+        //         let s = props.statuses.find(status => status._id == props.task.status)
+        //         setStatus(s.statusName)
+        //         // console.log(status);
+        //     }
     }, [props.task, props.statuses])
     const [status, setStatus] = useState()
 
 
 
-    console.log(status)
+    // console.log(status)
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
@@ -53,7 +51,8 @@ function ViewTaskByCrad(props) {
 
 
     const showDetails = (from) => {
-        props.setTaskName(task.name)
+        // props.setTaskName(task.name)
+        props.setTask(props.task)
         setDetailsOrEditTask(from)
         setViewDetails(true)
     }
@@ -91,12 +90,11 @@ function ViewTaskByCrad(props) {
     // }, [task])
 
     const editTask = () => {
-        alert("hi")
-        let temp = { ...task }
-
+        debugger
+        let temp = {...task}
         temp.name = editTaskName
         setTask(temp)
-
+        console.log(temp);
         // props.EditTask(task);
 
     }
@@ -160,7 +158,7 @@ function ViewTaskByCrad(props) {
                                 {viewDetails ?
                                     <div className="closeDet" >
                                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                            from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
+                                            from={detailsOrEditTask} open={true}> </ViewDetails>
                                     </div>
                                     : null}
                             </div>
@@ -188,7 +186,8 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser())
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        setTask: (task) => dispatch(actions.setTask(task))
 
     }
 }

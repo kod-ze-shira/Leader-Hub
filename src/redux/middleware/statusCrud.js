@@ -18,8 +18,8 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
             success: function (data) {
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
-                console.log("data", data);
-                console.log("data-s", data.statuses);
+                // console.log("data", data);
+                // console.log("data-s", data.statuses);
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
@@ -40,6 +40,7 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
 // }
 
 export const createStatus = ({ dispatch, getState }) => next => action => {
+    
     if (action.type === 'CREATE_STATUS') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/createStatus`
         let statusTask = action.payload
@@ -53,7 +54,6 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ statusTask }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log(data);
                 dispatch(actions.addNewStatus(data.newStatusTask))
@@ -76,7 +76,7 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
 export const editStatus = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_STATUS') {
-        let status = getState().status_reducer.status;
+        let status = action.payload
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editStatus`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -90,7 +90,7 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.setStatuses(data.result))
+                dispatch(actions.updateStatusUfterEditInServer(data.result))
 
             },
             error: function (err) {
