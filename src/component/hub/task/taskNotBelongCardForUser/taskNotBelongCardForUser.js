@@ -19,7 +19,7 @@ function TaskNotBelongCardForUser(props) {
         return <TasksNotBelongCardByMap key={task._id} task={task} />
     })
     return (
-        <div className="body-workspace mt-4">
+        <div className="body-workspace mt-3">
             <div className="mt-5">
                 {props.tasks.length ?
                     renderTasks

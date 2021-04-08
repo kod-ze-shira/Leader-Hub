@@ -23,21 +23,10 @@ function SelectProject(props) {
 
         myProject = props.workspace.projectList.find(p => p.project._id == id.value)
         props.setProject(myProject.project)
+        // props.selectProject(myProject.project.name)
         console.log(myProject.project.cards)
         props.getCardsByProjectId(myProject.project._id)
-        // props.setCards(myProject.cards)
-        // if (!myProject.cards[0])
-        //     props.setCards(null)
         console.log("my project  " + props.workspace)
-        // if (myProject.cards[0]) {
-        //     props.setProject(myProject.cards[0])
-        //     // alert("hi ")
-        // }
-        // else {
-        //     props.setProjectName("No Projects")
-        //     // alert("else")
-        // }
-
     }
 
     const dot = (color = '#ccc') => ({
@@ -105,9 +94,9 @@ function SelectProject(props) {
 
     };
 
-    const viewProjectsList =props.workspace.projectList? props.workspace.projectList.map((project) => (
+    const viewProjectsList = props.workspace.projectList ? props.workspace.projectList.map((project) => (
         { value: project.project._id, label: project.project.name }
-    )):null
+    )) : null
     return (
         <>
             <div className="react-select">

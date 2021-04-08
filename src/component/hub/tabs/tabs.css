@@ -9,9 +9,7 @@
     display: inline-block !important
     ; float: none !important;  
 }
-#add-card{
-    /* margin-top: -5vh; */
-}
+
 a .add-card-tabs{
     text-align: center !important;
     color: var(--unnamed-color-34a38b);

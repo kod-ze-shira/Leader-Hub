@@ -35,8 +35,6 @@ function ViewWorkspaceGrid(props) {
     // $(`.ViewWorkspace`).mouseover(function () {
     //     console.log(this.id)
     //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
-
-
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })

@@ -94,9 +94,9 @@ function Tabs(props) {
                                                     key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
-                                        <div className="col-3 mt-4" >
+                                        <div className="col-3 add-card-col " >
                                             <div className="view-cards-tabs ">
-                                                <div class="card " >
+                                                <div class="card  " >
                                                     <div class="container" >
                                                         {showInput ?
                                                             <div

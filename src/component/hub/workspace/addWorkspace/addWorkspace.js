@@ -51,16 +51,16 @@ function AddWorkspace(props) {
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input name="name"
-                       onChange={handleChange} type="text" class="form-control" id="workspace-name"  />
+                        onChange={handleChange} type="text" class="form-control" id="workspace-name" />
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description" 
-                       onChange={handleChange}></textarea>
+                    <textarea class="form-control" id="description" rows="5" placeholder="Write a description"
+                        onChange={handleChange}></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="color">Color</label>
+                    <label for="color">Logo Color</label>
                     <input name="color"
                         className="ml-2 w-25 "
                         styles="height: 50px"

@@ -16,8 +16,11 @@ function ProjectsByWorkspace(props) {
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
-    let [valueSearch, setValueSearch] = useState('')
-
+    const [valueSearch, setValueSearch] = useState(props.projectName)
+    // fun()
+    // function fun() {
+        // setValueSearch(props.projectName)
+    // }
     const [addOrEditProject, setAddOrEditProject] = useState(false)
 
     function getWorkspacesAwait(result) {
