@@ -17,18 +17,22 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 function ViewTaskByCrad(props) {
     useEffect(() => {
-        props.setTaskName(task.name)
-        props.getAllStatusesTaskForUser();
+        console.log(props);
+        // props.setTaskName(task.name)
+        // props.getAllStatusesTaskForUser();
         console.log("statuses" + props.statuses)
         // if(props.task.status==props.statuses._)
-        if (props.statuses.length > 0) {
-            let s = props.statuses.find(status => status._id == props.task.status)
-            setStatus(s.statusName)
-            console.log(status);
+        // if (props.statuses.length > 0) {
+        //     let s = props.statuses.find(status => status._id == props.task.status)
+        //     setStatus(s.statusName)
+        //     console.log(status);
 
-        }
+        // }
 
-    }, [props.task, props.statuses])
+    }, [
+        // props.task, 
+        // props.statuses,
+        props.cards])
     const [status, setStatus] = useState()
 
 
@@ -133,7 +137,7 @@ function ViewTaskByCrad(props) {
                                     </label>
                                     <input
                                         className="show-card py-2"
-                                        value={editTaskName}
+                                        value={props.task.name}
                                         onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                         onBlur={(e) => editTask()}
                                         onKeyPress={e => {
@@ -160,7 +164,7 @@ function ViewTaskByCrad(props) {
                                 {viewDetails ?
                                     <div className="closeDet" >
                                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                            from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
+                                            from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                     </div>
                                     : null}
                             </div>

@@ -11,24 +11,25 @@ import AddStatus from '../../status/addStatus'
 function TaskDetails(props) {
 
     useEffect(() => {
-        props.getAllStatusesTaskForUser();
-    }, [props.task])
+        console.log(props);
+        // props.getAllStatusesTaskForUser();
+    }, [props.task,props.cards])
 
-    useEffect(() => {
-        let status = [];
-        // console.log(props.task.milestones)
+    // useEffect(() => {
+    //     let status = [];
+    //     // console.log(props.task.milestones)
 
-        props.statuses.length && props.statuses.forEach(st => {
-            let stTemp = {
-                "name": st.statusName,
-                "value": st.statusName,
-                "label": st.statusName
-            }
-            status.push(stTemp);
-        });
+    //     props.statuses.length && props.statuses.forEach(st => {
+    //         let stTemp = {
+    //             "name": st.statusName,
+    //             "value": st.statusName,
+    //             "label": st.statusName
+    //         }
+    //         status.push(stTemp);
+    //     });
 
-        setStatusTemp(status)
-    }, [props.statuses])
+    //     setStatusTemp(status)
+    // }, [props.statuses])
 
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [editDescription, setEditDescription] = useState(props.task.description)
@@ -116,6 +117,10 @@ function TaskDetails(props) {
         // console.log(temp);
         // setEditTask(temp)
     }
+const changeFiledInTask=(input)=>{
+    let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+    props.setTaskByFiledFromTasks(editTaskInRedux)
+}
 
     return (
         <>
@@ -127,10 +132,12 @@ function TaskDetails(props) {
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => handleChange(e)}
+                    {/* <input name="name" onChange={(e) => handleChange(e)} */}
+                    <input name="name" onChange={(e) => changeFiledInTask(e)}
+
                         type="text" class="form-control"
                         id="name"
-                        value={editTaskName} />
+                        value={props.task.name} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -234,10 +241,11 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        task: state.task_reducer.task,
+        // task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
+        cards:state.public_reducer.cards
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -245,7 +253,8 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        createStatus: (status) => dispatch(actions.createStatus(status))
+        createStatus: (status) => dispatch(actions.createStatus(status)),
+        setTaskByFiledFromTasks:(taskDetails)=>dispatch(actions.setTaskByFiledFromTasks(taskDetails))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)
