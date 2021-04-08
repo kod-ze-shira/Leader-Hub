@@ -13,7 +13,7 @@ function TaskDetails(props) {
     useEffect(() => {
         console.log(props);
         // props.getAllStatusesTaskForUser();
-    }, [props.task,props.cards])
+    }, [props.task, props.cards])
 
     // useEffect(() => {
     //     let status = [];
@@ -104,7 +104,8 @@ function TaskDetails(props) {
         props.createStatus(newStatus)
     }
     const saveNewTask = () => {
-        props.EditTask(editTask)
+        console.log(props.task);
+        props.EditTask(props.task)
     }
     const deleteTask = () => {
         props.showToast(true)
@@ -117,10 +118,10 @@ function TaskDetails(props) {
         // console.log(temp);
         // setEditTask(temp)
     }
-const changeFiledInTask=(input)=>{
-    let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
-    props.setTaskByFiledFromTasks(editTaskInRedux)
-}
+    const changeFiledInTask = (input) => {
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+    }
 
     return (
         <>
@@ -134,7 +135,6 @@ const changeFiledInTask=(input)=>{
                     <label for="name">Name</label>
                     {/* <input name="name" onChange={(e) => handleChange(e)} */}
                     <input name="name" onChange={(e) => changeFiledInTask(e)}
-
                         type="text" class="form-control"
                         id="name"
                         value={props.task.name} />
@@ -144,8 +144,8 @@ const changeFiledInTask=(input)=>{
                     <textarea class="form-control" name="description"
                         id="descriptionProject" rows="2"
                         // placeholder="this is a very important task.. don’t forget!"
-                        onChange={handleChange}
-                        value={editDescription}>
+                        onChange={(e) => changeFiledInTask(e)}
+                        value={props.task.description}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -156,8 +156,8 @@ const changeFiledInTask=(input)=>{
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={task.startDate}
-                            onChange={handleChange}
+                            value={props.task.startDate}
+                            onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
                     <div class="form-group col-5">
@@ -167,8 +167,8 @@ const changeFiledInTask=(input)=>{
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={task.dueDate}
-                            onChange={handleChange}
+                            value={props.task.dueDate}
+                            onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
 
@@ -196,10 +196,10 @@ const changeFiledInTask=(input)=>{
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
                                     <ViewAllStatuses changeStatus={changeStatusById} status={status} />
                                 )) : null}
-                            {openPopUp ?
-                                <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
-                                : null}
-                            {openPopUpToAdd ? <AddStatus task={task} /> : null}
+                                {openPopUp ?
+                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
+                                    : null}
+                                {openPopUpToAdd ? <AddStatus task={task} /> : null}
                             </div>
 
                         </div>
@@ -227,7 +227,6 @@ const changeFiledInTask=(input)=>{
                 </label>
 
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
-                    <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
@@ -245,7 +244,7 @@ const mapStateToProps = (state) => {
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
-        cards:state.public_reducer.cards
+        cards: state.public_reducer.cards
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -254,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
-        setTaskByFiledFromTasks:(taskDetails)=>dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

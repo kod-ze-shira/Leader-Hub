@@ -25,7 +25,8 @@ function ViewTaskByCradTabs(props) {
 
     useEffect(() => {
 
-    }, [props.task])
+    }, [props.cards])
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -40,8 +41,9 @@ function ViewTaskByCradTabs(props) {
         if (e) {
             console.log(e);
             if (e == "viewCard") {
-                props.openViewDetails(task)
-                props.setTaskName(task.name)
+                console.log(props.task)
+                props.openViewDetails(props.task)
+                // props.setTaskName(task.name)
             }
             if (e == "delete") {
                 $(`#${props.task._id + "disappear"}`).css("display", "none")
@@ -61,12 +63,16 @@ function ViewTaskByCradTabs(props) {
     }
     const showDetails = () => {
         if (anchorEl == null) {
-            props.openViewDetails(task)
-            props.setTaskName(task.name)
+            props.openViewDetails(props.task)
+            // props.setTaskName(task.name)
         }
     }
 
-
+    const changeFiledInTask=(input)=>{
+        
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+    }
 
     return (
         <>
@@ -100,13 +106,14 @@ function ViewTaskByCradTabs(props) {
                                         <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
                                         <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                         <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
-
                                     </Menu>
                                 </div>
                                 <input
                                     className="form-control col-12"
-                                    value={editTaskName}
-                                    onChange={(e) => setEditTaskName(e.target.value)}
+                                    value={props.task.name}
+                                    name="name" 
+                                    onChange={(e) => changeFiledInTask(e)}
+
                                     onBlur={(e) => editTask(e)}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
@@ -137,6 +144,8 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
+        setTaskByFiledFromTasks:(taskDetails)=>dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+
 
     }
 }
