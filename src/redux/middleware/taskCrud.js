@@ -196,7 +196,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let task = action.payload;
-        let taskId = task._id
+        // let taskId = task._id
 
         $.ajax({
             url: urlData,
@@ -208,6 +208,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             data: JSON.stringify({ task }),
             success: function (data) {
                 console.log("success")
+                console.log(data)
                 console.log(data.result);
                 dispatch(actions.setTaskName(data.result))
             },

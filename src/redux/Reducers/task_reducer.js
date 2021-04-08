@@ -4,11 +4,10 @@ import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
     task: {
-
     }
 }
 
-const tasks = {
+const task = {
     setTaskNameInTaskReducer(state, action) {
         state.task.name = action.payload
     },
@@ -21,6 +20,9 @@ const tasks = {
     setisConfiguratorOpenTask(state, action) {
         state.task.isConfiguratorOpenTask = !state.task.isConfiguratorOpenTask
     },
+    // setTaskOnChangeFiled(state, action) {
+    //     state.task[action.payload] = action.value
+    // }
 
 
 
@@ -28,4 +30,4 @@ const tasks = {
 }
 
 
-export default produce((state, action) => createReducer(state, action, tasks), initialState);
+export default produce((state, action) => createReducer(state, action, task), initialState);

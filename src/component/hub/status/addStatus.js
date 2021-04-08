@@ -44,8 +44,8 @@ function AddStatus(props) {
     return (
         <>
             <div className="container ">
-                <div className="row">
-                    <div class="form-group row mt-1 col-8">
+                <div className="row justify-content-center">
+                    <div class="form-group  mt-1 col-11">
                         <label for="name">Name</label>
                         <input name="statusName" onChange={(e) => handleChangeStatus(e)}
                             type="text" class="form-control"
@@ -53,9 +53,7 @@ function AddStatus(props) {
                         // placeholder="enter status name"
                         />
                     </div>
-                </div>
-                <div className="row">
-                    <div class="form-group col-8">
+                    <div class="form-group col-10">
                         {/* <label for="color">Select a Color</label>
                     <input name="color" onChange={(e) => handleChangeStatus(e)}
                         type="color" class="form-control"
@@ -66,7 +64,7 @@ function AddStatus(props) {
                         <Colors changeStatusColor={(event) => handleChangeColorStatus(event)} />
 
                     </div>
-                    <button className="add-status" onClick={(e) => addStatus(e)}>Save</button>
+                <button className="add-status col-10" onClick={(e) => addStatus(e)}>Save</button>
                 </div>
 
             </div>
