@@ -18,7 +18,7 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 function ViewTaskByCrad(props) {
     useEffect(() => {
         // props.setTaskName(task.name)
-        // props.getAllStatusesTaskForUser();
+        props.getAllStatusesTaskForUser();
         // console.log("statuses" + props.statuses)
         // if (props.task.status == props.statuses._)
         //     if (props.statuses.length > 0) {
