@@ -82,7 +82,6 @@ function Hub(props) {
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
-            {/* <UploadFile file={()=>props.addFile()} /> */}
             <Router history={history}>
                 {/* <Nav openConfigurator={openConfigurator} /> */}
 

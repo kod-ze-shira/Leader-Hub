@@ -49,38 +49,38 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     return next(action);
 
 }
-export const getFiles = ({ dispatch, getState }) => next => action => {
+// export const getFiles = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'GET_FILES') {
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        $.ajax({
-            type: "GET",
-            url: `https://files.codes/api/${getState().public_reducer.userName}`,
-            headers: { Authorization: jwtFromCookie },
-            success: (data) => {
-                console.log(data)
-            }
-        })
-    }
-}
+//     if (action.type === 'GET_FILES') {
+//         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+//         $.ajax({
+//             type: "GET",
+//             url: `https://files.codes/api/${getState().public_reducer.userName}`,
+//             headers: { Authorization: jwtFromCookie },
+//             success: (data) => {
+//                 console.log(data)
+//             }
+//         })
+//     }
+// }
 
-export const removeFile = ({ dispatch, getState }) => next => action => {
+// export const removeFile = ({ dispatch, getState }) => next => action => {
 
-    if (action.type === 'REMOVE_FILE') {
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        let file = action.payload
-        
-        $.ajax({
-            type: "GET",
-            url: `https://files.codes/api/${getState().public_reducer.userName}/remove/${file.url}`,
-            headers: { Authentication: jwtFromCookie },
-            success: function (data) {
-                console.log(data)
-            },
-            error: function (err) {
-                alert(err);
-            },
-        });
+//     if (action.type === 'REMOVE_FILE') {
+//         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+//         let file = action.payload
 
-    }
-}
+//         $.ajax({
+//             type: "GET",
+//             url: `https://files.codes/api/${getState().public_reducer.userName}/remove/${file.url}`,
+//             headers: { Authentication: jwtFromCookie },
+//             success: function (data) {
+//                 console.log(data)
+//             },
+//             error: function (err) {
+//                 alert(err);
+//             },
+//         });
+
+//     }
+// }

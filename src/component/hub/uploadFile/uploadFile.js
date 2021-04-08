@@ -21,7 +21,7 @@ function UploadFile(props) {
         // setUploadFile([...uploadFile, file])
         // console.log(uploadFile)
         // props.addFile(file)
-        props.file(file)
+        props.addFile(file)
 
     }
 
@@ -65,8 +65,8 @@ export default connect(
     (dispatch) => {
         return {
             uploadFiles: (filesArr) => dispatch(actions.uploadFiles(filesArr)),
-            getFiles: () => dispatch(actions.getFiles()),
-            // addFile: (files) => dispatch(actions.addFile(files)),
+            // getFiles: () => dispatch(actions.getFiles()),
+            addFile: (files) => dispatch(actions.addFile(files)),
         }
     }
 )(UploadFile)
