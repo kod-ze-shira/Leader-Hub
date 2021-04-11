@@ -12,6 +12,15 @@
 #add-card{
     /* margin-top: -5vh; */
 }
+
+.noneNewCard{
+    display: none !important;
+}
+
+.blockNewCard{
+    display: block !important;
+}
+
 a .add-card-tabs{
     text-align: center !important;
     color: var(--unnamed-color-34a38b);

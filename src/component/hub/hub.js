@@ -84,7 +84,7 @@ function Hub(props) {
     }
     return (
         <>
-            <HeaderLeader userName={props.user} appName='hub' />‏
+            {/* <HeaderLeader userName={props.user} appName='hub' />‏ */}
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
