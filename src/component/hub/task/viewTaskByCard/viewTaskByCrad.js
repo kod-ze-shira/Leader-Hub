@@ -55,7 +55,10 @@ function ViewTaskByCrad(props) {
         })
     }
 
-
+    const changeFiledInTask = (input) => {
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+    }
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
@@ -90,14 +93,11 @@ function ViewTaskByCrad(props) {
     }
 
     // useEffect(() => {
-
     //     props.EditTask(task);
     // }, [task])
 
     const editTask = () => {
-        alert("hi")
         let temp = { ...task }
-
         temp.name = editTaskName
         setTask(temp)
 
@@ -136,9 +136,11 @@ function ViewTaskByCrad(props) {
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
+                                        name="name" id="name"
                                         className="show-card py-2"
                                         value={props.task.name}
-                                        onChange={(e) => editTaskNameInReduxs(e.target.value)}
+                                        onChange={(e) => changeFiledInTask(e)}
+                                        // onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                         onBlur={(e) => editTask()}
                                         onKeyPress={e => {
                                             if (e.key === 'Enter') {
@@ -192,7 +194,9 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser())
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+
 
     }
 }

@@ -101,7 +101,7 @@ function Tabs(props) {
                                                         {showInput ?
                                                             <div
                                                                 class="card-header row">
-                                                                <input autoFocus="true"  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                                <input autoFocus="true" placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                     if (event.key === 'Enter') {
                                                                         newCard()
                                                                     }
@@ -111,7 +111,7 @@ function Tabs(props) {
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
                                                         <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
-                                                    
+
                                                     </div>
                                                 </div>
                                             </div>
