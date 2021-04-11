@@ -7,21 +7,17 @@ function UploadFile(props) {
     const [uploadFile, setUploadFile] = useState([])
 
     const [saveInServer, setSaveInServer] = useState(false)
+   
     useEffect(() => {
         console.log(props);
-        if (uploadFile.length > 0 && saveInServer) {
-            props.uploadFiles(uploadFile)
-            setSaveInServer(false)
-        }
-    }, [saveInServer])
-
+        props.uploadFiles(props.files)
+    }, [props.files])
 
     const uploadMulti = (file) => {
-        debugger
+
         // setUploadFile([...uploadFile, file])
-        // console.log(uploadFile)
-        // props.addFile(file)
         props.addFile(file)
+        console.log(props)
 
     }
 

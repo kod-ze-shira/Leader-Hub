@@ -17,9 +17,9 @@ import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace,
 import { createNewTeam } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, getAllStatusesTaskForUser } from '../middleware/statusCrud';
-import { uploadFiles } from '../middleware/filesCrud';
+import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer,files_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer });
 
 const store = createStore(
     reducers,
@@ -52,8 +52,8 @@ const store = createStore(
                 getAllStatusesTaskForUser,
                 createStatus,
                 uploadFiles,
-                // getFiles,
-                // removeFile
+                getFiles,
+                removeFile
             ))
 )
 var url = window.location;

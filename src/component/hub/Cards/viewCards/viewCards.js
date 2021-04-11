@@ -123,13 +123,13 @@ function ViewCards(props) {
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
-                                </div>
+                        </div>
                         <input
                             autoFocus="true"
                             className="ml-3 show-card"
                             value={editCardName}
                             onChange={updateCardName}
-                            // onBlur={editCard}
+                            onBlur={editCard}
                             onKeyPress={event => {
                                 if (event.key === 'Enter') {
                                     editCard()

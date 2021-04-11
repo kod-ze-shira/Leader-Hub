@@ -2,7 +2,7 @@ import produce from 'immer';
 import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
-    files:[]
+    files: []
 
 }
 
@@ -11,8 +11,9 @@ const files = {
     //     state.project.name = action.payload;
     // },
     addFile(state, action) {
-        state.files.push = action.payload;
-        console.log(action.payload)
+        state.files = []
+        state.files.push(action.payload);
+        console.log(state.files)
     },
 
     // setProjectId(state, action) {
