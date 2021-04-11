@@ -63,6 +63,7 @@ function ViewTaskByCradTabs(props) {
     }
     const showDetails = () => {
         if (anchorEl == null) {
+            console.log("props.task",props.task);
             props.openViewDetails(props.task)
             // props.setTaskName(task.name)
         }
@@ -114,7 +115,7 @@ function ViewTaskByCradTabs(props) {
                                     name="name" 
                                     onChange={(e) => changeFiledInTask(e)}
 
-                                    onBlur={(e) => editTask(e)}
+                                    // onBlur={(e) => editTask(e)}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
                                             editTask()

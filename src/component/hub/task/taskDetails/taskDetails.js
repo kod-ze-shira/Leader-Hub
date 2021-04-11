@@ -128,7 +128,7 @@ function TaskDetails(props) {
             <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between  mx-1" >
-                    <label>Create {task.startDate}</label>   <label>Last Update {task.dueDate}</label>
+                    <label>Create {props.task.startDate}</label>   <label>Last Update {props.task.dueDate}</label>
                     <br></br>
                 </div>
                 <div class="form-group">

@@ -93,7 +93,6 @@ function ViewTaskByCrad(props) {
     }
 
     // useEffect(() => {
-
     //     props.EditTask(task);
     // }, [task])
 
