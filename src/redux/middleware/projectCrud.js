@@ -87,7 +87,6 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                     countTasks: 0
                 }
                 dispatch(actions.addProjectToProjects(p))
-                // dispatch(() => addProjectToProjects(data.message))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין

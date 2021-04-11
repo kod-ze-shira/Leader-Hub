@@ -15,7 +15,7 @@ import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
 
 const mapStateToProps = (state) => {
     return {
-        close: state.public_reducer.close,
+        // close: state.public_reducer.close,
     }
 }
 
@@ -26,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
-
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
 
