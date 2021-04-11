@@ -135,7 +135,7 @@
     padding-bottom: 0.5vh;
     opacity: 0.9;
     font-weight: 400;
-
+padding: 4px;
   }
   .status-task-done{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;

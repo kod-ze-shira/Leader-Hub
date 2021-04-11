@@ -60,6 +60,10 @@ function Tabs(props) {
         // console.log(headerHeight)
         setShowInput(!showInput)
         setShowHeader(!showHeader)
+        // document.getElementById('newCardInput').style.display = 'block'
+        $('#newCardInput').removeClass('noneNewCard')
+        $('#newCardInput').addClass('blockNewCard')
+
 
     }
     const newCard = () => {
@@ -94,10 +98,10 @@ function Tabs(props) {
                                                     key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
-                                        <div className="col-3 add-card-col " >
-                                            <div className="view-cards-tabs ">
-                                                <div class="card  " >
-                                                    <div class="container" >
+                                        <div className="col-3 mt-4" >
+                                            <div className="view-cards-tabs mt-1" >
+                                                <div class="card " >
+                                                    <div id='newCardInput' class="container noneNewCard" >
                                                         {showInput ?
                                                             <div
                                                                 class="card-header row">

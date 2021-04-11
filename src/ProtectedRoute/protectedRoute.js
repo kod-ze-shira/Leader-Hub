@@ -14,7 +14,6 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     let routes = rest.computedMatch.params.nameVideo;
     let userName = rest.computedMatch.params.userName;
     useEffect(() => {
-        debugger
         const isLocal = window.location.hostname == "localhost"
         const url=`${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;
            const isPermission = async () => {
@@ -34,7 +33,8 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
                 setIsLoading(false)
             }
         }
-        isPermission()
+       isPermission()
+
     }, [])
  
     return isLoading ? null : isLoggedIn ?
