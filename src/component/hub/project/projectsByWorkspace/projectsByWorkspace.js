@@ -8,7 +8,6 @@ import "./projectsByWorkspace.css";
 import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import ViewDetails from '../../viewDetails/viewDetails'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import $ from 'jquery'
 
 
@@ -37,29 +36,22 @@ function ProjectsByWorkspace(props) {
         if (props.projects)
             if (props.projects.length == 0) {
                 props.getProjectsByWorkspaceId(idWorkspace)
-                // let w = props.workspaces.find(w => w._id == idWorkspace)
             }
-        // props.setProjects(props.workspaces.)
         if (!flug) {
             if (props.workspaces.length == 0) {
-                // if (props.workspaces.length)
-                // alert('hhh')
+
                 if (window.location.href.indexOf('workspace') != -1) {
-                    // props.getProjectsByWorkspaceId(idWorkspace)
                     let w = props.workspaces.find(w => w._id == idWorkspace)
-                    // props.setProjects(props.workspace.projectList)
-                    // let p=props.workspace.find(p=>p)
 
                 } else {
                     if (window.location.href.indexOf('allProjects') != -1) {
-                        // props.getFullWorkspacesForUser()
                         let allProjects = []
                         for (let index = 0; index < props.workspaces.length; index++) {
                             for (let j = 0; j < props.workspaces[index].projects.length; j++) {
                                 allProjects.projects.push(props.workspaces[index].projects[j])
                             }
                         }
-                        // props.workspaces.map((myWorkspace) => )
+                        props.setWorkspace(props.workspaces[0])
                         props.setProjects(allProjects)
                     }
                 }
@@ -118,7 +110,8 @@ function ProjectsByWorkspace(props) {
         // $("#inputSearchProjects").trigger("focusout");
 
         setTimeout(() => {
-            document.getElementById('inputSearchProjects').value = ''
+            if (!valueSearch)
+                document.getElementById('inputSearchProjects').value = ''
         }, 1700);
 
     }
@@ -132,7 +125,6 @@ function ProjectsByWorkspace(props) {
 
 
             <div className='body' >
-                {/* <HeaderBody nameWorkspace={props.workspaces.find(w => w._id == idWorkspace).name} /> */}
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
                         <div className="titleProjects">Leader Projects</div>
@@ -143,10 +135,9 @@ function ProjectsByWorkspace(props) {
                                     onMouseLeave={() => closeInputSearch()}
                                     onChange={() => searchProject()}
                                     onMouseOver={() => openSearchProject()}
+                                    style={valueSearch ? { 'width': '400px' } : null}
+
                                 />
-                                {/* <img id='iconSearchProject' src={require('../../../img/imge_search.png')}
-                                    onMouseOver={() => openSearchProject()} />
-                                ‏ */}
                             </span>
 
 
@@ -196,6 +187,7 @@ const mapDispatchToProps = (dispatch) => {
         getFullWorkspacesForUser: () => dispatch(actions.getFullWorkspacesForUser()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+        setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
 
     }
 }
