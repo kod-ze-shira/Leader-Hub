@@ -6,7 +6,8 @@
 
 .titleProjects{
     font-family: Roboto;
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: 18px;
     display: inline-block;
 }
 
@@ -22,7 +23,7 @@
     display: flex;
     margin-left: 25px;
     border-bottom: 1px solid #75798E;
-    height: 64px;
+    height: 54px;
 }
 
 #searchProject{

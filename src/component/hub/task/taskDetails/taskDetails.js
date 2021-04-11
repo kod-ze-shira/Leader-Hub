@@ -189,10 +189,10 @@ function TaskDetails(props) {
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
                                     <ViewAllStatuses changeStatus={changeStatusById} status={status} />
                                 )) : null}
-                            {openPopUp ?
-                                <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
-                                : null}
-                            {openPopUpToAdd ? <AddStatus task={task} /> : null}
+                                {openPopUp ?
+                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
+                                    : null}
+                                {openPopUpToAdd ? <AddStatus task={task} /> : null}
                             </div>
 
                         </div>
@@ -220,7 +220,6 @@ function TaskDetails(props) {
                 </label>
 
                 <div className="row justify-content-between  mx-1 btns-in-view-details-task">
-                    <button onClick={(e) => addStatus(e)}>new status</button>
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>

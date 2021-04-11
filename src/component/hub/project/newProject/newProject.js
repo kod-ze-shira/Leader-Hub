@@ -79,7 +79,7 @@ function NewProject(props) {
         project.workspace = props.workspace.workspace._id
         project.name = nameProject
         project.description = descriptioneProject
-        debugger
+
         // if (!project.dueDate) {
         //     project.dueDate = myDueDate
 
