@@ -124,7 +124,7 @@ function ProjectsByWorkspace(props) {
             <div className='body' >
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
-                        <div className="titleProjects">Leader Projects</div>
+                        <div className="titleProjects pt-2 ml-2">Leader Projects</div>
 
                         <div id=''>
                             <span id='searchProject' >
@@ -146,7 +146,7 @@ function ProjectsByWorkspace(props) {
 
                 </div>
 
-                <Table responsive className='tableProject' >
+                <Table responsive className='tableProject ' >
                     <>
                         <tbody>
                             {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}

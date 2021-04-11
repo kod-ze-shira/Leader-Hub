@@ -39,6 +39,11 @@
 }
 .add-task-tabs{
   text-decoration: none !important;
+  font-weight: bold !important;
+    font-size: 15px !important;
+}
+.allTaskInCard div{
+  margin-bottom: 9px;
 }
 
 .add-task-tabs:hover{

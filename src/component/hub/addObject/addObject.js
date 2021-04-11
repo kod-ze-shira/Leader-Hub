@@ -37,7 +37,10 @@ function AddObject(props) {
                     props.setShowViewDitails('newProject')
                 break;
             case 'Card':
+                if (window.location.href.indexOf('projectPlatform') != -1)
+                    props.focusInputCard(true)
                 console.log('Card')
+
                 break;
             case 'Task':
                 console.log('Task')
@@ -61,7 +64,8 @@ function AddObject(props) {
             document.getElementById("newProjectInComponentAddObject").style.cursor = "pointer";
 
         }
-        document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
+        if (window.location.href.indexOf('projectPlatform') == -1)
+            document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
         document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
         // }
         // else

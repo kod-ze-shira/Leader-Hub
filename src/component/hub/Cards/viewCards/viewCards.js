@@ -113,6 +113,7 @@ function ViewCards(props) {
 
     };
 
+
     return (
         <>
             <div id={props.cardFromMap._id + "disappear"}>
@@ -129,7 +130,6 @@ function ViewCards(props) {
                             className="ml-3 show-card"
                             value={editCardName}
                             onChange={updateCardName}
-                            // onBlur={editCard}
                             onKeyPress={event => {
                                 if (event.key === 'Enter') {
                                     editCard()
@@ -157,7 +157,7 @@ function ViewCards(props) {
                         <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
-                    <p className="col">Team</p>
+                    {/* <p className="col">Team</p> */}
                     <p className="col">Label</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>

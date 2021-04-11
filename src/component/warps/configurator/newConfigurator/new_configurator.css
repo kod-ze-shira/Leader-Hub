@@ -36,12 +36,11 @@ border-radius: 3px;
   }
   .li-back{
      background: url('../../../img/Mask1.svg');
-     border-left:1px solid #40D9ED; 
+     border-left:16px solid var(--light-light-blue); 
      left:2.5vh !important ;
-
-     /* margin-left: 2vh; */
-  }
-  li:focus{
+     /* border-left: 16px solid #44D7B6 !important;‏ */
+}
+     li:focus{
     background-color:white;
   }
   li p{

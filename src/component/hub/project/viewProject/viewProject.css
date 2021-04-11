@@ -10,6 +10,11 @@
    width: 30%;
 }
 
+.projectForWorkspace,.projectForWorkspace td{
+    border-top: none !important;
+    border-bottom: 0.5px solid rgb(209, 207, 207);
+}
+
 .name2ProjectInList{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;

@@ -13,10 +13,14 @@ function ProjectPlatform(props) {
     const [taskOrCard, setTaskOrCard] = useState()
 
     useEffect(() => {
-        {
 
-        };
-    }, []);
+    }, [props.focusInputCard]);
+    if (!showInput) {
+        if (props.focusInputCard) {
+            setShowInput(true)
+        }
+    }
+
 
     const [inputValue, setInputValue] = useState()
     const textInput = useRef(null);
@@ -25,13 +29,15 @@ function ProjectPlatform(props) {
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
-    const showInputToAddCard = () => {
+    function showInputToAddCard() {
         setShowInput(!showInput)
         // $('.add-card-btn').click(function () {
         //     $('.add-card').focus()
         // })
 
     }
+
+
     const newCard = () => {
         let card;
         if (inputValue) {

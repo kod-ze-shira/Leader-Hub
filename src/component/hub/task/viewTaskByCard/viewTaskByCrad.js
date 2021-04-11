@@ -148,8 +148,8 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task py-2  px-2 col-3 view-details-btn">
                                     <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col ">{status}
-                                </label>
+                                {/* <label className="check-task border-left  py-2  px-2 col ">{status} */}
+                                {/* </label> */}
                                 <label className="check-task border-left  py-2  px-2 col " >
                                     <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>{status}</div>
                                 </label>
