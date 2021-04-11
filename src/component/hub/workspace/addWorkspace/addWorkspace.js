@@ -56,7 +56,7 @@ function AddWorkspace(props) {
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="5" placeholder="Write a description"
+                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description about your project"
                         onChange={handleChange}></textarea>
                 </div>
                 <div class="form-group">

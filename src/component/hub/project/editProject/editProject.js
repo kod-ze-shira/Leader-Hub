@@ -92,12 +92,12 @@ function EditProject(props) {
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
+                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description about your project"
                         onChange={(e) => changeDescriptionProject(e)} value={descriptionProject}></textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
-                        <label for="color">Color</label>
+                        <label for="color">Project color</label>
                         <input name="color"
                             className=" form-control "
                             onChange={(e) => changeColorProject(e)}

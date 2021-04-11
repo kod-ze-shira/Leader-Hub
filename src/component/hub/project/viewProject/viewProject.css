@@ -7,7 +7,24 @@
 }
 .nameProjectInList{
    padding-left: 2rem !important;
-   width: 21%;
+   width: 30%;
+}
+
+.projectForWorkspace,.projectForWorkspace td{
+    border-top: none !important;
+    border-bottom: 0.5px solid rgb(209, 207, 207);
+}
+
+.name2ProjectInList{
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    margin-left: 13px !important;
+    margin-top: -23px;
+}
+.widthCellInProject{
+    width: 10%;
 }
 .stripeActionsProject{
     display: inline-block;

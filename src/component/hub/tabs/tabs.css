@@ -9,6 +9,17 @@
     display: inline-block !important
     ; float: none !important;  
 }
+#add-card{
+    /* margin-top: -5vh; */
+}
+
+.noneNewCard{
+    display: none !important;
+}
+
+.blockNewCard{
+    display: block !important;
+}
 
 a .add-card-tabs{
     text-align: center !important;

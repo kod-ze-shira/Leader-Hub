@@ -72,22 +72,22 @@ function ViewProject(props) {
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
                     <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
-                    <span style={{ 'color': props.myProject.project.color }}>
+                    <span class='name2ProjectInList' title={props.myProject.project.name} style={{ 'color': props.myProject.project.color }}>
                         {props.myProject.project.name}</span>
                     {/* <span class='stripeProject'
                         // style={{ 'background-color': props.project.color }}></span>
                         style={{ 'background-color': props.myProject.project.color }}></span> */}
                 </td>
-                <td>
+                <td className='widthCellInProject'>
                     <Cell item={props.myProject.project.dueDate} />
                     <CellDescription description='Due date' />
                 </td>
-                <td>
+                <td className='widthCellInProject'>
                     <Cell item={props.myProject.project.cards.length ? props.myProject.project.cards.length : "0"} />
                     <CellDescription description='card' />
                 </td>
                 <td>
-                    <span className='task'>
+                    <span className='task widthCellInProject'>
                         <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }}>
                             {props.myProject.countReadyTask}</span>
                         <span className='designPropertiesProject'>
@@ -97,14 +97,14 @@ function ViewProject(props) {
                 </td>
                 <td>
 
-                    <div className='divProgress'>
+                    <div className='divProgress' >
                         <div class="progressProject" >
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
                     </div>
-                    <CellDescription description={(complited ? complited : 0) + '% comlete'} />
+                    <CellDescription description={(complited ? complited : 0) + '% complete'} />
                 </td>
                 {/* <td style={{ 'text-align': 'center' }}>
                     <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
@@ -113,12 +113,12 @@ function ViewProject(props) {
 
                     <CellDescription description='Team' />
                 </td> */}
-                <td>
+                <td className='widthCellInProject'>
                     <Cell item={props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023'} />
-                    <CellDescription description='Last update' />
+                    <CellDescription description='Last Update' />
                 </td>
 
-                <td className='actionsProject'>
+                <td className='actionsProject widthCellInProject'>
                     <img style={myStyleIcons}
                         className='iconsProject' onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')} />
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
