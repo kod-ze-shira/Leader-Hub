@@ -97,7 +97,7 @@ function EditProject(props) {
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
-                        <label for="color">Color</label>
+                        <label for="color">Project color</label>
                         <input name="color"
                             className=" form-control "
                             onChange={(e) => changeColorProject(e)}

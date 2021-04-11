@@ -123,7 +123,7 @@ function ViewCards(props) {
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
-                                </div>
+                        </div>
                         <input
                             autoFocus="true"
                             className="ml-3 show-card"
@@ -159,8 +159,8 @@ function ViewCards(props) {
                     </Menu>
                     <p className="col">Team</p>
                     <p className="col">Label</p>
-                    <p className="col">Start Date</p>
-                    <p className="col">Due Date</p>
+                    <p className="col">Start date</p>
+                    <p className="col">Due date</p>
                     {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>
                 <p className="border-left col">Due Date</p> */}

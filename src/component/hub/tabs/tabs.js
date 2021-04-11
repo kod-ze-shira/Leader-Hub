@@ -60,6 +60,10 @@ function Tabs(props) {
         // console.log(headerHeight)
         setShowInput(!showInput)
         setShowHeader(!showHeader)
+        // document.getElementById('newCardInput').style.display = 'block'
+        $('#newCardInput').removeClass('noneNewCard')
+        $('#newCardInput').addClass('blockNewCard')
+
 
     }
     const newCard = () => {
@@ -95,13 +99,13 @@ function Tabs(props) {
                                             })}
                                         </DragDropContext>
                                         <div className="col-3 mt-4" >
-                                            <div className="view-cards-tabs ">
+                                            <div className="view-cards-tabs mt-1" >
                                                 <div class="card " >
-                                                    <div class="container" >
+                                                    <div id='newCardInput' class="container noneNewCard" >
                                                         {showInput ?
                                                             <div
                                                                 class="card-header row">
-                                                                <input autoFocus="true"  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                                <input autoFocus="true" placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                     if (event.key === 'Enter') {
                                                                         newCard()
                                                                     }
@@ -111,7 +115,7 @@ function Tabs(props) {
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
                                                         <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
-                                                    
+
                                                     </div>
                                                 </div>
                                             </div>
