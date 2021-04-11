@@ -10,7 +10,7 @@ import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
-    const workspace = props.workspace1
+    const workspace = props.workspace
 
 
     const routeToProject = () => {
@@ -35,8 +35,6 @@ function ViewWorkspaceGrid(props) {
     // $(`.ViewWorkspace`).mouseover(function () {
     //     console.log(this.id)
     //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
-
-
     // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })

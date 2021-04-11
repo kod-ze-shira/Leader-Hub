@@ -166,7 +166,6 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
-        console.log(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`)
         fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',
@@ -180,7 +179,7 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
             }).then((result) => {
                 checkPermission(result).then((ifOk) => {
                     console.log(result);
-                    dispatch(actions.addWorkspaceToWorkspaces(result.duplicateWorkspace))
+                    dispatch(actions.addWorkspaceToWorkspaces(result))
 
                 })
 

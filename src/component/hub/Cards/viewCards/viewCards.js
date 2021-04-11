@@ -61,7 +61,7 @@ function ViewCards(props) {
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
-        console.log("edut-card", card)
+        console.log("edit-card", card)
         props.EditCard(card);
     }
     const showDetails =
@@ -130,6 +130,7 @@ function ViewCards(props) {
                             className="ml-3 show-card"
                             value={editCardName}
                             onChange={updateCardName}
+                            onBlur={editCard}
                             onKeyPress={event => {
                                 if (event.key === 'Enter') {
                                     editCard()

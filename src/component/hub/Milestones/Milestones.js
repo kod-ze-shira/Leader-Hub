@@ -17,7 +17,7 @@ function Milestones(props) {
         return <ViewMilstone milestone={milestone} />
     }) : null
     return (
-        <div className="body-workspace mt-4">
+        <div className="body-workspace mt-3">
             <div className="mt-5">
                 {props.milestones.length ?
                     renderTasks

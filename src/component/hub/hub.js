@@ -25,6 +25,7 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
+import UploadFile from './uploadFile/uploadFile'
 import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
 import ViewDetails from './viewDetails/viewDetails'
@@ -37,14 +38,7 @@ function Hub(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [formViewDitails, setFormViewDitails] = useState()
 
-    // const [componentFlag, setComponentFlag] = useState("")
-    // const {location}=props
-    // useEffect(() => {
-    //    if(location)
-    //   {  if (location.hash.includes("#workspace"))
-    //     setComponentFlag("#workspace")}
 
-    // },[location])
     const showToastToDelete = (objectToDelete) => {
         setObjectToDelete(objectToDelete)
         setShowToastDelete(true)
@@ -90,7 +84,6 @@ function Hub(props) {
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
-
             <Router history={history}>
                 {/* <Nav openConfigurator={openConfigurator} /> */}
 
@@ -137,12 +130,13 @@ function Hub(props) {
                             </Route>
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
-                                    <span id='searchProject' >
+                                    <UploadFile />
+                                    {/* <span id='searchProject' >
                                         <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
                                         <input type='text' id='inputSearchProjects' className='inputSearchProjects'
                                             onMouseLeave={() => closeInputSearch()}
                                         />‏
-                                    </span>
+                                    </span> */}
                                 </div>
                                 {/* <Animation /> */}
                             </Route>
@@ -178,6 +172,7 @@ const mapDispatchToProps = (dispatch) => {
         removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
+        addFile: (files) => dispatch(actions.addFile(files)),
 
 
 

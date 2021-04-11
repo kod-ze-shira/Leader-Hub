@@ -15,7 +15,7 @@ import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
 
 const mapStateToProps = (state) => {
     return {
-        close: state.public_reducer.close,
+        // close: state.public_reducer.close,
     }
 }
 
@@ -26,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
-
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
 
@@ -59,16 +58,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         return (
             <>
-                {/* <div className="container-fluid">
-                    <div className="row "> */}
                 <div className="row ">
-                    <div className="view-details  col-5 mt-4">
+                    <div className="view-details  col-5 mt-5">
                         <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
                         {renderSwitch()}
                     </div>
                 </div>
-                {/* </div>
-                </div > */}
             </>
         )
     })

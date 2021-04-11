@@ -30,8 +30,8 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
-        props.setProject(project)
-        props.editProject()
+        // props.setProject(project)
+        props.editProject(project)
         event.stopPropagation();
     }
 
@@ -131,7 +131,7 @@ function ViewProject(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        project: state.project_reducer.project,
+        // project: state.project_reducer.project,
         projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName

@@ -63,7 +63,7 @@ function SelectHeader(props) {
                         <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
                     </div>
                     <div className="col-md col-sm-2 pr-0">
-                        <SelectProject workspaces={props.workspaces} />
+                        <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
                     </div>
                     <div className="col-md col-sm-2 pr-0">
                         <SelectCards flag={changeFlag} />
