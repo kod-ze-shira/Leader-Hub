@@ -107,6 +107,8 @@ const mapStateToProps = (state) => {
     return {
         cards: state.public_reducer.cards,
         workspaces: state.public_reducer.workspaces,
+        workspace: state.workspace_reducer.workspace,
+
     }
 }
 

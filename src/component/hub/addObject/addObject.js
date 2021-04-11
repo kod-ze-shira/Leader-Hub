@@ -99,7 +99,6 @@ export default connect(
     (state) => {
         return {
             // workspaceToEdit: state.workspace_reducer.workspace,
-            // workspaces: state.workspace_reducer.workspaces,
 
 
         }

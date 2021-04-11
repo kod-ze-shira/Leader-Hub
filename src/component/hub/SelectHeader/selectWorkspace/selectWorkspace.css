@@ -11,6 +11,12 @@
     position: relative;
 
 }
+.select-workspace .select__control .select__value-container  .select__placeholder{
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+}
 
 
 .select-workspace .css-1uccc91-singleValue, .select-workspace .css-1wa3eu0-placeholder,.select-workspace .css-b8ldur-Input{

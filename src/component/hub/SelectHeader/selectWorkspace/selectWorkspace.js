@@ -13,7 +13,7 @@ function SelectWorkspace(props) {
 
     useEffect(() => {
     }, [props.workspace])
-    
+
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
@@ -38,7 +38,7 @@ function SelectWorkspace(props) {
     }
 
     const viewWorkspacesList = props.workspaces.map((workspace) => (
-        { value: workspace.workspace._id, label: workspace.workspace.name }
+        { value: workspace.workspace._id, label: workspace.workspace.name, title: workspace.workspace.name }
     ))
     const style = {
         control: (base, state) => ({
@@ -61,7 +61,7 @@ function SelectWorkspace(props) {
             <div className="react-select">
                 <LetterLogo className="workspace-logo" nameWorkspace={props.workspace.workspace ? props.workspace.workspace : null} />
                 <Select
-                    className="select-workspace"
+                    className="select-workspace selectInHeader"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
