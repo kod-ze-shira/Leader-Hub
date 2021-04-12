@@ -12,14 +12,16 @@ import $ from 'jquery'
 
 
 function ProjectsByWorkspace(props) {
+
+    // useEffect(() => {
+    //     console.log(props.workspace.projectList)
+    // }, [props.workspace])
+
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
     const [valueSearch, setValueSearch] = useState(props.projectName)
-    // fun()
-    // function fun() {
-        // setValueSearch(props.projectName)
-    // }
+
     const [addOrEditProject, setAddOrEditProject] = useState(false)
 
     function getWorkspacesAwait(result) {
@@ -32,7 +34,7 @@ function ProjectsByWorkspace(props) {
 
 
     useEffect(() => {
-        props.getAllWorkspaces()
+        
         if (props.projects)
             if (props.projects.length == 0) {
                 props.getProjectsByWorkspaceId(idWorkspace)
@@ -45,6 +47,7 @@ function ProjectsByWorkspace(props) {
 
                 } else {
                     if (window.location.href.indexOf('allProjects') != -1) {
+                        props.getAllWorkspaces()
                         let allProjects = []
                         for (let index = 0; index < props.workspaces.length; index++) {
                             for (let j = 0; j < props.workspaces[index].projects.length; j++) {
@@ -59,12 +62,14 @@ function ProjectsByWorkspace(props) {
                 setFlug(true)
             }
         }
-    }, []);
+    }, [props.workspaces]);
 
 
 
+    const [currentProject, setCurrentProject] = useState()
 
-    function openEditProject() {
+    function openEditProject(project) {
+        setCurrentProject(project)
         setAddOrEditProject("editProject")
         setShowProject(true)
     }
@@ -73,15 +78,21 @@ function ProjectsByWorkspace(props) {
         setAddOrEditProject("newProject")
         setShowProject(true)
     }
-    const viewProjectsByWorkspace = props.projects ?
-        props.projects.map((project) => {
+    // const viewProjectsByWorkspace = props.workspace.projectList ?
+    //     props.workspace.projectList.map((project) => {
+    //         return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
+    //             ? <ViewProject showToast={(obj) => showToast1(obj)}
+    //                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
+    //             : null
+    //     }) : null
+
+    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList ?
+        props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
             return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false} myProject={project} editProject={openEditProject} />
                 : null
         }) : null
-
-
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
             return project.project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
@@ -127,7 +138,7 @@ function ProjectsByWorkspace(props) {
             <div className='body' >
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
-                        <div className="titleProjects">Leader Projects</div>
+                        <div className="titleProjects pt-2 ml-2">Leader Projects</div>
 
                         <div id=''>
                             <span id='searchProject' >
@@ -149,7 +160,7 @@ function ProjectsByWorkspace(props) {
 
                 </div>
 
-                <Table responsive className='tableProject' >
+                <Table responsive className='tableProject ' >
                     <>
                         <tbody>
                             {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
@@ -159,7 +170,9 @@ function ProjectsByWorkspace(props) {
 
 
                 {
-                    showProject ? <ViewDetails closeViewDetails={() => setShowProject(false)}
+                    showProject ? <ViewDetails
+                        closeViewDetails={() => setShowProject(false)}
+                        project={currentProject}
                         showToast={showToast}
                         from={addOrEditProject} workspaceId={idWorkspace} />
                         : null
@@ -173,11 +186,11 @@ function ProjectsByWorkspace(props) {
 const mapStateToProps = (state) => {
 
     return {
-        projects: state.public_reducer.projects,
+        // projects: state.public_reducer.projects,
         projectToDelete: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.workspace,
+        // workspace: state.workspace_reducer.workspace,
 
     }
 }

@@ -26,14 +26,14 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} />
+                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} />
             case 'list':
-                return <ProjectPlatform showToast={showToast} flag={flag} />
+                return <ProjectPlatform showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
                 return <GanttDesign />
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
-            return <ProjectPlatform showToast={showToast} flag={flag} />
+                return <ProjectPlatform showToast={showToast} flag={flag} />
         }
     }
     return (

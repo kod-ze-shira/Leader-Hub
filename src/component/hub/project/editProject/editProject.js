@@ -92,7 +92,7 @@ function EditProject(props) {
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description"
+                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description about your project"
                         onChange={(e) => changeDescriptionProject(e)} value={descriptionProject}></textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -126,87 +126,6 @@ function EditProject(props) {
                     <button button onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
-            {/* <div className='details-task'>
-                <div>
-                    <h5 className="mt-3">Edit Project</h5>
-                    <hr />
-
-                    <div className="row">
-                        <div className="col-11"></div>
-                    </div>
-                    <div className="row mt-1">
-                        <div className="col-5"><b>Name:</b></div>
-                        <div className="col-6">
-                            <input
-                                id='nameProject'
-                                className="inputProject"
-                                name="name"
-                                placeholder='name project'
-                                value={nameProject}
-                                onChange={(e) => changeNameProject(e)}
-                            >
-                            </input>
-                        </div>
-                    </div>
-                    <div className="row mt-1">
-                        <div className=" col-5"><b>Description:</b></div>
-                        <div className="col-6">
-                            <input
-                                className="inputProject"
-                                name="description"
-                                id='descriptionProject'
-                                placeholder={project.description}
-                                value={descriptionProject}
-                                onChange={(e) => changeDescriptionProject(e)}
-                            >
-                            </input>
-                        </div>
-                    </div>
-                    <div className="row mt-1">
-                        <div className=" col-5"><b>Due date:</b></div>
-                        <div className="col-6">
-                            <input
-                                className="inputProject"
-                                name="dueDate"
-                                type="date"
-                                id='dueDateProject'
-                                value={dueDateProject}
-                                onChange={(e) => changeDueDateProject(e)}
-                            >
-                            </input>
-                        </div>
-                    </div>
-
-                    <div className="row mt-1">
-                        <div className=" col-5"><b>Color:</b></div>
-                        <div className="col-6">
-                            <input
-                                className="inputProject"
-                                name="color"
-                                type="color"
-                                id='colorProject'
-                                value={colorProject}
-                                onChange={(e) => changeColorProject(e)}
-                            >
-                            </input>
-                        </div>
-                        {props.workspaceId}
-                    </div>
-                    <img onClick={() => props.showToast(true)} src={require('../../../img/bin.png')}></img>
-                </div>
-                <div className="row actionsViewDitails" >
-                    <div className='col-6 deleteInViewDitails' onClick={deleteMyProject}>
-                        <img className='mr-1'
-                            src={require('../../../img/bin.png')} />
-                        <span >delete </span>
-                    </div>
-                    <div className='col-6'>   <button onClick={() => saveProject()} className="saveChangesInViewDitails">Save</button></div>
-
-                </div>
-
- */}
-
-            {/* </div> */}
 
         </>
 
@@ -219,7 +138,7 @@ function EditProject(props) {
 export default connect(
     (state) => {
         return {
-            project: state.project_reducer.project,
+            // project: state.project_reducer.project,
         }
     },
     (dispatch) => {

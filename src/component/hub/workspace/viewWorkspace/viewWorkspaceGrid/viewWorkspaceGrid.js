@@ -10,7 +10,7 @@ import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
-    const workspace = props.workspace1
+    const workspace = props.workspace
 
 
     const routeToProject = () => {

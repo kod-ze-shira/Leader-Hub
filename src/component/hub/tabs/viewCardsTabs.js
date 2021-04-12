@@ -111,7 +111,8 @@ function ViewCardsTabs(props) {
                                                 className="form-control col-10"
                                                 value={editCardName}
                                                 onChange={updateCardName}
-                                                // onBlur={editCard}
+                                                onBlur={() => editCard()}
+
                                                 title={editCardName}
                                                 onKeyPress={event => {
                                                     if (event.key === 'Enter') {
@@ -136,7 +137,7 @@ function ViewCardsTabs(props) {
 
                                         </div>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body allTaskInCard">
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
                                                 <div

@@ -13,15 +13,19 @@ function Tabs(props) {
 
     useEffect(() => {
 
-    }, [props.projectId])
+    }, [props.projectId, props.focusInputCard])
 
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [taskToDetails, setTaskToDetails] = useState("")
-
-
+    if (!showInput) {
+        if (props.focusInputCard) {
+            setShowInput(true)
+            showInputToAddCard()
+        }
+    }
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
@@ -54,7 +58,9 @@ function Tabs(props) {
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
-    const showInputToAddCard = () => {
+
+
+    function showInputToAddCard() {
         // let headerHeight = document.getElementsByClassName("add-card").style.height
         // let headerHeight =  $("#add-card").height()
         // console.log(headerHeight)
@@ -114,7 +120,7 @@ function Tabs(props) {
                                                             : null}
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
-                                                        <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
+                                                        <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a>
 
                                                     </div>
                                                 </div>

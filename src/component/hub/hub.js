@@ -77,6 +77,8 @@ function Hub(props) {
     function closeInputSearch() {
         document.getElementById('inputSearchProjects').style.display = 'none'
     }
+
+    const [focusInputCard, setFocusInputCard] = useState(false)
     return (
         <>
             <HeaderLeader userName={props.user} appName='hub' />‏
@@ -125,7 +127,7 @@ function Hub(props) {
                                 <CardsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route> */}
                             <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
-                                <CardsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <CardsPage focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             {/* <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
@@ -170,7 +172,7 @@ function Hub(props) {
                         />
                         : null}
 
-                    <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} />
+                    <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} />
                     {/* setShowViewDitails={} */}
                 </div>
 
