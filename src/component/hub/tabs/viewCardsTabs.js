@@ -61,7 +61,7 @@ function ViewCardsTabs(props) {
     }
 
     const handleClick = (event) => {
-            textInput.current.focus()
+        textInput.current.focus()
 
         if (event == "rename") {
             console.log(textInput.current)
@@ -71,7 +71,7 @@ function ViewCardsTabs(props) {
         else
             setAnchorEl(event.currentTarget)
     };
- 
+
 
     const handleClose = (nameAction) => {
         handleClick(nameAction)
@@ -108,10 +108,12 @@ function ViewCardsTabs(props) {
                                             <input
                                                 id="input-card-name"
                                                 ref={textInput}
-                                                className="form-control col-8"
+                                                className="form-control col-10"
                                                 value={editCardName}
                                                 onChange={updateCardName}
-                                                // onBlur={editCard}
+                                                onBlur={() => editCard()}
+
+                                                title={editCardName}
                                                 onKeyPress={event => {
                                                     if (event.key === 'Enter') {
                                                         editCard()
@@ -128,14 +130,14 @@ function ViewCardsTabs(props) {
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
                                                 onClose={handleClose}
-                                            >                                               
+                                            >
                                                 <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
                                                 <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
                                             </Menu>
 
                                         </div>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body allTaskInCard">
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
                                                 <div

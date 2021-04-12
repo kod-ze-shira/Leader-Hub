@@ -41,7 +41,7 @@ function EditWorkspace(props) {
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="5" placeholder="Write a description" value={descriptionWorkspace}
+                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description about your project" value={descriptionWorkspace}
                         onChange={(input) => changeDescriptionWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">

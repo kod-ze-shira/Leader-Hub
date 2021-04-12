@@ -57,7 +57,7 @@ function SelectHeader(props) {
     return (
         <>
             {props.workspaces.length > 0 ?
-                <div className="s-header mx-0 mb-3 row align-items-center mt-5">
+                <div className="s-header mx-0 mb-3 row align-items-center mt-4">
 
                     <div className="col-md col-sm-2 pr-0">
                         <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
@@ -72,7 +72,7 @@ function SelectHeader(props) {
                         <SelectTask />
                     </div>
 
-                    <div className={classes.root}>
+                    <div className={classes.root} id='tabsAndList'>
                         {props.menue ?
                             <Tabs
                                 className="tabs-in-header offset-md-4 w-sm-15"
@@ -83,8 +83,8 @@ function SelectHeader(props) {
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                                 aria-label="scrollable prevent tabs example"
                             >
-                                <Tab label="Tabs" onClick={(e) => changePresent("tabs")} />
-                                <Tab label="List" onClick={(e) => changePresent("list")} />
+                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
                                 <Tab label="" />
                                 <Tab label="" />
                             </Tabs>

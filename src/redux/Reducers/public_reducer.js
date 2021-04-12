@@ -58,7 +58,26 @@ const publicData = {
         )
     },
     addProjectToProjects(state, action) {
-        state.projects.push(action.payload)
+        debugger;
+        let workspaceId = action.payload.project.workspace
+        for (let i = 0; i < state.workspaces.length; i++) {
+            if (state.workspaces[i].workspace._id == workspaceId) {
+                console.log("yes");
+                console.log(action.payload);
+                console.log(state.workspaces[i].projectList)
+                // state.workspaces[i].projectList.push({ "project": action.payload.project, "countTasks": 0, "countReadyTask": 0 })
+                state.workspaces[i].projectList.push(action.payload)
+
+            }
+        }
+        // state.workspaces.forEach((workspace) => {
+        //     if (workspace.workspace._id == workspaceId) {
+        //         console.log("yes");
+        //         console.log(workspace.workspace.projectList)
+
+        //         // workspace.workspace.projectList.push(action.payload)
+        //     }
+        // })
     },
     // state.projects.push(action.payload)
 
@@ -190,7 +209,8 @@ const publicData = {
                 })
             }
         })
-    }
+    },
+
 
 }
 

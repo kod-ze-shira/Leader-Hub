@@ -13,15 +13,19 @@ function Tabs(props) {
 
     useEffect(() => {
 
-    }, [props.projectId])
+    }, [props.projectId, props.focusInputCard])
 
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [taskToDetails, setTaskToDetails] = useState("")
-
-
+    if (!showInput) {
+        if (props.focusInputCard) {
+            setShowInput(true)
+            showInputToAddCard()
+        }
+    }
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
@@ -54,12 +58,18 @@ function Tabs(props) {
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
-    const showInputToAddCard = () => {
+
+
+    function showInputToAddCard() {
         // let headerHeight = document.getElementsByClassName("add-card").style.height
         // let headerHeight =  $("#add-card").height()
         // console.log(headerHeight)
         setShowInput(!showInput)
         setShowHeader(!showHeader)
+        // document.getElementById('newCardInput').style.display = 'block'
+        $('#newCardInput').removeClass('noneNewCard')
+        $('#newCardInput').addClass('blockNewCard')
+
 
     }
     const newCard = () => {
@@ -94,10 +104,10 @@ function Tabs(props) {
                                                     key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
-                                        <div className="col-3 add-card-col " >
-                                            <div className="view-cards-tabs ">
-                                                <div class="card  " >
-                                                    <div class="container" >
+                                        <div className="col-3 mt-4" >
+                                            <div className="view-cards-tabs mt-1" >
+                                                <div class="card " >
+                                                    <div id='newCardInput' class="container noneNewCard" >
                                                         {showInput ?
                                                             <div
                                                                 class="card-header row">
@@ -110,7 +120,7 @@ function Tabs(props) {
                                                             : null}
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
-                                                        <a className="add-card-tabs" onClick={showInputToAddCard}>Add Card+</a>
+                                                        <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a>
 
                                                     </div>
                                                 </div>

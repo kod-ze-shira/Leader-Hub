@@ -4,13 +4,13 @@ import { actions } from '../actions/action'
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'UPLOAD_FILES') {
-
+        debugger
         var formData = new FormData()
         var files = action.payload
-        var myFiles = Object.values(files)
-        if (myFiles.length < 1) { console.log("ooops... not files to upload") }
+        // var myFiles = Object.values(files)
+        if (files.length < 1) { console.log("ooops... not files to upload") }
         else {
-            myFiles.forEach((file, index) => {
+            files.forEach((file, index) => {
                 formData.append("file" + index, file)
             })
         }
@@ -49,38 +49,40 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     return next(action);
 
 }
-// export const getFiles = ({ dispatch, getState }) => next => action => {
+export const getFiles = ({ dispatch, getState }) => next => action => {
 
-//     if (action.type === 'GET_FILES') {
-//         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-//         $.ajax({
-//             type: "GET",
-//             url: `https://files.codes/api/${getState().public_reducer.userName}`,
-//             headers: { Authorization: jwtFromCookie },
-//             success: (data) => {
-//                 console.log(data)
-//             }
-//         })
-//     }
-// }
+    if (action.type === 'GET_FILES') {
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        $.ajax({
+            type: "GET",
+            url: `https://files.codes/api/${getState().public_reducer.userName}`,
+            headers: { Authorization: jwtFromCookie },
+            success: (data) => {
+                console.log(data)
+            }
+        })
+    }
+    return next(action);
+}
 
-// export const removeFile = ({ dispatch, getState }) => next => action => {
+export const removeFile = ({ dispatch, getState }) => next => action => {
 
-//     if (action.type === 'REMOVE_FILE') {
-//         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-//         let file = action.payload
+    if (action.type === 'REMOVE_FILE') {
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        let file = action.payload
 
-//         $.ajax({
-//             type: "GET",
-//             url: `https://files.codes/api/${getState().public_reducer.userName}/remove/${file.url}`,
-//             headers: { Authentication: jwtFromCookie },
-//             success: function (data) {
-//                 console.log(data)
-//             },
-//             error: function (err) {
-//                 alert(err);
-//             },
-//         });
+        $.ajax({
+            type: "GET",
+            url: `https://files.codes/api/${getState().public_reducer.userName}/remove/${file.url}`,
+            headers: { Authentication: jwtFromCookie },
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (err) {
+                alert(err);
+            },
+        });
 
-//     }
-// }
+    }
+    return next(action);
+}

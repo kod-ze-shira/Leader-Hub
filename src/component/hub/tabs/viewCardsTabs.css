@@ -10,11 +10,18 @@
 
    
 }
-
+.more {
+  right: 6px;
+  padding: 0px !important;
+  min-width: min-content !important;
+}
 .view-cards-tabs .card-header{
     background-color: white !important;
     font-size: 16px;
     font-weight: 500;
+}
+.card-header{
+  padding: 0px !important;
 }
 .more{
     background-color: transparent;
@@ -29,6 +36,18 @@
   font: normal normal normal 18px/24px Rubik;
   opacity: 1 !important;
   cursor: pointer;
+}
+.add-task-tabs{
+  text-decoration: none !important;
+  font-weight: bold !important;
+    font-size: 15px !important;
+}
+.allTaskInCard div{
+  margin-bottom: 9px;
+}
+
+.add-task-tabs:hover{
+  color:black  !important;
 }
 .task-card{
     background-color: white;

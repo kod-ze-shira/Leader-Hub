@@ -33,20 +33,18 @@ function AddObject(props) {
                 props.setShowViewDitails('addWorkspace')
                 break;
             case 'Project':
-                if (window.location.href.indexOf('workspace') != -1 ||
-                    window.location.href.indexOf('allProjects') != -1) {
+                if (window.location.href.indexOf('workspace') != -1)
                     props.setShowViewDitails('newProject')
-                }
                 break;
             case 'Card':
-                alert('Card')
+                if (window.location.href.indexOf('projectPlatform') != -1)
+                    props.focusInputCard(true)
+                console.log('Card')
 
                 break;
             case 'Task':
-                alert('Task')
-
+                console.log('Task')
                 break;
-
             default:
                 break;
         }
@@ -54,11 +52,22 @@ function AddObject(props) {
 
     function startComponentAddObject() {
 
-        if (window.location.href.indexOf('workspace') != -1 ||
-            window.location.href.indexOf('allProjects') != -1) {
-            document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
-            document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
+        // if (window.location.href.indexOf('workspace') != -1) {
+        //     document.getElementById("newProjectInComponentAddObject").style.cursor = "pointer";
+        // } else 
+
+        if (window.location.href.indexOf('workspace') == -1 && window.location.href.indexOf('projectPlatform') == -1) {
+            document.getElementById("newProjectInComponentAddObject").style.cursor = "no-drop";
+
         }
+        else {
+            document.getElementById("newProjectInComponentAddObject").style.cursor = "pointer";
+
+        }
+        if (window.location.href.indexOf('projectPlatform') == -1)
+            document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
+        document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
+        // }
         // else
         //     if (window.location.href.indexOf('projectPlatform') == -1) {
         //         document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
@@ -80,16 +89,16 @@ function AddObject(props) {
                 <div id='addNewP2'
 
                 >
-                    <p className='addNewP' onClick={(e) => openViewDitails('Workspace')}>New Workspace</p>
+                    <p className='addNewP' onClick={(e) => openViewDitails('Workspace')}>New workspace</p>
                     <p className='addNewP' id='newProjectInComponentAddObject'
                         onMouseOver={() => startComponentAddObject()}
-                        onClick={(e) => openViewDitails('Project')}>New Project</p>
+                        onClick={(e) => openViewDitails('Project')}>New project</p>
                     <p className='addNewP' id='newCardInComponentAddObject'
                         onMouseOver={() => startComponentAddObject()}
-                        onClick={(e) => openViewDitails('Card')}>New Card</p>
+                        onClick={(e) => openViewDitails('Card')}>New card</p>
                     <p className='addNewP' id='newTaskInComponentAddObject'
                         onMouseOver={() => startComponentAddObject()}
-                        onClick={(e) => openViewDitails('Task')}>New Task</p>
+                        onClick={(e) => openViewDitails('Task')}>New task</p>
                 </div>
             </div >
         </>
