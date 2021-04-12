@@ -67,7 +67,7 @@ function EditWorkspace(props) {
 export default connect(
     (state) => {
         return {
-            workspace: state.workspace_reducer.workspace,
+            // workspace: state.workspace_reducer.workspace,
             workspaceToEdit: state.workspace_reducer.workspace,
 
         }
