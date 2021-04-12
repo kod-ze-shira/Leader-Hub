@@ -23,7 +23,10 @@ function EditProject(props) {
         props.setProject(p)
     }
 
+const changeProjectField=(input)=>{
+    
 
+}
 
     const changeDescriptionProject = (input) => {
         setDescriptionProject(input.target.value)
