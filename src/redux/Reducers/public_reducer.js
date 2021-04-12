@@ -29,8 +29,38 @@ const publicData = {
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
     },
-    setProjectInWorkspace(state,action){
+    setWorkspaceByFiled(state, action) {
+        debugger
+        state.workspaces.forEach((workspace, index) => {
+            if (workspace.workspace._id == action.payload.workspace.workspace._id) {
+                state.workspaces[index].workspace[action.payload.nameFiled] = action.payload.value
+            }
+        })
+    },
+    setProjectByFiledFromWorkspace(state, action) {
+        state.workspaces.forEach((workspace, index1) => {
+            if (workspace.workspace._id == action.payload.project.workspace) {
+                workspace.projectList.forEach((project, index2) => {
+                    if (project.project._id == action.payload.project._id) {
+                        state.workspaces[index1].projectList[index2].project[action.payload.nameFiled] = action.payload.value
+                        let a = state.workspaces[index1].projectList[index2].project[action.payload.nameFiled]
+                        console.log(a);
+                    }
+                })
+            }
+        })
+    },
+    setProjectInWorkspace(state, action) {
+        state.workspaces.forEach((workspace, index1) => {
+            if (workspace.workspace._id == action.payload.project.workspace) {
+                workspace.projectList.forEach((project, index2) => {
+                    if (project.project._id == action.payload.project._id) {
+                        state.workspaces[index1].projectList[index2].project = action.payload.project
 
+                    }
+                })
+            }
+        })
     },
     setProjects(state, action) {
         state.projects = action.payload;
@@ -81,6 +111,9 @@ const publicData = {
         //         // workspace.workspace.projectList.push(action.payload)
         //     }
         // })
+    },
+    addProjectTArray(state, action) {
+        state.projects.push(action.payload)
     },
     // state.projects.push(action.payload)
 

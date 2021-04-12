@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
+
     let [nameWorkspace, setNameWorkspace] = useState(props.workspace.workspace.name)
     let [colorWorkspace, setColorWorkspace] = useState(props.workspace.workspace.color)
     let [descriptionWorkspace, setDescriptionWorkspace] = useState(props.workspace.workspace.description)
@@ -18,9 +19,9 @@ function EditWorkspace(props) {
     const changeColorWorkspace = (input) => {
         setColorWorkspace(input.target.value)
     }
-    const changeFiledInWorkspace = (input) => {
-        props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
-    }
+    // const changeFiledInWorkspace = (input) => {
+    //     props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
+    // }
     function save_edit() {
         myWorkspace.name = nameWorkspace
         myWorkspace.description = descriptionWorkspace
@@ -29,6 +30,13 @@ function EditWorkspace(props) {
         props.saveWorkspaceInServerUfterEdit()
         props.closeViewDetails();
     }
+
+    const changeFiledInWorkspace = (input) => {
+        let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value, "workspace": props.workspace }
+        props.setWorkspaceByFiled(editWorkspaceInRedux)
+        props.workspace.workspace[input.target.name] = input.target.value
+    }
+    
     return (
         <>
             <div className="details d-workspace mr-5 ml-4">
@@ -36,7 +44,9 @@ function EditWorkspace(props) {
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input name="name"
-                        onChange={(input) => changeNameWorkspace(input)} type="text" class="form-control" id="name" value={nameWorkspace} />
+                        onChange={(input) => changeFiledInWorkspace(input)}
+                        type="text" class="form-control" id="name"
+                        value={props.workspace.workspace.name} />
                 </div>
 
                 <div class="form-group">
@@ -67,7 +77,7 @@ function EditWorkspace(props) {
 export default connect(
     (state) => {
         return {
-            workspace: state.workspace_reducer.workspace,
+            // workspace: state.workspace_reducer.workspace,
             workspaceToEdit: state.workspace_reducer.workspace,
 
         }
@@ -75,6 +85,7 @@ export default connect(
 
     (dispatch) => {
         return {
+            setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
         }

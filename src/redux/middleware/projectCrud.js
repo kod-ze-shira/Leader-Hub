@@ -103,7 +103,9 @@ export const newProject = ({ dispatch, getState }) => next => action => {
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
-        let project = getState().project_reducer.project;
+        let projectBeforeChanges = getState().public_reducer.projects[0];
+        let project = action.payload.project;
+        let projectBeforeChange = action.payload.projectBeforeChanges;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -113,16 +115,17 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ 'project': project }),
+            data: JSON.stringify({ 'project': '' }),
             success: function (data) {
                 console.log("success")
-                console.log("data", data);
-                dispatch(actions.setProject(data.result))
+                console.log("data", data.result);
+                dispatch(actions.setProjectInWorkspace({ "project": data.result }))
 
             },
             error: function (err) {
 
                 checkPermission(err).then((ifOk) => {
+                    dispatch(actions.setProjectInWorkspace({ "project": projectBeforeChanges }))
 
                 })
             }
@@ -178,15 +181,15 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-      if (result.status == "401") {
-        result.routes ?
-           window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-          window.location.assign(`https://accounts.codes/hub/login`)
-       
-        reject(false)
-  
-      }
-      resolve(true)
-  
+        if (result.status == "401") {
+            result.routes ?
+                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
     })
-  }
+}
