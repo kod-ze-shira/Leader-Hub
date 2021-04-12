@@ -144,7 +144,7 @@ export default connect(
     (dispatch) => {
         return {
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
-            setProject: (p) => dispatch(actions.setProject(p)),
+            setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p)),
 
 
         }

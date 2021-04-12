@@ -86,7 +86,7 @@ function ProjectsByWorkspace(props) {
     //             : null
     //     }) : null
 
-    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList ?
+    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace) ?
         props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
             return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}

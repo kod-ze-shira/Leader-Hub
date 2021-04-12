@@ -29,6 +29,9 @@ const publicData = {
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
     },
+    setProjectInWorkspace(state,action){
+
+    },
     setProjects(state, action) {
         state.projects = action.payload;
     },
