@@ -17,18 +17,22 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 function ViewTaskByCrad(props) {
     useEffect(() => {
-        props.setTaskName(task.name)
-        props.getAllStatusesTaskForUser();
+        console.log(props);
+        // props.setTaskName(task.name)
+        // props.getAllStatusesTaskForUser();
         console.log("statuses" + props.statuses)
         // if(props.task.status==props.statuses._)
-        if (props.statuses.length > 0) {
-            let s = props.statuses.find(status => status._id == props.task.status)
-            setStatus(s.statusName)
-            console.log(status);
+        // if (props.statuses.length > 0) {
+        //     let s = props.statuses.find(status => status._id == props.task.status)
+        //     setStatus(s.statusName)
+        //     console.log(status);
 
-        }
+        // }
 
-    }, [props.task, props.statuses])
+    }, [
+        // props.task, 
+        // props.statuses,
+        props.cards])
     const [status, setStatus] = useState()
 
 
@@ -51,7 +55,10 @@ function ViewTaskByCrad(props) {
         })
     }
 
-
+    const changeFiledInTask = (input) => {
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+    }
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
@@ -86,14 +93,11 @@ function ViewTaskByCrad(props) {
     }
 
     // useEffect(() => {
-
     //     props.EditTask(task);
     // }, [task])
 
     const editTask = () => {
-        alert("hi")
         let temp = { ...task }
-
         temp.name = editTaskName
         setTask(temp)
 
@@ -132,9 +136,11 @@ function ViewTaskByCrad(props) {
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
+                                        name="name" id="name"
                                         className="show-card py-2"
-                                        value={editTaskName}
-                                        onChange={(e) => editTaskNameInReduxs(e.target.value)}
+                                        value={props.task.name}
+                                        onChange={(e) => changeFiledInTask(e)}
+                                        // onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                         onBlur={(e) => editTask()}
                                         onKeyPress={e => {
                                             if (e.key === 'Enter') {
@@ -160,7 +166,7 @@ function ViewTaskByCrad(props) {
                                 {viewDetails ?
                                     <div className="closeDet" >
                                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                            from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
+                                            from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                     </div>
                                     : null}
                             </div>
@@ -188,7 +194,9 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser())
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+
 
     }
 }
