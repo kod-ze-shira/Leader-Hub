@@ -118,7 +118,7 @@ function ViewCards(props) {
     return (
         <>
             <div id={props.cardFromMap._id + "disappear"}>
-                <div className=" row justify-content-start card-name  mx-4 mt-4 pb-0"
+                <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
                     <div className=" col-3  " >
                         <div className="wrap-triangle">

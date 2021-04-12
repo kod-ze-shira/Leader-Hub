@@ -246,7 +246,12 @@ const publicData = {
             }
         })
     },
-
+    // setWorkspaceByFiledFromWorkspaces(state, action) {
+    //     console.log("workspace", action.payload);
+    //     for (let index = 0; index < workspaces.length; index++) {  
+    //         let a = state.workspaces[index].workspace[action.payload.nameFiled]    
+    //     }      
+    // },
 
 }
 

@@ -111,8 +111,7 @@ function ViewCardsTabs(props) {
                                                 className="form-control col-10"
                                                 value={editCardName}
                                                 onChange={updateCardName}
-                                                onBlur={() => editCard()}
-
+                                                // onBlur={() => editCard()}
                                                 title={editCardName}
                                                 onKeyPress={event => {
                                                     if (event.key === 'Enter') {

@@ -13,7 +13,7 @@ function TaskDetails(props) {
     useEffect(() => {
         console.log(props);
         // props.getAllStatusesTaskForUser();
-    }, [props.task, props.cards])
+    }, [props.cards])
 
     // useEffect(() => {
     //     let status = [];
