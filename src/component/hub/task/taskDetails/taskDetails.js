@@ -133,7 +133,6 @@ function TaskDetails(props) {
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    {/* <input name="name" onChange={(e) => handleChange(e)} */}
                     <input name="name" onChange={(e) => changeFiledInTask(e)}
                         type="text" class="form-control"
                         id="name"

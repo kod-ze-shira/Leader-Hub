@@ -39,7 +39,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'viewTaskByCard':
                     return <TaskDetails showToast={showToast} task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
-                    return <EditWorkspace closeViewDetails={props.closeViewDetails} />
+                    return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} />
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':

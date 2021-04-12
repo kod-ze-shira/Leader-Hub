@@ -39,7 +39,10 @@ function AllWorkspaces(props) {
         setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
         key={workspace.workspace._id} workspace={workspace} editWorkspace={openEditWorkspace}/>
         })
-    function openEditWorkspace(){
+        const [workspaceToEdit,setWorspaceToEdit]=useState()
+
+    function openEditWorkspace(value){
+        setWorspaceToEdit(value)
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)
     }
@@ -53,9 +56,11 @@ function AllWorkspaces(props) {
         setlist(false);
         setgrid(true);
     }
+
     function openaddNewWorkspace() {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
+   
     }
    
 return (
@@ -125,7 +130,8 @@ return (
             </div>
      </div>
                    {showAddWorkspace ?
-                        <ViewDetails closeViewDetails={() => setShowWorkspace(false)} from={addOrEditWorkspace} /> : null
+                        <ViewDetails closeViewDetails={() => setShowWorkspace(false)}
+                         from={addOrEditWorkspace} workspace={workspaceToEdit}/> : null
                     }
                     {/* {showToastDelete ?
                         <ToastDelete ref={refToDeleteToast}

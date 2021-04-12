@@ -22,7 +22,7 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject.project._id;
-        props.setProject(props.myProject.project)
+        // props.setProject(props.myProject.project)
         console.log("project" + props.myProject.project._id)
         // props.setCards(props.myProject.project.cards)
         props.getCardsByProjectId(props.myProject.project._id)
@@ -30,7 +30,7 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
-        // props.setProject(project)
+        props.addProjectTArray(project)
         props.editProject(project)
         event.stopPropagation();
     }
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setProject: (p) => dispatch(actions.setProject(p)),
+        addProjectTArray: (p) => dispatch(actions.addProjectTArray(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),

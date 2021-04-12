@@ -34,11 +34,11 @@ function ProjectsByWorkspace(props) {
 
 
     useEffect(() => {
-        
-        if (props.projects)
-            if (props.projects.length == 0) {
-                props.getProjectsByWorkspaceId(idWorkspace)
-            }
+
+        // if (props.projects)
+        // if (props.projects.length == 0) {
+        //     props.getProjectsByWorkspaceId(idWorkspace)
+        // }
         if (!flug) {
             if (props.workspaces.length == 0) {
 
@@ -54,8 +54,8 @@ function ProjectsByWorkspace(props) {
                                 allProjects.projects.push(props.workspaces[index].projects[j])
                             }
                         }
-                        props.setWorkspace(props.workspaces[0])
-                        props.setProjects(allProjects)
+                        // props.setWorkspace(props.workspaces[0])
+                        // props.setProjects(allProjects)
                     }
                 }
 
@@ -70,6 +70,7 @@ function ProjectsByWorkspace(props) {
 
     function openEditProject(project) {
         setCurrentProject(project)
+        props.setProject(project)
         setAddOrEditProject("editProject")
         setShowProject(true)
     }
@@ -78,21 +79,15 @@ function ProjectsByWorkspace(props) {
         setAddOrEditProject("newProject")
         setShowProject(true)
     }
-    // const viewProjectsByWorkspace = props.workspace.projectList ?
-    //     props.workspace.projectList.map((project) => {
-    //         return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
-    //             ? <ViewProject showToast={(obj) => showToast1(obj)}
-    //                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
-    //             : null
-    //     }) : null
 
-    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList ?
+    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace) ?
         props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
             return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false} myProject={project} editProject={openEditProject} />
                 : null
         }) : null
+
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
             return project.project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
@@ -200,6 +195,7 @@ const mapDispatchToProps = (dispatch) => {
         getFullWorkspacesForUser: () => dispatch(actions.getFullWorkspacesForUser()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
+        setProject: (project) => dispatch(actions.setProject(project)),
         setWorkspace: (w) => dispatch(actions.setWorkspace(w)),
 
     }
