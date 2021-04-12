@@ -56,7 +56,7 @@ function NewConfigorator(props) {
                     </div> */}
 
                 </div>
-                <ul className="list_config">
+                <ul className="list_config ">
                     <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
                     My Workspace </li>

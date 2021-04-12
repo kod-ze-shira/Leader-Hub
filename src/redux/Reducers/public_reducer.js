@@ -198,7 +198,23 @@ const publicData = {
 
     addWorkspaceToWorkspaces(state, action) {
         state.workspaces.push(action.payload)
-    }
+    },
+    setTaskByFiledFromTasks(state, action) {
+        console.log("task", action.payload.task);
+        state.cards.forEach((card, index1) => {
+            if (card._id == action.payload.task.card) {
+                card.tasks.forEach((task, index2) => {
+                    if (task._id == action.payload.task._id) {
+                        state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
+                        let a = state.cards[index1].tasks[index2][action.payload.nameFiled]
+                        console.log(a);
+                    }
+                })
+            }
+        })
+    },
+
+
 }
 
 
