@@ -22,12 +22,12 @@ function EditWorkspace(props) {
     // const changeFiledInWorkspace = (input) => {
     //     props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
     // }
-    function save_edit() {
-        myWorkspace.name = nameWorkspace
-        myWorkspace.description = descriptionWorkspace
-        myWorkspace.color = colorWorkspace
-
-        props.saveWorkspaceInServerUfterEdit()
+    function saveEdit() {
+        // myWorkspace.name = nameWorkspace
+        // myWorkspace.description = descriptionWorkspace
+        // myWorkspace.color = colorWorkspace
+        debugger
+        props.saveWorkspaceInServerUfterEdit(props.workspace.workspace)
         props.closeViewDetails();
     }
 
@@ -36,7 +36,7 @@ function EditWorkspace(props) {
         props.setWorkspaceByFiled(editWorkspaceInRedux)
         props.workspace.workspace[input.target.name] = input.target.value
     }
-    
+
     return (
         <>
             <div className="details d-workspace mr-5 ml-4">
@@ -51,8 +51,11 @@ function EditWorkspace(props) {
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description about your project" value={descriptionWorkspace}
-                        onChange={(input) => changeDescriptionWorkspace(input)}></textarea>
+                    <textarea class="form-control"
+                        id="description" rows="2"
+                        placeholder="Write a description about your project"
+                        value={props.workspace.workspace.description}
+                        onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">
                     <label for="color">Color</label>
@@ -61,14 +64,14 @@ function EditWorkspace(props) {
                         styles="height: 50px"
                         type="color"
                         id='colorProject'
-                        value={colorWorkspace}
-                        onChange={(e) => changeColorWorkspace(e)} />
+                        value={props.workspace.workspace.color}
+                        onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
-                    <button onClick={save_edit} className="save_canges_btn col-3">Save</button>
+                    <button onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
         </>
@@ -87,7 +90,7 @@ export default connect(
         return {
             setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
-            saveWorkspaceInServerUfterEdit: () => dispatch(actions.editWorkspaceInServer()),
+            saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
         }
     }
 )(EditWorkspace)
