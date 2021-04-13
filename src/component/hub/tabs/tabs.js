@@ -12,9 +12,10 @@ import taskDetails from '../task/taskDetails/taskDetails'
 function Tabs(props) {
 
     useEffect(() => {
-
+        console.log(props)
     }, [props.projectId, props.focusInputCard])
 
+    let b;
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
@@ -82,8 +83,14 @@ function Tabs(props) {
         setShowInput(false)
     }
     const openViewDetails = (task) => {
+        // debugger
+        // console.log("a", task);
+        // const a = props.cards.find(c => c._id == task.card)
+        // const b = a.tasks.find(t => t._id == task._id)
+        // console.log(a)
         setViewDetails(true)
         setTaskToDetails(task)
+
     }
     return (
         <><div className="body">
@@ -100,6 +107,7 @@ function Tabs(props) {
                                         <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
                                                 return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                    // setTask={(task) => setTaskToDetails(task)}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} index={index} />
                                             })}
@@ -139,7 +147,9 @@ function Tabs(props) {
             {viewDetails ?
                 <div className="closeDet" >
                     <ViewDetails closeViewDetails={() => setViewDetails(false)}
-                        from={"viewTaskByCard"} task={taskToDetails} open={true}> </ViewDetails>
+                        from={"viewTaskByCard"}
+                        task={taskToDetails}
+                        open={true}> </ViewDetails>
                 </div>
                 : null}
         </div>

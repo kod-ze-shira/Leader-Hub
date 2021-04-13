@@ -4,7 +4,10 @@
    font-size: medium;
     color: #000000;
     /* border-bottom: gray solid 1px; */
-    background-color:transparent;
+    background-color:#eeffff;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    /* opacity: 0.1; */
     border-bottom: 1px  solid #98A9BC ;
 
 }

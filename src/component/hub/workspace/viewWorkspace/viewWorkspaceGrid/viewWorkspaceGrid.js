@@ -14,8 +14,11 @@ function ViewWorkspaceGrid(props) {
 
 
     const routeToProject = () => {
+<<<<<<< HEAD
         // props.setWorkspace(workspace)
         // props.setProjects(workspace.projectList)
+=======
+>>>>>>> newDev
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function outOver(id) {
@@ -24,7 +27,7 @@ function ViewWorkspaceGrid(props) {
     }
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        props.editWorkspace()
+        props.editWorkspace(workspace)
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);

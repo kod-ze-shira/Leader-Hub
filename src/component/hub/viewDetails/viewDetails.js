@@ -39,7 +39,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'viewTaskByCard':
                     return <TaskDetails showToast={showToast} task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
-                    return <EditWorkspace closeViewDetails={props.closeViewDetails} />
+                    return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} />
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':
@@ -59,7 +59,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
             <>
                 <div className="row ">
-                    <div className="view-details  col-5 mt-5">
+                    <div className="view-details  col-5 mt-4">
                         <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
                         {renderSwitch()}
                     </div>

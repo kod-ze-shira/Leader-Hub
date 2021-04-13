@@ -55,7 +55,7 @@ const store = createStore(
                 uploadFiles,
                 extractJwt,
                 getFiles,
-                removeFile
+                removeFile,
             ))
 )
 store.dispatch(actions.extractJwt());
