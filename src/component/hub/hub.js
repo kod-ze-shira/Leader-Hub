@@ -172,7 +172,7 @@ function Hub(props) {
                         />
                         : null}
 
-                    <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} />
+                    {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
                 </div>
 

@@ -14,11 +14,6 @@ function ViewWorkspaceGrid(props) {
 
 
     const routeToProject = () => {
-<<<<<<< HEAD
-        // props.setWorkspace(workspace)
-        // props.setProjects(workspace.projectList)
-=======
->>>>>>> newDev
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function outOver(id) {
