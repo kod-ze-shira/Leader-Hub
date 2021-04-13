@@ -30,7 +30,7 @@ const publicData = {
         state.workspaces = action.payload;
     },
     setWorkspaceByFiled(state, action) {
-        debugger
+
         state.workspaces.forEach((workspace, index) => {
             if (workspace.workspace._id == action.payload.workspace.workspace._id) {
                 state.workspaces[index].workspace[action.payload.nameFiled] = action.payload.value

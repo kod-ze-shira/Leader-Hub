@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './newProject.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
@@ -14,6 +14,8 @@ function NewProject(props) {
     let [descriptioneProject, setDescriptionProject] = useState('')
     let [myStyle, setMyStyle] = useState('');
     let [myDueDate, setMyDueDate] = useState('')
+    const nameRequired = useRef()
+
     // let [dufultDateDueDate, setDufultDateDueDate] = useState()
     let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
@@ -88,24 +90,21 @@ function NewProject(props) {
         let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
         project.dueDate = res
 
-        if (!project.name) {
-            // $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
-            setMyStyle({ 'border-bottom': 'red solid 1px' })
-        }
-        else {
-
+        if (nameRequired.current.value) {
             props.newProject(project)
             document.getElementById('nameProject').value = ''
             document.getElementById('descriptionProject').value = ''
             setMyStyle({ 'border-bottom': ' rgb(129, 129, 165) solid 1px' })
             document.getElementById('dueDateProject').value = ''
             props.closeViewDetails(false)
-
-            // tempColor = getRandomColor();
-            // setMyColor(tempColor)
-
-            // $(`#colorProject`).val(myColor)
         }
+        else {
+            nameRequired.current.focus()
+            var form = document.getElementById('nameRequired')
+            form.classList.add('was-validated')
+        }
+
+
 
     }
 
@@ -134,10 +133,18 @@ function NewProject(props) {
 
             <div className="details mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Add Project</h5>
-                <div class="form-group">
+                {/* 
+                <div class="row justify-content-between  mx-1">
+    <label>workspace {}</label>   
+                    </div> */}
+                <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeNameInProject(e)}
+                        required ref={nameRequired}
                         id='nameProject' type="text" class="form-control" value={nameProject} />
+                    <div class="invalid-feedback">
+                        Please enter project name.
+                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>

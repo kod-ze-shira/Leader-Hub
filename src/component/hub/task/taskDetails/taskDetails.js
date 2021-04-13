@@ -11,25 +11,24 @@ import AddStatus from '../../status/addStatus'
 function TaskDetails(props) {
 
     useEffect(() => {
-        console.log(props);
-        // props.getAllStatusesTaskForUser();
-    }, [props.cards])
+        props.getAllStatusesTaskForUser();
+    }, [props.task])
 
-    // useEffect(() => {
-    //     let status = [];
-    //     // console.log(props.task.milestones)
+    useEffect(() => {
+        let status = [];
+        // console.log(props.task.milestones)
 
-    //     props.statuses.length && props.statuses.forEach(st => {
-    //         let stTemp = {
-    //             "name": st.statusName,
-    //             "value": st.statusName,
-    //             "label": st.statusName
-    //         }
-    //         status.push(stTemp);
-    //     });
+        props.statuses.length && props.statuses.forEach(st => {
+            let stTemp = {
+                "name": st.statusName,
+                "value": st.statusName,
+                "label": st.statusName
+            }
+            status.push(stTemp);
+        });
 
-    //     setStatusTemp(status)
-    // }, [props.statuses])
+        setStatusTemp(status)
+    }, [props.statuses])
 
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [editDescription, setEditDescription] = useState(props.task.description)
@@ -104,8 +103,7 @@ function TaskDetails(props) {
         props.createStatus(newStatus)
     }
     const saveNewTask = () => {
-        console.log(props.task);
-        props.EditTask(props.task)
+        props.EditTask(editTask)
     }
     const deleteTask = () => {
         props.showToast(true)
@@ -118,33 +116,29 @@ function TaskDetails(props) {
         // console.log(temp);
         // setEditTask(temp)
     }
-    const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
-        props.setTaskByFiledFromTasks(editTaskInRedux)
-    }
 
     return (
         <>
             <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between  mx-1" >
-                    <label>Create {props.task.startDate}</label>   <label>Last Update {props.task.dueDate}</label>
+                    <label>Create {task.startDate}</label>   <label>Last Update {task.dueDate}</label>
                     <br></br>
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => changeFiledInTask(e)}
+                    <input name="name" onChange={(e) => handleChange(e)}
                         type="text" class="form-control"
                         id="name"
-                        value={props.task.name} />
+                        value={editTaskName} />
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
                         id="descriptionProject" rows="2"
                         // placeholder="this is a very important task.. don’t forget!"
-                        onChange={(e) => changeFiledInTask(e)}
-                        value={props.task.description}>
+                        onChange={handleChange}
+                        value={editDescription}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -155,8 +149,8 @@ function TaskDetails(props) {
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={props.task.startDate}
-                            onChange={(e) => changeFiledInTask(e)}
+                            value={task.startDate}
+                            onChange={handleChange}
                         />
                     </div>
                     <div class="form-group col-5">
@@ -166,8 +160,8 @@ function TaskDetails(props) {
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={props.task.dueDate}
-                            onChange={(e) => changeFiledInTask(e)}
+                            value={task.dueDate}
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -239,11 +233,10 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // task: state.task_reducer.task,
+        task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
-        statuses: state.status_reducer.statuses,
-        cards: state.public_reducer.cards
+        statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -251,8 +244,7 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        createStatus: (status) => dispatch(actions.createStatus(status)),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+        createStatus: (status) => dispatch(actions.createStatus(status))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)
