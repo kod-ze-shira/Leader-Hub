@@ -68,6 +68,7 @@ function ViewTaskByCrad(props) {
         props.setIdCurrentCard(currentIdCard)
         setViewDetails(true)
     }
+    
 
 
     function addChalalit() {
