@@ -190,7 +190,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
-        getFullWorkspacesForUser: () => dispatch(actions.getFullWorkspacesForUser()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setProject: (project) => dispatch(actions.setProject(project)),
