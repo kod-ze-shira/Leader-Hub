@@ -16,7 +16,12 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 
 function ViewTaskByCrad(props) {
+    const [currentIndexTask,setCurrentIndexTask]=useState("")
+    const [currentIdCard,setCurrentIdCard]=useState("")
     useEffect(() => {
+        setCurrentIndexTask(props.idTask)
+        setCurrentIdCard(props.idCard)
+
         console.log(props);
         // props.setTaskName(task.name)
         // props.getAllStatusesTaskForUser();
@@ -62,6 +67,8 @@ function ViewTaskByCrad(props) {
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setIdCurrentCard(currentIdCard)
         setViewDetails(true)
     }
 
@@ -195,7 +202,9 @@ const mapDispatchToProps = (dispatch) => {
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasksTry(taskDetails)),
+        setCurrentIndexTask:(index)=>dispatch(actions.setCurrentIndexTask(index)),
+        setIdCurrentCard:(id)=>dispatch(actions.setIdCurrentCard(id))
 
 
     }
