@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './editWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
@@ -9,6 +9,7 @@ function EditWorkspace(props) {
     let [colorWorkspace, setColorWorkspace] = useState(props.workspace.workspace.color)
     let [descriptionWorkspace, setDescriptionWorkspace] = useState(props.workspace.workspace.description)
     let myWorkspace = props.workspaceToEdit.workspace;
+    const nameRequired = useRef()
 
     const changeNameWorkspace = (input) => {
         setNameWorkspace(input.target.value)
@@ -26,9 +27,17 @@ function EditWorkspace(props) {
         // myWorkspace.name = nameWorkspace
         // myWorkspace.description = descriptionWorkspace
         // myWorkspace.color = colorWorkspace
-        debugger
-        props.saveWorkspaceInServerUfterEdit(props.workspace.workspace)
-        props.closeViewDetails();
+
+        if (nameRequired.current.value) {
+
+            props.saveWorkspaceInServerUfterEdit(props.workspace.workspace)
+            props.closeViewDetails();
+        }
+        else {
+            nameRequired.current.focus()
+            var form = document.getElementById('nameRequired')
+            form.classList.add('was-validated')
+        }
     }
 
     const changeFiledInWorkspace = (input) => {
@@ -41,19 +50,24 @@ function EditWorkspace(props) {
         <>
             <div className="details d-workspace mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Workspace details</h5>
-                <div class="form-group">
+                <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
-                    <input name="name"
+                    <input name="name" ref={nameRequired} required
                         onChange={(input) => changeFiledInWorkspace(input)}
                         type="text" class="form-control" id="name"
                         value={props.workspace.workspace.name} />
+
+
+                    <div class="invalid-feedback">
+                        Please enter workspace name.
+                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control"
                         id="description" rows="2"
-                        placeholder="Write a description about your project"
+                        placeholder="Write a description about your workspace"
                         value={props.workspace.workspace.description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
