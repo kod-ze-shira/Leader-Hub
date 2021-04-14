@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
@@ -9,6 +9,7 @@ import ViewAllStatuses from '../../status/viewAllStatuses'
 import AddStatus from '../../status/addStatus'
 
 function TaskDetails(props) {
+    const nameRequired = useRef()
 
     useEffect(() => {
         props.getAllStatusesTaskForUser();
@@ -103,8 +104,19 @@ function TaskDetails(props) {
         props.createStatus(newStatus)
     }
     const saveNewTask = () => {
-        props.EditTask(editTask)
+
+        if (nameRequired.current.value) {
+            props.EditTask(editTask)
+        }
+        else {
+            nameRequired.current.focus()
+            var form = document.getElementById('nameRequired')
+            form.classList.add('was-validated')
+        }
     }
+
+
+
     const deleteTask = () => {
         props.showToast(true)
     }
@@ -125,12 +137,16 @@ function TaskDetails(props) {
                     <label>Create {task.startDate}</label>   <label>Last Update {task.dueDate}</label>
                     <br></br>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => handleChange(e)}
+                        required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"
                         value={editTaskName} />
+                    <div class="invalid-feedback">
+                        Please enter task name.
+                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>

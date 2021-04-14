@@ -103,9 +103,9 @@ export const newProject = ({ dispatch, getState }) => next => action => {
 export const editProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
-        let projectBeforeChanges = getState().public_reducer.projects[0];
+        // let projectBeforeChanges = getState().public_reducer.projects[0];
         let project = action.payload.project;
-        let projectBeforeChange = action.payload.projectBeforeChanges;
+        let projectBeforeChanges = action.payload.projectBeforeChanges;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({

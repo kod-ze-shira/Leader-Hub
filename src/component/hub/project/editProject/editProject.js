@@ -6,19 +6,19 @@ import { actions } from '../../../../redux/actions/action'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
-
+    const [projectBeforeChanges, setProjectBeforeChanges] = useState()
+    let project;
     useEffect(() => {
+        setProjectBeforeChanges({ ...props.project })
+    }, [])
 
-    }, [props.workspaces])
-
-    let project = props.project
 
     // let myDate = project.dueDate;
     // let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     // let [dueDateProject, setDueDateProject] = useState(dueDate1)
     const nameRequired = useRef()
 
-    const [projectBeforeChanges, setProjectBeforeChanges] = useState(project)
+
     const changeFiledInProject = (input) => {
         let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.project }
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
@@ -30,7 +30,6 @@ function EditProject(props) {
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
-        let projectBeforeChanges = project;
         project = props.project
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
@@ -39,9 +38,9 @@ function EditProject(props) {
 
 
         if (nameRequired.current.value) {
-
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.closeViewDetails(false)
+
         }
         else {
             nameRequired.current.focus()
@@ -54,7 +53,10 @@ function EditProject(props) {
         <>
 
             <div className="details mr-5 ml-4">
-                <h5 className="my-5 title-view-details pb-2">Project details</h5>
+                <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
+                <div class="row justify-content-between  mx-1 mb-2">
+                    <label>workspace: {props.workspace.workspace.name}</label>
+                </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeFiledInProject(e)}
@@ -107,7 +109,9 @@ export default connect(
     (state) => {
         return {
             workspaces: state.public_reducer.workspaces,
-            projectReducer: state.project_reducer.project
+            projectReducer: state.project_reducer.project,
+            workspace: state.workspace_reducer.workspace,
+
 
         }
     },

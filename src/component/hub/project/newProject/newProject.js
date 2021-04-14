@@ -132,11 +132,11 @@ function NewProject(props) {
         <>
 
             <div className="details mr-5 ml-4">
-                <h5 className="my-5 title-view-details pb-2">Add Project</h5>
-                {/* 
-                <div class="row justify-content-between  mx-1">
-    <label>workspace {}</label>   
-                    </div> */}
+                <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5>
+                <div class="row justify-content-between  mx-1 mb-2">
+                    <label>workspace: {props.workspace.workspace.name}</label>
+                </div>
+
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeNameInProject(e)}

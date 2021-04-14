@@ -38,6 +38,7 @@ border-radius: 3px;
      background: url('../../../img/Mask1.svg');
      border-left:16px solid var(--light-light-blue); 
      left:2.5vh !important ;
+     padding-left: 10px;
      /* border-left: 16px solid #44D7B6 !important;‏ */
 }
      li:focus{

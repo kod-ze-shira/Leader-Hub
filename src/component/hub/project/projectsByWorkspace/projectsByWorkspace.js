@@ -155,7 +155,7 @@ function ProjectsByWorkspace(props) {
 
                 <Table responsive className='tableProject ' >
                     <>
-                        <tbody>
+                        <tbody className="mx-3">
                             {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
                         </tbody>
                     </>
