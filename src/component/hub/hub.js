@@ -94,7 +94,7 @@ function Hub(props) {
                             <Configurator />
                         </div>
                         : null}
-                    <div className={open ? "col-10 bodyHub pr-4" : "col-12 bodyHub  px-4 "}>
+                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub"}>
                         {viewDetails ?
                             <ViewDetails
                                 closeViewDetails={() => setViewDetails(false)}
@@ -172,7 +172,7 @@ function Hub(props) {
                         />
                         : null}
 
-                    <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} />
+                    {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
                 </div>
 

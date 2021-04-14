@@ -4,12 +4,12 @@ import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
-
+import { useRef } from 'react'
 // let workspace;
 
 
 function AddWorkspace(props) {
-
+    const nameworkspae = useRef()
     useEffect(() => {
 
     }, []);
@@ -23,8 +23,20 @@ function AddWorkspace(props) {
     })
 
     function addNewWorkspace() {
-        props.addNewWorkspaceToServer(workspace)
-        props.closeViewDetails()
+
+        if (nameworkspae.current.value) {
+            props.addNewWorkspaceToServer(workspace)
+            props.closeViewDetails()
+        }
+        else {
+            nameworkspae.current.focus()
+            var form = document.getElementById('nameRequired')
+            form.classList.add('was-validated')
+        }
+        // else {
+        // document.getElementById('workspace-name').classList.add('errorNameEmpty')
+
+        // }
     }
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -33,6 +45,24 @@ function AddWorkspace(props) {
             [name]: value
         }));
     }
+    // (function () {
+    //     // 'use strict'
+
+    //     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    //     var form = document.getElementById('sevaNewWorkspace')
+
+    //     // Loop over them and prevent submission
+
+    //     form.addEventListener('click', function (event) {
+    //         if (!form.checkValidity()) {
+    //             event.preventDefault()
+    //             event.stopPropagation()
+    //         }
+
+    //         form.classList.add('was-validated')
+    //     }, false)
+    // })()
+
     return (
         <>
 
@@ -46,17 +76,21 @@ function AddWorkspace(props) {
                 onChange={handleChange}
             />
             <button className="save_canges_btn" onClick={addNewWorkspace}>save workspace</button> */}
-            <div className="details d-workspace mr-5 ml-4">
+
+            <div className="details d-workspace mr-5 ml-4" >
                 <h5 className="my-5 title-view-details pb-2">Add Workspace</h5>
-                <div class="form-group">
+                <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
-                    <input name="name"
+                    <input name="name" ref={nameworkspae} required
                         onChange={handleChange} type="text" class="form-control" id="workspace-name" />
+                    <div class="invalid-feedback">
+                        Please enter workspace name.
+                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description about your project"
+                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description about your workspace"
                         onChange={handleChange}></textarea>
                 </div>
                 <div class="form-group">
@@ -72,7 +106,7 @@ function AddWorkspace(props) {
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
-                    <button onClick={addNewWorkspace} className="save_canges_btn col-3">Save</button>
+                    <button onClick={addNewWorkspace} className="save_canges_btn col-3" id='sevaNewWorkspace'>Save</button>
                 </div>
             </div>
         </>

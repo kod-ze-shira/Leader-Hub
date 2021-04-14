@@ -21,7 +21,7 @@ function ProjectsByWorkspace(props) {
     let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
     const [valueSearch, setValueSearch] = useState(props.projectName)
-
+    const [currentProject, setCurrentProject] = useState()
     const [addOrEditProject, setAddOrEditProject] = useState(false)
 
     function getWorkspacesAwait(result) {
@@ -39,6 +39,7 @@ function ProjectsByWorkspace(props) {
         // if (props.projects.length == 0) {
         //     props.getProjectsByWorkspaceId(idWorkspace)
         // }
+
         if (!flug) {
             if (props.workspaces.length == 0) {
 
@@ -47,6 +48,7 @@ function ProjectsByWorkspace(props) {
 
                 } else {
                     if (window.location.href.indexOf('allProjects') != -1) {
+                        // setPage('allProject')
                         props.getAllWorkspaces()
                         let allProjects = []
                         for (let index = 0; index < props.workspaces.length; index++) {
@@ -66,7 +68,6 @@ function ProjectsByWorkspace(props) {
 
 
 
-    const [currentProject, setCurrentProject] = useState()
 
     function openEditProject(project) {
         setCurrentProject(project)
@@ -105,22 +106,22 @@ function ProjectsByWorkspace(props) {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
 
-    function openSearchProject() {
-        document.getElementById('inputSearchProjects').value = valueSearch
+    // function openSearchProject() {
+    //     document.getElementById('inputSearchProjects').value = valueSearch
 
-    }
+    // }
     function searchProject() {
         setValueSearch(document.getElementById('inputSearchProjects').value)
     }
-    function closeInputSearch() {
-        // $("#inputSearchProjects").trigger("focusout");
+    // function closeInputSearch() {
+    //     // $("#inputSearchProjects").trigger("focusout");
 
-        setTimeout(() => {
-            if (!valueSearch)
-                document.getElementById('inputSearchProjects').value = ''
-        }, 1700);
+    //     setTimeout(() => {
+    //         if (!valueSearch)
+    //             document.getElementById('inputSearchProjects').value = ''
+    //     }, 1700);
 
-    }
+    // }
 
 
 
@@ -138,18 +139,15 @@ function ProjectsByWorkspace(props) {
                         <div id=''>
                             <span id='searchProject' >
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
-                                    onMouseLeave={() => closeInputSearch()}
                                     onChange={() => searchProject()}
-                                    onMouseOver={() => openSearchProject()}
-                                    style={valueSearch ? { 'width': '400px' } : null}
-
+                                    placeholder='Search project...'
                                 />
                             </span>
 
 
-                            <button className='buttonNewProject'
+                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
                                 onClick={() => openViewDitailsAddProject()}
-                            >+ New Project</button>
+                            >+ New Project</button> : null}
                         </div>
                     </div>
 

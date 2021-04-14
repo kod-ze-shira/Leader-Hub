@@ -206,15 +206,15 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-      if (result.status == "401") {
-        result.routes ?
-           window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-          window.location.assign(`https://accounts.codes/hub/login`)
-       
-        reject(false)
-  
-      }
-      resolve(true)
-  
+        if (result.status == "401") {
+            result.routes ?
+                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
     })
-  }
+}

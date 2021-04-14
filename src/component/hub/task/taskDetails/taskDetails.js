@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+
+import React, { useEffect, useState } from 'react'
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
@@ -16,19 +17,19 @@ function TaskDetails(props) {
     }, [props.cards])
 
     // useEffect(() => {
-    //     let status = [];
-    //     // console.log(props.task.milestones)
+    // let status = [];
+    // // console.log(props.task.milestones)
 
-    //     props.statuses.length && props.statuses.forEach(st => {
-    //         let stTemp = {
-    //             "name": st.statusName,
-    //             "value": st.statusName,
-    //             "label": st.statusName
-    //         }
-    //         status.push(stTemp);
-    //     });
+    // props.statuses.length && props.statuses.forEach(st => {
+    // let stTemp = {
+    // "name": st.statusName,
+    // "value": st.statusName,
+    // "label": st.statusName
+    // }
+    // status.push(stTemp);
+    // });
 
-    //     setStatusTemp(status)
+    // setStatusTemp(status)
     // }, [props.statuses])
 
     const [editTaskName, setEditTaskName] = useState(props.task.name)
@@ -77,8 +78,8 @@ function TaskDetails(props) {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             }
             // if (name == "milestones") {
-            //     setMilestonesValue(!milestonesValue)
-            //     value = milestonesValue
+            // setMilestonesValue(!milestonesValue)
+            // value = milestonesValue
             // }
         }
         setEditTask(prevState => ({
@@ -127,8 +128,8 @@ function TaskDetails(props) {
         <>
             <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
-                <div className="row justify-content-between  mx-1" >
-                    <label>Create {props.task.startDate}</label>   <label>Last Update {props.task.dueDate}</label>
+                <div className="row justify-content-between mx-1" >
+                    <label>Create {props.task.startDate}</label> <label>Last Update {props.task.dueDate}</label>
                     <br></br>
                 </div>
                 <div class="form-group">
@@ -141,7 +142,7 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="2"
+                        id="descriptionProject" rows="3"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
                         value={props.task.description}>
@@ -149,7 +150,7 @@ function TaskDetails(props) {
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
-                        <label for="startDate">Due Date</label>
+                        <label for="startDate">Start Date</label>
                         <input
                             className="form-control"
                             name="startDate"
@@ -174,29 +175,28 @@ function TaskDetails(props) {
                 </div>
                 <div className="row justify-content-between">
                     {/* <Select
-                        onChange={(e) => handleChange(e)}
-                        name="status"
-                        options={statusTemp}
-                        placeholder={task.status}
-                        className="col-5"
-                    /> */}
+ onChange={(e) => handleChange(e)}
+ name="status"
+ options={statusTemp}
+ placeholder={task.status}
+ className="col-5"
+ /> */}
                     <div class="dropdown col-5">
 
-                        <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {props.statuses.length ? props.statuses.map((status, index) => (
-                                <>
-                                    <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
-                                </>
-
-                            )) : null}
-                        </button>
+                        {/* <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ {props.statuses.length ? props.statuses.map((status, index) => (
+ <>
+ <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
+ </>
+ )) : null}
+ </button> */}
                         <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
                                     <ViewAllStatuses changeStatus={changeStatusById} status={status} />
                                 )) : null}
                                 {openPopUp ?
-                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
+                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
                                 {openPopUpToAdd ? <AddStatus task={task} /> : null}
                             </div>
@@ -204,31 +204,45 @@ function TaskDetails(props) {
                         </div>
                     </div>
                 </div>
+                <div className="row mb-3">
+                    <div className="col-7">
+                        <span>Mark as milestone</span>
+                        <label class="switch ml-2 ">
+                            <input type="checkbox"
+                                checked={milestonesValue ? "checked" : ''}
+                                value={props.task.milestone} />
+                            <span class="slider round"
+                                onChange={(e) => changeFiledInTask(e)}
+                            ></span>
+                        </label>
+                    </div>
+                </div>
 
-                <label className="check-task py-2 mt-2 " for="milestones">
+
+                {/* <label className="check-task py-2 mt-2 " for="milestones">
                     <input
                         type="checkbox"
                         checked={milestonesValue ? "checked" : ''}
                         value={milestonesValue}
                     ></input>
-                    <span className="checkmark  ml-0"
+                    <span className="checkmark ml-0"
                         onclick={(e) => changeMilstone(e)}></span>
                     <p className="pl-4 mils">Milestones</p>
-                </label>
-
+                </label> */}
+                {/* 
                 <label for="milestones" className="check-task py-2">
                     <input
                         checked={milestonesValue ? "checked" : ''}
                         type="checkbox" id="milestones" name="milestones"
                         onClick={(e) => changeMilstone(e)}
                         value={milestonesValue}></input>
-                    {/* Is Milestones */}
-                </label>
+                    Is Milestones
+                </label> */}
 
-                <div className="row justify-content-between  mx-1 btns-in-view-details-task">
+                <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                </button>
+ </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
