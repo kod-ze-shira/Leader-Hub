@@ -32,6 +32,7 @@ import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
+import Gantt from '../hub/gantt/gantt'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -46,6 +47,7 @@ function Hub(props) {
         setShowToastDelete(true)
     }
     const [disableBin, setDisableBin] = useState(false)
+
     const deleteObject = () => {
         setShowToastDelete(false)
         props['remove' + objectToDelete.type](objectToDelete.object._id)
@@ -56,6 +58,7 @@ function Hub(props) {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
+        setDisableBin(false)
         setShowToastDelete(value)
         if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
             $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
@@ -93,7 +96,7 @@ function Hub(props) {
                             <Configurator />
                         </div>
                         : null}
-                    <div className={open ? "col-10 bodyHub  pr-4" : "col-12 bodyHub  px-4 "}>
+                    <div className={open ? "col-10 bodyHub pr-4" : "col-12 bodyHub  px-4 "}>
                         {viewDetails ?
                             <ViewDetails
                                 closeViewDetails={() => setViewDetails(false)}
@@ -105,6 +108,10 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </ProtectedRoute>
+
+                            <ProtectedRoute path={"/:userName/gantt"}>
+                                <Gantt />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
@@ -123,14 +130,14 @@ function Hub(props) {
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
-
                             <ProtectedRoute path={"/:userName/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName"}>
-                                <Body disableBin={false} showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <Body disableBin={disableBin} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
+
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
                                     <UploadFile />
@@ -146,9 +153,6 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
-
-                    <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} />
-                    {/* setShowViewDitails={} */}
                 </div>
 
             </Router >

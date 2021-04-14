@@ -30,7 +30,7 @@ const publicData = {
         state.workspaces = action.payload;
     },
     setWorkspaceByFiled(state, action) {
-        debugger
+
         state.workspaces.forEach((workspace, index) => {
             if (workspace.workspace._id == action.payload.workspace.workspace._id) {
                 state.workspaces[index].workspace[action.payload.nameFiled] = action.payload.value
@@ -91,7 +91,6 @@ const publicData = {
         )
     },
     addProjectToProjects(state, action) {
-        debugger;
         let workspaceId = action.payload.project.workspace
         for (let i = 0; i < state.workspaces.length; i++) {
             if (state.workspaces[i].workspace._id == workspaceId) {
@@ -246,7 +245,12 @@ const publicData = {
             }
         })
     },
-
+    // setWorkspaceByFiledFromWorkspaces(state, action) {
+    //     console.log("workspace", action.payload);
+    //     for (let index = 0; index < workspaces.length; index++) {  
+    //         let a = state.workspaces[index].workspace[action.payload.nameFiled]    
+    //     }      
+    // },
 
 }
 

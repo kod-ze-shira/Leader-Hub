@@ -17,6 +17,8 @@ border-left: 9px solid  #329A80  ;
 .close{
     cursor: pointer;
     font-weight: 100;
+}
 
-    
+.errorNameEmpty{
+    border-bottom: 1px solid red !important;
 }

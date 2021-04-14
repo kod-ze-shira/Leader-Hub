@@ -32,12 +32,12 @@ function CardsPage(props) {
             case 'gantt':
                 return <GanttDesign />
             default:
-                // return <Tabs showToast={showToast} projectId={props.project._id} />
-                return <ProjectPlatform showToast={showToast} flag={flag} />
+                return <Tabs showToast={showToast} projectId={props.project._id} />
+                // return <ProjectPlatform showToast={showToast} flag={flag} />
         }
     }
     return (
-        <div className="mt-5">
+        <div className="mt-4">
             <SelectHeader flag={changeFlag} from={howToPresent} menue={true} />
             {renderSwitch()}
 

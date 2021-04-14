@@ -14,7 +14,6 @@ function AllWorkspaces(props) {
     const refToDeleteToast = useRef(null);
  
      
-
     useEffect(() => {
         props.getAllWorkspaces()
     }, [props.bin]);
@@ -30,11 +29,11 @@ function AllWorkspaces(props) {
         props.showToast(obj)
     }
 
-    const renderedListWorkspaces = props.workspaces.map(todo => {
+    const renderedListWorkspaces = props.workspaces.map(workspace => {
 
         return <ViewWorkspaceList
         setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
-         key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}
+         key={workspace.workspace._id} workspace={workspace} editWorkspace={openEditWorkspace}
          bin={disableBin}
          />
     })

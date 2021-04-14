@@ -51,8 +51,9 @@ function ViewCardsTabs(props) {
         props.setCard(props.cardFromMap)
     }
     const updateCardName = (event) => {
-        setEditCardName(event.target.value)
 
+
+        setEditCardName(event.target.value)
     }
     const editCard = (event) => {
         let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
@@ -83,6 +84,16 @@ function ViewCardsTabs(props) {
 
         }
     };
+    function enterK(event) {
+
+
+        if (event.key === 'Enter') {
+            debugger
+            editCard()
+            document.getElementById("input-card-name").blur();
+        }
+
+    }
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
@@ -112,12 +123,10 @@ function ViewCardsTabs(props) {
                                                 value={editCardName}
                                                 onChange={updateCardName}
                                                 onBlur={() => editCard()}
-
                                                 title={editCardName}
                                                 onKeyPress={event => {
-                                                    if (event.key === 'Enter') {
-                                                        editCard()
-                                                    }
+                                                    enterK(event)
+
                                                 }}
                                             >
                                             </input>

@@ -1,7 +1,8 @@
 import $ from "jquery"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
+
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
@@ -15,6 +16,7 @@ function EditProject(props) {
     // let myDate = project.dueDate;
     // let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     // let [dueDateProject, setDueDateProject] = useState(dueDate1)
+    const nameRequired = useRef()
 
     const [projectBeforeChanges, setProjectBeforeChanges] = useState(project)
     const changeFiledInProject = (input) => {
@@ -34,12 +36,17 @@ function EditProject(props) {
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
         // project.dueDate = res
 
-        if (!project.name)
-            $(`#nameProject`).css({ 'border-bottom': 'red solid 1px' })
-        else {
+
+
+        if (nameRequired.current.value) {
+
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.closeViewDetails(false)
-
+        }
+        else {
+            nameRequired.current.focus()
+            var form = document.getElementById('nameRequired')
+            form.classList.add('was-validated')
         }
     }
 
@@ -48,11 +55,14 @@ function EditProject(props) {
 
             <div className="details mr-5 ml-4">
                 <h5 className="my-5 title-view-details pb-2">Project details</h5>
-                <div class="form-group">
+                <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeFiledInProject(e)}
-                        id='nameProject' type="text" class="form-control"
+                        type="text" class="form-control" required ref={nameRequired}
                         value={props.project.name} placeholder='Write a name' />
+                    <div class="invalid-feedback">
+                        Please enter project name.
+                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
