@@ -22,7 +22,7 @@ export default function ToastDelete1(props) {
             <animated.div style={scrolling}>
                 <Toast className="toast_delete"
                     onClose={props.toOnClose}
-                    delay={4000} autohide>
+                    delay={20000} autohide>
 
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>
                         <div className=" ">{props.name}</div>

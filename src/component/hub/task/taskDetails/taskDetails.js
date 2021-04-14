@@ -104,6 +104,7 @@ function TaskDetails(props) {
         props.createStatus(newStatus)
     }
     const saveNewTask = () => {
+        props.closeViewDetails(false)
         console.log(props.task);
         props.EditTask(props.task)
     }
@@ -141,7 +142,7 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="2"
+                        id="descriptionProject" rows="5"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
                         value={props.task.description}>

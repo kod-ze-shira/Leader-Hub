@@ -17,27 +17,34 @@ function AllWorkspaces(props) {
 
     useEffect(() => {
         props.getAllWorkspaces()
-    }, []);
+    }, [props.bin]);
 
     const [list, setlist] = useState(false);
     const [grid, setgrid] = useState(true);
     const [showAddWorkspace, setShowWorkspace] = useState(false)
     const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
-    
+    const [disableBin,setDisableBin] = useState(props.bin)
+
+    const deleteWorkspace=(obj)=>{
+        setDisableBin(true)
+        props.showToast(obj)
+    }
 
     const renderedListWorkspaces = props.workspaces.map(todo => {
 
         return <ViewWorkspaceList
-        setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-         key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
+        setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
+         key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}
+         bin={disableBin}
+         />
     })
 
-    const 
-    renderedGridWorkspaces = props.workspaces.map(todo => {
-        console.log(todo)
+    const renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
-        setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-        key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}/>
+        setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
+        key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}
+        bin={disableBin}
+         />
         })
         const [workspaceToEdit,setWorspaceToEdit]=useState()
 
@@ -133,17 +140,9 @@ return (
                         <ViewDetails closeViewDetails={() => setShowWorkspace(false)}
                          from={addOrEditWorkspace} workspace={workspaceToEdit}/> : null
                     }
-                    {/* {showToastDelete ?
-                        <ToastDelete ref={refToDeleteToast}
-                            toOnClose={deleteWorkspace}
-                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={props.workspaceDeleted.name} 
-                            /> 
-                             : null}  */}
         </>
 
     )
-
 }
 const mapStateToProps = (state) => {
 

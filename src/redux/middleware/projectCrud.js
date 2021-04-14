@@ -115,7 +115,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ 'project': '' }),
+            data: JSON.stringify({ 'project': project }),
             success: function (data) {
                 console.log("success")
                 console.log("data", data.result);

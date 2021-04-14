@@ -26,7 +26,7 @@ function ViewWorkspaceList(props) {
 
     function editWorkspace() {
         props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        props.editWorkspace()
+        props.editWorkspace(workspace)
     }
     function delete_workspace() {
         $(`#${workspace.workspace._id}`).css("display", "none")
@@ -92,10 +92,11 @@ function ViewWorkspaceList(props) {
                                 <img src={duplicate}></img>
                             </div>
                             <div className="ml-1 stripe">|</div>
-                            <div
+                            <button
+                                disabled={props.bin}
                                 className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
                                 <img src={bin}></img>
-                            </div>
+                            </button>
                         </div>
                     </div>
 

@@ -56,7 +56,7 @@ function EditProject(props) {
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description about your project"
+                    <textarea class="form-control" name="description" id="descriptionProject" rows="5" placeholder="Write a description about your project"
                         onChange={(e) => changeFiledInProject(e)} value={props.project.description}></textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -82,7 +82,7 @@ function EditProject(props) {
                         />
                     </div>
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-project">
+                <div className="row justify-content-between mt-5  mx-1 btns-in-view-details-project">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
