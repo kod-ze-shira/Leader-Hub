@@ -13,8 +13,8 @@ const initialState = {
     statuses: [],
     milestones: [],
     isConfiguratorOpen: "false",
-    indexCurrentTask:0,
-    idCurrentCard:0
+    indexCurrentTask: 0,
+    idCurrentCard: 0
 }
 
 const publicData = {
@@ -251,7 +251,7 @@ const publicData = {
     setTaskByFiledFromTasksTry(state, action) {
         console.log("task", action.payload.task);
         state.cards.forEach((card, index1) => {
-            if (card._id ==state.idCurrentCard) {
+            if (card._id == state.idCurrentCard) {
                 card.tasks.forEach((task, index2) => {
                     if (task._id == state.indexCurrentTask) {
                         state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
@@ -269,7 +269,7 @@ const publicData = {
         //                 task[action.payload.nameFiled]=action.payload.value
         //                 console.log(task);
         //             }
-                    
+
         //         })
         //     }
         // })
@@ -280,17 +280,17 @@ const publicData = {
         //                 console.log(task);
         //     }
         //    })
-            
-                        // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-                        // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
-                        // console.log(a);        
-            
+
+        // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
+        // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
+        // console.log(a);        
+
     },
-    setCurrentIndexTask(state,action){
-        state.indexCurrentTask=action.payload
+    setCurrentIndexTask(state, action) {
+        state.indexCurrentTask = action.payload
     },
-    setIdCurrentCard(state,action){
-        state.idCurrentCard=action.payload
+    setIdCurrentCard(state, action) {
+        state.idCurrentCard = action.payload
     }
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
