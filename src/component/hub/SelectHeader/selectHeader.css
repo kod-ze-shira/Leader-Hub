@@ -26,10 +26,11 @@
 .s-header div{
 margin-right: 0px;
 }
-
-/* #tabsAndList{
-        margin-bottom: 10px;
-} */
+#tabsAndList{
+        padding-bottom: 8px;
+}
+.listInSelect, .tabsInSelect{
+        border-bottom: 2px solid rgb(210, 200, 200) !important}
 
 /* .listInSelect .MuiTab-wrapper ,
  .tabsInSelect  .MuiTab-wrapper{
