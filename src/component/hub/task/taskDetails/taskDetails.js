@@ -216,8 +216,6 @@ function TaskDetails(props) {
                             ></span>
                         </label>
                     </div>
-                </div>
-
 
                 {/* <label className="check-task py-2 mt-2 " for="milestones">
                     <input
