@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 .s-header{
-   
+        margin-bottom: 0.7rem;
         /* width:70vw; */
         /* height:10vh; */
         margin-top: 0;
-        padding-top: 1.5vh;
-        padding-bottom: 1.5vh;
+        padding-top: 0.7vh;
+        padding-bottom: 0.7vh;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         border-radius: 12px;
         opacity: 1;
+        box-shadow: 0px 3px 6px #00000029;
+
         
 }
+
 .select__control{
         border:none !important;
 }

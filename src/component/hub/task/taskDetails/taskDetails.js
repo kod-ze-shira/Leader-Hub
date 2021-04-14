@@ -141,7 +141,7 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="2"
+                        id="descriptionProject" rows="3"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
                         value={props.task.description}>
@@ -149,7 +149,7 @@ function TaskDetails(props) {
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
-                        <label for="startDate">Due Date</label>
+                        <label for="startDate">Start Date</label>
                         <input
                             className="form-control"
                             name="startDate"
@@ -182,21 +182,21 @@ function TaskDetails(props) {
                     /> */}
                     <div class="dropdown col-5">
 
-                        <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {/* <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {props.statuses.length ? props.statuses.map((status, index) => (
                                 <>
                                     <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
                                 </>
 
                             )) : null}
-                        </button>
+                        </button> */}
                         <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
                                     <ViewAllStatuses changeStatus={changeStatusById} status={status} />
                                 )) : null}
                                 {openPopUp ?
-                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Label</button>
+                                    <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
                                 {openPopUpToAdd ? <AddStatus task={task} /> : null}
                             </div>

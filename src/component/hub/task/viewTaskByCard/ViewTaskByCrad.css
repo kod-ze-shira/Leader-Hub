@@ -78,6 +78,15 @@
   }
   .view-details-btn{
     text-align: right!important;
+   
+  }
+  .view-details-btn>button:hover{
+    background-color: #E8EAEC;
+    border-radius: 5px;
+    margin-right: 1vh;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+
   }
   /* Style the checkmark/indicator */
   .check-task .checkmark:after {
@@ -137,6 +146,9 @@
     font-weight: 400;
 padding: 4px;
   }
+ .col-add-task{
+   width: 5vw;
+ }
   .status-task-done{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
     background:#D9F7F0 0% 0% no-repeat padding-box;

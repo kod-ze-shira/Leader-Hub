@@ -25,7 +25,7 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
     // return new Promise((resolve, reject) => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getFullWorkspacesForUser"
+        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
             {
                 method: 'GET',
@@ -38,7 +38,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
             .then((result) => {
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setWorkspaces(result.userWorkspaces))
+                    dispatch(actions.setWorkspaces(result.workspaces))
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projectList)
@@ -206,15 +206,15 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-      if (result.status == "401") {
-        result.routes ?
-           window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-          window.location.assign(`https://accounts.codes/hub/login`)
-       
-        reject(false)
-  
-      }
-      resolve(true)
-  
+        if (result.status == "401") {
+            result.routes ?
+                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
     })
-  }
+}

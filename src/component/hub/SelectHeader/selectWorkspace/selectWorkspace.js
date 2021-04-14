@@ -4,14 +4,19 @@ import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
-import Select from 'react-select';
+// import Select from 'react-select';
 import LetterLogo from '../../logo/letterLogo'
 import './selectWorkspace.css'
+import Select, { components } from "react-select";
+
+const Input = props => <components.Input {...props} maxLength={5} />;
+const maxLength = 5;
 
 function SelectWorkspace(props) {
 
 
     useEffect(() => {
+        console.log("Input", Input);
     }, [props.workspace])
 
     //to change the workspace that user selected
@@ -68,7 +73,10 @@ function SelectWorkspace(props) {
                     options={viewWorkspacesList}
                     placeholder={props.workspace.workspace ? props.workspace.workspace.name : null}
                     styles={style}
-
+                    components={{ Input }}
+                    // onInputChange={inputValue =>
+                    //     (inputValue.length <= maxLength ? inputValue : inputValue.substr(0, maxLength))
+                    // }
                 />
             </div>
         </>
