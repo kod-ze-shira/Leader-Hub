@@ -36,7 +36,8 @@ function ViewCards(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "", status: props.statuses[0]._id, startDate: today, dueDate: today, "card": props.card._id }
+            // props.statuses[0]._id
+            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -120,14 +121,14 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className=" col-3  " >
+                    <div className="col-5" >
                         <div className="wrap-triangle">
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
                         </div>
                         <input
-                            autoFocus="true"
+                            // autoFocus="true"
                             className="ml-3 show-card"
                             value={editCardName}
                             onChange={updateCardName}
@@ -139,11 +140,8 @@ function ViewCards(props) {
                             }}
                         >
                         </input>
-                        <a>
-                            <button className="new-task" onClick={addTask}>+</button>
-                        </a>
+
                     </div>
-                    <p className=" col-2"></p>
                     <Button className="more col-1 "
                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         . . .
@@ -160,9 +158,12 @@ function ViewCards(props) {
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
                     {/* <p className="col">Team</p> */}
-                    <p className="col">Label</p>
+                    <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
+                    <p className="col-add-task"><a>
+                        <button className="new-task" onClick={addTask}>+</button>
+                    </a></p>
                     {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>
                 <p className="border-left col">Due Date</p> */}
@@ -175,7 +176,9 @@ function ViewCards(props) {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}>
                                     {props.cardFromMap.tasks.map((task, index) => (
-                                        <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)} key={task._id} task={task} index={index} />
+                                        <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)} 
+                                        key={task._id} task={task}
+                                         index={index} idTask={task._id} idCard={props.cardFromMap._id}/>
                                     ))}
                                     {provided.placeholder}
                                 </div>

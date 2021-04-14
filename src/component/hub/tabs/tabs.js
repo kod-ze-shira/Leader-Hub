@@ -21,12 +21,12 @@ function Tabs(props) {
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [taskToDetails, setTaskToDetails] = useState("")
-    if (!showInput) {
-        if (props.focusInputCard) {
-            setShowInput(true)
-            showInputToAddCard()
-        }
-    }
+    // if (!showInput) {
+    //     if (props.focusInputCard) {
+    //         setShowInput(true)
+    //         showInputToAddCard()
+    //     }
+    // }
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
@@ -68,8 +68,8 @@ function Tabs(props) {
         setShowInput(!showInput)
         setShowHeader(!showHeader)
         // document.getElementById('newCardInput').style.display = 'block'
-        $('#newCardInput').removeClass('noneNewCard')
-        $('#newCardInput').addClass('blockNewCard')
+        // $('#newCardInput').removeClass('noneNewCard')
+        // $('#newCardInput').addClass('blockNewCard')
 
 
     }
@@ -115,17 +115,18 @@ function Tabs(props) {
                                         <div className="col-3 mt-4" >
                                             <div className="view-cards-tabs mt-1" >
                                                 <div class="card " >
-                                                    <div id='newCardInput' class="container noneNewCard" >
-                                                        {showInput ?
-                                                            <div
-                                                                class="card-header row">
-                                                                <input autoFocus="true" placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
-                                                                    if (event.key === 'Enter') {
-                                                                        newCard()
-                                                                    }
-                                                                }}></input>
-                                                            </div>
-                                                            : null}
+                                                    <div id='newCardInput' class="container" >
+                                                        {/* {showInput ? */}
+                                                        <div
+                                                            class="card-header row">
+                                                                {/* autoFocus="true" */}
+                                                            <input  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                                if (event.key === 'Enter') {
+                                                                    newCard()
+                                                                }
+                                                            }}></input>
+                                                        </div>
+                                                        {/* : null} */}
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
                                                         <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a>
