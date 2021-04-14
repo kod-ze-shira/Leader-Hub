@@ -37,7 +37,7 @@ function CardsPage(props) {
         }
     }
     return (
-        <div className="mt-4">
+        <div className="mt-3">
             <SelectHeader flag={changeFlag} from={howToPresent} menue={true} />
             {renderSwitch()}
 
