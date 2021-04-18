@@ -13,8 +13,9 @@ const initialState = {
     statuses: [],
     milestones: [],
     isConfiguratorOpen: "false",
-    indexCurrentTask: 0,
-    idCurrentCard: 0
+    indexCurrentTask:0,
+    idCurrentCard:0,
+    indexOfWorkspace:0
 }
 
 const publicData = {
@@ -32,12 +33,13 @@ const publicData = {
         state.workspaces = action.payload;
     },
     setWorkspaceByFiled(state, action) {
+        state.workspaces[state.indexOfWorkspace].workspace[action.payload.nameFiled] = action.payload.value
 
-        state.workspaces.forEach((workspace, index) => {
-            if (workspace.workspace._id == action.payload.workspace.workspace._id) {
-                state.workspaces[index].workspace[action.payload.nameFiled] = action.payload.value
-            }
-        })
+        // state.workspaces.forEach((workspace, index) => {
+        //     if (workspace.workspace._id == action.payload.workspace.workspace._id) {
+        //         state.workspaces[index].workspace[action.payload.nameFiled] = action.payload.value
+        //     }
+        // })
     },
     setProjectByFiledFromWorkspace(state, action) {
         state.workspaces.forEach((workspace, index1) => {
@@ -289,8 +291,11 @@ const publicData = {
     setCurrentIndexTask(state, action) {
         state.indexCurrentTask = action.payload
     },
-    setIdCurrentCard(state, action) {
-        state.idCurrentCard = action.payload
+    setIdCurrentCard(state,action){
+        state.idCurrentCard=action.payload
+    },
+    saveIndexOfWorkspaceInRedux(state,action){
+        state.indexOfWorkspace=action.payload
     }
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
