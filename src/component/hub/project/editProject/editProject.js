@@ -60,17 +60,12 @@ function EditProject(props) {
         }
     }
 
-    function closeViewDitails() {
-        props.setProjectInWorkspace({ "project": projectBeforeChanges })
-        props.closeViewDetails(false)
 
-    }
 
     return (
         <>
 
             <div className="details mr-5 ml-4">
-                <button onClick={() => closeViewDitails()} >CLOSE</button>
                 <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
                 <div class="row justify-content-between  mx-1 mb-2">
                     <label>workspace: {props.workspace.workspace.name}</label>
