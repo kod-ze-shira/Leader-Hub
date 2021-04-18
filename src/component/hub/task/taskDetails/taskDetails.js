@@ -14,8 +14,8 @@ function TaskDetails(props) {
 
     useEffect(() => {
         console.log(props);
-        // props.getAllStatusesTaskForUser();
-    }, [props.cards])
+        props.getAllStatusesTaskForUser();
+    }, [props.cards,props.statuses])
 
     // useEffect(() => {
     // let status = [];

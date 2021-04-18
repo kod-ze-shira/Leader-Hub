@@ -5,16 +5,27 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
     useEffect(() => {
+        debugger
+        console.log(props.workspaces[props.indexOfWorkspace])
+        console.log(props.indexOfWorkspace)
 
     }, [props.workspaces])
 
+
+    const [workspaceBeforeChanges] = useState({ ...props.workspace.workspace })
+
     const nameRequired = useRef()
+    useEffect(() => {
+        props.objectBeforeChanges({ 'type': 'workspace', 'workspace': workspaceBeforeChanges })
+    }, [props.workspaces])
+
+
 
     function saveEdit() {
 
         if (nameRequired.current.value) {
-
-            props.saveWorkspaceInServerUfterEdit(props.workspace.workspace)
+            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
+            props.objectBeforeChanges(null)
             props.closeViewDetails();
         }
         else {
@@ -25,9 +36,9 @@ function EditWorkspace(props) {
     }
 
     const changeFiledInWorkspace = (input) => {
-        let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value, "workspace": props.workspace }
+        let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
-        props.workspace.workspace[input.target.name] = input.target.value
+        // props.workspace.workspace[input.target.name] = input.target.value
     }
 
     return (
@@ -39,7 +50,9 @@ function EditWorkspace(props) {
                     <input name="name" ref={nameRequired} required
                         onChange={(input) => changeFiledInWorkspace(input)}
                         type="text" class="form-control" id="name"
-                        value={props.workspace.workspace.name} />
+                    // value={props.workspace.workspace.name} 
+                    value={props.workspaces[props.indexOfWorkspace].workspace.name}
+                    />
 
 
                     <div class="invalid-feedback">
@@ -50,9 +63,11 @@ function EditWorkspace(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control"
-                        id="description" rows="5"
-                        placeholder="Write a description about your project"
-                        value={props.workspace.workspace.description}
+                        id="description" rows="2"
+                        placeholder="Write a description about your workspace"
+                        // value={props.workspace.workspace.description}
+                        name="description"
+                        // value={props.workspaces[props.indexOfWorkspace].workspace.description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">
@@ -62,7 +77,8 @@ function EditWorkspace(props) {
                         styles="height: 50px"
                         type="color"
                         id='colorProject'
-                        value={props.workspace.workspace.color}
+                        // value={props.workspaces[props.indexOfWorkspace].workspace.color}
+                        // value={props.workspace.workspace.color}
                         onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
                 <div className="row justify-content-between mt-5  mx-1 btns-in-view-details-workspace ">
@@ -79,8 +95,9 @@ export default connect(
     (state) => {
         return {
             // workspace: state.workspace_reducer.workspace,
-            workspaceToEdit: state.workspace_reducer.workspace,
-
+            workspaces: state.public_reducer.workspaces,
+            // workspaceToEdit: state.workspace_reducer.workspace,
+            indexOfWorkspace: state.public_reducer.indexOfWorkspace
         }
     },
 

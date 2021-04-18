@@ -10,10 +10,13 @@ import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
-    useEffect(() => {
 
-    }, [props.bin])
+    const [indexWorkspace, setIndexWorkspace] = useState()
+
     const workspace = props.workspace
+    useEffect(() => {
+        setIndexWorkspace(props.index)
+    }, [props.workspaces])
 
     const routeToProject = () => {
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
@@ -23,8 +26,10 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
     }
     function editWorkspace() {
-        props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        // props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        props.saveIndexOfWorkspaceInRedux(indexWorkspace)
         props.editWorkspace(workspace)
+
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
@@ -95,7 +100,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
     }
 
 }

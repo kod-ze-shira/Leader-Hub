@@ -47,27 +47,6 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     // })
     return next(action);
 }
-export const getFullWorkspacesForUser = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'GET_FULL_WORKSPACES_FOR_USER') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getFullWorkspacesForUser"
-        fetch(urlData,
-            {
-                method: 'GET',
-                headers: { 'authorization': getState().public_reducer.tokenFromCookies }
-            })
-            .then((res) => {
-                console.log("res11111", res)
-                return res.json();
-            })
-            .then((result) => {
-                console.log("res", result)
-                checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setWorkspaces(result.workspaces))
-                })
-            })
-    }
-    return next(action);
-}
 
 
 export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
@@ -106,7 +85,8 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
 
-        let workspace = { 'workspace': getState().workspace_reducer.workspace.workspace };
+        let workspaceBeforeChanges = action.payload.workspaceBeforeChanges
+        let workspace = { 'workspace': getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].workspace };
 
         // delete workspace.workspace.projects
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
@@ -125,6 +105,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
+                    dispatch(actions.setWorkspaceBeforeChanges({ 'workspace': workspaceBeforeChanges }))
                 })
             }
         });

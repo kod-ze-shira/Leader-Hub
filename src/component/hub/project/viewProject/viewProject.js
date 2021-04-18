@@ -9,6 +9,7 @@ import { withRouter } from 'react-router-dom';
 // import { ProgressBar } from 'react-bootstrap';
 import TeamView from '../../teamView/teamView'
 import $ from 'jquery'
+import { useEffect } from 'react';
 
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
@@ -17,6 +18,7 @@ function ViewProject(props) {
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
+
     function detailsProject() {
         set_getProjectById(false);
     }
@@ -134,7 +136,8 @@ const mapStateToProps = (state) => {
         // project: state.project_reducer.project,
         projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {

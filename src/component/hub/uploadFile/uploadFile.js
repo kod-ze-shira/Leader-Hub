@@ -47,8 +47,6 @@ function UploadFile(props) {
             />
             <button onClick={saveFiles}>save</button>
             <button onClick={() => props.getFiles()}>get</button>
-
-
         </div>
     )
 }

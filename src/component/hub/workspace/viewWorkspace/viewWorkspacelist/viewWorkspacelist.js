@@ -14,7 +14,9 @@ function ViewWorkspaceList(props) {
     const { workspace } = props
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [edit, setEdit] = useState(false);
-
+    
+    useEffect(() => {
+    }, [props.workspaces])
 
 
     const routeToProject = () => {
