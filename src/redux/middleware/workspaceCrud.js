@@ -109,8 +109,8 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
 
-        let workspace = { 'workspace': getState().workspace_reducer.workspace.workspace };
-
+        let workspace = { 'workspace': action.payload.workspace };
+        let workspaceBeforeChanges = action.payload.workspaceBeforeChanges
         // delete workspace.workspace.projects
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
@@ -128,6 +128,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
+                    dispatch(actions.setWorkspaceBeforeChanges({ 'workspace': workspaceBeforeChanges }))
                 })
             }
         });

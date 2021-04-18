@@ -13,8 +13,8 @@ const initialState = {
     statuses: [],
     milestones: [],
     isConfiguratorOpen: "false",
-    indexCurrentTask:0,
-    idCurrentCard:0
+    indexCurrentTask: 0,
+    idCurrentCard: 0
 }
 
 const publicData = {
@@ -39,6 +39,15 @@ const publicData = {
             }
         })
     },
+    setWorkspaceBeforeChanges(state, action) {
+
+        state.workspaces.forEach((workspace, index) => {
+            if (workspace.workspace._id == action.payload.workspace._id) {
+                state.workspaces[index].workspace = action.payload.workspace
+            }
+        })
+    },
+
     setProjectByFiledFromWorkspace(state, action) {
         state.workspaces.forEach((workspace, index1) => {
             if (workspace.workspace._id == action.payload.project.workspace) {
@@ -53,12 +62,13 @@ const publicData = {
         })
     },
     setProjectInWorkspace(state, action) {
+
         state.workspaces.forEach((workspace, index1) => {
             if (workspace.workspace._id == action.payload.project.workspace) {
                 workspace.projectList.forEach((project, index2) => {
                     if (project.project._id == action.payload.project._id) {
                         state.workspaces[index1].projectList[index2].project = action.payload.project
-
+                        console.log(state.workspaces[index1].projectList[index2].project)
                     }
                 })
             }
@@ -93,7 +103,7 @@ const publicData = {
         )
     },
     addProjectToProjects(state, action) {
-        debugger;
+
         let workspaceId = action.payload.project.workspace
         for (let i = 0; i < state.workspaces.length; i++) {
             if (state.workspaces[i].workspace._id == workspaceId) {
@@ -251,7 +261,7 @@ const publicData = {
     setTaskByFiledFromTasksTry(state, action) {
         console.log("task", action.payload.task);
         state.cards.forEach((card, index1) => {
-            if (card._id ==state.idCurrentCard) {
+            if (card._id == state.idCurrentCard) {
                 card.tasks.forEach((task, index2) => {
                     if (task._id == state.indexCurrentTask) {
                         state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
@@ -269,7 +279,7 @@ const publicData = {
         //                 task[action.payload.nameFiled]=action.payload.value
         //                 console.log(task);
         //             }
-                    
+
         //         })
         //     }
         // })
@@ -280,17 +290,17 @@ const publicData = {
         //                 console.log(task);
         //     }
         //    })
-            
-                        // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-                        // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
-                        // console.log(a);        
-            
+
+        // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
+        // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
+        // console.log(a);        
+
     },
-    setCurrentIndexTask(state,action){
-        state.indexCurrentTask=action.payload
+    setCurrentIndexTask(state, action) {
+        state.indexCurrentTask = action.payload
     },
-    setIdCurrentCard(state,action){
-        state.idCurrentCard=action.payload
+    setIdCurrentCard(state, action) {
+        state.idCurrentCard = action.payload
     }
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
