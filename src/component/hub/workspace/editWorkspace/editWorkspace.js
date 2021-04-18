@@ -5,36 +5,21 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
 
-    let [nameWorkspace, setNameWorkspace] = useState(props.workspace.workspace.name)
-    let [colorWorkspace, setColorWorkspace] = useState(props.workspace.workspace.color)
-    let [descriptionWorkspace, setDescriptionWorkspace] = useState(props.workspace.workspace.description)
-    // let myWorkspace = props.workspaceToEdit.workspace;
-    const nameRequired = useRef()
 
+    const [workspaceBeforeChanges] = useState({ ...props.workspace.workspace })
+
+    const nameRequired = useRef()
     useEffect(() => {
-debugger
+        props.objectBeforeChanges({ 'type': 'workspace', 'workspace': workspaceBeforeChanges })
     }, [props.workspaces])
 
-    const changeNameWorkspace = (input) => {
-        setNameWorkspace(input.target.value)
-    }
-    const changeDescriptionWorkspace = (input) => {
-        setDescriptionWorkspace(input.target.value)
-    }
-    const changeColorWorkspace = (input) => {
-        setColorWorkspace(input.target.value)
-    }
-    // const changeFiledInWorkspace = (input) => {
-    //     props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
-    // }
+
+
     function saveEdit() {
-        // myWorkspace.name = nameWorkspace
-        // myWorkspace.description = descriptionWorkspace
-        // myWorkspace.color = colorWorkspace
 
         if (nameRequired.current.value) {
-
-            props.saveWorkspaceInServerUfterEdit(props.workspace.workspace)
+            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
+            props.objectBeforeChanges(null)
             props.closeViewDetails();
         }
         else {

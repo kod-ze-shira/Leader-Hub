@@ -13,7 +13,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks } from '../middleware/taskCrud';
-import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer, getFullWorkspacesForUser } from '../middleware/workspaceCrud';
+import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, getAllStatusesTaskForUser } from '../middleware/statusCrud';
@@ -32,7 +32,6 @@ const store = createStore(
                 editWorkspaceInServer,
                 addNewWorkspaceToServer,
                 getAllWorkspacesFromServer,
-                getFullWorkspacesForUser,
                 createNewTeam,
                 newProject,
                 getProjectsByWorkspaceId,
@@ -78,6 +77,6 @@ else {
     }
 }
 window.store = store;
-export const Token=jwtFromCookie;
+export const Token = jwtFromCookie;
 
 export default store;

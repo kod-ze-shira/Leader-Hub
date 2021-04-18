@@ -13,9 +13,9 @@ const initialState = {
     statuses: [],
     milestones: [],
     isConfiguratorOpen: "false",
-    indexCurrentTask:0,
-    idCurrentCard:0,
-    indexOfWorkspace:0
+    indexCurrentTask: 0,
+    idCurrentCard: 0,
+    indexOfWorkspace: 0
 }
 
 const publicData = {
@@ -41,6 +41,15 @@ const publicData = {
         //     }
         // })
     },
+    setWorkspaceBeforeChanges(state, action) {
+
+        state.workspaces.forEach((workspace, index) => {
+            if (workspace.workspace._id == action.payload.workspace._id) {
+                state.workspaces[index].workspace = action.payload.workspace
+            }
+        })
+    },
+
     setProjectByFiledFromWorkspace(state, action) {
         state.workspaces.forEach((workspace, index1) => {
             if (workspace.workspace._id == action.payload.project.workspace) {
@@ -55,12 +64,13 @@ const publicData = {
         })
     },
     setProjectInWorkspace(state, action) {
+
         state.workspaces.forEach((workspace, index1) => {
             if (workspace.workspace._id == action.payload.project.workspace) {
                 workspace.projectList.forEach((project, index2) => {
                     if (project.project._id == action.payload.project._id) {
                         state.workspaces[index1].projectList[index2].project = action.payload.project
-
+                        console.log(state.workspaces[index1].projectList[index2].project)
                     }
                 })
             }
@@ -95,7 +105,7 @@ const publicData = {
         )
     },
     addProjectToProjects(state, action) {
-        debugger;
+
         let workspaceId = action.payload.project.workspace
         for (let i = 0; i < state.workspaces.length; i++) {
             if (state.workspaces[i].workspace._id == workspaceId) {
@@ -291,11 +301,11 @@ const publicData = {
     setCurrentIndexTask(state, action) {
         state.indexCurrentTask = action.payload
     },
-    setIdCurrentCard(state,action){
-        state.idCurrentCard=action.payload
+    setIdCurrentCard(state, action) {
+        state.idCurrentCard = action.payload
     },
-    saveIndexOfWorkspaceInRedux(state,action){
-        state.indexOfWorkspace=action.payload
+    saveIndexOfWorkspaceInRedux(state, action) {
+        state.indexOfWorkspace = action.payload
     }
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);

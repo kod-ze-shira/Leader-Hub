@@ -21,6 +21,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p)),
+        setWorkspaceBeforeChanges: (workspace) => dispatch(actions.setWorkspaceBeforeChanges(workspace)),
+
     }
 }
 
@@ -28,7 +31,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
-
+        const [oldObject, setOldObject] = useState()
         const { from } = props//to know from which component its come
         function showToast(val) {
             props.showToast(val)
@@ -39,13 +42,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'viewTaskByCard':
                     return <TaskDetails showToast={showToast} task={props.task} />
                 case 'editWorkspace'://on click edit button of workspace
-                    return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} />
+                    return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
-                    return <EditProject closeViewDetails={props.closeViewDetails} showToast={showToast} project={props.project} />
+                    return <EditProject closeViewDetails={props.closeViewDetails} showToast={showToast} project={props.project} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
@@ -56,11 +59,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             }
         }
 
+        function closeEndRefreshViewDetails() {
+
+            switch (oldObject.type) {
+                case 'workspace':
+                    props.setWorkspaceBeforeChanges({ 'workspace': oldObject.workspace })
+                    break;
+                case 'project':
+                    props.setProjectInWorkspace({ "project": oldObject.project })
+
+
+
+
+                default:
+                    break;
+            }
+
+
+            props.closeViewDetails()
+        }
+
         return (
             <>
                 <div className="row ">
                     <div className="view-details  col-5 mt-3">
-                        <div className="close mt-2 mr-2" onClick={(e) => props.closeViewDetails()} >x</div>
+                        <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div>
                         {renderSwitch()}
                     </div>
                 </div>
