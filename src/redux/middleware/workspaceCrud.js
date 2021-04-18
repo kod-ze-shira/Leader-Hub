@@ -109,7 +109,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
     if (action.type === 'EDIT_WORKSPACE_IN_SERVER') {
 
-        let workspace = { 'workspace': getState().workspace_reducer.workspace.workspace };
+        let workspace = { 'workspace': getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].workspace };
 
         // delete workspace.workspace.projects
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
