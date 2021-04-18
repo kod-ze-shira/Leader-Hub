@@ -25,11 +25,11 @@ function AllWorkspaces(props) {
     const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
     
 
-    const renderedListWorkspaces = props.workspaces.map(workspace => {
+    const renderedListWorkspaces = props.workspaces.map((workspace,index) => {
 
         return <ViewWorkspaceList
         setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-         key={workspace.workspace._id} workspace={workspace} editWorkspace={openEditWorkspace}/>
+         key={workspace.workspace._id} index={index} workspace={workspace} editWorkspace={openEditWorkspace}/>
     })
 
     const 

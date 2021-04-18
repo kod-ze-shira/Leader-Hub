@@ -14,8 +14,8 @@ function TaskDetails(props) {
 
     useEffect(() => {
         console.log(props);
-        props.getAllStatusesTaskForUser();
-    }, [props.cards,props.statuses])
+        // props.getAllStatusesTaskForUser();
+    }, [props.cards])
 
     // useEffect(() => {
     // let status = [];
@@ -38,7 +38,6 @@ function TaskDetails(props) {
     const task = props.task
     const status = props.status
     const [milstone, setMilstone] = useState(props.task.milestones)
-    const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [editTask, setEditTask] = useState(task)
@@ -56,39 +55,8 @@ function TaskDetails(props) {
             [name]: value
         }));
     }
-    const changeMilstone = (event) => {
-        setMilestonesValue(!milestonesValue)
-        let temp = editTask
-        temp.milestones = !milestonesValue
-        setEditTask(temp)
-    }
-    const handleChange = (event) => {
-        let name, value
-        if (event.name == "status") {
-            name = event.name
-            value = event.value
-        }
-        else {
-            name = event.target.name
-            value = event.target.value
-            if (name == "name") {
-                setEditTaskName(value)
-                props.setTaskName(value)
-            }
-            if (name == "dueDate" || name == "startDate") {
-                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
-            }
-            // if (name == "milestones") {
-            // setMilestonesValue(!milestonesValue)
-            // value = milestonesValue
-            // }
-        }
-        setEditTask(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
 
-    }
+
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
         if (openPopUpToAdd == true)
@@ -108,7 +76,7 @@ function TaskDetails(props) {
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
-            props.EditTask(editTask)
+            props.EditTask(props.task)
         }
         else {
             nameRequired.current.focus()
@@ -130,8 +98,16 @@ function TaskDetails(props) {
         // console.log(temp);
         // setEditTask(temp)
     }
+
     const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        debugger
+        let editTaskInRedux
+        if (input.target.name == "milestones") {
+            setMilstone(!props.task.milestones)
+            editTaskInRedux = { "nameFiled": input.target.name, "value": !milstone, "task": props.task }
+        }
+        else
+            editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
@@ -145,11 +121,12 @@ function TaskDetails(props) {
                 </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => handleChange(e)}
+                    <input name="name"
                         required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"
-                        value={props.task.name} />
+                        value={props.task.name}
+                        onChange={(e) => changeFiledInTask(e)} />
                     <div class="invalid-feedback">
                         Please enter task name.
                      </div>
@@ -224,11 +201,14 @@ function TaskDetails(props) {
                         <span>Mark as milestone</span>
                         <label class="switch ml-2 ">
                             <input type="checkbox"
-                                checked={milestonesValue ? "checked" : ''}
-                                value={props.task.milestone} />
-                            <span class="slider round"
+                                name="milestones"
+                                checked={milstone}
+                                value={props.task.milestones}
                                 onChange={(e) => changeFiledInTask(e)}
+                            />
+                            <span class="slider round"
                             ></span>
+
                         </label>
                     </div>
                 </div>

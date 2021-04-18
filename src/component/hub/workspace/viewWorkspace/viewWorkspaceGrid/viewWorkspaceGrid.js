@@ -26,7 +26,6 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
     }
     function editWorkspace() {
-        // props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.saveIndexOfWorkspaceInRedux(indexWorkspace)
         props.editWorkspace(workspace)
 
