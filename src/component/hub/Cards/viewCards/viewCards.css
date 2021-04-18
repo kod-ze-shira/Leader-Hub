@@ -4,13 +4,16 @@
    font-size: medium;
     color: #000000;
     /* border-bottom: gray solid 1px; */
-    background-color:#eeffff;
+    background-color:#f9ffff;
     padding-top: 1vh;
     padding-bottom: 1vh;
     /* opacity: 0.1; */
     border-bottom: 1px  solid #98A9BC ;
 
 }
+/* .new-task-in-list{
+    
+} */
 .title-table-in-list{
     width: 600px;
 }
@@ -39,6 +42,7 @@
     background-color: transparent;
     border: none !important;
     outline: 0!important;
+    width: max-content !important;
 }
 .title-card{
     display: inline !important;
@@ -48,7 +52,10 @@
     display: inline-block;
 }
 .show-card:focus{
-    border:1px  solid #98A9BC!important;
+    padding-top:1px !important;
+    padding-bottom: 1.5px;
+    border-radius: 3px;
+    border:1px  solid #00C1C9!important;
     /* border-radius: 2px !important; */
     /* border: 1px solid blue; */
 }

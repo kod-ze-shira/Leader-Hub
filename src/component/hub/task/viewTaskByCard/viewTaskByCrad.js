@@ -16,26 +16,28 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 
 function ViewTaskByCrad(props) {
+    const [currentIndexTask,setCurrentIndexTask]=useState("")
+    const [currentIdCard,setCurrentIdCard]=useState("")
     useEffect(() => {
-        console.log(props);
-        // props.setTaskName(task.name)
-        // props.getAllStatusesTaskForUser();
-        console.log("statuses" + props.statuses)
-        // if(props.task.status==props.statuses._)
-        // if (props.statuses.length > 0) {
-        //     let s = props.statuses.find(status => status._id == props.task.status)
-        //     setStatus(s.statusName)
-        //     console.log(status);
+        setCurrentIndexTask(props.idTask)
+        setCurrentIdCard(props.idCard)
 
-        // }
+        console.log(props);
+        // props.getAllStatusesTaskForUser();
+        // console.log("statuses" + props.statuses)
+        // if (props.task.status == props.statuses._id)
+        //     if (props.statuses.length > 0) {
+        //         let s = props.statuses.find(status => status._id == props.task.status)
+        //         setStatus(s.statusName)
+        //         console.log(status);
+
+        //     }
 
     }, [
         // props.task, 
         // props.statuses,
         props.cards])
     const [status, setStatus] = useState()
-
-
 
     console.log(status)
     const [viewDetails, setViewDetails] = useState(false)
@@ -44,16 +46,16 @@ function ViewTaskByCrad(props) {
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
-        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+        , "status": status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
-    const findStatusById = () => {
-        let temp = { ...task }
-        props.statuses.map(status => {
-            if (status._id == task.status)
-                temp.status = status
-            setTask(temp);
-        })
-    }
+    // const findStatusById = () => {
+    //     let temp = { ...task }
+    //     props.statuses.map(status => {
+    //         if (status._id == task.status)
+    //             temp.status = status
+    //         setTask(temp);
+    //     })
+    // }
 
     const changeFiledInTask = (input) => {
         let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
@@ -62,8 +64,11 @@ function ViewTaskByCrad(props) {
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setIdCurrentCard(currentIdCard)
         setViewDetails(true)
     }
+    
 
 
     function addChalalit() {
@@ -73,7 +78,7 @@ function ViewTaskByCrad(props) {
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
         setTask(task.status = "done", task.endDate = today)
-        findStatusById()
+        // findStatusById()
         props.EditTask(task)
         setShowChalalit(true)
     }
@@ -129,7 +134,7 @@ function ViewTaskByCrad(props) {
                                 <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
-                                <div className="col-3">
+                                <div className=" col-5">
                                     <label
                                         className="check-task py-2 ">
                                         <input type="checkbox" />
@@ -151,17 +156,22 @@ function ViewTaskByCrad(props) {
 
                                     </input>
                                 </div>
-                                <label className="check-task py-2  px-2 col-3 view-details-btn">
+                                {/* <label className="check-task py-2  px-2 col-3 view-details-btn">
+                                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
+                                </label> */}
+                                <label className="check-task py-2   view-details-btn">
                                     <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                                 </label>
                                 {/* <label className="check-task border-left  py-2  px-2 col ">{status} */}
                                 {/* </label> */}
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>{status}</div>
+                                    <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>To do</div>
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                                </label>
+                                <label className="check-task border-left  py-2  px-2 col-add-task">
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" >
@@ -195,7 +205,9 @@ const mapDispatchToProps = (dispatch) => {
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasksTry(taskDetails)),
+        setCurrentIndexTask:(index)=>dispatch(actions.setCurrentIndexTask(index)),
+        setIdCurrentCard:(id)=>dispatch(actions.setIdCurrentCard(id))
 
 
     }

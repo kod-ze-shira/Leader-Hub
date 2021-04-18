@@ -7,21 +7,12 @@ import project_reducer from "../../../../redux/Reducers/project_reducer"
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
-
-    const [projectBeforeChanges, setProjectBeforeChanges] = useState(...props.project)
-
+    const [projectBeforeChanges, setProjectBeforeChanges] = useState()
+    let project;
     useEffect(() => {
-        if (props.project) {
-            if (projectBeforeChanges) {
-                // setProjectBeforeChanges(props.project)
-                setProjectBeforeChanges(...projectBeforeChanges)
-            }
-            else
-                setProjectBeforeChanges(...projectBeforeChanges)
-        }
-    }, [props.workspaces])
+        setProjectBeforeChanges({ ...props.project })
+    }, [])
 
-    let project = props.project
 
     const nameRequired = useRef()
 
@@ -36,7 +27,6 @@ function EditProject(props) {
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
-        let projectBeforeChanges = project;
         project = props.project
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
@@ -47,6 +37,7 @@ function EditProject(props) {
             let a = projectBeforeChanges
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.closeViewDetails(false)
+
         }
         else {
             nameRequired.current.focus()
@@ -59,7 +50,10 @@ function EditProject(props) {
         <>
 
             <div className="details mr-5 ml-4">
-                <h5 className="my-5 title-view-details pb-2">Project details</h5>
+                <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
+                <div class="row justify-content-between  mx-1 mb-2">
+                    <label>workspace: {props.workspace.workspace.name}</label>
+                </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeFiledInProject(e)}
@@ -113,7 +107,8 @@ export default connect(
         return {
             workspaces: state.public_reducer.workspaces,
             projectReducer: state.project_reducer.project,
-            project1: state.project_reducer.project
+            workspace: state.workspace_reducer.workspace,
+
 
         }
     },

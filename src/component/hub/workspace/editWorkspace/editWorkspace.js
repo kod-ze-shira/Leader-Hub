@@ -8,28 +8,9 @@ function EditWorkspace(props) {
 
     }, [props.workspaces])
 
-    let [nameWorkspace, setNameWorkspace] = useState(props.workspace.workspace.name)
-    let [colorWorkspace, setColorWorkspace] = useState(props.workspace.workspace.color)
-    let [descriptionWorkspace, setDescriptionWorkspace] = useState(props.workspace.workspace.description)
-    let myWorkspace = props.workspaceToEdit.workspace;
     const nameRequired = useRef()
 
-    const changeNameWorkspace = (input) => {
-        setNameWorkspace(input.target.value)
-    }
-    const changeDescriptionWorkspace = (input) => {
-        setDescriptionWorkspace(input.target.value)
-    }
-    const changeColorWorkspace = (input) => {
-        setColorWorkspace(input.target.value)
-    }
-    // const changeFiledInWorkspace = (input) => {
-    //     props.setWorkspaceOnChangeFiled(input.target.name, input.target.value)
-    // }
     function saveEdit() {
-        // myWorkspace.name = nameWorkspace
-        // myWorkspace.description = descriptionWorkspace
-        // myWorkspace.color = colorWorkspace
 
         if (nameRequired.current.value) {
 

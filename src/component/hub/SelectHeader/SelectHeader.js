@@ -60,7 +60,7 @@ function SelectHeader(props) {
     return (
         <>
             {props.workspaces.length > 0 ?
-                <div className="s-header mx-0 mb-3 row align-items-center mt-4">
+                <div className="s-header mx-0  row align-items-center">
 
                     <div className="col-md col-sm-2 pr-0">
                         <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
@@ -88,7 +88,7 @@ function SelectHeader(props) {
                             >
                                 <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
                                 <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Gantt" onClick={openGantt} />
+                                <Tab label="Gantt" onClick={(e)=>openGantt} />
                                 <Tab label="" />
                             </Tabs>
                             :

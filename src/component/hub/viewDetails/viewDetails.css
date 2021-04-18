@@ -4,11 +4,12 @@ background-color: white ;
 border-radius: 12px;
 opacity: 1;
 position: absolute !important;
-height:87vh;
+height:87.8vh;
 top:0;
 right: 0;
 z-index: 999;
 border-left: 9px solid  #329A80  ;
+margin-right: 1.8rem !important;
 }
 .inputTextproject{
     background-color: var(--light-light-blue);

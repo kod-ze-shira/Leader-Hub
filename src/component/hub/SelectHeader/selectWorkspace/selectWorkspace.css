@@ -12,17 +12,36 @@
 
 }
 .select-workspace .select__control .select__value-container  .select__placeholder{
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    /* -webkit-box-orient: vertical; */
+    /* -webkit-line-clamp: 1; */
+    /* overflow: hidden; */
+    /* display: -webkit-box; */
+}
+.select__control .select__value-container  .select__placeholder{
+    text-overflow: ellipsis;
+
+    /* Needed to make it work */
     overflow: hidden;
-    display: -webkit-box;
+    white-space: nowrap;
 }
-
-
+.select-project{
+    /* max-width: 4px;
+    word-wrap: break-word; */
+}
+.select-project .css-1bgp60t-singleValue{
+    /* max-width: calc(100% -10px)!important; */
+}
+.select-project{
+    /* -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; */
+    /* overflow: hidden !important; */
+    /* display: -webkit-box; */
+}
 .select-workspace .css-1uccc91-singleValue, .select-workspace .css-1wa3eu0-placeholder,.select-workspace .css-b8ldur-Input{
-   margin-left: 3vw !important;
+   margin-left: 2.8vw !important;
 
 }
+
 .css-5duvv3-control{
     border:none !important;
 }
