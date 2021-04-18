@@ -12,10 +12,10 @@ import AddStatus from '../../status/addStatus'
 function TaskDetails(props) {
     const nameRequired = useRef()
 
-    useEffect(() => {
-        console.log(props);
-        props.getAllStatusesTaskForUser();
-    }, [props.cards,props.statuses])
+    // useEffect(() => {
+    //     console.log(props);
+    //     // props.getAllStatusesTaskForUser();
+    // }, [props.cards,props.statuses])
 
     // useEffect(() => {
     // let status = [];
@@ -131,7 +131,8 @@ function TaskDetails(props) {
         // setEditTask(temp)
     }
     const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        debugger
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value}
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
@@ -145,7 +146,7 @@ function TaskDetails(props) {
                 </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => handleChange(e)}
+                    <input name="name" onChange={(e) => changeFiledInTask(e)}
                         required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"

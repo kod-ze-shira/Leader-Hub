@@ -14,7 +14,7 @@ const initialState = {
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
-    idCurrentCard: 0,
+    indexCurrentCard:0,
     indexOfWorkspace: 0
 }
 
@@ -247,18 +247,19 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     setTaskByFiledFromTasks(state, action) {
-        console.log("task", action.payload.task);
-        state.cards.forEach((card, index1) => {
-            if (card._id == action.payload.task.card) {
-                card.tasks.forEach((task, index2) => {
-                    if (task._id == action.payload.task._id) {
-                        state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
-                        let a = state.cards[index1].tasks[index2][action.payload.nameFiled]
-                        console.log(a);
-                    }
-                })
-            }
-        })
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
+        // console.log("task", action.payload.task);
+        // state.cards.forEach((card, index1) => {
+        //     if (card._id == action.payload.task.card) {
+        //         card.tasks.forEach((task, index2) => {
+        //             if (task._id == action.payload.task._id) {
+        //                 state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
+        //                 let a = state.cards[index1].tasks[index2][action.payload.nameFiled]
+        //                 console.log(a);
+        //             }
+        //         })
+        //     }
+        // })
     },
     setTaskByFiledFromTasksTry(state, action) {
         console.log("task", action.payload.task);
@@ -298,11 +299,11 @@ const publicData = {
         // console.log(a);        
 
     },
-    setCurrentIndexTask(state, action) {
+    saveCurrentIndexOfTaskInRedux(state, action) {
         state.indexCurrentTask = action.payload
     },
-    setIdCurrentCard(state, action) {
-        state.idCurrentCard = action.payload
+    saveCurrentIndexOfCardInRedux(state, action) {
+        state.indexCurrentCard = action.payload
     },
     saveIndexOfWorkspaceInRedux(state, action) {
         state.indexOfWorkspace = action.payload
