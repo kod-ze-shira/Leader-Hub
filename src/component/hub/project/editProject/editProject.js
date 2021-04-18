@@ -1,24 +1,30 @@
 import $ from "jquery"
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
+import project_reducer from "../../../../redux/Reducers/project_reducer"
 
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
 
-    useEffect(() => {
+    const [projectBeforeChanges, setProjectBeforeChanges] = useState(...props.project)
 
+    useEffect(() => {
+        if (props.project) {
+            if (projectBeforeChanges) {
+                // setProjectBeforeChanges(props.project)
+                setProjectBeforeChanges(...projectBeforeChanges)
+            }
+            else
+                setProjectBeforeChanges(...projectBeforeChanges)
+        }
     }, [props.workspaces])
 
     let project = props.project
 
-    // let myDate = project.dueDate;
-    // let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
-    // let [dueDateProject, setDueDateProject] = useState(dueDate1)
     const nameRequired = useRef()
 
-    const [projectBeforeChanges, setProjectBeforeChanges] = useState(project)
     const changeFiledInProject = (input) => {
         let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.project }
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
@@ -36,10 +42,9 @@ function EditProject(props) {
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
         // project.dueDate = res
 
-
-
         if (nameRequired.current.value) {
-
+            debugger
+            let a = projectBeforeChanges
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.closeViewDetails(false)
         }
@@ -107,7 +112,8 @@ export default connect(
     (state) => {
         return {
             workspaces: state.public_reducer.workspaces,
-            projectReducer: state.project_reducer.project
+            projectReducer: state.project_reducer.project,
+            project1: state.project_reducer.project
 
         }
     },

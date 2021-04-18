@@ -10,7 +10,7 @@ function UploadFile(props) {
    
     useEffect(() => {
         console.log(props);
-        props.uploadFiles(props.files)
+        // props.uploadFiles(props.files)
     }, [props.files])
 
     const uploadMulti = (file) => {

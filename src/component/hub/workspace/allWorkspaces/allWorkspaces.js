@@ -15,6 +15,7 @@ function AllWorkspaces(props) {
  
      
     useEffect(() => {
+
         props.getAllWorkspaces()
     }, [props.bin]);
 
@@ -27,13 +28,17 @@ function AllWorkspaces(props) {
     const deleteWorkspace=(obj)=>{
         setDisableBin(true)
         props.showToast(obj)
+        setTimeout(() => {
+            setDisableBin(false)
+        }, 10000);
     }
 
     const renderedListWorkspaces = props.workspaces.map(workspace => {
-
         return <ViewWorkspaceList
-        setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
-         key={workspace.workspace._id} workspace={workspace} editWorkspace={openEditWorkspace}
+         setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
+         key={workspace.workspace._id} 
+         workspace={workspace} 
+         editWorkspace={openEditWorkspace}
          bin={disableBin}
          />
     })
@@ -41,16 +46,18 @@ function AllWorkspaces(props) {
     const renderedGridWorkspaces = props.workspaces.map(todo => {
         return <ViewWorkspaceGrid
         setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
-        key={todo.workspace._id} workspace={todo} editWorkspace={openEditWorkspace}
-        bin={disableBin}
-         />
+        key={todo.workspace._id} workspace={todo}
+        editWorkspace={openEditWorkspace}
+        bin={disableBin}/>
         })
-        const [workspaceToEdit,setWorspaceToEdit]=useState()
+    const [workspaceToEdit,setWorspaceToEdit]=useState()
 
     function openEditWorkspace(value){
         setWorspaceToEdit(value)
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)
+
+
     }
     // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
@@ -66,7 +73,6 @@ function AllWorkspaces(props) {
     function openaddNewWorkspace() {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
-   
     }
    
 return (

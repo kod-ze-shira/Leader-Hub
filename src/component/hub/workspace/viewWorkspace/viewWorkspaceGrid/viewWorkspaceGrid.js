@@ -53,7 +53,9 @@ function ViewWorkspaceGrid(props) {
                         <img class='imageIcon' src={pencil}></img>
                     </div>
                     <div className="stripe stripeToSavePlace">|</div>
-                    <button disabled={props.bin} className="p-0 m-0 delete iconsAction delete1"
+                    <button disabled={props.bin}
+                        className="p-0 m-0 delete iconsAction delete1"
+                        name="delete"
                         onClick={delete_workspace}>
                         <img class='imageIcon' src={bin}></img>
                     </button>
@@ -96,8 +98,6 @@ const mapDispatchToProps = (dispatch) => {
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
     }
 
-
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))

@@ -58,6 +58,7 @@ function Hub(props) {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
+        setDisableBin(true)
         setDisableBin(false)
         setShowToastDelete(value)
         if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
@@ -134,15 +135,15 @@ function Hub(props) {
                                 <Milestones />
                             </ProtectedRoute>
 
+                            <ProtectedRoute path={"/:userName/files"} >
+                                    <UploadFile />
+                            </ProtectedRoute>
+
                             <ProtectedRoute path={"/:userName"}>
                                 <Body disableBin={disableBin} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
-                            <Route path="/" >
-                                <div id='cdggdfdfb'>
-                                    <UploadFile />
-                                </div>
-                            </Route>
+                            
                         </Switch>
                     </div>
 
