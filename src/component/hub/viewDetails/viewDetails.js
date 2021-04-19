@@ -21,9 +21,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p)),
+        setProjectInWorkspace: (project) => dispatch(actions.setProjectInWorkspace(project)),
         setWorkspaceBeforeChanges: (workspace) => dispatch(actions.setWorkspaceBeforeChanges(workspace)),
-
+        setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
     }
 }
 
@@ -40,7 +40,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails showToast={showToast} task={props.task} />
+                    return <TaskDetails showToast={showToast} task={props.task} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'editCurrentTask':
@@ -48,7 +48,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
-                    return <EditProject closeViewDetails={props.closeViewDetails} showToast={showToast} project={props.project} objectBeforeChanges={(e) => setOldObject(e)} />
+                    return <EditProject closeViewDetails={props.closeViewDetails}
+                        showToast={showToast} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
@@ -60,22 +61,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         function closeEndRefreshViewDetails() {
-
-            switch (oldObject.type) {
-                case 'workspace':
-                    props.setWorkspaceBeforeChanges({ 'workspace': oldObject.workspace })
-                    break;
-                case 'project':
-                    props.setProjectInWorkspace({ "project": oldObject.project })
-
-
-
-
-                default:
-                    break;
-            }
+            if (oldObject)
+                switch (oldObject.type) {
+                    case 'workspace':
+                        props.setWorkspaceBeforeChanges({ 'workspace': oldObject.workspace })
+                        break;
+                    case 'project':
+                        props.setProjectInWorkspace({ "project": oldObject.project })
+                        break;
+                    case 'task':
+                        props.setTaskFromTasks({ "task": oldObject.project })
+                        break;
 
 
+                    default:
+                        break;
+                }
             props.closeViewDetails()
         }
 
