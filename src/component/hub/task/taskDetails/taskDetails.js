@@ -11,11 +11,21 @@ import AddStatus from '../../status/addStatus'
 
 function TaskDetails(props) {
     const nameRequired = useRef()
+    const [taskBeforeChanges] = useState({ ...props.task })
 
+<<<<<<< HEAD
+    useEffect(() => {
+        console.log(props);
+        props.getAllStatusesTaskForUser();
+        props.objectBeforeChanges({ 'type': 'task', 'project': taskBeforeChanges })
+
+    }, [props.cards, props.statuses])
+=======
     // useEffect(() => {
     //     console.log(props);
     //     // props.getAllStatusesTaskForUser();
     // }, [props.cards,props.statuses])
+>>>>>>> newDev
 
     // useEffect(() => {
     // let status = [];
@@ -108,6 +118,7 @@ function TaskDetails(props) {
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
+            props.objectBeforeChanges(null)
             props.EditTask(editTask)
         }
         else {

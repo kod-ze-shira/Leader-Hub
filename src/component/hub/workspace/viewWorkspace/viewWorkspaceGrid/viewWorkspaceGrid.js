@@ -11,14 +11,13 @@ import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
 
-    const [indexWorkspace, setIndexWorkspace] = useState()
 
     const workspace = props.workspace
     useEffect(() => {
-        setIndexWorkspace(props.index)
     }, [props.workspaces])
 
     const routeToProject = () => {
+        props.setIndexWorkspace(props.indexWorkspace)
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
     function outOver(id) {
@@ -27,7 +26,7 @@ function ViewWorkspaceGrid(props) {
     }
     function editWorkspace() {
         // props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        props.saveIndexOfWorkspaceInRedux(indexWorkspace)
+        props.saveIndexOfWorkspaceInRedux(props.indexWorkspace)
         props.editWorkspace(workspace)
 
     }
@@ -101,6 +100,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
