@@ -6,7 +6,7 @@ import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
 
 
-    const [workspaceBeforeChanges] = useState({ ...props.workspace.workspace })
+    const [workspaceBeforeChanges] = useState({ ...props.workspace })
 
     const nameRequired = useRef()
     useEffect(() => {
@@ -18,7 +18,7 @@ function EditWorkspace(props) {
     function saveEdit() {
 
         if (nameRequired.current.value) {
-            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
+            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
             props.objectBeforeChanges(null)
             props.closeViewDetails();
         }
@@ -32,7 +32,7 @@ function EditWorkspace(props) {
     const changeFiledInWorkspace = (input) => {
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
-        // props.workspace.workspace[input.target.name] = input.target.value
+        // props.workspace[input.target.name] = input.target.value
     }
 
     return (
@@ -44,8 +44,8 @@ function EditWorkspace(props) {
                     <input name="name" ref={nameRequired} required
                         onChange={(input) => changeFiledInWorkspace(input)}
                         type="text" class="form-control" id="name"
-                        // value={props.workspace.workspace.name} 
-                        value={props.workspaces[props.indexOfWorkspace].workspace.name}
+                        // value={props.workspace.name} 
+                        value={props.workspaces[props.indexOfWorkspace].name}
                     />
 
 
@@ -59,9 +59,9 @@ function EditWorkspace(props) {
                     <textarea class="form-control"
                         id="description" rows="2"
                         placeholder="Write a description about your workspace"
-                        // value={props.workspace.workspace.description}
+                        // value={props.workspace.description}
                         name="description"
-                        value={props.workspaces[props.indexOfWorkspace].workspace.description}
+                        value={props.workspaces[props.indexOfWorkspace].description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">
@@ -71,8 +71,8 @@ function EditWorkspace(props) {
                         styles="height: 50px"
                         type="color"
                         id='colorProject'
-                        value={props.workspaces[props.indexOfWorkspace].workspace.color}
-                        // value={props.workspace.workspace.color}
+                        value={props.workspaces[props.indexOfWorkspace].color}
+                        // value={props.workspace.color}
                         onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">

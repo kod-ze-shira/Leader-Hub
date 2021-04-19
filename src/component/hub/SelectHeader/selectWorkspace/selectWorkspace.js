@@ -24,16 +24,16 @@ function SelectWorkspace(props) {
     const changeSelectedWorkspace = (id) => {
         myWorkspace = props.workspaces.find(p => p.workspace._id == id.value)
         props.setWorkspace(myWorkspace)
-        console.log(myWorkspace.workspace._id)
-        if (myWorkspace.projectList[0]) {
+        console.log(myWorkspace._id)
+        if (myWorkspace.projects[0]) {
 
-            props.setProjects(myWorkspace.projectList)
-            props.setProject(myWorkspace.projectList[0])
+            props.setProjects(myWorkspace.projects)
+            props.setProject(myWorkspace.projects[0])
             //ssssssssssssss
-            // props.getCardsByProjectId(myWorkspace.projectList[0]._id)
+            // props.getCardsByProjectId(myWorkspace.projects[0]._id)
             // if (props.projectPage == true)
             if (window.location.href.indexOf('workspace') != -1)
-                props.history.push("/" + props.user + "/workspace/" + myWorkspace.workspace._id)
+                props.history.push("/" + props.user + "/workspace/" + myWorkspace._id)
 
         }
         else {
@@ -44,7 +44,7 @@ function SelectWorkspace(props) {
     }
 
     const viewWorkspacesList = props.workspaces.map((workspace) => (
-        { value: workspace.workspace._id, label: workspace.workspace.name, title: workspace.workspace.name }
+        { value: workspace._id, label: workspace.name, title: workspace.name }
     ))
     const style = {
         control: (base, state) => ({
@@ -65,19 +65,19 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace.workspace ? props.workspace.workspace : null} />
+                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace ? props.workspace : null} />
                 <Select
                     className="select-workspace selectInHeader"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
-                    placeholder={props.workspace.workspace ? props.workspace.workspace.name : null}
+                    placeholder={props.workspace ? props.workspace.name : null}
                     styles={style}
                     components={{ Input }}
-                    // onInputChange={inputValue =>
-                    //     (inputValue.length <= maxLength ? inputValue : inputValue.substr(0, maxLength))
-                    // }
+                // onInputChange={inputValue =>
+                //     (inputValue.length <= maxLength ? inputValue : inputValue.substr(0, maxLength))
+                // }
                 />
             </div>
         </>

@@ -61,6 +61,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         function closeEndRefreshViewDetails() {
+            debugger
             if (oldObject)
                 switch (oldObject.type) {
                     case 'workspace':
@@ -70,7 +71,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         props.setProjectInWorkspace({ "project": oldObject.project })
                         break;
                     case 'task':
-                        props.setTaskFromTasks({ "task": oldObject.project })
+                        props.setTaskFromTasks({ "task": oldObject.task })
                         break;
 
 
