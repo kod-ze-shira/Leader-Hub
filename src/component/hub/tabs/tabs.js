@@ -20,7 +20,6 @@ function Tabs(props) {
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
-    const [taskToDetails, setTaskToDetails] = useState("")
     // if (!showInput) {
     //     if (props.focusInputCard) {
     //         setShowInput(true)
@@ -89,8 +88,6 @@ function Tabs(props) {
         // const b = a.tasks.find(t => t._id == task._id)
         // console.log(a)
         setViewDetails(true)
-        setTaskToDetails(task)
-
     }
     return (
         <><div className="body">
@@ -106,10 +103,10 @@ function Tabs(props) {
                                     <div className="row row mx-3">
                                         <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                return <ViewCardsTabs openViewDetails={() => openViewDetails()}
                                                     // setTask={(task) => setTaskToDetails(task)}
                                                     showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} index={index} />
+                                                    key={card._id} cardFromMap={card} indexCard={index} />
                                             })}
                                         </DragDropContext>
                                         <div className="col-3 mt-4" >
@@ -149,7 +146,7 @@ function Tabs(props) {
                 <div className="closeDet" >
                     <ViewDetails closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
-                        task={taskToDetails}
+                        // task={taskToDetails}
                         open={true}> </ViewDetails>
                 </div>
                 : null}

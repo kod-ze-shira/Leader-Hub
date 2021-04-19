@@ -13,16 +13,23 @@ function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.task })
 
+<<<<<<< HEAD
     useEffect(() => {
         console.log(props);
         props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'project': taskBeforeChanges })
 
     }, [props.cards, props.statuses])
+=======
+    // useEffect(() => {
+    //     console.log(props);
+    //     // props.getAllStatusesTaskForUser();
+    // }, [props.cards,props.statuses])
+>>>>>>> newDev
 
     // useEffect(() => {
     // let status = [];
-    // // console.log(props.task.milestones)
+    // // console.log(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     // props.statuses.length && props.statuses.forEach(st => {
     // let stTemp = {
@@ -36,11 +43,11 @@ function TaskDetails(props) {
     // setStatusTemp(status)
     // }, [props.statuses])
 
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
-    const [editDescription, setEditDescription] = useState(props.task.description)
-    const task = props.task
+    const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
+    const [editDescription, setEditDescription] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description)
+    const task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
     const status = props.status
-    const [milstone, setMilstone] = useState(props.task.milestones)
+    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
@@ -135,7 +142,7 @@ function TaskDetails(props) {
         // setEditTask(temp)
     }
     const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value}
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
@@ -144,16 +151,18 @@ function TaskDetails(props) {
             <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between mx-1" >
-                    <label>Create {props.task.startDate}</label> <label>Last Update {props.task.dueDate}</label>
+                    {/* <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label> */}
+                    <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                  
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => handleChange(e)}
+                    <input name="name" onChange={(e) => changeFiledInTask(e)}
                         required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"
-                        value={props.task.name} />
+                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                     <div class="invalid-feedback">
                         Please enter task name.
                      </div>
@@ -164,7 +173,7 @@ function TaskDetails(props) {
                         id="descriptionProject" rows="3"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
-                        value={props.task.description}>
+                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -175,7 +184,7 @@ function TaskDetails(props) {
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={props.task.startDate}
+                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
@@ -186,7 +195,7 @@ function TaskDetails(props) {
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={props.task.dueDate}
+                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
@@ -229,7 +238,7 @@ function TaskDetails(props) {
                         <label class="switch ml-2 ">
                             <input type="checkbox"
                                 checked={milestonesValue ? "checked" : ''}
-                                value={props.task.milestone} />
+                                value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestone} />
                             <span class="slider round"
                                 onChange={(e) => changeFiledInTask(e)}
                             ></span>
@@ -272,11 +281,11 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // task: state.task_reducer.task,
-        tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        indexCurrentCard:state.public_reducer.indexCurrentCard,
+        indexCurrentTask:state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {
