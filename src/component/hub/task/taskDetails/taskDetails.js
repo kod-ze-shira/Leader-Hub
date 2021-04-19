@@ -11,21 +11,14 @@ import AddStatus from '../../status/addStatus'
 
 function TaskDetails(props) {
     const nameRequired = useRef()
-    const [taskBeforeChanges] = useState({ ...props.task })
+    const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
 
-<<<<<<< HEAD
     useEffect(() => {
         console.log(props);
         props.getAllStatusesTaskForUser();
-        props.objectBeforeChanges({ 'type': 'task', 'project': taskBeforeChanges })
+        props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
 
     }, [props.cards, props.statuses])
-=======
-    // useEffect(() => {
-    //     console.log(props);
-    //     // props.getAllStatusesTaskForUser();
-    // }, [props.cards,props.statuses])
->>>>>>> newDev
 
     // useEffect(() => {
     // let status = [];
@@ -142,7 +135,7 @@ function TaskDetails(props) {
         // setEditTask(temp)
     }
     const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value}
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
@@ -153,7 +146,7 @@ function TaskDetails(props) {
                 <div className="row justify-content-between mx-1" >
                     {/* <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label> */}
                     <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-                  
+
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
@@ -284,8 +277,8 @@ const mapStateToProps = (state) => {
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
-        indexCurrentCard:state.public_reducer.indexCurrentCard,
-        indexCurrentTask:state.public_reducer.indexCurrentTask
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {
