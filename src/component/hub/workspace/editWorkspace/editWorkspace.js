@@ -6,17 +6,21 @@ import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
 
    
-    const nameRequired = useRef()
 
+    const [workspaceBeforeChanges] = useState({ ...props.workspace.workspace })
+
+    const nameRequired = useRef()
     useEffect(() => {
+        props.objectBeforeChanges({ 'type': 'workspace', 'workspace': workspaceBeforeChanges })
     }, [props.workspaces])
+
 
 
     function saveEdit() {
 
         if (nameRequired.current.value) {
-
-            props.saveWorkspaceInServerUfterEdit(props.workspaces[props.indexOfWorkspace].workspace)
+            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
+            props.objectBeforeChanges(null)
             props.closeViewDetails();
         }
         else {

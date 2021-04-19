@@ -36,7 +36,8 @@ function CardsByProject(props) {
             {props.cards.length ?
                 <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                     {props.cards.map((card, index) => {
-                        return <ViewCards showToastDelete={(object) => props.showToast(object)} key={card._id} cardFromMap={card} flag={props.flag} index={index} />
+                        return <ViewCards showToastDelete={(object) => props.showToast(object)} key={card._id} 
+                        cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}
                 </DragDropContext>
                 : null}

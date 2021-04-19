@@ -6,23 +6,33 @@ import { actions } from '../../../../redux/actions/action'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
-    const [projectBeforeChanges, setProjectBeforeChanges] = useState()
+    const [projectBeforeChanges] = useState({ ...props.project })
     let project;
     useEffect(() => {
-        setProjectBeforeChanges({ ...props.project })
-    }, [])
+        props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
+    }, [props.workspaces])
 
 
-    // let myDate = project.dueDate;
-    // let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
-    // let [dueDateProject, setDueDateProject] = useState(dueDate1)
+    let myDate = props.project.dueDate;
+    let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
+    let [dueDateProject, setDueDateProject] = useState(dueDate1)
     const nameRequired = useRef()
 
 
     const changeFiledInProject = (input) => {
+
         let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.project }
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
         props.project[input.target.name] = input.target.value
+    }
+
+    const changeDateInProject = (input) => {
+
+        let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
+        let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.project }
+        setDueDateProject(input.target.value)
+        props.setProjectByFiledFromWorkspace(editProjectInRedux)
+        props.project[input.target.name] = res
     }
 
     function saveProject() {
@@ -39,6 +49,7 @@ function EditProject(props) {
 
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
+            props.objectBeforeChanges(null)
             props.closeViewDetails(false)
 
         }
@@ -48,6 +59,8 @@ function EditProject(props) {
             form.classList.add('was-validated')
         }
     }
+
+
 
     return (
         <>
@@ -89,8 +102,8 @@ function EditProject(props) {
                             name="dueDate"
                             type="date"
                             id='dueDateProject'
-                            value={props.project.dueDate}
-                            onChange={(e) => changeFiledInProject(e)}
+                            value={dueDateProject}
+                            onChange={(e) => changeDateInProject(e)}
                         />
                     </div>
                 </div>
@@ -111,16 +124,14 @@ export default connect(
             workspaces: state.public_reducer.workspaces,
             projectReducer: state.project_reducer.project,
             workspace: state.workspace_reducer.workspace,
-
-
         }
     },
     (dispatch) => {
         return {
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
             setProjectByFiledFromWorkspace: (p) => dispatch(actions.setProjectByFiledFromWorkspace(p)),
-            setProject: (p) => dispatch(actions.setProject(p))
-
+            setProject: (p) => dispatch(actions.setProject(p)),
+            setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p))
         }
     }
 )(EditProject)

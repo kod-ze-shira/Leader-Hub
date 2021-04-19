@@ -8,13 +8,15 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
 import ViewAllStatuses from '../../status/viewAllStatuses'
 import AddStatus from '../../status/addStatus'
+import editStatus from '../../status/editStatus';
 
 function TaskDetails(props) {
     const nameRequired = useRef()
 
     useEffect(() => {
-        console.log(props);
-        // props.getAllStatusesTaskForUser();
+        props.getAllStatusesTaskForUser();
+        console.log(props.statuses);
+
     }, [props.cards])
 
     // useEffect(() => {
@@ -61,8 +63,6 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
         if (openPopUpToAdd == true)
             setOpenPopUpToAdd(!openPopUpToAdd)
-
-
     }
     const openAddStatus = (e) => {
 
@@ -104,10 +104,10 @@ function TaskDetails(props) {
         let editTaskInRedux
         if (input.target.name == "milestones") {
             setMilstone(!props.task.milestones)
-            editTaskInRedux = { "nameFiled": input.target.name, "value": !milstone, "task": props.task }
+            editTaskInRedux = { "nameFiled": input.target.name, "value": !milstone }
         }
         else
-            editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+            editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
@@ -175,13 +175,13 @@ function TaskDetails(props) {
  /> */}
                     <div class="dropdown col-5">
 
-                        {/* <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- {props.statuses.length ? props.statuses.map((status, index) => (
- <>
- <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
- </>
- )) : null}
- </button> */}
+                        <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {props.statuses.length ? props.statuses.map((status, index) => (
+                                <>
+                                    <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
+                                </>
+                            )) : null}
+                        </button>
                         <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
@@ -191,12 +191,13 @@ function TaskDetails(props) {
                                     <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
                                 {openPopUpToAdd ? <AddStatus task={task} /> : null}
+                                
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div className="row mb-3">
+                {/* <div className="row mb-3">
                     <div className="col-7">
                         <span>Mark as milestone</span>
                         <label class="switch ml-2 ">
@@ -211,7 +212,7 @@ function TaskDetails(props) {
 
                         </label>
                     </div>
-                </div>
+                </div> */}
 
 
                 {/* <label className="check-task py-2 mt-2 " for="milestones">
