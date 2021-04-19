@@ -32,7 +32,8 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
-        props.addProjectTArray(project)
+        props.setCurrentIndexProject(props.indexProject)
+        // props.addProjectTArray(project)
         props.editProject(project)
         event.stopPropagation();
     }
@@ -142,11 +143,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addProjectTArray: (p) => dispatch(actions.addProjectTArray(p)),
+        // addProjectTArray: (p) => dispatch(actions.addProjectTArray(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index))
 
 
     }

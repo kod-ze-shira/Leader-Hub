@@ -14,7 +14,8 @@ const initialState = {
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
-    indexCurrentCard:0,
+    idCurrentCard: 0,
+    indexCurrentProject: 0,
     indexOfWorkspace: 0
 }
 
@@ -51,30 +52,26 @@ const publicData = {
     },
 
     setProjectByFiledFromWorkspace(state, action) {
-        state.workspaces.forEach((workspace, index1) => {
-            if (workspace.workspace._id == action.payload.project.workspace) {
-                workspace.projectList.forEach((project, index2) => {
-                    if (project.project._id == action.payload.project._id) {
-                        state.workspaces[index1].projectList[index2].project[action.payload.nameFiled] = action.payload.value
-                        let a = state.workspaces[index1].projectList[index2].project[action.payload.nameFiled]
-                        console.log(a);
-                    }
-                })
-            }
-        })
+
+        debugger
+        state.workspaces[state.indexOfWorkspace].projectList[state.indexCurrentProject].
+            project[action.payload.nameFiled] = action.payload.value
+
     },
     setProjectInWorkspace(state, action) {
+        state.workspaces[state.indexOfWorkspace].projectList[state.indexCurrentProject].project
+            = action.payload.project
 
-        state.workspaces.forEach((workspace, index1) => {
-            if (workspace.workspace._id == action.payload.project.workspace) {
-                workspace.projectList.forEach((project, index2) => {
-                    if (project.project._id == action.payload.project._id) {
-                        state.workspaces[index1].projectList[index2].project = action.payload.project
-                        console.log(state.workspaces[index1].projectList[index2].project)
-                    }
-                })
-            }
-        })
+        // state.workspaces.forEach((workspace, index1) => {
+        //     if (workspace.workspace._id == action.payload.project.workspace) {
+        //         workspace.projectList.forEach((project, index2) => {
+        //             if (project.project._id == action.payload.project._id) {
+        //                 state.workspaces[index1].projectList[index2].project = action.payload.project
+        //                 console.log(state.workspaces[index1].projectList[index2].project)
+        //             }
+        //         })
+        //     }
+        // })
     },
     setProjects(state, action) {
         state.projects = action.payload;
@@ -126,9 +123,9 @@ const publicData = {
         //     }
         // })
     },
-    addProjectTArray(state, action) {
-        state.projects.push(action.payload)
-    },
+    // addProjectTArray(state, action) {
+    //     state.projects.push(action.payload)
+    // },
     // state.projects.push(action.payload)
 
     setNewTask(state, action) {
@@ -261,6 +258,17 @@ const publicData = {
         //     }
         // })
     },
+    setTaskFromTasks(state, action) {
+        state.cards.forEach((card, index1) => {
+            if (card._id == action.payload.task.card) {
+                card.tasks.forEach((task, index2) => {
+                    if (task._id == action.payload.task._id) {
+                        state.cards[index1].tasks[index2] = action.payload.task
+                    }
+                })
+            }
+        })
+    },
     setTaskByFiledFromTasksTry(state, action) {
         console.log("task", action.payload.task);
         state.cards.forEach((card, index1) => {
@@ -301,6 +309,12 @@ const publicData = {
     },
     saveCurrentIndexOfTaskInRedux(state, action) {
         state.indexCurrentTask = action.payload
+    },
+    setCurrentIndexProject(state, action) {
+        state.indexCurrentProject = action.payload
+    },
+    setIdCurrentCard(state, action) {
+        state.idCurrentCard = action.payload
     },
     saveCurrentIndexOfCardInRedux(state, action) {
         state.indexCurrentCard = action.payload

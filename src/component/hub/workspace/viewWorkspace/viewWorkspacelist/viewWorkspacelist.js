@@ -24,7 +24,7 @@ function ViewWorkspaceList(props) {
 
     const routeToProject = () => {
         // props.setWorkspace(workspace)
-        // props.setProjects(workspace.projectList)
+        props.setIndexWorkspace(props.indexWorkspace)
         props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
     }
 
@@ -115,6 +115,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
+
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),

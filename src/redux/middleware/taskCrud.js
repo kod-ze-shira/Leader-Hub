@@ -195,9 +195,9 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
-        let task = action.payload;
-        let taskId = task._id
-
+        let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+        .tasks[getState().public_reducer.indexCurrentTask]
+        
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -209,7 +209,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
-                dispatch(actions.setTaskName(data.result))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
