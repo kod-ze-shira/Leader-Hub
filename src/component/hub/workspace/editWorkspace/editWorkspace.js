@@ -5,9 +5,7 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
     useEffect(() => {
-        debugger
-        console.log(props.workspaces[props.indexOfWorkspace])
-        console.log(props.indexOfWorkspace)
+
 
     }, [props.workspaces])
 
@@ -53,7 +51,6 @@ function EditWorkspace(props) {
                     // value={props.workspace.workspace.name} 
                     value={props.workspaces[props.indexOfWorkspace].workspace.name}
                     />
-
 
                     <div class="invalid-feedback">
                         Please enter workspace name.

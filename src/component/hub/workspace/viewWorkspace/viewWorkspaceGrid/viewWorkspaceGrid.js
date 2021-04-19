@@ -27,6 +27,7 @@ function ViewWorkspaceGrid(props) {
     }
     function editWorkspace() {
         // props.setWorkspace(workspace)//to select workspace to edit and send him to server
+       
         props.saveIndexOfWorkspaceInRedux(indexWorkspace)
         props.editWorkspace(workspace)
 

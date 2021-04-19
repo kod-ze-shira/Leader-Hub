@@ -68,15 +68,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     break;
                 case 'project':
                     props.setProjectInWorkspace({ "project": oldObject.project })
-
-
-
-
                 default:
                     break;
             }
-
-
             props.closeViewDetails()
         }
 
