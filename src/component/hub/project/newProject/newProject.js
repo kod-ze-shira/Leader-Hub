@@ -78,7 +78,7 @@ function NewProject(props) {
         console.log(date + '/' + month + '/' + year)
         project.updateDates[0] = date + '/' + month + '/' + year
         project.color = myColor
-        project.workspace = props.workspace.workspace._id
+        project.workspace = props.workspace._id
         project.name = nameProject
         project.description = descriptioneProject
 
@@ -134,7 +134,7 @@ function NewProject(props) {
             <div className="details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5>
                 <div class="row justify-content-between  mx-1 mb-2">
-                    <label>workspace: {props.workspace.workspace.name}</label>
+                    <label>workspace: {props.workspace.name}</label>
                 </div>
 
                 <div class="form-group" id='nameRequired'>
@@ -192,18 +192,12 @@ function NewProject(props) {
 export default connect(
     (state) => {
         return {
-            // workspaceToEdit: state.workspace_reducer.workspace,
             workspace: state.workspace_reducer.workspace,
-
-
         }
     },
     (dispatch) => {
         return {
             newProject: (props) => dispatch(actions.newProject(props)),
-
-
-
         }
     }
 )(NewProject)

@@ -12,7 +12,7 @@ function LetterLogo(props) {
         if (props.workspaces) {
             if (window.location.href.indexOf('workspace') != -1) {
                 // props.getProjectsByWorkspaceId(idWorkspace)
-                let w = props.workspaces.find(w => w.workspace._id == idWorkspace)
+                let w = props.workspaces.find(w => w._id == idWorkspace)
                 props.setWorkspace(w)
             }
             else
@@ -22,29 +22,29 @@ function LetterLogo(props) {
                     if (window.location.href.indexOf('projectPlatform') != -1) {
 
                         for (let index = 0; index < props.workspaces.length; index++) {
-                            for (let j = 0; j < props.workspaces[index].projectList.length; j++) {
-                                if (idProject == props.workspaces[index].projectList[j].project._id) {
+                            for (let j = 0; j < props.workspaces[index].projects.length; j++) {
+                                if (idProject == props.workspaces[index].projects[j]._id) {
                                     props.setWorkspace(props.workspaces[index])
-                                    props.setProject(props.workspaces[index].projectList[j].project)
+                                    props.setProject(props.workspaces[index].projects[j])
                                     //sssssssss
-                                    // props.getCardsByProjectId(props.workspaces[index].projectList[j].project._id)
+                                    // props.getCardsByProjectId(props.workspaces[index].projects[j]._id)
                                 }
                             }
                         }
                     }
         }
-    }, [props.workspace.workspace])
+    }, [props.workspace])
 
     return (
         <>
 
-            {props.workspace.workspace ?
-                <span className='logoW' style={{ "backgroundColor": props.workspace.workspace.color }} >
-                    {props.workspace.workspace.name ?
-                        props.workspace.workspace.name[0].toUpperCase() : null}
+            {props.workspace ?
+                <span className='logoW' style={{ "backgroundColor": props.workspace.color }} >
+                    {props.workspace.name ?
+                        props.workspace.name[0].toUpperCase() : null}
                     {
-                        props.workspace.workspace.name && props.workspace.workspace.name.indexOf(" ") && props.workspace.workspace.name.indexOf(" ") + 1 ?
-                            props.workspace.workspace.name[props.workspace.workspace.name.indexOf(" ") + 1].toUpperCase() : null
+                        props.workspace.name && props.workspace.name.indexOf(" ") && props.workspace.name.indexOf(" ") + 1 ?
+                            props.workspace.name[props.workspace.name.indexOf(" ") + 1].toUpperCase() : null
                     }
                 </span>
                 : null}
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspaceId) => dispatch(actions.setWorkspace(workspaceId)),
         setProject: (project) => dispatch(actions.setProject(project)),
-        getCardsByProjectId:(projectId)=>dispatch(actions.getCardsByProjectId(projectId))
+        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId))
 
     }
 }

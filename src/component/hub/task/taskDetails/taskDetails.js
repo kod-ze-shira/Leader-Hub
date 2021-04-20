@@ -12,10 +12,11 @@ import editStatus from '../../status/editStatus';
 
 function TaskDetails(props) {
     const nameRequired = useRef()
+    const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
 
     useEffect(() => {
         props.getAllStatusesTaskForUser();
-        console.log(props.statuses);
+        props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
 
     }, [props.cards])
 
@@ -116,7 +117,9 @@ function TaskDetails(props) {
             <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between mx-1" >
-                    <label>Create {props.task.startDate}</label> <label>Last Update {props.task.dueDate}</label>
+                    {/* <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label> */}
+                    <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
@@ -253,7 +256,9 @@ const mapStateToProps = (state) => {
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {

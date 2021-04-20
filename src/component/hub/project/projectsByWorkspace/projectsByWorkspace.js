@@ -14,7 +14,7 @@ import $ from 'jquery'
 function ProjectsByWorkspace(props) {
 
     // useEffect(() => {
-    //     console.log(props.workspace.projectList)
+    //     console.log(props.projects)
     // }, [props.workspace])
 
     let { idWorkspace } = useParams();
@@ -69,9 +69,9 @@ function ProjectsByWorkspace(props) {
 
 
 
-    function openEditProject(project) {
-        setCurrentProject(project)
-        props.setProject(project)
+    function openEditProject() {
+        // setCurrentProject(project)
+        // props.setProject(project)
         setAddOrEditProject("editProject")
         setShowProject(true)
     }
@@ -81,17 +81,17 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace) ?
-        props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
-            return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
+    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
+        props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
+            return project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
-                    closeViewDetails={false} myProject={project} editProject={openEditProject} />
+                    closeViewDetails={false} indexProject={index} myProject={project} editProject={openEditProject} />
                 : null
         }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
-        return workspace.projectList.map((project) => {
-            return project.project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
+        return workspace.projects.map((project) => {
+            return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
                 : null
         })
@@ -165,7 +165,7 @@ function ProjectsByWorkspace(props) {
                 {
                     showProject ? <ViewDetails
                         closeViewDetails={() => setShowProject(false)}
-                        project={currentProject}
+                        // project={currentProject}
                         showToast={showToast}
                         from={addOrEditProject} workspaceId={idWorkspace} />
                         : null

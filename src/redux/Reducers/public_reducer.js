@@ -14,7 +14,8 @@ const initialState = {
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
-    indexCurrentCard:0,
+    idCurrentCard: 0,
+    indexCurrentProject: 0,
     indexOfWorkspace: 0
 }
 
@@ -33,48 +34,42 @@ const publicData = {
         state.workspaces = action.payload;
     },
     setWorkspaceByFiled(state, action) {
-        state.workspaces[state.indexOfWorkspace].workspace[action.payload.nameFiled] = action.payload.value
+        state.workspaces[state.indexOfWorkspace][action.payload.nameFiled] = action.payload.value
 
         // state.workspaces.forEach((workspace, index) => {
-        //     if (workspace.workspace._id == action.payload.workspace.workspace._id) {
-        //         state.workspaces[index].workspace[action.payload.nameFiled] = action.payload.value
+        //     if (workspace._id == action.payload.workspace._id) {
+        //         state.workspaces[index][action.payload.nameFiled] = action.payload.value
         //     }
         // })
     },
     setWorkspaceBeforeChanges(state, action) {
 
         state.workspaces.forEach((workspace, index) => {
-            if (workspace.workspace._id == action.payload.workspace._id) {
-                state.workspaces[index].workspace = action.payload.workspace
+            if (workspace._id == action.payload.workspace._id) {
+                state.workspaces[index] = action.payload.workspace
             }
         })
     },
 
     setProjectByFiledFromWorkspace(state, action) {
-        state.workspaces.forEach((workspace, index1) => {
-            if (workspace.workspace._id == action.payload.project.workspace) {
-                workspace.projectList.forEach((project, index2) => {
-                    if (project.project._id == action.payload.project._id) {
-                        state.workspaces[index1].projectList[index2].project[action.payload.nameFiled] = action.payload.value
-                        let a = state.workspaces[index1].projectList[index2].project[action.payload.nameFiled]
-                        console.log(a);
-                    }
-                })
-            }
-        })
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject]
+        [action.payload.nameFiled] = action.payload.value
+
     },
     setProjectInWorkspace(state, action) {
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject]
+            = action.payload
 
-        state.workspaces.forEach((workspace, index1) => {
-            if (workspace.workspace._id == action.payload.project.workspace) {
-                workspace.projectList.forEach((project, index2) => {
-                    if (project.project._id == action.payload.project._id) {
-                        state.workspaces[index1].projectList[index2].project = action.payload.project
-                        console.log(state.workspaces[index1].projectList[index2].project)
-                    }
-                })
-            }
-        })
+        // state.workspaces.forEach((workspace, index1) => {
+        //     if (workspace._id == action.payload.project.workspace) {
+        //         workspace.project.forEach((project, index2) => {
+        //             if (project_id == action.payload.project._id) {
+        //                 state.workspaces[index1].project[index2].project = action.payload.project
+        //                 console.log(state.workspaces[index1].project[index2].project)
+        //             }
+        //         })
+        //     }
+        // })
     },
     setProjects(state, action) {
         state.projects = action.payload;
@@ -87,7 +82,7 @@ const publicData = {
         console.log(state.milestones)
     },
     addNewWorkspace(state, action) {
-        state.workspaces.push({ "workspace": action.payload, "projectList": [] })
+        state.workspaces.push(action.payload)
     },
 
     deletTask(state, action) {
@@ -106,30 +101,14 @@ const publicData = {
     },
     addProjectToProjects(state, action) {
 
-        let workspaceId = action.payload.project.workspace
+        let workspaceId = action.payload.workspace
         for (let i = 0; i < state.workspaces.length; i++) {
-            if (state.workspaces[i].workspace._id == workspaceId) {
-                console.log("yes");
-                console.log(action.payload);
-                console.log(state.workspaces[i].projectList)
-                // state.workspaces[i].projectList.push({ "project": action.payload.project, "countTasks": 0, "countReadyTask": 0 })
-                state.workspaces[i].projectList.push(action.payload)
-
+            if (state.workspaces[i]._id == workspaceId) {
+                state.workspaces[i].projects.push(action.payload)
             }
         }
-        // state.workspaces.forEach((workspace) => {
-        //     if (workspace.workspace._id == workspaceId) {
-        //         console.log("yes");
-        //         console.log(workspace.workspace.projectList)
+    },
 
-        //         // workspace.workspace.projectList.push(action.payload)
-        //     }
-        // })
-    },
-    addProjectTArray(state, action) {
-        state.projects.push(action.payload)
-    },
-    // state.projects.push(action.payload)
 
     setNewTask(state, action) {
         let i, j
@@ -190,9 +169,11 @@ const publicData = {
         state.cards = action.payload;
     },
     deleteProjectFromWorkspace(state, action) {
-        state.projects = state.projects.filter((_, i) =>
-            state.projects[i].project._id !== action.payload._id
+
+        state.workspaces[state.indexOfWorkspace].projects.filter((_, i) =>
+            state.workspaces[state.indexOfWorkspace].projects[i]._id !== action.payload._id
         )
+
     },
     getCardsOfProject(state, action) {
         state.projects.find(project => {
@@ -223,7 +204,7 @@ const publicData = {
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
         state.workspaces = state.workspaces.filter((_, i) =>
-            state.workspaces[i].workspace._id !== action.payload._id
+            state.workspaces[i]._id !== action.payload._id
         )
     },
     setCardNameInput(state, action) {
@@ -235,8 +216,8 @@ const publicData = {
     },
     updateWorkspaceUfterEditInServer(state, action) {
         state.workspaces.forEach((workspace, index) => {
-            if (workspace.workspace._id === action.payload._id)
-                state.workspaces[index].workspace = action.payload
+            if (workspace._id === action.payload._id)
+                state.workspaces[index] = action.payload
         }
 
         )
@@ -260,6 +241,17 @@ const publicData = {
         //         })
         //     }
         // })
+    },
+    setTaskFromTasks(state, action) {
+        state.cards.forEach((card, index1) => {
+            if (card._id == action.payload.task.card) {
+                card.tasks.forEach((task, index2) => {
+                    if (task._id == action.payload.task._id) {
+                        state.cards[index1].tasks[index2] = action.payload.task
+                    }
+                })
+            }
+        })
     },
     setTaskByFiledFromTasksTry(state, action) {
         console.log("task", action.payload.task);
@@ -302,6 +294,12 @@ const publicData = {
     saveCurrentIndexOfTaskInRedux(state, action) {
         state.indexCurrentTask = action.payload
     },
+    setCurrentIndexProject(state, action) {
+        state.indexCurrentProject = action.payload
+    },
+    setIdCurrentCard(state, action) {
+        state.idCurrentCard = action.payload
+    },
     saveCurrentIndexOfCardInRedux(state, action) {
         state.indexCurrentCard = action.payload
     },
@@ -311,7 +309,7 @@ const publicData = {
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  
-    //         let a = state.workspaces[index].workspace[action.payload.nameFiled]    
+    //         let a = state.workspaces[index][action.payload.nameFiled]    
     //     }      
     // },
 

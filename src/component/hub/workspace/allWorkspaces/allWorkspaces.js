@@ -27,16 +27,16 @@ function AllWorkspaces(props) {
 
     const renderedListWorkspaces = props.workspaces.map((workspace,index) => {
 
-        return <ViewWorkspaceList
+        return <ViewWorkspaceList indexWorkspace={index}
         setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-         key={workspace.workspace._id} index={index} workspace={workspace} editWorkspace={openEditWorkspace}/>
+         key={workspace._id} workspace={workspace} editWorkspace={openEditWorkspace}/>
     })
 
     const 
     renderedGridWorkspaces = props.workspaces.map((workspace,index) => {
-        return <ViewWorkspaceGrid
+        return <ViewWorkspaceGrid indexWorkspace={index}
         setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-        key={workspace.workspace._id} index={index} workspace={workspace} editWorkspace={openEditWorkspace}/>
+        key={workspace._id} workspace={workspace} editWorkspace={openEditWorkspace}/>
         })
         const [workspaceToEdit,setWorspaceToEdit]=useState()
 

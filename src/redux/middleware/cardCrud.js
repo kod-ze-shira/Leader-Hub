@@ -94,7 +94,7 @@ export const editCard = ({ dispatch, getState }) => next => action => {
 export const removeCardById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_CARD_BY_ID') {
-        // let workspace = getState().workspace_reducer.workspace;
+        // let workspace = getState().workspace_reducer;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/removeCardById`
         $.ajax({
             url: urlData,
@@ -122,15 +122,15 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-      if (result.status == "401") {
-        result.routes ?
-           window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-          window.location.assign(`https://accounts.codes/hub/login`)
-       
-        reject(false)
-  
-      }
-      resolve(true)
-  
+        if (result.status == "401") {
+            result.routes ?
+                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
     })
-  }
+}

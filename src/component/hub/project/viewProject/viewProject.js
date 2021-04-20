@@ -23,16 +23,17 @@ function ViewProject(props) {
         set_getProjectById(false);
     }
     const routeToCards = (e) => {
-        let idProject = props.myProject.project._id;
-        // props.setProject(props.myProject.project)
-        console.log("project" + props.myProject.project._id)
-        // props.setCards(props.myProject.project.cards)
-        props.getCardsByProjectId(props.myProject.project._id)
+        let idProject = props.myProject._id;
+        // props.setProject(props.myProject)
+        console.log("project" + props.myProject._id)
+        // props.setCards(props.myProject.cards)
+        props.getCardsByProjectId(props.myProject._id)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }
 
     function editProject(project, event) {
-        props.addProjectTArray(project)
+        props.setCurrentIndexProject(props.indexProject)
+        // props.addProjectTArray(project)
         props.editProject(project)
         event.stopPropagation();
     }
@@ -43,14 +44,14 @@ function ViewProject(props) {
     }
 
     function deleteMyProject(event) {
-        props.showToast({ 'type': 'Project', 'object': props.myProject.project })
-        $(`#${props.myProject.project._id}`).css("display", "none")
+        props.showToast({ 'type': 'Project', 'object': props.myProject })
+        $(`#${props.myProject._id}`).css("display", "none")
         event.stopPropagation();
     }
 
     if (props.myProject.countTasks) {
         complited = 100 / props.myProject.countTasks;
-        complited = complited * props.myProject.countReadyTask
+        complited = complited * props.myProject.countReadyTasks
         if (complited % 1 != 0)
             complited = complited.toFixed(2);
     }
@@ -68,30 +69,30 @@ function ViewProject(props) {
             <tr
                 className='projectForWorkspace col-12 '
                 onClick={(e) => routeToCards(e)}
-                onMouseOver={() => overProject(props.myProject.project._id)}
-                onMouseOut={() => outOver(props.myProject.project._id)}
-                id={props.myProject.project._id}>
+                onMouseOver={() => overProject(props.myProject._id)}
+                onMouseOut={() => outOver(props.myProject._id)}
+                id={props.myProject._id}>
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
-                    <span class="dot" style={{ 'background-color': props.myProject.project.color }} ></span>
-                    <span class='name2ProjectInList' title={props.myProject.project.name} style={{ 'color': props.myProject.project.color }}>
-                        {props.myProject.project.name}</span>
+                    <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
+                    <span class='name2ProjectInList' title={props.myProject.name} style={{ 'color': props.myProject.color }}>
+                        {props.myProject.name}</span>
                     {/* <span class='stripeProject'
-                        // style={{ 'background-color': props.project.color }}></span>
-                        style={{ 'background-color': props.myProject.project.color }}></span> */}
+                        // style={{ 'background-color': props.color }}></span>
+                        style={{ 'background-color': props.myProject.color }}></span> */}
                 </td>
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.project.dueDate} />
+                    <Cell item={props.myProject.dueDate} />
                     <CellDescription description='Due date' />
                 </td>
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.project.cards.length ? props.myProject.project.cards.length : "0"} />
+                    <Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} />
                     <CellDescription description='card' />
                 </td>
                 <td>
                     <span className='task widthCellInProject'>
                         <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }}>
-                            {props.myProject.countReadyTask}</span>
+                            {props.myProject.countReadyTasks}</span>
                         <span className='designPropertiesProject'>
                             /{props.myProject.countTasks}</span>
                     </span>
@@ -116,13 +117,13 @@ function ViewProject(props) {
                     <CellDescription description='Team' />
                 </td> */}
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.project.updateDates.length ? props.myProject.project.updateDates[props.myProject.project.updateDates.length - 1] : '12/12/2023'} />
+                    <Cell item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12/12/2023'} />
                     <CellDescription description='Last Update' />
                 </td>
 
                 <td className='actionsProject widthCellInProject'>
                     <img style={myStyleIcons}
-                        className='iconsProject' onClick={(event) => editProject(props.myProject.project, event)} src={require('../../../img/pencil-write.png')} />
+                        className='iconsProject' onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
@@ -142,11 +143,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addProjectTArray: (p) => dispatch(actions.addProjectTArray(p)),
+        // addProjectTArray: (p) => dispatch(actions.addProjectTArray(p)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index))
 
 
     }

@@ -11,29 +11,29 @@ import $ from "jquery";
 
 function ViewWorkspaceGrid(props) {
 
-    const [indexWorkspace, setIndexWorkspace] = useState()
 
     const workspace = props.workspace
     useEffect(() => {
-        setIndexWorkspace(props.index)
     }, [props.workspaces])
 
     const routeToProject = () => {
-        props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
+        props.setIndexWorkspace(props.indexWorkspace)
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
     }
     function editWorkspace() {
-        props.saveIndexOfWorkspaceInRedux(indexWorkspace)
+        // props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        props.saveIndexOfWorkspaceInRedux(props.indexWorkspace)
         props.editWorkspace(workspace)
 
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
         console.log(workspace)
-        props.duplicateWorkspace(workspace.workspace._id);
+        props.duplicateWorkspace(workspace._id);
     }
 
     // $(`.ViewWorkspace`).mouseover(function () {
@@ -46,15 +46,15 @@ function ViewWorkspaceGrid(props) {
     }
 
     function delete_workspace() {
-        $(`#${workspace.workspace._id}`).css("display", "none")
-        props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace.workspace })
+        $(`#${workspace._id}`).css("display", "none")
+        props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace })
         props.setWorkspace(workspace);
     }
     return (
         <>
-            <div className="ViewWorkspace" id={workspace.workspace._id}
-                onMouseOver={() => over_workspace(workspace.workspace._id)}
-                onMouseOut={() => outOver(workspace.workspace._id)}>
+            <div className="ViewWorkspace" id={workspace._id}
+                onMouseOver={() => over_workspace(workspace._id)}
+                onMouseOut={() => outOver(workspace._id)}>
                 <div className="row iconsActions" >
                     <div
                         className=" edit iconsAction" onClick={editWorkspace}>
@@ -76,14 +76,14 @@ function ViewWorkspaceGrid(props) {
                     <div>
                         <div className="logoWorkspace1 " >
                             <div className="logo-w"
-                                style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}
+                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
                             >
-                                {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}
+                                {workspace.name ? workspace.name[0].toUpperCase() : null}
                             </div>
                         </div>
-                        <div className="name "><p className='nameWorkspaceInGrid' title={workspace.workspace.name}>{workspace.workspace.name}</p> </div>
+                        <div className="name "><p className='nameWorkspaceInGrid' title={workspace.name}>{workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
-                            <p className="productionDateW">{workspace.workspace.productionDate}</p>
+                            <p className="productionDateW">{workspace.productionDate}</p>
                         </div>
                     </div>
                 </div>
@@ -100,6 +100,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),

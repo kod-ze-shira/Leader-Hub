@@ -15,32 +15,29 @@ function ViewWorkspaceList(props) {
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [edit, setEdit] = useState(false);
 
-    const [indexWorkspace, setIndexWorkspace] = useState()
-
-    
     useEffect(() => {
-        setIndexWorkspace(props.index)
     }, [props.workspaces])
+
 
     const routeToProject = () => {
         // props.setWorkspace(workspace)
-        // props.setProjects(workspace.projectList)
-        props.history.push("/" + props.user + "/workspace/" + workspace.workspace._id)
+        props.setIndexWorkspace(props.indexWorkspace)
+        props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
     function editWorkspace() {
-        props.saveIndexOfWorkspaceInRedux(indexWorkspace)
+        props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.editWorkspace()
     }
     function delete_workspace() {
-        $(`#${workspace.workspace._id}`).css("display", "none")
+        $(`#${workspace._id}`).css("display", "none")
 
-        props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace.workspace })
+        props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace })
         props.setWorkspace(workspace);
     }
     function duplicateWorkspace() {
-        props.setWorkspace(workspace.workspace);
-        props.duplicateWorkspace(workspace.workspace._id);
+        props.setWorkspace(workspace);
+        props.duplicateWorkspace(workspace._id);
     }
     const [over, setover] = useState(false);
 
@@ -55,27 +52,27 @@ function ViewWorkspaceList(props) {
 
     return (
         <>
-            <div id={workspace.workspace._id}>
+            <div id={workspace._id}>
                 <div className="row WorkspaceList mt-3"
 
-                    onMouseOver={() => func_over(workspace.workspace._id)}
-                    onMouseOut={() => outOver(workspace.workspace._id)}  >
-                    <div className="col-10" onClick={() => routeToProject(workspace.workspace._id)}
+                    onMouseOver={() => func_over(workspace._id)}
+                    onMouseOut={() => outOver(workspace._id)}  >
+                    <div className="col-10" onClick={() => routeToProject(workspace._id)}
                     >
 
                         <div className="row "  >
                             <div className="Workspace "  >
                                 <div className="logoWorkspacelist logo-w "
-                                    style={{ backgroundColor: workspace.workspace.color ? workspace.workspace.color ? workspace.workspace.color : "#F7B500" : "#F7B500" }}>
-                                    {workspace.workspace.name ? workspace.workspace.name[0].toUpperCase() : null}                            </div>
+                                    style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
+                                    {workspace.name ? workspace.name[0].toUpperCase() : null}                            </div>
 
 
                             </div>
                             <div className="col-3">
-                                <p className="workspace-name-list">{workspace.workspace.name} </p>
+                                <p className="workspace-name-list">{workspace.name} </p>
                                 <div className="description-and-date">
-                                    <p className=""> {workspace.workspace.description}</p>
-                                    <p className="">Update {workspace.workspace.productionDate}</p>
+                                    <p className=""> {workspace.description}</p>
+                                    <p className="">Update {workspace.productionDate}</p>
                                 </div>
                             </div>
 
@@ -115,11 +112,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
+
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
-        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
-
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
     }
 }
 
