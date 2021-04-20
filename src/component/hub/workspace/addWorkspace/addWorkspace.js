@@ -90,11 +90,11 @@ function AddWorkspace(props) {
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="5" placeholder="Write a description about your project"
+                    <textarea class="form-control" id="description" rows="2" placeholder="Write a description about your workspace"
                         onChange={handleChange}></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="color">Workspace Color</label>
+                    <label for="color">Logo Color</label>
                     <input name="color"
                         className="ml-2 w-25 "
                         styles="height: 50px"
@@ -102,11 +102,11 @@ function AddWorkspace(props) {
                         // id='colorProject'
                         onChange={handleChange} />
                 </div>
-                <div className="row justify-content-between mt-5 mx-1 btns-in-view-details-workspace ">
-                    {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
+                <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
+                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                </button> */}
-                    <button onClick={addNewWorkspace} className="save_canges_btn col-3">Save</button>
+                </button>
+                    <button onClick={addNewWorkspace} className="save_canges_btn col-3" id='sevaNewWorkspace'>Save</button>
                 </div>
             </div>
         </>

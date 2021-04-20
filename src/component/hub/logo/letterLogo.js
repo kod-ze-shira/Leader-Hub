@@ -26,7 +26,8 @@ function LetterLogo(props) {
                                 if (idProject == props.workspaces[index].projectList[j].project._id) {
                                     props.setWorkspace(props.workspaces[index])
                                     props.setProject(props.workspaces[index].projectList[j].project)
-                                    props.getCardsByProjectId(props.workspaces[index].projectList[j].project._id)
+                                    //sssssssss
+                                    // props.getCardsByProjectId(props.workspaces[index].projectList[j].project._id)
                                 }
                             }
                         }

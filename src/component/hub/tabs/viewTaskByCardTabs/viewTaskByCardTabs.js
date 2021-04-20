@@ -70,7 +70,6 @@ function ViewTaskByCradTabs(props) {
     }
 
     const changeFiledInTask=(input)=>{
-        
         let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }

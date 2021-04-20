@@ -1,8 +1,9 @@
 .Workspacegrid{
-   cursor: pointer !important;
+   cursor: pointer;;
 
 /* color:black; */
 font-size: small;
+
       width: 7rem;
    background-color: #F6F6FA;
    height: 7.5rem;
@@ -15,10 +16,7 @@ font-size: small;
     
 }
 
-/* .iconsActions{
-   cursor: pointer !important;
-} */
-  
+
 .stripeToSavePlace{
    color:#ffffff00;
    margin-right: 0.2rem;

@@ -178,7 +178,11 @@ function ViewCards(props) {
                                     {props.cardFromMap.tasks.map((task, index) => (
                                         <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)} 
                                         key={task._id} task={task}
-                                         index={index} idTask={task._id} idCard={props.cardFromMap._id}/>
+                                        indexCard={props.indexCard}
+                                        indexTask={index}
+                                        //   idTask={task._id} 
+                                        //   idCard={props.cardFromMap._id}
+                                        />
                                     ))}
                                     {provided.placeholder}
                                 </div>

@@ -17,10 +17,10 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask,setCurrentIndexTask]=useState("")
-    const [currentIdCard,setCurrentIdCard]=useState("")
+    const [currentIndexCard,setCurrentIndexCard]=useState("")
     useEffect(() => {
-        setCurrentIndexTask(props.idTask)
-        setCurrentIdCard(props.idCard)
+        setCurrentIndexTask(props.indexTask)
+        setCurrentIndexCard(props.indexCard)
 
         console.log(props);
         // props.getAllStatusesTaskForUser();
@@ -58,14 +58,16 @@ function ViewTaskByCrad(props) {
     // }
 
     const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
         props.setCurrentIndexTask(currentIndexTask)
-        props.setIdCurrentCard(currentIdCard)
+        props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
     }
     
@@ -205,11 +207,9 @@ const mapDispatchToProps = (dispatch) => {
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasksTry(taskDetails)),
-        setCurrentIndexTask:(index)=>dispatch(actions.setCurrentIndexTask(index)),
-        setIdCurrentCard:(id)=>dispatch(actions.setIdCurrentCard(id))
-
-
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
+        setCurrentIndexTask:(index)=>dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
+        setCurrentIndexCard:(index)=>dispatch(actions.saveCurrentIndexOfCardInRedux(index))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

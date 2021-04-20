@@ -13,6 +13,9 @@ import $ from 'jquery'
 
 function ProjectsByWorkspace(props) {
 
+    // useEffect(() => {
+    //     console.log(props.workspace.projectList)
+    // }, [props.workspace])
 
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
@@ -79,13 +82,12 @@ function ProjectsByWorkspace(props) {
     }
 
     const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace) ?
-        props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList ?
-            props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
-                return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
-                    ? <ViewProject showToast={(obj) => showToast1(obj)}
-                        closeViewDetails={false} myProject={project} editProject={openEditProject} />
-                    : null
-            }) : null : null
+        props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
+            return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
+                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                    closeViewDetails={false} myProject={project} editProject={openEditProject} />
+                : null
+        }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projectList.map((project) => {
@@ -111,7 +113,19 @@ function ProjectsByWorkspace(props) {
     function searchProject() {
         setValueSearch(document.getElementById('inputSearchProjects').value)
     }
-  
+    // function closeInputSearch() {
+    //     // $("#inputSearchProjects").trigger("focusout");
+
+    //     setTimeout(() => {
+    //         if (!valueSearch)
+    //             document.getElementById('inputSearchProjects').value = ''
+    //     }, 1700);
+
+    // }
+
+
+
+
     return (
         <>
 

@@ -14,49 +14,36 @@ function AllWorkspaces(props) {
     const refToDeleteToast = useRef(null);
  
      
-    useEffect(() => {
 
+    useEffect(() => {
         props.getAllWorkspaces()
-    }, [props.bin]);
+    }, []);
 
     const [list, setlist] = useState(false);
     const [grid, setgrid] = useState(true);
     const [showAddWorkspace, setShowWorkspace] = useState(false)
     const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
-    const [disableBin,setDisableBin] = useState(props.bin)
+    
 
-    const deleteWorkspace=(obj)=>{
-        setDisableBin(true)
-        props.showToast(obj)
-        setTimeout(() => {
-            setDisableBin(false)
-        }, 10000);
-    }
+    const renderedListWorkspaces = props.workspaces.map((workspace,index) => {
 
-    const renderedListWorkspaces = props.workspaces.map(workspace => {
         return <ViewWorkspaceList
-         setShowToastDeleteWhenClickDelete={(obj)=>deleteWorkspace(obj)} 
-         key={workspace.workspace._id} 
-         workspace={workspace} 
-         editWorkspace={openEditWorkspace}
-         bin={disableBin}
-         />
+        setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
+         key={workspace.workspace._id} index={index} workspace={workspace} editWorkspace={openEditWorkspace}/>
     })
 
     const 
     renderedGridWorkspaces = props.workspaces.map((workspace,index) => {
         return <ViewWorkspaceGrid
         setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
-        key={workspace.workspace._id} bin={disableBin} index={index} workspace={workspace} editWorkspace={openEditWorkspace}/>
+        key={workspace.workspace._id} index={index} workspace={workspace} editWorkspace={openEditWorkspace}/>
         })
-    const [workspaceToEdit,setWorspaceToEdit]=useState()
+        const [workspaceToEdit,setWorspaceToEdit]=useState()
 
     function openEditWorkspace(value){
         setWorspaceToEdit(value)
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)
-
-
     }
     // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
@@ -72,6 +59,7 @@ function AllWorkspaces(props) {
     function openaddNewWorkspace() {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
+   
     }
    
 return (
@@ -144,9 +132,17 @@ return (
                         <ViewDetails closeViewDetails={() => setShowWorkspace(false)}
                          from={addOrEditWorkspace} workspace={workspaceToEdit}/> : null
                     }
+                    {/* {showToastDelete ?
+                        <ToastDelete ref={refToDeleteToast}
+                            toOnClose={deleteWorkspace}
+                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                            name={props.workspaceDeleted.name} 
+                            /> 
+                             : null}  */}
         </>
 
     )
+
 }
 const mapStateToProps = (state) => {
 

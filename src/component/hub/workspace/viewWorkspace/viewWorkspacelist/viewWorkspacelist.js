@@ -14,10 +14,13 @@ function ViewWorkspaceList(props) {
     const { workspace } = props
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [edit, setEdit] = useState(false);
+
+    const [indexWorkspace, setIndexWorkspace] = useState()
+
     
     useEffect(() => {
+        setIndexWorkspace(props.index)
     }, [props.workspaces])
-
 
     const routeToProject = () => {
         // props.setWorkspace(workspace)
@@ -26,8 +29,8 @@ function ViewWorkspaceList(props) {
     }
 
     function editWorkspace() {
-        props.setWorkspace(workspace)//to select workspace to edit and send him to server
-        props.editWorkspace(workspace)
+        props.saveIndexOfWorkspaceInRedux(indexWorkspace)
+        props.editWorkspace()
     }
     function delete_workspace() {
         $(`#${workspace.workspace._id}`).css("display", "none")
@@ -93,11 +96,10 @@ function ViewWorkspaceList(props) {
                                 <img src={duplicate}></img>
                             </div>
                             <div className="ml-1 stripe">|</div>
-                            <button
-                                disabled={props.bin}
+                            <div
                                 className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
                                 <img src={bin}></img>
-                            </button>
+                            </div>
                         </div>
                     </div>
 
@@ -115,7 +117,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
+
     }
 }
 
