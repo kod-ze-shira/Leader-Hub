@@ -60,7 +60,7 @@ function EditWorkspace(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control"
-                        id="description" rows="2"
+                        id="description" rows="5"
                         placeholder="Write a description about your workspace"
                         name="description"
                         value={props.workspaces[props.indexOfWorkspace].description}
