@@ -12,7 +12,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
 import { createMuiTheme } from '@material-ui/core/styles';
-import cyan from '@material-ui/core/colors/cyan';
+import { withRouter } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +53,10 @@ function SelectHeader(props) {
         console.log(e)
         props.from(e)
     }
-
+    function openGantt() {
+        props.history.push( "/"+ props.user +"/gantt")
+    }
+    
     return (
         <>
             {props.workspaces.length > 0 ?
@@ -85,7 +88,7 @@ function SelectHeader(props) {
                             >
                                 <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
                                 <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Gant" className='tabsInSelect'onClick={(e) => changePresent("gant")} />
+                                <Tab label="Gantt" onClick={(e)=>openGantt} />
                                 <Tab label="" />
                             </Tabs>
                             :
@@ -105,6 +108,7 @@ function SelectHeader(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        user: state.public_reducer.userName,
         cards: state.public_reducer.cards,
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
@@ -117,4 +121,4 @@ const mapDispatchToProps = (dispatch) => {
         getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SelectHeader)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectHeader))

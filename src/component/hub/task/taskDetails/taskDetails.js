@@ -19,7 +19,7 @@ function TaskDetails(props) {
         props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'project': taskBeforeChanges })
 
-    }, [props.cards])
+    }, [props.cards,props.cards[props.indexCurrentCard]])
 
 
     // useEffect(() => {
@@ -38,15 +38,15 @@ function TaskDetails(props) {
     // setStatusTemp(status)
     // }, [props.statuses])
 
-    const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
-    const [editDescription, setEditDescription] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description)
-    const task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
+    // const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
+    // const [editDescription, setEditDescription] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description)
+    // const task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
     const status = props.status
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
-    const [editTask, setEditTask] = useState(task)
+    // const [editTask, setEditTask] = useState(task)
     const [statusId, setStatusId] = useState()
 
     const [statusTemp, setStatusTemp] = useState({})
@@ -123,7 +123,7 @@ function TaskDetails(props) {
                 <div className="row justify-content-between mx-1" >
                     {/* <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label> */}
                     <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-                  
+
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
@@ -132,6 +132,7 @@ function TaskDetails(props) {
                         required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"
+                        onChange={(e) => changeFiledInTask(e)}
                         value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                     <div class="invalid-feedback">
                         Please enter task name.
@@ -140,7 +141,7 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="3"
+                        id="descriptionProject" rows="1"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
                         value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
@@ -196,8 +197,8 @@ function TaskDetails(props) {
                                 {openPopUp ?
                                     <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
-                                {openPopUpToAdd ? <AddStatus task={task} /> : null}
-                                
+                                {openPopUpToAdd ? <AddStatus task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status} /> : null}
+
                             </div>
 
                         </div>
@@ -258,8 +259,8 @@ const mapStateToProps = (state) => {
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
-        indexCurrentCard:state.public_reducer.indexCurrentCard,
-        indexCurrentTask:state.public_reducer.indexCurrentTask
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {

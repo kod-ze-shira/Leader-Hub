@@ -32,8 +32,8 @@ function CardsPage(props) {
             case 'gantt':
                 return <GanttDesign />
             default:
-                // return <Tabs showToast={showToast} projectId={props.project._id} />
-                return <ProjectPlatform showToast={showToast} flag={flag} />
+                return <Tabs showToast={showToast} projectId={props.project._id} />
+                // return <ProjectPlatform showToast={showToast} flag={flag} />
         }
     }
     return (

@@ -102,7 +102,6 @@ const publicData = {
         )
     },
     addProjectToProjects(state, action) {
-
         let workspaceId = action.payload.project.workspace
         for (let i = 0; i < state.workspaces.length; i++) {
             if (state.workspaces[i].workspace._id == workspaceId) {
@@ -320,6 +319,7 @@ const publicData = {
         state.indexCurrentCard = action.payload
     },
     saveIndexOfWorkspaceInRedux(state, action) {
+       
         state.indexOfWorkspace = action.payload
     }
     // setWorkspaceByFiledFromWorkspaces(state, action) {

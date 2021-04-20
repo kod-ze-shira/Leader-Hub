@@ -36,10 +36,6 @@ function ViewWorkspaceGrid(props) {
         props.duplicateWorkspace(workspace.workspace._id);
     }
 
-    // $(`.ViewWorkspace`).mouseover(function () {
-    //     console.log(this.id)
-    //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
-    // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': 'rgb(220 220 226)' })
@@ -61,14 +57,15 @@ function ViewWorkspaceGrid(props) {
                         <img class='imageIcon' src={pencil}></img>
                     </div>
                     <div className="stripe stripeToSavePlace">|</div>
-                    <div className=" delete iconsAction"
+                    <button disabled={props.bin}
+                        className="p-0 m-0 delete iconsAction delete1"
+                        name="delete"
                         onClick={delete_workspace}>
                         <img class='imageIcon' src={bin}></img>
-                    </div>
+                    </button>
                     <div className="stripe stripeToSavePlace" >|</div>
-                    <div className="add iconsAction" onClick={duplicateWorkspace}>
+                    <div className="add iconsAction ml-1" onClick={duplicateWorkspace}>
                         <img class='imageIcon' src={duplicate}></img>
-
                     </div>
                 </div>
                 <div className="Workspacegrid"
@@ -95,7 +92,7 @@ const mapStateToProps = (state) => {
 
     return {
         user: state.public_reducer.userName,
-        workspaces: state.workspace_reducer.workspaces,
+        // workspaces: state.workspace_reducer.workspaces,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -107,8 +104,6 @@ const mapDispatchToProps = (dispatch) => {
         saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
     }
 
-
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewWorkspaceGrid))

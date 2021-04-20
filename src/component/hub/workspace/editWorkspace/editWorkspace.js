@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
+    useEffect(() => {
+
+
+    }, [props.workspaces])
 
    
 
@@ -47,7 +51,6 @@ function EditWorkspace(props) {
                         value={props.workspaces[props.indexOfWorkspace].workspace.name}
                     />
 
-
                     <div class="invalid-feedback">
                         Please enter workspace name.
                      </div>
@@ -59,11 +62,11 @@ function EditWorkspace(props) {
                         id="description" rows="2"
                         placeholder="Write a description about your workspace"
                         name="description"
-                        value={props.workspaces[props.indexOfWorkspace].workspace.description}
+                        // value={props.workspaces[props.indexOfWorkspace].workspace.description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="color">Color</label>
+                    <label for="color">Workspace Color</label>
                     <input name="color"
                         className="ml-2 w-25 "
                         styles="height: 50px"
@@ -72,7 +75,7 @@ function EditWorkspace(props) {
                         value={props.workspaces[props.indexOfWorkspace].workspace.color}
                         onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
+                <div className="row justify-content-between mt-5  mx-1 btns-in-view-details-workspace ">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
