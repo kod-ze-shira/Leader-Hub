@@ -13,6 +13,9 @@ import $ from 'jquery'
 
 function ProjectsByWorkspace(props) {
 
+    // useEffect(() => {
+    //     console.log(props.projects)
+    // }, [props.workspace])
 
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
@@ -78,18 +81,17 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace.workspace._id == idWorkspace) ?
-        props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList ?
-            props.workspaces.find(workspace => workspace.workspace._id == idWorkspace).projectList.map((project) => {
-                return project.project.name.toUpperCase().includes(valueSearch.toUpperCase())
-                    ? <ViewProject showToast={(obj) => showToast1(obj)}
-                        closeViewDetails={false} myProject={project} editProject={openEditProject} />
-                    : null
-            }) : null : null
+    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
+        props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
+            return project.name.toUpperCase().includes(valueSearch.toUpperCase())
+                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                    closeViewDetails={false} indexProject={index} myProject={project} editProject={openEditProject} />
+                : null
+        }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
-        return workspace.projectList.map((project) => {
-            return project.project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
+        return workspace.projects.map((project) => {
+            return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
                 closeViewDetails={false} myProject={project} editProject={openEditProject} />
                 : null
         })

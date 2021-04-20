@@ -21,7 +21,7 @@ function SelectProject(props) {
 
     const changeSelectedProject = (id) => {
 
-        myProject = props.workspace.projectList.find(p => p.project._id == id.value)
+        myProject = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(myProject.project)
         // props.selectProject(myProject.project.name)
         console.log(myProject.project.cards)
@@ -94,7 +94,7 @@ function SelectProject(props) {
 
     };
 
-    const viewProjectsList = props.workspace.projectList ? props.workspace.projectList.map((project) => (
+    const viewProjectsList = props.workspace.project ? props.workspace.project.map((project) => (
         { value: project.project._id, label: project.project.name }
     )) : null
     return (

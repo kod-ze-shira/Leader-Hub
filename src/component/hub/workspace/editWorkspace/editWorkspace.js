@@ -11,7 +11,7 @@ function EditWorkspace(props) {
 
    
 
-    const [workspaceBeforeChanges] = useState({ ...props.workspace.workspace })
+    const [workspaceBeforeChanges] = useState({ ...props.workspace })
 
     const nameRequired = useRef()
     useEffect(() => {
@@ -23,7 +23,7 @@ function EditWorkspace(props) {
     function saveEdit() {
 
         if (nameRequired.current.value) {
-            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
+            props.saveWorkspaceInServerUfterEdit({ 'workspace': props.workspace, 'workspaceBeforeChanges': workspaceBeforeChanges })
             props.objectBeforeChanges(null)
             props.closeViewDetails();
         }
@@ -48,7 +48,8 @@ function EditWorkspace(props) {
                     <input name="name" ref={nameRequired} required
                         onChange={(input) => changeFiledInWorkspace(input)}
                         type="text" class="form-control" id="name"
-                        value={props.workspaces[props.indexOfWorkspace].workspace.name}
+                        // value={props.workspace.name} 
+                        value={props.workspaces[props.indexOfWorkspace].name}
                     />
 
                     <div class="invalid-feedback">
@@ -62,7 +63,7 @@ function EditWorkspace(props) {
                         id="description" rows="2"
                         placeholder="Write a description about your workspace"
                         name="description"
-                        // value={props.workspaces[props.indexOfWorkspace].workspace.description}
+                        value={props.workspaces[props.indexOfWorkspace].description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">
@@ -72,7 +73,7 @@ function EditWorkspace(props) {
                         styles="height: 50px"
                         type="color"
                         id='colorProject'
-                        value={props.workspaces[props.indexOfWorkspace].workspace.color}
+                        value={props.workspaces[props.indexOfWorkspace].color}
                         onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
                 <div className="row justify-content-between mt-5  mx-1 btns-in-view-details-workspace ">

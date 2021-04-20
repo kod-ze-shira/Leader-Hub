@@ -18,8 +18,6 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
             success: function (data) {
                 dispatch(actions.setProject(data))
 
-                console.log("success")
-                console.log("data", data);
 
             },
             error: function (err) {
@@ -49,10 +47,10 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
                 return result.json()
             })
             .then((result) => {
-                console.log(result)
+
                 checkPermission(result).then((ifOk) => {
-                    dispatch(actions.setProjects(result.projectList))
-                    // dispatch(actions.addProjectToProjects(result.projectList))
+                    dispatch(actions.setProjects(result.projects))
+                    // dispatch(actions.addProjectToProjects(result.projects))
                     // addProjectToProjects
                 })
             })
@@ -79,14 +77,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 }),
             dataType: 'json',
             success: function (data) {
-                console.log("success")
-                console.log(data.message)
-                let p = {
-                    'project': data.message,
-                    countReadyTask: 0,
-                    countTasks: 0
-                }
-                dispatch(actions.addProjectToProjects(p))
+                dispatch(actions.addProjectToProjects(data.message))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -106,7 +97,8 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
         // let projectBeforeChanges = getState().public_reducer.projects[0];
         let project = action.payload.project;
         let projectBeforeChanges = action.payload.projectBeforeChanges;
-        let urlData = `https://reacthubproject.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
+
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -116,15 +108,14 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ 'project': project }),
             success: function (data) {
-                console.log("success")
-                console.log("data", data.result);
-                dispatch(actions.setProjectInWorkspace({ "project": data.result }))
+
+                dispatch(actions.setProjectInWorkspace(data.result))
 
             },
             error: function (err) {
 
                 checkPermission(err).then((ifOk) => {
-                    dispatch(actions.setProjectInWorkspace({ "project": projectBeforeChanges }))
+                    dispatch(actions.setProjectInWorkspace(projectBeforeChanges))
 
                 })
             }
@@ -150,11 +141,10 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
             contentType: "application/json; charset=utf-8",
             // data: JSON.stringify({ project }),
             success: function (data) {
-                console.log("success")
-                console.log("data", data);
+
                 // dispatch(actions.setProject(data.result))
                 dispatch(actions.deleteProjectFromWorkspace(data.project))
-                // dispatch(actions.setProjects(result.projectList))
+                // dispatch(actions.setProjects(result.projects))
 
             },
             error: function (err) {

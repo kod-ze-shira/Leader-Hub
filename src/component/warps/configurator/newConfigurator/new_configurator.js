@@ -15,11 +15,13 @@ function NewConfigorator(props) {
             window.location.href.indexOf('allProjects') != -1) {
             $("li").removeClass("li-back")
             $(`#allProjects`).addClass("li-back")
+            $(`#allProjects img`).removeClass("li-back")
 
         } else {
             if (window.location.href.indexOf('myTasks') != -1) {
                 $("li").removeClass("li-back")
                 $(`#myTask`).addClass("li-back")
+                $(`#myTask img`).removeClass("li-back")
             }
         }
 
@@ -30,6 +32,8 @@ function NewConfigorator(props) {
         $(document).ready(function () {
             $("li").removeClass("li-back")
             $(e).addClass("li-back")
+            $('img').removeClass("li-back")
+
         })
 
     }

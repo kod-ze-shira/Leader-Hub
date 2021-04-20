@@ -7,33 +7,33 @@ import project_reducer from "../../../../redux/Reducers/project_reducer"
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
-    const [projectBeforeChanges] = useState({ ...props.workspaces[props.indexWorkspace].projectList[props.indexProject].project })
+    const [projectBeforeChanges] = useState({ ...props.workspaces[props.indexWorkspace].projects[props.indexProject] })
     let project;
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
     }, [props.workspaces])
 
 
-    let myDate = props.workspaces[props.indexWorkspace].projectList[props.indexProject].project.dueDate;
+    let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
     const nameRequired = useRef()
 
     const changeFiledInProject = (input) => {
 
-        // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projectList[props.indexProject].project }
+        // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
-        // props.workspaces[props.indexWorkspace].projectList[props.indexProject].project[input.target.name] = input.target.value
+        // props.workspaces[props.indexWorkspace].projects[props.indexProject][input.target.name] = input.target.value
     }
 
     const changeDateInProject = (input) => {
 
         let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
-        let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projectList[props.indexProject].project }
+        let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         setDueDateProject(input.target.value)
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
-        // props.workspaces[props.indexWorkspace].projectList[props.indexProject].project[input.target.name] = res
+        // props.workspaces[props.indexWorkspace].projects[props.indexProject][input.target.name] = res
     }
 
     function saveProject() {
@@ -41,7 +41,7 @@ function EditProject(props) {
         let date = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
-        project = props.workspaces[props.indexWorkspace].projectList[props.indexProject].project
+        project = props.workspaces[props.indexWorkspace].projects[props.indexProject]
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
         // project.dueDate = res
@@ -69,13 +69,13 @@ function EditProject(props) {
             <div className="details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
                 <div class="row justify-content-between  mx-1 mb-2">
-                    <label>workspace: {props.workspace.workspace.name}</label>
+                    <label>workspace: {props.workspace.name}</label>
                 </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
                     <input name="name" onChange={(e) => changeFiledInProject(e)}
                         type="text" class="form-control" required ref={nameRequired}
-                        value={props.workspaces[props.indexWorkspace].projectList[props.indexProject].project.name} placeholder='Write a name' />
+                        value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
                     <div class="invalid-feedback">
                         Please enter project name.
                      </div>
@@ -83,7 +83,7 @@ function EditProject(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" id="descriptionProject" rows="5" placeholder="Write a description about your project"
-                        onChange={(e) => changeFiledInProject(e)} value={props.workspaces[props.indexWorkspace].projectList[props.indexProject].project.description}></textarea>
+                        onChange={(e) => changeFiledInProject(e)} value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></textarea>
                 </div>
                 <div className="row justify-content-between">
                     <div class="form-group col-5">
@@ -93,7 +93,7 @@ function EditProject(props) {
                             onChange={(e) => changeFiledInProject(e)}
                             type="color"
                             id='colorProject'
-                            value={props.workspaces[props.indexWorkspace].projectList[props.indexProject].project.color}
+                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].color}
                         />
                     </div>
                     <div class="form-group col-5">

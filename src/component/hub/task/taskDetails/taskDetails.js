@@ -12,15 +12,13 @@ import editStatus from '../../status/editStatus';
 
 function TaskDetails(props) {
     const nameRequired = useRef()
-    const [taskBeforeChanges] = useState({ ...props.task })
-
+    const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
 
     useEffect(() => {
         props.getAllStatusesTaskForUser();
-        props.objectBeforeChanges({ 'type': 'task', 'project': taskBeforeChanges })
+        props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
 
-    }, [props.cards,props.cards[props.indexCurrentCard]])
-
+    }, [props.cards, props.statuses])
 
     // useEffect(() => {
     // let status = [];
