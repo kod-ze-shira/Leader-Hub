@@ -1,29 +1,82 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
-import { uploadFiles } from '../../../redux/middleware/filesCrud'
+import File from './file/file'
 
 function UploadFile(props) {
     const [uploadFile, setUploadFile] = useState([])
-
+    const [uploadFile1, setUploadFile1] = useState([])
+    const fileInputRef = useRef()
     const [saveInServer, setSaveInServer] = useState(false)
-   
+    const [fileComponent, setFileComponent] = useState([])
     useEffect(() => {
         console.log(props);
-        props.uploadFiles(props.files)
+        // props.uploadFiles(props.files)
     }, [props.files])
 
-    const uploadMulti = (file) => {
 
+
+    const uploadMulti = () => {
         // setUploadFile([...uploadFile, file])
-        props.addFile(file)
-        console.log(props)
+        if (fileInputRef.current.files.length) {
+
+            for (let index = 0; index < fileInputRef.current.files.length; index++) {
+                if (!uploadFile1)
+                    setUploadFile1([...fileInputRef.current.files[index]]);
+                else
+                    setUploadFile1([...uploadFile1, fileInputRef.current.files[index]])
+
+
+                let fileComponent2 = fileComponent1(fileInputRef.current.files[index].name, fileInputRef.current.files[index].name)
+
+                if (!fileComponent.length)
+                    setFileComponent([fileComponent2])
+                else
+                    setFileComponent([...fileComponent, fileComponent2])
+
+                // let div = document.createElement("div");
+                // let deleteFile = document.createElement('button')
+                // deleteFile.innerText = 'X'
+                // deleteFile.name = 'fileInLocal'
+                // deleteFile.setAttribute('onclick', (e) => deleteFile1(e));
+
+                // deleteFile.addEventListener("click", deleteFile2);
+
+                // div.appendChild(deleteFile);
+                // deleteFile.onclick = deleteFile2();
+
+                // div.innerHTML += fileInputRef.current.files[index].name
+                // this.setState({
+                //     users: [...this.state.users, <User />]
+                //   })
+                // let element = document.getElementById('myFile')
+                // element.appendChild(fileComponent);
+            }
+        }
+
+
+        // document.getElementById('myFile').innerText += 
+        // if (!uploadFile1)
+        // setUploadFile1([file])
+        // else
+        // setUploadFile1([...uploadFile1, file])
+
+        // props.addFile(file)
+        // console.log(props)
 
     }
 
+
+    const fileComponent1 = (urlFile, nameFile) => {
+        return <File urlFile={urlFile} nameFile={nameFile} />
+    }
+    // function deleteFile2() {
+    //     alert('delete file')
+    // }
+
     const saveFiles = () => {
         // setSaveInServer(true)
-        props.uploadFiles(uploadFile)
+        props.uploadFiles(uploadFile1)
 
     }
     return (
@@ -43,10 +96,13 @@ function UploadFile(props) {
                     display: 'none',
                     cursor: 'pointer',
                 }}
-                onChange={(e) => uploadMulti(e.target.files[0])}
+                ref={fileInputRef}
+                multiple
+                onChange={() => uploadMulti()}
             />
+            <div id='myFile'></div>
+            {fileComponent}
             <button onClick={saveFiles}>save</button>
-            <button onClick={() => props.getFiles()}>get</button>
         </div>
     )
 }
@@ -59,7 +115,6 @@ export default connect(
     (dispatch) => {
         return {
             uploadFiles: (filesArr) => dispatch(actions.uploadFiles(filesArr)),
-            // getFiles: () => dispatch(actions.getFiles()),
             addFile: (files) => dispatch(actions.addFile(files)),
         }
     }

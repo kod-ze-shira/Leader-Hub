@@ -8,7 +8,7 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
 import ViewAllStatuses from '../../status/viewAllStatuses'
 import AddStatus from '../../status/addStatus'
-
+import UploadFile from '../../uploadFile/uploadFile'
 function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
@@ -259,7 +259,7 @@ function TaskDetails(props) {
                         value={milestonesValue}></input>
                     Is Milestones
                 </label> */}
-
+                {/* <UploadFile /> */}
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
