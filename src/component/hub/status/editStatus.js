@@ -24,11 +24,14 @@ function EditStatus(props) {
         props.editStatus(editStatus)
     }
     const handleChangeStatus = (event) => {
+        debugger
+        console.log(event.target)
         const { name, value } = event.target
         setEditStatus(prevState => ({
             ...prevState,
             [name]: value
         }));
+        console.log(editStatus);
     }
     return (
 

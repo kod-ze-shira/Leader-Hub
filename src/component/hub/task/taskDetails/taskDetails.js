@@ -36,14 +36,10 @@ function TaskDetails(props) {
     // setStatusTemp(status)
     // }, [props.statuses])
 
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
-    const [editDescription, setEditDescription] = useState(props.task.description)
-    const task = props.task
     const status = props.status
     const [milstone, setMilstone] = useState(props.task.milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
-    const [editTask, setEditTask] = useState(task)
     const [statusId, setStatusId] = useState()
 
     const [statusTemp, setStatusTemp] = useState({})
@@ -77,6 +73,7 @@ function TaskDetails(props) {
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
+            props.objectBeforeChanges(null)
             props.EditTask(props.task)
         }
         else {
@@ -128,8 +125,8 @@ function TaskDetails(props) {
                         required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"
-                        value={props.task.name}
-                        onChange={(e) => changeFiledInTask(e)} />
+                        onChange={(e) => changeFiledInTask(e)}
+                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                     <div class="invalid-feedback">
                         Please enter task name.
                      </div>
@@ -193,8 +190,8 @@ function TaskDetails(props) {
                                 {openPopUp ?
                                     <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
-                                {openPopUpToAdd ? <AddStatus task={task} /> : null}
-                                
+                                {openPopUpToAdd ? <AddStatus task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status} /> : null}
+
                             </div>
 
                         </div>

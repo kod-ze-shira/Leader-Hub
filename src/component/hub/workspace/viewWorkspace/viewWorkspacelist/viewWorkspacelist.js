@@ -15,9 +15,12 @@ function ViewWorkspaceList(props) {
     const [openEditWorkspace, setOpenEditWorkspace] = useState(false)
     const [edit, setEdit] = useState(false);
 
-    useEffect(() => {
-    }, [props.workspaces])
+    const [indexWorkspace, setIndexWorkspace] = useState()
 
+    
+    useEffect(() => {
+        setIndexWorkspace(props.index)
+    }, [props.workspaces])
 
     const routeToProject = () => {
         // props.setWorkspace(workspace)
@@ -26,7 +29,7 @@ function ViewWorkspaceList(props) {
     }
 
     function editWorkspace() {
-        props.setWorkspace(workspace)//to select workspace to edit and send him to server
+        props.saveIndexOfWorkspaceInRedux(indexWorkspace)
         props.editWorkspace()
     }
     function delete_workspace() {
@@ -116,7 +119,9 @@ const mapDispatchToProps = (dispatch) => {
 
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
-        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId))
+        duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
+
     }
 }
 
