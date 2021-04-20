@@ -37,7 +37,7 @@ function ViewCards(props) {
         let task;
         if (inputValue) {
             // props.statuses[0]._id
-            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
+            task = { name: inputValue, description: "", status: "", startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -224,7 +224,7 @@ const mapStateToProps = (state) => {
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
-        statuses: state.status_reducer.statuses,
+        // statuses: state.status_reducer.statuses,
         // user: state.public_reducer.userName,
 
     }
