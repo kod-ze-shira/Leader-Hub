@@ -94,8 +94,8 @@ function SelectProject(props) {
 
     };
 
-    const viewProjectsList = props.workspace.project ? props.workspace.project.map((project) => (
-        { value: project.project._id, label: project.project.name }
+    const viewProjectsList = props.workspace.projects ? props.workspace.projects.map((project) => (
+        { value: project._id, label: project.name }
     )) : null
     return (
         <>
