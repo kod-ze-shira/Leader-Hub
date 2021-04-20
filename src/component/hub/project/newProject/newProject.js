@@ -148,7 +148,7 @@ function NewProject(props) {
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="2" placeholder="Write a description about your project"
+                    <textarea class="form-control" name="description" id="descriptionProject" rows="5" placeholder="Write a description about your project"
                         onChange={(e) => changeDescriptionInProject(e)} value={descriptioneProject}></textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -173,12 +173,12 @@ function NewProject(props) {
                             onChange={(e) => changeDueDateInProject(e)} />
                     </div>
                 </div>
-
                 <UploadFile />
-                <div className="row justify-content-between  mx-1 btns-in-view-details-project">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
+
+                <div className="row justify-content-between mt-5 mx-1 btns-in-view-details-project">
+                    {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                </button>
+                </button> */}
                     <button onClick={() => addProject()} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>

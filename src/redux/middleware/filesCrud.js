@@ -1,18 +1,19 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 
-export const uploadFiles = ({ dispatch, getState }) => next => action => {
 
+export const uploadFiles = ({ dispatch, getState }) => next => action => {
+    var files = getState().files_reducer.files
     if (action.type === 'UPLOAD_FILES') {
         var formData = new FormData()
-        var files = action.payload
-        // var myFiles = Object.values(files)
-        if (files.length < 1) { console.log("ooops... not files to upload") }
-        else {
-            files.forEach((file, index) => {
-                formData.append("file" + index, file)
-            })
-        }
+        // var files = action.payload
+        var myFiles = Object.values(files)
+        // if (files.length < 1) { console.log("ooops... not files to upload") }
+        // else {
+        files.forEach((file, index) => {
+            formData.append("file", myFiles)
+        })
+        // }
         console.log(formData)
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
 

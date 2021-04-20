@@ -4,7 +4,12 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
+    useEffect(() => {
 
+
+    }, [props.workspaces])
+
+   
 
     const [workspaceBeforeChanges] = useState({ ...props.workspace })
 
@@ -32,7 +37,6 @@ function EditWorkspace(props) {
     const changeFiledInWorkspace = (input) => {
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
-        // props.workspace[input.target.name] = input.target.value
     }
 
     return (
@@ -48,7 +52,6 @@ function EditWorkspace(props) {
                         value={props.workspaces[props.indexOfWorkspace].name}
                     />
 
-
                     <div class="invalid-feedback">
                         Please enter workspace name.
                      </div>
@@ -57,25 +60,23 @@ function EditWorkspace(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control"
-                        id="description" rows="2"
+                        id="description" rows="5"
                         placeholder="Write a description about your workspace"
-                        // value={props.workspace.description}
                         name="description"
                         value={props.workspaces[props.indexOfWorkspace].description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="color">Color</label>
+                    <label for="color">Workspace Color</label>
                     <input name="color"
                         className="ml-2 w-25 "
                         styles="height: 50px"
                         type="color"
                         id='colorProject'
                         value={props.workspaces[props.indexOfWorkspace].color}
-                        // value={props.workspace.color}
                         onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
+                <div className="row justify-content-between mt-5  mx-1 btns-in-view-details-workspace ">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
@@ -88,9 +89,7 @@ function EditWorkspace(props) {
 export default connect(
     (state) => {
         return {
-            // workspace: state.workspace_reducer.workspace,
             workspaces: state.public_reducer.workspaces,
-            // workspaceToEdit: state.workspace_reducer.workspace,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace
         }
     },

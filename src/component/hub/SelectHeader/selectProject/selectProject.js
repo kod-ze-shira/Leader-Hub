@@ -8,10 +8,10 @@ import Select from 'react-select';
 
 function SelectProject(props) {
 
-    const { idProject } = useParams();
+    const { idWorkspace } = useParams();
 
     useEffect(() => {
-        props.getProjectByIdInServer(idProject)
+        // props.getProjectByIdInServer(idWorkspace)
         if (!props.projects)
             props.getProjectsByWorkspaceId(props.project.workspace)
     }, [props.workspace])
