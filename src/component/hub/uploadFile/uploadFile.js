@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import File from './file/file'
+import './uploadFile.css'
+
 
 function UploadFile(props) {
     const [uploadFile, setUploadFile] = useState([])
-    const [uploadFile1, setUploadFile1] = useState([])
     const fileInputRef = useRef()
-    const [saveInServer, setSaveInServer] = useState(false)
-    const [fileComponent, setFileComponent] = useState([])
+    const [fileComponentArr, setFileComponentArr] = useState([])
     useEffect(() => {
         console.log(props);
         // props.uploadFiles(props.files)
@@ -18,48 +18,33 @@ function UploadFile(props) {
 
     const uploadMulti = () => {
         // setUploadFile([...uploadFile, file])
+        debugger
+        let r = fileInputRef.current.file
         if (fileInputRef.current.files.length) {
 
             for (let index = 0; index < fileInputRef.current.files.length; index++) {
-                if (!uploadFile1)
-                    setUploadFile1([...fileInputRef.current.files[index]]);
+                if (!uploadFile)
+                    setUploadFile([...fileInputRef.current.files[index]]);
                 else
-                    setUploadFile1([...uploadFile1, fileInputRef.current.files[index]])
+                    setUploadFile([...uploadFile, fileInputRef.current.files[index]])
 
 
-                let fileComponent2 = fileComponent1(fileInputRef.current.files[index].name, fileInputRef.current.files[index].name)
-
-                if (!fileComponent.length)
-                    setFileComponent([fileComponent2])
+                let newComponent = addFileComponent(fileInputRef.current.files[index].name, fileInputRef.current.files[index].name)
+                if (!fileComponentArr.length)
+                    setFileComponentArr([newComponent])
                 else
-                    setFileComponent([...fileComponent, fileComponent2])
+                    setFileComponentArr([...fileComponentArr, newComponent])
 
-                // let div = document.createElement("div");
-                // let deleteFile = document.createElement('button')
-                // deleteFile.innerText = 'X'
-                // deleteFile.name = 'fileInLocal'
-                // deleteFile.setAttribute('onclick', (e) => deleteFile1(e));
 
-                // deleteFile.addEventListener("click", deleteFile2);
-
-                // div.appendChild(deleteFile);
-                // deleteFile.onclick = deleteFile2();
-
-                // div.innerHTML += fileInputRef.current.files[index].name
-                // this.setState({
-                //     users: [...this.state.users, <User />]
-                //   })
-                // let element = document.getElementById('myFile')
-                // element.appendChild(fileComponent);
             }
         }
 
 
         // document.getElementById('myFile').innerText += 
-        // if (!uploadFile1)
-        // setUploadFile1([file])
+        // if (!uploadFile)
+        // setUploadFile([file])
         // else
-        // setUploadFile1([...uploadFile1, file])
+        // setUploadFile([...uploadFile, file])
 
         // props.addFile(file)
         // console.log(props)
@@ -67,7 +52,7 @@ function UploadFile(props) {
     }
 
 
-    const fileComponent1 = (urlFile, nameFile) => {
+    const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
     // function deleteFile2() {
@@ -76,11 +61,12 @@ function UploadFile(props) {
 
     const saveFiles = () => {
         // setSaveInServer(true)
-        props.uploadFiles(uploadFile1)
+
+        props.uploadFiles(uploadFile)
 
     }
     return (
-        <div>
+        <div className='divFile'>
             <label for="logouug" className="lbl_img">
                 <p>add file</p>
                 {/* <img className="img_logo" 
@@ -97,11 +83,11 @@ function UploadFile(props) {
                     cursor: 'pointer',
                 }}
                 ref={fileInputRef}
-                multiple
+                // multiple
                 onChange={() => uploadMulti()}
             />
             <div id='myFile'></div>
-            {fileComponent}
+            {fileComponentArr}
             <button onClick={saveFiles}>save</button>
         </div>
     )

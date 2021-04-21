@@ -9,6 +9,10 @@ box-shadow: 0px 0px 10px #00000034;
 overflow-y: auto;
 
 }
+
+.divStatus{
+  display: inline-block;
+}
 .status-list{
     margin-top: 1vh;
     max-height: 109px;

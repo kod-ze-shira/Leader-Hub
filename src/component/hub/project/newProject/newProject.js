@@ -173,7 +173,6 @@ function NewProject(props) {
                             onChange={(e) => changeDueDateInProject(e)} />
                     </div>
                 </div>
-                <UploadFile />
 
                 <div className="row justify-content-between mt-5 mx-1 btns-in-view-details-project">
                     {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >

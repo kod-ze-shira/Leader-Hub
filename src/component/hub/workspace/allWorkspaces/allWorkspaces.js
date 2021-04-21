@@ -6,12 +6,12 @@ import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
-import ToastDelete from '../../toastDelete/toastDelete1'
+// import ToastDelete from '../../toastDelete/toastDelete1'
 
 
 function AllWorkspaces(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
-    const refToDeleteToast = useRef(null);
+    // const refToDeleteToast = useRef(null);
  
      
     useEffect(() => {
