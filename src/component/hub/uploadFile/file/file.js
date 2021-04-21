@@ -15,7 +15,7 @@ function File(props) {
 
     return (
         <>
-            <div id={props.urlFile}>
+            <div style={{ 'display': 'inline-block' }} id={props.urlFile}>
                 <button onClick={() => deleteFile()} >X</button>
                 <span>{props.nameFile}</span>
             </div>

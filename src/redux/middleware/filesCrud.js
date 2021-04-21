@@ -3,7 +3,8 @@ import { actions } from '../actions/action'
 
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
-    var files = getState().files_reducer.files
+    // let files = getState().files_reducer.files
+    let files = action.payload
     if (action.type === 'UPLOAD_FILES') {
         var formData = new FormData()
         // var files = action.payload
