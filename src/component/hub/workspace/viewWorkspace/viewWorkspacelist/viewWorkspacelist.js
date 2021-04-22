@@ -96,11 +96,10 @@ function ViewWorkspaceList(props) {
                                 <img src={duplicate}></img>
                             </div>
                             <div className="ml-1 stripe">|</div>
-                            <button
-                                disabled={props.bin}
+                            <div
                                 className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
                                 <img src={bin}></img>
-                            </button>
+                            </div>
                         </div>
                     </div>
 

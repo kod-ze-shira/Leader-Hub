@@ -304,7 +304,6 @@ const publicData = {
         state.indexCurrentCard = action.payload
     },
     saveIndexOfWorkspaceInRedux(state, action) {
-       
         state.indexOfWorkspace = action.payload
     }
     // setWorkspaceByFiledFromWorkspaces(state, action) {

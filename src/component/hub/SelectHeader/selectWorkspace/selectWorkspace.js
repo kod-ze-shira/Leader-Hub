@@ -22,9 +22,10 @@ function SelectWorkspace(props) {
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
-        myWorkspace = props.workspaces.find(p => p.workspace._id == id.value)
-        props.setWorkspace(myWorkspace)
-        console.log(myWorkspace._id)
+        props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
+        // myWorkspace = props.workspaces.find(p => p.workspace._id == id.value)
+        // props.setWorkspace(myWorkspace)
+        // console.log(myWorkspace._id)
         if (myWorkspace.projects[0]) {
 
             props.setProjects(myWorkspace.projects)
@@ -43,8 +44,8 @@ function SelectWorkspace(props) {
 
     }
 
-    const viewWorkspacesList = props.workspaces.map((workspace) => (
-        { value: workspace._id, label: workspace.name, title: workspace.name }
+    const viewWorkspacesList = props.workspaces.map((workspace, index) => (
+        { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
     ))
     const style = {
         control: (base, state) => ({
@@ -97,6 +98,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        saveIndexOfWorkspaceInRedux: (indexWorkspace) => dispatch(actions.saveIndexOfWorkspaceInRedux(indexWorkspace)),
         setCards: (c) => dispatch(actions.setCards(c)),
         setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
         setProject: (project) => dispatch(actions.setProject(project)),

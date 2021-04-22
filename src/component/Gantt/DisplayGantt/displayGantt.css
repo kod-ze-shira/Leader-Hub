@@ -1,0 +1,8 @@
+.cardsName{
+    font-weight: 700;
+}
+
+.canResize{
+    resize: both;
+    overflow: auto
+}

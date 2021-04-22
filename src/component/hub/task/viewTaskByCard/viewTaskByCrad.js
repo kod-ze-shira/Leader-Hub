@@ -39,14 +39,13 @@ function ViewTaskByCrad(props) {
         props.cards])
     const [status, setStatus] = useState()
 
-    console.log(status)
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [task, setTask] = useState({
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
-        , "status": status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+        , "status": "", "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
     // const findStatusById = () => {
     //     let temp = { ...task }
@@ -167,7 +166,7 @@ function ViewTaskByCrad(props) {
                                 {/* <label className="check-task border-left  py-2  px-2 col ">{status} */}
                                 {/* </label> */}
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>To do</div>
+                                    {/* <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>To do</div> */}
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                                 </label>

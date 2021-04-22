@@ -18,13 +18,11 @@ function TaskDetails(props) {
     useEffect(() => {
         // props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-        filesInTask()
-
-    }, [props.cards, props.statuses])
+    }, [props.cards])
 
     // useEffect(() => {
     // let status = [];
-    // // console.log(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
+    // // console.log(props.task.milestones)
 
     // props.statuses.length && props.statuses.forEach(st => {
     // let stTemp = {
@@ -38,15 +36,10 @@ function TaskDetails(props) {
     // setStatusTemp(status)
     // }, [props.statuses])
 
-    // const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
-    // const [editDescription, setEditDescription] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description)
-    // const task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
     const status = props.status
-    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
-    const [milestonesValue, setMilestonesValue] = useState(milstone)
+    const [milstone, setMilstone] = useState(props.task.milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
-    // const [editTask, setEditTask] = useState(task)
     const [statusId, setStatusId] = useState()
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
@@ -107,7 +100,6 @@ function TaskDetails(props) {
     }
 
     const changeFiledInTask = (input) => {
-        debugger
         let editTaskInRedux
         if (input.target.name == "milestones") {
             setMilstone(!props.task.milestones)
@@ -166,10 +158,10 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="1"
+                        id="descriptionProject" rows="3"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
-                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
+                        value={props.task.description}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -180,7 +172,7 @@ function TaskDetails(props) {
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}
+                            value={props.task.startDate}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
@@ -191,7 +183,7 @@ function TaskDetails(props) {
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}
+                            value={props.task.dueDate}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
@@ -234,9 +226,9 @@ function TaskDetails(props) {
                         <span>Mark as milestone</span>
                         <label class="switch ml-2 ">
                             <input type="checkbox"
-                                checked={milestonesValue ? "checked" : ''}
-                                value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestone} />
-                            <span class="slider round"
+                                name="milestones"
+                                checked={milstone}
+                                value={props.task.milestones}
                                 onChange={(e) => changeFiledInTask(e)}
                             />
                             <span class="slider round"
@@ -284,6 +276,8 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        // task: state.task_reducer.task,
+        tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
