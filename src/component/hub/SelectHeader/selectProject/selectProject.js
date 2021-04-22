@@ -8,24 +8,23 @@ import Select from 'react-select';
 
 function SelectProject(props) {
 
-    const { idWorkspace } = useParams();
+    const { idProject } = useParams();
 
     useEffect(() => {
-        // props.getProjectByIdInServer(idWorkspace)
+        props.getProjectByIdInServer(idProject)
         if (!props.projects)
             props.getProjectsByWorkspaceId(props.project.workspace)
     }, [props.workspace])
 
     //to chang the project that user selected
-    let myProject = props.project;
+    let project = props.project;
 
     const changeSelectedProject = (id) => {
-
-        myProject = props.workspace.projects.find(p => p._id == id.value)
-        props.setProject(myProject.project)
-        // props.selectProject(myProject.project.name)
-        console.log(myProject.project.cards)
-        props.getCardsByProjectId(myProject.project._id)
+        props.setCurrentIndexProject(id.projectIndex)
+        project = props.workspace.projects.find(p => p._id == id.value)
+        props.setProject(project)
+        console.log(project)
+        props.getCardsByProjectId(project._id)
         console.log("my project  " + props.workspace)
     }
 
@@ -94,8 +93,8 @@ function SelectProject(props) {
 
     };
 
-    const viewProjectsList = props.workspace.project ? props.workspace.project.map((project) => (
-        { value: project.project._id, label: project.project.name }
+    const viewProjectsList = props.workspace.projects ? props.workspace.projects.map((project, index) => (
+        { value: project._id, label: project.name, projectIndex: index }
     )) : null
     return (
         <>
@@ -126,6 +125,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCurrentIndexProject: (indexProject) => dispatch(actions.setCurrentIndexProject(indexProject)),
+        saveIndexOfWorkspaceInRedux: (indexWorkspace) => dispatch(actions.saveIndexOfWorkspaceInRedux(indexWorkspace)),
         setCard: (card) => dispatch(actions.setCard(card)),
         setCards: (cards) => dispatch(actions.setCards(cards)),
         setProject: (project) => dispatch(actions.setProject(project)),

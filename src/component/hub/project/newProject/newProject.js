@@ -5,7 +5,7 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 import viewDetails from '../../viewDetails/viewDetails'
 import $ from "jquery";
-
+import UploadFile from '../../uploadFile/uploadFile'
 function NewProject(props) {
     let [flag, setFlag] = useState(false)
     let project = { 'updateDates': [] }
@@ -173,6 +173,7 @@ function NewProject(props) {
                             onChange={(e) => changeDueDateInProject(e)} />
                     </div>
                 </div>
+
                 <div className="row justify-content-between mt-5 mx-1 btns-in-view-details-project">
                     {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete

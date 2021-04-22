@@ -10,11 +10,11 @@ const initialState = {
     projects: [],
     cards: [],
     tasks: [],
-    statuses: [],
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
+    indexCurrentCard: 0,
     indexCurrentProject: 0,
     indexOfWorkspace: 0
 }
@@ -207,11 +207,7 @@ const publicData = {
             state.workspaces[i]._id !== action.payload._id
         )
     },
-    removeNotActiveStatus(state, action) {
-        state.statuses = state.statuses.filter((_, i) =>
-            state.statuses[i]._id !== action.payload._id
-        )
-    },
+  
     setCardNameInput(state, action) {
         console.log(action.payload)
         state.cards.map(card => {
@@ -262,7 +258,6 @@ const publicData = {
         state.indexCurrentCard = action.payload
     },
     saveIndexOfWorkspaceInRedux(state, action) {
-
         state.indexOfWorkspace = action.payload
     },
 

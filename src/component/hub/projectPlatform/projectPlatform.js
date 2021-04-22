@@ -47,6 +47,7 @@ function ProjectPlatform(props) {
         setInputValue("")
         setShowInput(false)
     }
+    // ?מחיקת משימה לא עובדת
     //show toast delete to true and save the sask that shold be deleted
     const showToastToDeleteTask = (taskOrCard) => {
         // props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
@@ -112,6 +113,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        // removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
+        // removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
+        // getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+        // getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
         newCard: (cardname) => dispatch(actions.newCard(cardname)),
     }
 

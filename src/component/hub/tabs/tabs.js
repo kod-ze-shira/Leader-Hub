@@ -12,7 +12,7 @@ import taskDetails from '../task/taskDetails/taskDetails'
 function Tabs(props) {
 
     useEffect(() => {
-        console.log(props)
+   
     }, [props.projectId, props.focusInputCard])
 
     let b;
@@ -20,12 +20,8 @@ function Tabs(props) {
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
-    // if (!showInput) {
-    //     if (props.focusInputCard) {
-    //         setShowInput(true)
-    //         showInputToAddCard()
-    //     }
-    // }
+    const [taskToDetails, setTaskToDetails] = useState("")
+
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
@@ -88,6 +84,8 @@ function Tabs(props) {
         // const b = a.tasks.find(t => t._id == task._id)
         // console.log(a)
         setViewDetails(true)
+        setTaskToDetails(task)
+
     }
     return (
         <><div className="body">
@@ -103,10 +101,10 @@ function Tabs(props) {
                                     <div className="row row mx-3">
                                         <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs openViewDetails={() => openViewDetails()}
+                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                     // setTask={(task) => setTaskToDetails(task)}
                                                     showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} indexCard={index} />
+                                                    key={card._id} cardFromMap={card} index={index} />
                                             })}
                                         </DragDropContext>
                                         <div className="col-3 mt-4" >
@@ -116,8 +114,8 @@ function Tabs(props) {
                                                         {/* {showInput ? */}
                                                         <div
                                                             class="card-header row">
-                                                                {/* autoFocus="true" */}
-                                                            <input  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                            {/* autoFocus="true" */}
+                                                            <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                 if (event.key === 'Enter') {
                                                                     newCard()
                                                                 }
@@ -146,7 +144,7 @@ function Tabs(props) {
                 <div className="closeDet" >
                     <ViewDetails closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
-                        // task={taskToDetails}
+                        task={taskToDetails}
                         open={true}> </ViewDetails>
                 </div>
                 : null}
@@ -167,10 +165,12 @@ export default connect(
             workspaces: state.public_reducer.workspaces,
             workspace: state.workspace_reducer.worksapce,
             project: state.project_reducer.project,
+            statuses: state.public_reducer.statuses
         }
     },
     (dispatch) => {
         return {
+            getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),

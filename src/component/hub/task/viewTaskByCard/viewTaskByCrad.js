@@ -21,7 +21,10 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        console.log(props.task);
+            let a=props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask];
+            console.log(a)
+
+
     }, [
         props.cards])
     const [status, setStatus] = useState()
@@ -144,17 +147,14 @@ function ViewTaskByCrad(props) {
 
                                     </input>
                                 </div>
-                                {/* <label className="check-task py-2  px-2 col-3 view-details-btn">
-                                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
-                                </label> */}
                                 <label className="check-task py-2   view-details-btn">
                                     <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                                 </label>
-                                {/* <label className="check-task border-left  py-2  px-2 col ">{status} */}
-                                {/* </label> */}
+
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className="status-task" style={{"backgroundColor":props.task.status.color}}>{props.task.status.statusName}</div>
-                                    {/* <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>To do</div> */}
+                                    <div className="status-task" style={{"backgroundColor":  props.task.status.color}} >
+                                        {props.task.status.statusName}
+                                        </div>
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                                 </label>
@@ -185,7 +185,9 @@ const mapStateToProps = (state) => {
         tasks: state.public_reducer.tasks,
         taskReducer: state.task_reducer.task,
         cards: state.public_reducer.cards,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {

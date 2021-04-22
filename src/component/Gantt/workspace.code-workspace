@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\.."
+		},
+		{
+			"name": "SSH FS - gantt_dev",
+			"uri": "ssh://gantt_dev/"
+		}
+	],
+	"settings": {}
+}

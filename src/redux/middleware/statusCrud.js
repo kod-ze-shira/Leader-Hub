@@ -5,7 +5,6 @@ import { actions } from '../actions/action'
 
 export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_USER') {
-
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllStatusesTaskForUser`
         $.ajax({
             url: urlData,
@@ -53,7 +52,6 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ statusTask }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log(data);
                 dispatch(actions.addNewStatus(data.newStatusTask))
@@ -87,7 +85,6 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ status }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log("data", data);
                 dispatch(actions.setStatuses(data.result))
@@ -106,7 +103,6 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
 }
 // '/:userName/:taskStatusId/removeStatus'
 export const removeStatus = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'REMOVE_STATUS') {
         let statusId = action.payload
         // let status = getState().status_reducer.status;
@@ -119,14 +115,13 @@ export const removeStatus = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log("data", data);
-                dispatch(actions.removeNotActiveStatus(data.result))
+                dispatch(actions.removeNotActiveStatus(data.updatedStatus))
                 // if (data.result.status == "401") {
                 // }
             },
-          
+
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
                 })
@@ -141,15 +136,15 @@ export const removeStatus = ({ dispatch, getState }) => next => action => {
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-      if (result.status == "401") {
-        result.routes ?
-           window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-          window.location.assign(`https://accounts.codes/hub/login`)
-       
-        reject(false)
-  
-      }
-      resolve(true)
-  
+        if (result.status == "401") {
+            result.routes ?
+                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
     })
-  }
+}

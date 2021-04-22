@@ -32,7 +32,7 @@ import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
-import Gantt from '../hub/gantt/gantt'
+import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -46,20 +46,16 @@ function Hub(props) {
         setObjectToDelete(objectToDelete)
         setShowToastDelete(true)
     }
-    const [disableBin, setDisableBin] = useState(false)
-
     const deleteObject = () => {
+        console.log(objectToDelete)
         setShowToastDelete(false)
         props['remove' + objectToDelete.type](objectToDelete.object._id)
-        setDisableBin(false)
 
     }
     const openConfigurator = () => {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
-        setDisableBin(true)
-        setDisableBin(false)
         setShowToastDelete(value)
         if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
             $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
@@ -91,6 +87,8 @@ function Hub(props) {
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
             <Router history={history}>
+                {/* <Nav openConfigurator={openConfigurator} /> */}
+
                 <div className="row back-screen">
                     {open ?
                         <div className="col-2 px-0">
@@ -106,44 +104,67 @@ function Hub(props) {
                             : null
                         }
                         <Switch>
-
+                            {/* <Route path="/:userName/workspace/:idWorkspace" >
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </Route> */}
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-
-                            <ProtectedRoute path={"/:userName/gantt"}>
-                                <Gantt />
+                            {/* <Route path="/:userName/allProjects" >
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </Route> */}
+                            <ProtectedRoute path={"/:userName/gantt"} user={Token} >
+                                <div className="body-workspace mt-3">
+                                    <DisplayGantt />
+                                </div>
                             </ProtectedRoute>
-
                             <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-
+                            {/* <Route path="/workspacePlatform" >
+                                <WorkspacePlatform />
+                            </Route> */}
                             <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute>
-
+                            {/* <Route path="/:userName/projectPlatform/:idProject" >
+                                <CardsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </Route> */}
                             <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
                                 <CardsPage focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-
+                            {/* <Route path="/:userName/myTasks" >
+                                <TaskNotBelongCardForUser />
+                            </Route> */}
                             <ProtectedRoute path={"/:userName/myTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
+                            {/* <Route path="/:userName/milestones" >
+                                <Milestones />
+                            </Route> */}
                             <ProtectedRoute path={"/:userName/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
-
-                            <ProtectedRoute path={"/:userName/files"} >
-                                    <UploadFile />
-                            </ProtectedRoute>
-
+                            {/* <Route path="/:userName" >
+                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </Route> */}
                             <ProtectedRoute path={"/:userName"}>
-                                <Body disableBin={disableBin} showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-
-                            
+                            <Route path="/" >
+                                <div id='cdggdfdfb'>
+                                    <UploadFile />
+                                    {/* <span id='searchProject' >
+                                        <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
+                                        <input type='text' id='inputSearchProjects' className='inputSearchProjects'
+                                            onMouseLeave={() => closeInputSearch()}
+                                        />‏
+                                    </span> */}
+                                </div>
+                                {/* <Animation /> */}
+                            </Route>
+                            {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
                     </div>
 
@@ -154,6 +175,9 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
+
+                    {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
+                    {/* setShowViewDitails={} */}
                 </div>
 
             </Router >

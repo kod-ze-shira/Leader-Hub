@@ -5,6 +5,7 @@ import GanttDesign from '../gantt/gantt';
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
+import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
 
 function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
@@ -12,8 +13,9 @@ function CardsPage(props) {
     const [present, setPresent] = useState("tabs");
 
     useEffect(() => {
-
-    })
+        props.getAllStatusesTaskForUser()
+     
+    },[])
     const changeFlag = (value) => {
         setFlag(value)
     }
@@ -26,14 +28,14 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} />
+                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard}   />
             case 'list':
                 return <ProjectPlatform showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
-                return <GanttDesign />
+                return <DisplayGantt />
             default:
-                return <Tabs showToast={showToast} projectId={props.project._id} />
-                // return <ProjectPlatform showToast={showToast} flag={flag} />
+                // return <Tabs showToast={showToast} projectId={props.project._id} />
+                return <ProjectPlatform showToast={showToast} flag={flag} />
         }
     }
     return (
@@ -55,6 +57,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)
