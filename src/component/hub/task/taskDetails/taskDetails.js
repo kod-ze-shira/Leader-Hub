@@ -6,7 +6,7 @@ import Select from 'react-select';
 import './taskDetails.css'
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
-import ViewAllStatuses from '../../status/viewAllStatuses'
+import ViewStatus from '../../status/viewStatus'
 import AddStatus from '../../status/addStatus'
 import editStatus from '../../status/editStatus';
 
@@ -15,9 +15,13 @@ function TaskDetails(props) {
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
 
     useEffect(() => {
+        // if (props.statuses.length == 0)
         props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
     }, [props.cards])
+
+    const statusName = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName
+    const statusColor = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color
 
     // useEffect(() => {
     // let status = [];
@@ -38,14 +42,14 @@ function TaskDetails(props) {
     // const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
     // const [editDescription, setEditDescription] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description)
     // const task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
-    const status = props.status
+    // const status = props.status
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     // const [editTask, setEditTask] = useState(task)
-    const [statusId, setStatusId] = useState()
-
+    const [statusIndex, setStatusIndex] = useState()
+    const [status, setStatus] = useState()
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
         statusName: "",
@@ -78,6 +82,8 @@ function TaskDetails(props) {
 
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
+            debugger
+            console.log(props.task);
             props.EditTask(props.task)
         }
         else {
@@ -92,14 +98,21 @@ function TaskDetails(props) {
     const deleteTask = () => {
         props.showToast(true)
     }
-    const changeStatusById = (statusId) => {
-        console.log(statusId)
-        // setStatusId(statusId)
-        // var temp = editTask
-        // temp.status = statusId
-        // console.log(temp);
-        // setEditTask(temp)
+    const changeStatusByIndex = (indexOfStatus) => {
+        debugger
+        setStatusIndex(indexOfStatus)
+        let s = props.statuses[indexOfStatus]
+        setStatus(s)
+        // console.log(status.statusName);
+        let a = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName
+        console.log(a)
+        console.log("props.statuses[statusIndex]" + props.statuses[indexOfStatus].statusName);
     }
+    const saveStatus = (value) => {
+        let editStatusInRedux = { "nameFiled": "status", "value": value }
+        props.setTaskByFiledFromTasks(editStatusInRedux)
+    }
+
 
     const changeFiledInTask = (input) => {
         let editTaskInRedux
@@ -169,32 +182,25 @@ function TaskDetails(props) {
 
                 </div>
                 <div className="row justify-content-between">
-                    {/* <Select
- onChange={(e) => handleChange(e)}
- name="status"
- options={statusTemp}
- placeholder={task.status}
- className="col-5"
- /> */}
-                    <div class="dropdown col-5">
 
+                    <div class="dropdown col-5">
                         <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {props.statuses.length ? props.statuses.map((status, index) => (
-                                <>
-                                    <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
-                                </>
-                            )) : null}
+                            {props.statuses.length > 0 ? <>
+                                {/* && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.active  */}
+                                <div className="color-status-first" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div><p>{
+                                    props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</p>
+                            </> : null}
                         </button>
+
                         <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
-                                {openPopUp && props.statuses.length ? props.statuses.map((status) => (
-                                    <ViewAllStatuses changeStatus={changeStatusById} status={status} />
+                                {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
+                                        <ViewStatus saveStatus={(e) => saveStatus(e)} changeStatus={changeStatusByIndex} status={status} index={index} />
                                 )) : null}
                                 {openPopUp ?
                                     <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
                                 {openPopUpToAdd ? <AddStatus task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status} /> : null}
-
                             </div>
 
                         </div>

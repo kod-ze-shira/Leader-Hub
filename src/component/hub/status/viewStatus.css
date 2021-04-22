@@ -14,11 +14,10 @@ margin-top: 1vh;
 {
     box-shadow: none !important;
 }
-.pencil-status{
-    height: 1vh;
-    width: 1vh;
-    
-}
+
 .circle-picker {
     width: 140% !important;
 }
+/* .pencil-status{
+    cursor: pointer !important;
+} */

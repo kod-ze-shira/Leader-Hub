@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import EditStatus from './editStatus'
 // import ViewDetails from '../../viewDetails/viewDetails'
-import './viewAllStatuses.css'
+import './viewStatus.css'
 
 
-function ViewAllStatuses(props) {
+function ViewStatus(props) {
 
     useEffect(() => {
         console.log(props.status);
@@ -16,6 +16,8 @@ function ViewAllStatuses(props) {
 
     const openEditTask = (event) => {
         setOpenPopUpToAdd(true)
+        props.saveIndexOfStatusInRedux(props.index)
+        props.changeStatus(props.index)
         console.log("openEditTask", openPopUpToEdit);
 
     }
@@ -23,21 +25,18 @@ function ViewAllStatuses(props) {
 
         <>
             <div className="container">
-                <div className="row justify-content-around">
+                <div className="row justify-content-around" onClick={(id) => props.saveStatus(props.status)}>
                     <div className="menu-status " style={{ backgroundColor: props.status.color }}>
                         <p >{props.status.statusName}</p>
-                        {/* onClick={(event) => editStatus(props.myProject.project, event)} */}
-                        {/* style={myStyleIcons} */}
-
                     </div>
                     <img
-                        // onClick={props.changeStatus(props.status._id)}
-                        onClick={(e)=>openEditTask(e)}
+                        className="pencil-status"
+                        onClick={(e) => openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>
 
-            {openPopUpToEdit ? <EditStatus status={props.status} /> : null}
+            {openPopUpToEdit ? <EditStatus status={props.status} index={props.index} /> : null}
         </>
 
     )
@@ -51,10 +50,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index))
         // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
     }
 
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAllStatuses)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewStatus)

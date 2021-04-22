@@ -21,21 +21,8 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-
-        console.log(props);
-        // props.getAllStatusesTaskForUser();
-        // console.log("statuses" + props.statuses)
-        // if (props.task.status == props.statuses._id)
-        //     if (props.statuses.length > 0) {
-        //         let s = props.statuses.find(status => status._id == props.task.status)
-        //         setStatus(s.statusName)
-        //         console.log(status);
-
-        //     }
-
+        console.log(props.task);
     }, [
-        // props.task, 
-        // props.statuses,
         props.cards])
     const [status, setStatus] = useState()
 
@@ -166,6 +153,7 @@ function ViewTaskByCrad(props) {
                                 {/* <label className="check-task border-left  py-2  px-2 col ">{status} */}
                                 {/* </label> */}
                                 <label className="check-task border-left  py-2  px-2 col " >
+                                    <div className="status-task" style={{"backgroundColor":props.task.status.color}}>{props.task.status.statusName}</div>
                                     {/* <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>To do</div> */}
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}

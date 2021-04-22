@@ -39,7 +39,7 @@ function ViewCardsTabs(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
+            task = { name: inputValue, description: "", status: props.statuses[0]._id, startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -193,6 +193,7 @@ const mapStateToProps = (state) => {
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
+        statuses:state.status_reducer.statuses
 
     }
 }

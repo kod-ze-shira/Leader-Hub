@@ -21,7 +21,7 @@ export default function Colors(props) {
 
     return (
         <>
-            <div>
+            <div className="ml-2 mr-3">
                 <CirclePicker circleSize={18} onChangeComplete={(color) => { props.changeStatusColor({ value: color.hex, name: "color" }) }} colors={colors} />
                 {/* <span id="color_front"></span>
                 <input type='color'  class='bar' id='colour'/>            </div> */}
