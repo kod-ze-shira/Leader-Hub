@@ -125,7 +125,7 @@ function TaskDetails(props) {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
     const closePopUpOfViewStatus = () => {
-        // openPopUp(false)
+        openPopUp(false)
     }
 
     return (
@@ -151,7 +151,7 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="2"
+                        id="descriptionProject" rows="3"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
                         value={props.task.description}>
@@ -197,8 +197,7 @@ function TaskDetails(props) {
                                     <ViewStatus saveStatus={(e) => saveStatus(e)}
                                         changeStatus={changeStatusByIndex}
                                         status={status} index={index}
-                                        // openPopUp={closePopUpOfViewStatus} 
-                                        />
+                                        openPopUp={closePopUpOfViewStatus} />
                                 )) : null}
                                 {openPopUp ?
                                     <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
@@ -208,7 +207,7 @@ function TaskDetails(props) {
 
                         </div>
                     </div>
-                    {/* <div className="row mb-3"> */}
+                {/* <div className="row mb-3"> */}
                     <div className="col-7">
                         <span>Mark as milestone</span>
                         <label class="switch ml-2 ">
@@ -223,7 +222,7 @@ function TaskDetails(props) {
 
                         </label>
                     </div>
-                </div>
+                    </div>
 
                 {/* </div> */}
 
