@@ -1,6 +1,7 @@
 import produce from 'immer';
 import { removeData } from 'jquery';
 import { act } from 'react-dom/test-utils';
+import file from '../../component/hub/uploadFile/file/file';
 import { actions } from '../actions/action';
 import createReducer from './reducerUtils';
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     indexCurrentCard: 0,
     idCurrentCard: 0,
     indexCurrentProject: 0,
-    indexOfWorkspace: 0
+    indexOfWorkspace: 0,
+    arrFilesOfTask: []
 }
 
 const publicData = {
@@ -28,6 +30,14 @@ const publicData = {
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
+    setFilesFromTask(state, action) {
+        state.arrFilesOfTask = action.payload
+    },
+    setFileFromTask(state, action) {
+        debugger
+        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload })
+    },
+
     setUserName(state, action) {
         state.userName = action.payload;
     },
@@ -289,7 +299,20 @@ const publicData = {
 
         // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
         // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
-        // console.log(a);        
+        // console.log(a);   
+    },
+    // deleteFilesInTask(state, action) {
+    //     debugger
+    //     action.payload.map((urlFile) =>
+    //         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
+    //             .filter((file) => file.url != urlFile))
+    // },
+    removeFileInRedux(state, action) {
+        debugger
+        if (action.payload.url != 'new')
+            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
+        else
+            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
 
     },
     saveCurrentIndexOfTaskInRedux(state, action) {

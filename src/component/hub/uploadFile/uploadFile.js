@@ -11,60 +11,40 @@ function UploadFile(props) {
     const [fileComponentArr, setFileComponentArr] = useState([])
     useEffect(() => {
         console.log(props);
-        props.uploadFiles(props.files)
+        // props.uploadFiles(props.files)
     }, [props.files])
 
 
 
     const uploadMulti = () => {
         // setUploadFile([...uploadFile, file])
-        debugger
-        let r = fileInputRef.current.file
-        if (fileInputRef.current.files.length) {
 
-            for (let index = 0; index < fileInputRef.current.files.length; index++) {
-                if (!uploadFile)
-                    setUploadFile([...fileInputRef.current.files[index]]);
-                else
-                    setUploadFile([...uploadFile, fileInputRef.current.files[index]])
-
-
-                let newComponent = addFileComponent(fileInputRef.current.files[index].name, fileInputRef.current.files[index].name)
-                if (!fileComponentArr.length)
-                    setFileComponentArr([newComponent])
-                else
-                    setFileComponentArr([...fileComponentArr, newComponent])
+        // let r = fileInputRef.current.file
+        if (fileInputRef.current.files) {
+            props.setFileFromTask(fileInputRef.current.files[0])
+            // for (let index = 0; index < fileInputRef.current.files.length; index++) {
+            // if (!uploadFile)
+            //     setUploadFile([...fileInputRef.current.files[0]]);
+            // else
+            //     setUploadFile([...uploadFile, fileInputRef.current.files[0]])
 
 
-            }
+            // let newComponent = addFileComponent(fileInputRef.current.files[0].name, fileInputRef.current.files[0].name)
+            // if (!fileComponentArr.length)
+            //     setFileComponentArr([newComponent])
+            // else
+            //     setFileComponentArr([...fileComponentArr, newComponent])
+
+
         }
-
-
-        // document.getElementById('myFile').innerText += 
-        // if (!uploadFile)
-        // setUploadFile([file])
-        // else
-        // setUploadFile([...uploadFile, file])
-
-        // props.addFile(file)
-        // console.log(props)
-
     }
 
 
-    const addFileComponent = (urlFile, nameFile) => {
-        return <File urlFile={urlFile} nameFile={nameFile} />
-    }
-    // function deleteFile2() {
-    //     alert('delete file')
+
+
+    // const saveFiles = () => {
+    //     props.uploadFiles(uploadFile)
     // }
-
-    const saveFiles = () => {
-        // setSaveInServer(true)
-
-        props.uploadFiles(uploadFile)
-
-    }
     return (
         <div className='divFile'>
             <label for="logouug" className="lbl_img">
@@ -88,7 +68,7 @@ function UploadFile(props) {
             />
             <div id='myFile'></div>
             {fileComponentArr}
-            <button onClick={saveFiles}>save</button>
+            {/* <button onClick={saveFiles}>save</button> */}
         </div>
     )
 }
@@ -100,6 +80,7 @@ export default connect(
     },
     (dispatch) => {
         return {
+            setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
             uploadFiles: (filesArr) => dispatch(actions.uploadFiles(filesArr)),
             addFile: (files) => dispatch(actions.addFile(files)),
         }
