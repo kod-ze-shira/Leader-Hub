@@ -113,7 +113,19 @@ function ProjectsByWorkspace(props) {
     function searchProject() {
         setValueSearch(document.getElementById('inputSearchProjects').value)
     }
-  
+    // function closeInputSearch() {
+    //     // $("#inputSearchProjects").trigger("focusout");
+
+    //     setTimeout(() => {
+    //         if (!valueSearch)
+    //             document.getElementById('inputSearchProjects').value = ''
+    //     }, 1700);
+
+    // }
+
+
+
+
     return (
         <>
 

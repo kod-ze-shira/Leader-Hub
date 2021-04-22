@@ -1,8 +1,7 @@
 import $ from "jquery"
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import project_reducer from "../../../../redux/Reducers/project_reducer"
 
 // import '../../inputDitails/inputDitails.css'
 
@@ -18,6 +17,7 @@ function EditProject(props) {
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
     const nameRequired = useRef()
+
 
     const changeFiledInProject = (input) => {
 
@@ -46,9 +46,9 @@ function EditProject(props) {
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
         // project.dueDate = res
 
+
+
         if (nameRequired.current.value) {
-            debugger
-            let a = projectBeforeChanges
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
             props.closeViewDetails(false)
@@ -108,7 +108,7 @@ function EditProject(props) {
                         />
                     </div>
                 </div>
-                <div className="row justify-content-between mt-5  mx-1 btns-in-view-details-project">
+                <div className="row justify-content-between  mx-1 btns-in-view-details-project">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>

@@ -21,7 +21,7 @@ function ViewCardsTabs(props) {
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
-    const [indexToEdit, setIndexToEdit] = useState(props.indexCard)
+    const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [a, setA] = useState()
 
@@ -94,14 +94,17 @@ function ViewCardsTabs(props) {
         }
 
     }
-    const openViewDetails = () => {
-        props.openViewDetails()
+    const [task, setTask] = useState(false)
+
+    const openViewDetails = (task) => {
+        setTask(task)
+        props.openViewDetails(task)
     };
 
     return (
         <>
             <div className="col-3 mt-4" >
-                <Draggable draggableId={props.cardFromMap._id} index={props.indexCard}>
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
                             {...provided.draggableProps}
@@ -152,7 +155,7 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            key={task._id} task={task} indexTask={index} indexCard={props.indexCard}/>
+                                                            key={task._id} task={task} index={index} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?

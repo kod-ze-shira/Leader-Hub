@@ -112,6 +112,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        // removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
+        // removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
+        // getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+        // getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
         newCard: (cardname) => dispatch(actions.newCard(cardname)),
     }
 

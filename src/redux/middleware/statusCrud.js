@@ -88,6 +88,7 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ 'status': status }),
             success: function (data) {
+                debugger
                 console.log("success")
                 console.log("data", data);
                 dispatch(actions.setStatuses(data.result))

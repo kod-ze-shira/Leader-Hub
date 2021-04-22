@@ -9,11 +9,12 @@ import './viewAllStatuses.css'
 function ViewAllStatuses(props) {
 
     useEffect(() => {
+        console.log(props.status);
     }, [])
 
     const [openPopUpToEdit, setOpenPopUpToAdd] = useState(false)
 
-    const openEditTask = () => {
+    const openEditTask = (event) => {
         setOpenPopUpToAdd(true)
         console.log("openEditTask", openPopUpToEdit);
 
@@ -31,7 +32,7 @@ function ViewAllStatuses(props) {
                     </div>
                     <img
                         // onClick={props.changeStatus(props.status._id)}
-                        onClick={openEditTask}
+                        onClick={(e)=>openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>
