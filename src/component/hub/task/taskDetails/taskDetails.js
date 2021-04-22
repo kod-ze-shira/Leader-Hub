@@ -8,14 +8,15 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
 import ViewAllStatuses from '../../status/viewAllStatuses'
 import AddStatus from '../../status/addStatus'
+import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
-
+import File from '../../uploadFile/file/file'
 function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
-
+    const [flugFiles, setFlugFiles] = useState(false)
     useEffect(() => {
-        props.getAllStatusesTaskForUser();
+        // props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
     }, [props.cards])
 
@@ -40,12 +41,13 @@ function TaskDetails(props) {
     const [openPopUp, setOpenPopUp] = useState(false)
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [statusId, setStatusId] = useState()
-
     const [statusTemp, setStatusTemp] = useState({})
     const [newStatus, setNewStatus] = useState({
         statusName: "",
         color: "",
     })
+    const [fileComponentArr, setFileComponentArr] = useState([])
+
     const handleChangeStatus = (event) => {
         const { name, value } = event.target
         setNewStatus(prevState => ({
@@ -73,6 +75,7 @@ function TaskDetails(props) {
 
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
+
             props.EditTask(props.task)
         }
         else {
@@ -107,6 +110,28 @@ function TaskDetails(props) {
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
+    // if (!flugFiles) {
+    //     filesInTask()
+    //     setFlugFiles(true)
+    // }
+    function filesInTask() {
+
+        let newComponent
+        props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
+            newComponent = addFileComponent(file.url, file.name)
+            if (!fileComponentArr.length)
+                setFileComponentArr([newComponent])
+            else
+                setFileComponentArr([...fileComponentArr, newComponent])
+
+        })
+
+    }
+    const addFileComponent = (urlFile, nameFile) => {
+        return <File urlFile={urlFile} nameFile={nameFile} />
+    }
+
+
     return (
         <>
             <div className="details task-details mr-5 ml-4">
@@ -114,7 +139,8 @@ function TaskDetails(props) {
                 <div className="row justify-content-between mx-1" >
                     {/* <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label> */}
                     <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-
+                    {/* <label>{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id}</label>/\ */}
+                    {/* <label>card: {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].card}</label> */}
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
@@ -163,7 +189,7 @@ function TaskDetails(props) {
                     </div>
 
                 </div>
-                <div className="row justify-content-between">
+                <div className="row justify-content-between divStatus">
                     {/* <Select
  onChange={(e) => handleChange(e)}
  name="status"
@@ -233,6 +259,9 @@ function TaskDetails(props) {
                     Is Milestones
                 </label> */}
 
+                {fileComponentArr}
+
+                <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete

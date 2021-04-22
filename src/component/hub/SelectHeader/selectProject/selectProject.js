@@ -21,7 +21,6 @@ function SelectProject(props) {
 
     const changeSelectedProject = (id) => {
         props.setCurrentIndexProject(id.projectIndex)
-        debugger
         project = props.workspace.projects.find(p => p._id == id.value)
         props.setProject(project)
         console.log(project)

@@ -10,16 +10,14 @@ import workspaces from '../workspace.json'
 function DisplayGantt(props) {
 
     useEffect(() => {
-        // setCardsInproject(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject])
-    }, [props.indexOfWorkspace, props.indexCurrentProject])
+
+    }, [props.workspaces, props.indexOfWorkspace, props.indexCurrentProject])
 
     const cardsInproject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
     const allWorkspace = { workspaces };
     console.log(allWorkspace);
     const allTheWorkspaces = allWorkspace.workspaces.workspaces.projects;
     const allTheWorkspaceFromRedux = props.workspaces
-    // const cardsInproject = props.project
-    debugger
     const theCards = []
     const theTasks = []
     const mone = []
@@ -61,19 +59,21 @@ function DisplayGantt(props) {
 
     {
         theTasks.map((item) => {
-            // let year = item.start_date.split('-')[0];
-            // if (year > maxYear.split('-')[0]) {
-            //     currDate = year
-            //     console.log("papapap", year);
-            //     year = year.concat('-01-01')
-            //     console.log("tttt", year);
-            //     maxYear = year;
-            // } else if (year < minYear) {
-            //     minYear = year
-            // }
-            // else {
-            //     return
-            // }
+            if (item) {
+                let year = item.start_date.split('-')[0];
+                if (year > maxYear.split('-')[0]) {
+                    currDate = year
+                    console.log("papapap", year);
+                    year = year.concat('-01-01')
+                    console.log("tttt", year);
+                    maxYear = year;
+                } else if (year < minYear) {
+                    minYear = year
+                }
+                else {
+                    return
+                }
+            }
         })
     }
 

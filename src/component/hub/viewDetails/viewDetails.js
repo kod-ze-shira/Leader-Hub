@@ -41,10 +41,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             switch (from) {
                 case 'viewTaskByCard':
                     return <TaskDetails showToast={showToast}
-                    task={props.task}
-                    objectBeforeChanges={(e) => setOldObject(e)}
-                        closeViewDetails={props.closeViewDetails}                    
-                        />
+                        task={props.task}
+                        objectBeforeChanges={(e) => setOldObject(e)}
+                        closeViewDetails={props.closeViewDetails}
+                    />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'editCurrentTask':
