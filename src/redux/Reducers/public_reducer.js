@@ -14,6 +14,7 @@ const initialState = {
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
+    indexCurrentCard: 0,
     idCurrentCard: 0,
     indexCurrentProject: 0,
     indexOfWorkspace: 0

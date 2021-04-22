@@ -12,6 +12,7 @@ import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'
 function TaskDetails(props) {
+    debugger
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     const [flugFiles, setFlugFiles] = useState(false)
