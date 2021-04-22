@@ -36,8 +36,7 @@ function AllWorkspaces(props) {
           />
     })
 
-    const 
-    renderedGridWorkspaces = props.workspaces.map((workspace,index) => {
+    const renderedGridWorkspaces = props.workspaces.map((workspace,index) => {
         return <ViewWorkspaceGrid indexWorkspace={index}
         setShowToastDeleteWhenClickDelete={(obj)=>props.showToast(obj)} 
         key={workspace._id}
@@ -104,8 +103,7 @@ return (
                                         <div className="logoWorkspacelist addWorkspace "
                                             style={{ backgroundColor: "#778CA2" }}
                                             >
-                                            +
-                                            
+                                            + 
                                         </div>
                                     </div>
                                     <b className="mt-4 ml-2">Add Workspace</b>

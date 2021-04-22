@@ -49,6 +49,10 @@ function NewConfigorator(props) {
         changeBackground(e)
         props.history.push("/" + props.user + "/milestones")
     }
+    // function goToGantt(e) {
+    //     changeBackground(e)
+    //     props.history.push("/" + props.user + "/gantt")
+    // }
     return (
         <>
             <div className="left_nav ">

@@ -21,12 +21,7 @@ function Tabs(props) {
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [taskToDetails, setTaskToDetails] = useState("")
-    // if (!showInput) {
-    //     if (props.focusInputCard) {
-    //         setShowInput(true)
-    //         showInputToAddCard()
-    //     }
-    // }
+   
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))

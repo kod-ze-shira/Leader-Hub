@@ -17,7 +17,6 @@ function TaskDetails(props) {
     useEffect(() => {
         props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-
     }, [props.cards])
 
     // useEffect(() => {
@@ -98,7 +97,6 @@ function TaskDetails(props) {
     }
 
     const changeFiledInTask = (input) => {
-        debugger
         let editTaskInRedux
         if (input.target.name == "milestones") {
             setMilstone(!props.task.milestones)

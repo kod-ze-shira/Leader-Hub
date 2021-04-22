@@ -38,7 +38,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         const renderSwitch = () => {
-            debugger
             switch (from) {
                 case 'viewTaskByCard':
                     return <TaskDetails showToast={showToast}
@@ -66,7 +65,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         function closeEndRefreshViewDetails() {
-            debugger
             if (oldObject)
                 switch (oldObject.type) {
                     case 'workspace':
