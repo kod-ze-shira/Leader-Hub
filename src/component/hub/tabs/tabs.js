@@ -138,7 +138,8 @@ function Tabs(props) {
                         )}
                     </Droppable>
                 </DragDropContext>
-                : null
+                :<div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>
+
             }
             {viewDetails ?
                 <div className="closeDet" >
