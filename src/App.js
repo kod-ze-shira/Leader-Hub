@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
 import HeaderLeader from '@leadercodes/leader-header'
-// import ViewAllStatuses from './component/hub/status/viewAllStatuses/viewAllStatuses';
 
 export default function App(props) {
 

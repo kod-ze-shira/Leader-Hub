@@ -47,6 +47,7 @@ function ProjectPlatform(props) {
         setInputValue("")
         setShowInput(false)
     }
+    // ?מחיקת משימה לא עובדת
     //show toast delete to true and save the sask that shold be deleted
     const showToastToDeleteTask = (taskOrCard) => {
         setTaskOrCard(taskOrCard)
