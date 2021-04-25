@@ -90,7 +90,7 @@ function ViewTaskByCradTabs(props) {
                             id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
-                                    <div className={(props.task.status) == "in progress" ? 'color-task col-5 mt-3 ml-2  status-task-in-progress' : props.task.status == "done" ? 'color-task col-5 mt-3 ml-2  status-task-done' : 'color-task col-5 mt-3 ml-2  status-task-to-do'} ></div>
+                                    <div className="color-task col-4 mt-3 ml-2" style={{"backgroundColor":props.task.status.color}}></div>
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
                                     <Button className="more col-3 mr-0"
                                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -136,7 +136,9 @@ const mapStateToProps = (state) => {
     return {
         tasks: state.public_reducer.tasks,
         cards: state.public_reducer.cards,
-        card: state.card_reducer.card
+        card: state.card_reducer.card,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {

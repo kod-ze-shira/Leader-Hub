@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import { editStatus } from '../../../redux/middleware/statusCrud';
 // import ViewDetails from '../../viewDetails/viewDetails'
-import './viewAllStatuses.css'
+import './viewStatus.css'
 
 
 function EditStatus(props) {
 
     useEffect(() => {
-            
+
     }, [])
 
     const [editStatus, setEditStatus] = useState({
@@ -19,50 +19,42 @@ function EditStatus(props) {
     })
 
     const editStatus_ = () => {
-        debugger
-        console.log(editStatus);
-        props.editStatus(editStatus)
+        console.log(props.status);
+        props.editStatus(props.status)
     }
-    // const handleChangeStatus = (event) => {
-    //     debugger
-    //     console.log(event.target)
-    //     const { name, value } = event.target
-    //     setEditStatus(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    //     console.log(editStatus);
-    // }
-    const changeFiledInStatus = (input) => {
-        // props.setCurrentIndexTask(currentIndexTask)
-        // props.setCurrentIndexCard(currentIndexCard)
+    const deleteStatus = () => {
+        console.log(props.status._id);
+        props.removeStatus(props.status._id)
+    }
+    const handleChangeStatus = (input) => {
         let editStatusInRedux = { "nameFiled": input.target.name, "value": input.target.value }
-        props.setTaskByFiledFromTasks(editStatusInRedux)
+        props.setStatusByFiledFromStatuses(editStatusInRedux)
     }
     return (
         <>
             <div className="container">
-                <div className="">
-                    <div class="form-group row">
-                        <label for="name">Name</label>
-                        <input name="statusName"
-                            type="text" class="form-control"
-                            id="statusName"
-                            value={props.status.statusName}
-                            onChange={(e) => changeFiledInStatus(e)}
-                        />
-                    </div>
-                    <div class="form-group row">
+                <div class="form-group row mx-2">
+                    <label for="name">Name</label>
+                    <input name="statusName"
+                        type="text" class="form-control"
+                        id="statusName"
+                        value={props.status.statusName}
+                        onChange={(e) => handleChangeStatus(e)}
+                    />
+                    <div class="form-group row mx-2">
                         <label for="color">Select Color</label>
                         <input name="color"
                             type="color" class="form-control"
                             id="color"
                             value={props.status.color}
-                            onChange={(e) => changeFiledInStatus(e)}
+                            onChange={(e) => handleChangeStatus(e)}
 
                         />
                     </div>
-                    <button onClick={(e) => editStatus_(e)}>Save</button>
+                    <div className=" row ">
+                        <button className="ml-3" onClick={(e) => editStatus_(e)}>Save</button>
+                        <button className="ml-4"  onClick={(e) => deleteStatus(e)}>Delete</button>
+                    </div>
 
                 </div>
 
@@ -81,8 +73,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        editStatus: (status) => dispatch(actions.editStatus(status))
+        editStatus: (status) => dispatch(actions.editStatus(status)),
+        removeStatus: (statusId) => dispatch(actions.removeStatus(statusId)),
+        setStatusByFiledFromStatuses: (statusDetails) => dispatch(actions.setStatusByFiledFromStatuses(statusDetails))
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditStatus)

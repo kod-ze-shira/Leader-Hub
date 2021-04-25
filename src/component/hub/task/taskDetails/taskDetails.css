@@ -19,6 +19,9 @@ overflow-y: auto;
     overflow-y: auto;
 
 }
+.menu__ .form-control{
+  height: calc(1.3em + .75rem ) !important;
+}
 .d-status{
     /* display: inline-block; */
 }
@@ -69,33 +72,38 @@ textarea:focus{
 .mils{
     display: inline;
 }
+.task-details{
+  /* overflow-x: auto; */
+}
 .task-details > .form-group{
     /* margin-bottom: 0.5rem !important; */
   }
   .task-details > .dropdown{
-z-index: 9999 !important;  }
+z-index: 9999 !important; 
+ }
 .task-details .status-btn .save_canges_btn{
     z-index: 99999 !important;
 }
 .color-status-first{
-    width: 26px;
-height: 10px;
-background: var(--unnamed-color-f13b7f) 0% 0% no-repeat padding-box;
-background: #F13B7F 0% 0% no-repeat padding-box;
-border-radius: 5px;
-opacity: 1;
-/* margin-top:1.5vh; */
-/* vertical-align: middle; */
-/* display: inline; */
+    /* /* width: 26px; */
+    height: 1.5vh; 
+    border-radius: 5px;
+    opacity: 1;
+    display: inline-block;
+
+}
+.placeHolder-status{
+      /* display: inline-block !important; */
+
 }
 .placehlder-first-status{
     /* display: inline-block; */
 }
-.placehlder-first-status span{
-    /* margin-left: 29px; */
-    /* float:right !important; */
+.placeHolder-status span{
+    margin-left: 29px; 
+    float:right !important;
     
-    /* margin-bottom: 1.5vh; */
+     /* margin-bottom: 1.5vh !; */
 }.switch {
     position: relative;
     display: inline-block;

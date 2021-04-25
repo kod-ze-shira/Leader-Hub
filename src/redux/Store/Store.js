@@ -16,9 +16,10 @@ import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskB
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
-import { createStatus, getAllStatusesTaskForUser } from '../middleware/statusCrud';
+import { createStatus, getAllStatusesTaskForUser, editStatus, removeStatus } from '../middleware/statusCrud';
 import { extractJwt } from '../middleware/loginCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
+
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer });
 
@@ -55,6 +56,8 @@ const store = createStore(
                 extractJwt,
                 getFiles,
                 removeFile,
+                editStatus,
+                removeStatus
             ))
 )
 store.dispatch(actions.extractJwt());

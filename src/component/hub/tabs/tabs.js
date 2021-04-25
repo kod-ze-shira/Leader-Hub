@@ -12,7 +12,7 @@ import taskDetails from '../task/taskDetails/taskDetails'
 function Tabs(props) {
 
     useEffect(() => {
-        console.log(props)
+   
     }, [props.projectId, props.focusInputCard])
 
     let b;
@@ -21,7 +21,7 @@ function Tabs(props) {
     const [showHeader, setShowHeader] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [taskToDetails, setTaskToDetails] = useState("")
-   
+
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
@@ -114,8 +114,8 @@ function Tabs(props) {
                                                         {/* {showInput ? */}
                                                         <div
                                                             class="card-header row">
-                                                                {/* autoFocus="true" */}
-                                                            <input  placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                            {/* autoFocus="true" */}
+                                                            <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                 if (event.key === 'Enter') {
                                                                     newCard()
                                                                 }
@@ -165,10 +165,12 @@ export default connect(
             workspaces: state.public_reducer.workspaces,
             workspace: state.workspace_reducer.worksapce,
             project: state.project_reducer.project,
+            statuses: state.public_reducer.statuses
         }
     },
     (dispatch) => {
         return {
+            getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),
