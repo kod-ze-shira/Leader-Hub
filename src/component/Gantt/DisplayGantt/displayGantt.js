@@ -30,7 +30,7 @@ function DisplayGantt(props) {
     })
 
     console.log("theCards", theCards)
-    
+
     function calculateDiff(end, start) {
         let endDate = end.split("/")[1] + "/" + end.split("/")[0] + "/" + end.split("/")[2]
         let startDate = start.split("/")[1] + "/" + start.split("/")[0] + "/" + start.split("/")[2]
@@ -46,7 +46,7 @@ function DisplayGantt(props) {
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
             let cardName
-            if (index1 > 0 && card.name == theTasks[index1 - 1].cardName)
+            if (index1 > 0 && card.name == theTasks[index1-1].cardName)
                 cardName = null
             else cardName = card.name
 

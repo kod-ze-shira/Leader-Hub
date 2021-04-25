@@ -4,8 +4,12 @@ import './gantt.css';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
 import '../Gantt/gantt.css';
 import { LinearProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { actions } from '../../redux/actions/action'
+import store from '../../redux/Store/Store'
 
-export default class Gantt extends Component {
+
+class Gantt extends Component {
     constructor(props) {
         debugger
         super(props);
@@ -38,9 +42,24 @@ export default class Gantt extends Component {
     initGanttDataProcessor() {
         // const onDataUpdated = this.props.onDataUpdated;
     }
+
     componentDidMount() {
 
         gantt.templates.task_text = function (start, end, task) {
+
+            let endDate = JSON.stringify(end)
+            let ed = JSON.parse(endDate)
+            let newEndDate = ed.split("-")[2][0]
+                + ed.split("-")[2][1] + '/' + ed.split("-")[1] + '/' + ed.split("-")[0];
+
+            let startDate = JSON.stringify(start)
+            let sd = JSON.parse(startDate)
+            let newStartDate = sd.split("-")[2][0]
+                + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
+
+            let editTaskInRedux = { "_id": task.id, "dueDate": newEndDate, "startDate": newStartDate }
+            store.dispatch(actions.editTask(editTaskInRedux))
+
             if (task.progress > 1) {
                 return task.text;
             }
@@ -164,3 +183,15 @@ export default class Gantt extends Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        editTask: (task) => dispatch(actions.editTask(task)),
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Gantt)
