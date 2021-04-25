@@ -13,6 +13,7 @@ const statuses = {
     },
 
     addNewStatus(state, action) {
+        debugger
         state.statuses.push(action.payload)
         console.log(state.statuses)
     },

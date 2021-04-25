@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
+import EditStatus from './editStatus'
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewAllStatuses.css'
 
@@ -8,16 +9,16 @@ import './viewAllStatuses.css'
 function ViewAllStatuses(props) {
 
     useEffect(() => {
-        // props.getAllStatusesTaskForUser()
-    }, []);
+        console.log(props.status);
+    }, [])
 
+    const [openPopUpToEdit, setOpenPopUpToAdd] = useState(false)
 
-    useEffect(() => {
-        // debugger
-        // console.log(props.statuses);
-    }, [props.statuses])
+    const openEditTask = (event) => {
+        setOpenPopUpToAdd(true)
+        console.log("openEditTask", openPopUpToEdit);
 
-
+    }
     return (
 
         <>
@@ -30,11 +31,13 @@ function ViewAllStatuses(props) {
 
                     </div>
                     <img
-                        onClick={props.changeStatus(props.status._id)}
+                        // onClick={props.changeStatus(props.status._id)}
+                        onClick={(e)=>openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>
-            {/* {props.statuses.length && renderedListStatuses} */}
+
+            {openPopUpToEdit ? <EditStatus status={props.status} /> : null}
         </>
 
     )

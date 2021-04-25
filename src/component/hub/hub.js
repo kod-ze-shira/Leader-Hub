@@ -32,6 +32,7 @@ import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
+import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -98,9 +99,7 @@ function Hub(props) {
                         {viewDetails ?
                             <ViewDetails
                                 closeViewDetails={() => setViewDetails(false)}
-                                // showToast={showToast}
                                 from={formViewDitails}
-                            // workspaceId={idWorkspace} 
                             />
                             : null
                         }
@@ -114,6 +113,11 @@ function Hub(props) {
                             {/* <Route path="/:userName/allProjects" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </Route> */}
+                            <ProtectedRoute path={"/:userName/gantt"} user={Token} >
+                                <div className="body-workspace mt-3">
+                                    <DisplayGantt />
+                                </div>
+                            </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>

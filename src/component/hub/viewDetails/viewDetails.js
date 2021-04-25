@@ -40,7 +40,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails showToast={showToast} task={props.task} objectBeforeChanges={(e) => setOldObject(e)} />
+                    return <TaskDetails showToast={showToast}
+                        task={props.task}
+                        objectBeforeChanges={(e) => setOldObject(e)}
+                        closeViewDetails={props.closeViewDetails}
+                    />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'editCurrentTask':
@@ -61,7 +65,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
 
         function closeEndRefreshViewDetails() {
-            debugger
             if (oldObject)
                 switch (oldObject.type) {
                     case 'workspace':

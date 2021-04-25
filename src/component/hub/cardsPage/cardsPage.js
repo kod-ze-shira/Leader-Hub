@@ -5,6 +5,7 @@ import GanttDesign from '../gantt/gantt';
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
+import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
 
 function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
@@ -30,7 +31,7 @@ function CardsPage(props) {
             case 'list':
                 return <ProjectPlatform showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
-                return <GanttDesign />
+                return <DisplayGantt />
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform showToast={showToast} flag={flag} />

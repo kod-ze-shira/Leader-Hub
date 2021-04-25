@@ -60,11 +60,9 @@ const store = createStore(
 store.dispatch(actions.extractJwt());
 
 var url = window.location;
-console.log(url);
 let jwtFromCookie
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
-    console.log("localhost");
     jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }

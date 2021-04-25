@@ -8,21 +8,33 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 import { createStatus } from '../../../../redux/middleware/statusCrud';
 import ViewAllStatuses from '../../status/viewAllStatuses'
 import AddStatus from '../../status/addStatus'
-
+import UploadFile from '../../uploadFile/uploadFile'
+import editStatus from '../../status/editStatus';
+import File from '../../uploadFile/file/file'
 function TaskDetails(props) {
+
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
-
+    const status = props.status
+    const [milstone, setMilstone] = useState(props.task.milestones)
+    const [openPopUp, setOpenPopUp] = useState(false)
+    const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
+    const [statusId, setStatusId] = useState()
+    const [statusTemp, setStatusTemp] = useState({})
+    const [newStatus, setNewStatus] = useState({
+        statusName: "",
+        color: "",
+    })
     useEffect(() => {
-        console.log(props);
-        props.getAllStatusesTaskForUser();
+        // props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
+        props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
 
-    }, [props.cards, props.statuses])
+    }, [props.cards])
 
     // useEffect(() => {
     // let status = [];
-    // // console.log(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
+    // // console.log(props.task.milestones)
 
     // props.statuses.length && props.statuses.forEach(st => {
     // let stTemp = {
@@ -36,22 +48,8 @@ function TaskDetails(props) {
     // setStatusTemp(status)
     // }, [props.statuses])
 
-    const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
-    const [editDescription, setEditDescription] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description)
-    const task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
-    const status = props.status
-    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
-    const [milestonesValue, setMilestonesValue] = useState(milstone)
-    const [openPopUp, setOpenPopUp] = useState(false)
-    const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
-    const [editTask, setEditTask] = useState(task)
-    const [statusId, setStatusId] = useState()
 
-    const [statusTemp, setStatusTemp] = useState({})
-    const [newStatus, setNewStatus] = useState({
-        statusName: "",
-        color: "",
-    })
+
     const handleChangeStatus = (event) => {
         const { name, value } = event.target
         setNewStatus(prevState => ({
@@ -59,45 +57,12 @@ function TaskDetails(props) {
             [name]: value
         }));
     }
-    const changeMilstone = (event) => {
-        setMilestonesValue(!milestonesValue)
-        let temp = editTask
-        temp.milestones = !milestonesValue
-        setEditTask(temp)
-    }
-    const handleChange = (event) => {
-        let name, value
-        if (event.name == "status") {
-            name = event.name
-            value = event.value
-        }
-        else {
-            name = event.target.name
-            value = event.target.value
-            if (name == "name") {
-                setEditTaskName(value)
-                props.setTaskName(value)
-            }
-            if (name == "dueDate" || name == "startDate") {
-                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
-            }
-            // if (name == "milestones") {
-            // setMilestonesValue(!milestonesValue)
-            // value = milestonesValue
-            // }
-        }
-        setEditTask(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
 
-    }
+
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
         if (openPopUpToAdd == true)
             setOpenPopUpToAdd(!openPopUpToAdd)
-
-
     }
     const openAddStatus = (e) => {
 
@@ -108,11 +73,10 @@ function TaskDetails(props) {
         console.log(newStatus);
         props.createStatus(newStatus)
     }
-    const saveNewTask = () => {
-
+    const saveTask = () => {
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
-            props.EditTask(editTask)
+            props.EditTask(props.task)
         }
         else {
             nameRequired.current.focus()
@@ -134,10 +98,25 @@ function TaskDetails(props) {
         // console.log(temp);
         // setEditTask(temp)
     }
+
     const changeFiledInTask = (input) => {
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value }
+        let editTaskInRedux
+        if (input.target.name == "milestones") {
+            setMilstone(!props.task.milestones)
+            editTaskInRedux = { "nameFiled": input.target.name, "value": !milstone }
+        }
+        else
+            editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
+
+
+
+    const newFileComponentArr = props.arrFilesOfTask.map((file) => {
+        return <File url={file.url} name={file.name} />
+    })
+
+
 
     return (
         <>
@@ -146,15 +125,17 @@ function TaskDetails(props) {
                 <div className="row justify-content-between mx-1" >
                     {/* <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label> */}
                     <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-
+                    {/* <label>{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id}</label>/\ */}
+                    {/* <label>card: {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].card}</label> */}
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
                     <label for="name">Name</label>
-                    <input name="name" onChange={(e) => changeFiledInTask(e)}
+                    <input name="name"
                         required ref={nameRequired}
                         type="text" class="form-control"
                         id="name"
+                        onChange={(e) => changeFiledInTask(e)}
                         value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                     <div class="invalid-feedback">
                         Please enter task name.
@@ -166,7 +147,7 @@ function TaskDetails(props) {
                         id="descriptionProject" rows="3"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
-                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
+                        value={props.task.description}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
@@ -177,7 +158,7 @@ function TaskDetails(props) {
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}
+                            value={props.task.startDate}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
@@ -188,13 +169,13 @@ function TaskDetails(props) {
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}
+                            value={props.task.dueDate}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
 
                 </div>
-                <div className="row justify-content-between">
+                <div className="row justify-content-between divStatus">
                     {/* <Select
  onChange={(e) => handleChange(e)}
  name="status"
@@ -204,13 +185,13 @@ function TaskDetails(props) {
  /> */}
                     <div class="dropdown col-5">
 
-                        {/* <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
- {props.statuses.length ? props.statuses.map((status, index) => (
- <>
- <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
- </>
- )) : null}
- </button> */}
+                        <button onClick={openPopUpStatus} class=" form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {props.statuses.length ? props.statuses.map((status, index) => (
+                                <>
+                                    <div className={index == 0 ? "color-status-first" : ""}> </div>{index == 0 ? status.statusName : null}
+                                </>
+                            )) : null}
+                        </button>
                         <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                             <div className="status-list">
                                 {openPopUp && props.statuses.length ? props.statuses.map((status) => (
@@ -219,25 +200,29 @@ function TaskDetails(props) {
                                 {openPopUp ?
                                     <button onClick={openAddStatus} className="ml-3 create-label">Create New Status</button>
                                     : null}
-                                {openPopUpToAdd ? <AddStatus task={task} /> : null}
+                                {openPopUpToAdd ? <AddStatus task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status} /> : null}
+
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div className="row mb-3">
+                {/* <div className="row mb-3">
                     <div className="col-7">
                         <span>Mark as milestone</span>
                         <label class="switch ml-2 ">
                             <input type="checkbox"
-                                checked={milestonesValue ? "checked" : ''}
-                                value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestone} />
-                            <span class="slider round"
+                                name="milestones"
+                                checked={milstone}
+                                value={props.task.milestones}
                                 onChange={(e) => changeFiledInTask(e)}
+                            />
+                            <span class="slider round"
                             ></span>
+
                         </label>
                     </div>
-                </div>
+                </div> */}
 
 
                 {/* <label className="check-task py-2 mt-2 " for="milestones">
@@ -260,11 +245,14 @@ function TaskDetails(props) {
                     Is Milestones
                 </label> */}
 
+                {newFileComponentArr}
+
+                <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
  </button>
-                    <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
+                    <button onClick={(e) => saveTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
 
@@ -274,16 +262,21 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        // task: state.task_reducer.task,
+        tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
-        indexCurrentTask: state.public_reducer.indexCurrentTask
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        arrFilesOfTask: state.public_reducer.arrFilesOfTask
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        uploadFiles: (uploadFile) => dispatch(actions.uploadFiles(uploadFile)),
         EditTask: (task) => dispatch(actions.editTask(task)),
+        setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         createStatus: (status) => dispatch(actions.createStatus(status)),

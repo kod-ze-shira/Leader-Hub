@@ -1,33 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
-import { uploadFiles } from '../../../redux/middleware/filesCrud'
+import File from './file/file'
+import './uploadFile.css'
+
 
 function UploadFile(props) {
     const [uploadFile, setUploadFile] = useState([])
-
-    const [saveInServer, setSaveInServer] = useState(false)
-   
+    const fileInputRef = useRef()
+    const [fileComponentArr, setFileComponentArr] = useState([])
     useEffect(() => {
         console.log(props);
-        props.uploadFiles(props.files)
+        // props.uploadFiles(props.files)
     }, [props.files])
 
-    const uploadMulti = (file) => {
 
+
+    const uploadMulti = () => {
         // setUploadFile([...uploadFile, file])
-        props.addFile(file)
-        console.log(props)
 
+        // let r = fileInputRef.current.file
+        if (fileInputRef.current.files) {
+            props.setFileFromTask(fileInputRef.current.files[0])
+            // for (let index = 0; index < fileInputRef.current.files.length; index++) {
+            // if (!uploadFile)
+            //     setUploadFile([...fileInputRef.current.files[0]]);
+            // else
+            //     setUploadFile([...uploadFile, fileInputRef.current.files[0]])
+
+
+            // let newComponent = addFileComponent(fileInputRef.current.files[0].name, fileInputRef.current.files[0].name)
+            // if (!fileComponentArr.length)
+            //     setFileComponentArr([newComponent])
+            // else
+            //     setFileComponentArr([...fileComponentArr, newComponent])
+
+
+        }
     }
 
-    const saveFiles = () => {
-        // setSaveInServer(true)
-        props.uploadFiles(uploadFile)
 
-    }
+
+
+    // const saveFiles = () => {
+    //     props.uploadFiles(uploadFile)
+    // }
     return (
-        <div>
+        <div className='divFile'>
             <label for="logouug" className="lbl_img">
                 <p>add file</p>
                 {/* <img className="img_logo" 
@@ -43,10 +62,13 @@ function UploadFile(props) {
                     display: 'none',
                     cursor: 'pointer',
                 }}
-                onChange={(e) => uploadMulti(e.target.files[0])}
+                ref={fileInputRef}
+                // multiple
+                onChange={() => uploadMulti()}
             />
-            <button onClick={saveFiles}>save</button>
-            <button onClick={() => props.getFiles()}>get</button>
+            <div id='myFile'></div>
+            {fileComponentArr}
+            {/* <button onClick={saveFiles}>save</button> */}
         </div>
     )
 }
@@ -58,8 +80,8 @@ export default connect(
     },
     (dispatch) => {
         return {
+            setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
             uploadFiles: (filesArr) => dispatch(actions.uploadFiles(filesArr)),
-            // getFiles: () => dispatch(actions.getFiles()),
             addFile: (files) => dispatch(actions.addFile(files)),
         }
     }

@@ -9,49 +9,60 @@ import './viewAllStatuses.css'
 function EditStatus(props) {
 
     useEffect(() => {
-        // debugger
-        // console.log(props.statuses);
-    }, [props.statuses])
+            
+    }, [])
 
     const [editStatus, setEditStatus] = useState({
-        id_: "",
+        _id: "",
         statusName: "",
         color: "",
     })
 
-    const addStatus = () => {
-        console.log(newStatus);
+    const editStatus_ = () => {
+        debugger
+        console.log(editStatus);
         props.editStatus(editStatus)
     }
-    const handleChangeStatus = (event) => {
-        const { name, value } = event.target
-        setNewStatus(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+    // const handleChangeStatus = (event) => {
+    //     debugger
+    //     console.log(event.target)
+    //     const { name, value } = event.target
+    //     setEditStatus(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+    //     console.log(editStatus);
+    // }
+    const changeFiledInStatus = (input) => {
+        // props.setCurrentIndexTask(currentIndexTask)
+        // props.setCurrentIndexCard(currentIndexCard)
+        let editStatusInRedux = { "nameFiled": input.target.name, "value": input.target.value }
+        props.setTaskByFiledFromTasks(editStatusInRedux)
     }
     return (
-
         <>
             <div className="container">
                 <div className="">
                     <div class="form-group row">
                         <label for="name">Name</label>
-                        <input name="statusName" onChange={(e) => handleChangeStatus(e)}
+                        <input name="statusName"
                             type="text" class="form-control"
                             id="statusName"
-                            value={status.statusName}
+                            value={props.status.statusName}
+                            onChange={(e) => changeFiledInStatus(e)}
                         />
                     </div>
                     <div class="form-group row">
-                        <label for="color">Select aColor</label>
-                        <input name="color" onChange={(e) => handleChangeStatus(e)}
+                        <label for="color">Select Color</label>
+                        <input name="color"
                             type="color" class="form-control"
                             id="color"
-                            value={status.color}
+                            value={props.status.color}
+                            onChange={(e) => changeFiledInStatus(e)}
+
                         />
                     </div>
-                    <button onClick={(e) => addStatus(e)}>Save</button>
+                    <button onClick={(e) => editStatus_(e)}>Save</button>
 
                 </div>
 
@@ -64,7 +75,8 @@ function EditStatus(props) {
 const mapStateToProps = (state) => {
 
     return {
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {

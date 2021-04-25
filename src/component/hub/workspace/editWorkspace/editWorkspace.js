@@ -5,6 +5,7 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
 
+   
 
     const [workspaceBeforeChanges] = useState({ ...props.workspace })
 
@@ -32,7 +33,6 @@ function EditWorkspace(props) {
     const changeFiledInWorkspace = (input) => {
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
-        // props.workspace[input.target.name] = input.target.value
     }
 
     return (
@@ -57,9 +57,8 @@ function EditWorkspace(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control"
-                        id="description" rows="2"
+                        id="description" rows="5"
                         placeholder="Write a description about your workspace"
-                        // value={props.workspace.description}
                         name="description"
                         value={props.workspaces[props.indexOfWorkspace].description}
                         onChange={(input) => changeFiledInWorkspace(input)}></textarea>
@@ -72,7 +71,6 @@ function EditWorkspace(props) {
                         type="color"
                         id='colorProject'
                         value={props.workspaces[props.indexOfWorkspace].color}
-                        // value={props.workspace.color}
                         onChange={(e) => changeFiledInWorkspace(e)} />
                 </div>
                 <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
@@ -88,9 +86,7 @@ function EditWorkspace(props) {
 export default connect(
     (state) => {
         return {
-            // workspace: state.workspace_reducer.workspace,
             workspaces: state.public_reducer.workspaces,
-            // workspaceToEdit: state.workspace_reducer.workspace,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace
         }
     },
