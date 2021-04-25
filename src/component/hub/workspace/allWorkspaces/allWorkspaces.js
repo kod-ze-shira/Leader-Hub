@@ -13,8 +13,6 @@ function AllWorkspaces(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const refToDeleteToast = useRef(null);
 
-
-
     useEffect(() => {
         props.getAllWorkspaces()
     }, []);
@@ -34,17 +32,21 @@ function AllWorkspaces(props) {
                 editWorkspace={openEditWorkspace}
             //   bin={disableBin}
             />
-        }) : null
+        }) :
+        <div className="logoGif"><img src={require('../../../img/animation.gif')} /></div>
 
-    const renderedGridWorkspaces = props.workspaces ?
-        props.workspaces.map((workspace, index) => {
-            return <ViewWorkspaceGrid indexWorkspace={index}
-                setShowToastDeleteWhenClickDelete={(obj) => props.showToast(obj)}
-                key={workspace._id}
-                //  bin={disableBin} 
-                index={index}
-                workspace={workspace} editWorkspace={openEditWorkspace} />
-        }) : null
+
+    const renderedGridWorkspaces =
+        props.workspaces ?
+            props.workspaces.map((workspace, index) => {
+                return <ViewWorkspaceGrid indexWorkspace={index}
+                    setShowToastDeleteWhenClickDelete={(obj) => props.showToast(obj)}
+                    key={workspace._id}
+                    //  bin={disableBin} 
+                    index={index}
+                    workspace={workspace} editWorkspace={openEditWorkspace} />
+            }) : 
+            <div className="logoGif"><img src={require('../../../img/animation.gif')} /></div>
 
     const [workspaceToEdit, setWorspaceToEdit] = useState()
 
