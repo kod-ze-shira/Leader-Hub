@@ -18,7 +18,8 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         if (!!formData.entries().next().value == true) {
             $.ajax({
-                url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                url: `https://files.codes/api/renana-il/uploadMultipleFiles`,
+                // url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
                 method: 'post',
                 contentType: false,
                 processData: false,
@@ -29,7 +30,8 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     console.log("finish first ajax  " + JSON.stringify(myData));
                     setTimeout(() => {
                         $.ajax({
-                            url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
+                            url: `https://files.codes/api/renana-il/savedMultiFilesDB`,
+                            // url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
                             method: 'POST',
                             headers: { "authorization": jwtFromCookie },
                             data: myData,
@@ -75,15 +77,20 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
 export const removeFile = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_FILE') {
+        debugger
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        let fileUrl = action.payload
+        let fileUrlArr = action.payload
 
         $.ajax({
-            type: "GET",
-            url: `https://files.codes/api/${getState().public_reducer.userName}/remove/${fileUrl}`,
-            headers: { Authentication: jwtFromCookie },
+            type: "POST",
+            url: `https://files.codes/api/${getState().public_reducer.userName}/removeMultipleFiles`,
+            headers: { Authorization: jwtFromCookie },
+            data: { 'urls': fileUrlArr },
+
             success: function (data) {
-                console.log(data)
+                console.log('succes delete files!!')
+                // dispatch(actions.deleteFilesInTask(data.urls))
+
             },
             error: function (err) {
                 alert(err);

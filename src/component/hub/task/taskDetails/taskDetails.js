@@ -12,12 +12,24 @@ import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'
 function TaskDetails(props) {
+
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
-    const [flugFiles, setFlugFiles] = useState(false)
+    const status = props.status
+    const [milstone, setMilstone] = useState(props.task.milestones)
+    const [openPopUp, setOpenPopUp] = useState(false)
+    const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
+    const [statusId, setStatusId] = useState()
+    const [statusTemp, setStatusTemp] = useState({})
+    const [newStatus, setNewStatus] = useState({
+        statusName: "",
+        color: "",
+    })
     useEffect(() => {
         // props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
+        props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
+
     }, [props.cards])
 
     // useEffect(() => {
@@ -36,17 +48,7 @@ function TaskDetails(props) {
     // setStatusTemp(status)
     // }, [props.statuses])
 
-    const status = props.status
-    const [milstone, setMilstone] = useState(props.task.milestones)
-    const [openPopUp, setOpenPopUp] = useState(false)
-    const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
-    const [statusId, setStatusId] = useState()
-    const [statusTemp, setStatusTemp] = useState({})
-    const [newStatus, setNewStatus] = useState({
-        statusName: "",
-        color: "",
-    })
-    const [fileComponentArr, setFileComponentArr] = useState([])
+
 
     const handleChangeStatus = (event) => {
         const { name, value } = event.target
@@ -71,11 +73,9 @@ function TaskDetails(props) {
         console.log(newStatus);
         props.createStatus(newStatus)
     }
-    const saveNewTask = () => {
-
+    const saveTask = () => {
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
-
             props.EditTask(props.task)
         }
         else {
@@ -118,26 +118,12 @@ function TaskDetails(props) {
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
-    // if (!flugFiles) {
-    //     filesInTask()
-    //     setFlugFiles(true)
-    // }
-    function filesInTask() {
 
-        let newComponent
-        props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
-            newComponent = addFileComponent(file.url, file.name)
-            if (!fileComponentArr.length)
-                setFileComponentArr([newComponent])
-            else
-                setFileComponentArr([...fileComponentArr, newComponent])
 
-        })
+    const newFileComponentArr = props.arrFilesOfTask.map((file) => {
+        return <File url={file.url} name={file.name} />
+    })
 
-    }
-    const addFileComponent = (urlFile, nameFile) => {
-        return <File urlFile={urlFile} nameFile={nameFile} />
-    }
 
 
     return (
@@ -267,14 +253,14 @@ function TaskDetails(props) {
                     Is Milestones
                 </label> */}
 
-                {fileComponentArr}
+                {newFileComponentArr}
 
                 <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
  </button>
-                    <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
+                    <button onClick={(e) => saveTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
 
@@ -290,12 +276,15 @@ const mapStateToProps = (state) => {
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
-        indexCurrentTask: state.public_reducer.indexCurrentTask
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        arrFilesOfTask: state.public_reducer.arrFilesOfTask
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        uploadFiles: (uploadFile) => dispatch(actions.uploadFiles(uploadFile)),
         EditTask: (task) => dispatch(actions.editTask(task)),
+        setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
