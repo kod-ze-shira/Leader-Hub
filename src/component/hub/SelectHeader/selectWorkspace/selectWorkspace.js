@@ -28,13 +28,13 @@ function SelectWorkspace(props) {
         // console.log(myWorkspace._id)
         if (myWorkspace.projects[0]) {
 
-            props.setProjects(myWorkspace.projects)
-            props.setProject(myWorkspace.projects[0])
+            // props.setProjects(myWorkspace.projects)
+            // props.setProject(myWorkspace.projects[0])
             //ssssssssssssss
             // props.getCardsByProjectId(myWorkspace.projects[0]._id)
             // if (props.projectPage == true)
-            if (window.location.href.indexOf('workspace') != -1)
-                props.history.push("/" + props.user + "/workspace/" + myWorkspace._id)
+
+            props.history.push("/" + props.user + "/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
         }
         else {
@@ -66,14 +66,14 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo" nameWorkspace={props.workspace ? props.workspace : null} />
+                <LetterLogo className="workspace-logo" nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
                 <Select
                     className="select-workspace selectInHeader"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
-                    placeholder={props.workspace ? props.workspace.name : null}
+                    placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
                     styles={style}
                     components={{ Input }}
                 // onInputChange={inputValue =>
@@ -88,11 +88,11 @@ const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
-        // workspaces: state.public_reducer.workspaces,
+        workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
         cards: state.public_reducer.cards,
-        user: state.public_reducer.userName
-
+        user: state.public_reducer.userName,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace
 
     }
 }
@@ -107,7 +107,8 @@ const mapDispatchToProps = (dispatch) => {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
-        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
+        getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectWorkspace))

@@ -37,7 +37,7 @@ const publicData = {
     setNewFilesInTask(state, action) {
         let files = action.payload
         // for (let index = 0; index < files.length; index++) {
-        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled].files
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
             .push({ 'name': files.file0.name, 'url': files.file0.url })
 
         // }
@@ -47,6 +47,7 @@ const publicData = {
     },
 
     setFileFromTask(state, action) {
+        debugger
         state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload })
     },
     setUserName(state, action) {
@@ -281,7 +282,7 @@ const publicData = {
     // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
     // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
     // console.log(a);   
-},
+    // },
 
     // deleteFilesInTask(state, action) {
     //     debugger
@@ -303,21 +304,21 @@ const publicData = {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
     },
-        saveCurrentIndexOfTaskInRedux(state, action) {
-    state.indexCurrentTask = action.payload
-},
-setCurrentIndexProject(state, action) {
-    state.indexCurrentProject = action.payload
-},
-setIdCurrentCard(state, action) {
-    state.idCurrentCard = action.payload
-},
-saveCurrentIndexOfCardInRedux(state, action) {
-    state.indexCurrentCard = action.payload
-},
-saveIndexOfWorkspaceInRedux(state, action) {
-    state.indexOfWorkspace = action.payload
-},
+    saveCurrentIndexOfTaskInRedux(state, action) {
+        state.indexCurrentTask = action.payload
+    },
+    setCurrentIndexProject(state, action) {
+        state.indexCurrentProject = action.payload
+    },
+    setIdCurrentCard(state, action) {
+        state.idCurrentCard = action.payload
+    },
+    saveCurrentIndexOfCardInRedux(state, action) {
+        state.indexCurrentCard = action.payload
+    },
+    saveIndexOfWorkspaceInRedux(state, action) {
+        state.indexOfWorkspace = action.payload
+    },
 
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);

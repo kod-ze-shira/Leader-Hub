@@ -51,12 +51,13 @@ function AddWorkspace(props) {
     const [workspace, setWorkspace] = useState({
         name: "",
         description: "",
-        color: myColor
+        color: ''
     })
 
     function addNewWorkspace() {
 
         if (nameworkspae.current.value) {
+            workspace.color = myColor
             props.addNewWorkspaceToServer(workspace)
             props.closeViewDetails()
 
