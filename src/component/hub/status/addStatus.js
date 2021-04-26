@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import { editStatus } from '../../../redux/middleware/statusCrud';
 import Colors from '../color/color';
+import ViewAllStatuses from './viewAllStatuses';
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewStatus.css'
 
@@ -41,9 +42,15 @@ function AddStatus(props) {
             [name]: value
         }));
     }
+    const [view, setView] = useState(false)
+    const viewAllStatus =()=>{
+        setView(!view)
+
+    }
     return (
         <>
             <div className="container ">
+            <div className="title-edit-label py-2 mb-1" onClick={viewAllStatus}>> Add Label</div>
                 <label for="name">Name</label>
                 <input name="statusName" onChange={(e) => handleChangeStatus(e)}
                     type="text" class="form-control"
@@ -55,6 +62,7 @@ function AddStatus(props) {
                 <button className="add-status" onClick={(e) => addStatus(e)}>Save</button>
 
             </div>
+           { view?<ViewAllStatuses/>:null}
         </>
 
     )

@@ -24,22 +24,20 @@ function ViewStatus(props) {
         props.changeStatus(props.index)
         $('.display-task').css({ 'display': 'none' })
         console.log("openEditTask", openPopUpToEdit);
-
     }
     return (
 
         <>
-            <div className="container display-task">
-                <div className="" >
-                    <div onClick={(id) => props.saveStatus(props.status)} className="menu-status " style={{ backgroundColor: props.status.color }}>
+            <div className="container display-task ">
+                <div className="row ml-2">
+                    <div onClick={(id) => props.saveStatus(props.status)} className="menu-status col-8 " style={{ backgroundColor: props.status.color }}>
                         <p >{props.status.statusName}</p>
                     </div>
-                   
-                </div>
-                <img
-                        className="pencil-status "
+                    <img
+                        className="pencil-status ml-2"
                         onClick={(e) => openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
+                </div>
             </div>
 
             {openPopUpToEdit ? <EditStatus status={props.status} index={props.index} /> : null}
