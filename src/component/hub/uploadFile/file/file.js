@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { actions } from '../../../../redux/actions/action'
 
@@ -22,7 +23,11 @@ function File(props) {
         <>
             <div style={{ 'display': 'inline-block' }} id={props.url ? props.url : props.name}>
                 <button onClick={() => deleteFile()} >X</button>
-                <span>{props.name}</span>
+                {props.url ?
+                    <a href={props.url} target="_blank">{props.name}</a>
+                    : <p>{props.name}</p>
+                }
+                {/* <FontAwesomeIcon icon={["fas", "download"]} onClick={() => props.downloadFile(props.url)} /> */}
             </div>
         </>
     )
@@ -36,6 +41,7 @@ export default connect(
     },
     (dispatch) => {
         return {
+            downloadFile: (url) => dispatch(actions.downloadFile(url)),
             removeFileInRedux: (filesArr) => dispatch(actions.removeFileInRedux(filesArr)),
             deleteFilesInTask: (filesArr) => dispatch(actions.deleteFilesInTask(filesArr)),
         }

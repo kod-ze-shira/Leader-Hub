@@ -7,7 +7,7 @@ import './viewCardsTabs.css'
 // import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
 
