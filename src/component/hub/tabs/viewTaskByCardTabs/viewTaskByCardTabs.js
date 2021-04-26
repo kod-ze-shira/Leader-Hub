@@ -90,11 +90,7 @@ function ViewTaskByCradTabs(props) {
                             id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
-<<<<<<< HEAD
-                                    <div className="color-task col-4 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div>
-=======
                                     {props.task.status ? <div className="color-task col-4 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div> : null}
->>>>>>> newDev
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
                                     <Button className="more col-3 mr-0"
                                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
