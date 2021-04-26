@@ -1,11 +1,11 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 
-// {{urlHub}}/api/renana-il/getAllStatusesTaskForUser
 
-export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'GET_ALL_STATUSES_TASK_FOR_USER') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllStatusesTaskForUser`
+export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
+        let taskId = action.payload
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/getAllStatusesTaskForWorkspace`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -18,7 +18,7 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 console.log("data", data);
-                console.log("data-s", data.statuses);
+                console.log("data.statuses", data.statuses);
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
@@ -40,6 +40,7 @@ export const getAllStatusesTaskForUser = ({ dispatch, getState }) => next => act
 
 export const createStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'CREATE_STATUS') {
+        debugger
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/createStatus`
         let statusTask = action.payload
         console.log(statusTask)
@@ -50,16 +51,17 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
+
             data: JSON.stringify({ statusTask }),
             success: function (data) {
+                debugger
                 console.log("success")
-                console.log(data);
+                console.log(data.newStatusTask);
                 dispatch(actions.addNewStatus(data.newStatusTask))
                 // console.log("data.newStatusTask",data.newStatusTask);
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
 
                 })
@@ -104,6 +106,7 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
 // '/:userName/:taskStatusId/removeStatus'
 export const removeStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'REMOVE_STATUS') {
+
         let statusId = action.payload
         // let status = getState().status_reducer.status;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${statusId}/removeStatus`

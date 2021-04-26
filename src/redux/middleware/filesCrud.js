@@ -5,7 +5,6 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     // let files = getState().files_reducer.files
     let files = action.payload
     if (action.type === 'UPLOAD_FILES') {
-        debugger
         var formData = new FormData()
         // var myFiles = Object.values(files)
         if (files.length < 1) { console.log("ooops... not files to upload") }

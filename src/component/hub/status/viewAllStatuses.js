@@ -13,7 +13,8 @@ function ViewAllStatuses(props) {
 
     useEffect(() => {
         debugger
-        props.getAllStatusesTaskForUser();
+        console.log(props.task._id);
+        props.getAllStatusesTaskForWorkspace(props.task._id);
         console.log(props.statuses);
         console.log(props.status);
     }, [props.cards])
@@ -29,7 +30,6 @@ function ViewAllStatuses(props) {
             setOpenPopUpToAdd(!openPopUpToAdd)
     }
     const openAddStatus = (e) => {
-
         setOpenPopUpToAdd(!openPopUpToAdd)
         setOpenPopUp(!openPopUp)
     }
@@ -38,10 +38,8 @@ function ViewAllStatuses(props) {
         props.setTaskByFiledFromTasks(editStatusInRedux)
     }
     const changeStatusByIndex = (indexOfStatus) => {
-        // setStatusIndex(indexOfStatus)
         let s = props.statuses[indexOfStatus]
         setStatus(s)
-        // console.log(status.statusName);
         let a = props.status.statusName
         console.log(a)
     }
@@ -53,24 +51,21 @@ function ViewAllStatuses(props) {
 
         <>
 
-
-            
-                <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
-                    <div className="status-list">
-                        {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
-                            <ViewStatus saveStatus={(e) => saveStatus(e)}
-                                changeStatus={changeStatusByIndex}
-                                status={status} index={index}
-                            // openPopUp={closePopUpOfViewStatus} 
-                            />
-                        )) : null}
-                        {openPopUp ?
-                            <button onClick={(e)=>openAddStatus(e)} className="ml-3 create-label">Create New Status</button>
-                            : null}
-                        {openPopUpToAdd ? <AddStatus task={props.status} /> : null}
-                    </div>
-
+            <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
+                <div className="status-list">
+                    {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
+                        <ViewStatus saveStatus={(e) => saveStatus(e)}
+                            changeStatus={changeStatusByIndex}
+                            status={status} index={index}
+                        // openPopUp={closePopUpOfViewStatus} 
+                        />
+                    )) : null}
+                    {openPopUp ?
+                        <button onClick={(e) => openAddStatus(e)} className="ml-3 create-label">Create New Status</button>
+                        : null}
+                    {openPopUpToAdd ? <AddStatus task={props.task} status={props.status} /> : null}
                 </div>
+            </div>
         </>
 
     )
@@ -81,18 +76,15 @@ const mapStateToProps = (state) => {
     return {
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
         saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index)),
         createStatus: (status) => dispatch(actions.createStatus(status)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
     }
-
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewAllStatuses)

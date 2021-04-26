@@ -28,7 +28,7 @@ function TaskDetails(props) {
 
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
-        
+
     }
 
     const saveNewTask = () => {
@@ -36,6 +36,7 @@ function TaskDetails(props) {
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
             props.EditTask(props.task)
+            props.closeViewDetails(false)
         }
         else {
             nameRequired.current.focus()
@@ -49,7 +50,7 @@ function TaskDetails(props) {
     const deleteTask = () => {
         props.showToast(true)
     }
-  
+
 
 
     const changeFiledInTask = (input) => {
@@ -113,7 +114,7 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="3"
+                        id="descriptionProject" rows="1"
                         // placeholder="this is a very important task.. don’t forget!"
                         onChange={(e) => changeFiledInTask(e)}
                         value={props.task.description}>
@@ -152,9 +153,12 @@ function TaskDetails(props) {
                                 <span className="">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
                             </> : null}
                         </button>
-                       {openPopUp? 
-                       <ViewAllStatuses status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status} openPopUp={openPopUp}/>
-                       :null}
+                        {openPopUp ?
+                            <ViewAllStatuses
+                                task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                                status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                                openPopUp={openPopUp} />
+                            : null}
                     </div>
                     {/* <div className="row mb-3"> */}
                     <div className="col-7">
@@ -206,7 +210,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
     }

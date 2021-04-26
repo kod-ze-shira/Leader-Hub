@@ -240,7 +240,7 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         EditCard: (card) => dispatch(actions.editCard(card)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
     }
 }
