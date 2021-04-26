@@ -50,7 +50,6 @@ function ProjectPlatform(props) {
     // ?מחיקת משימה לא עובדת
     //show toast delete to true and save the sask that shold be deleted
     const showToastToDeleteTask = (taskOrCard) => {
-        // props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
         setTaskOrCard(taskOrCard)
         props.showToast(taskOrCard)
     }

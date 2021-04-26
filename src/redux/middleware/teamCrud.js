@@ -4,7 +4,6 @@ import { actions } from '../actions/action'
 export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
-        // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllTeamsForUser"
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTeamsForUser`
         fetch(urlData,
             {
@@ -17,14 +16,15 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
             })
             .then((result) => {
                 console.log("res", result)
-                // checkPermission(result).then((ifOk) => {
-                //     dispatch(actions.setWorkspaces(result.workspaces))
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setTeams(result.teams))
 
-                // })
+                })
             })
-        return next(action);
+        
 
     }
+    return next(action);
 }
 
 export const createNewTeam = ({ dispatch, getState }) => next => action => {
@@ -74,6 +74,28 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+export const getContactsForUser = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_CONTACTS_FOR_USER') {
+      fetch(
+        `https://api.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
+        {
+          method: 'GET',
+          headers: { authorization: getState().public_reducer.tokenFromCookies }
+        }
+      )
+        .then(res => {
+          return res.json()
+        })
+        .then(result => {
+          console.log('contacts', result)
+          checkPermission(result).then(ifOk => {
+            dispatch(actions.setContactsUser(result))
+          })
+        })
+    }
+  
+    return next(action)
+  }
 
 
 

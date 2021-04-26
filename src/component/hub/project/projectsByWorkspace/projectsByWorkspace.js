@@ -69,10 +69,10 @@ function ProjectsByWorkspace(props) {
 
 
 
-    function openEditProject() {
+    function openEditOrShareProject(from) {
         // setCurrentProject(project)
         // props.setProject(project)
-        setAddOrEditProject("editProject")
+        setAddOrEditProject(from)
         setShowProject(true)
     }
 
@@ -85,14 +85,20 @@ function ProjectsByWorkspace(props) {
         props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
             return project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
-                    closeViewDetails={false} indexProject={index} myProject={project} editProject={openEditProject} />
+                    closeViewDetails={false} 
+                    indexProject={index} 
+                    myProject={project} 
+                    editOrShareProject={(editOrShare)=>openEditOrShareProject(editOrShare)} />
                 : null
         }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects.map((project) => {
             return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
-                closeViewDetails={false} myProject={project} editProject={openEditProject} />
+                closeViewDetails={false} 
+                myProject={project} 
+                editOrShareProject={(editOrShare)=>openEditOrShareProject(editOrShare)}
+                shareProject={openEditOrShareProject}/>
                 : null
         })
     }) : null

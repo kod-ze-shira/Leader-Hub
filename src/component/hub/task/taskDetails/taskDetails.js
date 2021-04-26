@@ -55,12 +55,20 @@ function TaskDetails(props) {
 
     const changeFiledInTask = (input) => {
         let editTaskInRedux
-        if (input.target.name == "milestones") {
-            setMilstone(!props.task.milestones)
-            editTaskInRedux = { "nameFiled": input.target.name, "value": !milstone }
+        let value = input.target.value
+        if (input.target.name == "startDate") {
+            value = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
         }
         else
-            editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value }
+            if (input.target.name == "dueDate") {
+                value = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
+            }
+            else
+                if (input.target.name == "milestones") {
+                    setMilstone(!props.task.milestones)
+                    value = !milstone
+                }
+        editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
     function filesInTask() {
