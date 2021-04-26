@@ -50,8 +50,8 @@ function ViewTaskByCradTabs(props) {
                 // props.setTaskName(task.name)
             }
             if (e == "delete") {
-                $(`#${props.task._id + "disappear"}`).css("display", "none")
-                props.objectToast({ 'type': 'Task', 'object': props.task })
+                $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
+                props.objectToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
             }
         }
         else
