@@ -19,7 +19,8 @@ const initialState = {
     indexCurrentCard: 0,
     indexCurrentProject: 0,
     indexOfWorkspace: 0,
-    arrFilesOfTask: []
+    arrFilesOfTask: [],
+    ArrDeleteFilesOfTask: []
 }
 
 const publicData = {
@@ -33,11 +34,22 @@ const publicData = {
     setFilesFromTask(state, action) {
         state.arrFilesOfTask = action.payload
     },
+    setNewFilesInTask(state, action) {
+        let files = action.payload
+        // for (let index = 0; index < files.length; index++) {
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
+            .push({ 'name': files.file0.name, 'url': files.file0.url })
+
+        // }
+
+        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled].files.push(files) 
+
+    },
+
     setFileFromTask(state, action) {
         debugger
         state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload })
     },
-
     setUserName(state, action) {
         state.userName = action.payload;
     },
@@ -218,7 +230,7 @@ const publicData = {
             state.workspaces[i]._id !== action.payload._id
         )
     },
-  
+
     setCardNameInput(state, action) {
         console.log(action.payload)
         state.cards.map(card => {
@@ -256,20 +268,22 @@ const publicData = {
         })
     },
 
-        //         })
-        //     }
-        // })
-        //    state.cards.find(card=>card._id==state.idCurrentCard).tasks.map(task=>{
-        //       if(task._id==state.indexCurrentTask)
-        //     {
-        //         task[action.payload.nameFiled]=action.payload.value
-        //                 console.log(task);
-        //     }
-        //    })
+    //         })
+    //     }
+    // })
+    //    state.cards.find(card=>card._id==state.idCurrentCard).tasks.map(task=>{
+    //       if(task._id==state.indexCurrentTask)
+    //     {
+    //         task[action.payload.nameFiled]=action.payload.value
+    //                 console.log(task);
+    //     }
+    //    })
 
-        // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-        // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
-        // console.log(a);   
+    // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
+    // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
+    // console.log(a);   
+    // },
+
     // deleteFilesInTask(state, action) {
     //     debugger
     //     action.payload.map((urlFile) =>
@@ -278,11 +292,17 @@ const publicData = {
     // },
     removeFileInRedux(state, action) {
         debugger
-        if (action.payload.url != 'new')
+        if (action.payload.url != 'new') {
+            let fileToDelete = state.arrFilesOfTask.find((file) => file.url == action.payload.url)
+            if (state.ArrDeleteFilesOfTask)
+                state.ArrDeleteFilesOfTask.push(fileToDelete)
+            else
+                state.ArrDeleteFilesOfTask = fileToDelete
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
-        else
+        }
+        else {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
-
+        }
     },
     saveCurrentIndexOfTaskInRedux(state, action) {
         state.indexCurrentTask = action.payload
