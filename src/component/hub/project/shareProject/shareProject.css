@@ -1,7 +1,19 @@
 .div_share_with{
-    width: 455px;
-height: 360px;
-background: #87C5FE 0% 0% no-repeat padding-box;
+    width: 28.5vw;
+height: 35vh;
+background: #eaf8f2 0% 0% no-repeat padding-box;
 border-radius: 3px;
-opacity: 0.11;
+/* opacity: 0.11; */
+}
+.txt_share{
+    font: bold 16px/21px Roboto;
+    color: #0A102E;
+}
+.txt_description_share{
+    font: normal normal normal 14px/21px Roboto;
+letter-spacing: 0.32px;
+color: #75798E;
+}
+.txt_share_with{
+  color:  #75798E
 }
