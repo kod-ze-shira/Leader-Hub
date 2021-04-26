@@ -49,6 +49,7 @@ function Hub(props) {
     const deleteObject = () => {
         console.log(objectToDelete)
         setShowToastDelete(false)
+        debugger
         props['remove' + objectToDelete.type](objectToDelete.object._id)
 
     }

@@ -81,23 +81,23 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-export const downloadFile = ({ dispatch, getState }) => next => action => {
-    let file = action.payload
-    let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-    $.ajax({
-        type: "GET",
-        url: `https://files.codes/api/${getState().public_reducer.userName}/download/${file}`,
-        headers: { Authentication: jwtFromCookie },
-        success: function (data) {
-            // console.log()
-        },
-        error: function (err) {
-            // alert(err);
-        },
-    });
-    return next(action);
+// export const downloadFile = ({ dispatch, getState }) => next => action => {
+//     let file = action.payload
+//     let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+//     $.ajax({
+//         type: "GET",
+//         url: `https://files.codes/api/${getState().public_reducer.userName}/download/${file}`,
+//         headers: { Authentication: jwtFromCookie },
+//         success: function (data) {
+//             // console.log()
+//         },
+//         error: function (err) {
+//             // alert(err);
+//         },
+//     });
+//     return next(action);
 
-}
+// }
 
 export const removeFile = ({ dispatch, getState }) => next => action => {
 
