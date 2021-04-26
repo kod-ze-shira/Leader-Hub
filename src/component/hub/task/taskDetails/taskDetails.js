@@ -36,7 +36,15 @@ function TaskDetails(props) {
 
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
-            props.EditTask(props.task)
+            let newFiles
+            if (props.arrFilesOfTask)
+                newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
+            if (newFiles) {
+                props.uploadFiles(newFiles)
+
+            }
+            else
+                props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         }
         else {
             nameRequired.current.focus()
@@ -209,7 +217,8 @@ const mapDispatchToProps = (dispatch) => {
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

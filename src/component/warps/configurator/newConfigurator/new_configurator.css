@@ -48,6 +48,8 @@ border-radius: 3px;
   li p{
     line-height: 1.4 !important; 
   }
+
+  .list_config li:hover,
   .li-back{
      background: url('../../../img/Mask1.svg');
      border-left:16px solid var(--light-light-blue); 
@@ -55,6 +57,8 @@ border-radius: 3px;
      padding-left: 10px;
      /* border-left: 16px solid #44D7B6 !important;‏ */
 }
+
+
 
 .list_config li{
   overflow: auto;
