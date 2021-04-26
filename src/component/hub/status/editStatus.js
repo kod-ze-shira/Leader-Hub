@@ -35,7 +35,8 @@ function EditStatus(props) {
 
     const viewAllStatus = (e) => {
         debugger
-        setViewList(true)
+        let a=true
+        setViewList(a)
         console.log(viewList);
 
     }
@@ -71,7 +72,9 @@ function EditStatus(props) {
                 </div>
 
             </div>
-            {viewList ? <ViewAllStatuses /> : null}
+            {viewList ?
+                <ViewAllStatuses />
+                : null}
         </>
 
     )

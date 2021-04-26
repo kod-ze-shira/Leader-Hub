@@ -195,7 +195,6 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask:(index)=>dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard:(index)=>dispatch(actions.saveCurrentIndexOfCardInRedux(index))

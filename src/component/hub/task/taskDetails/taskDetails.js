@@ -17,7 +17,6 @@ function TaskDetails(props) {
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     const [flugFiles, setFlugFiles] = useState(false)
     useEffect(() => {
-        props.getAllStatusesTaskForUser();
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
     }, [props.cards])
 

@@ -26,6 +26,7 @@ margin-top: 1vh;
     box-shadow: none !important;
 }
 .title-edit-label{
+    cursor: pointer;
     color: var(--unnamed-color-3598f4);
 text-align: left;
 font: normal normal bold 14px/19px Roboto;

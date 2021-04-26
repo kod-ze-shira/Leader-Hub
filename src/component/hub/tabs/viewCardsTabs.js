@@ -15,7 +15,6 @@ function ViewCardsTabs(props) {
 
     useEffect(() => {
 
-        // props.getAllStatusesTaskForUser()
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
