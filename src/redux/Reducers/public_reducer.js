@@ -11,12 +11,12 @@ const initialState = {
     projects: [],
     cards: [],
     tasks: [],
-    statuses: [],
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     indexCurrentCard: 0,
     idCurrentCard: 0,
+    indexCurrentCard: 0,
     indexCurrentProject: 0,
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
@@ -229,6 +229,7 @@ const publicData = {
             state.workspaces[i]._id !== action.payload._id
         )
     },
+
     setCardNameInput(state, action) {
         console.log(action.payload)
         state.cards.map(card => {
@@ -251,19 +252,9 @@ const publicData = {
     },
     setTaskByFiledFromTasks(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-        // console.log("task", action.payload.task);
-        // state.cards.forEach((card, index1) => {
-        //     if (card._id == action.payload.task.card) {
-        //         card.tasks.forEach((task, index2) => {
-        //             if (task._id == action.payload.task._id) {
-        //                 state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
-        //                 let a = state.cards[index1].tasks[index2][action.payload.nameFiled]
-        //                 console.log(a);
-        //             }
-        //         })
-        //     }
-        // })
+
     },
+
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {
             if (card._id == action.payload.task.card) {
@@ -275,43 +266,22 @@ const publicData = {
             }
         })
     },
-    setTaskByFiledFromTasksTry(state, action) {
-        console.log("task", action.payload.task);
-        state.cards.forEach((card, index1) => {
-            if (card._id == state.idCurrentCard) {
-                card.tasks.forEach((task, index2) => {
-                    if (task._id == state.indexCurrentTask) {
-                        state.cards[index1].tasks[index2][action.payload.nameFiled] = action.payload.value
-                        let a = state.cards[index1].tasks[index2][action.payload.nameFiled]
-                        console.log(a);
-                    }
-                })
-            }
-        })
-        // state.cards.map(card=>{
-        //     if(card._id==state.idCurrentCard)
-        //     {
-        //         card.tasks.map(task=>{
-        //             if(task._id==state.indexCurrentTask){
-        //                 task[action.payload.nameFiled]=action.payload.value
-        //                 console.log(task);
-        //             }
 
-        //         })
-        //     }
-        // })
-        //    state.cards.find(card=>card._id==state.idCurrentCard).tasks.map(task=>{
-        //       if(task._id==state.indexCurrentTask)
-        //     {
-        //         task[action.payload.nameFiled]=action.payload.value
-        //                 console.log(task);
-        //     }
-        //    })
+    //         })
+    //     }
+    // })
+    //    state.cards.find(card=>card._id==state.idCurrentCard).tasks.map(task=>{
+    //       if(task._id==state.indexCurrentTask)
+    //     {
+    //         task[action.payload.nameFiled]=action.payload.value
+    //                 console.log(task);
+    //     }
+    //    })
 
-        // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-        // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
-        // console.log(a);   
-    },
+    // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
+    // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
+    // console.log(a);   
+},
 
     // deleteFilesInTask(state, action) {
     //     debugger
@@ -333,21 +303,22 @@ const publicData = {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
     },
-    saveCurrentIndexOfTaskInRedux(state, action) {
-        state.indexCurrentTask = action.payload
-    },
-    setCurrentIndexProject(state, action) {
-        state.indexCurrentProject = action.payload
-    },
-    setIdCurrentCard(state, action) {
-        state.idCurrentCard = action.payload
-    },
-    saveCurrentIndexOfCardInRedux(state, action) {
-        state.indexCurrentCard = action.payload
-    },
-    saveIndexOfWorkspaceInRedux(state, action) {
-        state.indexOfWorkspace = action.payload
-    }
+        saveCurrentIndexOfTaskInRedux(state, action) {
+    state.indexCurrentTask = action.payload
+},
+setCurrentIndexProject(state, action) {
+    state.indexCurrentProject = action.payload
+},
+setIdCurrentCard(state, action) {
+    state.idCurrentCard = action.payload
+},
+saveCurrentIndexOfCardInRedux(state, action) {
+    state.indexCurrentCard = action.payload
+},
+saveIndexOfWorkspaceInRedux(state, action) {
+    state.indexOfWorkspace = action.payload
+},
+
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  

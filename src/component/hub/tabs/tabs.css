@@ -12,7 +12,9 @@
 #add-card{
     /* margin-top: -5vh; */
 }
-
+.logoGifInCards{
+    margin-left: 20vh !important;
+}
 .noneNewCard{
     display: none !important;
 }

@@ -21,21 +21,11 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
+            let a=props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask];
+            console.log(a)
 
-        console.log(props);
-        // props.getAllStatusesTaskForUser();
-        // console.log("statuses" + props.statuses)
-        // if (props.task.status == props.statuses._id)
-        //     if (props.statuses.length > 0) {
-        //         let s = props.statuses.find(status => status._id == props.task.status)
-        //         setStatus(s.statusName)
-        //         console.log(status);
-
-        //     }
 
     }, [
-        // props.task, 
-        // props.statuses,
         props.cards])
     const [status, setStatus] = useState()
 
@@ -157,16 +147,14 @@ function ViewTaskByCrad(props) {
 
                                     </input>
                                 </div>
-                                {/* <label className="check-task py-2  px-2 col-3 view-details-btn">
-                                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
-                                </label> */}
                                 <label className="check-task py-2   view-details-btn">
                                     <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                                 </label>
-                                {/* <label className="check-task border-left  py-2  px-2 col ">{status} */}
-                                {/* </label> */}
+
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    {/* <div className={(status) == "in progress" ? 'status-task-in-progress' : status == "done" ? 'status-task-done' : 'status-task-to-do'}>To do</div> */}
+                                    <div className="status-task" style={{"backgroundColor":  props.task.status.color}} >
+                                        {props.task.status.statusName}
+                                        </div>
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                                 </label>
@@ -197,7 +185,9 @@ const mapStateToProps = (state) => {
         tasks: state.public_reducer.tasks,
         taskReducer: state.task_reducer.task,
         cards: state.public_reducer.cards,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask
     }
 }
 const mapDispatchToProps = (dispatch) => {

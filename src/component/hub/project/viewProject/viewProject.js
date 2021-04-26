@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 import TeamView from '../../teamView/teamView'
 import $ from 'jquery'
 import { useEffect } from 'react';
-
+import share from '../../../img/share.svg'
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
@@ -34,7 +34,7 @@ function ViewProject(props) {
     function editProject(project, event) {
         props.setCurrentIndexProject(props.indexProject)
         // props.addProjectTArray(project)
-        props.editProject(project)
+        props.editOrShareProject('editProject')
         event.stopPropagation();
     }
 
@@ -62,6 +62,11 @@ function ViewProject(props) {
     function outOver(id) {
         setMyStyleIcons({ 'opacity': '0' })
         setMyStyleStripe({ 'color': 'white' })
+    }
+    const openShareProject = (event) => {
+        props.setCurrentIndexProject(props.indexProject)
+        props.editOrShareProject('shareProject')
+        event.stopPropagation();
     }
     complitedColor = complited < 30 ? '#44D7B6' : complited < 60 ? '#34A38B' : '#005750'
     return (
@@ -122,6 +127,9 @@ function ViewProject(props) {
                 </td>
 
                 <td className='actionsProject widthCellInProject'>
+                    <img style={myStyleIcons}
+                        className='iconsProject' onClick={(event) => openShareProject(event)} src={share} />
+                    <div style={myStyleStripe} className='stripeActionsProject'>|</div>
                     <img style={myStyleIcons}
                         className='iconsProject' onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>

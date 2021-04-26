@@ -28,12 +28,37 @@ function DisplayGantt(props) {
             theCards.push(card);
         }
     })
+
     console.log("theCards", theCards)
 
+    function calculateDiff(end, start) {
+        let endDate = end.split("/")[1] + "/" + end.split("/")[0] + "/" + end.split("/")[2]
+        let startDate = start.split("/")[1] + "/" + start.split("/")[0] + "/" + start.split("/")[2]
+        let date1 = new Date(endDate);
+        let date2 = new Date(startDate);
+        let Difference_In_Time = date1.getTime() - date2.getTime();
+        let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+        return Difference_In_Days
+    }
     theCards.map((card, index) => {
-        card.tasks.map((task) => {
+        card.tasks.map((task, index1) => {
+            debugger
+            let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
-            theTasks.push({ cardName: card.name, priority: "high", id: task._id, text: task.name, start_date: startDate, duration: 5, progress: 0.3 })
+            let cardName
+            if (index1 > 0 && card.name == theTasks[index1-1].cardName)
+                cardName = null
+            else cardName = card.name
+
+            theTasks.push({
+                cardName: cardName,
+                priority: "high",
+                id: task._id, text:
+                    task.name, start_date:
+                    startDate,
+                duration: diffDays,
+                progress: 0.3
+            })
         })
         mone.push(index)
     })
@@ -59,7 +84,7 @@ function DisplayGantt(props) {
 
     {
         theTasks.map((item) => {
-            if (item) {
+            if (item.start_date) {
                 let year = item.start_date.split('-')[0];
                 if (year > maxYear.split('-')[0]) {
                     currDate = year

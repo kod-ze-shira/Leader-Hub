@@ -10,7 +10,8 @@ export const extractJwt = ({ dispatch, getState }) => next => action => {
             let date = new Date(Date.now() + 86400e3);
             date = date.toUTCString();
             var expires = "expires=" + date;
-            document.cookie = "devJwt" + "=" + jwtGlobal + ";" + expires + ";path=/";
+            document.cookie = "devJwt" + "=" + jwtGlobal + ";" + expires + ";domain=.dev.leader.codes;path=/"
+            // document.cookie = "devJwt" + "=" + jwtGlobal + ";" + expires + ";path=/";
             window.location.replace(newUrl)
         }
 

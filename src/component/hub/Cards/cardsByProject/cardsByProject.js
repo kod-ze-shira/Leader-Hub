@@ -40,7 +40,7 @@ function CardsByProject(props) {
                         cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}
                 </DragDropContext>
-                : null}
+                :<div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../../img/animation.gif')} /></div>}
         </>
     )
 }

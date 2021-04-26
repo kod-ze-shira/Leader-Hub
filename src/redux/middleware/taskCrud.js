@@ -192,13 +192,15 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 }
 
 export const editTask = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'EDIT_TASK') {
         debugger
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
-        let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-            .tasks[getState().public_reducer.indexCurrentTask]
-
+        let task
+        if (action.payload.name)
+            task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+                .tasks[getState().public_reducer.indexCurrentTask]
+        else
+            task = action.payload
         $.ajax({
             url: urlData,
             method: 'POST',

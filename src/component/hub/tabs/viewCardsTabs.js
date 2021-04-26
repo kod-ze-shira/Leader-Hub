@@ -7,14 +7,15 @@ import './viewCardsTabs.css'
 // import history from '../../../history'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
 
 function ViewCardsTabs(props) {
 
     useEffect(() => {
-        console.log(props.cardFromMap._id)
+
+        // props.getAllStatusesTaskForUser()
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -38,8 +39,9 @@ function ViewCardsTabs(props) {
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
-        if (inputValue) {
-            task = { name: inputValue, description: "", status: "to do", startDate: today, dueDate: today, "card": props.card._id }
+        if (inputValue && props.statuses.length) {
+
+            task = { name: inputValue, description: "", status: props.statuses[0], startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -88,7 +90,6 @@ function ViewCardsTabs(props) {
 
 
         if (event.key === 'Enter') {
-            debugger
             editCard()
             document.getElementById("input-card-name").blur();
         }
@@ -196,6 +197,10 @@ const mapStateToProps = (state) => {
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        statuses: state.status_reducer.statuses,
+
 
     }
 }
@@ -204,7 +209,10 @@ const mapDispatchToProps = (dispatch) => {
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
-        editCard: (card) => dispatch(actions.editCard(card))
+        editCard: (card) => dispatch(actions.editCard(card)),
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCardsTabs)
