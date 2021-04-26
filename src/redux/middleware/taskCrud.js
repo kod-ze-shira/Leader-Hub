@@ -112,7 +112,6 @@ export const getAllMilestonesTasks = ({ dispatch, getState }) => next => action 
     return next(action);
 }
 export const newTask = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'NEW_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
