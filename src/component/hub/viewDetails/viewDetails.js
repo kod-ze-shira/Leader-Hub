@@ -12,6 +12,7 @@ import TaskDetails from '../task/taskDetails/taskDetails'
 import EditTask from '../task/addTask/addTask'
 import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
+import ShareProject from '../project/shareProject/shareProject'
 
 const mapStateToProps = (state) => {
     return {
@@ -54,6 +55,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={showToast} objectBeforeChanges={(e) => setOldObject(e)} />
+                case 'shareProject':
+                    return <ShareProject />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':

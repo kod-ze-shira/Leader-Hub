@@ -7,6 +7,7 @@ import card_reducer from '../Reducers/card_reducer';
 import status_reducer from '../Reducers/status_reducer';
 import public_reducer from '../Reducers/public_reducer';
 import files_reducer from '../Reducers/files_reducer'
+import share_reducer from '../Reducers/share_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -14,13 +15,13 @@ import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { createNewTeam } from '../middleware/teamCrud';
+import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, getAllStatusesTaskForUser } from '../middleware/statusCrud';
 import { extractJwt } from '../middleware/loginCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer,share_reducer });
 
 const store = createStore(
     reducers,
@@ -55,6 +56,8 @@ const store = createStore(
                 extractJwt,
                 getFiles,
                 removeFile,
+                getContactsForUser,
+                getAllTeamsForUser
             ))
 )
 store.dispatch(actions.extractJwt());
