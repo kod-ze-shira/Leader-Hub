@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 
-
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
         let taskId = action.payload
