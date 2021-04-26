@@ -44,6 +44,10 @@
 
 }
 .description-and-date{
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
     font-size: small !important;
     text-align: left !important;
 }

@@ -133,7 +133,7 @@ function ViewTaskByCrad(props) {
                                     </label>
                                     <input
                                         name="name" id="name"
-                                        className="show-card py-2"
+                                        className="show-card col-10 py-2"
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         // onChange={(e) => editTaskNameInReduxs(e.target.value)}
