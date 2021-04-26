@@ -13,8 +13,9 @@ function CardsPage(props) {
     const [present, setPresent] = useState("tabs");
 
     useEffect(() => {
-
-    })
+        props.getAllStatusesTaskForUser()
+     
+    },[])
     const changeFlag = (value) => {
         setFlag(value)
     }
@@ -27,7 +28,7 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} />
+                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard}   />
             case 'list':
                 return <ProjectPlatform showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
@@ -56,6 +57,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

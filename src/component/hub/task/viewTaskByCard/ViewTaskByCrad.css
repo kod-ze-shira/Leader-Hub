@@ -120,11 +120,10 @@
     margin: auto;
   
   } */
-  .status-task-in-progress{
-    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background: #F0D923 0% 0% no-repeat padding-box;
+  .status-task{
+
     border-radius: 3px;
-    color:#BDAA1C !important;
+
     font-weight: 300;
     opacity: 0.9;
     margin: auto;
