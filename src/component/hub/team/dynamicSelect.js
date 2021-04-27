@@ -13,7 +13,7 @@ function DynamicSelect(props) {
   }, [])
 
   const viewContactsList = props.contactsUser ? props.contactsUser.map((contact) => (
-    { value: contact._id, label: contact.email }
+    { value: contact, label: contact.email }
   )) : null
 
   const viewTeamsList = props.teamsUser ? props.teamsUser.map((team) => (
@@ -24,7 +24,7 @@ function DynamicSelect(props) {
     if (newValue) {
       console.group('Value Changed');
       console.log(newValue);
-      // props.addMember(newValue)
+      props.addContactToShare(newValue)
       console.log(`action: ${actionMeta.action}`);
       console.groupEnd();
     }
