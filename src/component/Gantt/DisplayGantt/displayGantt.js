@@ -10,20 +10,17 @@ import workspaces from '../workspace.json'
 function DisplayGantt(props) {
 
     useEffect(() => {
+    }, [props.cards])
 
-    }, [props.workspaces, props.indexOfWorkspace, props.indexCurrentProject])
-
-    const cardsInproject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
     const allWorkspace = { workspaces };
     console.log(allWorkspace);
-    const allTheWorkspaces = allWorkspace.workspaces.workspaces.projects;
-    const allTheWorkspaceFromRedux = props.workspaces
+
     const theCards = []
     const theTasks = []
     const mone = []
 
 
-    cardsInproject.cards.map((card) => {
+    props.cards.map((card) => {
         {
             theCards.push(card);
         }
@@ -42,11 +39,11 @@ function DisplayGantt(props) {
     }
     theCards.map((card, index) => {
         card.tasks.map((task, index1) => {
-            debugger
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
             let cardName
-            if (index1 > 0 && card.name == theTasks[index1-1].cardName)
+            let a = theTasks.find(task => task.cardName == card.name)
+            if (a)
                 cardName = null
             else cardName = card.name
 
@@ -157,6 +154,7 @@ function DisplayGantt(props) {
 const mapStateToProps = (state) => {
 
     return {
+        cards: state.public_reducer.cards,
         workspaces: state.public_reducer.workspaces,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,

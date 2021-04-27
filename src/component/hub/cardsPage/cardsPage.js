@@ -6,16 +6,23 @@ import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
 import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
+import { useParams } from 'react-router-dom';
+
+import cardsByProject from '../Cards/cardsByProject/cardsByProject';
 
 function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
     const [present, setPresent] = useState("tabs");
 
+    const { idProject } = useParams();
+
     useEffect(() => {
-        props.getAllStatusesTaskForUser()
-     
-    },[])
+        if (props.cards.length < 1)
+            props.getCardsByProjectId(idProject)
+        // props.getAllStatusesTaskForUser()
+    }, [])
+
     const changeFlag = (value) => {
         setFlag(value)
     }
@@ -28,7 +35,7 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard}   />
+                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} />
             case 'list':
                 return <ProjectPlatform showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
@@ -51,6 +58,7 @@ const mapStateToProps = (state) => {
     return {
         workspaces: state.public_reducer.workspaces,
         project: state.project_reducer.project,
+        cards: state.public_reducer.cards
 
     }
 }
@@ -58,7 +66,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-
+        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

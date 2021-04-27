@@ -1,3 +1,4 @@
+import { act } from '@testing-library/react';
 import $ from 'jquery'
 import { actions } from '../actions/action'
 
@@ -251,6 +252,31 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'MOVE_TASK_BETWEEN_CARDS') {
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/dragTaskFromCardToCard`
+        console.log(urlData)
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({}),
+            success: function (data) {
+                console.log("success")
+                console.log(data.result);
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
 
 
 
