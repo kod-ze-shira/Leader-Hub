@@ -7,6 +7,7 @@ import card_reducer from '../Reducers/card_reducer';
 import status_reducer from '../Reducers/status_reducer';
 import public_reducer from '../Reducers/public_reducer';
 import files_reducer from '../Reducers/files_reducer'
+import share_reducer from '../Reducers/share_reducer';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -15,14 +16,14 @@ import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, get
 import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks 
 ,moveTaskBetweenCards} from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { createNewTeam } from '../middleware/teamCrud';
+import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
-import { createStatus, getAllStatusesTaskForUser, editStatus, removeStatus } from '../middleware/statusCrud';
+import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { extractJwt } from '../middleware/loginCrud';
+// import { uploadFiles, removeFile, getFiles, downloadFile } from '../middleware/filesCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
 
-
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer });
 
 const store = createStore(
     reducers,
@@ -51,12 +52,15 @@ const store = createStore(
                 getAllMilestonesTasks,
                 editCard,
                 removeCardById,
-                getAllStatusesTaskForUser,
+                getAllStatusesTaskForWorkspace,
                 createStatus,
                 uploadFiles,
+                // downloadFile,
                 extractJwt,
                 getFiles,
                 removeFile,
+                getContactsForUser,
+                getAllTeamsForUser,
                 editStatus,
                 removeStatus,
                 moveTaskBetweenCards
@@ -68,7 +72,8 @@ var url = window.location;
 let jwtFromCookie
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
-    jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
+    jwtFromCookie='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
+    // jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }
 else {

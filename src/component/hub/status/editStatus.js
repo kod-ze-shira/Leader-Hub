@@ -2,8 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import { editStatus } from '../../../redux/middleware/statusCrud';
+import ViewAllStatuses from './viewAllStatuses';
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewStatus.css'
+import $ from 'jquery'
+
 
 
 function EditStatus(props) {
@@ -17,7 +20,7 @@ function EditStatus(props) {
         statusName: "",
         color: "",
     })
-
+    // const [viewAllStatusComponent, setViewAllStatusComponent] = useState(false)
     const editStatus_ = () => {
         console.log(props.status);
         props.editStatus(props.status)
@@ -30,10 +33,27 @@ function EditStatus(props) {
         let editStatusInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setStatusByFiledFromStatuses(editStatusInRedux)
     }
+    const [viewList, setViewList] = useState(false)
+
+    const viewAllStatus = (e) => {
+        debugger
+        $('.edit-status-wraps').css({ 'display': 'none' })
+        setViewList(true)
+        console.log(viewList);
+
+    }
+
+    // useEffect(() => {
+    //     console.log(viewList);
+    //     debugger
+    // }, [viewList])
+
     return (
         <>
-            <div className="container">
+            <div className="container edit-status-wraps">
+                <div className="title-edit-label py-2 mb-1" onClick={(e) => viewAllStatus(e)}>> Edit Label</div>
                 <div class="form-group row mx-2">
+
                     <label for="name">Name</label>
                     <input name="statusName"
                         type="text" class="form-control"
@@ -51,14 +71,17 @@ function EditStatus(props) {
 
                         />
                     </div>
-                    <div className=" row ">
-                        <button className="ml-3" onClick={(e) => editStatus_(e)}>Save</button>
-                        <button className="ml-4"  onClick={(e) => deleteStatus(e)}>Delete</button>
+                    <div className=" row justify-content-between">
+                        <button className=" edit-status px-3 ml-3" onClick={(e) => editStatus_(e)}>Save</button>
+                        <button className=" delete-status ml-3" onClick={(e) => deleteStatus(e)}>Delete</button>
                     </div>
 
                 </div>
 
             </div>
+            {viewList ?
+                <ViewAllStatuses  status={props.status} />
+            : null}
         </>
 
     )

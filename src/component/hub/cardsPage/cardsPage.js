@@ -65,8 +65,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
-        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId))
+        // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

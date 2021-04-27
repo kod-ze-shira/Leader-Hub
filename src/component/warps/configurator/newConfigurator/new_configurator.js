@@ -92,7 +92,7 @@ function NewConfigorator(props) {
                         {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/mail-open-outline.svg')}></img>
                         Email</li> */}
-                        <li onClick={(e) => changeBackground(e.target)}>
+                        <li onClick={(e) => changeBackground(e.target)} >
                             <img className="mr-2" src={require('../../../img/users-solid.svg')}></img>
                         Members <p className="soon px-1 ml-1">soon</p></li>
 

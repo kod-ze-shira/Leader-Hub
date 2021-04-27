@@ -4,11 +4,19 @@
 }
 .menu-status{
 border: 1.5px solid var(--unnamed-color-8d8dae);
-border: 2px solid #8D8DAE;
+/* border: 2px solid #8D8DAE; */
 border-radius: 19px;
-width: 150px;
+/* width: 150px; */
 height: 28px;
 margin-top: 1vh;
+}
+.menu-status:hover{
+
+    border-color:  #75798E !important;
+    border-width: 3px !important;
+    border-style: double !important;
+    
+
 }
 .display-task{
     display: block;
@@ -17,12 +25,83 @@ margin-top: 1vh;
 {
     box-shadow: none !important;
 }
+.edit-status-wraps{
+    display: block;
+}
+.title-edit-label{
+    cursor: pointer;
+    color: var(--unnamed-color-3598f4);
+text-align: left;
+font: normal normal bold 14px/19px Roboto;
+letter-spacing: 0.28px;
+color: #3598F4;
+text-transform: capitalize;
+opacity: 0.9;
+border-bottom: 1px solid gray;
+}
+.add-status  , .edit-status{
+    background-color:  #3598F4;
+border-radius: 5px;
+color: white;
+opacity: 0.9;
 
+}
+.delete-status{
+    background-color: gray;
+    border-radius: 5px;
+    color: white;
+    opacity: 0.4;
+}
 .circle-picker {
     width: 140% !important;
 }
 .pencil-status{
-    cursor: pointer !important;
+    /* display: inline-block; */
+    /* cursor: pointer !important; */
     /* float: right !important; */
 
+}
+.details-task p{
+    text-align: left !important;
+}
+.menu__{
+   
+background-color: white;
+width: 140%;
+box-shadow: 0px 0px 10px #00000034;
+overflow-x: auto;
+
+}
+
+.divStatus{
+  display: inline-block;
+}
+.status-list{
+    margin-top: 1vh;
+    max-height: 150px;
+    overflow-y: auto;
+
+}
+.menu__ .form-control{
+  height: calc(1.1em + .75rem ) !important;
+}
+.menu__  label{
+  margin-top:3px;
+  font-size: 11px !important;
+}
+.d-status{
+    /* display: inline-block; */
+}
+.status-btn{
+    margin-top: 55px;
+}
+.create-label{
+  background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box;
+background: #75798E 0% 0% no-repeat padding-box;
+border: 1px solid #707070;
+opacity: 0.15;
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+/* opacity: 0.5; */
+/* border-top: 1px solid #707070; */
 }

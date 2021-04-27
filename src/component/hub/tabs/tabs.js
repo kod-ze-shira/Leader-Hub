@@ -108,7 +108,7 @@ function Tabs(props) {
                                                 return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                     // setTask={(task) => setTaskToDetails(task)}
                                                     showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} index={index} />
+                                                    key={card._id} cardFromMap={card} indexCard={index} />
                                             })}
                                         </DragDropContext>
                                         <div className="col-3 mt-4" >

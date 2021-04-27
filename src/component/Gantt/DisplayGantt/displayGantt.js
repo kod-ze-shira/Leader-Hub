@@ -38,6 +38,8 @@ function DisplayGantt(props) {
         return Difference_In_Days
     }
     theCards.map((card, index) => {
+        // if (index == 0 & theTasks.length > 0)
+        //     theTasks.clear()
         card.tasks.map((task, index1) => {
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];

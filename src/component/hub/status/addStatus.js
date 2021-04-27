@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import { editStatus } from '../../../redux/middleware/statusCrud';
 import Colors from '../color/color';
+import ViewAllStatuses from './viewAllStatuses';
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewStatus.css'
 
@@ -10,18 +11,21 @@ import './viewStatus.css'
 function AddStatus(props) {
 
     useEffect(() => {
-
+        debugger
+        console.log(props.task);
         // debugger
         // console.log(props.statuses);
     }, [props.statuses])
 
     const [newStatus, setNewStatus] = useState({
+        task: props.task._id,
         statusName: "",
         color: "",
     })
 
 
     const addStatus = () => {
+        debugger
         console.log(newStatus);
         props.createStatus(newStatus)
         console.log(props.statuses);
@@ -41,20 +45,27 @@ function AddStatus(props) {
             [name]: value
         }));
     }
+    const [view, setView] = useState(false)
+    const viewAllStatus = () => {
+        setView(!view)
+
+    }
     return (
         <>
             <div className="container ">
+                <div className="title-edit-label py-2 mb-1" onClick={viewAllStatus}>> Add Label</div>
                 <label for="name">Name</label>
                 <input name="statusName" onChange={(e) => handleChangeStatus(e)}
                     type="text" class="form-control"
                     id="statusName"
                     placeholder="enter status name"
                 />
-                    <label>Select Color</label>
-                    <Colors changeStatusColor={(event) => handleChangeColorStatus(event)} />
-                <button className="add-status" onClick={(e) => addStatus(e)}>Save</button>
+                <label>Select Color</label>
+                <Colors changeStatusColor={(event) => handleChangeColorStatus(event)} />
+                <button className="add-status px-2" onClick={(e) => addStatus(e)}>Save</button>
 
             </div>
+            { view ? <ViewAllStatuses /> : null}
         </>
 
     )
@@ -64,7 +75,6 @@ const mapStateToProps = (state) => {
 
     return {
         statuses: state.status_reducer.statuses,
-        task: state.public_reducer.task
     }
 }
 const mapDispatchToProps = (dispatch) => {
