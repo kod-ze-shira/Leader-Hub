@@ -19,6 +19,8 @@ function TaskDetails(props) {
 
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
+        props.setFilesFromTask(props.task.files)
+
     }, [props.cards])
 
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
@@ -92,6 +94,9 @@ function TaskDetails(props) {
         openPopUp(false)
     }
 
+    const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
+        return <File url={file.url} name={file.name} />
+    }) : null
     return (
         <>
             <div className="details task-details mr-5 ml-4">
@@ -181,7 +186,7 @@ function TaskDetails(props) {
                 {/* </div> */}
 
 
-                {fileComponentArr}
+                {newFileComponentArr}
 
                 <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
@@ -204,7 +209,9 @@ const mapStateToProps = (state) => {
         statuses: state.status_reducer.statuses,
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
-        indexCurrentTask: state.public_reducer.indexCurrentTask
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        arrFilesOfTask: state.public_reducer.arrFilesOfTask
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -213,6 +220,7 @@ const mapDispatchToProps = (dispatch) => {
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
+        setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
     }
 }
