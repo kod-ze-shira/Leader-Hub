@@ -28,6 +28,8 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
+        props.getAllStatusesTaskForWorkspace(props.task._id)
+
 
     }, [props.cards])
 
@@ -154,7 +156,8 @@ const mapDispatchToProps = (dispatch) => {
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
-        setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index))
+        setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
 
     }
 }

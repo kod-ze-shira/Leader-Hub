@@ -22,6 +22,8 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
+        props.getAllStatusesTaskForWorkspace(props.task._id)
+
 
     }, [
         props.cards])
@@ -34,11 +36,11 @@ function ViewTaskByCrad(props) {
     const [doneStatus, setDoneStatus] = useState(props.task.complete)
 
     const [task, setTask] = useState({
-        "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id,
-        "name": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name,
-        "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description
-        , "status": "", "dueDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate,
-        "startDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate
+        "_id": props.task._id,
+        "name": props.task.name,
+        "description": props.task.description
+        , "status": "", "dueDate": props.task.dueDate,
+        "startDate": props.task.startDate
     })
 
     const changeFiledInTask = (input) => {
@@ -57,7 +59,7 @@ function ViewTaskByCrad(props) {
         let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
 
-        console.log("task", props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete);
+        console.log("task", props.task.complete);
 
     }
     const showDetails = (from) => {
@@ -82,9 +84,9 @@ function ViewTaskByCrad(props) {
     }
 
     function deleteTask() {
-        console.log(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
-        $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
-        props.objectToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
+        console.log(props.task._id)
+        $(`#${props.task._id + "disappear"}`).css("display", "none")
+        props.objectToast({ 'type': 'Task', 'object': props.task })
 
     }
 
@@ -119,19 +121,19 @@ function ViewTaskByCrad(props) {
     }
     return (
         <>
-            <Draggable draggableId={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id} index={props.index}>
+            <Draggable draggableId={props.task._id} index={props.index}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <div id={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}>
-                            <div onMouseOver={(e) => overTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)}
-                                onMouseOut={() => outOver(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)}
+                        <div id={props.task._id + "disappear"}>
+                            <div onMouseOver={(e) => overTask(props.task._id)}
+                                onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom"
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id}
+                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
@@ -148,7 +150,7 @@ function ViewTaskByCrad(props) {
                                     <input
                                         name="name" id="name"
                                         className="show-card py-2"
-                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name}
+                                        value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         // onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                         onBlur={(e) => editTask()}
@@ -166,20 +168,20 @@ function ViewTaskByCrad(props) {
                                 </label>
 
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className="status-task" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} >
-                                        {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}
+                                    <div className="status-task" style={{ "backgroundColor": props.task.status.color }} >
+                                        {props.task.status.statusName}
                                     </div>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}
+                                <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}
+                                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col-add-task">
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" >
                                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                            from={detailsOrEditTask} task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]} open={true}> </ViewDetails>
+                                            from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                     </div>
                                     : null}
                             </div>
@@ -209,7 +211,7 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index))
