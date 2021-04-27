@@ -12,7 +12,7 @@ import taskDetails from '../task/taskDetails/taskDetails'
 function Tabs(props) {
 
     useEffect(() => {
-   
+
     }, [props.projectId, props.focusInputCard])
 
     let b;
@@ -23,6 +23,7 @@ function Tabs(props) {
     const [taskToDetails, setTaskToDetails] = useState("")
 
     function onDragEndׂ(e) {
+        debugger
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId))
                 onDragEndׂCard(e)
@@ -38,6 +39,8 @@ function Tabs(props) {
                 }
                 console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
                 const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+                const replaceIServer = [e.source.droppableId, e.destination.droppableId]
+                props.moveTaskBetweenCards(replaceIServer)
                 props.changeTaskplace(replace)
             }
         }
@@ -48,6 +51,7 @@ function Tabs(props) {
             if (props.cards[icard]._id == e.destination.droppableId)
                 break
         const replace = [e.source.index, icard]
+
         props.changeCardPlace(replace)
     }
 
@@ -138,7 +142,7 @@ function Tabs(props) {
                         )}
                     </Droppable>
                 </DragDropContext>
-                :<div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>
+                : <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>
 
             }
             {viewDetails ?
@@ -165,13 +169,14 @@ export default connect(
             user: state.public_reducer.userName,
             workspaces: state.public_reducer.workspaces,
             workspace: state.workspace_reducer.worksapce,
-            project: state.project_reducer.project,
+            // project: state.project_reducer.project,
             statuses: state.public_reducer.statuses
         }
     },
     (dispatch) => {
         return {
-            getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+            moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
+            getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),

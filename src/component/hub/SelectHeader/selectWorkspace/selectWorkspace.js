@@ -23,9 +23,7 @@ function SelectWorkspace(props) {
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
-        // myWorkspace = props.workspaces.find(p => p.workspace._id == id.value)
-        // props.setWorkspace(myWorkspace)
-        // console.log(myWorkspace._id)
+   
         if (myWorkspace.projects[0]) {
 
             // props.setProjects(myWorkspace.projects)
@@ -38,9 +36,7 @@ function SelectWorkspace(props) {
 
         }
         else {
-            props.setProjectName("No Projects")
-            props.setCards({});
-        }
+            props.setProjectName("No Projects")        }
 
     }
 

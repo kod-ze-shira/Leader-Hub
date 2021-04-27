@@ -24,9 +24,7 @@ function ViewProject(props) {
     }
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
-        // props.setProject(props.myProject)
         console.log("project" + props.myProject._id)
-        // props.setCards(props.myProject.cards)
         props.getCardsByProjectId(props.myProject._id)
         props.history.push("/" + props.user + "/projectPlatform/" + idProject)
     }

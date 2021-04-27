@@ -7,14 +7,19 @@ import { LinearProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { actions } from '../../redux/actions/action'
 import store from '../../redux/Store/Store'
+import { editTask } from '../../redux/middleware/taskCrud';
 
 
-class Gantt extends Component {
+export default class Gantt extends Component {
     constructor(props) {
-        debugger
         super(props);
+        this.state = {
+            editTask
+        }
+
         this.initZoom();
     }
+
     dataProcessor = null;
 
     initZoom() {
@@ -58,15 +63,24 @@ class Gantt extends Component {
                 + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
 
             let editTaskInRedux = { "_id": task.id, "dueDate": newEndDate, "startDate": newStartDate }
+            // console.log(editTaskInRedux)
+            // this.setState({ editTask: editTaskInRedux })
             store.dispatch(actions.editTask(editTaskInRedux))
-
             if (task.progress > 1) {
-                return task.text;
+                // return task.text;
             }
             else {
-                return task.text + " " + `<b>${(task.progress) * 100}%</b>`;
+                // return task.text + " " + `<b>${(task.progress) * 100}%</b>`;
             }
+            return task.text;
+
         };
+
+        gantt.attachEvent("onAfterTaskDrag", function (id, mode, e, start, end) {
+
+            // store.dispatch(actions.editTask(editTaskInRedux))
+        });
+
         gantt.templates.gantt_cell = function (start, end, task) {
             return task.text = "knkl";
         }
@@ -81,9 +95,8 @@ class Gantt extends Component {
             // alert(eDate);
 
             gantt.modalbox({
-                title: task.text + " " + (task.progress) * 100 + "%",
-
-
+                // title: task.text + " " + (task.progress) * 100 + "%",
+                title: task.text,
                 text: `<b>Start date: </b>` + task.start_date.toISOString().replace('-', '/').split('T')[0].replace('-', '/') + `<br><br/>` + `<b>End date: </b>` + eDate,
                 buttons: [{ label: "Close", css: "link_cancel_btn", value: "Close" }],
                 callback: function (result) {
@@ -112,14 +125,16 @@ class Gantt extends Component {
         gantt.templates.task_class = function (start, end, task) {
 
             if (task.progress > 0 && task.progress < 1) {
-                return task.class = "pinkBorder";
+                // return task.class = "pinkBorder";
             }
             if (task.progress === 1) {
-                return task.class = "greenBorder vv";
+                // return task.class = "greenBorder vv";
             }
             else {
-                return task.class = "orangeBorder";
+                // return task.class = "orangeBorder";
             }
+            return task.class = "orangeBorder";
+
         };
         gantt.templates.tooltip_date_format = function (date) {
             var formatFunc = gantt.date.date_to_str("%Y-%m-%d");
@@ -156,12 +171,15 @@ class Gantt extends Component {
     }
     state = {
         background: '#fff',
+        newDatesInTask: {}
     };
+
     handleChangeComplete = (color) => {
 
         this.setState({ background: color.hex });
         document.documentElement.style.setProperty('--color1', color)
     };
+
     componentWillUnmount() {
 
         if (this.dataProcessor) {
@@ -169,6 +187,7 @@ class Gantt extends Component {
             this.dataProcessor = null;
         }
     }
+
     render() {
         const { zoom } = this.props;
         this.setZoom(zoom);
@@ -176,22 +195,11 @@ class Gantt extends Component {
             <>
                 <center>
                     <div ref={(input) => { this.ganttContainer = input }}
-                        style={{ width: '100%', height: '80vh' }}>
+                        style={{ width: '100%', height: '80vh' }}
+                    >
                     </div>
                 </center>
             </>
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        editTask: (task) => dispatch(actions.editTask(task)),
-    }
-}
-const mapStateToProps = (state) => {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Gantt)

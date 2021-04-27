@@ -6,15 +6,23 @@ import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
 import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
+import { useParams } from 'react-router-dom';
+
+import cardsByProject from '../Cards/cardsByProject/cardsByProject';
 
 function CardsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState();
     const [present, setPresent] = useState("tabs");
 
-    useEffect(() => {
+    const { idProject } = useParams();
 
+    useEffect(() => {
+        if (props.cards.length < 1)
+            props.getCardsByProjectId(idProject)
+        // props.getAllStatusesTaskForUser()
     }, [])
+
     const changeFlag = (value) => {
         setFlag(value)
     }
@@ -50,12 +58,16 @@ const mapStateToProps = (state) => {
     return {
         workspaces: state.public_reducer.workspaces,
         project: state.project_reducer.project,
-        // task: state.task_reducer.task
+        cards: state.public_reducer.cards
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
     }
 }
