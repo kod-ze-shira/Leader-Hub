@@ -47,16 +47,17 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
 
-        if (input.target.name == "status") {
+        if (input.target.name == "complete") {
             setDoneStatus(!props.task.complete)
             value = !doneStatus
             console.log(value);
-           let status= props.task.status
-           status=props.statuses[2]
+            // let status = props.task.status
+            // status = props.statuses[2]
         }
         let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
-        console.log("task",props.task);
+
+        console.log("task", props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete);
 
     }
     const showDetails = (from) => {
@@ -76,8 +77,7 @@ function ViewTaskByCrad(props) {
         // props.task.status=props.statuses[2]
         // console.log(props.task.status);
         // setTask(task.status = "done", task.endDate = today)
-        // findStatusById()
-        props.EditTask(task)
+        props.EditTask(props.task)
         setShowChalalit(true)
     }
 
@@ -103,9 +103,11 @@ function ViewTaskByCrad(props) {
         let temp = { ...task }
         temp.name = editTaskName
         setTask(temp)
-
-        // props.EditTask(task);
-
+    }
+    const editCompleteTask = () => {
+        let temp = { ...task }
+        temp.complete = editCompleteTask
+        setTask(temp)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -136,7 +138,7 @@ function ViewTaskByCrad(props) {
                                     <label
                                         className="check-task py-2 ">
                                         <input type="checkbox"
-                                            name="status"
+                                            name="complete"
                                             checked={doneStatus}
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
