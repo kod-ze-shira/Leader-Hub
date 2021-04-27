@@ -55,3 +55,21 @@ color: #75798E;
   .round input[type="checkbox"]:checked + label:after {
     opacity: 1;
   }
+  .select_permission_one_member{
+    border: 1px solid #87C5FE !important;
+    border-radius: 14px;
+    background-color: #FFFFFF !important;
+    width: 79px;
+height: 27px;
+font: normal normal normal 14px/21px Roboto;
+color: #75798E;
+  }
+  .select_permission_one_member::selection{
+    border: 1px solid #87C5FE !important;
+    border-radius: 14px;
+    background-color: #FFFFFF !important;
+    width: 79px;
+height: 27px;
+font: normal normal normal 14px/21px Roboto;
+color: #75798E;
+  }

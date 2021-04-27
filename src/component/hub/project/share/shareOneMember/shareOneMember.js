@@ -29,8 +29,14 @@ export default function ShareOneMember(props) {
                         </div>
                     </div>
                 </div>
-                <div className="col-3">
-                    {props.member.permission}
+                <div className="col-3 pr-3">
+                <select class=" select_permission_one_member">
+                            <option selected>{props.member.permission}</option>
+                           {props.member.permission!='viewer'? <option value="1">viewer</option>:null}
+                           {props.member.permission!='editor'? <option value="2">editor</option>:null}
+                           {props.member.permission!='admin'? <option value="3">admin</option>:null}
+                        </select>
+                    
                 </div>
             </div>
 
