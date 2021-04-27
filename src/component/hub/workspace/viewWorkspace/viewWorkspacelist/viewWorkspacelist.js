@@ -28,9 +28,11 @@ function ViewWorkspaceList(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
-    function editWorkspace() {
+    function editWorkspace(event) {
         props.saveIndexOfWorkspaceInRedux(indexWorkspace)
         props.editWorkspace()
+        event.stopPropagation();
+
     }
     function delete_workspace() {
         $(`#${workspace._id}`).css("display", "none")

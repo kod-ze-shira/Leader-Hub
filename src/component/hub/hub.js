@@ -79,7 +79,12 @@ function Hub(props) {
     function closeInputSearch() {
         document.getElementById('inputSearchProjects').style.display = 'none'
     }
-
+    // $(window).click(function () {
+    //     setViewDetails(false)
+    // });
+    // function stopP(event) {
+    //     event.stopPropagation();
+    // }
     const [focusInputCard, setFocusInputCard] = useState(false)
     return (
         <>
@@ -97,13 +102,15 @@ function Hub(props) {
                         </div>
                         : null}
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub"}>
-                        {viewDetails ?
-                            <ViewDetails
-                                closeViewDetails={() => setViewDetails(false)}
-                                from={formViewDitails}
-                            />
+                        {/* {viewDetails ?
+                            <div className="closeDet" onClick={(e) => stopP(e)}>
+                                <ViewDetails
+                                    closeViewDetails={() => setViewDetails(false)}
+                                    from={formViewDitails}
+                                />
+                            </div>
                             : null
-                        }
+                        } */}
                         <Switch>
                             {/* <Route path="/:userName/workspace/:idWorkspace" >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
