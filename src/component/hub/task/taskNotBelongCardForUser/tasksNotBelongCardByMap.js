@@ -45,8 +45,9 @@ function TasksNotBelongCardByMap(props) {
         let mm = today.getMonth() + 1
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
-        setTask(task.status = "done", task.endDate = today)
-        props.EditTask(task)
+        setTask(task.status = props.statuses[2], task.endDate = today)
+        debugger
+        props.EditTask("add"+props.task)
         setShowChalalit(true)
     }
     function deleteTask(value) {
@@ -61,7 +62,7 @@ function TasksNotBelongCardByMap(props) {
     const editTask = () => {
 
         setTask(task.name = editTaskName)
-        props.EditTask(task);
+        props.EditTask(props.task);
     }
     return (
         <>

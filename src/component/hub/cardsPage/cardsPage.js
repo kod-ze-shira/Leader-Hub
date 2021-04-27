@@ -13,7 +13,7 @@ function CardsPage(props) {
     const [present, setPresent] = useState("tabs");
 
     useEffect(() => {
-        props.getAllStatusesTaskForUser()
+        props.getAllStatusesTaskForWorkspace()
      
     },[])
     const changeFlag = (value) => {
@@ -57,7 +57,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
     }
 }

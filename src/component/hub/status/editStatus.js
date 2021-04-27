@@ -5,6 +5,8 @@ import { editStatus } from '../../../redux/middleware/statusCrud';
 import ViewAllStatuses from './viewAllStatuses';
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewStatus.css'
+import $ from 'jquery'
+
 
 
 function EditStatus(props) {
@@ -35,14 +37,20 @@ function EditStatus(props) {
 
     const viewAllStatus = (e) => {
         debugger
+        $('.edit-status-wraps').css({ 'display': 'none' })
         setViewList(true)
         console.log(viewList);
 
     }
 
+    // useEffect(() => {
+    //     console.log(viewList);
+    //     debugger
+    // }, [viewList])
+
     return (
         <>
-            <div className="container">
+            <div className="container edit-status-wraps">
                 <div className="title-edit-label py-2 mb-1" onClick={(e) => viewAllStatus(e)}>> Edit Label</div>
                 <div class="form-group row mx-2">
 
@@ -71,7 +79,9 @@ function EditStatus(props) {
                 </div>
 
             </div>
-            {viewList ? <ViewAllStatuses /> : null}
+            {viewList ?
+                <ViewAllStatuses  status={props.status} />
+            : null}
         </>
 
     )

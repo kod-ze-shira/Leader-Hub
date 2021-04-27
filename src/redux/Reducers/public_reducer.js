@@ -252,6 +252,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     setTaskByFiledFromTasks(state, action) {
+        
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
 
     },

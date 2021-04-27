@@ -13,10 +13,12 @@ import $ from "jquery";
 
 function ViewCardsTabs(props) {
 
-    useEffect(() => {
 
-        // props.getAllStatusesTaskForUser()
-    }, [props.flag])
+    useEffect(() => {
+  
+       
+
+    }, [ props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
@@ -156,7 +158,9 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            key={task._id} task={task} index={index} />
+                                                            key={task._id} task={task}
+                                                            indexCard={props.indexCard}
+                                                            indexTask={index} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?
@@ -210,7 +214,7 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         editCard: (card) => dispatch(actions.editCard(card)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
 
     }

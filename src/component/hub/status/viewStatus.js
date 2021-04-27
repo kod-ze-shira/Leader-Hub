@@ -10,7 +10,6 @@ import $ from 'jquery'
 function ViewStatus(props) {
 
     useEffect(() => {
-        debugger
         console.log(props.status);
     }, [])
 
@@ -55,7 +54,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index))
-        // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
     }
 
 

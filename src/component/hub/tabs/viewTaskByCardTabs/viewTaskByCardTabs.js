@@ -15,6 +15,8 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 function ViewTaskByCradTabs(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [currentIndexTask, setCurrentIndexTask] = useState("")
+    const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [task, setTask] = useState({
         "milestones": props.task.milestones,
         "_id": props.task._id, "name": editTaskName, "description": props.task.description
@@ -24,6 +26,8 @@ function ViewTaskByCradTabs(props) {
 
 
     useEffect(() => {
+        setCurrentIndexTask(props.indexTask)
+        setCurrentIndexCard(props.indexCard)
 
     }, [props.cards])
 
@@ -62,14 +66,16 @@ function ViewTaskByCradTabs(props) {
         props.EditTask(task);
     }
     const showDetails = () => {
+
         if (anchorEl == null) {
-            console.log("props.task", props.task);
+            props.setCurrentIndexTask(currentIndexTask)
+            props.setCurrentIndexCard(currentIndexCard)
             props.openViewDetails(props.task)
-            // props.setTaskName(task.name)
         }
     }
-
     const changeFiledInTask = (input) => {
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
@@ -146,8 +152,9 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
-
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
+        setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
+        setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index))
 
     }
 }

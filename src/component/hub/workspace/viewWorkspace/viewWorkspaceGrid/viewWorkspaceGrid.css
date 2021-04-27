@@ -13,6 +13,7 @@ font-size: small;
    align-items: center;
    border-radius: 10px;
    margin-right: 1rem;
+   padding:12px;
     
 }
 
@@ -50,7 +51,7 @@ font-size: small;
 .name{
    /* font-weight: 650; */
    margin: auto ;
-   margin-top: 2.4vh;
+   margin-top: 1vh;
 }
 .name1{
    /* font-weight: 650; */
@@ -67,7 +68,7 @@ font-size: small;
    /* text-align: 30px; */
    font-family: 'Roboto', sans-serif;
    font-size: 1.8rem;
-   margin-top:9px;
+   /* margin-top:9px; */
 }
 /* .close{
    cursor: pointer;
@@ -128,7 +129,7 @@ opacity: 0.9;
    letter-spacing: 1.72px;
    text-align: center;
    font-family: 'Roboto', sans-serif;
-   font-size: xx-large;
+   /* font-size: xx-large; */
    /* margin-top: 30px; */
 }
    .name> p{

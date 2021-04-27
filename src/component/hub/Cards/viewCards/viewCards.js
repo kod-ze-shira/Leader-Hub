@@ -13,7 +13,6 @@ import { Menu, MenuItem, Button, Select } from '@material-ui/core';
 function ViewCards(props) {
     useEffect(() => {
 
-        props.getAllStatusesTaskForUser()
         console.log();
     }, [props.flag])
 
@@ -37,13 +36,13 @@ function ViewCards(props) {
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
-        if (inputValue ) {
+        if (inputValue) {
             debugger
-            let status=props.statuses[0]
+            let status = props.statuses[0]
             console.log(status);
             // props.statuses[0]._id
             task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
-            console.log( props.statuses[0].statusName);
+            console.log(props.statuses[0].statusName);
             props.newTask(task)
         }
         setInputValue("")
@@ -241,7 +240,7 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         EditCard: (card) => dispatch(actions.editCard(card)),
-        getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
     }
 }
