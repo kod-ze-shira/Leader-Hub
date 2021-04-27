@@ -22,9 +22,6 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        let a = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask];
-        console.log(a)
-
 
     }, [
         props.cards])
@@ -37,8 +34,11 @@ function ViewTaskByCrad(props) {
     const [doneStatus, setDoneStatus] = useState(props.task.complete)
 
     const [task, setTask] = useState({
-        "_id": props.task._id, "name": props.task.name, "description": props.task.description
-        , "status": "", "dueDate": props.task.dueDate, "startDate": props.task.startDate
+        "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id,
+        "name": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name,
+        "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description
+        , "status": "", "dueDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate,
+        "startDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate
     })
 
     const changeFiledInTask = (input) => {
@@ -82,9 +82,9 @@ function ViewTaskByCrad(props) {
     }
 
     function deleteTask() {
-        console.log(props.task._id)
-        $(`#${props.task._id + "disappear"}`).css("display", "none")
-        props.objectToast({ 'type': 'Task', 'object': props.task })
+        console.log(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
+        $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
+        props.objectToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
 
     }
 
@@ -119,19 +119,19 @@ function ViewTaskByCrad(props) {
     }
     return (
         <>
-            <Draggable draggableId={props.task._id} index={props.index}>
+            <Draggable draggableId={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id} index={props.index}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <div id={props.task._id + "disappear"}>
-                            <div onMouseOver={(e) => overTask(props.task._id)}
-                                onMouseOut={() => outOver(props.task._id)}
+                        <div id={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}>
+                            <div onMouseOver={(e) => overTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)}
+                                onMouseOut={() => outOver(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)}
                                 className="show-task row mx-4 border-bottom"
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
+                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id}
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
@@ -147,8 +147,8 @@ function ViewTaskByCrad(props) {
                                     </label>
                                     <input
                                         name="name" id="name"
-                                        className="show-card col-10 py-2"
-                                        value={props.task.name}
+                                        className="show-card py-2"
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         // onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                         onBlur={(e) => editTask()}
@@ -166,20 +166,20 @@ function ViewTaskByCrad(props) {
                                 </label>
 
                                 <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className="status-task" style={{ "backgroundColor": props.task.status.color }} >
-                                        {props.task.status.statusName}
+                                    <div className="status-task" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} >
+                                        {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}
                                     </div>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+                                <label className="check-task border-left  py-2  px-2 col">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                                <label className="check-task border-left  py-2  px-2 col">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col-add-task">
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" >
                                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                            from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
+                                            from={detailsOrEditTask} task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]} open={true}> </ViewDetails>
                                     </div>
                                     : null}
                             </div>
