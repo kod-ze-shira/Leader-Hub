@@ -15,6 +15,7 @@ function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     const [flugFiles, setFlugFiles] = useState(false)
+
     useEffect(() => {
         // if (props.statuses.length == 0)
         props.getAllStatusesTaskForUser();
@@ -215,7 +216,7 @@ function TaskDetails(props) {
 
                         </div>
                     </div>
-                {/* <div className="row mb-3"> */}
+                    {/* <div className="row mb-3"> */}
                     <div className="col-7">
                         <span>Mark as milestone</span>
                         <label class="switch ml-2 ">
@@ -230,7 +231,7 @@ function TaskDetails(props) {
 
                         </label>
                     </div>
-                    </div>
+                </div>
 
                 {/* </div> */}
 
