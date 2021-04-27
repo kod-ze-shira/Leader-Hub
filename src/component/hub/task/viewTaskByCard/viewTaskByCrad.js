@@ -44,7 +44,6 @@ function ViewTaskByCrad(props) {
     })
 
     const changeFiledInTask = (input) => {
-        debugger
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
@@ -69,7 +68,17 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
     }
+    $(window).click(function () {
+        setViewDetails(false)
+    });
 
+    function openViewDetails(event) {
+        showDetails("viewTaskByCard")
+        event.stopPropagation();
+    }
+    function stopP(event) {
+        event.stopPropagation();
+    }
     function addChalalit() {
         let today = new Date()
         let dd = today.getDate()
@@ -164,7 +173,7 @@ function ViewTaskByCrad(props) {
                                     </input>
                                 </div>
                                 <label className="check-task py-2   view-details-btn">
-                                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
+                                    <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
 
                                 <label className="check-task border-left  py-2  px-2 col " >
@@ -179,7 +188,7 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task border-left  py-2  px-2 col-add-task">
                                 </label>
                                 {viewDetails ?
-                                    <div className="closeDet" >
+                                    <div className="closeDet" onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
                                     </div>

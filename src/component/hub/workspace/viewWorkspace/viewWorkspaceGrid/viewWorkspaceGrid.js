@@ -24,11 +24,11 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
     }
-    function editWorkspace() {
+    function editWorkspace(event) {
         // props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.saveIndexOfWorkspaceInRedux(props.indexWorkspace)
         props.editWorkspace(workspace)
-
+        event.stopPropagation();
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);

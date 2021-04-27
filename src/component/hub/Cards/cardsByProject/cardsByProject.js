@@ -8,7 +8,6 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 function CardsByProject(props) {
 
     useEffect(() => {
-        debugger
         // props.getCardsByProjectId(props.projectId)
 
     }, [props.projectId])
