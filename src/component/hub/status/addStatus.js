@@ -29,6 +29,7 @@ function AddStatus(props) {
         console.log(newStatus);
         props.createStatus(newStatus)
         console.log(props.statuses);
+        e.stopPropagation();
 
     }
     const handleChangeStatus = (event) => {
@@ -44,6 +45,11 @@ function AddStatus(props) {
             ...prevState,
             [name]: value
         }));
+        // event.stopPropagation();
+    }
+
+    function stopP(event) {
+        event.stopPropagation();
     }
     const [view, setView] = useState(false)
     const viewAllStatus = () => {
@@ -56,6 +62,7 @@ function AddStatus(props) {
                 <div className="title-edit-label py-2 mb-1" onClick={viewAllStatus}>> Add Label</div>
                 <label for="name">Name</label>
                 <input name="statusName" onChange={(e) => handleChangeStatus(e)}
+                    onClick={(e) => stopP(e)}
                     type="text" class="form-control"
                     id="statusName"
                     placeholder="enter status name"

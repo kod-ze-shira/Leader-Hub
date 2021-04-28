@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
@@ -31,9 +32,18 @@ function TaskDetails(props) {
 
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
+        e.stopPropagation();
 
     }
 
+    $(window).click(function () {
+        setOpenPopUp(false)
+    });
+ 
+   
+    function stopP(event) {
+        event.stopPropagation();
+    }
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
@@ -93,6 +103,7 @@ function TaskDetails(props) {
     const closePopUpOfViewStatus = () => {
         openPopUp(false)
     }
+
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File url={file.url} name={file.name} />
@@ -160,11 +171,14 @@ function TaskDetails(props) {
                             </> : null}
                         </button>
                         {openPopUp ?
-                            <ViewAllStatuses
-                                task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
-                                status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                openPopUp={openPopUp} />
+                            <div onclick={(e) =>stopP()}>
+                                <ViewAllStatuses
+                                    task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                                    status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                                    openPopUp={openPopUp} />
+                            </div>
                             : null}
+
                     </div>
                     {/* <div className="row mb-3"> */}
                     <div className="col-7">

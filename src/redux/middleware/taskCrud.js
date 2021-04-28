@@ -221,6 +221,34 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+// /:userName/:taskId/complitTask
+
+export const complitTask = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'COMPLIT_TASK') {
+        let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+        .tasks[getState().public_reducer.indexCurrentTask]._id
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/complitTask`
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ taskId }),
+            success: function (data) {
+                console.log("success")
+                console.log(data.result);
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
 
 export const removeTaskById = ({ dispatch, getState }) => next => action => {
 

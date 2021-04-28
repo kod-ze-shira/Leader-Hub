@@ -21,15 +21,26 @@ function EditStatus(props) {
         color: "",
     })
     // const [viewAllStatusComponent, setViewAllStatusComponent] = useState(false)
-    const editStatus_ = () => {
+    const editStatus_ = (e) => {
         debugger
         console.log(props.status);
         props.editStatus(props.status)
+        // e.stopPropagation()
+
+        // $(window).click(function () {
+        //     setViewList(false)
+        // });
+
+
     }
-    const deleteStatus = () => {
+    const deleteStatus = (e) => {
         console.log(props.status._id);
         props.removeStatus(props.status._id)
-    } 
+        // $(window).click(function () {
+        //     setViewList(false)
+        // });
+        // e.stopPropagation()
+    }
     const handleChangeStatus = (input) => {
         let editStatusInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setStatusByFiledFromStatuses(editStatusInRedux)
@@ -44,11 +55,9 @@ function EditStatus(props) {
 
     }
 
-    // useEffect(() => {
-    //     console.log(viewList);
-    //     debugger
-    // }, [viewList])
-
+    function stopP(event) {
+        event.stopPropagation();
+    }
     return (
         <>
             <div className="container edit-status-wraps">
@@ -60,6 +69,7 @@ function EditStatus(props) {
                         type="text" class="form-control"
                         id="statusName"
                         value={props.status.statusName}
+                        onClick={(e) => stopP(e)}
                         onChange={(e) => handleChangeStatus(e)}
                     />
                     <div class="form-group row mx-2">
@@ -68,6 +78,7 @@ function EditStatus(props) {
                             type="color" class="form-control"
                             id="color"
                             value={props.status.color}
+                            onClick={(e) => stopP(e)}
                             onChange={(e) => handleChangeStatus(e)}
 
                         />
@@ -81,8 +92,8 @@ function EditStatus(props) {
 
             </div>
             {viewList ?
-                <ViewAllStatuses  status={props.status} />
-            : null}
+                <ViewAllStatuses status={props.status} />
+                : null}
         </>
 
     )
