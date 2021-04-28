@@ -109,7 +109,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
-                    dispatch(actions.setWorkspaceBeforeChanges({ 'workspace': workspaceBeforeChanges }))
+                    dispatch(actions.setWorkspaceBeforeChanges(workspaceBeforeChanges))
                 })
             }
         });

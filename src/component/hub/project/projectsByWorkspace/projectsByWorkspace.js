@@ -18,53 +18,17 @@ function ProjectsByWorkspace(props) {
     // }, [props.workspace])
 
     let { idWorkspace } = useParams();
-    let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
     const [valueSearch, setValueSearch] = useState(props.projectName)
-    const [currentProject, setCurrentProject] = useState()
     const [addOrEditProject, setAddOrEditProject] = useState(false)
 
-    function getWorkspacesAwait(result) {
-        return new Promise((resolve, reject) => {
-            props.getAllWorkspaces()
-            resolve(true)
 
-        })
-    }
 
 
     useEffect(() => {
 
-        // if (props.projects)
-        // if (props.projects.length == 0) {
-        //     props.getProjectsByWorkspaceId(idWorkspace)
-        // }
-
-        if (!flug) {
-            if (props.workspaces.length == 0) {
-
-                if (window.location.href.indexOf('workspace') != -1) {
-                    let w = props.workspaces.find(w => w._id == idWorkspace)
-
-                } else {
-                    if (window.location.href.indexOf('allProjects') != -1) {
-                        // setPage('allProject')
-                        props.getAllWorkspaces()
-                        let allProjects = []
-                        for (let index = 0; index < props.workspaces.length; index++) {
-                            for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                allProjects.projects.push(props.workspaces[index].projects[j])
-                            }
-                        }
-                        // props.setWorkspace(props.workspaces[0])
-                        // props.setProjects(allProjects)
-                    }
-                }
-
-                setFlug(true)
-            }
-        }
-    }, [props.workspaces]);
+        // }, [props.workspaces]);
+    }, [props.workspaces, props.indexOfWorkspace]);
 
 
 
@@ -116,22 +80,9 @@ function ProjectsByWorkspace(props) {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
 
-    // function openSearchProject() {
-    //     document.getElementById('inputSearchProjects').value = valueSearch
-
-    // }
     function searchProject() {
         setValueSearch(document.getElementById('inputSearchProjects').value)
     }
-    // function closeInputSearch() {
-    //     // $("#inputSearchProjects").trigger("focusout");
-
-    //     setTimeout(() => {
-    //         if (!valueSearch)
-    //             document.getElementById('inputSearchProjects').value = ''
-    //     }, 1700);
-
-    // }
 
     $(window).click(function () {
         setShowProject(false)
@@ -191,11 +142,10 @@ function ProjectsByWorkspace(props) {
 const mapStateToProps = (state) => {
 
     return {
-        // projects: state.public_reducer.projects,
         projectToDelete: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
-        // workspace: state.workspace_reducer.workspace,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace
 
     }
 }

@@ -17,7 +17,7 @@ function ViewWorkspaceList(props) {
 
     const [indexWorkspace, setIndexWorkspace] = useState()
 
-    
+
     useEffect(() => {
         setIndexWorkspace(props.index)
     }, [props.workspaces])
@@ -73,7 +73,7 @@ function ViewWorkspaceList(props) {
 
 
                             </div>
-                            <div className="col-3">
+                            <div className="col-9">
                                 <p className="workspace-name-list">{workspace.name} </p>
                                 <div className="description-and-date">
                                     <p className=""> {workspace.description}</p>

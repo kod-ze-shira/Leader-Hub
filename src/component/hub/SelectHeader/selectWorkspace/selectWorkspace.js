@@ -63,7 +63,8 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo" nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
+                <LetterLogo className="workspace-logo"
+                    nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
                 <Select
                     className="select-workspace selectInHeader"
                     classNamePrefix="select"

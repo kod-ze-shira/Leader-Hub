@@ -74,13 +74,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             if (oldObject)
                 switch (oldObject.type) {
                     case 'workspace':
-                        props.setWorkspaceBeforeChanges({ 'workspace': oldObject.workspace })
+                        props.setWorkspaceBeforeChanges(oldObject.workspace)
                         break;
                     case 'project':
-                        props.setProjectInWorkspace({ "project": oldObject.project })
+                        props.setProjectInWorkspace(oldObject.project)
                         break;
                     case 'task':
-                        props.setTaskFromTasks({ "task": oldObject.task })
+                        props.setTaskFromTasks(oldObject.task)
                         break;
 
 
