@@ -133,7 +133,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
                     "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
-                    "to": "learn@leader.codes",
+                    "to": getState().public_reducer.userEmail,
                     "from": "hub@noreply.leader.codes",
                     "source": "Hub",
                     "files": null

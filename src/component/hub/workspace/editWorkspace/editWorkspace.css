@@ -31,6 +31,13 @@
     padding: 1px;
   } */
 
+  .descriptionWorkspace{
+    max-height: 27vh; 
+    height: auto;
+    overflow: auto;
+    min-height:84px ;
+  }
+
   .title-view-details{
     color: var(--unnamed-color-34a38b);
     text-align: left;

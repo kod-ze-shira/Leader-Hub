@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
-        debugger
+
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
         const [oldObject, setOldObject] = useState()
