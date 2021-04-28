@@ -12,7 +12,7 @@ function EditProject(props) {
         props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
     }, [props.workspaces])
 
-
+    debugger
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -67,48 +67,53 @@ function EditProject(props) {
         <>
 
             <div className="details mr-5 ml-4">
-                <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
-                <div class="row justify-content-between  mx-1 mb-2">
-                    <label>workspace: {props.workspace.name}</label>
-                </div>
-                <div class="form-group" id='nameRequired'>
-                    <label for="name">Name</label>
-                    <input name="name" onChange={(e) => changeFiledInProject(e)}
-                        type="text" class="form-control" required ref={nameRequired}
-                        value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
-                    <div class="invalid-feedback">
-                        Please enter project name.
+                <div className='propertiesViewDitails'>
+
+                    <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
+                    <div class="row justify-content-between  mx-1 mb-2">
+                        <label>workspace: {props.workspace.name}</label>
+                    </div>
+                    <div class="form-group" id='nameRequired'>
+                        <label for="name">Name</label>
+                        <input name="name" onChange={(e) => changeFiledInProject(e)}
+                            type="text" class="form-control" required ref={nameRequired}
+                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
+                        <div class="invalid-feedback">
+                            Please enter project name.
                      </div>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="3" placeholder="Write a description about your project"
-                        onChange={(e) => changeFiledInProject(e)} value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></textarea>
-                </div>
-                <div className="row justify-content-between">
-                    <div class="form-group col-5">
-                        <label for="color">Project color</label>
-                        <input name="color"
-                            className=" form-control "
-                            onChange={(e) => changeFiledInProject(e)}
-                            type="color"
-                            id='colorProject'
-                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].color}
-                        />
                     </div>
-                    <div class="form-group col-5">
-                        <label for="color">Due Date</label>
-                        <input
-                            className="form-control "
-                            name="dueDate"
-                            type="date"
-                            id='dueDateProject'
-                            value={dueDateProject}
-                            onChange={(e) => changeDateInProject(e)}
-                        />
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <div class="form-control descriptionProject" name="description" id="descriptionProject" rows="5"
+                            placeholder="Write a description about your project"
+                            onChange={(e) => changeFiledInProject(e)} contentEditable
+                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></div>
+                    </div>
+                    <div className="row justify-content-between">
+                        <div class="form-group col-5 ditailsAction col-md-4">
+                            <label for="color">Project color</label>
+                            <input name="color"
+                                className=" form-control "
+                                onChange={(e) => changeFiledInProject(e)}
+                                type="color"
+                                id='colorProject'
+                                value={props.workspaces[props.indexWorkspace].projects[props.indexProject].color}
+                            />
+                        </div>
+                        <div class="form-group col-5 ditailsAction col-md-8">
+                            <label for="color">Due Date</label>
+                            <input
+                                className="form-control "
+                                name="dueDate"
+                                type="date"
+                                id='dueDateProject'
+                                value={dueDateProject}
+                                onChange={(e) => changeDateInProject(e)}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-project">
+                <div className="row justify-content-between ">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
@@ -134,7 +139,7 @@ export default connect(
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
             setProjectByFiledFromWorkspace: (p) => dispatch(actions.setProjectByFiledFromWorkspace(p)),
             setProject: (p) => dispatch(actions.setProject(p)),
-            setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p))
+            // setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p))
         }
     }
 )(EditProject)

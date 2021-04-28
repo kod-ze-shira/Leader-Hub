@@ -14,7 +14,9 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 
 function ViewTaskByCradTabs(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
+    // const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCard].tasks[props.indexTask].name)
     const [editTaskName, setEditTaskName] = useState(props.task.name)
+
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [task, setTask] = useState({
@@ -50,7 +52,7 @@ function ViewTaskByCradTabs(props) {
             if (e == "viewCard") {
                 console.log(props.task)
                 props.openViewDetails(props.task)
-                // props.setTaskName(task.name)
+                event.stopPropagation()
             }
             if (e == "delete") {
                 $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
@@ -68,12 +70,13 @@ function ViewTaskByCradTabs(props) {
         setTask(task1)
         props.EditTask(task);
     }
-    const showDetails = () => {
+    const showDetails = (event) => {
 
         if (anchorEl == null) {
             props.setCurrentIndexTask(currentIndexTask)
             props.setCurrentIndexCard(currentIndexCard)
             props.openViewDetails(props.task)
+            event.stopPropagation()
         }
     }
     const changeFiledInTask = (input) => {
@@ -95,7 +98,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                     >
                         <div className="task-card mt-2 "
-                            onClick={(e) => showDetails("viewTaskByCard")}
+                            onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
@@ -122,7 +125,7 @@ function ViewTaskByCradTabs(props) {
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-
+                                    onClick={(e) => e.stopPropagation()}
                                     // onBlur={(e) => editTask(e)}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {

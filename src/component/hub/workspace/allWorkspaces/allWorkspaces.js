@@ -7,7 +7,7 @@ import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacel
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
-
+import $ from 'jquery'
 
 function AllWorkspaces(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -45,7 +45,7 @@ function AllWorkspaces(props) {
                     //  bin={disableBin} 
                     index={index}
                     workspace={workspace} editWorkspace={openEditWorkspace} />
-            }) : 
+            }) :
             <div className="logoGif"><img src={require('../../../img/animation.gif')} /></div>
 
     const [workspaceToEdit, setWorspaceToEdit] = useState()
@@ -66,12 +66,17 @@ function AllWorkspaces(props) {
         setgrid(true);
     }
 
-    function openaddNewWorkspace() {
+    function openAddNewWorkspace(e) {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
-
+        e.stopPropagation()
     }
-
+    $(window).click(function () {
+        setShowWorkspace(false)
+    });
+    function stopP(event) {
+        event.stopPropagation();
+    }
     return (
 
         <>
@@ -100,7 +105,7 @@ function AllWorkspaces(props) {
                     {/* add workspace button */}
                     {list ?
                         <div className="row WorkspaceList mt-3 " >
-                            <div className="col-10" onClick={openaddNewWorkspace}
+                            <div className="col-10" onClick={(e) => openAddNewWorkspace(e)}
                             >
                                 <div className="row "  >
                                     <div className="Workspace addWorkspace"  >
@@ -118,7 +123,7 @@ function AllWorkspaces(props) {
 
                         :
                         <div className="Workspacegrid mt-4 addWorkspace" >
-                            <div onClick={openaddNewWorkspace}>
+                            <div onClick={(e) => openAddNewWorkspace(e)}>
                                 <div className="logoWorkspace1 " >
                                     <div className="mt-1 logo-w"
                                         style={{ backgroundColor: "#778CA2" }}
@@ -138,8 +143,9 @@ function AllWorkspaces(props) {
                 </div>
             </div>
             {showAddWorkspace ?
-                <ViewDetails closeViewDetails={() => setShowWorkspace(false)}
-                    from={addOrEditWorkspace} workspace={workspaceToEdit} /> : null
+                <div className="closeDet" onClick={(e) => stopP(e)}>
+                    <ViewDetails closeViewDetails={() => setShowWorkspace(false)}
+                        from={addOrEditWorkspace} workspace={workspaceToEdit} /></div> : null
             }
             {/* {showToastDelete ?
                         <ToastDelete ref={refToDeleteToast}

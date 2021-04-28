@@ -17,6 +17,8 @@ import ShareProject from '../project/shareProject/shareProject'
 const mapStateToProps = (state) => {
     return {
         // close: state.public_reducer.close,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace
+
     }
 }
 
@@ -30,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
+
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
         const [oldObject, setOldObject] = useState()
@@ -71,13 +74,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             if (oldObject)
                 switch (oldObject.type) {
                     case 'workspace':
-                        props.setWorkspaceBeforeChanges({ 'workspace': oldObject.workspace })
+                        props.setWorkspaceBeforeChanges(oldObject.workspace)
                         break;
                     case 'project':
-                        props.setProjectInWorkspace({ "project": oldObject.project })
+                        props.setProjectInWorkspace(oldObject.project)
                         break;
                     case 'task':
-                        props.setTaskFromTasks({ "task": oldObject.task })
+                        props.setTaskFromTasks(oldObject.task)
                         break;
 
 

@@ -17,7 +17,7 @@ function ViewWorkspaceList(props) {
 
     const [indexWorkspace, setIndexWorkspace] = useState()
 
-    
+
     useEffect(() => {
         setIndexWorkspace(props.index)
     }, [props.workspaces])
@@ -28,9 +28,11 @@ function ViewWorkspaceList(props) {
         props.history.push("/" + props.user + "/workspace/" + workspace._id)
     }
 
-    function editWorkspace() {
+    function editWorkspace(event) {
         props.saveIndexOfWorkspaceInRedux(indexWorkspace)
         props.editWorkspace()
+        event.stopPropagation();
+
     }
     function delete_workspace() {
         $(`#${workspace._id}`).css("display", "none")
@@ -71,7 +73,7 @@ function ViewWorkspaceList(props) {
 
 
                             </div>
-                            <div className="col-3">
+                            <div className="col-9">
                                 <p className="workspace-name-list">{workspace.name} </p>
                                 <div className="description-and-date">
                                     <p className=""> {workspace.description}</p>

@@ -15,10 +15,10 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-  
-       
 
-    }, [ props.flag])
+        debugger
+
+    }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
@@ -55,8 +55,6 @@ function ViewCardsTabs(props) {
         props.setCard(props.cardFromMap)
     }
     const updateCardName = (event) => {
-
-
         setEditCardName(event.target.value)
     }
     const editCard = (event) => {
@@ -89,8 +87,6 @@ function ViewCardsTabs(props) {
         }
     };
     function enterK(event) {
-
-
         if (event.key === 'Enter') {
             editCard()
             document.getElementById("input-card-name").blur();
@@ -102,6 +98,7 @@ function ViewCardsTabs(props) {
     const openViewDetails = (task) => {
         setTask(task)
         props.openViewDetails(task)
+
     };
 
     return (
@@ -158,7 +155,8 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            key={task._id} task={task}
+                                                            key={props.cards[props.indexCard].tasks[index]._id}
+                                                            task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
                                                             indexTask={index} />
                                                     ))}
@@ -168,8 +166,10 @@ function ViewCardsTabs(props) {
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="form-control scroll-container" placeholder="Add Task" id="input-task"
-                                                                    value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                                                                    class="form-control scroll-container" placeholder="Add Task"
+                                                                    id="input-task"
+                                                                    value={inputValue}
+                                                                    onChange={updateInputValue} onKeyPress={event => {
                                                                         if (event.key === 'Enter') {
                                                                             newTask()
                                                                         }
@@ -198,6 +198,7 @@ const mapStateToProps = (state) => {
 
     return {
         project: state.project_reducer.project,
+        cards: state.public_reducer.cards,
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,

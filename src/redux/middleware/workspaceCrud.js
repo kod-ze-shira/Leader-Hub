@@ -39,7 +39,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
             .then((result) => {
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
-
+                    dispatch(actions.setUserEmail(result.user.email))
                     dispatch(actions.setWorkspaces(result.workspace))
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
@@ -109,7 +109,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
-                    dispatch(actions.setWorkspaceBeforeChanges({ 'workspace': workspaceBeforeChanges }))
+                    dispatch(actions.setWorkspaceBeforeChanges(workspaceBeforeChanges))
                 })
             }
         });
