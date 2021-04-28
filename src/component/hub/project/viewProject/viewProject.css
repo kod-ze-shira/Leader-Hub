@@ -24,7 +24,11 @@
     margin-top: -23px;
 }
 .widthCellInProject{
-    width: 10%;
+    width: 14% !important;
+}
+.iconsProjectInLine{
+    width: 15%!important;
+
 }
 .stripeActionsProject{
     display: inline-block;

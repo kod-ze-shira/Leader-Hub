@@ -155,6 +155,7 @@ function Hub(props) {
                             </ProtectedRoute>
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
+                                    <button onClick={() => props.createSystemWave()}>createSystemWave</button>
                                     <UploadFile />
                                     {/* <span id='searchProject' >
                                         <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
@@ -198,7 +199,7 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
         addFile: (files) => dispatch(actions.addFile(files)),
-
+        createSystemWave: () => dispatch(actions.createSystemWave()),
 
 
     }

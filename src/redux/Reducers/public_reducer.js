@@ -7,6 +7,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
     userName: "",
+    userEmail: '',
     workspaces: [],
     projects: [],
     cards: [],
@@ -52,6 +53,9 @@ const publicData = {
     },
     setUserName(state, action) {
         state.userName = action.payload;
+    },
+    setUserEmail(state, action) {
+        state.userEmail = action.payload;
     },
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
@@ -252,7 +256,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     setTaskByFiledFromTasks(state, action) {
-        
+
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
 
     },

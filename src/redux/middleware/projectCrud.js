@@ -78,6 +78,14 @@ export const newProject = ({ dispatch, getState }) => next => action => {
             dataType: 'json',
             success: function (data) {
                 dispatch(actions.addProjectToProjects(data.message))
+                dispatch(actions.createSystemWave({
+                    "subject": "New task",
+                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "to": "learn@leader.codes",
+                    "from": "hub@noreply.leader.codes",
+                    "source": "Hub",
+                    "files": null
+                }))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -182,3 +190,5 @@ function checkPermission(result) {
 
     })
 }
+
+
