@@ -132,14 +132,15 @@ function ProjectsByWorkspace(props) {
 
     // }
 
-
-
+    $(window).click(function () {
+        setShowProject(false)
+    });
+    function stopP(event) {
+        event.stopPropagation();
+    }
 
     return (
         <>
-
-
-
             <div className='body' >
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
@@ -172,12 +173,13 @@ function ProjectsByWorkspace(props) {
 
 
                 {
-                    showProject ? <ViewDetails
-                        closeViewDetails={() => setShowProject(false)}
-                        // project={currentProject}
-                        showToast={showToast}
-                        from={addOrEditProject} workspaceId={idWorkspace} />
-                        : null
+                    showProject ?
+                        <div className="closeDet" onClick={(e) => stopP(e)}>
+                            <ViewDetails
+                                closeViewDetails={() => setShowProject(false)}
+                                showToast={showToast}
+                                from={addOrEditProject} workspaceId={idWorkspace} />
+                        </div> : null
                 }
 
             </div>

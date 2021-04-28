@@ -82,14 +82,20 @@ function Tabs(props) {
         setShowInput(false)
     }
     const openViewDetails = (task) => {
-        // debugger
-        // console.log("a", task);
-        // const a = props.cards.find(c => c._id == task.card)
-        // const b = a.tasks.find(t => t._id == task._id)
-        // console.log(a)
         setViewDetails(true)
         setTaskToDetails(task)
 
+    }
+    $(window).click(function () {
+        setViewDetails(false)
+    });
+
+    // function openViewDetails(event) {
+    //     showDetails("viewTaskByCard")
+    //     event.stopPropagation();
+    // }
+    function stopP(event) {
+        event.stopPropagation();
     }
     return (
         <><div className="body">
@@ -146,7 +152,7 @@ function Tabs(props) {
 
             }
             {viewDetails ?
-                <div className="closeDet" >
+                <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}

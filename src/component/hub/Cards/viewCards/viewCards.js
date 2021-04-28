@@ -120,7 +120,6 @@ function ViewCards(props) {
 
     };
 
-
     return (
         <>
             <div id={props.cardFromMap._id + "disappear"}>
