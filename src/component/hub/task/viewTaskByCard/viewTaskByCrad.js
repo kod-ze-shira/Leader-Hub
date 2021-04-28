@@ -22,7 +22,7 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        props.getAllStatusesTaskForWorkspace(props.task._id)
+        props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
 
 
     }, [
@@ -58,6 +58,8 @@ function ViewTaskByCrad(props) {
         }
         let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
+        if (input.target.name == "complete")
+            editCompleteTask()
 
         console.log("task", props.task.complete);
 
@@ -79,7 +81,8 @@ function ViewTaskByCrad(props) {
         // props.task.status=props.statuses[2]
         // console.log(props.task.status);
         // setTask(task.status = "done", task.endDate = today)
-        props.EditTask(props.task)
+        // props.EditTask(props.task)
+        // editCompleteTask()
         setShowChalalit(true)
     }
 
@@ -107,9 +110,12 @@ function ViewTaskByCrad(props) {
         setTask(temp)
     }
     const editCompleteTask = () => {
+        debugger
         let temp = { ...task }
-        temp.complete = editCompleteTask
+        temp.complete = doneStatus
+        temp.status = props.statuses[2]
         setTask(temp)
+        props.EditTask(task)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -144,6 +150,7 @@ function ViewTaskByCrad(props) {
                                             checked={doneStatus}
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
+                                        // onClick={(e) => editCompleteTask(e)}
                                         />
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
@@ -160,13 +167,11 @@ function ViewTaskByCrad(props) {
                                             }
                                         }}
                                     >
-
                                     </input>
                                 </div>
                                 <label className="check-task py-2   view-details-btn">
                                     <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                                 </label>
-
                                 <label className="check-task border-left  py-2  px-2 col " >
                                     <div className="status-task" style={{ "backgroundColor": props.task.status.color }} >
                                         {props.task.status.statusName}

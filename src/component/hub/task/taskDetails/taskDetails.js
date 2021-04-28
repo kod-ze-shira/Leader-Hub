@@ -192,7 +192,7 @@ function TaskDetails(props) {
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
- </button>
+                    </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
@@ -203,7 +203,6 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,

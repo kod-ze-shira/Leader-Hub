@@ -104,11 +104,13 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
 }
 // '/:userName/:taskStatusId/removeStatus'
 export const removeStatus = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'REMOVE_STATUS') {
 
-        let statusId = action.payload
-        // let status = getState().status_reducer.status;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${statusId}/removeStatus`
+    if (action.type === 'REMOVE_STATUS') {
+        let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+            .tasks[getState().public_reducer.indexCurrentTask]._id
+        let statusId = action.payload;
+        console.log(taskId);
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${statusId}/${taskId}/removeStatus`
         $.ajax({
             url: urlData,
             type: 'POST',

@@ -22,13 +22,14 @@ function EditStatus(props) {
     })
     // const [viewAllStatusComponent, setViewAllStatusComponent] = useState(false)
     const editStatus_ = () => {
+        debugger
         console.log(props.status);
         props.editStatus(props.status)
     }
     const deleteStatus = () => {
         console.log(props.status._id);
         props.removeStatus(props.status._id)
-    }
+    } 
     const handleChangeStatus = (input) => {
         let editStatusInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setStatusByFiledFromStatuses(editStatusInRedux)

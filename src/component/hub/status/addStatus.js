@@ -24,7 +24,7 @@ function AddStatus(props) {
     })
 
 
-    const addStatus = () => {
+    const addStatus = (e) => {
         debugger
         console.log(newStatus);
         props.createStatus(newStatus)
