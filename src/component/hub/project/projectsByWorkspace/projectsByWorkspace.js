@@ -83,22 +83,25 @@ function ProjectsByWorkspace(props) {
 
     const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
         props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
-            return project.name.toUpperCase().includes(valueSearch.toUpperCase())
+            let p = project.name ? project : project.project
+            return p.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     indexProject={index}
-                    myProject={project}
+                    myProject={p}
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
                 : null
         }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects.map((project) => {
-            return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ? <ViewProject showToast={(obj) => showToast1(obj)}
-                closeViewDetails={false}
-                myProject={project}
-                editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)}
-                shareProject={openEditOrShareProject} />
+            let p = project.name ? project : project.project
+            return p.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
+                <ViewProject showToast={(obj) => showToast1(obj)}
+                    closeViewDetails={false}
+                    myProject={p}
+                    editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)}
+                    shareProject={openEditOrShareProject} />
                 : null
         })
     }) : null

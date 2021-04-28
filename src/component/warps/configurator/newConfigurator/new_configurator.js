@@ -13,22 +13,27 @@ function NewConfigorator(props) {
     // checkTheUrl()
     // function checkTheUrl() {
     $(document).ready(function () {
-        if (window.location.href.indexOf('workspace') != -1 ||
-            window.location.href.indexOf('allProjects') != -1) {
+        if (window.location.href.indexOf('workspace') != -1) {
             $("li").removeClass("li-back")
-            $(`#allProjects`).addClass("li-back")
-            $(`#allProjects img`).removeClass("li-back")
-
-        } else {
-            if (window.location.href.indexOf('myTasks') != -1) {
-                $("li").removeClass("li-back")
-                $(`#myTask`).addClass("li-back")
-                $(`#myTask img`).removeClass("li-back")
-            }
+            $(`img`).removeClass("li-back")
         }
+        else
+            if (window.location.href.indexOf('allProjects') != -1) {
+                $("li").removeClass("li-back")
+                $(`#allProjects`).addClass("li-back")
+                $(`#allProjects img`).removeClass("li-back")
+
+            } else {
+                if (window.location.href.indexOf('myTasks') != -1) {
+                    $("li").removeClass("li-back")
+                    $(`#myTask`).addClass("li-back")
+                    $(`#myTask img`).removeClass("li-back")
+                }
+            }
 
 
     })
+
     const changeBackground = (e) => {
         props.history.push("/" + props.user)
         $(document).ready(function () {

@@ -130,6 +130,14 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log(data);
                 dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
+                dispatch(actions.createSystemWave({
+                    "subject": "New task",
+                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "to": "learn@leader.codes",
+                    "from": "hub@noreply.leader.codes",
+                    "source": "Hub",
+                    "files": null
+                }))
                 // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
             },
             error: function (err) {

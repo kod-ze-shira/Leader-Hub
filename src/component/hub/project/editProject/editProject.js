@@ -12,7 +12,7 @@ function EditProject(props) {
         props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
     }, [props.workspaces])
 
-
+    debugger
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -134,7 +134,7 @@ export default connect(
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
             setProjectByFiledFromWorkspace: (p) => dispatch(actions.setProjectByFiledFromWorkspace(p)),
             setProject: (p) => dispatch(actions.setProject(p)),
-            setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p))
+            // setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p))
         }
     }
 )(EditProject)

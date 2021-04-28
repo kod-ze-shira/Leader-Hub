@@ -17,6 +17,8 @@ import ShareProject from '../project/shareProject/shareProject'
 const mapStateToProps = (state) => {
     return {
         // close: state.public_reducer.close,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace
+
     }
 }
 
@@ -30,6 +32,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     function ViewDetails(props) {
+        debugger
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
         const [oldObject, setOldObject] = useState()
