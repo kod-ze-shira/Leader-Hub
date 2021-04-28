@@ -17,12 +17,17 @@ export default function Colors(props) {
     $("#color_front").click(function (event) {
         $("#colour").click();
     });
+    function stopP(event) {
+        event.stopPropagation();
+    }
     // const circleSize="14";
 
     return (
         <>
-            <div className="ml-2 mr-3">
-                <CirclePicker circleSize={18} onChangeComplete={(color) => { props.changeStatusColor({ value: color.hex, name: "color" }) }} colors={colors} />
+            <div className="ml-2 mr-3" onClick={(e) => stopP(e)}>
+                <CirclePicker circleSize={18}
+                    onChangeComplete={(color) => props.changeStatusColor({ value: color.hex, name: "color" })}
+                    colors={colors} />
                 {/* <span id="color_front"></span>
                 <input type='color'  class='bar' id='colour'/>            </div> */}
                 <img src={require('../../img/ID.svg')}></img>

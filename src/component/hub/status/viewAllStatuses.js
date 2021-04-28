@@ -32,16 +32,20 @@ function ViewAllStatuses(props) {
     const openAddStatus = (e) => {
         setOpenPopUpToAdd(!openPopUpToAdd)
         setOpenPopUp(!openPopUp)
+        e.stopPropagation()
     }
     const saveStatus = (value) => {
-        let editStatusInRedux = { "nameFiled": "status", "value": value }
-        props.setTaskByFiledFromTasks(editStatusInRedux)
+        if (!props.task.complete) {
+            let editStatusInRedux = { "nameFiled": "status", "value": value }
+            props.setTaskByFiledFromTasks(editStatusInRedux)
+        }
     }
+
     const changeStatusByIndex = (indexOfStatus) => {
         let s = props.statuses[indexOfStatus]
-        setStatus(s)
-        let a = props.status.statusName
-        console.log(a)
+        if (s.complete == false)
+            setStatus(s)
+
     }
     const closePopUpOfViewStatus = () => {
         openPopUp(false)
@@ -57,7 +61,6 @@ function ViewAllStatuses(props) {
                         <ViewStatus saveStatus={(e) => saveStatus(e)}
                             changeStatus={changeStatusByIndex}
                             status={status} index={index}
-                        // openPopUp={closePopUpOfViewStatus} 
                         />
                     )) : null}
                     {openPopUp ?

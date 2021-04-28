@@ -24,6 +24,10 @@
   .check-task:nth-child(3){
     text-align: right !important;
   }
+  .disabled{
+  color:gray ;
+  opacity: 0.5;
+  }
   .check-task{
     font-size: 14px;
     margin-bottom: 0px !important;
@@ -31,7 +35,7 @@
   
   /* Hide the browser's default checkbox */
   .check-task input {
-    /* position: absolute; */
+    position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
@@ -51,6 +55,7 @@
   .checkmark-place{
     top: 7px;
     left: 0;
+    
   }
   
   .check-task:hover input ~ .checkmark {
@@ -66,12 +71,13 @@
   .checkmark:after {
     content: "";
     position: absolute;
-    display: none;
+    /* display: none; */
   }
   
   /* Show the checkmark when checked */
   .check-task input:checked ~ .checkmark:after {
     display: block;
+
   }
   .close-details{
     width: 0 !important;
@@ -98,12 +104,13 @@
     top: 5px;
     width: 5px;
     height: 10px;
-    border: solid white;
+    border: solid rgb(207, 207, 207);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+ 
   .show-task{
     background-color: transparent !important;
   }

@@ -13,10 +13,9 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
-import {
-    editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards
-} from '../middleware/taskCrud';
+import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks 
+,moveTaskBetweenCards,
+complitTask} from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
@@ -67,7 +66,8 @@ const store = createStore(
                 getAllTeamsForUser,
                 editStatus,
                 removeStatus,
-                moveTaskBetweenCards
+                moveTaskBetweenCards,
+                complitTask
             ))
 )
 store.dispatch(actions.extractJwt());

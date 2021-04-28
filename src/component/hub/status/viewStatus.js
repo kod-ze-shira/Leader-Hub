@@ -23,6 +23,8 @@ function ViewStatus(props) {
         props.changeStatus(props.index)
         $('.display-task').css({ 'display': 'none' })
         console.log("openEditTask", openPopUpToEdit);
+        event.stopPropagation()
+
     }
     return (
 

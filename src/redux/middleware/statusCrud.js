@@ -74,8 +74,13 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
 
 export const editStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_STATUS') {
+        debugger
+        let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+            .tasks[getState().public_reducer.indexCurrentTask]._id
+        console.log(taskId);
         let status = action.payload
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editStatus`
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/editStatus`
+        console.log(urlData);
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,
@@ -86,13 +91,15 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ status }),
             success: function (data) {
+                debugger
                 console.log("success")
                 console.log("data", data);
                 dispatch(actions.setStatuses(data.result))
 
             },
             error: function (err) {
-
+                debugger
+                console.log(err);
                 checkPermission(err).then((ifOk) => {
 
                 })
@@ -104,11 +111,13 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
 }
 // '/:userName/:taskStatusId/removeStatus'
 export const removeStatus = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'REMOVE_STATUS') {
 
-        let statusId = action.payload
-        // let status = getState().status_reducer.status;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${statusId}/removeStatus`
+    if (action.type === 'REMOVE_STATUS') {
+        let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+            .tasks[getState().public_reducer.indexCurrentTask]._id
+        let statusId = action.payload;
+        console.log(taskId);
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${statusId}/${taskId}/removeStatus`
         $.ajax({
             url: urlData,
             type: 'POST',
