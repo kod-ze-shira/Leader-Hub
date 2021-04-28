@@ -19,6 +19,9 @@ function ViewProject(props) {
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
 
+    useEffect(() => {
+
+    }, [props.indexOfWorkspace])
     function detailsProject() {
         set_getProjectById(false);
     }
@@ -140,7 +143,7 @@ function ViewProject(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // project: state.project_reducer.project,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName,

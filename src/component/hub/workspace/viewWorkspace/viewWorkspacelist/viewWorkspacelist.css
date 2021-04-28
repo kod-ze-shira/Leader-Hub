@@ -51,13 +51,16 @@
     font-size: small !important;
     text-align: left !important;
 }
-.ul-workspace-list{
-    /* line-height: ; */
-}
+
 .workspace-name-list{
     font-weight: 400;
     color: black !important;
     font-size: 17px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-inline-box;
+    max-width: 54vw;
 }
 .WorkspaceList:hover{
   background-color:#F6F6FA;
@@ -67,7 +70,7 @@
     border-bottom:#F6F6FA 1px solid ;
     display: flex;
     justify-content:space-between; 
-    width: 67vw;
+    width: 73.2vw;
 }
 
 .stripe{

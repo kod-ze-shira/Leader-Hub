@@ -72,8 +72,8 @@ const publicData = {
     setWorkspaceBeforeChanges(state, action) {
 
         state.workspaces.forEach((workspace, index) => {
-            if (workspace._id == action.payload.workspace._id) {
-                state.workspaces[index] = action.payload.workspace
+            if (workspace._id == action.payload._id) {
+                state.workspaces[index] = action.payload
             }
         })
     },
@@ -263,10 +263,10 @@ const publicData = {
 
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {
-            if (card._id == action.payload.task.card) {
+            if (card._id == action.payload.card) {
                 card.tasks.forEach((task, index2) => {
-                    if (task._id == action.payload.task._id) {
-                        state.cards[index1].tasks[index2] = action.payload.task
+                    if (task._id == action.payload._id) {
+                        state.cards[index1].tasks[index2] = action.payload
                     }
                 })
             }
