@@ -76,9 +76,10 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    function openViewDitailsAddProject() {
+    function openViewDitailsAddProject(e) {
         setAddOrEditProject("newProject")
         setShowProject(true)
+        e.stopPropagation()
     }
 
     const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
@@ -156,7 +157,7 @@ function ProjectsByWorkspace(props) {
 
 
                             {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
-                                onClick={() => openViewDitailsAddProject()}
+                                onClick={(e) => openViewDitailsAddProject(e)}
                             >+ New Project</button> : null}
                         </div>
                     </div>

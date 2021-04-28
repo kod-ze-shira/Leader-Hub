@@ -54,11 +54,11 @@ const publicData = {
     setUserName(state, action) {
         state.userName = action.payload;
     },
-    setUserEmail(state, action) {
-        state.userEmail = action.payload;
-    },
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
+    },
+    setUserEmail(state, action) {
+        state.userEmail = action.payload;
     },
     setWorkspaceByFiled(state, action) {
         state.workspaces[state.indexOfWorkspace][action.payload.nameFiled] = action.payload.value

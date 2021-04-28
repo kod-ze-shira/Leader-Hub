@@ -19,3 +19,13 @@ margin-left: 8vh;
     margin-left: 400px;
 }
 
+.divtext {
+    border: ridge 2px;
+    padding: 5px;
+    width: 20em;
+    min-height: 5em;
+    overflow: auto;
+}
+  
+
+  

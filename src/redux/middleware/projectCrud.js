@@ -80,8 +80,8 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.addProjectToProjects(data.message))
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
-                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
-                    "to": "learn@leader.codes",
+                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>Go to Hub</a> ",
+                    "to": getState().public_reducer.userEmail,
                     "from": "hub@noreply.leader.codes",
                     "source": "Hub",
                     "files": null

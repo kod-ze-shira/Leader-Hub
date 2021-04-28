@@ -5,7 +5,7 @@ import { actions } from '../../../../redux/actions/action'
 import Toast from 'react-bootstrap/Toast'
 function EditWorkspace(props) {
 
-   
+
 
     const [workspaceBeforeChanges] = useState({ ...props.workspace })
 
@@ -38,42 +38,46 @@ function EditWorkspace(props) {
     return (
         <>
             <div className="details d-workspace mr-5 ml-4">
-                <h5 className="my-5 title-view-details pb-2">Workspace details</h5>
-                <div class="form-group" id='nameRequired'>
-                    <label for="name">Name</label>
-                    <input name="name" ref={nameRequired} required
-                        onChange={(input) => changeFiledInWorkspace(input)}
-                        type="text" class="form-control" id="name"
-                        // value={props.workspace.name} 
-                        value={props.workspaces[props.indexOfWorkspace].name}
-                    />
+                <div className='propertiesViewDitails'>
+
+                    <h5 className="my-5 title-view-details pb-2">Workspace details</h5>
+                    <div class="form-group" id='nameRequired'>
+                        <label for="name">Name</label>
+                        <input name="name" ref={nameRequired} required
+                            onChange={(input) => changeFiledInWorkspace(input)}
+                            type="text" class="form-control" id="name"
+                            // value={props.workspace.name} 
+                            value={props.workspaces[props.indexOfWorkspace].name}
+                        />
 
 
-                    <div class="invalid-feedback">
-                        Please enter workspace name.
+                        <div class="invalid-feedback">
+                            Please enter workspace name.
                      </div>
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control"
-                        id="description" rows="5"
-                        placeholder="Write a description about your workspace"
-                        name="description"
-                        value={props.workspaces[props.indexOfWorkspace].description}
-                        onChange={(input) => changeFiledInWorkspace(input)}></textarea>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <div class="form-control descriptionWorkspace"
+                            id="description" rows="5"
+                            placeholder="Write a description about your workspace"
+                            name="description"
+                            value={props.workspaces[props.indexOfWorkspace].description}
+                            onChange={(input) => changeFiledInWorkspace(input)} contentEditable
+                        ></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input name="color"
+                            className="ml-2 w-25 "
+                            styles="height: 50px"
+                            type="color"
+                            id='colorProject'
+                            value={props.workspaces[props.indexOfWorkspace].color}
+                            onChange={(e) => changeFiledInWorkspace(e)} />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="color">Color</label>
-                    <input name="color"
-                        className="ml-2 w-25 "
-                        styles="height: 50px"
-                        type="color"
-                        id='colorProject'
-                        value={props.workspaces[props.indexOfWorkspace].color}
-                        onChange={(e) => changeFiledInWorkspace(e)} />
-                </div>
-                <div className="row justify-content-between  mx-1 btns-in-view-details-workspace ">
+                <div className="row justify-content-between">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>

@@ -86,6 +86,7 @@ function Hub(props) {
     //     event.stopPropagation();
     // }
     const [focusInputCard, setFocusInputCard] = useState(false)
+
     return (
         <>
             <HeaderLeader userName={props.user} appName='hub' />‏
@@ -163,6 +164,11 @@ function Hub(props) {
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
                                     <button onClick={() => props.createSystemWave()}>createSystemWave</button>
+
+                                    {/* contentEditable
+                                    height: auto;
+                              max-height: 110px;
+                                 overflow: auto; */}
                                     <UploadFile />
                                     {/* <span id='searchProject' >
                                         <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
