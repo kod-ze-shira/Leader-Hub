@@ -24,7 +24,7 @@
     margin-top: -23px;
 }
 .widthCellInProject{
-    width: 14% !important;
+    width: 10% !important;
 }
 .iconsProjectInLine{
     width: 15%!important;
@@ -61,6 +61,7 @@
   }
 .divProgress{
     text-align: center;
+
 }
 .progressProject {
     display: inline-flex;
@@ -70,9 +71,9 @@
     font-size: .75rem;
     background-color: #e9ecef;
     border-radius: .25rem;
+    width:  10vw !important; 
     /* height: 5px; */
     height: 9px;  
-    width:  64% 
     
 }
 .progressProject-bar {

@@ -107,7 +107,7 @@ function ViewProject(props) {
                 </td>
                 <td>
 
-                    <div className='divProgress' >
+                    <div className='divProgress ' >
                         <div class="progressProject" >
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
