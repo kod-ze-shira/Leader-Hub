@@ -32,7 +32,6 @@ function ViewTaskByCradTabs(props) {
         setCurrentIndexCard(props.indexCard)
         props.getAllStatusesTaskForWorkspace(props.task._id)
 
-
     }, [props.cards])
 
     const [anchorEl, setAnchorEl] = React.useState(null);

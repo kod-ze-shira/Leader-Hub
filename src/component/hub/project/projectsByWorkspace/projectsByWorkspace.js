@@ -13,10 +13,6 @@ import $ from 'jquery'
 
 function ProjectsByWorkspace(props) {
 
-    // useEffect(() => {
-    //     console.log(props.projects)
-    // }, [props.workspace])
-
     let { idWorkspace } = useParams();
     let [flug, setFlug] = useState(false)
     const [showProject, setShowProject] = useState(false)
@@ -64,6 +60,8 @@ function ProjectsByWorkspace(props) {
                 setFlug(true)
             }
         }
+        debugger
+
     }, [props.workspaces]);
 
 
@@ -81,8 +79,21 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
-        props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
+    // const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
+    //     props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
+    //         return project.name.toUpperCase().includes(valueSearch.toUpperCase())
+    //             ? <ViewProject showToast={(obj) => showToast1(obj)}
+    //                 closeViewDetails={false}
+    //                 indexProject={index}
+    //                 myProject={project}
+    //                 editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
+    //             : null
+    //     }) : null
+
+    const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
+        props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
+            let a = props.workspaces[props.indexOfWorkspace].projects
+            let b = project
             return project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
@@ -187,12 +198,11 @@ function ProjectsByWorkspace(props) {
 const mapStateToProps = (state) => {
 
     return {
-        // projects: state.public_reducer.projects,
         projectToDelete: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
-        // workspace: state.workspace_reducer.workspace,
-
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 const mapDispatchToProps = (dispatch) => {

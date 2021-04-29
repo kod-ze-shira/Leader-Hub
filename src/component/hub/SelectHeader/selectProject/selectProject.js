@@ -95,11 +95,12 @@ function SelectProject(props) {
 
     const viewProjectsList = props.workspace.projects ? props.workspace.projects.map((project, index) => (
         { value: project._id, label: project.name, projectIndex: index }
-    )) : null
+    )) : null 
     return (
         <>
             <div className="react-select">
-                <Select
+                
+                    < Select
                     className="select-project"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedProject(e)}
@@ -109,6 +110,7 @@ function SelectProject(props) {
                     styles={colourStyles}
 
                 />
+
             </div>
         </>
     )

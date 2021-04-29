@@ -87,7 +87,6 @@ function AddObject(props) {
 
                 </div>
                 <div id='addNewP2'
-
                 >
                     <p className='addNewP' onClick={(e) => openViewDitails('Workspace')}>New workspace</p>
                     <p className='addNewP' id='newProjectInComponentAddObject'
