@@ -29,12 +29,16 @@ export default function ToastDelete1(props) {
                         <span className="px-4 ">was deleted</span>
                         <div className="div_btn_undo  ">
                             <button className="btn_undo "
-                                onClick={() => {
+                                onClick={(e) => {
                                     props.toSetShowToastDelete();
+                                    e.stopPropagation()
                                     //  props.toSetDeleted() 
                                 }}>Undo</button>
                         </div>
-                        <button onClick={props.toOnClose} className="pl-2">X</button>
+                        <button onClick={(e) => {
+                            props.toOnClose()
+                            e.stopPropagation()
+                        }} className="pl-2">X</button>
                     </Toast.Header>
                 </Toast>
             </animated.div>

@@ -2,10 +2,9 @@ import React, { useEffect, useState, useRef } from 'react'
 import './editWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import Toast from 'react-bootstrap/Toast'
+import $ from 'jquery'
+
 function EditWorkspace(props) {
-
-
 
     const [workspaceBeforeChanges] = useState({ ...props.workspace })
 
@@ -34,7 +33,12 @@ function EditWorkspace(props) {
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
+    const deleteWorkspace = (e) => {
+        debugger
+        $(`#${props.workspaces[props.indexOfWorkspace]._id}`).css("display", "none")
+        props.showToast({ 'type': 'Workspace', 'object': props.workspaces[props.indexOfWorkspace] })
 
+    }
     return (
         <>
             <div className="details d-workspace mr-5 ml-4">
@@ -78,9 +82,12 @@ function EditWorkspace(props) {
                     </div>
                 </div>
                 <div className="row justify-content-between">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
+                    <button data-toggle="tooltip" data-placement="top"
+                        title="Garbage"
+                        className="delete-btn col-4 "
+                        onClick={(e) => deleteWorkspace(e)}>
                         <img src={require('../../../img/bin.png')}></img> Delete
-                </button>
+                    </button>
                     <button onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>

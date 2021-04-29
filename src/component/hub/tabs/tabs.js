@@ -153,7 +153,9 @@ function Tabs(props) {
             }
             {viewDetails ?
                 <div className="closeDet" onClick={(e) => stopP(e)} >
-                    <ViewDetails closeViewDetails={() => setViewDetails(false)}
+                    <ViewDetails
+                        showToast={(obj) => props.showToast(obj)}
+                        closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
                         open={true}> </ViewDetails>

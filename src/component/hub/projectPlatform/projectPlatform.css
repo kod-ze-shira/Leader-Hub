@@ -46,7 +46,7 @@ margin-bottom: 10vh;
 display: none;
 }
 .MuiButton-label {
-  display: none !important;
+  /* display: none !important; */
 }
 .MuiButtonBase-root:hover .MuiButton-root:hover .MuiButton-text:hover{
   display: block !important;
