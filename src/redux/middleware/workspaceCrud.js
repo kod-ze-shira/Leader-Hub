@@ -104,7 +104,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
             data: JSON.stringify(workspace),
             success: function (data) {
                 console.log("success")
-                console.log(data);
                 dispatch(actions.updateWorkspaceUfterEditInServer(data.result))
             },
             error: function (err) {
