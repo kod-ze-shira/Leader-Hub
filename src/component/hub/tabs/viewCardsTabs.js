@@ -16,8 +16,6 @@ function ViewCardsTabs(props) {
 
     useEffect(() => {
 
-        debugger
-
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -126,7 +124,6 @@ function ViewCardsTabs(props) {
                                                 title={editCardName}
                                                 onKeyPress={event => {
                                                     enterK(event)
-
                                                 }}
                                             >
                                             </input>
@@ -155,11 +152,12 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            key={props.cards[props.indexCard].tasks[index]._id}
+                                                            // key={props.cards[props.indexCard].tasks[index]._id}
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
                                                             indexTask={index} />
                                                     ))}
+
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-2">

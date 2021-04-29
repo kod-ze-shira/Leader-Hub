@@ -75,7 +75,7 @@ function Tabs(props) {
     const newCard = () => {
         let card;
         if (inputValue) {
-            card = { "project": props.project._id, name: inputValue }
+            card = { "project": props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]._id, name: inputValue }
             props.newCard(card)
         }
         setInputValue("")
@@ -134,7 +134,7 @@ function Tabs(props) {
                                                         {/* : null} */}
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
-                                                        <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a>
+                                                        {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
 
                                                     </div>
                                                 </div>
@@ -176,6 +176,8 @@ export default connect(
             workspaces: state.public_reducer.workspaces,
             workspace: state.workspace_reducer.worksapce,
             // project: state.project_reducer.project,
+            indexCurrentProject: state.public_reducer.indexCurrentProject,
+            indexOfWorkspace: state.public_reducer.indexOfWorkspace,
             statuses: state.public_reducer.statuses
         }
     },
