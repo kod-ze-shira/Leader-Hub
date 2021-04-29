@@ -15,7 +15,7 @@ function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     let complited = props.myProject.countReadyTasks
-    , complitedColor;
+        , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)

@@ -91,7 +91,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 
         let workspaceBeforeChanges = action.payload.workspaceBeforeChanges
         let workspace = { 'workspace': getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace] };
-
         // delete workspace.workspace.projects
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({

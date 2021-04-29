@@ -90,8 +90,10 @@ function TaskDetails(props) {
 
 
 
-    const deleteTask = () => {
-        props.showToast(true)
+    const deleteTask = (e) => {
+        // props.showToast(true)
+        $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
+        props.showToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     }
 
 
@@ -235,7 +237,7 @@ function TaskDetails(props) {
 
                 <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
+                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask(e)} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                     </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
