@@ -24,7 +24,7 @@ function DynamicSelect(props) {
     if (newValue) {
       console.group('Value Changed');
       console.log(newValue);
-      props.addContactToShare(newValue)
+      props.options == 'contacts'? props.setContactEmail(newValue):props.addMemberEmailToMembersEmailList(newValue)
       console.log(`action: ${actionMeta.action}`);
       console.groupEnd();
     }

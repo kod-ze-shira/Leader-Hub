@@ -1,3 +1,4 @@
+import { event } from 'jquery'
 import React, { useState } from 'react'
 import DynamicSelect from '../../team/dynamicSelect'
 import ShareOneMember from '../share/shareOneMember/shareOneMember'
@@ -7,15 +8,23 @@ export default function ShareProject() {
     const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
     const [shareDetails, setShareDetails] = useState([])
     const [email, setEmail] = useState('')
+    const [membersTeamEmails,setMembersTeamEmails]=useState([])
 
-    const addContactMailToSharedList = (emailMember) => {
+    //onselect contact his email be in  state:email
+    const setStateMailToContactMail = (emailMember) => {
         setDisabledSelectPermission('true')
         console.log(disabledSelectPermission);
         setEmail(emailMember.value)
     }
+    //onselect perrmision to contact his email and permission will add to members list
     const addContactToList = (event) => {
         let shareDetail = { 'shareDetail': email, 'permission': event.target.options[event.target.selectedIndex].label }
         setShareDetails([...shareDetails, shareDetail])
+    }
+
+    const addTeamMemberEmailToMembersEmailList=(member)=>{
+        // let memberTeam = { 'email': member.email, 'team': member.team }
+        // setMembersTeamEmails([...membersTeamEmails, memberTeam])
     }
     const renderShareDetails = () => {
        return   shareDetails.map(detail => {
@@ -35,8 +44,8 @@ export default function ShareProject() {
                     <div className="txt_share">Share With Email Address</div>
                 </div>
                 <div className="row">
-                    <div className="col-9">
-                        <DynamicSelect addContactToShare={addContactMailToSharedList} options={'contacts'} />
+                    <div className="col-md-9">
+                        <DynamicSelect setContactEmail={setStateMailToContactMail} options={'contacts'} />
                     </div>
                     <div className="col-3 pl-0">
                         <select class="form-control" onChange={(e) => addContactToList(e)}>
@@ -51,8 +60,16 @@ export default function ShareProject() {
                     <div className="txt_share">Share With Teams</div>
                 </div>
                 <div className="row">
-                    <div className="col">
-                        <DynamicSelect options={'teams'} />
+                    <div className="col-md-9">
+                        <DynamicSelect options={'teams'} addMemberEmailToMembersEmailList={addTeamMemberEmailToMembersEmailList}/>
+                    </div>
+                    <div className="col-3 pl-0">
+                        <select class="form-control" >
+                            <option disabled selected>Select...</option>
+                            <option value="1">viewer</option>
+                            <option value="2">editor</option>
+                            <option value="3">admin</option>
+                        </select>
                     </div>
                 </div>
                 <div className="row pt-3">
