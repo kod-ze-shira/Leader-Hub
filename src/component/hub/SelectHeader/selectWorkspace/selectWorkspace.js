@@ -17,13 +17,13 @@ function SelectWorkspace(props) {
 
     useEffect(() => {
         console.log("Input", Input);
-    }, [props.workspace])
+    }, [props.workspaces])
 
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
-   
+
         if (myWorkspace.projects[0]) {
 
             // props.setProjects(myWorkspace.projects)
@@ -36,7 +36,8 @@ function SelectWorkspace(props) {
 
         }
         else {
-            props.setProjectName("No Projects")        }
+            props.setProjectName("No Projects")
+        }
 
     }
 
@@ -62,7 +63,8 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo" nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
+                <LetterLogo className="workspace-logo"
+                    nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
                 <Select
                     className="select-workspace selectInHeader"
                     classNamePrefix="select"

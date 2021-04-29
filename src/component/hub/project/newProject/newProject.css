@@ -9,16 +9,22 @@
         margin: 0px -50px;
 
  }  
-   
-  
+
+ .descriptionProject{
+  max-height: 156px; 
+  height: auto;
+  overflow: auto;
+  min-height:84px ;
+}
+
     
-       .inputProject:focus {
-        outline:none;
-      } 
-         .edit_workspace_color:focus {
-        outline:none;
-       
-      } 
+.inputProject:focus {
+  outline:none;
+} 
+  .edit_workspace_color:focus {
+  outline:none;
+  
+} 
       .edit_workspace_color{
             background-color: white;
         color:black;

@@ -7,6 +7,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     tokenFromCookies: "",
     userName: "",
+    userEmail: '',
     workspaces: [],
     projects: [],
     cards: [],
@@ -56,6 +57,9 @@ const publicData = {
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
     },
+    setUserEmail(state, action) {
+        state.userEmail = action.payload;
+    },
     setWorkspaceByFiled(state, action) {
         state.workspaces[state.indexOfWorkspace][action.payload.nameFiled] = action.payload.value
 
@@ -68,8 +72,8 @@ const publicData = {
     setWorkspaceBeforeChanges(state, action) {
 
         state.workspaces.forEach((workspace, index) => {
-            if (workspace._id == action.payload.workspace._id) {
-                state.workspaces[index] = action.payload.workspace
+            if (workspace._id == action.payload._id) {
+                state.workspaces[index] = action.payload
             }
         })
     },
@@ -80,19 +84,8 @@ const publicData = {
 
     },
     setProjectInWorkspace(state, action) {
-        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject]
-            = action.payload
-
-        // state.workspaces.forEach((workspace, index1) => {
-        //     if (workspace._id == action.payload.project.workspace) {
-        //         workspace.project.forEach((project, index2) => {
-        //             if (project_id == action.payload.project._id) {
-        //                 state.workspaces[index1].project[index2].project = action.payload.project
-        //                 console.log(state.workspaces[index1].project[index2].project)
-        //             }
-        //         })
-        //     }
-        // })
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject] = action.payload
+           
     },
     setProjects(state, action) {
         state.projects = action.payload;
@@ -252,17 +245,21 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     setTaskByFiledFromTasks(state, action) {
-        
+
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
 
     },
+    setTaskComplete(state, action) {
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
+    },
+
 
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {
-            if (card._id == action.payload.task.card) {
+            if (card._id == action.payload.card) {
                 card.tasks.forEach((task, index2) => {
-                    if (task._id == action.payload.task._id) {
-                        state.cards[index1].tasks[index2] = action.payload.task
+                    if (task._id == action.payload._id) {
+                        state.cards[index1].tasks[index2] = action.payload
                     }
                 })
             }

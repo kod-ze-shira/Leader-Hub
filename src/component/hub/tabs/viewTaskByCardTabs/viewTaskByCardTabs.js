@@ -30,7 +30,8 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        props.getAllStatusesTaskForWorkspace(props.task._id)
+        if (props.cards[props.indexCurrentCard])
+            props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
 
     }, [props.cards])
 

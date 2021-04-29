@@ -132,55 +132,57 @@ function NewProject(props) {
         <>
 
             <div className="details mr-5 ml-4">
-                <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5>
-                <div class="row justify-content-between  mx-1 mb-2">
-                    <label>workspace: {props.workspace.name}</label>
-                </div>
+                <div className='propertiesViewDitails'>
+                    <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5>
+                    <div class="row justify-content-between  mx-1 mb-2">
+                        <label>workspace: {props.workspace.name}</label>
+                    </div>
 
-                <div class="form-group" id='nameRequired'>
-                    <label for="name">Name</label>
-                    <input name="name" onChange={(e) => changeNameInProject(e)}
-                        required ref={nameRequired}
-                        id='nameProject' type="text" class="form-control" value={nameProject} />
-                    <div class="invalid-feedback">
-                        Please enter project name.
+                    <div class="form-group" id='nameRequired'>
+                        <label for="name">Name</label>
+                        <input name="name" onChange={(e) => changeNameInProject(e)}
+                            required ref={nameRequired}
+                            id='nameProject' type="text" class="form-control" value={nameProject} />
+                        <div class="invalid-feedback">
+                            Please enter project name.
                      </div>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" name="description" id="descriptionProject" rows="5" placeholder="Write a description about your project"
-                        onChange={(e) => changeDescriptionInProject(e)} value={descriptioneProject}></textarea>
-                </div>
-                <div className="row justify-content-between">
-                    <div class="form-group col-5">
-                        <label for="color">Project color</label>
-                        <input name="color"
-                            className="form-control"
-                            onChange={(e) => changeColorProject(e)}
-                            type="color"
-                            id='colorProject'
-                            value={myColor}
-                        />
                     </div>
-                    <div class="form-group col-5">
-                        <label for="color">Due Date</label>
-                        <input
-                            className="form-control "
-                            name="dueDate"
-                            type="date"
-                            id='dueDateProject'
-                            value={myDueDate}
-                            onChange={(e) => changeDueDateInProject(e)} />
-                    </div>
-                </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
 
-                <div className="row justify-content-between mt-5 mx-1 btns-in-view-details-project">
-                    {/* <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
-                        <img src={require('../../../img/bin.png')}></img> Delete
-                </button> */}
-                    <button onClick={() => addProject()} className="save_canges_btn col-3">Save</button>
+
+                        <div class="form-control descriptionProject" name="description"
+                            id="descriptionProject" rows="5" placeholder="Write a description about your project"
+                            onChange={(e) => changeDescriptionInProject(e)} value={descriptioneProject} contentEditable></div>
+                    </div>
+                    <div className="row justify-content-between" >
+                        <div class="form-group col-5 ditailsAction col-md-4">
+                            <label for="color">Project color</label>
+                            <input name="color"
+                                className="form-control"
+                                onChange={(e) => changeColorProject(e)}
+                                type="color"
+                                id='colorProject'
+                                value={myColor}
+                            />
+                        </div>
+                        <div class="form-group col-5 ditailsAction col-md-8" >
+                            <label for="color">Due Date</label>
+                            <input
+                                className="form-control "
+                                name="dueDate"
+                                type="date"
+                                id='dueDateProject'
+                                value={myDueDate}
+                                onChange={(e) => changeDueDateInProject(e)} />
+                        </div>
+                    </div>
                 </div>
+                {/* <div className="row justify-content-between mx-1 btns-in-view-details-project"> */}
+                <button onClick={() => addProject()}
+                    style={{ 'margin-top': '0px !important;' }} className="save_canges_btn float-right">Save</button>
             </div>
+
 
         </>
 

@@ -14,11 +14,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks 
-,moveTaskBetweenCards} from '../middleware/taskCrud';
+,moveTaskBetweenCards,
+complitTask} from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
+import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
 // import { uploadFiles, removeFile, getFiles, downloadFile } from '../middleware/filesCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
@@ -31,6 +33,7 @@ const store = createStore(
         applyMiddleware
             (
                 deleteProjectInServer,
+                createSystemWave,
                 editProjectInServer,
                 editWorkspaceInServer,
                 addNewWorkspaceToServer,
@@ -63,7 +66,8 @@ const store = createStore(
                 getAllTeamsForUser,
                 editStatus,
                 removeStatus,
-                moveTaskBetweenCards
+                moveTaskBetweenCards,
+                complitTask
             ))
 )
 store.dispatch(actions.extractJwt());
@@ -72,7 +76,7 @@ var url = window.location;
 let jwtFromCookie
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
-    jwtFromCookie='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
+    jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
     // jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }

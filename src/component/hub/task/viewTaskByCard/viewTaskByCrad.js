@@ -22,7 +22,7 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        props.getAllStatusesTaskForWorkspace(props.task._id)
+        props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
 
 
     }, [
@@ -40,23 +40,24 @@ function ViewTaskByCrad(props) {
         "name": props.task.name,
         "description": props.task.description
         , "status": "", "dueDate": props.task.dueDate,
-        "startDate": props.task.startDate
+        "startDate": props.task.startDate,
+
     })
 
     const changeFiledInTask = (input) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
-
         if (input.target.name == "complete") {
-            setDoneStatus(!props.task.complete)
-            value = !doneStatus
-            console.log(value);
-            // let status = props.task.status
-            // status = props.statuses[2]
+            debugger
+            setDoneStatus(true)
+            value = doneStatus
+            console.log(value)
         }
         let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
+        if (input.target.name == "complete")
+            editCompleteTask()
 
         console.log("task", props.task.complete);
 
@@ -80,16 +81,8 @@ function ViewTaskByCrad(props) {
         event.stopPropagation();
     }
     function addChalalit() {
-        let today = new Date()
-        let dd = today.getDate()
-        let mm = today.getMonth() + 1
-        const yyyy = today.getFullYear()
-        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
-        // props.task.status=props.statuses[2]
-        // console.log(props.task.status);
-        // setTask(task.status = "done", task.endDate = today)
-        props.EditTask(props.task)
-        setShowChalalit(true)
+        if (props.task.complete == false)
+            setShowChalalit(true)
     }
 
     function deleteTask() {
@@ -106,9 +99,6 @@ function ViewTaskByCrad(props) {
         $(`#${id}`).css({ 'opacity': '0' })
     }
 
-    // useEffect(() => {
-    //     props.EditTask(task);
-    // }, [task])
 
     const editTask = () => {
         let temp = { ...task }
@@ -116,9 +106,25 @@ function ViewTaskByCrad(props) {
         setTask(temp)
     }
     const editCompleteTask = () => {
-        let temp = { ...task }
-        temp.complete = editCompleteTask
-        setTask(temp)
+        debugger
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth() + 1
+        const yyyy = today.getFullYear()
+        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
+        let completeTask = {
+            "_id": props.task._id,
+            "name": props.task.name,
+            "description": props.task.description,
+            "dueDate": props.task.dueDate,
+            "startDate": props.task.startDate,
+            "complete": true,
+            "endDate": today,
+            "status": props.statuses[2],
+            // "card": props.task.card
+        }
+        props.setTaskComplete(completeTask)
+        props.completeTask(task)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -153,15 +159,15 @@ function ViewTaskByCrad(props) {
                                             checked={doneStatus}
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
+                                        // onClick={(e) => editCompleteTask(e)}
                                         />
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
                                         name="name" id="name"
-                                        className="show-card py-2"
+                                        className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
-                                        // onChange={(e) => editTaskNameInReduxs(e.target.value)}
                                         onBlur={(e) => editTask()}
                                         onKeyPress={e => {
                                             if (e.key === 'Enter') {
@@ -169,13 +175,11 @@ function ViewTaskByCrad(props) {
                                             }
                                         }}
                                     >
-
                                     </input>
                                 </div>
                                 <label className="check-task py-2   view-details-btn">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
-
                                 <label className="check-task border-left  py-2  px-2 col " >
                                     <div className="status-task" style={{ "backgroundColor": props.task.status.color }} >
                                         {props.task.status.statusName}
@@ -222,8 +226,10 @@ const mapDispatchToProps = (dispatch) => {
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
+        setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
-        setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index))
+        setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+        completeTask: () => dispatch(actions.complitTask())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

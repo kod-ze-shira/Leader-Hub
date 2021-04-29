@@ -14,11 +14,15 @@ import share from '../../../img/share.svg'
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
-    let complited = 0, complitedColor;
+    let complited = props.myProject.countReadyTasks
+    , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
 
+    useEffect(() => {
+
+    }, [props.indexOfWorkspace])
     function detailsProject() {
         set_getProjectById(false);
     }
@@ -120,11 +124,11 @@ function ViewProject(props) {
                     <CellDescription description='Team' />
                 </td> */}
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.updateDates.length ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : '12/12/2023'} />
+                    <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
                     <CellDescription description='Last Update' />
                 </td>
 
-                <td className='actionsProject widthCellInProject'>
+                <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
                     <img style={myStyleIcons}
                         className='iconsProject' onClick={(event) => openShareProject(event)} src={share} />
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
@@ -140,7 +144,7 @@ function ViewProject(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // project: state.project_reducer.project,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName,

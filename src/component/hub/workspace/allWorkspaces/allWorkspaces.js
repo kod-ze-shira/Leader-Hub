@@ -66,10 +66,10 @@ function AllWorkspaces(props) {
         setgrid(true);
     }
 
-    function openaddNewWorkspace() {
+    function openAddNewWorkspace(e) {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
-
+        e.stopPropagation()
     }
     $(window).click(function () {
         setShowWorkspace(false)
@@ -105,7 +105,7 @@ function AllWorkspaces(props) {
                     {/* add workspace button */}
                     {list ?
                         <div className="row WorkspaceList mt-3 " >
-                            <div className="col-10" onClick={openaddNewWorkspace}
+                            <div className="col-10" onClick={(e) => openAddNewWorkspace(e)}
                             >
                                 <div className="row "  >
                                     <div className="Workspace addWorkspace"  >
@@ -123,7 +123,7 @@ function AllWorkspaces(props) {
 
                         :
                         <div className="Workspacegrid mt-4 addWorkspace" >
-                            <div onClick={openaddNewWorkspace}>
+                            <div onClick={(e) => openAddNewWorkspace(e)}>
                                 <div className="logoWorkspace1 " >
                                     <div className="mt-1 logo-w"
                                         style={{ backgroundColor: "#778CA2" }}

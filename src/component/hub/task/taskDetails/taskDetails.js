@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
@@ -31,9 +32,18 @@ function TaskDetails(props) {
 
     const openPopUpStatus = (e) => {
         setOpenPopUp(!openPopUp)
+        e.stopPropagation();
 
     }
 
+    $(window).click(function () {
+        setOpenPopUp(false)
+    });
+ 
+   
+    function stopP(event) {
+        event.stopPropagation();
+    }
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
@@ -93,6 +103,7 @@ function TaskDetails(props) {
     const closePopUpOfViewStatus = () => {
         openPopUp(false)
     }
+
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File url={file.url} name={file.name} />
@@ -160,11 +171,14 @@ function TaskDetails(props) {
                             </> : null}
                         </button>
                         {openPopUp ?
-                            <ViewAllStatuses
-                                task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
-                                status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                openPopUp={openPopUp} />
+                            <div onclick={(e) =>stopP()}>
+                                <ViewAllStatuses
+                                    task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                                    status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                                    openPopUp={openPopUp} />
+                            </div>
                             : null}
+
                     </div>
                     {/* <div className="row mb-3"> */}
                     <div className="col-7">
@@ -192,7 +206,7 @@ function TaskDetails(props) {
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
                         <img src={require('../../../img/bin.png')}></img> Delete
- </button>
+                    </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
                 </div>
             </div>
@@ -203,7 +217,6 @@ function TaskDetails(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        // task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
