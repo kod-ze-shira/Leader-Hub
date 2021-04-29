@@ -47,14 +47,14 @@ export default class Gantt extends Component {
     componentDidUpdate() {
 
         if (this.props.tasks) {
-            debugger
+
             gantt.clearAll();
             gantt.config.xml_date = "%Y-%m-%d %H:%i";
             const { tasks } = this.props;
             gantt.init(this.ganttContainer);
             this.initGanttDataProcessor();
             gantt.parse(tasks);
-    
+
         }
     }
     componentDidMount() {

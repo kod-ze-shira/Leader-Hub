@@ -30,6 +30,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
     }
     return next(action);
 }
+
 export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
@@ -59,6 +60,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
 export const getAllTasksNotBelongsCardForUser = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_ALL_TASKS_NOT_BELONGS_CARD_FOR_USER') {
@@ -86,6 +88,7 @@ export const getAllTasksNotBelongsCardForUser = ({ dispatch, getState }) => next
     }
     return next(action);
 }
+
 export const getAllMilestonesTasks = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_MILESTONES_TASKS') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllmilestonesTasksForUser`
@@ -112,6 +115,7 @@ export const getAllMilestonesTasks = ({ dispatch, getState }) => next => action 
     }
     return next(action);
 }
+
 export const newTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
@@ -219,6 +223,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.result);
+
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -233,8 +238,8 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
 export const complitTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLIT_TASK') {
-        let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-        .tasks[getState().public_reducer.indexCurrentTask]._id
+        let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+            .tasks[getState().public_reducer.indexCurrentTask]._id
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/complitTask`
         $.ajax({
             url: urlData,
