@@ -21,7 +21,7 @@ const initialState = {
     indexCurrentProject: 0,
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
-    ArrDeleteFilesOfTask: []
+    arrDeleteFilesOfTask: []
 }
 
 const publicData = {
@@ -37,18 +37,18 @@ const publicData = {
     },
     setNewFilesInTask(state, action) {
         let files = action.payload
-        // for (let index = 0; index < files.length; index++) {
-        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-            .push({ 'name': files.file0.name, 'url': files.file0.url })
+        for (let index = 0; index < files['file' + index]; index++) {
+            state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
+                .push({ 'name': files['file' + index], 'url': files['file' + index].url })
 
-        // }
+        }
 
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled].files.push(files) 
 
     },
 
     setFileFromTask(state, action) {
-        debugger
+
         state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload })
     },
     setUserName(state, action) {
@@ -85,7 +85,7 @@ const publicData = {
     },
     setProjectInWorkspace(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject] = action.payload
-           
+
     },
     setProjects(state, action) {
         state.projects = action.payload;
@@ -282,20 +282,19 @@ const publicData = {
     // console.log(a);   
     // },
 
-    // deleteFilesInTask(state, action) {
-    //     debugger
-    //     action.payload.map((urlFile) =>
-    //         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-    //             .filter((file) => file.url != urlFile))
-    // },
-    removeFileInRedux(state, action) {
+    deleteFilesInArr(state, action) {
         debugger
+
+        state.arrDeleteFilesOfTask = []
+    },
+    removeFileInRedux(state, action) {
+
         if (action.payload.url != 'new') {
             let fileToDelete = state.arrFilesOfTask.find((file) => file.url == action.payload.url)
-            if (state.ArrDeleteFilesOfTask)
-                state.ArrDeleteFilesOfTask.push(fileToDelete)
+            if (state.arrDeleteFilesOfTask)
+                state.arrDeleteFilesOfTask.push(fileToDelete)
             else
-                state.ArrDeleteFilesOfTask = fileToDelete
+                state.arrDeleteFilesOfTask = fileToDelete
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
         }
         else {
