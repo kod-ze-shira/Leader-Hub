@@ -13,10 +13,6 @@ import $ from 'jquery'
 
 function ProjectsByWorkspace(props) {
 
-    // useEffect(() => {
-    //     console.log(props.projects)
-    // }, [props.workspace])
-
     let { idWorkspace } = useParams();
     const [showProject, setShowProject] = useState(false)
     const [valueSearch, setValueSearch] = useState(props.projectName)
@@ -46,10 +42,21 @@ function ProjectsByWorkspace(props) {
         e.stopPropagation()
     }
 
-    const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
-        props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
+    // const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
+    //     props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
+    //         return project.name.toUpperCase().includes(valueSearch.toUpperCase())
+    //             ? <ViewProject showToast={(obj) => showToast1(obj)}
+    //                 closeViewDetails={false}
+    //                 indexProject={index}
+    //                 myProject={project}
+    //                 editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
+    //             : null
+    //     }) : null
+
+    const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
+        props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
             let p = project.name ? project : project.project
-            return p.name.toUpperCase().includes(valueSearch.toUpperCase())
+            return project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     indexProject={index}
@@ -145,8 +152,8 @@ const mapStateToProps = (state) => {
         projectToDelete: state.project_reducer.project,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
-        indexOfWorkspace: state.public_reducer.indexOfWorkspace
-
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -101,7 +101,8 @@ function SelectProject(props) {
     return (
         <>
             <div className="react-select">
-                <Select
+                
+                    < Select
                     className="select-project"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedProject(e)}
@@ -112,6 +113,7 @@ function SelectProject(props) {
                     styles={colourStyles}
 
                 />
+
             </div>
         </>
     )

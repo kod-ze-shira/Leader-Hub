@@ -13,9 +13,6 @@ import { editTask } from '../../redux/middleware/taskCrud';
 export default class Gantt extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            editTask
-        }
 
         this.initZoom();
     }
@@ -47,7 +44,19 @@ export default class Gantt extends Component {
     initGanttDataProcessor() {
         // const onDataUpdated = this.props.onDataUpdated;
     }
+    componentDidUpdate() {
 
+        if (this.props.tasks) {
+            debugger
+            gantt.clearAll();
+            gantt.config.xml_date = "%Y-%m-%d %H:%i";
+            const { tasks } = this.props;
+            gantt.init(this.ganttContainer);
+            this.initGanttDataProcessor();
+            gantt.parse(tasks);
+    
+        }
+    }
     componentDidMount() {
 
         gantt.templates.task_text = function (start, end, task) {

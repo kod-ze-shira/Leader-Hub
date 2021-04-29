@@ -56,50 +56,54 @@ function SelectHeader(props) {
 
     return (
         <>
-            {props.workspaces.length > 0 ?
-                <div className="s-header mx-0  row align-items-center">
 
-                    <div className="col-md col-sm-2 pr-0">
-                        <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
-                    </div>
-                    <div className="col-md col-sm-2 pr-0">
-                        <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
-                    </div>
-                    <div className="col-md col-sm-2 pr-0">
-                        <SelectCards flag={changeFlag} />
-                    </div>
-                    <div className="col-md col-sm-2 pr-0">
-                        <SelectTask />
-                    </div>
+            <div className="s-header mx-0  row align-items-center">
+                {props.workspaces.length > 0 ?
+                    <>
+                        <div className="col-md col-sm-2 pr-0">
+                            <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
+                        </div>
+                        <div className="col-md col-sm-2 pr-0">
+                            <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
+                        </div>
+                        <div className="col-md col-sm-2 pr-0">
+                            <SelectCards flag={changeFlag} />
+                        </div>
+                        <div className="col-md col-sm-2 pr-0">
+                            <SelectTask />
+                        </div>
+                    </> : 
+                       <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" /><Tab label="Tabs" className="tab" /></Tabs>}
+                <div className={classes.root} id='tabsAndList'>
+                    {props.menue ?
+                        <Tabs
+                            className="tabs-in-header offset-md-4 w-sm-15"
+                            value={value}
+                            onChange={handleChange}
+                            variant="scrollable"
+                            scrollButtons="off"
+                            TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
+                            aria-label="scrollable prevent tabs example"
+                        >
+                            <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
+                            <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
+                            <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+                            <Tab label="" />
+                        </Tabs>
+                        :
+                        <Tabs
+                            className="tabs-in-header offset-md-4 w-sm-15 opacity">
+                            <Tab label="List" className="tab" />
+                            <Tab label="Calender" className="tab" />
+                            <Tab label="Gant" className="tab" />
+                            <Tab label="Tabs" className="tab" />
+                        </Tabs>
+                    }
+                </div>
 
-                    <div className={classes.root} id='tabsAndList'>
-                        {props.menue ?
-                            <Tabs
-                                className="tabs-in-header offset-md-4 w-sm-15"
-                                value={value}
-                                onChange={handleChange}
-                                variant="scrollable"
-                                scrollButtons="off"
-                                TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                                aria-label="scrollable prevent tabs example"
-                            >
-                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
-                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Gant" className='tabsInSelect'onClick={(e) => changePresent("gantt")} />
-                                <Tab label="" />
-                            </Tabs>
-                            :
-                            <Tabs
-                                className="tabs-in-header offset-md-4 w-sm-15 opacity">
-                                <Tab label="List" className="tab" />
-                                <Tab label="Calender" className="tab" />
-                                <Tab label="Gant" className="tab" />
-                                <Tab label="Tabs" className="tab" />
-                            </Tabs>
-                        }
-                    </div>
-                </div >
-                : null}
+
+            </div>
+
         </>
     )
 }

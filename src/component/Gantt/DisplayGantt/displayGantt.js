@@ -10,6 +10,7 @@ import workspaces from '../workspace.json'
 function DisplayGantt(props) {
 
     useEffect(() => {
+        
     }, [props.cards])
 
     const allWorkspace = { workspaces };
@@ -20,7 +21,9 @@ function DisplayGantt(props) {
     const mone = []
 
 
-    props.cards.map((card) => {
+    props.cards.map((card, index) => {
+        if (index == 0 & theCards.length > 0)
+            theCards.clear()
         {
             theCards.push(card);
         }
@@ -38,8 +41,6 @@ function DisplayGantt(props) {
         return Difference_In_Days
     }
     theCards.map((card, index) => {
-        // if (index == 0 & theTasks.length > 0)
-        //     theTasks.clear()
         card.tasks.map((task, index1) => {
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
@@ -48,7 +49,6 @@ function DisplayGantt(props) {
             if (a)
                 cardName = null
             else cardName = card.name
-
             theTasks.push({
                 cardName: cardName,
                 priority: "high",
