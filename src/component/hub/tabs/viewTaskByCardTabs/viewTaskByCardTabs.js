@@ -30,8 +30,8 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        if (props.cards[props.indexCurrentCard])
-            props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
+        // if (props.cards[props.indexCurrentCard])
+        props.getAllStatusesTaskForWorkspace()
 
     }, [props.cards])
 
@@ -160,7 +160,7 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
     }
 }

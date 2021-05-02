@@ -6,10 +6,10 @@ export default function ShareOneMember(props) {
         <>
             <div className="row pt-3 pl-2">
                 <div className="col-1 pt-3">
-                    <div class="round">
+                    {/* <div class="round">
                         <input type="checkbox" id="checkbox" />
                         <label for="checkbox"></label>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="col-8">
                     <div className="row">

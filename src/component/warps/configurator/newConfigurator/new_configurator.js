@@ -44,6 +44,11 @@ function NewConfigorator(props) {
         })
 
     }
+    
+    const  closeConfigurator= (e) => {
+        setCloseOrOpenConfigurator(!closeOrOpenConfigurator) 
+        props.openOrClose(closeOrOpenConfigurator)
+    }
     function goToAllProjects(e) {
         changeBackground(e)
         props.history.push("/" + props.user + "/allProjects")
@@ -63,7 +68,8 @@ function NewConfigorator(props) {
     return (
         <>
             {/* <button class='closeConfigurator' onClick={() => setCloseOrOpenConfigurator(!closeOrOpenConfigurator)}>X</button> */}
-            <FontAwesomeIcon icon={["fas", "bars"]} class='closeConfigurator' onClick={() => setCloseOrOpenConfigurator(!closeOrOpenConfigurator)} />
+            <FontAwesomeIcon icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
+           }/>
 
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
@@ -123,3 +129,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewConfigorator))
+

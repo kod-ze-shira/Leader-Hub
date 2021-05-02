@@ -22,11 +22,14 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
+        props.getAllStatusesTaskForWorkspace()
 
 
     }, [
         props.cards])
+    useEffect(() => {
+        setDoneStatus(props.task.complete)
+    }, [props.task.complete])
     const [status, setStatus] = useState()
 
     const [viewDetails, setViewDetails] = useState(false)
@@ -48,12 +51,6 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
-        if (input.target.name == "complete") {
-            debugger
-            setDoneStatus(true)
-            value = doneStatus
-            console.log(value)
-        }
         let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
         if (input.target.name == "complete")
@@ -224,12 +221,12 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        completeTask: () => dispatch(actions.complitTask())
+        completeTask: (task) => dispatch(actions.complitTask(task))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

@@ -15,13 +15,13 @@ function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     let complited = props.myProject.countReadyTasks
-    , complitedColor;
+        , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
 
     useEffect(() => {
-
+        console.log(complited);
     }, [props.indexOfWorkspace])
     function detailsProject() {
         set_getProjectById(false);
@@ -106,7 +106,6 @@ function ViewProject(props) {
                     <CellDescription description='Task' />
                 </td>
                 <td>
-
                     <div className='divProgress ' >
                         <div class="progressProject" >
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}

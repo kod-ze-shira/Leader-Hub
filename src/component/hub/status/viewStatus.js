@@ -8,16 +8,13 @@ import $ from 'jquery'
 
 
 function ViewStatus(props) {
-
     useEffect(() => {
         console.log(props.status);
     }, [])
 
     const [openPopUpToEdit, setOpenPopUpToEdit] = useState(false)
 
-
     const openEditTask = (event) => {
-        debugger
         setOpenPopUpToEdit(true)
         props.saveIndexOfStatusInRedux(props.index)
         props.changeStatus(props.index)
@@ -26,12 +23,22 @@ function ViewStatus(props) {
         event.stopPropagation()
 
     }
+    const saveStatus1 = (id) => {
+        debugger
+        props.saveStatus(props.status)
+        if (props.status.statusName == props.statuses[2].statusName) {
+            let editTaskInRedux = { "nameFiled": "complete", "value": true }
+            props.setTaskByFiledFromTasks(editTaskInRedux)
+            props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+        }
+    }
+
     return (
 
         <>
             <div className="container display-task ">
                 <div className="row ml-2">
-                    <div onClick={(id) => props.saveStatus(props.status)} className="menu-status col-8 " style={{ backgroundColor: props.status.color }}>
+                    <div onClick={(id) => saveStatus1(id)} className="menu-status col-8 " style={{ backgroundColor: props.status.color }}>
                         <p >{props.status.statusName}</p>
                     </div>
                     <img
@@ -50,12 +57,18 @@ function ViewStatus(props) {
 const mapStateToProps = (state) => {
 
     return {
-        // statuses: state.status_reducer.statuses
+        cards: state.public_reducer.cards,
+        statuses: state.status_reducer.statuses,
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index))
+        saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index)),
+        completeTask: (task) => dispatch(actions.complitTask(task)),
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
+
     }
 
 

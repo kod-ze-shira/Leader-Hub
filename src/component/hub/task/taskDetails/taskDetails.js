@@ -17,6 +17,8 @@ function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     const [flugFiles, setFlugFiles] = useState(false)
+    // const [completeTask, setCompleteTask] = useState(props.task.complete)
+
 
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
@@ -30,22 +32,25 @@ function TaskDetails(props) {
     const [fileComponentArr, setFileComponentArr] = useState([])
 
 
-    const openPopUpStatus = (e) => {
+    const openPopUpStatus = (event) => {
         setOpenPopUp(!openPopUp)
-        e.stopPropagation();
+        // event.stopPropagation();
 
     }
-
     $(window).click(function () {
-        setOpenPopUp(false)
+        debugger
+        setOpenPopUp(!openPopUp)
     });
- 
-   
+    // $(window).click(function () {
+    //     debugger
+    //     setOpenPopUp(false)
+    // });
+
+
     function stopP(event) {
         event.stopPropagation();
     }
     const saveNewTask = () => {
-
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
             props.EditTask(props.task)
@@ -64,17 +69,26 @@ function TaskDetails(props) {
         props.showToast(true)
     }
 
+    let dueDate = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate;
+    let startDate = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate;
+    let dueDate_ = dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
+    let startDate_ = startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
+
+    let [dueDateTask, setDueDateTask] = useState(dueDate_)
+    let [startDateTask, setStartDateTask] = useState(startDate_)
 
 
     const changeFiledInTask = (input) => {
         let editTaskInRedux
         let value = input.target.value
         if (input.target.name == "startDate") {
-            value = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
+            value = startDateTask.split("-")[2] + '/' + startDateTask.split("-")[1] + '/' + startDateTask.split("-")[0];
+            setStartDateTask(input.target.value)
         }
         else
             if (input.target.name == "dueDate") {
-                value = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
+                value = dueDateTask.split("-")[2] + '/' + dueDateTask.split("-")[1] + '/' + dueDateTask.split("-")[0];
+                setDueDateTask(input.target.value)
             }
             else
                 if (input.target.name == "milestones") {
@@ -100,9 +114,7 @@ function TaskDetails(props) {
     const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
-    const closePopUpOfViewStatus = () => {
-        openPopUp(false)
-    }
+   
 
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
@@ -110,10 +122,10 @@ function TaskDetails(props) {
     }) : null
     return (
         <>
-            <div className="details task-details mr-5 ml-4">
+            <div className="details task-details mr-5 ml-4" ondragstart="return false;" ondrop="return false;">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between mx-1" >
-                    <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                    <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label className="ml-5">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
@@ -131,47 +143,47 @@ function TaskDetails(props) {
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description"
-                        id="descriptionProject" rows="1"
-                        // placeholder="this is a very important task.. don’t forget!"
+                        id="descriptionProject" rows="2"
                         onChange={(e) => changeFiledInTask(e)}
-                        value={props.task.description}>
+                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
                     </textarea>
                 </div>
                 <div className="row justify-content-between">
-                    <div class="form-group col-5">
+                    <div class="form-group col-6">
                         <label for="startDate">Start Date</label>
                         <input
                             className="form-control"
                             name="startDate"
                             type="date"
                             id="startDate"
-                            value={props.task.startDate}
+                            value={startDateTask}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
-                    <div class="form-group col-5">
-                        <label for="dueDateProject">Due Date</label>
+                    <div class="form-group col-6">
+                        <label for="dueDate">Due Date</label>
                         <input
                             className="form-control "
                             name="dueDate"
                             type="date"
                             id="dueDate"
-                            value={props.task.dueDate}
+                            value={dueDateTask}
                             onChange={(e) => changeFiledInTask(e)}
                         />
                     </div>
 
                 </div>
-                <div className="row ">
-                    <div class="dropdown col-5">
+                <div className="row justify-content-between">
+                    <div class="dropdown col-6">
                         <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {props.statuses.length > 0 ? <>
+
                                 <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                <span className="">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
+                                <span >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
                             </> : null}
                         </button>
                         {openPopUp ?
-                            <div onclick={(e) =>stopP()}>
+                            <div onClick={(e) => stopP(e)}>
                                 <ViewAllStatuses
                                     task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
                                     status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
@@ -181,17 +193,17 @@ function TaskDetails(props) {
 
                     </div>
                     {/* <div className="row mb-3"> */}
-                    <div className="col-7">
-                        <span>Mark as milestone</span>
-                        <label class="switch ml-2 ">
+                    <div className="col-6 ">
+                        <span className="milestones-span mt-2">Mark as milestone</span>
+                        <label className="switch ml-2 mt-1">
                             <input type="checkbox"
                                 name="milestones"
                                 checked={milstone}
                                 value={props.task.milestones}
                                 onChange={(e) => changeFiledInTask(e)}
                             />
-                            <span class="slider round"
-                            ></span>
+                            <span className="slider round" ></span>
+                           
 
                         </label>
                     </div>
