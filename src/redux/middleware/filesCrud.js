@@ -5,7 +5,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     // let files = getState().files_reducer.files
     if (action.type === 'UPLOAD_FILES') {
 
-        let files = action.payload
+        let files = action.payload.files
         if (action.type === 'UPLOAD_FILES') {
             var formData = new FormData()
             // var myFiles = Object.values(files)
@@ -37,15 +37,10 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                                 headers: { "authorization": jwtFromCookie },
                                 data: myData,
                                 success: (data) => {
-                                    // getState().public_reducer.tokenFromCookies
-                                    // dispatch(actions.setTaskNameInTaskReducer(name)
                                     let cards = getState().public_reducer.cards;
                                     let indexCurrentCard = getState().public_reducer.indexCurrentCard
                                     let indexCurrentTask = getState().public_reducer.indexCurrentTask
                                     dispatch(actions.editTask(cards[indexCurrentCard].tasks[indexCurrentTask]))
-
-                                    console.log("upload success", data)
-
 
                                 }
                             })
@@ -131,3 +126,38 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
+// function App() {
+//     async function handleImageUpload(event) {
+//         const imageFile = event.target.files[0];
+
+//         const options = {
+//             maxSizeMB: 1,
+//             maxWidthOrHeight: 1920,
+//             useWebWorker: true,
+//         };
+//         try {
+
+//             const compressedFile = await imageCompression(imageFile, options);
+
+//             const formData = new FormData();
+//             formData.append("File", compressedFile);
+
+//             await fetch("http://localhost:7000/upload", {
+//                 method: "POST",
+//                 body: formData,
+//                 headers: {
+//                     name: compressedFile.name,
+//                 },
+//             })
+//                 .then((result) => {
+//                     console.log("Success:", result);
+//                 })
+//                 .catch((error) => {
+//                     console.error("Error:", error);
+//                 });
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }  

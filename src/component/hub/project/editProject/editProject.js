@@ -12,7 +12,6 @@ function EditProject(props) {
         props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
     }, [props.workspaces])
 
-    debugger
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -61,7 +60,11 @@ function EditProject(props) {
         }
     }
 
-
+    const deletProject = () => {
+        debugger
+        $(`#${props.workspaces[props.indexWorkspace].projects[props.indexProject]._id + "disappear"}`).css("display", "none")
+        props.showToast({ 'type': 'Project', 'object': props.workspaces[props.indexWorkspace].projects[props.indexProject] })
+    }
 
     return (
         <>
@@ -114,7 +117,12 @@ function EditProject(props) {
                     </div>
                 </div>
                 <div className="row justify-content-between ">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " >
+                    <button
+                        onClick={deletProject}
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Garbage"
+                        className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>
                     <button button onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>

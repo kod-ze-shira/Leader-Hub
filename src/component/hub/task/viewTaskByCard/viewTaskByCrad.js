@@ -190,8 +190,10 @@ function ViewTaskByCrad(props) {
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
-                                        <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                                            from={detailsOrEditTask} task={props.task} open={true}> </ViewDetails>
+                                        <ViewDetails showToast={deleteTask}
+                                            closeViewDetails={() => setViewDetails(false)}
+                                            from={detailsOrEditTask} task={props.task} open={true}
+                                        > </ViewDetails>
                                     </div>
                                     : null}
                             </div>

@@ -37,6 +37,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [open, setOpen] = useState(true)
         const [oldObject, setOldObject] = useState()
         const { from } = props//to know from which component its come
+
         function showToast(val) {
             props.showToast(val)
         }
@@ -50,14 +51,19 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         closeViewDetails={props.closeViewDetails}
                     />
                 case 'editWorkspace'://on click edit button of workspace
-                    return <EditWorkspace closeViewDetails={props.closeViewDetails} workspace={props.workspace} objectBeforeChanges={(e) => setOldObject(e)} />
+                    return <EditWorkspace closeViewDetails={props.closeViewDetails}
+                        showToast={(e)=>showToast(e)}
+                        workspace={props.workspace}
+                        objectBeforeChanges={(e) => setOldObject(e)}
+                    />
+
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
-                        showToast={showToast} objectBeforeChanges={(e) => setOldObject(e)} />
+                        showToast={(e)=>showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'shareProject':
                     return <ShareProject />
                 case 'addTask':

@@ -2,6 +2,10 @@ import React from 'react'
 import './shareOneMember.css'
 
 export default function ShareOneMember(props) {
+    const colors = ['#FD80E5', '#6236FC', '#40D9ED',
+        '#6DD400', '#F88C20', '#F0D923', '#F26B9C', '#8580FD'
+
+    ]
     return (
         <>
             <div className="row pt-3 pl-2">
@@ -14,10 +18,10 @@ export default function ShareOneMember(props) {
                 <div className="col-8">
                     <div className="row">
                         <div className="col-3">
-                            <img className="img_share_one_member"
-                                src={props.member.shareDetail.thumbnail ? props.member.shareDetail.thumbnail : null}></img>
-
-
+                            {props.member.shareDetail.thumbnail? <img className="img_share_one_member"
+                                src={props.member.shareDetail.thumbnail}></img>
+                                :<div style={{backgroundColor:colors[Math.floor(Math.random() * colors.length)]}} className="img_share_one_member div_img_share_one_member">{props.member.shareDetail.name[0]}</div>}
+                         
                         </div>
                         <div className="col-9">
                             <div className="row name_share_one_member">

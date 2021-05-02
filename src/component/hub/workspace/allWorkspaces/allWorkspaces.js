@@ -77,6 +77,7 @@ function AllWorkspaces(props) {
     function stopP(event) {
         event.stopPropagation();
     }
+ 
     return (
 
         <>
@@ -144,16 +145,12 @@ function AllWorkspaces(props) {
             </div>
             {showAddWorkspace ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
-                    <ViewDetails closeViewDetails={() => setShowWorkspace(false)}
+                    <ViewDetails
+                        showToast={(obj)=> props.showToast(obj)}
+                        closeViewDetails={() => setShowWorkspace(false)}
                         from={addOrEditWorkspace} workspace={workspaceToEdit} /></div> : null
             }
-            {/* {showToastDelete ?
-                        <ToastDelete ref={refToDeleteToast}
-                            toOnClose={deleteWorkspace}
-                            toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                            name={props.workspaceDeleted.name} 
-                            /> 
-                             : null}  */}
+   
         </>
 
     )
