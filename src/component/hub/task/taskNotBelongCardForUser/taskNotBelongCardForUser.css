@@ -1,0 +1,64 @@
+.searchTask{
+    border:1px solid #3598F4;
+    border-radius: 8px !important;    
+     margin: 3%; 
+     padding-right: 32px;
+}
+
+.divAllTask{
+    background: #3598f41c 0% 0% no-repeat padding-box;
+    border-radius: 3px;
+    height: 36px;
+    margin: 3%;
+    margin-top: 1%;
+}
+
+.divText{
+    font-weight: bolder;
+    text-align: left;
+    font: normal normal medium 20px/26px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    text-transform: capitalize;
+}
+
+.workspaceForTask{
+    color: var(--unnamed-color-87c5fe);
+    text-align: left;
+    font: normal normal bold 14px/19px Roboto;
+    letter-spacing: 0px;
+    color: #87C5FE;
+    text-transform: capitalize;
+}
+
+.propertiesAllTask{ 
+text-align: left;
+font: normal normal bold 14px/19px Roboto;
+letter-spacing: 0px;
+color: #87C5FE;
+text-transform: capitalize;
+}
+
+.headerTableTask{
+    background: #3598f41c 0% 0% no-repeat padding-box !important;
+}
+
+
+.labelAllTask{
+    font-weight: bolder;
+    text-align: left;
+    font: normal normal medium 20px/26px Roboto;
+    letter-spacing: 0px;
+    color: black !important;
+    text-transform: capitalize;
+}
+
+
+.cleanSearchTask{
+    position: absolute;
+    right: 2.3rem;
+    top: 2.0rem;
+    z-index: 99;
+    width: 11px;
+    cursor: pointer;
+}

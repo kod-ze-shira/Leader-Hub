@@ -140,7 +140,7 @@ function Hub(props) {
                             {/* <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
                             </Route> */}
-                            <ProtectedRoute path={"/:userName/myTasks"}>
+                            <ProtectedRoute path={"/:userName/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
