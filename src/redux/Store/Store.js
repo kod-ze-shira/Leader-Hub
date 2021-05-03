@@ -16,7 +16,7 @@ import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, get
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
     , moveTaskBetweenCards,
-    complitTask
+    completeTask
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
@@ -68,7 +68,7 @@ const store = createStore(
                 editStatus,
                 removeStatus,
                 moveTaskBetweenCards,
-                complitTask
+                completeTask
             ))
 )
 store.dispatch(actions.extractJwt());

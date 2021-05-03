@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ViewMilstone from './viewMilstone'
+import './Milstones.css'
 
 function Milestones(props) {
 
@@ -13,17 +14,21 @@ function Milestones(props) {
 
     }, [])
     const renderTasks = props.milestones.length ? props.milestones.map((milestone) => {
-        // return <h1>{milestone.name}</h1>
         return <ViewMilstone milestone={milestone} />
     }) : null
+
     return (
         <div className="body-workspace mt-3">
+            <div className=" row justify-content-start mill mx-4 mt-4">
+                <p className="milstoneTitle pl-3">My Milestones</p>
+            </div >
+
             <div className="mt-5">
                 {props.milestones.length ?
                     renderTasks
-                    : null}
+                    : <div className="ml-5"><h1 className="ml-5">No Milestones</h1></div>}
             </div>
-        </div>
+        </div >
     );
 
 }

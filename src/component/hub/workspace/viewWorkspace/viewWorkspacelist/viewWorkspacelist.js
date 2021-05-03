@@ -8,6 +8,8 @@ import bin from '../../../../img/bin.png'
 import duplicate from '../../../../img/duplicate-outline.png'
 import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../../Data/title.json'
 
 
 function ViewWorkspaceList(props) {
@@ -89,17 +91,28 @@ function ViewWorkspaceList(props) {
                     <div className="col-2">
                         <div className="row  mt-4 icons-in-list-w" >
                             <div
-                                className="col-1  edit iconsAction" onClick={editWorkspace}>
+                             data-tip data-for="edit"
+                                className="col-1  edit iconsAction"  onClick={editWorkspace}>
                                 <img src={pencil}></img>
+                                <ReactTooltip data-tip id="edit" place="bottom" effect="solid">
+                                    {title.title_edit}
+                                </ReactTooltip>
                             </div>
                             <div className="ml-1 stripe">|</div>
                             <div
+                                data-tip data-for="duplicate"
                                 className="col-1 ml-1 delete iconsAction" onClick={duplicateWorkspace} >
                                 <img src={duplicate}></img>
+                                <ReactTooltip data-tip id="duplicate" place="bottom" effect="solid">
+                                    {title.title_duplicate}
+                                </ReactTooltip>
                             </div>
                             <div className="ml-1 stripe">|</div>
                             <div
-                                className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
+                                className="col-1 ml-1 delete iconsAction" data-tip data-for="delete" onClick={delete_workspace} >
+                                <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
+                                    {title.title_delete}
+                                </ReactTooltip>
                                 <img src={bin}></img>
                             </div>
                         </div>

@@ -6,6 +6,8 @@ import './projectPlatform.css'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ToastDelete from '../toastDelete/toastDelete1';
 import $ from 'jquery'
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../src/Data/title.json'
 
 function ProjectPlatform(props) {
     const [showInput, setShowInput] = useState(false)
@@ -88,7 +90,12 @@ function ProjectPlatform(props) {
                                 }
                             }}></input>
                         : null}
-                    <a className="ml-4 mx-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <a className="ml-4 mx-5 add-card-btn" data-tip data-for="add_c"
+                        onClick={showInputToAddCard}>Add Card+</a>
+                    <ReactTooltip data-tip id="add_c" place="top" effect="solid">
+                        {title.title_add_card}
+                    </ReactTooltip>
+                                            
                 </div>
                 {showToastDelete ?
                     <ToastDelete

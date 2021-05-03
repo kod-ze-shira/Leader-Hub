@@ -1,0 +1,24 @@
+.milstoneTitle{
+    color: black !important;
+font-weight: bold;}
+.milIcon{
+    width: 15px;
+    height: 15px;
+    background: var(--unnamed-color-3598f4) 0% 0% no-repeat padding-box;
+    border: 1.5px solid var(--unnamed-color-3598f4);
+    background: #3598F4 0% 0% no-repeat padding-box;
+    border: 2px solid #3598F4;
+    border-radius: 5px;
+    transform: matrix(0.69, 0.72, -0.72, 0.69, 0, 0);
+}
+
+.mill{
+    color: var(--unnamed-color-000000);
+    text-align: left;
+   font-size: medium;
+    color: #000000;
+    background-color:#f9ffff;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+
+}

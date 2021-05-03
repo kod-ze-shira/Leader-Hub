@@ -1,9 +1,9 @@
 .left_nav{
   
-  height: 100vh;
+  height: 95vh;
   background: #0A102E 0% 0% no-repeat padding-box;
   border: 1px solid #707070;
-  animation: openConfigurator 1s ;
+  /* animation: openConfigurator 1s ; */
   /* width: 0% ; */
   /* animation-direction: alternate-reverse; */
 }
@@ -16,11 +16,11 @@
   animation: closeConfigurator 2s ;
 
 }
-@keyframes closeConfigurator {
+/* @keyframes closeConfigurator {
   0%   {width: 100%; }
  99%   {width: 0%; }
  100%{display: none !important}
-}
+} */
 
 .left_nav li{
   color: #FFFFFF;
@@ -72,16 +72,17 @@ border-radius: 3px;
      height: 24px;
      margin-top: -34px;
      z-index: 99999;
+     cursor: pointer;
  }
 
- @-webkit-keyframes slide-in {
+ /* @-webkit-keyframes slide-in {
   0% {
     transform: translateX(100%);
   }
   100% {
     transform: translateX(0%);
   }
-}
+} */
    .list_config  li:focus{
     background-color:white;
   }

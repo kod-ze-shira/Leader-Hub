@@ -6,33 +6,66 @@ import './shareProject.css'
 
 export default function ShareProject() {
     const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
-    const [shareDetails, setShareDetails] = useState([])
-    const [email, setEmail] = useState('')
-    const [membersTeamEmails,setMembersTeamEmails]=useState([])
-
+    const [shareDetails, setShareDetails] = useState([])//all contacts details
+    const [shareDetail, setShareDetail] = useState('')//contact email
+    const [membersTeamEmails, setMembersTeamEmails] = useState([])//team members
+    const [teams, setTeams] = useState([])
+    const [teamId, setTeamId] = useState(0)
     //onselect contact his email be in  state:email
     const setStateMailToContactMail = (emailMember) => {
         setDisabledSelectPermission('true')
         console.log(disabledSelectPermission);
-        setEmail(emailMember.value)
+        setShareDetail(emailMember.value)
     }
     //onselect perrmision to contact his email and permission will add to members list
     const addContactToList = (event) => {
-        let shareDetail = { 'shareDetail': email, 'permission': event.target.options[event.target.selectedIndex].label }
-        setShareDetails([...shareDetails, shareDetail])
+        let shareDetailToAdd = { 'shareDetail': shareDetail, 'permission': event.target.options[event.target.selectedIndex].label }
+        setShareDetails([...shareDetails, shareDetailToAdd])
+        event.target.selectedIndex = 0
     }
+    //on select team name
+    const addTeamMemberEmailToMembersEmailList = (team) => {
+        setTeamId(team.value._id)
+        let membersTeam = team.value.members
+        membersTeam.forEach(element => {
+            // membersTeamEmails.push({'shareDetail':element.contactMember})
+            membersTeamEmails.push(element.contactMember)
+            // setMembersTeamEmails([...membersTeamEmails, element.contactMember])
+        });
 
-    const addTeamMemberEmailToMembersEmailList=(member)=>{
-        // let memberTeam = { 'email': member.email, 'team': member.team }
-        // setMembersTeamEmails([...membersTeamEmails, memberTeam])
+    }
+    //on select perrmission to team
+    const addMemberTeamToList = (event) => {
+        let shareDetailsTemp = []
+        membersTeamEmails.forEach(element => {
+            let shareDetailToAdd = { 'shareDetail': element, 'permission': event.target.options[event.target.selectedIndex].label }
+            shareDetailsTemp.push(shareDetailToAdd)
+            setShareDetails([...shareDetailsTemp])
+        })
+        //if render team not in shareDetails
+        // let teamToShare = { 'teamId': teamId, 'members': membersTeamEmails }
+        // setTeams([...teams, teamToShare])
+        setMembersTeamEmails([])
+
+        event.target.selectedIndex = 0
     }
     const renderShareDetails = () => {
-       return   shareDetails.map(detail => {
+        return shareDetails.map(detail => {
             console.log(detail);
-            return <ShareOneMember  member={detail}/>
-               
+            return <ShareOneMember member={detail} />
+
         })
     }
+    //if render team withot shareDetails
+    // const renderShareDetailsOfTeam = () => {
+    //   return   teams.map(team => {
+    //         team.members.map(member=>{
+    //         return <ShareOneMember member={member} />
+    //         })
+
+    //     })
+    // }
+    
     return (
         <>
             <div className="details mr-5 ml-4">
@@ -61,10 +94,10 @@ export default function ShareProject() {
                 </div>
                 <div className="row">
                     <div className="col-md-9">
-                        <DynamicSelect options={'teams'} addMemberEmailToMembersEmailList={addTeamMemberEmailToMembersEmailList}/>
+                        <DynamicSelect options={'teams'} addMemberEmailToMembersEmailList={addTeamMemberEmailToMembersEmailList} />
                     </div>
                     <div className="col-3 pl-0">
-                        <select class="form-control" >
+                        <select class="form-control" onChange={(e) => addMemberTeamToList(e)}>
                             <option disabled selected>Select...</option>
                             <option value="1">viewer</option>
                             <option value="2">editor</option>
@@ -81,8 +114,12 @@ export default function ShareProject() {
                     <div className="col">
                         <div className="div_share_with">
                             {renderShareDetails()}
+                            {/* {renderShareDetailsOfTeam()} */}
                         </div>
                     </div>
+                </div>
+                <div className="row">
+                    <button onClick={() => console.log(shareDetails)}>share</button>
                 </div>
             </div>
 
