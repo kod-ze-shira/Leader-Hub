@@ -14,6 +14,8 @@ import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'
 import ViewAllStatuses from '../../status/viewAllStatuses';
 import file from '../../uploadFile/file/file';
+import title from '../../../../Data/title.json'
+
 function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
@@ -244,7 +246,7 @@ function TaskDetails(props) {
 
                 <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task mt-4">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask(e)} >
+                    <button data-toggle="tooltip" data-placement="top" title={title.title_delete} className="delete-btn col-4 " onClick={(e) => deleteTask(e)} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                     </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>

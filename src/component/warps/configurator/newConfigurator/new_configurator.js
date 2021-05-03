@@ -6,7 +6,8 @@ import $ from 'jquery'
 // import history from '../../../history'
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../Data/title.json'
 
 function NewConfigorator(props) {
     const [closeOrOpenConfigurator, setCloseOrOpenConfigurator] = useState(true)
@@ -44,9 +45,9 @@ function NewConfigorator(props) {
         })
 
     }
-    
-    const  closeConfigurator= (e) => {
-        setCloseOrOpenConfigurator(!closeOrOpenConfigurator) 
+
+    const closeConfigurator = (e) => {
+        setCloseOrOpenConfigurator(!closeOrOpenConfigurator)
         props.openOrClose(closeOrOpenConfigurator)
     }
     function goToAllProjects(e) {
@@ -67,9 +68,14 @@ function NewConfigorator(props) {
     // }
     return (
         <>
-            <FontAwesomeIcon title="Close Menu" icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
-           }/>
-
+            <div>
+                <FontAwesomeIcon data-tip data-for="close_m"
+                    icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
+                    } />
+                <ReactTooltip data-tip id="close_m" place="bottom" effect="solid">
+                    {title.title_close_menu}
+                </ReactTooltip>
+            </div>
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
 

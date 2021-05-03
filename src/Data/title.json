@@ -1,0 +1,21 @@
+{
+    "title_share": "Share with members",
+    "title_delete": "Delete",
+    "title_edit": "Edit",
+    "title_duplicate": "Duplicate",
+    "title_add_task": "Add task",
+    "title_add _card": "Add card",
+    "title_add_project": "Add project",
+    "title_add_workspace": "Add workspace",
+    "title_view_list": "View list",
+    "title_view_grid": "View grid",
+    "title_more_actions": "More actions",
+    "title_exit": "Exit",
+    "title_close_menu": "Close menu",
+    "title_save": "Save",
+    "title_production_date": "Production date",
+    "title_number_of_cards":"Number of cards",
+    "title_percentage":"Percentage of completed tasks",
+    "title_task_complete":"Task complete",
+    "title_count_task":"Count tasks"
+}

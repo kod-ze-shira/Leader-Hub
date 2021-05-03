@@ -37,6 +37,8 @@ import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
+    const [showToastComplete, setShowToastComplete] = useState(false)
+
     const [objectToDelete, setObjectToDelete] = useState()
     const [viewDetails, setViewDetails] = useState(false)
     const [formViewDitails, setFormViewDitails] = useState()
@@ -98,10 +100,10 @@ function Hub(props) {
 
                 <div className="row back-screen">
                     {/* {open ? */}
-                        <div className="col-2 px-0">
-                            <Configurator openOrClose={(e) => setOpen(!open)} />
-                        </div>
-                        {/* // : null} */}
+                    <div className="col-2 px-0">
+                        <Configurator openOrClose={(e) => setOpen(!open)} />
+                    </div>
+                    {/* // : null} */}
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         {/* {viewDetails ?
                             <div className="closeDet" onClick={(e) => stopP(e)}>
@@ -177,6 +179,13 @@ function Hub(props) {
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
+                        />
+                        : null}
+                    {showToastComplete ?
+                        <Toast
+                        // toOnClose={deleteObject}
+                        // toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
+                        // name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
 

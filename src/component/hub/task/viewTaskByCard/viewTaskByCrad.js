@@ -13,7 +13,7 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
-
+import Toast from '../../toast/toast'
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -31,7 +31,7 @@ function ViewTaskByCrad(props) {
         setDoneStatus(props.task.complete)
     }, [props.task.complete])
     const [status, setStatus] = useState()
-
+    const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
@@ -122,6 +122,7 @@ function ViewTaskByCrad(props) {
         }
         props.setTaskComplete(completeTask)
         props.completeTask(task)
+        setViewCompleteTask(true)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -150,7 +151,7 @@ function ViewTaskByCrad(props) {
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
                                     <label
-                                    title="Complete Task"
+                                        title="Complete Task"
                                         className="check-task py-2 ">
                                         <input type="checkbox"
                                             name="complete"
@@ -202,7 +203,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
-
+            {viewCompleteTask ? <Toast></Toast> : null}
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
@@ -229,7 +230,7 @@ const mapDispatchToProps = (dispatch) => {
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        completeTask: (task) => dispatch(actions.complitTask(task))
+        completeTask: (task) => dispatch(actions.completeTask(task))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

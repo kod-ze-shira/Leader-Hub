@@ -234,15 +234,14 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
-// /:userName/:taskId/complitTask
 
-export const complitTask = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'COMPLIT_TASK') {
+export const completeTask = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'COMPLETE_TASK') {
         debugger
         let taskId = action.payload._id
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/complitTask`
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/completeTask`
         $.ajax({
             url: urlData,
             method: 'POST',

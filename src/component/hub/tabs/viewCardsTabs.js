@@ -10,6 +10,8 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
 import $ from "jquery";
+import ReactTooltip from 'react-tooltip';
+import title from '../../../Data/title.json'
 
 function ViewCardsTabs(props) {
 
@@ -127,9 +129,13 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                            <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
+                                            >
                                                 . . .
                                             </Button>
+                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                                {title.title_more_actions}
+                                            </ReactTooltip>
                                             <Menu
                                                 id="simple-menu"
                                                 anchorEl={anchorEl}
@@ -180,7 +186,11 @@ function ViewCardsTabs(props) {
                                                 </div>
                                             )}
                                         </Droppable>
-                                        <a title="Add Task" className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
+                                        <a data-tip data-for="add_t"
+                                            className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
+                                        {/* <ReactTooltip data-tip id="add_t" place="bootom" effect="solid">
+                                            {title.title_add_task}
+                                        </ReactTooltip> */}
                                     </div>
                                 </div>
                             </div>

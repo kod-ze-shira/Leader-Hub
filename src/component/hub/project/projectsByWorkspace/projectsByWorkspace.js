@@ -9,6 +9,9 @@ import { useParams } from 'react-router-dom';
 import '../../body/body.css'
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery'
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../Data/title.json'
+
 
 
 function ProjectsByWorkspace(props) {
@@ -107,16 +110,21 @@ function ProjectsByWorkspace(props) {
 
                         <div id=''>
                             <span id='searchProject' >
-                                <input type='text' id='inputSearchProjects' title="Search Project" className='inputSearchProjects'
+                                <input type='text' id='inputSearchProjects' className='inputSearchProjects'
                                     onChange={() => searchProject()}
                                     placeholder='Search project...'
                                 />
                             </span>
 
 
-                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject' title="New Project"
+                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
+                                data-tip data-for="add_p"
                                 onClick={(e) => openViewDitailsAddProject(e)}
                             >+ New Project</button> : null}
+                            <ReactTooltip data-tip id="add_p" place="top" effect="solid">
+                                {title.title_add_project}
+                            </ReactTooltip>
+                                            
                         </div>
                     </div>
 
