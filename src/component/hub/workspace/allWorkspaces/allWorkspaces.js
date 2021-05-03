@@ -149,7 +149,7 @@ function AllWorkspaces(props) {
                         :
                         <div className="Workspacegrid mt-4 addWorkspace" >
                             <div onClick={(e) => openAddNewWorkspace(e)}>
-                                <div className="logoWorkspace1 pt-2 " >
+                                <div className="logoWorkspace1 pt-2" >
                                     <div className="mt-1 logo-w"
                                         style={{ backgroundColor: "#778CA2" }}
                                         data-tip data-for="add_w"
