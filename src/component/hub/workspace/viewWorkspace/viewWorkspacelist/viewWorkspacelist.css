@@ -1,17 +1,17 @@
 
 .logoWorkspacelist{
     margin: auto !important;
-    width: 2.6rem;
-    height:2.6rem;
+    width: 2.5rem;
+    height:2.5rem;
    border-radius: 50%;
- font-size: 1.8rem;
+ font-size: 1.6rem;
    
    
    color: white;
    letter-spacing: 1.72px;
    text-align: center;
    font-family: 'Roboto', sans-serif;
-   margin-top: 3vh !important;
+   margin-top: 2.2vh !important
    /* margin-top: 30px; */
    
 }
@@ -53,6 +53,7 @@
 }
 
 .workspace-name-list{
+    margin-top:1vh;
     font-weight: 400;
     color: black !important;
     font-size: 17px;
@@ -79,15 +80,15 @@
 .icons-in-list-w{
 }
 .logo-w{
-    width: 2.6rem;
-  height:2.6rem;
+    width: 2.5rem;
+  height:2.5rem;
  border-radius: 50%;
  font-size: 26px;
  color: white;
  letter-spacing: 1.72px;
  /* text-align: 30px; */
  font-family: 'Roboto', sans-serif;
- font-size: 1.8rem;
+ font-size: 1.6rem;
  /* margin-top: 30px; */
 }
 

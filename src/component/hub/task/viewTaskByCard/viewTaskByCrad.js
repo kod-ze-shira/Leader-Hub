@@ -13,7 +13,7 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
-
+import Toast from '../../toast/toast'
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -22,13 +22,16 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
+        props.getAllStatusesTaskForWorkspace()
 
 
     }, [
         props.cards])
+    useEffect(() => {
+        setDoneStatus(props.task.complete)
+    }, [props.task.complete])
     const [status, setStatus] = useState()
-
+    const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
@@ -48,12 +51,6 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
-        if (input.target.name == "complete") {
-            debugger
-            setDoneStatus(true)
-            value = doneStatus
-            console.log(value)
-        }
         let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
         if (input.target.name == "complete")
@@ -125,6 +122,7 @@ function ViewTaskByCrad(props) {
         }
         props.setTaskComplete(completeTask)
         props.completeTask(task)
+        setViewCompleteTask(true)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -148,11 +146,12 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom"
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
+                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
                                     <label
+                                        title="Complete Task"
                                         className="check-task py-2 ">
                                         <input type="checkbox"
                                             name="complete"
@@ -164,7 +163,7 @@ function ViewTaskByCrad(props) {
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
-                                        name="name" id="name"
+                                        name="name" id="name" title={props.task.name}
                                         className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
@@ -177,7 +176,7 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-                                <label className="check-task py-2   view-details-btn">
+                                <label className="check-task py-2   view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col " >
@@ -204,7 +203,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
-
+            {/* {viewCompleteTask ? <Toast></Toast> : null} */}
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
@@ -226,12 +225,12 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        completeTask: () => dispatch(actions.complitTask())
+        completeTask: (task) => dispatch(actions.completeTask(task))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

@@ -12,9 +12,8 @@ import './viewStatus.css'
 function ViewAllStatuses(props) {
 
     useEffect(() => {
-        debugger
         console.log(props.task._id);
-        props.getAllStatusesTaskForWorkspace(props.task._id);
+        props.getAllStatusesTaskForWorkspace();
         console.log(props.statuses);
         console.log(props.status);
     }, [props.cards])
@@ -83,7 +82,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index)),
         createStatus: (status) => dispatch(actions.createStatus(status)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))

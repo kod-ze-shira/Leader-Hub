@@ -69,7 +69,7 @@ function AddStatus(props) {
                 />
                 <label>Select Color</label>
                 <Colors changeStatusColor={(event) => handleChangeColorStatus(event)} />
-                <button className="add-status px-2" onClick={(e) => addStatus(e)}>Save</button>
+                <button className="add-status px-3 ml-4" onClick={(e) => addStatus(e)}>Save</button>
 
             </div>
             { view ? <ViewAllStatuses /> : null}

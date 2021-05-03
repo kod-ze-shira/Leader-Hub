@@ -2,6 +2,7 @@ import $ from "jquery"
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
+import title from '../../../../Data/title.json'
 
 // import '../../inputDitails/inputDitails.css'
 
@@ -123,7 +124,7 @@ function EditProject(props) {
                         onClick={deletProject}
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="Garbage"
+                        data-toggle="tooltip" data-placement="bottom" title={title.title_delete}
                         className="delete-btn col-4 " >
                         <img src={require('../../../img/bin.png')}></img> Delete
                 </button>

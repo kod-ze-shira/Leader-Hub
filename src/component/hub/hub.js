@@ -37,6 +37,8 @@ import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
+    const [showToastComplete, setShowToastComplete] = useState(false)
+
     const [objectToDelete, setObjectToDelete] = useState()
     const [viewDetails, setViewDetails] = useState(false)
     const [formViewDitails, setFormViewDitails] = useState()
@@ -97,12 +99,12 @@ function Hub(props) {
                 {/* <Nav openConfigurator={openConfigurator} /> */}
 
                 <div className="row back-screen">
-                    {open ?
-                        <div className="col-2 px-0">
-                            <Configurator />
-                        </div>
-                        : null}
-                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub"}>
+                    {/* {open ? */}
+                    <div className="col-2 px-0">
+                        <Configurator openOrClose={(e) => setOpen(!open)} />
+                    </div>
+                    {/* // : null} */}
+                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         {/* {viewDetails ?
                             <div className="closeDet" onClick={(e) => stopP(e)}>
                                 <ViewDetails
@@ -179,6 +181,13 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
+                    {showToastComplete ?
+                        <Toast
+                        // toOnClose={deleteObject}
+                        // toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
+                        // name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
+                        />
+                        : null}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
@@ -209,4 +218,5 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Hub)
+
 

@@ -9,7 +9,8 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
-
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../Data/title.json'
 
 
 function ViewTaskByCradTabs(props) {
@@ -30,8 +31,8 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        if (props.cards[props.indexCurrentCard])
-            props.getAllStatusesTaskForWorkspace(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id)
+        // if (props.cards[props.indexCurrentCard])
+        props.getAllStatusesTaskForWorkspace()
 
     }, [props.cards])
 
@@ -101,12 +102,16 @@ function ViewTaskByCradTabs(props) {
                             id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
-                                    {props.task.status ? <div className="color-task col-4 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div> : null}
+                                    {props.task.status ? <div title={props.task.status.statusName} className="color-task col-4 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div> : null}
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
-                                    <Button className="more col-3 mr-0"
+                                    <Button className="more col-3 mr-0 more-task"
+                                        data-tip data-for="more_a"
                                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                         . . .
                                     </Button>
+                                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                        {title.title_more_actions}
+                                    </ReactTooltip>
                                     <Menu
                                         id="simple-menu"
                                         anchorEl={anchorEl}
@@ -160,7 +165,7 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
 
     }
 }
