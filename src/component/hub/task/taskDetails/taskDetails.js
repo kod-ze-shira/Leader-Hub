@@ -13,6 +13,7 @@ import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'
 import ViewAllStatuses from '../../status/viewAllStatuses';
+import file from '../../uploadFile/file/file';
 function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
@@ -39,17 +40,46 @@ function TaskDetails(props) {
     $(window).click(function () {
         setOpenPopUp(false)
     });
- 
-   
+
+
     function stopP(event) {
         event.stopPropagation();
     }
+
+
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
+            debugger
             props.objectBeforeChanges(null)
-            props.EditTask(props.task)
-            props.closeViewDetails(false)
+            let newFiles
+            if (props.arrFilesOfTask)
+                newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
+            if (newFiles.length) {
+                props.uploadFiles({ 'files': newFiles, 'task': props.task })
+            }
+            else
+                if (props.arrDeleteFilesOfTask.length) {
+                    for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
+
+                        props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
+
+                        // for (let index2 = 0; index2 < props.task.files.length; index2++) {
+                        //     if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id)
+                        //         props.task.files.splice(index2, 1); // first element removed
+                        // }
+
+                        // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
+
+                    }
+
+                    let r = props.task.files
+                    debugger
+                    props.EditTask(props.task)
+                    // props.removeFile(props.ArrDeleteFilesOfTask)
+
+                } else
+                    props.EditTask(props.task)
         }
         else {
             nameRequired.current.focus()
@@ -60,8 +90,10 @@ function TaskDetails(props) {
 
 
 
-    const deleteTask = () => {
-        props.showToast(true)
+    const deleteTask = (e) => {
+        // props.showToast(true)
+        $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
+        props.showToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     }
 
 
@@ -113,7 +145,8 @@ function TaskDetails(props) {
             <div className="details task-details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between mx-1" >
-                    <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                    <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                    <label>Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
                     <br></br>
                 </div>
                 <div class="form-group" id='nameRequired'>
@@ -171,7 +204,7 @@ function TaskDetails(props) {
                             </> : null}
                         </button>
                         {openPopUp ?
-                            <div onclick={(e) =>stopP()}>
+                            <div onclick={(e) => stopP()}>
                                 <ViewAllStatuses
                                     task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
                                     status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
@@ -204,7 +237,7 @@ function TaskDetails(props) {
 
                 <UploadFile />
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">
-                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask()} >
+                    <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask(e)} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                     </button>
                     <button onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3">Save</button>
@@ -223,12 +256,15 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
-        arrFilesOfTask: state.public_reducer.arrFilesOfTask
+        arrFilesOfTask: state.public_reducer.arrFilesOfTask,
+        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        removeFile: (file) => dispatch(actions.removeFile(file)),
+        uploadFiles: (uploadFile) => dispatch(actions.uploadFiles(uploadFile)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
