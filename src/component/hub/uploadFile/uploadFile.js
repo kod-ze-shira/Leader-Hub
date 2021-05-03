@@ -11,7 +11,6 @@ function UploadFile(props) {
     const [fileComponentArr, setFileComponentArr] = useState([])
     useEffect(() => {
         console.log(props);
-        // props.uploadFiles(props.files)
     }, [props.files])
 
 
@@ -43,7 +42,6 @@ function UploadFile(props) {
 
 
     // const saveFiles = () => {
-    //     props.uploadFiles(uploadFile)
     // }
     return (
         <div className='divFile'>
@@ -81,7 +79,6 @@ export default connect(
     (dispatch) => {
         return {
             setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
-            uploadFiles: (filesArr) => dispatch(actions.uploadFiles(filesArr)),
             addFile: (files) => dispatch(actions.addFile(files)),
         }
     }

@@ -36,15 +36,11 @@ const publicData = {
         state.arrFilesOfTask = action.payload
     },
     setNewFilesInTask(state, action) {
-        let files = action.payload
-        for (let index = 0; index < files['file' + index]; index++) {
+        let myFiles = Object.values(action.payload)
+        for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-                .push({ 'name': files['file' + index], 'url': files['file' + index].url })
-
+                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url })
         }
-
-        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled].files.push(files) 
-
     },
 
     setFileFromTask(state, action) {

@@ -50,7 +50,7 @@ function TaskDetails(props) {
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
-            debugger
+
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
