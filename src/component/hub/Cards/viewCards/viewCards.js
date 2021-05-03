@@ -149,7 +149,7 @@ function ViewCards(props) {
                     <Button className="more col-1 "
                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         . . .
-                </Button>
+                    </Button>
                     <Menu
                         id="simple-menu"
                         anchorEl={anchorEl}
@@ -168,9 +168,6 @@ function ViewCards(props) {
                     <p className="col-add-task"><a>
                         <button className="new-task" onClick={addTask}>+</button>
                     </a></p>
-                    {/* <p className="border-left  col">Team</p>
-                <p className="border-left col">Label</p>
-                <p className="border-left col">Due Date</p> */}
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?

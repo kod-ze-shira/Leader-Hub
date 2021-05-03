@@ -36,11 +36,12 @@ function CardsByProject(props) {
             {props.cards.length ?
                 <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                     {props.cards.map((card, index) => {
-                        return <ViewCards showToastDelete={(object) => props.showToast(object)} key={card._id} 
-                        cardFromMap={card} flag={props.flag} indexCard={index} />
+                        return <ViewCards showToastDelete={(object) => props.showToast(object)}
+                            key={card._id}
+                            cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}
                 </DragDropContext>
-                :<div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../../img/animation.gif')} /></div>}
+                : <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../../img/animation.gif')} /></div>}
         </>
     )
 }
