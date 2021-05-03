@@ -50,7 +50,6 @@ function TaskDetails(props) {
     const saveNewTask = () => {
 
         if (nameRequired.current.value) {
-            debugger
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -80,6 +79,8 @@ function TaskDetails(props) {
 
                 } else
                     props.EditTask(props.task)
+            props.closeViewDetails();
+
         }
         else {
             nameRequired.current.focus()
@@ -91,9 +92,10 @@ function TaskDetails(props) {
 
 
     const deleteTask = (e) => {
-        // props.showToast(true)
         $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
         props.showToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
+        props.closeViewDetails();
+
     }
 
 

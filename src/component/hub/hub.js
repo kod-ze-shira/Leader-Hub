@@ -113,15 +113,10 @@ function Hub(props) {
                             : null
                         } */}
                         <Switch>
-                            {/* <Route path="/:userName/workspace/:idWorkspace" >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
-                            </Route> */}
+                           
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName/allProjects" >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
-                            </Route> */}
                             <ProtectedRoute path={"/:userName/gantt"} user={Token} >
                                 <div className="body-workspace mt-3">
                                     <DisplayGantt />
@@ -136,9 +131,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName/projectPlatform/:idProject" >
-                                <CardsPage showToastDelete={(obj) => showToastToDelete(obj)} />
-                            </Route> */}
+                          
                             <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
                                 <CardsPage focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -149,9 +142,6 @@ function Hub(props) {
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
-                            {/* <Route path="/:userName/milestones" >
-                                <Milestones />
-                            </Route> */}
                             <ProtectedRoute path={"/:userName/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
@@ -179,7 +169,6 @@ function Hub(props) {
                                 </div>
                                 {/* <Animation /> */}
                             </Route>
-                            {/* <Route path=":userName/workspace/:nameOfWorkspace" > */}
                         </Switch>
                     </div>
 
