@@ -95,7 +95,7 @@ function Tabs(props) {
     //     event.stopPropagation();
     // }
     function stopP(event) {
-        event.stopPropagation();
+        event.stopPropagation(); 
     }
     return (
         <><div className="body">
@@ -123,7 +123,7 @@ function Tabs(props) {
                                                     <div id='newCardInput' class="container" >
                                                         {/* {showInput ? */}
                                                         <div
-                                                            class="card-header row">
+                                                            class="card-header row" title="New Card">
                                                             {/* autoFocus="true" */}
                                                             <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                 if (event.key === 'Enter') {

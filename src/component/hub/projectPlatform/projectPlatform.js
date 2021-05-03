@@ -88,7 +88,7 @@ function ProjectPlatform(props) {
                                 }
                             }}></input>
                         : null}
-                    <a className="ml-4 mx-5 add-card-btn" onClick={showInputToAddCard}>Add Card+</a>
+                    <a className="ml-4 mx-5 add-card-btn" title="Add Card" onClick={showInputToAddCard}>Add Card+</a>
                 </div>
                 {showToastDelete ?
                     <ToastDelete

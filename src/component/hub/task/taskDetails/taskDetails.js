@@ -42,7 +42,7 @@ function TaskDetails(props) {
         debugger
         setOpenPopUp(!openPopUp)
     });
- 
+
 
     function stopP(event) {
         event.stopPropagation();
@@ -142,7 +142,7 @@ function TaskDetails(props) {
     const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
-   
+
 
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
@@ -150,7 +150,7 @@ function TaskDetails(props) {
     }) : null
     return (
         <>
-            <div className="details task-details mr-5 ml-4" ondragstart="return false;" ondrop="return false;">
+            <div className="details task-details mr-5 ml-4" >
                 <h5 className="mt-5 title-view-details pb-2">Task details</h5>
                 <div className="row justify-content-between mx-1" >
                     <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label className="ml-5">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
@@ -231,7 +231,7 @@ function TaskDetails(props) {
                                 onChange={(e) => changeFiledInTask(e)}
                             />
                             <span className="slider round" ></span>
-                           
+
 
                         </label>
                     </div>
@@ -243,7 +243,7 @@ function TaskDetails(props) {
                 {newFileComponentArr}
 
                 <UploadFile />
-                <div className="row justify-content-between mx-1 btns-in-view-details-task">
+                <div className="row justify-content-between mx-1 btns-in-view-details-task mt-4">
                     <button data-toggle="tooltip" data-placement="top" title="Garbage" className="delete-btn col-4 " onClick={(e) => deleteTask(e)} >
                         <img src={require('../../../img/bin.png')}></img> Delete
                     </button>

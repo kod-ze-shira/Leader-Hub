@@ -78,6 +78,9 @@ textarea:focus{
 .task-details{
   overflow-y: auto !important;
 }
+.btns-in-view-details-task{
+  /* margin-top:8vh  !important; */
+}
 .task-details > .form-group{
     /* margin-bottom: 0.5rem !important; */
   }
@@ -95,19 +98,7 @@ z-index: 9999 !important;
     display: inline-block;
 
 }
-.placeHolder-status{
-      /* display: inline-block !important; */
 
-}
-.placehlder-first-status{
-    /* display: inline-block; */
-}
-.placeHolder-status span{
-    margin-left: 29px; 
-    float:right !important;
-    
-     /* margin-bottom: 1.5vh !; */
-}
 .milestones-span{
   font-size:15px;
 }

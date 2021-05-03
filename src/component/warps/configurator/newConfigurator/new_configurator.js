@@ -67,8 +67,7 @@ function NewConfigorator(props) {
     // }
     return (
         <>
-            {/* <button class='closeConfigurator' onClick={() => setCloseOrOpenConfigurator(!closeOrOpenConfigurator)}>X</button> */}
-            <FontAwesomeIcon icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
+            <FontAwesomeIcon title="Close Menu" icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
            }/>
 
             {closeOrOpenConfigurator ?

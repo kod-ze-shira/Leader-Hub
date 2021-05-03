@@ -92,22 +92,22 @@ function ViewProject(props) {
                     <Cell item={props.myProject.dueDate} />
                     <CellDescription description='Due date' />
                 </td>
-                <td className='widthCellInProject'>
+                <td className='widthCellInProject' title='Number Of Cards'>
                     <Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} />
                     <CellDescription description='card' />
                 </td>
                 <td>
-                    <span className='task widthCellInProject'>
-                        <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }}>
+                    <span className='task widthCellInProject' >
+                        <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }} title='Task Complited'>
                             {props.myProject.countReadyTasks}</span>
-                        <span className='designPropertiesProject'>
+                        <span className='designPropertiesProject' title='Number Of Task'>
                             /{props.myProject.countTasks}</span>
                     </span>
                     <CellDescription description='Task' />
                 </td>
                 <td>
-                    <div className='divProgress ' >
-                        <div class="progressProject" >
+                    <div className='divProgress ' title='Percentage of completed tasks'>
+                        <div class="progressProject"  >
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -129,13 +129,13 @@ function ViewProject(props) {
 
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
                     <img style={myStyleIcons}
-                        className='iconsProject' onClick={(event) => openShareProject(event)} src={share} />
+                        className='iconsProject' title="Share " onClick={(event) => openShareProject(event)} src={share} />
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
                     <img style={myStyleIcons}
-                        className='iconsProject' onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
+                        className='iconsProject' title="Edit" onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
-                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
+                    <img style={myStyleIcons} title="Delete" className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
                         src={require('../../../img/bin.png')} />                </td>
             </tr >
         </>

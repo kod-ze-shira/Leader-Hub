@@ -89,17 +89,17 @@ function ViewWorkspaceList(props) {
                     <div className="col-2">
                         <div className="row  mt-4 icons-in-list-w" >
                             <div
-                                className="col-1  edit iconsAction" onClick={editWorkspace}>
+                                className="col-1  edit iconsAction" title="Edit" onClick={editWorkspace}>
                                 <img src={pencil}></img>
                             </div>
                             <div className="ml-1 stripe">|</div>
                             <div
-                                className="col-1 ml-1 delete iconsAction" onClick={duplicateWorkspace} >
+                                className="col-1 ml-1 delete iconsAction" title="Duplicate" onClick={duplicateWorkspace} >
                                 <img src={duplicate}></img>
                             </div>
                             <div className="ml-1 stripe">|</div>
                             <div
-                                className="col-1 ml-1 delete iconsAction" onClick={delete_workspace} >
+                                className="col-1 ml-1 delete iconsAction" title="Delete" onClick={delete_workspace} >
                                 <img src={bin}></img>
                             </div>
                         </div>

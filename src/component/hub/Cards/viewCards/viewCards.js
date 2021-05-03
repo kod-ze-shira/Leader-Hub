@@ -146,7 +146,7 @@ function ViewCards(props) {
                         </input>
 
                     </div>
-                    <Button className="more col-1 "
+                    <Button className="more col-1 " title=" Option Of Card"
                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         . . .
                 </Button>
@@ -166,7 +166,7 @@ function ViewCards(props) {
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
                     <p className="col-add-task"><a>
-                        <button className="new-task" onClick={addTask}>+</button>
+                        <button title="New Task" className="new-task" onClick={addTask}>+</button>
                     </a></p>
                     {/* <p className="border-left  col">Team</p>
                 <p className="border-left col">Label</p>

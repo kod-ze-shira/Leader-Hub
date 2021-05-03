@@ -43,6 +43,7 @@ function ViewStatus(props) {
                     </div>
                     <img
                         className="pencil-status ml-2"
+                        title="Edit Status"
                         onClick={(e) => openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>

@@ -107,14 +107,14 @@ function ProjectsByWorkspace(props) {
 
                         <div id=''>
                             <span id='searchProject' >
-                                <input type='text' id='inputSearchProjects' className='inputSearchProjects'
+                                <input type='text' id='inputSearchProjects' title="Search Project" className='inputSearchProjects'
                                     onChange={() => searchProject()}
                                     placeholder='Search project...'
                                 />
                             </span>
 
 
-                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
+                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject' title="New Project"
                                 onClick={(e) => openViewDitailsAddProject(e)}
                             >+ New Project</button> : null}
                         </div>

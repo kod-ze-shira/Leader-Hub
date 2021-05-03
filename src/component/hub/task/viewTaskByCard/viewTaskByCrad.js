@@ -145,11 +145,12 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom"
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id}
+                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
                                     <label
+                                    title="Complete Task"
                                         className="check-task py-2 ">
                                         <input type="checkbox"
                                             name="complete"
@@ -161,7 +162,7 @@ function ViewTaskByCrad(props) {
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
-                                        name="name" id="name"
+                                        name="name" id="name" title={props.task.name}
                                         className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
@@ -174,7 +175,7 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-                                <label className="check-task py-2   view-details-btn">
+                                <label className="check-task py-2   view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
                                 <label className="check-task border-left  py-2  px-2 col " >

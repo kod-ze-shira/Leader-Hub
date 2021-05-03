@@ -58,16 +58,16 @@ function ViewWorkspaceGrid(props) {
                 <div className="row iconsActions" >
                     <div
                         className=" edit iconsAction" onClick={editWorkspace}>
-                        <img class='imageIcon' src={pencil}></img>
+                        <img class='imageIcon' src={pencil} title="Edit"></img>
                     </div>
                     <div className="stripe stripeToSavePlace">|</div>
                     <div className=" delete iconsAction"
                         onClick={delete_workspace}>
-                        <img class='imageIcon' src={bin}></img>
+                        <img class='imageIcon' src={bin} title="Delete"></img>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div>
                     <div className="add iconsAction" onClick={duplicateWorkspace}>
-                        <img class='imageIcon' src={duplicate}></img>
+                        <img class='imageIcon' src={duplicate} title="Duplicate"></img>
 
                     </div>
                 </div>
@@ -83,7 +83,7 @@ function ViewWorkspaceGrid(props) {
                         </div>
                         <div className="name "><p className='nameWorkspaceInGrid' title={workspace.name}>{workspace.name}</p> </div>
                         <div className=" description-and-productionDate">
-                            <p className="productionDateW">{workspace.productionDate}</p>
+                            <p className="productionDateW" title="Production Date">{workspace.productionDate}</p>
                         </div>
                     </div>
                 </div>

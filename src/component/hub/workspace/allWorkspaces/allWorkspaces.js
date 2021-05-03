@@ -89,13 +89,13 @@ function AllWorkspaces(props) {
                         {
                             grid ?
                                 <>
-                                    <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19506.png')}></img></div>
-                                    <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                                    <div className="col-1 grid" title="Grid" onClick={chenge_grid}><img src={require('../../../img/Group 19506.png')}></img></div>
+                                    <div className="col-1 list" title="List" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
                                 </>
                                 :
                                 <>
-                                    <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19507.png')}></img></div>
-                                    <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                    <div className="col-1 grid" title="Grid" onClick={chenge_grid}><img src={require('../../../img/Group 19507.png')}></img></div>
+                                    <div className="col-1 list" title="List"  onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
                                 </>
                         }
                     </div>
@@ -112,6 +112,7 @@ function AllWorkspaces(props) {
                                     <div className="Workspace addWorkspace"  >
                                         <div className="logoWorkspacelist addWorkspace "
                                             style={{ backgroundColor: "#778CA2" }}
+                                            title="Add Workspace"
                                         >
                                             +
                                         </div>
@@ -128,6 +129,7 @@ function AllWorkspaces(props) {
                                 <div className="logoWorkspace1 " >
                                     <div className="mt-1 logo-w"
                                         style={{ backgroundColor: "#778CA2" }}
+                                        title="Add Workspace"
                                     >+
                                 </div>
                                 </div>
