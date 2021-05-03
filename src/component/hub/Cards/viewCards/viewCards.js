@@ -173,9 +173,6 @@ function ViewCards(props) {
                     <p className="col-add-task"><a>
                         <button data-toggle="tooltip" data-placement="bottom" className="new-task" onClick={addTask}>+</button>
                     </a></p>
-                    {/* <p className="border-left  col">Team</p>
-                <p className="border-left col">Label</p>
-                <p className="border-left col">Due Date</p> */}
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?

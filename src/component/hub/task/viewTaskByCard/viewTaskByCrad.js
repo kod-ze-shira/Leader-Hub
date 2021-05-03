@@ -203,7 +203,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
-            {viewCompleteTask ? <Toast></Toast> : null}
+            {/* {viewCompleteTask ? <Toast></Toast> : null} */}
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>

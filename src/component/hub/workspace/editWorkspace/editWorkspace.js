@@ -37,6 +37,7 @@ function EditWorkspace(props) {
         debugger
         $(`#${props.workspaces[props.indexOfWorkspace]._id}`).css("display", "none")
         props.showToast({ 'type': 'Workspace', 'object': props.workspaces[props.indexOfWorkspace] })
+        props.closeViewDetails();
 
     }
     return (

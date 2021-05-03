@@ -115,7 +115,7 @@ function Hub(props) {
                             : null
                         } */}
                         <Switch>
-
+                           
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -133,7 +133,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute>
-
+                          
                             <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
                                 <CardsPage focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
