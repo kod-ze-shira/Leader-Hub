@@ -17,7 +17,7 @@ function DynamicSelect(props) {
   )) : null
 
   const viewTeamsList = props.teamsUser ? props.teamsUser.map((team) => (
-    { value: team._id, label: <div><img  referrerpolicy="no-referrer" src={team.logo} height="30px" width="30px"/>{team.name} </div> }
+    { value: team, label: <div><img  referrerpolicy="no-referrer" src={team.logo} height="30px" width="30px"/>{team.name} </div> }
   )) : null
  
   const handleChange = (newValue, actionMeta) => {
