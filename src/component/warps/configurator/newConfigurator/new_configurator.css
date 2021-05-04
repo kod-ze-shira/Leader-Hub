@@ -52,6 +52,7 @@ border-radius: 3px;
   .list_config li:hover,
   .li-back{
      background: url('../../../img/Mask1.svg');
+     background-repeat: no-repeat;
      border-left:16px solid var(--light-light-blue); 
      left:2.5vh !important ;
      padding-left: 10px;

@@ -17,16 +17,12 @@ function SelectProject(props) {
     }, [props.workspaces])
 
     //to chang the project that user selected
-    // let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
 
     const changeSelectedProject = (id) => {
         props.setCurrentIndexProject(id.projectIndex)
         project = props.workspaces[props.indexWorkspace].projects.find(p => p._id == id.value)
-        // props.setProject(project)
-        // console.log(project)
         props.getCardsByProjectId(project._id)
-        // console.log("my project  " + props.workspace)
     }
 
     const dot = (color = '#ccc') => ({

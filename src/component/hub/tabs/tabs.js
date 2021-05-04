@@ -14,7 +14,6 @@ import title from '../../../Data/title.json'
 function Tabs(props) {
 
     useEffect(() => {
-
     }, [props.projectId, props.focusInputCard])
 
     let b;
@@ -92,10 +91,6 @@ function Tabs(props) {
         setViewDetails(false)
     });
 
-    // function openViewDetails(event) {
-    //     showDetails("viewTaskByCard")
-    //     event.stopPropagation();
-    // }
     function stopP(event) {
         event.stopPropagation();
     }
@@ -103,15 +98,21 @@ function Tabs(props) {
         <><div className="body">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {props.cards.length ?
-                <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
-                    <Droppable droppableId={props.cards[0]._id} >
+                <DragDropContext
+                    onDragEndׂ={(e) => onDragEndׂCard(e)}>
+                    {/* props.cards[2]._id */}
+                    <Droppable 
+                    // droppableId={props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]} >
+                    droppableId={props.cards[0]._id} >
+
                         {provided => (
                             <div
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}>
                                 <div className="wraperr-tabs">
                                     <div className="row row mx-3">
-                                        <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
+                                        <DragDropContext
+                                            onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
                                                 return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                     // setTask={(task) => setTaskToDetails(task)}
@@ -182,7 +183,7 @@ export default connect(
             projects: state.project_reducer.projects,
             user: state.public_reducer.userName,
             workspaces: state.public_reducer.workspaces,
-            workspace: state.workspace_reducer.worksapce,
+            // workspace: state.workspace_reducer.worksapce,
             // project: state.project_reducer.project,
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
