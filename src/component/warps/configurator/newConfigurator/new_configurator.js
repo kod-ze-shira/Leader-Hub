@@ -69,12 +69,10 @@ function NewConfigorator(props) {
     return (
         <>
             <div>
-                <FontAwesomeIcon data-tip data-for="close_m"
+                <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
-                <ReactTooltip data-tip id="close_m" place="bottom" effect="solid">
-                    {title.title_close_menu}
-                </ReactTooltip>
+             
             </div>
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">

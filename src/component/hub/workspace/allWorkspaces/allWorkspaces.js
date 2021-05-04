@@ -134,9 +134,9 @@ function AllWorkspaces(props) {
                                             style={{ backgroundColor: "#778CA2" }}
                                             data-tip data-for="add_w"
                                         >
-                                            <ReactTooltip data-tip id="add_w" place="top" effect="solid">
+                                            {/* <ReactTooltip data-tip id="add_w" place="top" effect="solid">
                                                 {title.title_add_workspace}
-                                            </ReactTooltip>
+                                            </ReactTooltip> */}
                                             +
                                         </div>
                                     </div>
@@ -154,9 +154,9 @@ function AllWorkspaces(props) {
                                         style={{ backgroundColor: "#778CA2" }}
                                         data-tip data-for="add_w"
                                     >+ </div>
-                                    <ReactTooltip data-tip id="add_w" place="top" effect="solid">
+                                    {/* <ReactTooltip data-tip id="add_w" place="top" effect="solid">
                                         {title.title_add_workspace}
-                                    </ReactTooltip>
+                                    </ReactTooltip> */}
 
                                 </div>
                                 <div className="name1 mt-4"><p>Add Workspace</p> </div>

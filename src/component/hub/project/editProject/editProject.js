@@ -96,7 +96,7 @@ function EditProject(props) {
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></div>
                     </div>
                     <div className="row justify-content-between">
-                        <div class="form-group col-5 ditailsAction col-md-4">
+                        <div class="form-group col-5 ditailsAction">
                             <label for="color">Project color</label>
                             <input name="color"
                                 className=" form-control "
@@ -106,7 +106,7 @@ function EditProject(props) {
                                 value={props.workspaces[props.indexWorkspace].projects[props.indexProject].color}
                             />
                         </div>
-                        <div class="form-group col-5 ditailsAction col-md-8">
+                        <div class="form-group col-5 ditailsAction ">
                             <label for="color">Due Date</label>
                             <input
                                 className="form-control "
@@ -122,9 +122,6 @@ function EditProject(props) {
                 <div className="row justify-content-between ">
                     <button
                         onClick={deletProject}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        data-toggle="tooltip" data-placement="bottom" title={title.title_delete}
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
