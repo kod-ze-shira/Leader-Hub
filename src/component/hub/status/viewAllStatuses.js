@@ -57,13 +57,19 @@ function ViewAllStatuses(props) {
             <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                 <div className="status-list">
                     {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
-                        <ViewStatus saveStatus={(e) => saveStatus(e)}
-                            changeStatus={changeStatusByIndex}
-                            status={status} index={index}
-                        />
+                        
+                    < ViewStatus saveStatus={(e) => saveStatus(e)}
+                        changeStatus={changeStatusByIndex}
+                        status={status} index={index}
+                       openPopUp={props.openPopUp}
+                    />
+                    
+
                     )) : null}
                     {openPopUp ?
+                        // <div className="container">
                         <button onClick={(e) => openAddStatus(e)} className="ml-3 create-label">Create New Status</button>
+                        // </div>
                         : null}
                     {openPopUpToAdd ? <AddStatus task={props.task} status={props.status} /> : null}
                 </div>

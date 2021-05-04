@@ -10,7 +10,10 @@ import $ from 'jquery'
 function ViewStatus(props) {
     useEffect(() => {
         console.log(props.status);
+        if (props.index < 3)
+            setStatusDisable(true)
     }, [])
+    const [statusDisable, setStatusDisable] = useState(false)
 
     const [openPopUpToEdit, setOpenPopUpToEdit] = useState(false)
 
@@ -32,9 +35,7 @@ function ViewStatus(props) {
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         }
     }
-
     return (
-
         <>
             <div className="container display-task ">
                 <div className="row ml-2">
@@ -42,14 +43,14 @@ function ViewStatus(props) {
                         <p >{props.status.statusName}</p>
                     </div>
                     <img
-                        className="pencil-status ml-2"
+                        className={statusDisable ? "disabled pencil-status ml-2" : "pencil-status ml-2"}
                         title="Edit Status"
                         onClick={(e) => openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>
 
-            {openPopUpToEdit ? <EditStatus status={props.status} index={props.index} /> : null}
+            {openPopUpToEdit ? <EditStatus openPopUp={props.openPopUp} status={props.status} index={props.index} /> : null}
         </>
 
     )

@@ -8,6 +8,14 @@
 
 
   }
+  @media screen and (min-width: 1650px) {
+    .body {
+      height: 83vh;
+    }
+    .card{
+      height:75vh !important;
+    }
+  }
   .cards{
     height: 65vh;
     /* overflow-y: auto; */

@@ -6,6 +6,9 @@ import Toast from 'react-bootstrap/Toast'
 import viewDetails from '../../viewDetails/viewDetails'
 import $ from "jquery";
 import UploadFile from '../../uploadFile/uploadFile'
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../Data/title.json'
+
 function NewProject(props) {
     let [flag, setFlag] = useState(false)
     let project = { 'updateDates': [] }
@@ -178,9 +181,13 @@ function NewProject(props) {
                         </div>
                     </div>
                 </div>
-                {/* <div className="row justify-content-between mx-1 btns-in-view-details-project"> */}
-                <button onClick={() => addProject()}
-                    style={{ 'margin-top': '0px !important;' }} className="save_canges_btn float-right">Save</button>
+                <div className="row justify-content-end">
+                    <button onClick={() => addProject()} data-tip data-for="save"
+                        style={{ 'margin-top': '0px !important;' }} className="save_canges_btn px-5">Save</button>
+                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                        {title.title_save}
+                    </ReactTooltip>
+                </div>
             </div>
 
 

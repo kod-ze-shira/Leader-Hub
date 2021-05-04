@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import title from '../../../../Data/title.json'
-
+import ReactTooltip from 'react-tooltip';
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
@@ -96,7 +96,7 @@ function EditProject(props) {
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></div>
                     </div>
                     <div className="row justify-content-between">
-                        <div class="form-group col-5 ditailsAction col-md-4">
+                        <div class="form-group col-5 ditailsAction">
                             <label for="color">Project color</label>
                             <input name="color"
                                 className=" form-control "
@@ -106,7 +106,7 @@ function EditProject(props) {
                                 value={props.workspaces[props.indexWorkspace].projects[props.indexProject].color}
                             />
                         </div>
-                        <div class="form-group col-5 ditailsAction col-md-8">
+                        <div class="form-group col-5 ditailsAction ">
                             <label for="color">Due Date</label>
                             <input
                                 className="form-control "
@@ -122,13 +122,17 @@ function EditProject(props) {
                 <div className="row justify-content-between ">
                     <button
                         onClick={deletProject}
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        data-toggle="tooltip" data-placement="bottom" title={title.title_delete}
-                        className="delete-btn col-4 " >
+                        className="delete-btn col-4 "
+                        data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                </button>
-                    <button button onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
+                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                            {title.title_delete}
+                        </ReactTooltip>
+                    </button>
+                    <button data-tip data-for="save" onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
+                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                        {title.title_save}
+                    </ReactTooltip>
                 </div>
             </div>
 

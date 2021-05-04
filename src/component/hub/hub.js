@@ -17,7 +17,7 @@ import ProjectPlatform from './projectPlatform/projectPlatform'
 import CardsByProject from './Cards/cardsByProject/cardsByProject'
 import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
-import Toast from "./toast/toast";
+import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
@@ -38,6 +38,7 @@ function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
+    const [showCompleteTask, setShowCompleteTask] = useState(false)
 
     const [objectToDelete, setObjectToDelete] = useState()
     const [viewDetails, setViewDetails] = useState(false)
@@ -115,7 +116,7 @@ function Hub(props) {
                             : null
                         } */}
                         <Switch>
-                           
+
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -133,9 +134,11 @@ function Hub(props) {
                             <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute>
-                          
+
                             <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
-                                <CardsPage focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <CardsPage
+                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             {/* <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
@@ -182,12 +185,8 @@ function Hub(props) {
                         />
                         : null}
                     {showToastComplete ?
-                        <Toast
-                        // toOnClose={deleteObject}
-                        // toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
-                        // name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
-                        />
-                        : null}
+                        <Toast /> : null}
+
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}

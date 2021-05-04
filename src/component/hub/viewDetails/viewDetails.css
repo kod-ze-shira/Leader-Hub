@@ -11,6 +11,13 @@ z-index: 999;
 border-left: 9px solid  #329A80  ;
 margin-right: 1.8rem !important;
 }
+@media screen and (min-width: 1650px) {
+  
+    .view-details{
+      height: 91.6vh !important;
+    }
+  
+  }
 .inputTextproject{
     background-color: var(--light-light-blue);
     color: black;

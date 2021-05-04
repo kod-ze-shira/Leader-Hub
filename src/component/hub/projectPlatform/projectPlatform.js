@@ -68,7 +68,9 @@ function ProjectPlatform(props) {
         <>
             <div className=" body container-fluid">
                 <div className="cards">
-                    <CardsByProject showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag} />
+                    <CardsByProject
+                        viewToastComplete={props.viewToastComplete}
+                        showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag} />
                     <div className="add-new-pop-up ">
                         <a >New Workspace</a><br></br>
                         <a>New Project</a><br></br>
@@ -92,10 +94,10 @@ function ProjectPlatform(props) {
                         : null}
                     <a className="ml-4 mx-5 add-card-btn" data-tip data-for="add_c"
                         onClick={showInputToAddCard}>Add Card+</a>
-                    <ReactTooltip data-tip id="add_c" place="top" effect="solid">
+                    {/* <ReactTooltip data-tip id="add_c" place="top" effect="solid">
                         {title.title_add_card}
-                    </ReactTooltip>
-                                            
+                    </ReactTooltip> */}
+
                 </div>
                 {showToastDelete ?
                     <ToastDelete

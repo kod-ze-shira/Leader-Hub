@@ -3,6 +3,8 @@ import './editWorkspace.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import $ from 'jquery'
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../Data/title.json'
 
 function EditWorkspace(props) {
 
@@ -89,7 +91,10 @@ function EditWorkspace(props) {
                         onClick={(e) => deleteWorkspace(e)}>
                         <img src={require('../../../img/bin.png')}></img> Delete
                     </button>
-                    <button onClick={saveEdit} className="save_canges_btn col-3">Save</button>
+                    <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
+                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                        {title.title_save}
+                    </ReactTooltip>
                 </div>
             </div>
         </>

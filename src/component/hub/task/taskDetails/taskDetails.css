@@ -17,6 +17,7 @@ overflow-y: auto;
     margin-top: 1vh;
     max-height: 150px;
     overflow-y: auto;
+    justify-content: center;
 
 }
 .menu__ .form-control{
@@ -32,6 +33,12 @@ overflow-y: auto;
 .status-btn{
     margin-top: 55px;
 }
+@media screen and (min-width: 1650px) {
+  #descriptionProject{
+    height:250px
+  }
+
+}
 .create-label{
   background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box;
 background: #75798E 0% 0% no-repeat padding-box;
@@ -39,6 +46,11 @@ border: 1px solid #707070;
 opacity: 0.15;
     margin-top: 1vh;
     margin-bottom: 3vh;
+    /* vertical-align: middle !important; */
+
+    /* justify-content: center !important; */
+
+/* -ms-transform-origin-x:auto !important;  */
 /* opacity: 0.5; */
 /* border-top: 1px solid #707070; */
 }
@@ -76,7 +88,7 @@ textarea:focus{
     display: inline;
 }
 .task-details{
-  overflow-y: auto !important;
+  /* overflow-x: auto !important; */
 }
 .btns-in-view-details-task{
   /* margin-top:8vh  !important; */

@@ -143,8 +143,8 @@ function AddWorkspace(props) {
                         {/* onChange={handleChange} /> */}
                     </div>
                 </div>
-                <div className="float-right">
-                    <button onClick={addNewWorkspace} className="save_canges_btn " id='sevaNewWorkspace'>Save</button>
+                <div className="row justify-content-end">
+                    <button onClick={addNewWorkspace} className="save_canges_btn px-5" id='sevaNewWorkspace'>Save</button>
                 </div>
             </div>
         </>
