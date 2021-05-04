@@ -17,7 +17,7 @@ import ProjectPlatform from './projectPlatform/projectPlatform'
 import CardsByProject from './Cards/cardsByProject/cardsByProject'
 import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
-import Toast from "./toast/toast";
+import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
@@ -37,6 +37,9 @@ import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
+    const [showToastComplete, setShowToastComplete] = useState(false)
+    const [showCompleteTask, setShowCompleteTask] = useState(false)
+
     const [objectToDelete, setObjectToDelete] = useState()
     const [viewDetails, setViewDetails] = useState(false)
     const [formViewDitails, setFormViewDitails] = useState()
@@ -97,12 +100,12 @@ function Hub(props) {
                 {/* <Nav openConfigurator={openConfigurator} /> */}
 
                 <div className="row back-screen">
-                    {open ?
-                        <div className="col-2 px-0">
-                            <Configurator />
-                        </div>
-                        : null}
-                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub"}>
+                    {/* {open ? */}
+                    <div className="col-2 px-0">
+                        <Configurator openOrClose={(e) => setOpen(!open)} />
+                    </div>
+                    {/* // : null} */}
+                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         {/* {viewDetails ?
                             <div className="closeDet" onClick={(e) => stopP(e)}>
                                 <ViewDetails
@@ -113,7 +116,7 @@ function Hub(props) {
                             : null
                         } */}
                         <Switch>
-                           
+
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -131,14 +134,16 @@ function Hub(props) {
                             <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute>
-                          
+
                             <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
-                                <CardsPage focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <CardsPage
+                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             {/* <Route path="/:userName/myTasks" >
                                 <TaskNotBelongCardForUser />
                             </Route> */}
-                            <ProtectedRoute path={"/:userName/myTasks"}>
+                            <ProtectedRoute path={"/:userName/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
@@ -179,6 +184,9 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
+                    {showToastComplete ?
+                        <Toast /> : null}
+
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
@@ -209,4 +217,5 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Hub)
+
 

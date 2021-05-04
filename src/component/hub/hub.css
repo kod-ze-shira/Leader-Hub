@@ -1,31 +1,33 @@
 .toastDeleteOnStage{
-margin-top: 75vh;
-position: fixed;
-margin-left: 8vh;
-}
-
-.bodyHub {
-    padding-right: 1.8rem !important;
-    /* margin-top:24px !important; */
-}
-.back-screen{
-    background-color: #E8EAEC !important;
-    height: 100vh;
-}
-
-
-#cdggdfdfb{
-    margin-top: 100px;
-    margin-left: 400px;
-}
-
-.divtext {
-    border: ridge 2px;
-    padding: 5px;
-    width: 20em;
-    min-height: 5em;
-    overflow: auto;
-}
-  
-
-  
+    margin-top: 75vh;
+    position: fixed;
+    margin-left: 8vh;
+    }
+    
+    .bodyHub {
+        padding-right: 1.8rem !important;
+        /* margin-top:24px !important; */
+    }
+    .back-screen{
+        background-color: #E8EAEC !important;
+        /* height: 100vh; */
+    }
+    
+    
+    #cdggdfdfb{
+        margin-top: 100px;
+        margin-left: 400px;
+    }
+    
+    .divtext {
+        border: ridge 2px;
+        padding: 5px;
+        width: 20em;
+        min-height: 5em;
+        overflow: auto;
+    }
+      
+    
+      
+    
+    

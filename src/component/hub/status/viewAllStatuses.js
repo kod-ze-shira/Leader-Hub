@@ -12,9 +12,8 @@ import './viewStatus.css'
 function ViewAllStatuses(props) {
 
     useEffect(() => {
-        debugger
         console.log(props.task._id);
-        props.getAllStatusesTaskForWorkspace(props.task._id);
+        props.getAllStatusesTaskForWorkspace();
         console.log(props.statuses);
         console.log(props.status);
     }, [props.cards])
@@ -58,13 +57,19 @@ function ViewAllStatuses(props) {
             <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                 <div className="status-list">
                     {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
-                        <ViewStatus saveStatus={(e) => saveStatus(e)}
-                            changeStatus={changeStatusByIndex}
-                            status={status} index={index}
-                        />
+                        
+                    < ViewStatus saveStatus={(e) => saveStatus(e)}
+                        changeStatus={changeStatusByIndex}
+                        status={status} index={index}
+                       openPopUp={props.openPopUp}
+                    />
+                    
+
                     )) : null}
                     {openPopUp ?
+                        // <div className="container">
                         <button onClick={(e) => openAddStatus(e)} className="ml-3 create-label">Create New Status</button>
+                        // </div>
                         : null}
                     {openPopUpToAdd ? <AddStatus task={props.task} status={props.status} /> : null}
                 </div>
@@ -83,7 +88,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllStatusesTaskForWorkspace: (taskId) => dispatch(actions.getAllStatusesTaskForWorkspace(taskId)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index)),
         createStatus: (status) => dispatch(actions.createStatus(status)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))

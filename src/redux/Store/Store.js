@@ -13,16 +13,17 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
-import { editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks 
-,moveTaskBetweenCards,
-complitTask} from '../middleware/taskCrud';
+import {
+    editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
+    , moveTaskBetweenCards,
+    completeTask
+} from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
-// import { uploadFiles, removeFile, getFiles, downloadFile } from '../middleware/filesCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
 
 const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer });
@@ -67,7 +68,7 @@ const store = createStore(
                 editStatus,
                 removeStatus,
                 moveTaskBetweenCards,
-                complitTask
+                completeTask
             ))
 )
 store.dispatch(actions.extractJwt());

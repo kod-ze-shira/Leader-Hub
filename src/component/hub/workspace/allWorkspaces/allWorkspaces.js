@@ -7,7 +7,11 @@ import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacel
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
+import title from '../../../../Data/title.json'
 import $ from 'jquery'
+import ReactTooltip from 'react-tooltip';
+
+
 
 function AllWorkspaces(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -65,7 +69,9 @@ function AllWorkspaces(props) {
         setlist(false);
         setgrid(true);
     }
-
+    // $(function () {
+    //     $('[data-toggle="tooltip"]').tooltip()
+    // })
     function openAddNewWorkspace(e) {
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
@@ -77,7 +83,7 @@ function AllWorkspaces(props) {
     function stopP(event) {
         event.stopPropagation();
     }
- 
+
     return (
 
         <>
@@ -89,13 +95,27 @@ function AllWorkspaces(props) {
                         {
                             grid ?
                                 <>
-                                    <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19506.png')}></img></div>
-                                    <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+
+                                    {/* <img data-tip data-for="registerTip" src={copy} id="img1" onClick={copyToClipboard} className="img_copy"></img> */}
+                                    <div data-tip data-for="Grid" className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19506.png')}></img></div>
+                                    <ReactTooltip id="Grid" place="bottom" effect="solid">
+                                        {title.title_view_grid}
+                                    </ReactTooltip>
+                                    <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                                    <ReactTooltip data-tip id="List" place="bottom" effect="solid">
+                                        {title.title_view_list}
+                                    </ReactTooltip>
                                 </>
                                 :
                                 <>
-                                    <div className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19507.png')}></img></div>
-                                    <div className="col-1 list" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                    <div data-tip className="col-1 grid" data-for="Grid" onClick={chenge_grid}><img src={require('../../../img/Group 19507.png')}></img></div>
+                                    <ReactTooltip id="Grid" place="bottom" effect="solid">
+                                        {title.title_view_grid}
+                                    </ReactTooltip>
+                                    <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                    <ReactTooltip data-tip id="List" place="bottom" effect="solid">
+                                        {title.title_view_list}
+                                    </ReactTooltip>
                                 </>
                         }
                     </div>
@@ -112,7 +132,11 @@ function AllWorkspaces(props) {
                                     <div className="Workspace addWorkspace"  >
                                         <div className="logoWorkspacelist addWorkspace "
                                             style={{ backgroundColor: "#778CA2" }}
+                                            data-tip data-for="add_w"
                                         >
+                                            {/* <ReactTooltip data-tip id="add_w" place="top" effect="solid">
+                                                {title.title_add_workspace}
+                                            </ReactTooltip> */}
                                             +
                                         </div>
                                     </div>
@@ -125,13 +149,17 @@ function AllWorkspaces(props) {
                         :
                         <div className="Workspacegrid mt-4 addWorkspace" >
                             <div onClick={(e) => openAddNewWorkspace(e)}>
-                                <div className="logoWorkspace1 " >
+                                <div className="logoWorkspace1 pt-2" >
                                     <div className="mt-1 logo-w"
                                         style={{ backgroundColor: "#778CA2" }}
-                                    >+
+                                        data-tip data-for="add_w"
+                                    >+ </div>
+                                    {/* <ReactTooltip data-tip id="add_w" place="top" effect="solid">
+                                        {title.title_add_workspace}
+                                    </ReactTooltip> */}
+
                                 </div>
-                                </div>
-                                <div className="name1 pt-1 "><p>Add Workspace</p> </div>
+                                <div className="name1 mt-4"><p>Add Workspace</p> </div>
                             </div>
                         </div>
                     }
@@ -146,11 +174,11 @@ function AllWorkspaces(props) {
             {showAddWorkspace ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
-                        showToast={(obj)=> props.showToast(obj)}
+                        showToast={(obj) => props.showToast(obj)}
                         closeViewDetails={() => setShowWorkspace(false)}
                         from={addOrEditWorkspace} workspace={workspaceToEdit} /></div> : null
             }
-   
+
         </>
 
     )

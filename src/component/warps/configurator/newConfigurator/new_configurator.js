@@ -6,7 +6,8 @@ import $ from 'jquery'
 // import history from '../../../history'
 import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../Data/title.json'
 
 function NewConfigorator(props) {
     const [closeOrOpenConfigurator, setCloseOrOpenConfigurator] = useState(true)
@@ -24,7 +25,7 @@ function NewConfigorator(props) {
                 $(`#allProjects img`).removeClass("li-back")
 
             } else {
-                if (window.location.href.indexOf('myTasks') != -1) {
+                if (window.location.href.indexOf('allTasks') != -1) {
                     $("li").removeClass("li-back")
                     $(`#myTask`).addClass("li-back")
                     $(`#myTask img`).removeClass("li-back")
@@ -35,6 +36,7 @@ function NewConfigorator(props) {
                         $(`#milstones img`).removeClass("li-back")
                     } 
                 }
+
             }
 
 
@@ -52,13 +54,19 @@ function NewConfigorator(props) {
         })
 
     }
+
+    const closeConfigurator = (e) => {
+        setCloseOrOpenConfigurator(!closeOrOpenConfigurator)
+        props.openOrClose(closeOrOpenConfigurator)
+    }
     function goToAllProjects(e) {
         changeBackground(e)
         props.history.push("/" + props.user + "/allProjects")
     }
     function goToMyTasks(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/myTasks")
+        // props.history.push("/" + props.user + "/myTasks")
+        props.history.push("/" + props.user + "/allTasks")
     }
     function goToMilestones(e) {
         changeBackground(e)
@@ -70,9 +78,12 @@ function NewConfigorator(props) {
     // }
     return (
         <>
-            {/* <button class='closeConfigurator' onClick={() => setCloseOrOpenConfigurator(!closeOrOpenConfigurator)}>X</button> */}
-            <FontAwesomeIcon icon={["fas", "bars"]} class='closeConfigurator' onClick={() => setCloseOrOpenConfigurator(!closeOrOpenConfigurator)} />
-
+            <div>
+                <FontAwesomeIcon title="Close menu"
+                    icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
+                    } />
+             
+            </div>
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
 
@@ -94,8 +105,8 @@ function NewConfigorator(props) {
                         All Projects</li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        My Tasks</li>
-                        <li id="milstones" onClick={(e) => goToMilestones(e.target)}>
+                        All Tasks</li>
+                        <li onClick={(e) => goToMilestones(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         Milestones</li>
 
@@ -128,3 +139,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewConfigorator))
+

@@ -9,6 +9,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './tabs.css'
 import $ from "jquery"
 import taskDetails from '../task/taskDetails/taskDetails'
+import ReactTooltip from 'react-tooltip';
+import title from '../../../Data/title.json'
 function Tabs(props) {
 
     useEffect(() => {
@@ -124,13 +126,17 @@ function Tabs(props) {
                                                     <div id='newCardInput' class="container" >
                                                         {/* {showInput ? */}
                                                         <div
-                                                            class="card-header row">
+                                                            class="card-header row"   data-tip data-for="add_c"
+                                                            >
                                                             {/* autoFocus="true" */}
                                                             <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                 if (event.key === 'Enter') {
                                                                     newCard()
                                                                 }
                                                             }}></input>
+                                                            <ReactTooltip data-tip id="add_c" place="top" effect="solid">
+                                                                {title.title_add_card}
+                                                            </ReactTooltip>
                                                         </div>
                                                         {/* : null} */}
                                                     </div>

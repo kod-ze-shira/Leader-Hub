@@ -9,6 +9,8 @@ import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
 import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 import { Menu, MenuItem, Button, Select } from '@material-ui/core';
+import ReactTooltip from 'react-tooltip';
+// import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
@@ -146,10 +148,13 @@ function ViewCards(props) {
                         </input>
 
                     </div>
-                    <Button className="more col-1 "
+                    <Button className="more col-1 " data-tip data-for="more_a"
                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         . . .
-                    </Button>
+                </Button>
+                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                        {/* {title.title_more_actions} */}
+                    </ReactTooltip>
                     <Menu
                         id="simple-menu"
                         anchorEl={anchorEl}
@@ -166,7 +171,7 @@ function ViewCards(props) {
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
                     <p className="col-add-task"><a>
-                        <button className="new-task" onClick={addTask}>+</button>
+                        <button data-toggle="tooltip" data-placement="bottom" className="new-task" onClick={addTask}>+</button>
                     </a></p>
                 </div >
                 {
@@ -177,12 +182,12 @@ function ViewCards(props) {
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}>
                                     {props.cardFromMap.tasks.map((task, index) => (
-                                        <ViewTaskByCrad objectToast={(task) => props.showToastDelete(task)}
+                                        <ViewTaskByCrad
+                                            viewToastComplete={props.viewToastComplete}
+                                            objectToast={(task) => props.showToastDelete(task)}
                                             key={task._id} task={task}
                                             indexCard={props.indexCard}
                                             indexTask={index}
-                                        //   idTask={task._id} 
-                                        //   idCard={props.cardFromMap._id}
                                         />
                                     ))}
                                     {provided.placeholder}

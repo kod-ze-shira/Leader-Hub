@@ -4,9 +4,9 @@
 .menu__{
    
 background-color: white;
-width: 140%;
+/* width: 120%; */
 box-shadow: 0px 0px 10px #00000034;
-overflow-x: auto;
+overflow-y: auto;
 
 }
 
@@ -17,6 +17,7 @@ overflow-x: auto;
     margin-top: 1vh;
     max-height: 150px;
     overflow-y: auto;
+    justify-content: center;
 
 }
 .menu__ .form-control{
@@ -32,6 +33,12 @@ overflow-x: auto;
 .status-btn{
     margin-top: 55px;
 }
+@media screen and (min-width: 1650px) {
+  #descriptionProject{
+    height:250px
+  }
+
+}
 .create-label{
   background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box;
 background: #75798E 0% 0% no-repeat padding-box;
@@ -39,6 +46,11 @@ border: 1px solid #707070;
 opacity: 0.15;
     margin-top: 1vh;
     margin-bottom: 3vh;
+    /* vertical-align: middle !important; */
+
+    /* justify-content: center !important; */
+
+/* -ms-transform-origin-x:auto !important;  */
 /* opacity: 0.5; */
 /* border-top: 1px solid #707070; */
 }
@@ -76,7 +88,10 @@ textarea:focus{
     display: inline;
 }
 .task-details{
-  overflow-y: auto !important;
+  /* overflow-x: auto !important; */
+}
+.btns-in-view-details-task{
+  /* margin-top:8vh  !important; */
 }
 .task-details > .form-group{
     /* margin-bottom: 0.5rem !important; */
@@ -95,23 +110,15 @@ z-index: 9999 !important;
     display: inline-block;
 
 }
-.placeHolder-status{
-      /* display: inline-block !important; */
 
+.milestones-span{
+  font-size:15px;
 }
-.placehlder-first-status{
-    /* display: inline-block; */
-}
-.placeHolder-status span{
-    margin-left: 29px; 
-    float:right !important;
-    
-     /* margin-bottom: 1.5vh !; */
-}.switch {
+.switch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 22px;
+    width: 36px;
+    height: 19px;
   }
   
   .switch input { 
@@ -135,10 +142,10 @@ z-index: 9999 !important;
   .slider:before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
+    height: 14px;
+    width: 14px;
+    left: 4px;
+    bottom: 2.3px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;

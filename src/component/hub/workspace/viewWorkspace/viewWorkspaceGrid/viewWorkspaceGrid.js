@@ -8,6 +8,8 @@ import bin from '../../../../img/bin.png'
 import duplicate from '../../../../img/duplicate-outline.png'
 import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
+import ReactTooltip from 'react-tooltip';
+import title from '../../../../../Data/title.json'
 
 function ViewWorkspaceGrid(props) {
 
@@ -58,20 +60,32 @@ function ViewWorkspaceGrid(props) {
                 <div className="row iconsActions" >
                     <div
                         className=" edit iconsAction" onClick={editWorkspace}>
-                        <img class='imageIcon' src={pencil}></img>
+                        <img class='imageIcon' src={pencil} data-tip data-for="edit"
+                        ></img>
+                        <ReactTooltip data-tip id="edit" place="top" effect="solid">
+                            {title.title_edit}
+                        </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace">|</div>
                     <div className=" delete iconsAction"
-                        onClick={delete_workspace}>
-                        <img class='imageIcon' src={bin}></img>
+                        onClick={delete_workspace}
+                        data-tip data-for="delete"
+                    >
+                        <img class='imageIcon' src={bin} ></img>
+                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                            {title.title_delete}
+                        </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div>
-                    <div className="add iconsAction" onClick={duplicateWorkspace}>
-                        <img class='imageIcon' src={duplicate}></img>
+                    <div className="add iconsAction" onClick={duplicateWorkspace} data-tip data-for="duplicate" >
+                        <img class='imageIcon' src={duplicate} ></img>
+                        <ReactTooltip data-tip id="duplicate" place="top" effect="solid">
+                            {title.title_duplicate}
+                        </ReactTooltip>
 
                     </div>
                 </div>
-                <div className="Workspacegrid"
+                <div className="Workspacegrid pt-2"
                     onClick={routeToProject} >
                     <div>
                         <div className="logoWorkspace1 " >
@@ -81,11 +95,12 @@ function ViewWorkspaceGrid(props) {
                                 {workspace.name ? workspace.name[0].toUpperCase() : null}
                             </div>
                         </div>
-                        <div className="name "><p className='nameWorkspaceInGrid' title={workspace.name}>{workspace.name}</p> </div>
-                        <div className=" description-and-productionDate">
-                            <p className="productionDateW">{workspace.productionDate}</p>
-                        </div>
-                    </div>
+                        <div className="name mt-1"><p className='nameWorkspaceInGrid' title={workspace.name}>{workspace.name}</p> </div>
+                        <p className="productionDateW" data-tip data-for="date_p">{workspace.productionDate}</p>                    </div>
+
+                    <ReactTooltip data-tip id="date_p" place="bottom" effect="solid">
+                        {title.title_production_date}
+                    </ReactTooltip>
                 </div>
             </div>
         </>
