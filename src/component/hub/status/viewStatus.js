@@ -35,9 +35,7 @@ function ViewStatus(props) {
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         }
     }
-
     return (
-
         <>
             <div className="container display-task ">
                 <div className="row ml-2">
