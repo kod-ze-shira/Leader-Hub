@@ -13,7 +13,7 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
-import Toast from '../../toast/toast'
+import Toast from '../../toast/toastTaskCompleted'
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -122,7 +122,8 @@ function ViewTaskByCrad(props) {
         }
         props.setTaskComplete(completeTask)
         props.completeTask(task)
-        setViewCompleteTask(true)
+        props.viewToastComplete(true)
+        // setViewCompleteTask(true)
     }
     const editTaskNameInReduxs = (taskName) => {
 

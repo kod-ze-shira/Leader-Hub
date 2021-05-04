@@ -37,12 +37,16 @@ function CardsPage(props) {
             case 'tabs':
                 return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} />
             case 'list':
-                return <ProjectPlatform showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
+                return <ProjectPlatform
+                viewToastComplete={props.viewToastComplete}
+                showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
                 return <DisplayGantt />
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
-                return <ProjectPlatform showToast={showToast} flag={flag} />
+                return <ProjectPlatform 
+                viewToastComplete={props.viewToastComplete}
+                showToast={showToast} flag={flag} />
         }
     }
     return (
