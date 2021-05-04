@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import title from '../../../../Data/title.json'
-
+import ReactTooltip from 'react-tooltip';
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
@@ -125,10 +125,17 @@ function EditProject(props) {
                         data-toggle="tooltip"
                         data-placement="top"
                         data-toggle="tooltip" data-placement="bottom" title={title.title_delete}
-                        className="delete-btn col-4 " >
+                        className="delete-btn col-4 "
+                        data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                </button>
-                    <button button onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
+                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                            {title.title_delete}
+                        </ReactTooltip>
+                    </button>
+                    <button data-tip data-for="save" onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
+                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                        {title.title_save}
+                    </ReactTooltip>
                 </div>
             </div>
 
