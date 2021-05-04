@@ -17,7 +17,8 @@ function TaskNotBelongCardForUser(props) {
 
     const renderTasks = props.tasks.map((task) => {
         console.log(task);
-        return <TasksNotBelongCardByMap key={task._id} task={task} />
+        return task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
+            <TasksNotBelongCardByMap key={task._id} task={task} /> : null
     })
     return (
         <div className="body-workspace mt-3">
@@ -30,16 +31,14 @@ function TaskNotBelongCardForUser(props) {
             </div>
             {/* <i class="fas fa-times"></i> */}
             {/* <button onClick={() => sestSearchTask('')}>X</button> */}
-            {searchTask}
             <div class="show-task row mx-4 mt-3 headerTableTask" >
-
                 <label class="ml-3 pl-6 col-7 labelAllTask"> All task </label>
                 <label class="col propertiesAllTask">Workspace</label>
                 <label class="col propertiesAllTask">Project</label>
                 <label class=" col propertiesAllTask">Card</label>
             </div>
 
-            <div className="mt-5">
+            <div className="mt-1">
                 {props.tasks.length ?
                     renderTasks
                     : null}

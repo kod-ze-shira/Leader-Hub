@@ -104,6 +104,7 @@ function ViewCardsTabs(props) {
     return (
         <>
             <div className="col-3 mt-4" >
+                {/* {props.cardFromMap._id} */}
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
