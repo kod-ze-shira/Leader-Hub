@@ -25,11 +25,12 @@ function NewConfigorator(props) {
                 $(`#allProjects img`).removeClass("li-back")
 
             } else {
-                if (window.location.href.indexOf('myTasks') != -1) {
+                if (window.location.href.indexOf('allTasks') != -1) {
                     $("li").removeClass("li-back")
                     $(`#myTask`).addClass("li-back")
                     $(`#myTask img`).removeClass("li-back")
                 }
+
             }
 
 
@@ -56,7 +57,8 @@ function NewConfigorator(props) {
     }
     function goToMyTasks(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/myTasks")
+        // props.history.push("/" + props.user + "/myTasks")
+        props.history.push("/" + props.user + "/allTasks")
     }
     function goToMilestones(e) {
         changeBackground(e)
@@ -96,7 +98,7 @@ function NewConfigorator(props) {
                         All Projects</li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        My Tasks</li>
+                        All Tasks</li>
                         <li onClick={(e) => goToMilestones(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         Milestones</li>

@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TasksNotBelongCardByMap from './tasksNotBelongCardByMap'
-import ViewTaskByCrad from '../viewTaskByCard/viewTaskByCrad'
-function TaskNotBelongCardForUser(props) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './taskNotBelongCardForUser.css'
 
+function TaskNotBelongCardForUser(props) {
+    const [searchTask, setSearchTask] = useState('')
     useEffect(() => {
         props.getAllTasksNotBelongsCardForUser()
 
@@ -15,11 +17,28 @@ function TaskNotBelongCardForUser(props) {
 
     const renderTasks = props.tasks.map((task) => {
         console.log(task);
-        // return <h1>{task.name}</h1>
         return <TasksNotBelongCardByMap key={task._id} task={task} />
     })
     return (
         <div className="body-workspace mt-3">
+            <div class="input-group">
+                <FontAwesomeIcon class='cleanSearchTask' onClick={() => setSearchTask('')} icon={["fas", "times"]} />
+
+                <input id="searchTask" type="text" class="form-control searchTask"
+                    onChange={(e) => setSearchTask(e.target.value)}
+                    value={searchTask} placeholder="Write a task name" />
+            </div>
+            {/* <i class="fas fa-times"></i> */}
+            {/* <button onClick={() => sestSearchTask('')}>X</button> */}
+            {searchTask}
+            <div class="show-task row mx-4 mt-3 headerTableTask" >
+
+                <label class="ml-3 pl-6 col-7 labelAllTask"> All task </label>
+                <label class="col propertiesAllTask">Workspace</label>
+                <label class="col propertiesAllTask">Project</label>
+                <label class=" col propertiesAllTask">Card</label>
+            </div>
+
             <div className="mt-5">
                 {props.tasks.length ?
                     renderTasks

@@ -36,6 +36,8 @@
     height: auto;
     overflow: auto;
     min-height:84px ;
+    width: 97%;
+    margin-left: 2%;
   }
 
   .title-view-details{
