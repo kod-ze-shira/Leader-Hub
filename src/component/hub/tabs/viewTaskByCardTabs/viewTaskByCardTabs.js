@@ -17,7 +17,6 @@ function ViewTaskByCradTabs(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     // const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCard].tasks[props.indexTask].name)
     const [editTaskName, setEditTaskName] = useState(props.task.name)
-
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [task, setTask] = useState({
@@ -124,6 +123,7 @@ function ViewTaskByCradTabs(props) {
                                         <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                     </Menu>
                                 </div>
+                                {/* <span>{props.task._id}</span> */}
                                 <input
                                     className="form-control col-12"
                                     value={props.task.name}

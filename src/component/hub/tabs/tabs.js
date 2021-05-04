@@ -25,34 +25,51 @@ function Tabs(props) {
     const [taskToDetails, setTaskToDetails] = useState("")
 
     function onDragEndׂ(e) {
-        debugger
         if (e.source.droppableId && e.destination) {
-            if (props.cards.find(card => card._id == e.draggableId))
+            if (props.cards.find(card => card._id == e.draggableId)) {
                 onDragEndׂCard(e)
+            }
             else {
+
                 let iSourse, iDestination
+                let iCardTo, iCardFrom;
                 for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
-                    if (props.cards[iSourse]._id == e.source.droppableId)
+                    if (props.cards[iSourse]._id == e.source.droppableId) {
+                        iCardFrom = props.cards[iSourse]._id;
                         break
+                    }
                 }
                 for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
-                    if (props.cards[iDestination]._id == e.destination.droppableId)
+                    if (props.cards[iDestination]._id == e.destination.droppableId) {
+                        iCardTo = props.cards[iDestination]._id;
                         break
+
+                    }
                 }
-                console.log(e.source.index, e.destination.index, " ", iSourse, iDestination)
-                const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-                const replaceIServer = [e.source.droppableId, e.destination.droppableId]
+                // console.log(e.source.index, e.destination.index, iSourse, iDestination)
+                // const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+                const replace = [iSourse, iDestination]
+                // /: taskId/:cardId/dragTaskFromCardToCard‏
+                debugger
+
+                const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
                 props.moveTaskBetweenCards(replaceIServer)
-                props.changeTaskplace(replace)
+                // props.changeTaskplace(replace)
             }
         }
     };
     function onDragEndׂCard(e) {
+        debugger
         let icard
         for (icard = 0; icard < props.cards.length; icard++)
             if (props.cards[icard]._id == e.destination.droppableId)
                 break
-        const replace = [e.source.index, icard]
+        let indexSource = 0
+        for (let index = 0; index < props.cards.length; index++) {
+            if (props.cards[index]._id == e.source.droppableId)
+                indexSource = index
+        }
+        const replace = [indexSource, icard]
 
         props.changeCardPlace(replace)
     }
@@ -102,9 +119,16 @@ function Tabs(props) {
     return (
         <><div className="body">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
+            {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
+            {/* ואז זה יעבור תקין */}
             {props.cards.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
-                    <Droppable droppableId={props.cards[0]._id} >
+                    {/* {props.cards[0]._id} */}
+
+                    <Droppable
+                        // droppableId='gggg'
+                        droppableId={props.cards[0]._id}
+                    >
                         {provided => (
                             <div
                                 ref={provided.innerRef}
@@ -125,8 +149,8 @@ function Tabs(props) {
                                                     <div id='newCardInput' class="container" >
                                                         {/* {showInput ? */}
                                                         <div
-                                                            class="card-header row"   data-tip data-for="add_c"
-                                                            >
+                                                            class="card-header row" data-tip data-for="add_c"
+                                                        >
                                                             {/* autoFocus="true" */}
                                                             <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                 if (event.key === 'Enter') {
