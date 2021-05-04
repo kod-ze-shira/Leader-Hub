@@ -66,12 +66,13 @@ function ProjectsByWorkspace(props) {
         }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
-        return workspace.projects.map((project) => {
+        return workspace.projects.map((project, index) => {
             let p = project.name ? project : project.project
             return p.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
                 <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     myProject={p}
+                    indexProject={index}
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)}
                     shareProject={openEditOrShareProject} />
                 : null

@@ -80,9 +80,9 @@
   } */
   
   /* Handle on hover */
-  /* ::-webkit-scrollbar-thumb:hover {
+  ::-webkit-scrollbar-thumb:hover {
     background: #44D7B6; 
-  } */
+  }
   .color-task{
     width: 60px;
     height: 7px;

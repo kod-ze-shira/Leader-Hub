@@ -28,8 +28,16 @@ function NewConfigorator(props) {
                     $("li").removeClass("li-back")
                     $(`#myTask`).addClass("li-back")
                     $(`#myTask img`).removeClass("li-back")
+                } else {
+                    if (window.location.href.indexOf('milestones') != -1) {
+                        $("li").removeClass("li-back")
+                        $(`#milstones`).addClass("li-back")
+                        $(`#milstones img`).removeClass("li-back")
+                    } 
                 }
             }
+
+
 
 
     })
@@ -80,20 +88,17 @@ function NewConfigorator(props) {
                         <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                             <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
                     My Workspace </li>
-                        {/* id='myWorkspace' */}
-                        {/* <li onDrop onClick={(e) => changeBackground(e.target)}> */}
+
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                             <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                         All Projects</li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         My Tasks</li>
-                        <li onClick={(e) => goToMilestones(e.target)}>
+                        <li id="milstones" onClick={(e) => goToMilestones(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                         Milestones</li>
-                        {/* <li onClick={(e) => changeBackground(e.target)}>
-                        <img className="mr-2" src={require('../../../img/form-line.svg')}></img>
-                        Forms</li> */}
+
                         {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/mail-open-outline.svg')}></img>
                         Email</li> */}

@@ -13,7 +13,6 @@ import { editTask } from '../../redux/middleware/taskCrud';
 export default class Gantt extends Component {
     constructor(props) {
         super(props);
-
         this.initZoom();
     }
 
@@ -42,7 +41,7 @@ export default class Gantt extends Component {
         gantt.ext.zoom.setLevel(value);
     }
     initGanttDataProcessor() {
-        // const onDataUpdated = this.props.onDataUpdated;
+        const onDataUpdated = this.props.onDataUpdated;
     }
     componentDidUpdate() {
 
@@ -59,6 +58,21 @@ export default class Gantt extends Component {
     }
     componentDidMount() {
 
+        gantt.plugins({
+            tooltip: true,
+            marker: true
+        });
+
+        var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
+        var markerId = gantt.addMarker({
+            start_date: new Date(),
+            css: "today",
+            text: "Now",
+            title: dateToStr(new Date())
+        });
+        gantt.getMarker(markerId);
+
+
         gantt.templates.task_text = function (start, end, task) {
 
             let endDate = JSON.stringify(end)
@@ -72,8 +86,6 @@ export default class Gantt extends Component {
                 + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
 
             let editTaskInRedux = { "_id": task.id, "dueDate": newEndDate, "startDate": newStartDate }
-            // console.log(editTaskInRedux)
-            // this.setState({ editTask: editTaskInRedux })
             store.dispatch(actions.editTask(editTaskInRedux))
             if (task.progress > 1) {
                 // return task.text;
@@ -81,14 +93,26 @@ export default class Gantt extends Component {
             else {
                 // return task.text + " " + `<b>${(task.progress) * 100}%</b>`;
             }
+            if (task.milestones) {
+                debugger
+                var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
+                var markerId = gantt.addMarker({
+                    start_date: task.end_date,
+                    css: "milestones_",
+                    text: "milestone",
+                    title: dateToStr(task.end_date)
+                });
+                gantt.getMarker(markerId);
+            }
+
             return task.text;
+
 
         };
 
-        gantt.attachEvent("onAfterTaskDrag", function (id, mode, e, start, end) {
-
-            // store.dispatch(actions.editTask(editTaskInRedux))
-        });
+        // gantt.attachEvent("onAfterTaskDrag", function (id, mode, e, start, end) {
+        //     // store.dispatch(actions.editTask(editTaskInRedux))
+        // });
 
         gantt.templates.gantt_cell = function (start, end, task) {
             return task.text = "knkl";
@@ -111,11 +135,9 @@ export default class Gantt extends Component {
                 callback: function (result) {
                 }
             });
+
         });
 
-        gantt.plugins({
-            tooltip: true,
-        });
         gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
             if (task.priority == "high") {
                 return true;
@@ -131,6 +153,9 @@ export default class Gantt extends Component {
         gantt.templates.scale_cell_class = function (date) {
             return "weekend";
         }
+
+        // gantt.init(this.ganttContainer);
+
         gantt.templates.task_class = function (start, end, task) {
 
             if (task.progress > 0 && task.progress < 1) {

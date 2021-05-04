@@ -109,3 +109,22 @@
 .gantt_popup_button ,.dhtmlx_popup_button ,.gantt_link_cancel_btn_button ,.dhtmlx_link_cancel_btn_button{
   background-color:#ecfbf8 !important;
 }
+.today{
+  background-color: rgb(218, 246, 247) !important;
+  width: 6vh !important;
+  margin-left: -3vh !important;
+  z-index: 0!important;
+  opacity: 0.5 !important;
+}
+
+.gantt_marker_content {
+  color: black !important;
+}
+.milestones_{
+  /* margin-left: -3vh !important;
+  margin-right: -3vh !important; */
+  vertical-align: middle !important;
+  background-color: #b2e5e7 !important;
+  image-rendering: url("../img/milstone.svg")!important;
+
+}
