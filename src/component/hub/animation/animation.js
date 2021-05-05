@@ -6,7 +6,7 @@ export default function Animation(props) {
     fun()
     function fun() {
         setTimeout(() => {
-            $(".rocketShip").remove();
+            // $(".rocketShip").remove();
             // $('.rocketShip').css('display', 'none')
         }, 3000);
 

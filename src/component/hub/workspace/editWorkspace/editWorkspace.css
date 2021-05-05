@@ -32,10 +32,10 @@
   } */
 
   .descriptionWorkspace{
-    max-height: 27vh; 
+    max-height: 30vh;
     height: auto;
     overflow: auto;
-    min-height:84px ;
+    min-height: 20vh;
     width: 97%;
     margin-left: 2%;
   }
