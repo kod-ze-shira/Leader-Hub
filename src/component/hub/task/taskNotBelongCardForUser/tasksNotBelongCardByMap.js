@@ -1,16 +1,13 @@
-// import React, { useEffect, useState } from 'react'
-// import { connect } from 'react-redux';
+
 import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect, useRef } from 'react'
 // import './ViewTaskByCrad.css'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
-import { InputGroup, FormControl, Table } from 'react-bootstrap'
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -19,7 +16,13 @@ function TasksNotBelongCardByMap(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
+    const [currentIndexTask, setCurrentIndexTask] = useState("")
+    const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
+
+    // const [viewCompleteTask, setViewCompleteTask] = useState(false)
+    const [doneStatus, setDoneStatus] = useState(props.task.complete)
+
     const [task, setTask] = useState({
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
@@ -30,52 +33,80 @@ function TasksNotBelongCardByMap(props) {
     }, [props.task])
 
 
-    const showDetails = (from) => {
-        setDetailsOrEditTask(from)
-        setViewDetails(true)
+    // const showDetails = (from) => {
+    //     props.setTaskName(task.name)
+    //     setDetailsOrEditTask(from)
+    //     props.setCurrentIndexTask(currentIndexTask)
+    //     props.setCurrentIndexCard(currentIndexCard)
+    //     setViewDetails(true)
+    // }
+    const editTask = () => {
+        let temp = { ...task }
+        temp.name = editTaskName
+        setTask(temp)
     }
-    const closeDetails = (e) => {
+    $(window).click(function () {
         setViewDetails(false)
-    }
+    });
 
+    // function openViewDetails(event) {
+    //     showDetails("viewTaskByCard")
+    //     event.stopPropagation();
+    // }
+    // function stopP(event) {
+    //     event.stopPropagation();
+    // }
 
     function addChalalit() {
+        if (props.task.complete == false)
+            setShowChalalit(true)
+    }
+
+    const editCompleteTask = () => {
+        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
-        setTask(task.status = props.statuses[2], task.endDate = today)
-        debugger
-        props.EditTask("add"+props.task)
-        setShowChalalit(true)
+        let completeTask = {
+            "_id": props.task._id,
+            "name": props.task.name,
+            "description": props.task.description,
+            "dueDate": props.task.dueDate,
+            "startDate": props.task.startDate,
+            "complete": true,
+            "endDate": today,
+            "status": props.statuses[2],
+            // "card": props.task.card
+        }
+        props.setTaskComplete(completeTask)
+        props.completeTask(task)
+        // setViewCompleteTask(true)
     }
-    function deleteTask(value) {
-        props.showToast(props.task)
-    }
-    function overTask(id) {
-        $(`#${id}`).css({ 'opacity': '0.3' })
-    }
-    function outOver(id) {
-        $(`#${id}`).css({ 'opacity': '0' })
-    }
-    const editTask = () => {
 
-        setTask(task.name = editTaskName)
-        props.EditTask(props.task);
+    const changeFiledInTask = (input) => {
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        let value = input.target.value
+        let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        if (input.target.name == "complete")
+            editCompleteTask()
+        console.log("task", props.task.complete);
     }
+
+    function deleteTask() {
+        console.log(props.task._id)
+        $(`#${props.task._id + "disappear"}`).css("display", "none")
+        props.objectToast({ 'type': 'Task', 'object': props.task })
+
+    }
+
     return (
         <>
-            {/* <Draggable draggableId={props.task._id} index={props.index}>
-                {provided => (
-                    <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                    > */}
             <div
-                // onMouseOver={(e) => overTask(props.task._id)}
-                // onMouseOut={() => outOver(props.task._id)}
+                style={{ 'min-height': '36px' }}
                 className="show-task row mx-4 border-bottom "
             >
 
@@ -87,27 +118,30 @@ function TasksNotBelongCardByMap(props) {
                     <input type="checkbox" />
                     <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
                 </label>
+
                 <input
-                    className="show-card col-3"
-                    value={editTaskName}
-                    onChange={(e) => setEditTaskName(e.target.value)}
-                    onBlur={(e) => editTask(e)}
-                    onKeyPress={event => {
-                        if (event.key === 'Enter') {
+                    name="name" id="name" title={props.task.name}
+                    className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
+                    value={props.task.name}
+                    onChange={(e) => changeFiledInTask(e)}
+                    onBlur={(e) => editTask()}
+                    onKeyPress={e => {
+                        if (e.key === 'Enter') {
                             editTask()
                         }
                     }}
-                ></input>
+                >
+                </input>
                 <label className="check-task py-2  px-2 col-3 ">
-                    <button onClick={(e) => showDetails("viewTaskByCard")}>view details +</button>
                 </label>
-                <label className="check-task border-left  py-2  px-2 col ">{props.task.status}
+                <label className="check-task border-left  py-2  px-2 col ">
+                    {/* {props.task.status} */}
                 </label>
                 <label className="check-task border-left  py-2  px-2 col " >
-                    <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div>
+                    {/* <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div> */}
                 </label>
-                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
-
+                <label className="check-task border-left  py-2  px-2 col">
+                    {/* {props.task.dueDate} */}
                 </label>
 
                 {viewDetails ?

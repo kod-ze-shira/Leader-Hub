@@ -23,7 +23,7 @@
     "bootstrap-table": "^1.18.1",
     "chroma-js": "^2.1.0",
     "date-diff": "^0.2.2",
-    "dhtmlx-gantt": "^7.1.1",
+    "dhtmlx-gantt": "^7.1.2",
     "history": "^5.0.0",
     "icheck-bootstrap": "^3.0.1",
     "jquery": "^3.5.1",

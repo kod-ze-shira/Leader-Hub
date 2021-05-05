@@ -5,12 +5,13 @@ import Gantt from '../gantt';
 import { connect } from 'react-redux'
 import './displayGantt.css'
 import workspaces from '../workspace.json'
+import { gantt } from 'dhtmlx-gantt';
 
 
 function DisplayGantt(props) {
 
     useEffect(() => {
-        
+
     }, [props.cards])
 
     const allWorkspace = { workspaces };
@@ -56,7 +57,8 @@ function DisplayGantt(props) {
                     task.name, start_date:
                     startDate,
                 duration: diffDays,
-                progress: 0.3
+                progress: 0.3,
+                milestones: task.milestones
             })
         })
         mone.push(index)

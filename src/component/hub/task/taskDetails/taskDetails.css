@@ -33,7 +33,7 @@ overflow-y: auto;
 .status-btn{
     margin-top: 55px;
 }
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1650px) {
   #descriptionProject{
     height:250px
   }
