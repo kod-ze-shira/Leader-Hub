@@ -13,6 +13,7 @@ function ViewAllStatuses(props) {
 
     useEffect(() => {
         console.log(props.task._id);
+        // if (props.statuses && props.statuses.length > 0)
         props.getAllStatusesTaskForWorkspace();
         console.log(props.statuses);
         console.log(props.status);
@@ -57,13 +58,13 @@ function ViewAllStatuses(props) {
             <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
                 <div className="status-list">
                     {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
-                        
-                    < ViewStatus saveStatus={(e) => saveStatus(e)}
-                        changeStatus={changeStatusByIndex}
-                        status={status} index={index}
-                       openPopUp={props.openPopUp}
-                    />
-                    
+
+                        < ViewStatus saveStatus={(e) => saveStatus(e)}
+                            changeStatus={changeStatusByIndex}
+                            status={status} index={index}
+                            openPopUp={props.openPopUp}
+                        />
+
 
                     )) : null}
                     {openPopUp ?
