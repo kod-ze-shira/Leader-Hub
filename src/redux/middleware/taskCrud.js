@@ -237,7 +237,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
-        debugger
+
         let taskId = action.payload._id
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
@@ -251,7 +251,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ taskId }),
             success: function (data) {
-                debugger
+
                 console.log("success")
                 console.log(data.result);
             },

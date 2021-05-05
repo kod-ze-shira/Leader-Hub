@@ -1,8 +1,8 @@
 .rocketShip {
-    height: 57px;
+    height:100px;
     position: relative;
     animation-name: example;
-    animation-duration: 3s;
+    animation-duration: 4s;
     z-index: 99999;
 
   }

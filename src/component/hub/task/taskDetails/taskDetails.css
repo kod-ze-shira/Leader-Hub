@@ -173,3 +173,12 @@ z-index: 9999 !important;
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .descriptionTask{
+    max-height: 15vh;
+    height: auto;
+    overflow: auto;
+    min-height: 16vh;
+    width: 97%;
+    margin-left: 2%;
+  }
