@@ -14,9 +14,8 @@ import title from '../../../Data/title.json'
 function Tabs(props) {
 
     useEffect(() => {
-    }, [props.projectId, props.focusInputCard])
+    }, [props.projectId, props.focusInputCard, props.cards])
 
-    let b;
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
@@ -46,14 +45,14 @@ function Tabs(props) {
                     }
                 }
                 // console.log(e.source.index, e.destination.index, iSourse, iDestination)
-                // const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-                const replace = [iSourse, iDestination]
+                const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+                // const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard‏
-                debugger
-
-                const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
+                props.changeTaskplace(replace)
+                const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 props.moveTaskBetweenCards(replaceIServer)
-                // props.changeTaskplace(replace)
+
+
             }
         }
     };
@@ -118,10 +117,7 @@ function Tabs(props) {
             {/* ואז זה יעבור תקין */}
             {props.cards.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
-                    {/* {props.cards[0]._id} */}
-
                     <Droppable
-                        // droppableId='gggg'
                         droppableId={props.cards[0]._id}
                     >
                         {provided => (

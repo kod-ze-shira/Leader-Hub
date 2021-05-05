@@ -135,7 +135,7 @@ function ViewTaskByCrad(props) {
     }
     return (
         <>
-            <Draggable draggableId={props.task._id} index={props.index}>
+            <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
                 {provided => (
                     <div
                         {...provided.draggableProps}
@@ -145,7 +145,7 @@ function ViewTaskByCrad(props) {
                         <div id={props.task._id + "disappear"}>
                             <div onMouseOver={(e) => overTask(props.task._id)}
                                 onMouseOut={() => outOver(props.task._id)}
-                                className="show-task row mx-4 border-bottom"
+                                className="show-task row mx-4 border-bottom    zA yO x7 mt-list"
                             >
                                 <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}

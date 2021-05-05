@@ -176,7 +176,7 @@ function ViewCards(props) {
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                        <Droppable droppableId={props.cardFromMap._id} >
+                        <Droppable droppableId={props.cardFromMap._id}  >
                             {provided => (
                                 <div
                                     ref={provided.innerRef}

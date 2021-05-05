@@ -4,6 +4,7 @@ import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import Select from 'react-select';
+import { withRouter } from 'react-router-dom';
 
 
 function SelectProject(props) {
@@ -11,9 +12,7 @@ function SelectProject(props) {
     const { idProject } = useParams();
 
     useEffect(() => {
-        // props.getProjectByIdInServer(idProject)
-        // if (!props.workspaces[props.indexWorkspace].projects[props.indexProject])
-        //     props.getProjectsByWorkspaceId(props.workspaces[props.indexWorkspace].projects[props.indexProject].workspace)
+
     }, [props.workspaces])
 
     //to chang the project that user selected
@@ -23,6 +22,7 @@ function SelectProject(props) {
         props.setCurrentIndexProject(id.projectIndex)
         project = props.workspaces[props.indexWorkspace].projects.find(p => p._id == id.value)
         props.getCardsByProjectId(project._id)
+        props.history.push("/" + props.user + "/projectPlatform/" + project._id)
     }
 
     const dot = (color = '#ccc') => ({
@@ -97,8 +97,8 @@ function SelectProject(props) {
     return (
         <>
             <div className="react-select">
-                
-                    < Select
+
+                < Select
                     className="select-project"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedProject(e)}
@@ -140,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SelectProject)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectProject))
 
 
 

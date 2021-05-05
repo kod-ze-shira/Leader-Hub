@@ -89,7 +89,7 @@ function ViewTaskByCradTabs(props) {
         <>
 
             {/* <div className="color-task mb-2 ml-2" ></div> */}
-            <Draggable draggableId={props.task._id} index={props.index}>
+            <Draggable draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
                         {...provided.draggableProps}

@@ -297,8 +297,11 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action => {
     if (action.type === 'MOVE_TASK_BETWEEN_CARDS') {
 
+        let cardSours = getState().public_reducer.cards[action.payload[3]].tasks ? getState().public_reducer.cards[action.payload[3]].tasks : []
+        let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
+        debugger
+        let obj = { "cardFromTasks": cardSours, "cardToTasks": cardDest }
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
-        console.log(urlData)
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -306,7 +309,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
                 Authorization: getState().public_reducer.tokenFromCookies
             },
             contentType: "application/json; charset=utf-8",
-            // data: JSON.stringify({}),
+            data: JSON.stringify({ "cardFromTasks": cardSours, "cardToTasks": cardDest }),
             success: function (data) {
                 console.log("success")
                 console.log(data);
