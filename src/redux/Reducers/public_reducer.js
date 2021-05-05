@@ -39,12 +39,27 @@ const publicData = {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url })
+                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
     },
+    setIdFiles(state, action) {
+        // dispatch(actions.setIdFiles(data.result.files));
+        debugger
+        action.payload.map((file) => {
+            state.arrFilesOfTask.map((myFile, index) => {
+                if (myFile.url == file.url)
+                    state.arrFilesOfTask[index]._id = file._id
+            })
+            state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.map((myFile, index) => {
+                if (myFile.url == file.url)
+                    state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index]._id = file._id
+            })
+        })
 
+        debugger
+        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
+    },
     setFileFromTask(state, action) {
-
         state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload })
     },
     setUserName(state, action) {

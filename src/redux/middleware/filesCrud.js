@@ -26,6 +26,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     headers: { "authorization": jwtFromCookie },
                     data: formData,
                     success: (data) => {
+
                         var myData = { "files": data.filesData }
                         dispatch(actions.setNewFilesInTask(data.filesData))
                         console.log("finish first ajax  " + JSON.stringify(myData));
