@@ -37,8 +37,8 @@ function TaskDetails(props) {
 
 
     const openPopUpStatus = (event) => {
+        event.stopPropagation();
         setOpenPopUp(!openPopUp)
-        // event.stopPropagation();
 
     }
     $(window).click(function () {
@@ -51,7 +51,7 @@ function TaskDetails(props) {
     }
     function closeStatus(event) {
 
-        setOpenPopUp(!openPopUp)
+        setOpenPopUp(false)
     }
 
 
