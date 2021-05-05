@@ -107,3 +107,7 @@ opacity: 0.15;
 /* opacity: 0.5; */
 /* border-top: 1px solid #707070; */
 }
+.disabled{
+    pointer-events: none !important;
+    opacity:0.5;
+}
