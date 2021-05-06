@@ -45,7 +45,6 @@ const publicData = {
     },
     setIdFiles(state, action) {
         // dispatch(actions.setIdFiles(data.result.files));
-
         action.payload.map((file) => {
             state.arrFilesOfTask.map((myFile, index) => {
                 if (myFile.url == 'new' && file.name == file.name) {
@@ -62,8 +61,6 @@ const publicData = {
                 }
             })
         })
-
-
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
@@ -301,8 +298,6 @@ const publicData = {
     // },
 
     deleteFilesInArr(state, action) {
-        debugger
-
         state.arrDeleteFilesOfTask = []
     },
     removeFileInRedux(state, action) {

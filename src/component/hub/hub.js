@@ -53,7 +53,6 @@ function Hub(props) {
     const deleteObject = () => {
         console.log(objectToDelete)
         setShowToastDelete(false)
-        debugger
         props['remove' + objectToDelete.type](objectToDelete.object._id)
 
     }
@@ -107,15 +106,6 @@ function Hub(props) {
                     </div>
                     {/* // : null} */}
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
-                        {/* {viewDetails ?
-                            <div className="closeDet" onClick={(e) => stopP(e)}>
-                                <ViewDetails
-                                    closeViewDetails={() => setViewDetails(false)}
-                                    from={formViewDitails}
-                                />
-                            </div>
-                            : null
-                        } */}
                         <Switch>
 
                             <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >

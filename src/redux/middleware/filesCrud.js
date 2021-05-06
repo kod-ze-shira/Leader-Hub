@@ -105,7 +105,6 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
 export const removeFile = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_FILE') {
-        debugger
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         let fileUrlArr = action.payload
 

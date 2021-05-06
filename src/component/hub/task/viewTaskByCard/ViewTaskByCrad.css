@@ -50,13 +50,17 @@
     background-color: #FFFFFF;
     border: 1px solid #34A38B;
     border-radius: 50%;
+    
   }
-  
+  .checkmark-tabs{
+    right: 10% !important;
+  }
   .checkmark-place{
     top: 7px;
     left: 0;
     
   }
+  
   
   .check-task:hover input ~ .checkmark {
     background-color: #FFFFFF;
@@ -157,8 +161,21 @@
 padding: 4px;
   }
  .col-add-task{
-   width: 4vw;
+   width: 2vw;
  }
+ .check-task .css-yk16xz-control{
+border: none !important;
+ }
+ .check-task.css-yk16xz-control :active{
+   border: none !important;
+ }
+ .check-task.css-yk16xz-control :focus{
+  border: none !important;
+ }
+ .check-task .css-2b097c-container{
+   /* display: none !important; */
+}
+
   .status-task-done{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
     background:#D9F7F0 0% 0% no-repeat padding-box;

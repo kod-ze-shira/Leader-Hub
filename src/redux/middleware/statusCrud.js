@@ -3,15 +3,11 @@ import { actions } from '../actions/action'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
-        let taskId
-        let card = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-        if (card)
-            taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-                .tasks[getState().public_reducer.indexCurrentTask]._id
-        else
-            taskId = null
+        let workspaceId
 
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/getAllStatusesTaskForWorkspace`
+        workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
+
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -46,7 +42,6 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
 
 export const createStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'CREATE_STATUS') {
-        debugger
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/createStatus`
         let statusTask = action.payload
         console.log(statusTask)
@@ -60,7 +55,6 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
 
             data: JSON.stringify({ statusTask }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log(data.newStatusTask);
                 dispatch(actions.addNewStatus(data.newStatusTask))
@@ -81,7 +75,6 @@ export const createStatus = ({ dispatch, getState }) => next => action => {
 
 export const editStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_STATUS') {
-        debugger
         let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
             .tasks[getState().public_reducer.indexCurrentTask]._id
         console.log(taskId);
@@ -98,14 +91,12 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ status }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log("data", data);
                 dispatch(actions.setStatuses(data.result))
 
             },
             error: function (err) {
-                debugger
                 console.log(err);
                 checkPermission(err).then((ifOk) => {
 
