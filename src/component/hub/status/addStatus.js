@@ -11,10 +11,7 @@ import './viewStatus.css'
 function AddStatus(props) {
 
     useEffect(() => {
-        debugger
-        console.log(props.task);
-        // debugger
-        // console.log(props.statuses);
+
     }, [props.statuses])
 
     const [newStatus, setNewStatus] = useState({
@@ -25,7 +22,6 @@ function AddStatus(props) {
 
 
     const addStatus = (e) => {
-        debugger
         console.log(newStatus);
         props.createStatus(newStatus)
         console.log(props.statuses);

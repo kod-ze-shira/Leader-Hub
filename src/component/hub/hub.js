@@ -49,7 +49,6 @@ function Hub(props) {
     const deleteObject = () => {
         console.log(objectToDelete)
         setShowToastDelete(false)
-        debugger
         props['remove' + objectToDelete.type](objectToDelete.object._id)
 
     }
@@ -107,38 +106,39 @@ function Hub(props) {
                             : null
                         } */}
                         <Switch>
+                        {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
-                            <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/gantt"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
                                 <div className="body-workspace mt-3">
                                     <DisplayGantt />
                                 </div>
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                         
-                            <ProtectedRoute path={"/workspacePlatform"}>
+                            {/* <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
-                            </ProtectedRoute>
+                            </ProtectedRoute> */}
 
-                            <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
+                            <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                         
-                            <ProtectedRoute path={"/:userName/allTasks"}>
+                            <ProtectedRoute path={"/:userName/hub/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/milestones"}>
+                            <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
                          
-                            <ProtectedRoute path={"/:userName"}>
+                            <ProtectedRoute path={"/:userName/hub"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <Route path="/" >

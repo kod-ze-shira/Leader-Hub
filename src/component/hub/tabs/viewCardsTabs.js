@@ -17,7 +17,8 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -41,9 +42,10 @@ function ViewCardsTabs(props) {
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
-        if (inputValue && props.statuses.length) {
-
-            task = { name: inputValue, description: "", status: props.statuses[0], startDate: today, dueDate: today, "card": props.card._id }
+        if (inputValue) {
+            let status = props.statuses[0]
+            console.log(status);
+            task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
@@ -159,10 +161,10 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            // key={props.cards[props.indexCard].tasks[index]._id}
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
-                                                            indexTask={index} />
+                                                            indexTask={index}
+                                                            viewToastComplete={props.viewToastComplete} />
                                                     ))}
 
                                                     {
@@ -171,7 +173,7 @@ function ViewCardsTabs(props) {
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="form-control scroll-container" placeholder="Add Task"
+                                                                    class="form-control" placeholder="Add Task"
                                                                     id="input-task"
                                                                     value={inputValue}
                                                                     onChange={updateInputValue} onKeyPress={event => {

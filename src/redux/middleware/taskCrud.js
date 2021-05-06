@@ -221,7 +221,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
-                debugger
                 console.log("success")
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;

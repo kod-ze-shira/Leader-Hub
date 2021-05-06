@@ -57,7 +57,6 @@ function Tabs(props) {
         }
     };
     function onDragEndׂCard(e) {
-        debugger
         let icard
         for (icard = 0; icard < props.cards.length; icard++)
             if (props.cards[icard]._id == e.destination.droppableId)
@@ -131,6 +130,7 @@ function Tabs(props) {
                                             {props.cards.map((card, index) => {
                                                 return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                     // setTask={(task) => setTaskToDetails(task)}
+                                                    viewToastComplete={props.viewToastComplete}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} indexCard={index} />
                                             })}

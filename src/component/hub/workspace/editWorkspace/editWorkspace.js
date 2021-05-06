@@ -36,7 +36,6 @@ function EditWorkspace(props) {
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
     const deleteWorkspace = (e) => {
-        debugger
         $(`#${props.workspaces[props.indexOfWorkspace]._id}`).css("display", "none")
         props.showToast({ 'type': 'Workspace', 'object': props.workspaces[props.indexOfWorkspace] })
         props.closeViewDetails();

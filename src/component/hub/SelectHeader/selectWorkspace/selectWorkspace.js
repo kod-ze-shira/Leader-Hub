@@ -32,7 +32,7 @@ function SelectWorkspace(props) {
             // props.getCardsByProjectId(myWorkspace.projects[0]._id)
             // if (props.projectPage == true)
 
-            props.history.push("/" + props.user + "/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+            props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
         }
         else {

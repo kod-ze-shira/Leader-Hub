@@ -94,4 +94,5 @@ p{ color:#98A9BC !important;
 .scroll-container {
     overflow-y: scroll;
     scroll-behavior: smooth;
+    width: 48% !important;
 }

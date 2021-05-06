@@ -61,16 +61,15 @@ function NewConfigorator(props) {
     }
     function goToAllProjects(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/allProjects")
+        props.history.push("/" + props.user + "/hub/allProjects")
     }
     function goToMyTasks(e) {
         changeBackground(e)
-        // props.history.push("/" + props.user + "/myTasks")
-        props.history.push("/" + props.user + "/allTasks")
+        props.history.push("/" + props.user + "/hub/allTasks")
     }
     function goToMilestones(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/milestones")
+        props.history.push("/" + props.user + "/hub/milestones")
     }
     // function goToGantt(e) {
     //     changeBackground(e)
