@@ -1,10 +1,12 @@
 import { event } from 'jquery'
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { actions } from '../../../../redux/actions/action'
 import DynamicSelect from '../../team/dynamicSelect'
 import ShareOneMember from '../share/shareOneMember/shareOneMember'
 import './shareProject.css'
 
-export default function ShareProject() {
+function ShareProject(props) {
     const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
     const [shareDetails, setShareDetails] = useState([])//all contacts details
     const [shareDetail, setShareDetail] = useState('')//contact email
@@ -15,7 +17,7 @@ export default function ShareProject() {
     const setStateMailToContactMail = (emailMember) => {
         setDisabledSelectPermission('true')
         console.log(disabledSelectPermission);
-        setShareDetail(emailMember.value)
+        setShareDetail(emailMember.value)//to save email of contact
     }
     //onselect perrmision to contact his email and permission will add to members list
     const addContactToList = (event) => {
@@ -29,7 +31,7 @@ export default function ShareProject() {
         let membersTeam = team.value.members
         membersTeam.forEach(element => {
             // membersTeamEmails.push({'shareDetail':element.contactMember})
-            membersTeamEmails.push(element.contactMember)
+            membersTeamEmails.push( element.contactMember )
             // setMembersTeamEmails([...membersTeamEmails, element.contactMember])
         });
 
@@ -37,14 +39,18 @@ export default function ShareProject() {
     //on select perrmission to team
     const addMemberTeamToList = (event) => {
         let shareDetailsTemp = []
+        let shareDetailToAdd
         membersTeamEmails.forEach(element => {
-            let shareDetailToAdd = { 'shareDetail': element, 'permission': event.target.options[event.target.selectedIndex].label }
+            //to add perrmision all members team
+            shareDetailToAdd = { 'shareDetail': element, 'permission': event.target.options[event.target.selectedIndex].label }
             shareDetailsTemp.push(shareDetailToAdd)
-            setShareDetails([...shareDetailsTemp])
+            
         })
+        // setShareDetails(shareDetails.concat(shareDetailsTemp))
+
         //if render team not in shareDetails
-        // let teamToShare = { 'teamId': teamId, 'members': membersTeamEmails }
-        // setTeams([...teams, teamToShare])
+        let teamToShare = { 'teamId': teamId, 'members': shareDetailsTemp }
+        setTeams([...teams, teamToShare])
         setMembersTeamEmails([])
 
         event.target.selectedIndex = 0
@@ -56,16 +62,19 @@ export default function ShareProject() {
 
         })
     }
-    //if render team withot shareDetails
-    // const renderShareDetailsOfTeam = () => {
-    //   return   teams.map(team => {
-    //         team.members.map(member=>{
-    //         return <ShareOneMember member={member} />
-    //         })
+    // if render team withot shareDetails
+    const renderShareDetailsOfTeam = () => {
+        return teams.map(team => {
+            return team.members.map(member => {
+                return <ShareOneMember member={member} />
+            })
 
-    //     })
-    // }
-    
+        })
+    }
+const shareObject=()=>{
+    let details={shareDetails:shareDetails,teams:teams}
+    props.shareObject(details)
+}
     return (
         <>
             <div className="details mr-5 ml-4">
@@ -114,12 +123,12 @@ export default function ShareProject() {
                     <div className="col">
                         <div className="div_share_with">
                             {renderShareDetails()}
-                            {/* {renderShareDetailsOfTeam()} */}
+                            {renderShareDetailsOfTeam()}
                         </div>
                     </div>
                 </div>
                 <div className="row">
-                    <button onClick={() => console.log(shareDetails)}>share</button>
+                    <button onClick={shareObject}>share</button>
                 </div>
             </div>
 
@@ -127,3 +136,15 @@ export default function ShareProject() {
     )
 
 }
+export default connect(
+    (state) => {
+        return {
+
+        }
+    },
+    (dispatch) => {
+        return {
+            shareObject: (shareDetails) => dispatch(actions.shareObject(shareDetails))
+        }
+    }
+)(ShareProject)
