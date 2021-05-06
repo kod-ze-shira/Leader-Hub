@@ -323,7 +323,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                debugger
                 dispatch(actions.setCards(data.cards))
 
             },
