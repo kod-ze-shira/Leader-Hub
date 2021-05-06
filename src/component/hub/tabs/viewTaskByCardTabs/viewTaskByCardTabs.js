@@ -113,7 +113,6 @@ function ViewTaskByCradTabs(props) {
         props.setCurrentIndexCard(currentIndexCard)
         let value = event.target.value
         if (event.target.name == "complete") {
-            event.stopPropagation()
             doneStatus = !doneStatus
             value = doneStatus
             editCompleteTask()
@@ -125,9 +124,10 @@ function ViewTaskByCradTabs(props) {
         }
 
     }
-    function addChalalit() {
+    function addChalalit(e) {
         if (props.task.complete == false)
             setShowChalalit(true)
+        e.stopPropagation()
     }
 
     return (
@@ -176,9 +176,10 @@ function ViewTaskByCradTabs(props) {
                                             checked={doneStatus}
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
-                                        // onClick={(e) => editCompleteTask(e)}
+                                            onClick={(e) => e.stopPropagation()
+                                            }
                                         />
-                                        <span className="checkmark checkmark-tabs" onClick={() => addChalalit()}></span>
+                                        <span className="checkmark checkmark-tabs" onClick={(e) => addChalalit(e)}></span>
                                     </label>
                                 </div>
                                 {/* <span>{props.task._id}</span> */}
