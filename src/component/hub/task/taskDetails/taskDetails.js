@@ -55,7 +55,7 @@ function TaskDetails(props) {
     }
 
 
-    const saveNewTask = () => {
+    const saveTask = () => {
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
             let newFiles
@@ -68,12 +68,12 @@ function TaskDetails(props) {
                 if (props.arrDeleteFilesOfTask.length) {
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
 
-                        props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-
-                        // for (let index2 = 0; index2 < props.task.files.length; index2++) {
-                        //     if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id)
-                        //         props.task.files.splice(index2, 1); // first element removed
-                        // }
+                        // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
+                        debugger
+                        for (let index2 = 0; index2 < props.task.files.length; index2++) {
+                            if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id)
+                                props.task.files.splice(index2, 1); // first element removed
+                        }
 
                         // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
 
@@ -274,7 +274,7 @@ function TaskDetails(props) {
                         {title.title_delete}
                     </ReactTooltip>
 
-                    <button data-tip data-for="save" onClick={(e) => saveNewTask(e)} className="save_canges_btn col-3 btn-block mb-lg-4">Save</button>
+                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className="save_canges_btn col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>

@@ -95,16 +95,46 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
       })
       .then(result => {
         console.log('contacts', result)
-        checkPermission(result).then(ifOk => {
+        // checkPermission(result).then(ifOk => {
           dispatch(actions.setContactsUser(result))
-        })
+        // })
       })
   }
 
   return next(action)
 }
 
+export const shareObject = ({ dispatch, getState }) => next => action => {
 
+  if (action.type === 'SHARE_OBJECT') {
+  let teamsMemberAndPermission=action.payload.teams
+  let membersEmail=action.payload.shareDetails
+  let objectId=getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]
+  .projects[getState().public_reducer.indexCurrentProject]._id
+  console.log(objectId);
+  ///:userName/:objectId/:schemaName/:applicationName/shareObject
+  fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${objectId}/Project1/reacthub/shareMembersAndTeams`,
+            {
+                method: 'POST',
+                headers: {
+                    authorization: getState().public_reducer.tokenFromCookies,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({teamsMemberAndPermission,membersEmail})
+            }).then((result) => {
+                return result.json();
+            }).then((result) => {
+                checkPermission(result).then((ifOk) => {
+                    // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
+
+                })
+
+            })
+
+  }
+  return next(action);
+}
 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {

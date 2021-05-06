@@ -19,7 +19,7 @@ import {
     completeTask
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { createNewTeam, getAllTeamsForUser, getContactsForUser } from '../middleware/teamCrud';
+import { createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
@@ -68,7 +68,8 @@ const store = createStore(
                 editStatus,
                 removeStatus,
                 moveTaskBetweenCards,
-                completeTask
+                completeTask,
+                shareObject
             ))
 )
 store.dispatch(actions.extractJwt());
