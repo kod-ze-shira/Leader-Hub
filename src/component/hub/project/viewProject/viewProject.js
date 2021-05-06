@@ -11,6 +11,7 @@ import TeamView from '../../teamView/teamView'
 import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { useEffect } from 'react';
 import share from '../../../img/share.svg'
@@ -144,14 +145,19 @@ function ViewProject(props) {
                 </td>
 
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
-                    <img style={myStyleIcons}
-                        className='iconsProject' data-tip data-for="share"
+                    {/* <i class="fas fa-user-friends"></i> */}
+
+                    <FontAwesomeIcon style={myStyleIcons} icon={["fas", "user-friends"]} className='ddd iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
+
+                    {/* <img style={myStyleIcons}
+                        className='iconsProject' data-tip data-for="share"
+                        onClick={(event) => openShareProject(event)} src={share} /> */}
                     <ReactTooltip data-tip id="share" place="bottom" effect="solid">
                         {title.title_share}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
-                    <img data-tip data-for="edit_" style={myStyleIcons} 
+                    <img data-tip data-for="edit_" style={myStyleIcons}
                         className='iconsProject' onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
                     <ReactTooltip data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}

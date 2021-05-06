@@ -119,7 +119,7 @@ function ViewTaskByCrad(props) {
         setTask(temp)
     }
     const editCompleteTask = () => {
-        debugger
+
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1

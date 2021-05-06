@@ -11,10 +11,10 @@
  }  
 
  .descriptionProject{
-  max-height: 156px; 
+  max-height: 29vh;
   height: auto;
   overflow: auto;
-  min-height:84px ;
+  min-height: 20vh;
   width: 97%;
   margin-left: 2%;
 }

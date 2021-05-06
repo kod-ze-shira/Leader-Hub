@@ -28,7 +28,6 @@
 }
 .iconsProjectInLine{
     width: 15%!important;
-
 }
 .stripeActionsProject{
     display: inline-block;
@@ -92,6 +91,10 @@
 }
 .projectForWorkspace:hover{
     background-color: rgba(0,0,0,.075);
+}
+
+.ddd{
+   color:rgb(168 176 186)
 }
 
 .projectForWorkspace  td, .projectForWorkspace th {
