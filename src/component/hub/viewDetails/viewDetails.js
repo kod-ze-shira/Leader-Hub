@@ -24,9 +24,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setProjectInWorkspace: (project) => dispatch(actions.setProjectInWorkspace(project)),
-        setWorkspaceBeforeChanges: (workspace) => dispatch(actions.setWorkspaceBeforeChanges(workspace)),
-        setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
+
     }
 }
 
@@ -52,7 +50,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails}
-                        showToast={(e)=>showToast(e)}
+                        showToast={(e) => showToast(e)}
                         workspace={props.workspace}
                         objectBeforeChanges={(e) => setOldObject(e)}
                     />
@@ -63,7 +61,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
-                        showToast={(e)=>showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
+                        showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'shareProject':
                     return <ShareProject />
                 case 'addTask':
@@ -76,31 +74,31 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             }
         }
 
-        function closeEndRefreshViewDetails() {
-            if (oldObject)
-                switch (oldObject.type) {
-                    case 'workspace':
-                        props.setWorkspaceBeforeChanges(oldObject.workspace)
-                        break;
-                    case 'project':
-                        props.setProjectInWorkspace(oldObject.project)
-                        break;
-                    case 'task':
-                        props.setTaskFromTasks(oldObject.task)
-                        break;
+        // function closeEndRefreshViewDetails() {
+        //     if (oldObject)
+        //         switch (oldObject.type) {
+        //             case 'workspace':
+        //                 props.setWorkspaceBeforeChanges(oldObject.workspace)
+        //                 break;
+        //             case 'project':
+        //                 props.setProjectInWorkspace(oldObject.project)
+        //                 break;
+        //             case 'task':
+        //                 props.setTaskFromTasks(oldObject.task)
+        //                 break;
 
 
-                    default:
-                        break;
-                }
-            props.closeViewDetails()
-        }
+        //             default:
+        //                 break;
+        //         }
+        //     props.closeViewDetails()
+        // }
 
         return (
             <>
                 <div className="row ">
                     <div className="view-details  col-5 mt-3">
-                        <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div>
+                        {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
                         {renderSwitch()}
                     </div>
                 </div>

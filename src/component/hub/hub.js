@@ -33,6 +33,7 @@ import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
+import ShureDelete from './shureDelete/shureDelete'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -149,7 +150,7 @@ function Hub(props) {
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
                                     <button onClick={() => props.createSystemWave()}>createSystemWave</button>
-
+                                    <ShureDelete />
                                     {/* contentEditable
                                     height: auto;
                               max-height: 110px;
