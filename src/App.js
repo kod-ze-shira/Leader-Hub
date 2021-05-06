@@ -13,7 +13,6 @@ export default function App(props) {
 
       <Provider store={Store}>
         <>
-          {/* <ConfiguratorList></ConfiguratorList> */}
           <Hub></Hub>
         </>
       </Provider>

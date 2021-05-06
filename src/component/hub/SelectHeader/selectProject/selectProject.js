@@ -116,7 +116,7 @@ function SelectProject(props) {
 }
 const mapStateToProps = (state) => {
     return {
-
+        user: state.public_reducer.userName,
         projects: state.public_reducer.projects,
         project: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,

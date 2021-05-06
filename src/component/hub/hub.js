@@ -5,17 +5,14 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    
     Link,
     Redirect,
 } from 'react-router-dom';
 import history from "../history"
 
-import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
-import ProjectPlatform from './projectPlatform/projectPlatform'
-import CardsByProject from './Cards/cardsByProject/cardsByProject'
-import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
@@ -82,12 +79,7 @@ function Hub(props) {
     function closeInputSearch() {
         document.getElementById('inputSearchProjects').style.display = 'none'
     }
-    // $(window).click(function () {
-    //     setViewDetails(false)
-    // });
-    // function stopP(event) {
-    //     event.stopPropagation();
-    // }
+ 
     const [focusInputCard, setFocusInputCard] = useState(false)
 
     return (
@@ -96,15 +88,15 @@ function Hub(props) {
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
+            {/* <Router history={history}> */}
             <Router history={history}>
-                {/* <Nav openConfigurator={openConfigurator} /> */}
 
                 <div className="row back-screen">
-                    {/* {open ? */}
+        
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
-                    {/* // : null} */}
+                  
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         {/* {viewDetails ?
                             <div className="closeDet" onClick={(e) => stopP(e)}>
@@ -128,9 +120,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/workspacePlatform" >
-                                <WorkspacePlatform />
-                            </Route> */}
+                        
                             <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute>
@@ -140,9 +130,7 @@ function Hub(props) {
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName/myTasks" >
-                                <TaskNotBelongCardForUser />
-                            </Route> */}
+                        
                             <ProtectedRoute path={"/:userName/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
@@ -150,9 +138,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName" >
-                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
-                            </Route> */}
+                         
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -160,19 +146,8 @@ function Hub(props) {
                                 <div id='cdggdfdfb'>
                                     <button onClick={() => props.createSystemWave()}>createSystemWave</button>
 
-                                    {/* contentEditable
-                                    height: auto;
-                              max-height: 110px;
-                                 overflow: auto; */}
                                     <UploadFile />
-                                    {/* <span id='searchProject' >
-                                        <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
-                                        <input type='text' id='inputSearchProjects' className='inputSearchProjects'
-                                            onMouseLeave={() => closeInputSearch()}
-                                        />‏
-                                    </span> */}
                                 </div>
-                                {/* <Animation /> */}
                             </Route>
                         </Switch>
                     </div>

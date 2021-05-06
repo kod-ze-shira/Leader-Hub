@@ -4,11 +4,8 @@ import './gantt.css';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
 import '../Gantt/gantt.css';
 import { LinearProgress } from '@material-ui/core';
-import { connect } from 'react-redux';
 import { actions } from '../../redux/actions/action'
 import store from '../../redux/Store/Store'
-import { editTask } from '../../redux/middleware/taskCrud';
-
 
 export default class Gantt extends Component {
     constructor(props) {
@@ -94,12 +91,12 @@ export default class Gantt extends Component {
                 // return task.text + " " + `<b>${(task.progress) * 100}%</b>`;
             }
             if (task.milestones) {
-                debugger
                 var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
                 var markerId = gantt.addMarker({
                     start_date: task.end_date,
                     css: "milestones_",
-                    text: "milestone",
+                    text: document.createAttribute("img"),
+                    // text: "milestone",
                     title: dateToStr(task.end_date)
                 });
                 gantt.getMarker(markerId);
