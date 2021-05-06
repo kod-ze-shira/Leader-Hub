@@ -114,8 +114,13 @@ function AddWorkspace(props) {
 
             <div className="details d-workspace mr-5 ml-4" >
                 <div className='propertiesViewDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
+                        <h5 className=" title-view-details   pl-3">Add Workspace </h5>
 
-                    <h5 className="my-5 title-view-details pb-2">Add Workspace</h5>
+                        <div class="close pr-3" onClick={() => props.closeViewDetails()} >x</div>
+                        {/* <h5 className="my-5 title-view-details pb-2">Add Workspace</h5> */}
+
+                    </div>
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" ref={nameworkspae} required

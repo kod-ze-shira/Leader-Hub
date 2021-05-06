@@ -6,13 +6,14 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPLOAD_FILES') {
 
         let files = action.payload.files
+        debugger
         if (action.type === 'UPLOAD_FILES') {
             var formData = new FormData()
             // var myFiles = Object.values(files)
             if (files.length < 1) { console.log("ooops... not files to upload") }
             else {
                 files.forEach((file, index) => {
-                    formData.append("file" + index, file.file)
+                    formData.append("file" + index, file, file.name)
                 })
             }
             console.log(formData)

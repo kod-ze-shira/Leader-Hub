@@ -16,7 +16,10 @@ function EditWorkspace(props) {
     }, [props.workspaces])
 
 
-
+    function closeViewDetailsInWorkspace() {
+        props.setWorkspaceBeforeChanges(workspaceBeforeChanges)
+        props.closeViewDetails()
+    }
     function saveEdit() {
 
         if (nameRequired.current.value) {
@@ -46,8 +49,13 @@ function EditWorkspace(props) {
         <>
             <div className="details d-workspace mr-5 ml-4">
                 <div className='propertiesViewDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
+                        <h5 className=" title-view-details pl-3">Workspace details</h5>
 
-                    <h5 className="my-5 title-view-details pb-2">Workspace details</h5>
+                        <div class="close pr-3" onClick={() => closeViewDetailsInWorkspace()}>x</div>
+
+                        {/* <h5 className="my-5 title-view-details pb-2 col-10">Workspace details</h5> */}
+                    </div>
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" ref={nameRequired} required
@@ -113,6 +121,8 @@ export default connect(
             setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
             setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
+            setWorkspaceBeforeChanges: (workspace) => dispatch(actions.setWorkspaceBeforeChanges(workspace)),
+
         }
     }
 )(EditWorkspace)

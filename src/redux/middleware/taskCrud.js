@@ -221,7 +221,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
-                debugger
                 console.log("success")
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
@@ -231,12 +230,11 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                     dispatch(actions.removeFile(urlsFile));
                     dispatch(actions.deleteFilesInArr());
                     // dispatch(actions.setNewFilesInTask(data.filesData))
-
-                    dispatch(actions.setIdFiles(data.result.files));
-
-
                 }
-                console.log(data.result);
+                if (getState().public_reducer.arrFilesOfTask.length) {
+                    dispatch(actions.setIdFiles(data.result.files));
+                }
+                // console.log(data.result);
 
             },
             error: function (err) {

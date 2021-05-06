@@ -40,15 +40,15 @@
     margin-left: 2%;
   }
 
+ 
+
   .title-view-details{
-    color: var(--unnamed-color-34a38b);
     text-align: left;
-    font: normal normal bold 20px/28px Roboto;
+    font: normal normal bold 18px/28px Roboto;
     letter-spacing: 0.48px;
     color: #34A38B;
     text-transform: capitalize;
     opacity: 0.9;
-    border-bottom: 1px solid #707070;
   }
   input[type="color"] :focus{
       border:none;
