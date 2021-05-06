@@ -62,7 +62,6 @@ function EditProject(props) {
     }
 
     const deletProject = () => {
-        debugger
         $(`#${props.workspaces[props.indexWorkspace].projects[props.indexProject]._id + "disappear"}`).css("display", "none")
         props.showToast({ 'type': 'Project', 'object': props.workspaces[props.indexWorkspace].projects[props.indexProject] })
         props.closeViewDetails();

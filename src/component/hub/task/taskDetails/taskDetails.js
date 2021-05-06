@@ -27,6 +27,8 @@ function TaskDetails(props) {
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
 
     }, [props.cards])
 
@@ -69,7 +71,6 @@ function TaskDetails(props) {
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
 
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-                        debugger
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id)
                                 props.task.files.splice(index2, 1); // first element removed
@@ -78,9 +79,7 @@ function TaskDetails(props) {
                         // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
 
                     }
-
                     let r = props.task.files
-                    debugger
                     props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
@@ -150,8 +149,6 @@ function TaskDetails(props) {
     const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
-
-
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File url={file.url} name={file.name} />
@@ -228,10 +225,10 @@ function TaskDetails(props) {
                     <div className="row justify-content-between">
                         <div class="dropdown col-6 col-lg-5">
                             <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {props.statuses.length > 0 ? <>
+                                {props.statuses && props.statuses.length > 0 ? <>
 
                                     <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                    <span >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
+                                    <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
                                 </> : null}
                             </button>
                             {openPopUp ?

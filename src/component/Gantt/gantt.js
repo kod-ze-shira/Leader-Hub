@@ -94,7 +94,6 @@ export default class Gantt extends Component {
                 // return task.text + " " + `<b>${(task.progress) * 100}%</b>`;
             }
             if (task.milestones) {
-                debugger
                 var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
                 var markerId = gantt.addMarker({
                     start_date: task.end_date,

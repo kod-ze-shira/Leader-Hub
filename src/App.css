@@ -50,7 +50,9 @@ margin-top: 15vh
 } */
 
 
- 
+ button{
+   cursor: pointer !important;
+ }
 
 
 

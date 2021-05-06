@@ -71,7 +71,7 @@ background-color: white;
 box-shadow: 0px 0px 10px #00000034;
 overflow-y: auto;
 z-index: 9999999;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .divStatus{

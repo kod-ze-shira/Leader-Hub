@@ -89,7 +89,6 @@ function TeamExample(props) {
     function addMailToTeams(index, evt) {
 
         if (["Enter", "Tab", ","].includes(evt.key)) {
-            // debugger
             evt.preventDefault();
             // var value = team.value.trim();
             var value = teams[index].value.trim()

@@ -50,13 +50,18 @@
     background-color: #FFFFFF;
     border: 1px solid #34A38B;
     border-radius: 50%;
+    
   }
-  
+  .checkmark-tabs{
+    right: 10% !important;
+    z-index: 9999;
+  }
   .checkmark-place{
     top: 7px;
     left: 0;
     
   }
+  
   
   .check-task:hover input ~ .checkmark {
     background-color: #FFFFFF;

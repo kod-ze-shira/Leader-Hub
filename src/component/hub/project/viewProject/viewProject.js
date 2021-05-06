@@ -38,7 +38,6 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
-        debugger
         props.setCurrentIndexProject(props.indexProject)
         // props.addProjectTArray(project)
         props.editOrShareProject('editProject')
