@@ -14,8 +14,9 @@ import ReactTooltip from 'react-tooltip';
 
 function ViewCards(props) {
     useEffect(() => {
-
-        console.log();
+        debugger
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
 
     const [flag, setFlag] = useState(true)
@@ -44,7 +45,7 @@ function ViewCards(props) {
             console.log(status);
             // props.statuses[0]._id
             task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
-            console.log(props.statuses[0].statusName);
+            // console.log(props.statuses[0].statusName);
             props.newTask(task)
         }
         setInputValue("")
@@ -201,7 +202,7 @@ function ViewCards(props) {
                             autoFocus="true"
                             type="text"
                             // className="add-task"
-                            class="form-control scroll-container mt-2 w-50 ml-4"
+                            class="form-control scroll-container mt-2   ml-4"
                             placeholder="Add Task" id="input-task"
                             value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                                 if (event.key === 'Enter') {

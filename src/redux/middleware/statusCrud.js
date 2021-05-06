@@ -3,15 +3,11 @@ import { actions } from '../actions/action'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
-        let taskId
-        let card = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-        if (card)
-            taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-                .tasks[getState().public_reducer.indexCurrentTask]._id
-        else
-            taskId = null
+        let workspaceId
 
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/getAllStatusesTaskForWorkspace`
+        workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
+
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
         $.ajax({
             url: urlData,
             type: 'GET',

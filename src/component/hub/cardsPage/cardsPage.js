@@ -20,7 +20,7 @@ function CardsPage(props) {
     useEffect(() => {
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
-        // props.getAllStatusesTaskForUser()
+       
     }, [])
 
     const changeFlag = (value) => {
@@ -38,15 +38,15 @@ function CardsPage(props) {
                 return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} />
             case 'list':
                 return <ProjectPlatform
-                viewToastComplete={props.viewToastComplete}
-                showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
+                    viewToastComplete={props.viewToastComplete}
+                    showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
             case 'gantt':
                 return <DisplayGantt />
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
-                return <ProjectPlatform 
-                viewToastComplete={props.viewToastComplete}
-                showToast={showToast} flag={flag} />
+                return <ProjectPlatform
+                    viewToastComplete={props.viewToastComplete}
+                    showToast={showToast} flag={flag} />
         }
     }
     return (
@@ -62,7 +62,8 @@ const mapStateToProps = (state) => {
     return {
         workspaces: state.public_reducer.workspaces,
         project: state.project_reducer.project,
-        cards: state.public_reducer.cards
+        cards: state.public_reducer.cards,
+        statuses: state.status_reducer.statuses
 
     }
 }

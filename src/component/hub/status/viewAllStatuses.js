@@ -35,10 +35,14 @@ function ViewAllStatuses(props) {
         e.stopPropagation()
     }
     const saveStatus = (value) => {
-        if (!props.task.complete) {
-            let editStatusInRedux = { "nameFiled": "status", "value": value }
-            props.setTaskByFiledFromTasks(editStatusInRedux)
-        }
+        // if (!props.task.complete) {
+        let editStatusInRedux
+        editStatusInRedux = { "nameFiled": "status", "value": value }
+        if (props.task.complete )
+            editStatusInRedux = { "nameFiled": "complete", "value": false }
+        props.setTaskByFiledFromTasks(editStatusInRedux)
+
+        // }
     }
 
     const changeStatusByIndex = (indexOfStatus) => {
