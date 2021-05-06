@@ -18,7 +18,16 @@ body {
   justify-content: center;
   height: 100vh;
 } */
+.thumbnail-contact{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  margin-left: 0 !important;
+}
 
+.css-tlfecz-indicatorContainer{
+  display:none !important;
+}
 
 .viewer{
   border: #007bff solid 1px;
@@ -75,7 +84,18 @@ body {
   font-size: 90%;
   color: tomato;
 }
+.option-contact{
+  /* display: inline-block!important; */
+}
+.name-contact{
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  display: -webkit-box;
+    display: inline-block!important;
+    margin-left: 2vw;
 
+}
 .choose{
   border: #007bff 2px solid;
    background: white;

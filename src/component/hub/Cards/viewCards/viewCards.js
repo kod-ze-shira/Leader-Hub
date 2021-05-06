@@ -166,6 +166,7 @@ function ViewCards(props) {
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
                     {/* <p className="col">Team</p> */}
+                    <p className="col">Assignee</p>
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
