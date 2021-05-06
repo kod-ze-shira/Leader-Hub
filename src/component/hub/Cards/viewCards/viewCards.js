@@ -14,7 +14,6 @@ import ReactTooltip from 'react-tooltip';
 
 function ViewCards(props) {
     useEffect(() => {
-        debugger
         if (!(props.statuses && props.statuses.length > 0))
             props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
@@ -40,7 +39,6 @@ function ViewCards(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            debugger
             let status = props.statuses[0]
             console.log(status);
             // props.statuses[0]._id

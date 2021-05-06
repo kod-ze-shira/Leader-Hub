@@ -24,7 +24,6 @@ function EditStatus(props) {
 
     // const [viewAllStatusComponent, setViewAllStatusComponent] = useState(false)
     const editStatus_ = (e) => {
-        debugger
         console.log(props.status);
         props.editStatus(props.status)
         console.log(openPopUp);
@@ -32,7 +31,6 @@ function EditStatus(props) {
 
     }
     const deleteStatus = (e) => {
-        debugger
         console.log(props.status._id);
         props.removeStatus(props.status._id)
         setOpenPopUp(false)
@@ -48,7 +46,6 @@ function EditStatus(props) {
     const [viewList, setViewList] = useState(false)
 
     const viewAllStatus = (e) => {
-        debugger
         $('.edit-status-wraps').css({ 'display': 'none' })
         setViewList(true)
         console.log(viewList);

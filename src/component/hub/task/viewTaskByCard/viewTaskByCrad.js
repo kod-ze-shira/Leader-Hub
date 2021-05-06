@@ -36,7 +36,6 @@ function ViewTaskByCrad(props) {
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
-    // const [doneStatus, setDoneStatus] = useState(props.task.complete)
     let doneStatus = props.task.complete
     const [task, setTask] = useState({
         "_id": props.task._id,
@@ -251,4 +250,5 @@ const mapDispatchToProps = (dispatch) => {
         completeTask: (task) => dispatch(actions.completeTask(task))
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

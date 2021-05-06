@@ -13,8 +13,7 @@ function ViewAllStatuses(props) {
 
     useEffect(() => {
         console.log(props.task._id);
-        // if (props.statuses && props.statuses.length > 0)
-        props.getAllStatusesTaskForWorkspace();
+      
         console.log(props.statuses);
         console.log(props.status);
     }, [props.cards])
@@ -38,7 +37,7 @@ function ViewAllStatuses(props) {
         // if (!props.task.complete) {
         let editStatusInRedux
         editStatusInRedux = { "nameFiled": "status", "value": value }
-        if (props.task.complete )
+        if (props.task.complete)
             editStatusInRedux = { "nameFiled": "complete", "value": false }
         props.setTaskByFiledFromTasks(editStatusInRedux)
 

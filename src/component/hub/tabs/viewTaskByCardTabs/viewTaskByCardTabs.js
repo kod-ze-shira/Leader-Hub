@@ -25,6 +25,8 @@ function ViewTaskByCradTabs(props) {
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
+    let doneStatus = props.task.complete
+    const [showchalalit, setShowChalalit] = useState(false)
 
 
     useEffect(() => {
@@ -33,6 +35,13 @@ function ViewTaskByCradTabs(props) {
 
     }, [props.cards])
 
+    useEffect(() => {
+        doneStatus = props.task.complete
+    }, [props.task.complete])
+
+    useEffect(() => {
+
+    }, [props.task.status])
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -67,6 +76,29 @@ function ViewTaskByCradTabs(props) {
         setTask(task1)
         props.EditTask(task);
     }
+
+    const editCompleteTask = () => {
+
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth() + 1
+        const yyyy = today.getFullYear()
+        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
+        let completeTask = {
+            "_id": props.task._id,
+            "name": props.task.name,
+            "description": props.task.description,
+            "dueDate": props.task.dueDate,
+            "startDate": props.task.startDate,
+            "complete": doneStatus,
+            "endDate": today,
+            "status": doneStatus ? props.statuses[2] : props.statuses[0],
+        }
+        props.setTaskComplete(completeTask)//redux
+        props.completeTask(completeTask)//server
+        if (doneStatus)
+            props.viewToastComplete(true)
+    }
     const showDetails = (event) => {
 
         if (anchorEl == null) {
@@ -76,11 +108,26 @@ function ViewTaskByCradTabs(props) {
             event.stopPropagation()
         }
     }
-    const changeFiledInTask = (input) => {
+    const changeFiledInTask = (event) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": input.target.value, "task": props.task }
-        props.setTaskByFiledFromTasks(editTaskInRedux)
+        let value = event.target.value
+        if (event.target.name == "complete") {
+            event.stopPropagation()
+            doneStatus = !doneStatus
+            value = doneStatus
+            editCompleteTask()
+
+        }
+        else {
+            let editTaskInRedux = { "nameFiled": event.target.name, "value": value }
+            props.setTaskByFiledFromTasks(editTaskInRedux)
+        }
+
+    }
+    function addChalalit() {
+        if (props.task.complete == false)
+            setShowChalalit(true)
     }
 
     return (
@@ -99,7 +146,8 @@ function ViewTaskByCradTabs(props) {
                             id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
-                                    {props.task.status ? <div title={props.task.status.statusName} className="color-task col-4 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div> : null}
+                                    {props.task.status ? <div title={props.task.status.statusName} className="color-task col-3 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div> : null}
+
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
                                     <Button className="more col-3 mr-0 more-task"
                                         data-tip data-for="more_a"
@@ -120,6 +168,18 @@ function ViewTaskByCradTabs(props) {
                                         <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                         <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                     </Menu>
+                                    <label
+                                        title="Complete Task ml-3"
+                                        className="check-task py-2 check-tabs">
+                                        <input type="checkbox"
+                                            name="complete"
+                                            checked={doneStatus}
+                                            value={props.task.complete}
+                                            onChange={(e) => changeFiledInTask(e)}
+                                        // onClick={(e) => editCompleteTask(e)}
+                                        />
+                                        <span className="checkmark checkmark-tabs" onClick={() => addChalalit()}></span>
+                                    </label>
                                 </div>
                                 {/* <span>{props.task._id}</span> */}
                                 <input
@@ -152,7 +212,8 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         card: state.card_reducer.card,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
-        indexCurrentTask: state.public_reducer.indexCurrentTask
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -164,6 +225,9 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
         getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+        setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
+        completeTask: (task) => dispatch(actions.completeTask(task))
+
 
     }
 }

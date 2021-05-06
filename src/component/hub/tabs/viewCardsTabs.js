@@ -17,8 +17,8 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        // if (props.statuses && props.statuses.length > 0)
-        //     props.getAllStatusesTaskForWorkspace();
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -36,7 +36,6 @@ function ViewCardsTabs(props) {
         setInputValue(evt.target.value)
     }
     const newTask = () => {
-        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -44,7 +43,6 @@ function ViewCardsTabs(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            debugger
             let status = props.statuses[0]
             console.log(status);
             task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
@@ -163,10 +161,10 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            // key={props.cards[props.indexCard].tasks[index]._id}
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
-                                                            indexTask={index} />
+                                                            indexTask={index}
+                                                            viewToastComplete={props.viewToastComplete} />
                                                     ))}
 
                                                     {
