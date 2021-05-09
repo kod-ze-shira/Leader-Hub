@@ -14,9 +14,9 @@ import ShureDelete from '../../../shureDelete/shureDelete';
 
 function ViewWorkspaceGrid(props) {
 
-    const [shureDelete, setShureDelete] = useState(false)
     const workspace = props.workspace
     useEffect(() => {
+
     }, [props.workspaces])
 
     const routeToProject = () => {
@@ -49,16 +49,12 @@ function ViewWorkspaceGrid(props) {
     }
 
     function delete_workspace() {
-        setShureDelete(true)
         // $(`#${workspace._id}`).css("display", "none")
         props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace })
         props.setWorkspace(workspace);
     }
     return (
         <>
-            {shureDelete ? <ShureDelete type='workspace' object={workspace}
-            /> : null}
-
             <div className="ViewWorkspace" id={workspace._id}
                 onMouseOver={() => over_workspace(workspace._id)}
                 onMouseOut={() => outOver(workspace._id)}>

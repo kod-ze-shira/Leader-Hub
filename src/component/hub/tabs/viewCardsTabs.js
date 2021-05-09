@@ -84,8 +84,7 @@ function ViewCardsTabs(props) {
         // textInput.current.focus()
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
-            $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
-
+            // $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
         }
     };
     function enterK(event) {
@@ -105,7 +104,7 @@ function ViewCardsTabs(props) {
 
     return (
         <>
-            <div className="col-3 mt-4" >
+            <div className="col-3 mt-4" id={props.cards[props.indexCard]._id}>
                 {/* {props.cardFromMap._id} */}
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (

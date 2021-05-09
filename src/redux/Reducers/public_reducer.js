@@ -124,11 +124,12 @@ const publicData = {
                 )
         })
     },
-    deletCard(state, action) {
+    deleteCard(state, action) {
         console.log(action.payload.dc)
         state.cards = state.cards.filter((_, i) =>
             state.cards[i]._id !== action.payload.dc._id
         )
+        debugger
     },
     addProjectToProjects(state, action) {
 
