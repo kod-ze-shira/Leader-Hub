@@ -51,7 +51,7 @@ function ViewProject(props) {
 
     function deleteMyProject(event) {
         props.showToast({ 'type': 'Project', 'object': props.myProject })
-        $(`#${props.myProject._id}`).css("display", "none")
+        // $(`#${props.myProject._id}`).css("display", "none")
         event.stopPropagation();
     }
 

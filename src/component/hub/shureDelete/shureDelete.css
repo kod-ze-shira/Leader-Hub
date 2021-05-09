@@ -32,3 +32,7 @@
 .borderTop  .modal-dialog  .modal-content .modal-body{
     text-align: center;
 }
+
+.displayNone{
+    display: none !important;
+}

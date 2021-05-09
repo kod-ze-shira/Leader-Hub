@@ -1,76 +1,64 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react'
 import './shureDelete.css'
-import { actions } from '../../../redux/actions/action'
 import { Button, Modal } from 'react-bootstrap';
 import $ from 'jquery'
 
-const mapStateToProps = (state) => {
-    return {
-        // close: state.public_reducer.close,
-
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-    function SureDelete(props) {
 
 
-        let type = props.type ? props.type : 'object'
+export default function SureDelete(props) {
 
-        const [show, setShow] = useState(true);
 
-        const handleClose = () => {
-            setShow(false)
-            // $('.modal-backdrop').css('background-color', '#000')
-        };
-        const handleShow = () => {
-            setShow(true);
-            // $('.modal-backdrop').css({ 'background-color': '#00000059' })
+    let type = props.objectToDelete.type ? props.objectToDelete.type : 'object'
+
+    const [showModal, setShowModal] = useState(true);
+    // useEffect(() => {
+    // setShowModal(props.showModal)
+
+    // }, [props.showModal])
+
+    function deleteObject() {
+        setShowModal(false)
+        if (props.objectToDelete.type == "Card") {
+            $(`#${props.objectToDelete.object._id} `).addClass("displayNone")
+            $(`#${props.objectToDelete.object._id} `).removeClass("mt-4")
+            $(`#${props.objectToDelete.object._id} `).removeClass("col-3")
         }
-        function deleteObject() {
-            setShow(false)
-            $(`#${props.object._id}`).css("display", "none")
-            // props.setShowToastDeleteWhenClickDelete({ 'type': props.type, 'object': props.object })
+        else $(`#${props.objectToDelete.object._id}`).css("display", "none")
 
-        }
-        return (
-            <>
-                {/* <Button variant="primary" onClick={handleShow}>
+        props.showToastDelete(true)
+    }
+
+
+    return (
+        <>
+            {/* <Button variant="primary" onClick={handleShowModal}>
                     Launch static backdrop modal
             </Button> */}
+            <Modal
+                show={showModal}
+                size="sm"
+                onHide={() => setShowModal(false)}
+                backdrop="static"
+                keyboard={false}
+                className='borderTop'
+            >
+                <Modal.Header closeButton>
 
-                <Modal
-                    show={show}
-                    size="sm"
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                    className='borderTop'
-                >
-                    <Modal.Header closeButton>
-
-                    </Modal.Header>
-                    <Modal.Body>
-                        Are you shure you want to delete this {type}?
+                </Modal.Header>
+                <Modal.Body>
+                    Are you shure you want to delete this {type}?
               </Modal.Body>
-                    <Modal.Footer className='justify-content-between'>
-                        <Button className='cancelModalDelete' onClick={handleClose}>
-                            Cancel
+                <Modal.Footer className='justify-content-between'>
+                    <Button className='cancelModalDelete' onClick={() => setShowModal(false)}>
+                        Cancel
                 </Button>
-                        <Button className='deleteInModalDelete' onClick={() => deleteObject()}>Delete</Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
+                    <Button className='deleteInModalDelete' onClick={() => deleteObject()}>Delete</Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 
-    })
+}
 
 
 

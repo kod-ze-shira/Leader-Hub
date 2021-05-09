@@ -14,7 +14,7 @@ import title from '../../../Data/title.json'
 function Tabs(props) {
 
     useEffect(() => {
-    }, [props.projectId, props.focusInputCard])
+    }, [props.projectId, props.focusInputCard, props.cards])
 
     let b;
     const [showInput, setShowInput] = useState(false)
@@ -49,7 +49,7 @@ function Tabs(props) {
                 // const replace = [e.source.index, e.destination.index, iSourse, iDestination]
                 const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard‏
-        
+
 
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
                 props.moveTaskBetweenCards(replaceIServer)
