@@ -61,8 +61,8 @@ function ViewTaskByCradTabs(props) {
                 event.stopPropagation()
             }
             if (e == "delete") {
-                $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
-                props.objectToast({ 'type': 'Task', 'object': props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
+                $(`#${props.task._id + "disappear"}`).css("display", "none")
+                props.objectToast({ 'type': 'Task', 'object': props.task })
             }
         }
         else
@@ -134,7 +134,7 @@ function ViewTaskByCradTabs(props) {
         <>
 
             {/* <div className="color-task mb-2 ml-2" ></div> */}
-            <Draggable draggableId={props.task._id} index={props.index}>
+            <Draggable draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
@@ -181,8 +181,8 @@ function ViewTaskByCradTabs(props) {
                                         />
                                         <span className="checkmark checkmark-tabs" onClick={(e) => addChalalit(e)}></span>
                                     </label>
+                                    {/* <div>{props.task.index}</div> */}
                                 </div>
-                                {/* <span>{props.task._id}</span> */}
                                 <input
                                     className="form-control col-12"
                                     value={props.task.name}

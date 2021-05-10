@@ -6,11 +6,14 @@ import ViewMilstone from './viewMilstone'
 import './Milstones.css'
 
 function Milestones(props) {
-
+    const [showGif, setShowGif] = useState(true)
     useEffect(() => {
         console.log("hi");
         props.getAllMilestonesTasks()
         console.log("milestones")
+        setTimeout(() => {
+            setShowGif(false)
+        }, 4000);
 
     }, [])
     const renderTasks = props.milestones.length ? props.milestones.map((milestone) => {
@@ -26,7 +29,9 @@ function Milestones(props) {
             <div className="mt-5">
                 {props.milestones.length ?
                     renderTasks
-                    : <div className="ml-5"><h1 className="ml-5">No Milestones</h1></div>}
+                    : showGif ?
+                        <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>
+                        : <div className="ml-5"><h1 className="ml-5">No Milestones</h1></div>}
             </div>
         </div >
     );
