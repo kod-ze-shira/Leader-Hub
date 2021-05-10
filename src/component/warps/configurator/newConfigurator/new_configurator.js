@@ -34,7 +34,7 @@ function NewConfigorator(props) {
                         $("li").removeClass("li-back")
                         $(`#milstones`).addClass("li-back")
                         $(`#milstones img`).removeClass("li-back")
-                    } 
+                    }
                 }
 
             }
@@ -82,7 +82,7 @@ function NewConfigorator(props) {
                 <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
-             
+
             </div>
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
@@ -98,7 +98,8 @@ function NewConfigorator(props) {
                     <ul className="list_config ">
                         <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                             <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
-                    My Workspace </li>
+                             My Workspace
+                             </li>
 
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                             <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
