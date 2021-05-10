@@ -1,20 +1,18 @@
 .Workspacegrid{
-   cursor: pointer;;
-
-/* color:black; */
-font-size: small;
-
-      width: 7rem;
+   cursor: pointer;
+   /* color: black; */
+   font-size: small;
+   width: 7.2rem;
    background-color: #F6F6FA;
-   height: 7.8rem;
+   height: 8rem;
    margin-bottom: 10px;
    text-align: center;
    justify-content: center;
    align-items: center;
    border-radius: 10px;
    margin-right: 1rem;
-   /* padding:15px; */
-    
+   /* padding: 15px; */
+   padding: 3px;
 }
 
 

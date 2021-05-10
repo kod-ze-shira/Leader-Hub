@@ -36,6 +36,7 @@ function TaskNotBelongCardForUser(props) {
                 <label class="col propertiesAllTask">Workspace</label>
                 <label class="col propertiesAllTask">Project</label>
                 <label class=" col propertiesAllTask">Card</label>
+                <label class=" col propertiesAllTask"></label>
             </div>
 
             <div className="mt-1">
