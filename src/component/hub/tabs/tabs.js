@@ -16,9 +16,6 @@ function Tabs(props) {
     const [showGif, setShowGif] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {
-            setShowGif(false)
-        }, 4000);
     }, [props.projectId, props.focusInputCard, props.cards])
 
     const [showInput, setShowInput] = useState(false)

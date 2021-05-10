@@ -9,6 +9,8 @@
   .check-task button {
     color: #778CA2;
     background-color: transparent;
+    vertical-align: middle !important;
+
   }
 
   .check-task button:focus{
@@ -29,8 +31,10 @@
   opacity: 0.5;
   }
   .check-task{
+    padding-top:1vh !important;
     font-size: 14px;
     margin-bottom: 0px !important;
+    vertical-align: middle !important;
   }
   
   /* Hide the browser's default checkbox */
@@ -138,7 +142,7 @@
     font-weight: 300;
     opacity: 0.9;
     margin: auto;
-    width: 75%;
+    width: 90%;
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     opacity: 0.6;

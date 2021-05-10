@@ -30,34 +30,45 @@ import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
+import ShureDelete from './shureDelete/shureDelete'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
+    const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
-    const [showCompleteTask, setShowCompleteTask] = useState(false)
-
     const [objectToDelete, setObjectToDelete] = useState()
     const [viewDetails, setViewDetails] = useState(false)
     const [formViewDitails, setFormViewDitails] = useState()
 
 
+
+
+
+
     const showToastToDelete = (objectToDelete) => {
         setObjectToDelete(objectToDelete)
-        setShowToastDelete(true)
+        if (objectToDelete.type == 'Task')
+            setShowToastDelete(true)
+        else {
+            setShowModlalDelete(true)
+        }
     }
     const deleteObject = () => {
-        console.log(objectToDelete)
         setShowToastDelete(false)
         props['remove' + objectToDelete.type](objectToDelete.object._id)
-
     }
     const openConfigurator = () => {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
+        if (objectToDelete.type == "Card") {
+            $(`#${objectToDelete.object._id} `).removeClass("displayNone")
+            $(`#${objectToDelete.object._id} `).addClass("mt-4")
+            $(`#${objectToDelete.object._id} `).addClass("col-3")
+        }
+        else if (objectToDelete.type == "Task")
             $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
         else if (objectToDelete.type == "Project")
             $(`#${objectToDelete.object._id}`).css("display", "table-row")
@@ -66,23 +77,18 @@ function Hub(props) {
 
     }
 
-    const openViewDetails = (value) => {
-        setFormViewDitails(value)
-        setViewDetails(true)
-    }
 
-    function openSearchProject() {
-        document.getElementById('inputSearchProjects').style.display = 'inline-block'
-    }
-
-    function closeInputSearch() {
-        document.getElementById('inputSearchProjects').style.display = 'none'
-    }
- 
     const [focusInputCard, setFocusInputCard] = useState(false)
 
     return (
         <>
+            {showModalDelete ? <ShureDelete
+                showToastDelete={(e) => setShowToastDelete(true)}
+                objectToDelete={objectToDelete}
+                closeModal={(e) => setShowModlalDelete(e)}
+            /> : null}
+
+
             <HeaderLeader userName={props.user} appName='hub' />‏
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
@@ -135,13 +141,11 @@ function Hub(props) {
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
                                     <button onClick={() => props.createSystemWave()}>createSystemWave</button>
-
                                     <UploadFile />
                                 </div>
                             </Route>
                         </Switch>
                     </div>
-
                     {showToastDelete ?
                         <ToastDelete
                             toOnClose={deleteObject}
@@ -149,6 +153,7 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
+
                     {showToastComplete ?
                         <Toast /> : null}
 
