@@ -71,9 +71,7 @@ function ViewTaskByCrad(props) {
             let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
             props.setTaskByFiledFromTasks(editTaskInRedux)
         }
-        // else
-        //     props.EditTask()
-        console.log("task", props.task.complete);
+
 
     }
     const showDetails = (from) => {
@@ -141,7 +139,6 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus)
             props.viewToastComplete(true)
-        // setViewCompleteTask(true)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -152,13 +149,19 @@ function ViewTaskByCrad(props) {
         setTask(temp);
     }
     const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
-    const [assigneeDetails, setAssigneeDetails] = useState([])//all contacts detail
-   
-    const setStateMailToContactMail = (emailMember) => {
-        setDisabledSelectPermission('true')
-        console.log(disabledSelectPermission);
-        setAssigneeDetails(emailMember.value)//to save email of contact
+    const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
 
+    const setStateMailToContactMail = (emailMember) => {
+        debugger
+
+        setAssigneeDetails(emailMember.value.email)
+        console.log(assigneeDetails);
+        props.assingTo(emailMember.value.email)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        let editTaskInRedux = { "nameFiled": "assingTo", "value": emailMember.value }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        console.log(props.task.assingTo);
 
     }
     return (
@@ -175,13 +178,13 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom"
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id} title="Drag and Drop"
+                                <FontAwesomeIcon className="dnd-icon " id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
                                     <label
                                         title="Complete Task"
-                                        className="check-task py-2 ">
+                                        className="check-task  ">
                                         <input type="checkbox"
                                             name="complete"
                                             checked={doneStatus}
@@ -193,7 +196,7 @@ function ViewTaskByCrad(props) {
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
+                                        className={props.task.complete ? "disabled show-card mt-2" : "show-card mt-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -206,22 +209,23 @@ function ViewTaskByCrad(props) {
                                     </input>
                                 </div>
 
-                                <label className="check-task py-2   view-details-btn" title="View Details">
+                                <label className="check-task    view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">
+
+                                <label className="check-task border-left    px-2 col">
                                     <DynamicSelect setContactEmail={setStateMailToContactMail} options={'contacts'} />
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col " >
+                                <label className="check-task border-left    px-2 col " >
                                     <div className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
                                     </div>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+                                <label className="check-task border-left  px-2 col">{props.task.startDate}
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                                <label className="check-task border-left  px-2 col">{props.task.dueDate}
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col-add-task">
+                                <label className="check-task border-left  px-2 col-add-task">
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
@@ -264,7 +268,8 @@ const mapDispatchToProps = (dispatch) => {
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        completeTask: (task) => dispatch(actions.completeTask(task))
+        completeTask: (task) => dispatch(actions.completeTask(task)),
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
     }
 }
 

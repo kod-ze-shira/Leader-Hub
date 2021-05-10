@@ -87,21 +87,39 @@ body {
 .option-contact{
   /* display: inline-block!important; */
 }
+
 .name-contact{
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
   display: -webkit-box;
     display: inline-block!important;
-    margin-left: 2vw;
-
+    margin-left: 2px;
+    /* width:70%; */
+}.css-tj5bde-Svg {
+  display:none !important;
 }
 .choose{
   border: #007bff 2px solid;
    background: white;
    color: #007bff;
 }
-
+.css-2b097c-container:focus{
+  border:0 !important;
+  outline: none !important;
+}
+.css-tlfecz-indicatorContainer:focus{
+  border:0 !important;
+  outline: none !important;
+}
+.logo-contact{
+  border-radius: 50%;
+  height:25px;
+  width:25px;
+  color:white;
+  background-color: red;
+  display:inline-block;
+}
 .choose:focus{
   border: #007bff 2px solid;
    background: white;

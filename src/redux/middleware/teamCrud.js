@@ -79,16 +79,16 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
     fetch(
       `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getContactsForUser`,
       // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
-      
+
       {
         method: 'GET',
         headers: {
           Authorization: getState().public_reducer.tokenFromCookies,
           // Accept: 'application/json',
           // 'Content-Type': 'application/json'
-      },
+        },
 
-       }
+      }
     )
       .then(res => {
         return res.json()
@@ -96,7 +96,7 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
       .then(result => {
         console.log('contacts', result)
         // checkPermission(result).then(ifOk => {
-          dispatch(actions.setContactsUser(result))
+        dispatch(actions.setContactsUser(result))
         // })
       })
   }
@@ -107,35 +107,96 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
 export const shareObject = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'SHARE_OBJECT') {
-  let teamsMemberAndPermission=action.payload.teams
-  let membersEmail=action.payload.shareDetails
-  let objectId=getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]
-  .projects[getState().public_reducer.indexCurrentProject]._id
-  console.log(objectId);
-  ///:userName/:objectId/:schemaName/:applicationName/shareObject
-  fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${objectId}/Project1/reacthub/shareMembersAndTeams`,
-            {
-                method: 'POST',
-                headers: {
-                    authorization: getState().public_reducer.tokenFromCookies,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({teamsMemberAndPermission,membersEmail})
-            }).then((result) => {
-                return result.json();
-            }).then((result) => {
-                checkPermission(result).then((ifOk) => {
-                    // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
+    let teamsMemberAndPermission = action.payload.teams
+    let membersEmail = action.payload.shareDetails
+    let objectId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]
+      .projects[getState().public_reducer.indexCurrentProject]._id
+    console.log(objectId);
+    ///:userName/:objectId/:schemaName/:applicationName/shareObject
+    fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${objectId}/Project1/reacthub/shareMembersAndTeams`,
+      {
+        method: 'POST',
+        headers: {
+          authorization: getState().public_reducer.tokenFromCookies,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ teamsMemberAndPermission, membersEmail })
+      }).then((result) => {
+        return result.json();
+      }).then((result) => {
+        checkPermission(result).then((ifOk) => {
+          // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
-                })
+        })
 
-            })
+      })
 
   }
   return next(action);
 }
+// {{urlHub}}/api/ranana-il/{{taskId}}/assingTo
+// export const assingTo = ({ dispatch, getState }) => next => action => {
 
+//   if (action.type === 'ASSING_TO') {
+//     debugger
+//     let email = action.payload
+//     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+//     .tasks[getState().public_reducer.indexCurrentTask]._id
+//     fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/assingTo`,
+//       {
+//         method: 'POST',
+//         headers: {
+//           authorization: getState().public_reducer.tokenFromCookies,
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ email })
+//       }).then((result) => {
+//         return result.json();
+//       }).then((result) => {
+//         checkPermission(result).then((ifOk) => {
+//           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
+
+//         })
+
+//       })
+
+//   }
+//   return next(action);
+// }
+export const assingTo = ({ dispatch, getState }) => next => action => {
+
+  if (action.type === 'ASSING_TO') {
+    let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+      .tasks[getState().public_reducer.indexCurrentTask]._id
+    let email = action.payload;
+    console.log(taskId);
+    let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/assingTo`
+    $.ajax({
+      url: urlData,
+      type: 'POST',
+      headers: {
+        Authorization: getState().public_reducer.tokenFromCookies
+      },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ email }),
+
+      success: function (data) {
+        console.log("success")
+        console.log("data", data);
+      
+      },
+
+      error: function (err) {
+        checkPermission(err).then((ifOk) => {
+        })
+      }
+    });
+
+  }
+  return next(action);
+}
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
   return new Promise((resolve, reject) => {
