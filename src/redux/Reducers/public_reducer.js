@@ -187,6 +187,7 @@ const publicData = {
         state.cards[cardDestinitionId].tasks.splice(destinition, 0, temp1)
     },
     changeCardPlace(state, action) {
+        debugger
         let source, destinition, temp
         source = action.payload[0]
         destinition = action.payload[1]

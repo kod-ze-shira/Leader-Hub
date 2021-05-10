@@ -49,7 +49,7 @@ function ViewCardsTabs(props) {
             props.newTask(task)
         }
         setInputValue("")
-        setAddTaskInInput(!addTaskInInput)
+        // setAddTaskInInput(!addTaskInInput)
     }
 
     const addTask = () => {
@@ -70,7 +70,6 @@ function ViewCardsTabs(props) {
 
         if (event == "rename") {
             console.log(textInput.current)
-
             // textInput.current.focus()
         }
         else
@@ -84,9 +83,10 @@ function ViewCardsTabs(props) {
         // textInput.current.focus()
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
-            // $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
+            $(`#${props.cardFromMap._id }`).css("display", "none")
         }
-    };
+    }
+
     function enterK(event) {
         if (event.key === 'Enter') {
             editCard()
@@ -129,8 +129,9 @@ function ViewCardsTabs(props) {
                                                 onKeyPress={event => {
                                                     enterK(event)
                                                 }}
-                                            >
+                                            > 
                                             </input>
+                                            {/* <p>{props.cardFromMap._id}</p> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
@@ -190,9 +191,7 @@ function ViewCardsTabs(props) {
                                         </Droppable>
                                         <a data-tip data-for="add_t"
                                             className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
-                                        {/* <ReactTooltip data-tip id="add_t" place="bootom" effect="solid">
-                                            {title.title_add_task}
-                                        </ReactTooltip> */}
+
                                     </div>
                                 </div>
                             </div>

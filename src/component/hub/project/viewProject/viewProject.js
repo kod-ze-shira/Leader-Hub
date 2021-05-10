@@ -34,7 +34,7 @@ function ViewProject(props) {
         let idProject = props.myProject._id;
         console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
-        props.history.push("/" + props.user + "/projectPlatform/" + idProject)
+        props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
     }
 
     function editProject(project, event) {
