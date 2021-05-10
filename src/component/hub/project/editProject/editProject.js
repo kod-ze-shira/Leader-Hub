@@ -68,20 +68,29 @@ function EditProject(props) {
 
     }
 
+    function closeViewDetailsInProject() {
+        props.setProjectInWorkspace(projectBeforeChanges)
+        props.closeViewDetails()
+    }
+
     return (
         <>
 
             <div className="details mr-5 ml-4">
                 <div className='propertiesViewDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
+                        <h5 className=" title-view-details  pl-3">Project details</h5>
+                        <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
+                        {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
+                    </div>
 
-                    <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5>
                     <div class="row justify-content-between  mx-1 mb-2">
                         <label>workspace: {props.workspace.name}</label>
                     </div>
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeFiledInProject(e)}
-                            type="text" class="form-control" required ref={nameRequired}
+                            id='nameProject' type="text" class="form-control" required ref={nameRequired}
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
                         <div class="invalid-feedback">
                             Please enter project name.
@@ -153,7 +162,8 @@ export default connect(
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
             setProjectByFiledFromWorkspace: (p) => dispatch(actions.setProjectByFiledFromWorkspace(p)),
             setProject: (p) => dispatch(actions.setProject(p)),
-            // setProjectInWorkspace: (p) => dispatch(actions.setProjectInWorkspace(p))
+            setProjectInWorkspace: (project) => dispatch(actions.setProjectInWorkspace(project)),
+
         }
     }
 )(EditProject)

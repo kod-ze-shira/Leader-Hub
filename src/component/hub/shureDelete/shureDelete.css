@@ -1,0 +1,38 @@
+
+
+.borderTop  .modal-dialog .modal-content{
+    border-top: 7px solid #3598F4;
+}
+
+.borderTop  .modal-dialog .modal-content .modal-header{
+    padding: 0.5rem 1rem;
+    border-bottom: none;
+
+}
+
+.borderTop  .modal-dialog{
+    margin-top: 30vh;
+}
+
+.borderTop .modal-dialog .modal-content .modal-footer{
+    border-top: none;
+}
+
+.cancelModalDelete{
+    color: #3598F4;
+    background-color: white;
+    border: 1px solid  #3598F4 !important;
+}
+
+.deleteInModalDelete{
+    background-color: #3598F4;
+
+}
+
+.borderTop  .modal-dialog  .modal-content .modal-body{
+    text-align: center;
+}
+
+.displayNone{
+    display: none !important;
+}

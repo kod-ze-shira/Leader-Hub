@@ -10,6 +10,13 @@
    width: 30%;
 }
 
+#nameRequired input
+{
+    width: 97%;
+    margin-left: 2%;
+
+}
+
 .projectForWorkspace,.projectForWorkspace td{
     border-top: none !important;
     border-bottom: 0.5px solid rgb(209, 207, 207);

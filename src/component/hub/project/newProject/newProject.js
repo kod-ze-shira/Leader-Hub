@@ -136,7 +136,15 @@ function NewProject(props) {
 
             <div className="details mr-5 ml-4">
                 <div className='propertiesViewDitails'>
-                    <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5>
+                    <div className='row my-4 justify-content-between headerDitails'>
+                        <h5 className=" title-view-details  pl-3">Add Project</h5>
+
+                        <div class="close pr-3" onClick={() => props.closeViewDetails()}>x</div>
+                        {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5> */}
+
+                    </div>
+
+
                     <div class="row justify-content-between  mx-1 mb-2">
                         <label>workspace: {props.workspace.name}</label>
                     </div>

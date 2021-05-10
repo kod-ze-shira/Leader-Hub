@@ -9,7 +9,6 @@ export function ToastDelete() {
                 {/* <span
             className="close_remove"
             onClick={out_remove_workspace}>×</span> */}
-
                 <Toast.Header className="tost" closeButton={false}>
 
                     <div className="row">

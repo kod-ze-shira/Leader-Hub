@@ -14,8 +14,10 @@ import ReactTooltip from 'react-tooltip';
 
 
 function AllWorkspaces(props) {
-    const [showToastDelete, setShowToastDelete] = useState(false)
+    // const [showToastDelete, setShowToastDelete] = useState(false)
+    // const [showModalDelete, setShowModalDelete] = useState(false)
     const refToDeleteToast = useRef(null);
+
 
     useEffect(() => {
         props.getAllWorkspaces()
@@ -25,7 +27,6 @@ function AllWorkspaces(props) {
     const [grid, setgrid] = useState(true);
     const [showAddWorkspace, setShowWorkspace] = useState(false)
     const [addOrEditWorkspace, setAddOrEditWorkspace] = useState(false)
-
 
     const renderedListWorkspaces = props.workspaces ?
         props.workspaces.map((workspace, index) => {
@@ -87,6 +88,8 @@ function AllWorkspaces(props) {
     return (
 
         <>
+
+
             <div className="row mt-5"></div>
             <div className="col-12">
                 <div className="row borderBottom mx-5">
