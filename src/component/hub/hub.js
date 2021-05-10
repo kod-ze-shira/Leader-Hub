@@ -88,7 +88,7 @@ function Hub(props) {
             {showModalDelete ? <ShureDelete
                 showToastDelete={(e) => setShowToastDelete(true)}
                 objectToDelete={objectToDelete}
-            // showModal={setshowModal}
+                closeModal={(e) => setShowModlalDelete(e)}
             /> : null}
 
 
