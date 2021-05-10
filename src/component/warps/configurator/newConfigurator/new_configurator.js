@@ -34,18 +34,15 @@ function NewConfigorator(props) {
                         $("li").removeClass("li-back")
                         $(`#milstones`).addClass("li-back")
                         $(`#milstones img`).removeClass("li-back")
-                    } 
+                    }
                 }
 
             }
 
-
-
-
     })
 
     const changeBackground = (e) => {
-        props.history.push("/" + props.user)
+        props.history.push("/" + props.user + "/hub")
         $(document).ready(function () {
             $("li").removeClass("li-back")
             $(e).addClass("li-back")
@@ -81,7 +78,7 @@ function NewConfigorator(props) {
                 <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
-             
+
             </div>
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">

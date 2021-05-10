@@ -10,7 +10,7 @@ import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 import { Menu, MenuItem, Button, Select } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
-// import title from '../../../../../src/Data/title.json'
+import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
@@ -148,11 +148,11 @@ function ViewCards(props) {
 
                     </div>
                     <Button className="more col-1 " data-tip data-for="more_a"
-                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        onClick={handleClick}>
                         . . .
                 </Button>
                     <ReactTooltip data-tip id="more_a" place="top" effect="solid">
-                        {/* {title.title_more_actions} */}
+                        {title.title_more_actions}
                     </ReactTooltip>
                     <Menu
                         id="simple-menu"
