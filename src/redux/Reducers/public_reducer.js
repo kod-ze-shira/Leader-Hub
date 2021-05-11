@@ -21,7 +21,8 @@ const initialState = {
     indexCurrentProject: 0,
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
-    arrDeleteFilesOfTask: []
+    arrDeleteFilesOfTask: [],
+    
 }
 
 const publicData = {

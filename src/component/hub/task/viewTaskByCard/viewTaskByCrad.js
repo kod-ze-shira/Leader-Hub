@@ -23,8 +23,8 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-    }, [
-        props.cards])
+    }, [props.cards])
+  
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
@@ -47,16 +47,7 @@ function ViewTaskByCrad(props) {
         "startDate": props.task.startDate,
 
     })
-    const unCompleteTask = {
-        "_id": props.task._id,
-        "name": props.task.name,
-        "description": props.task.description,
-        "dueDate": props.task.dueDate,
-        "startDate": props.task.startDate,
-        "complete": false,
-        "status": props.statuses[0],
-        // "card": props.task.card
-    }
+
     const changeFiledInTask = (input) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
@@ -148,7 +139,6 @@ function ViewTaskByCrad(props) {
         temp.name = editTaskName
         setTask(temp);
     }
-    const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
 
     const setStateMailToContactMail = (emailMember) => {
@@ -178,7 +168,7 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <FontAwesomeIcon className="dnd-icon " id={props.task._id} title="Drag and Drop"
+                                <FontAwesomeIcon className="dnd-icon mt-3" id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
@@ -240,9 +230,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
-            {/* {viewCompleteTask ? <Toast></Toast> : null} */}
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
-            {/* {showContactList ? <DynamicSelect options={'contacts'} /> : null} */}
 
         </>
     )
@@ -263,7 +251,6 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),

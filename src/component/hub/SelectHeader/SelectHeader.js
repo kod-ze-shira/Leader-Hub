@@ -38,8 +38,7 @@ function SelectHeader(props) {
     const color = '#00C6EA'
 
     useEffect(() => {
-        if (props.workspaces.length == 0)
-            props.getAllWorkspacesFromServer()
+       
     }, [])
 
     const handleChange = (event, newValue) => {

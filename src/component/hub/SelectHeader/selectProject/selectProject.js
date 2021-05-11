@@ -17,7 +17,6 @@ function SelectProject(props) {
 
     //to chang the project that user selected
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
-
     const changeSelectedProject = (id) => {
         props.setCurrentIndexProject(id.projectIndex)
         project = props.workspaces[props.indexWorkspace].projects.find(p => p._id == id.value)
@@ -140,6 +139,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectProject))
 
 

@@ -132,7 +132,7 @@ function Hub(props) {
                                 <Milestones />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/hub"}>
+                            <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <Route path="/" >
