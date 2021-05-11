@@ -6,7 +6,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPLOAD_FILES') {
 
         let files = action.payload.files
-        debugger
+
         if (action.type === 'UPLOAD_FILES') {
             var formData = new FormData()
             // var myFiles = Object.values(files)

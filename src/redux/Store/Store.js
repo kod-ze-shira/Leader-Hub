@@ -16,7 +16,7 @@ import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, get
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
     , moveTaskBetweenCards, moveCards,
-    completeTask
+    completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject } from '../middleware/teamCrud';
@@ -69,6 +69,8 @@ const store = createStore(
                 removeStatus,
                 moveTaskBetweenCards,
                 moveCards,
+                newTaskNotBelong,
+                belongTask,
                 completeTask,
                 shareObject,
                 assingTo

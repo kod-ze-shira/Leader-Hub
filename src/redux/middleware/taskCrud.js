@@ -250,7 +250,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
-
+        debugger
         let taskId = action.payload._id
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
@@ -368,8 +368,74 @@ export const moveCards = ({ dispatch, getState }) => next => action => {
 }
 
 
+export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'NEW_TASK_NOT_BELONG') {
+        let task = {
+            'name': action.payload,
+            "updateDates": "08/03/2021"
+        }
+        debugger
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ task }),
+            success: function (data) {
+                debugger
+                console.log("success")
+                // console.log(data);
+                // dispatch(actions.setCards(data.cards))
+
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+
+}
 
 
+export const belongTask = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'BELONG_TASK') {
+        let taskId = action.payload.taskId
+        let cardId = action.payload.cardId
+
+        // {{urlHub}}/api/renana-il/{{taskId}}/{{cardId}}/belongTask
+        //
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/${cardId}/belongTask`
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            // data: JSON.stringify({ cards }),
+            success: function (data) {
+                console.log("success")
+                // console.log(data);
+                // dispatch(actions.setCards(data.cards))
+
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                // console.log(err)
+            }
+        });
+
+    }
+    return next(action);
+
+}
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
