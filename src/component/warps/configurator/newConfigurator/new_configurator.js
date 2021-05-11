@@ -34,18 +34,15 @@ function NewConfigorator(props) {
                         $("li").removeClass("li-back")
                         $(`#milstones`).addClass("li-back")
                         $(`#milstones img`).removeClass("li-back")
-                    } 
+                    }
                 }
 
             }
 
-
-
-
     })
 
     const changeBackground = (e) => {
-        props.history.push("/" + props.user)
+        props.history.push("/" + props.user + "/hub")
         $(document).ready(function () {
             $("li").removeClass("li-back")
             $(e).addClass("li-back")
@@ -61,16 +58,15 @@ function NewConfigorator(props) {
     }
     function goToAllProjects(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/allProjects")
+        props.history.push("/" + props.user + "/hub/allProjects")
     }
     function goToMyTasks(e) {
         changeBackground(e)
-        // props.history.push("/" + props.user + "/myTasks")
-        props.history.push("/" + props.user + "/allTasks")
+        props.history.push("/" + props.user + "/hub/allTasks")
     }
     function goToMilestones(e) {
         changeBackground(e)
-        props.history.push("/" + props.user + "/milestones")
+        props.history.push("/" + props.user + "/hub/milestones")
     }
     // function goToGantt(e) {
     //     changeBackground(e)
@@ -82,7 +78,7 @@ function NewConfigorator(props) {
                 <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
-             
+
             </div>
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
@@ -98,7 +94,8 @@ function NewConfigorator(props) {
                     <ul className="list_config ">
                         <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
                             <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
-                    My Workspace </li>
+                             My Workspace
+                             </li>
 
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                             <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>

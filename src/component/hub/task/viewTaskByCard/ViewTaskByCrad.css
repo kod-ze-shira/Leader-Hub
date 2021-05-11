@@ -9,6 +9,8 @@
   .check-task button {
     color: #778CA2;
     background-color: transparent;
+    vertical-align: middle !important;
+
   }
 
   .check-task button:focus{
@@ -29,8 +31,10 @@
   opacity: 0.5;
   }
   .check-task{
+    padding-top:1vh !important;
     font-size: 14px;
     margin-bottom: 0px !important;
+    vertical-align: middle !important;
   }
   
   /* Hide the browser's default checkbox */
@@ -50,13 +54,17 @@
     background-color: #FFFFFF;
     border: 1px solid #34A38B;
     border-radius: 50%;
+    
   }
-  
+  .checkmark-tabs{
+    right: 10% !important;
+  }
   .checkmark-place{
     top: 7px;
     left: 0;
     
   }
+  
   
   .check-task:hover input ~ .checkmark {
     background-color: #FFFFFF;
@@ -134,7 +142,7 @@
     font-weight: 300;
     opacity: 0.9;
     margin: auto;
-    width: 75%;
+    width: 90%;
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
     opacity: 0.6;
@@ -157,8 +165,21 @@
 padding: 4px;
   }
  .col-add-task{
-   width: 4vw;
+   width: 2vw;
  }
+ .check-task .css-yk16xz-control{
+border: none !important;
+ }
+ .check-task.css-yk16xz-control :active{
+   border: none !important;
+ }
+ .check-task.css-yk16xz-control :focus{
+  border: none !important;
+ }
+ .check-task .css-2b097c-container{
+   /* display: none !important; */
+}
+
   .status-task-done{
     background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
     background:#D9F7F0 0% 0% no-repeat padding-box;
@@ -203,4 +224,37 @@ padding: 4px;
 } */
 .view-details-in-list{
   float: right !important;
+}
+
+
+.zA[draggable="false"] {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.zA {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  -webkit-box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
+  box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+
+.x7 {
+  color: #202124;
+  background: #c2dbff;
+}
+
+.yO {
+  background: rgba(242,245,245,0.8);
+  color: #202124;
+}
+
+.zA {
+  color: #202124;
+  cursor: pointer;
 }

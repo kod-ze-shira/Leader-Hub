@@ -34,11 +34,10 @@ function ViewProject(props) {
         let idProject = props.myProject._id;
         console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
-        props.history.push("/" + props.user + "/projectPlatform/" + idProject)
+        props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
     }
 
     function editProject(project, event) {
-        debugger
         props.setCurrentIndexProject(props.indexProject)
         // props.addProjectTArray(project)
         props.editOrShareProject('editProject')
@@ -52,7 +51,7 @@ function ViewProject(props) {
 
     function deleteMyProject(event) {
         props.showToast({ 'type': 'Project', 'object': props.myProject })
-        $(`#${props.myProject._id}`).css("display", "none")
+        // $(`#${props.myProject._id}`).css("display", "none")
         event.stopPropagation();
     }
 

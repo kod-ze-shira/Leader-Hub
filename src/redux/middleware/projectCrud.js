@@ -136,6 +136,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 export const deleteProjectInServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_PROJECT_IN_SERVER') {
+
         var projectId = action.payload;
         // let project = getState().project_reducer.project;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/removeProjectById`

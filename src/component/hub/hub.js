@@ -5,17 +5,14 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    
     Link,
     Redirect,
 } from 'react-router-dom';
 import history from "../history"
 
-import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
-import ProjectPlatform from './projectPlatform/projectPlatform'
-import CardsByProject from './Cards/cardsByProject/cardsByProject'
-import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
@@ -33,35 +30,45 @@ import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
+import ShureDelete from './shureDelete/shureDelete'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
+    const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
-    const [showCompleteTask, setShowCompleteTask] = useState(false)
-
     const [objectToDelete, setObjectToDelete] = useState()
     const [viewDetails, setViewDetails] = useState(false)
     const [formViewDitails, setFormViewDitails] = useState()
 
 
+
+
+
+
     const showToastToDelete = (objectToDelete) => {
         setObjectToDelete(objectToDelete)
-        setShowToastDelete(true)
+        if (objectToDelete.type == 'Task')
+            setShowToastDelete(true)
+        else {
+            setShowModlalDelete(true)
+        }
     }
     const deleteObject = () => {
-        console.log(objectToDelete)
         setShowToastDelete(false)
-        debugger
         props['remove' + objectToDelete.type](objectToDelete.object._id)
-
     }
     const openConfigurator = () => {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        if (objectToDelete.type == "Card" || objectToDelete.type == "Task")
+        if (objectToDelete.type == "Card") {
+            $(`#${objectToDelete.object._id} `).removeClass("displayNone")
+            $(`#${objectToDelete.object._id} `).addClass("mt-4")
+            $(`#${objectToDelete.object._id} `).addClass("col-3")
+        }
+        else if (objectToDelete.type == "Task")
             $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
         else if (objectToDelete.type == "Project")
             $(`#${objectToDelete.object._id}`).css("display", "table-row")
@@ -70,113 +77,75 @@ function Hub(props) {
 
     }
 
-    const openViewDetails = (value) => {
-        setFormViewDitails(value)
-        setViewDetails(true)
-    }
 
-    function openSearchProject() {
-        document.getElementById('inputSearchProjects').style.display = 'inline-block'
-    }
-
-    function closeInputSearch() {
-        document.getElementById('inputSearchProjects').style.display = 'none'
-    }
-    // $(window).click(function () {
-    //     setViewDetails(false)
-    // });
-    // function stopP(event) {
-    //     event.stopPropagation();
-    // }
     const [focusInputCard, setFocusInputCard] = useState(false)
 
     return (
         <>
+            {showModalDelete ? <ShureDelete
+                showToastDelete={(e) => setShowToastDelete(true)}
+                objectToDelete={objectToDelete}
+                closeModal={(e) => setShowModlalDelete(e)}
+            /> : null}
+
+
             <HeaderLeader userName={props.user} appName='hub' />‏
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
             <Router history={history}>
-                {/* <Nav openConfigurator={openConfigurator} /> */}
 
                 <div className="row back-screen">
-                    {/* {open ? */}
+        
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
-                    {/* // : null} */}
+                  
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
-                        {/* {viewDetails ?
-                            <div className="closeDet" onClick={(e) => stopP(e)}>
-                                <ViewDetails
-                                    closeViewDetails={() => setViewDetails(false)}
-                                    from={formViewDitails}
-                                />
-                            </div>
-                            : null
-                        } */}
                         <Switch>
+                        {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
-                            <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/gantt"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
                                 <div className="body-workspace mt-3">
                                     <DisplayGantt />
                                 </div>
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/workspacePlatform" >
+                        
+                            {/* <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
-                            </Route> */}
-                            <ProtectedRoute path={"/workspacePlatform"}>
-                                <WorkspacePlatform />
-                            </ProtectedRoute>
+                            </ProtectedRoute> */}
 
-                            <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
+                            <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName/myTasks" >
-                                <TaskNotBelongCardForUser />
-                            </Route> */}
-                            <ProtectedRoute path={"/:userName/allTasks"}>
+                        
+                            <ProtectedRoute path={"/:userName/hub/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/milestones"}>
+                            <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName" >
-                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
-                            </Route> */}
-                            <ProtectedRoute path={"/:userName"}>
+                         
+                            <ProtectedRoute path={"/:userName/hub"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
                                     <button onClick={() => props.createSystemWave()}>createSystemWave</button>
-
-                                    {/* contentEditable
-                                    height: auto;
-                              max-height: 110px;
-                                 overflow: auto; */}
                                     <UploadFile />
-                                    {/* <span id='searchProject' >
-                                        <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
-                                        <input type='text' id='inputSearchProjects' className='inputSearchProjects'
-                                            onMouseLeave={() => closeInputSearch()}
-                                        />‏
-                                    </span> */}
                                 </div>
-                                {/* <Animation /> */}
                             </Route>
                         </Switch>
                     </div>
-
                     {showToastDelete ?
                         <ToastDelete
                             toOnClose={deleteObject}
@@ -184,6 +153,7 @@ function Hub(props) {
                             name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
                         />
                         : null}
+
                     {showToastComplete ?
                         <Toast /> : null}
 

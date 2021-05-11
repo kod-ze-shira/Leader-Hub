@@ -9,6 +9,7 @@ import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CreatableSelect from 'react-select/creatable';
 
 
 function TasksNotBelongCardByMap(props) {
@@ -19,6 +20,9 @@ function TasksNotBelongCardByMap(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
+    const [mySelect, setMySelect] = useState({})
+    const [myProjects, setMyProjects] = useState([])
+    const [myCards, setMyCards] = useState([])
 
     // const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [doneStatus, setDoneStatus] = useState(props.task.complete)
@@ -30,7 +34,7 @@ function TasksNotBelongCardByMap(props) {
 
     useEffect(() => {
 
-    }, [props.task])
+    }, [props.task, props.workspaces])
 
 
     // const showDetails = (from) => {
@@ -63,7 +67,6 @@ function TasksNotBelongCardByMap(props) {
     }
 
     const editCompleteTask = () => {
-        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -103,6 +106,108 @@ function TasksNotBelongCardByMap(props) {
 
     }
 
+    const workspaceSelect = props.workspaces ? props.workspaces.map((workspace) => (
+        workspace.name ? {
+            value: workspace, label:
+                // <div className="container">
+                <div className="row">
+
+                    <div className=" " style={{ display: 'inline-block' }} >
+                        <div className="logo-w-little "
+                            style={{ backgroundColor: workspace.color, display: 'inline-block' }}
+                        >
+                            {workspace.name ? workspace.name[0].toUpperCase() : null}
+                        </div>
+                    </div>
+                    {workspace.name}
+
+                </div >
+        } : null
+    )) : null
+
+    const handleChange = (newValue, actionMeta) => {
+        if (newValue) {
+            console.group('Value Changed');
+            console.log(newValue);
+            //   props.options == 
+            document.getElementById('buttonSaveSelect').style.display = 'inline'
+            document.getElementById('buttonCancleSelect').style.display = 'inline'
+            // document.getElementById('selectProjectInAllTask').style.display = 'inline'
+            let indexWorkspace
+            for (let index = 0; index < props.workspaces.length; index++) {
+                if (props.workspaces[index]._id == newValue.value._id)
+                    indexWorkspace = index
+            }
+            setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
+            setMySelect({ 'workspaceId': newValue.value._id, 'indexWorkspace': indexWorkspace })
+            console.log(`action: ${actionMeta.action}`);
+            console.groupEnd();
+        }
+
+    };
+    const handleChangeProject = (newValue, actionMeta) => {
+        if (newValue) {
+            console.group('Value Changed');
+            console.log(newValue);
+            //   props.options == 
+            let indexProject
+            for (let index = 0; index < myProjects.length; index++) {
+                if (myProjects[index]._id == newValue.value._id)
+                    indexProject = index
+            }
+            setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
+            setMySelect({ 'projectId': newValue.value._id, 'indexProject': indexProject })
+            console.log(`action: ${actionMeta.action}`);
+            console.groupEnd();
+        }
+    };
+
+    const projectSelect = myProjects ? myProjects.map((project) => (
+        project.name ? {
+            value: project, label:
+                // <div className="container">
+                <div className="row" style={{ color: project.color }}>
+
+
+                    {project.name}
+
+                </div >
+        } : null
+    )) : null
+
+
+    const cardsSelect = myCards ? myCards.map((card) => (
+        card.name ? {
+            value: card, label:
+                // <div className="container">
+                <div className="row" >
+
+
+                    {card.name}
+
+                </div >
+        } : null
+    )) : null
+
+
+    const handleChangeCard = (newValue, actionMeta) => {
+        if (newValue) {
+            console.group('Value Changed');
+            console.log(newValue);
+            //   props.options == 
+            let indexCard
+            for (let index = 0; index < myCards.length; index++) {
+                if (myCards[index]._id == newValue.value._id)
+                    indexCard = index
+            }
+            // setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
+            setMySelect({ 'cardId': newValue.value._id, 'indexCard': indexCard })
+            console.log(mySelect)
+            console.log(`action: ${actionMeta.action}`);
+            console.groupEnd();
+        }
+    };
+
     return (
         <>
             <div
@@ -133,17 +238,41 @@ function TasksNotBelongCardByMap(props) {
                 >
                 </input>
                 <label className="check-task py-2  px-2 col-3 ">
+
+
                 </label>
                 <label className="check-task border-left  py-2  px-2 col ">
-                    {/* {props.task.status} */}
+                    <CreatableSelect
+                        isClearable
+                        onChange={handleChange}
+                        // onInputChange={handleInputChange}
+                        options={workspaceSelect}
+                    />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col " >
-                    {/* <div className={(props.task.status) == "in progress" ? 'status-task-in-progress' : props.task.status == "done" ? 'status-task-done' : 'status-task-to-do'}>{props.task.status}</div> */}
+                    <CreatableSelect
+                        // id='selectProjectInAllTask'
+                        isClearable
+                        onChange={handleChangeProject}
+                        // onInputChange={handleInputChange}
+                        options={projectSelect}
+                    />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col">
-                    {/* {props.task.dueDate} */}
-                </label>
+                    <CreatableSelect
+                        // id='selectProjectInAllTask'
+                        isClearable
+                        onChange={handleChangeCard}
+                        // onInputChange={handleInputChange}
+                        options={cardsSelect}
+                    />
 
+                </label>
+                <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
+                    <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
+                    <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                </label>
                 {viewDetails ?
                     <div className="closeDet" >
                         <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
@@ -165,7 +294,7 @@ const mapStateToProps = (state) => {
 
     return {
         tasks: state.public_reducer.tasks,
-        // cards: state.public_reducer.cards
+        workspaces: state.public_reducer.workspaces,
     }
 }
 const mapDispatchToProps = (dispatch) => {

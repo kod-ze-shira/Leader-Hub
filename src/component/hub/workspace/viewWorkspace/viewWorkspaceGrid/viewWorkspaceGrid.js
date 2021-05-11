@@ -10,17 +10,18 @@ import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
+import ShureDelete from '../../../shureDelete/shureDelete';
 
 function ViewWorkspaceGrid(props) {
 
-
     const workspace = props.workspace
     useEffect(() => {
+
     }, [props.workspaces])
 
     const routeToProject = () => {
         props.setIndexWorkspace(props.indexWorkspace)
-        props.history.push("/" + props.user + "/workspace/" + workspace._id)
+        props.history.push("/" + props.user + "/hub/workspace/" + workspace._id)
     }
     function outOver(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'none' })
@@ -48,7 +49,7 @@ function ViewWorkspaceGrid(props) {
     }
 
     function delete_workspace() {
-        $(`#${workspace._id}`).css("display", "none")
+        // $(`#${workspace._id}`).css("display", "none")
         props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace })
         props.setWorkspace(workspace);
     }

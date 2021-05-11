@@ -10,12 +10,12 @@ import ViewDetails from '../../viewDetails/viewDetails'
 import ToastDelete from '../../toastDelete/toastDelete1'
 import { Menu, MenuItem, Button, Select } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
-// import title from '../../../../../src/Data/title.json'
+import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
-
-        console.log();
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
 
     const [flag, setFlag] = useState(true)
@@ -39,12 +39,11 @@ function ViewCards(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            debugger
             let status = props.statuses[0]
             console.log(status);
             // props.statuses[0]._id
             task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
-            console.log(props.statuses[0].statusName);
+            // console.log(props.statuses[0].statusName);
             props.newTask(task)
         }
         setInputValue("")
@@ -149,11 +148,11 @@ function ViewCards(props) {
 
                     </div>
                     <Button className="more col-1 " data-tip data-for="more_a"
-                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        onClick={handleClick}>
                         . . .
                 </Button>
                     <ReactTooltip data-tip id="more_a" place="top" effect="solid">
-                        {/* {title.title_more_actions} */}
+                        {title.title_more_actions}
                     </ReactTooltip>
                     <Menu
                         id="simple-menu"
@@ -167,6 +166,7 @@ function ViewCards(props) {
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
                     {/* <p className="col">Team</p> */}
+                    <p className="col">Assignee</p>
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
@@ -176,7 +176,7 @@ function ViewCards(props) {
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                        <Droppable droppableId={props.cardFromMap._id} >
+                        <Droppable droppableId={props.cardFromMap._id}  >
                             {provided => (
                                 <div
                                     ref={provided.innerRef}
@@ -201,7 +201,7 @@ function ViewCards(props) {
                             autoFocus="true"
                             type="text"
                             // className="add-task"
-                            class="form-control scroll-container mt-2 w-50 ml-4"
+                            class="form-control scroll-container mt-2   ml-4"
                             placeholder="Add Task" id="input-task"
                             value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                                 if (event.key === 'Enter') {

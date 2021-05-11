@@ -41,22 +41,26 @@ const publicData = {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
+        debugger
     },
     setIdFiles(state, action) {
         // dispatch(actions.setIdFiles(data.result.files));
-        debugger
         action.payload.map((file) => {
             state.arrFilesOfTask.map((myFile, index) => {
-                if (myFile.url == file.url)
+                if (myFile.url == 'new' && file.name == file.name) {
                     state.arrFilesOfTask[index]._id = file._id
+                    state.arrFilesOfTask[index].url = file.url
+                }
             })
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.map((myFile, index) => {
-                if (myFile.url == file.url)
+                if (myFile.url == file.url) {
                     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index]._id = file._id
+                    // state.task._id = file._id
+                    state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url = file.url
+                    // state.task.url = file.url
+                }
             })
         })
-
-        debugger
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
@@ -120,11 +124,12 @@ const publicData = {
                 )
         })
     },
-    deletCard(state, action) {
+    deleteCard(state, action) {
         console.log(action.payload.dc)
         state.cards = state.cards.filter((_, i) =>
             state.cards[i]._id !== action.payload.dc._id
         )
+        debugger
     },
     addProjectToProjects(state, action) {
 
@@ -182,6 +187,7 @@ const publicData = {
         state.cards[cardDestinitionId].tasks.splice(destinition, 0, temp1)
     },
     changeCardPlace(state, action) {
+        debugger
         let source, destinition, temp
         source = action.payload[0]
         destinition = action.payload[1]
@@ -256,7 +262,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     setTaskByFiledFromTasks(state, action) {
-
+        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
 
     },
@@ -294,8 +300,6 @@ const publicData = {
     // },
 
     deleteFilesInArr(state, action) {
-        debugger
-
         state.arrDeleteFilesOfTask = []
     },
     removeFileInRedux(state, action) {

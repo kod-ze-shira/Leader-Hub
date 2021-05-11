@@ -14,6 +14,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 import Toast from '../../toast/toastTaskCompleted'
+import DynamicSelect from '../../team/dynamicSelect';
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -22,22 +23,22 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        if (props.statuses && props.statuses.length > 0)
-            props.getAllStatusesTaskForWorkspace();
-
     }, [
         props.cards])
     useEffect(() => {
-        setDoneStatus(props.task.complete)
+        doneStatus = props.task.complete
     }, [props.task.complete])
+    useEffect(() => {
+
+    }, [props.task.status])
     const [status, setStatus] = useState()
     const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
+    const [showContactList, setShowContactList] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
-    const [doneStatus, setDoneStatus] = useState(props.task.complete)
-
+    let doneStatus = props.task.complete
     const [task, setTask] = useState({
         "_id": props.task._id,
         "name": props.task.name,
@@ -46,17 +47,31 @@ function ViewTaskByCrad(props) {
         "startDate": props.task.startDate,
 
     })
-
+    const unCompleteTask = {
+        "_id": props.task._id,
+        "name": props.task.name,
+        "description": props.task.description,
+        "dueDate": props.task.dueDate,
+        "startDate": props.task.startDate,
+        "complete": false,
+        "status": props.statuses[0],
+        // "card": props.task.card
+    }
     const changeFiledInTask = (input) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
-        props.setTaskByFiledFromTasks(editTaskInRedux)
-        if (input.target.name == "complete")
+        if (input.target.name == "complete") {
+            doneStatus = !doneStatus
+            value = doneStatus
             editCompleteTask()
 
-        console.log("task", props.task.complete);
+        }
+        else {
+            let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
+            props.setTaskByFiledFromTasks(editTaskInRedux)
+        }
+
 
     }
     const showDetails = (from) => {
@@ -115,15 +130,15 @@ function ViewTaskByCrad(props) {
             "description": props.task.description,
             "dueDate": props.task.dueDate,
             "startDate": props.task.startDate,
-            "complete": true,
+            "complete": doneStatus,
             "endDate": today,
-            "status": props.statuses[2],
+            "status": doneStatus ? props.statuses[2] : props.statuses[0],
             // "card": props.task.card
         }
-        props.setTaskComplete(completeTask)
-        props.completeTask(task)
-        props.viewToastComplete(true)
-        // setViewCompleteTask(true)
+        props.setTaskComplete(completeTask)//redux
+        props.completeTask(completeTask)//server
+        if (doneStatus)
+            props.viewToastComplete(true)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -133,9 +148,25 @@ function ViewTaskByCrad(props) {
         temp.name = editTaskName
         setTask(temp);
     }
+    const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
+    const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
+
+    const setStateMailToContactMail = (emailMember) => {
+        debugger
+
+        setAssigneeDetails(emailMember.value.email)
+        console.log(assigneeDetails);
+        props.assingTo(emailMember.value.email)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        let editTaskInRedux = { "nameFiled": "assingTo", "value": emailMember.value }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        console.log(props.task.assingTo);
+
+    }
     return (
         <>
-            <Draggable draggableId={props.task._id} index={props.index}>
+            <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
                 {provided => (
                     <div
                         {...provided.draggableProps}
@@ -145,15 +176,15 @@ function ViewTaskByCrad(props) {
                         <div id={props.task._id + "disappear"}>
                             <div onMouseOver={(e) => overTask(props.task._id)}
                                 onMouseOut={() => outOver(props.task._id)}
-                                className="show-task row mx-4 border-bottom"
+                                className="show-task row mx-4 border-bottom "
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-2" id={props.task._id} title="Drag and Drop"
+                                <FontAwesomeIcon className="dnd-icon " id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
                                     <label
                                         title="Complete Task"
-                                        className="check-task py-2 ">
+                                        className="check-task  ">
                                         <input type="checkbox"
                                             name="complete"
                                             checked={doneStatus}
@@ -165,7 +196,7 @@ function ViewTaskByCrad(props) {
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
+                                        className={props.task.complete ? "disabled show-card mt-2" : "show-card mt-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -177,19 +208,24 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-                                <label className="check-task py-2   view-details-btn" title="View Details">
+
+                                <label className="check-task    view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col " >
-                                    <div className="status-task" style={{ "backgroundColor": props.task.status.color }} >
-                                        {props.task.status.statusName}
+
+                                <label className="check-task border-left    px-2 col">
+                                    <DynamicSelect setContactEmail={setStateMailToContactMail} options={'contacts'} />
+                                </label>
+                                <label className="check-task border-left    px-2 col " >
+                                    <div className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                        {props.task.status ? props.task.status.statusName : null}
                                     </div>
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.task.startDate}
+                                <label className="check-task border-left  px-2 col">{props.task.startDate}
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col">{props.task.dueDate}
+                                <label className="check-task border-left  px-2 col">{props.task.dueDate}
                                 </label>
-                                <label className="check-task border-left  py-2  px-2 col-add-task">
+                                <label className="check-task border-left  px-2 col-add-task">
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
@@ -206,6 +242,7 @@ function ViewTaskByCrad(props) {
             </Draggable>
             {/* {viewCompleteTask ? <Toast></Toast> : null} */}
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
+            {/* {showContactList ? <DynamicSelect options={'contacts'} /> : null} */}
 
         </>
     )
@@ -231,7 +268,9 @@ const mapDispatchToProps = (dispatch) => {
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        completeTask: (task) => dispatch(actions.completeTask(task))
+        completeTask: (task) => dispatch(actions.completeTask(task)),
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)

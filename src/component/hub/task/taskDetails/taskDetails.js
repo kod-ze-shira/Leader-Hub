@@ -16,6 +16,7 @@ import ViewAllStatuses from '../../status/viewAllStatuses';
 import file from '../../uploadFile/file/file';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
+import imageCompression from "browser-image-compression";
 
 function TaskDetails(props) {
     const nameRequired = useRef()
@@ -27,6 +28,8 @@ function TaskDetails(props) {
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
 
     }, [props.cards])
 
@@ -53,34 +56,67 @@ function TaskDetails(props) {
 
         setOpenPopUp(false)
     }
+    const compressedFile = async (myFiles) => {
 
+        let compressedFile;
+        let compressedFiles = [];
 
-    const saveTask = () => {
+        await Promise.all(
+            myFiles.map(async (file) => {
+                if (file.file.type.includes("image")) {
+                    console.log("in img type");
+                    const options = {
+                        maxSizeMB: 1,
+                        maxWidthOrHeight: 1920,
+                        useWebWorker: true,
+                    };
+                    // console.log(file);
+                    compressedFile = await imageCompression(file.file, options);
+                    // console.log("compressedFile  " + JSON.stringify(compressedFile));
+                    console.log(
+                        "compressedFile instanceof Blob",
+                        compressedFile instanceof Blob
+                    ); // true
+                    // console.log(
+                    //     `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+                    // );
+                } else {
+                    compressedFile = file.file;
+                }
+                compressedFiles.push(compressedFile)
+
+            })
+        )
+        debugger
+        return compressedFiles
+    }
+    const saveTask = async () => {
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
                 newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
             if (newFiles.length) {
+                newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
             }
             else
                 if (props.arrDeleteFilesOfTask.length) {
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
-
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-                        debugger
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
-                            if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id)
-                                props.task.files.splice(index2, 1); // first element removed
+                            if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
+                                console.log(props.task.files)
+                                debugger
+                                let r = props.task.files
+                                r.splice(index2, 1);
+                            }
+                            // first element removed
                         }
-
                         // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
 
                     }
-
                     let r = props.task.files
-                    debugger
                     props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
@@ -151,7 +187,10 @@ function TaskDetails(props) {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
 
-
+    function closeViewDetailsInTask() {
+        props.setTaskFromTasks(taskBeforeChanges)
+        props.closeViewDetails()
+    }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File url={file.url} name={file.name} />
@@ -160,7 +199,13 @@ function TaskDetails(props) {
         <>
             <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}>
                 <div className='propertiesViewDitails'>
-                    <h5 className="mt-5 title-view-details pb-2">Task details</h5>
+                    <div className='row my-4 justify-content-between headerDitails'>
+                        <h5 className=" title-view-details   pl-3">Task details</h5>
+                        <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
+                        {/* <h5 className="mt-5 title-view-details pb-2">Task details</h5> */}
+
+                    </div>
+
                     <div className="row justify-content-between mx-1" >
                         <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label className="ml-5">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
                         <br></br>
@@ -228,10 +273,10 @@ function TaskDetails(props) {
                     <div className="row justify-content-between">
                         <div class="dropdown col-6 col-lg-5">
                             <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {props.statuses.length > 0 ? <>
+                                {props.statuses && props.statuses.length > 0 ? <>
 
                                     <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                    <span >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
+                                    <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
                                 </> : null}
                             </button>
                             {openPopUp ?
@@ -285,6 +330,7 @@ function TaskDetails(props) {
 
     )
 }
+
 const mapStateToProps = (state) => {
     return {
         tasks: state.public_reducer.tasks,
@@ -307,7 +353,9 @@ const mapDispatchToProps = (dispatch) => {
         getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
         setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
-        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails))
+        setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
+        setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

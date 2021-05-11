@@ -17,7 +17,8 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-
+        if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -41,13 +42,14 @@ function ViewCardsTabs(props) {
         const yyyy = today.getFullYear()
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
-        if (inputValue && props.statuses.length) {
-
-            task = { name: inputValue, description: "", status: props.statuses[0], startDate: today, dueDate: today, "card": props.card._id }
+        if (inputValue) {
+            let status = props.statuses[0]
+            console.log(status);
+            task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
             props.newTask(task)
         }
         setInputValue("")
-        setAddTaskInInput(!addTaskInInput)
+        // setAddTaskInInput(!addTaskInInput)
     }
 
     const addTask = () => {
@@ -68,7 +70,6 @@ function ViewCardsTabs(props) {
 
         if (event == "rename") {
             console.log(textInput.current)
-
             // textInput.current.focus()
         }
         else
@@ -82,10 +83,10 @@ function ViewCardsTabs(props) {
         // textInput.current.focus()
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
-            $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
-
+            $(`#${props.cardFromMap._id }`).css("display", "none")
         }
-    };
+    }
+
     function enterK(event) {
         if (event.key === 'Enter') {
             editCard()
@@ -103,7 +104,7 @@ function ViewCardsTabs(props) {
 
     return (
         <>
-            <div className="col-3 mt-4" >
+            <div className="col-3 mt-4" id={props.cards[props.indexCard]._id}>
                 {/* {props.cardFromMap._id} */}
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
@@ -128,8 +129,9 @@ function ViewCardsTabs(props) {
                                                 onKeyPress={event => {
                                                     enterK(event)
                                                 }}
-                                            >
+                                            > 
                                             </input>
+                                            {/* <p>{props.cardFromMap._id}</p> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
@@ -159,10 +161,10 @@ function ViewCardsTabs(props) {
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
-                                                            // key={props.cards[props.indexCard].tasks[index]._id}
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
-                                                            indexTask={index} />
+                                                            indexTask={index}
+                                                            viewToastComplete={props.viewToastComplete} />
                                                     ))}
 
                                                     {
@@ -171,7 +173,7 @@ function ViewCardsTabs(props) {
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="form-control scroll-container" placeholder="Add Task"
+                                                                    class="form-control" placeholder="Add Task"
                                                                     id="input-task"
                                                                     value={inputValue}
                                                                     onChange={updateInputValue} onKeyPress={event => {
@@ -189,9 +191,7 @@ function ViewCardsTabs(props) {
                                         </Droppable>
                                         <a data-tip data-for="add_t"
                                             className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
-                                        {/* <ReactTooltip data-tip id="add_t" place="bootom" effect="solid">
-                                            {title.title_add_task}
-                                        </ReactTooltip> */}
+
                                     </div>
                                 </div>
                             </div>

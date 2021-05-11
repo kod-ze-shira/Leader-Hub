@@ -46,7 +46,8 @@ export default function ShareOneMember(props) {
                                     src={props.member.shareDetail.thumbnail}></img>
                                 // style={{ 'background': `linear-gradient(136deg,${backgroundStyle},white)` }}
 
-                                : <div ref={refToDivColor} style={{ backgroundColor: backgroundStyle }} className="img_share_one_member div_img_share_one_member">{props.member.shareDetail.name[0]}</div>}
+                                : <div ref={refToDivColor} style={{ backgroundColor: backgroundStyle }}
+                                    className="img_share_one_member div_img_share_one_member">{props.member.shareDetail.name[0]}</div>}
                         </div>
                         <div className="col-9">
                             <div className="row name_share_one_member">

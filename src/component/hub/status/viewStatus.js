@@ -25,7 +25,6 @@ function ViewStatus(props) {
 
     }
     const saveStatus1 = (id) => {
-        debugger
         props.saveStatus(props.status)
         if (props.status.statusName == props.statuses[2].statusName) {
             let editTaskInRedux = { "nameFiled": "complete", "value": true }
