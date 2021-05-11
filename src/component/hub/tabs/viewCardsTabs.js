@@ -17,8 +17,8 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
+        // if (!(props.statuses && props.statuses.length > 0))
+        //     props.getAllStatusesTaskForWorkspace();
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -51,6 +51,7 @@ function ViewCardsTabs(props) {
         setInputValue("")
         setAddTaskInInput(!addTaskInInput)
     }
+
 
     const addTask = () => {
         setAddTaskInInput(!addTaskInInput)

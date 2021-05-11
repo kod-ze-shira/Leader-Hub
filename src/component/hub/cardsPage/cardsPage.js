@@ -20,6 +20,9 @@ function CardsPage(props) {
     useEffect(() => {
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
+            if (!(props.statuses && props.statuses.length > 0))
+            props.getAllStatusesTaskForWorkspace();
+            
        
     }, [])
 

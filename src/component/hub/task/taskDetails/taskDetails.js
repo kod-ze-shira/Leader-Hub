@@ -28,8 +28,8 @@ function TaskDetails(props) {
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
-        if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
+        // if (!(props.statuses && props.statuses.length > 0))
+        //     props.getAllStatusesTaskForWorkspace();
 
     }, [props.cards])
 
@@ -170,7 +170,6 @@ function TaskDetails(props) {
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
     function filesInTask() {
-
         let newComponent
         props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
             newComponent = addFileComponent(file.url, file.name)
@@ -178,9 +177,7 @@ function TaskDetails(props) {
                 setFileComponentArr([newComponent])
             else
                 setFileComponentArr([...fileComponentArr, newComponent])
-
         })
-
     }
     const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
@@ -306,7 +303,6 @@ function TaskDetails(props) {
                     </div>
                     {/* </div> */}
                     {newFileComponentArr}
-
                     <UploadFile />
                 </div>
 

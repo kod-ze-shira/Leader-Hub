@@ -41,7 +41,6 @@ const publicData = {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
-        debugger
     },
     setIdFiles(state, action) {
         // dispatch(actions.setIdFiles(data.result.files));
@@ -129,7 +128,6 @@ const publicData = {
         state.cards = state.cards.filter((_, i) =>
             state.cards[i]._id !== action.payload.dc._id
         )
-        debugger
     },
     addProjectToProjects(state, action) {
 
@@ -261,10 +259,10 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     setTaskByFiledFromTasks(state, action) {
-        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
 
     },
+
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },

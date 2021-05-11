@@ -89,15 +89,16 @@ body {
 }
 
 .name-contact{
-  -webkit-box-orient: vertical;
+  /* -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  display: -webkit-box;
+  display: -webkit-box; */
     display: inline-block!important;
     margin-left: 2px;
-    /* width:70%; */
+    
 }.css-tj5bde-Svg {
   display:none !important;
+  opacity:0 !important;
 }
 .choose{
   border: #007bff 2px solid;
