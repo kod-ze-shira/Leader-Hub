@@ -14,8 +14,7 @@ import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
-        // if (!(props.statuses && props.statuses.length > 0))
-        //     props.getAllStatusesTaskForWorkspace()
+    
     }, [props.flag])
 
     const [flag, setFlag] = useState(true)
@@ -243,8 +242,6 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         EditCard: (card) => dispatch(actions.editCard(card)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)

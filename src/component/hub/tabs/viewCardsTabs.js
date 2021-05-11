@@ -17,8 +17,7 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        // if (!(props.statuses && props.statuses.length > 0))
-        //     props.getAllStatusesTaskForWorkspace();
+        
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -233,8 +232,6 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         editCard: (card) => dispatch(actions.editCard(card)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
-
 
     }
 }
