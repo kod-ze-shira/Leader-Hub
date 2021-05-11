@@ -26,6 +26,7 @@ function TaskDetails(props) {
 
 
     useEffect(() => {
+        debugger
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -34,11 +35,8 @@ function TaskDetails(props) {
     }, [props.cards])
 
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
-    const [milestonesValue, setMilestonesValue] = useState(milstone)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
-
-
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
         event.stopPropagation();

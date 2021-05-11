@@ -14,8 +14,8 @@ import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
-        if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
+        // if (!(props.statuses && props.statuses.length > 0))
+        //     props.getAllStatusesTaskForWorkspace()
     }, [props.flag])
 
     const [flag, setFlag] = useState(true)
@@ -231,6 +231,8 @@ const mapStateToProps = (state) => {
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         statuses: state.status_reducer.statuses,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
+
         // user: state.public_reducer.userName,
 
     }

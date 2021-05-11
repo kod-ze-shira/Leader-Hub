@@ -12,6 +12,7 @@ function SelectCards(props) {
     useEffect(() => {
         if (props.cards[0])
             props.setCard(props.cards[0])
+            
     }, [])
 
 

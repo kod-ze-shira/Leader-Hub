@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    
+
     Link,
     Redirect,
 } from 'react-router-dom';
@@ -96,14 +96,14 @@ function Hub(props) {
             <Router history={history}>
 
                 <div className="row back-screen">
-        
+
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
-                  
+
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
-                        {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
+                            {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
                             <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -116,7 +116,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                        
+
                             {/* <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute> */}
@@ -126,7 +126,7 @@ function Hub(props) {
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                        
+
                             <ProtectedRoute path={"/:userName/hub/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
@@ -134,8 +134,8 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
-                         
-                            <ProtectedRoute path={"/:userName/hub"}>
+
+                            <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <Route path="/" >

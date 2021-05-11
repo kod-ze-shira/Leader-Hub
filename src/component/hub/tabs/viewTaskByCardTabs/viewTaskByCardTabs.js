@@ -11,11 +11,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
+import { useParams } from 'react-router-dom';
 
 
 function ViewTaskByCradTabs(props) {
-    const [detailsOrEditTask, setDetailsOrEditTask] = useState()
-    // const [editTaskName, setEditTaskName] = useState(props.cards[props.indexCard].tasks[props.indexTask].name)
+
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
@@ -27,7 +27,7 @@ function ViewTaskByCradTabs(props) {
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
     const [showchalalit, setShowChalalit] = useState(false)
-
+    const { idProject } = useParams();
 
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
@@ -92,7 +92,7 @@ function ViewTaskByCradTabs(props) {
             "startDate": props.task.startDate,
             "complete": doneStatus,
             "endDate": today,
-            "status": doneStatus ? props.statuses[2] : props.statuses[0],
+            "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
@@ -133,7 +133,6 @@ function ViewTaskByCradTabs(props) {
     return (
         <>
 
-            {/* <div className="color-task mb-2 ml-2" ></div> */}
             <Draggable draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
@@ -146,7 +145,9 @@ function ViewTaskByCradTabs(props) {
                             id={props.task._id + "disappear"}>
                             <div className="container">
                                 <div className="row">
-                                    {props.task.status ? <div title={props.task.status.statusName} className="color-task col-3 mt-3 ml-2" style={{ "backgroundColor": props.task.status.color }}></div> : null}
+                                    {props.task.status ? <div title={props.task.status.statusName}
+                                        className="color-task col-3 mt-3 ml-2"
+                                        style={{ "backgroundColor": props.task.status.color }}></div> : null}
 
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
                                     <Button className="more col-3 mr-0 more-task"
@@ -181,7 +182,7 @@ function ViewTaskByCradTabs(props) {
                                         />
                                         <span className="checkmark checkmark-tabs" onClick={(e) => addChalalit(e)}></span>
                                     </label>
-                                    {/* <div>{props.task.index}</div> */}
+                                    <div>{props.task.index}</div>
                                 </div>
                                 <input
                                     className="form-control col-12"
@@ -212,8 +213,10 @@ const mapStateToProps = (state) => {
         tasks: state.public_reducer.tasks,
         cards: state.public_reducer.cards,
         card: state.card_reducer.card,
+        workspaces: state.public_reducer.workspaces,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         statuses: state.status_reducer.statuses
     }
 }
@@ -225,7 +228,6 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task))
 
