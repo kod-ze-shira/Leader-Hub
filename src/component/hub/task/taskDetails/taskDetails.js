@@ -85,7 +85,7 @@ function TaskDetails(props) {
 
             })
         )
-        debugger
+
         return compressedFiles
     }
     const saveTask = async () => {

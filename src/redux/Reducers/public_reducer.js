@@ -42,7 +42,11 @@ const publicData = {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
-        debugger
+
+    },
+    setTaskByFiledFromTasks(state, action) {
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
+        [action.payload.nameFiled] = action.payload.value
     },
     setIdFiles(state, action) {
         // dispatch(actions.setIdFiles(data.result.files));
@@ -130,7 +134,7 @@ const publicData = {
         state.cards = state.cards.filter((_, i) =>
             state.cards[i]._id !== action.payload.dc._id
         )
-        debugger
+
     },
     addProjectToProjects(state, action) {
 
@@ -188,7 +192,7 @@ const publicData = {
         state.cards[cardDestinitionId].tasks.splice(destinition, 0, temp1)
     },
     changeCardPlace(state, action) {
-        debugger
+
         let source, destinition, temp
         source = action.payload[0]
         destinition = action.payload[1]
@@ -262,10 +266,10 @@ const publicData = {
     addWorkspaceToWorkspaces(state, action) {
         state.workspaces.push(action.payload)
     },
-    setTaskByFiledFromTasks(state, action) {
-        debugger
-        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
 
+
+    setComlitedTask(state, action) {
+        state.tasks[action.payload.index].complete = action.payload.value
     },
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload

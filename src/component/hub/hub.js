@@ -22,7 +22,6 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import UploadFile from './uploadFile/uploadFile'
 import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
 import ViewDetails from './viewDetails/viewDetails'
@@ -38,8 +37,6 @@ function Hub(props) {
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
-    const [viewDetails, setViewDetails] = useState(false)
-    const [formViewDitails, setFormViewDitails] = useState()
 
 
 
@@ -140,8 +137,7 @@ function Hub(props) {
                             </ProtectedRoute>
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
-                                    <button onClick={() => props.createSystemWave()}>createSystemWave</button>
-                                    <UploadFile />
+
                                 </div>
                             </Route>
                         </Switch>
@@ -180,8 +176,6 @@ const mapDispatchToProps = (dispatch) => {
         removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
         addFile: (files) => dispatch(actions.addFile(files)),
         createSystemWave: () => dispatch(actions.createSystemWave()),
-
-
     }
 
 

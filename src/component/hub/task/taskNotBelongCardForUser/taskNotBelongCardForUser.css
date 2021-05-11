@@ -1,8 +1,13 @@
-.searchTask{
+.addTaskNotBelong{
     border:1px solid #3598F4;
     border-radius: 8px !important;    
-     margin: 3%; 
+     /* margin: 3%;  */
      padding-right: 32px;
+}
+
+.input-group-task-not-belongs{
+     margin: 3%; 
+
 }
 
 .divAllTask{
@@ -36,6 +41,10 @@
     padding-right: 11px;
     height: fit-content;
     display: none;
+}
+
+.activeBuutonSave{
+    background-color: #3598F4 !important;
 }
 
 #buttonCancleSelect{
@@ -95,3 +104,20 @@ text-transform: capitalize;
     width: 11px;
     cursor: pointer;
 }
+
+inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.right-addon input { padding-right: 30px; }
