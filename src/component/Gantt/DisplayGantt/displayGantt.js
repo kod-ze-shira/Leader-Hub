@@ -89,9 +89,7 @@ function DisplayGantt(props) {
                 let year = item.start_date.split('-')[0];
                 if (year > maxYear.split('-')[0]) {
                     currDate = year
-                    console.log("papapap", year);
                     year = year.concat('-01-01')
-                    console.log("tttt", year);
                     maxYear = year;
                 } else if (year < minYear) {
                     minYear = year

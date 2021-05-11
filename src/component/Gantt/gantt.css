@@ -119,12 +119,29 @@
 
 .gantt_marker_content {
   color: black !important;
+
 }
 .milestones_{
   /* margin-left: -3vh !important;
   margin-right: -3vh !important; */
   vertical-align: middle !important;
-  background-color: #b2e5e7 !important;
-  image-rendering: url("../img/milstone.svg")!important;
+  background-color: #3598F4 !important;
+
+}
+.milestones_ > .gantt_marker_content{
+  background-image: url("../img/milstone.svg") !important;
+  background-repeat: no-repeat !important;
+  color: transparent !important;
+  width: 5vh;
+  padding: 11px !important;
+  margin-top: 10vh;
+  margin-left: -2vh;
+  background-color: transparent !important;
+  opacity: 1;
+
+  /* padding-top: 2px !important; */
+  /* padding-bottom: 2px !important; */
+
+
 
 }

@@ -59,6 +59,7 @@ function DynamicSelect(props) {
       console.log(`action: ${actionMeta.action}`);
       console.groupEnd();
     }
+
   };
   const handleInputChange = (inputValue, actionMeta) => {
     console.group('Input Changed');

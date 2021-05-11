@@ -5,17 +5,14 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    
     Link,
     Redirect,
 } from 'react-router-dom';
 import history from "../history"
 
-import ProjectsByWorkspace from './project/projectsByWorkspace/projectsByWorkspace'
 // import workspacePlatform from './workspacePlatform/workspacePlatform';
 import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
-import ProjectPlatform from './projectPlatform/projectPlatform'
-import CardsByProject from './Cards/cardsByProject/cardsByProject'
-import HeaderBody from './headerBody/headerBody'
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
@@ -88,7 +85,7 @@ function Hub(props) {
             {showModalDelete ? <ShureDelete
                 showToastDelete={(e) => setShowToastDelete(true)}
                 objectToDelete={objectToDelete}
-            // showModal={setshowModal}
+                closeModal={(e) => setShowModlalDelete(e)}
             /> : null}
 
 
@@ -97,72 +94,55 @@ function Hub(props) {
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div>
             <Router history={history}>
-                {/* <Nav openConfigurator={openConfigurator} /> */}
 
                 <div className="row back-screen">
-                    {/* {open ? */}
+        
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
-                    {/* // : null} */}
+                  
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
+                        {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
-                            <ProtectedRoute path={"/:userName/workspace/:idWorkspace"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/gantt"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
                                 <div className="body-workspace mt-3">
                                     <DisplayGantt />
                                 </div>
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/allProjects"} user={Token} >
+                            <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/workspacePlatform" >
+                        
+                            {/* <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
-                            </Route> */}
-                            <ProtectedRoute path={"/workspacePlatform"}>
-                                <WorkspacePlatform />
-                            </ProtectedRoute>
+                            </ProtectedRoute> */}
 
-                            <ProtectedRoute path={"/:userName/projectPlatform/:idProject"}>
+                            <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName/myTasks" >
-                                <TaskNotBelongCardForUser />
-                            </Route> */}
-                            <ProtectedRoute path={"/:userName/allTasks"}>
+                        
+                            <ProtectedRoute path={"/:userName/hub/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/milestones"}>
+                            <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
-                            {/* <Route path="/:userName" >
-                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
-                            </Route> */}
-                            <ProtectedRoute path={"/:userName"}>
+                         
+                            <ProtectedRoute path={"/:userName/hub"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
                                     <button onClick={() => props.createSystemWave()}>createSystemWave</button>
-                                    {/* contentEditable
-                                    height: auto;
-                              max-height: 110px;
-                                 overflow: auto; */}
                                     <UploadFile />
-                                    {/* <span id='searchProject' >
-                                        <img id='iconSearchProject' src={require('../img/imge_search.png')} onMouseOver={() => openSearchProject()} />
-                                        <input type='text' id='inputSearchProjects' className='inputSearchProjects'
-                                            onMouseLeave={() => closeInputSearch()}
-                                        />‏
-                                    </span> */}
                                 </div>
-                                {/* <Animation /> */}
                             </Route>
                         </Switch>
                     </div>

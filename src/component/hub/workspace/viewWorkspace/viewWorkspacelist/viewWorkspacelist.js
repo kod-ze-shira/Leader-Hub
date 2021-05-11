@@ -27,7 +27,7 @@ function ViewWorkspaceList(props) {
     const routeToProject = () => {
         // props.setWorkspace(workspace)
         props.setIndexWorkspace(props.indexWorkspace)
-        props.history.push("/" + props.user + "/workspace/" + workspace._id)
+        props.history.push("/" + props.user + "/hub/workspace/" + workspace._id)
     }
 
     function editWorkspace(event) {

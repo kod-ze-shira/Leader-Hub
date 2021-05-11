@@ -13,10 +13,11 @@ import ReactTooltip from 'react-tooltip';
 import title from '../../../Data/title.json'
 function Tabs(props) {
 
+    const [showGif, setShowGif] = useState(true)
+
     useEffect(() => {
     }, [props.projectId, props.focusInputCard, props.cards])
 
-    let b;
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [showHeader, setShowHeader] = useState(false)
@@ -46,48 +47,40 @@ function Tabs(props) {
                     }
                 }
                 // console.log(e.source.index, e.destination.index, iSourse, iDestination)
-                // const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-                const replace = [iSourse, iDestination]
+                const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+                // const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard‏
-
-
-                const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
+                props.changeTaskplace(replace)
+                const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 props.moveTaskBetweenCards(replaceIServer)
-                // props.changeTaskplace(replace)
+
             }
         }
     };
     function onDragEndׂCard(e) {
-        let icard
-        for (icard = 0; icard < props.cards.length; icard++)
-            if (props.cards[icard]._id == e.destination.droppableId)
+        let indexDest, indexSource
+        for (let index = 0; index < props.cards.length; index++)
+            if (props.cards[index]._id == e.destination.droppableId) {
+                indexDest = index
                 break
-        let indexSource = 0
+            }
         for (let index = 0; index < props.cards.length; index++) {
-            if (props.cards[index]._id == e.source.droppableId)
+            if (props.cards[index]._id == e.draggableId) {
                 indexSource = index
+            }
         }
-        const replace = [indexSource, icard]
-
+        const replace = [indexSource, indexDest]
         props.changeCardPlace(replace)
+        props.moveCards()
     }
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
     }
 
-
     function showInputToAddCard() {
-        // let headerHeight = document.getElementsByClassName("add-card").style.height
-        // let headerHeight =  $("#add-card").height()
-        // console.log(headerHeight)
         setShowInput(!showInput)
         setShowHeader(!showHeader)
-        // document.getElementById('newCardInput').style.display = 'block'
-        // $('#newCardInput').removeClass('noneNewCard')
-        // $('#newCardInput').addClass('blockNewCard')
-
-
     }
     const newCard = () => {
         let card;
@@ -117,10 +110,7 @@ function Tabs(props) {
             {/* ואז זה יעבור תקין */}
             {props.cards.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
-                    {/* {props.cards[0]._id} */}
-
                     <Droppable
-                        // droppableId='gggg'
                         droppableId={props.cards[0]._id}
                     >
                         {provided => (
@@ -143,11 +133,9 @@ function Tabs(props) {
                                             <div className="view-cards-tabs mt-1" >
                                                 <div class="card " >
                                                     <div id='newCardInput' class="container" >
-                                                        {/* {showInput ? */}
                                                         <div
                                                             class="card-header row" data-tip data-for="add_c"
                                                         >
-                                                            {/* autoFocus="true" */}
                                                             <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
                                                                 if (event.key === 'Enter') {
                                                                     newCard()
@@ -157,7 +145,6 @@ function Tabs(props) {
                                                                 {title.title_add_card}
                                                             </ReactTooltip>
                                                         </div>
-                                                        {/* : null} */}
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
                                                         {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
@@ -174,9 +161,9 @@ function Tabs(props) {
                         )}
                     </Droppable>
                 </DragDropContext>
-                : <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>
+                :
+                <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>}
 
-            }
             {viewDetails ?
                 <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails
@@ -211,6 +198,7 @@ export default connect(
     },
     (dispatch) => {
         return {
+            moveCards: () => dispatch(actions.moveCards()),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
             getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),

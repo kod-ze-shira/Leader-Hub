@@ -159,7 +159,7 @@ function ViewTaskByCrad(props) {
 
     return (
         <>
-            <Draggable draggableId={props.task._id} index={props.index}>
+            <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
                 {provided => (
                     <div
                         {...provided.draggableProps}
