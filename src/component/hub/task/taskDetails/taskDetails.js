@@ -106,7 +106,8 @@ function TaskDetails(props) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
                                 console.log(props.task.files)
                                 debugger
-                                props.task.files.splice(index2, 1);
+                                let r = props.task.files
+                                r.splice(index2, 1);
                             }
                             // first element removed
                         }

@@ -19,6 +19,10 @@
         margin-left: 400px;
     }
     
+    body {
+        font-size: 1.1rem;
+    }
+
     .divtext {
         border: ridge 2px;
         padding: 5px;
