@@ -21,6 +21,10 @@ function AllWorkspaces(props) {
 
     useEffect(() => {
         props.getAllWorkspaces()
+        props.getContactsForUser()
+        props.getAllTeamsForUser()
+
+
     }, []);
 
     const [list, setlist] = useState(false);
@@ -191,7 +195,9 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.workspaces,
-        workspaceDeleted: state.workspace_reducer.workspace
+        workspaceDeleted: state.workspace_reducer.workspace,
+        contactsUser: state.share_reducer.contactsUser,
+        teamsUser: state.share_reducer.teamsUser,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -199,6 +205,8 @@ const mapDispatchToProps = (dispatch) => {
         addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
+        getContactsForUser: () => dispatch(actions.getContactsForUser()),
+        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser())
 
     }
 

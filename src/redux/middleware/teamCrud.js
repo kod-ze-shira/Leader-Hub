@@ -185,7 +185,9 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
       success: function (data) {
         console.log("success")
         console.log("data", data);
-      
+        let editTaskInRedux = { "nameFiled": "assingTo", "value": data.task.assingTo }
+        dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
+
       },
 
       error: function (err) {
