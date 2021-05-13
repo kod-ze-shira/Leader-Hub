@@ -22,7 +22,7 @@ const initialState = {
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
-    
+
 }
 
 const publicData = {

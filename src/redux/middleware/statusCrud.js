@@ -27,6 +27,38 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
     }
     return next(action);
 }
+
+
+export const getAllStatusesTaskForWorkspace1 = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE1') {
+        let workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
+        let task = action.payload
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                dispatch(actions.setStatuses(data.statuses))
+                task.status = getState().status_reducer.statuses[0]
+
+                dispatch(actions.editTask({ 'type': 'taskNotBelong', 'task': task }))
+                // props.completeTask(completeTask)
+
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                })
+            }
+        });
+    }
+    return next(action);
+}
 // url:
 // {{urlHub}}/api/renana-il/createStatus
 

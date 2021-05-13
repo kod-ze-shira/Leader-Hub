@@ -26,6 +26,12 @@
   .check-task:nth-child(3){
     text-align: right !important;
   }
+
+  .check-task1:nth-child(3){
+    text-align: left !important;
+    margin-left: -67px;
+    margin-top: 2px;
+  }
   .disabled{
   color:gray ;
   opacity: 0.5;
