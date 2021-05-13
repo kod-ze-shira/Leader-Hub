@@ -14,7 +14,12 @@ import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
+<<<<<<< HEAD
+        // if (!(props.statuses && props.statuses.length > 0))
+        //     props.getAllStatusesTaskForWorkspace();
+=======
     
+>>>>>>> newDev
     }, [props.flag])
 
     const [flag, setFlag] = useState(true)
@@ -170,7 +175,10 @@ function ViewCards(props) {
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
                     <p className="col-add-task"><a>
-                        <button data-toggle="tooltip" data-placement="bottom" className="new-task" onClick={addTask}>+</button>
+                        <button data-tip data-for="add" className="new-task" onClick={addTask}>+</button>
+                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
+                            {title.title_add_task}
+                        </ReactTooltip>
                     </a></p>
                 </div >
                 {

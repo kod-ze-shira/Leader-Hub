@@ -47,6 +47,16 @@ function ViewTaskByCrad(props) {
         "startDate": props.task.startDate,
 
     })
+<<<<<<< HEAD
+    const colors = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
+        "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
+        "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
+        "#F8B520", "#F88C20", "#F84A20", "#F13B7F", "#FD808B",
+        "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
+        "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"
+    ]
+=======
+>>>>>>> newDev
 
     const changeFiledInTask = (input) => {
         props.setCurrentIndexTask(currentIndexTask)
@@ -140,20 +150,15 @@ function ViewTaskByCrad(props) {
         setTask(temp);
     }
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
-
+    let contact
     const setStateMailToContactMail = (emailMember) => {
-        debugger
-
-        setAssigneeDetails(emailMember.value.email)
-        console.log(assigneeDetails);
-        props.assingTo(emailMember.value.email)
+        // debugger
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
-        let editTaskInRedux = { "nameFiled": "assingTo", "value": emailMember.value }
-        props.setTaskByFiledFromTasks(editTaskInRedux)
-        console.log(props.task.assingTo);
+        props.assingTo(emailMember.value.email)
 
     }
+
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
@@ -180,7 +185,6 @@ function ViewTaskByCrad(props) {
                                             checked={doneStatus}
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
-                                        // onClick={(e) => editCompleteTask(e)}
                                         />
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
@@ -204,7 +208,9 @@ function ViewTaskByCrad(props) {
                                 </label>
 
                                 <label className="check-task border-left    px-2 col">
-                                    <DynamicSelect setContactEmail={setStateMailToContactMail} options={'contacts'} />
+                                    <DynamicSelect
+                                        value={props.task.assingTo ? props.task.assingTo.contact : null}
+                                        setContactEmail={setStateMailToContactMail} options={'contacts'} />
                                 </label>
                                 <label className="check-task border-left    px-2 col " >
                                     <div className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
