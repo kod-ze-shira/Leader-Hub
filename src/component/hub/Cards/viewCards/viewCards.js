@@ -14,12 +14,7 @@ import title from '../../../../../src/Data/title.json'
 
 function ViewCards(props) {
     useEffect(() => {
-<<<<<<< HEAD
-        // if (!(props.statuses && props.statuses.length > 0))
-        //     props.getAllStatusesTaskForWorkspace();
-=======
-    
->>>>>>> newDev
+
     }, [props.flag])
 
     const [flag, setFlag] = useState(true)

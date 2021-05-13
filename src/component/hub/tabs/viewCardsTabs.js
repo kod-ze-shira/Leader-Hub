@@ -17,12 +17,7 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-<<<<<<< HEAD
-        // if (!(props.statuses && props.statuses.length > 0))
-        //     props.getAllStatusesTaskForWorkspace();
-=======
-        
->>>>>>> newDev
+
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -59,12 +54,7 @@ function ViewCardsTabs(props) {
         // setAddTaskInInput(!addTaskInInput)
     }
 
-<<<<<<< HEAD
-
-    const addTask = () => {
-=======
     const addTask = (e) => {
->>>>>>> newDev
         setAddTaskInInput(!addTaskInInput)
         props.setCard(props.cardFromMap)
         e.stopPropagation();
