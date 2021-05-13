@@ -139,7 +139,7 @@ function AddWorkspace(props) {
                     <div class="form-group">
                         <label for="color">Logo Color</label>
                         <input name="color"
-                            className="ml-2 w-25 "
+                            className="ml-2 "
                             styles="height: 50px"
                             type="color"
                             // id='colorProject'
