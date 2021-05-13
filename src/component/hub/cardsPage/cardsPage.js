@@ -11,19 +11,27 @@ import { useParams } from 'react-router-dom';
 import cardsByProject from '../Cards/cardsByProject/cardsByProject';
 
 function CardsPage(props) {
-    const [isHasTask, setIsHasTask] = useState(false);
+
     const [flag, setFlag] = useState();
     const [present, setPresent] = useState("tabs");
 
     const { idProject } = useParams();
-
     useEffect(() => {
+
+        // if (props.workspaces.length == 0) {
+        //     props.getAllWorkspacesFromServer()
+        // }
+
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
+<<<<<<< HEAD
             if (!(props.statuses && props.statuses.length > 0))
             props.getAllStatusesTaskForWorkspace();
             
        
+=======
+
+>>>>>>> newDev
     }, [])
 
     const changeFlag = (value) => {
@@ -38,7 +46,7 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard}  viewToastComplete={props.viewToastComplete} />
+                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} viewToastComplete={props.viewToastComplete} />
             case 'list':
                 return <ProjectPlatform
                     viewToastComplete={props.viewToastComplete}
@@ -75,8 +83,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
-
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

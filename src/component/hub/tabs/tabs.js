@@ -11,12 +11,27 @@ import $ from "jquery"
 import taskDetails from '../task/taskDetails/taskDetails'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../Data/title.json'
+import { useParams } from 'react-router-dom';
+
 function Tabs(props) {
 
     const [showGif, setShowGif] = useState(true)
+    const { idProject } = useParams();
+    useEffect(() => {
+
+    }, [props.projectId, props.focusInputCard, props.cards])
 
     useEffect(() => {
-    }, [props.projectId, props.focusInputCard, props.cards])
+        props.getAllWorkspaces()
+        for (let i = 0; i < props.workspaces.length; i++) {
+            let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
+            if (workspace) {
+                console.log('workspace')
+                console.log(workspace)
+                props.indexOfWorkspace(i)
+            }
+        }
+    }, [props.workspaces])
 
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -189,8 +204,6 @@ export default connect(
             projects: state.project_reducer.projects,
             user: state.public_reducer.userName,
             workspaces: state.public_reducer.workspaces,
-            // workspace: state.workspace_reducer.worksapce,
-            // project: state.project_reducer.project,
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
             statuses: state.public_reducer.statuses
@@ -198,6 +211,7 @@ export default connect(
     },
     (dispatch) => {
         return {
+            indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
             moveCards: () => dispatch(actions.moveCards()),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
             getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
@@ -208,8 +222,7 @@ export default connect(
             removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
             removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
-            getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-            getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
+            getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
             newCard: (cardname) => dispatch(actions.newCard(cardname)),
 
         }

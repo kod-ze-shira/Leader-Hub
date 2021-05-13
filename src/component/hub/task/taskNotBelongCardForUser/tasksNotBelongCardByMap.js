@@ -17,10 +17,10 @@ function TasksNotBelongCardByMap(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
-    const [currentIndexTask, setCurrentIndexTask] = useState("")
-    const [currentIndexCard, setCurrentIndexCard] = useState("")
+    // const [currentIndexTask, setCurrentIndexTask] = useState("")
+    // const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
-    const [mySelect, setMySelect] = useState({})
+    const [cardId, setCardId] = useState({})
     const [myProjects, setMyProjects] = useState([])
     const [myCards, setMyCards] = useState([])
 
@@ -33,9 +33,10 @@ function TasksNotBelongCardByMap(props) {
     })
 
     useEffect(() => {
+        if (props.workspaces.length == 0)
+            props.getAllWorkspacesFromServer()
 
     }, [props.task, props.workspaces])
-
 
     // const showDetails = (from) => {
     //     props.setTaskName(task.name)
@@ -53,20 +54,14 @@ function TasksNotBelongCardByMap(props) {
         setViewDetails(false)
     });
 
-    // function openViewDetails(event) {
-    //     showDetails("viewTaskByCard")
-    //     event.stopPropagation();
-    // }
-    // function stopP(event) {
-    //     event.stopPropagation();
-    // }
+
 
     function addChalalit() {
         if (props.task.complete == false)
             setShowChalalit(true)
     }
 
-    const editCompleteTask = () => {
+    const editCompleteTask = (comlited) => {
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -78,24 +73,31 @@ function TasksNotBelongCardByMap(props) {
             "description": props.task.description,
             "dueDate": props.task.dueDate,
             "startDate": props.task.startDate,
-            "complete": true,
-            "endDate": today,
-            "status": props.statuses[2],
-            // "card": props.task.card
+            "complete": comlited,
+            "endDate": props.task.endDate ? props.task.endDatet : today,
+            "status": props.statuses[0],
+            "card": props.task.card ? props.task.card : ''
         }
-        props.setTaskComplete(completeTask)
-        props.completeTask(task)
+        // לא מתעדכן הכומפליטד ברידקס 
+        // props.setTaskComplete(completeTask)
+        props.completeTask(completeTask)
         // setViewCompleteTask(true)
     }
 
     const changeFiledInTask = (input) => {
-        props.setCurrentIndexTask(currentIndexTask)
-        props.setCurrentIndexCard(currentIndexCard)
+        // props.setCurrentIndexTask(currentIndexTask)
+        // props.setCurrentIndexCard(currentIndexCard)
+        let indexTask
+        for (let index = 0; index < props.tasks.length; index++) {
+            if (props.tasks[index]._id == props.task._id)
+                indexTask = index
+        }
         let value = input.target.value
-        let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
-        props.setTaskByFiledFromTasks(editTaskInRedux)
-        if (input.target.name == "complete")
-            editCompleteTask()
+        let editTaskInRedux = { "index": indexTask, "value": !props.task.complete }
+        // props.setComlitedTask(editTaskInRedux)
+        // if (input.target.name == "complete")
+
+        editCompleteTask(!props.task.complete)
         console.log("task", props.task.complete);
     }
 
@@ -110,7 +112,7 @@ function TasksNotBelongCardByMap(props) {
         workspace.name ? {
             value: workspace, label:
                 // <div className="container">
-                <div className="row">
+                <div className="row" style={{ width: '200px' }}>
 
                     <div className=" " style={{ display: 'inline-block' }} >
                         <div className="logo-w-little "
@@ -127,8 +129,6 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChange = (newValue, actionMeta) => {
         if (newValue) {
-            console.group('Value Changed');
-            console.log(newValue);
             //   props.options == 
             document.getElementById('buttonSaveSelect').style.display = 'inline'
             document.getElementById('buttonCancleSelect').style.display = 'inline'
@@ -139,16 +139,14 @@ function TasksNotBelongCardByMap(props) {
                     indexWorkspace = index
             }
             setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
-            setMySelect({ 'workspaceId': newValue.value._id, 'indexWorkspace': indexWorkspace })
-            console.log(`action: ${actionMeta.action}`);
-            console.groupEnd();
+            setCardId(null)
+            document.getElementById('buttonSaveSelect').classList.remove('activeBuutonSave')
+
         }
 
     };
     const handleChangeProject = (newValue, actionMeta) => {
         if (newValue) {
-            console.group('Value Changed');
-            console.log(newValue);
             //   props.options == 
             let indexProject
             for (let index = 0; index < myProjects.length; index++) {
@@ -156,21 +154,17 @@ function TasksNotBelongCardByMap(props) {
                     indexProject = index
             }
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
-            setMySelect({ 'projectId': newValue.value._id, 'indexProject': indexProject })
-            console.log(`action: ${actionMeta.action}`);
-            console.groupEnd();
+            setCardId(null)
+            document.getElementById('buttonSaveSelect').classList.remove('activeBuutonSave')
+
         }
     };
 
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
             value: project, label:
-                // <div className="container">
                 <div className="row" style={{ color: project.color }}>
-
-
                     {project.name}
-
                 </div >
         } : null
     )) : null
@@ -179,12 +173,8 @@ function TasksNotBelongCardByMap(props) {
     const cardsSelect = myCards ? myCards.map((card) => (
         card.name ? {
             value: card, label:
-                // <div className="container">
                 <div className="row" >
-
-
                     {card.name}
-
                 </div >
         } : null
     )) : null
@@ -192,22 +182,28 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
-            console.group('Value Changed');
-            console.log(newValue);
+            console.group('My select');
+            // console.log(newValue);
             //   props.options == 
-            let indexCard
-            for (let index = 0; index < myCards.length; index++) {
-                if (myCards[index]._id == newValue.value._id)
-                    indexCard = index
-            }
+            // let indexCard
+            // for (let index = 0; index < myCards.length; index++) {
+            //     if (myCards[index]._id == newValue.value._id)
+            //         indexCard = index
+            // }
             // setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
-            setMySelect({ 'cardId': newValue.value._id, 'indexCard': indexCard })
-            console.log(mySelect)
-            console.log(`action: ${actionMeta.action}`);
+            setCardId(newValue.value._id)
+            console.log(cardId)
+            // console.log(`action: ${actionMeta.action}`);
+            document.getElementById('buttonSaveSelect').classList.add('activeBuutonSave')
             console.groupEnd();
         }
     };
-
+    function belongTask() {
+        if (cardId) {
+            debugger
+            props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
+        }
+    }
     return (
         <>
             <div
@@ -219,29 +215,32 @@ function TasksNotBelongCardByMap(props) {
                     icon={['fas', 'grip-vertical']}
                 ></FontAwesomeIcon>
                 <label
-                    className="check-task ml-3 py-2 pl-5 col-1 ">
-                    <input type="checkbox" />
+                    className="check-task ml-3 py-2 pl-5 col-3 ">
+                    {/* <input type="checkbox" /> */}
+
+                    <input
+                        type="checkbox"
+                        name="name" id="name" title={props.task.name}
+                        checked={props.task.complete}
+                        className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
+                        value={props.task.name}
+                        onChange={(e) => changeFiledInTask(e)}
+                        onBlur={(e) => editTask()}
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                editTask()
+                            }
+                        }}
+                    />
                     <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
-                </label>
-
-                <input
-                    name="name" id="name" title={props.task.name}
-                    className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
-                    value={props.task.name}
-                    onChange={(e) => changeFiledInTask(e)}
-                    onBlur={(e) => editTask()}
-                    onKeyPress={e => {
-                        if (e.key === 'Enter') {
-                            editTask()
-                        }
-                    }}
-                >
-                </input>
-                <label className="check-task py-2  px-2 col-3 ">
-
 
                 </label>
-                <label className="check-task border-left  py-2  px-2 col ">
+
+                <label className="check-task py-2  px-2 col-1 ">
+
+                    {props.task.name}
+                </label>
+                <label className="check-task border-left  py-2  px-2 col-2 ">
                     <CreatableSelect
                         isClearable
                         onChange={handleChange}
@@ -249,7 +248,7 @@ function TasksNotBelongCardByMap(props) {
                         options={workspaceSelect}
                     />
                 </label>
-                <label className="check-task border-left  py-2  px-2 col " >
+                <label className="check-task border-left  py-2  px-2 col-2 " >
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
@@ -258,7 +257,7 @@ function TasksNotBelongCardByMap(props) {
                         options={projectSelect}
                     />
                 </label>
-                <label className="check-task border-left  py-2  px-2 col">
+                <label className="check-task border-left  py-2  px-2 col-2">
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
@@ -269,7 +268,7 @@ function TasksNotBelongCardByMap(props) {
 
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
-                    <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
+                    <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
                     <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
 
                 </label>
@@ -295,12 +294,20 @@ const mapStateToProps = (state) => {
     return {
         tasks: state.public_reducer.tasks,
         workspaces: state.public_reducer.workspaces,
+        statuses: state.status_reducer.statuses,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+        completeTask: (task) => dispatch(actions.completeTask(task)),
+        setComlitedTask: (taskDetails) => dispatch(actions.setComlitedTask(taskDetails)),
+        belongTask: (ids) => dispatch(actions.belongTask(ids)),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TasksNotBelongCardByMap)

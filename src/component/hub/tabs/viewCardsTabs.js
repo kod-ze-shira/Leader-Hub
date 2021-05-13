@@ -17,8 +17,12 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
+<<<<<<< HEAD
         // if (!(props.statuses && props.statuses.length > 0))
         //     props.getAllStatusesTaskForWorkspace();
+=======
+        
+>>>>>>> newDev
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -43,19 +47,27 @@ function ViewCardsTabs(props) {
         today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy;
         let task;
         if (inputValue) {
-            let status = props.statuses[0]
-            console.log(status);
-            task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
+            // let status = props.statuses[0]
+            task = {
+                name: inputValue, description: "",
+                // status: status,
+                startDate: today, dueDate: today, "card": props.card._id
+            }
             props.newTask(task)
         }
         setInputValue("")
         // setAddTaskInInput(!addTaskInInput)
     }
 
+<<<<<<< HEAD
 
     const addTask = () => {
+=======
+    const addTask = (e) => {
+>>>>>>> newDev
         setAddTaskInInput(!addTaskInInput)
         props.setCard(props.cardFromMap)
+        e.stopPropagation();
     }
     const updateCardName = (event) => {
         setEditCardName(event.target.value)
@@ -84,7 +96,7 @@ function ViewCardsTabs(props) {
         // textInput.current.focus()
         if (nameAction == "delete") {
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
-            $(`#${props.cardFromMap._id }`).css("display", "none")
+            $(`#${props.cardFromMap._id}`).css("display", "none")
         }
     }
 
@@ -102,6 +114,10 @@ function ViewCardsTabs(props) {
         props.openViewDetails(task)
 
     };
+
+    $(window).click(function () {
+        setAddTaskInInput(false)
+    })
 
     return (
         <>
@@ -130,7 +146,7 @@ function ViewCardsTabs(props) {
                                                 onKeyPress={event => {
                                                     enterK(event)
                                                 }}
-                                            > 
+                                            >
                                             </input>
                                             {/* <p>{props.cardFromMap._id}</p> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
@@ -177,6 +193,7 @@ function ViewCardsTabs(props) {
                                                                     class="form-control" placeholder="Add Task"
                                                                     id="input-task"
                                                                     value={inputValue}
+                                                                    // onMouseLeave={(e)=>setAddTaskInInput(false)}
                                                                     onChange={updateInputValue} onKeyPress={event => {
                                                                         if (event.key === 'Enter') {
                                                                             newTask()
@@ -191,7 +208,7 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t"
-                                            className="add-task-tabs mt-1" onClick={addTask}>Add Task +</a>
+                                            className="add-task-tabs mt-1" onClick={(e) => addTask(e)}>Add Task +</a>
 
                                     </div>
                                 </div>
@@ -214,9 +231,9 @@ const mapStateToProps = (state) => {
         tasks: state.public_reducer.tasks,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         statuses: state.status_reducer.statuses,
-
-
+        workspaces: state.public_reducer.workspaces,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -225,8 +242,6 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         editCard: (card) => dispatch(actions.editCard(card)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
-
 
     }
 }

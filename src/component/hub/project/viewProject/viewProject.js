@@ -27,9 +27,7 @@ function ViewProject(props) {
     useEffect(() => {
         console.log(complited);
     }, [props.indexOfWorkspace])
-    function detailsProject() {
-        set_getProjectById(false);
-    }
+
     const routeToCards = (e) => {
         let idProject = props.myProject._id;
         console.log("project" + props.myProject._id)

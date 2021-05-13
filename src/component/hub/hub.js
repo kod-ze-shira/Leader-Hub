@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    
+
     Link,
     Redirect,
 } from 'react-router-dom';
@@ -22,7 +22,6 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import UploadFile from './uploadFile/uploadFile'
 import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
 import ViewDetails from './viewDetails/viewDetails'
@@ -38,8 +37,6 @@ function Hub(props) {
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState()
-    const [viewDetails, setViewDetails] = useState(false)
-    const [formViewDitails, setFormViewDitails] = useState()
 
 
 
@@ -96,14 +93,14 @@ function Hub(props) {
             <Router history={history}>
 
                 <div className="row back-screen">
-        
+
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
-                  
+
                     <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
-                        {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
+                            {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
                             <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -116,7 +113,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                        
+
                             {/* <ProtectedRoute path={"/workspacePlatform"}>
                                 <WorkspacePlatform />
                             </ProtectedRoute> */}
@@ -126,7 +123,7 @@ function Hub(props) {
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                        
+
                             <ProtectedRoute path={"/:userName/hub/allTasks"}>
                                 <TaskNotBelongCardForUser />
                             </ProtectedRoute>
@@ -134,14 +131,13 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
-                         
-                            <ProtectedRoute path={"/:userName/hub"}>
+
+                            <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <Route path="/" >
                                 <div id='cdggdfdfb'>
-                                    <button onClick={() => props.createSystemWave()}>createSystemWave</button>
-                                    <UploadFile />
+
                                 </div>
                             </Route>
                         </Switch>
@@ -180,8 +176,6 @@ const mapDispatchToProps = (dispatch) => {
         removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
         addFile: (files) => dispatch(actions.addFile(files)),
         createSystemWave: () => dispatch(actions.createSystemWave()),
-
-
     }
 
 
