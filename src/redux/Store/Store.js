@@ -15,14 +15,14 @@ import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, 
+    , moveTaskBetweenCards,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
-import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
+import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace, getAllStatusesTaskForWorkspace1 } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
@@ -58,6 +58,7 @@ const store = createStore(
                 editCard,
                 removeCardById,
                 getAllStatusesTaskForWorkspace,
+                getAllStatusesTaskForWorkspace1,
                 createStatus,
                 uploadFiles,
                 // downloadFile,
@@ -91,10 +92,10 @@ else {
     if (document.cookie) {
         jwtFromCookie = document.cookie.includes('jwt') ?
             document.cookie.split(";")
-                .filter(s => s.includes('jwt'))[0].split("=").pop() 
-                : document.cookie.includes('devJwt') ?
+                .filter(s => s.includes('jwt'))[0].split("=").pop()
+            : document.cookie.includes('devJwt') ?
                 document.cookie.split(";")
-                    .filter(s => s.includes('devJwt'))[0].split("=").pop():null;
+                    .filter(s => s.includes('devJwt'))[0].split("=").pop() : null;
         store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
     }
 }

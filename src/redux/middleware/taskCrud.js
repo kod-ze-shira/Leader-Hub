@@ -208,11 +208,16 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let task
-        if (action.payload.name)
-            task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-                .tasks[getState().public_reducer.indexCurrentTask]
-        else
-            task = action.payload
+        if (action.payload.type == 'taskNotBelong') {
+            task = action.payload.task
+
+        } else
+            if (action.payload.name)
+                task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+                    .tasks[getState().public_reducer.indexCurrentTask]
+            else
+                task = action.payload
+
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -250,7 +255,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
-        debugger
         let taskId = action.payload._id
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
@@ -377,7 +381,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             'name': action.payload,
             "updateDates": "08/03/2021"
         }
-        debugger
+
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         $.ajax({
             url: urlData,
@@ -388,7 +392,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
-                debugger
+
                 console.log("success")
                 // console.log(data);
                 // dispatch(actions.setCards(data.cards))

@@ -22,7 +22,7 @@ const initialState = {
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
-    
+
 }
 
 const publicData = {
@@ -42,14 +42,11 @@ const publicData = {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
-<<<<<<< HEAD
-=======
 
     },
     setTaskByFiledFromTasks(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
->>>>>>> newDev
     },
     setIdFiles(state, action) {
         // dispatch(actions.setIdFiles(data.result.files));
@@ -137,10 +134,6 @@ const publicData = {
         state.cards = state.cards.filter((_, i) =>
             state.cards[i]._id !== action.payload.dc._id
         )
-<<<<<<< HEAD
-=======
-
->>>>>>> newDev
     },
     addProjectToProjects(state, action) {
 
@@ -272,11 +265,6 @@ const publicData = {
     addWorkspaceToWorkspaces(state, action) {
         state.workspaces.push(action.payload)
     },
-<<<<<<< HEAD
-    setTaskByFiledFromTasks(state, action) {
-        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-=======
->>>>>>> newDev
 
 
     setComlitedTask(state, action) {

@@ -12,7 +12,7 @@ function TaskNotBelongCardForUser(props) {
     useEffect(() => {
         props.getAllTasksNotBelongsCardForUser()
 
-    }, [])
+    }, [props.tasks])
 
     console.log(props.tasks)
 
@@ -28,7 +28,7 @@ function TaskNotBelongCardForUser(props) {
             <div class="input-group input-group-task-not-belongs">
                 {/* <FontAwesomeIcon class='cleanSearchTask' onClick={() => setNameTask('')} icon={["fas", "times"]} /> */}
 
-                <input type="text" class="col-8 addTaskNotBelong"
+                <input type="text" class="col-9 addTaskNotBelong"
                     value={nameTask}
                     placeholder="Write a task name"
                     onChange={(e) => setNameTask(e.target.value)}
@@ -38,14 +38,17 @@ function TaskNotBelongCardForUser(props) {
                             setNameTask('')
                         }
                     }} />
-                <input type='text' id="searchTask" placeholder='search task' onChange={(e) => setSearchTask(e.target.value)} />
+                {/* <input type='text' id="searchTask" placeholder='search task' onChange={(e) => setSearchTask(e.target.value)} /> */}
+                {/* <span id="searchProject"> */}
+                <input type="text" class="inputSearchTask " placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
+                {/* </span> */}
 
             </div>
             {/* <i class="fas fa-times"></i> */}
             {/* <button onClick={() => sestSearchTask('')}>X</button> */}
             <div class="show-task row mx-4 mt-3 headerTableTask" >
-                <label class="ml-3 pl-6 col-4 labelAllTask"> All task </label>
-                <label class="col propertiesAllTask">Workspace</label>
+                <label class="ml-3 pl-6 col-3 labelAllTask"> All task </label>
+                <label class="col propertiesAllTask ml-4">Workspace</label>
                 <label class="col propertiesAllTask">Project</label>
                 <label class=" col propertiesAllTask">Card</label>
                 <label class=" col propertiesAllTask"></label>

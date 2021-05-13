@@ -24,14 +24,6 @@ function CardsPage(props) {
 
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
-<<<<<<< HEAD
-            if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
-            
-       
-=======
-
->>>>>>> newDev
     }, [])
 
     const changeFlag = (value) => {

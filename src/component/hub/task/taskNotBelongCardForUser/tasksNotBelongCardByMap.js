@@ -20,13 +20,14 @@ function TasksNotBelongCardByMap(props) {
     // const [currentIndexTask, setCurrentIndexTask] = useState("")
     // const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
-    const [cardId, setCardId] = useState({})
+    const [cardId, setCardId] = useState()
     const [myProjects, setMyProjects] = useState([])
-    const [myCards, setMyCards] = useState([])
-
+    const [myCards, setMyCards] = useState()
+    const [myWorkspace, setMyWorkspace] = useState()
     // const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [doneStatus, setDoneStatus] = useState(props.task.complete)
-
+    let flugButtonSavePositive = false
+    const [indexOfWorkspace, setIndexOfWorkspace] = useState()
     const [task, setTask] = useState({
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
@@ -38,23 +39,11 @@ function TasksNotBelongCardByMap(props) {
 
     }, [props.task, props.workspaces])
 
-    // const showDetails = (from) => {
-    //     props.setTaskName(task.name)
-    //     setDetailsOrEditTask(from)
-    //     props.setCurrentIndexTask(currentIndexTask)
-    //     props.setCurrentIndexCard(currentIndexCard)
-    //     setViewDetails(true)
-    // }
     const editTask = () => {
         let temp = { ...task }
         temp.name = editTaskName
         setTask(temp)
     }
-    $(window).click(function () {
-        setViewDetails(false)
-    });
-
-
 
     function addChalalit() {
         if (props.task.complete == false)
@@ -62,6 +51,7 @@ function TasksNotBelongCardByMap(props) {
     }
 
     const editCompleteTask = (comlited) => {
+        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -75,7 +65,7 @@ function TasksNotBelongCardByMap(props) {
             "startDate": props.task.startDate,
             "complete": comlited,
             "endDate": props.task.endDate ? props.task.endDatet : today,
-            "status": props.statuses[0],
+            // "status": props.statuses[0],
             "card": props.task.card ? props.task.card : ''
         }
         // לא מתעדכן הכומפליטד ברידקס 
@@ -96,7 +86,7 @@ function TasksNotBelongCardByMap(props) {
         let editTaskInRedux = { "index": indexTask, "value": !props.task.complete }
         // props.setComlitedTask(editTaskInRedux)
         // if (input.target.name == "complete")
-
+        debugger
         editCompleteTask(!props.task.complete)
         console.log("task", props.task.complete);
     }
@@ -127,21 +117,23 @@ function TasksNotBelongCardByMap(props) {
         } : null
     )) : null
 
-    const handleChange = (newValue, actionMeta) => {
+    const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
             //   props.options == 
-            document.getElementById('buttonSaveSelect').style.display = 'inline'
-            document.getElementById('buttonCancleSelect').style.display = 'inline'
-            // document.getElementById('selectProjectInAllTask').style.display = 'inline'
+            // debugger
             let indexWorkspace
             for (let index = 0; index < props.workspaces.length; index++) {
-                if (props.workspaces[index]._id == newValue.value._id)
+                if (props.workspaces[index]._id == newValue.value._id) {
                     indexWorkspace = index
+                    setIndexOfWorkspace(index)
+                }
             }
+
+            // chooseWorkspace()
+            setMyWorkspace('selectedWorkspace')
+            flugButtonSavePositive = true
             setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
             setCardId(null)
-            document.getElementById('buttonSaveSelect').classList.remove('activeBuutonSave')
-
         }
 
     };
@@ -155,8 +147,7 @@ function TasksNotBelongCardByMap(props) {
             }
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
-            document.getElementById('buttonSaveSelect').classList.remove('activeBuutonSave')
-
+            // chooseProject()
         }
     };
 
@@ -164,6 +155,8 @@ function TasksNotBelongCardByMap(props) {
         project.name ? {
             value: project, label:
                 <div className="row" style={{ color: project.color }}>
+                    <span class="dot dotProject" style={{ 'background-color': project.color }} ></span>
+
                     {project.name}
                 </div >
         } : null
@@ -182,32 +175,128 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
-            console.group('My select');
-            // console.log(newValue);
             //   props.options == 
-            // let indexCard
-            // for (let index = 0; index < myCards.length; index++) {
-            //     if (myCards[index]._id == newValue.value._id)
-            //         indexCard = index
-            // }
-            // setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(newValue.value._id)
-            console.log(cardId)
-            // console.log(`action: ${actionMeta.action}`);
-            document.getElementById('buttonSaveSelect').classList.add('activeBuutonSave')
-            console.groupEnd();
+            // console.log(cardId)
         }
     };
     function belongTask() {
         if (cardId) {
-            debugger
-            props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
+
+            props.setIndexWorkspace(indexOfWorkspace)
+
+
+            const promiseA = new Promise(function (resolve, reject) {
+                let task = {
+                    "_id": props.task._id,
+                    "name": props.task.name,
+                    "description": props.task.description,
+                    "dueDate": props.task.dueDate,
+                    "startDate": props.task.startDate,
+                    "complete": props.task.comlited ? props.task.comlited : false,
+                    "endDate": props.task.endDate,
+                    // "status": props.statuses[0],
+                    "card": props.task.card ? props.task.card : ''
+                }
+                // props.completeTask(completeTask)
+                props.getAllStatusesTaskForWorkspace(task)
+
+                if (props.statuses.length) {
+
+                    resolve('suc')
+                    // dd()
+                    reject('gg')
+                }
+
+            });
+            // promiseA.then(() => {
+            //     setPropertiesOfTask()
+            // })
+
+
+            // promiseA.then(function () {
+            //     console.log('1.');
+            //     debugger
+            //     // setPropertiesOfTask()
+            //     props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
+
+            // })
+            //     .then(function () {
+            //         console.log('2')
+            //         // debugger
+            //         // setPropertiesOfTask()
+
+            //         //do another thing, it will be called after the first promise was fullfilled.
+            //     }).then(function () {
+            //         console.log('3')
+            //         // setPropertiesOfTask()
+            //         // props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
+
+            //         //do another thing, it will be called after the first promise was fullfilled.
+            //     })
+            //     .then(function () {
+            //         debugger
+            //         console.log('Promise rejected.')
+            //         // setPropertiesOfTask()
+            //         props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
+
+            //         //do third thing, it will be called after the last promise was fullfilled.
+            //     });
+
+
+            // const promiseB = promiseA.then(setPropertiesOfTask());
+
+
+            // לא מתעדכן הכומפליטד ברידקס 
+            // props.setTaskComplete(completeTask)
         }
     }
+    // function dd() {
+    //     props.getAllStatusesTaskForWorkspace()
+    // }
+    function setPropertiesOfTask() {
+        debugger
+        let completeTask = {
+            "_id": props.task._id,
+            "name": props.task.name,
+            "description": props.task.description,
+            "dueDate": props.task.dueDate,
+            "startDate": props.task.startDate,
+            "complete": props.task.comlited,
+            "endDate": props.task.endDate,
+            // "status": props.statuses[0],
+            "card": props.task.card ? props.task.card : ''
+        }
+        props.completeTask(completeTask)
+    }
+
+    function chooseWorkspace() {
+
+        document.getElementById('selectWorkspaceInTasksNotBelong').style.display = 'block'
+        document.getElementById('chooseWorkspace').style.display = 'none'
+        document.getElementById('selectProjectInTasksNotBelong').style.display = 'none'
+        document.getElementById('chooseProject').style.display = 'block'
+        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
+        document.getElementById('chooseCard').style.display = 'block'
+        // $('#chooseWorkspace').css({ 'display', 'none'})
+        // $('#selectWorkspaceInTasksNotBelong').css({ 'display': 'block' })
+    }
+    function chooseProject() {
+        document.getElementById('selectProjectInTasksNotBelong').style.display = 'block'
+        document.getElementById('chooseProject').style.display = 'none'
+        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
+        document.getElementById('chooseCard').style.display = 'block'
+    }
+    function chooseCard() {
+
+        document.getElementById('selectCardInTasksNotBelong').style.display = 'block'
+        document.getElementById('chooseCard').style.display = 'none'
+    }
+
     return (
         <>
             <div
-                style={{ 'min-height': '36px' }}
+                style={{ 'min-height': '47px' }}
                 className="show-task row mx-4 border-bottom "
             >
 
@@ -215,7 +304,7 @@ function TasksNotBelongCardByMap(props) {
                     icon={['fas', 'grip-vertical']}
                 ></FontAwesomeIcon>
                 <label
-                    className="check-task ml-3 py-2 pl-5 col-3 ">
+                    className="check-task ml-3 py-2 pl-5 col-1 ">
                     {/* <input type="checkbox" /> */}
 
                     <input
@@ -236,40 +325,69 @@ function TasksNotBelongCardByMap(props) {
 
                 </label>
 
-                <label className="check-task py-2  px-2 col-1 ">
+                <label className="check-task1 py-2  px-2 col-3 ">
 
                     {props.task.name}
                 </label>
-                <label className="check-task border-left  py-2  px-2 col-2 ">
+                <label className="check-task border-left  py-2  px-2 col-2 workspaceN ">
+                    {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
                     <CreatableSelect
                         isClearable
-                        onChange={handleChange}
+                        onChange={handleChangeWorkspace}
                         // onInputChange={handleInputChange}
+                        // value='dd'
+                        id='selectWorkspaceInTasksNotBelong'
+                        className='selectWorkspaceInTasksNotBelong'
                         options={workspaceSelect}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
+                    {/* <div id='chooseProject' onClick={() => chooseProject()}>--</div> */}
+
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeProject}
                         // onInputChange={handleInputChange}
+                        id='selectProjectInTasksNotBelong'
+                        className='selectProjectInTasksNotBelong'
                         options={projectSelect}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
+                    {/* <div id='chooseCard' onClick={(e) => chooseCard(e)}>--</div> */}
+
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeCard}
+                        id='selectCardInTasksNotBelong'
+                        className='selectCardInTasksNotBelong'
+
                         // onInputChange={handleInputChange}
                         options={cardsSelect}
                     />
 
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
-                    <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
-                    <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                    {myWorkspace && !cardId ?
+                        <>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                        </>
+                        : null
+                    }
+
+                    {cardId ?
+                        <>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                        </> : null
+
+                    }
 
                 </label>
                 {viewDetails ?
@@ -306,7 +424,8 @@ const mapDispatchToProps = (dispatch) => {
         completeTask: (task) => dispatch(actions.completeTask(task)),
         setComlitedTask: (taskDetails) => dispatch(actions.setComlitedTask(taskDetails)),
         belongTask: (ids) => dispatch(actions.belongTask(ids)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+        getAllStatusesTaskForWorkspace: (task) => dispatch(actions.getAllStatusesTaskForWorkspace1(task)),
+        setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
 
     }
 }

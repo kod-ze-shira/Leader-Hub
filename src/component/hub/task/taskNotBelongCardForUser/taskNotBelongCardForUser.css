@@ -1,13 +1,53 @@
 .addTaskNotBelong{
     border:1px solid #3598F4;
     border-radius: 8px !important;    
-     /* margin: 3%;  */
+    margin-right: 10px;
      padding-right: 32px;
+     margin-bottom: 2px;
+    margin-top: 2px;
 }
 
 .input-group-task-not-belongs{
      margin: 3%; 
+     margin-bottom: 1%;
+     margin-left: 2%;
+}
+/* 
+.selectWorkspaceInTasksNotBelong,
+.selectProjectInTasksNotBelong,
+.selectCardInTasksNotBelong{
+    display: none;
+} */
 
+
+ .selectWorkspaceInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row,
+ .selectProjectInTasksNotBelong  .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row,
+ .selectCardInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
+ {
+    margin-right: 0px;
+    margin-left: 0px;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+}
+.selectProjectInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
+{
+    margin-left: -7px;
+    padding-left: 0px !important;
+}
+
+.selectWorkspaceInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
+{
+    margin-left: -7px;
+}
+.workspaceN{
+    padding-left: 0px !important;
+}
+
+.dotProject{
+    margin-top: 5px;
+    margin-left: 6px;
+    margin-right: 5px;
 }
 
 .divAllTask{
@@ -31,6 +71,8 @@
     margin-left:8px;
     display: inline-block !important;
 }
+
+
 .saveSelect{
     background-color: #C4CCD5 !important;
     color: white !important;
@@ -40,12 +82,47 @@
     padding-left: 11px;
     padding-right: 11px;
     height: fit-content;
-    display: none;
+    display: inline;
 }
 
-.activeBuutonSave{
+.saveSelectActive{
     background-color: #3598F4 !important;
+    border-radius: 19px;
+    color:white !important;
+    padding: 5px;
+    letter-spacing: 0px;
+    padding-left: 11px;
+    padding-right: 11px;
+    height: fit-content;
+    display: inline;
 }
+
+.saveSelectActive:hover{
+    background-color: #2f85d6 !important;
+}
+.inputSearchTask{
+    border-top-left-radius: 50rem !important;
+    border-bottom-left-radius: 50rem !important;
+    background-color: #54ccb647;
+    border-radius: 20px;
+    height: 37px;
+    border: 0px;
+    outline: none;
+    border-top-right-radius: 50rem !important;
+    border-bottom-right-radius: 50rem !important;
+    transition: width 2s;
+    height: 32px;
+    margin-right: -42px;
+    margin-right: 10px;
+    background: url(../../../img/imge_search.png) no-repeat #c5ccca47 ;
+    background-size: contain;
+
+    background-position: right;
+    padding-left: 18px;
+    padding-right: 44px;
+}
+.inputSearchTask {transition-timing-function: ease-in-out;}
+
 
 #buttonCancleSelect{
     display: none;
@@ -79,6 +156,7 @@ font: normal normal bold 14px/19px Roboto;
 letter-spacing: 0px;
 color: #87C5FE;
 text-transform: capitalize;
+padding-left: 59px;
 }
 
 .headerTableTask{
