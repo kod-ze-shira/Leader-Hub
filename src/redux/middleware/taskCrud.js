@@ -210,14 +210,14 @@ export const editTask = ({ dispatch, getState }) => next => action => {
         let task
         if (action.payload.type == 'taskNotBelong') {
             task = action.payload.task
-
+            task.description = null
+            task.endDate = null
         } else
             if (action.payload.name)
                 task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
                     .tasks[getState().public_reducer.indexCurrentTask]
             else
                 task = action.payload
-
         $.ajax({
             url: urlData,
             method: 'POST',
