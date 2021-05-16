@@ -34,10 +34,11 @@ function TasksNotBelongCardByMap(props) {
     })
 
     useEffect(() => {
-        if (props.workspaces.length == 0)
+        if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
+        }
 
-    }, [props.task, props.workspaces])
+    }, [props.workspaces])
 
     const editTask = () => {
         let temp = { ...task }
@@ -121,6 +122,14 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             //   props.options == 
             // debugger
+            // projectSelect.isLoading = true
+            // projectSelect.value('GG')
+            // let mm = myProjects
+            // myProjects = []
+            setMyCards(null)
+            setMyProjects(null)
+            document.getElementById("selectProjectInTasksNotBelong").click();
+
             let indexWorkspace
             for (let index = 0; index < props.workspaces.length; index++) {
                 if (props.workspaces[index]._id == newValue.value._id) {
@@ -131,8 +140,12 @@ function TasksNotBelongCardByMap(props) {
 
             // chooseWorkspace()
             setMyWorkspace('selectedWorkspace')
+            setTimeout(() => {
+                setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
+
+            }, 10);
             flugButtonSavePositive = true
-            setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
+
             setCardId(null)
         }
 
@@ -145,6 +158,7 @@ function TasksNotBelongCardByMap(props) {
                 if (myProjects[index]._id == newValue.value._id)
                     indexProject = index
             }
+            setMyCards(null)
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
             // chooseProject()
@@ -156,7 +170,6 @@ function TasksNotBelongCardByMap(props) {
             value: project, label:
                 <div className="row" style={{ color: project.color }}>
                     <span class="dot dotProject" style={{ 'background-color': project.color }} ></span>
-
                     {project.name}
                 </div >
         } : null
@@ -273,6 +286,7 @@ function TasksNotBelongCardByMap(props) {
     function chooseWorkspace() {
 
         document.getElementById('selectWorkspaceInTasksNotBelong').style.display = 'block'
+
         document.getElementById('chooseWorkspace').style.display = 'none'
         document.getElementById('selectProjectInTasksNotBelong').style.display = 'none'
         document.getElementById('chooseProject').style.display = 'block'
