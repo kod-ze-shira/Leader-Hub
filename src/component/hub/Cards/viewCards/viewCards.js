@@ -62,7 +62,9 @@ function ViewCards(props) {
 
     }
     const deleteCard = () => {
-        $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
+        debugger
+        $(`#${props.cardFromMap._id}`).css("display", "none")
+        // $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
 
     }

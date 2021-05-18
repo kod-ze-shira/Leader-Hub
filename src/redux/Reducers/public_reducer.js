@@ -113,6 +113,12 @@ const publicData = {
     setTasks(state, action) {
         state.tasks = action.payload.tasksForUser;
     },
+    addTask(state, action) {
+        state.tasks.push(action.payload)
+    },
+    removeTask(state, action) {
+        state.tasks = state.tasks.filter((task) => task._id !== action.payload)
+    },
     setMilestones(state, action) {
         state.milestones = action.payload;
         console.log(state.milestones)
