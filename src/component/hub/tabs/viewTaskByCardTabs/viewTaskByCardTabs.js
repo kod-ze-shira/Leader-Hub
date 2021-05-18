@@ -182,7 +182,7 @@ function ViewTaskByCradTabs(props) {
                                         />
                                         <span className="checkmark checkmark-tabs" onClick={(e) => addChalalit(e)}></span>
                                     </label>
-                                    <div>{props.task.index}</div>
+                                    {/* <div>{props.task.index}</div> */}
                                 </div>
                                 <input
                                     className="form-control col-12"
