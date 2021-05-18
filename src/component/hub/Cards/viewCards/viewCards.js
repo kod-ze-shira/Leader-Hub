@@ -146,6 +146,12 @@ function ViewCards(props) {
                             }}
                         >
                         </input>
+                        <a>
+                        <button data-tip data-for="add" className="new-task" onClick={addTask}>+</button>
+                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
+                            {title.title_add_task}
+                        </ReactTooltip>
+                    </a>
 
                     </div>
                     <Button className="more col-1 " data-tip data-for="more_a"
@@ -171,12 +177,9 @@ function ViewCards(props) {
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
-                    <p className="col-add-task"><a>
-                        <button data-tip data-for="add" className="new-task" onClick={addTask}>+</button>
-                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
-                            {title.title_add_task}
-                        </ReactTooltip>
-                    </a></p>
+                    {/* <p className="col-add-task">
+                  
+                    </p> */}
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?

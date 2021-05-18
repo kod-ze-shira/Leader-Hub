@@ -180,7 +180,7 @@ function ViewTaskByCrad(props) {
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? "disabled show-card mt-2" : "show-card mt-2"}
+                                        className={props.task.complete ? "disabled show-task mt-2" : "show-task mt-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -211,8 +211,8 @@ function ViewTaskByCrad(props) {
                                 </label>
                                 <label className="check-task border-left  px-2 col">{props.task.dueDate}
                                 </label>
-                                <label className="check-task border-left  px-2 col-add-task">
-                                </label>
+                                {/* <label className="check-task border-left  px-2 col-add-task">
+                                </label> */}
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask}
