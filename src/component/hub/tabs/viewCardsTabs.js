@@ -17,7 +17,6 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)

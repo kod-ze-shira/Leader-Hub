@@ -24,7 +24,7 @@ function ViewTaskByCrad(props) {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
     }, [props.cards])
-  
+
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])

@@ -26,7 +26,7 @@ function TaskDetails(props) {
 
 
     useEffect(() => {
-        debugger
+
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -201,9 +201,9 @@ function TaskDetails(props) {
 
                     </div>
 
-                    <div className="row justify-content-start " >
-                        <label className="col-6">Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label className="col-6 last-update">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-                        <br></br>
+                    <div className="row justify-content-between mx-1" >
+                        <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                        <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
                     </div>
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
