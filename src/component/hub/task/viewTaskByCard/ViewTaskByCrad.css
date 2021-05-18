@@ -16,10 +16,10 @@
   .check-task button:focus{
     outline: 0;
   }
-  .check-task:first-child{
+  /* .check-task:first-child{
     text-align: left !important;
     padding-left: 3vw;
-  }
+  } */
   .check-task:nth-child(2){
     text-align: left !important;
   }
