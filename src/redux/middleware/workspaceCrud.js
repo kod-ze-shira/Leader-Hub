@@ -47,9 +47,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 })
             })
     }
-    // resolve(true)
 
-    // })
     return next(action);
 }
 

@@ -16,7 +16,7 @@ function SelectWorkspace(props) {
 
 
     useEffect(() => {
-        console.log("Input", Input);
+        console.log("props.workspaces", props.workspaces);
     }, [props.workspaces])
 
     //to change the workspace that user selected
@@ -103,7 +103,6 @@ const mapDispatchToProps = (dispatch) => {
         setProjects: (project) => dispatch(actions.setProjects(project)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
 

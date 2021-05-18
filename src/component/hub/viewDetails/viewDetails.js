@@ -74,26 +74,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
             }
         }
 
-        // function closeEndRefreshViewDetails() {
-        //     if (oldObject)
-        //         switch (oldObject.type) {
-        //             case 'workspace':
-        //                 props.setWorkspaceBeforeChanges(oldObject.workspace)
-        //                 break;
-        //             case 'project':
-        //                 props.setProjectInWorkspace(oldObject.project)
-        //                 break;
-        //             case 'task':
-        //                 props.setTaskFromTasks(oldObject.task)
-        //                 break;
-
-
-        //             default:
-        //                 break;
-        //         }
-        //     props.closeViewDetails()
-        // }
-
         return (
             <>
                 <div className="row ">

@@ -65,6 +65,7 @@ function CardsByProject(props) {
             // }
         }
     };
+    console.log(props.cards)
     return (
         <>
             {props.cards.length ?

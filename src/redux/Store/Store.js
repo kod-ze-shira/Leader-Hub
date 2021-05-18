@@ -15,8 +15,9 @@ import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, moveCards,
-    completeTask
+    , moveTaskBetweenCards,
+    // moveCards,
+    completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject } from '../middleware/teamCrud';
@@ -68,7 +69,9 @@ const store = createStore(
                 editStatus,
                 removeStatus,
                 moveTaskBetweenCards,
-                moveCards,
+                // moveCards,
+                newTaskNotBelong,
+                belongTask,
                 completeTask,
                 shareObject,
                 assingTo
@@ -88,10 +91,10 @@ else {
     if (document.cookie) {
         jwtFromCookie = document.cookie.includes('jwt') ?
             document.cookie.split(";")
-                .filter(s => s.includes('jwt'))[0].split("=").pop() 
-                : document.cookie.includes('devJwt') ?
+                .filter(s => s.includes('jwt'))[0].split("=").pop()
+            : document.cookie.includes('devJwt') ?
                 document.cookie.split(";")
-                    .filter(s => s.includes('devJwt'))[0].split("=").pop():null;
+                    .filter(s => s.includes('devJwt'))[0].split("=").pop() : null;
         store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
     }
 }

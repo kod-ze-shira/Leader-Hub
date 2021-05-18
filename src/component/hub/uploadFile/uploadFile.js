@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import File from './file/file'
 import './uploadFile.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 function UploadFile(props) {
@@ -46,7 +47,12 @@ function UploadFile(props) {
     return (
         <div className='divFile'>
             <label for="logouug" className="lbl_img">
-                <p>add file</p>
+                {/* <p>add file</p> */}
+                <span className='spanUploadFileNew'>
+                    <FontAwesomeIcon className="uploadFileNew"
+                        icon={['fas', 'paperclip']}
+                    ></FontAwesomeIcon>
+                </span>
                 {/* <img className="img_logo" 
                     referrerpolicy="no-referrer"
                      src={props.user && props.user.imgLogo == "" ? logo1 : props.user.imgLogo} /> */}

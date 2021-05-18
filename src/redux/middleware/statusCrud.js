@@ -3,11 +3,12 @@ import { actions } from '../actions/action'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
-        let workspaceId
 
-        workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace] ?
-            getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id : null
-
+        let workspaceId;
+        if (action.payload.workspaceId)
+            workspaceId = action.payload.workspaceId
+        else
+            workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
         $.ajax({
             url: urlData,
@@ -20,7 +21,16 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
             success: function (data) {
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
-                console.log("data", data);
+                if (action.payload.task) {
+                    let task = action.payload.task
+                    let status = data.statuses.find((s) => s.workspace == workspaceId)._id
+                    task.status = status
+                    dispatch(actions.editTask({
+                        'type': 'taskNotBelong',
+                        'task': task
+                    }))
+                }
+                // console.log("data", data);
                 console.log("data.statuses", data.statuses);
             },
             error: function (err) {
@@ -31,6 +41,8 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
     }
     return next(action);
 }
+
+
 // url:
 // {{urlHub}}/api/renana-il/createStatus
 

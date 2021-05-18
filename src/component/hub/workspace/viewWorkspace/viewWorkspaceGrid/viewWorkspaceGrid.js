@@ -86,7 +86,7 @@ function ViewWorkspaceGrid(props) {
 
                     </div>
                 </div>
-                <div className="Workspacegrid pt-2"
+                <div className="Workspacegrid pt-2 pb-2 px-2"
                     onClick={routeToProject} >
                     <div>
                         <div className="logoWorkspace1 " >

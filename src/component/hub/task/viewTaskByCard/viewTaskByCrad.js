@@ -23,8 +23,8 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-    }, [
-        props.cards])
+    }, [props.cards])
+
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
@@ -47,16 +47,7 @@ function ViewTaskByCrad(props) {
         "startDate": props.task.startDate,
 
     })
-    const unCompleteTask = {
-        "_id": props.task._id,
-        "name": props.task.name,
-        "description": props.task.description,
-        "dueDate": props.task.dueDate,
-        "startDate": props.task.startDate,
-        "complete": false,
-        "status": props.statuses[0],
-        // "card": props.task.card
-    }
+
     const changeFiledInTask = (input) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
@@ -148,22 +139,16 @@ function ViewTaskByCrad(props) {
         temp.name = editTaskName
         setTask(temp);
     }
-    const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
-
+    let contact
     const setStateMailToContactMail = (emailMember) => {
-        debugger
-
-        setAssigneeDetails(emailMember.value.email)
-        console.log(assigneeDetails);
-        props.assingTo(emailMember.value.email)
+        // debugger
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
-        let editTaskInRedux = { "nameFiled": "assingTo", "value": emailMember.value }
-        props.setTaskByFiledFromTasks(editTaskInRedux)
-        console.log(props.task.assingTo);
+        props.assingTo(emailMember.value.email)
 
     }
+
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
@@ -178,7 +163,7 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <FontAwesomeIcon className="dnd-icon " id={props.task._id} title="Drag and Drop"
+                                <FontAwesomeIcon className="dnd-icon mt-3" id={props.task._id} title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon>
                                 <div className=" col-5">
@@ -190,13 +175,12 @@ function ViewTaskByCrad(props) {
                                             checked={doneStatus}
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
-                                        // onClick={(e) => editCompleteTask(e)}
                                         />
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? "disabled show-card mt-2" : "show-card mt-2"}
+                                        className={props.task.complete ? "disabled show-task mt-2" : "show-task mt-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -214,7 +198,9 @@ function ViewTaskByCrad(props) {
                                 </label>
 
                                 <label className="check-task border-left    px-2 col">
-                                    <DynamicSelect setContactEmail={setStateMailToContactMail} options={'contacts'} />
+                                    <DynamicSelect
+                                        value={props.task.assingTo ? props.task.assingTo.contact : null}
+                                        setContactEmail={setStateMailToContactMail} options={'contacts'} />
                                 </label>
                                 <label className="check-task border-left    px-2 col " >
                                     <div className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
@@ -225,8 +211,8 @@ function ViewTaskByCrad(props) {
                                 </label>
                                 <label className="check-task border-left  px-2 col">{props.task.dueDate}
                                 </label>
-                                <label className="check-task border-left  px-2 col-add-task">
-                                </label>
+                                {/* <label className="check-task border-left  px-2 col-add-task">
+                                </label> */}
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask}
@@ -240,9 +226,7 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
-            {/* {viewCompleteTask ? <Toast></Toast> : null} */}
             {showchalalit ? <div className="animation"><Animation /> </div> : null}
-            {/* {showContactList ? <DynamicSelect options={'contacts'} /> : null} */}
 
         </>
     )
@@ -263,7 +247,6 @@ const mapDispatchToProps = (dispatch) => {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),

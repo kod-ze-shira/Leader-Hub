@@ -3,43 +3,60 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TasksNotBelongCardByMap from './tasksNotBelongCardByMap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './taskNotBelongCardForUser.css'
 
 function TaskNotBelongCardForUser(props) {
     const [searchTask, setSearchTask] = useState('')
+    const [nameTask, setNameTask] = useState('')
     useEffect(() => {
-        props.getAllTasksNotBelongsCardForUser()
+        if (!props.tasks.length)
+            props.getAllTasksNotBelongsCardForUser()
 
-    }, [])
+    }, [props.tasks])
 
-    console.log(props.tasks)
+    // console.log(props.tasks)
 
     const renderTasks = props.tasks.map((task) => {
-        console.log(task);
-        return task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
+        return searchTask ? task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
             <TasksNotBelongCardByMap key={task._id} task={task} /> : null
+            : <TasksNotBelongCardByMap key={task._id} task={task} />
     })
     return (
-        <div className="body-workspace mt-3">
-            <div class="input-group">
-                <FontAwesomeIcon class='cleanSearchTask' onClick={() => setSearchTask('')} icon={["fas", "times"]} />
+        <div className="body-workspace ">
+            {/* <div className="body-workspace mt-3"> */}
 
-                <input id="searchTask" type="text" class="form-control searchTask"
-                    onChange={(e) => setSearchTask(e.target.value)}
-                    value={searchTask} placeholder="Write a task name" />
+            <div class="input-group input-group-task-not-belongs1">
+
+                {/* <FontAwesomeIcon class='cleanSearchTask' onClick={() => setNameTask('')} icon={["fas", "times"]} /> */}
+                <div className='input-group-task-not-belongs'>
+                    <input type="text" class="col-8 addTaskNotBelong  mr-2 ml-4"
+                        value={nameTask}
+                        placeholder="Write a task name"
+                        onChange={(e) => setNameTask(e.target.value)}
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                props.newTaskNotBelong(nameTask)
+                                setNameTask('')
+                            }
+                        }} />
+                    {/* <input type='text' id="searchTask" placeholder='search task' onChange={(e) => setSearchTask(e.target.value)} /> */}
+                    {/* <span id="searchProject"> */}
+                    <input type="text" class="inputSearchTask " placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
+                </div> {/* </span> */}
+                <div class="show-task row mx-4 mt-3 headerTableTask" >
+                    <label class="ml-3 pl-6 col-3 labelAllTask"> All task </label>
+                    <label class="col propertiesAllTask ml-4">Workspace</label>
+                    <label class="col propertiesAllTask">Project</label>
+                    <label class=" col propertiesAllTask">Card</label>
+                    <label class=" col propertiesAllTask"></label>
+                </div>
+
             </div>
             {/* <i class="fas fa-times"></i> */}
             {/* <button onClick={() => sestSearchTask('')}>X</button> */}
-            <div class="show-task row mx-4 mt-3 headerTableTask" >
-                <label class="ml-3 pl-6 col-7 labelAllTask"> All task </label>
-                <label class="col propertiesAllTask">Workspace</label>
-                <label class="col propertiesAllTask">Project</label>
-                <label class=" col propertiesAllTask">Card</label>
-                <label class=" col propertiesAllTask"></label>
-            </div>
 
-            <div className="mt-1">
+            <div className="mt-1 allTasks">
                 {props.tasks.length ?
                     renderTasks
                     : null}
@@ -59,6 +76,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllTasksNotBelongsCardForUser: () => dispatch(actions.getAllTasksNotBelongsCardForUser()),
+        newTaskNotBelong: (nameTask) => dispatch(actions.newTaskNotBelong(nameTask)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskNotBelongCardForUser)

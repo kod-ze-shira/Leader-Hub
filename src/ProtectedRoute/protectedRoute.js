@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Route, Redirect } from 'react-router-dom';
 import configData from './configData.json'
- 
+
 function redirectToLogin(routes) {
     window.location.href = routes ?
         `https://accounts.codes/hub/login?routes=${routes}` :
@@ -11,12 +11,12 @@ function redirectToLogin(routes) {
 const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    let routes = rest.computedMatch.params.nameVideo;
+    let routes
     let userName = rest.computedMatch.params.userName;
     useEffect(() => {
         const isLocal = window.location.hostname == "localhost"
-        const url=`${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;
-           const isPermission = async () => {
+        const url = `${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;
+        const isPermission = async () => {
             let response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -26,6 +26,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
                 },
             })
             if (response.status == 401) {
+                routes = "hub"
                 setIsLoading(false)
                 setIsLoggedIn(true)
             }
@@ -33,12 +34,12 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
                 setIsLoading(false)
             }
         }
-       isPermission()
+        isPermission()
 
     }, [])
- 
+
     return isLoading ? null : isLoggedIn ?
         redirectToLogin(routes)
-        :<Route {...rest} render={props => { return props.children }}></Route>
+        : <Route {...rest} render={props => { return props.children }}></Route>
 }
 export default ProtectedRoute
