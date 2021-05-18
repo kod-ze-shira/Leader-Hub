@@ -42,10 +42,7 @@
     background-color: transparent;
     border: none !important;
     outline: 0!important;
-    /* -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    display: -webkit-box; */
+  
 }
 
 .title-card{
@@ -77,6 +74,8 @@ p{
     background-color: transparent;
      outline: 0 !important;
     border: none !important;
+    opacity: 0.5;
+    display: none;
 }
 
 .new-task:focus{

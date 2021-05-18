@@ -98,18 +98,21 @@ function Tabs(props) {
         setShowHeader(!showHeader)
     }
     const newCard = () => {
+
         let card;
         if (inputValue) {
-            card = { "project": props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]._id, name: inputValue }
+            card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
         }
         setInputValue("")
-        setShowInput(false)
+        // setShowInput(false)
     }
     const openViewDetails = (task) => {
         setViewDetails(true)
         setTaskToDetails(task)
-
+    }
+    const setFocousCardFunc = (e) => {
+        document.getElementById("add-new-card").focus();
     }
     $(window).click(function () {
         setViewDetails(false)
@@ -118,6 +121,7 @@ function Tabs(props) {
     function stopP(event) {
         event.stopPropagation();
     }
+
     return (
         <><div className="body">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
@@ -144,21 +148,28 @@ function Tabs(props) {
                                                     key={card._id} cardFromMap={card} indexCard={index} />
                                             })}
                                         </DragDropContext>
-                                        <div className="col-3 mt-4" >
-                                            <div className="view-cards-tabs mt-1" >
-                                                <div class="card " >
+                                        <div className="card-width px-2 mt-4" >
+                                            <div className="view-cards-tabs  mt-1" >
+                                                <div class="card new-card" >
                                                     <div id='newCardInput' class="container" >
                                                         <div
                                                             class="card-header row" data-tip data-for="add_c"
                                                         >
-                                                            <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
-                                                                if (event.key === 'Enter') {
-                                                                    newCard()
-                                                                }
-                                                            }}></input>
-                                                            <ReactTooltip data-tip id="add_c" place="top" effect="solid">
-                                                                {title.title_add_card}
-                                                            </ReactTooltip>
+                                                            <input
+                                                                id="add-new-card"
+                                                                className="form-control "
+                                                                placeholder={""} value={inputValue}
+                                                                onChange={updateInputValue}
+                                                                onBlur={(e) => newCard()}
+                                                                onKeyPress={event => {
+                                                                    if (event.key === 'Enter') {
+                                                                        newCard()
+                                                                    }
+                                                                }}></input>
+                                                            <button
+                                                                className='buttonNewCard mt-3'
+                                                                onClick={(e) => setFocousCardFunc(e)}
+                                                            >+ Add Card</button>
                                                         </div>
                                                     </div>
                                                     <div className="card-body " id={!showInput ? "add-card" : ""}>
@@ -200,6 +211,7 @@ function Tabs(props) {
 export default connect(
     (state) => {
         return {
+            project: state.project_reducer.project,
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
             user: state.public_reducer.userName,

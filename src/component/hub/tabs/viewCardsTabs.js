@@ -17,7 +17,7 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        
+
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
@@ -111,7 +111,7 @@ function ViewCardsTabs(props) {
 
     return (
         <>
-            <div className="col-3 mt-4" id={props.cards[props.indexCard]._id}>
+            <div className="card-width px-3 mt-4" id={props.cards[props.indexCard]._id}>
                 {/* {props.cardFromMap._id} */}
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
@@ -128,7 +128,7 @@ function ViewCardsTabs(props) {
                                             <input
                                                 id="input-card-name"
                                                 ref={textInput}
-                                                className="form-control col-10"
+                                                className="form-control pl-4 col-10"
                                                 value={editCardName}
                                                 onChange={updateCardName}
                                                 onBlur={() => editCard()}
@@ -162,7 +162,7 @@ function ViewCardsTabs(props) {
                                     <div class="card-body allTaskInCard">
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div
+                                                <div className="mt-0"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
                                                     {props.cardFromMap.tasks.map((task, index) => (
@@ -198,7 +198,8 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t"
-                                            className="add-task-tabs mt-1" onClick={(e) => addTask(e)}>Add Task +</a>
+                                            className="add-task-tabs mt-1 "
+                                            onClick={(e) => addTask(e)}>Add Task +</a>
 
                                     </div>
                                 </div>

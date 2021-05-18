@@ -200,7 +200,7 @@ function TasksNotBelongCardByMap(props) {
     };
     function belongTask() {
         if (cardId) {
-            debugger
+            
             props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
         }
     }

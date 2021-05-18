@@ -142,7 +142,6 @@ function ViewTaskByCrad(props) {
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
 
     const setStateMailToContactMail = (emailMember) => {
-        debugger
 
         setAssigneeDetails(emailMember.value.email)
         console.log(assigneeDetails);

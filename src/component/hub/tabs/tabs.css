@@ -18,7 +18,12 @@
 .noneNewCard{
     display: none !important;
 }
-
+.new-card{
+    height: 40vh !important;
+}
+.new-card:hover{
+    border-color:#52C4A9  ;
+}
 .blockNewCard{
     display: block !important;
 }
@@ -31,4 +36,16 @@ a .add-card-tabs{
     color: #34A38B;
     text-transform: capitalize;
     font-weight: bold;
+}
+.buttonNewCard{
+    width: 100px;
+    height: 30px;
+    background: var(--unnamed-color-52c4a9) 0% 0% no-repeat padding-box;
+    background: #52C4A9 0% 0% no-repeat padding-box;
+    border-radius: 5px;
+    color:white;
+    font: normal normal normal 16px/21px Roboto;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    margin: auto ;
 }

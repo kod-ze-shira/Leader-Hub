@@ -250,7 +250,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
-        debugger
         let taskId = action.payload._id
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
@@ -315,7 +314,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-        debugger
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -377,7 +375,6 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             'name': action.payload,
             "updateDates": "08/03/2021"
         }
-        debugger
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         $.ajax({
             url: urlData,
@@ -388,7 +385,6 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
-                debugger
                 console.log("success")
                 // console.log(data);
                 // dispatch(actions.setCards(data.cards))
