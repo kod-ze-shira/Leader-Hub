@@ -7,58 +7,78 @@ import ShareOneMember from '../share/shareOneMember/shareOneMember'
 import './shareProject.css'
 
 function ShareProject(props) {
-    const [disabledSelectPermission, setDisabledSelectPermission] = useState('false')
     const [shareDetails, setShareDetails] = useState([])//all contacts details
-    const [shareDetail, setShareDetail] = useState('')//contact email
     const [membersTeamEmails, setMembersTeamEmails] = useState([])//team members
     const [teams, setTeams] = useState([])
     const [teamId, setTeamId] = useState(0)
-    //onselect contact his email be in  state:email
+    const [permissionContact, setPermissionContact] = useState('viewer')
+    const [permissionTeam, setPermissionTeam] = useState('viewer')
+
+    //onselect contact his email and perrmisin add shareDetails list
     const setStateMailToContactMail = (emailMember) => {
-        setDisabledSelectPermission('true')
-        console.log(disabledSelectPermission);
-        setShareDetail(emailMember.value)//to save email of contact
-    }
-    //onselect perrmision to contact his email and permission will add to members list
-    const addContactToList = (event) => {
-        let shareDetailToAdd = { 'shareDetail': shareDetail, 'permission': event.target.options[event.target.selectedIndex].label }
+        let shareDetailToAdd
+        if (typeof (emailMember.value) === 'object')//its contact 
+            shareDetailToAdd = { 'shareDetail': emailMember.value, 'permission': permissionContact }
+        else// he not my contact
+            shareDetailToAdd = { 'shareDetail': { 'email': emailMember.value }, 'permission': permissionContact }
         setShareDetails([...shareDetails, shareDetailToAdd])
-        event.target.selectedIndex = 0
+    }
+    //onselect perrmision to contact his  permission will save in state
+    const setStatePerrmissionContact = (event) => {
+        setPermissionContact(event.target.options[event.target.selectedIndex].label)
     }
     //on select team name
     const addTeamMemberEmailToMembersEmailList = (team) => {
-        setTeamId(team.value._id)
+        //add members
         let membersTeam = team.value.members
         membersTeam.forEach(element => {
             // membersTeamEmails.push({'shareDetail':element.contactMember})
-            membersTeamEmails.push( element.contactMember )
+            membersTeamEmails.push(element.contactMember)
             // setMembersTeamEmails([...membersTeamEmails, element.contactMember])
         });
 
-    }
-    //on select perrmission to team
-    const addMemberTeamToList = (event) => {
         let shareDetailsTemp = []
         let shareDetailToAdd
         membersTeamEmails.forEach(element => {
             //to add perrmision all members team
-            shareDetailToAdd = { 'shareDetail': element, 'permission': event.target.options[event.target.selectedIndex].label }
+            shareDetailToAdd = { 'shareDetail': element, 'permission': permissionTeam }
             shareDetailsTemp.push(shareDetailToAdd)
-            
+
         })
-        // setShareDetails(shareDetails.concat(shareDetailsTemp))
 
         //if render team not in shareDetails
-        let teamToShare = { 'teamId': teamId, 'members': shareDetailsTemp }
+        let teamToShare = { 'teamId': team.value._id, 'members': shareDetailsTemp }
         setTeams([...teams, teamToShare])
         setMembersTeamEmails([])
-
-        event.target.selectedIndex = 0
+    }
+    //on select perrmission to team
+    const setStatePermissionTean = (event) => {
+        setPermissionTeam(event.target.options[event.target.selectedIndex].label)
+    }
+    //onchange perrmision of contact
+    const changePermissionContactAfterRender = (event, shareDetailWithNewPermission) => {
+        let permission = event.target.options[event.target.selectedIndex].label
+        shareDetails.find(detail => {
+            if (detail.shareDetail.email == shareDetailWithNewPermission.shareDetail.email)
+                detail.permission = permission
+        })
+    }
+    //onchange perrmision of team member
+    const changePermissionMemberAfterRender = (event, shareDetailWithNewPermission, teamId) => {
+        let permission = event.target.options[event.target.selectedIndex].label
+        teams.forEach(team => {
+            if (team.teamId == teamId)
+                team.members.find(member => {
+                    if (member.shareDetail.email == shareDetailWithNewPermission.shareDetail.email)
+                        member.permission = permission
+                })
+        });
     }
     const renderShareDetails = () => {
         return shareDetails.map(detail => {
-            console.log(detail);
-            return <ShareOneMember member={detail} />
+            return <ShareOneMember
+                member={detail}
+                changePermission={changePermissionContactAfterRender} />
 
         })
     }
@@ -66,15 +86,18 @@ function ShareProject(props) {
     const renderShareDetailsOfTeam = () => {
         return teams.map(team => {
             return team.members.map(member => {
-                return <ShareOneMember member={member} />
+                return <ShareOneMember
+                    teamId={team.teamId}//בשביל שנוי הרשאה לחבר שיידע לשנות לו רמת הרשאה כלפי הטים הזה, מקרה קצה
+                    member={member}
+                    changePermission={changePermissionMemberAfterRender} />
             })
 
         })
     }
-const shareObject=()=>{
-    let details={shareDetails:shareDetails,teams:teams}
-    props.shareObject(details)
-}
+    const shareObject = () => {
+        let details = { shareDetails: shareDetails, teams: teams }
+        props.shareObject(details)
+    }
     return (
         <>
             <div className="details mr-5 ml-4">
@@ -90,8 +113,8 @@ const shareObject=()=>{
                         <DynamicSelect setContactEmail={setStateMailToContactMail} options={'contacts'} />
                     </div>
                     <div className="col-3 pl-0">
-                        <select class="form-control" onChange={(e) => addContactToList(e)}>
-                            <option disabled selected>Select...</option>
+                        <select class="form-control" onChange={(e) => setStatePerrmissionContact(e)}>
+                            {/* <option disabled selected>Select...</option> */}
                             <option value="1">viewer</option>
                             <option value="2">editor</option>
                             <option value="3">admin</option>
@@ -106,8 +129,8 @@ const shareObject=()=>{
                         <DynamicSelect options={'teams'} addMemberEmailToMembersEmailList={addTeamMemberEmailToMembersEmailList} />
                     </div>
                     <div className="col-3 pl-0">
-                        <select class="form-control" onChange={(e) => addMemberTeamToList(e)}>
-                            <option disabled selected>Select...</option>
+                        <select class="form-control" onChange={(e) => setStatePermissionTean(e)}>
+                            {/* <option disabled selected>Select...</option> */}
                             <option value="1">viewer</option>
                             <option value="2">editor</option>
                             <option value="3">admin</option>
@@ -127,8 +150,8 @@ const shareObject=()=>{
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <button onClick={shareObject}>share</button>
+                <div className="row pt-4 row_btn_share pr-4">
+                    <button className="btn_share" onClick={shareObject}>share</button>
                 </div>
             </div>
 

@@ -3,10 +3,11 @@
     width: 50px;
     height: 50px;
     border: 1.5px solid white;
+    color: white;
 }
 .div_img_share_one_member{
   text-align: center;
-  font:normal normal 34px Roboto
+  font:normal normal 34px Roboto;
 }
 .name_share_one_member{
     font: normal normal  17px/29px Roboto;
@@ -26,6 +27,7 @@ color: #75798E;
 height: 27px;
 font: normal normal normal 14px/21px Roboto;
 color: #75798E;
+text-align-last:center;
   }
   .select_permission_one_member::selection{
     border: 1px solid #87C5FE !important;

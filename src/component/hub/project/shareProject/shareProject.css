@@ -1,6 +1,6 @@
 .div_share_with{
-    width: 28.5vw;
-height: 35vh;
+    width: 29vw;
+height: 42vh;
 background: #eaf8f2 0% 0% no-repeat padding-box;
 border-radius: 3px;
 /* opacity: 0.11; */
@@ -17,4 +17,15 @@ color: #75798E;
 }
 .txt_share_with{
   color:  #75798E
+}
+.btn_share{
+    background-color: #1FB9C1;
+    color: white;
+    border-radius: 5px;
+    width: 118px;
+    height: 36px;
+    font: normal normal 18px/24px Roboto;
+}
+.row_btn_share{
+    float: right;
 }
