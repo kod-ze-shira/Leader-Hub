@@ -110,9 +110,11 @@ z-index: 9999 !important;
     display: inline-block;
 
 }
-
+.last-update{
+  text-align:right !important;
+}
 .milestones-span{
-  font-size:15px;
+  font-size:13px;
 }
 .switch {
     position: relative;

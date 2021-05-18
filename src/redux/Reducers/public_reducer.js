@@ -22,7 +22,7 @@ const initialState = {
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
-    
+
 }
 
 const publicData = {
@@ -113,6 +113,12 @@ const publicData = {
     setTasks(state, action) {
         state.tasks = action.payload.tasksForUser;
     },
+    addTask(state, action) {
+        state.tasks.push(action.payload)
+    },
+    removeTask(state, action) {
+        state.tasks = state.tasks.filter((task) => task._id !== action.payload)
+    },
     setMilestones(state, action) {
         state.milestones = action.payload;
         console.log(state.milestones)
@@ -134,7 +140,6 @@ const publicData = {
         state.cards = state.cards.filter((_, i) =>
             state.cards[i]._id !== action.payload.dc._id
         )
-
     },
     addProjectToProjects(state, action) {
 
@@ -271,6 +276,7 @@ const publicData = {
     setComlitedTask(state, action) {
         state.tasks[action.payload.index].complete = action.payload.value
     },
+
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },

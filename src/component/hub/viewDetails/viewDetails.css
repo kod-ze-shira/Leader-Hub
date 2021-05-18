@@ -33,9 +33,16 @@ overflow-x: hidden !important;
 }
 
 .propertiesViewDitails{
+<<<<<<< HEAD
     max-height: 74vh;
     height: 74vh;
     overflow: auto;
+=======
+    max-height: 79vh;
+    height: 79vh;
+    overflow-y: auto;
+    overflow-x: hidden !important;
+>>>>>>> newDev
     padding-bottom: 0px !important;
 }
 

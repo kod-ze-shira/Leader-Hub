@@ -20,41 +20,30 @@ function TasksNotBelongCardByMap(props) {
     // const [currentIndexTask, setCurrentIndexTask] = useState("")
     // const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
-    const [cardId, setCardId] = useState({})
+    const [cardId, setCardId] = useState()
     const [myProjects, setMyProjects] = useState([])
-    const [myCards, setMyCards] = useState([])
-
+    const [myCards, setMyCards] = useState()
+    const [myWorkspace, setMyWorkspace] = useState()
     // const [viewCompleteTask, setViewCompleteTask] = useState(false)
-    const [doneStatus, setDoneStatus] = useState(props.task.complete)
-
+    const [idWorkspace, setIdWorkspace] = useState()
+    const [indexOfWorkspace, setIndexOfWorkspace] = useState()
     const [task, setTask] = useState({
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
 
     useEffect(() => {
-        if (props.workspaces.length == 0)
+        if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
+        }
 
-    }, [props.task, props.workspaces])
+    }, [props.workspaces])
 
-    // const showDetails = (from) => {
-    //     props.setTaskName(task.name)
-    //     setDetailsOrEditTask(from)
-    //     props.setCurrentIndexTask(currentIndexTask)
-    //     props.setCurrentIndexCard(currentIndexCard)
-    //     setViewDetails(true)
-    // }
     const editTask = () => {
         let temp = { ...task }
         temp.name = editTaskName
         setTask(temp)
     }
-    $(window).click(function () {
-        setViewDetails(false)
-    });
-
-
 
     function addChalalit() {
         if (props.task.complete == false)
@@ -62,6 +51,7 @@ function TasksNotBelongCardByMap(props) {
     }
 
     const editCompleteTask = (comlited) => {
+
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -75,18 +65,12 @@ function TasksNotBelongCardByMap(props) {
             "startDate": props.task.startDate,
             "complete": comlited,
             "endDate": props.task.endDate ? props.task.endDatet : today,
-            "status": props.statuses[0],
             "card": props.task.card ? props.task.card : ''
         }
-        // לא מתעדכן הכומפליטד ברידקס 
-        // props.setTaskComplete(completeTask)
         props.completeTask(completeTask)
-        // setViewCompleteTask(true)
     }
 
     const changeFiledInTask = (input) => {
-        // props.setCurrentIndexTask(currentIndexTask)
-        // props.setCurrentIndexCard(currentIndexCard)
         let indexTask
         for (let index = 0; index < props.tasks.length; index++) {
             if (props.tasks[index]._id == props.task._id)
@@ -94,10 +78,9 @@ function TasksNotBelongCardByMap(props) {
         }
         let value = input.target.value
         let editTaskInRedux = { "index": indexTask, "value": !props.task.complete }
-        // props.setComlitedTask(editTaskInRedux)
-        // if (input.target.name == "complete")
-
         editCompleteTask(!props.task.complete)
+        props.setComlitedTask(editTaskInRedux)
+
         console.log("task", props.task.complete);
     }
 
@@ -127,21 +110,28 @@ function TasksNotBelongCardByMap(props) {
         } : null
     )) : null
 
-    const handleChange = (newValue, actionMeta) => {
+    const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
-            //   props.options == 
-            document.getElementById('buttonSaveSelect').style.display = 'inline'
-            document.getElementById('buttonCancleSelect').style.display = 'inline'
-            // document.getElementById('selectProjectInAllTask').style.display = 'inline'
+            setMyCards(null)
+            setMyProjects(null)
+            document.getElementById("selectProjectInTasksNotBelong").click();
+
             let indexWorkspace
             for (let index = 0; index < props.workspaces.length; index++) {
-                if (props.workspaces[index]._id == newValue.value._id)
+                if (props.workspaces[index]._id == newValue.value._id) {
                     indexWorkspace = index
+                    setIndexOfWorkspace(index)
+                    setIdWorkspace(props.workspaces[index]._id)
+                }
             }
-            setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
-            setCardId(null)
-            document.getElementById('buttonSaveSelect').classList.remove('activeBuutonSave')
 
+            // chooseWorkspace()
+            setMyWorkspace('selectedWorkspace')
+            setTimeout(() => {
+                setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
+
+            }, 10);
+            setCardId(null)
         }
 
     };
@@ -153,10 +143,10 @@ function TasksNotBelongCardByMap(props) {
                 if (myProjects[index]._id == newValue.value._id)
                     indexProject = index
             }
+            setMyCards(null)
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
-            document.getElementById('buttonSaveSelect').classList.remove('activeBuutonSave')
-
+            // chooseProject()
         }
     };
 
@@ -164,6 +154,7 @@ function TasksNotBelongCardByMap(props) {
         project.name ? {
             value: project, label:
                 <div className="row" style={{ color: project.color }}>
+                    <span class="dot dotProject" style={{ 'background-color': project.color }} ></span>
                     {project.name}
                 </div >
         } : null
@@ -182,94 +173,193 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
-            console.group('My select');
-            // console.log(newValue);
             //   props.options == 
-            // let indexCard
-            // for (let index = 0; index < myCards.length; index++) {
-            //     if (myCards[index]._id == newValue.value._id)
-            //         indexCard = index
-            // }
-            // setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(newValue.value._id)
-            console.log(cardId)
-            // console.log(`action: ${actionMeta.action}`);
-            document.getElementById('buttonSaveSelect').classList.add('activeBuutonSave')
-            console.groupEnd();
+            // console.log(cardId)
         }
     };
     function belongTask() {
         if (cardId) {
+<<<<<<< HEAD
             
             props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
+=======
+
+            props.setIndexWorkspace(indexOfWorkspace)
+
+
+            const promiseA = new Promise(function (resolve, reject) {
+                let task = {
+                    "_id": props.task._id,
+                    "name": props.task.name,
+                    "description": props.task.description,
+                    "dueDate": props.task.dueDate,
+                    "startDate": props.task.startDate,
+                    "complete": props.task.comlited ? props.task.comlited : false,
+                    "endDate": props.task.endDate,
+                    "card": props.task.card ? props.task.card : ''
+                }
+
+                props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
+
+                // if (props.statuses.length) {
+
+                //     resolve('suc')
+                //     
+                //     task.statuses = props.statuses
+                //     props.editTask(task)
+                //     reject('gg')
+                // }
+
+            });
+
+
+
+
+
+            // לא מתעדכן הכומפליטד ברידקס 
+            // props.setTaskComplete(completeTask)
+>>>>>>> newDev
         }
     }
+    function setPropertiesOfTask() {
+        debugger
+        let completeTask = {
+            "_id": props.task._id,
+            "name": props.task.name,
+            "description": props.task.description,
+            "dueDate": props.task.dueDate,
+            "startDate": props.task.startDate,
+            "complete": props.task.comlited,
+            "endDate": props.task.endDate,
+            // "status": props.statuses[0],
+            "card": props.task.card ? props.task.card : ''
+        }
+        props.completeTask(completeTask)
+    }
+
+    function chooseWorkspace() {
+
+        document.getElementById('selectWorkspaceInTasksNotBelong').style.display = 'block'
+
+        document.getElementById('chooseWorkspace').style.display = 'none'
+        document.getElementById('selectProjectInTasksNotBelong').style.display = 'none'
+        document.getElementById('chooseProject').style.display = 'block'
+        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
+        document.getElementById('chooseCard').style.display = 'block'
+        // $('#chooseWorkspace').css({ 'display', 'none'})
+        // $('#selectWorkspaceInTasksNotBelong').css({ 'display': 'block' })
+    }
+    function chooseProject() {
+        document.getElementById('selectProjectInTasksNotBelong').style.display = 'block'
+        document.getElementById('chooseProject').style.display = 'none'
+        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
+        document.getElementById('chooseCard').style.display = 'block'
+    }
+    function chooseCard() {
+
+        document.getElementById('selectCardInTasksNotBelong').style.display = 'block'
+        document.getElementById('chooseCard').style.display = 'none'
+    }
+
     return (
         <>
             <div
-                style={{ 'min-height': '36px' }}
+                style={{ 'min-height': '47px' }}
                 className="show-task row mx-4 border-bottom "
             >
 
-                <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
-                    icon={['fas', 'grip-vertical']}
-                ></FontAwesomeIcon>
-                <label
-                    className="check-task ml-3 py-2 pl-5 col-3 ">
-                    {/* <input type="checkbox" /> */}
+                <label className="check-task1 py-2 row  px-2 col-4 nameTaskNotBelong">
 
-                    <input
-                        type="checkbox"
-                        name="name" id="name" title={props.task.name}
-                        checked={props.task.complete}
-                        className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
-                        value={props.task.name}
-                        onChange={(e) => changeFiledInTask(e)}
-                        onBlur={(e) => editTask()}
-                        onKeyPress={e => {
-                            if (e.key === 'Enter') {
-                                editTask()
-                            }
-                        }}
-                    />
-                    <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
+                    <label
+                        className="check-task col-1">
+                        {/* className="check-task ml-3 py-2 pl-5 col-1 "> */}
+                        {/* <input type="checkbox" /> */}
 
+                        <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
+                            icon={['fas', 'grip-vertical']}
+                        ></FontAwesomeIcon>
+
+                        <input
+                            type="checkbox"
+                            name="name" id="name" title={props.task.name}
+                            checked={props.task.complete}
+                            className={props.task.complete ? "disabled show-card " : "show-card "}
+                            value={props.task.name}
+                            onChange={(e) => changeFiledInTask(e)}
+                            onBlur={(e) => editTask()}
+                            onKeyPress={e => {
+                                if (e.key === 'Enter') {
+                                    editTask()
+                                }
+                            }}
+                        />
+                        <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
+
+                    </label>
+                    <label className='col-10'>
+                        {props.task.name}
+                    </label>
                 </label>
-
-                <label className="check-task py-2  px-2 col-1 ">
-
-                    {props.task.name}
-                </label>
-                <label className="check-task border-left  py-2  px-2 col-2 ">
+                <label className="check-task border-left  py-2  px-2 col-2 workspaceN ">
+                    {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
                     <CreatableSelect
                         isClearable
-                        onChange={handleChange}
+                        onChange={handleChangeWorkspace}
                         // onInputChange={handleInputChange}
+                        // value='dd'
+                        id='selectWorkspaceInTasksNotBelong'
+                        className='selectWorkspaceInTasksNotBelong'
                         options={workspaceSelect}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
+                    {/* <div id='chooseProject' onClick={() => chooseProject()}>--</div> */}
+
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeProject}
                         // onInputChange={handleInputChange}
+                        id='selectProjectInTasksNotBelong'
+                        className='selectProjectInTasksNotBelong'
                         options={projectSelect}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
+                    {/* <div id='chooseCard' onClick={(e) => chooseCard(e)}>--</div> */}
+
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeCard}
+                        id='selectCardInTasksNotBelong'
+                        className='selectCardInTasksNotBelong'
+
                         // onInputChange={handleInputChange}
                         options={cardsSelect}
                     />
 
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
-                    <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
-                    <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                    {myWorkspace && !cardId ?
+                        <>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                        </>
+                        : null
+                    }
+
+                    {cardId ?
+                        <>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+
+                        </> : null
+
+                    }
 
                 </label>
                 {viewDetails ?
@@ -306,7 +396,7 @@ const mapDispatchToProps = (dispatch) => {
         completeTask: (task) => dispatch(actions.completeTask(task)),
         setComlitedTask: (taskDetails) => dispatch(actions.setComlitedTask(taskDetails)),
         belongTask: (ids) => dispatch(actions.belongTask(ids)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+        setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
 
     }
 }

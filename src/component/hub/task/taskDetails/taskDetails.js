@@ -26,6 +26,10 @@ function TaskDetails(props) {
 
 
     useEffect(() => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> newDev
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -167,7 +171,6 @@ function TaskDetails(props) {
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
     function filesInTask() {
-
         let newComponent
         props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
             newComponent = addFileComponent(file.url, file.name)
@@ -175,9 +178,7 @@ function TaskDetails(props) {
                 setFileComponentArr([newComponent])
             else
                 setFileComponentArr([...fileComponentArr, newComponent])
-
         })
-
     }
     const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
@@ -195,7 +196,7 @@ function TaskDetails(props) {
         <>
             <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}>
                 <div className='propertiesViewDitails'>
-                    <div className='row my-4 justify-content-between headerDitails'>
+                    <div className='row mt-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details   pl-3">Task details</h5>
                         <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-2">Task details</h5> */}
@@ -203,8 +204,8 @@ function TaskDetails(props) {
                     </div>
 
                     <div className="row justify-content-between mx-1" >
-                        <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label> <label className="ml-5">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-                        <br></br>
+                        <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                        <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
                     </div>
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
@@ -221,13 +222,13 @@ function TaskDetails(props) {
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div class="form-control descriptionTask"
-                            id="descriptionProject" rows="5"
+                        <textarea class="form-control"
+                            rows="3"
                             placeholder="Write a description about your workspace"
                             name="description"
                             value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}
                             onChange={(e) => changeFiledInTask(e)} contentEditable
-                        ></div>
+                        ></textarea>
                     </div>
 
 
@@ -267,7 +268,7 @@ function TaskDetails(props) {
 
                     </div>
                     <div className="row justify-content-between">
-                        <div class="dropdown col-6 col-lg-5">
+                        <div class="dropdown col-md-6 col-lg-5">
                             <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {props.statuses && props.statuses.length > 0 ? <>
 
@@ -286,7 +287,7 @@ function TaskDetails(props) {
 
                         </div>
                         {/* <div className="row mb-3"> */}
-                        <div className="col-6 col-lg-5">
+                        <div className="col-md-6 col-lg-5">
                             <span className="milestones-span mt-2">Mark as milestone</span>
                             <label className="switch ml-2 mt-1">
                                 <input type="checkbox"
@@ -303,8 +304,9 @@ function TaskDetails(props) {
                     </div>
                     {/* </div> */}
                     {newFileComponentArr}
-
                     <UploadFile />
+                    <hr></hr>
+
                 </div>
 
                 <div className="row justify-content-between mx-1 btns-in-view-details-task">

@@ -38,31 +38,35 @@
     display: inline-block;
     width: 6px; 
 }
-.show-card{
+.show-card , .show-task{
     background-color: transparent;
     border: none !important;
     outline: 0!important;
   
+}
+.show-card{
+    font-weight: bold;
+
 }
 
 .title-card{
     display: inline !important;
     /* background-color: #E8EAEC; */
 }
-.show-card>div{
-    display: inline-block;
+.show-card>div ,.show-task>div{
+    /* display: inline-block; */
 }
-.show-card:focus{
+.show-card:focus , .show-task:focus{
     padding-top:1px !important;
     padding-bottom: 1.5px;
     border-radius: 3px;
     border:1px  solid #00C1C9!important;
-
+/* font-weight: bold; */
     /* border-radius: 2px !important; */
     /* border: 1px solid blue; */
 }
 .card-name >p{
-   
+   font-size:15px;
     text-align: center;
 }
 p{ 
@@ -74,8 +78,16 @@ p{
     background-color: transparent;
      outline: 0 !important;
     border: none !important;
+<<<<<<< HEAD
     opacity: 0.5;
     display: none;
+=======
+    display: inline-block !important; ;
+
+}
+.new-task{
+    display: block;
+>>>>>>> newDev
 }
 
 .new-task:focus{

@@ -6,16 +6,18 @@ import { Provider } from 'react-redux';
 import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
 import HeaderLeader from '@leadercodes/leader-header'
+import BodyEmailOfAssignmentTask from './component/hub/BodyOfAssignmentTask/BodyEmailOfAssignmentTask';
 
 export default function App(props) {
 
   return (
     <>
-        <Provider store={Store}>
-          <>
-            <Hub></Hub>
-          </>
-        </Provider>
+      <Provider store={Store}>
+        <>
+          <Hub></Hub>
+          {/* <BodyEmailOfAssignmentTask/> */}
+        </>
+      </Provider>
     </>
   );
 }

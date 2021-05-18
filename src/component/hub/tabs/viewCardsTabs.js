@@ -17,7 +17,10 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> newDev
     }, [props.flag])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)

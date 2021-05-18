@@ -24,7 +24,6 @@ function CardsPage(props) {
 
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
-
     }, [])
 
     const changeFlag = (value) => {
