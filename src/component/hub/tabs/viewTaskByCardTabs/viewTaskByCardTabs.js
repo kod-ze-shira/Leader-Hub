@@ -226,7 +226,7 @@ function ViewTaskByCradTabs(props) {
                                     {/* <div>{props.task.index}</div> */}
                                     <img
                                         //  onClick={(e) => setShowAssignee(true)} 
-                                        class='assing-icon pb-3 mr-2' src={require('../../../img/share-icon.png')}></img>
+                                        class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
                                     {showAssignee ? <DynamicSelect
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> : null}

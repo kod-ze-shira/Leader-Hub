@@ -89,11 +89,11 @@ function DynamicSelect(props) {
             <div className="option-contact row">
               {props.value.thumbnail ? <img referrerpolicy="no-referrer" src={props.value.thumbnail} className="thumbnail-contact " />
                 : <div className="logo-contact" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.value.name ? props.value.name[0] : null}</div>}
-              <img referrerpolicy="no-referrer" src={require('../../img/share-icon.png')} className="ml-2 assinto-contact " />
+              <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="ml-2 assinto-contact " />
               {/* <p className="name-contact ">{props.value.name} </p> */}
             </div>
           </div>
-          : <img referrerpolicy="no-referrer" src={require('../../img/share-icon.png')} className="assinto-contact  ml-2" />}
+          : <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="assinto-contact" />}
         isClearable
         onChange={handleChange}
         onInputChange={handleInputChange}
