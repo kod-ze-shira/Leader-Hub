@@ -45,6 +45,7 @@ function Hub(props) {
 
 
     const showToastToDelete = (objectToDelete) => {
+        debugger
         setObjectToDelete(objectToDelete)
         if (objectToDelete.type == 'Task')
             setShowToastDelete(true)
@@ -126,7 +127,9 @@ function Hub(props) {
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/hub/allTasks"}>
-                                <TaskNotBelongCardForUser />
+                                <TaskNotBelongCardForUser
+                                    showToastDelete={(object) => props.showToastToDelete(object)}
+                                />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
