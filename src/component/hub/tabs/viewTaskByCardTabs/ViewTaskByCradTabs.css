@@ -14,4 +14,7 @@
   .task-card .MuiButtonBase-root:hover{
     display: block ;
 }
+.input-card-name{
+    height: 65vh !important;
+}
 

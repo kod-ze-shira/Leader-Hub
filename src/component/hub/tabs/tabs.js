@@ -100,7 +100,7 @@ function Tabs(props) {
     const newCard = () => {
         let card;
         if (inputValue) {
-            card = { "project": props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]._id, name: inputValue }
+            card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
         }
         setInputValue("")
@@ -151,7 +151,7 @@ function Tabs(props) {
                                                         <div
                                                             class="card-header row" data-tip data-for="add_c"
                                                         >
-                                                            <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control " onKeyPress={event => {
+                                                            <input placeholder={"New Card"} value={inputValue} onChange={updateInputValue} className="form-control" onKeyPress={event => {
                                                                 if (event.key === 'Enter') {
                                                                     newCard()
                                                                 }
@@ -200,6 +200,7 @@ function Tabs(props) {
 export default connect(
     (state) => {
         return {
+            project: state.project_reducer.project,
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
             user: state.public_reducer.userName,
