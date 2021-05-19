@@ -2,17 +2,20 @@
     cursor: pointer;
 }
 .more {
-    width: 250px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
+    /* width: 250px; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    /* text-align: center; */
   }
   .MuiButton-label-text {
    
     
       /* display: none !important ; */
   }
-  .task-card .MuiButtonBase-root:hover{
+  /* .task-card .MuiButtonBase-root:hover{
     display: block ;
+} */
+.check-task input:hover ~ .checkmark{
+    background-color:#f6f7f8 !important;
 }
 .input-card-name{
     height: 65vh !important;

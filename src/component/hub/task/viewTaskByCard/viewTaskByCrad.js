@@ -142,7 +142,10 @@ function ViewTaskByCrad(props) {
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
     let contact
     const setStateMailToContactMail = (emailMember) => {
-        // debugger
+
+        setAssigneeDetails(emailMember.value.email)
+        console.log(assigneeDetails);
+        props.assingTo(emailMember.value.email)
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         props.assingTo(emailMember.value.email)
@@ -169,7 +172,7 @@ function ViewTaskByCrad(props) {
                                 <div className=" col-5">
                                     <label
                                         title="Complete Task"
-                                        className="check-task  ">
+                                        className="check-task ml-4 ">
                                         <input type="checkbox"
                                             name="complete"
                                             checked={doneStatus}

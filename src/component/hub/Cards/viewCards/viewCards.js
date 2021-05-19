@@ -62,7 +62,9 @@ function ViewCards(props) {
 
     }
     const deleteCard = () => {
-        $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
+        debugger
+        $(`#${props.cardFromMap._id}`).css("display", "none")
+        // $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
 
     }
@@ -100,7 +102,6 @@ function ViewCards(props) {
                 setFlag(true)
             }
             else {
-                console.log(props.cardFromMap.tasks[0])
                 setFlag(false)
                 setAddTaskInInput(false)
             }
@@ -119,20 +120,23 @@ function ViewCards(props) {
             }
 
     };
-
+   
     return (
         <>
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-5" >
+                    <div
+                     onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
+                     onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
+                    className="col-5" >
                         <div className="wrap-triangle">
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
                         </div>
                         <input
-                            // autoFocus="true"
+                            // style="max-width:1px;"
                             className="ml-3 show-card"
                             value={editCardName}
                             onChange={updateCardName}
@@ -144,13 +148,10 @@ function ViewCards(props) {
                             }}
                         >
                         </input>
-                        <a>
-                        <button data-tip data-for="add" className="new-task" onClick={addTask}>+</button>
-                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
-                            {title.title_add_task}
-                        </ReactTooltip>
-                    </a>
-
+                        <button data-toggle="tooltip" data-placement="bottom"
+                            id={`task${props.cardFromMap._id}`}
+                            className="new-task"
+                            onClick={addTask}>+</button>
                     </div>
                     <Button className="more col-1 " data-tip data-for="more_a"
                         onClick={handleClick}>
@@ -175,9 +176,9 @@ function ViewCards(props) {
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
-                    {/* <p className="col-add-task">
-                  
-                    </p> */}
+                    <p className="col-add-task"><a>
+                        {/* <button data-toggle="tooltip" data-placement="bottom" className="new-task" onClick={addTask}>+</button> */}
+                    </a></p>
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?

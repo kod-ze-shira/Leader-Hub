@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TasksNotBelongCardByMap from './tasksNotBelongCardByMap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './taskNotBelongCardForUser.css'
 
 function TaskNotBelongCardForUser(props) {
@@ -15,7 +15,7 @@ function TaskNotBelongCardForUser(props) {
 
     }, [props.tasks])
 
-    console.log(props.tasks)
+    // console.log(props.tasks)
 
     const renderTasks = props.tasks.map((task) => {
         return searchTask ? task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
@@ -30,7 +30,7 @@ function TaskNotBelongCardForUser(props) {
 
                 {/* <FontAwesomeIcon class='cleanSearchTask' onClick={() => setNameTask('')} icon={["fas", "times"]} /> */}
                 <div className='input-group-task-not-belongs'>
-                    <input type="text" class="col-9 addTaskNotBelong"
+                    <input type="text" class="col-8 addTaskNotBelong  mr-2 ml-4"
                         value={nameTask}
                         placeholder="Write a task name"
                         onChange={(e) => setNameTask(e.target.value)}

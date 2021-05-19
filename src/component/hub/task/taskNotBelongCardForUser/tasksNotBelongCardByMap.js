@@ -25,8 +25,7 @@ function TasksNotBelongCardByMap(props) {
     const [myCards, setMyCards] = useState()
     const [myWorkspace, setMyWorkspace] = useState()
     // const [viewCompleteTask, setViewCompleteTask] = useState(false)
-    const [doneStatus, setDoneStatus] = useState(props.task.complete)
-    let flugButtonSavePositive = false
+    const [idWorkspace, setIdWorkspace] = useState()
     const [indexOfWorkspace, setIndexOfWorkspace] = useState()
     const [task, setTask] = useState({
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
@@ -52,7 +51,7 @@ function TasksNotBelongCardByMap(props) {
     }
 
     const editCompleteTask = (comlited) => {
-        debugger
+
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -66,18 +65,12 @@ function TasksNotBelongCardByMap(props) {
             "startDate": props.task.startDate,
             "complete": comlited,
             "endDate": props.task.endDate ? props.task.endDatet : today,
-            // "status": props.statuses[0],
             "card": props.task.card ? props.task.card : ''
         }
-        // לא מתעדכן הכומפליטד ברידקס 
-        // props.setTaskComplete(completeTask)
         props.completeTask(completeTask)
-        // setViewCompleteTask(true)
     }
 
     const changeFiledInTask = (input) => {
-        // props.setCurrentIndexTask(currentIndexTask)
-        // props.setCurrentIndexCard(currentIndexCard)
         let indexTask
         for (let index = 0; index < props.tasks.length; index++) {
             if (props.tasks[index]._id == props.task._id)
@@ -85,10 +78,9 @@ function TasksNotBelongCardByMap(props) {
         }
         let value = input.target.value
         let editTaskInRedux = { "index": indexTask, "value": !props.task.complete }
-        // props.setComlitedTask(editTaskInRedux)
-        // if (input.target.name == "complete")
-        debugger
         editCompleteTask(!props.task.complete)
+        props.setComlitedTask(editTaskInRedux)
+
         console.log("task", props.task.complete);
     }
 
@@ -120,12 +112,6 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
-            //   props.options == 
-            // debugger
-            // projectSelect.isLoading = true
-            // projectSelect.value('GG')
-            // let mm = myProjects
-            // myProjects = []
             setMyCards(null)
             setMyProjects(null)
             document.getElementById("selectProjectInTasksNotBelong").click();
@@ -135,6 +121,7 @@ function TasksNotBelongCardByMap(props) {
                 if (props.workspaces[index]._id == newValue.value._id) {
                     indexWorkspace = index
                     setIndexOfWorkspace(index)
+                    setIdWorkspace(props.workspaces[index]._id)
                 }
             }
 
@@ -144,8 +131,6 @@ function TasksNotBelongCardByMap(props) {
                 setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
 
             }, 10);
-            flugButtonSavePositive = true
-
             setCardId(null)
         }
 
@@ -208,65 +193,30 @@ function TasksNotBelongCardByMap(props) {
                     "startDate": props.task.startDate,
                     "complete": props.task.comlited ? props.task.comlited : false,
                     "endDate": props.task.endDate,
-                    // "status": props.statuses[0],
                     "card": props.task.card ? props.task.card : ''
                 }
-                // props.completeTask(completeTask)
-                props.getAllStatusesTaskForWorkspace(task)
 
-                if (props.statuses.length) {
+                props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
 
-                    resolve('suc')
-                    // dd()
-                    reject('gg')
-                }
+                // if (props.statuses.length) {
+
+                //     resolve('suc')
+                //     
+                //     task.statuses = props.statuses
+                //     props.editTask(task)
+                //     reject('gg')
+                // }
 
             });
-            // promiseA.then(() => {
-            //     setPropertiesOfTask()
-            // })
 
 
-            // promiseA.then(function () {
-            //     console.log('1.');
-            //     debugger
-            //     // setPropertiesOfTask()
-            //     props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
 
-            // })
-            //     .then(function () {
-            //         console.log('2')
-            //         // debugger
-            //         // setPropertiesOfTask()
-
-            //         //do another thing, it will be called after the first promise was fullfilled.
-            //     }).then(function () {
-            //         console.log('3')
-            //         // setPropertiesOfTask()
-            //         // props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
-
-            //         //do another thing, it will be called after the first promise was fullfilled.
-            //     })
-            //     .then(function () {
-            //         debugger
-            //         console.log('Promise rejected.')
-            //         // setPropertiesOfTask()
-            //         props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
-
-            //         //do third thing, it will be called after the last promise was fullfilled.
-            //     });
-
-
-            // const promiseB = promiseA.then(setPropertiesOfTask());
 
 
             // לא מתעדכן הכומפליטד ברידקס 
             // props.setTaskComplete(completeTask)
         }
     }
-    // function dd() {
-    //     props.getAllStatusesTaskForWorkspace()
-    // }
     function setPropertiesOfTask() {
         debugger
         let completeTask = {
@@ -314,34 +264,37 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
             >
 
-                <FontAwesomeIcon className="dnd-icon mt-2 " id={props.task._id}
-                    icon={['fas', 'grip-vertical']}
-                ></FontAwesomeIcon>
-                <label
-                    className="check-task ml-3 py-2 pl-5 col-1 ">
-                    {/* <input type="checkbox" /> */}
+                <label className="check-task1 py-2 row  px-2 col-4 nameTaskNotBelong">
 
-                    <input
-                        type="checkbox"
-                        name="name" id="name" title={props.task.name}
-                        checked={props.task.complete}
-                        className={props.task.complete ? "disabled show-card py-2" : "show-card py-2"}
-                        value={props.task.name}
-                        onChange={(e) => changeFiledInTask(e)}
-                        onBlur={(e) => editTask()}
-                        onKeyPress={e => {
-                            if (e.key === 'Enter') {
-                                editTask()
-                            }
-                        }}
-                    />
-                    <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
+                    <label
+                        className="check-task col-1">
+                        {/* className="check-task ml-3 py-2 pl-5 col-1 "> */}
+                        {/* <input type="checkbox" /> */}
 
-                </label>
+                        <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
+                            icon={['fas', 'grip-vertical']}
+                        ></FontAwesomeIcon>
 
-                <label className="check-task1 py-2  px-2 col-3 ">
+                        <input
+                            type="checkbox"
+                            name="name" id="name" title={props.task.name}
+                            checked={props.task.complete}
+                            className={props.task.complete ? "disabled show-card " : "show-card "}
+                            value={props.task.name}
+                            onChange={(e) => changeFiledInTask(e)}
+                            onBlur={(e) => editTask()}
+                            onKeyPress={e => {
+                                if (e.key === 'Enter') {
+                                    editTask()
+                                }
+                            }}
+                        />
+                        <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
 
-                    {props.task.name}
+                    </label>
+                    <label className='col-10'>
+                        {props.task.name}
+                    </label>
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 workspaceN ">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
@@ -438,7 +391,6 @@ const mapDispatchToProps = (dispatch) => {
         completeTask: (task) => dispatch(actions.completeTask(task)),
         setComlitedTask: (taskDetails) => dispatch(actions.setComlitedTask(taskDetails)),
         belongTask: (ids) => dispatch(actions.belongTask(ids)),
-        getAllStatusesTaskForWorkspace: (task) => dispatch(actions.getAllStatusesTaskForWorkspace1(task)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
 
     }

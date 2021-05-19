@@ -47,11 +47,12 @@ export default function ShareOneMember(props) {
                                 // style={{ 'background': `linear-gradient(136deg,${backgroundStyle},white)` }}
 
                                 : <div ref={refToDivColor} style={{ backgroundColor: backgroundStyle }}
-                                    className="img_share_one_member div_img_share_one_member">{props.member.shareDetail.name[0]}</div>}
+                                    className="img_share_one_member div_img_share_one_member">{props.member.shareDetail.name?props.member.shareDetail.name[0]:props.member.shareDetail.email[0]}</div>}
+                                    {/* props.member.shareDetail.email-its mail that not in my contacts , he has just email*/}
                         </div>
                         <div className="col-9">
                             <div className="row name_share_one_member">
-                                {props.member.shareDetail.name}
+                                {props.member.shareDetail.name?props.member.shareDetail.name:props.member.shareDetail.email}
                             </div>
                             <div className="row email_share_one_member">
                                 {props.member.shareDetail.email}
@@ -59,8 +60,8 @@ export default function ShareOneMember(props) {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 pr-3">
-                    <select class=" select_permission_one_member">
+                <div className="col-3 pl-0 pt-4">
+                    <select class=" select_permission_one_member" onChange={(event)=>props.changePermission(event,props.member,props.teamId)}>
                         <option selected>{props.member.permission}</option>
                         {props.member.permission != 'viewer' ? <option value="1">viewer</option> : null}
                         {props.member.permission != 'editor' ? <option value="2">editor</option> : null}

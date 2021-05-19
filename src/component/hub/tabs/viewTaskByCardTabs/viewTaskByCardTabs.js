@@ -14,6 +14,7 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import DynamicSelect from '../../team/dynamicSelect';
 
+import './ViewTaskByCradTabs.css'
 
 function ViewTaskByCradTabs(props) {
 
@@ -160,6 +161,7 @@ function ViewTaskByCradTabs(props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
+                        id="task-card"
                     >
 
                         <div className="task-card mt-2 pt-2"
@@ -204,8 +206,8 @@ function ViewTaskByCradTabs(props) {
                                         <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                     </Menu>
                                     <label
-                                        title="Complete Task "
-                                        className="check-task py-2 check-tabs ">
+                                        title="Complete Task"
+                                        className="check-task py-2 check-tabs">
                                         <input type="checkbox"
                                             name="complete"
                                             checked={doneStatus}
@@ -214,15 +216,17 @@ function ViewTaskByCradTabs(props) {
                                             onClick={(e) => e.stopPropagation()
                                             }
                                         />
-                                        <span className="checkmark checkmark-tabs" onClick={(e) => addChalalit(e)}></span>
+                                        <span
+                                            className="checkmark checkmark-tabs"
+                                            onClick={(e) => addChalalit(e)}></span>
                                     </label>
                                     {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null}
                                     {/* <div>{props.task.index}</div> */}
                                     <img
-                                    //  onClick={(e) => setShowAssignee(true)} 
-                                     class='assing-icon pb-3 mr-2' src={require('../../../img/share-icon.png')}></img>
+                                        //  onClick={(e) => setShowAssignee(true)} 
+                                        class='assing-icon pb-3 mr-2' src={require('../../../img/share-icon.png')}></img>
                                     {showAssignee ? <DynamicSelect
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> : null}

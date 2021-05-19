@@ -13,7 +13,7 @@
       height: 83vh;
     }
     .card{
-      height:75vh !important;
+      /* height:75vh !important; */
     }
   }
   .cards{

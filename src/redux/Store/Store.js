@@ -22,7 +22,7 @@ import {
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
-import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace, getAllStatusesTaskForWorkspace1 } from '../middleware/statusCrud';
+import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
 import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
@@ -58,7 +58,6 @@ const store = createStore(
                 editCard,
                 removeCardById,
                 getAllStatusesTaskForWorkspace,
-                getAllStatusesTaskForWorkspace1,
                 createStatus,
                 uploadFiles,
                 // downloadFile,
