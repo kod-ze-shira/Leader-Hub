@@ -18,10 +18,7 @@ function CardsPage(props) {
     const { idProject } = useParams();
     useEffect(() => {
 
-        // if (props.workspaces.length == 0) {
-        //     props.getAllWorkspacesFromServer()
-        // }
-
+       
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
     }, [])
@@ -75,9 +72,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

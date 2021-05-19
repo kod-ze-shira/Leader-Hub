@@ -15,7 +15,7 @@ import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards,
+    , moveTaskBetweenCards, dragTask,dragCard,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
@@ -70,6 +70,8 @@ const store = createStore(
                 removeStatus,
                 moveTaskBetweenCards,
                 // moveCards,
+                dragTask,
+                dragCard,
                 newTaskNotBelong,
                 belongTask,
                 completeTask,

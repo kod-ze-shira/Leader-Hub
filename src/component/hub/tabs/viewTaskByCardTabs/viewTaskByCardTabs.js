@@ -32,6 +32,7 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
+        
 
     }, [props.cards])
 
@@ -133,7 +134,8 @@ function ViewTaskByCradTabs(props) {
     return (
         <>
 
-            <Draggable draggableId={props.task._id} index={props.indexTask}>
+            <Draggable  className="taskkk"
+            draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
@@ -184,7 +186,7 @@ function ViewTaskByCradTabs(props) {
                                             className="checkmark checkmark-tabs"
                                             onClick={(e) => addChalalit(e)}></span>
                                     </label>
-                                    {/* <div>{props.task.index}</div> */}
+                                    <div>{props.task.index}</div>
                                 </div>
                                 <input
                                     className="form-control col-12"

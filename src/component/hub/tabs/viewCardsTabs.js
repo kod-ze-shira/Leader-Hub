@@ -17,7 +17,14 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-    }, [props.flag])
+        
+        if (props.cards[props.indexCurrentCard])
+            if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
+                document.getElementById("add-new-card").focus();
+                setAddTaskInInput(true)
+                props.setCard(props.cardFromMap)
+            }
+    }, [props.flag, props.openInputTask])
 
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
@@ -111,7 +118,6 @@ function ViewCardsTabs(props) {
     return (
         <>
             <div className="card-width px-3 mt-4" id={props.cards[props.indexCard]._id}>
-                {/* {props.cardFromMap._id} */}
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -137,7 +143,7 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            {/* <p>{props.cardFromMap._id}</p> */}
+                                            <p>{props.cardFromMap.index}</p>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
@@ -165,7 +171,9 @@ function ViewCardsTabs(props) {
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
                                                     {props.cardFromMap.tasks.map((task, index) => (
-                                                        <ViewTaskByCradTabs openViewDetails={openViewDetails}
+                                                        <ViewTaskByCradTabs
+
+                                                            openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
