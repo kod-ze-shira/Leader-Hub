@@ -20,4 +20,7 @@
 .input-card-name{
     height: 65vh !important;
 }
+.delete-task-hover{
+    display:none;
+}
 

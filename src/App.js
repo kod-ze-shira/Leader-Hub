@@ -7,6 +7,7 @@ import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
 import HeaderLeader from '@leadercodes/leader-header'
 import BodyEmailOfAssignmentTask from './component/hub/BodyOfAssignmentTask/BodyEmailOfAssignmentTask';
+import ContactList from './component/hub/contact/contactList';
 
 export default function App(props) {
 
@@ -16,6 +17,8 @@ export default function App(props) {
         <>
           <Hub></Hub>
           {/* <BodyEmailOfAssignmentTask/> */}
+          {/* <ContactList /> */}
+
         </>
       </Provider>
     </>
