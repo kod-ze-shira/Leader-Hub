@@ -180,10 +180,6 @@ function TasksNotBelongCardByMap(props) {
     };
     function belongTask() {
         if (cardId) {
-<<<<<<< HEAD
-            
-            props.belongTask({ 'taskId': props.task._id, 'cardId': cardId })
-=======
 
             props.setIndexWorkspace(indexOfWorkspace)
 
@@ -219,7 +215,6 @@ function TasksNotBelongCardByMap(props) {
 
             // לא מתעדכן הכומפליטד ברידקס 
             // props.setTaskComplete(completeTask)
->>>>>>> newDev
         }
     }
     function setPropertiesOfTask() {

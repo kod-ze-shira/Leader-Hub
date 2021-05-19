@@ -26,10 +26,6 @@ function TaskDetails(props) {
 
 
     useEffect(() => {
-<<<<<<< HEAD
-=======
-
->>>>>>> newDev
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
