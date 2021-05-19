@@ -38,7 +38,9 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} focusInputCard={props.focusInputCard} viewToastComplete={props.viewToastComplete} />
+                return <Tabs showToast={showToast} 
+                focusInputCard={props.focusInputCard} 
+                viewToastComplete={props.viewToastComplete} />
             case 'list':
                 return <ProjectPlatform
                     viewToastComplete={props.viewToastComplete}
@@ -53,7 +55,7 @@ function CardsPage(props) {
         }
     }
     return (
-        <div className="mt-3">
+        <div className="mt-4">
             <SelectHeader flag={changeFlag} from={howToPresent} menue={true} />
             {renderSwitch()}
 

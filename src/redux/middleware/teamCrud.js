@@ -139,7 +139,6 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 // export const assingTo = ({ dispatch, getState }) => next => action => {
 
 //   if (action.type === 'ASSING_TO') {
-//     debugger
 //     let email = action.payload
 //     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
 //     .tasks[getState().public_reducer.indexCurrentTask]._id

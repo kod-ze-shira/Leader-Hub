@@ -1,15 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 .view-cards-tabs .card-body{
-    height:  55vh; /* בינתיים */
-    background: transparent linear-gradient(360deg, #87C5FE30 0%, #ebfff8 100%) 0% 0% no-repeat padding-box;
-   /* background-color: #87C5FE30; */
+     max-height:  70vh;/* בינתיים */
+    /* background: transparent linear-gradient(360deg, #87C5FE30 0%, #ebfff8 100%) 0% 0% no-repeat padding-box; */
+    background-color:#EDFBFC !important ;
     border-radius: 0px 0px 8px 8px;
     text-align: left;
     letter-spacing: 0px;
     color: #0A102E;
-    overflow-y: auto;
+    overflow-y: auto;  
 
-   
+}
+.card-width{
+  width: 35vh !important;
+  display: inline-block !important; 
+}
+.card-body {
+  padding: 1rem !important;
+  /* padding-top: 0.5 !important; */
+}
+#add-new-card{
+  background-color:  #EDFBFC  !important;
+
+}
+#input-card-name{
+  font-size: medium;
+  font-weight: bold !important;
+  background-color:  #EDFBFC  !important;
 }
 .more {
   right: 6px;
@@ -17,16 +33,21 @@
   min-width: min-content !important;
 }
 .view-cards-tabs .card-header{
-    background-color: white !important;
+    background-color: #EDFBFC !important;
     font-size: 16px;
     font-weight: 500;
 }
 .card-header{
   padding: 4px !important;
+  border-bottom: none !important;
+}
+#task-card:hover{
+  border-color:#52C4A9  !important;
+
 }
 .more{
     background-color: transparent;
-    float: right !important;
+    /* float: right !important; */
     color:#778ca2;
     /* margin-top: 1px; */
 }
@@ -44,17 +65,31 @@
     font-size: 15px !important;
 }
 .allTaskInCard div{
+  /* padding-right: 5px !important;
+  padding-left: 5px !important; */
+
   margin-bottom: 9px;
 }
+.allTaskInCard div:hover{
+  border-color:#52C4A9  !important;
+
+  }
 
 .add-task-tabs:hover{
   color:black  !important;
 }
 .task-card{
+  padding-top: 5px !important;
     background-color: white;
-    height: 100px;
+    height: 105px;
     border-radius: 5px;
     position: relative !important;
+}
+.task-card input{
+  height: 50px !important;
+  float: left !important;
+  margin:0 !important;
+
 }
 .task-card p{
     color:black !important;
@@ -90,17 +125,35 @@
     /* background-color:#F8B520; */
     border-radius: 4px;
     opacity: 1;
+    margin-right: 10px;
+    margin-top: 3vh;
+
 
 }
+.assing-icon{
+  display: none;
+
+  
+}
+.task-card:hover .assing-icon {
+}​
+.task-card:hover .color-task {
+}​
+/* .color-task:hover{
+  display: none;
+} */
 .card-header .form-control, .task-card .form-control
 {
   color:black !important;
     border:none !important;
+    outline: 0 !important;
     /* width:70%; */
 
 }
 .card-header .form-control{
   font-weight: 500 !important;
+  border:none !important;
+    outline: 0 !important;
 }
 .card-header .form-control:focus
 {

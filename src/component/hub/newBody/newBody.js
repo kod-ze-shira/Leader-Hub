@@ -13,7 +13,7 @@ export default function Body() {
 
     return (
 
-        <div className="body mt-3">
+        <div className="body mt-4">
 
             {/* <Search /> */}
             {/* <TableHeader/> */}

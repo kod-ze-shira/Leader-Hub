@@ -321,7 +321,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-
         $.ajax({
             url: urlData,
             method: 'POST',
