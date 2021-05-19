@@ -48,6 +48,15 @@ const publicData = {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
     },
+    setTaskByFiledFromTasksNotBelong(state, action) {
+        let indexTask;
+        for (let index = 0; index < state.tasks.length; index++) {
+            if (state.tasks[index]._id == action.payload.idTask) {
+                indexTask = index
+            }
+        }
+        state.tasks[indexTask][action.payload.nameFiled] = action.payload.value
+    },
     setIdFiles(state, action) {
         // dispatch(actions.setIdFiles(data.result.files));
         action.payload.map((file) => {
@@ -293,7 +302,12 @@ const publicData = {
             }
         })
     },
-
+    setTaskFromTasksNotBelong(state, action) {
+        state.tasks.forEach((task, index) => {
+            if (task._id == action.payload._id)
+                state.tasks[index] = action.payload
+        })
+    },
     //         })
     //     }
     // })

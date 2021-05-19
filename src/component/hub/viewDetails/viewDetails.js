@@ -13,6 +13,7 @@ import EditTask from '../task/addTask/addTask'
 import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
 import ShareProject from '../project/shareProject/shareProject'
+import TaskNotBelongDetails from '../task/taskNotBelongCardForUser/taskNotBelongDetails/taskNotBelongDetails'
 
 const mapStateToProps = (state) => {
     return {
@@ -43,7 +44,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const renderSwitch = () => {
             switch (from) {
                 case 'viewTaskByCard':
-                    return <TaskDetails showToast={showToast}
+                    return <TaskDetails
+                        showToast={showToast}
                         task={props.task}
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
@@ -57,6 +59,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
                 case 'editCurrentTask':
                     return <EditCurrentTask task={props.task} />
+                case 'taskNotBelongDetails':
+                    return <TaskNotBelongDetails task={props.task}
+                        objectBeforeChanges={(e) => setOldObject(e)}
+                        closeViewDetails={props.closeViewDetails}
+                        showToast={showToast}
+
+                    />
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
