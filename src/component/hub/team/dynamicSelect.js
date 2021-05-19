@@ -47,8 +47,13 @@ function DynamicSelect(props) {
 
   const viewTeamsList = props.teamsUser ? props.teamsUser.map((team) => (
     { value: team, label: <div><img referrerpolicy="no-referrer" src={team.logo} height="30px" width="30px" />{team.name} </div> }
-  )) : null
+  )): null
+  const new_options = viewTeamsList
 
+  new_options.push({
+    value: "element.name",
+    label:<div><input onChange={()=>alert()}></input><button onClick={props.setClickTeam}>+</button> <label>Create team</label></div>
+  })
   const [value, setValue] = useState()
   const handleChange = (newValue, actionMeta) => {
     if (newValue) {
@@ -80,13 +85,13 @@ function DynamicSelect(props) {
               {props.value.thumbnail ? <img referrerpolicy="no-referrer" src={props.value.thumbnail} className="thumbnail-contact " />
                 : <div className="logo-contact" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.value.name ? props.value.name[0] : null}</div>}
 
-              <p className="name-contact ">{props.value.name} </p></div>
+              <p className="name-contact">{props.value.name} </p></div>
           </div>
           : 'Select ...'}
         isClearable
         onChange={handleChange}
         onInputChange={handleInputChange}
-        options={props.options == 'contacts' ? viewContactsList : viewTeamsList}
+        options={props.options == 'contacts' ? viewContactsList : new_options}
       />
     </div>
   );
