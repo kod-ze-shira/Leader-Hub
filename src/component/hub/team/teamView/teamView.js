@@ -1,5 +1,6 @@
 import React from 'react'
-export default function ViewTeam(props){
+export default function 
+ViewTeam(props){
     return(
         <>
         <div className='row'>

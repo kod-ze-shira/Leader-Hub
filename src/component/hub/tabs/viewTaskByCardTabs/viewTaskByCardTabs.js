@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import DynamicSelect from '../../team/dynamicSelect';
 
 import './ViewTaskByCradTabs.css'
+import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
 
@@ -225,12 +226,11 @@ function ViewTaskByCradTabs(props) {
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null}
                                     {/* <div>{props.task.index}</div> */}
                                     <img
-                                        //  onClick={(e) => setShowAssignee(true)} 
+                                        onClick={(e) => setShowAssignee(!showAssignee)}
                                         class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
-                                    {showAssignee ? <DynamicSelect
-                                        value={props.task.assingTo ? props.task.assingTo.contact : null}
-                                        setContactEmail={setStateMailToContactMail} options={'contacts'} /> : null}
-                                    {/* <img class='assing-icon' src={'../../assingTo-icon.png'}></img> */}
+                                    {/* {showAssignee ?
+                                        <ContactList/>
+                                    : null} */}
                                 </div>
                             </div>
                         </div>
