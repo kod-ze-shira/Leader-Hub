@@ -12,7 +12,7 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
-
+import './ViewTaskByCradTabs.css'
 
 function ViewTaskByCradTabs(props) {
 
@@ -140,7 +140,7 @@ function ViewTaskByCradTabs(props) {
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <div className="task-card mt-2 "
+                        <div className="task-card mt-0"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className="container">
@@ -170,7 +170,7 @@ function ViewTaskByCradTabs(props) {
                                         <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                     </Menu>
                                     <label
-                                        title="Complete Task ml-3"
+                                        title="Complete Task"
                                         className="check-task py-2 check-tabs">
                                         <input type="checkbox"
                                             name="complete"
@@ -180,7 +180,9 @@ function ViewTaskByCradTabs(props) {
                                             onClick={(e) => e.stopPropagation()
                                             }
                                         />
-                                        <span className="checkmark checkmark-tabs" onClick={(e) => addChalalit(e)}></span>
+                                        <span
+                                            className="checkmark checkmark-tabs"
+                                            onClick={(e) => addChalalit(e)}></span>
                                     </label>
                                     {/* <div>{props.task.index}</div> */}
                                 </div>

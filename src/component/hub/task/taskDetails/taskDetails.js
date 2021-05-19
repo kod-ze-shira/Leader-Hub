@@ -26,7 +26,6 @@ function TaskDetails(props) {
 
 
     useEffect(() => {
-
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -105,7 +104,6 @@ function TaskDetails(props) {
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
                                 console.log(props.task.files)
-                                debugger
                                 let r = props.task.files
                                 r.splice(index2, 1);
                             }

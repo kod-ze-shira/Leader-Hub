@@ -42,10 +42,7 @@
     background-color: transparent;
     border: none !important;
     outline: 0!important;
-    /* -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    display: -webkit-box; */
+  
 }
 .show-card{
     font-weight: bold;
@@ -81,11 +78,13 @@ p{
     background-color: transparent;
      outline: 0 !important;
     border: none !important;
-    display: inline-block !important; ;
+    opacity: 0.5;
+    display: none;
+    /* display: inline-block !important; ; */
 
 }
 .new-task{
-    display: block;
+    /* display: block; */
 }
 
 .new-task:focus{

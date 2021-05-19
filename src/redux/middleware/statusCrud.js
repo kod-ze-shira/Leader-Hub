@@ -5,7 +5,7 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
 
         let workspaceId;
-        if (action.payload.workspaceId)
+        if (action.payload)
             workspaceId = action.payload.workspaceId
         else
             workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
@@ -21,7 +21,7 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
             success: function (data) {
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
-                if (action.payload.task) {
+                if (action.payload) {
                     let task = action.payload.task
                     let status = data.statuses.find((s) => s.workspace == workspaceId)._id
                     task.status = status
