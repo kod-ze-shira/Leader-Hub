@@ -85,9 +85,18 @@ body {
   color: tomato;
 }
 .option-contact{
+  /* width: 500px !important; */
   /* display: inline-block!important; */
 }
-
+/* .assinto-contact{
+  display: none;
+}
+.assinto-contact:hover{
+  display: block  !important;
+} */
+.select-dinamic{
+  width:150px !important;
+}
 .name-contact{
   /* -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;

@@ -110,6 +110,9 @@ z-index: 9999 !important;
     display: inline-block;
 
 }
+.btn-option-in-task img{
+  margin-left: 1vw;
+}
 .last-update{
   text-align:right !important;
 }

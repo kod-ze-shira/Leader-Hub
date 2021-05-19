@@ -36,6 +36,8 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    const [showUploadFiles, setShowUploadFiles] = useState(false)
+
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
         event.stopPropagation();
@@ -52,6 +54,9 @@ function TaskDetails(props) {
     function closeStatus(event) {
 
         setOpenPopUp(false)
+    }
+    function addFile(event) {
+        setShowUploadFiles(true)
     }
     const compressedFile = async (myFiles) => {
 
@@ -300,19 +305,18 @@ function TaskDetails(props) {
                     </div>
                     {/* </div> */}
                     {newFileComponentArr}
-                    <UploadFile />
+                    {showUploadFiles ? < UploadFile /> : null}
                     <hr></hr>
 
                 </div>
 
-                <div className="row justify-content-between mx-1 btns-in-view-details-task">
-                    <button data-tip data-for="delete" className="delete-btn col-4 btn-block mb-lg-4" onClick={(e) => deleteTask(e)} >
-                        <img src={require('../../../img/bin.png')}></img> Delete
-                    </button>
-                    <ReactTooltip data-tip id="delete" place="top" effect="solid">
-                        {title.title_delete}
-                    </ReactTooltip>
+                <div className="row justify-content-between mx-1 ">
 
+                    <div className="btn-option-in-task">
+                        <img src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img src={require('../../../img/share-icon.png')}></img>
+                        <img src={require('../../../img/files-icon.png')} onClick={(e) => addFile(e)}></img>
+                    </div>
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className="save_canges_btn col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
