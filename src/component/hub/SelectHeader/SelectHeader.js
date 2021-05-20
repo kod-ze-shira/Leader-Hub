@@ -116,7 +116,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
+        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SelectHeader)
