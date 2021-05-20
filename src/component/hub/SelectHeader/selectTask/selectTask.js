@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setCard: (card) => dispatch(actions.setCard(card)),
         setTask: (task) => dispatch(actions.setTask(task)),
-        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        // getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))
     }

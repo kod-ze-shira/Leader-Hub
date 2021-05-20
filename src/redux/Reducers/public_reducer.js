@@ -15,7 +15,6 @@ const initialState = {
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
-    indexCurrentCard: 0,
     idCurrentCard: 0,
     indexCurrentCard: 0,
     indexCurrentProject: 0,
@@ -219,7 +218,6 @@ const publicData = {
         destinition = action.payload[1]
         cardSourseId = action.payload[2]
         cardDestinitionId = action.payload[3]
-        console.log(cardSourseId, cardDestinitionId)
         let temp1 = state.cards[cardSourseId].tasks[source]
         state.cards[cardSourseId].tasks.splice(source, 1)
         state.cards[cardDestinitionId].tasks.splice(destinition, 0, temp1)
