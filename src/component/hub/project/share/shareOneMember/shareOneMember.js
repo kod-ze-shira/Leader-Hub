@@ -62,6 +62,7 @@ export default function ShareOneMember(props) {
                 </div>
                 <div className="col-3 pl-0 pt-4">
                     <select class=" select_permission_one_member" onChange={(event)=>props.changePermission(event,props.member,props.teamId)}>
+                        {/* send teamId to change perrission to change petrmission of member from true team */}
                         <option selected>{props.member.permission}</option>
                         {props.member.permission != 'viewer' ? <option value="1">viewer</option> : null}
                         {props.member.permission != 'editor' ? <option value="2">editor</option> : null}

@@ -107,7 +107,7 @@ function Hub(props) {
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
-                                <div className="body-workspace mt-3">
+                                <div className="body-workspace mt-4">
                                     <DisplayGantt />
                                 </div>
                             </ProtectedRoute>

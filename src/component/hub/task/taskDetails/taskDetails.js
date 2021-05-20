@@ -36,6 +36,8 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    const [showUploadFiles, setShowUploadFiles] = useState(false)
+
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
         event.stopPropagation();
@@ -52,6 +54,9 @@ function TaskDetails(props) {
     function closeStatus(event) {
 
         setOpenPopUp(false)
+    }
+    function addFile(event) {
+        setShowUploadFiles(true)
     }
     const compressedFile = async (myFiles) => {
 
@@ -188,6 +193,32 @@ function TaskDetails(props) {
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File url={file.url} name={file.name} />
     }) : null
+
+    $('.assingto-details').hover(function () {
+        $(this).find('.assingto-task').hide();
+        $(this).find('.assingto-task-hover').show();
+    }, function () {
+        $(this).find('.assingto-task-hover').hide();
+        $(this).find('.assingto-task').show();
+    });
+    $('.delete-details').hover(function () {
+        $(this).find('.delete-task').hide();
+        $(this).find('.delete-task-hover').show();
+
+    }, function () {
+        $(this).find('.delete-task-hover').hide();
+        $(this).find('.delete-task').show();
+
+    });
+    $('.files-details').hover(function () {
+        $(this).find('.files-task').hide();
+        $(this).find('.files-task-hover').show();
+    }, function () {
+        $(this).find('.files-task-hover').hide();
+        $(this).find('.files-task').show();
+    });
+
+
     return (
         <>
             <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}>
@@ -226,9 +257,6 @@ function TaskDetails(props) {
                             onChange={(e) => changeFiledInTask(e)} contentEditable
                         ></textarea>
                     </div>
-
-
-
                     {/* <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description"
@@ -300,20 +328,28 @@ function TaskDetails(props) {
                     </div>
                     {/* </div> */}
                     {newFileComponentArr}
-                    <UploadFile />
+                    {showUploadFiles ? < UploadFile /> : null}
                     <hr></hr>
 
                 </div>
 
-                <div className="row justify-content-between mx-1 btns-in-view-details-task">
-                    <button data-tip data-for="delete" className="delete-btn col-4 btn-block mb-lg-4" onClick={(e) => deleteTask(e)} >
-                        <img src={require('../../../img/bin.png')}></img> Delete
-                    </button>
-                    <ReactTooltip data-tip id="delete" place="top" effect="solid">
-                        {title.title_delete}
-                    </ReactTooltip>
+                <div className="row justify-content-around mx-1 ">
 
-                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className="save_canges_btn col-3 btn-block mb-lg-4">Save</button>
+                    {/* <div className="btn-option-in-task col-3"> */}
+                    <div className="delete-details">
+                        <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                    </div>
+                    <div className="files-details ">
+                        <img className="files-task" src={require('../../../img/share-icon.png')}></img>
+                        <img className="files-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                    </div>
+                    <div className="assingto-details ">
+                        <img className="assingto-task" src={require('../../../img/files-icon.png')} onClick={(e) => addFile(e)}></img>
+                        <img className="assingto-task-hover" src={require('../../../img/files-hover.png')} onClick={(e) => addFile(e)}></img>
+                    </div>
+                    {/* </div> */}
+                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>

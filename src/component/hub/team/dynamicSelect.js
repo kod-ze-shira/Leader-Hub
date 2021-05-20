@@ -3,20 +3,23 @@ import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
 import { actions } from '../../../redux/actions/action';
 import share from '../../img/share.svg'
+import LetterLogo from '../logo/letterLogo';
+import AssingToContact from './assingToContact';
 import './style.css'
 
 function DynamicSelect(props) {
   useEffect(() => {
-    // if (props.options == 'contacts' && props.contactsUser.length == 0) {
-    //   props.getContactsForUser()
-    // }
-    // else
-    //   if (props.teamsUser.length == 0)
-    //     props.getAllTeamsForUser()
-    // debugger
+    if (props.options == 'contacts' && props.contactsUser.length == 0) {
+      props.getContactsForUser()
+    }
+    else
+      if (props.teamsUser.length == 0)
+        props.getAllTeamsForUser()
   }, [])
   const [currentIndexTask, setCurrentIndexTask] = useState("")
   const [currentIndexCard, setCurrentIndexCard] = useState("")
+  const [showAssignTo, setShowAssignTo] = useState(false)
+
 
   useEffect(() => {
     setCurrentIndexTask(props.indexTask)
@@ -42,15 +45,27 @@ function DynamicSelect(props) {
 
             <p className="name-contact ">{contact.name} </p></div>
         </div>
+
     }
   )) : null
+  const new_options = viewContactsList
 
+  new_options.push({
+    value: "element.name",
+    label: <label onClick={(e) => setShowAssignTo(true)}>Add contact </label>
+  })
   const viewTeamsList = props.teamsUser ? props.teamsUser.map((team) => (
     { value: team, label: <div><img referrerpolicy="no-referrer" src={team.logo} height="30px" width="30px" />{team.name} </div> }
-  )) : null
+  )): null
+  // const new_options = viewTeamsList
 
+  // new_options.push({
+  //   value: "element.name",
+  //   label:<div><input onChange={()=>alert()}></input><button onClick={props.setClickTeam}>+</button> <label>Create team</label></div>
+  // })
   const [value, setValue] = useState()
   const handleChange = (newValue, actionMeta) => {
+    debugger
     if (newValue) {
       console.group('Value Changed');
       console.log(newValue);
@@ -72,22 +87,26 @@ function DynamicSelect(props) {
   };
 
   return (
-    <div>
+    <div className="select-dinamic">
       <CreatableSelect
         placeholder={props.value ?
           <div className="container">
             <div className="option-contact row">
               {props.value.thumbnail ? <img referrerpolicy="no-referrer" src={props.value.thumbnail} className="thumbnail-contact " />
                 : <div className="logo-contact" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.value.name ? props.value.name[0] : null}</div>}
-
-              <p className="name-contact ">{props.value.name} </p></div>
+              <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="ml-2 assinto-contact " />
+              {/* <p className="name-contact ">{props.value.name} </p> */}
+            </div>
           </div>
-          : 'Select ...'}
+          : <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="assinto-contact" />}
         isClearable
         onChange={handleChange}
         onInputChange={handleInputChange}
-        options={props.options == 'contacts' ? viewContactsList : viewTeamsList}
+        autosize={true}
+        options={props.options == 'contacts' ? new_options : viewTeamsList}
       />
+      {/* { showAssignTo ? <AssingToContact /> : null} */}
+
     </div>
   );
 

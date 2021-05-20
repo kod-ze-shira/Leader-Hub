@@ -87,7 +87,6 @@ function SelectHeader(props) {
                             <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
                             <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
                             <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
-                            <Tab label="" />
                         </Tabs>
                         :
                         <Tabs

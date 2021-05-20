@@ -9,7 +9,9 @@ box-shadow: 0px 0px 10px #00000034;
 overflow-y: auto;
 
 }
-
+.delete-task-hover{
+  display: none;
+}
 .divStatus{
   display: inline-block;
 }
@@ -110,6 +112,13 @@ z-index: 9999 !important;
     display: inline-block;
 
 }
+.btn-option-in-task{
+  display: inline-block !important;
+}
+.btn-option-in-task div img{
+  margin-left: 1vw;
+
+}
 .last-update{
   text-align:right !important;
 }
@@ -184,3 +193,9 @@ z-index: 9999 !important;
     width: 97%;
     /* margin-left: 2%; */
   }
+.assingto-task-hover{
+  display: none;
+}
+.files-task-hover{
+  display: none;
+}

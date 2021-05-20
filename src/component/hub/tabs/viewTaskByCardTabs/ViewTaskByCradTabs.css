@@ -17,3 +17,10 @@
 .check-task input:hover ~ .checkmark{
     background-color:#f6f7f8 !important;
 }
+/* .input-card-name{
+    height: 65vh !important;
+}
+.delete-task-hover{
+    display:none;
+} */
+

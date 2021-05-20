@@ -143,7 +143,7 @@ function ViewCardsTabs(props) {
                                                 }}
                                             >
                                             </input>
-                                            <p>{props.cardFromMap.index}</p>
+                                            {/* <p>{props.cardFromMap.index}</p> */}
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .

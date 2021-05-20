@@ -12,7 +12,10 @@ import { Menu, MenuItem, Button } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
+import DynamicSelect from '../../team/dynamicSelect';
+
 import './ViewTaskByCradTabs.css'
+import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
 
@@ -50,6 +53,17 @@ function ViewTaskByCradTabs(props) {
         event.stopPropagation();
 
     };
+    const [showAssignee, setShowAssignee] = useState(false)
+
+    const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
+    let contact
+    const setStateMailToContactMail = (emailMember) => {
+        // debugger
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.assingTo(emailMember.value.email)
+
+    }
 
     const handleClose = (e, event) => {
 
@@ -77,6 +91,7 @@ function ViewTaskByCradTabs(props) {
         setTask(task1)
         props.EditTask(task);
     }
+
 
     const editCompleteTask = () => {
 
@@ -130,6 +145,14 @@ function ViewTaskByCradTabs(props) {
             setShowChalalit(true)
         e.stopPropagation()
     }
+    $('.task-card').hover(function () {
+        $(this).find('.color-task').hide();
+        $(this).find('.assing-icon').show();
+    }, function () {
+        $(this).find('.assing-icon').hide();
+        $(this).find('.color-task').show();
+    });
+
 
     return (
         <>
@@ -141,22 +164,36 @@ function ViewTaskByCradTabs(props) {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
+                        id="task-card"
                     >
-                        <div className="task-card mt-0"
+
+                        <div className="task-card mt-2 pt-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
-                            <div className="container">
-                                <div className="row">
-                                    {props.task.status ? <div title={props.task.status.statusName}
-                                        className="color-task col-3 mt-3 ml-2"
-                                        style={{ "backgroundColor": props.task.status.color }}></div> : null}
+
+                            <div className="container ">
+                                <input
+                                    className="form-control col-12 mx-0"
+                                    value={props.task.name}
+                                    name="name"
+                                    onChange={(e) => changeFiledInTask(e)}
+                                    onClick={(e) => e.stopPropagation()}
+                                    // onBlur={(e) => editTask(e)}
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') {
+                                            editTask()
+                                        }
+                                    }}
+                                ></input>
+                                <div className="row justify-content-between">
+
 
                                     {/* <button className="more col-4 mr-0">. . .</button> */}
-                                    <Button className="more col-3 mr-0 more-task"
+                                    {/* <Button className="more col-3 mr-0 more-task"
                                         data-tip data-for="more_a"
                                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                         . . .
-                                    </Button>
+                                    </Button> */}
                                     <ReactTooltip data-tip id="more_a" place="top" effect="solid">
                                         {title.title_more_actions}
                                     </ReactTooltip>
@@ -186,21 +223,17 @@ function ViewTaskByCradTabs(props) {
                                             className="checkmark checkmark-tabs"
                                             onClick={(e) => addChalalit(e)}></span>
                                     </label>
-                                    <div>{props.task.index}</div>
+                                    {props.task.status ? <div title={props.task.status.statusName}
+                                        className="color-task col-3  "
+                                        style={{ "backgroundColor": props.task.status.color }}></div> : null}
+                                    {/* <div>{props.task.index}</div> */}
+                                    <img
+                                        onClick={(e) => setShowAssignee(!showAssignee)}
+                                        class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
+                                    {/* {showAssignee ?
+                                        <ContactList/>
+                                    : null} */}
                                 </div>
-                                <input
-                                    className="form-control col-12"
-                                    value={props.task.name}
-                                    name="name"
-                                    onChange={(e) => changeFiledInTask(e)}
-                                    onClick={(e) => e.stopPropagation()}
-                                    // onBlur={(e) => editTask(e)}
-                                    onKeyPress={event => {
-                                        if (event.key === 'Enter') {
-                                            editTask()
-                                        }
-                                    }}
-                                ></input>
                             </div>
                         </div>
                     </div>
@@ -233,7 +266,8 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
-        completeTask: (task) => dispatch(actions.completeTask(task))
+        completeTask: (task) => dispatch(actions.completeTask(task)),
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
 
 
     }

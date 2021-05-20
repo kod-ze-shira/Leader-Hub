@@ -64,7 +64,7 @@ function Tabs(props) {
                 let replace = [e.source.index, e.destination.index, iSourse, iDestination]
                 // const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard
-                props.changeTaskplace(replace)  
+                props.changeTaskplace(replace)
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 if (replace[2] == replace[3])
                     props.dragTask(iSourse)
@@ -122,7 +122,7 @@ function Tabs(props) {
     }
 
     return (
-        <><div className="body">
+        <><div className="body body-cards">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
@@ -138,19 +138,6 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {props.cards.length ?
-                                        <DragDropContext
-                                            onDragEnd={(e) => onDragEndׂ(e)}>
-                                            {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
-                                                    openInputTask={openInputTask}
-                                                    viewToastComplete={props.viewToastComplete}
-                                                    showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} indexCard={index} />
-                                            })}
-                                        </DragDropContext>
-                                        : null}
-                                    {/* // <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>} */}
                                     <div className="card-width px-2 mt-4" >
                                         <div className="view-cards-tabs  mt-1" >
                                             <div class="card new-card" >
@@ -183,6 +170,20 @@ function Tabs(props) {
                                         </div>
 
                                     </div>
+
+                                    {props.cards.length ?
+                                        <DragDropContext
+                                            onDragEnd={(e) => onDragEndׂ(e)}>
+                                            {props.cards.map((card, index) => {
+                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                    openInputTask={openInputTask}
+                                                    viewToastComplete={props.viewToastComplete}
+                                                    showToast={(obj) => props.showToast(obj)}
+                                                    key={card._id} cardFromMap={card} indexCard={index} />
+                                            })}
+                                        </DragDropContext>
+                                        : null}
+                                    {/* // <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>} */}
 
 
                                 </div>
