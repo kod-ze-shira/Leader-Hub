@@ -310,7 +310,7 @@ function TasksNotBelongCardByMap(props) {
                     </label>
                 </label>
 
-                <label className="check-task    view-details-btn" title="View Details">
+                <label className="check-task    view-details-btn" >
                     <button
                         onClick={(e) => openViewDetails(e)}
                     >view details +</button>

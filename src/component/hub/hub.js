@@ -54,6 +54,7 @@ function Hub(props) {
         }
     }
     const deleteObject = () => {
+        debugger
         setShowToastDelete(false)
         props['remove' + objectToDelete.type](objectToDelete.object._id)
     }
@@ -126,9 +127,9 @@ function Hub(props) {
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/hub/allTasks"}>
+                            <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                    showToastDelete={(object) => props.showToastToDelete(object)}
+                                    showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
 
