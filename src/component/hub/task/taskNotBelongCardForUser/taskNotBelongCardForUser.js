@@ -16,11 +16,19 @@ function TaskNotBelongCardForUser(props) {
     }, [props.tasks])
 
     // console.log(props.tasks)
-
+    function showToast(valueToDelet) {
+        props.showToastDelete(valueToDelet)
+    }
     const renderTasks = props.tasks.map((task) => {
         return searchTask ? task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
-            <TasksNotBelongCardByMap key={task._id} task={task} /> : null
-            : <TasksNotBelongCardByMap key={task._id} task={task} />
+            <TasksNotBelongCardByMap key={task._id} task={task}
+                objectToast={(task) => props.showToastDelete(task)}
+                showToast={showToast}
+            /> : null
+            : <TasksNotBelongCardByMap key={task._id} task={task}
+                objectToast={(task) => props.showToastDelete(task)}
+                showToast={showToast}
+            />
     })
     return (
         <div className="body-workspace ">

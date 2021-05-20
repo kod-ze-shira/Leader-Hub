@@ -208,10 +208,11 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let task
-        if (action.payload.type == 'taskNotBelong') {
+
+        if (action.payload.type && action.payload.type == 'taskNotBelong') {
             task = action.payload.task
-            task.description = null
-            task.endDate = null
+            task.description = task.description ? task.description : null
+            task.endDate = task.endDate ? task.endDate : null
         } else
             if (action.payload.name)
                 task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
@@ -412,9 +413,11 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
 
 export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK_NOT_BELONG') {
+        debugger
         let task = {
             'name': action.payload,
-            "updateDates": "08/03/2021"
+            "updateDates": "08/03/2021",
+            'description': ' '
         }
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
         $.ajax({

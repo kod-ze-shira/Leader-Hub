@@ -52,7 +52,6 @@ function TaskDetails(props) {
         event.stopPropagation();
     }
     function closeStatus(event) {
-
         setOpenPopUp(false)
     }
     function addFile(event) {

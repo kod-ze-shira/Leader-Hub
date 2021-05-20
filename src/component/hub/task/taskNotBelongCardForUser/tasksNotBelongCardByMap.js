@@ -251,17 +251,30 @@ function TasksNotBelongCardByMap(props) {
         document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
         document.getElementById('chooseCard').style.display = 'block'
     }
-    function chooseCard() {
+    // function chooseCard() {
 
-        document.getElementById('selectCardInTasksNotBelong').style.display = 'block'
-        document.getElementById('chooseCard').style.display = 'none'
+    //     document.getElementById('selectCardInTasksNotBelong').style.display = 'block'
+    //     document.getElementById('chooseCard').style.display = 'none'
+    // }
+    function openViewDetails(e) {
+        // props.setTaskName(props.task.name)
+        setDetailsOrEditTask("viewTaskByCard")
+        // props.setCurrentIndexTask(currentIndexTask)
+        // props.setCurrentIndexCard(currentIndexCard)
+        setViewDetails(true)
+        e.stopPropagation();
+
     }
 
+    $(window).click(function () {
+        setViewDetails(false)
+    });
     return (
         <>
             <div
                 style={{ 'min-height': '47px' }}
                 className="show-task row mx-4 border-bottom "
+                id={props.task._id + 'disappear'}
             >
 
                 <label className="check-task1 py-2 row  px-2 col-4 nameTaskNotBelong">
@@ -296,6 +309,12 @@ function TasksNotBelongCardByMap(props) {
                         {props.task.name}
                     </label>
                 </label>
+
+                <label className="check-task    view-details-btn" title="View Details">
+                    <button
+                        onClick={(e) => openViewDetails(e)}
+                    >view details +</button>
+                </label>
                 <label className="check-task border-left  py-2  px-2 col-2 workspaceN ">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
                     <CreatableSelect
@@ -310,7 +329,6 @@ function TasksNotBelongCardByMap(props) {
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
                     {/* <div id='chooseProject' onClick={() => chooseProject()}>--</div> */}
-
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
@@ -323,18 +341,15 @@ function TasksNotBelongCardByMap(props) {
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
                     {/* <div id='chooseCard' onClick={(e) => chooseCard(e)}>--</div> */}
-
                     <CreatableSelect
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeCard}
                         id='selectCardInTasksNotBelong'
                         className='selectCardInTasksNotBelong'
-
                         // onInputChange={handleInputChange}
                         options={cardsSelect}
                     />
-
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
 
@@ -359,8 +374,12 @@ function TasksNotBelongCardByMap(props) {
                 </label>
                 {viewDetails ?
                     <div className="closeDet" >
-                        <ViewDetails showToast={deleteTask} closeViewDetails={() => setViewDetails(false)}
-                            from={detailsOrEditTask} task={task} open={true}> </ViewDetails>
+                        <ViewDetails
+                            showToast={deleteTask}
+                            closeViewDetails={() => setViewDetails(false)}
+                            from='taskNotBelongDetails'
+                            task={props.task}
+                            open={true} />
                     </div>
                     : null}
             </div>
