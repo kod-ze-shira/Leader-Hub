@@ -79,7 +79,7 @@ p{
      outline: 0 !important;
     border: none !important;
     opacity: 0.5;
-    display: none;
+    /* display: none; */
     /* display: inline-block !important; ; */
 
 }
