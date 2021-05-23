@@ -23,7 +23,7 @@ function ContactList(props) {
   return (
     <>
 
-      <div className=' div_contacts' style={{ "left": left, "top": top }}>
+      <div className='div_contacts' style={{ "left": left, "top": top }}>
         <div className='container div_contacts_list mt-2' style={{ "width": width, "height": height }}>
           {viewContacts}
         </div>
