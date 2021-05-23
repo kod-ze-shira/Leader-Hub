@@ -53,7 +53,7 @@ function ViewTaskByCradTabs(props) {
         event.stopPropagation();
 
     };
-    const [showAssignee, setShowAssignee] = useState(false)
+    const [showAssignee, setShowAssignee] = useState(true)
 
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
     let contact
@@ -90,6 +90,20 @@ function ViewTaskByCradTabs(props) {
         }
         setTask(task1)
         props.EditTask(task);
+    }
+
+    const showAssigTo = (e) => {
+        debugger
+        e.stopPropagation()
+        var x = e.clientX;
+        var y = e.clientY;
+        var height = $(window).height();
+        var width = $(window).width();
+        props.setLeftContactList(x)
+        props.setTopContactList(y)
+        props.setWidthScreen(width)
+        props.setHeightScreen(height)
+        props.viewContactList(showAssignee)
     }
 
 
@@ -228,7 +242,7 @@ function ViewTaskByCradTabs(props) {
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null}
                                     {/* <div>{props.task.index}</div> */}
                                     <img
-                                        onClick={(e) => setShowAssignee(!showAssignee)}
+                                        onClick={(e) => showAssigTo(e)}
                                         class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
                                     {/* {showAssignee ?
                                         <ContactList/>
@@ -265,6 +279,10 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+        setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
+        setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
+        setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
+        setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))

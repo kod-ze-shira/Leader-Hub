@@ -74,6 +74,7 @@ function CardsByProject(props) {
                         return <ViewCards
                             viewToastComplete={props.viewToastComplete}
                             showToastDelete={(object) => props.showToast(object)}
+                            viewContactList={props.viewContactList}
                             key={card._id}
                             cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}

@@ -129,7 +129,10 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-5" >
+                    <div
+                        onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
+                        onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
+                        className="col-5" >
                         <div className="wrap-triangle">
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
@@ -189,6 +192,7 @@ function ViewCards(props) {
                                     {...provided.droppableProps}>
                                     {props.cardFromMap.tasks.map((task, index) => (
                                         <ViewTaskByCrad
+                                            viewContactList={props.viewContactList}
                                             viewToastComplete={props.viewToastComplete}
                                             objectToast={(task) => props.showToastDelete(task)}
                                             key={task._id} task={task}
@@ -221,7 +225,9 @@ function ViewCards(props) {
                 {
                     viewDetails ?
                         <div className="closeDet">
-                            <ViewDetails closeViewDetails={() => setViewDetails(false)} cardId={cardId} from={"addTask"}> </ViewDetails>
+                            <ViewDetails viewContactList={props.viewContactList}
+                                closeViewDetails={() => setViewDetails(false)}
+                                cardId={cardId} from={"addTask"}> </ViewDetails>
                         </div>
                         : null
                 }
