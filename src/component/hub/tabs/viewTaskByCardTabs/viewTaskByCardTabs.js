@@ -52,7 +52,7 @@ function ViewTaskByCradTabs(props) {
         event.stopPropagation();
 
     };
-    const [showAssignee, setShowAssignee] = useState(false)
+    const [showAssignee, setShowAssignee] = useState(true)
 
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
     let contact
@@ -83,12 +83,27 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
+        debugger
         let task1 = {
-            "milestones": props.task.milestones, "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         setTask(task1)
-        props.EditTask(task);
+        props.EditTask(task1);
+    }
+
+    const showAssigTo = (e) => {
+        debugger
+        e.stopPropagation()
+        var x = e.clientX;
+        var y = e.clientY;
+        var height = $(window).height();
+        var width = $(window).width();
+        props.setLeftContactList(x)
+        props.setTopContactList(y)
+        props.setWidthScreen(width)
+        props.setHeightScreen(height)
+        props.viewContactList(showAssignee)
     }
 
 
@@ -177,13 +192,14 @@ function ViewTaskByCradTabs(props) {
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onClick={(e) => e.stopPropagation()}
-                                    // onBlur={(e) => editTask(e)}
+                                    onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
                                             editTask()
                                         }
                                     }}
                                 ></input>
+                                {/* <div>{props.task.index}</div> */}
                                 <div className="row justify-content-between">
 
 
@@ -225,9 +241,9 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null}
-                                    {/* <div>{props.task.index}</div> */}
+
                                     <img
-                                        onClick={(e) => setShowAssignee(!showAssignee)}
+                                        onClick={(e) => showAssigTo(e)}
                                         class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
                                     {/* {showAssignee ?
                                         <ContactList/>
@@ -264,6 +280,10 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+        setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
+        setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
+        setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
+        setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))

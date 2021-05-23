@@ -117,7 +117,7 @@ function ViewCardsTabs(props) {
 
     return (
         <>
-            <div className="card-width px-3 mt-4" id={props.cards[props.indexCard]._id}>
+            <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -178,7 +178,8 @@ function ViewCardsTabs(props) {
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
                                                             indexTask={index}
-                                                            viewToastComplete={props.viewToastComplete} />
+                                                            viewToastComplete={props.viewToastComplete}
+                                                            viewContactList={props.viewContactList} />
                                                     ))}
 
                                                     {

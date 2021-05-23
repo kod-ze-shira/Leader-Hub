@@ -5,6 +5,7 @@ import GanttDesign from '../gantt/gantt';
 import ProjectPlatform from '../projectPlatform/projectPlatform'
 import SelectHeader from '../SelectHeader/SelectHeader'
 import Tabs from '../tabs/tabs'
+import Overview from '../../hubFeature/Overview/Overview'
 import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
 import { useParams } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ function CardsPage(props) {
     const { idProject } = useParams();
     useEffect(() => {
 
-       
+
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
     }, [])
@@ -35,15 +36,19 @@ function CardsPage(props) {
     const renderSwitch = () => {
         switch (present) {
             case 'tabs':
-                return <Tabs showToast={showToast} 
-                focusInputCard={props.focusInputCard} 
-                viewToastComplete={props.viewToastComplete} />
+                return <Tabs showToast={showToast}
+                    focusInputCard={props.focusInputCard}
+                    viewToastComplete={props.viewToastComplete}
+                    viewContactList={props.viewContactList} />
             case 'list':
                 return <ProjectPlatform
                     viewToastComplete={props.viewToastComplete}
-                    showToast={showToast} flag={flag} focusInputCard={props.focusInputCard} />
+                    showToast={showToast} flag={flag} focusInputCard={props.focusInputCard}
+                    viewContactList={props.viewContactList} />
             case 'gantt':
                 return <DisplayGantt />
+            case 'Overview':
+                return <Overview />
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform
