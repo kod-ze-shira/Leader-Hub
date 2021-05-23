@@ -117,8 +117,10 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
         let workspaceId = action.payload
+        debugger
         let workspace = getState().workspace_reducer.workspace;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspace._id}/removeWorkspaceById`
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
+
         $.ajax({
             url: urlData,
             type: 'POST',

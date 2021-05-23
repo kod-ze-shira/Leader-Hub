@@ -152,9 +152,32 @@
   }
  .task-card .status-task-done{
 
-    background-color:#52C4A9 !important;
+    background-color:transparent !important;
   
   }
   .MuiMenuItem-root{
       font-size: 0.9rem !important;
   }
+  .view-cards-tabs .card-body::-webkit-scrollbar {
+    background-color: #EDFBFC ;
+    width: 6px;
+  }
+   
+    /* Track */
+    .view-cards-tabs .card-body::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+    .view-cards-tabs .card-body::-webkit-scrollbar-track:hover {
+        box-shadow: inset 0 0 5px grey; 
+      }
+     
+    /* Handle */
+    .view-cards-tabs .card-body::-webkit-scrollbar-thumb { 
+      border-radius: 15px;
+    }
+    
+    /* Handle on hover */
+    .view-cards-tabs .card-body::-webkit-scrollbar-thumb:hover {
+      background: #919494; 
+    }
+    

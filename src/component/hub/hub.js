@@ -37,53 +37,61 @@ function Hub(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
-    const [objectToDelete, setObjectToDelete] = useState()
+    const [objectToDelete, setObjectToDelete] = useState([])
+    const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
 
+    const showToastToDelete = (objectToDelete_) => {
 
-
-
-
-
-    const showToastToDelete = (objectToDelete) => {
-        debugger
-        setObjectToDelete(objectToDelete)
-        if (objectToDelete.type == 'Task')
+        // setObjectToDelete(objectToDelete_)
+        if (objectToDelete_.type == 'Task') {
+            objectToDelete.push(objectToDelete_)
             setShowToastDelete(true)
+        }
         else {
+            setObjectToDeleteLocal(objectToDelete_)
             setShowModlalDelete(true)
+
         }
     }
     const deleteObject = () => {
         setShowToastDelete(false)
-        props['remove' + objectToDelete.type](objectToDelete.object._id)
+        let length = objectToDelete.length
+        for (let i = 0; i < length; i++) {
+            let a = objectToDelete[i].object._id
+            props['remove' + objectToDelete[i].type](objectToDelete[i].object._id)
+        }
     }
     const openConfigurator = () => {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        if (objectToDelete.type == "Card") {
-            $(`#${objectToDelete.object._id} `).removeClass("displayNone")
-            $(`#${objectToDelete.object._id} `).addClass("mt-4")
-            $(`#${objectToDelete.object._id} `).addClass("col-3")
+        let i = objectToDelete.length - 1
+        if (objectToDelete[i].type == "Card") {
+            $(`#${objectToDelete[i].object._id} `).removeClass("displayNone")
+            $(`#${objectToDelete[i].object._id} `).addClass("mt-4")
+            $(`#${objectToDelete[i].object._id} `).addClass("col-3")
         }
-        else if (objectToDelete.type == "Task")
-            $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
-        else if (objectToDelete.type == "Project")
-            $(`#${objectToDelete.object._id}`).css("display", "table-row")
+        else if (objectToDelete[i].type == "Task")
+            $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
+        else if (objectToDelete[i].type == "Project")
+            $(`#${objectToDelete[i].object._id}`).css("display", "table-row")
         else
-            $(`#${objectToDelete.object._id}`).css("display", "block")
+            $(`#${objectToDelete[i].object._id}`).css("display", "block")
 
     }
 
-
+    const showToast = () => {
+        objectToDelete.push(objectToDeleteLocal)
+        setShowToastDelete(true)
+    }
     const [focusInputCard, setFocusInputCard] = useState(false)
 
     return (
         <>
             {showModalDelete ? <ShureDelete
-                showToastDelete={(e) => setShowToastDelete(true)}
-                objectToDelete={objectToDelete}
+                showToastDelete={(e) => showToast()}
+                objectToDelete={objectToDeleteLocal}
                 closeModal={(e) => setShowModlalDelete(e)}
             /> : null}
 
@@ -149,7 +157,7 @@ function Hub(props) {
                         <ToastDelete
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
-                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
+                            name={objectToDelete[objectToDelete.length - 1].name ? objectToDelete[objectToDelete.length - 1].name : objectToDelete[objectToDelete.length - 1].object.name}
                         />
                         : null}
 
@@ -176,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
         removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
         removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
-        removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
+        removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
         createSystemWave: () => dispatch(actions.createSystemWave()),
     }
