@@ -23,4 +23,6 @@
 .delete-task-hover{
     display:none;
 }
-
+.assing-icon{
+    position: relative !important;
+}

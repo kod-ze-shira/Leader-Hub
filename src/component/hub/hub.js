@@ -30,6 +30,7 @@ import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
+import ContactList from './contact/contactList';
 
 
 function Hub(props) {
@@ -37,6 +38,8 @@ function Hub(props) {
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
+    const [showContactList, setShowContactList] = useState(false)
+
     const [objectToDelete, setObjectToDelete] = useState()
 
 
@@ -74,7 +77,13 @@ function Hub(props) {
             $(`#${objectToDelete.object._id}`).css("display", "block")
 
     }
-
+    $(window).click(function () {
+        setShowContactList(false)
+    });
+    $(window).scroll(function () {
+        alert()
+        setShowContactList(false)
+    });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
 
@@ -122,6 +131,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
@@ -152,6 +162,9 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+                    {showContactList ?
+                        <ContactList />
+                        : null}
 
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}

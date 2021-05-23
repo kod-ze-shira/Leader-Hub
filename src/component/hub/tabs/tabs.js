@@ -145,6 +145,7 @@ function Tabs(props) {
                                                 return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                     // setTask={(task) => setTaskToDetails(task)}
                                                     viewToastComplete={props.viewToastComplete}
+                                                    viewContactList={props.viewContactList}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} indexCard={index} />
                                             })}
