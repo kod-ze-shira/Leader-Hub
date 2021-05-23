@@ -6,8 +6,7 @@ import $ from 'jquery'
 
 
 export default function SureDelete(props) {
-
-
+    // let i = props.objectToDelete.length?props.objectToDelete.length-1:props.objectToDelete.length
     let type = props.objectToDelete.type ? props.objectToDelete.type : 'object'
 
     const [showModal, setShowModal] = useState(true);
@@ -19,6 +18,7 @@ export default function SureDelete(props) {
     function deleteObject() {
         // setShowModal(false)
         props.closeModal(false)
+   
         if (props.objectToDelete.type == "Card") {
             $(`#${props.objectToDelete.object._id} `).addClass("displayNone")
             $(`#${props.objectToDelete.object._id} `).removeClass("mt-4")
