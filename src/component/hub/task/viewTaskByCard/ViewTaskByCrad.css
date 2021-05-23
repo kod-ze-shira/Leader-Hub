@@ -212,6 +212,8 @@ border: none !important;
 }
 .dnd-icon{
   opacity: 0;
+ 
+  
   /* display: none; */
 }
 .view-details-in-list{
