@@ -16,14 +16,19 @@ function ContactList(props) {
   const viewContacts = props.contactsUser ? props.contactsUser.map((contact) => (
     <ViewContact contact={contact}></ViewContact>
   )) : null
+  const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList;
+  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList;
+  const left = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.leftContactList : props.widthCurrentScreen - 350
+  const width = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.widthContactsList : props.widthContactsList
   return (
     <>
-      <div className=' div_contacts'>
-        <div className='container div_contacts_list mt-2'>
+
+      <div className=' div_contacts' style={{ "left": left, "top": top }}>
+        <div className='container div_contacts_list mt-2' style={{ "width": width, "height": height }}>
           {viewContacts}
         </div>
         <div className='mx-2 form'>
-          <input placeholder="Name or email " className="mt-2 mb-2 form-control invite-contact"></input>
+          <input placeholder="Name or email " className=" form-control invite-contact"></input>
           {/* <button className="invite-btn"> + invite</button> */}
 
         </div>
@@ -34,7 +39,14 @@ function ContactList(props) {
 export default connect(
   (state) => {
     return {
-      contactsUser: state.share_reducer.contactsUser
+      contactsUser: state.share_reducer.contactsUser,
+      leftContactList: state.design_reducer.leftContactList,
+      topContactList: state.design_reducer.topContactList,
+      heightCurrentScreen: state.design_reducer.heightCurrentScreen,
+      widthCurrentScreen: state.design_reducer.widthCurrentScreen,
+      widthContactsList: state.design_reducer.widthContactsList,
+      heightContactsList: state.design_reducer.widthContactsList,
+
     }
   },
   (dispatch) => {

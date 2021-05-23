@@ -29,7 +29,10 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     success: (data) => {
 
                         var myData = { "files": data.filesData }
-                        dispatch(actions.setNewFilesInTask(data.filesData))
+                        if (action.payload.type == 'taskNotBelong')
+                            dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
+                        else
+                            dispatch(actions.setNewFilesInTask(data.filesData))
                         console.log("finish first ajax  " + JSON.stringify(myData));
                         setTimeout(() => {
                             $.ajax({
@@ -39,10 +42,15 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                                 headers: { "authorization": jwtFromCookie },
                                 data: myData,
                                 success: (data) => {
-                                    let cards = getState().public_reducer.cards;
-                                    let indexCurrentCard = getState().public_reducer.indexCurrentCard
-                                    let indexCurrentTask = getState().public_reducer.indexCurrentTask
-                                    dispatch(actions.editTask(cards[indexCurrentCard].tasks[indexCurrentTask]))
+                                    if (action.payload.type != 'taskNotBelong') {
+
+                                        let cards = getState().public_reducer.cards;
+                                        let indexCurrentCard = getState().public_reducer.indexCurrentCard
+                                        let indexCurrentTask = getState().public_reducer.indexCurrentTask
+                                        dispatch(actions.editTask(cards[indexCurrentCard].tasks[indexCurrentTask]))
+                                    }
+                                    else
+                                        dispatch(actions.editTask(action.payload.task))
 
                                 }
                             })

@@ -28,7 +28,6 @@ function TaskNotBelongDetails(props) {
     // const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
-    const [showUploadFiles, setShowUploadFiles] = useState(false)
 
     // const openPopUpStatus = (event) => {
     //     setOpenPopUp(true)
@@ -46,9 +45,7 @@ function TaskNotBelongDetails(props) {
 
     //     setOpenPopUp(false)
     // }
-    function addFile(event) {
-        setShowUploadFiles(true)
-    }
+
     const compressedFile = async (myFiles) => {
         let compressedFile;
         let compressedFiles = [];
@@ -90,7 +87,7 @@ function TaskNotBelongDetails(props) {
                 newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
             if (newFiles.length) {
                 newFiles = await compressedFile(newFiles)
-                props.uploadFiles({ 'files': newFiles, 'task': props.task })
+                props.uploadFiles({ 'files': newFiles, 'task': props.task, 'type': 'taskNotBelong' })
             }
             else
                 if (props.arrDeleteFilesOfTask.length) {
@@ -111,7 +108,7 @@ function TaskNotBelongDetails(props) {
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
                 } else
-                    props.EditTask({ 'type': 'taskNotBelong', 'task': props.task })
+                    props.EditTask({ 'type': 'taskNotBelong2', 'idTask': props.task._id })
             props.closeViewDetails();
 
         }
@@ -144,12 +141,12 @@ function TaskNotBelongDetails(props) {
         let editTaskInRedux
         let value = input.target.value
         if (input.target.name == "startDate") {
-            value = startDateTask.split("-")[2] + '/' + startDateTask.split("-")[1] + '/' + startDateTask.split("-")[0];
+            value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
         }
         else
             if (input.target.name == "dueDate") {
-                value = dueDateTask.split("-")[2] + '/' + dueDateTask.split("-")[1] + '/' + dueDateTask.split("-")[0];
+                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             }
         // else
@@ -298,19 +295,27 @@ function TaskNotBelongDetails(props) {
                     </div>
                     {/* </div> */}
                     {newFileComponentArr}
-                    {showUploadFiles ? < UploadFile /> : null}
                     <hr></hr>
 
                 </div>
 
-                <div className="row justify-content-between mx-1 ">
+                <div className="row justify-content-around mx-1 ">
 
-                    <div className="btn-option-in-task">
-                        <img src={require('../../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img src={require('../../../../img/share-icon.png')}></img>
-                        <img src={require('../../../../img/files-icon.png')} onClick={(e) => addFile(e)}></img>
+                    <div className="delete-details">
+                        <img className="delete-task" src={require('../../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
-                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className="save_canges_btn col-3 btn-block mb-lg-4">Save</button>
+                    {/* <div className="files-details ">
+                        <img className="files-task" src={require('../../../../img/share-icon.png')}></img>
+                        <img className="files-task-hover" src={require('../../../../img/share-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                    </div> */}
+                    <div className="assingto-details ">
+                        <UploadFile />
+                        <img className="assingto-task" src={require('../../../../img/files-icon.png')} ></img>
+                        <img className="assingto-task-hover" src={require('../../../../img/files-hover.png')} ></img>
+                    </div>
+
+                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>

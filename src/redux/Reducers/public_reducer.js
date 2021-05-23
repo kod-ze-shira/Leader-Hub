@@ -22,6 +22,7 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
 
+
 }
 
 const publicData = {
@@ -39,6 +40,20 @@ const publicData = {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
+                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
+        }
+
+    },
+    setNewFilesInTaskNotBelong(state, action) {
+        let myFiles = Object.values(action.payload.file)
+        let indexTask
+        for (let index = 0; index < state.tasks.length; index++) {
+            if (state.tasks[index]._id == action.payload.id)
+                indexTask = index;
+
+        }
+        for (let index = 0; index < myFiles.length; index++) {
+            state.tasks[indexTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
 
@@ -142,6 +157,11 @@ const publicData = {
                     card.tasks[i]._id !== action.payload._id
                 )
         })
+    },
+    deletTaskNotBelong(state, action) {
+        state.tasks = state.tasks.filter((task, i) =>
+            state.tasks[i]._id !== action.payload._id
+        )
     },
     deleteCard(state, action) {
         console.log(action.payload.dc)
@@ -354,7 +374,7 @@ const publicData = {
     saveIndexOfWorkspaceInRedux(state, action) {
         state.indexOfWorkspace = action.payload
     },
-
+  
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  

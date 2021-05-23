@@ -36,7 +36,6 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
-    const [showUploadFiles, setShowUploadFiles] = useState(false)
 
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
@@ -54,9 +53,7 @@ function TaskDetails(props) {
     function closeStatus(event) {
         setOpenPopUp(false)
     }
-    function addFile(event) {
-        setShowUploadFiles(true)
-    }
+
     const compressedFile = async (myFiles) => {
 
         let compressedFile;
@@ -327,7 +324,6 @@ function TaskDetails(props) {
                     </div>
                     {/* </div> */}
                     {newFileComponentArr}
-                    {showUploadFiles ? < UploadFile /> : null}
                     <hr></hr>
 
                 </div>
@@ -344,8 +340,9 @@ function TaskDetails(props) {
                         <img className="files-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
                     <div className="assingto-details ">
-                        <img className="assingto-task" src={require('../../../img/files-icon.png')} onClick={(e) => addFile(e)}></img>
-                        <img className="assingto-task-hover" src={require('../../../img/files-hover.png')} onClick={(e) => addFile(e)}></img>
+                        <UploadFile />
+                        <img className="assingto-task" src={require('../../../img/files-icon.png')} ></img>
+                        <img className="assingto-task-hover" src={require('../../../img/files-hover.png')} ></img>
                     </div>
                     {/* </div> */}
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>

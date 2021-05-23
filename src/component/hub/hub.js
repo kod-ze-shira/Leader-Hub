@@ -30,6 +30,7 @@ import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
+import ContactList from './contact/contactList';
 
 
 function Hub(props) {
@@ -39,12 +40,15 @@ function Hub(props) {
     const [showToastComplete, setShowToastComplete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
+    const [showContactList, setShowContactList] = useState(false)
+    // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
         if (objectToDelete_.type == 'Task') {
             objectToDelete.push(objectToDelete_)
+            
             setShowToastDelete(true)
         }
         else {
@@ -54,6 +58,7 @@ function Hub(props) {
         }
     }
     const deleteObject = () => {
+        debugger
         setShowToastDelete(false)
         let length = objectToDelete.length
         for (let i = 0; i < length; i++) {
@@ -85,6 +90,14 @@ function Hub(props) {
         objectToDelete.push(objectToDeleteLocal)
         setShowToastDelete(true)
     }
+    $(window).click(function () {
+        setShowContactList(false)
+    });
+    $(window).scroll(function () {
+        alert()
+        setShowContactList(false)
+    });
+
     const [focusInputCard, setFocusInputCard] = useState(false)
 
     return (
@@ -108,7 +121,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
+                    <div style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -131,12 +144,13 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/hub/allTasks"}>
+                            <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                    showToastDelete={(object) => props.showToastToDelete(object)}
+                                    showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
 
@@ -163,6 +177,9 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+                    {showContactList ?
+                        <ContactList />
+                        : null}
 
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}

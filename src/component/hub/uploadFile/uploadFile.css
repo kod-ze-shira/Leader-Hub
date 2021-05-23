@@ -15,3 +15,11 @@
     text-align: center;
     padding-top: 10px;
  }
+
+ .divFile{
+    z-index: 9999;
+    position: absolute;
+    height: 39px;
+    width: 38px;
+    /* background-color: yellow; */
+ }
