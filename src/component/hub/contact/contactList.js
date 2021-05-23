@@ -13,11 +13,15 @@ function ContactList(props) {
     if (props.contactsUser.length == 0)
       props.getContactsForUser()
   }, [])
+  const handleChange = (event) => {
+    event.stopPropagation();
+  }
+
   const viewContacts = props.contactsUser ? props.contactsUser.map((contact) => (
     <ViewContact contact={contact}></ViewContact>
   )) : null
-  const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList;
-  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList;
+  const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 70;
+  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 150;
   const left = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.leftContactList : props.widthCurrentScreen - 350
   const width = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.widthContactsList : props.widthContactsList
   return (
@@ -28,7 +32,7 @@ function ContactList(props) {
           {viewContacts}
         </div>
         <div className='mx-2 form'>
-          <input placeholder="Name or email " className=" form-control invite-contact"></input>
+          <input placeholder="Name or email " className=" form-control invite-contact" onChange={(e) => handleChange(e)}></input>
           {/* <button className="invite-btn"> + invite</button> */}
 
         </div>
