@@ -193,7 +193,7 @@ function ViewTaskByCradTabs(props) {
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onClick={(e) => e.stopPropagation()}
-                                    // onBlur={(e) => editTask()}
+                                    onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
                                             editTask()
