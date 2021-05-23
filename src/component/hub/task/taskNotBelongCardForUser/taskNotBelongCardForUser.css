@@ -145,6 +145,10 @@ display: inline-block;
 .inputSearchTask {transition-timing-function: ease-in-out;}
 
 
+.filesInTask:first-child{
+    margin-right: 5px;
+}
+
 #buttonCancleSelect{
     /* display: none; */
 }

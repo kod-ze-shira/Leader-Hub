@@ -208,7 +208,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-        debugger
+
         if (!action.payload.card) {
             for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
                 if (getState().public_reducer.tasks[index]._id == action.payload._id)

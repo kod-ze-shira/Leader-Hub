@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import { completeTask } from './taskCrud'
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
     // let files = getState().files_reducer.files
@@ -89,26 +90,7 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
-export const downloadFile = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'DOWNLOAD_FILE') {
 
-        let file = action.payload
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        $.ajax({
-            type: "GET",
-            url: `https://files.codes/api/${getState().public_reducer.userName}/download/${file}`,
-            headers: { Authentication: jwtFromCookie },
-            success: function (data) {
-                // console.log()
-            },
-            error: function (err) {
-                // alert(err);
-            },
-        });
-    }
-    return next(action);
-
-}
 
 export const removeFile = ({ dispatch, getState }) => next => action => {
 
@@ -132,6 +114,25 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
             },
         });
 
+    }
+    return next(action);
+}
+export const downloadFile = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DOWNLOAD_FILE') {
+        let urlFile = action.payload
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        debugger
+        $.ajax({
+            type: "GET",
+            url: "https://files.codes/api/" + getState().public_reducer.userName + "/download/" + urlFile,
+            headers: { Authentication: jwtFromCookie },
+            success: function (data) {
+
+            },
+            error: function (err) {
+                console.log(err);
+            },
+        });
     }
     return next(action);
 }

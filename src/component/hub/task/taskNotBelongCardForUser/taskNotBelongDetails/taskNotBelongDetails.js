@@ -293,8 +293,11 @@ function TaskNotBelongDetails(props) {
                         </div>
                  */}
                     </div>
+
                     {/* </div> */}
-                    {newFileComponentArr}
+                    <div className='row filesInTask'>
+                        {newFileComponentArr}
+                    </div>
                     <hr></hr>
 
                 </div>
