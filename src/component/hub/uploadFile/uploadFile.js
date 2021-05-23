@@ -49,9 +49,7 @@ function UploadFile(props) {
             <label for="logouug" className="lbl_img">
                 {/* <p>add file</p> */}
                 <span className='spanUploadFileNew'>
-                    <FontAwesomeIcon className="uploadFileNew"
-                        icon={['fas', 'paperclip']}
-                    ></FontAwesomeIcon>
+
                 </span>
                 {/* <img className="img_logo" 
                     referrerpolicy="no-referrer"

@@ -16,11 +16,19 @@ function TaskNotBelongCardForUser(props) {
     }, [props.tasks])
 
     // console.log(props.tasks)
-
+    function showToast(valueToDelet) {
+        props.showToastDelete(valueToDelet)
+    }
     const renderTasks = props.tasks.map((task) => {
         return searchTask ? task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
-            <TasksNotBelongCardByMap key={task._id} task={task} /> : null
-            : <TasksNotBelongCardByMap key={task._id} task={task} />
+            <TasksNotBelongCardByMap key={task._id} task={task}
+                objectToast={(task) => props.showToastDelete(task)}
+                showToast={showToast}
+            /> : null
+            : <TasksNotBelongCardByMap key={task._id} task={task}
+                objectToast={(task) => props.showToastDelete(task)}
+                showToast={showToast}
+            />
     })
     return (
         <div className="body-workspace ">
@@ -45,7 +53,7 @@ function TaskNotBelongCardForUser(props) {
                     <input type="text" class="inputSearchTask " placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
                 </div> {/* </span> */}
                 <div class="show-task row mx-4 mt-3 headerTableTask" >
-                    <label class="ml-3 pl-6 col-3 labelAllTask"> All task </label>
+                    <label class="ml-3 pl-6 col-3 labelAllTask"> My task </label>
                     <label class="col propertiesAllTask ml-4">Workspace</label>
                     <label class="col propertiesAllTask">Project</label>
                     <label class=" col propertiesAllTask">Card</label>

@@ -1,7 +1,9 @@
 
 
 .borderTop  .modal-dialog .modal-content{
-    border-top: 7px solid #3598F4;
+    border-top: 7px solid #1FB9C1;
+    -webkit-border-image: -webkit-gradient(91deg, #339E9B 0%, #41CFCE 100%) 21 30 30 21 repeat repeat;
+
 }
 
 .borderTop  .modal-dialog .modal-content .modal-header{
@@ -19,13 +21,23 @@
 }
 
 .cancelModalDelete{
-    color: #3598F4;
+    color: #1FB9C1;
     background-color: white;
-    border: 1px solid  #3598F4 !important;
+    border: 2px solid #1FB9C1 !important;
+}
+.cancelModalDelete:hover{
+    color: #1ca6ad;
+    border: 2px solid #1ca6ad !important;
+    background-color: white;
+
 }
 
+.deleteInModalDelete:hover{
+    background-color: #1ca6ad;
+
+}
 .deleteInModalDelete{
-    background-color: #3598F4;
+    background-color: #1FB9C1;
 
 }
 
