@@ -48,7 +48,7 @@ function Hub(props) {
         // setObjectToDelete(objectToDelete_)
         if (objectToDelete_.type == 'Task') {
             objectToDelete.push(objectToDelete_)
-            
+            setObjectToDeleteLocal(objectToDelete_)
             setShowToastDelete(true)
         }
         else {
@@ -58,11 +58,9 @@ function Hub(props) {
         }
     }
     const deleteObject = () => {
-        debugger
         setShowToastDelete(false)
         let length = objectToDelete.length
         for (let i = 0; i < length; i++) {
-            let a = objectToDelete[i].object._id
             props['remove' + objectToDelete[i].type](objectToDelete[i].object._id)
         }
     }
@@ -83,18 +81,20 @@ function Hub(props) {
             $(`#${objectToDelete[i].object._id}`).css("display", "table-row")
         else
             $(`#${objectToDelete[i].object._id}`).css("display", "block")
-
+        for (let index = 0; index < i; index++) {
+            props['remove' + objectToDelete[index].type](objectToDelete[index].object._id)
+        }
     }
 
     const showToast = () => {
         objectToDelete.push(objectToDeleteLocal)
         setShowToastDelete(true)
     }
+
     $(window).click(function () {
         setShowContactList(false)
     });
     $(window).scroll(function () {
-        alert()
         setShowContactList(false)
     });
 
