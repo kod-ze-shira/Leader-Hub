@@ -101,7 +101,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
+                    <div style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
