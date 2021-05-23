@@ -212,8 +212,7 @@ border: none !important;
 }
 .dnd-icon{
   opacity: 0;
- 
-  
+margin-top: -10px !important;  
   /* display: none; */
 }
 .view-details-in-list{

@@ -35,7 +35,7 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        
+
 
     }, [props.cards])
 
@@ -84,12 +84,13 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
+        debugger
         let task1 = {
-            "milestones": props.task.milestones, "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         setTask(task1)
-        props.EditTask(task);
+        props.EditTask(task1);
     }
 
     const showAssigTo = (e) => {
@@ -171,8 +172,8 @@ function ViewTaskByCradTabs(props) {
     return (
         <>
 
-            <Draggable  className="taskkk"
-            draggableId={props.task._id} index={props.indexTask}>
+            <Draggable className="taskkk"
+                draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
@@ -192,13 +193,14 @@ function ViewTaskByCradTabs(props) {
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onClick={(e) => e.stopPropagation()}
-                                    // onBlur={(e) => editTask(e)}
+                                    // onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
                                             editTask()
                                         }
                                     }}
                                 ></input>
+                                {/* <div>{props.task.index}</div> */}
                                 <div className="row justify-content-between">
 
 
@@ -240,7 +242,7 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null}
-                                    {/* <div>{props.task.index}</div> */}
+
                                     <img
                                         onClick={(e) => showAssigTo(e)}
                                         class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>

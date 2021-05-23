@@ -5,6 +5,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
+        // let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + projectId + "/getSortCardsProjectByIndex"
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -36,7 +37,6 @@ export const newCard = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_CARD') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newCard`
         let card = action.payload;
-
         $.ajax({
             url: urlData,
             method: 'POST',
