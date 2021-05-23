@@ -305,10 +305,10 @@ function TaskNotBelongDetails(props) {
                         <img className="delete-task" src={require('../../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
-                    <div className="files-details ">
+                    {/* <div className="files-details ">
                         <img className="files-task" src={require('../../../../img/share-icon.png')}></img>
                         <img className="files-task-hover" src={require('../../../../img/share-hover.png')} onClick={(e) => deleteTask(e)} ></img>
-                    </div>
+                    </div> */}
                     <div className="assingto-details ">
                         <UploadFile />
                         <img className="assingto-task" src={require('../../../../img/files-icon.png')} ></img>
