@@ -7,7 +7,6 @@ import { InputGroup, FormControl, Table } from 'react-bootstrap'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
@@ -35,7 +34,7 @@ function ViewTaskByCradTabs(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        
+
 
     }, [props.cards])
 
@@ -157,8 +156,8 @@ function ViewTaskByCradTabs(props) {
     return (
         <>
 
-            <Draggable  className="taskkk"
-            draggableId={props.task._id} index={props.indexTask}>
+            <Draggable className="taskkk"
+                draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
                         {...provided.draggableProps}

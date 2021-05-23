@@ -28,6 +28,11 @@
     margin-left: 0px;
     margin-right: 0px
 }
+
+.hrInSelect{
+display: inline-block;
+
+}
 /* 
 .selectWorkspaceInTasksNotBelong,
 .selectProjectInTasksNotBelong,
