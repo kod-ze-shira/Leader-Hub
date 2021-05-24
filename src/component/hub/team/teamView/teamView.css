@@ -1,0 +1,15 @@
+.team_name{
+    color: #75798e;
+    font: normal normal normal 16px/19px Roboto;
+}
+.div_icon_team{
+    width: 33px;
+    height: 33px;
+    background: #F5F4F4 0% 0% no-repeat padding-box;
+    border: 1px dashed #75798E;
+    opacity: 1;
+    border-radius: 50px;
+}
+.row_team:hover{
+    background-color: #EAF6FD;
+}
