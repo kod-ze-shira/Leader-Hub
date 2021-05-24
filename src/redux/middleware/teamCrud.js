@@ -94,7 +94,6 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
         return res.json()
       })
       .then(result => {
-        debugger
         console.log('contacts', result)
         // checkPermission(result).then(ifOk => {
         dispatch(actions.setContactsUser(result))
