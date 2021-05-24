@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ViewTeam from '../teamView/teamView';
-import './teamList.css'
+import './teamsList.css'
 
-function TeamList(props){
+function TeamsList(props){
+
     const viewTeams = props.teamsUser ? props.teamsUser.map((team) => (
-       <ViewTeam team={team}></ViewTeam>
+       <ViewTeam addTeamToShare={props.addTeamToShare} team={team}></ViewTeam>
       )): null
+
   return (
      <>
-     <div className='container div_teams'>
-     <div className='row txt_your_team_list'>your team list </div>
+
+     <div className='row txt_your_team_list pb-3 pt-3 pl-4'>Your Team List </div>
      <div className='container div_teams_list'>
      {viewTeams}
+     <div className='row pt-2 pb-2 div_create_team' onClick={()=>props.clickCreateTeam()}>
+         <div className='col-1 div_icon_team'>+</div>
+         <div className='col-9 div_txt_create_team my-auto'>Create team</div>
      </div>
      </div>
      </>
+    
   )  
 }
 export default connect(
@@ -30,5 +36,5 @@ export default connect(
         // getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser())
       }
     }
-  )(TeamList)
+  )(TeamsList)
   
