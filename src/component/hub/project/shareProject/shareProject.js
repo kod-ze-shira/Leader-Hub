@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import CreateTeam from '../../team/createTeam/createTeam'
 import DynamicSelect from '../../team/dynamicSelect'
-import TeamList from '../../team/teamList/teamList'
+import TeamsShare from '../../team/teamsShare/teamsShare'
 import ShareOneMember from '../share/shareOneMember/shareOneMember'
 import './shareProject.css'
 
@@ -16,7 +16,7 @@ function ShareProject(props) {
     const [permissionContact, setPermissionContact] = useState('viewer')
     const [permissionTeam, setPermissionTeam] = useState('viewer')
     const [clickCreateTeam, setClickCreateTeam] = useState(false)
-    const [showTeams,setShowTeams]=useState(false)
+    const [showTeams, setShowTeams] = useState(false)
     //onselect contact his email and perrmisin add shareDetails list
     const setStateMailToContactMail = (emailMember) => {
         let shareDetailToAdd
@@ -30,16 +30,16 @@ function ShareProject(props) {
     const setStatePerrmissionContact = (event) => {
         setPermissionContact(event.target.options[event.target.selectedIndex].label)
     }
+
     //on select team name
-    const addTeamMemberEmailToMembersEmailList = (team) => {
+    const addTeamMembersEmailsToMembersEmailList = (team) => {
         //add members
-        let membersTeam = team.value.members
+        let membersTeam = team.members
         membersTeam.forEach(element => {
             // membersTeamEmails.push({'shareDetail':element.contactMember})
             membersTeamEmails.push(element.contactMember)
             // setMembersTeamEmails([...membersTeamEmails, element.contactMember])
         });
-
         let shareDetailsTemp = []
         let shareDetailToAdd
         membersTeamEmails.forEach(element => {
@@ -48,11 +48,11 @@ function ShareProject(props) {
             shareDetailsTemp.push(shareDetailToAdd)
 
         })
-
         //if render team not in shareDetails
-        let teamToShare = { 'teamId': team.value._id, 'members': shareDetailsTemp }
+        let teamToShare = { 'teamId': team._id, 'members': shareDetailsTemp }
         setTeams([...teams, teamToShare])
         setMembersTeamEmails([])
+        setShowTeams(false)//close teams list
     }
     //on select perrmission to team
     const setStatePermissionTean = (event) => {
@@ -118,7 +118,7 @@ function ShareProject(props) {
                             options={'contacts'} />
                     </div>
                     <div className="col-3 pl-0">
-                        <select class="form-control" onChange={(e) => setStatePerrmissionContact(e)}>
+                        <select class="form-control select_permission" onChange={(e) => setStatePerrmissionContact(e)}>
                             {/* <option disabled selected>Select...</option> */}
                             <option value="1">viewer</option>
                             <option value="2">editor</option>
@@ -131,15 +131,16 @@ function ShareProject(props) {
                 </div>
                 <div className="row">
                     <div className="col-md-9">
-                        <input onClick={()=>setShowTeams(true)}></input>
-                       
+                        <div className='div_choose_team' onClick={() => setShowTeams(true)}>
+                            Choose Team
+                        </div>
+
                         {/* <DynamicSelect
                             options={'teams'}
-                            setClickTeam={() => setClickCreateTeam(true)}
                             addMemberEmailToMembersEmailList={addTeamMemberEmailToMembersEmailList} /> */}
                     </div>
-                    <div className="col-3 pl-0">
-                        <select class="form-control" onChange={(e) => setStatePermissionTean(e)}>
+                    <div className="col-md-3 pl-0">
+                        <select class="select_permission form-control" onChange={(e) => setStatePermissionTean(e)}>
                             {/* <option disabled selected>Select...</option> */}
                             <option value="1">viewer</option>
                             <option value="2">editor</option>
@@ -160,9 +161,9 @@ function ShareProject(props) {
                         </div>
                     </div>
                 </div>
-                {showTeams? <TeamList/>:null}
-                {clickCreateTeam ?
-                    <CreateTeam /> : null}
+                {showTeams ? <TeamsShare addTeamToShare={addTeamMembersEmailsToMembersEmailList} /> : null}
+                {/* {clickCreateTeam ?
+                    <CreateTeam /> : null} */}
                 <div className="row pt-4 row_btn_share pr-4">
                     <button className="btn_share" onClick={shareObject}>Share</button>
                 </div>

@@ -1,6 +1,11 @@
 
+.body-cards{
+      overflow-x: auto !important;
+      /* overflow-y: hidden !important; */
+}
+
 .wraperr-tabs >.row{
-    overflow-x: auto !important;
+  
     white-space: nowrap !important;
     display: block;
 }
@@ -49,3 +54,27 @@ a .add-card-tabs{
     text-transform: capitalize;
     margin: auto ;
 }
+/* width */
+.body-cards::-webkit-scrollbar {
+    background-color: #ffff;
+    height: 10px;
+  }
+   
+    /* Track */
+    .body-cards::-webkit-scrollbar-track {
+      /* border-radius: 10px; */
+    }
+    .body-cards::-webkit-scrollbar-track:hover {
+        box-shadow: inset 0 0 5px grey; 
+      }
+     
+    /* Handle */
+    .body-cards::-webkit-scrollbar-thumb { 
+      border-radius: 10px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #919494; 
+    }
+    

@@ -8,11 +8,3 @@
    left:29px;
    box-shadow: 0px 3px 6px #00000029;
 }
-.div_teams_list{
-overflow-y: scroll;
-height: 38vh;
-}
-.txt_your_team_list{
-  color:  #1FB9C1;
-  font: normal normal bold 16px/19px Roboto;
-}

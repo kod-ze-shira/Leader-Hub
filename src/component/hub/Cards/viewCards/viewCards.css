@@ -38,11 +38,16 @@
     display: inline-block;
     width: 6px; 
 }
-.show-card , .show-task{
+.show-card{
     background-color: transparent;
-    border: none !important;
+    border: none;
     outline: 0!important;
   
+}
+.show-task{
+    outline: 0!important;
+    border: none ;
+
 }
 .show-card{
     font-weight: bold;

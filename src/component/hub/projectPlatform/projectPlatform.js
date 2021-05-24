@@ -8,6 +8,7 @@ import ToastDelete from '../toastDelete/toastDelete1';
 import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../src/Data/title.json'
+import ContactList from '../contact/contactList';
 
 function ProjectPlatform(props) {
     const [showInput, setShowInput] = useState(false)
@@ -70,7 +71,8 @@ function ProjectPlatform(props) {
                 <div className="cards">
                     <CardsByProject
                         viewToastComplete={props.viewToastComplete}
-                        showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag} />
+                        showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag} 
+                        viewContactList={props.viewContactList}/>
                     <div className="add-new-pop-up ">
                         <a >New Workspace</a><br></br>
                         <a>New Project</a><br></br>
@@ -104,6 +106,9 @@ function ProjectPlatform(props) {
                         toOnClose={deleteTaskOrCard}
                         toSetShowToastDelete={() => { setShowToastDelete(false) }}
                         name={taskOrCard.name} /> : null}
+                {showToastDelete ?
+                    <ContactList toSetShowToastDelete={() => { setShowToastDelete(false) }}
+                    /> : null}
             </div>
         </>
     )

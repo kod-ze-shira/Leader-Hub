@@ -15,13 +15,13 @@ const initialState = {
     milestones: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
-    indexCurrentCard: 0,
     idCurrentCard: 0,
     indexCurrentCard: 0,
     indexCurrentProject: 0,
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
+
 
 }
 
@@ -40,6 +40,20 @@ const publicData = {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
+                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
+        }
+
+    },
+    setNewFilesInTaskNotBelong(state, action) {
+        let myFiles = Object.values(action.payload.file)
+        let indexTask
+        for (let index = 0; index < state.tasks.length; index++) {
+            if (state.tasks[index]._id == action.payload.id)
+                indexTask = index;
+
+        }
+        for (let index = 0; index < myFiles.length; index++) {
+            state.tasks[indexTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
         }
 
@@ -144,6 +158,11 @@ const publicData = {
                 )
         })
     },
+    deletTaskNotBelong(state, action) {
+        state.tasks = state.tasks.filter((task, i) =>
+            state.tasks[i]._id !== action.payload._id
+        )
+    },
     deleteCard(state, action) {
         console.log(action.payload.dc)
         state.cards = state.cards.filter((_, i) =>
@@ -200,7 +219,6 @@ const publicData = {
         destinition = action.payload[1]
         cardSourseId = action.payload[2]
         cardDestinitionId = action.payload[3]
-        console.log(cardSourseId, cardDestinitionId)
         let temp1 = state.cards[cardSourseId].tasks[source]
         state.cards[cardSourseId].tasks.splice(source, 1)
         state.cards[cardDestinitionId].tasks.splice(destinition, 0, temp1)
@@ -356,7 +374,7 @@ const publicData = {
     saveIndexOfWorkspaceInRedux(state, action) {
         state.indexOfWorkspace = action.payload
     },
-
+  
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  

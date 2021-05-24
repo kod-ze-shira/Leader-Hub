@@ -207,18 +207,27 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
-        let task
-
-        if (action.payload.type && action.payload.type == 'taskNotBelong') {
-            task = action.payload.task
-            task.description = task.description ? task.description : null
-            task.endDate = task.endDate ? task.endDate : null
-        } else
-            if (action.payload.name)
-                task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-                    .tasks[getState().public_reducer.indexCurrentTask]
-            else
-                task = action.payload
+        let task = action.payload
+        debugger
+        if (!action.payload.card) {
+            for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
+                if (getState().public_reducer.tasks[index]._id == action.payload._id)
+                    task = getState().public_reducer.tasks[index]
+            }
+        }
+        else
+            if (action.payload.type && action.payload.type == 'taskNotBelong') {
+                task = action.payload.task
+                if (!task.description)
+                    task.description = null
+                // if (!task.endDate)
+                //     task.endDate = null
+            } else
+                if (action.payload.name)
+                    task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+                        .tasks[getState().public_reducer.indexCurrentTask]
+                else
+                    task = action.payload
 
 
         $.ajax({
@@ -240,14 +249,12 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                     dispatch(actions.deleteFilesInArr());
                     // dispatch(actions.setNewFilesInTask(data.filesData))
                 }
-                if (getState().public_reducer.arrFilesOfTask.length) {
+                if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
-                // console.log(data.result);
 
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 console.log("error")
                 console.log(err)
             }
@@ -298,7 +305,13 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                dispatch(actions.deletTask(data.result))
+
+                if (data.result.card)
+                    dispatch(actions.deletTask(data.result))
+                else
+                    dispatch(actions.deletTaskNotBelong(data.result))
+
+
                 console.log("success")
                 console.log("data", data.result);
             },
@@ -347,39 +360,73 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
 }
 
 
-// export const moveCards = ({ dispatch, getState }) => next => action => {
+export const dragTask = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DRAG_TASK') {
+        let tasksList = getState().public_reducer.cards[action.payload].tasks ? getState().public_reducer.cards[action.payload].tasks : []
+        console.log(tasksList)
+        debugger
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/dragTask`
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ tasksList }),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch(actions.setCards(data.project.cards))
 
-//     if (action.type === 'MOVE_TASK_BETWEEN_CARDS') {
-//         let cards = getState().public_reducer.cards
-//         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
-//         $.ajax({
-//             url: urlData,
-//             method: 'POST',
-//             headers: {
-//                 Authorization: getState().public_reducer.tokenFromCookies
-//             },
-//             contentType: "application/json; charset=utf-8",
-//             data: JSON.stringify({ cards }),
-//             success: function (data) {
-//                 console.log("success")
-//                 console.log(data);
-//                 dispatch(actions.setCards(data.cards))
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
 
-//             },
-//             error: function (err) {
-//                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-//                 console.log("error")
-//                 console.log(err)
-//             }
-//         });
-//     }
-// return next(action);
-// }
 
+export const dragCard = ({ dispatch, getState }) => next => action => {
+
+    if (action.type === 'DRAG_CARD') {
+        debugger
+        let cardsList = getState().public_reducer.cards
+        console.log(cardsList)
+        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/dragCard`
+        console.log(urlData)
+        debugger
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ cardsList }),
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch(actions.setCards(data.cards))
+
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
 
 export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK_NOT_BELONG') {
-        debugger
+
         let task = {
             'name': action.payload,
             "updateDates": "08/03/2021",

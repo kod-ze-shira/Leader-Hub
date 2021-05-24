@@ -31,59 +31,82 @@ import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import Chart from './charts/chart'
+import ContactList from './contact/contactList';
+
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastComplete, setShowToastComplete] = useState(false)
-    const [objectToDelete, setObjectToDelete] = useState()
+    const [objectToDelete, setObjectToDelete] = useState([])
+    const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
+    const [showContactList, setShowContactList] = useState(false)
+    // const [objectToDelete, setObjectToDelete] = useState()
 
+    const showToastToDelete = (objectToDelete_) => {
 
-
-
-
-
-    const showToastToDelete = (objectToDelete) => {
-        debugger
-        setObjectToDelete(objectToDelete)
-        if (objectToDelete.type == 'Task')
+        // setObjectToDelete(objectToDelete_)
+        if (objectToDelete_.type == 'Task') {
+            objectToDelete.push(objectToDelete_)
+            setObjectToDeleteLocal(objectToDelete_)
             setShowToastDelete(true)
+        }
         else {
+            setObjectToDeleteLocal(objectToDelete_)
             setShowModlalDelete(true)
+
         }
     }
     const deleteObject = () => {
         setShowToastDelete(false)
-        props['remove' + objectToDelete.type](objectToDelete.object._id)
+        let length = objectToDelete.length
+        for (let i = 0; i < length; i++) {
+            props['remove' + objectToDelete[i].type](objectToDelete[i].object._id)
+        }
     }
     const openConfigurator = () => {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
         setShowToastDelete(value)
-        if (objectToDelete.type == "Card") {
-            $(`#${objectToDelete.object._id} `).removeClass("displayNone")
-            $(`#${objectToDelete.object._id} `).addClass("mt-4")
-            $(`#${objectToDelete.object._id} `).addClass("col-3")
+        let i = objectToDelete.length - 1
+        if (objectToDelete[i].type == "Card") {
+            $(`#${objectToDelete[i].object._id} `).removeClass("displayNone")
+            $(`#${objectToDelete[i].object._id} `).addClass("mt-4")
+            $(`#${objectToDelete[i].object._id} `).addClass("col-3")
         }
-        else if (objectToDelete.type == "Task")
-            $(`#${objectToDelete.object._id + "disappear"}`).css("display", "block")
-        else if (objectToDelete.type == "Project")
-            $(`#${objectToDelete.object._id}`).css("display", "table-row")
+        else if (objectToDelete[i].type == "Task")
+            $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
+        else if (objectToDelete[i].type == "Project")
+            $(`#${objectToDelete[i].object._id}`).css("display", "table-row")
         else
-            $(`#${objectToDelete.object._id}`).css("display", "block")
-
+            $(`#${objectToDelete[i].object._id}`).css("display", "block")
+        for (let index = 0; index < i; index++) {
+            props['remove' + objectToDelete[index].type](objectToDelete[index].object._id)
+        }
     }
 
+    const showToast = () => {
+        objectToDelete.push(objectToDeleteLocal)
+        setShowToastDelete(true)
+    }
+
+    $(window).click(function () {
+        setShowContactList(false)
+    });
+    $(window).scroll(function () {
+        setShowContactList(false)
+    });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
+    $("input,textarea").attr("dir","auto");
 
     return (
         <>
             {showModalDelete ? <ShureDelete
-                showToastDelete={(e) => setShowToastDelete(true)}
-                objectToDelete={objectToDelete}
+                showToastDelete={(e) => showToast()}
+                objectToDelete={objectToDeleteLocal}
                 closeModal={(e) => setShowModlalDelete(e)}
             /> : null}
 
@@ -100,7 +123,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -123,12 +146,13 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
-                            <ProtectedRoute path={"/:userName/hub/allTasks"}>
+                            <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                    showToastDelete={(object) => props.showToastToDelete(object)}
+                                    showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
 
@@ -149,12 +173,15 @@ function Hub(props) {
                         <ToastDelete
                             toOnClose={deleteObject}
                             toSetShowToastDelete={() => { setShowToastDeletefunc(false) }}
-                            name={objectToDelete.name ? objectToDelete.name : objectToDelete.object.name}
+                            name={objectToDelete[objectToDelete.length - 1].name ? objectToDelete[objectToDelete.length - 1].name : objectToDelete[objectToDelete.length - 1].object.name}
                         />
                         : null}
 
                     {showToastComplete ?
                         <Toast /> : null}
+                    {showContactList ?
+                        <ContactList hub={true} />
+                        : null}
 
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
@@ -176,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
         removeCard: (cardId) => dispatch(actions.removeCardById(cardId)),
         removeTask: (taskId) => dispatch(actions.removeTaskById(taskId)),
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
-        removeWorkspace: () => dispatch(actions.deleteWorkspaceFromServer()),
+        removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
         createSystemWave: () => dispatch(actions.createSystemWave()),
     }
