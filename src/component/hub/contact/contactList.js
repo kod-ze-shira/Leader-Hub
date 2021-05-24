@@ -9,7 +9,6 @@ import { actions } from '../../../redux/actions/action'
 
 function ContactList(props) {
   useEffect(() => {
-    debugger
     if (props.contactsUser.length == 0)
       props.getContactsForUser()
   }, [])

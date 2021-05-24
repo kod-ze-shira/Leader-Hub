@@ -1,11 +1,12 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import configData from '../../ProtectedRoute/configData.json'
 
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
 
         var projectId = action.payload;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/getProjectById`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/getProjectById`
 
         $.ajax({
             url: urlData,
@@ -37,7 +38,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
-        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
+        let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload}/getProjectsByWorkspaceId`;
         fetch(url,
             {
                 method: 'GET',
@@ -62,7 +63,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_PROJECT') {
 
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/newProject"
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newProject`
         let project = action.payload;
         $.ajax({
             url: urlData,
@@ -105,7 +106,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
         // let projectBeforeChanges = getState().public_reducer.projects[0];
         let project = action.payload.project;
         let projectBeforeChanges = action.payload.projectBeforeChanges;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editProject`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editProject`
 
         $.ajax({
             url: urlData,
@@ -138,7 +139,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     if (action.type === 'DELETE_PROJECT_IN_SERVER') {
         var projectId = action.payload;
         // let project = getState().project_reducer.project;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${projectId}/removeProjectById`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/removeProjectById`
         // let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             url: urlData,

@@ -58,7 +58,7 @@ function ViewTaskByCradTabs(props) {
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
     let contact
     const setStateMailToContactMail = (emailMember) => {
-        // debugger
+
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         props.assingTo(emailMember.value.email)
@@ -84,7 +84,7 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
-        debugger
+        
         let task1 = {
             "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
@@ -94,7 +94,7 @@ function ViewTaskByCradTabs(props) {
     }
 
     const showAssigTo = (e) => {
-        debugger
+        
         e.stopPropagation()
         var x = e.clientX;
         var y = e.clientY;

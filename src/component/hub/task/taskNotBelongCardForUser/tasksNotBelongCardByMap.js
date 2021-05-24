@@ -218,7 +218,7 @@ function TasksNotBelongCardByMap(props) {
         }
     }
     function setPropertiesOfTask() {
-        debugger
+        
         let completeTask = {
             "_id": props.task._id,
             "name": props.task.name,

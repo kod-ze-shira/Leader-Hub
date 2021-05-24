@@ -22,10 +22,10 @@ export default function ToastDelete1(props) {
             <animated.div style={scrolling}>
                 <Toast className="toast_delete"
                     onClose={props.toOnClose}
-                    delay={30000} autohide>
+                    delay={100000000} autohide>
                     <div className="border-top-gradient"></div>
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>
-                        <div className=" ">{props.name}</div>
+                        <div className="object_name">{props.name}</div>
                         <span className="px-4 ">was deleted</span>
                         <div className="div_btn_undo  ">
                             <button className="btn_undo "
@@ -38,7 +38,7 @@ export default function ToastDelete1(props) {
                         <button onClick={(e) => {
                             props.toOnClose()
                             e.stopPropagation()
-                        }} className="pl-2">X</button>
+                        }} className="pl-2 button_close">X</button>
                     </Toast.Header>
                 </Toast>
             </animated.div>

@@ -1,10 +1,11 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import configData from '../../ProtectedRoute/configData.json'
 
 export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
-    let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTeamsForUser`
+    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getAllTeamsForUser`
     fetch(urlData,
       {
         method: 'GET',
@@ -31,7 +32,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'CREATE_NEW_TEAM') {
     console.log('CREATE_NEW_TEAM')
-    let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/addNewTeam"
+    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/addNewTeam`
     // let team = getState().team_reducer.team;
     let team = action.payload;
     // team 
@@ -77,7 +78,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 export const getContactsForUser = ({ dispatch, getState }) => next => action => {
   if (action.type === 'GET_CONTACTS_FOR_USER') {
     fetch(
-      `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getContactsForUser`,
+      `${configData.SERVER_URL}/${getState().public_reducer.userName}/getContactsForUser`,
       // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
 
       {
@@ -113,7 +114,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       .projects[getState().public_reducer.indexCurrentProject]._id
     console.log(objectId);
     ///:userName/:objectId/:schemaName/:applicationName/shareObject
-    fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${objectId}/Project1/reacthub/shareMembersAndTeams`,
+    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project1/reacthub/shareMembersAndTeams`,
       {
         method: 'POST',
         headers: {
@@ -142,7 +143,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 //     let email = action.payload
 //     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
 //     .tasks[getState().public_reducer.indexCurrentTask]._id
-//     fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/assingTo`,
+//     fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingTo`,
 //       {
 //         method: 'POST',
 //         headers: {
@@ -171,7 +172,7 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;
     console.log(taskId);
-    let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/assingTo`
+    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingTo`
     $.ajax({
       url: urlData,
       type: 'POST',

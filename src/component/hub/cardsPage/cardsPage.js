@@ -11,17 +11,39 @@ import { useParams } from 'react-router-dom';
 
 import cardsByProject from '../Cards/cardsByProject/cardsByProject';
 
+
 function CardsPage(props) {
 
     const [flag, setFlag] = useState();
     const [present, setPresent] = useState("tabs");
-
+    const [number, setNumber] = useState()
     const { idProject } = useParams();
+
+
     useEffect(() => {
-
-
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
+
+        if ((window.location.href.indexOf('list') != -1)) {
+            setPresent("list")
+            setNumber(1)
+        }
+        else
+            if ((window.location.href.indexOf('tabs') != -1)) {
+                setPresent("tabs")
+                setNumber(0)
+            }
+            else
+                if ((window.location.href.indexOf('gantt') != -1)) {
+                    setPresent("gantt")
+                    setNumber(3)
+                }
+                else
+                    if ((window.location.href.indexOf('Overview') != -1)){
+                        setPresent("Overview")
+                        setNumber(2)
+                    }
+
     }, [])
 
     const changeFlag = (value) => {
@@ -58,7 +80,7 @@ function CardsPage(props) {
     }
     return (
         <div className="mt-4">
-            <SelectHeader flag={changeFlag} from={howToPresent} menue={true} />
+            <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} />
             {renderSwitch()}
 
         </div>
