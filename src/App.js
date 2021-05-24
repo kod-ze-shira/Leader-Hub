@@ -16,11 +16,10 @@ export default function App(props) {
     <>
       <Provider store={Store}>
         <>
-          <Hub></Hub>
+          {/* <Hub></Hub> */}
           {/* <BodyEmailOfAssignmentTask/> */}
           {/* <ContactList /> */}
-          {/* <Chart/> */}
-
+          <Chart/>
         </>
       </Provider>
     </>
