@@ -38,7 +38,8 @@ function SelectHeader(props) {
     const color = '#00C6EA'
 
     useEffect(() => {
-       
+        if (props.workspaces.length == 0)
+            props.getAllWorkspaces()
     }, [])
 
     const handleChange = (event, newValue) => {
@@ -86,7 +87,10 @@ function SelectHeader(props) {
                         >
                             <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
                             <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
+                            <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
                             <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+                            
+
                         </Tabs>
                         :
                         <Tabs
@@ -110,13 +114,12 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
-
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SelectHeader)

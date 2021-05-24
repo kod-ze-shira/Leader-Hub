@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import DynamicSelect from '../../team/dynamicSelect';
 
 import './ViewTaskByCradTabs.css'
+import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
 
@@ -35,6 +36,7 @@ function ViewTaskByCradTabs(props) {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
 
+
     }, [props.cards])
 
     useEffect(() => {
@@ -51,7 +53,7 @@ function ViewTaskByCradTabs(props) {
         event.stopPropagation();
 
     };
-    const [showAssignee, setShowAssignee] = useState(false)
+    const [showAssignee, setShowAssignee] = useState(true)
 
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
     let contact
@@ -82,12 +84,27 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
+        debugger
         let task1 = {
-            "milestones": props.task.milestones, "_id": props.task._id, "name": editTaskName, "description": props.task.description
+            "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         setTask(task1)
-        props.EditTask(task);
+        props.EditTask(task1);
+    }
+
+    const showAssigTo = (e) => {
+        debugger
+        e.stopPropagation()
+        var x = e.clientX;
+        var y = e.clientY;
+        var height = $(window).height();
+        var width = $(window).width();
+        props.setLeftContactList(x)
+        props.setTopContactList(y)
+        props.setWidthScreen(width)
+        props.setHeightScreen(height)
+        props.viewContactList(showAssignee)
     }
 
 
@@ -155,7 +172,8 @@ function ViewTaskByCradTabs(props) {
     return (
         <>
 
-            <Draggable draggableId={props.task._id} index={props.indexTask}>
+            <Draggable className="taskkk"
+                draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
                         {...provided.draggableProps}
@@ -175,13 +193,14 @@ function ViewTaskByCradTabs(props) {
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onClick={(e) => e.stopPropagation()}
-                                    // onBlur={(e) => editTask(e)}
+                                    onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
                                             editTask()
                                         }
                                     }}
                                 ></input>
+                                {/* <div>{props.task.index}</div> */}
                                 <div className="row justify-content-between">
 
 
@@ -223,14 +242,13 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null}
-                                    {/* <div>{props.task.index}</div> */}
+
                                     <img
-                                        //  onClick={(e) => setShowAssignee(true)} 
-                                        class='assing-icon pb-3 mr-2' src={require('../../../img/share-icon.png')}></img>
-                                    {showAssignee ? <DynamicSelect
-                                        value={props.task.assingTo ? props.task.assingTo.contact : null}
-                                        setContactEmail={setStateMailToContactMail} options={'contacts'} /> : null}
-                                    {/* <img class='assing-icon' src={'../../assingTo-icon.png'}></img> */}
+                                        onClick={(e) => showAssigTo(e)}
+                                        class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
+                                    {/* {showAssignee ?
+                                        <ContactList/>
+                                    : null} */}
                                 </div>
                             </div>
                         </div>
@@ -263,6 +281,10 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+        setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
+        setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
+        setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
+        setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))

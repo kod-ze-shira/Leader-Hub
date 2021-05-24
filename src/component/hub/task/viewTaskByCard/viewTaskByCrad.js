@@ -96,7 +96,7 @@ function ViewTaskByCrad(props) {
     }
 
     function overTask(id) {
-        $(`#${id}`).css({ 'opacity': '0.3' })
+        $(`#${id}`).css({ 'opacity': '0.7' })
     }
     function outOver(id) {
         $(`#${id}`).css({ 'opacity': '0' })
@@ -166,9 +166,10 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <FontAwesomeIcon className="dnd-icon mt-3" id={props.task._id} title="Drag and Drop"
+                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon pl-3 " id={props.task._id}></img>
+                                {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
-                                ></FontAwesomeIcon>
+                                ></FontAwesomeIcon> */}
                                 <div className=" col-5">
                                     <label
                                         title="Complete Task"

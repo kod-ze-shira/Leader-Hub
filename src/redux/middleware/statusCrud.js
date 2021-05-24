@@ -5,8 +5,10 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
 
         let workspaceId;
-        if (action.payload)
-            workspaceId = action.payload.workspaceId
+        if (action.payload) {
+            if (action.payload.workspaceId)
+                workspaceId = action.payload.workspaceId
+        }
         else
             workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
@@ -22,13 +24,15 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 if (action.payload) {
-                    let task = action.payload.task
-                    let status = data.statuses.find((s) => s.workspace == workspaceId)._id
-                    task.status = status
-                    dispatch(actions.editTask({
-                        'type': 'taskNotBelong',
-                        'task': task
-                    }))
+                    if (action.payload.task) {
+                        let task = action.payload.task
+                        let status = data.statuses.find((s) => s.workspace == workspaceId)._id
+                        task.status = status
+                        dispatch(actions.editTask({
+                            'type': 'taskNotBelong',
+                            'task': task
+                        }))
+                    }
                 }
                 // console.log("data", data);
                 console.log("data.statuses", data.statuses);

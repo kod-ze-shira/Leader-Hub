@@ -7,17 +7,17 @@ import './teamsShare.css'
 
 function TeamsShare(props) {
 
-  const [showCraeteTeam, setShowCraeteTeam] = useState(false)
+  const [showCreateTeam, setShowCreateTeam] = useState(false)
 
   return (
     <>
       <div className='container div_teams'>
-        {/* {
-          !showCraeteTeam ?
-            <TeamsList clickCreateTeam={() => setShowCraeteTeam(true)}></TeamsList> */}
-            {/* : */}
+        {
+          !showCreateTeam ?
+            <TeamsList clickCreateTeam={() => setShowCreateTeam(true)}></TeamsList>
+             :
              <CreateTeam></CreateTeam>
-        {/* } */}
+        }
       </div>
     </>
   )

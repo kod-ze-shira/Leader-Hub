@@ -25,13 +25,6 @@ function SelectWorkspace(props) {
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
 
         if (myWorkspace.projects[0]) {
-
-            // props.setProjects(myWorkspace.projects)
-            // props.setProject(myWorkspace.projects[0])
-            //ssssssssssssss
-            // props.getCardsByProjectId(myWorkspace.projects[0]._id)
-            // if (props.projectPage == true)
-
             props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
         }

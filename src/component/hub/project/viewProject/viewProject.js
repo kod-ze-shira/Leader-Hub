@@ -58,6 +58,8 @@ function ViewProject(props) {
         complited = complited * props.myProject.countReadyTasks
         if (complited % 1 != 0)
             complited = complited.toFixed(2);
+        complited = Math.round(complited);
+
     }
     function overProject(id) {
         setMyStyleIcons({ 'opacity': '1' })
