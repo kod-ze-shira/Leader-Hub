@@ -103,7 +103,7 @@ function DynamicSelect(props) {
         onChange={handleChange}
         onInputChange={handleInputChange}
         autosize={true}
-        options={props.options == 'contacts' ? new_options : viewTeamsList}
+        options={props.options == 'contacts' ? viewContactsList : viewTeamsList}
       />
       {/* { showAssignTo ? <AssingToContact /> : null} */}
 

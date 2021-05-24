@@ -1,0 +1,21 @@
+.div_teams_list{
+    overflow-y: scroll;
+    height: 38vh;
+    }
+    .txt_your_team_list{
+      color:  #1FB9C1;
+      font: normal normal bold 15px/13px Roboto;
+      border-bottom: #F6F6FA 1px solid;
+      letter-spacing: 0.52px;
+    }
+    .div_txt_create_team{
+        font: bold 16px/19px Roboto;
+    }
+    .div_create_team:hover{
+        color: #1FB9C1 ;
+        cursor: pointer;
+    }
+    .div_create_team{
+        color: #75798e;
+    }
+    
