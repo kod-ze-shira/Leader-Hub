@@ -25,7 +25,7 @@ export default function ToastDelete1(props) {
                     delay={100000000} autohide>
                     <div className="border-top-gradient"></div>
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>
-                        <div className="object_name">{props.name}</div>
+                        <div className="object_name pt-1 ">{props.name}</div>
                         <span className="px-4 ">was deleted</span>
                         <div className="div_btn_undo  ">
                             <button className="btn_undo "
