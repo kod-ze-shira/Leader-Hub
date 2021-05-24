@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
+import FormInput  from "../../../../input";
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
@@ -49,6 +50,30 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
     });
 
+    // $('input, textarea').keyup(function(){
+    //    let $this = $(this);
+    //     if($this.val().length == 1)
+    //     {
+    //         var x =  new RegExp("[\x00-\x80]+"); // is ascii
+    
+    //         //alert(x.test($this.val()));
+    
+    //         var isAscii = x.test($this.val());
+    
+    //         if(isAscii)
+    //         {
+    //             $this.css("direction", "ltr");
+    //         }
+    //         else
+    //         {
+    //             $this.css("direction", "rtl");
+    //         }
+    //     }
+    
+    // });
+
+    // document.getElementsByTagName("input").setAttribute("dir","auto");
+    $("input,textarea").attr("dir","auto");
 
     function stopP(event) {
         event.stopPropagation();
@@ -246,8 +271,10 @@ function TaskDetails(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name"
+                        // dir="auto"
                             required ref={nameRequired}
-                            type="text" class="form-control"
+                            // type="text" 
+                            class="form-control"
                             id="name"
                             onChange={(e) => changeFiledInTask(e)}
                             value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
@@ -259,6 +286,7 @@ function TaskDetails(props) {
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control"
+                        // dir="auto"
                             rows="3"
                             placeholder="Write a description about your workspace"
                             name="description"

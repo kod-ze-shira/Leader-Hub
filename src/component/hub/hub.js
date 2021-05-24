@@ -99,6 +99,7 @@ function Hub(props) {
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
+    $("input,textarea").attr("dir","auto");
 
     return (
         <>
