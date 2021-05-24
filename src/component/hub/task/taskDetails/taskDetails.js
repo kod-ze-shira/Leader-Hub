@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
-import FormInput  from "../../../../input";
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'

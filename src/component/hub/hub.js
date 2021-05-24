@@ -30,6 +30,7 @@ import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
+import Chart from './charts/chart'
 import ContactList from './contact/contactList';
 
 
