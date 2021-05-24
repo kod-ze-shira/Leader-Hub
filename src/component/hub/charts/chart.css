@@ -1,0 +1,15 @@
+.row1{
+    height:10%;   
+    border:1px solid black;
+}
+.row2{
+    height:50%;
+    border:1px solid black;
+}
+.row3{
+    height:40%;
+    border:1px solid black;
+}
+.container{
+    height:100vh;
+}
