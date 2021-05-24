@@ -20,15 +20,17 @@ function ContactList(props) {
   const viewContacts = props.contactsUser ? props.contactsUser.map((contact) => (
     <ViewContact contact={contact}></ViewContact>
   )) : null
-  const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 70;
-  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 150;
+
+  const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;
+  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200;
   const left = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.leftContactList : props.widthCurrentScreen - 350
   const width = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.widthContactsList : props.widthContactsList
+
   return (
     <>
 
-      <div className='div_contacts' style={{ "left": left, "top": top }}>
-        <div className='container div_contacts_list mt-2' style={{ "width": width, "height": height }}>
+      <div className='div_contacts' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
+        <div className='container div_contacts_list mt-2' style={{ "width": props.hub ? width : 300, "height": props.hub ? height : 200 }}>
           {viewContacts}
         </div>
         <div className='mx-2 form'>

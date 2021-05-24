@@ -48,7 +48,7 @@ function Hub(props) {
         // setObjectToDelete(objectToDelete_)
         if (objectToDelete_.type == 'Task') {
             objectToDelete.push(objectToDelete_)
-            
+
             setShowToastDelete(true)
         }
         else {
@@ -178,7 +178,7 @@ function Hub(props) {
                     {showToastComplete ?
                         <Toast /> : null}
                     {showContactList ?
-                        <ContactList />
+                        <ContactList hub={true} />
                         : null}
 
 

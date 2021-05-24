@@ -129,7 +129,10 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-5" >
+                    <div
+                        onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
+                        onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
+                        className="col-5" >
                         <div className="wrap-triangle">
                             <div id={props.cardFromMap._id}
                                 className=" newTriangle "
