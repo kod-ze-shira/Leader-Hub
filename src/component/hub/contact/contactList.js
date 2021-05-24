@@ -17,8 +17,16 @@ function ContactList(props) {
     event.stopPropagation();
   }
 
+  const saveContact = (value) => {
+    // let editStatusInRedux
+    // editStatusInRedux = { "nameFiled": "status", "value": value }
+    // if (props.task.complete)
+    //     editStatusInRedux = { "nameFiled": "complete", "value": false }
+    // props.setTaskByFiledFromTasks(editStatusInRedux)
+  }
+
   const viewContacts = props.contactsUser ? props.contactsUser.map((contact) => (
-    <ViewContact contact={contact}></ViewContact>
+    <ViewContact saveContact={(e) => saveContact(e)} contact={contact}></ViewContact>
   )) : null
 
   const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;

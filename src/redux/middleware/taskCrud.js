@@ -207,8 +207,8 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
-        let task
-
+        let task = action.payload
+        debugger
         if (!action.payload.card) {
             for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
                 if (getState().public_reducer.tasks[index]._id == action.payload._id)
@@ -377,7 +377,7 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                dispatch(actions.setCards(data.cards))
+                dispatch(actions.setCards(data.project.cards))
 
             },
             error: function (err) {
