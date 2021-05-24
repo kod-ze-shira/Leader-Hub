@@ -17,11 +17,14 @@ import file from '../../uploadFile/file/file';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
+import ContactList from '../../contact/contactList';
 
 function TaskDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     const [flugFiles, setFlugFiles] = useState(false)
+    const [showContactList, setShowContactList] = useState(false)
+
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
 
@@ -52,6 +55,11 @@ function TaskDetails(props) {
     }
     function closeStatus(event) {
         setOpenPopUp(false)
+
+    }
+    function closeContactList(event) {
+        setShowContactList(false)
+
     }
 
     const compressedFile = async (myFiles) => {
@@ -180,6 +188,11 @@ function TaskDetails(props) {
     const addFileComponent = (urlFile, nameFile) => {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
+    const assingto = (e) => {
+        debugger
+        setShowContactList(true)
+        console.log(showContactList)
+    }
 
     function closeViewDetailsInTask() {
         props.setTaskFromTasks(taskBeforeChanges)
@@ -218,7 +231,7 @@ function TaskDetails(props) {
     return (
         <>
             <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}>
-                <div className='propertiesViewDitails'>
+                <div className='propertiesViewDitails' onClick={(e) => closeContactList(e)}>
                     <div className='row mt-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details   pl-3">Task details</h5>
                         <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
@@ -329,22 +342,28 @@ function TaskDetails(props) {
                 </div>
 
                 <div className="row justify-content-around mx-1 ">
+                    {showContactList ?
+                        <ContactList></ContactList> : null
+
+                    }
 
                     {/* <div className="btn-option-in-task col-3"> */}
                     <div className="delete-details">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
-                    <div className="files-details ">
-                        <img className="files-task" src={require('../../../img/share-icon.png')}></img>
-                        <img className="files-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                    <div className="assingto-details" >
+
+                        <img className="assingto-task" src={require('../../../img/share-icon.png')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                     </div>
-                    <div className="assingto-details ">
+                    <div className=" files-details">
                         <UploadFile />
-                        <img className="assingto-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img className="assingto-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
+                        <img className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
                     </div>
                     {/* </div> */}
+
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}

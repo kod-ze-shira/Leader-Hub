@@ -121,7 +121,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -178,7 +178,7 @@ function Hub(props) {
                     {showToastComplete ?
                         <Toast /> : null}
                     {showContactList ?
-                        <ContactList />
+                        <ContactList hub={true} />
                         : null}
 
 
