@@ -61,6 +61,6 @@ margin-top: 15vh
 }
 
 
-input{
-  direction: auto;
+input,textarea,p,div{
+  unicode-bidi: plaintext !important;
 }
