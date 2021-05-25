@@ -170,15 +170,15 @@ function TaskDetails(props) {
     function filesInTask() {
         let newComponent
         props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
-            newComponent = addFileComponent(file.url, file.name)
+            newComponent = addFileComponent(file)
             if (!fileComponentArr.length)
                 setFileComponentArr([newComponent])
             else
                 setFileComponentArr([...fileComponentArr, newComponent])
         })
     }
-    const addFileComponent = (urlFile, nameFile) => {
-        return <File urlFile={urlFile} nameFile={nameFile} />
+    const addFileComponent = (file) => {
+        return <File urlFile={file.url} nameFile={file.name} file={file} />
     }
 
     function closeViewDetailsInTask() {
@@ -187,7 +187,7 @@ function TaskDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File url={file.url} name={file.name} />
+        return <File url={file.url} name={file.name} file={file} />
     }) : null
 
     $('.assingto-details').hover(function () {

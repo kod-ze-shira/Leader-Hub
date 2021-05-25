@@ -119,21 +119,52 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 }
 export const downloadFile = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILE') {
-        let urlFile = action.payload
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        debugger
-        $.ajax({
-            type: "GET",
-            url: "https://files.codes/api/" + getState().public_reducer.userName + "/download/" + urlFile,
-            headers: { Authentication: jwtFromCookie },
-            success: function (data) {
+        let urlFile = action.payload.url
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies
 
-            },
-            error: function (err) {
-                console.log(err);
-            },
-        });
+
+        fetch(
+            "https://files.codes/api/" +
+            getState().public_reducer.userName +
+            "/download/" +
+            urlFile,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: jwtFromCookie,
+                },
+            }
+        )
+            .then((resp) => resp.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = action.payload.name;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                // action.payload.e.stopPropagation()
+            })
+            .catch(() => console.log("oh no!"));
     }
+
+
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "https://files.codes/api/" + getState().public_reducer.userName + "/download/" + urlFile,
+    //     headers: { authorization: jwtFromCookie },
+    //     success: function (data) {
+    //         console.log('data')
+    //         console.log(data)
+    //     },
+    //     error: function (err) {
+    //         console.log(err);
+    //     },
+    // });
+    // }
     return next(action);
 }
 

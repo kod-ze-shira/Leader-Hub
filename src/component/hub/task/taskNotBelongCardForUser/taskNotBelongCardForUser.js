@@ -38,7 +38,8 @@ function TaskNotBelongCardForUser(props) {
 
                 {/* <FontAwesomeIcon class='cleanSearchTask' onClick={() => setNameTask('')} icon={["fas", "times"]} /> */}
                 <div className='input-group-task-not-belongs'>
-                    <input type="text" class="col-8 addTaskNotBelong  mr-2 ml-4"
+                    <input type="text" class="col-9 addTaskNotBelong  mr-2 
+                    "
                         value={nameTask}
                         placeholder="Write a task name"
                         onChange={(e) => setNameTask(e.target.value)}

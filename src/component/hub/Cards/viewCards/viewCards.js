@@ -65,7 +65,7 @@ function ViewCards(props) {
     const deleteCard = () => {
         // addNewStyle(`${props.cardFromMap._id} {display:none !important;}`)
         // document.getElementById(props.cardFromMap._id).setAttribute('style', 'display:none !important');
-
+        // debugger
         $(`#${props.cardFromMap._id}`).addClass("displayNone")
         // $(`#${props.cardFromMap._id + "disappear"}`).css("display", "none")
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })

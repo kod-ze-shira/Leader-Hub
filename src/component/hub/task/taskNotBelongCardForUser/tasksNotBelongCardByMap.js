@@ -245,7 +245,7 @@ function TasksNotBelongCardByMap(props) {
                 id={props.task._id + 'disappear'}
             >
 
-                <label className="check-task1 py-2 row  px-2 col-4 nameTaskNotBelong">
+                <label className="check-task1 py-2 row  px-2 col-4 ml-1 nameTaskNotBelong">
                     <label
                         className="check-task col-1">
                         <FontAwesomeIcon className="dnd-icon  " id={props.task._id}

@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function UploadFile(props) {
     const [uploadFile, setUploadFile] = useState([])
     const fileInputRef = useRef()
-    const [fileComponentArr, setFileComponentArr] = useState([])
     useEffect(() => {
         console.log(props);
     }, [props.files])
@@ -17,23 +16,12 @@ function UploadFile(props) {
 
 
     const uploadMulti = () => {
-        // setUploadFile([...uploadFile, file])
-
-        // let r = fileInputRef.current.file
+        // const [file] = fileInputRef.current.files[0]
+        // if (file) {
+        //     blah.src = URL.createObjectURL(file)
+        // }
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
-            // for (let index = 0; index < fileInputRef.current.files.length; index++) {
-            // if (!uploadFile)
-            //     setUploadFile([...fileInputRef.current.files[0]]);
-            // else
-            //     setUploadFile([...uploadFile, fileInputRef.current.files[0]])
-
-
-            // let newComponent = addFileComponent(fileInputRef.current.files[0].name, fileInputRef.current.files[0].name)
-            // if (!fileComponentArr.length)
-            //     setFileComponentArr([newComponent])
-            // else
-            //     setFileComponentArr([...fileComponentArr, newComponent])
 
 
         }
@@ -69,7 +57,6 @@ function UploadFile(props) {
                 onChange={() => uploadMulti()}
             />
             <div id='myFile'></div>
-            {fileComponentArr}
             {/* <button onClick={saveFiles}>save</button> */}
         </div>
     )

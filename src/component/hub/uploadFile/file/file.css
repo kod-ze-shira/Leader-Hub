@@ -3,9 +3,10 @@
     background-color: #EDFBFC !important;
     padding: 0px;
     color: #358A8D;
-
+    min-width:208px;
+    max-width: min-content;
+    height: 60px;
 }
-
 .imgFileInTask {
     height: 54px;
     width: 61px;

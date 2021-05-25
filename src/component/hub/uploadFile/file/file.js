@@ -4,36 +4,44 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './file.css'
 import { actions } from '../../../../redux/actions/action'
+import ReactDOM from 'react-dom'
 
 function File(props) {
+    const [file, setFile] = useState(null)
+    useEffect(() => {
 
+        if (props.url == 'new' && props.file)
+            setFile(URL.createObjectURL(props.file.file))
+    }, [props.file])
     function deleteFile() {
-        // alert('delete file')
         props.removeFileInRedux({ 'name': props.name, 'url': props.url })
-
-
-        // props.deleteFilesInTask([url])
-        // props.removeFile([props.url])
-
-        // props.removeFile('https://files.codes/uploads/renana-il/img/1618920248226__ת.ז. יהודה עם ספח נשוי.JPG')
-
-        // document.getElementById(props.urlFile).remove()
     }
-
+    function downloadFile(e) {
+        props.downloadFile({ 'url': props.url, 'name': props.name, 'e': e })
+        e.stopPropagation()
+    }
     return (
         <>
-            <div className='col-6 fileInTask' id={props.url ? props.url : props.name}>
-                <img className="imgFileInTask" src={props.url}></img>
-                <span className='nameFileInTask'>{props.name}</span>
+            <div className=' fileInTask ml-3 mb-3 ' id={props.url ? props.url : props.name}>
+                {props.url != 'new' ?
+                    <a href={props.url} target="_blank"> <img className="imgFileInTask" src={props.url}></img></a> :
+                    <img className="imgFileInTask" src={file}></img>}
+                {/* blah.src = URL.createObjectURL(file) */}
+
+                <span className='nameFileInTask'>
+                    {props.url != 'new' ?
+                        <a href={props.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.name}</a>
+                        : props.name}
+                </span>
                 {/* <FontAwesomeIcon className=''
                     icon={['fas', 'trash-alt']}
                 ></FontAwesomeIcon> */}
-                <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1'
+                <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
                     icon={['fas', 'trash-alt']}
                 ></FontAwesomeIcon>
                 {props.url != 'new' ?
-                    <FontAwesomeIcon className='downloadFileInTask' onClick={() => props.downloadFile(props.url)}
-                        icon={['fa', 'download']}
+                    <FontAwesomeIcon className='downloadFileInTask' onClick={(e) => downloadFile(e)}
+                        icon={['fa', 'download']} style={{ float: 'right' }}
                     ></FontAwesomeIcon>
                     : null}
             </div>

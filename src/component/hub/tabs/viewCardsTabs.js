@@ -17,7 +17,7 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        
+
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
                 document.getElementById("add-new-card").focus();
@@ -91,8 +91,11 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
+            // debugger
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
-            $(`#${props.cardFromMap._id}`).css("display", "none")
+            // $(`#${props.cardFromMap._id}`).css("display", "none")
+            $(`#${props.cardFromMap._id}`).addClass("displayNone")
+
         }
     }
 
