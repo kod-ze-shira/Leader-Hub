@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
-import FormInput  from "../../../../input";
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
@@ -47,30 +46,7 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
     });
 
-    // $('input, textarea').keyup(function(){
-    //    let $this = $(this);
-    //     if($this.val().length == 1)
-    //     {
-    //         var x =  new RegExp("[\x00-\x80]+"); // is ascii
     
-    //         //alert(x.test($this.val()));
-    
-    //         var isAscii = x.test($this.val());
-    
-    //         if(isAscii)
-    //         {
-    //             $this.css("direction", "ltr");
-    //         }
-    //         else
-    //         {
-    //             $this.css("direction", "rtl");
-    //         }
-    //     }
-    
-    // });
-
-    // document.getElementsByTagName("input").setAttribute("dir","auto");
-    $("input,textarea").attr("dir","auto");
 
     function stopP(event) {
         event.stopPropagation();

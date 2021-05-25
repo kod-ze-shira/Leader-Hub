@@ -5,6 +5,7 @@ import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacel
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
 import { useRef } from 'react'
+
 // let workspace;
 
 
@@ -21,9 +22,9 @@ function AddWorkspace(props) {
     let [myColor, setMyColor] = useState("#C967B6")
 
     const nameworkspae = useRef()
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, []);
+    // }, []);
 
     const changeColorWorkspace = (event) => {
         setMyColor(event.target.value)
@@ -132,9 +133,9 @@ function AddWorkspace(props) {
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div class="form-control descriptionWorkspace"
+                        <textarea class="form-control descriptionWorkspace"
                             id="description" rows="2" placeholder="Write a description about your workspace"
-                            onChange={handleChange} contentEditable></div>
+                            onChange={handleChange} contentEditable></textarea>
                     </div>
                     <div class="form-group">
                         <label for="color">Logo Color</label>
