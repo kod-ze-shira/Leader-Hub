@@ -160,15 +160,15 @@ function TaskNotBelongDetails(props) {
     function filesInTask() {
         let newComponent
         props.task.files.map((file) => {
-            newComponent = addFileComponent(file.url, file.name)
+            newComponent = addFileComponent(file)
             if (!fileComponentArr.length)
                 setFileComponentArr([newComponent])
             else
                 setFileComponentArr([...fileComponentArr, newComponent])
         })
     }
-    const addFileComponent = (urlFile, nameFile) => {
-        return <File urlFile={urlFile} nameFile={nameFile} />
+    const addFileComponent = (file) => {
+        return <File file={file} />
     }
 
     function closeViewDetailsInTask() {
@@ -177,7 +177,7 @@ function TaskNotBelongDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File url={file.url} name={file.name} />
+        return <File file={file} />
     }) : null
     return (
         <>
@@ -219,18 +219,6 @@ function TaskNotBelongDetails(props) {
                             onChange={(e) => changeFiledInTask(e)} contentEditable
                         ></textarea>
                     </div>
-
-
-
-                    {/* <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="description"
-                            id="descriptionProject" rows="2"
-                            onChange={(e) => changeFiledInTask(e)}
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
-                        </textarea>
-                    </div>
-                 */}
                     <div className="row justify-content-between">
                         <div class="form-group col-md-6 col-lg-5">
                             <label for="startDate">Start Date</label>
@@ -257,43 +245,8 @@ function TaskNotBelongDetails(props) {
 
                     </div>
                     <div className="row justify-content-between">
-                        {/* <div class="dropdown col-md-6 col-lg-5">
-                            <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {props.statuses && props.statuses.length > 0 ? <>
-
-                                    <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.task.status.color }} > </div>
-                                    <span className="ml-1">{props.task.statusName}</span>
-                                </> : null}
-                            </button>
-                            {openPopUp ?
-                                <div onClick={(e) => stopP(e)}>
-                                    <ViewAllStatuses
-                                        task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
-                                        status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                        openPopUp={openPopUp} />
-                                </div>
-                                : null}
-
-                        </div>
-                    */}
-                        {/* <div className="row mb-3"> */}
-                        {/* <div className="col-md-6 col-lg-5">
-                            <span className="milestones-span mt-2">Mark as milestone</span>
-                            <label className="switch ml-2 mt-1">
-                                <input type="checkbox"
-                                    name="milestones"
-                                    checked={milstone}
-                                    value={props.task.milestones}
-                                    onChange={(e) => changeFiledInTask(e)}
-                                />
-                                <span className="slider round" ></span>
-
-
-                            </label>
-                        </div>
-                 */}
                     </div>
-                    {/* </div> */}
+
                     {newFileComponentArr}
                     <hr></hr>
 
@@ -305,14 +258,11 @@ function TaskNotBelongDetails(props) {
                         <img className="delete-task" src={require('../../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
-                    {/* <div className="files-details ">
-                        <img className="files-task" src={require('../../../../img/share-icon.png')}></img>
-                        <img className="files-task-hover" src={require('../../../../img/share-hover.png')} onClick={(e) => deleteTask(e)} ></img>
-                    </div> */}
-                    <div className="assingto-details ">
+
+                    <div className="files-details ">
                         <UploadFile />
-                        <img className="assingto-task" src={require('../../../../img/files-icon.png')} ></img>
-                        <img className="assingto-task-hover" src={require('../../../../img/files-hover.png')} ></img>
+                        <img className="files-task" src={require('../../../../img/files-icon.png')} ></img>
+                        <img className="files-task-hover" src={require('../../../../img/files-hover.png')} ></img>
                     </div>
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>

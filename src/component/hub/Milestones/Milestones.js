@@ -21,8 +21,8 @@ function Milestones(props) {
     }) : null
 
     return (
-        <div className="body-workspace mt-4">
-            <div className=" row justify-content-start mill mx-4 mt-4">
+        <div className="body-workspace ">
+            <div className=" row justify-content-start mill mx-4 ">
                 <p className="milstoneTitle pl-3">My Milestones</p>
             </div >
 
