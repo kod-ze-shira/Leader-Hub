@@ -217,6 +217,21 @@ function TasksNotBelongCardByMap(props) {
             // props.setTaskComplete(completeTask)
         }
     }
+    function setPropertiesOfTask() {
+        
+        let completeTask = {
+            "_id": props.task._id,
+            "name": props.task.name,
+            "description": props.task.description,
+            "dueDate": props.task.dueDate,
+            "startDate": props.task.startDate,
+            "complete": props.task.comlited,
+            "endDate": props.task.endDate,
+            // "status": props.statuses[0],
+            "card": props.task.card ? props.task.card : ''
+        }
+        props.completeTask(completeTask)
+    }
 
 
     // function chooseCard() {

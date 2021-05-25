@@ -65,7 +65,7 @@ function DynamicSelect(props) {
   // })
   const [value, setValue] = useState()
   const handleChange = (newValue, actionMeta) => {
-    debugger
+    
     if (newValue) {
       console.group('Value Changed');
       console.log(newValue);

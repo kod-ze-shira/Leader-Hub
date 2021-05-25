@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
@@ -54,11 +53,11 @@ function TaskDetails(props) {
     //     if($this.val().length == 1)
     //     {
     //         var x =  new RegExp("[\x00-\x80]+"); // is ascii
-    
+
     //         //alert(x.test($this.val()));
-    
+
     //         var isAscii = x.test($this.val());
-    
+
     //         if(isAscii)
     //         {
     //             $this.css("direction", "ltr");
@@ -68,11 +67,11 @@ function TaskDetails(props) {
     //             $this.css("direction", "rtl");
     //         }
     //     }
-    
+
     // });
 
     // document.getElementsByTagName("input").setAttribute("dir","auto");
-    $("input,textarea").attr("dir","auto");
+    $("input,textarea").attr("dir", "auto");
 
     function stopP(event) {
         event.stopPropagation();
@@ -270,7 +269,7 @@ function TaskDetails(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name"
-                        // dir="auto"
+                            // dir="auto"
                             required ref={nameRequired}
                             // type="text" 
                             class="form-control"
@@ -285,7 +284,7 @@ function TaskDetails(props) {
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control"
-                        // dir="auto"
+                            // dir="auto"
                             rows="3"
                             placeholder="Write a description about your workspace"
                             name="description"
