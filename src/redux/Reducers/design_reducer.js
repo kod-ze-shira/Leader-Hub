@@ -21,7 +21,7 @@ const design = {
     saveWidthScreenInRedux(state, action) {
         state.widthCurrentScreen = action.payload
     },
-    saveHightScreenInRedux(state, action) {
+    saveHeightScreenInRedux(state, action) {
         state.heightCurrentScreen = action.payload
     }
 }

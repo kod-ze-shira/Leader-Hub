@@ -103,9 +103,7 @@ function Tabs(props) {
             props.newCard(card)
         }
         setInputValue("")
-        props.setCurrentIndexCard(props.cards.length)
-        setOpenInputTask(true)
-        // setShowInput(false)
+        setShowInput(false)
     }
     const openViewDetails = (task) => {
         setViewDetails(true)

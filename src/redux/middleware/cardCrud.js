@@ -1,11 +1,12 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import configData from '../../ProtectedRoute/configData.json'
 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
-        // let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + projectId + "/getSortCardsProjectByIndex"
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
+        // let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -35,7 +36,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
 export const newCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_CARD') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newCard`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newCard`
         let card = action.payload;
         $.ajax({
             url: urlData,
@@ -63,7 +64,7 @@ export const newCard = ({ dispatch, getState }) => next => action => {
 export const editCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_CARD') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editCard`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
         console.log("a" + card.name)
@@ -95,7 +96,7 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_CARD_BY_ID') {
         // let workspace = getState().workspace_reducer;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/removeCardById`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload}/removeCardById`
         $.ajax({
             url: urlData,
             type: 'POST',

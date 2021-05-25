@@ -215,8 +215,8 @@ function ViewTaskByCrad(props) {
                                 </label>
                                 <label className="check-task border-left  px-2 col">{props.task.dueDate}
                                 </label>
-                                {/* <label className="check-task border-left  px-2 col-add-task">
-                                </label> */}
+                                <label className="check-task border-left  px-2 col-add-task">
+                                </label>
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask}

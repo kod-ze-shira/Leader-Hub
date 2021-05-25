@@ -1,10 +1,12 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import configData from '../../ProtectedRoute/configData.json'
 
+// ${configData.SERVER_URL}
 export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type == "GET_WORKSPACE_BY_ID_FROM_SERVER") {
         let workspaceId = action.payload;
-        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
+        let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
         fetch(url, {
             method: 'GET',
             headers: { authorization: getState().public_reducer.tokenFromCookies }
@@ -25,7 +27,7 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
     // return new Promise((resolve, reject) => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getWorkspacesForUser"
+        let urlData = `${configData.SERVER_URL}/${ getState().public_reducer.userName}/getWorkspacesForUser`
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
             {
@@ -55,7 +57,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newWorkspace`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newWorkspace`
         let workspace = action.payload
 
         $.ajax({
@@ -90,7 +92,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
         let workspaceBeforeChanges = action.payload.workspaceBeforeChanges
         let workspace = { 'workspace': getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace] };
         // delete workspace.workspace.projects
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editWorkspace`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -117,9 +119,8 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
         let workspaceId = action.payload
-        debugger
         let workspace = getState().workspace_reducer.workspace;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
 
         $.ajax({
             url: urlData,
@@ -146,7 +147,7 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
-        fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
+        fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',
                 headers: {
