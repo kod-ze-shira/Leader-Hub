@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
+
 import { actions } from '../../../redux/actions/action'
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
@@ -36,7 +37,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [open, setOpen] = useState(true)
         const [oldObject, setOldObject] = useState()
         const { from } = props//to know from which component its come
-
+      
+        
         function showToast(val) {
             props.showToast(val)
         }

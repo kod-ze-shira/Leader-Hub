@@ -42,6 +42,10 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     // const [objectToDelete, setObjectToDelete] = useState()
+    useEffect(() => {
+        $("input,textarea,p").attr("dir", "auto");
+
+    }, []);
 
     const showToastToDelete = (objectToDelete_) => {
 
@@ -99,7 +103,6 @@ function Hub(props) {
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
-    $("input,textarea").attr("dir", "auto");
 
     return (
         <>
