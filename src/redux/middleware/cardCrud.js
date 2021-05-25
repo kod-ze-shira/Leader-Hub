@@ -5,8 +5,8 @@ import configData from '../../ProtectedRoute/configData.json'
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
         var projectId = action.payload;
-        // let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
+        // let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
         $.ajax({
             url: urlData,
             type: 'GET',
