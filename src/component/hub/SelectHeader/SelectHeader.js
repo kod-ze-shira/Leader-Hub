@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SelectHeader(props) {
-    debugger
     const classes = useStyles();
 
     // const [value, setValue] = useState(props.number);
