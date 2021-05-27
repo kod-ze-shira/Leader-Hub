@@ -10,6 +10,7 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
+import placeholder from '../../../img/placeholder.png'; // with import
 
 
 function TasksNotBelongCardByMap(props) {
@@ -112,7 +113,7 @@ function TasksNotBelongCardByMap(props) {
                 </div >
         } : null
     )) : null
-
+    const selectPlaceHorder = <img src={placeholder}></img>
     const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
             setMyCards(null)
@@ -157,11 +158,11 @@ function TasksNotBelongCardByMap(props) {
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
             // chooseProject()
-           
+
 
         }
     };
-    console.log("indexOfProject",indexOfProject);
+    console.log("indexOfProject", indexOfProject);
 
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
@@ -290,46 +291,47 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
+                <div className="col-4 row">
+                    <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
-                <label className="check-task1 py-2 row  px-2 col-4 nameTaskNotBelong">
+                        <label
+                            className="check-task col-1">
+                            {/* className="check-task ml-3 py-2 pl-5 col-1 "> */}
+                            {/* <input type="checkbox" /> */}
 
-                    <label
-                        className="check-task col-1">
-                        {/* className="check-task ml-3 py-2 pl-5 col-1 "> */}
-                        {/* <input type="checkbox" /> */}
+                            <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
+                                icon={['fas', 'grip-vertical']}
+                            ></FontAwesomeIcon>
 
-                        <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
-                            icon={['fas', 'grip-vertical']}
-                        ></FontAwesomeIcon>
+                            <input
+                                type="checkbox"
+                                name="name" id="name" title={props.task.name}
+                                checked={props.task.complete}
+                                className={props.task.complete ? "disabled show-card " : "show-card "}
+                                value={props.task.name}
+                                onChange={(e) => changeFiledInTask(e)}
+                                onBlur={(e) => editTask()}
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        editTask()
+                                    }
+                                }}
+                            />
+                            <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
 
-                        <input
-                            type="checkbox"
-                            name="name" id="name" title={props.task.name}
-                            checked={props.task.complete}
-                            className={props.task.complete ? "disabled show-card " : "show-card "}
-                            value={props.task.name}
-                            onChange={(e) => changeFiledInTask(e)}
-                            onBlur={(e) => editTask()}
-                            onKeyPress={e => {
-                                if (e.key === 'Enter') {
-                                    editTask()
-                                }
-                            }}
-                        />
-                        <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
-
+                        </label>
+                        <label className='col-10'>
+                            {props.task.name}
+                        </label>
                     </label>
-                    <label className='col-10'>
-                        {props.task.name}
-                    </label>
-                </label>
 
-                <label className="check-task    view-details-btn" >
-                    <button
-                        onClick={(e) => openViewDetails(e)}
-                    >view details +</button>
-                </label>
-                <label className="check-task border-left  py-2  px-2 col-2 workspaceN ">
+                    <label className="check-task col    view-details-btn" >
+                        <button
+                            onClick={(e) => openViewDetails(e)}
+                        >view details +</button>
+                    </label>
+                </div>
+                <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN ">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
                     <CreatableSelect
                         isClearable
@@ -338,7 +340,9 @@ function TasksNotBelongCardByMap(props) {
                         // value='dd'
                         id='selectWorkspaceInTasksNotBelong'
                         className='selectWorkspaceInTasksNotBelong'
+                        placeholder={selectPlaceHorder}
                         options={workspaceSelect}
+
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
@@ -347,12 +351,13 @@ function TasksNotBelongCardByMap(props) {
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeProject}
+                        placeholder={selectPlaceHorder}
                         // onInputChange={handleInputChange}
                         id='selectProjectInTasksNotBelong'
                         className='selectProjectInTasksNotBelong'
                         options={projectSelect}
-                        value=  {  indexOfProject!==null ? 
-                            projectSelect[indexOfProject] : 'Select...' }
+                        value={indexOfProject !== null ?
+                            projectSelect[indexOfProject] : 'frf'}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
@@ -365,8 +370,10 @@ function TasksNotBelongCardByMap(props) {
                         className='selectCardInTasksNotBelong'
                         // onInputChange={handleInputChange}
                         options={cardsSelect}
-                        value=  {  indexOfCard!==null ? 
-                            cardsSelect[indexOfCard] : 'Select...' }
+                        placeholder={selectPlaceHorder}
+
+                        value={indexOfCard !== null ?
+                            cardsSelect[indexOfCard] : 'Select...'}
                     />
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
