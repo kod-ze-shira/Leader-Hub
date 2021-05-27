@@ -28,6 +28,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     data: formData,
                     success: (data) => {
 
+                        // let size = data.filesData.file0.size / 1024 / 1024
                         var myData = { "files": data.filesData }
                         if (action.payload.type == 'taskNotBelong')
                             dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
@@ -42,6 +43,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                                 headers: { "authorization": jwtFromCookie },
                                 data: myData,
                                 success: (data) => {
+
                                     if (action.payload.type != 'taskNotBelong') {
 
                                         let cards = getState().public_reducer.cards;
@@ -90,9 +92,9 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
 }
 
 export const downloadFile = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'DOWNLOAD_FILE') {
 
-        let file = action.payload
+    if (action.type === 'DOWNLOAD_FILE') {
+        let file = action.payload.file
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
         fetch(
             "https://files.codes/api/" +
@@ -106,10 +108,9 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
                 },
             }
         )
-            .then((resp) => {
+            .then((resp) =>
 
-                resp.blob()
-            })
+                resp.blob())
             .then((blob) => {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
@@ -117,6 +118,7 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
                 a.href = url;
                 a.download = file.name;
                 document.body.appendChild(a);
+                // action.payload.e.stopPropagation()
                 a.click();
                 window.URL.revokeObjectURL(url);
 
