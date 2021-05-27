@@ -54,9 +54,9 @@ function TaskNotBelongCardForUser(props) {
                 </div> {/* </span> */}
                 <div class="show-task row mx-4 mt-3 headerTableTask" >
                     <label class="ml-3 pl-6 col-3 labelAllTask"> My task </label>
-                    <label class="col propertiesAllTask ml-4">Workspace</label>
-                    <label class="col propertiesAllTask">Project</label>
-                    <label class=" col propertiesAllTask">Card</label>
+                    <label class="col-2 propertiesAllTask ml-4">Workspace</label>
+                    <label class="col-2 propertiesAllTask">Project</label>
+                    <label class=" col-2 propertiesAllTask">Card</label>
                     <label class=" col propertiesAllTask"></label>
                 </div>
 
