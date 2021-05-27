@@ -99,7 +99,7 @@ function Hub(props) {
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
-    $("input,textarea").attr("dir","auto");
+    $("input,textarea").attr("dir", "auto");
 
     return (
         <>
@@ -154,7 +154,12 @@ function Hub(props) {
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
-
+                            <ProtectedRoute path={'/:emailShare/hub/:idProject/:userName/share'}>
+                                <CardsPage
+                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewContactList={(val) => setShowContactList(true)}
+                                    focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
@@ -189,7 +194,7 @@ function Hub(props) {
 
             </Router >
 
-        
+
         </>
     )
 }
