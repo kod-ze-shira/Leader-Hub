@@ -190,7 +190,7 @@ function TaskDetails(props) {
         return <File file={file} />
     }
     const assingto = (e) => {
-        debugger
+        
         setShowContactList(true)
         console.log(showContactList)
     }

@@ -11,8 +11,8 @@
 
 }
 .card-width{
-  width: 36vh !important;
-  display: inline-block ; 
+  width: 38vh !important;
+  display: inline-block !important; 
 }
 .card-body {
   padding: 1rem !important;
