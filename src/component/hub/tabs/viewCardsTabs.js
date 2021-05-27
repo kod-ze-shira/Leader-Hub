@@ -179,6 +179,7 @@ function ViewCardsTabs(props) {
                                                             indexCard={props.indexCard}
                                                             indexTask={index}
                                                             viewToastComplete={props.viewToastComplete}
+                                        
                                                             viewContactList={props.viewContactList} />
                                                     ))}
 

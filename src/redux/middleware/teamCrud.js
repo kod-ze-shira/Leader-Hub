@@ -136,38 +136,11 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
-// {{urlHub}}/api/ranana-il/{{taskId}}/assingTo
-// export const assingTo = ({ dispatch, getState }) => next => action => {
 
-//   if (action.type === 'ASSING_TO') {
-//     let email = action.payload
-//     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-//     .tasks[getState().public_reducer.indexCurrentTask]._id
-//     fetch(`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/assingTo`,
-//       {
-//         method: 'POST',
-//         headers: {
-//           authorization: getState().public_reducer.tokenFromCookies,
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({ email })
-//       }).then((result) => {
-//         return result.json();
-//       }).then((result) => {
-//         checkPermission(result).then((ifOk) => {
-//           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
-
-//         })
-
-//       })
-
-//   }
-//   return next(action);
-// }
 export const assingTo = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'ASSING_TO') {
+    debugger
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;
@@ -183,6 +156,7 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ email }),
 
       success: function (data) {
+        debugger
         console.log("success")
         console.log("data", data);
         let editTaskInRedux = { "nameFiled": "assingTo", "value": data.task.assingTo }

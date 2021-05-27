@@ -7,7 +7,7 @@ const initialState = {
     widthCurrentScreen: '',
     heightCurrentScreen: '',
     widthContactsList: 300,
-    heightContactsList: 380
+    heightContactsList: 200
 
 }
 const design = {

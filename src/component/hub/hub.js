@@ -179,11 +179,8 @@ function Hub(props) {
                         <Toast /> : null}
                     {showContactList ?
                         <ContactList hub={true} />
-                        : null}
-
-
-                    {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
-                    {/* setShowViewDitails={} */}
+                        : null
+                    }
                 </div>
 
             </Router >

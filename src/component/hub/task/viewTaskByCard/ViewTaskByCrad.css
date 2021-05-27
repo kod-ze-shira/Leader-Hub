@@ -16,10 +16,7 @@
   .check-task button:focus{
     outline: 0;
   }
-  /* .check-task:first-child{
-    text-align: left !important;
-    padding-left: 3vw;
-  } */
+ 
   .check-task:nth-child(2){
     text-align: left !important;
   }
@@ -55,18 +52,18 @@
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    height: 23px;
-    width: 23px;
+    height: 21px;
+    width: 21px;
     background-color: #FFFFFF;
-    border: 1px solid #34A38B;
-    border-radius: 50%;
+    border: 1px solid #C4CCD5;
+        border-radius: 50%;
     
   }
   .checkmark-tabs{
     left: 6% !important;
   }
   .checkmark-place{
-    top: 7px;
+    top: 6px;
     left: 0;
     
   }
@@ -78,7 +75,7 @@
   
   /* When the checkbox is checked, add a blue background */
   .check-task input:checked ~ .checkmark {
-    background: transparent linear-gradient(270deg, #44D7B6 0%, #329A80 100%) 0% 0% no-repeat padding-box;
+    background-color:rgb(79, 216, 186);
   }
   
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -114,11 +111,11 @@
   }
   /* Style the checkmark/indicator */
   .check-task .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 8px;
+    top: 4px;
     width: 5px;
     height: 10px;
-    border: solid rgb(207, 207, 207);
+    border: solid rgb(231, 231, 231);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);

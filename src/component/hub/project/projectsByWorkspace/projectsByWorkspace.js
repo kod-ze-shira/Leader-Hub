@@ -58,9 +58,11 @@ function ProjectsByWorkspace(props) {
 
     const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
         props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
+            debugger
             let p = project.name ? project : project.project
             return project.name.toUpperCase().includes(valueSearch.toUpperCase())
-                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                ?
+                <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     indexProject={index}
                     myProject={p}
@@ -125,7 +127,7 @@ function ProjectsByWorkspace(props) {
                             <ReactTooltip data-tip id="add_p" place="top" effect="solid">
                                 {title.title_add_project}
                             </ReactTooltip>
-                                            
+
                         </div>
                     </div>
 

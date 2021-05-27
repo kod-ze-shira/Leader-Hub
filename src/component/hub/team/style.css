@@ -26,7 +26,7 @@ body {
 }
 
 .css-tlfecz-indicatorContainer{
-  display:none !important;
+  /* display:none !important; */
 }
 
 .viewer{
@@ -63,7 +63,7 @@ body {
 
 .inputMails:focus {
   border-color: cornflowerblue;
-  outline: none;
+  /* outline: none; */
 }
 
 .inputMails.has-error {
@@ -106,8 +106,8 @@ body {
     margin-left: 2px;
     
 }.css-tj5bde-Svg {
-  display:none !important;
-  opacity:0 !important;
+  /* display:none !important; */
+  /* opacity:0 !important; */
 }
 .choose{
   border: #007bff 2px solid;
@@ -115,12 +115,12 @@ body {
    color: #007bff;
 }
 .css-2b097c-container:focus{
-  border:0 !important;
-  outline: none !important;
+  /* border:0 !important;
+  outline: none !important; */
 }
 .css-tlfecz-indicatorContainer:focus{
-  border:0 !important;
-  outline: none !important;
+  /* border:0 !important;
+  outline: none !important; */
 }
 .logo-contact{
   border-radius: 50%;

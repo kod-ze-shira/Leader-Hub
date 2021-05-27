@@ -160,17 +160,23 @@ body {
 .div_contacts_list{
     overflow-y: auto;
     overflow-x: hidden !important;
-    height: 400px;
-    }
+
+  }
     .invite-contact{
         background-color:#f7f5f5 !important;
-margin-top: 2vh !important;
+margin-top: 0.5vh !important;
 /* margin-bottom: 2vh !important; */
 
     }
-    /* .invite-btn{
-        position: absolute;
-    } */
+
+.btn-none{
+  display: none
+}
+
+
+    .invite-btn{
+display:block    
+}
     form {
         /* This bit sets up the horizontal layout */
         display:flex;
