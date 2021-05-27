@@ -3,5 +3,9 @@
     background: #0000000A;
     border: none;
     width: 17vw;
-    height: 6vh;
+    height: 4vh;
+    font:'normal normal normal 16px/19px Roboto'
+}
+.input_member_new_team{
+    width: 21vw;
 }

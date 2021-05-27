@@ -2,8 +2,82 @@
     /* margin-right: 5%; */
 }
 .name-workspace-email{
-    color:#00C1C9;
+    color:#00C1C9;text-align: center;
+   
+}
+.title{
+    color:  #778CA2;
 }
 .body-email-assingTo{
    margin-right: 18%;  
+}
+.body-email-assingTo >p ,.body-email-assingTo >div,.body-email-assingTo >h2,.body-email-assingTo >h1{
+    text-align: center;
+}
+
+.details-of-task{
+    background-color: rgb(230, 227, 227);
+}
+.details-of-task{
+    margin: auto;
+}
+.logo-of-w {
+    width: 30px;
+    height: 30px;
+    /* background: #2BB4FB 0% 0% no-repeat padding-box; */
+    text-align: center;
+    font: normal normal medium 30px/39px Roboto;
+    /* letter-spacing: 1.26px; */
+    color: #FFFFFF;
+    text-transform: uppercase;
+    opacity: 1;
+    border-radius: 50%;
+    /* padding-top: 5px; */
+    font-size: 19px;
+    font-weight: bold;
+    background-color: rgb(94, 212, 228);
+}
+
+.workspase-whith-logo > span,.workspase-whith-logo > p {
+    display: inline-block !important;
+}
+.workspase-whith-logo > p{
+    color: rgb(39, 200, 221) ;
+}
+.project-logo > div{
+    border-radius: 10px;
+    height: 10px;
+    width: 10px;
+    background-color:#FD808B  ;
+}
+.project-logo > div,.project-logo > p{
+    display: inline-block;
+}
+.project-logo > p{
+    color:#FD808B
+}
+.card--->p{
+    font-weight: bold;
+}
+.task-det>p{
+    text-align: left;
+}
+.task-name{
+    color:#778CA2
+}
+.border-line{
+    border: 1px solid var(--unnamed-color-778ca2);
+    border: 1px solid #778CA2;
+    opacity: 0.21;
+}
+
+.assigned-to >p,.assigned-to>img{
+    display: inline-block;
+    color: #778CA2 !important;
+}
+.assigned-to,.det{
+    display: inline-block;
+}
+.det{
+    font-weight: bold;
 }

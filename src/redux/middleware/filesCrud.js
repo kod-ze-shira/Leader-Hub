@@ -91,6 +91,7 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
 
 export const downloadFile = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILE') {
+
         let file = action.payload
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
         fetch(
@@ -105,7 +106,10 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
                 },
             }
         )
-            .then((resp) => resp.blob())
+            .then((resp) => {
+
+                resp.blob()
+            })
             .then((blob) => {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");

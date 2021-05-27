@@ -181,73 +181,75 @@ function TaskNotBelongDetails(props) {
     }) : null
     return (
         <>
-            <div className="details task-details mr-4 ml-4"
+            <div className="details task-details ml-4"
                 onClick={(e) => stopP(e)}
             >
                 <div className='propertiesViewDitails'>
-                    <div className='row mt-4 justify-content-between headerDitails'>
-                        <h5 className=" title-view-details   pl-3">Task details</h5>
-                        <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
-                        {/* <h5 className="mt-5 title-view-details pb-2">Task details</h5> */}
+                    <div className='mr-4 '>
+                        <div className='row mt-4 justify-content-between headerDitails'>
+                            <h5 className=" title-view-details   pl-3">Task details</h5>
+                            <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
-                    </div>
+                        </div>
 
-                    <div className="row justify-content-between mx-1" >
-                        <label>Create {props.task.startDate}</label>
-                        <label className="">Last Update {props.task.dueDate}</label>
-                    </div>
-                    <div class="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
-                        <input name="name"
-                            required ref={nameRequired}
-                            type="text" class="form-control"
-                            id="name"
-                            onChange={(e) => changeFiledInTask(e)}
-                            value={props.task.name} />
-                        <div class="invalid-feedback">
-                            Please enter task name.
+                        <div className="row justify-content-between mx-1" >
+                            <label>Create {props.task.startDate}</label>
+                            <label className="">Last Update {props.task.dueDate}</label>
+                        </div>
+                        <div class="form-group" id='nameRequired'>
+                            <label for="name">Name</label>
+                            <input name="name"
+                                required ref={nameRequired}
+                                type="text" class="form-control"
+                                id="name"
+                                onChange={(e) => changeFiledInTask(e)}
+                                value={props.task.name} />
+                            <div class="invalid-feedback">
+                                Please enter task name.
                      </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control"
-                            rows="3"
-                            placeholder="Write a description about your workspace"
-                            name="description"
-                            value={props.task.description}
-                            onChange={(e) => changeFiledInTask(e)} contentEditable
-                        ></textarea>
-                    </div>
-                    <div className="row justify-content-between">
-                        <div class="form-group col-md-6 col-lg-5">
-                            <label for="startDate">Start Date</label>
-                            <input
-                                className="form-control"
-                                name="startDate"
-                                type="date"
-                                id="startDate"
-                                value={startDateTask}
-                                onChange={(e) => changeFiledInTask(e)}
-                            />
-                        </div>
-                        <div class="form-group col-md-6 col-lg-5">
-                            <label for="dueDate">Due Date</label>
-                            <input
-                                className="form-control "
-                                name="dueDate"
-                                type="date"
-                                id="dueDate"
-                                value={dueDateTask}
-                                onChange={(e) => changeFiledInTask(e)}
-                            />
                         </div>
 
-                    </div>
-                    <div className="row justify-content-between">
-                    </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control"
+                                rows="3"
+                                placeholder="Write a description about your workspace"
+                                name="description"
+                                value={props.task.description}
+                                onChange={(e) => changeFiledInTask(e)} contentEditable
+                            ></textarea>
+                        </div>
+                        <div className="row justify-content-between">
+                            <div class="form-group col-md-6 col-lg-5">
+                                <label for="startDate">Start Date</label>
+                                <input
+                                    className="form-control"
+                                    name="startDate"
+                                    type="date"
+                                    id="startDate"
+                                    value={startDateTask}
+                                    onChange={(e) => changeFiledInTask(e)}
+                                />
+                            </div>
+                            <div class="form-group col-md-6 col-lg-5">
+                                <label for="dueDate">Due Date</label>
+                                <input
+                                    className="form-control "
+                                    name="dueDate"
+                                    type="date"
+                                    id="dueDate"
+                                    value={dueDateTask}
+                                    onChange={(e) => changeFiledInTask(e)}
+                                />
+                            </div>
 
-                    {newFileComponentArr}
+                        </div>
+                        <div className="row justify-content-between">
+                        </div>
+                    </div>
+                    <div className='row  d-flex justify-content-between mr-3 ml-3'>
+                        {newFileComponentArr}
+                    </div>
                     <hr></hr>
 
                 </div>

@@ -11,10 +11,9 @@ import ContactList from './component/hub/contact/contactList';
 import $ from 'jquery'
 
 export default function App(props) {
-
   return (
     <>
-      <Provider  store={Store}>
+      <Provider store={Store}>
         <>
           <Hub></Hub>
           {/* <BodyEmailOfAssignmentTask/> */}

@@ -408,6 +408,7 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ cardsList }),
             success: function (data) {
+                debugger
                 console.log("success")
                 console.log(data);
                 dispatch(actions.setCards(data.cards))

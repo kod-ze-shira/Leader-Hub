@@ -7,7 +7,8 @@ import DynamicSelect from '../../team/dynamicSelect'
 import TeamsShare from '../../team/teamsShare/teamsShare'
 import ShareOneMember from '../share/shareOneMember/shareOneMember'
 import './shareProject.css'
-
+import $ from 'jquery'
+import arrow_select from '../../../../component/img/arrow_select.svg'
 function ShareProject(props) {
     const [shareDetails, setShareDetails] = useState([])//all contacts details
     const [membersTeamEmails, setMembersTeamEmails] = useState([])//team members
@@ -21,9 +22,9 @@ function ShareProject(props) {
     const setStateMailToContactMail = (emailMember) => {
         let shareDetailToAdd
         if (typeof (emailMember.value) === 'object')//its contact 
-            shareDetailToAdd = { 'shareDetail': emailMember.value, 'permission': permissionContact }
+            shareDetailToAdd = { 'member': emailMember.value, 'permission': permissionContact }
         else// he not my contact
-            shareDetailToAdd = { 'shareDetail': { 'email': emailMember.value }, 'permission': permissionContact }
+            shareDetailToAdd = { 'member': { 'email': emailMember.value }, 'permission': permissionContact }
         setShareDetails([...shareDetails, shareDetailToAdd])
     }
     //onselect perrmision to contact his  permission will save in state
@@ -44,7 +45,7 @@ function ShareProject(props) {
         let shareDetailToAdd
         membersTeamEmails.forEach(element => {
             //to add perrmision all members team
-            shareDetailToAdd = { 'shareDetail': element, 'permission': permissionTeam }
+            shareDetailToAdd = { 'member': element, 'permission': permissionTeam }
             shareDetailsTemp.push(shareDetailToAdd)
 
         })
@@ -62,7 +63,7 @@ function ShareProject(props) {
     const changePermissionContactAfterRender = (event, shareDetailWithNewPermission) => {
         let permission = event.target.options[event.target.selectedIndex].label
         shareDetails.find(detail => {
-            if (detail.shareDetail.email == shareDetailWithNewPermission.shareDetail.email)
+            if (detail.member.email == shareDetailWithNewPermission.member.email)
                 detail.permission = permission
         })
     }
@@ -72,7 +73,7 @@ function ShareProject(props) {
         teams.forEach(team => {
             if (team.teamId == teamId)
                 team.members.find(member => {
-                    if (member.shareDetail.email == shareDetailWithNewPermission.shareDetail.email)
+                    if (member.member.email == shareDetailWithNewPermission.member.email)
                         member.permission = permission
                 })
         });
@@ -101,9 +102,10 @@ function ShareProject(props) {
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
     }
+
     return (
         <>
-            <div className="details mr-5 ml-4">
+            <div onClick={()=>setShowTeams(false)} className="details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-1 mb-2">Share Project</h5>
                 <div class="row justify-content-between  mx-1 mb-2">
                     <p className="txt_description_share">your teammates will get an email that gives them access to your team.</p>
@@ -131,9 +133,17 @@ function ShareProject(props) {
                 </div>
                 <div className="row">
                     <div className="col-md-9">
-                        <div className='div_choose_team' onClick={() => setShowTeams(true)}>
+                        <div className='row'>
+                            <div className='col-10'>
+                               <div className='div_choose_team'>
                             Choose Team
+                        </div> 
+                            </div>
+                            <div className='col-1 my-auto'  onClick={(e) => {setShowTeams(true) ; e.stopPropagation()}}>
+                                <img src={arrow_select}></img>
+                            </div>
                         </div>
+                        
 
                         {/* <DynamicSelect
                             options={'teams'}
