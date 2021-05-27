@@ -24,7 +24,7 @@ function ProjectsPage(props) {
     }
 
     return (
-        <div className="mt-4" >
+        <div className="" >
             <SelectHeader selectProject={selectProject} flag={changeFlag} from={from} menue={false} />
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}

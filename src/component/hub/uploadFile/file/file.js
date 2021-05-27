@@ -2,33 +2,39 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import './file.css'
 import { actions } from '../../../../redux/actions/action'
 
 function File(props) {
 
+    const [file, setFile] = useState()
+    useEffect(() => {
+
+        if (props.file.url == 'new' && props.file) {
+            setFile(URL.createObjectURL(props.file.file))
+        }
+
+    }, [props.file])
     function deleteFile() {
-        // alert('delete file')
-        props.removeFileInRedux({ 'name': props.name, 'url': props.url })
-
-
-        // props.deleteFilesInTask([url])
-        // props.removeFile([props.url])
-
-        // props.removeFile('https://files.codes/uploads/renana-il/img/1618920248226__ת.ז. יהודה עם ספח נשוי.JPG')
-
-        // document.getElementById(props.urlFile).remove()
+        props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
     }
 
     return (
         <>
-            <div style={{ 'display': 'inline-block' }} id={props.url ? props.url : props.name}>
-                <button onClick={() => deleteFile()} >X</button>
-                {props.url != 'new' ?
-                    <a href={props.url} target="_blank">{props.name}</a>
-                    : <p>{props.name}</p>
+            <div className='divFile' style={{ 'display': 'inline-block' }} id={props.file.url ? props.file.url : props.file.name}>
+
+                <FontAwesomeIcon icon={["fa", "trash-alt"]} onClick={() => deleteFile()} />
+                {props.file.url != 'new' ?
+                    <a href={props.file.url} target="_blank">{props.file.name}</a>
+                    : <p>{props.file.name}</p>
                 }
-                {/* <FontAwesomeIcon icon={["fas", "download"]} onClick={() => props.downloadFile(props.url)} /> */}
+
+                {props.file.url != 'new' ?
+                    <img className="menu-open-close imgInFile" src={props.file.url}></img>
+                    :
+                    <img className="menu-open-close imgInFile" src={file}></img>
+                }
+                <FontAwesomeIcon icon={["fas", "download"]} onClick={() => props.downloadFile(props.file)} />
             </div>
         </>
     )
@@ -42,7 +48,7 @@ export default connect(
     },
     (dispatch) => {
         return {
-            // downloadFile: (url) => dispatch(actions.downloadFile(url)),
+            downloadFile: (file) => dispatch(actions.downloadFile(file)),
             removeFileInRedux: (filesArr) => dispatch(actions.removeFileInRedux(filesArr)),
             deleteFilesInTask: (filesArr) => dispatch(actions.deleteFilesInTask(filesArr)),
         }

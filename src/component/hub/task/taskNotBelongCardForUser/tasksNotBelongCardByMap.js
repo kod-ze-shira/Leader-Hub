@@ -32,6 +32,9 @@ function TasksNotBelongCardByMap(props) {
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
 
+    const [indexOfProject, setIndexOfProject] = useState(null);
+    const [indexOfCard, setIndexOfCard] = useState(null);
+
     useEffect(() => {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
@@ -114,6 +117,8 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             setMyCards(null)
             setMyProjects(null)
+            setIndexOfProject(null)
+            setIndexOfCard(null)
             document.getElementById("selectProjectInTasksNotBelong").click();
 
             let indexWorkspace
@@ -139,16 +144,24 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             //   props.options == 
             let indexProject
+            // setIndexOfProject(0) ;
+            console.log(indexOfProject);
             for (let index = 0; index < myProjects.length; index++) {
-                if (myProjects[index]._id == newValue.value._id)
-                    indexProject = index
+                if (myProjects[index]._id == newValue.value._id) {
+                    setIndexOfProject(index);
+                    indexProject = index;
+                }
             }
+            setIndexOfCard(null)
             setMyCards(null)
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
             // chooseProject()
+           
+
         }
     };
+    console.log("indexOfProject",indexOfProject);
 
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
@@ -175,6 +188,7 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             //   props.options == 
             setCardId(newValue.value._id)
+            setIndexOfCard(newValue.value.index)
             // console.log(cardId)
         }
     };
@@ -218,7 +232,7 @@ function TasksNotBelongCardByMap(props) {
         }
     }
     function setPropertiesOfTask() {
-        
+
         let completeTask = {
             "_id": props.task._id,
             "name": props.task.name,
@@ -337,6 +351,8 @@ function TasksNotBelongCardByMap(props) {
                         id='selectProjectInTasksNotBelong'
                         className='selectProjectInTasksNotBelong'
                         options={projectSelect}
+                        value=  {  indexOfProject!==null ? 
+                            projectSelect[indexOfProject] : 'Select...' }
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
@@ -349,6 +365,8 @@ function TasksNotBelongCardByMap(props) {
                         className='selectCardInTasksNotBelong'
                         // onInputChange={handleInputChange}
                         options={cardsSelect}
+                        value=  {  indexOfCard!==null ? 
+                            cardsSelect[indexOfCard] : 'Select...' }
                     />
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">

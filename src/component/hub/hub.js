@@ -42,6 +42,10 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     // const [objectToDelete, setObjectToDelete] = useState()
+    useEffect(() => {
+        $("input,textarea,p").attr("dir", "auto");
+
+    }, []);
 
     const showToastToDelete = (objectToDelete_) => {
 
@@ -99,7 +103,6 @@ function Hub(props) {
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
-    $("input,textarea").attr("dir", "auto");
 
     return (
         <>
@@ -122,7 +125,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub mt-4" : "col-12 bodyHub mx-2 mt-4"}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
