@@ -72,7 +72,9 @@ function SelectHeader(props) {
                             <SelectTask />
                         </div>
                     </> :
-                    <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" /><Tab label="Tabs" className="tab" /></Tabs>}
+                    <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" />
+                        <Tab label="Tabs" className="tab" /></Tabs>}
+
                 <div className={classes.root} id='tabsAndList'>
                     {props.menue ?
                         <Tabs
@@ -101,7 +103,8 @@ function SelectHeader(props) {
                     }
                 </div>
 
-
+                {/* {props.type == 'projects' ?
+                    <span>ff</span> : null} */}
             </div>
 
         </>

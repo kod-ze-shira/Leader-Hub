@@ -1,9 +1,41 @@
-.imgInFile{
-    width: 100px;
-    height: 100px;
-
+.fileInTask{
+    display: inline-block;
+    background-color: #EDFBFC !important;
+    padding: 0px;
+    color: #358A8D;
+    min-width:208px;
+    max-width: min-content;
+    height: 66px;
 }
-.divFile{
-    background-color: #68c7cb1a;
-    color:#358A8D;
+.imgFileInTask a img,
+.imgFileInTask img
+{
+    height: 64px;
+    width: 75px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 4px;
+}
+
+.nameFileInTask{
+    text-align: left;
+    font: normal normal medium 13px/15px Roboto;
+    letter-spacing: 0px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    font-size: small;
+}
+.displayInlineBlock{
+    display: inline-block;
+}
+
+.imgFileInTask{
+    padding-left: 0px;
+}
+
+.nameFileAndAction{
+    padding-right: 4px;
 }

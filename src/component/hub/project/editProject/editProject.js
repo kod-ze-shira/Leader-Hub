@@ -22,7 +22,10 @@ function EditProject(props) {
     const changeFiledInProject = (input) => {
 
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
-        let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value }
+        let value = input.target.value
+        if (!value)
+            value = ''
+        let editProjectInRedux = { "nameFiled": input.target.name, "value": value }
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
         // props.workspaces[props.indexWorkspace].projects[props.indexProject][input.target.name] = input.target.value
     }
