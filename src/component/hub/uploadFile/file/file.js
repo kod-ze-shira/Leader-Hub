@@ -18,24 +18,42 @@ function File(props) {
     function deleteFile() {
         props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
     }
-
+    function downloadFile(e) {
+        // e.stopPropagation()
+        props.downloadFile(props.file)
+        // props.showViewDetails(true)
+    }
     return (
         <>
-            <div className='divFile' style={{ 'display': 'inline-block' }} id={props.file.url ? props.file.url : props.file.name}>
-
-                <FontAwesomeIcon icon={["fa", "trash-alt"]} onClick={() => deleteFile()} />
-                {props.file.url != 'new' ?
-                    <a href={props.file.url} target="_blank">{props.file.name}</a>
-                    : <p>{props.file.name}</p>
-                }
-
-                {props.file.url != 'new' ?
-                    <img className="menu-open-close imgInFile" src={props.file.url}></img>
-                    :
-                    <img className="menu-open-close imgInFile" src={file}></img>
-                }
-                <FontAwesomeIcon icon={["fas", "download"]} onClick={() => props.downloadFile(props.file)} />
+            <div className=' fileInTask  mb-3 row' id={props.file.url ? props.file.url : props.file.name}>
+                <div className='col-4 displayInlineBlock imgFileInTask'>
+                    {props.file.url != 'new' ?
+                        <a href={props.file.url} target="_blank">
+                            <img src={props.file.url}></img></a> :
+                        <img src={file}></img>}
+                </div>
+                <div className='col-8 displayInlineBlock nameFileAndAction'>
+                    <span className='nameFileInTask'>
+                        {props.file.url != 'new' ?
+                            <a href={props.file.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.file.name}</a>
+                            : props.file.name}
+                    </span>
+                    {/* <div> */}
+                    <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
+                        icon={['fas', 'trash-alt']}
+                    ></FontAwesomeIcon>
+                    {props.file.url != 'new' ?
+                        <FontAwesomeIcon className='downloadFileInTask' onClick={(e) => downloadFile(e)}
+                            icon={['fa', 'download']} style={{ float: 'right' }}
+                        ></FontAwesomeIcon>
+                        : null}
+                    {/* </div> */}
+                </div>
             </div>
+
+
+
+
         </>
     )
 }
