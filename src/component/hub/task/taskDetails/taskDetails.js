@@ -214,7 +214,7 @@ function TaskDetails(props) {
         return <File urlFile={urlFile} nameFile={nameFile} />
     }
     const assingto = (e) => {
-        debugger
+        
         setShowContactList(true)
         console.log(showContactList)
     }
