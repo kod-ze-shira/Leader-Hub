@@ -157,7 +157,12 @@ function Hub(props) {
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
-
+                            <ProtectedRoute path={'/:emailShare/hub/:idProject/:userName/share'}>
+                                <CardsPage
+                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewContactList={(val) => setShowContactList(true)}
+                                    focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>

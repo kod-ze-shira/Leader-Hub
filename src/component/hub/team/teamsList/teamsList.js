@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ViewTeam from '../teamView/teamView';
 import './teamsList.css'
-
+import $ from 'jquery'
 function TeamsList(props){
 
     const viewTeams = props.teamsUser ? props.teamsUser.map((team) => (
        <ViewTeam addTeamToShare={props.addTeamToShare} team={team}></ViewTeam>
       )): null
-
-  return (
+    
+      return (
      <>
 
      <div className='row txt_your_team_list pb-3 pt-3 pl-4'>Your Team List </div>
