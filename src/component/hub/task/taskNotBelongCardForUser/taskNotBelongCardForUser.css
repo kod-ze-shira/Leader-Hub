@@ -86,8 +86,11 @@
     margin-right: 6px;
     margin-left:8px;
     display: inline-block !important;
+    text-align: center !important;
 }
-
+.check-task1 label.col-10{
+    text-align: left;
+}
 
 .saveSelect{
     background-color: #C4CCD5 !important;
@@ -224,3 +227,6 @@ inner-addon {
 
 /* add padding  */
 .right-addon input { padding-right: 30px; }
+.propertiesAllTask {
+    text-align: center !important;
+}
