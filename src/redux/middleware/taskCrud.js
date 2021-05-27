@@ -334,6 +334,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
+        debugger
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -345,6 +346,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
             success: function (data) {
                 console.log("success")
                 console.log(data);
+             
                 dispatch(actions.setCards(data.cards))
 
             },
@@ -363,7 +365,7 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DRAG_TASK') {
         let tasksList = getState().public_reducer.cards[action.payload].tasks ? getState().public_reducer.cards[action.payload].tasks : []
         console.log(tasksList)
-        
+        debugger
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragTask`
         $.ajax({
             url: urlData,
@@ -408,9 +410,12 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ cardsList }),
             success: function (data) {
+                debugger
                 console.log("success")
                 console.log(data);
-                dispatch(actions.setCards(data.cards))
+                dispatch(actions.setCards(cardsList))
+                // dispatch(actions.setCards(data.cards))
+
 
             },
             error: function (err) {

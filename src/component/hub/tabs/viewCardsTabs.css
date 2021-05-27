@@ -11,8 +11,8 @@
 
 }
 .card-width{
-  width: 36vh !important;
-  display: inline-block ; 
+  width: 20vw !important;
+  display: inline-block !important; 
 }
 .card-body {
   padding: 1rem !important;
@@ -81,7 +81,7 @@
 .task-card{
   padding-top: 5px !important;
     background-color: white;
-    height: 105px;
+    height: 115px;
     border-radius: 5px;
     position: relative !important;
 }
@@ -90,9 +90,8 @@
 }
 
 .task-card input{
-  height: 50px !important;
-  float: left !important;
-  margin:0 !important;
+
+  margin-top:20px !important; 
 
 }
 .task-card p{
@@ -115,9 +114,9 @@
   
 }
 .task-card:hover .assing-icon {
-}​
+}
 .task-card:hover .color-task {
-}​
+}
 /* .color-task:hover{
   display: none;
 } */
