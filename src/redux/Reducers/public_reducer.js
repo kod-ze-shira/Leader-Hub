@@ -22,7 +22,6 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
 
-
 }
 
 const publicData = {
@@ -374,7 +373,7 @@ const publicData = {
     saveIndexOfWorkspaceInRedux(state, action) {
         state.indexOfWorkspace = action.payload
     },
-  
+
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  
