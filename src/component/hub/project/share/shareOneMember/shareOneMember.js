@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './shareOneMember.css'
+import delete_member_logo from '../../../../img/delete_member_logo.svg'
 
 export default function ShareOneMember(props) {
     const colors = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
@@ -30,32 +31,33 @@ export default function ShareOneMember(props) {
                         <input type="checkbox" id="checkbox" />
                         <label  for="checkbox" className="checkmark checkmark-place"></label>
                     </div> */}
-                    <label
+                    {/* <label
                         className="check-task py-2">
                         <input type="checkbox" checked={ifCheckedMember}
                             onChange={() => setIfCheckedMember(!ifCheckedMember)}
                         />
                         <span className="checkmark checkmark-place ml-1"></span>
-                    </label>
+                    </label> */}
+                    <img src={delete_member_logo}></img>
                 </div>
                 <div className="col-8">
                     <div className="row">
                         <div className="col-3">
-                            {props.member.shareDetail.thumbnail ?
+                            {props.member.member.thumbnail ?
                                 <img className="img_share_one_member"
-                                    src={props.member.shareDetail.thumbnail}></img>
+                                    src={props.member.member.thumbnail}></img>
                                 // style={{ 'background': `linear-gradient(136deg,${backgroundStyle},white)` }}
 
                                 : <div ref={refToDivColor} style={{ backgroundColor: backgroundStyle }}
-                                    className="img_share_one_member div_img_share_one_member">{props.member.shareDetail.name?props.member.shareDetail.name[0]:props.member.shareDetail.email[0]}</div>}
-                                    {/* props.member.shareDetail.email-its mail that not in my contacts , he has just email*/}
+                                    className="img_share_one_member div_img_share_one_member">{props.member.member.name?props.member.member.name[0]:props.member.member.email[0]}</div>}
+                                    {/* props.member.member.email-its mail that not in my contacts , he has just email*/}
                         </div>
                         <div className="col-9">
                             <div className="row name_share_one_member">
-                                {props.member.shareDetail.name?props.member.shareDetail.name:props.member.shareDetail.email}
+                                {props.member.member.name?props.member.member.name:props.member.member.email}
                             </div>
                             <div className="row email_share_one_member">
-                                {props.member.shareDetail.email}
+                                {props.member.member.email}
                             </div>
                         </div>
                     </div>

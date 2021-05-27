@@ -17,8 +17,6 @@ function TasksNotBelongCardByMap(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
-    // const [currentIndexTask, setCurrentIndexTask] = useState("")
-    // const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [cardId, setCardId] = useState()
     const [myProjects, setMyProjects] = useState([])
@@ -31,6 +29,9 @@ function TasksNotBelongCardByMap(props) {
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
+
+    const [indexOfProject, setIndexOfProject] = useState(null);
+    const [indexOfCard, setIndexOfCard] = useState(null);
 
     useEffect(() => {
         if (!props.workspaces.length) {
@@ -88,7 +89,6 @@ function TasksNotBelongCardByMap(props) {
         console.log(props.task._id)
         $(`#${props.task._id + "disappear"}`).css("display", "none")
         props.objectToast({ 'type': 'Task', 'object': props.task })
-
     }
 
     const workspaceSelect = props.workspaces ? props.workspaces.map((workspace) => (
@@ -96,10 +96,9 @@ function TasksNotBelongCardByMap(props) {
             value: workspace, label:
                 // <div className="container">
                 <div className="row" style={{ width: '200px' }}>
-
                     <div className=" " style={{ display: 'inline-block' }} >
                         <div className="logo-w-little "
-                            style={{ backgroundColor: workspace.color, display: 'inline-block' }}
+                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
                         >
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
@@ -114,6 +113,8 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             setMyCards(null)
             setMyProjects(null)
+            setIndexOfProject(null)
+            setIndexOfCard(null)
             document.getElementById("selectProjectInTasksNotBelong").click();
 
             let indexWorkspace
@@ -139,16 +140,24 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             //   props.options == 
             let indexProject
+            // setIndexOfProject(0) ;
+            console.log(indexOfProject);
             for (let index = 0; index < myProjects.length; index++) {
-                if (myProjects[index]._id == newValue.value._id)
-                    indexProject = index
+                if (myProjects[index]._id == newValue.value._id) {
+                    setIndexOfProject(index);
+                    indexProject = index;
+                }
             }
+            setIndexOfCard(null)
             setMyCards(null)
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
             // chooseProject()
+
+
         }
     };
+    console.log("indexOfProject", indexOfProject);
 
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
@@ -175,6 +184,7 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             //   props.options == 
             setCardId(newValue.value._id)
+            setIndexOfCard(newValue.value.index)
             // console.log(cardId)
         }
     };
@@ -218,7 +228,7 @@ function TasksNotBelongCardByMap(props) {
         }
     }
     function setPropertiesOfTask() {
-        
+
         let completeTask = {
             "_id": props.task._id,
             "name": props.task.name,
@@ -233,24 +243,8 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
     }
 
-    function chooseWorkspace() {
 
-        document.getElementById('selectWorkspaceInTasksNotBelong').style.display = 'block'
 
-        document.getElementById('chooseWorkspace').style.display = 'none'
-        document.getElementById('selectProjectInTasksNotBelong').style.display = 'none'
-        document.getElementById('chooseProject').style.display = 'block'
-        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
-        document.getElementById('chooseCard').style.display = 'block'
-        // $('#chooseWorkspace').css({ 'display', 'none'})
-        // $('#selectWorkspaceInTasksNotBelong').css({ 'display': 'block' })
-    }
-    function chooseProject() {
-        document.getElementById('selectProjectInTasksNotBelong').style.display = 'block'
-        document.getElementById('chooseProject').style.display = 'none'
-        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
-        document.getElementById('chooseCard').style.display = 'block'
-    }
     // function chooseCard() {
 
     //     document.getElementById('selectCardInTasksNotBelong').style.display = 'block'
@@ -302,7 +296,7 @@ function TasksNotBelongCardByMap(props) {
                                 }
                             }}
                         />
-                        <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
+                        <span className="checkmark checkmark-place" onClick={(e) => addChalalit(e)}></span>
 
                     </label>
                     <label className='col-10'>
@@ -337,6 +331,8 @@ function TasksNotBelongCardByMap(props) {
                         id='selectProjectInTasksNotBelong'
                         className='selectProjectInTasksNotBelong'
                         options={projectSelect}
+                        value={indexOfProject !== null ?
+                            projectSelect[indexOfProject] : 'Select...'}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
@@ -349,6 +345,8 @@ function TasksNotBelongCardByMap(props) {
                         className='selectCardInTasksNotBelong'
                         // onInputChange={handleInputChange}
                         options={cardsSelect}
+                        value={indexOfCard !== null ?
+                            cardsSelect[indexOfCard] : 'Select...'}
                     />
                 </label>
                 <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">

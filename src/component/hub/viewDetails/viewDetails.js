@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 
+
 import { actions } from '../../../redux/actions/action'
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
@@ -36,6 +37,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [open, setOpen] = useState(true)
         const [oldObject, setOldObject] = useState()
         const { from } = props//to know from which component its come
+
 
         function showToast(val) {
             props.showToast(val)
@@ -86,7 +88,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
             <>
                 <div className="row ">
-                    <div className="view-details  col-5 mt-4">
+                    <div className="view-details  col-5">
                         {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
                         {renderSwitch()}
                     </div>

@@ -39,7 +39,7 @@ function CardsPage(props) {
                     setNumber(3)
                 }
                 else
-                    if ((window.location.href.indexOf('Overview') != -1)){
+                    if ((window.location.href.indexOf('Overview') != -1)) {
                         setPresent("Overview")
                         setNumber(2)
                     }
@@ -79,8 +79,8 @@ function CardsPage(props) {
         }
     }
     return (
-        <div className="mt-4">
-            <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} />
+        <div className="">
+            <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
             {renderSwitch()}
 
         </div>

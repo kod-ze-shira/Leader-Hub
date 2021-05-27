@@ -14,7 +14,7 @@ function TeamsShare(props) {
       <div className='container div_teams'>
         {
           !showCreateTeam ?
-            <TeamsList clickCreateTeam={() => setShowCreateTeam(true)}></TeamsList>
+            <TeamsList addTeamToShare={props.addTeamToShare} clickCreateTeam={() => setShowCreateTeam(true)}></TeamsList>
              :
              <CreateTeam></CreateTeam>
         }
