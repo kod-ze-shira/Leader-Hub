@@ -94,9 +94,9 @@ function ProjectsByWorkspace(props) {
             <div className='body' >
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
-                        {/* <div className="titleProjects pt-2 ml-2">Leader Projects</div> */}
-                        <div class="show-task row mx-4 mt-3 headerTableTask">
-                            <label class="ml-4 pl-6 labelAllTask mt-2"> Leader Projects </label></div>
+                        <div className="titleProjects pt-2 ml-2">Leader Projects</div>
+                        {/* <div class="show-task row mx-4 mt-3 headerTableTask"> */}
+                        {/* <label class="ml-4 pl-6 labelAllTask mt-2"> Leader Projects </label></div> */}
                         <div id=''>
                             <span id='searchProject' >
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
