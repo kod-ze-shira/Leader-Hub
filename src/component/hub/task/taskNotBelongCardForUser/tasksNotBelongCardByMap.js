@@ -312,13 +312,13 @@ function TasksNotBelongCardByMap(props) {
                         </label>
                     </label>
 
-                    <label className="check-task col    view-details-btn" >
+                    <label className="check-task col  d-flex align-items-center  view-details-btn" >
                         <button
                             onClick={(e) => openViewDetails(e)}
                         >view details +</button>
                     </label>
                 </div>
-                <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN ">
+                <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
                     <CreatableSelect
                         isClearable
@@ -365,7 +365,7 @@ function TasksNotBelongCardByMap(props) {
                             cardsSelect[indexOfCard] : 'Select...'}
                     />
                 </label>
-                <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
+                <label className="check-task border-left d-flex justify-content-around align-items-center  py-2  px-2 col">
 
                     {myWorkspace && !cardId ?
                         <>

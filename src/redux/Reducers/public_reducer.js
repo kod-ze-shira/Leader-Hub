@@ -39,7 +39,7 @@ const publicData = {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
+                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
 
     },
@@ -53,7 +53,7 @@ const publicData = {
         }
         for (let index = 0; index < myFiles.length; index++) {
             state.tasks[indexTask].files
-                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id })
+                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
 
     },
@@ -91,7 +91,7 @@ const publicData = {
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
-        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload })
+        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.name.size })
     },
     setUserName(state, action) {
         state.userName = action.payload;

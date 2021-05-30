@@ -172,7 +172,6 @@ function ViewCardsTabs(props) {
                                                     {...provided.droppableProps} >
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
-
                                                             openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
                                                             task={props.cards[props.indexCard].tasks[index]}

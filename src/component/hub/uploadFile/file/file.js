@@ -20,7 +20,7 @@ function File(props) {
     }
     function downloadFile(e) {
         // e.stopPropagation()
-        props.downloadFile(props.file)
+        props.downloadFile({ 'file': props.file, 'e': e })
         // props.showViewDetails(true)
     }
     return (
@@ -36,18 +36,21 @@ function File(props) {
                     <span className='nameFileInTask'>
                         {props.file.url != 'new' ?
                             <a href={props.file.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.file.name}</a>
-                            : props.file.name}
+                            : <span> {props.file.name}</span>}
                     </span>
                     {/* <div> */}
-                    <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
-                        icon={['fas', 'trash-alt']}
-                    ></FontAwesomeIcon>
+
                     {props.file.url != 'new' ?
-                        <FontAwesomeIcon className='downloadFileInTask' onClick={(e) => downloadFile(e)}
-                            icon={['fa', 'download']} style={{ float: 'right' }}
-                        ></FontAwesomeIcon>
-                        : null}
-                    {/* </div> */}
+                        <img onClick={(e) => downloadFile(e)} style={{ float: 'right' }} className='downloadFileInTask mt-4'
+                            src={require('../../../img/download.svg')}></img>
+                        : null}‏
+        <img onClick={(e) => downloadFile(e)} onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
+                        src={require('../../../img/Group 21592.svg')}></img>
+                    {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
+                        icon={['fas', 'trash-alt']}
+                    ></FontAwesomeIcon> */}
+
+
                 </div>
             </div>
 
