@@ -64,7 +64,7 @@ function TaskNotBelongCardForUser(props) {
             {/* <i class="fas fa-times"></i> */}
             {/* <button onClick={() => sestSearchTask('')}>X</button> */}
 
-            <div className="mt-1 allTasks">
+            <div className=" allTasks">
                 {props.tasks.length ?
                     renderTasks
                     : null}
