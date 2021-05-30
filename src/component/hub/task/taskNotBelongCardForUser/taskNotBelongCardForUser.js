@@ -52,7 +52,7 @@ function TaskNotBelongCardForUser(props) {
                     {/* <span id="searchProject"> */}
                     <input type="text" class="inputSearchTask " placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
                 </div> {/* </span> */}
-                <div class="show-task row mx-4 mt-3 headerTableTask" >
+                <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
                     <label class="ml-3 pl-6 col-3 labelAllTask"> My task </label>
                     <label class="col-2 propertiesAllTask ml-4">Workspace</label>
                     <label class="col-2 propertiesAllTask">Project</label>
@@ -64,7 +64,7 @@ function TaskNotBelongCardForUser(props) {
             {/* <i class="fas fa-times"></i> */}
             {/* <button onClick={() => sestSearchTask('')}>X</button> */}
 
-            <div className="mt-1 allTasks">
+            <div className=" allTasks">
                 {props.tasks.length ?
                     renderTasks
                     : null}
