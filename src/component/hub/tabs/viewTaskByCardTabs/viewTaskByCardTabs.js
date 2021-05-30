@@ -267,10 +267,10 @@ function ViewTaskByCradTabs(props) {
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
                                         <div className="icons-task-tabs">
-                                            {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
+                                            {/* {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
                                                 {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
                                                     : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                            </div> : null}
+                                            </div> : null} */}
                                             <img onClick={(e) => {
                                                 setOpenCalander(!openCalander);
                                                 e.stopPropagation()
@@ -280,10 +280,7 @@ function ViewTaskByCradTabs(props) {
                                                 value={value} 
                                                />
                                                 : null}
-                                            {/* <img
-                                                onClick={(e) => showAssigTo(e)}
-                                                src={require('../../../img/due-date-icon.png')}>
-                                            </img> */}
+                                           
                                             <img
                                                 onClick={(e) => showAssigTo(e)}
                                                 src={require('../../../img/like-icon.png')}>
