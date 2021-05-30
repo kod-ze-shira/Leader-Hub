@@ -31,6 +31,8 @@ function ViewTaskByCradTabs(props) {
     const [showchalalit, setShowChalalit] = useState(false)
     const { idProject } = useParams();
     const [openCalander, setOpenCalander] = useState()
+    // const [assingToMemberToTask, setAssingToMemberToTask] = useState(false)
+    const [assignTo, setAssignTo] = useState(false)
     const [value, onChange] = useState(new Date());
 
 
@@ -168,22 +170,28 @@ function ViewTaskByCradTabs(props) {
             setShowChalalit(true)
         e.stopPropagation()
     }
-    $('.task-card').hover(function () {
-        $(this).find('.color-task').hide();
-        $(this).find('.assing-icon').show();
-    }, function () {
-        $(this).find('.assing-icon').hide();
-        $(this).find('.color-task').show();
-    });
-    $('.icons-task-tabs').hover(function () {
-        $(this).find('.color-task').hide();
-        $(this).find('.assing-icon').show();
-    }, function () {
-        $(this).find('.assing-icon').hide();
-        $(this).find('.color-task').show();
-    });
 
 
+    // $('.icons-task-tabs').hover(function () {
+    //     $(this).find('.like-task-tabs').hide();
+    //     $(this).find('.like-task-tabs-hover').show();
+    // }, function () {
+    //     $(this).find('.like-task-tabs-hover').hide();
+    //     $(this).find('.like-task-tabs').show();
+    // });
+    // $('.icons-task-tabs').hover(function () {
+    //     $(this).find('.due-date-tabs').hide();
+    //     $(this).find('.due-date-task-tabs-hover').show();
+    // }, function () {
+    //     $(this).find('.due-date-task-tabs-hover').hide();
+    //     $(this).find('.due-date-tabs').show();
+    // });
+
+
+    const showAssign = () => {
+
+  
+    }
 
     return (
         <>
@@ -199,6 +207,7 @@ function ViewTaskByCradTabs(props) {
                     >
 
                         <div className="task-card mt-2 pt-2"
+                            onMouseOver={(e) => showAssign(e)}
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
 
@@ -254,11 +263,11 @@ function ViewTaskByCradTabs(props) {
                                     }}
                                 ></input>
                                 {/* <div>{props.task.index}</div> */}
-                                <div className="row justify-content-between">
+                                <div className=" ">
 
 
 
-                                    <div className="row justify-content-center  mx-2 mt-1">
+                                    <div className="row justify-content-between mx-2 mt-1">
                                         <div className="status-task-tabs " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                             {props.task.status ? props.task.status.statusName : null}
                                         </div>
@@ -266,34 +275,52 @@ function ViewTaskByCradTabs(props) {
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
-                                        <div className="icons-task-tabs">
-                                            {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
-                                                {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
-                                                    : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                            </div> : null}
-                                            <img onClick={(e) => {
-                                                setOpenCalander(!openCalander);
-                                                e.stopPropagation()
-                                            }}  src={require('../../../img/due-date-icon.png')}></img>
+                                        <div className="icons-task-tabs offset-lg-3  ">
+
+                                            {/* <img
+                                                className="due-date-task-tabs"
+                                                onClick={(e) => {
+                                                    setOpenCalander(!openCalander);
+                                                    e.stopPropagation()
+                                                }} src={require('../../../img/due-date-icon.png')}></img>
                                             {openCalander ? <Calendar
                                                 onChange={onChange}
-                                                value={value} 
-                                               />
-                                                : null}
-                                            {/* <img
-                                                onClick={(e) => showAssigTo(e)}
-                                                src={require('../../../img/due-date-icon.png')}>
-                                            </img> */}
-                                            <img
-                                                onClick={(e) => showAssigTo(e)}
-                                                src={require('../../../img/like-icon.png')}>
-                                            </img>
+                                                value={value}
+                                            />
+                                                : null} */}
+                                            <div className="due-date-hover">
+                                                <img
+                                                    className="due-date-icon-tabs"
 
-                                            <img
-                                                className=""
-                                                onClick={(e) => showAssigTo(e)}
-                                                src={require('../../../img/share-icon.png')}>
-                                            </img>
+                                                    onClick={(e) => showAssigTo(e)}
+                                                    src={require('../../../img/due-date-icon.png')}>
+                                                </img>
+                                                <p >Jan 14</p>
+                                            </div>
+                                            <div className="like-hover">
+                                                <img
+                                                    className="like-icon-tabs"
+                                                    onClick={(e) => showAssigTo(e)}
+                                                    src={require('../../../img/like-icon.png')}>
+                                                </img>
+                                                <p>1</p>
+                                                <img
+                                                    src={require('../../../img/heart.png')}>
+                                                </img>
+
+                                            </div>
+
+                                            <div className="assing-to-hover" >
+                                                <img
+                                                    className={props.task.assingTo ? "assing-to-icon-tabs" : null}
+                                                    onClick={(e) => showAssigTo(e)}
+                                                    src={require('../../../img/share-icon.png')}>
+                                                </img>
+                                                {props.task.assingTo ? <div className="assing-to" >
+                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
+                                                        : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                                </div> : null}
+                                            </div>
 
                                         </div>
                                     </div>

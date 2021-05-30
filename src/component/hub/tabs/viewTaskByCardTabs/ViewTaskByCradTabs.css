@@ -40,6 +40,46 @@
   }
   @media screen and (min-width: 1000px) {
     .icons-task-tabs{
-        margin-left:76px ;
+        /* margin-left:76px ; */
     }
   }
+
+.due-date-icon-tabs{
+    display : none;
+}
+/* .asiing-to-task-tabs {
+    display : none;
+} */
+.assing-to-icon-tabs {
+    display : none;
+}
+.assing-to-icon-tabs :hover{
+    display:block !important;
+}
+.aaaa{
+    display:none;
+}
+.aaaa:hover{
+    display:block
+}
+
+.like-icon-tabs {
+    display : none;
+}
+.icons-task-tabs > div {
+    display: inline-block;
+}
+.due-date-hover p {
+    font-size: smaller !important;
+    color:red !important;
+}
+.like-hover p{
+    font-size: smaller !important;
+    color:#68C7CB!important;
+    display: inline-block;
+    margin-left:10px;
+
+
+}
+.like-hover img{
+}
