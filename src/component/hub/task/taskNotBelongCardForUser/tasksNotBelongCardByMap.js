@@ -104,8 +104,9 @@ function TasksNotBelongCardByMap(props) {
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
                     </div>
-                    {workspace.name}
-
+                    <div>
+                        {workspace.name}
+                    </div>
                 </div >
         } : null
     )) : null
@@ -158,7 +159,6 @@ function TasksNotBelongCardByMap(props) {
 
         }
     };
-    console.log("indexOfProject", indexOfProject);
 
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
@@ -183,10 +183,8 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
-            //   props.options == 
             setCardId(newValue.value._id)
             setIndexOfCard(newValue.value.index)
-            // console.log(cardId)
         }
     };
     function belongTask() {
@@ -227,6 +225,15 @@ function TasksNotBelongCardByMap(props) {
             // לא מתעדכן הכומפליטד ברידקס 
             // props.setTaskComplete(completeTask)
         }
+    }
+
+    function deleteAllSelect() {
+        setMyCards(null)
+        setMyProjects(null)
+        setIndexOfProject(null)
+        setIndexOfCard(null)
+        setIndexOfWorkspace(null)
+
     }
     function setPropertiesOfTask() {
 
@@ -305,13 +312,13 @@ function TasksNotBelongCardByMap(props) {
                         </label>
                     </label>
 
-                    <label className="check-task col    view-details-btn" >
+                    <label className="check-task col  d-flex align-items-center  view-details-btn" >
                         <button
                             onClick={(e) => openViewDetails(e)}
                         >view details +</button>
                     </label>
                 </div>
-                <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN ">
+                <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
                     <CreatableSelect
                         isClearable
@@ -322,6 +329,8 @@ function TasksNotBelongCardByMap(props) {
                         className='selectWorkspaceInTasksNotBelong'
                         placeholder={selectPlaceHorder}
                         options={workspaceSelect}
+                        value={indexOfWorkspace !== null ?
+                            workspaceSelect[indexOfWorkspace] : 'Select...'}
 
                     />
                 </label>
@@ -356,12 +365,12 @@ function TasksNotBelongCardByMap(props) {
                             cardsSelect[indexOfCard] : 'Select...'}
                     />
                 </label>
-                <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
+                <label className="check-task border-left d-flex justify-content-around align-items-center  py-2  px-2 col">
 
                     {myWorkspace && !cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
 
                         </>
                         : null
@@ -370,7 +379,7 @@ function TasksNotBelongCardByMap(props) {
                     {cardId ?
                         <>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
 
                         </> : null
 

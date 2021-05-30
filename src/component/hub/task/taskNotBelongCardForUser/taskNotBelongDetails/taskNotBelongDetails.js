@@ -96,8 +96,8 @@ function TaskNotBelongDetails(props) {
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
                                 console.log(props.task.files)
-                                let r = props.task.files
-                                r.splice(index2, 1);
+                                //    props.task.files.splice(index2,1);
+                                delete props.task.files[index2];
                             }
                             // first element removed
                         }

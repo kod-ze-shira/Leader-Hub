@@ -268,41 +268,40 @@ function ViewTaskByCradTabs(props) {
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
                                         <div className="icons-task-tabs">
-                                            {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
+                                            {/* {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
                                                 {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
                                                     : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                            </div> : null}
-                                            <img onClick={(e) => {                                                showAssigToOrCalander({ "e": e, "name": "calander" });
-                                            }} src={require('../../../img/due-date-icon.png')}></img>
-                                            {/* {openCalander ?
-                                                <div className="calender-tabs">
-                                                    <Calendar
-                                                        onChange={onChange}
-                                                        value={value}
-                                                    />
-                                                </div>
+                                            </div> : null} */}
+                                            <img
+                                                onClick={(e) =>showAssigToOrCalander({ "e": e, "name": "calander" })}
+                                             src={require('../../../img/due-date-icon.png')}></img>
+                                        {/* {openCalander ? <Calendar
+                                                onChange={onChange}
+                                                value={value} 
+                                               />
                                                 : null} */}
-                                            <img
-                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
-                                                src={require('../../../img/like-icon.png')}>
-                                            </img>
-                                            <img
-                                                onClick={(e) => {
-                                                    showAssigToOrCalander({ "e": e, "name": "share" });
-                                                }}
-                                                src={require('../../../img/share-icon.png')}>
-                                            </img>
 
-                                        </div>
+                                        <img
+                                            onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
+                                            src={require('../../../img/like-icon.png')}>
+                                        </img>
+                                        <img
+                                            onClick={(e) => {
+                                                showAssigToOrCalander({ "e": e, "name": "share" });
+                                            }}
+                                            src={require('../../../img/share-icon.png')}>
+                                        </img>
+
                                     </div>
-
-
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
+                    </div>
                 )}
-            </Draggable>
+        </Draggable>
 
         </>
 
