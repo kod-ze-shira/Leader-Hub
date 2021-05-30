@@ -93,7 +93,9 @@ function ViewTaskByCradTabs(props) {
         props.EditTask(task1);
     }
 
-    const showAssigTo = (e) => {
+    const showAssigToOrCalander = (object) => {
+        let e = object.e
+        let name = object.name
         e.stopPropagation()
         var x = e.clientX;
         var y = e.clientY;
@@ -105,8 +107,7 @@ function ViewTaskByCradTabs(props) {
         props.setHeightScreen(height)
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
-        props.viewContactList(showAssignee)
-
+        props.viewContactList(name)
     }
     const colors = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
@@ -271,37 +272,36 @@ function ViewTaskByCradTabs(props) {
                                                 {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
                                                     : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                             </div> : null} */}
-                                            <img onClick={(e) => {
-                                                setOpenCalander(!openCalander);
-                                                e.stopPropagation()
-                                            }}  src={require('../../../img/due-date-icon.png')}></img>
-                                            {openCalander ? <Calendar
+                                            <img
+                                                onClick={(e) =>showAssigToOrCalander({ "e": e, "name": "calander" })}
+                                             src={require('../../../img/due-date-icon.png')}></img>
+                                        {/* {openCalander ? <Calendar
                                                 onChange={onChange}
                                                 value={value} 
                                                />
-                                                : null}
-                                           
-                                            <img
-                                                onClick={(e) => showAssigTo(e)}
-                                                src={require('../../../img/like-icon.png')}>
-                                            </img>
+                                                : null} */}
 
-                                            <img
-                                                className=""
-                                                onClick={(e) => showAssigTo(e)}
-                                                src={require('../../../img/share-icon.png')}>
-                                            </img>
+                                        <img
+                                            onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
+                                            src={require('../../../img/like-icon.png')}>
+                                        </img>
+                                        <img
+                                            onClick={(e) => {
+                                                showAssigToOrCalander({ "e": e, "name": "share" });
+                                            }}
+                                            src={require('../../../img/share-icon.png')}>
+                                        </img>
 
-                                        </div>
                                     </div>
-
-
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
+                    </div>
                 )}
-            </Draggable>
+        </Draggable>
 
         </>
 
