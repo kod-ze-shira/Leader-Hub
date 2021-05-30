@@ -52,7 +52,8 @@ margin-right: 11px;
     border-top-right-radius: 50rem !important;
     border-bottom-right-radius: 50rem !important;
     transition: width 2s;
-    width: 300px;
+   width: 300px;
+ /* width: 30px; */
     margin-right: -42px;
     margin-right: 10px;
     background: url(../../../img/imge_search.png) no-repeat #c5ccca47 ;
@@ -60,7 +61,11 @@ margin-right: 11px;
     padding-left: 18px;
     padding-right: 44px;
 }
-.inputSearchProjects {transition-timing-function: ease-in-out;}
+
+/* .inputSearchProjects:hover {
+  width: 300px;
+} */
+.inputSearchProjects{transition-timing-function: ease-in-out;}
 
 
 .buttonNewProject{

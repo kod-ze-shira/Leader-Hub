@@ -1,267 +1,233 @@
 /* .show-tasks{
    /* font-size: medium; */
-/* } */ 
+/* } */
 /* The container */
 .check-task:first-child {
-    color: #778CA2;
-    cursor: pointer;
-  }
-  .check-task button {
-    color: #778CA2;
-    background-color: transparent;
-    vertical-align: middle !important;
-
-  }
-
-  .check-task button:focus{
-    outline: 0;
-  }
-  /* .check-task:first-child{
-    text-align: left !important;
-    padding-left: 3vw;
-  } */
-  .check-task:nth-child(2){
-    text-align: left !important;
-  }
-  .check-task:nth-child(3){
-    text-align: right !important;
-  }
-
-  .check-task1:nth-child(3){
-    text-align: left !important;
-    margin-left: -67px;
-    margin-top: 2px;
-  }
-  .disabled{
-  color:gray ;
-  opacity: 0.5;
-  }
-  .check-task{
-    padding-top:1vh !important;
-    font-size: 14px;
-    margin-bottom: 0px !important;
-    vertical-align: middle !important;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .check-task input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
-    position: absolute;
-    height: 23px;
-    width: 23px;
-    background-color: #FFFFFF;
-    border: 1px solid #34A38B;
-    border-radius: 50%;
-    
-  }
-  .checkmark-tabs{
-    left: 6% !important;
-  }
-  .checkmark-place{
-    top: 7px;
-    left: 0;
-    
-  }
-  
-  
-  .check-task:hover input ~ .checkmark {
-    background-color: #FFFFFF;
-  }
-  
-  /* When the checkbox is checked, add a blue background */
-  .check-task input:checked ~ .checkmark {
-    background: transparent linear-gradient(270deg, #44D7B6 0%, #329A80 100%) 0% 0% no-repeat padding-box;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    /* display: none; */
-  }
-  
-  /* Show the checkmark when checked */
-  .check-task input:checked ~ .checkmark:after {
-    display: block;
-
-  }
-  .close-details{
-    width: 0 !important;
-  }
-  .view-details-btn{
-    text-align: right!important;
-   
-  }
-  .view-details-btn>button{
-    border-radius: 5px;
-    margin-right: 1vh;
-  padding-top: 0.5vh;
-  padding-bottom: 0.5vh;
-
-  }
-  .view-details-btn>button:hover{
-    background-color: #E8EAEC;
-    
-
-  }
-  /* Style the checkmark/indicator */
-  .check-task .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid rgb(207, 207, 207);
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
- 
-  .show-task{
-    background-color: transparent !important;
-  }
-  label{
-    text-align: center;
-  }
-  /* .status-task{
-    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background: #ffa5ca 0% 0% no-repeat padding-box;
-    border-radius: 3px;
-    color:#FE4D97 !important;
-    font-weight: 300;
-    opacity: 0.9;
-    margin: auto;
-  
-  } */
-  .status-task{
-
-    border-radius: 3px;
-
-    font-weight: 300;
-    opacity: 0.9;
-    margin: auto;
-    width: 90%;
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    opacity: 0.6;
-    font-weight: 400;
-
-  }
-  .status-task-to-do{
-    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background: #ffb6d0 0% 0% no-repeat padding-box;
-    border-radius: 3px;
-    color:#BF2E63 !important;
-    font-weight: 300;
-    opacity: 0.9;
-    margin: auto;
-    width: 75%;
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    opacity: 0.9;
-    font-weight: 400;
-padding: 4px;
-  }
- .col-add-task{
-   width: 2vw;
- }
- .check-task .css-yk16xz-control{
-border: none !important;
- }
- .check-task.css-yk16xz-control :active{
-   border: none !important;
- }
- .check-task.css-yk16xz-control :focus{
-  border: none !important;
- }
- .check-task .css-2b097c-container{
-   /* display: none !important; */
-}
-
-  .status-task-done{
-    background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
-    background:#D9F7F0 0% 0% no-repeat padding-box;
-    border-radius: 3px;
-    color:#34A38B !important;
-    font-weight: 300;
-    opacity: 0.9;
-    margin: auto;
-    width: 75%;
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-        /* opacity: 0.6; */
-        font-weight: 400;
-  }
-  .task-name-in-list{
-    width: 600px;
-  }
- 
-.closeDet{
-  width: 0 !important;
-}
-.animation{
-  height: 0;
-}
-.dnd-icon{
-  opacity: 0;
-margin-top: -10px !important;  
-  /* display: none; */
-}
-.view-details-in-list{
-  float:right;
-}
-.another-fileds label{
-  width: 130px;
-}
-/* @media only screen and (min-width: 600px) {
-  .another-fileds label{
-    width: 100px;
-  }
-  .task-name-in-list{
-    width: 450px;
-  }
-} */
-.view-details-in-list{
-  float: right !important;
-}
-
-
-.zA[draggable="false"] {
-  /* -webkit-user-drag: none;
-  -webkit-user-select: none;
-  user-select: none; */
-}
-
-.zA {
-  /* padding-bottom: 10px;
-  padding-top: 10px;
-  -webkit-box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
-  box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  position: relative; */
-}
-
-.x7 {
-  /* color: #202124;
-  background: #c2dbff; */
-}
-
-.yO {
-  /* background: rgba(242,245,245,0.8);
-  color: #202124; */
-}
-
-.zA {
-  color: #202124;
+  color: #778CA2;
   cursor: pointer;
 }
+.check-task button {
+  color: #778CA2;
+  background-color: transparent;
+  vertical-align: middle !important;
+
+}
+
+.check-task button:focus{
+  outline: 0;
+}
+
+.check-task:nth-child(2){
+  text-align: left !important;
+}
+.check-task:nth-child(3){
+  text-align: right !important;
+}
+
+.check-task1:nth-child(3){
+  text-align: left !important;
+  margin-left: -67px;
+  margin-top: 2px;
+}
+.disabled{
+color:gray ;
+opacity: 0.5;
+}
+.check-task{
+  padding-top:1vh !important;
+  font-size: 14px;
+  margin-bottom: 0px !important;
+  vertical-align: middle !important;
+}
+
+/* Hide the browser's default checkbox */
+.check-task input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  height: 21px;
+  width: 21px;
+  background-color: #FFFFFF;
+  border: 1px solid #C4CCD5;
+      border-radius: 50%;
+ 
+}
+.checkmark-tabs{
+  left: 6% !important;
+}
+.checkmark-place{
+  top: 6px;
+  left: 0;
+ 
+}
+
+
+.check-task:hover input ~ .checkmark {
+  background-color: #FFFFFF;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check-task input:checked ~ .checkmark {
+  background-color:rgb(79, 216, 186);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  /* display: none; */
+}
+
+/* Show the checkmark when checked */
+.check-task input:checked ~ .checkmark:after {
+  display: block;
+
+}
+.close-details{
+  width: 0 !important;
+}
+.view-details-btn{
+  text-align: right!important;
+ 
+}
+.view-details-btn>button{
+  border-radius: 5px;
+  margin-right: 1vh;
+padding-top: 0.5vh;
+padding-bottom: 0.5vh;
+
+}
+.view-details-btn>button:hover{
+  background-color: #E8EAEC;
+ 
+
+}
+/* Style the checkmark/indicator */
+.check-task .checkmark:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(231, 231, 231);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.show-task{
+  background-color: transparent !important;
+}
+label{
+  text-align: center;
+}
+/* .status-task{
+  background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+  background: #ffa5ca 0% 0% no-repeat padding-box;
+  border-radius: 3px;
+  color:#FE4D97 !important;
+  font-weight: 300;
+  opacity: 0.9;
+  margin: auto;
+
+} */
+.status-task{
+
+  border-radius: 3px;
+
+  font-weight: 300;
+  opacity: 0.9;
+  margin: auto;
+  width: 90%;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  opacity: 0.6;
+  font-weight: 400;
+
+}
+.status-task-to-do{
+  background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+  background: #ffb6d0 0% 0% no-repeat padding-box;
+  border-radius: 3px;
+  color:#BF2E63 !important;
+  font-weight: 300;
+  opacity: 0.9;
+  margin: auto;
+  width: 75%;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  opacity: 0.9;
+  font-weight: 400;
+padding: 4px;
+}
+.col-add-task{
+ width: 2vw;
+}
+.check-task .css-yk16xz-control{
+border: none !important;
+}
+.check-task.css-yk16xz-control :active{
+ border: none !important;
+}
+.check-task.css-yk16xz-control :focus{
+border: none !important;
+}
+.check-task .css-2b097c-container{
+ /* display: none !important; */
+}
+
+.status-task-done{
+  background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
+  background:#D9F7F0 0% 0% no-repeat padding-box;
+  border-radius: 3px;
+  color:#34A38B !important;
+  font-weight: 300;
+  opacity: 0.9;
+  margin: auto;
+  width: 75%;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+      /* opacity: 0.6; */
+      font-weight: 400;
+}
+.task-name-in-list{
+  width: 600px;
+}
+
+.closeDet{
+width: 0 !important;
+}
+.animation{
+height: 0;
+}
+.dnd-icon{
+opacity: 0;
+margin-top: -10px !important;  
+/* display: none; */
+}
+.view-details-in-list{
+float:right;
+}
+.another-fileds label{
+width: 130px;
+}
+/* @media only screen and (min-width: 600px) {
+.another-fileds label{
+  width: 100px;
+}
+.task-name-in-list{
+  width: 450px;
+}
+} */
+.view-details-in-list{
+float: right !important;
+}
+
+
