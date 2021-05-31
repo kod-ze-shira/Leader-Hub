@@ -180,3 +180,7 @@
       background: #919494; 
     }
     
+    .hand-drag{
+      display: inline-block;
+      opacity: 0.5;
+    }
