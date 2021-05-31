@@ -41,3 +41,8 @@
 .nameFileAndAction{
     padding-right: 4px;
 }
+
+.sizeFile{
+    color: #98A9BC;
+    font-size: small
+}

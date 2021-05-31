@@ -281,7 +281,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 if (action.payload.complete) {
                     dispatch(actions.createSystemWave({
-                        "subject": "Comlited task",
+                        "subject": "Comlpite task",
                         "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
                         "to": [getState().public_reducer.userName],
                         "from": "hub@noreply.leader.codes",
