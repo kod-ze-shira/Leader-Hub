@@ -71,14 +71,18 @@ export default class Gantt extends Component {
 
 
         gantt.templates.task_text = function (start, end, task) {
-
-            let endDate = JSON.stringify(end)
+            let a = new Date(end)
+            a.setDate(a.getDate() + 1);
+            let endDate = JSON.stringify(a)
             let ed = JSON.parse(endDate)
             let newEndDate = ed.split("-")[2][0]
                 + ed.split("-")[2][1] + '/' + ed.split("-")[1] + '/' + ed.split("-")[0];
 
-            let startDate = JSON.stringify(start)
+            let b = new Date(start)
+            b.setDate(b.getDate() + 1);
+            let startDate = JSON.stringify(b)
             let sd = JSON.parse(startDate)
+            debugger
             let newStartDate = sd.split("-")[2][0]
                 + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
 

@@ -108,9 +108,10 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
                 },
             }
         )
-            .then((resp) =>
+            .then((resp) => 
 
-                resp.blob())
+                resp.blob()
+            )
             .then((blob) => {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
@@ -148,7 +149,7 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
             },
             error: function (err) {
-                alert(err);
+                console.log(err);
             },
         });
 
