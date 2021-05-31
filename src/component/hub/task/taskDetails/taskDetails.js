@@ -190,7 +190,7 @@ function TaskDetails(props) {
         return <File file={file} />
     }
     const assingto = (e) => {
-        
+
         setShowContactList(true)
         console.log(showContactList)
     }
@@ -237,6 +237,8 @@ function TaskDetails(props) {
                     <div className='mr-4 '>
                         <div className='row mt-4 justify-content-between headerDitails'>
                             <h5 className=" title-view-details   pl-3">Task details</h5>
+                            {/* <img className="files-task-hover" src={require('../../../img/close.svg')} ></img> */}
+
                             <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
                         </div>

@@ -108,6 +108,7 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
 export const shareObject = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'SHARE_OBJECT') {
+    debugger
     let teamsMemberAndPermission = action.payload.teams
     let membersEmail = action.payload.shareDetails
     let objectId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]

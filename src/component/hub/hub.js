@@ -214,7 +214,6 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
-        createSystemWave: () => dispatch(actions.createSystemWave()),
     }
 
 

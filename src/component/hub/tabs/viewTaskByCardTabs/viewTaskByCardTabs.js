@@ -267,18 +267,22 @@ function ViewTaskByCradTabs(props) {
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
                                         <div className="icons-task-tabs">
-                                            {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
-                                                {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
-                                                    : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                            </div> : null}
+                                            {/* {props.task.assingTo ?
+                                                <div className=" mt-2 assing-to-tabs" >
+                                                    {props.task.assingTo.contact.thumbnail ?
+                                                        <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
+                                                        : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0]
+                                                            : null}
+                                                        </div>}
+                                                </div> : null} */}
                                             <img onClick={(e) => {
                                                 setOpenCalander(!openCalander);
                                                 e.stopPropagation()
-                                            }}  src={require('../../../img/due-date-icon.png')}></img>
+                                            }} src={require('../../../img/due-date-icon.png')}></img>
                                             {openCalander ? <Calendar
                                                 onChange={onChange}
-                                                value={value} 
-                                               />
+                                                value={value}
+                                            />
                                                 : null}
                                             {/* <img
                                                 onClick={(e) => showAssigTo(e)}
