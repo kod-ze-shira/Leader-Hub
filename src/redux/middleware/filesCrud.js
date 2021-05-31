@@ -30,6 +30,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
 
                         // let size = data.filesData.file0.size / 1024 / 1024
                         var myData = { "files": data.filesData }
+
                         if (action.payload.type == 'taskNotBelong')
                             dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
                         else
@@ -108,7 +109,7 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
                 },
             }
         )
-            .then((resp) => 
+            .then((resp) =>
 
                 resp.blob()
             )
