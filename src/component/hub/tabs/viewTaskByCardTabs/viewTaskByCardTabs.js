@@ -173,25 +173,16 @@ function ViewTaskByCradTabs(props) {
     }
 
 
-    // $('.icons-task-tabs').hover(function () {
-    //     $(this).find('.like-task-tabs').hide();
-    //     $(this).find('.like-task-tabs-hover').show();
-    // }, function () {
-    //     $(this).find('.like-task-tabs-hover').hide();
-    //     $(this).find('.like-task-tabs').show();
-    // });
-    // $('.icons-task-tabs').hover(function () {
-    //     $(this).find('.due-date-tabs').hide();
-    //     $(this).find('.due-date-task-tabs-hover').show();
-    // }, function () {
-    //     $(this).find('.due-date-task-tabs-hover').hide();
-    //     $(this).find('.due-date-tabs').show();
-    // });
-
 
     const showAssign = () => {
 
-  
+
+    }
+    const showAssigTo = () => {
+        debugger
+        props.viewContactList("share")
+
+
     }
 
     return (
@@ -276,7 +267,7 @@ function ViewTaskByCradTabs(props) {
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
-                                        <div className="icons-task-tabs offset-lg-3  ">
+                                        <div className="icons-task-tabs  ">
 
                                             {/* <img
                                                 className="due-date-task-tabs"
@@ -293,7 +284,7 @@ function ViewTaskByCradTabs(props) {
                                                 <img
                                                     className="due-date-icon-tabs"
 
-                                                    onClick={(e) =>showAssigToOrCalander({ "e": e, "name": "calander" })}
+                                                    onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
                                                     src={require('../../../img/due-date-icon.png')}>
                                                 </img>
                                                 <p >Jan 14</p>
@@ -317,22 +308,22 @@ function ViewTaskByCradTabs(props) {
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>
-                                                {props.task.assingTo ? <div className="assing-to" >
+                                                {props.task.assingTo ? <div className="assing-to"  >
                                                     {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
                                                         : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                                 </div> : null}
                                             </div>
 
+                                        </div>
                                     </div>
+
+
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-                    </div>
                 )}
-        </Draggable>
+            </Draggable>
 
         </>
 
