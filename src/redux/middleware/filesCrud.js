@@ -18,7 +18,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
             }
             console.log(formData)
             let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-            if (!!formData.entries().next().value == true) {
+            if (!!formData.entries().next().value === true) {
                 $.ajax({
                     url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
                     method: 'post',
@@ -29,7 +29,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     success: (data) => {
 
                         var myData = { "files": data.filesData }
-                        if (action.payload.type == 'taskNotBelong')
+                        if (action.payload.type === 'taskNotBelong')
                             dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
                         else
                             dispatch(actions.setNewFilesInTask(data.filesData))
@@ -42,7 +42,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                                 headers: { "authorization": jwtFromCookie },
                                 data: myData,
                                 success: (data) => {
-                                    if (action.payload.type != 'taskNotBelong') {
+                                    if (action.payload.type !== 'taskNotBelong') {
 
                                         let cards = getState().public_reducer.cards;
                                         let indexCurrentCard = getState().public_reducer.indexCurrentCard
@@ -88,6 +88,7 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
 
 export const downloadFile = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILE') {

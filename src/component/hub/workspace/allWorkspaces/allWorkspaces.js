@@ -6,7 +6,7 @@ import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
-import ToastDelete from '../../toastDelete/toastDelete1'
+// import ToastDelete from '../../toastDelete/toastDelete1'
 import title from '../../../../Data/title.json'
 import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';

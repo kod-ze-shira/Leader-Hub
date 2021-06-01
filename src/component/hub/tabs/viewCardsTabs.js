@@ -170,7 +170,9 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-                                                    {props.cardFromMap.tasks.map((task, index) => (
+
+                                                    
+                                                    {props.cardFromMap.tasks?props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
 
                                                             openViewDetails={openViewDetails}
@@ -180,7 +182,7 @@ function ViewCardsTabs(props) {
                                                             indexTask={index}
                                                             viewToastComplete={props.viewToastComplete}
                                                             viewContactList={props.viewContactList} />
-                                                    ))}
+                                                    )):null}
 
                                                     {
                                                         addTaskInInput ?

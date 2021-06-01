@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { connect } from 'react-redux';
 
-import { actions } from '../../../redux/actions/action'
+// import { actions } from '../../../redux/actions/action'
 import './viewDetails.css'
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
 import NewProject from '../project/newProject/newProject'
 import EditProject from '../project/editProject/editProject'
 import AddTask from '../task/addTask/addTask'
-import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
+// import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
 import TaskDetails from '../task/taskDetails/taskDetails'
-import EditTask from '../task/addTask/addTask'
+// import EditTask from '../task/addTask/addTask'
 import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
 import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
 import ShareProject from '../project/shareProject/shareProject'

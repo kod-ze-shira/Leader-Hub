@@ -1,8 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import CreatableSelect from 'react-select/creatable';
+// import CreatableSelect from 'react-select/creatable';
 import { actions } from '../../../redux/actions/action';
-import share from '../../img/share.svg'
+// import share from '../../img/share.svg'
 import LetterLogo from '../logo/letterLogo';
 import './style.css'
 

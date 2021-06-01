@@ -8,7 +8,7 @@ import { actions } from '../../../../redux/actions/action'
 function File(props) {
 
     function deleteFile() {
-        // alert('delete file')
+       debugger;
         props.removeFileInRedux({ 'name': props.name, 'url': props.url })
 
 
