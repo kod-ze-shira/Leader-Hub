@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
-import EditStatus from './editStatus'
+// import EditStatus from './editStatus'
 import './viewStatus.css'
-import $ from 'jquery'
+// import $ from 'jquery'
 import AddStatus from './addStatus'
 import ViewStatus from './viewStatus'
 import './viewStatus.css'
@@ -25,7 +25,7 @@ function ViewAllStatuses(props) {
 
     const openPopUpStatus = (e) => {
         // setOpenPopUp(!openPopUp)
-        if (openPopUpToAdd == true)
+        if (openPopUpToAdd === true)
             setOpenPopUpToAdd(!openPopUpToAdd)
     }
     const openAddStatus = (e) => {
@@ -46,7 +46,7 @@ function ViewAllStatuses(props) {
 
     const changeStatusByIndex = (indexOfStatus) => {
         let s = props.statuses[indexOfStatus]
-        if (s.complete == false)
+        if (s.complete === false)
             setStatus(s)
 
     }

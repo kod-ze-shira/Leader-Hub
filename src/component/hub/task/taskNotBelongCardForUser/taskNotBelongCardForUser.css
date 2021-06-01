@@ -1,12 +1,29 @@
-.addTaskNotBelong{
-    border:1px solid #1FB9C1;
-    border-radius: 8px !important;    
-    margin-right: 10px;
-     padding-right: 32px;
-     margin-bottom: 2px;
+.wrap-input{
+    border:2px solid #1FB9C1;
+    border-radius: 8px !important; 
+    margin-bottom: 2px;
     margin-top: 2px;
 }
-
+.addTaskNotBelong{
+    background: url(../../../img/check-mark.svg) no-repeat ;
+    background-size: 18px 18px;
+    background-position:left ;
+    padding-left: 20px  !important;
+    border: none;
+    width: 95%;
+}
+.wrap-input:focus,.wrap-input:hover{
+    border:2px solid #07a3ac !important;
+    border-radius: 8px !important; 
+}
+.addTaskNotBelong:focus,.addTaskNotBelong:hover{
+    outline: none;
+}
+.close-add-task{
+    margin-bottom: 2px;
+    background-color: transparent;
+    color: #C4CCD5;
+}
 .input-group-task-not-belongs1{
 
      /* z-index: 9999;
@@ -34,7 +51,26 @@
 .selectCardInTasksNotBelong{
     display: none;
 } */
-
+.icon-complete{
+    width: 22px;
+    padding-right: 5px;
+}
+.icon-check-mark{
+    width: 22px;
+    padding-right: 5px;
+    opacity: 20%;
+}
+.btn-add-task{
+    padding: 4px;
+    color: white;
+    border-radius: 6px;
+    background-color: #68C7CB;
+}
+.drop-down{
+    position: absolute;
+    top:25%;
+    right: 25%;
+}
 
  .selectWorkspaceInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row,
  .selectProjectInTasksNotBelong  .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row,
@@ -54,7 +90,18 @@
 
 .selectWorkspaceInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
 {
-    margin-left: -7px;
+    /* margin-left: -7px; */
+}
+.check-task .css-yk16xz-control{
+    background: url(../../../img/down-arrow.svg) no-repeat ;
+    background-size: 10px 10px;
+    background-position: 90%;
+}
+/* .selectPlaceHorder{
+    width: 80%;
+} */
+.css-yk16xz-control .css-g1d714-ValueContainer{
+    justify-content: center;
 }
 .workspaceN{
     padding-left: 0px !important;

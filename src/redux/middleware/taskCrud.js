@@ -346,7 +346,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-        debugger
+
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -376,8 +376,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
 export const dragTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DRAG_TASK') {
         let tasksList = getState().public_reducer.cards[action.payload].tasks ? getState().public_reducer.cards[action.payload].tasks : []
-        console.log(tasksList)
-        debugger
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragTask`
         $.ajax({
             url: urlData,
@@ -389,8 +387,8 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
             data: JSON.stringify({ tasksList }),
             success: function (data) {
                 console.log("success")
-                console.log(data);
-                dispatch(actions.setCards(data.project.cards))
+                console.log(data.cards);
+                dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -409,7 +407,6 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DRAG_CARD') {
 
         let cardsList = getState().public_reducer.cards
-        console.log(cardsList)
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragCard`
         console.log(urlData)
 
@@ -422,13 +419,9 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ cardsList }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log(data);
-                dispatch(actions.setCards(cardsList))
                 // dispatch(actions.setCards(data.cards))
-
-
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין

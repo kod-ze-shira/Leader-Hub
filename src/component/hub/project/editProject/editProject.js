@@ -50,7 +50,7 @@ function EditProject(props) {
         // project.dueDate = res
 
 
-
+        debugger
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
@@ -93,7 +93,7 @@ function EditProject(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeFiledInProject(e)}
-                            id='nameProject' type="text" class="form-control" required ref={nameRequired}
+                            type="text" class="form-control" required ref={nameRequired}
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
                         <div class="invalid-feedback">
                             Please enter project name.

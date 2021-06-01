@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import './contact.css'
+import $ from 'jquery'
+
 
 function ViewContact(props) {
     useEffect(() => {
@@ -15,12 +17,26 @@ function ViewContact(props) {
         "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
         "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"
     ]
+
+    const assingTaskToContact = (email) => {
+        debugger
+        props.assingTo(email)
+
+    }
+
+
+   
+      
+
+
+
     return (
         <>
-            <div className="option-contact row mb-2">
-                {props.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-2" />
-                    : <div className="logo-contact ml-2" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
+            <div className="option-contact row mb-2" onClick={() => assingTaskToContact(props.contact.email)}>
+                {props.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
+                    : <div className="logo-contact ml-3" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
                 <p className="name-contact ">{props.contact.name} </p>   <p className="email-contact ">{props.contact.email} </p></div>
+
         </>
 
     )
@@ -34,6 +50,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+
 
     }
 

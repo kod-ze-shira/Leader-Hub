@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, {  } from 'react'
 import './addObject.css'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
 // import { actions } from '../../../../redux/actions/action'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button } from 'react-bootstrap'
+// import { Button } from 'react-bootstrap'
 function AddObject(props) {
 
     function overButtonAdd(e) {
