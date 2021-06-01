@@ -51,22 +51,17 @@ function TaskNotBelongDetails(props) {
         await Promise.all(
             myFiles.map(async (file) => {
                 if (file.file.type.includes("image")) {
-                    console.log("in img type");
                     const options = {
                         maxSizeMB: 1,
                         maxWidthOrHeight: 1920,
                         useWebWorker: true,
                     };
-                    // console.log(file);
                     compressedFile = await imageCompression(file.file, options);
-                    // console.log("compressedFile  " + JSON.stringify(compressedFile));
+
+
                     console.log(
-                        "compressedFile instanceof Blob",
-                        compressedFile instanceof Blob
-                    ); // true
-                    // console.log(
-                    //     `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-                    // );
+                        `compressedFile size ${compressedFile.size / 1024} MB`
+                    );
                 } else {
                     compressedFile = file.file;
                 }
@@ -93,7 +88,6 @@ function TaskNotBelongDetails(props) {
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                console.log(props.task.files)
                                 //    props.task.files.splice(index2,1);
                                 delete props.task.files[index2];
                             }
@@ -155,16 +149,16 @@ function TaskNotBelongDetails(props) {
         editTaskInRedux = { "nameFiled": input.target.name, "value": value, 'idTask': props.task._id }
         props.setTaskByFiledFromTasksNotBelong(editTaskInRedux)
     }
-    function filesInTask() {
-        let newComponent
-        props.task.files.map((file) => {
-            newComponent = addFileComponent(file)
-            if (!fileComponentArr.length)
-                setFileComponentArr([newComponent])
-            else
-                setFileComponentArr([...fileComponentArr, newComponent])
-        })
-    }
+    // function filesInTask() {
+    //     let newComponent
+    //     props.task.files.map((file) => {
+    //         newComponent = addFileComponent(file)
+    //         if (!fileComponentArr.length)
+    //             setFileComponentArr([newComponent])
+    //         else
+    //             setFileComponentArr([...fileComponentArr, newComponent])
+    //     })
+    // }
     const addFileComponent = (file) => {
         return <File file={file} />
     }

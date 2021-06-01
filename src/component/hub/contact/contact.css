@@ -85,7 +85,7 @@ body {
   color: tomato;
 }
 .option-contact{
-  width: 350px !important;
+  width: 340px !important;
   /* display: inline-block!important; */
 }
 /* .assinto-contact{
@@ -112,8 +112,8 @@ body {
     display: inline-block!important;
     /* margin-left: 2px; */
     color:#75798E !important;
-    font-size:16px;
-    margin-left: 1vw;
+    font-size:15px;
+    margin-left: 0.5vw;
     font-weight:400;
     
 }.css-tj5bde-Svg {
@@ -161,11 +161,25 @@ body {
 .div_contacts_list{
     overflow-y: auto;
     overflow-x: hidden !important;
-    height: 400px;
+    /* height: 400px; */
     }
+.invite-button{
+  border-radius: 3px;
+background-color: #ebe6e6;
+font-size: smaller ;
+color: #B2B2B2;
+height:35px;
+text-align:left;
+/* display: inline-block; */
+}
+.div_contacts_list > .form-group{
+  margin-bottom: 0 !important;
+}
     .invite-contact{
         background-color:#f7f5f5 !important;
-margin-top: 2vh !important;
+/* margin-top: 0.5vh !important;
+margin-bottom: 0.5vh !important; */
+
 /* margin-bottom: 2vh !important; */
 
     }

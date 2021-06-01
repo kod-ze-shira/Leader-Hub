@@ -102,7 +102,7 @@ body {
   overflow: hidden;
   display: -webkit-box; */
     display: inline-block!important;
-    margin-left: 2px;
+    margin-left: 0.5vw;
     
 }.css-tj5bde-Svg {
   display:none !important;

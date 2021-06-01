@@ -311,8 +311,8 @@ function ViewTaskByCradTabs(props) {
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>
-                                                {props.task.assingTo ? <div className="assing-to" >
-                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
+                                                {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo?props.task.assingTo.contact.thumbnail:null} className="thumbnail-contact ml-2" />
                                                         : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                                 </div> : null}
                                             </div>

@@ -128,8 +128,9 @@ function ViewTaskByCrad(props) {
         }
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
-        if (doneStatus)
+        if (doneStatus) {
             props.viewToastComplete(true)
+        }
     }
     const editTaskNameInReduxs = (taskName) => {
 
