@@ -11,11 +11,12 @@
     
       /* display: none !important ; */
   }
-  /* .task-card .MuiButtonBase-root:hover{
-    display: block ;
-} */
+
 .check-task input:hover ~ .checkmark{
     background-color:#f6f7f8 !important;
+}
+.task-name-span{
+    text-indent: 5vh !important;
 }
 /* .input-card-name{
     height: 65vh !important;
@@ -47,21 +48,6 @@
 .due-date-icon-tabs{
     display : none;
 }
-/* .asiing-to-task-tabs {
-    display : none;
-} */
-.assing-to-icon-tabs {
-    display : none;
-}
-.assing-to-icon-tabs :hover{
-    display:block !important;
-}
-.aaaa{
-    display:none;
-}
-.aaaa:hover{
-    display:block
-}
 
 .like-icon-tabs {
     display : none;
@@ -79,7 +65,9 @@
     display: inline-block;
     margin-left:10px;
 
-
 }
-.like-hover img{
+.icons-in-task-tabs{
+    bottom: 0 !important;
+    margin-bottom: 0!important;
+    padding-bottom: 0 !important;
 }

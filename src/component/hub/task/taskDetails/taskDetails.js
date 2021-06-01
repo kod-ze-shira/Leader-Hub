@@ -348,7 +348,7 @@ function TaskDetails(props) {
                     </div>
                     <div className="assingto-details" >
 
-                        <img className="assingto-task" src={require('../../../img/share-icon.png')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                     </div>
                     <div className=" files-details">

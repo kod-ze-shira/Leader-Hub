@@ -20,12 +20,14 @@ function ContactList(props) {
 
   const setFIlter = () => {
     let arrayTemp = [];
-    props.contactsUser.map((contact) => {
-      if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
-        arrayTemp.push(contact);
-      }
+    if (props.contactsUser)
+      props.contactsUser.map((contact) => {
+        if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
+          arrayTemp.push(contact);
+        }
 
-    })
+      })
+
     console.log(arrayTemp)
     setArrayFilter(arrayTemp)
   }
@@ -38,7 +40,7 @@ function ContactList(props) {
 
   useEffect(() => {
     setFIlter();
-  }, [props.contactsUser])
+  }, [])
 
   const assingTaskToContact = (e) => {
     debugger
@@ -47,6 +49,10 @@ function ContactList(props) {
     console.log(a)
     if (a && nameRequired.current.value)
       props.assingTo(valueSearch)
+      else{
+        nameRequired.current.focus()
+        $(".invite-button").css("backgroundColor", "red");
+      }
     // else {
     //   nameRequired.current.focus()
     //   var form = document.getElementById('nameRequired')
@@ -80,8 +86,7 @@ function ContactList(props) {
       return (true)
     }
     else {
-      nameRequired.current.focus()
-      $(".invite-button").css("backgroundColor", "red");
+    
 
       // $(".invalid-feedback").css("display", "block");
 
