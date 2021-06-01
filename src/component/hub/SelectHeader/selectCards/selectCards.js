@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Select from 'react-select';
-import { act } from 'react-dom/test-utils';
+import { actions } from '../../../../redux/actions/action';
 
 
 function SelectCards(props) {
@@ -20,7 +18,7 @@ function SelectCards(props) {
     let myCard = props.card;
 
     const changeSelectedCard = (id) => {
-        myCard = props.cards.find(p => p._id == id.value)
+        myCard = props.cards.find(p => p._id === id.value)
         props.setCard(myCard)
         props.flag(myCard._id)
         // if (myCard.tasks[0])

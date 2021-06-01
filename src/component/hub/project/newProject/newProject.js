@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, {  useState, useRef } from 'react'
 import './newProject.css'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import Toast from 'react-bootstrap/Toast'
-import viewDetails from '../../viewDetails/viewDetails'
+// import Toast from 'react-bootstrap/Toast'
+// import viewDetails from '../../viewDetails/viewDetails'
 import $ from "jquery";
-import UploadFile from '../../uploadFile/uploadFile'
+// import UploadFile from '../../uploadFile/uploadFile'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 

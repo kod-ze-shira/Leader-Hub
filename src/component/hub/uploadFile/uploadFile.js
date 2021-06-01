@@ -11,7 +11,6 @@ function UploadFile(props) {
 
     const uploadMulti = () => {
         if (fileInputRef.current.files) {
-            
             props.setFileFromTask(fileInputRef.current.files[0])
         }
     }

@@ -172,6 +172,9 @@ height:35px;
 text-align:left;
 /* display: inline-block; */
 }
+.div_contacts_list >.form-control{
+  margin-bottom: 0 !important;
+}
     .invite-contact{
         background-color:#f7f5f5 !important;
 /* margin-top: 0.5vh !important;
