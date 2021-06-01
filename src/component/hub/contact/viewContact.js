@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import './contact.css'
+import $ from 'jquery'
+
 
 function ViewContact(props) {
     useEffect(() => {
@@ -23,12 +25,18 @@ function ViewContact(props) {
     }
 
 
+   
+      
+
+
+
     return (
         <>
- <div className="option-contact row mb-2" onClick={assingTaskToContact(props.contact.email)}>
+            <div className="option-contact row mb-2" onClick={() => assingTaskToContact(props.contact.email)}>
                 {props.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
                     : <div className="logo-contact ml-3" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
                 <p className="name-contact ">{props.contact.name} </p>   <p className="email-contact ">{props.contact.email} </p></div>
+
         </>
 
     )

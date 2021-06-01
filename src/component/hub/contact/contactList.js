@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ViewContact from './viewContact';
 import { actions } from '../../../redux/actions/action'
 import { Alert } from 'bootstrap';
+import $ from 'jquery'
 
 
 
@@ -15,6 +16,7 @@ function ContactList(props) {
   }, [])
 
   const [valueSearch, setValueSearch] = useState("")
+  const nameRequired = useRef()
 
   const setFIlter = () => {
     let arrayTemp = [];
@@ -38,25 +40,71 @@ function ContactList(props) {
     setFIlter();
   }, [props.contactsUser])
 
-  const assingTaskToContact = () => {
-    props.assingTo(valueSearch)
-
+  const assingTaskToContact = (e) => {
+    debugger
+    e.stopPropagation()
+    let a = ValidateEmail(valueSearch)
+    console.log(a)
+    if (a && nameRequired.current.value)
+      props.assingTo(valueSearch)
+    // else {
+    //   nameRequired.current.focus()
+    //   var form = document.getElementById('nameRequired')
+    //   form.classList.add('was-validated')
+    // }
   }
-  
- const contactList =props.contactsUser.length ?
-  arrayFilter && arrayFilter.length ?
-    arrayFilter.map((contact) =>
-      <ViewContact contact={contact}></ViewContact>
 
-    )
-    :
-    <button className=" col-4 my-2 invite-button"
-      onClick={(e) => assingTaskToContact(e)}
-    >Send Invite</button>
-  : <></>
-// <><div class="spinner-border" role="status">
-//   <span class="sr-only">Loading...</span>
-// </div></>
+
+
+  // function validateEmail(email) {
+  //   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   return re.test(email);
+  // }
+
+  // function validate(email) {
+  //   debugger
+  //   const $result = $("#result");
+  //   $result.text("");
+
+  //   if (validateEmail(email)) {
+  //     $result.text(email + " is valid :)");
+  //     $result.css("color", "green");
+  //   } else {
+  //     $result.text(email + " is not valid :(");
+  //     $result.css("color", "red");
+  //   }
+  //   return false;
+  // }
+  function ValidateEmail(mail) {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valueSearch)) {
+      return (true)
+    }
+    else {
+      nameRequired.current.focus()
+      $(".invite-button").css("backgroundColor", "red");
+
+      // $(".invalid-feedback").css("display", "block");
+
+      // var form = document.getElementById('nameRequired')
+      // form.classList.add('was-validated')
+      return (false)
+
+    }
+  }
+
+  const contactList = props.contactsUser.length > 0 ?
+    arrayFilter && arrayFilter.length ?
+      arrayFilter.map((contact) =>
+        <ViewContact contact={contact}></ViewContact>
+
+      )
+      :
+      <button className="col-4 my-2 invite-button  "
+        onClick={(e) => assingTaskToContact(e)}
+      >Send Invite</button> :
+    <><div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div></>
 
   const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;
   const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200;
@@ -68,14 +116,18 @@ function ContactList(props) {
 
       <div className='div_contacts ' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410, "width": props.hub ? width : 300, "maxHeight": 250 }}>
         <div className='container div_contacts_list  ' style={{}}>
-          <div className=' row  mx-1'>
-            <input placeholder="Name or email "
-              className={arrayFilter && arrayFilter.length && props.hub ? " form-control invite-contact col-12 my-2" : "form-control invite-contact col-8 my-2"}
+          <div className=' row  mx-1 form-group' id='nameRequired'>
+            <input placeholder="Name or email " required ref={nameRequired}
+              className={arrayFilter && arrayFilter.length && props.hub ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-8 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
+            <div class="invalid-feedback">
+              Please enter project name.
+            </div>
+
             {contactList}
-            
+
           </div>
         </div>
 
