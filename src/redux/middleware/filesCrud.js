@@ -28,6 +28,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     data: formData,
                     success: (data) => {
 
+                        // let size = data.filesData.file0.size / 1024 / 1024
                         var myData = { "files": data.filesData }
                         if (action.payload.type === 'taskNotBelong')
                             dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
@@ -91,22 +92,41 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
 
 
 export const downloadFile = ({ dispatch, getState }) => next => action => {
-    if (action.type === 'DOWNLOAD_FILE') {
 
-        let file = action.payload
-        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-        $.ajax({
-            type: "GET",
-            url: `https://files.codes/api/${getState().public_reducer.userName}/download/${file}`,
-            headers: { Authentication: jwtFromCookie },
-            success: function (data) {
-                // console.log()
-            },
-            error: function (err) {
-                // alert(err);
-            },
-        });
+    if (action.type === 'DOWNLOAD_FILE') {
+        let file = action.payload.file
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies
+        fetch(
+            "https://files.codes/api/" +
+            getState().public_reducer.userName +
+            "/download/" +
+            file.url,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: jwtFromCookie,
+                },
+            }
+        )
+            .then((resp) =>
+
+                resp.blob()
+            )
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                // action.payload.e.stopPropagation()
+                a.click();
+                window.URL.revokeObjectURL(url);
+
+            })
+            .catch(() => console.log("oh no!"));
     }
+
     return next(action);
 
 }
@@ -129,7 +149,7 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
             },
             error: function (err) {
-                alert(err);
+                console.log(err);
             },
         });
 

@@ -1,37 +1,35 @@
- 
+
 .toast_delete {
-    padding: 1rem;
-    /* border-width: 3px; */
-    /* border-style: solid; */
-   /* border-image: linear-gradient(91deg, #44D7B6 0%, #329A80 100%)100% 1 1 1 !important;  */
-   /* border-top-color:#44D7B6  !important; */
-border-top-width:medium !important ;
-    margin-top: -9rem;
-    margin-left: 6rem;
-    /* width: 274px; */
-    height: 65px;
-    /* background: #F5F5F5 0% 0% no-repeat padding-box!important; */
-    /* background-color:#FFFFFF !important ; */
-    /* box-shadow: 0px 3px 6px #00000029;
-    border-radius: 8px ; */
-    opacity: 1;
-    background-image: url('../../img/toast-image.png');
-  }
+  padding: 1rem;
+  margin-top: -9rem;
+  margin-left: 6rem !important;
+  opacity: 1;
+  background-image: url('../../img/toast-image.png');
+}
 
 .toast_header{
-  display: contents;
-  color: #202224;
-  border-bottom: none !important;
+/* display: contents; */
+display: inline-block;
+color: #202224;
+border-bottom: none !important;
 }
 
 .div_btn_undo{
-  text-align: right;
+text-align: right;
+display: inline-block;
+}
+.object_name{
+  display: inline-block;
 }
 
 
 .btn_undo{
-  border: none;
-    background: none;
-    color: var(--green);
+  display: inline-block;
+border: none;
+  background: none;
+  color: var(--green);
+}
+.button_close{
+  background-color: #ffff;
 }
 

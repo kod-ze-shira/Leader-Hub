@@ -5,15 +5,14 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl, Table } from 'react-bootstrap'
 import $ from 'jquery';
-import Animation from '../../animation/animation'
+import Calendar from 'react-calendar';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
-import DynamicSelect from '../../team/dynamicSelect';
-
+import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
 import ContactList from '../../contact/contactList';
 
@@ -31,12 +30,13 @@ function ViewTaskByCradTabs(props) {
     let doneStatus = props.task.complete
     const [showchalalit, setShowChalalit] = useState(false)
     const { idProject } = useParams();
+    const [openCalander, setOpenCalander] = useState()
+    const [value, onChange] = useState(new Date());
+
 
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-
-
     }, [props.cards])
 
     useEffect(() => {
@@ -93,8 +93,9 @@ function ViewTaskByCradTabs(props) {
         props.EditTask(task1);
     }
 
-    const showAssigTo = (e) => {
-        debugger
+    const showAssigToOrCalander = (object) => {
+        let e = object.e
+        let name = object.name
         e.stopPropagation()
         var x = e.clientX;
         var y = e.clientY;
@@ -104,9 +105,17 @@ function ViewTaskByCradTabs(props) {
         props.setTopContactList(y)
         props.setWidthScreen(width)
         props.setHeightScreen(height)
-        props.viewContactList(showAssignee)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.viewContactList(name)
     }
-
+    const colors = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
+        "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
+        "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
+        "#F8B520", "#F88C20", "#F84A20", "#F13B7F", "#FD808B",
+        "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
+        "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"
+    ]
 
     const editCompleteTask = () => {
 
@@ -167,6 +176,14 @@ function ViewTaskByCradTabs(props) {
         $(this).find('.assing-icon').hide();
         $(this).find('.color-task').show();
     });
+    $('.icons-task-tabs').hover(function () {
+        $(this).find('.color-task').hide();
+        $(this).find('.assing-icon').show();
+    }, function () {
+        $(this).find('.assing-icon').hide();
+        $(this).find('.color-task').show();
+    });
+
 
 
     return (
@@ -187,8 +204,45 @@ function ViewTaskByCradTabs(props) {
                             id={props.task._id + "disappear"}>
 
                             <div className="container ">
+                                <label
+                                    title="Complete Task"
+                                    className="check-task py-2 check-tabs row">
+                                    <input type="checkbox"
+                                        name="complete"
+                                        checked={doneStatus}
+                                        value={props.task.complete}
+                                        onChange={(e) => changeFiledInTask(e)}
+                                        onClick={(e) => e.stopPropagation()
+                                        }
+                                    />
+                                    <span
+                                        className="checkmark checkmark-tabs"
+                                        onClick={(e) => addChalalit(e)}></span>
+                                </label>
+
+                                {/* <button className="more col-4 mr-0">. . .</button> */}
+                                {/* <Button className="more col-3 mr-0 more-task"
+                                        data-tip data-for="more_a"
+                                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                        . . .
+                                    </Button> */}
+                                <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                    {title.title_more_actions}
+                                </ReactTooltip>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+                                    <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
+                                    <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
+                                    <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
+                                </Menu>
+
                                 <input
-                                    className="form-control col-12 mx-0"
+                                    className="form-control col-12 mx-0 mt-2"
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
@@ -204,51 +258,44 @@ function ViewTaskByCradTabs(props) {
                                 <div className="row justify-content-between">
 
 
-                                    {/* <button className="more col-4 mr-0">. . .</button> */}
-                                    {/* <Button className="more col-3 mr-0 more-task"
-                                        data-tip data-for="more_a"
-                                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                        . . .
-                                    </Button> */}
-                                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
-                                        {title.title_more_actions}
-                                    </ReactTooltip>
-                                    <Menu
-                                        id="simple-menu"
-                                        anchorEl={anchorEl}
-                                        keepMounted
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleClose}
-                                    >
-                                        <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
-                                    </Menu>
-                                    <label
-                                        title="Complete Task"
-                                        className="check-task py-2 check-tabs">
-                                        <input type="checkbox"
-                                            name="complete"
-                                            checked={doneStatus}
-                                            value={props.task.complete}
-                                            onChange={(e) => changeFiledInTask(e)}
-                                            onClick={(e) => e.stopPropagation()
-                                            }
-                                        />
-                                        <span
-                                            className="checkmark checkmark-tabs"
-                                            onClick={(e) => addChalalit(e)}></span>
-                                    </label>
-                                    {props.task.status ? <div title={props.task.status.statusName}
-                                        className="color-task col-3  "
-                                        style={{ "backgroundColor": props.task.status.color }}></div> : null}
 
-                                    <img
-                                        onClick={(e) => showAssigTo(e)}
-                                        class='assing-icon pb-3 mr-2' src={require('../../../img/assingTo-small-icon.png')}></img>
-                                    {/* {showAssignee ?
-                                        <ContactList/>
-                                    : null} */}
+                                    <div className="row justify-content-center  mx-2 mt-1">
+                                        <div className="status-task-tabs " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                            {props.task.status ? props.task.status.statusName : null}
+                                        </div>
+
+                                        {/* {props.task.status ? <div title={props.task.status.statusName}
+                                        className="color-task col-3  "
+                                        style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
+                                        <div className="icons-task-tabs">
+                                            {/* {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
+                                                {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
+                                                    : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                            </div> : null} */}
+                                            <img
+                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
+                                                src={require('../../../img/due-date-icon.png')}></img>
+                                            {/* {openCalander ? <Calendar
+                                                onChange={onChange}
+                                                value={value} 
+                                               />
+                                                : null} */}
+
+                                            <img
+                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
+                                                src={require('../../../img/like-icon.png')}>
+                                            </img>
+                                            <img
+                                                onClick={(e) => {
+                                                    showAssigToOrCalander({ "e": e, "name": "share" });
+                                                }}
+                                                src={require('../../../img/share-icon.png')}>
+                                            </img>
+
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -270,7 +317,9 @@ const mapStateToProps = (state) => {
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
+        contact: state.share_reducer.contactsUser,
+        indexContact: state.share_reducer.indexContact,
     }
 }
 const mapDispatchToProps = (dispatch) => {

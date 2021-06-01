@@ -37,6 +37,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [oldObject, setOldObject] = useState()
         const { from } = props//to know from which component its come
 
+
         function showToast(val) {
             props.showToast(val)
         }
@@ -86,7 +87,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
             <>
                 <div className="row ">
-                    <div className="view-details  col-5 mt-4">
+                    <div className="view-details  col-5">
                         {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
                         {renderSwitch()}
                     </div>

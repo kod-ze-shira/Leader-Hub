@@ -9,9 +9,9 @@ import HeaderLeader from '@leadercodes/leader-header'
 import BodyEmailOfAssignmentTask from './component/hub/BodyOfAssignmentTask/BodyEmailOfAssignmentTask';
 import ContactList from './component/hub/contact/contactList';
 import FilesOfProject from './component/hubFeature/viewFilesOfProject/viewFilesOfProject';
+import $ from 'jquery'
 
 export default function App(props) {
-
   return (
     <>
       <Provider store={Store}>

@@ -10,6 +10,9 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
+import placeholder from '../../../img/placeholder.png'; // with import
+import { blue } from '@material-ui/core/colors';
+// import {angleDown} from 'react-fa'
 
 
 function TasksNotBelongCardByMap(props) {
@@ -17,8 +20,6 @@ function TasksNotBelongCardByMap(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
-    // const [currentIndexTask, setCurrentIndexTask] = useState("")
-    // const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [cardId, setCardId] = useState()
     const [myProjects, setMyProjects] = useState([])
@@ -31,6 +32,9 @@ function TasksNotBelongCardByMap(props) {
         "_id": props.task._id, "name": props.task.name, "description": props.task.description
         , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
     })
+
+    const [indexOfProject, setIndexOfProject] = useState(null);
+    const [indexOfCard, setIndexOfCard] = useState(null);
 
     useEffect(() => {
         if (!props.workspaces.length) {
@@ -88,7 +92,6 @@ function TasksNotBelongCardByMap(props) {
         console.log(props.task._id)
         $(`#${props.task._id + "disappear"}`).css("display", "none")
         props.objectToast({ 'type': 'Task', 'object': props.task })
-
     }
 
     const workspaceSelect = props.workspaces ? props.workspaces.map((workspace) => (
@@ -96,24 +99,44 @@ function TasksNotBelongCardByMap(props) {
             value: workspace, label:
                 // <div className="container">
                 <div className="row" style={{ width: '200px' }}>
-
                     <div className=" " style={{ display: 'inline-block' }} >
                         <div className="logo-w-little "
-                            style={{ backgroundColor: workspace.color, display: 'inline-block' }}
+                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
                         >
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
                     </div>
-                    {workspace.name}
+                    <div>
+                        {workspace.name}
+                        {/* <i class="fa fa-angle-down" aria-hidden="true"></i> */}
+                        {/* <FontAwesomeIcon icon={angleDown}  /> */}
+
+                    </div>
+                    <div></div>
 
                 </div >
         } : null
     )) : null
+    // const selectPlaceHorder = <img className="selectPlaceHorder" src={require('../../../img/remove.svg')}></img>
+
+    // const selectPlaceHorder = <img src={placeholder}></img>
+    const selectPlaceHorder = <hr
+        style={{
+            border: 0,
+            clear: 'solid',
+            display: 'block',
+            width: '6vw',
+            backgroundColor: '#68C7CB',
+            height: '2px'
+        }}
+    />
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
             setMyCards(null)
             setMyProjects(null)
+            setIndexOfProject(null)
+            setIndexOfCard(null)
             document.getElementById("selectProjectInTasksNotBelong").click();
 
             let indexWorkspace
@@ -139,14 +162,21 @@ function TasksNotBelongCardByMap(props) {
         if (newValue) {
             //   props.options == 
             let indexProject
+            // setIndexOfProject(0) ;
+            console.log(indexOfProject);
             for (let index = 0; index < myProjects.length; index++) {
-                if (myProjects[index]._id == newValue.value._id)
-                    indexProject = index
+                if (myProjects[index]._id == newValue.value._id) {
+                    setIndexOfProject(index);
+                    indexProject = index;
+                }
             }
+            setIndexOfCard(null)
             setMyCards(null)
             setMyCards(myProjects[indexProject].cards ? myProjects[indexProject].cards : null)
             setCardId(null)
             // chooseProject()
+
+
         }
     };
 
@@ -173,9 +203,8 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
-            //   props.options == 
             setCardId(newValue.value._id)
-            // console.log(cardId)
+            setIndexOfCard(newValue.value.index)
         }
     };
     function belongTask() {
@@ -217,8 +246,17 @@ function TasksNotBelongCardByMap(props) {
             // props.setTaskComplete(completeTask)
         }
     }
+
+    function deleteAllSelect() {
+        setMyCards(null)
+        setMyProjects(null)
+        setIndexOfProject(null)
+        setIndexOfCard(null)
+        setIndexOfWorkspace(null)
+
+    }
     function setPropertiesOfTask() {
-        debugger
+
         let completeTask = {
             "_id": props.task._id,
             "name": props.task.name,
@@ -233,24 +271,8 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
     }
 
-    function chooseWorkspace() {
 
-        document.getElementById('selectWorkspaceInTasksNotBelong').style.display = 'block'
 
-        document.getElementById('chooseWorkspace').style.display = 'none'
-        document.getElementById('selectProjectInTasksNotBelong').style.display = 'none'
-        document.getElementById('chooseProject').style.display = 'block'
-        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
-        document.getElementById('chooseCard').style.display = 'block'
-        // $('#chooseWorkspace').css({ 'display', 'none'})
-        // $('#selectWorkspaceInTasksNotBelong').css({ 'display': 'block' })
-    }
-    function chooseProject() {
-        document.getElementById('selectProjectInTasksNotBelong').style.display = 'block'
-        document.getElementById('chooseProject').style.display = 'none'
-        document.getElementById('selectCardInTasksNotBelong').style.display = 'none'
-        document.getElementById('chooseCard').style.display = 'block'
-    }
     // function chooseCard() {
 
     //     document.getElementById('selectCardInTasksNotBelong').style.display = 'block'
@@ -276,56 +298,81 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
+                <div className="col-5 row">
+                    <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
-                <label className="check-task1 py-2 row  px-2 col-4 nameTaskNotBelong">
+                        <label
+                            className="check-task col-1">
+                            {/* className="check-task ml-3 py-2 pl-5 col-1 "> */}
+                            {/* <input type="checkbox" /> */}
 
-                    <label
-                        className="check-task col-1">
-                        {/* className="check-task ml-3 py-2 pl-5 col-1 "> */}
-                        {/* <input type="checkbox" /> */}
+                            <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
+                                icon={['fas', 'grip-vertical']}
+                            ></FontAwesomeIcon>
 
-                        <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
-                            icon={['fas', 'grip-vertical']}
-                        ></FontAwesomeIcon>
 
-                        <input
-                            type="checkbox"
-                            name="name" id="name" title={props.task.name}
-                            checked={props.task.complete}
-                            className={props.task.complete ? "disabled show-card " : "show-card "}
-                            value={props.task.name}
-                            onChange={(e) => changeFiledInTask(e)}
-                            onBlur={(e) => editTask()}
-                            onKeyPress={e => {
-                                if (e.key === 'Enter') {
-                                    editTask()
-                                }
-                            }}
-                        />
-                        <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
+                            <input
+                                type="checkbox"
+                                name="name" id="name" title={props.task.name}
+                                checked={props.task.complete}
+                                className={props.task.complete ? "disabled show-card " : "show-card "}
+                                value={props.task.name}
+                                onChange={(e) => changeFiledInTask(e)}
+                                onBlur={(e) => editTask()}
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        editTask()
+                                    }
+                                }}
+                            />
+                            <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
 
+                        </label>
+                        <label className='col-10'>
+                            {props.task.name}
+                        </label>
                     </label>
-                    <label className='col-10'>
-                        {props.task.name}
-                    </label>
-                </label>
 
-                <label className="check-task    view-details-btn" >
-                    <button
-                        onClick={(e) => openViewDetails(e)}
-                    >view details +</button>
-                </label>
-                <label className="check-task border-left  py-2  px-2 col-2 workspaceN ">
+                    <label className="check-task col  d-flex align-items-center justify-content-end  view-details-btn" >
+                        <button
+                            onClick={(e) => openViewDetails(e)}
+                        >
+                            view details
+                      <FontAwesomeIcon className="ml-2"
+                                icon={['fas', 'caret-right']}>
+                            </FontAwesomeIcon>
+                        </button>
+                    </label>
+                </div>
+                <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
-                    <CreatableSelect
-                        isClearable
-                        onChange={handleChangeWorkspace}
-                        // onInputChange={handleInputChange}
-                        // value='dd'
-                        id='selectWorkspaceInTasksNotBelong'
-                        className='selectWorkspaceInTasksNotBelong'
-                        options={workspaceSelect}
-                    />
+                    <div className="justify-content-center">
+                        <CreatableSelect
+                            theme={theme => ({
+                                ...theme,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: '#68c7cb1a',
+                                    primary: '#68C7CB',
+                                    primary50: '#68C7CB',
+                                },
+                            })}
+                            onChange={handleChangeWorkspace}
+                            id='selectWorkspaceInTasksNotBelong'
+                            className='selectWorkspaceInTasksNotBelong text-center '
+                            placeholder={selectPlaceHorder}
+                            options={workspaceSelect}
+                            value={indexOfWorkspace !== null ?
+                                workspaceSelect[indexOfWorkspace] : 'Select...'}
+
+                        />
+                        {/* <div className="drop-down"> 
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <FontAwesomeIcon 
+                                Icon='chevron-down'>
+                            </FontAwesomeIcon>
+                        </div> */}
+                    </div>
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
                     {/* <div id='chooseProject' onClick={() => chooseProject()}>--</div> */}
@@ -333,10 +380,21 @@ function TasksNotBelongCardByMap(props) {
                         // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeProject}
-                        // onInputChange={handleInputChange}
+                        placeholder={selectPlaceHorder}
+                        theme={theme => ({
+                            ...theme,
+                            colors: {
+                                ...theme.colors,
+                                primary25: '#68c7cb1a',
+                                primary: '#68C7CB',
+                                primary50: '#68C7CB',
+                            },
+                        })}
                         id='selectProjectInTasksNotBelong'
                         className='selectProjectInTasksNotBelong'
                         options={projectSelect}
+                        value={indexOfProject !== null ?
+                            projectSelect[indexOfProject] : 'Select...'}
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
@@ -347,16 +405,28 @@ function TasksNotBelongCardByMap(props) {
                         onChange={handleChangeCard}
                         id='selectCardInTasksNotBelong'
                         className='selectCardInTasksNotBelong'
-                        // onInputChange={handleInputChange}
+                        theme={theme => ({
+                            ...theme,
+                            colors: {
+                                ...theme.colors,
+                                primary25: '#68c7cb1a',
+                                primary: '#68C7CB',
+                                primary50: '#68C7CB',
+                            },
+                        })}
                         options={cardsSelect}
+                        placeholder={selectPlaceHorder}
+
+                        value={indexOfCard !== null ?
+                            cardsSelect[indexOfCard] : 'Select...'}
                     />
                 </label>
-                <label className="check-task border-left d-flex justify-content-between  py-2  px-2 col">
+                <label className="check-task border-left d-flex justify-content-around align-items-center  py-2  px-2 col">
 
                     {myWorkspace && !cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
 
                         </>
                         : null
@@ -365,7 +435,7 @@ function TasksNotBelongCardByMap(props) {
                     {cardId ?
                         <>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
 
                         </> : null
 

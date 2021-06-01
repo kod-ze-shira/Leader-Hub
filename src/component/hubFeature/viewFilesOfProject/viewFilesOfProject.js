@@ -52,6 +52,7 @@ function deleteFile(){
                     </div>
                 </div>
                 <br/>
+                
                 <hr></hr>
            
         {props.FilesOfProject.length?

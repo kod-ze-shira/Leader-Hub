@@ -43,7 +43,7 @@ function AddTask(props) {
         <div className="edit-task">
             <h5 className="mt-2">Add Task</h5>
             <label for="task-name">name:</label>
-            <input type="text" name="name" class="form-control" id="task-name" placeholder="name"
+            <input  type="text" name="name" class="form-control" id="task-name" placeholder="name"
                 onChange={handleChange} />
             <label for="description">description:</label>
             <input type="text" name="description" class="form-control" id="description" placeholder="description"

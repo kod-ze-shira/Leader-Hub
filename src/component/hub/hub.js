@@ -10,9 +10,7 @@ import {
     // Redirect,
 } from 'react-router-dom';
 import history from "../history"
-
-// import workspacePlatform from './workspacePlatform/workspacePlatform';
-// import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
+import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
@@ -41,7 +39,10 @@ function Hub(props) {
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
+    const [openCalander, setOpenCalander] = useState(false)
+    const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
+   
 
     const showToastToDelete = (objectToDelete_) => {
 
@@ -90,12 +91,27 @@ function Hub(props) {
         objectToDelete.push(objectToDeleteLocal)
         setShowToastDelete(true)
     }
+    const ShowObject = (val) => {
 
+        switch (val) {
+            case "calander":
+                setOpenCalander(true)
+                break;
+            case "share":
+                setShowContactList(true)
+                break;
+            default:
+                break;
+        }
+    }
     $(window).click(function () {
         setShowContactList(false)
+        setOpenCalander(false)
     });
     $(window).scroll(function () {
         setShowContactList(false)
+        setOpenCalander(false)
+
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
@@ -121,7 +137,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub" : "col-12 bodyHub mx-2 "}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub mt-4" : "col-12 bodyHub mx-2 mt-4"}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -144,7 +160,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
-                                    viewContactList={(val) => setShowContactList(true)}
+                                    viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
@@ -153,7 +169,12 @@ function Hub(props) {
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
-
+                            <ProtectedRoute path={'/:emailShare/hub/:idProject/:userName/share'}>
+                                <CardsPage
+                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewContactList={(val) => setShowContactList(true)}
+                                    focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
+                            </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
@@ -180,13 +201,17 @@ function Hub(props) {
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
-
+                    {openCalander ?
+                        <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
+                        : null}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
                 </div>
 
             </Router >
+
+
         </>
     )
 }
@@ -203,7 +228,6 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
-        createSystemWave: () => dispatch(actions.createSystemWave()),
     }
 
 

@@ -1,13 +1,12 @@
-import { act } from '@testing-library/react';
 import $ from 'jquery'
 import { actions } from '../actions/action'
-
+import configData from '../../ProtectedRoute/configData.json'
 
 export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
 
         var taskId = action.payload;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + taskId + "/getTaskById"
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + taskId + "/getTaskById"
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -35,7 +34,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASKS_BY_CARD_ID') {
 
         var cardId = action.payload;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/` + cardId + `/getTasksByCardId`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + cardId + `/getTasksByCardId`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -66,7 +65,7 @@ export const getAllTasksNotBelongsCardForUser = ({ dispatch, getState }) => next
     if (action.type === 'GET_ALL_TASKS_NOT_BELONGS_CARD_FOR_USER') {
 
         var cardId = action.payload;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllTasksNotBelongsCardForUser`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getAllTasksNotBelongsCardForUser`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -91,7 +90,7 @@ export const getAllTasksNotBelongsCardForUser = ({ dispatch, getState }) => next
 
 export const getAllMilestonesTasks = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_MILESTONES_TASKS') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/getAllmilestonesTasksForUser`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getAllmilestonesTasksForUser`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -119,7 +118,7 @@ export const getAllMilestonesTasks = ({ dispatch, getState }) => next => action 
 export const newTask = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_TASK') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
         console.log(task)
 
@@ -138,7 +137,8 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
                     "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
-                    "to": getState().public_reducer.userEmail,
+                    // "to": ['bp63447@gmail.com'],
+                    "to": [getState().public_reducer.userName],
                     "from": "hub@noreply.leader.codes",
                     "source": "Hub",
                     "files": null
@@ -206,9 +206,9 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 
 export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/editTask`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-        debugger
+
         if (!action.payload.card) {
             for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
                 if (getState().public_reducer.tasks[index]._id == action.payload._id)
@@ -266,9 +266,10 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
         let taskId = action.payload._id
+
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/completeTask`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/completeTask`
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -278,7 +279,16 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ taskId }),
             success: function (data) {
-
+                if (action.payload.complete) {
+                    dispatch(actions.createSystemWave({
+                        "subject": "Comlpite task",
+                        "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                        "to": [getState().public_reducer.userName],
+                        "from": "hub@noreply.leader.codes",
+                        "source": "Hub",
+                        "files": null
+                    }))
+                }
                 console.log("success")
                 console.log(data.result);
             },
@@ -296,7 +306,7 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_TASK_BY_ID') {
         // let workspace = getState().workspace_reducer;
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -333,8 +343,9 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
 
         let cardSours = getState().public_reducer.cards[action.payload[3]].tasks ? getState().public_reducer.cards[action.payload[3]].tasks : []
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
+        debugger
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -346,6 +357,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
             success: function (data) {
                 console.log("success")
                 console.log(data);
+
                 dispatch(actions.setCards(data.cards))
 
             },
@@ -365,7 +377,7 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
         let tasksList = getState().public_reducer.cards[action.payload].tasks ? getState().public_reducer.cards[action.payload].tasks : []
         console.log(tasksList)
         debugger
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/dragTask`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragTask`
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -394,12 +406,12 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
 export const dragCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DRAG_CARD') {
-        debugger
+
         let cardsList = getState().public_reducer.cards
         console.log(cardsList)
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/dragCard`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragCard`
         console.log(urlData)
-        debugger
+
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -409,9 +421,12 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ cardsList }),
             success: function (data) {
+                debugger
                 console.log("success")
                 console.log(data);
-                dispatch(actions.setCards(data.cards))
+                dispatch(actions.setCards(cardsList))
+                // dispatch(actions.setCards(data.cards))
+
 
             },
             error: function (err) {
@@ -432,7 +447,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             "updateDates": "08/03/2021",
             'description': ' '
         }
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/newTask`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -462,7 +477,7 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
         let taskId = action.payload.taskId
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
-        let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${taskId}/${cardId}/belongTask`
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/${cardId}/belongTask`
         $.ajax({
             url: urlData,
             method: 'POST',

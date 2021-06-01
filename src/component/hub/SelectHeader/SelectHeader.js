@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './selectHeader.css'
-import Logo from '../logo/logo'
 import SelectProject from '../SelectHeader/selectProject/selectProject';
 import SelectWorkspace from '../SelectHeader/selectWorkspace/selectWorkspace'
 import SelectCards from '../SelectHeader/selectCards/selectCards'
@@ -10,9 +9,7 @@ import SelectTask from '../SelectHeader/selectTask/selectTask'
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Paper from '@material-ui/core/Paper';
-import { createMuiTheme } from '@material-ui/core/styles';
-import cyan from '@material-ui/core/colors/cyan';
+import { useParams, withRouter } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,14 +25,16 @@ const useStyles = makeStyles((theme) => ({
     indicator: {
         backgroundColor: '#00C6EA'
     }
-
-
 }));
 
 function SelectHeader(props) {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+
+    // const [value, setValue] = useState(props.number);
+    const [value, setValue] = useState(0);
+
     const color = '#00C6EA'
+    const { idProject } = useParams();
 
     useEffect(() => {
         if (props.workspaces.length == 0)
@@ -50,8 +49,8 @@ function SelectHeader(props) {
         props.flag(value)
     }
     const changePresent = (e) => {
-        console.log(e)
         props.from(e)
+        props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
 
     return (
@@ -72,8 +71,10 @@ function SelectHeader(props) {
                         <div className="col-md col-sm-2 pr-0">
                             <SelectTask />
                         </div>
-                    </> : 
-                       <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" /><Tab label="Tabs" className="tab" /></Tabs>}
+                    </> :
+                    <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" />
+                        <Tab label="Tabs" className="tab" /></Tabs>}
+
                 <div className={classes.root} id='tabsAndList'>
                     {props.menue ?
                         <Tabs
@@ -89,7 +90,6 @@ function SelectHeader(props) {
                             <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
                             <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
                             <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
-                            
 
                         </Tabs>
                         :
@@ -103,7 +103,8 @@ function SelectHeader(props) {
                     }
                 </div>
 
-
+                {/* {props.type == 'projects' ?
+                    <span>ff</span> : null} */}
             </div>
 
         </>
@@ -114,6 +115,7 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
+        user: state.public_reducer.userName,
     }
 }
 
@@ -122,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SelectHeader)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectHeader))

@@ -17,7 +17,7 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-        
+
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
                 document.getElementById("add-new-card").focus();
@@ -115,6 +115,10 @@ function ViewCardsTabs(props) {
         setAddTaskInInput(false)
     })
 
+    $('.draggable input').click(function() {
+        $(this).focus();
+    });
+
     return (
         <>
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
@@ -127,10 +131,10 @@ function ViewCardsTabs(props) {
                         >
                             <div className="view-cards-tabs"
                                 id={props.cardFromMap._id + "disappear"}>
-                                <div class="card " >
-                                    <div class="container">
-                                        <div class="card-header row">
-                                            <input
+                                <div class="card" >
+                                    <div class="container" >
+                                        <div class="draggable card-header row">
+                                            <input                                              
                                                 id="input-card-name"
                                                 ref={textInput}
                                                 className="form-control pl-4 col-10"
@@ -172,9 +176,8 @@ function ViewCardsTabs(props) {
                                                     {...provided.droppableProps} >
 
                                                     
-                                                    {props.cardFromMap.tasks?props.cardFromMap.tasks.map((task, index) => (
+                                                    {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
-
                                                             openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
                                                             task={props.cards[props.indexCard].tasks[index]}
@@ -182,8 +185,7 @@ function ViewCardsTabs(props) {
                                                             indexTask={index}
                                                             viewToastComplete={props.viewToastComplete}
                                                             viewContactList={props.viewContactList} />
-                                                    )):null}
-
+                                                    ))}
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-2">
