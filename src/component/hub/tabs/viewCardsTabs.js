@@ -26,11 +26,9 @@ function ViewCardsTabs(props) {
             }
     }, [props.flag, props.openInputTask])
 
-    const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
-    const [indexToEdit, setIndexToEdit] = useState(props.index)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [a, setA] = useState()
 
@@ -65,11 +63,12 @@ function ViewCardsTabs(props) {
         props.setCard(props.cardFromMap)
         e.stopPropagation();
     }
-    const updateCardName = (event) => {
-        setEditCardName(event.target.value)
-    }
+    // const updateCardName = (event) => {
+
+    //     setEditCardName(event.target.value)
+    // }
     const editCard = (event) => {
-        let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
+        let card = { "_id": props.cardFromMap._id, "name": textInput.current.innerHTML, "project": props.project._id }
         console.log("edut-card", card)
         props.editCard(card);
     }
@@ -101,7 +100,6 @@ function ViewCardsTabs(props) {
             editCard()
             document.getElementById("input-card-name").blur();
         }
-
     }
     const [task, setTask] = useState(false)
 
@@ -115,8 +113,18 @@ function ViewCardsTabs(props) {
         setAddTaskInInput(false)
     })
 
-    $('.draggable input').click(function() {
+    $('.draggable input').click(function () {
         $(this).focus();
+    });
+
+    $('span').bind('click',
+        function () {
+            $(this).attr('contentEditable', true);
+        });
+        
+    $('span').bind('blur',
+    function () {
+        $(this).attr('contentEditable', false);
     });
 
     return (
@@ -134,20 +142,20 @@ function ViewCardsTabs(props) {
                                 <div class="card" >
                                     <div class="container" >
                                         <div class="draggable card-header row">
-                                            <input                                              
+                                            <span
                                                 id="input-card-name"
                                                 ref={textInput}
-                                                className="form-control pl-4 col-10"
-                                                value={editCardName}
-                                                onChange={updateCardName}
                                                 onBlur={() => editCard()}
-                                                title={editCardName}
-                                                onKeyPress={event => {
-                                                    enterK(event)
-                                                }}
-                                            >
-                                            </input>
-                                            {/* <p>{props.cardFromMap.index}</p> */}
+                                                className=" mt-2 pl-4 col-10"
+                                                // form-control              
+                                                // value={editCardName}
+                                                // onChange={updateCardName}
+                                                // title={editCardName}
+                                                // onKeyPress={event => {
+                                                //     enterK(event)
+                                                // }}
+                                            >{editCardName}
+                                            </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
@@ -210,7 +218,7 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t"
-                                            className="add-task-tabs mt-1 "
+                                            className="add-task-tabs mt-3 "
                                             onClick={(e) => addTask(e)}>Add Task +</a>
 
                                     </div>
