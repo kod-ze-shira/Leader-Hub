@@ -20,11 +20,11 @@ function ViewTaskByCradTabs(props) {
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
-    const [task, setTask] = useState({
-        "milestones": props.task.milestones,
-        "_id": props.task._id, "name": editTaskName, "description": props.task.description
-        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-    })
+    // const [task, setTask] = useState({
+    //     "milestones": props.task.milestones,
+    //     "_id": props.task._id, "name": editTaskName, "description": props.task.description
+    //     , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+    // })
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
     const [showchalalit, setShowChalalit] = useState(false)
@@ -36,6 +36,7 @@ function ViewTaskByCradTabs(props) {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         $(`#${props.task._id}assing-to`).css("display", "none")
+
     }, [props.cards])
 
     useEffect(() => {
@@ -86,7 +87,7 @@ function ViewTaskByCradTabs(props) {
             "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
-        setTask(task1)
+        // setTask(task1)
         props.EditTask(task1);
     }
 
@@ -115,7 +116,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
-
+        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -146,7 +147,6 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const changeFiledInTask = (event) => {
-        debugger
 
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
@@ -158,6 +158,7 @@ function ViewTaskByCradTabs(props) {
         else {
             let value = event.target.value
             if (event.target.name == "complete") {
+                debugger
                 doneStatus = !doneStatus
                 value = doneStatus
                 editCompleteTask()
@@ -215,7 +216,7 @@ function ViewTaskByCradTabs(props) {
                             <div className="container ">
                                 <label
                                     title="Complete Task"
-                                    className="check-task pb-2  check-tabs row">
+                                    className="check-task pb-2  check-tabs">
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
@@ -299,6 +300,7 @@ function ViewTaskByCradTabs(props) {
                                                 </img>
                                                 <p>1</p>
                                                 <img
+                                                    onClick={(e) => props.updateLike(props.task._id)}
                                                     src={require('../../../img/heart.png')}>
                                                 </img>
                                             </div>
@@ -344,6 +346,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),

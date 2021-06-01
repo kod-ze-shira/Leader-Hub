@@ -4,7 +4,7 @@ import configData from '../../ProtectedRoute/configData.json'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
-
+        debugger
         let workspaceId;
         if (action.payload) {
             if (action.payload.workspaceId)
@@ -22,6 +22,7 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
+                debugger
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 if (action.payload) {

@@ -17,7 +17,7 @@ import { actions } from '../actions/action.js';
 import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask, dragCard,
+    , moveTaskBetweenCards, dragTask, dragCard, updateLike,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
@@ -78,7 +78,8 @@ const store = createStore(
                 belongTask,
                 completeTask,
                 shareObject,
-                assingTo
+                assingTo,
+                updateLike
             ))
 )
 store.dispatch(actions.extractJwt());
