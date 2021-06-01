@@ -5,7 +5,6 @@ import { actions } from '../actions/action'
 export const createSystemWave = ({ dispatch, getState }) => next => action => {
     // let url='https://api.dev.leader.codes/michalgiladi/createSystemWave'
     if (action.type === 'CREATE_SYSTEM_WAVE') {
-
         let massege = action.payload;
         fetch(`https://api.dev.leader.codes/createSystemWave`,
             {

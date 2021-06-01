@@ -29,8 +29,18 @@ function File(props) {
                 <div className='col-4 displayInlineBlock imgFileInTask'>
                     {props.file.url != 'new' ?
                         <a href={props.file.url} target="_blank">
-                            <img src={props.file.url}></img></a> :
+                            {props.file.name.endsWith(".pdf") ?
+                                <FontAwesomeIcon className='fontAwesomeIconFile'
+                                    icon={['fas', 'file-pdf']}
+                                ></FontAwesomeIcon>
+                                :
+                                <img src={props.file.url}></img>
+                            }
+                        </a> :
                         <img src={file}></img>}
+
+‏
+
                 </div>
                 <div className='col-8 displayInlineBlock nameFileAndAction'>
                     <span className='nameFileInTask'>
@@ -42,10 +52,11 @@ function File(props) {
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
                     {props.file.url != 'new' ?
-                        <img onClick={(e) => downloadFile(e)} style={{ float: 'right' }} className='downloadFileInTask mt-4'
+                        <img onClick={(e) => downloadFile(e)} style={{ float: 'right' }}
+                            className='downloadFileInTask mt-4'
                             src={require('../../../img/download.svg')}></img>
-                        : null}‏
-        <img onClick={(e) => downloadFile(e)} onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
+                        : null}
+                    <img onClick={(e) => downloadFile(e)} onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
                         src={require('../../../img/Group 21592.svg')}></img>
                     {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
                         icon={['fas', 'trash-alt']}
