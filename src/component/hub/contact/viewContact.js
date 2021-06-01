@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
+// import { actions } from '../../../redux/actions/action'
 import './contact.css'
 
 function ViewContact(props) {

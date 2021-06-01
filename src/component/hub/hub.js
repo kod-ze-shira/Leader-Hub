@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -6,8 +6,8 @@ import {
     Switch,
     Route,
 
-    Link,
-    Redirect,
+    // Link,
+    // Redirect,
 } from 'react-router-dom';
 import history from "../history"
 import CalendarComponent from './calendar/CalendarComponent';
@@ -20,9 +20,9 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import AddObject from './addObject/addObject'
+// import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
-import ViewDetails from './viewDetails/viewDetails'
+// import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
@@ -42,10 +42,7 @@ function Hub(props) {
     const [openCalander, setOpenCalander] = useState(false)
     const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
-    useEffect(() => {
-        $("input,textarea,p").attr("dir", "auto");
-
-    }, []);
+   
 
     const showToastToDelete = (objectToDelete_) => {
 

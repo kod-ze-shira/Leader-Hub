@@ -1,9 +1,11 @@
 
 function convertActionToType(actionName) {
+    console.log(actionName+" "+actionName.replace(/([A-Z])/g, "_$1").toUpperCase());
     return actionName.replace(/([A-Z])/g, "_$1").toUpperCase();
 }
 
 export const actions = new Proxy(
+  
     {},
     {
         get: function (target, prop) {
@@ -17,5 +19,5 @@ export const actions = new Proxy(
                 };
             else return target[prop];
         }
-    }
+    } 
 );
