@@ -137,6 +137,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
                     "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+
                     // "to": ['bp63447@gmail.com'],
                     "to": [getState().public_reducer.userName],
                     "from": "hub@noreply.leader.codes",
@@ -459,6 +460,14 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 dispatch(actions.addTask(data.message))
+                dispatch(actions.createSystemWave({
+                    "subject": "New task",
+                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "to": [getState().public_reducer.userName],
+                    "from": "hub@noreply.leader.codes",
+                    "source": "Hub",
+                    "files": null
+                }))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין

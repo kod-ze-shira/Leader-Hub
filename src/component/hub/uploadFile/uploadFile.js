@@ -25,7 +25,7 @@ function UploadFile(props) {
                 type={"file"}
                 id="logouug"
                 htmlFor="myInput"
-                accept="image/*"
+                // accept="image/*"
                 style={{
                     display: 'none',
                     cursor: 'pointer',

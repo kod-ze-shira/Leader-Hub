@@ -126,6 +126,17 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       }).then((result) => {
         return result.json();
       }).then((result) => {
+
+        dispatch(actions.createSystemWave({
+          "subject": "Share project",
+          "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+
+          // "to": ['bp63447@gmail.com'],
+          "to": [getState().public_reducer.userName],
+          "from": "hub@noreply.leader.codes",
+          "source": "Hub",
+          "files": null
+        }))
         checkPermission(result).then((ifOk) => {
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
@@ -168,6 +179,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 export const assingTo = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'ASSING_TO') {
+
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;
