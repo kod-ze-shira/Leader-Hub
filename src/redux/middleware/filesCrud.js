@@ -30,6 +30,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
 
                         // let size = data.filesData.file0.size / 1024 / 1024
                         var myData = { "files": data.filesData }
+
                         if (action.payload.type == 'taskNotBelong')
                             dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
                         else
@@ -110,7 +111,8 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
         )
             .then((resp) =>
 
-                resp.blob())
+                resp.blob()
+            )
             .then((blob) => {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
@@ -148,7 +150,7 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
             },
             error: function (err) {
-                alert(err);
+                console.log(err);
             },
         });
 

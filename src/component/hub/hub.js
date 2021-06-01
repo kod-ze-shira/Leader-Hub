@@ -10,9 +10,7 @@ import {
     Redirect,
 } from 'react-router-dom';
 import history from "../history"
-
-// import workspacePlatform from './workspacePlatform/workspacePlatform';
-import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
+import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
@@ -41,6 +39,8 @@ function Hub(props) {
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
+    const [openCalander, setOpenCalander] = useState(false)
+    const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
     useEffect(() => {
         $("input,textarea,p").attr("dir", "auto");
@@ -94,12 +94,27 @@ function Hub(props) {
         objectToDelete.push(objectToDeleteLocal)
         setShowToastDelete(true)
     }
+    const ShowObject = (val) => {
 
+        switch (val) {
+            case "calander":
+                setOpenCalander(true)
+                break;
+            case "share":
+                setShowContactList(true)
+                break;
+            default:
+                break;
+        }
+    }
     $(window).click(function () {
         setShowContactList(false)
+        setOpenCalander(false)
     });
     $(window).scroll(function () {
         setShowContactList(false)
+        setOpenCalander(false)
+
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
@@ -148,7 +163,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
-                                    viewContactList={(val) => setShowContactList(true)}
+                                    viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
@@ -189,7 +204,9 @@ function Hub(props) {
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
-
+                    {openCalander ?
+                        <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
+                        : null}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
@@ -214,7 +231,6 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
-        createSystemWave: () => dispatch(actions.createSystemWave()),
     }
 
 

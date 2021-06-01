@@ -37,9 +37,10 @@ function File(props) {
                         {props.file.url != 'new' ?
                             <a href={props.file.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.file.name}</a>
                             : <span> {props.file.name}</span>}
+
                     </span>
                     {/* <div> */}
-
+                    <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
                     {props.file.url != 'new' ?
                         <img onClick={(e) => downloadFile(e)} style={{ float: 'right' }} className='downloadFileInTask mt-4'
                             src={require('../../../img/download.svg')}></img>
