@@ -172,7 +172,7 @@ height:35px;
 text-align:left;
 /* display: inline-block; */
 }
-.div_contacts_list >.form-control{
+.div_contacts_list > .form-group{
   margin-bottom: 0 !important;
 }
     .invite-contact{
