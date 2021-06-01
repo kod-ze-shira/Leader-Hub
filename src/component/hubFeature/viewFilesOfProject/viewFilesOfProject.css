@@ -27,10 +27,14 @@ h3{
     background-repeat: no-repeat;
     background-size: contain;
 }
-.iconsAction{
+.iconControl{
     display: block;
 
 
+ }
+ .fileItem{
+     border: gray;
+     box-shadow: gray 1ch 1ch;
  }
  
  
@@ -38,7 +42,7 @@ h3{
     height: 1rem;
  }
  
- .iconsActions{
+ .iconsList{
     text-align: center;
     width: 7rem;
     justify-content: center;

@@ -32,8 +32,8 @@ function deleteFile(){
         <>
         <div className="filesForProject">
            <h3>Project Files</h3>
-            <div className="row iconsActions" >
-                    <div className=" delete iconsAction"
+            <div className="row iconsList" >
+                    <div className=" delete iconControl"
                         onClick={deleteFile}
                         data-tip data-for="delete"
                     >
@@ -43,7 +43,7 @@ function deleteFile(){
                         </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div>
-                    <div className="add iconsAction" onClick={downloadFile} data-tip data-for="download" >
+                    <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
                         <img class='imageIcon' src={download} ></img>
                         <ReactTooltip data-tip id="download" place="top" effect="solid">
                             {title.title_downLoad}
@@ -56,9 +56,11 @@ function deleteFile(){
            
         {props.FilesOfProject.length?
         // <ul>{props.FilesOfProject.map((file)=><li><a href={file.url} target="_blank">{file.name}</a></li>)}</ul>:"there arent files"}
-      <div className="container">  <div class="row row-cols-4 g-2">{props.FilesOfProject.map((file)=><div className="viewFile col">
-            <div className="row-10 wrapImg"><img src={file.url} className="imgFile"></img> </div>
-            <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name}</a></div></div>)}</div></div>:"there arent files"}
+      <div className="container">  <div class="row row-cols-4 g-2">{props.FilesOfProject.map((file)=><div className="viewFile col p-2">
+           <div className="fileItem"> 
+           <div className="row-10 wrapImg"><img src={file.url} className="imgFile"></img> </div>
+           <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name}</a></div>        </div>
+            </div>)}</div></div>:"there arent files"}
         {/* <input type="file"></input> */}
         </div>
         </>
