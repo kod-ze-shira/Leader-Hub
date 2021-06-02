@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import Hangout from './hangout/hangout'
+import ViewMembers from './members/veiwMembers/viewMembers'
 // import { actions } from '../../hub'
 function Overview(props) {
     
     return (
         <>
             <div className=" body container-fluid">
-              <Hangout></Hangout>
+                <ViewMembers/>
+              {/* <Hangout></Hangout> */}
             </div>
         </>
     )

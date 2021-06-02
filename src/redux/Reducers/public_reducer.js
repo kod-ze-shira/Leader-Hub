@@ -13,6 +13,7 @@ const initialState = {
     cards: [],
     tasks: [],
     milestones: [],
+    members:[],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -237,6 +238,10 @@ const publicData = {
     setCards(state, action) {
         state.cards = action.payload;
     },
+    setMembers(state, action) {  
+        state.members = action.payload;
+        console.log(state.members);
+    },
     deleteProjectFromWorkspace(state, action) {
 
         state.workspaces[state.indexOfWorkspace].projects.filter((_, i) =>
@@ -250,6 +255,7 @@ const publicData = {
                 state.cards = project.cards
         })
     },
+
     getTasksOfCard(state, action) {
         state.cards.find(card => {
             if (card._id == action.payload)
