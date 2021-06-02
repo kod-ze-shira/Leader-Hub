@@ -255,7 +255,7 @@ function ViewTaskByCradTabs(props) {
                                 </Menu>
 
                                 <input
-                                    className="form-control col-12 mx-0 mt-2"
+                                    className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
@@ -282,7 +282,10 @@ function ViewTaskByCradTabs(props) {
                                 <div className="icons-in-task-tabs pt-0">
 
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
-                                        <div className="status-task-tabs " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                        <div
+
+                                            className={props.task.complete ? "status-task-tabs-opacity" : "status-task-tabs"}
+                                            style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                             {props.task.status ? props.task.status.statusName : null}
                                         </div>
 
