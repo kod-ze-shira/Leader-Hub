@@ -5,7 +5,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
-    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@fortawesome/vue-fontawesome": "^2.0.2",
@@ -42,6 +42,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^16.14.0",
     "react-dropdown": "^1.9.2",
+    "react-fa": "^5.0.0",
     "react-favicon": "0.0.18",
     "react-flag-icon-css": "^1.0.25",
     "react-gantt-timeline": "^0.4.3",

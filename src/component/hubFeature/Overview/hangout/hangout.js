@@ -6,7 +6,6 @@ function Hangout(props) {
     const { userName } = props;
     const { jwtFromCookie } = props
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
-    debugger
     return (
         <iframe className="iframeHangout"
             src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}

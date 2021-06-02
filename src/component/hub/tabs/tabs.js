@@ -139,38 +139,6 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {/* <div className="card-width px-2 mt-4" >
-                                        <div className="view-cards-tabs  mt-1" >
-                                            <div class="card new-card" >
-                                                <div id='newCardInput' class="container" >
-                                                    <div
-                                                        class="card-header row" data-tip data-for="add_c"
-                                                    >
-                                                        <input
-                                                            id="add-new-card"
-                                                            className="form-control "
-                                                            placeholder={""} value={inputValue}
-                                                            onChange={updateInputValue}
-                                                            onBlur={(e) => newCard()}
-                                                            onKeyPress={event => {
-                                                                if (event.key === 'Enter') {
-                                                                    newCard()
-                                                                }
-                                                            }}></input>
-                                                        <button
-                                                            className='buttonNewCard mt-3'
-                                                            onClick={(e) => setFocousCardFunc(e)}
-                                                        >+ Add Card</button>
-                                                    </div>
-                                                </div>
-                                                <div className="card-body " id={!showInput ? "add-card" : ""}>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div> */}
-
                                     {props.cards.length ?
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
