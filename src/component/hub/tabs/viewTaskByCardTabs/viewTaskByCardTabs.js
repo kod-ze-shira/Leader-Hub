@@ -206,7 +206,7 @@ function ViewTaskByCradTabs(props) {
                         id="task-card"
                     >
 
-                        <div className="task-card mt-1 pt-2 mb-2 pb-3"
+                        <div className="task-card mt-1 pt-2 mb-3 pb-4"
                             onMouseOver={(e) => showAssign(e)}
                             onMouseOut={(e) => closeAssign(e)}
                             onClick={(e) => showDetails(e)}
@@ -285,7 +285,7 @@ function ViewTaskByCradTabs(props) {
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
-                                        <div className="icons-task-tabs   ">
+                                        <div className="icons-task-tabs">
 
                                             <div className="due-date-hover">
                                                 <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
@@ -305,12 +305,12 @@ function ViewTaskByCradTabs(props) {
                                             <div>
                                                 <img
                                                     id={`${props.task._id}assing-to`}
-                                                    className="ml-2 assing-to-icon-tabs"
+                                                    className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>
                                                 {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo?props.task.assingTo.contact.thumbnail:null} className="thumbnail-contact ml-2" />
                                                         : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                                 </div> : null}
                                             </div>
