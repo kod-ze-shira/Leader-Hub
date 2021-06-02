@@ -1,10 +1,10 @@
+import $ from 'jquery'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import EditStatus from './editStatus'
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewStatus.css'
-import $ from 'jquery'
 
 
 function ViewStatus(props) {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-// import viewFilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+import MyChart from '../chart/chart'
 import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
-// import { actions } from '../../hub'
+
 function Overview(props) {
     
     const [showFilesForProject,setShowFilesForProject]=useState(false)
@@ -13,12 +13,13 @@ function Overview(props) {
     return (
         <>
             <div className=" body container-fluid">
+              <MyChart/>
               <button onClick={openViewFilesForProject}>files in this project</button>
               {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
               
-             
+              <Hangout></Hangout>
             </div>
-            <Hangout></Hangout>
+           
         </>
     )
 }

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import { useParams } from 'react-router-dom';
-import $ from 'jquery';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useParams, withRouter } from 'react-router-dom';
 import Select from 'react-select';
-import { withRouter } from 'react-router-dom';
+import { actions } from '../../../../redux/actions/action';
 
 
 function SelectProject(props) {
