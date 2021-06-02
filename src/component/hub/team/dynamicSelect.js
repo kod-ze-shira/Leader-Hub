@@ -1,19 +1,16 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
 import { actions } from '../../../redux/actions/action';
-import share from '../../img/share.svg'
-import LetterLogo from '../logo/letterLogo';
-import AssingToContact from './assingToContact';
-import './style.css'
+import './style.css';
 
 function DynamicSelect(props) {
   useEffect(() => {
-    if (props.options == 'contacts' && props.contactsUser.length == 0) {
+    if (props.options === 'contacts' && props.contactsUser.length === 0) {
       props.getContactsForUser()
     }
     else
-      if (props.teamsUser.length == 0)
+      if (props.teamsUser.length === 0)
         props.getAllTeamsForUser()
   }, [])
   const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -56,7 +53,7 @@ function DynamicSelect(props) {
   })
   const viewTeamsList = props.teamsUser ? props.teamsUser.map((team) => (
     { value: team, label: <div><img referrerpolicy="no-referrer" src={team.logo} height="30px" width="30px" />{team.name} </div> }
-  )): null
+  )) : null
   // const new_options = viewTeamsList
 
   // new_options.push({
@@ -65,12 +62,12 @@ function DynamicSelect(props) {
   // })
   const [value, setValue] = useState()
   const handleChange = (newValue, actionMeta) => {
-    
+
     if (newValue) {
       console.group('Value Changed');
       console.log(newValue);
       // setValue(newValue)
-      props.options == 'contacts' ? props.setContactEmail(newValue) : props.addMemberEmailToMembersEmailList(newValue)
+      props.options === 'contacts' ? props.setContactEmail(newValue) : props.addMemberEmailToMembersEmailList(newValue)
       console.log(`action: ${actionMeta.action}`);
       console.groupEnd();
     }
@@ -89,21 +86,21 @@ function DynamicSelect(props) {
   return (
     <div className="select-dinamic">
       <CreatableSelect
-        // placeholder={props.value ?
-          // <div className="container">
-          //   <div className="option-contact row">
-          //     {props.value.thumbnail ? <img referrerpolicy="no-referrer" src={props.value.thumbnail} className="thumbnail-contact " />
-          //       : <div className="logo-contact" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.value.name ? props.value.name[0] : null}</div>}
-          //     <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="ml-2 assinto-contact " />
-          //     {/* <p className="name-contact ">{props.value.name} </p> */}
-          //   </div>
-          // </div>
-          // : <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="assinto-contact" />}
+        placeholder={props.value ?
+          <div className="container">
+            <div className="option-contact row">
+              {props.value.thumbnail ? <img referrerpolicy="no-referrer" src={props.value.thumbnail} className="thumbnail-contact " />
+                : <div className="logo-contact" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.value.name ? props.value.name[0] : null}</div>}
+              <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="ml-2 assinto-contact " />
+              {/* <p className="name-contact ">{props.value.name} </p> */}
+            </div>
+          </div>
+          : <img referrerpolicy="no-referrer" src={require('../../img/assingTo-small-icon.png')} className="assinto-contact" />}
         isClearable
         onChange={handleChange}
         onInputChange={handleInputChange}
         autosize={true}
-        options={props.options == 'contacts' ? viewContactsList : viewTeamsList}
+        options={props.options === 'contacts' ? viewContactsList : viewTeamsList}
       />
       {/* { showAssignTo ? <AssingToContact /> : null} */}
 

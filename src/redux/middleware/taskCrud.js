@@ -137,6 +137,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
                     "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+
                     // "to": ['bp63447@gmail.com'],
                     "to": [getState().public_reducer.userName],
                     "from": "hub@noreply.leader.codes",
@@ -263,6 +264,33 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+export const updateLike = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'UPDATE_LIKE') {
+        let taskId = action.payload
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/updateLike`
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            // data: JSON.stringify( ),
+            success: function (data) {
+                dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "likes", "value": data.task.likes }))
+                console.log("success")
+                console.log(data.result);
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
+
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
         let taskId = action.payload._id
@@ -345,7 +373,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-        debugger
+
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -375,8 +403,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
 export const dragTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DRAG_TASK') {
         let tasksList = getState().public_reducer.cards[action.payload].tasks ? getState().public_reducer.cards[action.payload].tasks : []
-        console.log(tasksList)
-        debugger
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragTask`
         $.ajax({
             url: urlData,
@@ -388,8 +414,8 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
             data: JSON.stringify({ tasksList }),
             success: function (data) {
                 console.log("success")
-                console.log(data);
-                dispatch(actions.setCards(data.project.cards))
+                console.log(data.cards);
+                dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -408,7 +434,6 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DRAG_CARD') {
 
         let cardsList = getState().public_reducer.cards
-        console.log(cardsList)
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragCard`
         console.log(urlData)
 
@@ -421,13 +446,9 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ cardsList }),
             success: function (data) {
-                debugger
                 console.log("success")
                 console.log(data);
-                dispatch(actions.setCards(cardsList))
                 // dispatch(actions.setCards(data.cards))
-
-
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -459,6 +480,14 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 dispatch(actions.addTask(data.message))
+                dispatch(actions.createSystemWave({
+                    "subject": "New task",
+                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "to": [getState().public_reducer.userName],
+                    "from": "hub@noreply.leader.codes",
+                    "source": "Hub",
+                    "files": null
+                }))
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -487,6 +516,7 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log("success")
+
                 dispatch(actions.getAllStatusesTaskForWorkspace({ 'workspaceId': workspaceId, 'task': data.task }))
                 dispatch(actions.removeTask(taskId))
             },

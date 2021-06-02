@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
-import './newProject.css'
+import $ from "jquery"
+import React, { useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import Toast from 'react-bootstrap/Toast'
-import viewDetails from '../../viewDetails/viewDetails'
-import $ from "jquery";
-import UploadFile from '../../uploadFile/uploadFile'
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
+import { actions } from '../../../../redux/actions/action'
+import './newProject.css'
 
 function NewProject(props) {
     let [flag, setFlag] = useState(false)

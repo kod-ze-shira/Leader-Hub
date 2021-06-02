@@ -183,7 +183,6 @@ function TaskDetails(props) {
         return <File file={file} />
     }
     const assingto = (e) => {
-
         setShowContactList(true)
     }
 
@@ -290,7 +289,7 @@ function TaskDetails(props) {
                         <div className="row justify-content-between">
                             <div class="dropdown col-md-6 col-lg-5">
                                 <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {props.statuses && props.statuses.length > 0 ? <>
+                                    {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
 
                                         <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
                                         <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
@@ -342,7 +341,7 @@ function TaskDetails(props) {
                     </div>
                     <div className="assingto-details" >
 
-                        <img className="assingto-task" src={require('../../../img/share-icon.png')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                     </div>
                     <div className=" files-details">

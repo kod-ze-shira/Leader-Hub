@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import ProjectsByWorkspace from '../../../hub/project/projectsByWorkspace/projectsByWorkspace'
 import './viewWorkspaceName.css'
 

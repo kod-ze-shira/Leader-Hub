@@ -14,15 +14,16 @@ import design_reducer from '../Reducers/design_reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
-import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
+/////////////////////////////////////////////
+import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject, getFilesForProject } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask, dragCard,
+    , moveTaskBetweenCards, dragTask, dragCard, updateLike,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject } from '../middleware/teamCrud';
+import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
@@ -65,6 +66,8 @@ const store = createStore(
                 downloadFile,
                 extractJwt,
                 getFiles,
+                /////////////////////////////////////////////////////
+                getFilesForProject,
                 removeFile,
                 getContactsForUser,
                 getAllTeamsForUser,
@@ -78,7 +81,9 @@ const store = createStore(
                 belongTask,
                 completeTask,
                 shareObject,
-                assingTo
+                assingTo,
+                updateLike,
+                getMembersByProjectId
             ))
 )
 store.dispatch(actions.extractJwt());

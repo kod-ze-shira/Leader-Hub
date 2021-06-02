@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Select from 'react-select';
-import ViewDetails from '../../viewDetails/viewDetails';
+import { actions } from '../../../../redux/actions/action';
 
 function SelectTask(props) {
     useEffect(() => {

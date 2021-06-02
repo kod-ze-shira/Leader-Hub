@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
-import { editStatus } from '../../../redux/middleware/statusCrud';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
 import Colors from '../color/color';
 import ViewAllStatuses from './viewAllStatuses';
 // import ViewDetails from '../../viewDetails/viewDetails'
-import './viewStatus.css'
+import './viewStatus.css';
 
 
 function AddStatus(props) {
