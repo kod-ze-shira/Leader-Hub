@@ -11,11 +11,11 @@ function EditStatus(props) {
 
     }, [])
 
-    const [editStatus, setEditStatus] = useState({
-        _id: "",
-        statusName: "",
-        color: "",
-    })
+    // const [editStatus, setEditStatus] = useState({
+    //     _id: "",
+    //     statusName: "",
+    //     color: "",
+    // })
     const [openPopUp, setOpenPopUp] = useState(props.openPopUp)
 
     // const [viewAllStatusComponent, setViewAllStatusComponent] = useState(false)

@@ -6,7 +6,7 @@ import { actions } from '../../../../redux/actions/action'
 import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
-import ToastDelete from '../../toastDelete/toastDelete1'
+// import ToastDelete from '../../toastDelete/toastDelete1'
 import title from '../../../../Data/title.json'
 import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
@@ -128,7 +128,7 @@ function AllWorkspaces(props) {
                     </div>
                 </div>
 
-                <div className="row mt-4 ml-5 view_workspace">
+                <div className="row  ml-5 view_workspace">
 
                     {/* add workspace button */}
                     {list ?
@@ -154,7 +154,7 @@ function AllWorkspaces(props) {
                         </div>
 
                         :
-                        <div className="Workspacegrid mt-4 addWorkspace" >
+                        <div className="Workspacegrid addWorkspace mt-4" >
                             <div onClick={(e) => openAddNewWorkspace(e)}>
                                 <div className="logoWorkspace1 pt-2" >
                                     <div className="mt-1 logo-w"

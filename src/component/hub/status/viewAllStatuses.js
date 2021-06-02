@@ -22,7 +22,7 @@ function ViewAllStatuses(props) {
 
     const openPopUpStatus = (e) => {
         // setOpenPopUp(!openPopUp)
-        if (openPopUpToAdd == true)
+        if (openPopUpToAdd === true)
             setOpenPopUpToAdd(!openPopUpToAdd)
     }
     const openAddStatus = (e) => {
@@ -43,7 +43,7 @@ function ViewAllStatuses(props) {
 
     const changeStatusByIndex = (indexOfStatus) => {
         let s = props.statuses[indexOfStatus]
-        if (s.complete == false)
+        if (s.complete === false)
             setStatus(s)
 
     }

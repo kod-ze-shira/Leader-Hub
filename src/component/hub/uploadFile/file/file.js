@@ -2,34 +2,73 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import './file.css'
 import { actions } from '../../../../redux/actions/action'
 
 function File(props) {
 
+    const [file, setFile] = useState()
+    useEffect(() => {
+
+        if (props.file.url == 'new' && props.file) {
+            setFile(URL.createObjectURL(props.file.file))
+        }
+
+    }, [props.file])
     function deleteFile() {
-        // alert('delete file')
-        props.removeFileInRedux({ 'name': props.name, 'url': props.url })
-
-
-        // props.deleteFilesInTask([url])
-        // props.removeFile([props.url])
-
-        // props.removeFile('https://files.codes/uploads/renana-il/img/1618920248226__ת.ז. יהודה עם ספח נשוי.JPG')
-
-        // document.getElementById(props.urlFile).remove()
+        props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
     }
-
+    function downloadFile(e) {
+        // e.stopPropagation()
+        props.downloadFile({ 'file': props.file, 'e': e })
+        // props.showViewDetails(true)
+    }
     return (
         <>
-            <div style={{ 'display': 'inline-block' }} id={props.url ? props.url : props.name}>
-                <button onClick={() => deleteFile()} >X</button>
-                {props.url != 'new' ?
-                    <a href={props.url} target="_blank">{props.name}</a>
-                    : <p>{props.name}</p>
-                }
-                {/* <FontAwesomeIcon icon={["fas", "download"]} onClick={() => props.downloadFile(props.url)} /> */}
+            <div className=' fileInTask  mb-3 row' id={props.file.url ? props.file.url : props.file.name}>
+                <div className='col-4 displayInlineBlock imgFileInTask'>
+                    {props.file.url != 'new' ?
+                        <a href={props.file.url} target="_blank">
+                            {props.file.name.endsWith(".pdf") ?
+                                <FontAwesomeIcon className='fontAwesomeIconFile'
+                                    icon={['fas', 'file-pdf']}
+                                ></FontAwesomeIcon>
+                                :
+                                <img src={props.file.url}></img>
+                            }
+                        </a> :
+                        <img src={file}></img>}
+
+‏
+
+                </div>
+                <div className='col-8 displayInlineBlock nameFileAndAction'>
+                    <span className='nameFileInTask'>
+                        {props.file.url != 'new' ?
+                            <a href={props.file.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.file.name}</a>
+                            : <span> {props.file.name}</span>}
+
+                    </span>
+                    {/* <div> */}
+                    <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
+                    {props.file.url != 'new' ?
+                        <img onClick={(e) => downloadFile(e)} style={{ float: 'right' }}
+                            className='downloadFileInTask mt-4'
+                            src={require('../../../img/download.svg')}></img>
+                        : null}
+                    <img onClick={(e) => downloadFile(e)} onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
+                        src={require('../../../img/Group 21592.svg')}></img>
+                    {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
+                        icon={['fas', 'trash-alt']}
+                    ></FontAwesomeIcon> */}
+
+
+                </div>
             </div>
+
+
+
+
         </>
     )
 }
@@ -42,7 +81,7 @@ export default connect(
     },
     (dispatch) => {
         return {
-            // downloadFile: (url) => dispatch(actions.downloadFile(url)),
+            downloadFile: (file) => dispatch(actions.downloadFile(file)),
             removeFileInRedux: (filesArr) => dispatch(actions.removeFileInRedux(filesArr)),
             deleteFilesInTask: (filesArr) => dispatch(actions.deleteFilesInTask(filesArr)),
         }

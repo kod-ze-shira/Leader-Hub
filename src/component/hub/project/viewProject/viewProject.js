@@ -24,9 +24,11 @@ function ViewProject(props) {
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
+        props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
         console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
+        props.setCurrentIndexProject(props.indexProject)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
     }
 

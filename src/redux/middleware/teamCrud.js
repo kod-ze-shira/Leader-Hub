@@ -108,13 +108,13 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
 export const shareObject = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'SHARE_OBJECT') {
-    let teamsMemberAndPermission = action.payload.teams
-    let membersEmail = action.payload.shareDetails
+    let teamsMembersAndPermission = action.payload.teams
+    let membersEmails = action.payload.shareDetails
     let objectId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]
       .projects[getState().public_reducer.indexCurrentProject]._id
     console.log(objectId);
     ///:userName/:objectId/:schemaName/:applicationName/shareObject
-    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project1/reacthub/shareMembersAndTeams`,
+    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project1/hub/shareMembersAndTeams`,
       {
         method: 'POST',
         headers: {
@@ -122,10 +122,21 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ teamsMemberAndPermission, membersEmail })
+        body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
         return result.json();
       }).then((result) => {
+
+        dispatch(actions.createSystemWave({
+          "subject": "Share project",
+          "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+
+          // "to": ['bp63447@gmail.com'],
+          "to": [getState().public_reducer.userName],
+          "from": "hub@noreply.leader.codes",
+          "source": "Hub",
+          "files": null
+        }))
         checkPermission(result).then((ifOk) => {
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
@@ -168,6 +179,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 export const assingTo = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'ASSING_TO') {
+
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;

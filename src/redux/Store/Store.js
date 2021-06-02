@@ -14,10 +14,11 @@ import design_reducer from '../Reducers/design_reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
-import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
+/////////////////////////////////////////////
+import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject,getFilesForProject  } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask,dragCard,
+    , moveTaskBetweenCards, dragTask, dragCard,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
@@ -27,9 +28,9 @@ import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middl
 import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
-import { uploadFiles, removeFile, getFiles } from '../middleware/filesCrud';
+import { uploadFiles, removeFile, downloadFile, getFiles } from '../middleware/filesCrud';
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer ,design_reducer });
+const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
 
 const store = createStore(
     reducers,
@@ -62,9 +63,11 @@ const store = createStore(
                 getAllStatusesTaskForWorkspace,
                 createStatus,
                 uploadFiles,
-                // downloadFile,
+                downloadFile,
                 extractJwt,
                 getFiles,
+                /////////////////////////////////////////////////////
+                getFilesForProject,
                 removeFile,
                 getContactsForUser,
                 getAllTeamsForUser,

@@ -18,9 +18,10 @@ export default function SureDelete(props) {
     function deleteObject() {
         // setShowModal(false)
         props.closeModal(false)
-   
+
         if (props.objectToDelete.type == "Card") {
-            $(`#${props.objectToDelete.object._id} `).addClass("displayNone")
+            $(`#${props.objectToDelete.object._id} `).css({ "display": "none" })
+            // $(`#${props.objectToDelete.object._id} `).addClass("displayNone")
             $(`#${props.objectToDelete.object._id} `).removeClass("mt-4")
             $(`#${props.objectToDelete.object._id} `).removeClass("col-3")
         }

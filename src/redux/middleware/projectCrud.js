@@ -4,7 +4,7 @@ import configData from '../../ProtectedRoute/configData.json'
 
 export const getProjectByIdInServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_PROJECT_BY_ID_IN_SERVER') {
-
+        console.log(getState());
         var projectId = action.payload;
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/getProjectById`
 
@@ -35,6 +35,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
     }
     return next(action);
 }
+
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
@@ -59,6 +60,30 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
     return next(action)
 }
 
+
+//////////////////////////////////////////////////
+export const getFilesForProject=({dispatch,getState})=>next=>action=>{
+    if(action.type==='GET_FILES_FOR_PROJECT'){  
+        let jwtFromCookie=getState().public_reducer.tokenFromCookies
+        let url=`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
+        $.ajax({
+            type:"GET",           
+            url:url,
+            //${getState().public_reducer.userName}   renana-il
+            //${getState().public_reducer.indexCurrentProject}   
+            headers:{authorization:jwtFromCookie},
+            success:(data)=>{       
+                console.log('data'+data.projectFiles );
+                dispatch(actions.setFilesForProject(data.projectFiles))
+            },
+            error:(err)=>{
+                console.log('err'+err.statusText);
+            }
+        })
+    }
+    return next(action)
+}
+
 export const newProject = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_PROJECT') {
@@ -79,14 +104,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
             dataType: 'json',
             success: function (data) {
                 dispatch(actions.addProjectToProjects(data.message))
-                dispatch(actions.createSystemWave({
-                    "subject": "New task",
-                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>Go to Hub</a> ",
-                    "to": getState().public_reducer.userEmail,
-                    "from": "hub@noreply.leader.codes",
-                    "source": "Hub",
-                    "files": null
-                }))
+
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -178,7 +196,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status == "401") {
+        if (result.status === "401") {
             result.routes ?
                 window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
                 window.location.assign(`https://accounts.codes/hub/login`)

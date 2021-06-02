@@ -27,7 +27,13 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
     // return new Promise((resolve, reject) => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
-        let urlData = `${configData.SERVER_URL}/${ getState().public_reducer.userName}/getWorkspacesForUser`
+        let urlData;
+        if (window.location.href.includes('share'))//get carrds for user that share
+            urlData = `${configData.SERVER_URL}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
+
+        else
+        urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getWorkspacesForUser`
+
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
             {
@@ -41,6 +47,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
             .then((result) => {
                 console.log("res", result)
                 checkPermission(result).then((ifOk) => {
+                    
                     dispatch(actions.setUserEmail(result.user.email))
                     dispatch(actions.setWorkspaces(result.workspace))
                     //if user refresh page give him the first project
@@ -59,7 +66,6 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
     if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newWorkspace`
         let workspace = action.payload
-
         $.ajax({
             url: urlData,
             method: 'POST',

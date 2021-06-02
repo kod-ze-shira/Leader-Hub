@@ -11,7 +11,7 @@
 
 }
 .card-width{
-  width: 36vh !important;
+  width: 20vw !important;
   display: inline-block !important; 
 }
 .card-body {
@@ -21,6 +21,9 @@
 #add-new-card{
   background-color:  #EDFBFC  !important;
 
+}
+span:focus{
+  outline: 0!important;
 }
 #input-card-name{
   font-size: medium;
@@ -68,7 +71,7 @@
   /* padding-right: 5px !important;
   padding-left: 5px !important; */
 
-  margin-bottom: 9px;
+  /* margin-bottom: 9px; */
 }
 .allTaskInCard div:hover{
   border-color:#52C4A9  !important;
@@ -81,18 +84,16 @@
 .task-card{
   padding-top: 5px !important;
     background-color: white;
-    height: 105px;
+    min-height: 95px;
+    /* height: 115px; */
     border-radius: 5px;
     position: relative !important;
 }
 .task-card:hover{
     border:1px solid #52C4A9!important;
 }
-
 .task-card input{
-  height: 50px !important;
-  float: left !important;
-  margin:0 !important;
+  margin-top:20px !important; 
 
 }
 .task-card p{
@@ -115,9 +116,9 @@
   
 }
 .task-card:hover .assing-icon {
-}​
+}
 .task-card:hover .color-task {
-}​
+}
 /* .color-task:hover{
   display: none;
 } */
@@ -181,3 +182,7 @@
       background: #919494; 
     }
     
+    .hand-drag{
+      display: inline-block;
+      opacity: 0.5;
+    }

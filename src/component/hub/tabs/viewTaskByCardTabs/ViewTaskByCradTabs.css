@@ -11,11 +11,12 @@
     
       /* display: none !important ; */
   }
-  /* .task-card .MuiButtonBase-root:hover{
-    display: block ;
-} */
+
 .check-task input:hover ~ .checkmark{
     background-color:#f6f7f8 !important;
+}
+.task-name-span{
+    text-indent: 5vh !important;
 }
 /* .input-card-name{
     height: 65vh !important;
@@ -24,3 +25,49 @@
     display:none;
 } */
 
+.status-task-tabs{
+    color:white;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 300;
+    opacity: 0.7;
+    width: 53px;
+    height: 22px;
+    /* font-weight: 400; */
+
+  }
+  .icons-task-tabs > img{
+      margin-left: 5px;
+  }
+  @media screen and (min-width: 1000px) {
+    .icons-task-tabs{
+        /* margin-left:76px ; */
+    }
+  }
+
+.due-date-icon-tabs{
+    display : none;
+}
+
+.like-icon-tabs {
+    display : none;
+}
+.icons-task-tabs > div {
+    display: inline-block;
+}
+.due-date-hover p {
+    font-size: smaller !important;
+    color:red !important;
+}
+.like-hover p{
+    font-size: smaller !important;
+    color:#68C7CB!important;
+    display: inline-block;
+    margin-left:10px;
+
+}
+.icons-in-task-tabs{
+    bottom: 0 !important;
+    margin-bottom: 0!important;
+    padding-bottom: 0 !important;
+}

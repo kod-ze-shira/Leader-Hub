@@ -171,6 +171,7 @@ font-weight: 400;
 }
 
 .nameWorkspaceInGrid{
+
    -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;

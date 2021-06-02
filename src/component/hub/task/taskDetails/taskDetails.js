@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 
-// import FormInput  from "../../../../input";
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
@@ -50,30 +49,7 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
     });
 
-    // $('input, textarea').keyup(function(){
-    //    let $this = $(this);
-    //     if($this.val().length == 1)
-    //     {
-    //         var x =  new RegExp("[\x00-\x80]+"); // is ascii
-    
-    //         //alert(x.test($this.val()));
-    
-    //         var isAscii = x.test($this.val());
-    
-    //         if(isAscii)
-    //         {
-    //             $this.css("direction", "ltr");
-    //         }
-    //         else
-    //         {
-    //             $this.css("direction", "rtl");
-    //         }
-    //     }
-    
-    // });
 
-    // document.getElementsByTagName("input").setAttribute("dir","auto");
-    $("input,textarea").attr("dir","auto");
 
     function stopP(event) {
         event.stopPropagation();
@@ -95,22 +71,16 @@ function TaskDetails(props) {
         await Promise.all(
             myFiles.map(async (file) => {
                 if (file.file.type.includes("image")) {
-                    console.log("in img type");
                     const options = {
                         maxSizeMB: 1,
                         maxWidthOrHeight: 1920,
                         useWebWorker: true,
                     };
-                    // console.log(file);
                     compressedFile = await imageCompression(file.file, options);
-                    // console.log("compressedFile  " + JSON.stringify(compressedFile));
+
                     console.log(
-                        "compressedFile instanceof Blob",
-                        compressedFile instanceof Blob
-                    ); // true
-                    // console.log(
-                    //     `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-                    // );
+                        `compressedFile size ${compressedFile.size / 1024} MB`
+                    );
                 } else {
                     compressedFile = file.file;
                 }
@@ -137,7 +107,6 @@ function TaskDetails(props) {
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                console.log(props.task.files)
                                 let r = props.task.files
                                 r.splice(index2, 1);
                             }
@@ -203,19 +172,18 @@ function TaskDetails(props) {
     function filesInTask() {
         let newComponent
         props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
-            newComponent = addFileComponent(file.url, file.name)
+            newComponent = addFileComponent(file)
             if (!fileComponentArr.length)
                 setFileComponentArr([newComponent])
             else
                 setFileComponentArr([...fileComponentArr, newComponent])
         })
     }
-    const addFileComponent = (urlFile, nameFile) => {
-        return <File urlFile={urlFile} nameFile={nameFile} />
+    const addFileComponent = (file) => {
+        return <File file={file} />
     }
     const assingto = (e) => {
         setShowContactList(true)
-        console.log(showContactList)
     }
 
     function closeViewDetailsInTask() {
@@ -224,7 +192,7 @@ function TaskDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File url={file.url} name={file.name} />
+        return <File file={file} />
     }) : null
 
     $('.assingto-details').hover(function () {
@@ -254,116 +222,110 @@ function TaskDetails(props) {
 
     return (
         <>
-            <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}>
+            {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
+            <div className="details task-details ml-4" onClick={(e) => closeStatus(e)}>
                 <div className='propertiesViewDitails' onClick={(e) => closeContactList(e)}>
-                    <div className='row mt-4 justify-content-between headerDitails'>
-                        <h5 className=" title-view-details   pl-3">Task details</h5>
-                        <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
-                        {/* <h5 className="mt-5 title-view-details pb-2">Task details</h5> */}
+                    <div className='mr-4 '>
+                        <div className='row mt-4 justify-content-between headerDitails'>
+                            <h5 className=" title-view-details   pl-3">Task details</h5>
+                            {/* <img className="files-task-hover" src={require('../../../img/close.svg')} ></img> */}
 
-                    </div>
+                            <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
-                    <div className="row justify-content-between mx-1" >
-                        <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                        <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
-                    </div>
-                    <div class="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
-                        <input name="name"
-                        // dir="auto"
-                            required ref={nameRequired}
-                            // type="text" 
-                            class="form-control"
-                            id="name"
-                            onChange={(e) => changeFiledInTask(e)}
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
-                        <div class="invalid-feedback">
-                            Please enter task name.
+                        </div>
+
+                        <div className="row justify-content-between mx-1" >
+                            <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                        </div>
+                        <div class="form-group" id='nameRequired'>
+                            <label for="name">Name</label>
+                            <input name="name"
+                                required ref={nameRequired}
+                                class="form-control"
+                                id="name"
+                                onChange={(e) => changeFiledInTask(e)}
+                                value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
+                            <div class="invalid-feedback">
+                                Please enter task name.
                      </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control"
-                        // dir="auto"
-                            rows="3"
-                            placeholder="Write a description about your workspace"
-                            name="description"
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}
-                            onChange={(e) => changeFiledInTask(e)} contentEditable
-                        ></textarea>
-                    </div>
-                    {/* <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="description"
-                            id="descriptionProject" rows="2"
-                            onChange={(e) => changeFiledInTask(e)}
-                            value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}>
-                        </textarea>
-                    </div>
-                 */}
-                    <div className="row justify-content-between">
-                        <div class="form-group col-md-6 col-lg-5">
-                            <label for="startDate">Start Date</label>
-                            <input
-                                className="form-control"
-                                name="startDate"
-                                type="date"
-                                id="startDate"
-                                value={startDateTask}
-                                onChange={(e) => changeFiledInTask(e)}
-                            />
-                        </div>
-                        <div class="form-group col-md-6 col-lg-5">
-                            <label for="dueDate">Due Date</label>
-                            <input
-                                className="form-control "
-                                name="dueDate"
-                                type="date"
-                                id="dueDate"
-                                value={dueDateTask}
-                                onChange={(e) => changeFiledInTask(e)}
-                            />
                         </div>
 
-                    </div>
-                    <div className="row justify-content-between">
-                        <div class="dropdown col-md-6 col-lg-5">
-                            <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {props.statuses && props.statuses.length > 0 ? <>
-
-                                    <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                    <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
-                                </> : null}
-                            </button>
-                            {openPopUp ?
-                                <div onClick={(e) => stopP(e)}>
-                                    <ViewAllStatuses
-                                        task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
-                                        status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                        openPopUp={openPopUp} />
-                                </div>
-                                : null}
-
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control"
+                                rows="3"
+                                placeholder="Write a description about your workspace"
+                                name="description"
+                                value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}
+                                onChange={(e) => changeFiledInTask(e)} contentEditable
+                            ></textarea>
                         </div>
-                        {/* <div className="row mb-3"> */}
-                        <div className="col-md-6 col-lg-5">
-                            <span className="milestones-span mt-2">Mark as milestone</span>
-                            <label className="switch ml-2 mt-1">
-                                <input type="checkbox"
-                                    name="milestones"
-                                    checked={milstone}
-                                    value={props.task.milestones}
+                        <div className="row justify-content-between">
+                            <div class="form-group col-md-6 col-lg-5">
+                                <label for="startDate">Start Date</label>
+                                <input
+                                    className="form-control"
+                                    name="startDate"
+                                    type="date"
+                                    id="startDate"
+                                    value={startDateTask}
                                     onChange={(e) => changeFiledInTask(e)}
                                 />
-                                <span className="slider round" ></span>
+                            </div>
+                            <div class="form-group col-md-6 col-lg-5">
+                                <label for="dueDate">Due Date</label>
+                                <input
+                                    className="form-control "
+                                    name="dueDate"
+                                    type="date"
+                                    id="dueDate"
+                                    value={dueDateTask}
+                                    onChange={(e) => changeFiledInTask(e)}
+                                />
+                            </div>
+
+                        </div>
+                        <div className="row justify-content-between">
+                            <div class="dropdown col-md-6 col-lg-5">
+                                <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
+
+                                        <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
+                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
+                                    </> : null}
+                                </button>
+                                {openPopUp ?
+                                    <div onClick={(e) => stopP(e)}>
+                                        <ViewAllStatuses
+                                            task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                                            status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                                            openPopUp={openPopUp} />
+                                    </div>
+                                    : null}
+
+                            </div>
+                            <div className="col-md-6 col-lg-5">
+                                <span className="milestones-span mt-2">Mark as milestone</span>
+                                <label className="switch ml-2 mt-1">
+                                    <input type="checkbox"
+                                        name="milestones"
+                                        checked={milstone}
+                                        value={props.task.milestones}
+                                        onChange={(e) => changeFiledInTask(e)}
+                                    />
+                                    <span className="slider round" ></span>
 
 
-                            </label>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    {/* </div> */}
-                    {newFileComponentArr}
+
+                    <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
+
+                        {newFileComponentArr}
+                    </div>
                     <hr></hr>
 
                 </div>
@@ -373,15 +335,13 @@ function TaskDetails(props) {
                         <ContactList></ContactList> : null
 
                     }
-
-                    {/* <div className="btn-option-in-task col-3"> */}
                     <div className="delete-details">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
                     <div className="assingto-details" >
 
-                        <img className="assingto-task" src={require('../../../img/share-icon.png')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                     </div>
                     <div className=" files-details">
@@ -389,8 +349,6 @@ function TaskDetails(props) {
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
                         <img className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
                     </div>
-                    {/* </div> */}
-
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}

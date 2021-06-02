@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import './newBody.css';
 
 export default function Body() {
-    const [showShare, setShowShare] = useState(false)
+  const [showShare, setShowShare] = useState(false)
 
-    return (
+  return (
 
-        <div className="body mt-4">
+    <div className="body ">
 
-            {/* <Search /> */}
-            {/* <TableHeader/> */}
-            {/* <TableBody />
+      {/* <Search /> */}
+      {/* <TableHeader/> */}
+      {/* <TableBody />
       <AllWorkspaces />
       <Button onClick={() => setShowShare(!showShare)} variant="primary">
         Add team
@@ -18,7 +18,7 @@ export default function Body() {
       {
         showShare ? <TeamExample></TeamExample> : null
       } */}
-        </div>
-    );
+    </div>
+  );
 }
 // )

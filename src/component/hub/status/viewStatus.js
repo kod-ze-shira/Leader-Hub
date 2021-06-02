@@ -26,7 +26,7 @@ function ViewStatus(props) {
     }
     const saveStatus1 = (id) => {
         props.saveStatus(props.status)
-        if (props.status.statusName == props.statuses[2].statusName) {
+        if (props.status.statusName === props.statuses[2].statusName) {
             let editTaskInRedux = { "nameFiled": "complete", "value": true }
             props.setTaskByFiledFromTasks(editTaskInRedux)
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])

@@ -33,8 +33,6 @@ function ProjectsByWorkspace(props) {
 
 
     function openEditOrShareProject(from) {
-        // setCurrentProject(project)
-        // props.setProject(project)
         setAddOrEditProject(from)
         setShowProject(true)
     }
@@ -45,36 +43,25 @@ function ProjectsByWorkspace(props) {
         e.stopPropagation()
     }
 
-    // const viewProjectsByWorkspace = props.workspaces.find(workspace => workspace._id == idWorkspace) ?
-    //     props.workspaces.find(workspace => workspace._id == idWorkspace).projects.map((project, index) => {
-    //         return project.name.toUpperCase().includes(valueSearch.toUpperCase())
-    //             ? <ViewProject showToast={(obj) => showToast1(obj)}
-    //                 closeViewDetails={false}
-    //                 indexProject={index}
-    //                 myProject={project}
-    //                 editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
-    //             : null
-    //     }) : null
+
 
     const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
         props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
-            let p = project.name ? project : project.project
             return project.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     indexProject={index}
-                    myProject={p}
+                    myProject={project}
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
                 : null
         }) : null
 
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects.map((project, index) => {
-            let p = project.name ? project : project.project
-            return p.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
+            return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
                 <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
-                    myProject={p}
+                    myProject={project}
                     indexProject={index}
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)}
                     shareProject={openEditOrShareProject} />
@@ -108,7 +95,8 @@ function ProjectsByWorkspace(props) {
                 <div className='headerProjects'>
                     <div className='betweenHeaderProjects'>
                         <div className="titleProjects pt-2 ml-2">Leader Projects</div>
-
+                        {/* <div class="show-task row mx-4 mt-3 headerTableTask"> */}
+                        {/* <label class="ml-4 pl-6 labelAllTask mt-2"> Leader Projects </label></div> */}
                         <div id=''>
                             <span id='searchProject' >
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
@@ -116,8 +104,6 @@ function ProjectsByWorkspace(props) {
                                     placeholder='Search project...'
                                 />
                             </span>
-
-
                             {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
                                 data-tip data-for="add_p"
                                 onClick={(e) => openViewDitailsAddProject(e)}
@@ -125,7 +111,7 @@ function ProjectsByWorkspace(props) {
                             <ReactTooltip data-tip id="add_p" place="top" effect="solid">
                                 {title.title_add_project}
                             </ReactTooltip>
-                                            
+
                         </div>
                     </div>
 

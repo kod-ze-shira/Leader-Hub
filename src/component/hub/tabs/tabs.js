@@ -96,7 +96,7 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-        
+
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
@@ -105,6 +105,8 @@ function Tabs(props) {
         }
         setInputValue("")
         setShowInput(false)
+        props.setCurrentIndexCard(props.cards.length)
+        setOpenInputTask(true)
     }
     const openViewDetails = (task) => {
         setViewDetails(true)
@@ -138,6 +140,20 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
+                                    {props.cards.length ?
+                                        <DragDropContext
+                                            onDragEnd={(e) => onDragEndׂ(e)}>
+                                            {props.cards.map((card, index) => {
+                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                    openInputTask={openInputTask}
+                                                    viewToastComplete={props.viewToastComplete}
+                                                    viewContactList={props.viewContactList}
+                                                    showToast={(obj) => props.showToast(obj)}
+                                                    key={card._id} cardFromMap={card} indexCard={index} />
+                                            })}
+                                        </DragDropContext>
+                                        : null}
+                                    {/* // <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>} */}
                                     <div className="card-width px-2 mt-4" >
                                         <div className="view-cards-tabs  mt-1" >
                                             <div class="card new-card" >
@@ -170,22 +186,6 @@ function Tabs(props) {
                                         </div>
 
                                     </div>
-
-                                    {props.cards.length ?
-                                        <DragDropContext
-                                            onDragEnd={(e) => onDragEndׂ(e)}>
-                                            {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
-                                                    openInputTask={openInputTask}
-                                                    viewToastComplete={props.viewToastComplete}
-                                                    viewContactList={props.viewContactList}
-                                                    showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} indexCard={index} />
-                                            })}
-                                        </DragDropContext>
-                                        : null}
-                                    {/* // <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>} */}
-
 
                                 </div>
                             </div>
