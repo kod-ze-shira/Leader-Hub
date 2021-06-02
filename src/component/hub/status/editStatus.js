@@ -1,13 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
-import { editStatus } from '../../../redux/middleware/statusCrud';
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
 import ViewAllStatuses from './viewAllStatuses';
-// import ViewDetails from '../../viewDetails/viewDetails'
-import './viewStatus.css'
-import $ from 'jquery'
-
-
+import './viewStatus.css';
 
 function EditStatus(props) {
 
@@ -15,11 +11,11 @@ function EditStatus(props) {
 
     }, [])
 
-    const [editStatus, setEditStatus] = useState({
-        _id: "",
-        statusName: "",
-        color: "",
-    })
+    // const [editStatus, setEditStatus] = useState({
+    //     _id: "",
+    //     statusName: "",
+    //     color: "",
+    // })
     const [openPopUp, setOpenPopUp] = useState(props.openPopUp)
 
     // const [viewAllStatusComponent, setViewAllStatusComponent] = useState(false)

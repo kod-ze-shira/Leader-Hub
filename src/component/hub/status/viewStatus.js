@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import $ from 'jquery'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action'
 import EditStatus from './editStatus'
 // import ViewDetails from '../../viewDetails/viewDetails'
 import './viewStatus.css'
-import $ from 'jquery'
 
 
 function ViewStatus(props) {
@@ -26,7 +26,7 @@ function ViewStatus(props) {
     }
     const saveStatus1 = (id) => {
         props.saveStatus(props.status)
-        if (props.status.statusName == props.statuses[2].statusName) {
+        if (props.status.statusName === props.statuses[2].statusName) {
             let editTaskInRedux = { "nameFiled": "complete", "value": true }
             props.setTaskByFiledFromTasks(editTaskInRedux)
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])

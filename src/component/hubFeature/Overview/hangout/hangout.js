@@ -4,11 +4,15 @@ import { actions } from "../../../../redux/actions/action";
 import './hangout.css'
 function Hangout(props) {
     const { userName } = props;
+    const { jwtFromCookie } = props
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
     return (
         <iframe className="iframeHangout"
-            src={`https://chat.leader.codes/:${userName}/hangout/60ae13f7eb9376345b5668c1}`}
-            title="hangout"  >
+            src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
+            // src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=isLocal`}
+
+            // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
+            title="hangout">
         </iframe>
     )
 }
@@ -17,7 +21,8 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         workspaceIndex: state.public_reducer.indexOfWorkspace,
         projectIndex: state.public_reducer.indexCurrentProject,
-        userName: state.public_reducer.userName
+        userName: state.public_reducer.userName,
+        jwtFromCookie: state.public_reducer.tokenFromCookies
     }
 }
 const mapDispatchToProps = (dispatch) => {

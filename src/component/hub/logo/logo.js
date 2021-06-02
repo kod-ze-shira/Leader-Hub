@@ -1,7 +1,7 @@
 
-import React from 'react'
+import React from 'react';
+import LetterLogo from './letterLogo';
 import "./logo.css";
-import LetterLogo from './letterLogo'
 export default function Logo(props) {
     return (
         <>

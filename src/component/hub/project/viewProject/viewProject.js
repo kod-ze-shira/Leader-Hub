@@ -1,20 +1,15 @@
-import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import './viewProject.css'
-import Cell from './cell'
-import CellDescription from './cellDescription'
-import './viewProject.css'
-import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
-// import { ProgressBar } from 'react-bootstrap';
-import TeamView from '../../teamView/teamView'
-import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
-import title from '../../../../Data/title.json'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import title from '../../../../Data/title.json';
+import { actions } from '../../../../redux/actions/action';
+import share from '../../../img/share.svg';
+import Cell from './cell';
+import CellDescription from './cellDescription';
+import './viewProject.css';
 
-import { useEffect } from 'react';
-import share from '../../../img/share.svg'
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
@@ -29,9 +24,11 @@ function ViewProject(props) {
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
+        props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
         console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
+        props.setCurrentIndexProject(props.indexProject)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
     }
 

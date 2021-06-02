@@ -14,7 +14,8 @@ import design_reducer from '../Reducers/design_reducer';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
-import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
+/////////////////////////////////////////////
+import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject,getFilesForProject  } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
     , moveTaskBetweenCards, dragTask, dragCard,
@@ -65,6 +66,8 @@ const store = createStore(
                 downloadFile,
                 extractJwt,
                 getFiles,
+                /////////////////////////////////////////////////////
+                getFilesForProject,
                 removeFile,
                 getContactsForUser,
                 getAllTeamsForUser,

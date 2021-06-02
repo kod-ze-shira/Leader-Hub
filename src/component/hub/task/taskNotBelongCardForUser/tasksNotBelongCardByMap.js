@@ -11,6 +11,8 @@ import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
 import placeholder from '../../../img/placeholder.png'; // with import
+import { blue } from '@material-ui/core/colors';
+// import {angleDown} from 'react-fa'
 
 
 function TasksNotBelongCardByMap(props) {
@@ -104,12 +106,31 @@ function TasksNotBelongCardByMap(props) {
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
                     </div>
-                    {workspace.name}
+                    <div>
+                        {workspace.name}
+                        {/* <i class="fa fa-angle-down" aria-hidden="true"></i> */}
+                        {/* <FontAwesomeIcon icon={angleDown}  /> */}
+
+                    </div>
+                    <div></div>
 
                 </div >
         } : null
     )) : null
-    const selectPlaceHorder = <img src={placeholder}></img>
+    // const selectPlaceHorder = <img className="selectPlaceHorder" src={require('../../../img/remove.svg')}></img>
+
+    // const selectPlaceHorder = <img src={placeholder}></img>
+    const selectPlaceHorder = <hr
+        style={{
+            border: 0,
+            clear: 'solid',
+            display: 'block',
+            width: '6vw',
+            backgroundColor: '#68C7CB',
+            height: '2px'
+        }}
+    />
+
     const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
             setMyCards(null)
@@ -158,7 +179,6 @@ function TasksNotBelongCardByMap(props) {
 
         }
     };
-    console.log("indexOfProject", indexOfProject);
 
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
@@ -183,10 +203,8 @@ function TasksNotBelongCardByMap(props) {
 
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
-            //   props.options == 
             setCardId(newValue.value._id)
             setIndexOfCard(newValue.value.index)
-            // console.log(cardId)
         }
     };
     function belongTask() {
@@ -227,6 +245,15 @@ function TasksNotBelongCardByMap(props) {
             // לא מתעדכן הכומפליטד ברידקס 
             // props.setTaskComplete(completeTask)
         }
+    }
+
+    function deleteAllSelect() {
+        setMyCards(null)
+        setMyProjects(null)
+        setIndexOfProject(null)
+        setIndexOfCard(null)
+        setIndexOfWorkspace(null)
+
     }
     function setPropertiesOfTask() {
 
@@ -271,7 +298,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className="col-4 row">
+                <div className="col-5 row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -282,6 +309,7 @@ function TasksNotBelongCardByMap(props) {
                             <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
+
 
                             <input
                                 type="checkbox"
@@ -305,25 +333,46 @@ function TasksNotBelongCardByMap(props) {
                         </label>
                     </label>
 
-                    <label className="check-task col  d-flex align-items-center  view-details-btn" >
+                    <label className="check-task col  d-flex align-items-center justify-content-end  view-details-btn" >
                         <button
                             onClick={(e) => openViewDetails(e)}
-                        >view details +</button>
+                        >
+                            view details
+                      <FontAwesomeIcon className="ml-2"
+                                icon={['fas', 'caret-right']}>
+                            </FontAwesomeIcon>
+                        </button>
                     </label>
                 </div>
                 <label className="check-task text-center border-left  py-2  px-2 col-2 workspaceN">
                     {/* <div id='chooseWorkspace' onClick={(e) => chooseWorkspace(e)}>--</div> */}
-                    <CreatableSelect
-                        isClearable
-                        onChange={handleChangeWorkspace}
-                        // onInputChange={handleInputChange}
-                        // value='dd'
-                        id='selectWorkspaceInTasksNotBelong'
-                        className='selectWorkspaceInTasksNotBelong'
-                        placeholder={selectPlaceHorder}
-                        options={workspaceSelect}
+                    <div className="justify-content-center">
+                        <CreatableSelect
+                            theme={theme => ({
+                                ...theme,
+                                colors: {
+                                    ...theme.colors,
+                                    primary25: '#68c7cb1a',
+                                    primary: '#68C7CB',
+                                    primary50: '#68C7CB',
+                                },
+                            })}
+                            onChange={handleChangeWorkspace}
+                            id='selectWorkspaceInTasksNotBelong'
+                            className='selectWorkspaceInTasksNotBelong text-center '
+                            placeholder={selectPlaceHorder}
+                            options={workspaceSelect}
+                            value={indexOfWorkspace !== null ?
+                                workspaceSelect[indexOfWorkspace] : 'Select...'}
 
-                    />
+                        />
+                        {/* <div className="drop-down"> 
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <FontAwesomeIcon 
+                                Icon='chevron-down'>
+                            </FontAwesomeIcon>
+                        </div> */}
+                    </div>
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
                     {/* <div id='chooseProject' onClick={() => chooseProject()}>--</div> */}
@@ -332,7 +381,15 @@ function TasksNotBelongCardByMap(props) {
                         isClearable
                         onChange={handleChangeProject}
                         placeholder={selectPlaceHorder}
-                        // onInputChange={handleInputChange}
+                        theme={theme => ({
+                            ...theme,
+                            colors: {
+                                ...theme.colors,
+                                primary25: '#68c7cb1a',
+                                primary: '#68C7CB',
+                                primary50: '#68C7CB',
+                            },
+                        })}
                         id='selectProjectInTasksNotBelong'
                         className='selectProjectInTasksNotBelong'
                         options={projectSelect}
@@ -348,7 +405,15 @@ function TasksNotBelongCardByMap(props) {
                         onChange={handleChangeCard}
                         id='selectCardInTasksNotBelong'
                         className='selectCardInTasksNotBelong'
-                        // onInputChange={handleInputChange}
+                        theme={theme => ({
+                            ...theme,
+                            colors: {
+                                ...theme.colors,
+                                primary25: '#68c7cb1a',
+                                primary: '#68C7CB',
+                                primary50: '#68C7CB',
+                            },
+                        })}
                         options={cardsSelect}
                         placeholder={selectPlaceHorder}
 
@@ -360,8 +425,8 @@ function TasksNotBelongCardByMap(props) {
 
                     {myWorkspace && !cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect" onClick={() => belongTask()}>save</button>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
 
                         </>
                         : null
@@ -370,7 +435,7 @@ function TasksNotBelongCardByMap(props) {
                     {cardId ?
                         <>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm ">cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
 
                         </> : null
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -6,13 +6,11 @@ import {
     Switch,
     Route,
 
-    Link,
-    Redirect,
+    // Link,
+    // Redirect,
 } from 'react-router-dom';
 import history from "../history"
-
-// import workspacePlatform from './workspacePlatform/workspacePlatform';
-import WorkspacePlatform from './warkspacePlatform/workspacePlatform'
+import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
 import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
@@ -22,9 +20,9 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import AddObject from './addObject/addObject'
+// import AddObject from './addObject/addObject'
 import HeaderLeader from '@leadercodes/leader-header'
-import ViewDetails from './viewDetails/viewDetails'
+// import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
@@ -41,11 +39,10 @@ function Hub(props) {
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
+    const [openCalander, setOpenCalander] = useState(false)
+    const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
-    useEffect(() => {
-        $("input,textarea,p").attr("dir", "auto");
-
-    }, []);
+   
 
     const showToastToDelete = (objectToDelete_) => {
 
@@ -94,12 +91,27 @@ function Hub(props) {
         objectToDelete.push(objectToDeleteLocal)
         setShowToastDelete(true)
     }
+    const ShowObject = (val) => {
 
+        switch (val) {
+            case "calander":
+                setOpenCalander(true)
+                break;
+            case "share":
+                setShowContactList(true)
+                break;
+            default:
+                break;
+        }
+    }
     $(window).click(function () {
         setShowContactList(false)
+        setOpenCalander(false)
     });
     $(window).scroll(function () {
         setShowContactList(false)
+        setOpenCalander(false)
+
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
@@ -113,10 +125,10 @@ function Hub(props) {
             /> : null}
 
 
-            <HeaderLeader userName={props.user} appName='hub' />‏
+            {/* <HeaderLeader userName={props.user} appName='hub' />‏
             <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
-            </div>
+            </div> */}
             <Router history={history}>
 
                 <div className="row back-screen">
@@ -148,7 +160,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
-                                    viewContactList={(val) => setShowContactList(true)}
+                                    viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
@@ -157,7 +169,8 @@ function Hub(props) {
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
-                            <ProtectedRoute path={'/:emailShare/hub/:idProject/:userName/share'}>
+                            {/* share url */}
+                            <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
                                     viewToastComplete={(val) => setShowToastComplete(true)}
                                     viewContactList={(val) => setShowContactList(true)}
@@ -189,7 +202,9 @@ function Hub(props) {
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
-
+                    {openCalander ?
+                        <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
+                        : null}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
@@ -214,7 +229,6 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
-        createSystemWave: () => dispatch(actions.createSystemWave()),
     }
 
 
