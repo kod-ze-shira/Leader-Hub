@@ -33,6 +33,7 @@ function Tabs(props) {
             let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
             if (workspace) {
                 props.indexOfWorkspace(i)
+                props.getAllStatusesTaskForWorkspace()
             }
         }
     }, [props.workspaces])
@@ -234,7 +235,7 @@ export default connect(
             indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
             dragCard: () => dispatch(actions.dragCard()),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
-            getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+            getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),
