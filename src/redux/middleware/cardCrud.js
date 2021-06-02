@@ -3,9 +3,17 @@ import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
+
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
+        debugger
         var projectId = action.payload;
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
+        let urlData;
+        if (window.location.href.includes('share'))//get carrds for user that share
+            urlData = `${configData.SERVER_URL}/share/${projectId}/${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getCardsByProjectId`
+
+        else
+            urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
+
         // let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
         $.ajax({
             url: urlData,

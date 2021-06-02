@@ -23,7 +23,6 @@ function CardsPage(props) {
     useEffect(() => {
         if (props.cards.length < 1)
             props.getCardsByProjectId(idProject)
-
         if ((window.location.href.indexOf('list') != -1)) {
             setPresent("list")
             setNumber(1)
