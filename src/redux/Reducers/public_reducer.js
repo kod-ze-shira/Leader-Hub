@@ -8,11 +8,13 @@ const initialState = {
     tokenFromCookies: "",
     userName: "",
     userEmail: '',
+    userId: "",
     workspaces: [],
     projects: [],
     cards: [],
     tasks: [],
     milestones: [],
+    members: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -29,7 +31,10 @@ const publicData = {
     setclose(state, action) {
         state.close = !state.close
     },
-
+    setUserId(state, action) {
+        
+        state.userId = action.payload
+    },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -242,6 +247,10 @@ const publicData = {
     setCards(state, action) {
         state.cards = action.payload;
     },
+    setMembers(state, action) {
+        state.members = action.payload;
+        console.log(state.members);
+    },
     deleteProjectFromWorkspace(state, action) {
 
         state.workspaces[state.indexOfWorkspace].projects.filter((_, i) =>
@@ -255,6 +264,7 @@ const publicData = {
                 state.cards = project.cards
         })
     },
+
     getTasksOfCard(state, action) {
         state.cards.find(card => {
             if (card._id == action.payload)

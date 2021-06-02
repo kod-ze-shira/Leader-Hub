@@ -1,0 +1,14 @@
+.colorDiv{
+    width: 15vw;
+}
+.chartCol{
+    border: 0.1em solid rgb(204 238 240);
+    border-radius: 1%;
+}
+.col-3>.chartCol{
+    border-radius: 3%;
+}
+.bParam{
+    font-size: 1.5rem;
+    font-weight: 500;
+}

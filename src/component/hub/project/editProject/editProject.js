@@ -1,9 +1,9 @@
 import $ from "jquery"
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
+import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
-import ReactTooltip from 'react-tooltip';
+import { actions } from '../../../../redux/actions/action'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
@@ -49,8 +49,6 @@ function EditProject(props) {
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
         // project.dueDate = res
 
-
-        debugger
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import { useParams } from 'react-router-dom';
-import $ from 'jquery';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import Select from 'react-select';
-import LetterLogo from '../../logo/letterLogo'
-import './selectWorkspace.css'
 import Select, { components } from "react-select";
+import { actions } from '../../../../redux/actions/action';
+// import Select from 'react-select';
+import LetterLogo from '../../logo/letterLogo';
+import './selectWorkspace.css';
 
 const Input = props => <components.Input {...props} maxLength={5} />;
 const maxLength = 5;

@@ -237,3 +237,25 @@ function checkPermission(result) {
 
   })
 }
+export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
+
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project1/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
+    fetch(urlData,
+      {
+        method: "GET",
+        headers: {
+          Authorization: jwtFromCookie,
+        },
+      }
+    ).then(response =>{
+      return response.json()})
+      .then(data => {
+        console.log('dataaaaa'+ data.membersList)
+        dispatch(actions.setMembers(data.membersList))
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
+}

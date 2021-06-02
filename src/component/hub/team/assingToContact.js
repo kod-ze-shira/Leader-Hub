@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-// import CreatableSelect from 'react-select/creatable';
 import { actions } from '../../../redux/actions/action';
-// import share from '../../img/share.svg'
 import LetterLogo from '../logo/letterLogo';
-import './style.css'
+import './style.css';
 
 function AssingToContact(props) {
     useEffect(() => {

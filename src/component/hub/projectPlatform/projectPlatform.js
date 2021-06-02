@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
+import React, { useEffect, useRef, useState } from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
 import CardsByProject from '../Cards/cardsByProject/cardsByProject';
-import './projectPlatform.css'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ToastDelete from '../toastDelete/toastDelete1';
-import $ from 'jquery'
-import ReactTooltip from 'react-tooltip';
-import title from '../../../../src/Data/title.json'
 import ContactList from '../contact/contactList';
+import ToastDelete from '../toastDelete/toastDelete1';
+import './projectPlatform.css';
 
 function ProjectPlatform(props) {
     const [showInput, setShowInput] = useState(false)

@@ -1,8 +1,6 @@
-import { event } from 'jquery'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import CreateTeam from '../../team/createTeam/createTeam'
 import DynamicSelect from '../../team/dynamicSelect'
 import TeamsShare from '../../team/teamsShare/teamsShare'
 import ShareOneMember from '../share/shareOneMember/shareOneMember'

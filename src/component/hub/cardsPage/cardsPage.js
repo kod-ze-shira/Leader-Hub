@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../../../redux/actions/action'
-import GanttDesign from '../gantt/gantt';
-import ProjectPlatform from '../projectPlatform/projectPlatform'
-import SelectHeader from '../SelectHeader/SelectHeader'
-import Tabs from '../tabs/tabs'
-import Overview from '../../hubFeature/Overview/Overview'
-import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
 import { useParams } from 'react-router-dom';
-
-import cardsByProject from '../Cards/cardsByProject/cardsByProject';
+import { actions } from '../../../redux/actions/action';
+import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt';
+import Overview from '../../hubFeature/Overview/Overview';
+import ProjectPlatform from '../projectPlatform/projectPlatform';
+import SelectHeader from '../SelectHeader/SelectHeader';
+import Tabs from '../tabs/tabs';
 
 
 function CardsPage(props) {
@@ -21,8 +18,9 @@ function CardsPage(props) {
 
 
     useEffect(() => {
-        if (props.cards.length < 1)
+        if (props.cards.length < 1) {
             props.getCardsByProjectId(idProject)
+        }
 
         if ((window.location.href.indexOf('list') != -1)) {
             setPresent("list")
@@ -92,7 +90,7 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         project: state.project_reducer.project,
         cards: state.public_reducer.cards,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
 
     }
 }

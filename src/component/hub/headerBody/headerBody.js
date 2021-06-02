@@ -1,7 +1,6 @@
 
-import React, { useState } from 'react'
-import Logo from '../logo/logo';
-import './headerBody.css'
+import React, { useState } from 'react';
+import './headerBody.css';
 
 export default function HeaderBody(props) {
     const [workspaceId, setWorkspaceId] = useState(0)
