@@ -188,7 +188,7 @@ function ViewTaskByCrad(props) {
     }
 
     const updateLike = (e) => {
-        debugger
+        
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         props.updateLike(props.task._id)

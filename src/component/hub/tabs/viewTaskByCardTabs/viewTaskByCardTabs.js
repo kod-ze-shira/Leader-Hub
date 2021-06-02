@@ -183,7 +183,6 @@ function ViewTaskByCradTabs(props) {
             $(`#${props.task._id}assing-to`).css("display", "none")
     }
     const updateLike = (e) => {
-        debugger
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         props.updateLike(props.task._id)
