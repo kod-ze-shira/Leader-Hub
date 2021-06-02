@@ -229,5 +229,11 @@ width: 130px;
 .view-details-in-list{
 float: right !important;
 }
+.check-task .assing-to{
+  display: inline-block;
+}
+.assing-to-list {
+  float:left ;
+}
 
 

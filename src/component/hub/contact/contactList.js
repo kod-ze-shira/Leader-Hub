@@ -45,17 +45,14 @@ function ContactList(props) {
   const assingTaskToContact = (e) => {
     debugger
     e.stopPropagation()
-    let isValid = ValidateEmail(valueSearch)
-    console.log(isValid)
-    if (isValid) {
-      $(".invite-button").css("backgroundColor", "#1FB9C1");
+    let a = ValidateEmail(valueSearch)
+    console.log(a)
+    if (a && nameRequired.current.value)
       props.assingTo(valueSearch)
-    }
-    else {
-      nameRequired.current.focus()
-      $(".invalid-feedback").css("display", "block");
-
-    }
+      else{
+        nameRequired.current.focus()
+        $(".invite-button").css("backgroundColor", "red");
+      }
     // else {
     //   nameRequired.current.focus()
     //   var form = document.getElementById('nameRequired')
@@ -65,13 +62,31 @@ function ContactList(props) {
 
 
 
+  // function validateEmail(email) {
+  //   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   return re.test(email);
+  // }
 
+  // function validate(email) {
+  //   debugger
+  //   const $result = $("#result");
+  //   $result.text("");
+
+  //   if (validateEmail(email)) {
+  //     $result.text(email + " is valid :)");
+  //     $result.css("color", "green");
+  //   } else {
+  //     $result.text(email + " is not valid :(");
+  //     $result.css("color", "red");
+  //   }
+  //   return false;
+  // }
   function ValidateEmail(mail) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valueSearch)) {
       return (true)
     }
     else {
-
+    
 
       // $(".invalid-feedback").css("display", "block");
 
@@ -112,14 +127,13 @@ function ContactList(props) {
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
-
+            <div class="invalid-feedback">
+              Please enter project name.
+            </div>
 
             {contactList}
 
           </div>
-          <div class="invalid-feedback">
-            Please enter valid email.
-            </div>
         </div>
 
       </div>
@@ -147,3 +161,4 @@ export default connect(
     }
   }
 )(ContactList)
+

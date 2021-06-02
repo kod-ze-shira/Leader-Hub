@@ -23,6 +23,8 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
+        $(`#${props.task._id}assing-to`).css("display", "none")
+
     }, [props.cards])
 
     useEffect(() => {
@@ -153,6 +155,32 @@ function ViewTaskByCrad(props) {
 
     }
 
+    const showAssigToOrCalander = (object) => {
+        let e = object.e
+        let name = object.name
+        e.stopPropagation()
+        var x = e.clientX;
+        var y = e.clientY;
+        var height = $(window).height();
+        var width = $(window).width();
+        props.setLeftContactList(x)
+        props.setTopContactList(y)
+        props.setWidthScreen(width)
+        props.setHeightScreen(height)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.viewContactList(name)
+    }
+    const showAssign = () => {
+        if (!props.task.assingTo)
+            $(`#${props.task._id}assing-to`).css("display", "inline-block")
+    }
+    const closeAssign = () => {
+        if (!props.task.assingTo)
+            $(`#${props.task._id}assing-to`).css("display", "none")
+    }
+
+
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
@@ -202,10 +230,23 @@ function ViewTaskByCrad(props) {
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
 
-                                <label className="check-task border-left    px-2 col">
-                                    <DynamicSelect
+                                <label className="check-task border-left    px-2 col" onMouseOver={(e) => showAssign(e)}
+                                    onMouseOut={(e) => closeAssign(e)}>
+                                    <div className="assing-to-list">
+                                        {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                            {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                        </div> : null}
+                                        <img
+                                            id={`${props.task._id}assing-to`}
+                                            className="ml-2 assing-to-icon"
+                                            onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
+                                            src={require('../../../img/share-icon.png')}>
+                                        </img>
+                                    </div>
+                                    {/* <DynamicSelect
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
-                                        setContactEmail={setStateMailToContactMail} options={'contacts'} />
+                                        setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
                                 <label className="check-task border-left    px-2 col " >
                                     <div className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
@@ -257,7 +298,11 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
-        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
+        setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
+        setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
+        setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
+        setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
     }
 }
 
