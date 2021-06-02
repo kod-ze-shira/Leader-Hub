@@ -105,7 +105,7 @@ function ShareProject(props) {
 
     return (
         <>
-            <div onClick={()=>setShowTeams(false)} className="details mr-5 ml-4">
+            <div onClick={() => setShowTeams(false)} className="details mr-5 ml-4">
                 <h5 className="mt-5 title-view-details pb-1 mb-2">Share Project</h5>
                 <div class="row justify-content-between  mx-1 mb-2">
                     <p className="txt_description_share">your teammates will get an email that gives them access to your team.</p>
@@ -135,15 +135,15 @@ function ShareProject(props) {
                     <div className="col-md-9">
                         <div className='row'>
                             <div className='col-10'>
-                               <div className='div_choose_team'>
-                            Choose Team
-                        </div> 
+                                <div className='div_choose_team'>
+                                    Choose Team
+                        </div>
                             </div>
-                            <div className='col-1 my-auto'  onClick={(e) => {setShowTeams(true) ; e.stopPropagation()}}>
+                            <div className='col-1 my-auto' onClick={(e) => { setShowTeams(true); e.stopPropagation() }}>
                                 <img src={arrow_select}></img>
                             </div>
                         </div>
-                        
+
 
                         {/* <DynamicSelect
                             options={'teams'}

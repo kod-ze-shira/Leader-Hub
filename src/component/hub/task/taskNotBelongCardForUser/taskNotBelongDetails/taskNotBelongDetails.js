@@ -161,6 +161,23 @@ function TaskNotBelongDetails(props) {
     //             setFileComponentArr([...fileComponentArr, newComponent])
     //     })
     // }
+    $('.files-details').hover(function () {
+        $(this).find('.files-task').hide();
+        $(this).find('.files-task-hover').show();
+    }, function () {
+        $(this).find('.files-task-hover').hide();
+        $(this).find('.files-task').show();
+    });
+
+    $('.delete-details').hover(function () {
+        $(this).find('.delete-task').hide();
+        $(this).find('.delete-task-hover').show();
+
+    }, function () {
+        $(this).find('.delete-task-hover').hide();
+        $(this).find('.delete-task').show();
+
+    });
     const addFileComponent = (file) => {
         return <File file={file} />
     }
