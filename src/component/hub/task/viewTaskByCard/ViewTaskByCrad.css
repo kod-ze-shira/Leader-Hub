@@ -30,8 +30,8 @@
   margin-top: 2px;
 }
 .disabled{
-color:gray ;
-opacity: 0.5;
+color:#358A8D ;
+opacity: 0.3;
 }
 .check-task{
   padding-top:1vh !important;
