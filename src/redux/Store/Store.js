@@ -15,7 +15,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
 /////////////////////////////////////////////
-import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject,getFilesForProject  } from '../middleware/projectCrud';
+import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject, getFilesForProject } from '../middleware/projectCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
     , moveTaskBetweenCards, dragTask, dragCard, updateLike,
@@ -83,6 +83,7 @@ const store = createStore(
                 shareObject,
                 assingTo,
                 updateLike
+
             ))
 )
 store.dispatch(actions.extractJwt());

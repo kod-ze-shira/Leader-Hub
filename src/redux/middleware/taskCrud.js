@@ -265,9 +265,8 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
 export const updateLike = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPDATE_LIKE') {
-        let taskId = action.payload._id
+        let taskId = action.payload
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/updateLike`
-        debugger
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -277,7 +276,8 @@ export const updateLike = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             // data: JSON.stringify( ),
             success: function (data) {
-
+                debugger
+                dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "likes", "value": data.task.likes }))
                 console.log("success")
                 console.log(data.result);
             },
@@ -508,7 +508,7 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log("success")
-                debugger
+
                 dispatch(actions.getAllStatusesTaskForWorkspace({ 'workspaceId': workspaceId, 'task': data.task }))
                 dispatch(actions.removeTask(taskId))
             },
