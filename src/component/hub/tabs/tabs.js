@@ -27,8 +27,8 @@ function Tabs(props) {
     }, [props.projectId, props.focusInputCard, props.cards])
 
     useEffect(() => {
-        if (props.workspaces.length == 0)
-            props.getAllWorkspaces()
+        // if (props.workspaces.length == 0)
+        //     props.getAllWorkspaces()
         for (let i = 0; i < props.workspaces.length; i++) {
             let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
             if (workspace) {
@@ -102,7 +102,7 @@ function Tabs(props) {
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
-            
+
         }
         setInputValue("")
         setShowInput(false)

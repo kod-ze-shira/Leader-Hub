@@ -19,10 +19,15 @@ import DynamicSelect from '../../team/dynamicSelect';
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
+    const [userHasLike, setUserHasLike] = useState(false)
 
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
+        let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
+        if (hasLike)
+            setUserHasLike(true)
+
         $(`#${props.task._id}assing-to`).css("display", "none")
 
     }, [props.cards])
@@ -125,9 +130,11 @@ function ViewTaskByCrad(props) {
             "startDate": props.task.startDate,
             "complete": doneStatus,
             "endDate": today,
-            "status": doneStatus ? props.statuses[2] : props.statuses[0],
-            // "card": props.task.card
+            "likes": props.task.likes,
+            "assingTo": props.task.assingTo,
+            "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
+
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
@@ -180,7 +187,14 @@ function ViewTaskByCrad(props) {
             $(`#${props.task._id}assing-to`).css("display", "none")
     }
 
-
+    const updateLike = (e) => {
+        debugger
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.updateLike(props.task._id)
+        setUserHasLike(!userHasLike)
+        e.stopPropagation()
+    }
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
@@ -225,7 +239,13 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-
+                                {/* <div onClick={(e) => updateLike(e)}>
+                                    <p className="mr-1">{props.task.likes.length}</p>
+                                    <img
+                                        onClick={updateLike}
+                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                    </img>
+                                </div> */}
                                 <label className="check-task    view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
@@ -249,7 +269,7 @@ function ViewTaskByCrad(props) {
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
                                 <label className="check-task border-left    px-2 col " >
-                                    <div className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                    <div className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
                                     </div>
                                 </label>
@@ -290,6 +310,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),

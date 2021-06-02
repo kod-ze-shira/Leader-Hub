@@ -17,52 +17,40 @@ import ContactList from '../../contact/contactList';
 function ViewTaskByCradTabs(props) {
     const textInput = useRef();
 
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
-    // const [task, setTask] = useState({
-    //     "milestones": props.task.milestones,
-    //     "_id": props.task._id, "name": editTaskName, "description": props.task.description
-    //     , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-    // })
+    const [showchalalit, setShowChalalit] = useState(false)
+    const [userHasLike, setUserHasLike] = useState(false)
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
-    const [showchalalit, setShowChalalit] = useState(false)
-    // const [assingToMemberToTask, setAssingToMemberToTask] = useState(false)
-    const [assignTo, setAssignTo] = useState(false)
-
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
+
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         $(`#${props.task._id}assing-to`).css("display", "none")
 
-    }, [props.cards])
+        let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
+        if (hasLike)
+            setUserHasLike(true)
+
+    }, [props.cards, props.userId])
 
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [props.task.status])
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    // }, [props.task.status])
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
 
     };
-    const [showAssignee, setShowAssignee] = useState(true)
-
-    const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
-    let contact
-    const setStateMailToContactMail = (emailMember) => {
-        props.setCurrentIndexTask(currentIndexTask)
-        props.setCurrentIndexCard(currentIndexCard)
-        props.assingTo(emailMember.value.email)
-
-    }
 
     const handleClose = (e, event) => {
 
@@ -129,8 +117,11 @@ function ViewTaskByCradTabs(props) {
             "startDate": props.task.startDate,
             "complete": doneStatus,
             "endDate": today,
+            "likes": props.task.likes,
+            "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
+        
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus)
@@ -146,7 +137,6 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const changeFiledInTask = (event) => {
-
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux
@@ -193,9 +183,11 @@ function ViewTaskByCradTabs(props) {
             $(`#${props.task._id}assing-to`).css("display", "none")
     }
     const updateLike = (e) => {
+        debugger
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         props.updateLike(props.task._id)
+        setUserHasLike(!userHasLike)
         e.stopPropagation()
     }
     return (
@@ -282,7 +274,7 @@ function ViewTaskByCradTabs(props) {
                                 <div className="icons-in-task-tabs pt-0">
 
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
-                                        <div className="status-task-tabs " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                        <div className="status-task-tabs px-2 " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                             {props.task.status ? props.task.status.statusName : null}
                                         </div>
 
@@ -305,7 +297,7 @@ function ViewTaskByCradTabs(props) {
                                                     <p className="mr-1">{props.task.likes.length}</p>
                                                     <img
                                                         onClick={updateLike}
-                                                        src={require('../../../img/heart.png')}>
+                                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
                                                     </img>
                                                 </div>
                                             </div>
@@ -337,6 +329,7 @@ function ViewTaskByCradTabs(props) {
 const mapStateToProps = (state) => {
 
     return {
+        userId: state.public_reducer.userId,
         tasks: state.public_reducer.tasks,
         cards: state.public_reducer.cards,
         card: state.card_reducer.card,
