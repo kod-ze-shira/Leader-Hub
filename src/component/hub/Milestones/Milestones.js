@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux';
-import { actions } from '../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ViewMilstone from './viewMilstone'
-import './Milstones.css'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
+import './Milstones.css';
+import ViewMilstone from './viewMilstone';
 
 function Milestones(props) {
     const [showGif, setShowGif] = useState(true)

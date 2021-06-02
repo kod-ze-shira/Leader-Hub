@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
 
 import './BodyOfAssignmentTask.css'
 

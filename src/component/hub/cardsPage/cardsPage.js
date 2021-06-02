@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../../../redux/actions/action'
-import GanttDesign from '../gantt/gantt';
-import ProjectPlatform from '../projectPlatform/projectPlatform'
-import SelectHeader from '../SelectHeader/SelectHeader'
-import Tabs from '../tabs/tabs'
-import Overview from '../../hubFeature/Overview/Overview'
-import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt'
 import { useParams } from 'react-router-dom';
+import { actions } from '../../../redux/actions/action';
+import DisplayGantt from '../../Gantt/DisplayGantt/displayGantt';
+import Overview from '../../hubFeature/Overview/Overview';
+import ProjectPlatform from '../projectPlatform/projectPlatform';
+import SelectHeader from '../SelectHeader/SelectHeader';
+import Tabs from '../tabs/tabs';
 
-import cardsByProject from '../Cards/cardsByProject/cardsByProject';
 
 
 function CardsPage(props) {

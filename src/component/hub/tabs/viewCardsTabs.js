@@ -1,17 +1,15 @@
 
-import React, { useState, useEffect, useRef } from 'react'
-import ReactDOM from 'react-dom'
-import { connect } from 'react-redux';
-import { actions } from '../../../redux/actions/action'
-import './viewCardsTabs.css'
-// import history from '../../../history'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import $ from "jquery";
+import React, { useEffect, useRef, useState } from 'react';
+// import history from '../../../history'
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import title from '../../../Data/title.json'
+import title from '../../../Data/title.json';
+import { actions } from '../../../redux/actions/action';
+import './viewCardsTabs.css';
+import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs';
 
 function ViewCardsTabs(props) {
 

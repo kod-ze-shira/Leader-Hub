@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
-import TasksByProject from '../../task/tasksByProject/tasksByProject'
-import DetailsProject from '../detailsProject/detailsProject'
-import ReactDOM from 'react-dom'
+import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../../../../redux/actions/action'
+import { actions } from '../../../../redux/actions/action';
 function ViewProjectNew(props) {
 
     return (

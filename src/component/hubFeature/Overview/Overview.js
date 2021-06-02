@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-// import { actions } from '../../hub'
+import MyChart from '../chart/chart'
+
 function Overview(props) {
     
     return (
         <>
             <div className=" body container-fluid">
-              
+              <MyChart/>
             </div>
         </>
     )

@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import { Button, Menu, MenuItem } from '@material-ui/core';
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
-import { actions } from '../../../../redux/actions/action'
-import './viewCards.css'
-import $ from 'jquery'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad'
-import ViewDetails from '../../viewDetails/viewDetails'
-import ToastDelete from '../../toastDelete/toastDelete1'
-import { Menu, MenuItem, Button, Select } from '@material-ui/core';
 import ReactTooltip from 'react-tooltip';
-import title from '../../../../../src/Data/title.json'
+import title from '../../../../../src/Data/title.json';
+import { actions } from '../../../../redux/actions/action';
+import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad';
+import ViewDetails from '../../viewDetails/viewDetails';
+import './viewCards.css';
 
 function ViewCards(props) {
     useEffect(() => {

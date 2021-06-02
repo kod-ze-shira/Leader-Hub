@@ -1,7 +1,7 @@
 import React from 'react';
-import './newproject.css';
 import { connect } from 'react-redux';
-import { actions } from '..//..//..//..//redux/actions/action'
+import { actions } from '..//..//..//..//redux/actions/action';
+import './newproject.css';
 
 function NewProject(props) {
 
