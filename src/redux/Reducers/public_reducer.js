@@ -22,7 +22,7 @@ const initialState = {
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
-    filesForProjectArr:[],
+    filesForProjectArr: [],
 
 }
 
@@ -60,6 +60,8 @@ const publicData = {
 
     },
     setTaskByFiledFromTasks(state, action) {
+        debugger
+
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
     },
@@ -96,8 +98,8 @@ const publicData = {
         state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.name.size })
     },
     /////////////////////////////////////////
-    setFilesForProject(state,action){
-        state.filesForProjectArr=action.payload
+    setFilesForProject(state, action) {
+        state.filesForProjectArr = action.payload
     },
     setUserName(state, action) {
         state.userName = action.payload;
@@ -369,7 +371,7 @@ const publicData = {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
     },
-   
+
     saveCurrentIndexOfTaskInRedux(state, action) {
         state.indexCurrentTask = action.payload
     },

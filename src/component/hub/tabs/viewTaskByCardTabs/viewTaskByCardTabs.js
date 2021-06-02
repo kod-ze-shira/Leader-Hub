@@ -20,11 +20,11 @@ function ViewTaskByCradTabs(props) {
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
-    const [task, setTask] = useState({
-        "milestones": props.task.milestones,
-        "_id": props.task._id, "name": editTaskName, "description": props.task.description
-        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-    })
+    // const [task, setTask] = useState({
+    //     "milestones": props.task.milestones,
+    //     "_id": props.task._id, "name": editTaskName, "description": props.task.description
+    //     , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
+    // })
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
     const [showchalalit, setShowChalalit] = useState(false)
@@ -36,6 +36,7 @@ function ViewTaskByCradTabs(props) {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         $(`#${props.task._id}assing-to`).css("display", "none")
+
     }, [props.cards])
 
     useEffect(() => {
@@ -86,7 +87,7 @@ function ViewTaskByCradTabs(props) {
             "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
-        setTask(task1)
+        // setTask(task1)
         props.EditTask(task1);
     }
 
@@ -115,7 +116,6 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
-
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -146,7 +146,6 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const changeFiledInTask = (event) => {
-        debugger
 
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
@@ -158,6 +157,7 @@ function ViewTaskByCradTabs(props) {
         else {
             let value = event.target.value
             if (event.target.name == "complete") {
+
                 doneStatus = !doneStatus
                 value = doneStatus
                 editCompleteTask()
@@ -192,7 +192,12 @@ function ViewTaskByCradTabs(props) {
         if (!props.task.assingTo)
             $(`#${props.task._id}assing-to`).css("display", "none")
     }
-
+    const updateLike = (e) => {
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.updateLike(props.task._id)
+        e.stopPropagation()
+    }
     return (
         <>
 
@@ -206,16 +211,15 @@ function ViewTaskByCradTabs(props) {
                         id="task-card"
                     >
 
-                        <div className="task-card mt-1 pt-2 mb-3 pb-4"
+                        <div className="task-card mt-2 pt-2 pb-2"
                             onMouseOver={(e) => showAssign(e)}
                             onMouseOut={(e) => closeAssign(e)}
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
-
                             <div className="container ">
                                 <label
                                     title="Complete Task"
-                                    className="check-task pb-2  check-tabs row">
+                                    className="check-task pb-2  check-tabs">
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
@@ -229,13 +233,13 @@ function ViewTaskByCradTabs(props) {
                                 </label>
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
-                                {/* <Button className="more col-3 mr-0 more-task"
-                                        data-tip data-for="more_a"
-                                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                        . . .
-                                    </Button> */}
+                                <Button className="more col-3 mr-0 more-task"
+                                    data-tip data-for="more_a"
+                                    aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                    . . .
+                                    </Button>
 
-                                {/* <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                <ReactTooltip data-tip id="more_a" place="top" effect="solid">
                                     {title.title_more_actions}
                                 </ReactTooltip>
                                 <Menu
@@ -248,7 +252,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
-                                </Menu> */}
+                                </Menu>
 
                                 <input
                                     className="form-control col-12 mx-0 mt-2"
@@ -275,7 +279,7 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.name}
                                 </span> */}
 
-                                <div className="icons-in-task-tabs pt-1">
+                                <div className="icons-in-task-tabs pt-0">
 
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="status-task-tabs " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
@@ -297,10 +301,13 @@ function ViewTaskByCradTabs(props) {
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
                                                     src={require('../../../img/like-icon.png')}>
                                                 </img>
-                                                <p>1</p>
-                                                <img
-                                                    src={require('../../../img/heart.png')}>
-                                                </img>
+                                                <div onClick={(e) => updateLike(e)}>
+                                                    <p className="mr-1">{props.task.likes.length}</p>
+                                                    <img
+                                                        onClick={updateLike}
+                                                        src={require('../../../img/heart.png')}>
+                                                    </img>
+                                                </div>
                                             </div>
                                             <div>
                                                 <img
@@ -310,7 +317,7 @@ function ViewTaskByCradTabs(props) {
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>
                                                 {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo?props.task.assingTo.contact.thumbnail:null} className="thumbnail-contact ml-2" />
+                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
                                                         : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                                 </div> : null}
                                             </div>
@@ -344,6 +351,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),

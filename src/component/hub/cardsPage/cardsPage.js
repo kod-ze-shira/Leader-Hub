@@ -9,7 +9,6 @@ import SelectHeader from '../SelectHeader/SelectHeader';
 import Tabs from '../tabs/tabs';
 
 
-
 function CardsPage(props) {
 
     const [flag, setFlag] = useState();
@@ -19,8 +18,10 @@ function CardsPage(props) {
 
 
     useEffect(() => {
-        if (props.cards.length < 1)
+        if (props.cards.length < 1) {
             props.getCardsByProjectId(idProject)
+        }
+
         if ((window.location.href.indexOf('list') != -1)) {
             setPresent("list")
             setNumber(1)
@@ -89,7 +90,7 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         project: state.project_reducer.project,
         cards: state.public_reducer.cards,
-        statuses: state.status_reducer.statuses
+        statuses: state.status_reducer.statuses,
 
     }
 }

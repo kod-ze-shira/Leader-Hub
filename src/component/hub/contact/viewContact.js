@@ -24,11 +24,6 @@ function ViewContact(props) {
     }
 
 
-
-
-
-
-
     return (
         <>
             <div className="option-contact row mb-2" onClick={() => assingTaskToContact(props.contact.email)}>
