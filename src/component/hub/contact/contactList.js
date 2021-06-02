@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-
 import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
 import ViewContact from './viewContact';
-import { actions } from '../../../redux/actions/action'
-import { Alert } from 'bootstrap';
 import $ from 'jquery'
 
 

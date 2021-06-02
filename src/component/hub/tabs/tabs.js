@@ -101,6 +101,7 @@ function Tabs(props) {
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
+            
         }
         setInputValue("")
         setShowInput(false)

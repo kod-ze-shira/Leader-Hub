@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import ViewProject from '../viewProject/viewProject'
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import "./projectsByWorkspace.css";
+import { connect } from 'react-redux';
 // import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
-import '../../body/body.css'
-import ViewDetails from '../../viewDetails/viewDetails'
-import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
-import title from '../../../../Data/title.json'
+import title from '../../../../Data/title.json';
+import { actions } from '../../../../redux/actions/action';
+import '../../body/body.css';
+import ViewDetails from '../../viewDetails/viewDetails';
+import ViewProject from '../viewProject/viewProject';
+import "./projectsByWorkspace.css";
 
 
 

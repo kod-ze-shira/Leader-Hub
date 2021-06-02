@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
+import { DragDropContext } from 'react-beautiful-dnd'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
 import './cardsByProject.css'
-import { DragDropContext } from 'react-beautiful-dnd';
 
 function CardsByProject(props) {
 

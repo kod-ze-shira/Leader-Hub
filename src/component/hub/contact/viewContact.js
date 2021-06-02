@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../redux/actions/action'
 import './contact.css'
 import $ from 'jquery'
+import { actions } from '../../../redux/actions/action'
 
 
 function ViewContact(props) {
