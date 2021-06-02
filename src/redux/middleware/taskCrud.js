@@ -277,7 +277,6 @@ export const updateLike = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             // data: JSON.stringify( ),
             success: function (data) {
-                debugger
                 dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "likes", "value": data.task.likes }))
                 console.log("success")
                 console.log(data.result);

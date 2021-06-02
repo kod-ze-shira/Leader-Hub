@@ -8,12 +8,13 @@ const initialState = {
     tokenFromCookies: "",
     userName: "",
     userEmail: '',
+    userId: "",
     workspaces: [],
     projects: [],
     cards: [],
     tasks: [],
     milestones: [],
-    members:[],
+    members: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -30,7 +31,10 @@ const publicData = {
     setclose(state, action) {
         state.close = !state.close
     },
-
+    setUserId(state, action) {
+        
+        state.userId = action.payload
+    },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -60,8 +64,6 @@ const publicData = {
 
     },
     setTaskByFiledFromTasks(state, action) {
-        debugger
-
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
     },
@@ -245,7 +247,7 @@ const publicData = {
     setCards(state, action) {
         state.cards = action.payload;
     },
-    setMembers(state, action) {  
+    setMembers(state, action) {
         state.members = action.payload;
         console.log(state.members);
     },
