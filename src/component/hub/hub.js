@@ -42,8 +42,7 @@ function Hub(props) {
     const [openCalander, setOpenCalander] = useState(false)
     const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
-   
-
+    
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
