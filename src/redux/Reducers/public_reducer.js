@@ -97,7 +97,7 @@ const publicData = {
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
-        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.name.size })
+        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.size })
     },
     /////////////////////////////////////////
     setFilesForProject(state, action) {
