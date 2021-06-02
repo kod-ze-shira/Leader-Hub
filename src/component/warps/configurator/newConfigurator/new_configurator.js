@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import './new_configurator.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { actions } from '../../../../redux/actions/action'
-import $ from 'jquery'
+import $ from 'jquery';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 // import history from '../../../history'
 import { withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ReactTooltip from 'react-tooltip';
-import title from '../../../../Data/title.json'
+import './new_configurator.css';
 
 function NewConfigorator(props) {
     const [closeOrOpenConfigurator, setCloseOrOpenConfigurator] = useState(true)
@@ -38,7 +36,6 @@ function NewConfigorator(props) {
                 }
 
             }
-
     })
 
     const changeBackground = (e) => {
@@ -47,9 +44,7 @@ function NewConfigorator(props) {
             $("li").removeClass("li-back")
             $(e).addClass("li-back")
             $('img').removeClass("li-back")
-
         })
-
     }
 
     const closeConfigurator = (e) => {
@@ -92,20 +87,22 @@ function NewConfigorator(props) {
 
                     </div>
                     <ul className="list_config ">
-                        <li className="li-back" onDrag onClick={(e) => changeBackground(e.target)}>
+                        <li id='li-back' className='li-back' onClick={(e) => changeBackground(e.target)}>
                             <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
-                             My Workspace
-                             </li>
-
+                            <p>My Workspaces</p>
+                        </li>
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                             <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
-                        All Projects</li>
+                            <p>All Projects</p>
+                        </li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        My Tasks</li>
-                        <li onClick={(e) => goToMilestones(e.target)}>
+                            <p>My Tasks</p>
+                        </li>
+                        <li id='milestone'onClick={(e) => goToMilestones(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
-                        Milestones</li>
+                            <p>Milestones</p>
+                        </li>
 
                         {/* <li onClick={(e) => changeBackground(e.target)}>
                         <img className="mr-2" src={require('../../../img/mail-open-outline.svg')}></img>

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import './shureDelete.css'
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import $ from 'jquery'
+import './shureDelete.css';
 
 
 

@@ -289,7 +289,7 @@ function ViewTaskByCradTabs(props) {
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
-                                        <div className="icons-task-tabs   ">
+                                        <div className="icons-task-tabs">
 
                                             <div className="due-date-hover">
                                                 <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
@@ -302,7 +302,7 @@ function ViewTaskByCradTabs(props) {
                                                     src={require('../../../img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
-                                                    <p>{props.task.likes.length}</p>
+                                                    <p className="mr-1">{props.task.likes.length}</p>
                                                     <img
                                                         onClick={updateLike}
                                                         src={require('../../../img/heart.png')}>
@@ -312,7 +312,7 @@ function ViewTaskByCradTabs(props) {
                                             <div>
                                                 <img
                                                     id={`${props.task._id}assing-to`}
-                                                    className="ml-2 assing-to-icon-tabs"
+                                                    className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>

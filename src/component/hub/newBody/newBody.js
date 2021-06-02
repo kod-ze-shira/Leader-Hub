@@ -1,12 +1,5 @@
-import React, { useState } from 'react'
-import Search from '../Search/search';
-import TableBody from '../Table/tablebody/tablebody';
-import AllWorkspaces from '../workspace/allWorkspaces/allWorkspaces';
+import React, { useState } from 'react';
 import './newBody.css';
-import TeamExample from '../team/teamExample'
-import { Button, Modal, Form } from 'react-bootstrap';
-
-
 
 export default function Body() {
   const [showShare, setShowShare] = useState(false)

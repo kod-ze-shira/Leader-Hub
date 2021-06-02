@@ -1,7 +1,7 @@
 import React from 'react';
-import './newtask.css';
 import { connect } from 'react-redux';
-import { actions } from '..//..//..//..//redux/actions/action'
+import { actions } from '..//..//..//..//redux/actions/action';
+import './newtask.css';
 
 
 
