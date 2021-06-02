@@ -42,11 +42,7 @@ function Hub(props) {
     const [openCalander, setOpenCalander] = useState(false)
     const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
-    useEffect(() => {
-        $("input,textarea,p").attr("dir", "auto");
-
-    }, []);
-
+    
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
