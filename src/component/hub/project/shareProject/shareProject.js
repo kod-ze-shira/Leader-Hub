@@ -101,6 +101,7 @@ function ShareProject(props) {
     const shareObject = () => {
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
+        alert('project shared')
     }
 
     return (
