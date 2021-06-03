@@ -11,16 +11,21 @@ function AddMembers(props) {
 
     const members = props.members;
 
-    
+
     return (
         <>
-            <div className="row pt-3 px-3"  >
-                <div className="d-flex alighn-items-center addMembers"  >
-                    <div className="fontAddMembers" data-tip data-for="add_w">+
-                              {/* <img src="../../../../../img/ID.png" alt="plus"/> */}
+
+            <div className="divAddMembers row pt-3 px-2 d-flex align-items-center" >
+                <div className="col-2">
+                    <div className=" addMembers d-flex align-items-center"  >
+                        <div className="fontAddMembers d-flex justify-content-center " data-tip data-for="add_w">+
+                        {/* <img className="imgPlus" src={require('../../../../img/ID.png')} alt='+'/> */}
+                        </div>
                     </div>
                 </div>
-                <b className="mt-4 ml-2 MembersFont">Add Members</b>
+                <div className="col-8">
+                    <b className="ml-2 membersFont">Add Members</b>
+                </div>
             </div>
         </>
     )

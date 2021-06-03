@@ -20,7 +20,7 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-
+        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value = input.target.value
         if (!value)
@@ -99,10 +99,13 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div class="form-control descriptionProject" name="description" id="descriptionProject" rows="5"
+                        <div class="form-control descriptionProject"
+                            name="description"
+                            id="descriptionProject" rows="5"
                             placeholder="Write a description about your project"
-                            onChange={(e) => changeFiledInProject(e)} contentEditable
-                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></div>
+                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
+                            onChange={(input) => changeFiledInProject(input)} contentEditable
+                        ></div>
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">

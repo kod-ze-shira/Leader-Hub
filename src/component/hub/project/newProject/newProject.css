@@ -7,7 +7,6 @@
         border-bottom: 1px solid #8181A5;
         width: 15vw;
         margin: 0px -50px;
-
  }  
 
  .descriptionProject{
@@ -15,7 +14,7 @@
   height: auto;
   overflow: auto;
   min-height: 20vh;
-  width: 97%;
+  /* width: 97%; */
   /* margin-left: 2%; */
 }
 
