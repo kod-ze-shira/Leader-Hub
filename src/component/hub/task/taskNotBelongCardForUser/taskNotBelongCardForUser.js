@@ -17,7 +17,6 @@ function TaskNotBelongCardForUser(props) {
 
     }, [props.tasks])
 
-    // console.log(props.tasks)
     function showToast(valueToDelet) {
         props.showToastDelete(valueToDelet)
     }
@@ -32,63 +31,48 @@ function TaskNotBelongCardForUser(props) {
                 showToast={showToast}
             />
     })
-    // const placeholder =
-    // <img width="22" className="icon-check-mark"
-    //     src={require('../../../img/check-mark.svg')}>
-    // </img>+"  Write a task name"
+
     return (
         <div className="body-workspace ">
-            {/* <div className="body-workspace mt-3"> */}
+            <div className='input-group-task-not-belongs d-flex row'>
 
-            <div class="input-group input-group-task-not-belongs1">
-
-                {/* <FontAwesomeIcon class='cleanSearchTask' onClick={() => setNameTask('')} icon={["fas", "times"]} /> */}
-                <div className='input-group-task-not-belongs d-flex'>
-
-                    <button
-                        // className=" btn-add-task   mr-2 ml-4 mr-auto"
-                        className={showBtn ? 'd-block btn-add-task   mr-2 ml-4 mr-auto' : 'd-none '}
-                        onClick={() => setShowBtn(false)}>
-                        <img width="22" className="icon-complete" id="complete"
-                            src={require('../../../img/checked.svg')}>
-                        </img>‏
+                <button
+                    className={showBtn ? 'd-block btn-add-task p-2  mr-2 ml-4 mr-auto' : 'd-none '}
+                    onClick={() => setShowBtn(false)}>
+                    <img width="22" className="icon-complete" id="complete"
+                        src={require('../../../img/checked.svg')}>
+                    </img>‏
                     Add Task </button>
-                    <div className={showBtn ? 'd-none' : 'wrap-input d-block col-8 row pr-0  mr-auto  mr-2 ml-4'}>
-                        <input type="text" className='addTaskNotBelong '
-                            // class=" col-8 addTaskNotBelong  mr-2 ml-4"
-                            value={nameTask}
-                            placeholder="Write a task name"
-                            //  style={{'font-family': 'Font Awesome\ 5 Free'}}
-                            onChange={(e) => setNameTask(e.target.value)}
-                            // onClick={() => setShowBtn(true)}
-                            onKeyPress={e => {
-                                if (e.key === 'Enter') {
+                <div className={showBtn ? 'd-none' : 'wrap-input d-block col-12 col-md-8 row pr-0  mr-auto  mr-2 ml-4'}>
+                    <input type="text" className='addTaskNotBelong '
+                        value={nameTask}
+                        placeholder="Write a task name"
+                        onChange={(e) => setNameTask(e.target.value)}
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                if (nameTask !== '') {
                                     props.newTaskNotBelong(nameTask)
                                     setNameTask('')
-                                    setShowBtn(true)
                                 }
-                            }} />
-                        <button className="close-add-task"  onClick={() => setShowBtn(true)}>
-                        <img 
+                                setShowBtn(true)
+                            }
+                        }} />
+                    <button className="close-add-task" onClick={() => setShowBtn(true)}>
+                        <img
                             src={require('../../../img/close-icon.svg')}>
                         </img>
-                        </button>
-                    </div>
-                    {/* <input type='text' id="searchTask" placeholder='search task' onChange={(e) => setSearchTask(e.target.value)} /> */}
-                    {/* <span id="searchProject"> */}
-                    <input type="text" class="inputSearchTask mr-5" placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
-                </div> {/* </span> */}
-                <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                    <label class="ml-3 pl-6 col-4 labelAllTask"> My task </label>
-                    <label class="col-2 propertiesAllTask ml-4">Workspace</label>
-                    <label class="col-2 propertiesAllTask">Project</label>
-                    <label class=" col-2 propertiesAllTask">Card</label>
-                    <label class=" col propertiesAllTask"></label>
+                    </button>
                 </div>
 
+                <input type="text" class="inputSearchTask mr-5" placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
             </div>
-            {/* <i class="fas fa-times"></i> */}
-            {/* <button onClick={() => sestSearchTask('')}>X</button> */}
+            <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
+                <label class="ml-3 pl-6 col-4 labelAllTask"> My task </label>
+                <label class="col-2 propertiesAllTask ml-4">Workspace</label>
+                <label class="col-2 propertiesAllTask">Project</label>
+                <label class=" col-2 propertiesAllTask">Card</label>
+                <label class=" col propertiesAllTask"></label>
+            </div>
 
             <div className=" allTasks">
                 {props.tasks.length ?

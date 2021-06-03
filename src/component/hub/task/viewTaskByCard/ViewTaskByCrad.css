@@ -30,8 +30,8 @@
   margin-top: 2px;
 }
 .disabled{
-color:gray ;
-opacity: 0.5;
+color:#358A8D ;
+opacity: 0.3;
 }
 .check-task{
   padding-top:1vh !important;
@@ -228,6 +228,12 @@ width: 130px;
 } */
 .view-details-in-list{
 float: right !important;
+}
+.check-task .assing-to{
+  display: inline-block;
+}
+.assing-to-list {
+  float:left ;
 }
 
 

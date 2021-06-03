@@ -15,7 +15,10 @@
     color:#75798E;
     font-size:3vw;
 }
-.divAddMembers:hover{
+.divAddMembers:hover , .divAddMembers:hover .fontAddMembers{
     color:#38B1B5 !important;
    cursor: pointer;
+}
+.fontAddMembers{
+    font-weight: bold;
 }

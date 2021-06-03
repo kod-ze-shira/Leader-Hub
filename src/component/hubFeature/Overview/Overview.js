@@ -4,6 +4,7 @@ import MyChart from '../chart/chart'
 import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
+import ViewMembers from './members/veiwMembers/viewMembers'
 // import { actions } from '../../hub'
 function Overview(props) {
 
@@ -20,6 +21,12 @@ function Overview(props) {
                 {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
 
                 {/* <Hangout></Hangout> */}
+                <ViewMembers/>
+              <MyChart/>
+              <button onClick={openViewFilesForProject}>files in this project</button>
+              {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
+              
+           
             </div>
 
         </>

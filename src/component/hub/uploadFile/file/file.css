@@ -1,5 +1,6 @@
 .fileInTask{
-    display: inline-block;
+    /* overflow: auto; */
+    /* display: inline-block; */
     background-color: #EDFBFC !important;
     padding: 0px;
     color: #358A8D;
@@ -25,7 +26,11 @@
     padding-bottom: 8px;
     padding-left: 32px;
     padding-right: 4px;
+}
+
+.pdfFile{
     color:red
+
 }
 .nameFileInTask{
     text-align: left;
@@ -37,7 +42,7 @@
     display: -webkit-box;
     font-size: small;
 }
-.displayInlineBlock{
+{
     display: inline-block;
 }
 

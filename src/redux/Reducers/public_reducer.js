@@ -8,12 +8,13 @@ const initialState = {
     tokenFromCookies: "",
     userName: "",
     userEmail: '',
+    userId: "",
     workspaces: [],
     projects: [],
     cards: [],
     tasks: [],
     milestones: [],
-    members:[],
+    members: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -22,7 +23,7 @@ const initialState = {
     indexOfWorkspace: 0,
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
-    filesForProjectArr:[],
+    filesForProjectArr: [],
 
 }
 
@@ -30,7 +31,10 @@ const publicData = {
     setclose(state, action) {
         state.close = !state.close
     },
-
+    setUserId(state, action) {
+        
+        state.userId = action.payload
+    },
     setTokenFromCookies(state, action) {
         state.tokenFromCookies = action.payload;
     },
@@ -93,11 +97,11 @@ const publicData = {
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
-        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.name.size })
+        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.size })
     },
     /////////////////////////////////////////
-    setFilesForProject(state,action){
-        state.filesForProjectArr=action.payload
+    setFilesForProject(state, action) {
+        state.filesForProjectArr = action.payload
     },
     setUserName(state, action) {
         state.userName = action.payload;
@@ -243,7 +247,7 @@ const publicData = {
     setCards(state, action) {
         state.cards = action.payload;
     },
-    setMembers(state, action) {  
+    setMembers(state, action) {
         state.members = action.payload;
         console.log(state.members);
     },
@@ -369,7 +373,7 @@ const publicData = {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
     },
-   
+
     saveCurrentIndexOfTaskInRedux(state, action) {
         state.indexCurrentTask = action.payload
     },
