@@ -22,35 +22,35 @@ function ViewMembers(props) {
     return (
         <>
 
-            <div className="container-fluid px-0">
+            <div className="pt-3 px-2 ">
 
-                <div className="row divProjectMembers d-flex alight-items-cenetr px-4">
-                    <h3>Project Members</h3>
-                </div>
-                <div className="scrollbarMembers px-4">
 
-                    <AddMembers />
-
-                    <div className="row">
-                        {members?.length ?
-                            members.map(m => {
-                                return <>
-                                    <div className="option-contact col-12 mb-2">
+                <div className="row">
+                    {members?.length ?
+                        members.map(m => {
+                            return <>
+                                <div className="option-contact col-12 mb-2">
+                                    <div className="row">
+                                        <div className="col-2">
                                             {m.thumbnail ?
-                                                <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers ml-2" />
-                                                : <div className="logo-contact imgMembers ml-2" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
-                                                    {m.name ? m.name[0] : null}</div>}
-                                            <b className="name-contact">{m.name} </b>
-                                            <p className="email-contact emailMembers">{m.email} </p>
+                                                <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
+                                                : <div className="logo-contact imgMembers fomtImgMembers d-flex align-items-center justify-content-center" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
+                                                    {m.name ? m.name[0] : null}
+                                                </div>}
+                                        </div>
+                                        <div className="col-6">
+                                            <b className="name-contact nameMembers">{m.name} </b>
+                                            <p className="email-contact emailMembers ml-2">{m.email} </p>
+                                        </div>
                                     </div>
-                                </>
-                            })
-                            : null
-                        }
-                    </div>
+                                </div>
+                            </>
+                        })
+                        : null
+                    }
                 </div>
-            </div >
-
+            </div>
+ 
 
         </>
 

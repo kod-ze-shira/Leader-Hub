@@ -99,10 +99,13 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input class="form-control descriptionProject" name="description" id="descriptionProject" rows="5"
+                        <div class="form-control descriptionProject"
+                            name="description"
+                            id="descriptionProject" rows="5"
                             placeholder="Write a description about your project"
-                            onChange={(e) => changeFiledInProject(e)} contentEditable
-                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></input>
+                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
+                            onChange={(input) => changeFiledInProject(input)} contentEditable
+                        ></div>
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">

@@ -54,7 +54,7 @@ function AddStatus(props) {
     return (
         <>
             <div className="container ">
-                <div className="title-edit-label py-2 mb-1" onClick={viewAllStatus}>> Add Label</div>
+                <div className="title-edit-label py-2 mb-1" onClick={viewAllStatus}> Add Label</div>
                 <label for="name">Name</label>
                 <input name="statusName" onChange={(e) => handleChangeStatus(e)}
                     onClick={(e) => stopP(e)}
