@@ -54,7 +54,7 @@ function EditStatus(props) {
     return (
         <>
             <div className="container edit-status-wraps">
-                <div className="title-edit-label py-2 mb-1" onClick={(e) => viewAllStatus(e)}>> Edit Label</div>
+                <div className="title-edit-label py-2 mb-1" onClick={(e) => viewAllStatus(e)}> Edit Label</div>
                 <div class="form-group row mx-2">
 
                     <label for="name">Name</label>
