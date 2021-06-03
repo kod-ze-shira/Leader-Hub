@@ -1,19 +1,42 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { actions } from "../../../../redux/actions/action";
+import img from "../../../img/btn-chat.svg";
+import imgHover from "../../../img/btn-chat-hover.svg";
+import imgClick from "../../../img/btn-chat-close.svg";
+
 import './hangout.css'
+
 function Hangout(props) {
     const { userName } = props;
     const { jwtFromCookie } = props;
     const [showChat, setShowChat] = useState(false)
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
-    // btn-chat.svg
+    const handleOver = (e) => {
+        if (showChat === false) {
+            e.target.style.background = `url(${imgHover})`
+        }
+    }
+
+    const handleLeave = (e) => {
+        if (showChat === false) {
+            e.target.style.background = `url(${img})`
+        }
+    }
+
+    const handleClick = (e) => {
+        e.target.style.background = `url(${imgClick})`
+        showChat ? setShowChat(false) : setShowChat(true)
+    }
+    
     return (
         <>
-            <button className='btn-show-chat' onClick={() => { showChat ? setShowChat(false) : setShowChat(true) }}>
-                {/* <img 
-                    src={require('../../../img/btn-chat.svg')}>
-                </img> */}
+            <button className='btn-show-chat'
+                style={{ background: `url(${img})` }}
+                onMouseOver={(e) => handleOver(e)}
+                onMouseLeave={(e) => handleLeave(e)}
+                onClick={(e) => handleClick(e)}>
+
             </button>
             <iframe className={showChat ? "iframeHangout" : 'd-none'}
                 src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
