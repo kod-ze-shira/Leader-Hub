@@ -30,7 +30,6 @@ import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
 
-
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -202,6 +201,7 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
@@ -214,8 +214,6 @@ function Hub(props) {
                 </div>
 
             </Router >
-
-
         </>
     )
 }

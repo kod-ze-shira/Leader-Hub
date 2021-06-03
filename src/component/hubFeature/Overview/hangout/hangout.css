@@ -1,6 +1,18 @@
 .iframeHangout{
-    height:inherit;
+    height:62%;
     border: none;
+    z-index: 101;
     position: absolute;
-    bottom: 0;
+    bottom: 10%;
+    right:18%;
+}
+.btn-show-chat{
+    background: url(../../../img/btn-chat.svg);
+    background-size: cover;
+    width: 8vw;
+    height: 8vw;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 100;
 }

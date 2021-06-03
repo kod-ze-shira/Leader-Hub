@@ -85,6 +85,7 @@ body {
   color: tomato;
 }
 .option-contact{
+  cursor: pointer;
   width: 340px !important;
   /* display: inline-block!important; */
 }
@@ -99,7 +100,7 @@ body {
 }
 .email-contact{
     font-size:13px;
-    margin-left: 1vw;
+    /* margin-left: 1vw; */
     text-align: right;
     margin-top:1px;
     opacity:0.9;
@@ -165,12 +166,12 @@ body {
     }
 .invite-button{
   border-radius: 3px;
-background-color: #b6f6f8;
+background-color: #E8EAEC;
 font-size: smaller ;
-color: #B2B2B2;
+/* color: #B2B2B2; */
 height:35px;
 text-align:left;
-color:#68C7CB;
+color:black;
 
 /* display: inline-block; */
 }
