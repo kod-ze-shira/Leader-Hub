@@ -124,7 +124,7 @@ function TasksNotBelongCardByMap(props) {
     // const selectPlaceHorder = <img src={placeholder}></img>
     const selectPlaceHorder = <hr
         style={{
-            marginLeft:'25%',
+            marginLeft: '25%',
             border: 0,
             clear: 'solid',
             display: 'block',
@@ -203,13 +203,13 @@ function TasksNotBelongCardByMap(props) {
         } : null
     )) : null
 
-    
+
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
             setCardId(newValue.value._id)
             setIndexOfCard(newValue.value.index)
         }
-      
+
     };
     function belongTask() {
         if (cardId) {
@@ -259,7 +259,7 @@ function TasksNotBelongCardByMap(props) {
         }
         props.completeTask(completeTask)
     }
-    
+
     function openViewDetails(e) {
         // props.setTaskName(props.task.name)
         setDetailsOrEditTask("viewTaskByCard")
@@ -273,7 +273,7 @@ function TasksNotBelongCardByMap(props) {
     $(window).click(function () {
         setViewDetails(false)
     });
-    
+
 
     return (
         <>
@@ -282,7 +282,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className=" col-5 row">
+                <div className="wrap-not-belong col-5 row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -317,8 +317,8 @@ function TasksNotBelongCardByMap(props) {
                         </label>
                     </label>
 
-                    <label className="check-task col  d-flex align-items-center justify-content-end  view-details-btn" >
-                        <button
+                    <label className="check-task col  d-flex align-items-center justify-content-end" >
+                        <button className="btn-open-details"
                             onClick={(e) => openViewDetails(e)}
                         >
                             view details
@@ -334,7 +334,7 @@ function TasksNotBelongCardByMap(props) {
                         <CreatableSelect
                             theme={theme => ({
                                 ...theme,
-                            
+
                                 colors: {
                                     ...theme.colors,
                                     primary25: '#68c7cb1a',
@@ -391,7 +391,7 @@ function TasksNotBelongCardByMap(props) {
                         className='selectCardInTasksNotBelong'
                         theme={theme => ({
                             ...theme,
-                            border:0,
+                            border: 0,
                             colors: {
                                 ...theme.colors,
                                 primary25: '#68c7cb1a',
