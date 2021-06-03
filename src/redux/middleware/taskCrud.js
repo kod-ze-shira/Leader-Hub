@@ -136,7 +136,9 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
-                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "body": `<p>Hi ${getState().public_reducer.userName}</p> 
+                    <p> Task added to you: <span style="font-weight: 600;">${task.name}</span></p> 
+                    <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
 
                     // "to": ['bp63447@gmail.com'],
                     "to": [getState().public_reducer.userName],
@@ -264,6 +266,33 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     return next(action);
 }
 
+export const updateLike = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'UPDATE_LIKE') {
+        let taskId = action.payload
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/updateLike`
+        $.ajax({
+            url: urlData,
+            method: 'POST',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            // data: JSON.stringify( ),
+            success: function (data) {
+                dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "likes", "value": data.task.likes }))
+                console.log("success")
+                console.log(data.result);
+            },
+            error: function (err) {
+                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
+                console.log("error")
+                console.log(err)
+            }
+        });
+    }
+    return next(action);
+}
+
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
         let taskId = action.payload._id
@@ -283,7 +312,10 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                 if (action.payload.complete) {
                     dispatch(actions.createSystemWave({
                         "subject": "Comlpite task",
-                        "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                        "body":
+                            `<p>Hi ${getState().public_reducer.userName}</p>
+                        <p>Task: <span style="font-weight: 600;"> ${action.payload.name} </span>successfully completed!</p>
+                        <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
                         "to": [getState().public_reducer.userName],
                         "from": "hub@noreply.leader.codes",
                         "source": "Hub",
@@ -291,7 +323,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                     }))
                 }
                 console.log("success")
-                console.log(data.result);
+                // console.log(data.result);
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -455,7 +487,10 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.addTask(data.message))
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
-                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "body": `<p>Hi ${getState().public_reducer.userName}</p> 
+                    <p> Task added to you: <span style="font-weight: 600;">${task.name}</span></p> 
+                    <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+
                     "to": [getState().public_reducer.userName],
                     "from": "hub@noreply.leader.codes",
                     "source": "Hub",
@@ -489,6 +524,7 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log("success")
+
                 dispatch(actions.getAllStatusesTaskForWorkspace({ 'workspaceId': workspaceId, 'task': data.task }))
                 dispatch(actions.removeTask(taskId))
             },

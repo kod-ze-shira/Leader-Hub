@@ -29,9 +29,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
 
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });

@@ -4,16 +4,24 @@ import { actions } from "../../../../redux/actions/action";
 import './hangout.css'
 function Hangout(props) {
     const { userName } = props;
-    const { jwtFromCookie } = props
+    const { jwtFromCookie } = props;
+    const [showChat, setShowChat] = useState(false)
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
+    // btn-chat.svg
     return (
-        <iframe className="iframeHangout"
-            src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
-            // src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=isLocal`}
+        <>
+            <button className='btn-show-chat' onClick={() => { showChat ? setShowChat(false) : setShowChat(true) }}>
+                {/* <img 
+                    src={require('../../../img/btn-chat.svg')}>
+                </img> */}
+            </button>
+            <iframe className={showChat ? "iframeHangout" : 'd-none'}
+                src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
 
-            // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
-            title="hangout">
-        </iframe>
+                // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
+                title="hangout">
+            </iframe>
+        </>
     )
 }
 const mapStateToProps = (state) => {
