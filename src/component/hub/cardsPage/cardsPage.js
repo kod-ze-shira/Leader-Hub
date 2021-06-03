@@ -81,9 +81,9 @@ function CardsPage(props) {
         <div className="">
             <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
             {renderSwitch()}
+            <Hangout></Hangout>
 
         </div>
-<Hangout></Hangout>
 </>
     )
 }
