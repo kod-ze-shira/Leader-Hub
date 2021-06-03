@@ -203,6 +203,7 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
