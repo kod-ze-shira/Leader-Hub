@@ -1,9 +1,7 @@
 import React from 'react';
-
-import './newworkspace.css';
-
 import { connect } from 'react-redux';
-import { actions } from '..//..//..//..//redux/actions/action'
+import { actions } from '..//..//..//..//redux/actions/action';
+import './newworkspace.css';
 
 
 function NewWorkpas(props) {

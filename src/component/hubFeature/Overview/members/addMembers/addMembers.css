@@ -1,0 +1,17 @@
+.addMembers{
+    border-radius:50%;
+    border:1px dashed #75798E;
+    width: 3rem;
+    /* width: 5%; */
+    background: #F6F6FA;
+    height: 3rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+.fontAddMembers{
+    color:#75798E;
+    font-size:2vw;
+}

@@ -1,20 +1,15 @@
-import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import './viewProject.css'
-import Cell from './cell'
-import CellDescription from './cellDescription'
-import './viewProject.css'
-import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
-// import { ProgressBar } from 'react-bootstrap';
-import TeamView from '../../teamView/teamView'
-import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
-import title from '../../../../Data/title.json'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import title from '../../../../Data/title.json';
+import { actions } from '../../../../redux/actions/action';
+import share from '../../../img/share.svg';
+import Cell from './cell';
+import CellDescription from './cellDescription';
+import './viewProject.css';
 
-import { useEffect } from 'react';
-import share from '../../../img/share.svg'
 function ViewProject(props) {
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
@@ -25,13 +20,12 @@ function ViewProject(props) {
     // props.setProject(props.myProject)
 
     useEffect(() => {
-        console.log(complited);
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
         props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
-        console.log("project" + props.myProject._id)
+        // console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
         props.setCurrentIndexProject(props.indexProject)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
@@ -72,7 +66,17 @@ function ViewProject(props) {
         setMyStyleStripe({ 'color': 'white' })
     }
     const openShareProject = (event) => {
-        props.setCurrentIndexProject(props.indexProject)
+        for (let index = 0; index < props.workspaces.length; index++) {
+            for (let index2 = 0; index2 < props.workspaces[index].projects.length; index2++) {
+                if (props.workspaces[index].projects[index2]._id == props.myProject._id) {
+                    props.setCurrentIndexProject(index2)
+                    props.saveIndexOfWorkspaceInRedux(index)
+                }
+
+            }
+
+        }
+
         props.editOrShareProject('shareProject')
         event.stopPropagation();
     }
@@ -180,7 +184,8 @@ const mapStateToProps = (state) => {
         projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
-
+        workspaces: state.public_reducer.workspaces,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -190,7 +195,8 @@ const mapDispatchToProps = (dispatch) => {
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
-        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index))
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
 
 
     }
