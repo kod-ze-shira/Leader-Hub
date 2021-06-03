@@ -41,7 +41,6 @@ function ContactList(props) {
   }, [])
 
   const assingTaskToContact = (e) => {
-    
     e.stopPropagation()
     let a = ValidateEmail(valueSearch)
     console.log(a)

@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -42,7 +42,7 @@ function Hub(props) {
     const [openCalander, setOpenCalander] = useState(false)
     const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
-    
+
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
@@ -68,6 +68,7 @@ function Hub(props) {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
+
         setShowToastDelete(value)
         let i = objectToDelete.length - 1
         if (objectToDelete[i].type == "Card") {
@@ -75,8 +76,11 @@ function Hub(props) {
             $(`#${objectToDelete[i].object._id} `).addClass("mt-4")
             $(`#${objectToDelete[i].object._id} `).addClass("col-3")
         }
+        else if (!objectToDelete[i].object.card)
+            $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
         else if (objectToDelete[i].type == "Task")
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
+
         else if (objectToDelete[i].type == "Project")
             $(`#${objectToDelete[i].object._id}`).css("display", "table-row")
         else

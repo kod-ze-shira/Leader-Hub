@@ -136,7 +136,9 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
-                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "body": `<p>Hi ${getState().public_reducer.userName}</p> 
+                    <p> Task added to you: <span style="font-weight: 600;">${task.name}</span></p> 
+                    <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
 
                     // "to": ['bp63447@gmail.com'],
                     "to": [getState().public_reducer.userName],
@@ -310,7 +312,10 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                 if (action.payload.complete) {
                     dispatch(actions.createSystemWave({
                         "subject": "Comlpite task",
-                        "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                        "body":
+                            `<p>Hi ${getState().public_reducer.userName}</p>
+                        <p>Task: <span style="font-weight: 600;"> ${action.payload.name} </span>successfully completed!</p>
+                        <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
                         "to": [getState().public_reducer.userName],
                         "from": "hub@noreply.leader.codes",
                         "source": "Hub",
@@ -318,7 +323,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                     }))
                 }
                 console.log("success")
-                console.log(data.result);
+                // console.log(data.result);
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
@@ -482,7 +487,10 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.addTask(data.message))
                 dispatch(actions.createSystemWave({
                     "subject": "New task",
-                    "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
+                    "body": `<p>Hi ${getState().public_reducer.userName}</p> 
+                    <p> Task added to you: <span style="font-weight: 600;">${task.name}</span></p> 
+                    <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+
                     "to": [getState().public_reducer.userName],
                     "from": "hub@noreply.leader.codes",
                     "source": "Hub",
