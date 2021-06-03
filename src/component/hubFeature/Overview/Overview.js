@@ -3,31 +3,31 @@ import { connect } from 'react-redux'
 import MyChart from '../chart/chart'
 import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
-import ViewMembers from './members/veiwMembers/viewMembers'
+import Members from './members/members'
 // import { actions } from '../../hub'
 function Overview(props) {
-    
-    const [showFilesForProject,setShowFilesForProject]=useState(false)
-    function openViewFilesForProject(e){
+
+    const [showFilesForProject, setShowFilesForProject] = useState(false)
+    function openViewFilesForProject(e) {
         setShowFilesForProject(true)
     }
     return (
         <>
             <div className=" body container-fluid">
-                <ViewMembers/>
-              <MyChart/>
-              <button onClick={openViewFilesForProject}>files in this project</button>
-              {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
-              
-              <Hangout></Hangout>
+<Members/>
+                <MyChart />
+                <button onClick={openViewFilesForProject}>files in this project</button>
+                {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
+
+                {/* <Hangout></Hangout> */}
             </div>
-           
+
         </>
     )
 }
 const mapStateToProps = (state) => {
     return {
-    
+
     }
 }
 const mapDispatchToProps = (dispatch) => {

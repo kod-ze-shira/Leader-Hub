@@ -50,7 +50,6 @@ function EditProject(props) {
         // project.dueDate = res
 
 
-        debugger
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)

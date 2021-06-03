@@ -25,9 +25,20 @@
 .scrollbarMembers{
     overflow-y: auto;
 }
-/* .imgMembers{
-    height:10vh
-} */
+.fontImgMembers{
+    font-size:2vw;
+}
 .emailMembers{
     width: fit-content !important;
+}
+.imgMembers{
+    width: 3vw;
+    height: 3vw;
+}
+.members{
+    width: 30%;
+}
+.nameMembers{
+    /* text-align: left; */
+    font-weight: bold;
 }

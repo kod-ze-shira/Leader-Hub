@@ -5,7 +5,6 @@ import configData from '../../ProtectedRoute/configData.json'
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'GET_CARDS_BY_PROJECT_ID') {
-        debugger
         var projectId = action.payload;
         let urlData;
         if (window.location.href.includes('share'))//get carrds for user that share
