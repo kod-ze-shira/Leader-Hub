@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { Chart } from 'react-charts'
 import { connect } from 'react-redux'
-import $ from 'jquery'
-// import { Bar, Doughnut, Line, Scatter } from 'react-chartjs';
 import Paper from '@material-ui/core/Paper';
 import {
     ArgumentAxis,
@@ -159,8 +156,6 @@ function MyChart(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
-        console.log('ReadyProjects: ' + props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks);
-        console.log('countProjects: ' + props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks);
     }, [])
     // const data = React.useMemo(
     //     () => [
@@ -238,38 +233,40 @@ function MyChart(props) {
     //     })
     // })
     const [countTasks, setCountTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks )
-    const data1 = [
-        { card: 'card 1', value: 10 },
-        { card: 'card 2', value: 20 },
-        { card: 'card 3', value: 15 },
-        { card: 'card 4', value: 18 },
-        { card: 'card 5', value: 5 },
-    ];
+    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
+    const [cards, setCards] = useState(props.cards)
 
-    const data4 = [
+    const barData = [
         // { status: 'Open', percent: 2.018 },
         { status: 'Done', percent: `${readyTasks}%`, color: '#5ddae0' },
         { status: 'At work', percent: `${100 - readyTasks}%`, color: '#99e2e5' }
     ];
-    const data5 = [{ category: 'Completed', val: `${readyTasks/ countTasks}` }, { category: 'Incompleted', val: `${1-readyTasks/countTasks}`}];
-    const schemeSet = ['#1FB9C1', '#6CBAFF']
+    const pieData = [{ category: 'Completed', val: `${readyTasks / countTasks}` }, { category: 'Incompleted', val: `${1 - readyTasks / countTasks}` }];
+    const schemeSet = ['#1FB9C1', '#6CBAFF'] 
+    const sticksData = [];
+    cards.map(c => {
+        let ta = []
+        c.tasks.map(t => ta.push(t))
+        let notDone = ta.filter(t => t.complete === false)
+        sticksData.push({ name: c.name, tasks: notDone.length })
+    })
+    
     return (
         <>
             <Paper>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Completed tasks</b><br/><b  className='bParam'>{readyTasks}</b></div>
+                            <div className='chartCol p-2'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Incomplete tasks</b><br/><b className='bParam'>2</b></div>
+                            <div className='chartCol p-2'><b>Incomplete tasks</b><br /><b className='bParam'>{countTasks-readyTasks}</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Overdue tasks</b><br/><b className='bParam'>1</b></div>
+                            <div className='chartCol p-2'><b>Overdue tasks</b><br /><b className='bParam'>1</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Total tasks </b><br/> <b className='bParam'>{countTasks}</b></div>
+                            <div className='chartCol p-2'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
                         </div>
                     </div>
                     <div className='row'>
@@ -277,13 +274,13 @@ function MyChart(props) {
                             <div className='chartCol'>
                                 {/* sticks */}
                                 <Chart
-                                    data={data1}
+                                    data={sticksData}
                                 >
                                     <ArgumentAxis tickSize={10} />
                                     <ValueAxis />
                                     <BarSeries
-                                        valueField="value"
-                                        argumentField="card"
+                                        valueField="tasks"
+                                        argumentField="name"
                                         barWidth={0.2}
                                     />
                                     <Title text="Incomplete tasks by card" />
@@ -298,12 +295,12 @@ function MyChart(props) {
                             <div className='chartCol'>
                                 {/* bar */}
                                 <Chart
-                                    data={data4}
+                                    data={barData}
                                 >
                                     <BarSeries
                                         valueField="percent"
                                         argumentField="status"
-                                        // fill={data4.color}
+                                        // fill={barData.color}
                                         barWidth={0.2}
                                     />
                                     <Title text="all tasks by status" />
@@ -317,7 +314,7 @@ function MyChart(props) {
                             <div className='chartCol'>
                                 {/* pie */}
                                 <Chart
-                                    data={data5}
+                                    data={pieData}
                                 >
                                     <Palette scheme={schemeSet} />
                                     <PieSeries
@@ -352,7 +349,9 @@ const mapStateToProps = (state) => {
     return {
         workspacesIndex: state.public_reducer.indexOfWorkspace,
         workspaces: state.public_reducer.workspaces,
-        indexCurrentProject: state.public_reducer.indexCurrentProject
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
+        cards: state.public_reducer.cards,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
     }
 }
 

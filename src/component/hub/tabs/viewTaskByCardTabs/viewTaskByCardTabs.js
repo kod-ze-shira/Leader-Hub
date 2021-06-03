@@ -146,8 +146,6 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const changeFiledInTask = (event) => {
-        debugger
-
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux

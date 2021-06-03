@@ -17,7 +17,7 @@ function Overview(props) {
               <button onClick={openViewFilesForProject}>files in this project</button>
               {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
               
-              <Hangout></Hangout>
+              {/* <Hangout></Hangout> */}
             </div>
            
         </>
