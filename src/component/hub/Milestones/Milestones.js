@@ -30,7 +30,9 @@ function Milestones(props) {
                 {props.milestones.length ?
                     renderTasks
                     : showGif ?
-                        <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>
+                        <div className="logoGif d-flex justify-content-center"><img className="hub" src={require('../../img/hub.gif')} /></div>
+
+
                         : <div className="ml-5"><h1 className="ml-5">No Milestones</h1></div>}
             </div>
         </div >

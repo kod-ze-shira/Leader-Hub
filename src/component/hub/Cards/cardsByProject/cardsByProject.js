@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
@@ -79,7 +79,8 @@ function CardsByProject(props) {
                             cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}
                 </DragDropContext>
-                : <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../../img/animation.gif')} /></div>}
+                : 
+                <div className="logoGif"><img src={require('../../../img/hub.gif')} /></div>}
         </>
     )
 }

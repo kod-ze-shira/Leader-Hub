@@ -78,3 +78,6 @@ a .add-card-tabs{
       background: #919494; 
     }
     
+    .hub{
+        height: 70vh;
+    }
