@@ -240,7 +240,7 @@ function ViewTaskByCradTabs(props) {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
+                                    {/* <MenuItem onClick={handleClose}>Edit Task Name</MenuItem> */}
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>

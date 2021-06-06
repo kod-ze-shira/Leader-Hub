@@ -63,7 +63,7 @@ opacity: 0.3;
   left: 6% !important;
 }
 .checkmark-place{
-  top: 6px;
+  top: 9px;
   left: 0;
  
 }
@@ -138,6 +138,10 @@ label{
   margin: auto;
 
 } */
+.likes-num{
+ color: #68C7CB!important;
+ display: inline-block;
+}
 .status-task{
 
   border-radius: 3px;

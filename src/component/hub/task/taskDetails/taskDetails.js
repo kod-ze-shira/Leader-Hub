@@ -33,6 +33,8 @@ function TaskDetails(props) {
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
             props.getAllStatusesTaskForWorkspace();
+        if (props.contactsUser.length == 0)
+            props.getContactsForUser()
 
     }, [props.cards])
 
@@ -332,7 +334,7 @@ function TaskDetails(props) {
 
                 <div className="row justify-content-around mx-1 ">
                     {showContactList ?
-                        <ContactList></ContactList> : null
+                        <ContactList taskDetails={true}></ContactList> : null
 
                     }
                     <div className="delete-details">
@@ -370,7 +372,9 @@ const mapStateToProps = (state) => {
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
-        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask
+        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
+        contactsUser: state.share_reducer.contactsUser,
+
 
     }
 }
@@ -385,6 +389,8 @@ const mapDispatchToProps = (dispatch) => {
         setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
+        getContactsForUser: () => dispatch(actions.getContactsForUser()),
+
 
     }
 }
