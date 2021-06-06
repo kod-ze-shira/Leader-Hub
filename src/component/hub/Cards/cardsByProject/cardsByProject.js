@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { useState,useEffect } from 'react'
-=======
 import React, { useEffect } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
->>>>>>> 327f8330c2bb8969529520e67f7579ae216ac006
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
