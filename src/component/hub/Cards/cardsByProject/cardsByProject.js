@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { useState,useEffect } from 'react'
-=======
 import React, { useEffect } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
->>>>>>> 327f8330c2bb8969529520e67f7579ae216ac006
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
 import ViewCards from '../viewCards/viewCards'
@@ -43,28 +39,28 @@ function CardsByProject(props) {
             // }
             // else {
 
-                let iSourse, iDestination
-                let iCardTo, iCardFrom;
-                for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
-                    if (props.cards[iSourse]._id == e.source.droppableId) {
-                        iCardFrom = props.cards[iSourse]._id;
-                        break
-                    }
+            let iSourse, iDestination
+            let iCardTo, iCardFrom;
+            for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
+                if (props.cards[iSourse]._id == e.source.droppableId) {
+                    iCardFrom = props.cards[iSourse]._id;
+                    break
                 }
-                for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
-                    if (props.cards[iDestination]._id == e.destination.droppableId) {
-                        iCardTo = props.cards[iDestination]._id;
-                        break
+            }
+            for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
+                if (props.cards[iDestination]._id == e.destination.droppableId) {
+                    iCardTo = props.cards[iDestination]._id;
+                    break
 
-                    }
                 }
-                // console.log(e.source.index, e.destination.index, iSourse, iDestination)
-                const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-                // const replace = [iSourse, iDestination]
-                // /: taskId/:cardId/dragTaskFromCardToCard‏
-                props.changeTaskplace(replace)
-                const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
-                props.moveTaskBetweenCards(replaceIServer)
+            }
+            // console.log(e.source.index, e.destination.index, iSourse, iDestination)
+            const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+            // const replace = [iSourse, iDestination]
+            // /: taskId/:cardId/dragTaskFromCardToCard‏
+            props.changeTaskplace(replace)
+            const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
+            props.moveTaskBetweenCards(replaceIServer)
 
             // }
         }
@@ -83,7 +79,7 @@ function CardsByProject(props) {
                             cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}
                 </DragDropContext>
-                : 
+                :
                 <div className="logoGif"><img src={require('../../../img/hub.gif')} /></div>}
         </>
     )
