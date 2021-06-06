@@ -19,7 +19,8 @@ function File(props) {
         props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
     }
     function downloadFile(e) {
-        // e.stopPropagation()
+        debugger
+        props.setDownloadFile(true)
         props.downloadFile({ 'file': props.file, 'e': e })
         // props.showViewDetails(true)
     }

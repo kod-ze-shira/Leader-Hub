@@ -176,9 +176,7 @@ function TaskNotBelongDetails(props) {
         $(this).find('.delete-task').show();
 
     });
-    const addFileComponent = (file) => {
-        return <File file={file} />
-    }
+
 
     function closeViewDetailsInTask() {
         props.setTaskFromTasksNotBelong(taskBeforeChanges)
@@ -186,7 +184,7 @@ function TaskNotBelongDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File file={file} />
+        return <File file={file} setDownloadFile={(e) => props.setDownloadFile(e)} />
     }) : null
     return (
         <>
