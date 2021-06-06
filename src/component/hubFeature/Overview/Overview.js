@@ -15,18 +15,12 @@ function Overview(props) {
     return (
         <>
             <div className=" body container-fluid">
-<Members/>
+                <Members />
                 <MyChart />
                 <button onClick={openViewFilesForProject}>files in this project</button>
                 {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
 
-                {/* <Hangout></Hangout> */}
-                <ViewMembers/>
-              <MyChart/>
-              <button onClick={openViewFilesForProject}>files in this project</button>
-              {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
-              
-           
+
             </div>
 
         </>
