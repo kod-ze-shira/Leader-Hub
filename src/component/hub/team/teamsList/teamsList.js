@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ViewTeam from '../teamView/teamView';
-import './teamsList.css'
-import $ from 'jquery'
+import './teamsList.css';
+
 function TeamsList(props){
 
     const viewTeams = props.teamsUser ? props.teamsUser.map((team) => (

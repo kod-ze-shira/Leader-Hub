@@ -1,19 +1,15 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
-// import { actions } from '../../../redux/actions/action'
-import './viewDetails.css'
-import EditWorkspace from '../workspace/editWorkspace/editWorkspace'
-import NewProject from '../project/newProject/newProject'
-import EditProject from '../project/editProject/editProject'
-import AddTask from '../task/addTask/addTask'
-// import ViewTaskByCrad from '../task/viewTaskByCard/viewTaskByCrad';
-import TaskDetails from '../task/taskDetails/taskDetails'
-// import EditTask from '../task/addTask/addTask'
-import EditCurrentTask from '../task/editCurrentTask/editCurrentTask'
-import AddWorkspace from '../workspace/addWorkspace/addWorkspace'
-import ShareProject from '../project/shareProject/shareProject'
-import TaskNotBelongDetails from '../task/taskNotBelongCardForUser/taskNotBelongDetails/taskNotBelongDetails'
+import EditProject from '../project/editProject/editProject';
+import NewProject from '../project/newProject/newProject';
+import ShareProject from '../project/shareProject/shareProject';
+import AddTask from '../task/addTask/addTask';
+import TaskDetails from '../task/taskDetails/taskDetails';
+import TaskNotBelongDetails from '../task/taskNotBelongCardForUser/taskNotBelongDetails/taskNotBelongDetails';
+import AddWorkspace from '../workspace/addWorkspace/addWorkspace';
+import EditWorkspace from '../workspace/editWorkspace/editWorkspace';
+import EditCurrentTask from '../task/editCurrentTask/editCurrentTask';
+import './viewDetails.css';
 
 const mapStateToProps = (state) => {
     return {

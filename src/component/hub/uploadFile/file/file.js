@@ -26,23 +26,34 @@ function File(props) {
     return (
         <>
             <div className=' fileInTask  mb-3 row' id={props.file.url ? props.file.url : props.file.name}>
-                <div className='col-4 displayInlineBlock imgFileInTask'>
+                <div className='col-4  imgFileInTask'>
                     {props.file.url != 'new' ?
                         <a href={props.file.url} target="_blank">
                             {props.file.name.endsWith(".pdf") ?
-                                <FontAwesomeIcon className='fontAwesomeIconFile'
+                                <FontAwesomeIcon className='fontAwesomeIconFile pdfFile'
                                     icon={['fas', 'file-pdf']}
-                                ></FontAwesomeIcon>
-                                :
-                                <img src={props.file.url}></img>
+                                ></FontAwesomeIcon> :
+                                props.file.name.endsWith(".docx")
+                                    ? <FontAwesomeIcon className='fontAwesomeIconFile'
+                                        icon={['fas', 'file-word']}
+                                    ></FontAwesomeIcon> :
+                                    <img src={props.file.url}></img>
                             }
                         </a> :
-                        <img src={file}></img>}
+                        props.file.name.endsWith(".pdf") ?
+                            <FontAwesomeIcon className='fontAwesomeIconFile pdfFile'
+                                icon={['fas', 'file-pdf']}
+                            ></FontAwesomeIcon> :
+                            props.file.name.endsWith(".docx") ?
+                                <FontAwesomeIcon style={{ color: 'rgb(0, 123, 255)' }} className='fontAwesomeIconFile'
+                                    icon={['fas', 'file-word']}
+                                ></FontAwesomeIcon> :
+                                <img src={file}></img>}
 
 ‏
 
                 </div>
-                <div className='col-8 displayInlineBlock nameFileAndAction'>
+                <div className='col-8  nameFileAndAction'>
                     <span className='nameFileInTask'>
                         {props.file.url != 'new' ?
                             <a href={props.file.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.file.name}</a>

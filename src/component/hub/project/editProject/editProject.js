@@ -1,9 +1,9 @@
 import $ from "jquery"
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
+import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
-import ReactTooltip from 'react-tooltip';
+import { actions } from '../../../../redux/actions/action'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
@@ -20,7 +20,7 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-
+        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value = input.target.value
         if (!value)
@@ -49,8 +49,6 @@ function EditProject(props) {
         // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
         // project.dueDate = res
 
-
-        debugger
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
@@ -101,10 +99,13 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div class="form-control descriptionProject" name="description" id="descriptionProject" rows="5"
+                        <div class="form-control descriptionProject"
+                            name="description"
+                            id="descriptionProject" rows="5"
                             placeholder="Write a description about your project"
-                            onChange={(e) => changeFiledInProject(e)} contentEditable
-                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}></div>
+                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
+                            onChange={(input) => changeFiledInProject(input)} contentEditable
+                        ></div>
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">

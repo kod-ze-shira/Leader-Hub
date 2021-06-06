@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
+import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName';
+import './workspacePlatform.css';
 
-import { actions } from '../../../redux/actions/action'
-import ViewWorkspaceName from '../../warps/configurator/viewWorkspaceName/viewWorkspaceName'
-import './workspacePlatform.css'
 
 
 

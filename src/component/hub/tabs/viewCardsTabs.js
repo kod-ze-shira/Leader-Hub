@@ -1,17 +1,15 @@
 
-import React, { useState, useEffect, useRef } from 'react'
-import ReactDOM from 'react-dom'
-import { connect } from 'react-redux';
-import { actions } from '../../../redux/actions/action'
-import './viewCardsTabs.css'
-// import history from '../../../history'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu, MenuItem, Button, useEventCallback } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import $ from "jquery";
+import React, { useEffect, useRef, useState } from 'react';
+// import history from '../../../history'
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import title from '../../../Data/title.json'
+import title from '../../../Data/title.json';
+import { actions } from '../../../redux/actions/action';
+import './viewCardsTabs.css';
+import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs';
 
 function ViewCardsTabs(props) {
 
@@ -121,11 +119,11 @@ function ViewCardsTabs(props) {
         function () {
             $(this).attr('contentEditable', true);
         });
-        
+
     $('span').bind('blur',
-    function () {
-        $(this).attr('contentEditable', false);
-    });
+        function () {
+            $(this).attr('contentEditable', false);
+        });
 
     return (
         <>
@@ -146,14 +144,14 @@ function ViewCardsTabs(props) {
                                                 id="input-card-name"
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
-                                                className=" mt-2 pl-4 col-10"
-                                                // form-control              
-                                                // value={editCardName}
-                                                // onChange={updateCardName}
-                                                // title={editCardName}
-                                                // onKeyPress={event => {
-                                                //     enterK(event)
-                                                // }}
+                                                className="  pl-4 col-10"
+                                            // form-control              
+                                            // value={editCardName}
+                                            // onChange={updateCardName}
+                                            // title={editCardName}
+                                            // onKeyPress={event => {
+                                            //     enterK(event)
+                                            // }}
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
@@ -183,7 +181,7 @@ function ViewCardsTabs(props) {
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 
-                                                    
+
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
                                                             openViewDetails={openViewDetails}
@@ -218,9 +216,8 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t"
-                                            className="add-task-tabs mt-3 "
+                                            className="add-task-tabs mt-4 "
                                             onClick={(e) => addTask(e)}>Add Task +</a>
-
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +225,6 @@ function ViewCardsTabs(props) {
                     )}
                 </Draggable>
             </div >
-
         </>
     )
 }

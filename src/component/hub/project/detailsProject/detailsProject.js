@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../../../../redux/actions/action'
+import { actions } from '../../../../redux/actions/action';
 function DetailsProject(props) {
 
      const [isHasProject, setIsHasProject] = useState(false);

@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -30,7 +30,6 @@ import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
 
-
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -40,14 +39,13 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     const [openCalander, setOpenCalander] = useState(false)
-    const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
-   
 
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
         if (objectToDelete_.type == 'Task') {
+
             objectToDelete.push(objectToDelete_)
             setObjectToDeleteLocal(objectToDelete_)
             setShowToastDelete(true)
@@ -69,6 +67,7 @@ function Hub(props) {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
+
         setShowToastDelete(value)
         let i = objectToDelete.length - 1
         if (objectToDelete[i].type == "Card") {
@@ -76,8 +75,11 @@ function Hub(props) {
             $(`#${objectToDelete[i].object._id} `).addClass("mt-4")
             $(`#${objectToDelete[i].object._id} `).addClass("col-3")
         }
+        else if (!objectToDelete[i].object.card)
+            $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
         else if (objectToDelete[i].type == "Task")
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
+
         else if (objectToDelete[i].type == "Project")
             $(`#${objectToDelete[i].object._id}`).css("display", "table-row")
         else
@@ -85,6 +87,8 @@ function Hub(props) {
         for (let index = 0; index < i; index++) {
             props['remove' + objectToDelete[index].type](objectToDelete[index].object._id)
         }
+        setObjectToDelete([])
+        setObjectToDeleteLocal()
     }
 
     const showToast = () => {
@@ -199,6 +203,7 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
@@ -211,8 +216,6 @@ function Hub(props) {
                 </div>
 
             </Router >
-
-
         </>
     )
 }

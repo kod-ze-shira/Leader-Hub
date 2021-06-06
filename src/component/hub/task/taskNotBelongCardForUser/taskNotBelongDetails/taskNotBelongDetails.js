@@ -20,8 +20,6 @@ function TaskNotBelongDetails(props) {
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
-        // if (!(props.statuses && props.statuses.length > 0))
-        // props.getAllStatusesTaskForWorkspace();
 
     }, [props.task])
 
@@ -161,6 +159,23 @@ function TaskNotBelongDetails(props) {
     //             setFileComponentArr([...fileComponentArr, newComponent])
     //     })
     // }
+    $('.files-details').hover(function () {
+        $(this).find('.files-task').hide();
+        $(this).find('.files-task-hover').show();
+    }, function () {
+        $(this).find('.files-task-hover').hide();
+        $(this).find('.files-task').show();
+    });
+
+    $('.delete-details').hover(function () {
+        $(this).find('.delete-task').hide();
+        $(this).find('.delete-task-hover').show();
+
+    }, function () {
+        $(this).find('.delete-task-hover').hide();
+        $(this).find('.delete-task').show();
+
+    });
     const addFileComponent = (file) => {
         return <File file={file} />
     }
@@ -267,12 +282,9 @@ function TaskNotBelongDetails(props) {
                     </ReactTooltip>
                 </div>
             </div>
-
         </>
-
     )
 }
-
 const mapStateToProps = (state) => {
     return {
         tasks: state.public_reducer.tasks,
@@ -289,12 +301,10 @@ const mapDispatchToProps = (dispatch) => {
         uploadFiles: (uploadFile) => dispatch(actions.uploadFiles(uploadFile)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
-        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
         createStatus: (status) => dispatch(actions.createStatus(status)),
         setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
         setTaskByFiledFromTasksNotBelong: (taskDetails) => dispatch(actions.setTaskByFiledFromTasksNotBelong(taskDetails)),
         setTaskFromTasksNotBelong: (task) => dispatch(actions.setTaskFromTasksNotBelong(task)),
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskNotBelongDetails)

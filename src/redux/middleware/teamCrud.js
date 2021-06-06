@@ -95,7 +95,7 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
         return res.json()
       })
       .then(result => {
-        console.log('contacts', result)
+        // console.log('contacts', result)
         // checkPermission(result).then(ifOk => {
         dispatch(actions.setContactsUser(result))
         // })
@@ -127,11 +127,22 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         return result.json();
       }).then((result) => {
 
+        let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
         dispatch(actions.createSystemWave({
           "subject": "Share project",
-          "body": "get the body' display all details.good luck <a href='https://reacthub.dev.leader.codes'>linkkk</a> ",
-
-          // "to": ['bp63447@gmail.com'],
+          "body":
+            `<p>Hi ${getState().public_reducer.userName}</p>
+          <p>You have successfully shared the project 
+          <span  style='background-color: ${project.color} !important;
+          height: 7px;
+          width: 7px;
+          background-color: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+          margin-right: 2px;
+          margin-left: 4px;'></span>
+          <span style='color:${project.color} !important'> ${project.name}</span></p> 
+          <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
           "to": [getState().public_reducer.userName],
           "from": "hub@noreply.leader.codes",
           "source": "Hub",
@@ -225,4 +236,26 @@ function checkPermission(result) {
     resolve(true)
 
   })
+}
+export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
+
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project1/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
+    fetch(urlData,
+      {
+        method: "GET",
+        headers: {
+          Authorization: jwtFromCookie,
+        },
+      }
+    ).then(response =>{
+      return response.json()})
+      .then(data => {
+        console.log('dataaaaa'+ data.membersList)
+        dispatch(actions.setMembers(data.membersList))
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
 }

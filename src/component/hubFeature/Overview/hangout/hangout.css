@@ -1,6 +1,21 @@
 .iframeHangout{
-    height:inherit;
+    height:62%;
     border: none;
+    z-index: 101;
     position: absolute;
-    bottom: 0;
+    bottom: 2%;
+    right:calc(5% + 4vw) ;
+    margin-bottom: 10px;
+
+}
+.btn-show-chat{
+    /* background: url(../../../img/btn-chat.svg); */
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    width: 5vw;
+    height: 5vw;
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    z-index: 100;
 }
