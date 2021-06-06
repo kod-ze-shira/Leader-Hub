@@ -184,6 +184,7 @@ function TaskNotBelongDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
+
         return <File file={file} setDownloadFile={(e) => props.setDownloadFile(e)} />
     }) : null
     return (

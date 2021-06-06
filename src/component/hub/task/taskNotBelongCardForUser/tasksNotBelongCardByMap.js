@@ -272,6 +272,7 @@ function TasksNotBelongCardByMap(props) {
     }
 
     $(window).click(function () {
+        debugger
         if (!downloadFile) {
             setViewDetails(false)
         }

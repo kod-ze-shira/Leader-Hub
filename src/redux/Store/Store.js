@@ -93,7 +93,8 @@ let jwtFromCookie
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
     jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
-    // jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
+    // batshevamanir
+    // jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJsUW1oRmtsd3hyU1dTOUp1dG5XRFhtd1haOEcyIiwiZW1haWwiOiJsZWFybkBsZWFkZXIuY29kZXMiLCJpYXQiOjE2MjI5ODcyODZ9.VA10cCCWfnJWGEdFVMGs-0SQf5s3RDGMzEyP3p8db0o"
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }
 else {
