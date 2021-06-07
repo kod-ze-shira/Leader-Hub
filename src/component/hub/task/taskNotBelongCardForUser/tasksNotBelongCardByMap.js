@@ -35,6 +35,8 @@ function TasksNotBelongCardByMap(props) {
 
     const [indexOfProject, setIndexOfProject] = useState(null);
     const [indexOfCard, setIndexOfCard] = useState(null);
+    let doneStatus = props.task.complete;
+    const [downloadFile, setDownloadFile] = useState(false)
     // const cardRef = useRef()
     //    const blurCreatable = () => {
     //         this.creatableRef.blur();
@@ -43,14 +45,16 @@ function TasksNotBelongCardByMap(props) {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
         }
-
     }, [props.workspaces])
 
-    const editTask = () => {
-        let temp = { ...task }
-        temp.name = editTaskName
-        setTask(temp)
-    }
+    useEffect(() => {
+        doneStatus = props.task.complete
+    }, [props.task.complete])
+    // const editTask = () => {
+    //     let temp = { ...task }
+    //     temp.name = editTaskName
+    //     setTask(temp)
+    // }
 
     function addChalalit() {
         if (props.task.complete == false)
@@ -75,6 +79,10 @@ function TasksNotBelongCardByMap(props) {
             "card": props.task.card ? props.task.card : ''
         }
         props.completeTask(completeTask)
+        doneStatus = !doneStatus
+        if (doneStatus) {
+            props.viewToastComplete(true)
+        }
     }
 
     const changeFiledInTask = (input) => {
@@ -88,7 +96,7 @@ function TasksNotBelongCardByMap(props) {
         editCompleteTask(!props.task.complete)
         props.setComlitedTask(editTaskInRedux)
 
-        console.log("task", props.task.complete);
+
     }
 
     function deleteTask() {
@@ -109,11 +117,8 @@ function TasksNotBelongCardByMap(props) {
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
                     </div>
-                    <div className="">
+                    <div className="select-not-belong">
                         {workspace.name}
-                        {/* <i class="fa fa-angle-down" aria-hidden="true"></i> */}
-                        {/* <FontAwesomeIcon icon={angleDown}  /> */}
-
                     </div>
 
                 </div >
@@ -124,7 +129,7 @@ function TasksNotBelongCardByMap(props) {
     // const selectPlaceHorder = <img src={placeholder}></img>
     const selectPlaceHorder = <hr
         style={{
-            marginLeft:'25%',
+            marginLeft: '25%',
             border: 0,
             clear: 'solid',
             display: 'block',
@@ -187,8 +192,10 @@ function TasksNotBelongCardByMap(props) {
         project.name ? {
             value: project, label:
                 <div className="d-flex flex-row" style={{ color: project.color }}>
-                    <span class="dot dotProject" style={{ 'background-color': project.color }} ></span>
-                    {project.name}
+                    <span className="dot dotProject "
+                        style={{ 'background-color': project.color }} >
+                    </span>
+                    <span className="select-not-belong">{project.name}</span>
                 </div >
         } : null
     )) : null
@@ -197,19 +204,19 @@ function TasksNotBelongCardByMap(props) {
     const cardsSelect = myCards ? myCards.map((card) => (
         card.name ? {
             value: card, label:
-                <div className="d-flex flex-row pl-2" >
+                <div className="d-flex flex-row pl-2 select-not-belong" >
                     {card.name}
                 </div >
         } : null
     )) : null
 
-    
+
     const handleChangeCard = (newValue, actionMeta) => {
         if (newValue) {
             setCardId(newValue.value._id)
             setIndexOfCard(newValue.value.index)
         }
-      
+
     };
     function belongTask() {
         if (cardId) {
@@ -259,7 +266,7 @@ function TasksNotBelongCardByMap(props) {
         }
         props.completeTask(completeTask)
     }
-    
+
     function openViewDetails(e) {
         // props.setTaskName(props.task.name)
         setDetailsOrEditTask("viewTaskByCard")
@@ -269,11 +276,15 @@ function TasksNotBelongCardByMap(props) {
         e.stopPropagation();
 
     }
-
+    function setDownloadFileFunc(e) {
+        setDownloadFile(e)
+    }
     $(window).click(function () {
-        setViewDetails(false)
+        if (!downloadFile) {
+            setViewDetails(false)
+        }
     });
-    
+
 
     return (
         <>
@@ -282,7 +293,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className=" col-5 row">
+                <div className="wrap-not-belong col-5 row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -299,17 +310,11 @@ function TasksNotBelongCardByMap(props) {
                                 type="checkbox"
                                 name="name" id="name" title={props.task.name}
                                 checked={props.task.complete}
-                                className={props.task.complete ? "disabled show-card " : "show-card "}
-                                value={props.task.name}
-                                onChange={(e) => changeFiledInTask(e)}
-                                onBlur={(e) => editTask()}
-                                onKeyPress={e => {
-                                    if (e.key === 'Enter') {
-                                        editTask()
-                                    }
-                                }}
+                                className={props.task.complete ?
+                                    "disabled show-card " : "show-card "}
                             />
-                            <span className="checkmark checkmark-place" onClick={() => addChalalit()}></span>
+                            <span className="checkmark checkmark-place"
+                                onClick={(e) => { addChalalit(); changeFiledInTask(e) }}></span>
 
                         </label>
                         <label className='col-10 mt-2 '>
@@ -317,8 +322,8 @@ function TasksNotBelongCardByMap(props) {
                         </label>
                     </label>
 
-                    <label className="check-task col  d-flex align-items-center justify-content-end  view-details-btn" >
-                        <button
+                    <label className="check-task col  d-flex align-items-center justify-content-end mr-2" >
+                        <button className="btn-open-details "
                             onClick={(e) => openViewDetails(e)}
                         >
                             view details
@@ -334,7 +339,7 @@ function TasksNotBelongCardByMap(props) {
                         <CreatableSelect
                             theme={theme => ({
                                 ...theme,
-                            
+
                                 colors: {
                                     ...theme.colors,
                                     primary25: '#68c7cb1a',
@@ -391,7 +396,7 @@ function TasksNotBelongCardByMap(props) {
                         className='selectCardInTasksNotBelong'
                         theme={theme => ({
                             ...theme,
-                            border:0,
+                            border: 0,
                             colors: {
                                 ...theme.colors,
                                 primary25: '#68c7cb1a',
@@ -436,6 +441,7 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
+                            setDownloadFile={(e) => setDownloadFile(false)}
                             open={true} />
                     </div>
                     : null}

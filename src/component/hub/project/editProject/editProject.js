@@ -20,7 +20,6 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value = input.target.value
         if (!value)
@@ -79,7 +78,7 @@ function EditProject(props) {
 
             <div className="details mr-5 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row my-4 justify-content-between headerDitails'>
+                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Project details</h5>
                         <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}

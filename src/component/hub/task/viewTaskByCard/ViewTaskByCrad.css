@@ -55,15 +55,19 @@ opacity: 0.3;
   height: 21px;
   width: 21px;
   background-color: #FFFFFF;
-  border: 1px solid #C4CCD5;
-      border-radius: 50%;
+  border: 0.5px solid #C4CCD5;
+  border-radius: 50%;
  
+}
+.checkmark:focus,.checkmark:checked{
+  border: 1px solid white;
+  color: white;
 }
 .checkmark-tabs{
   left: 6% !important;
 }
 .checkmark-place{
-  top: 6px;
+  top: 9px;
   left: 0;
  
 }
@@ -75,7 +79,8 @@ opacity: 0.3;
 
 /* When the checkbox is checked, add a blue background */
 .check-task input:checked ~ .checkmark {
-  background-color:rgb(79, 216, 186);
+  background-color:#1FB9C1;
+  /* background-color:rgb(83, 145, 131); */
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

@@ -388,7 +388,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
                 console.log("success")
                 console.log(data);
 
-                dispatch(actions.setCards(data.cards))
+                // dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -512,7 +512,6 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/${cardId}/belongTask`
-        debugger
         $.ajax({
             url: urlData,
             method: 'POST',
