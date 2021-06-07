@@ -3,17 +3,42 @@ import { connect } from 'react-redux'
 import MyChart from './chart/chart'
 import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Members from './members/members'
-import Hangout from './hangout/hangout'
+import Logs from './logs/logs'
+import ViewMembers from './members/veiwMembers/viewMembers'
 // import { actions } from '../../hub'
 function Overview(props) {
 
   
     return (
         <>
-            <div className=" body container-fluid">
-                <MyChart />
-                <Members />
-                 <FilesOfProject></FilesOfProject> 
+            <div className="container-fluid">
+                <div className='row'>
+                    <div className='col-9'>
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <MyChart  />
+                            </div>
+
+                            <div className='row'>
+                                <FilesOfProject />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col'>
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <Members />
+                            </div>
+                            <div className='row'>
+                                <Logs />
+                            </div>
+                        </div>
+                    </div>
+                    {/* <Hangout></Hangout> */}
+
+                </div>
+
+
             </div>
 
         </>
