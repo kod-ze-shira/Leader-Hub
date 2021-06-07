@@ -8,7 +8,7 @@ import Hub from './component/hub/hub';
 import HeaderLeader from '@leadercodes/leader-header'
 import BodyEmailOfAssignmentTask from './component/hub/BodyOfAssignmentTask/BodyEmailOfAssignmentTask';
 import ContactList from './component/hub/contact/contactList';
-import FilesOfProject from './component/hubFeature/viewFilesOfProject/viewFilesOfProject';
+import FilesOfProject from './component/hubFeature/Overview/viewFilesOfProject/viewFilesOfProject';
 import $ from 'jquery'
 
 export default function App(props) {

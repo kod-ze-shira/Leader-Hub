@@ -1,24 +1,20 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 // import viewFilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
-import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 // import { actions } from '../../hub'
 function Overview(props) {
-    
-    const [showFilesForProject,setShowFilesForProject]=useState(false)
-    function openViewFilesForProject(e){
-        setShowFilesForProject(true)
-    }
+   
     return (
         <>
             <div className=" body container-fluid">
-              <button onClick={openViewFilesForProject}>files in this project</button>
-              {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
+            
+            <FilesOfProject></FilesOfProject>
               
              
             </div>
-            <Hangout></Hangout>
+            {/* <Hangout></Hangout> */}
         </>
     )
 }
