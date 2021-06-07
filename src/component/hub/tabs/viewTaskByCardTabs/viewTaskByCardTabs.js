@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl, Table } from 'react-bootstrap'
 import $ from 'jquery';
-import Calendar from 'react-calendar';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu, MenuItem, Button } from '@material-ui/core';
@@ -17,53 +15,42 @@ import './ViewTaskByCradTabs.css'
 import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
+    const textInput = useRef();
 
-    const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
-    const [task, setTask] = useState({
-        "milestones": props.task.milestones,
-        "_id": props.task._id, "name": editTaskName, "description": props.task.description
-        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-    })
+    const [showchalalit, setShowChalalit] = useState(false)
+    const [userHasLike, setUserHasLike] = useState(false)
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
-    const [showchalalit, setShowChalalit] = useState(false)
-    const { idProject } = useParams();
-    const [openCalander, setOpenCalander] = useState()
-    const [value, onChange] = useState(new Date());
-
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
+
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-    }, [props.cards])
+        $(`#${props.task._id}assing-to`).css("display", "none")
+
+        let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
+        if (hasLike)
+            setUserHasLike(true)
+
+    }, [props.cards, props.userId])
 
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [props.task.status])
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    // }, [props.task.status])
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
 
     };
-    const [showAssignee, setShowAssignee] = useState(true)
-
-    const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
-    let contact
-    const setStateMailToContactMail = (emailMember) => {
-        // debugger
-        props.setCurrentIndexTask(currentIndexTask)
-        props.setCurrentIndexCard(currentIndexCard)
-        props.assingTo(emailMember.value.email)
-
-    }
 
     const handleClose = (e, event) => {
 
@@ -84,12 +71,11 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
-        debugger
         let task1 = {
             "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
-        setTask(task1)
+        // setTask(task1)
         props.EditTask(task1);
     }
 
@@ -118,7 +104,6 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
-
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -132,8 +117,11 @@ function ViewTaskByCradTabs(props) {
             "startDate": props.task.startDate,
             "complete": doneStatus,
             "endDate": today,
+            "likes": props.task.likes,
+            "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
+        
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus)
@@ -151,45 +139,60 @@ function ViewTaskByCradTabs(props) {
     const changeFiledInTask = (event) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
-        let value = event.target.value
-        if (event.target.name == "complete") {
-            doneStatus = !doneStatus
-            value = doneStatus
-            editCompleteTask()
-
-        }
-        else {
-            let editTaskInRedux = { "nameFiled": event.target.name, "value": value }
+        let editTaskInRedux
+        if (event.name == "name") {
+            editTaskInRedux = { "nameFiled": event.name, "value": textInput.current.innerHTML }
             props.setTaskByFiledFromTasks(editTaskInRedux)
         }
+        else {
+            let value = event.target.value
+            if (event.target.name == "complete") {
 
+                doneStatus = !doneStatus
+                value = doneStatus
+                editCompleteTask()
+            }
+            else {
+                editTaskInRedux = { "nameFiled": event.target.name, "value": value }
+                props.setTaskByFiledFromTasks(editTaskInRedux)
+            }
+        }
     }
+
     function addChalalit(e) {
         if (props.task.complete == false)
             setShowChalalit(true)
         e.stopPropagation()
     }
-    $('.task-card').hover(function () {
-        $(this).find('.color-task').hide();
-        $(this).find('.assing-icon').show();
-    }, function () {
-        $(this).find('.assing-icon').hide();
-        $(this).find('.color-task').show();
-    });
-    $('.icons-task-tabs').hover(function () {
-        $(this).find('.color-task').hide();
-        $(this).find('.assing-icon').show();
-    }, function () {
-        $(this).find('.assing-icon').hide();
-        $(this).find('.color-task').show();
-    });
 
+    // date in  words
+    let dayNumber = props.task.dueDate.split("/")[0];
+    let day = Number(dayNumber)
+    let monthNumber = props.task.dueDate.split("/")[1];
+    let month = Number(monthNumber)
+    let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let monthName = monthNames[month];
+    let dateInString = day + " " + monthName
 
-
+    const showAssign = () => {
+        if (!props.task.assingTo)
+            $(`#${props.task._id}assing-to`).css("display", "inline-block")
+    }
+    const closeAssign = () => {
+        if (!props.task.assingTo)
+            $(`#${props.task._id}assing-to`).css("display", "none")
+    }
+    const updateLike = (e) => {
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.updateLike(props.task._id)
+        setUserHasLike(!userHasLike)
+        e.stopPropagation()
+    }
     return (
         <>
 
-            <Draggable className="taskkk"
+            <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
                     <div
@@ -199,21 +202,21 @@ function ViewTaskByCradTabs(props) {
                         id="task-card"
                     >
 
-                        <div className="task-card mt-2 pt-2"
+                        <div className="task-card mt-2 pt-2 pb-2"
+                            onMouseOver={(e) => showAssign(e)}
+                            onMouseOut={(e) => closeAssign(e)}
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
-
                             <div className="container ">
                                 <label
                                     title="Complete Task"
-                                    className="check-task py-2 check-tabs row">
+                                    className="check-task pb-2  check-tabs">
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
                                         value={props.task.complete}
                                         onChange={(e) => changeFiledInTask(e)}
-                                        onClick={(e) => e.stopPropagation()
-                                        }
+                                        onClick={(e) => e.stopPropagation()}
                                     />
                                     <span
                                         className="checkmark checkmark-tabs"
@@ -221,11 +224,12 @@ function ViewTaskByCradTabs(props) {
                                 </label>
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
-                                {/* <Button className="more col-3 mr-0 more-task"
-                                        data-tip data-for="more_a"
-                                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                        . . .
-                                    </Button> */}
+                                <Button className="more col-3 mr-0 more-task"
+                                    data-tip data-for="more_a"
+                                    aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                    . . .
+                                    </Button>
+
                                 <ReactTooltip data-tip id="more_a" place="top" effect="solid">
                                     {title.title_more_actions}
                                 </ReactTooltip>
@@ -236,13 +240,13 @@ function ViewTaskByCradTabs(props) {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem onClick={handleClose}>Edit Task Name</MenuItem>
+                                    {/* <MenuItem onClick={handleClose}>Edit Task Name</MenuItem> */}
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
 
                                 <input
-                                    className="form-control col-12 mx-0 mt-2"
+                                    className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
@@ -254,13 +258,25 @@ function ViewTaskByCradTabs(props) {
                                         }
                                     }}
                                 ></input>
-                                {/* <div>{props.task.index}</div> */}
-                                <div className="row justify-content-between">
 
+                                {/* <span
+                                    name="name"
+                                    ref={textInput}
+                                    value={this}
+                                    onBlur={(e) => editTask(e)}
+                                    className="task-name-span ml-3  col-12 "
+                                    onClick={(e) => e.stopPropagation()}
+                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}>
+                                    {props.task.name}
+                                </span> */}
 
+                                <div className="icons-in-task-tabs pt-0">
 
-                                    <div className="row justify-content-center  mx-2 mt-1">
-                                        <div className="status-task-tabs " style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                    <div className="row justify-content-between mx-2 mt-3 mb-0">
+                                        <div
+
+                                            className={props.task.complete ? "status-task-tabs-opacity px-2" : "status-task-tabs px-2"}
+                                            style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                             {props.task.status ? props.task.status.statusName : null}
                                         </div>
 
@@ -268,34 +284,39 @@ function ViewTaskByCradTabs(props) {
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
                                         <div className="icons-task-tabs">
-                                            {/* {props.task.assingTo ? <div className=" mt-2 assing-to-tabs" >
-                                                {props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact ml-2" />
-                                                    : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                            </div> : null} */}
-                                            <img
-                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
-                                                src={require('../../../img/due-date-icon.png')}></img>
-                                            {/* {openCalander ? <Calendar
-                                                onChange={onChange}
-                                                value={value} 
-                                               />
-                                                : null} */}
 
-                                            <img
-                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
-                                                src={require('../../../img/like-icon.png')}>
-                                            </img>
-                                            <img
-                                                onClick={(e) => {
-                                                    showAssigToOrCalander({ "e": e, "name": "share" });
-                                                }}
-                                                src={require('../../../img/share-icon.png')}>
-                                            </img>
-
+                                            <div className="due-date-hover">
+                                                <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
+                                                >{dateInString}</p>
+                                            </div>
+                                            <div className="like-hover">
+                                                <img
+                                                    className="like-icon-tabs"
+                                                    onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
+                                                    src={require('../../../img/like-icon.png')}>
+                                                </img>
+                                                <div onClick={(e) => updateLike(e)}>
+                                                    <p className="mr-1">{props.task.likes.length}</p>
+                                                    <img
+                                                        onClick={updateLike}
+                                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                    </img>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img
+                                                    id={`${props.task._id}assing-to`}
+                                                    className="ml-2 assing-to-icon"
+                                                    onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
+                                                    src={require('../../../img/share-icon.png')}>
+                                                </img>
+                                                {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                        : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                                </div> : null}
+                                            </div>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -310,6 +331,7 @@ function ViewTaskByCradTabs(props) {
 const mapStateToProps = (state) => {
 
     return {
+        userId: state.public_reducer.userId,
         tasks: state.public_reducer.tasks,
         cards: state.public_reducer.cards,
         card: state.card_reducer.card,
@@ -324,6 +346,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
@@ -337,8 +360,6 @@ const mapDispatchToProps = (dispatch) => {
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
-
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTabs)

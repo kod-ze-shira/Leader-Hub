@@ -1,0 +1,44 @@
+.divProjectMembers{
+    border-bottom:1px solid #E9E9E9;
+    /* height: 10vh; */
+    align-items: center;
+} 
+/* .addMembers{
+    border-radius:50%;
+    border:1px dashed #75798E;
+    width: 5rem;
+    background: #F6F6FA;
+    height: 5rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    cursor: pointer;
+} */
+.fontAddMembers{
+    color:#75798E;
+    font-size:2vw;
+}
+.MembersFont{
+    color:#3A405E
+}
+.scrollbarMembers{
+    overflow-y: auto;
+}
+.fontImgMembers{
+    font-size:2vw;
+}
+.emailMembers{
+    width: fit-content !important;
+}
+.imgMembers{
+    width: 3vw;
+    height: 3vw;
+}
+.members{
+    width: 30%;
+}
+.nameMembers{
+    /* text-align: left; */
+    font-weight: bold;
+}

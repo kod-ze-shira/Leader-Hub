@@ -1,13 +1,20 @@
 .left_nav{
   
-  height: 95vh;
+  height:100vh;
   background: #0A102E 0% 0% no-repeat padding-box;
   border: 1px solid #707070;
   /* animation: openConfigurator 1s ; */
   /* width: 0% ; */
   /* animation-direction: alternate-reverse; */
 }
-
+li p{
+  color: white !important;
+  display: inline-block;
+  opacity: 1!important;
+}
+li img{
+  display: inline-block;
+}
 @keyframes openConfigurator {
   0%   {width: 0%; }
  100%   {width: 100%; }
@@ -49,22 +56,26 @@ border-radius: 3px;
     line-height: 1.4 !important; 
   }
 
-  .list_config li:hover,
-  .li-back{
+  
+  .list_config>.li-back,.list_config>li:hover{
      background: url('../../../img/Mask1.svg');
      background-repeat: no-repeat;
      border-left:16px solid var(--light-light-blue); 
-     left:2.5vh !important ;
+     left:2.5vh !important;
      padding-left: 10px;
-     /* border-left: 16px solid #44D7B6 !important;‏ */
+     /* border-left: 16px solid #44D7B6 !important;‏ */    
 }
 
-
+/* side nav- hide text when screen is small */
+@media only screen and (max-width: 1000px) {
+  #li-back p, #allProjects p, #myTask p, #milestone p{
+      display: none !important;
+  }
+}
 
 .list_config li{
   overflow: auto;
 }
-
 
 .closeConfigurator{
      padding-left: 29px;
@@ -87,15 +98,3 @@ border-radius: 3px;
    .list_config  li:focus{
     background-color:white;
   }
-  li p{
-    color: white;
-    display: inline-block;
-    opacity: 1!important;
-  }
-  li img{
-    display: inline-block;
-  }
- 
-  
-
- 

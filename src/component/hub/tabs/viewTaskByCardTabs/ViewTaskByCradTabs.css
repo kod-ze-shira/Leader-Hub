@@ -1,45 +1,79 @@
 .task-card{
     cursor: pointer;
 }
-.more {
-    /* width: 250px; */
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-    /* text-align: center; */
+.more-task {
+    float: right;
   }
   .MuiButton-label-text {
-   
-    
-      /* display: none !important ; */
+      
   }
-  /* .task-card .MuiButtonBase-root:hover{
-    display: block ;
-} */
-.check-task input:hover ~ .checkmark{
+
+/* .check-task input:hover ~ .checkmark{
     background-color:#f6f7f8 !important;
+} */
+
+.task-name-span{
+    text-indent: 5vh !important;
 }
 /* .input-card-name{
     height: 65vh !important;
-}
-.delete-task-hover{
-    display:none;
-} */
+}*/
 
 .status-task-tabs{
     color:white;
     border-radius: 3px;
     text-align: center;
-    font-weight: 300;
+    /* font-weight: 300; */
     opacity: 0.7;
+   max-width: 110px;
+    /* height: 22px; */
+    /* font-weight: 400; */
+
+  }
+  .status-task-tabs-opacity{
+    color:white;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 300;
+    opacity: 0.4;
     width: 53px;
     height: 22px;
     /* font-weight: 400; */
 
   }
+  
   .icons-task-tabs > img{
       margin-left: 5px;
   }
   @media screen and (min-width: 1000px) {
     .icons-task-tabs{
-        margin-left:76px ;
+        /* margin-left:76px ; */
     }
   }
+
+.due-date-icon-tabs{
+    display : none;
+}
+
+.like-icon-tabs {
+    display : none;
+}
+.icons-task-tabs > div {
+    display: inline-block;
+}
+.due-date-hover p {
+    font-size: smaller !important;
+    color:red !important;
+}
+.like-hover p{
+    font-size: smaller !important;
+    color:#68C7CB!important;
+    display: inline-block;
+    margin-left:10px;
+
+}
+.icons-in-task-tabs{
+    bottom: 0 !important;
+    margin-bottom: 0!important;
+    padding-bottom: 0 !important;
+}

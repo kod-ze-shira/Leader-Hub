@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-import ViewProject from '../viewProject/viewProject'
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import "./projectsByWorkspace.css";
+import { connect } from 'react-redux';
 // import HeaderBody from '../../headerBody/headerBody'
 import { useParams } from 'react-router-dom';
-import '../../body/body.css'
-import ViewDetails from '../../viewDetails/viewDetails'
-import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
-import title from '../../../../Data/title.json'
+import title from '../../../../Data/title.json';
+import { actions } from '../../../../redux/actions/action';
+import '../../body/body.css';
+import ViewDetails from '../../viewDetails/viewDetails';
+import ViewProject from '../viewProject/viewProject';
+import "./projectsByWorkspace.css";
 
 
 
@@ -25,9 +25,21 @@ function ProjectsByWorkspace(props) {
 
 
     useEffect(() => {
+        if (props.showViewDitailsProject) {
+            setShowProject(props.showViewDitailsProject.show)
+            setAddOrEditProject("newProject")
+            props.showViewDitailsProject.e.stopPropagation()
+        } else
+            setShowProject(false)
+
+
+        if (props.valueSearchProject) {
+            setValueSearch(props.valueSearchProject)
+        } else
+            setValueSearch(props.projectName)
 
         // }, [props.workspaces]);
-    }, [props.workspaces, props.indexOfWorkspace]);
+    }, [props.workspaces, props.indexOfWorkspace, props.showViewDitailsProject, props.valueSearchProject]);
 
 
 
@@ -37,11 +49,11 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    function openViewDitailsAddProject(e) {
-        setAddOrEditProject("newProject")
-        setShowProject(true)
-        e.stopPropagation()
-    }
+    // function openViewDitailsAddProject(e) {
+    //     setAddOrEditProject("newProject")
+    //     setShowProject(true)
+    //     e.stopPropagation()
+    // }
 
 
 
@@ -78,9 +90,9 @@ function ProjectsByWorkspace(props) {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
 
-    function searchProject() {
-        setValueSearch(document.getElementById('inputSearchProjects').value)
-    }
+    // function searchProject() {
+    //     setValueSearch(document.getElementById('inputSearchProjects').value)
+    // }
 
     $(window).click(function () {
         setShowProject(false)
@@ -98,16 +110,17 @@ function ProjectsByWorkspace(props) {
                         {/* <div class="show-task row mx-4 mt-3 headerTableTask"> */}
                         {/* <label class="ml-4 pl-6 labelAllTask mt-2"> Leader Projects </label></div> */}
                         <div id=''>
-                            <span id='searchProject' >
+                            {/* <span id='searchProject' >
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
                                     onChange={() => searchProject()}
                                     placeholder='Search project...'
                                 />
-                            </span>
-                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
-                                data-tip data-for="add_p"
-                                onClick={(e) => openViewDitailsAddProject(e)}
-                            >+ New Project</button> : null}
+                            </span> */}
+                            {/* {window.location.href.indexOf('workspace') != -1 ?
+                                <button className='buttonNewProject'
+                                    data-tip data-for="add_p"
+                                    onClick={(e) => openViewDitailsAddProject(e)}
+                                >+ New Project</button> : null} */}
                             <ReactTooltip data-tip id="add_p" place="top" effect="solid">
                                 {title.title_add_project}
                             </ReactTooltip>
@@ -153,7 +166,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectsByWorkspaceId: (id) => dispatch(actions.getProjectsByWorkspaceId(id)),
         setProjects: (p) => dispatch(actions.setProjects(p)),
         setProject: (project) => dispatch(actions.setProject(project)),

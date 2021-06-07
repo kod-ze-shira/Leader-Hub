@@ -11,7 +11,7 @@ function CalendarComponent(props) {
         if (props.contactsUser.length == 0)
             props.getContactsForUser()
     }, [])
-    const handleChange = (event) => {       
+    const handleChange = (event) => {
         let a = new Date(event)
         a.setDate(a.getDate() + 1);
         let dueDate = JSON.stringify(a)
@@ -21,6 +21,7 @@ function CalendarComponent(props) {
 
         let editTaskInRedux = { "nameFiled": "dueDate", "value": updatedDueDate }
         props.setTaskByFiledFromTasks(editTaskInRedux)
+        props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         props.closeCalendar()
     }
 
@@ -50,6 +51,9 @@ function CalendarComponent(props) {
 export default connect(
     (state) => {
         return {
+            indexCurrentTask: state.public_reducer.indexCurrentTask,
+            indexCurrentCard: state.public_reducer.indexCurrentCard,
+            cards: state.public_reducer.cards,
             contactsUser: state.share_reducer.contactsUser,
             leftContactList: state.design_reducer.leftContactList,
             topContactList: state.design_reducer.topContactList,
@@ -62,6 +66,7 @@ export default connect(
     },
     (dispatch) => {
         return {
+            EditTask: (task) => dispatch(actions.editTask(task)),
             getContactsForUser: () => dispatch(actions.getContactsForUser()),
             setTaskByFiledFromTasks: (task) => dispatch(actions.setTaskByFiledFromTasks(task))
         }

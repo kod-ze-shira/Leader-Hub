@@ -1,13 +1,10 @@
-import React, {  useState, useRef } from 'react'
-import './newProject.css'
+import $ from "jquery"
+import React, { useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action'
-// import Toast from 'react-bootstrap/Toast'
-// import viewDetails from '../../viewDetails/viewDetails'
-import $ from "jquery";
-// import UploadFile from '../../uploadFile/uploadFile'
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
+import { actions } from '../../../../redux/actions/action'
+import './newProject.css'
 
 function NewProject(props) {
     let [flag, setFlag] = useState(false)
@@ -99,7 +96,8 @@ function NewProject(props) {
             document.getElementById('descriptionProject').value = ''
             setMyStyle({ 'border-bottom': ' rgb(129, 129, 165) solid 1px' })
             document.getElementById('dueDateProject').value = ''
-            props.closeViewDetails(false)
+            // props.closeViewDetails(false)
+            props.closeViewDetails()
         }
         else {
             nameRequired.current.focus()
@@ -136,7 +134,7 @@ function NewProject(props) {
 
             <div className="details mr-5 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row my-4 justify-content-between headerDitails'>
+                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Add Project</h5>
 
                         <div class="close pr-3" onClick={() => props.closeViewDetails()}>x</div>

@@ -6,7 +6,7 @@ const initialState = {
     leftContactList: '',
     widthCurrentScreen: '',
     heightCurrentScreen: '',
-    widthContactsList: 300,
+    widthContactsList: 320,
     heightContactsList: 380
 
 }

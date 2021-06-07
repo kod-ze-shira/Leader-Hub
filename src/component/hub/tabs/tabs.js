@@ -27,12 +27,13 @@ function Tabs(props) {
     }, [props.projectId, props.focusInputCard, props.cards])
 
     useEffect(() => {
-        if (props.workspaces.length == 0)
-            props.getAllWorkspaces()
+        // if (props.workspaces.length == 0)
+        //     props.getAllWorkspaces()
         for (let i = 0; i < props.workspaces.length; i++) {
             let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
             if (workspace) {
                 props.indexOfWorkspace(i)
+                props.getAllStatusesTaskForWorkspace()
             }
         }
     }, [props.workspaces])
@@ -101,6 +102,7 @@ function Tabs(props) {
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
+
         }
         setInputValue("")
         setShowInput(false)
@@ -139,38 +141,6 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {/* <div className="card-width px-2 mt-4" >
-                                        <div className="view-cards-tabs  mt-1" >
-                                            <div class="card new-card" >
-                                                <div id='newCardInput' class="container" >
-                                                    <div
-                                                        class="card-header row" data-tip data-for="add_c"
-                                                    >
-                                                        <input
-                                                            id="add-new-card"
-                                                            className="form-control "
-                                                            placeholder={""} value={inputValue}
-                                                            onChange={updateInputValue}
-                                                            onBlur={(e) => newCard()}
-                                                            onKeyPress={event => {
-                                                                if (event.key === 'Enter') {
-                                                                    newCard()
-                                                                }
-                                                            }}></input>
-                                                        <button
-                                                            className='buttonNewCard mt-3'
-                                                            onClick={(e) => setFocousCardFunc(e)}
-                                                        >+ Add Card</button>
-                                                    </div>
-                                                </div>
-                                                <div className="card-body " id={!showInput ? "add-card" : ""}>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div> */}
-
                                     {props.cards.length ?
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
@@ -265,7 +235,7 @@ export default connect(
             indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
             dragCard: () => dispatch(actions.dragCard()),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
-            getAllStatusesTaskForUser: () => dispatch(actions.getAllStatusesTaskForUser()),
+            getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),

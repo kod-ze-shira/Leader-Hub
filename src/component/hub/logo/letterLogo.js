@@ -1,9 +1,9 @@
 
-import React, { useEffect, useState } from 'react'
-import "./letterLogo.css";
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { actions } from '../../../redux/actions/action'
+import { actions } from '../../../redux/actions/action';
+import "./letterLogo.css";
 
 function LetterLogo(props) {
     let { idWorkspace, idProject } = useParams();

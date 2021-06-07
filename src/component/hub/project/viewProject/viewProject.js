@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import './viewProject.css'
-import Cell from './cell'
-import CellDescription from './cellDescription'
-import './viewProject.css'
-import { actions } from '../../../../redux/actions/action';
 import { withRouter } from 'react-router-dom';
-// import { ProgressBar } from 'react-bootstrap';
-import TeamView from '../../teamView/teamView'
-import $ from 'jquery'
+import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
-import title from '../../../../Data/title.json'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import title from '../../../../Data/title.json';
+import { actions } from '../../../../redux/actions/action';
+import share from '../../../img/share.svg';
+import Cell from './cell';
+import CellDescription from './cellDescription';
+import './viewProject.css';
+import TeamView from '../../teamView/teamView'
 
-import { useEffect } from 'react';
-import share from '../../../img/share.svg'
 function ViewProject(props) {
+
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     let complited = props.myProject.countReadyTasks
@@ -23,15 +21,14 @@ function ViewProject(props) {
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
-
+    let refToProject = useRef('')
     useEffect(() => {
-        console.log(complited);
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
         props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
-        console.log("project" + props.myProject._id)
+        // console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
         props.setCurrentIndexProject(props.indexProject)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
@@ -66,13 +63,26 @@ function ViewProject(props) {
     function overProject(id) {
         setMyStyleIcons({ 'opacity': '1' })
         setMyStyleStripe({ 'color': 'rgb(152 169 188 / 38%)' })
+        refToProject.current.style.backgroundColor = "white"
     }
     function outOver(id) {
         setMyStyleIcons({ 'opacity': '0' })
         setMyStyleStripe({ 'color': 'white' })
+        refToProject.current.style.backgroundColor = "#e9ecef"
+
     }
     const openShareProject = (event) => {
-        props.setCurrentIndexProject(props.indexProject)
+        for (let index = 0; index < props.workspaces.length; index++) {
+            for (let index2 = 0; index2 < props.workspaces[index].projects.length; index2++) {
+                if (props.workspaces[index].projects[index2]._id == props.myProject._id) {
+                    props.setCurrentIndexProject(index2)
+                    props.saveIndexOfWorkspaceInRedux(index)
+                }
+
+            }
+
+        }
+
         props.editOrShareProject('shareProject')
         event.stopPropagation();
     }
@@ -88,7 +98,8 @@ function ViewProject(props) {
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
                     <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
-                    <span class='name2ProjectInList' title={props.myProject.name} style={{ 'color': props.myProject.color }}>
+                    <span class='name2ProjectInList' title={props.myProject.name}
+                        style={{ 'color': props.myProject.color }}>
                         {props.myProject.name}</span>
                     {/* <span class='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
@@ -99,7 +110,8 @@ function ViewProject(props) {
                     <CellDescription description='Due date' />
                 </td>
                 <td className='widthCellInProject'  >
-                    <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} /></div>
+                    <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ?
+                        props.myProject.cards.length : "0"} /></div>
                     <ReactTooltip data-tip id="card_n" place="bottom" effect="solid">
                         {title.title_number_of_cards}
                     </ReactTooltip>
@@ -122,7 +134,7 @@ function ViewProject(props) {
                 </td>
                 <td>
                     <div className='divProgress'>
-                        <div class="progressProject"  >
+                        <div class="progressProject" ref={refToProject}>
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
@@ -133,40 +145,41 @@ function ViewProject(props) {
                     </div>
                     <CellDescription description={(complited ? complited : 0) + '% complete'} />
                 </td>
-                {/* <td style={{ 'text-align': 'center' }}>
-                    <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
-                    <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
-                    <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
 
-                    <CellDescription description='Team' />
-                </td> */}
+                {props.myProject.members.length ?
+                    <td style={{ 'text-align': 'center' }}>
+                        <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
+                        <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
+                        <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
+
+                        <CellDescription description='Team' />
+                    </td>
+                    : null}
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
                     <CellDescription description='Last Update' />
                 </td>
 
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
-                    {/* <i class="fas fa-user-friends"></i> */}
 
-                    <FontAwesomeIcon style={myStyleIcons} icon={["fas", "user-friends"]} className='ddd iconsProject' data-tip data-for="share"
-                        onClick={(event) => openShareProject(event)} src={share} />
 
-                    {/* <img style={myStyleIcons}
+                    <img style={myStyleIcons} src={require('../../../img/share.png')}
                         className='iconsProject' data-tip data-for="share"
-                        onClick={(event) => openShareProject(event)} src={share} /> */}
+                        onClick={(event) => openShareProject(event)} src={share} />
                     <ReactTooltip data-tip id="share" place="bottom" effect="solid">
                         {title.title_share}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
-                    <img data-tip data-for="edit_" style={myStyleIcons}
-                        className='iconsProject' onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
+
+                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
+                        src={require('../../../img/pencil-edit.png')} data-tip data-for="edit_" />
                     <ReactTooltip data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
-                        src={require('../../../img/bin.png')} data-tip data-for="delete" />
+                        src={require('../../../img/remove.png')} data-tip data-for="delete" />
                     <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
@@ -180,7 +193,8 @@ const mapStateToProps = (state) => {
         projectToDelete: state.project_reducer.project,
         projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
-
+        workspaces: state.public_reducer.workspaces,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -190,7 +204,8 @@ const mapDispatchToProps = (dispatch) => {
         setCards: (cards) => dispatch(actions.setCards(cards)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         deleteProjectInServer: () => dispatch(actions.deleteProjectInServer()),
-        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index))
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
 
 
     }

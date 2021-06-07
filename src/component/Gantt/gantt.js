@@ -82,7 +82,7 @@ export default class Gantt extends Component {
             b.setDate(b.getDate() + 1);
             let startDate = JSON.stringify(b)
             let sd = JSON.parse(startDate)
-            debugger
+            
             let newStartDate = sd.split("-")[2][0]
                 + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
 

@@ -33,6 +33,8 @@ function TaskDetails(props) {
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
             props.getAllStatusesTaskForWorkspace();
+        if (props.contactsUser.length == 0)
+            props.getContactsForUser()
 
     }, [props.cards])
 
@@ -169,21 +171,8 @@ function TaskDetails(props) {
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
-    function filesInTask() {
-        let newComponent
-        props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
-            newComponent = addFileComponent(file)
-            if (!fileComponentArr.length)
-                setFileComponentArr([newComponent])
-            else
-                setFileComponentArr([...fileComponentArr, newComponent])
-        })
-    }
-    const addFileComponent = (file) => {
-        return <File file={file} />
-    }
-    const assingto = (e) => {
 
+    const assingto = (e) => {
         setShowContactList(true)
     }
 
@@ -290,7 +279,7 @@ function TaskDetails(props) {
                         <div className="row justify-content-between">
                             <div class="dropdown col-md-6 col-lg-5">
                                 <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {props.statuses && props.statuses.length > 0 ? <>
+                                    {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
 
                                         <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
                                         <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
@@ -333,7 +322,7 @@ function TaskDetails(props) {
 
                 <div className="row justify-content-around mx-1 ">
                     {showContactList ?
-                        <ContactList></ContactList> : null
+                        <ContactList taskDetails={true}></ContactList> : null
 
                     }
                     <div className="delete-details">
@@ -342,7 +331,7 @@ function TaskDetails(props) {
                     </div>
                     <div className="assingto-details" >
 
-                        <img className="assingto-task" src={require('../../../img/share-icon.png')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                     </div>
                     <div className=" files-details">
@@ -371,7 +360,9 @@ const mapStateToProps = (state) => {
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
-        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask
+        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
+        contactsUser: state.share_reducer.contactsUser,
+
 
     }
 }
@@ -386,6 +377,8 @@ const mapDispatchToProps = (dispatch) => {
         setFilesFromTask: (task) => dispatch(actions.setFilesFromTask(task)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
+        getContactsForUser: () => dispatch(actions.getContactsForUser()),
+
 
     }
 }

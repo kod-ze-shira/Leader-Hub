@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 // import { actions } from '../../../redux/actions/action'
-import SelectHeader from '../../SelectHeader/SelectHeader'
-import ProjectsByWorkspace from '../projectsByWorkspace/projectsByWorkspace'
+import SelectHeader from '../../SelectHeader/SelectHeader';
+import ProjectsByWorkspace from '../projectsByWorkspace/projectsByWorkspace';
 
 function ProjectsPage(props) {
     const [isHasTask, setIsHasTask] = useState(false);
     const [flag, setFlag] = useState(true);
     const [projectName, setProjectName] = useState("")
-
+    const [addProject, setAddProject] = useState()
+    const [valueSearchProject, setValueSearchProject] = useState()
     useEffect(() => {
 
     })
@@ -25,10 +26,15 @@ function ProjectsPage(props) {
 
     return (
         <div className="" >
-            <SelectHeader selectProject={selectProject} flag={changeFlag} from={from} menue={false} type='projects' />
+            <SelectHeader selectProject={selectProject} flag={changeFlag}
+                openViewDitailsAddProject={(e) => setAddProject(e)}
+                valueSearchProject={(e) => setValueSearchProject(e)}
+                from={from} menue={false} type='projects' />
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}
+                valueSearchProject={valueSearchProject}
                 projectName={projectName}
+                showViewDitailsProject={addProject}
             />
         </div>
     )
