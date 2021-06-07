@@ -24,6 +24,12 @@ body {
   border-radius:50%;
   display: inline-block;
 }
+.thumbnail-contact-details{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display: inline-block;
+}
 
 .css-tlfecz-indicatorContainer{
   display:none !important;
@@ -144,6 +150,16 @@ body {
   text-align: center;
   font-size:16px !important;
 }
+.logo-contact-details{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color:white;
+  /* display:inline-block; */
+  text-align: center;
+  font-size:16px !important;
+}
+
 
 .choose:focus{
   border: #007bff 2px solid;

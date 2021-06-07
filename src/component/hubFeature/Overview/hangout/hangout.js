@@ -28,7 +28,7 @@ function Hangout(props) {
         e.target.style.background = `url(${imgClick})`
         showChat ? setShowChat(false) : setShowChat(true)
     }
-    
+
     return (
         <>
             <button className='btn-show-chat'
@@ -38,12 +38,12 @@ function Hangout(props) {
                 onClick={(e) => handleClick(e)}>
 
             </button>
-            <iframe className={showChat ? "iframeHangout" : 'd-none'}
+            {/* <iframe className={showChat ? "iframeHangout" : 'd-none'}
                 src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
 
                 // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
                 title="hangout">
-            </iframe>
+            </iframe> */}
         </>
     )
 }
