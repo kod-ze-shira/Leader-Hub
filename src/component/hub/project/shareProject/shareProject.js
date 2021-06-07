@@ -99,6 +99,7 @@ function ShareProject(props) {
     const shareObject = () => {
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
+        props.closeViewDetails()//close vd
         alert('project shared')
     }
 
