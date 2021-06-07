@@ -36,6 +36,11 @@ function TasksNotBelongCardByMap(props) {
     const [indexOfProject, setIndexOfProject] = useState(null);
     const [indexOfCard, setIndexOfCard] = useState(null);
     let doneStatus = props.task.complete;
+    const [downloadFile, setDownloadFile] = useState(false)
+    // const cardRef = useRef()
+    //    const blurCreatable = () => {
+    //         this.creatableRef.blur();
+    //       };
     useEffect(() => {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
@@ -273,7 +278,10 @@ function TasksNotBelongCardByMap(props) {
     }
 
     $(window).click(function () {
-        setViewDetails(false)
+        debugger
+        if (!downloadFile) {
+            setViewDetails(false)
+        }
     });
 
 
@@ -432,6 +440,8 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
+                            setDownloadFile={(e) => setDownloadFile(e)}
+
                             open={true} />
                     </div>
                     : null}
