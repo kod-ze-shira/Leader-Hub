@@ -30,7 +30,7 @@ function FilesOfProject(props) {
 
     return (
         <>
-            <div className="filesForProject backgroundWhiteAndBorderRadius">
+            <div className="filesForProject backgroundWhiteAndBorderRadius" style={{'width':'100%','height':'20vh'}}>
                 <h3>Project Files</h3>
                 <div className="row iconsList" >
                     <div className=" delete iconControl"

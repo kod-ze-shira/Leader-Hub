@@ -6,6 +6,7 @@ import Hangout from './hangout/hangout'
 import Members from './members/members'
 import Logs from './logs/logs'
 import MyChart from '../chart/chart'
+import './overview.css'
 
 import ViewMembers from './members/veiwMembers/viewMembers'
 // import MyChart from '../chart/chart'
@@ -15,20 +16,19 @@ function Overview(props) {
   
     return (
         <>
-            <div className="container-fluid">
+            <div className="scrollbarOverview container-fluid">
                 <div className='row'>
                     <div className='col-9'>
                         <div className='container-fluid'>
                             <div className='row'>
                                 <MyChart  />
                             </div>
-
                             <div className='row'>
                                 <FilesOfProject />
                             </div>
                         </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-3'>
                         <div className='container-fluid'>
                             <div className='row'>
                                 <Members />
