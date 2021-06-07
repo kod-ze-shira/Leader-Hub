@@ -140,9 +140,6 @@ span:focus{
    border: 1px solid #ced4da !important;
     /* border-radius: .25rem !important; */
 }
-.form-control:focus{
-  text-shadow: none !important;
-}
 
 .task-card .status-task-in-progress{
     background-color:#FFD56D !important;

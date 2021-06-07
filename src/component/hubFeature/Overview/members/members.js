@@ -4,17 +4,16 @@ import React from 'react';
 
 export default function members() {
 
-    return (
+    return(
         <>
-            <div className="container-fluid px-0  backgroundWhiteAndBorderRadius">
+            <div className="container-fluid px-0 members">
 
                 <div className="row divProjectMembers pt-3 px-4">
                     <h3>Project Members</h3>
                 </div>
-                <div className="scrollbarMembers">
-                    <AddMembers />
-                    <ViewMembers />
-                </div>
+
+                <AddMembers />
+                <ViewMembers/>
             </div>
         </>
     )

@@ -512,6 +512,7 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/${cardId}/belongTask`
+        debugger
         $.ajax({
             url: urlData,
             method: 'POST',
