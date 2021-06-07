@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import MyChart from '../chart/chart'
-import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+// import viewFilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
 import Logs from './logs/logs'
+import MyChart from '../chart/chart'
 
 import ViewMembers from './members/veiwMembers/viewMembers'
+// import MyChart from '../chart/chart'
 // import { actions } from '../../hub'
 function Overview(props) {
 
-    const [showFilesForProject, setShowFilesForProject] = useState(false)
-    function openViewFilesForProject(e) {
-        setShowFilesForProject(true)
-    }
+  
     return (
         <>
             <div className="container-fluid">

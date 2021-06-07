@@ -21,7 +21,7 @@ function FilesOfProject(props) {
 
 
 
-    function downloadFile() {
+    function downloadFile() {gi
 
     }
     function deleteFile() {
