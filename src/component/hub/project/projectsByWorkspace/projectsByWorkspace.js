@@ -25,21 +25,9 @@ function ProjectsByWorkspace(props) {
 
 
     useEffect(() => {
-        if (props.showViewDitailsProject) {
-            setShowProject(props.showViewDitailsProject.show)
-            setAddOrEditProject("newProject")
-            props.showViewDitailsProject.e.stopPropagation()
-        } else
-            setShowProject(false)
-
-
-        if (props.valueSearchProject) {
-            setValueSearch(props.valueSearchProject)
-        } else
-            setValueSearch(props.projectName)
 
         // }, [props.workspaces]);
-    }, [props.workspaces, props.indexOfWorkspace, props.showViewDitailsProject, props.valueSearchProject]);
+    }, [props.workspaces, props.indexOfWorkspace]);
 
 
 
@@ -49,11 +37,11 @@ function ProjectsByWorkspace(props) {
         setShowProject(true)
     }
 
-    // function openViewDitailsAddProject(e) {
-    //     setAddOrEditProject("newProject")
-    //     setShowProject(true)
-    //     e.stopPropagation()
-    // }
+    function openViewDitailsAddProject(e) {
+        setAddOrEditProject("newProject")
+        setShowProject(true)
+        e.stopPropagation()
+    }
 
 
 
@@ -90,9 +78,9 @@ function ProjectsByWorkspace(props) {
         props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
     }
 
-    // function searchProject() {
-    //     setValueSearch(document.getElementById('inputSearchProjects').value)
-    // }
+    function searchProject() {
+        setValueSearch(document.getElementById('inputSearchProjects').value)
+    }
 
     $(window).click(function () {
         setShowProject(false)
@@ -110,17 +98,16 @@ function ProjectsByWorkspace(props) {
                         {/* <div class="show-task row mx-4 mt-3 headerTableTask"> */}
                         {/* <label class="ml-4 pl-6 labelAllTask mt-2"> Leader Projects </label></div> */}
                         <div id=''>
-                            {/* <span id='searchProject' >
+                            <span id='searchProject' >
                                 <input type='text' id='inputSearchProjects' className='inputSearchProjects'
                                     onChange={() => searchProject()}
                                     placeholder='Search project...'
                                 />
-                            </span> */}
-                            {/* {window.location.href.indexOf('workspace') != -1 ?
-                                <button className='buttonNewProject'
-                                    data-tip data-for="add_p"
-                                    onClick={(e) => openViewDitailsAddProject(e)}
-                                >+ New Project</button> : null} */}
+                            </span>
+                            {window.location.href.indexOf('workspace') != -1 ? <button className='buttonNewProject'
+                                data-tip data-for="add_p"
+                                onClick={(e) => openViewDitailsAddProject(e)}
+                            >+ New Project</button> : null}
                             <ReactTooltip data-tip id="add_p" place="top" effect="solid">
                                 {title.title_add_project}
                             </ReactTooltip>

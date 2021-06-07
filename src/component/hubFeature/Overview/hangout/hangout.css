@@ -3,19 +3,16 @@
     border: none;
     z-index: 101;
     position: absolute;
-    bottom: 2%;
-    right:calc(5% + 4vw) ;
-    margin-bottom: 10px;
-
+    bottom: 10%;
+    right:18%;
 }
 .btn-show-chat{
-    /* background: url(../../../img/btn-chat.svg); */
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    width: 5vw;
-    height: 5vw;
+    background: url(../../../img/btn-chat.svg);
+    background-size: cover;
+    width: 8vw;
+    height: 8vw;
     position: fixed;
-    bottom: 2%;
-    right: 2%;
+    bottom: 5%;
+    right: 5%;
     z-index: 100;
 }

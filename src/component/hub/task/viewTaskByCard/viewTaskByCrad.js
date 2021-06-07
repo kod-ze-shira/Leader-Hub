@@ -256,12 +256,12 @@ function ViewTaskByCrad(props) {
                                             {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
                                                 : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {!props.task.assingTo ? <img
-                                            // id={`${props.task._id}assing-to`}
+                                        <img
+                                            id={`${props.task._id}assing-to`}
                                             className="ml-2 assing-to-icon"
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                             src={require('../../../img/share-icon.png')}>
-                                        </img> : null}
+                                        </img>
                                     </div>
                                     {/* <DynamicSelect
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
