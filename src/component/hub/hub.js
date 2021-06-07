@@ -39,13 +39,13 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     const [openCalander, setOpenCalander] = useState(false)
-    const [value, onChange] = useState(new Date());
     // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
         if (objectToDelete_.type == 'Task') {
+
             objectToDelete.push(objectToDelete_)
             setObjectToDeleteLocal(objectToDelete_)
             setShowToastDelete(true)
@@ -87,6 +87,8 @@ function Hub(props) {
         for (let index = 0; index < i; index++) {
             props['remove' + objectToDelete[index].type](objectToDelete[index].object._id)
         }
+        setObjectToDelete([])
+        setObjectToDeleteLocal()
     }
 
     const showToast = () => {

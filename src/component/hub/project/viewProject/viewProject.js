@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json';
 import { actions } from '../../../../redux/actions/action';
@@ -18,7 +19,7 @@ function ViewProject(props) {
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
     let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
-
+    let refToProject = useRef('')
     useEffect(() => {
     }, [props.indexOfWorkspace])
 
@@ -60,10 +61,13 @@ function ViewProject(props) {
     function overProject(id) {
         setMyStyleIcons({ 'opacity': '1' })
         setMyStyleStripe({ 'color': 'rgb(152 169 188 / 38%)' })
+        refToProject.current.style.backgroundColor = "white"
     }
     function outOver(id) {
         setMyStyleIcons({ 'opacity': '0' })
         setMyStyleStripe({ 'color': 'white' })
+        refToProject.current.style.backgroundColor = "#e9ecef"
+
     }
     const openShareProject = (event) => {
         for (let index = 0; index < props.workspaces.length; index++) {
@@ -126,7 +130,7 @@ function ViewProject(props) {
                 </td>
                 <td>
                     <div className='divProgress'>
-                        <div class="progressProject"  >
+                        <div class="progressProject" ref={refToProject}>
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
@@ -145,7 +149,7 @@ function ViewProject(props) {
                     <CellDescription description='Team' />
                 </td> */}
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
+                    <Cell item={props.myProject.updateDates?props.myProject.updateDates[props.myProject.updateDates.length - 1]:null} />
                     <CellDescription description='Last Update' />
                 </td>
 

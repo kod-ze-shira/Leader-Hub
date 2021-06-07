@@ -24,13 +24,12 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
+        let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null
         if (hasLike)
             setUserHasLike(true)
-
         $(`#${props.task._id}assing-to`).css("display", "none")
 
-    }, [props.cards])
+    }, [props.cards, props.userId])
 
     useEffect(() => {
         doneStatus = props.task.complete
@@ -188,7 +187,7 @@ function ViewTaskByCrad(props) {
     }
 
     const updateLike = (e) => {
-        
+
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         props.updateLike(props.task._id)
@@ -239,14 +238,14 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-                                {/* <div onClick={(e) => updateLike(e)}>
-                                    <p className="mr-1">{props.task.likes.length}</p>
+                                <div onClick={(e) => updateLike(e)} className="p-3">
+                                    <p className="likes-num mr-1">{props.task.likes.length}</p>
                                     <img
                                         onClick={updateLike}
                                         src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
                                     </img>
-                                </div> */}
-                                <label className="check-task    view-details-btn" title="View Details">
+                                </div>
+                                <label className="check-task view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
 
@@ -300,6 +299,7 @@ function ViewTaskByCrad(props) {
 const mapStateToProps = (state) => {
 
     return {
+        userId: state.public_reducer.userId,
         tasks: state.public_reducer.tasks,
         taskReducer: state.task_reducer.task,
         cards: state.public_reducer.cards,

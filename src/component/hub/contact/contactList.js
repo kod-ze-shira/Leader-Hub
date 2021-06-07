@@ -65,7 +65,6 @@ function ContactList(props) {
   // }
 
   // function validate(email) {
-  //   debugger
   //   const $result = $("#result");
   //   $result.text("");
 
