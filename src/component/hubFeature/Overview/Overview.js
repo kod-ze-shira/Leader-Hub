@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import MyChart from '../chart/chart'
+import MyChart from './chart/chart'
 import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
+import Logs from './logs/logs'
 import ViewMembers from './members/veiwMembers/viewMembers'
 // import { actions } from '../../hub'
 function Overview(props) {
@@ -15,18 +16,18 @@ function Overview(props) {
     return (
         <>
             <div className=" body container-fluid">
-<Members/>
+                <Members />
                 <MyChart />
                 <button onClick={openViewFilesForProject}>files in this project</button>
                 {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
 
                 {/* <Hangout></Hangout> */}
-                <ViewMembers/>
-              <MyChart/>
-              <button onClick={openViewFilesForProject}>files in this project</button>
-              {showFilesForProject?<FilesOfProject></FilesOfProject>:null}
-              
-           
+                <ViewMembers />
+                <MyChart />
+                <button onClick={openViewFilesForProject}>files in this project</button>
+                {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
+
+
             </div>
 
         </>
