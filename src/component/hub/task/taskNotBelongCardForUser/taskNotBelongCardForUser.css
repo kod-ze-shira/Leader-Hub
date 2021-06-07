@@ -11,12 +11,16 @@
     padding-left: 20px  !important; */
     border: none;
     width: 94%;
+    position: relative;
 }
 
 .addTaskNotBelong:focus,.addTaskNotBelong:hover{
     outline: none !important;
 }
 .close-add-task{
+    position: absolute;
+    right: 5px;
+    bottom: 1px;
     margin-bottom: 2px;
     background-color: transparent;
     color: #C4CCD5;
@@ -78,12 +82,15 @@
 } */
 .wrap-not-belong .check-task{
     padding-top:unset !important;
+    padding: 0 !important;
 }
 .check-task .css-yk16xz-control{
     background: url(../../../img/down-arrow.svg) no-repeat ;
     background-size: 10px 10px;
     background-position: 90%;
+    
 }
+
 .css-yk16xz-control .css-g1d714-ValueContainer{
   justify-content: start !important;
 }
@@ -96,9 +103,15 @@
 .workspaceN{
     padding-left: 0px !important;
 }
-
+.select-not-belong{
+    width: 6vw;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    text-align: left;
+}
 .dotProject{
-    margin-top: 5px;
+    margin-top: 9px;
     margin-left: 6px;
     margin-right: 5px;
 }
@@ -112,12 +125,12 @@
 }
 
 .logo-w-little {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.6rem;
+    height: 1.6rem;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 15px !important;
     color: white;
-    letter-spacing: 1.72px;
+    /* letter-spacing: 1.72px; */
     font-family: 'Roboto', sans-serif;
     font-size: 1.3rem;
     margin-right: 6px;
