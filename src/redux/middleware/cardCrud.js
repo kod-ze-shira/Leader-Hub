@@ -25,8 +25,9 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             success: function (data) {
                 dispatch(actions.setCards(data.cards))
                 console.log("success")
+                debugger;
                 console.log("data", data);
-
+                return false;
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {

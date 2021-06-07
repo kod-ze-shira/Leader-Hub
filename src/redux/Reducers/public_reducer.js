@@ -178,6 +178,7 @@ const publicData = {
             state.cards[i]._id !== action.payload.dc._id
         )
     },
+    
     addProjectToProjects(state, action) {
 
         let workspaceId = action.payload.workspace
@@ -246,6 +247,8 @@ const publicData = {
     },
     setCards(state, action) {
         state.cards = action.payload;
+        debugger;
+        return true
     },
     setMembers(state, action) {
         state.members = action.payload;
