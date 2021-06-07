@@ -36,7 +36,7 @@ function TaskNotBelongCardForUser(props) {
 
     return (
         <div className="body-workspace ">
-            <div className='input-group-task-not-belongs d-flex row'>
+            <div className='input-group-task-not-belongs d-flex '>
 
                 <button
                     className={showBtn ? 'd-block btn-add-task p-2  mr-2 ml-4 mr-auto' : 'd-none '}
@@ -45,7 +45,8 @@ function TaskNotBelongCardForUser(props) {
                         src={require('../../../img/checked.svg')}>
                     </img>‏
                     Add Task </button>
-                <div className={showBtn ? 'd-none' : 'wrap-input d-block  col-12 col-md-8 row pr-0  mr-auto  mr-2 ml-4'}>
+                <div className={showBtn ? 'd-none' :
+                    'wrap-input d-block  col-6 col-lg-8  pr-0  mr-md-auto  mr-2 ml-4'}>
                     <input type="text" className='addTaskNotBelong '
                         value={nameTask}
                         placeholder="Write a task name"
@@ -66,20 +67,25 @@ function TaskNotBelongCardForUser(props) {
                     </button>
                 </div>
 
-                <input type="text" class="inputSearchTask mr-5" placeholder="Search task" onChange={(e) => setSearchTask(e.target.value)} />
+                <input type="text" class="inputSearchTask ml-2 mr-5 " placeholder="Search task"
+                    onChange={(e) => setSearchTask(e.target.value)} />
             </div>
-            <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                <label class="ml-3 pl-6 col-4 labelAllTask"> My task </label>
-                <label class="col-2 propertiesAllTask ml-4">Workspace</label>
-                <label class="col-2 propertiesAllTask">Project</label>
-                <label class=" col-2 propertiesAllTask">Card</label>
-                <label class=" col propertiesAllTask"></label>
-            </div>
+            <div className="wrap-all-task">
+                <div className="wrap-all-task-width">
+                    <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
+                        <label class="ml-3 pl-6 col-3 col-lg-4 labelAllTask"> My task </label>
+                        <label class="col-2 propertiesAllTask ml-4">Workspace</label>
+                        <label class="col-2 propertiesAllTask">Project</label>
+                        <label class=" col-2 propertiesAllTask">Card</label>
+                        <label class=" col propertiesAllTask"></label>
+                    </div>
 
-            <div className=" allTasks">
-                {props.tasks.length ?
-                    renderTasks
-                    : null}
+                    <div className=" allTasks">
+                        {props.tasks.length ?
+                            renderTasks
+                            : null}
+                    </div>
+                </div>
             </div>
         </div>
     );
