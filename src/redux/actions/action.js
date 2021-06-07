@@ -1,6 +1,5 @@
 
 function convertActionToType(actionName) {
-    console.log(actionName+" "+actionName.replace(/([A-Z])/g, "_$1").toUpperCase());
     return actionName.replace(/([A-Z])/g, "_$1").toUpperCase();
 }
 

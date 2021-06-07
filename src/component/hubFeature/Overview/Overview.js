@@ -1,24 +1,46 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import MyChart from '../chart/chart'
-import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+// import viewFilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
+import Logs from './logs/logs'
+import MyChart from '../chart/chart'
+
 import ViewMembers from './members/veiwMembers/viewMembers'
+// import MyChart from '../chart/chart'
 // import { actions } from '../../hub'
 function Overview(props) {
 
-    const [showFilesForProject, setShowFilesForProject] = useState(false)
-    function openViewFilesForProject(e) {
-        setShowFilesForProject(true)
-    }
+  
     return (
         <>
-            <div className=" body container-fluid">
-                <Members />
-                <MyChart />
-                <button onClick={openViewFilesForProject}>files in this project</button>
-                {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
+            <div className="container-fluid">
+                <div className='row'>
+                    <div className='col-9'>
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <MyChart  />
+                            </div>
+
+                            <div className='row'>
+                                <FilesOfProject />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col'>
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <Members />
+                            </div>
+                            <div className='row'>
+                                <Logs />
+                            </div>
+                        </div>
+                    </div>
+                    {/* <Hangout></Hangout> */}
+
+                </div>
 
 
             </div>

@@ -170,19 +170,7 @@ function TaskDetails(props) {
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
-    function filesInTask() {
-        let newComponent
-        props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files.map((file) => {
-            newComponent = addFileComponent(file)
-            if (!fileComponentArr.length)
-                setFileComponentArr([newComponent])
-            else
-                setFileComponentArr([...fileComponentArr, newComponent])
-        })
-    }
-    const addFileComponent = (file) => {
-        return <File file={file} />
-    }
+
     const assingto = (e) => {
         setShowContactList(true)
     }
