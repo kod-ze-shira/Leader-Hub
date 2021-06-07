@@ -156,7 +156,7 @@ function ViewProject(props) {
                     </td>
                     : null}
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
+                    <Cell item={props.myProject.updateDates ? props.myProject.updateDates[props.myProject.updateDates.length - 1] : null} />
                     <CellDescription description='Last Update' />
                 </td>
 
