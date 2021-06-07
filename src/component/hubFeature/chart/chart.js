@@ -256,7 +256,7 @@ function MyChart(props) {
     const schemeSet = ['#1FB9C1', '#6CBAFF']
     return (
         <>
-            <Paper>
+            <Paper style={{'width':'100%'}}>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
