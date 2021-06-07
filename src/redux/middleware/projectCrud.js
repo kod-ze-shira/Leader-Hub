@@ -62,22 +62,22 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
 
 
 //////////////////////////////////////////////////
-export const getFilesForProject=({dispatch,getState})=>next=>action=>{
-    if(action.type==='GET_FILES_FOR_PROJECT'){  
-        let jwtFromCookie=getState().public_reducer.tokenFromCookies
-        let url=`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
+export const getFilesForProject = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_FILES_FOR_PROJECT') {
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
         $.ajax({
-            type:"GET",           
-            url:url,
+            type: "GET",
+            url: url,
             //${getState().public_reducer.userName}   renana-il
             //${getState().public_reducer.indexCurrentProject}   
-            headers:{authorization:jwtFromCookie},
-            success:(data)=>{       
-                console.log('data'+data.projectFiles );
+            headers: { authorization: jwtFromCookie },
+            success: (data) => {
+                console.log('data' + data.projectFiles);
                 dispatch(actions.setFilesForProject(data.projectFiles))
             },
-            error:(err)=>{
-                console.log('err'+err.statusText);
+            error: (err) => {
+                console.log('err' + err.statusText);
             }
         })
     }
@@ -103,6 +103,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 }),
             dataType: 'json',
             success: function (data) {
+                console.log("project ", data)
                 dispatch(actions.addProjectToProjects(data.message))
 
             },

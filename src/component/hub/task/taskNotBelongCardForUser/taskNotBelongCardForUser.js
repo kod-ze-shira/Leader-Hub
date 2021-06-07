@@ -12,10 +12,10 @@ function TaskNotBelongCardForUser(props) {
     const [nameTask, setNameTask] = useState('')
     const [showBtn, setShowBtn] = useState(true)
     useEffect(() => {
-        if (!props.tasks.length)
+        if (!props.tasks.length) {
             props.getAllTasksNotBelongsCardForUser()
-
-    }, [props.tasks])
+        }
+    }, [])
 
     function showToast(valueToDelet) {
         props.showToastDelete(valueToDelet)
