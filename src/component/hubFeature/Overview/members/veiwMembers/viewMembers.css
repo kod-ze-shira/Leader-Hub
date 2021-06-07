@@ -24,9 +24,10 @@
 }
 .scrollbarMembers{
     overflow-y: auto;
+    height: 200px;
 }
 .fontImgMembers{
-    font-size:2vw;
+    font-size:4vw;
 }
 .emailMembers{
     width: fit-content !important;
@@ -35,10 +36,26 @@
     width: 3vw;
     height: 3vw;
 }
-.members{
-    width: 30%;
-}
+
+
 .nameMembers{
     /* text-align: left; */
     font-weight: bold;
+}
+.scrollbarMembers::-webkit-scrollbar-thumb ,.scrollbarMembers:hover::-webkit-scrollbar-thumb {
+    background-color: #99E2E5 ;
+/* scrollbar-color:#99E2E5 #EDF5F8 ; */
+}
+.scrollbarMembers::-webkit-scrollbar-track{
+background-color:#EDF5F8
+}
+.scrollbarMembers::-webkit-scrollbar-track:hover{
+    background-color:#EDF5F8;
+    box-shadow:none;
+}
+
+.backgroundWhiteAndBorderRadius{
+    background-color:white;
+    border-radius:2%;
+
 }
