@@ -9,10 +9,11 @@
 
 }
 .btn-show-chat{
-    background: url(../../../img/btn-chat.svg);
-    background-size: cover;
-    width: 8vw;
-    height: 8vw;
+    /* background: url(../../../img/btn-chat.svg); */
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    width: 5vw;
+    height: 5vw;
     position: fixed;
     bottom: 4%;
     right: 2%;

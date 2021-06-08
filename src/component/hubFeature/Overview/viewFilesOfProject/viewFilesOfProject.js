@@ -31,12 +31,12 @@ function addOrRemoveFileToArr(e,file){
         // }
         if(index==0) {
             // e.currentTarget.className="fileItem"
-            e.currentTarget.children[0].children[1].children[0].checked=true
+            e.currentTarget.children[0].checked=true
             filesForDownloadOrDelete.push(file)
 
         }
         else {
-            e.currentTarget.children[0].children[1].children[0].checked=false   
+            e.currentTarget.children[0].checked=false   
             filesForDownloadOrDelete.splice(index,1)
         }
     }
@@ -90,25 +90,32 @@ function deleteFile(){
            <div  className="fileItem" onClick={(e)=>addOrRemoveFileToArr(e,file)}> 
            {/* <input type="checkbox" className="selectFile" ></input>   */}
           
-           <div className="row-10 wrapImg">
-               <img src={file.url} className="imgFile"></img> 
+           <div className="row-10 wrapImg"><img src={file.url} className="imgFile"></img> 
             <label
                                     title="check file"
                                     className="selectFile py-2 check-tabs row">
-                                    <input type="checkbox"/>
+                                    <input type="checkbox"
+                                        // name="complete"
+                                        // checked={doneStatus}
+                                        // value={props.task.complete}
+                                        // onChange={(e) => changeFiledInTask(e)}
+                                        // onClick={(e) => e.stopPropagation()
+                                        // }
+                                    />
                                     <span
                                         className="checkmarkFile checkmarkFile-tabs"
+                                        // onClick={(e) => addChalalit(e)}
                                     ></span>
           </label>
            </div>
            <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name.length>12?file.name.slice(0,12)+"...":file.name}</a></div>
                  </div>
             </div>)}</div></div>:"there arent files"}
+        {/* <input type="file"></input> */}
         </div>
         </>
     )
 }
-///+file.name.split()[1]
 
 const mapStateToProps=(state)=>{
     return {
