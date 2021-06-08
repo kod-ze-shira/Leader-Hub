@@ -45,8 +45,8 @@ function TasksNotBelongCardByMap(props) {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
         }
-
     }, [props.workspaces])
+
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
@@ -276,9 +276,10 @@ function TasksNotBelongCardByMap(props) {
         e.stopPropagation();
 
     }
-
+    function setDownloadFileFunc(e) {
+        setDownloadFile(e)
+    }
     $(window).click(function () {
-        debugger
         if (!downloadFile) {
             setViewDetails(false)
         }
@@ -440,8 +441,7 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
-                            setDownloadFile={(e) => setDownloadFile(e)}
-
+                            setDownloadFile={(e) => setDownloadFile(false)}
                             open={true} />
                     </div>
                     : null}

@@ -11,11 +11,12 @@ function TaskNotBelongCardForUser(props) {
     const [searchTask, setSearchTask] = useState('')
     const [nameTask, setNameTask] = useState('')
     const [showBtn, setShowBtn] = useState(true)
-    useEffect(() => {
-        if (!props.tasks.length)
-            props.getAllTasksNotBelongsCardForUser()
 
-    }, [props.tasks])
+    useEffect(() => {
+        if (!props.tasks.length) {
+            props.getAllTasksNotBelongsCardForUser()
+        }
+    }, [])
 
     function showToast(valueToDelet) {
         props.showToastDelete(valueToDelet)
@@ -35,7 +36,7 @@ function TaskNotBelongCardForUser(props) {
     })
 
     return (
-        <div className="body-workspace ">
+        <div className="body-workspace " >
             <div className='input-group-task-not-belongs d-flex row'>
 
                 <button

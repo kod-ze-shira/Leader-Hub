@@ -42,6 +42,7 @@ function CardsPage(props) {
                         setNumber(2)
                     }
 
+
     }, [])
 
     const changeFlag = (value) => {
@@ -78,13 +79,13 @@ function CardsPage(props) {
     }
     return (
         <>
-        <div className="">
-            <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
-            {renderSwitch()}
-            <Hangout></Hangout>
+            <div className="">
+                <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
+                {renderSwitch()}
+                <Hangout></Hangout>
 
-        </div>
-</>
+            </div>
+        </>
     )
 }
 const mapStateToProps = (state) => {

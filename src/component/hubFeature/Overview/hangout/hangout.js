@@ -38,12 +38,10 @@ function Hangout(props) {
                 onClick={(e) => handleClick(e)}>
 
             </button>
-            {/* <iframe id="iframe" className={showChat ? "iframeHangout" : 'd-none'}
+            <iframe id="iframe" className={showChat ? "iframeHangout" : 'd-none'}
                 src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
-
-                // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
                 title="hangout">
-            </iframe> */}
+            </iframe>
         </>
     )
 }
