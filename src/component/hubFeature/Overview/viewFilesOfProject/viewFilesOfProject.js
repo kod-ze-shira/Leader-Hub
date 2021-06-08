@@ -56,7 +56,7 @@ function deleteFile(){
 
     return(
         <>
-        <div className="filesForProject backgroundWhiteAndBorderRadius " >
+        <div className="filesForProject backgroundWhiteAndBorderRadius">
             <div className="row">
            <h3 className="col-9" id="title">Project Files</h3>
             <div className="col-3 row iconsList" >
