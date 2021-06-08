@@ -13,7 +13,6 @@ import './viewProject.css';
 import TeamView from '../../teamView/teamView'
 
 function ViewProject(props) {
-
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     let complited = props.myProject.countReadyTasks
@@ -146,7 +145,7 @@ function ViewProject(props) {
                     <CellDescription description={(complited ? complited : 0) + '% complete'} />
                 </td>
 
-                {props.myProject.members.length ?
+                {/* {props.myProject.members.length ?
                     <td style={{ 'text-align': 'center' }}>
                         <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
                         <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
@@ -154,13 +153,13 @@ function ViewProject(props) {
 
                         <CellDescription description='Team' />
                     </td>
-                    : null}
+                    : null} */}
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
                     <CellDescription description='Last Update' />
                 </td>
 
-                {/* <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
+                <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
 
 
                     <img style={myStyleIcons} src={require('../../../img/share.png')}
@@ -183,7 +182,7 @@ function ViewProject(props) {
                     <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
-           */}
+
             </tr >
         </>
     )

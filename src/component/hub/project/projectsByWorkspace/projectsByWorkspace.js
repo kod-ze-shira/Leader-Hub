@@ -14,17 +14,21 @@ import "./projectsByWorkspace.css";
 function ProjectsByWorkspace(props) {
     let { idWorkspace } = useParams();
     const [showProject, setShowProject] = useState(false)
+    const [showEditOrShareProject, setShowEditOrShareProject] = useState(false)
     const [valueSearch, setValueSearch] = useState(props.projectName)
     const [addOrEditProject, setAddOrEditProject] = useState(false)
+    const [editOrShareProject, setEditOrShareProject] = useState(false)
     const [e, setE] = useState('')
 
     useEffect(() => {
         // if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
-        debugger
-        if (props.showViewDitailsProject) {
+
+        // if (props.showViewDitailsProject) {
+        if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
+
             setShowProject(props.showViewDitailsProject.show)
             setAddOrEditProject("newProject")
-            // setE(props.showViewDitailsProject.e)
+            setE(props.showViewDitailsProject.e)
             props.showViewDitailsProject.e.stopPropagation()
         } else
             setShowProject(false)
@@ -37,9 +41,17 @@ function ProjectsByWorkspace(props) {
     }, [props.workspaces, props.indexOfWorkspace, props.showViewDitailsProject, props.valueSearchProject]);
 
     function openEditOrShareProject(from) {
-        setAddOrEditProject(from)
-        setShowProject(true)
+        // setAddOrEditProject(from)
+        setEditOrShareProject(from)
+        // setShowProject(true)
+        setShowEditOrShareProject(true)
     }
+    // function openEditOrShareProject(from) {
+    //     // setAddOrEditProject(from)
+    //     setEditOrShareProject(from)
+    //     // setShowProject(true)
+    //     showEditOrShareProject(true)
+    // }
 
     const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
         props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
@@ -76,6 +88,7 @@ function ProjectsByWorkspace(props) {
 
     $(window).click(function () {
         setShowProject(false)
+        setShowEditOrShareProject(false)
     });
     function stopP(event) {
         event.stopPropagation();
@@ -93,12 +106,20 @@ function ProjectsByWorkspace(props) {
                     {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
                 </tbody>
             </Table>
-            {  showProject ?
+            { showProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
                         closeViewDetails={() => setShowProject(false)}
                         showToast={showToast}
                         from={addOrEditProject} workspaceId={idWorkspace} />
+                </div> : null
+            }
+            {showEditOrShareProject ?
+                <div className="closeDet" onClick={(e) => stopP(e)}>
+                    <ViewDetails
+                        closeViewDetails={() => setShowEditOrShareProject(false)}
+                        showToast={showToast}
+                        from={editOrShareProject} workspaceId={idWorkspace} />
                 </div> : null
             }
         </div>
