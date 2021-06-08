@@ -160,7 +160,7 @@ function ViewProject(props) {
                     <CellDescription description='Last Update' />
                 </td>
 
-                <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
+                {/* <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
 
 
                     <img style={myStyleIcons} src={require('../../../img/share.png')}
@@ -183,6 +183,7 @@ function ViewProject(props) {
                     <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
+           */}
             </tr >
         </>
     )
