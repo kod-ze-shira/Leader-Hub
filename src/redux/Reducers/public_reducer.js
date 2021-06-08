@@ -173,9 +173,9 @@ const publicData = {
         )
     },
     deleteCard(state, action) {
-        console.log(action.payload)
+        console.log(action.payload.dc)
         state.cards = state.cards.filter((_, i) =>
-            state.cards[i]._id !== action.payload._id
+            state.cards[i]._id !== action.payload.dc._id
         )
     },
     addProjectToProjects(state, action) {

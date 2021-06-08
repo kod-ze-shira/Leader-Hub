@@ -9,6 +9,7 @@ import $ from 'jquery'
 function ContactList(props) {
   const [arrayFilter, setArrayFilter] = useState(null);
   useEffect(() => {
+    $(".invalid-feedback").css("display", "none");
     if (props.contactsUser.length == 0)
       props.getContactsForUser()
   }, [])
@@ -18,22 +19,20 @@ function ContactList(props) {
 
   const setFIlter = () => {
     let arrayTemp = [];
-    if (props.contactsUser)
+    if (props.contactsUser.length)
       props.contactsUser.map((contact) => {
         if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
           arrayTemp.push(contact);
         }
-
       })
-
-    console.log(arrayTemp)
     setArrayFilter(arrayTemp)
   }
 
   const handleChange = (event) => {
     setValueSearch(event.target.value)
     setFIlter();
-
+    if (valueSearch)
+      $(".invalid-feedback").css("display", "none");
   }
 
   useEffect(() => {
@@ -42,54 +41,26 @@ function ContactList(props) {
 
   const assingTaskToContact = (e) => {
     e.stopPropagation()
-    let a = ValidateEmail(valueSearch)
-    console.log(a)
-    if (a && nameRequired.current.value)
+    let isValid = ValidateEmail(valueSearch)
+    console.log(isValid)
+    if (isValid && nameRequired.current.value) {
+      $(".invalid-feedback").css("display", "none");
+      $(".invite-button").css("backgroundColor", "#68C7CB");
+      $(".invite-button").css("color", "#358A8D");
       props.assingTo(valueSearch)
-      else{
-        nameRequired.current.focus()
-        $(".invite-button").css("backgroundColor", "red");
-      }
-    // else {
-    //   nameRequired.current.focus()
-    //   var form = document.getElementById('nameRequired')
-    //   form.classList.add('was-validated')
-    // }
+    }
+    else {
+      nameRequired.current.focus()
+      $(".invalid-feedback").css("display", "block");
+    }
   }
 
-
-
-  // function validateEmail(email) {
-  //   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   return re.test(email);
-  // }
-
-  // function validate(email) {
-  //   const $result = $("#result");
-  //   $result.text("");
-
-  //   if (validateEmail(email)) {
-  //     $result.text(email + " is valid :)");
-  //     $result.css("color", "green");
-  //   } else {
-  //     $result.text(email + " is not valid :(");
-  //     $result.css("color", "red");
-  //   }
-  //   return false;
-  // }
   function ValidateEmail(mail) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valueSearch)) {
       return (true)
     }
     else {
-    
-
-      // $(".invalid-feedback").css("display", "block");
-
-      // var form = document.getElementById('nameRequired')
-      // form.classList.add('was-validated')
       return (false)
-
     }
   }
 
@@ -97,10 +68,9 @@ function ContactList(props) {
     arrayFilter && arrayFilter.length ?
       arrayFilter.map((contact) =>
         <ViewContact contact={contact}></ViewContact>
-
       )
       :
-      <button className="col-4 my-2 invite-button  "
+      <button className="ml-2 col-4 my-2 invite-button  " autocomplete="chrome-off"
         onClick={(e) => assingTaskToContact(e)}
       >Send Invite</button> :
     <><div class="spinner-border" role="status">
@@ -108,7 +78,7 @@ function ContactList(props) {
     </div></>
 
   const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;
-  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200;
+  const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200
   const left = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.leftContactList : props.widthCurrentScreen - 350
   const width = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.widthContactsList : props.widthContactsList
 
@@ -118,18 +88,22 @@ function ContactList(props) {
       <div className='div_contacts ' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410, "width": props.hub ? width : 300, "maxHeight": 250 }}>
         <div className='container div_contacts_list  ' style={{}}>
           <div className=' row  mx-1 form-group' id='nameRequired'>
-            <input placeholder="Name or email " required ref={nameRequired}
-              className={arrayFilter && arrayFilter.length && props.hub ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-8 my-2 "}
+            {props.hub ? <input placeholder="Name or email " required ref={nameRequired}
+              className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
-              value={props.contactsUser.email}></input>
-            <div class="invalid-feedback">
-              Please enter project name.
-            </div>
-
+              value={props.contactsUser.email}></input> : null}
             {contactList}
-
+            {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
+              className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+              onChange={(e) => handleChange(e)}
+              onClick={(e) => e.stopPropagation()}
+              value={props.contactsUser.email}></input> : null}
           </div>
+
+          <div class="invalid-feedback">
+            Please enter valid email.
+            </div>
         </div>
 
       </div>

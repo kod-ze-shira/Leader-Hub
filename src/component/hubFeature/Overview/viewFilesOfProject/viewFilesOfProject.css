@@ -23,10 +23,11 @@ h3{
 }
 .wrapLink{
     background-color: #EDFBFC ;
+   
      text-align: center;
 }
 .wrapLink a{
-       color: #707070;
+       color: black;
        text-decoration: none; 
        cursor: pointer;
 }
@@ -54,7 +55,6 @@ h3{
  .fileItem{
      border: gray;
      box-shadow: gray 1px 1px 1px 1px;
-     cursor: pointer;
  }
  .fileItem:hover{
     box-shadow: gray 2px 2px 2px 2px;
@@ -149,14 +149,12 @@ h3{
     /* position: absolute; */
     margin: 0vw;
     padding: 0;
-     cursor: pointer;
-     background-color: #707070;
   }
   /* Hide the browser's default checkbox */
   .selectFile input {
     position: absolute;
     opacity: 0;
-   
+    cursor: pointer;
   width: 0;
   height: 0;
   }
@@ -164,12 +162,12 @@ h3{
   /* Create a custom checkbox */
   .checkmarkFile {
     position: absolute;
-    height: 1em;
-    width: 1em;
-    background-color: #fff;
-    border: 1px solid #fff;
+    height: 10%;
+    width: 10%;
+    background-color: #FFFFFF;
+    border: 1px solid #C4CCD5;
         border-radius: 30%;
-   opacity: 0.8;
+   
   }
   /* .checkmarkFile-tabs{
     left: 6% !important;
@@ -189,29 +187,17 @@ h3{
   .selectFile input:checked .checkmarkFile::before {
     background-color:rgb(79, 216, 186);
     content: "\2713";
-    opacity: 1;
   }
   
   /* Create the checkmarkFile/indicator (hidden when not checked) */
   .checkmarkFile:after {
     content: "";
     position: absolute;
-    opacity:1;
     /* display: none; */
   }
   
   /* Show the checkmarkFile when checked */
   .selectFile input:checked ~ .checkmarkFile:after {
     display: block;
-    background-color:#38B1B5 ;
-    content: "\2713";
-    font-size:0.9vw;
-    font-weight: bolder;
-    color: white;
-    width:-webkit-fill-available;
-    height: -webkit-fill-available;
-    opacity: 1;
-    border-radius: 30%;
-    transition: 0.2s;
-   
+  
   }

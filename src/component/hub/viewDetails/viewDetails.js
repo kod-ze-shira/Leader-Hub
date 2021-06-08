@@ -61,7 +61,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
                         showToast={showToast}
-
+                        setDownloadFile={(e) => props.setDownloadFile(e)}
                     />
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />

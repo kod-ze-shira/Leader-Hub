@@ -170,6 +170,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
+                                //   viewToastComplete={(val) => setShowToastComplete(true)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
@@ -201,6 +202,7 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
