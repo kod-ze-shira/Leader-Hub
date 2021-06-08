@@ -6,6 +6,8 @@ import bin from '../../../img/bin.png'
 import title from '../../../../Data/title.json'
 import download from '../../../img/download.png'
 import ReactTooltip from 'react-tooltip'
+import pdf from '.././../../img/pdf.png'
+import word from '../../../img/word.png'
 
 function FilesOfProject(props){
 
@@ -86,12 +88,14 @@ function deleteFile(){
      //
      <div className="container">  
          <div class="row row-cols-4 row-cols-lg-6 g-2">
-          {props.FilesOfProject.map((file)=><div className="viewFile col p-2">
+          {props.FilesOfProject.map((file)=>
+          <div className="viewFile col p-2">
            <div  className="fileItem" onClick={(e)=>addOrRemoveFileToArr(e,file)}> 
            {/* <input type="checkbox" className="selectFile" ></input>   */}
-          
            <div className="row-10 wrapImg">
-               <img src={file.url} className="imgFile"></img> 
+               
+               <img src={file.name.endsWith('.pdf')?require('.././../../img/file_pdf.png'):
+               file.name.endsWith('.doc')?require('../../../img/word.png'):file.url} className="imgFile"></img> 
             <label
                                     title="check file"
                                     className="selectFile py-2 check-tabs row">
@@ -101,7 +105,7 @@ function deleteFile(){
                                     ></span>
           </label>
            </div>
-           <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name.length>12?file.name.slice(0,12)+"...":file.name}</a></div>
+           <div className="row-2 wrapLink"><a href={file.url} target="_blank" className="fileName">{file.name.length>10?file.name.slice(0,10)+"...":file.name}</a></div>
                  </div>
             </div>)}</div></div>:"there arent files"}
         </div>

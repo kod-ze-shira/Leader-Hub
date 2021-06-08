@@ -20,7 +20,7 @@ function Overview(props) {
                     <div className='col-9'>
                         <div className='container-fluid'>
                             <div className='row'>
-                                <MyChart  />
+                                {/* <MyChart  /> */}
                             </div>
 
                             <div className='row'>
@@ -31,10 +31,10 @@ function Overview(props) {
                     <div className='col'>
                         <div className='container-fluid'>
                             <div className='row'>
-                                <Members />
+                                {/* <Members /> */}
                             </div>
                             <div className='row'>
-                                <Logs />
+                                {/* <Logs /> */}
                             </div>
                         </div>
                     </div>
