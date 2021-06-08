@@ -56,7 +56,7 @@ function deleteFile(){
 
     return(
         <>
-        <div className="filesForProject">
+        <div className="filesForProject backgroundWhiteAndBorderRadius " >
             <div className="row">
            <h3 className="col-9" id="title">Project Files</h3>
             <div className="col-3 row iconsList" >
@@ -84,13 +84,14 @@ function deleteFile(){
         {props.FilesOfProject.length?
 
      //
-     <div className="container">  
+     <div className="container" >  
          <div class="row row-cols-4 row-cols-lg-6 g-2">
           {props.FilesOfProject.map((file)=><div className="viewFile col p-2">
            <div  className="fileItem" onClick={(e)=>addOrRemoveFileToArr(e,file)}> 
            {/* <input type="checkbox" className="selectFile" ></input>   */}
           
-           <div className="row-10 wrapImg"><img src={file.url} className="imgFile"></img> 
+           <div className="row-10 wrapImg" >
+               <img src={file.url} className="imgFile"></img> 
             <label
                                     title="check file"
                                     className="selectFile py-2 check-tabs row">

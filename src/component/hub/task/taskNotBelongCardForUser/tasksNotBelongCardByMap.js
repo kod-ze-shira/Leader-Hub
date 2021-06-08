@@ -81,7 +81,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete(true)
+            // props.viewToastComplete(true)
         }
     }
 

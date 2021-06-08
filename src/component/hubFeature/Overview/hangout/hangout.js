@@ -55,8 +55,6 @@ function Hangout(props) {
                 // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
                 title="hangout">
             </iframe>
-
-
         </>
     )
 }

@@ -69,7 +69,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'shareProject':
-                    return <ShareProject />
+                    return <ShareProject closeViewDetails={props.closeViewDetails}/>
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':

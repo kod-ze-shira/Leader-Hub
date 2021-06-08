@@ -6,7 +6,7 @@ function Logs(props) {
     let logs=['yosi','moyshi','avreimy','moty','yeuda','david']
     return (
         <>
-            <div className="container">
+            <div className="container backgroundWhiteAndBorderRadius">
                 <div className="row">
                     {logs.length ?
                         logs.map(l => {
