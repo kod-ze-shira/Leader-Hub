@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { actions } from "../../../../redux/actions/action";
-import img from "../../../img/btn-chat.svg";
-import imgHover from "../../../img/btn-chat-hover.svg";
-import imgClick from "../../../img/btn-chat-close.svg";
-
 import './hangout.css'
-
 function Hangout(props) {
     const { userName } = props;
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
@@ -43,11 +38,10 @@ function Hangout(props) {
     return (
         <>
             <button className='btn-show-chat'
-                style={{ background: `url(${img})` }}
-                onMouseOver={(e) => handleOver(e)}
-                onMouseLeave={(e) => handleLeave(e)}
-                onClick={(e) => handleClick(e)}>
-
+             onClick={() => { showChat ? setShowChat(false) : setShowChat(true) }}>
+                {/* <img 
+                    src={require('../../../img/btn-chat.svg')}>
+                </img> */}
             </button>
             <iframe id="iframe" className={showChat ? "iframeHangout" : 'd-none'}
                 src={src}

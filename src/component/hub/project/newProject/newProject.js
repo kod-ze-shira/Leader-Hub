@@ -96,8 +96,7 @@ function NewProject(props) {
             document.getElementById('descriptionProject').value = ''
             setMyStyle({ 'border-bottom': ' rgb(129, 129, 165) solid 1px' })
             document.getElementById('dueDateProject').value = ''
-            // props.closeViewDetails(false)
-            props.closeViewDetails()
+            props.closeViewDetails(false)
         }
         else {
             nameRequired.current.focus()
@@ -134,7 +133,7 @@ function NewProject(props) {
 
             <div className="details mr-5 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Add Project</h5>
 
                         <div class="close pr-3" onClick={() => props.closeViewDetails()}>x</div>

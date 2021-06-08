@@ -10,10 +10,8 @@ import share from '../../../img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
-import TeamView from '../../teamView/teamView'
 
 function ViewProject(props) {
-
     const [getProjectById, set_getProjectById] = useState(true);
     const [viewTasks, setViewTasks] = useState(false)
     let complited = props.myProject.countReadyTasks
@@ -98,8 +96,7 @@ function ViewProject(props) {
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
                     <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
-                    <span class='name2ProjectInList' title={props.myProject.name}
-                        style={{ 'color': props.myProject.color }}>
+                    <span class='name2ProjectInList' title={props.myProject.name} style={{ 'color': props.myProject.color }}>
                         {props.myProject.name}</span>
                     {/* <span class='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
@@ -110,8 +107,7 @@ function ViewProject(props) {
                     <CellDescription description='Due date' />
                 </td>
                 <td className='widthCellInProject'  >
-                    <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ?
-                        props.myProject.cards.length : "0"} /></div>
+                    <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ? props.myProject.cards.length : "0"} /></div>
                     <ReactTooltip data-tip id="card_n" place="bottom" effect="solid">
                         {title.title_number_of_cards}
                     </ReactTooltip>
@@ -145,41 +141,40 @@ function ViewProject(props) {
                     </div>
                     <CellDescription description={(complited ? complited : 0) + '% complete'} />
                 </td>
+                {/* <td style={{ 'text-align': 'center' }}>
+                    <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
+                    <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
+                    <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
 
-                {props.myProject.members.length ?
-                    <td style={{ 'text-align': 'center' }}>
-                        <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
-                        <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
-                        <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
-
-                        <CellDescription description='Team' />
-                    </td>
-                    : null}
+                    <CellDescription description='Team' />
+                </td> */}
                 <td className='widthCellInProject'>
-                    <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
+                    <Cell item={props.myProject.updateDates?props.myProject.updateDates[props.myProject.updateDates.length - 1]:null} />
                     <CellDescription description='Last Update' />
                 </td>
 
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
+                    {/* <i class="fas fa-user-friends"></i> */}
 
-
-                    <img style={myStyleIcons} src={require('../../../img/share.png')}
-                        className='iconsProject' data-tip data-for="share"
+                    <FontAwesomeIcon style={myStyleIcons} icon={["fas", "user-friends"]} className='ddd iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
+
+                    {/* <img style={myStyleIcons}
+                        className='iconsProject' data-tip data-for="share"
+                        onClick={(event) => openShareProject(event)} src={share} /> */}
                     <ReactTooltip data-tip id="share" place="bottom" effect="solid">
                         {title.title_share}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
-
-                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
-                        src={require('../../../img/pencil-edit.png')} data-tip data-for="edit_" />
+                    <img data-tip data-for="edit_" style={myStyleIcons}
+                        className='iconsProject' onClick={(event) => editProject(props.myProject, event)} src={require('../../../img/pencil-write.png')} />
                     <ReactTooltip data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
-                        src={require('../../../img/remove.png')} data-tip data-for="delete" />
+                        src={require('../../../img/bin.png')} data-tip data-for="delete" />
                     <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>

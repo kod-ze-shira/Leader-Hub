@@ -48,7 +48,7 @@ function EditWorkspace(props) {
         <>
             <div className="details d-workspace mr-5 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details pl-3">Workspace details</h5>
 
                         <div class="close pr-3" onClick={() => closeViewDetailsInWorkspace()}>x</div>
@@ -72,13 +72,13 @@ function EditWorkspace(props) {
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div class="form-control descriptionWorkspace"
-                            id="description" rows="5"
+                        <input class="form-control descriptionWorkspace"
+                            id="description" rows="3"
                             placeholder="Write a description about your workspace"
                             name="description"
                             value={props.workspaces[props.indexOfWorkspace].description}
                             onChange={(input) => changeFiledInWorkspace(input)} contentEditable
-                        ></div>
+                        ></input>
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>

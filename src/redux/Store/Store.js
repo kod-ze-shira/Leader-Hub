@@ -1,36 +1,41 @@
 
 // import reducer from './reducers';
-import project_reducer from '../Reducers/project_reducer';
-import task_reducer from '../Reducers/task_reducer';
-import workspace_reducer from '../Reducers/workspace_reducer';
-import card_reducer from '../Reducers/card_reducer';
-import status_reducer from '../Reducers/status_reducer';
-import public_reducer from '../Reducers/public_reducer';
-import files_reducer from '../Reducers/files_reducer'
-import share_reducer from '../Reducers/share_reducer';
-import design_reducer from '../Reducers/design_reducer';
-
-
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
-/////////////////////////////////////////////
-import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject, getFilesForProject } from '../middleware/projectCrud';
-import {
-    editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask, dragCard, updateLike,
-    // moveCards,
-    completeTask, belongTask, newTaskNotBelong
-} from '../middleware/taskCrud';
-import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
-import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
-import { createSystemWave } from '../middleware/waveCrud'
+import { downloadFile, getFiles, removeFile, uploadFiles } from '../middleware/filesCrud';
 import { extractJwt } from '../middleware/loginCrud';
-import { uploadFiles, removeFile, downloadFile, getFiles } from '../middleware/filesCrud';
+/////////////////////////////////////////////
+import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOverdueTasksByProjectId, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
+import { createStatus, editStatus, getAllStatusesTaskForWorkspace, removeStatus } from '../middleware/statusCrud';
+import {
+    belongTask,
+    // moveCards,
+    completeTask, dragCard, dragTask, editTask, getAllMilestonesTasks, getAllTasksNotBelongsCardForUser, getTaskByIdFromServer, getTasksByCardId,
+    moveTaskBetweenCards, newTask,
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
+
+    newTaskNotBelong, removeTaskById,
+    updateLike
+} from '../middleware/taskCrud';
+import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, getMembersByProjectId, shareObject } from '../middleware/teamCrud';
+import { createSystemWave } from '../middleware/waveCrud';
+import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
+import card_reducer from '../Reducers/card_reducer';
+import design_reducer from '../Reducers/design_reducer';
+import files_reducer from '../Reducers/files_reducer';
+import overview_reducer from '../Reducers/overview_reducer';
+import project_reducer from '../Reducers/project_reducer';
+import public_reducer from '../Reducers/public_reducer';
+import share_reducer from '../Reducers/share_reducer';
+import status_reducer from '../Reducers/status_reducer';
+import task_reducer from '../Reducers/task_reducer';
+import workspace_reducer from '../Reducers/workspace_reducer';
+
+
+
+const reducers = combineReducers({overview_reducer, project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
 
 const store = createStore(
     reducers,
@@ -48,6 +53,7 @@ const store = createStore(
                 getProjectsByWorkspaceId,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
+                getOverdueTasksByProjectId,
                 getCardsByProjectId,
                 getTasksByCardId,
                 deleteWorkspaceFromServer,
@@ -93,8 +99,7 @@ let jwtFromCookie
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
 if (window.location.hostname == "localhost") {
     jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
-    // batshevamanir
-    // jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJsUW1oRmtsd3hyU1dTOUp1dG5XRFhtd1haOEcyIiwiZW1haWwiOiJsZWFybkBsZWFkZXIuY29kZXMiLCJpYXQiOjE2MjI5ODcyODZ9.VA10cCCWfnJWGEdFVMGs-0SQf5s3RDGMzEyP3p8db0o"
+    // jwtFromCookie = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIZXNJaFlXaVU2Z1A3M1NkMHRXaDJZVzA4ZFkyIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjEwMzA4MTM4fQ.sEez_H1EQ7JfcBTB3R9MDGq89if9wTJh9rHXYcplYdw"
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }
 else {

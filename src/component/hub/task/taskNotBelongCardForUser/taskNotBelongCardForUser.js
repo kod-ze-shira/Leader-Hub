@@ -12,10 +12,10 @@ function TaskNotBelongCardForUser(props) {
     const [nameTask, setNameTask] = useState('')
     const [showBtn, setShowBtn] = useState(true)
     useEffect(() => {
-        if (!props.tasks.length)
+        if (!props.tasks.length) {
             props.getAllTasksNotBelongsCardForUser()
-
-    }, [props.tasks])
+        }
+    }, [])
 
     function showToast(valueToDelet) {
         props.showToastDelete(valueToDelet)
@@ -25,12 +25,10 @@ function TaskNotBelongCardForUser(props) {
             <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
-                viewToastComplete={props.viewToastComplete}
             /> : null
             : <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
-                viewToastComplete={props.viewToastComplete}
             />
     })
 
@@ -61,7 +59,7 @@ function TaskNotBelongCardForUser(props) {
                             }
                         }} />
                     <button className="close-add-task" onClick={() => setShowBtn(true)}>
-                        <img width="75%"
+                        <img
                             src={require('../../../img/close-icon.svg')}>
                         </img>
                     </button>

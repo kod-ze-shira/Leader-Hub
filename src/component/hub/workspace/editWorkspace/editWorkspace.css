@@ -18,7 +18,7 @@
       font-weight: 600;
   }
   .details .form-control , .details  .css-yk16xz-control{
-      background-color: hsla(196, 44%, 95%, 1) !important;
+      background-color: #EDF8F6 !important;
       border:none !important;
 
       /* color: var(--unnamed-color-0a102e); */
@@ -46,7 +46,7 @@
     text-align: left;
     font: normal normal bold 18px/28px Roboto;
     letter-spacing: 0.48px;
-    color: hsla(183, 72%, 44%, 1);
+    color: #34A38B;
     text-transform: capitalize;
     opacity: 0.9;
   }

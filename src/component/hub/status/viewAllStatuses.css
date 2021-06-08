@@ -1,0 +1,24 @@
+.menu-status p{
+    color:white !important;
+    text-align: center !important;
+}
+.menu-status{
+border: 1.5px solid var(--unnamed-color-8d8dae);
+border: 2px solid #8D8DAE;
+border-radius: 19px;
+width: 150px;
+height: 28px;
+margin-top: 1vh;
+}
+ .btn:focus
+{
+    box-shadow: none !important;
+}
+.pencil-status{
+    height: 1vh;
+    width: 1vh;
+    
+}
+.circle-picker {
+    width: 140% !important;
+}
