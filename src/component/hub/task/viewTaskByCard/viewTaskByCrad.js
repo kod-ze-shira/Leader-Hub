@@ -7,6 +7,8 @@ import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl, Table } from 'react-bootstrap'
 // import './viewTaskByCard.css'
 // import './viewTaskByCrad.css'
+import Select from 'react-select';
+
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
@@ -22,6 +24,8 @@ function ViewTaskByCrad(props) {
     const [userHasLike, setUserHasLike] = useState(false)
 
     useEffect(() => {
+        debugger
+        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null
@@ -71,6 +75,10 @@ function ViewTaskByCrad(props) {
 
 
     }
+    // const viewPriortyList = props.task ? props.task.priority.map(priority => (
+    //     { value: " priority.priorityLevel", label: "priority.priorityLevel" }
+
+    // )) : null
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
@@ -238,7 +246,7 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-                                <div onClick={(e) => updateLike(e)} className="p-3">
+                                <div onClick={(e) => updateLike(e)} className="p-2">
                                     <p className="likes-num mr-1">{props.task.likes.length}</p>
                                     <img
                                         onClick={updateLike}
@@ -275,6 +283,15 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task border-left  px-2 col">{props.task.startDate}
                                 </label>
                                 <label className="check-task border-left  px-2 col">{props.task.dueDate}
+                                </label>
+                                <label className="check-task border-left  px-2 col">
+                                    {/* <Select
+                                        classNamePrefix="select"
+                                        name="color"
+                                        options={viewPriortyList}
+                                        placeholder={"All Priorty"}
+
+                                    /> */}
                                 </label>
                                 <label className="check-task border-left  px-2 col-add-task">
                                 </label>
