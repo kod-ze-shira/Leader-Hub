@@ -25,6 +25,7 @@ function ViewTaskByCrad(props) {
 
     useEffect(() => {
         debugger
+        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null
@@ -245,7 +246,7 @@ function ViewTaskByCrad(props) {
                                     >
                                     </input>
                                 </div>
-                                <div onClick={(e) => updateLike(e)} className="p-3">
+                                <div onClick={(e) => updateLike(e)} className="p-2">
                                     <p className="likes-num mr-1">{props.task.likes.length}</p>
                                     <img
                                         onClick={updateLike}
