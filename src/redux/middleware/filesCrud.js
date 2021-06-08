@@ -94,7 +94,6 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
 export const downloadFile = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DOWNLOAD_FILE') {
-        
         let file = action.payload.file
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
         fetch(

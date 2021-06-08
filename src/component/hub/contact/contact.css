@@ -85,7 +85,6 @@ body {
   color: tomato;
 }
 .option-contact{
-  cursor: pointer;
   width: 340px !important;
   /* display: inline-block!important; */
 }
@@ -95,12 +94,12 @@ body {
 .assinto-contact:hover{
   display: block  !important;
 } */
-.select-dinamic{
+/* .select-dinamic{
   width:150px !important;
-}
+} */
 .email-contact{
     font-size:13px;
-    /* margin-left: 1vw; */
+    margin-left: 1vw;
     text-align: right;
     margin-top:1px;
     opacity:0.9;
@@ -166,13 +165,11 @@ body {
     }
 .invite-button{
   border-radius: 3px;
-background-color: #E8EAEC;
+background-color: #ebe6e6;
 font-size: smaller ;
-/* color: #B2B2B2; */
+color: #B2B2B2;
 height:35px;
 text-align:left;
-color:black;
-
 /* display: inline-block; */
 }
 .div_contacts_list > .form-group{

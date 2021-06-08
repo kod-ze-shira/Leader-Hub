@@ -1,0 +1,56 @@
+.filesForProject{
+   
+}
+h3{
+    font-family: Roboto;
+}
+
+.viewFile{
+  border: gray;
+  box-shadow: gray 1px 1px;
+    padding: 0;
+}
+.wrapImg{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+}
+.wrapLink{
+    background-color: #edfbfc ;
+    color: black;   
+     text-align: center;
+}
+.imgFile{
+   height: 15vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.iconControl{
+    display: block;
+
+
+ }
+ .fileItem{
+     border: gray;
+     box-shadow: gray 1ch 1ch;
+ }
+ 
+ 
+ .imageIcon{
+    height: 1rem;
+ }
+ 
+ .iconsList{
+    text-align: center;
+    width: 7rem;
+    justify-content: center;
+  float: right;
+ }
+ 
+.stripeToSavePlace{
+    color:#ffffff00;
+    margin-right: 0.2rem;
+     margin-left: 0.2rem;
+ }

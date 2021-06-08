@@ -94,6 +94,8 @@ export const getFilesForProject = ({ dispatch, getState }) => next => action => 
         $.ajax({
             type: "GET",
             url: url,
+            //${getState().public_reducer.userName}   renana-il
+            //${getState().public_reducer.indexCurrentProject}   
             headers: { authorization: jwtFromCookie },
             success: (data) => {
                 console.log('data' + data.projectFiles);
