@@ -10,7 +10,7 @@ export default function ShareOneMember(props) {
         "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
         "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"
     ]
-
+    const [ifCheckedMember, setIfCheckedMember] = useState(true)
     let refToDivColor = useRef(null)
     const backgroundStyle = refToDivColor.current ?//because the color will render anyway
         refToDivColor.current.style.backgroundColor != "" ?
@@ -27,7 +27,14 @@ export default function ShareOneMember(props) {
             <div className="row pt-3 pl-4">
                 <div className="col-1 pt-3">
                    
-                    <img src={delete_member_logo}></img>
+                    {/* <img src={delete_member_logo}></img> */}
+                    <label
+                        className="check-task py-2">
+                        <input type="checkbox" checked={ifCheckedMember}
+                            onChange={() => setIfCheckedMember(!ifCheckedMember)}
+                        />
+                        <span className="checkmark checkmark-place ml-1"></span>
+                    </label>
                 </div>
                 <div className="col-8">
                     <div className="row">

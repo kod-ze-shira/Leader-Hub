@@ -35,10 +35,11 @@
     width: 3vw;
     height: 3vw;
 }
-.members{
-    width: 30%;
-}
 .nameMembers{
     /* text-align: left; */
     font-weight: bold;
+}
+.backgroundWhiteAndBorderRadius{
+    border-radius: 2%;
+    background-color: white;
 }
