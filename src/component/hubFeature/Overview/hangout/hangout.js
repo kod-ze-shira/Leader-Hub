@@ -9,9 +9,11 @@ import './hangout.css'
 
 function Hangout(props) {
     const { userName } = props;
+    const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
     const { jwtFromCookie } = props;
     const [showChat, setShowChat] = useState(false)
-    const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
+    const [src, setSrc] = useState(null)
+
     const handleOver = (e) => {
         if (showChat === false) {
             e.target.style.background = `url(${imgHover})`
@@ -26,7 +28,16 @@ function Hangout(props) {
 
     const handleClick = (e) => {
         e.target.style.background = `url(${imgClick})`
-        showChat ? setShowChat(false) : setShowChat(true)
+        if (showChat) {
+            setShowChat(false)
+            setSrc(null)
+        }
+        else {
+            setShowChat(true)
+            setSrc(`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`)
+        }
+        // showChat ? setShowChat(false) : setShowChat(true)
+        // showChat ? setSrc(null) : setSrc(`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`)
     }
     // document.getElementById("iframe").contentDocument.close();
     return (
@@ -39,7 +50,7 @@ function Hangout(props) {
 
             </button>
             <iframe id="iframe" className={showChat ? "iframeHangout" : 'd-none'}
-                src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
+                src={src}
 
                 // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
                 title="hangout">

@@ -4,25 +4,21 @@
     background: #F6F6FA;
     width: 3vw;
     height: 3vw;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     margin-right: 1rem;
+    cursor: pointer;
 
 }
 .fontAddMembers{
     color:#75798E;
     font-size:3vw;
-    font-weight: bold;
-
 }
 .divAddMembers:hover , .divAddMembers:hover .fontAddMembers{
     color:#38B1B5 !important;
    cursor: pointer;
 }
-
-.addMembersList{
-    display:none;
-    
-}
-
-.divAddMembers{
-    width: 100%;
+.fontAddMembers{
+    font-weight: bold;
 }

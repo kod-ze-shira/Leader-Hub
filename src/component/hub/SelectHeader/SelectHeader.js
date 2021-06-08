@@ -39,6 +39,7 @@ function SelectHeader(props) {
 
     useEffect(() => {
         if (props.workspaces.length == 0)
+        if(!window.location.href.includes('share'))
             props.getAllWorkspaces()
     }, [])
 

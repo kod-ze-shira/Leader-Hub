@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React,{useEffect} from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../redux/actions/action.js';
 import './viewFilesOfProject.css'
@@ -7,30 +7,30 @@ import title from '../../../Data/title.json'
 import download from '../../img/download.png'
 import ReactTooltip from 'react-tooltip'
 
-function FilesOfProject(props) {
+function FilesOfProject(props){
 
 
-    useEffect(() => {
-
-        console.log('useeffect');
+    useEffect(()=>{
+    
+       console.log('useeffect');
         props.getFilesForProject(props.indexCurrentProject)
         // props.setFilesOfProject(props.indexCurrentProject)
 
-    }, [props.indexCurrentProject])
-    //props.indexOfCurrentProject
+    },[props.indexCurrentProject])
+//props.indexOfCurrentProject
 
 
 
-    function downloadFile() {gi
+function downloadFile(){
 
-    }
-    function deleteFile() {
+}
+function deleteFile(){
 
-    }
+}
 
-    return (
+    return(
         <>
-            <div className="filesForProject backgroundWhiteAndBorderRadius">
+            <div className="filesForProject backgroundWhiteAndBorderRadius" style={{'width':'100%','height':'20vh'}}>
                 <h3>Project Files</h3>
                 <div className="row iconsList" >
                     <div className=" delete iconControl"
@@ -51,35 +51,35 @@ function FilesOfProject(props) {
 
                     </div>
                 </div>
-                <br />
-
+                <br/>
+                
                 <hr></hr>
-
-                {props.FilesOfProject.length ?
-                    // <ul>{props.FilesOfProject.map((file)=><li><a href={file.url} target="_blank">{file.name}</a></li>)}</ul>:"there arent files"}
-                    <div className="container">  <div class="row row-cols-4 g-2">{props.FilesOfProject.map((file) => <div className="viewFile col p-2">
-                        <div className="fileItem">
-                            <div className="row-10 wrapImg"><img src={file.url} className="imgFile"></img> </div>
-                            <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name}</a></div>        </div>
-                    </div>)}</div></div> : "there arent files"}
-                {/* <input type="file"></input> */}
-            </div>
+           
+        {props.FilesOfProject.length?
+        // <ul>{props.FilesOfProject.map((file)=><li><a href={file.url} target="_blank">{file.name}</a></li>)}</ul>:"there arent files"}
+      <div className="container">  <div class="row row-cols-4 g-2">{props.FilesOfProject.map((file)=><div className="viewFile col p-2">
+           <div className="fileItem"> 
+           <div className="row-10 wrapImg"><img src={file.url} className="imgFile"></img> </div>
+           <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name}</a></div>        </div>
+            </div>)}</div></div>:"there arent files"}
+        {/* <input type="file"></input> */}
+        </div>
         </>
     )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps=(state)=>{
     return {
-        FilesOfProject: state.public_reducer.filesForProjectArr,
-        indexCurrentProject: state.public_reducer.indexCurrentProject
+        FilesOfProject:state.public_reducer.filesForProjectArr,
+        indexCurrentProject:state.public_reducer.indexCurrentProject
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setFilesOfProject: (f) => dispatch(actions.setFilesOfProject(f)),
-        getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
-
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        setFilesOfProject:(f)=>dispatch(actions.setFilesOfProject(f)),
+        getFilesForProject:(p)=>dispatch(actions.getFilesForProject(p)),
+    
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilesOfProject)
+export default connect(mapStateToProps,mapDispatchToProps)(FilesOfProject)
