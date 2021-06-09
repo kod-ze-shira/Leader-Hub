@@ -2,20 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 function Logs(props) {
-    let logs=props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
-    console.log("lodsssssssssss ",logs);
-
+    // const { members } = props.members
     return (
         <>
             <div className="container backgroundWhiteAndBorderRadius">
-                <div className="row">
-                    {logs.length ?
-                        logs.map(l => {
-                           return <div className="viewMembers col-4 ">{l}</div>
-                        })
-                        : null
-                    }
-                </div>
             </div>
         </>
 
