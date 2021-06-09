@@ -6,8 +6,7 @@ import bin from '../../../img/bin.png'
 import title from '../../../../Data/title.json'
 import download from '../../../img/download.png'
 import ReactTooltip from 'react-tooltip'
-import pdf from '.././../../img/pdf.png'
-import word from '../../../img/word.png'
+import ViewFile from './viewFile'
 
 function FilesOfProject(props){
 
@@ -16,15 +15,13 @@ function FilesOfProject(props){
     
        console.log('useeffect');
         props.getFilesForProject(props.indexCurrentProject)
-        // props.setFilesOfProject(props.indexCurrentProject)
 
     },[props.indexCurrentProject])
 //props.indexOfCurrentProject
 
 const filesForDownloadOrDelete=[]
 
-function addOrRemoveFileToArr(e,file){
-          //  e.currentTarget.className="fileItem fileItemFocus"
+function addOrRemoveFileToArr(e,file,ref){
         let index=0
         filesForDownloadOrDelete.forEach(f=>f._id==file._id?index=f._id:null)
         // for(let i=0;i<filesForDownloadOrDelete.length-1;i++){
@@ -32,12 +29,13 @@ function addOrRemoveFileToArr(e,file){
         //         index=i
         // }
         if(index==0) {
-            // e.currentTarget.className="fileItem"
-            e.currentTarget.children[0].children[1].children[0].checked=true
+            ref.current.checked=true
+            // e.currentTarget.children[0].children[1].children[0].checked=true
             filesForDownloadOrDelete.push(file)
 
         }
         else {
+            ref.current.checked=false
             e.currentTarget.children[0].children[1].children[0].checked=false   
             filesForDownloadOrDelete.splice(index,1)
         }
@@ -62,7 +60,7 @@ function deleteFile(){
             <div className="row">
            <h3 className="col-9" id="title">Project Files</h3>
             <div className="col-3 row iconsList" >
-                    <div className=" delete iconControl"
+                    {/* <div className=" delete iconControl"
                         onClick={deleteFile}
                         data-tip data-for="delete"
                     >
@@ -71,7 +69,7 @@ function deleteFile(){
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
-                    <div className="stripe stripeToSavePlace" >|</div>
+                    <div className="stripe stripeToSavePlace" >|</div> */}
                     <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
                         <img class='imageIcon' src={download} ></img>
                         <ReactTooltip data-tip id="download" place="top" effect="solid">
@@ -88,26 +86,16 @@ function deleteFile(){
      //
      <div className="container">  
          <div class="row row-cols-4 row-cols-lg-6 g-2">
-          {props.FilesOfProject.map((file)=>
-          <div className="viewFile col p-2">
-           <div  className="fileItem" onClick={(e)=>addOrRemoveFileToArr(e,file)}> 
-           {/* <input type="checkbox" className="selectFile" ></input>   */}
-           <div className="row-10 wrapImg">
-               
-               <img src={file.name.endsWith('.pdf')?require('.././../../img/file_pdf.png'):
-               file.name.endsWith('.doc')?require('../../../img/word.png'):file.url} className="imgFile"></img> 
-            <label
-                                    title="check file"
-                                    className="selectFile py-2 check-tabs row">
-                                    <input type="checkbox"/>
-                                    <span
-                                        className="checkmarkFile checkmarkFile-tabs"
-                                    ></span>
-          </label>
-           </div>
-           <div className="row-2 wrapLink"><a href={file.url} target="_blank" className="fileName">{file.name.length>10?file.name.slice(0,10)+"...":file.name}</a></div>
-                 </div>
-            </div>)}</div></div>:"there arent files"}
+          {props.FilesOfProject.map((card)=>
+              card.files.length?
+              card.files.map((file,index)=>
+          <ViewFile
+          file={file}
+          addOrRemoveFileToArr={addOrRemoveFileToArr}
+          fileRef={'ref'+index}
+          >
+          </ViewFile>):null
+        )}</div></div>:"there arent files"}
         </div>
         </>
     )
@@ -122,7 +110,6 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps=(dispatch)=>{
     return{
-        setFilesOfProject:(f)=>dispatch(actions.setFilesOfProject(f)),
         getFilesForProject:(p)=>dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
     }

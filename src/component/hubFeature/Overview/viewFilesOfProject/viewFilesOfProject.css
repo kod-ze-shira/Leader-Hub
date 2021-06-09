@@ -1,6 +1,7 @@
 .filesForProject{
    background-color: white;
    border-radius: 2%;
+   padding: 1vw;
 }
 h3{
     font-family: Roboto;
@@ -25,6 +26,7 @@ h3{
 .wrapLink{
     background-color: #EDFBFC ;
      text-align: center;
+     padding: 0.2rem;
 }
 .wrapLink a{
        color: #707070;
@@ -57,13 +59,15 @@ h3{
      background-color: #38B1B5;
  }
  .fileItem{
-     border: gray;
-     box-shadow: gray 1px 1px 1px 1px;
+    border: #E8EAEC;
+    border-width: 0.1rem;
+    border-style: solid;
      cursor: pointer;
+     border-radius: 2%;
  }
- .fileItem:hover{
+ /* .fileItem:hover{
     box-shadow: gray 2px 2px 2px 2px;
- }
+ } */
 
 
 .fileItemFocus{
@@ -169,12 +173,13 @@ h3{
   /* Create a custom checkbox */
   .checkmarkFile {
     position: absolute;
-    height: 1em;
-    width: 1em;
+    height: 0.7em;
+    width: 0.7em;
     background-color: #fff;
     border: 1px solid #fff;
         border-radius: 30%;
    opacity: 0.9;
+   margin-left: 0.5vw;
   }
   /* .checkmarkFile-tabs{
     left: 6% !important;
@@ -188,6 +193,11 @@ h3{
   
   .selectFile:hover input ~ .checkmarkFile {
     background-color: #FFFFFF;
+    opacity: 1;
+  }
+
+  .selectFile input:checked ~ .checkmarkFile {
+    opacity: 1;
   }
   
   /* When the checkbox is checked, add a blue background */
@@ -210,7 +220,7 @@ h3{
     display: block;
     background-color:#38B1B5 ;
     content: "\2713";
-    font-size:0.9vw;
+    font-size:0.6vw;
     font-weight: bolder;
     color: white;
     width:-webkit-fill-available;
