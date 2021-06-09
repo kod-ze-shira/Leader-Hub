@@ -80,42 +80,40 @@ function FilesOfProject(props) {
                     </div>
                 </div>
                 <hr></hr>
+           
+        {props.FilesOfProject.length?
 
-                {props.FilesOfProject.length ?
-
-                    //
-                    <div className="container" >
-                        <div class="row row-cols-4 row-cols-lg-6 g-2">
-                            {props.FilesOfProject.map((file) => <div className="viewFile col p-2">
-                                <div className="fileItem" onClick={(e) => addOrRemoveFileToArr(e, file)}>
-                                    {/* <input type="checkbox" className="selectFile" ></input>   */}
-
-                                    <div className="row-10 wrapImg" >
-                                        <img src={file.url} className="imgFile"></img>
-                                        <label
-                                            title="check file"
-                                            className="selectFile py-2 check-tabs row">
-                                            <input type="checkbox"
-                                            // name="complete"
-                                            // checked={doneStatus}
-                                            // value={props.task.complete}
-                                            // onChange={(e) => changeFiledInTask(e)}
-                                            // onClick={(e) => e.stopPropagation()
-                                            // }
-                                            />
-                                            <span
-                                                className="checkmarkFile checkmarkFile-tabs"
-                                            // onClick={(e) => addChalalit(e)}
-                                            ></span>
-                                        </label>
-                                    </div>
-                                    <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name.length > 12 ? file.name.slice(0, 12) + "..." : file.name}</a></div>
-                                </div>
-                            </div>)}
-                        </div>
-                    </div> : "there arent files"}
-                {/* <input type="file"></input> */}
-            </div>
+     //
+     <div className="container" >  
+         <div class="row row-cols-4 row-cols-lg-6 g-2">
+          {props.FilesOfProject.map((file)=><div className="viewFile col p-2">
+           <div  className="fileItem" onClick={(e)=>addOrRemoveFileToArr(e,file)}> 
+           {/* <input type="checkbox" className="selectFile" ></input>   */}
+          
+           <div className="row-10 wrapImg" >
+               <img src={file.url} className="imgFile"></img> 
+            <label
+                                    title="check file"
+                                    className="selectFile py-2 check-tabs row">
+                                    <input type="checkbox"
+                                        // name="complete"
+                                        // checked={doneStatus}
+                                        // value={props.task.complete}
+                                        // onChange={(e) => changeFiledInTask(e)}
+                                        // onClick={(e) => e.stopPropagation()
+                                        // }
+                                    />
+                                    <span
+                                        className="checkmarkFile checkmarkFile-tabs"
+                                        // onClick={(e) => addChalalit(e)}
+                                    ></span>
+          </label>
+           </div>
+           <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name?.length>12?file.name.slice(0,12)+"...":file.name}</a></div>
+                 </div>
+            </div>)}</div></div>:"there arent files"}
+        {/* <input type="file"></input> */}
+        </div>
         </>
     )
 }

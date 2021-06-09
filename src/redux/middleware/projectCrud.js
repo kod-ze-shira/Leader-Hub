@@ -36,6 +36,57 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
     return next(action);
 }
 
+//********for overview*********
+export const getOverdueTasksByProjectId = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_OVERDUE_TASKS_BY_PROJECT_ID') {
+        console.log(getState());
+        var projectId = action.payload;
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/getOverdueTasksOfProject`
+
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                dispatch(actions.setOverdueTasks(data.count))
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                })
+            }
+        });
+    }
+    return next(action);
+}
+
+export const getTaskStatusesOfProject = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_TASK_STATUSES_OF_PROJECT') {
+        console.log(getState());
+        var projectId = action.payload;
+        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/getTaskStatusesOfProject`
+
+        $.ajax({
+            url: urlData,
+            type: 'GET',
+            headers: {
+                Authorization: getState().public_reducer.tokenFromCookies
+            },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                dispatch(actions.setTaskStatusesOfProject(data))
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                })
+            }
+        });
+    }
+    return next(action);
+}
+
 export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => action => {
 
     if (action.type === "GET_PROJECTS_BY_WORKSPACE_ID") {
