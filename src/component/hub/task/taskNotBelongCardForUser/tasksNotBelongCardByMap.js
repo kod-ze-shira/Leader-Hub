@@ -45,8 +45,8 @@ function TasksNotBelongCardByMap(props) {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
         }
-    }, [props.workspaces])
 
+    }, [props.workspaces])
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
@@ -81,7 +81,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete(true)
+            // props.viewToastComplete(true)
         }
     }
 
@@ -127,17 +127,7 @@ function TasksNotBelongCardByMap(props) {
     // const selectPlaceHorder = <img className="selectPlaceHorder" src={require('../../../img/remove.svg')}></img>
 
     // const selectPlaceHorder = <img src={placeholder}></img>
-    const selectPlaceHorder = <hr
-        style={{
-            marginLeft: '25%',
-            border: 0,
-            clear: 'solid',
-            display: 'block',
-            width: '7vw',
-            backgroundColor: '#68C7CB',
-            height: '2px'
-        }}
-    />
+    const selectPlaceHorder = <hr className="hr-place-holder"/>
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
@@ -276,9 +266,7 @@ function TasksNotBelongCardByMap(props) {
         e.stopPropagation();
 
     }
-    function setDownloadFileFunc(e) {
-        setDownloadFile(e)
-    }
+
     $(window).click(function () {
         if (!downloadFile) {
             setViewDetails(false)
@@ -293,7 +281,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className="wrap-not-belong col-5 row">
+                <div className="wrap-not-belong col-4 col-lg-5 row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -441,7 +429,8 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
-                            setDownloadFile={(e) => setDownloadFile(false)}
+                            setDownloadFile={(e) => setDownloadFile(e)}
+
                             open={true} />
                     </div>
                     : null}

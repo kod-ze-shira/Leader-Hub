@@ -72,13 +72,13 @@ function EditWorkspace(props) {
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input class="form-control descriptionWorkspace"
-                            id="description" rows="3"
+                        <div class="form-control descriptionWorkspace"
+                            id="description" rows="5"
                             placeholder="Write a description about your workspace"
                             name="description"
                             value={props.workspaces[props.indexOfWorkspace].description}
                             onChange={(input) => changeFiledInWorkspace(input)} contentEditable
-                        ></input>
+                        ></div>
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>

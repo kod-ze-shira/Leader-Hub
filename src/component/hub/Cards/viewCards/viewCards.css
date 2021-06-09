@@ -42,11 +42,13 @@
     background-color: transparent;
     border: none;
     outline: 0!important;
+    text-align: left;
   
 }
 .show-task{
     outline: 0!important;
     border: none ;
+    text-align: left;
 
 }
 .show-card{
