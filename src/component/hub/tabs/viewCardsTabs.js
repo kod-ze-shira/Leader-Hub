@@ -24,6 +24,7 @@ function ViewCardsTabs(props) {
             }
     }, [props.flag, props.openInputTask])
 
+    
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
@@ -60,6 +61,7 @@ function ViewCardsTabs(props) {
         setAddTaskInInput(!addTaskInInput)
         props.setCard(props.cardFromMap)
         e.stopPropagation();
+
     }
     // const updateCardName = (event) => {
 
@@ -124,110 +126,106 @@ function ViewCardsTabs(props) {
         function () {
             $(this).attr('contentEditable', false);
         });
-
+    console.log(props.cards);
     return (
         <>
-        {props.cards?.length}
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-            {(props.cards?.length-1)?
-            <Draggable draggableId={props.cardFromMap._id} index={props.index}>
-            {provided => (
-                <div
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                >
-                    <div className="view-cards-tabs"
-                        id={props.cardFromMap._id + "disappear"}>
-                        <div class="card" >
-                            <div class="container" >
-                                <div class="draggable card-header row">
-                                    <span
-                                        id="input-card-name"
-                                        ref={textInput}
-                                        onBlur={() => editCard()}
-                                        className="  pl-4 col-10"
-                                    // form-control              
-                                    // value={editCardName}
-                                    // onChange={updateCardName}
-                                    // title={editCardName}
-                                    // onKeyPress={event => {
-                                    //     enterK(event)
-                                    // }}
-                                    >{editCardName}
-                                    </span>
-                                    <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
-                                    >
-                                        . . .
+                    <Draggable draggableId={props.cardFromMap._id} index={props.index}>
+                        {provided => (
+                            <div
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                            >
+                                <div className="view-cards-tabs"
+                                    id={props.cardFromMap._id + "disappear"}>
+                                    <div class="card" >
+                                        <div class="container" >
+                                            <div class="draggable card-header row">
+                                                <span
+                                                    id="input-card-name"
+                                                    ref={textInput}
+                                                    onBlur={() => editCard()}
+                                                    className="  pl-4 col-10"
+                                                // form-control              
+                                                // value={editCardName}
+                                                // onChange={updateCardName}
+                                                // title={editCardName}
+                                                // onKeyPress={event => {
+                                                //     enterK(event)
+                                                // }}
+                                                >{editCardName}
+                                                </span>
+                                                <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
+                                                >
+                                                    . . .
                                     </Button>
-                                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
-                                        {title.title_more_actions}
-                                    </ReactTooltip>
-                                    <Menu
-                                        id="simple-menu"
-                                        anchorEl={anchorEl}
-                                        keepMounted
-                                        open={Boolean(anchorEl)}
-                                        onClose={handleClose}
-                                    >
-                                        <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
-                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
-                                    </Menu>
+                                                <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                                    {title.title_more_actions}
+                                                </ReactTooltip>
+                                                <Menu
+                                                    id="simple-menu"
+                                                    anchorEl={anchorEl}
+                                                    keepMounted
+                                                    open={Boolean(anchorEl)}
+                                                    onClose={handleClose}
+                                                >
+                                                    <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
+                                                    <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
+                                                </Menu>
 
+                                            </div>
+                                        </div>
+                                        <div class="card-body allTaskInCard">
+                                            <Droppable droppableId={props.cardFromMap._id} >
+                                                {provided => (
+                                                    <div className="mt-0"
+                                                        ref={provided.innerRef}
+                                                        {...provided.droppableProps} >
+
+
+                                                        {props.cardFromMap.tasks.map((task, index) => (
+                                                            <ViewTaskByCradTabs
+                                                                openViewDetails={openViewDetails}
+                                                                objectToast={(obj) => props.showToast(obj)}
+                                                                task={props.cards[props.indexCard].tasks[index]}
+                                                                indexCard={props.indexCard}
+                                                                indexTask={index}
+                                                                viewToastComplete={props.viewToastComplete}
+                                                                viewContactList={props.viewContactList} />
+                                                        ))}
+                                                        {
+                                                            addTaskInInput ?
+                                                                <div class="mt-2">
+                                                                    <input
+                                                                        autoFocus="true"
+                                                                        type="text"
+                                                                        class="form-control" placeholder="Add Task"
+                                                                        id="input-task"
+                                                                        value={inputValue}
+                                                                        // onMouseLeave={(e)=>setAddTaskInInput(false)}
+                                                                        onChange={updateInputValue} onKeyPress={event => {
+                                                                            if (event.key === 'Enter') {
+                                                                                newTask()
+                                                                            }
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                : null
+                                                        }
+                                                        {provided.placeholder}
+                                                    </div>
+                                                )}
+                                            </Droppable>
+                                            <a data-tip data-for="add_t"
+                                                className="add-task-tabs mt-4 "
+                                                onClick={(e) => addTask(e)}>Add Task +</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body allTaskInCard">
-                                <Droppable droppableId={props.cardFromMap._id} >
-                                    {provided => (
-                                        <div className="mt-0"
-                                            ref={provided.innerRef}
-                                            {...provided.droppableProps} >
-
-
-                                            {props.cardFromMap.tasks.map((task, index) => (
-                                                <ViewTaskByCradTabs
-                                                    openViewDetails={openViewDetails}
-                                                    objectToast={(obj) => props.showToast(obj)}
-                                                    task={props.cards[props.indexCard].tasks[index]}
-                                                    indexCard={props.indexCard}
-                                                    indexTask={index}
-                                                    viewToastComplete={props.viewToastComplete}
-                                                    viewContactList={props.viewContactList} />
-                                            ))}
-                                            {
-                                                addTaskInInput ?
-                                                    <div class="mt-2">
-                                                        <input
-                                                            autoFocus="true"
-                                                            type="text"
-                                                            class="form-control" placeholder="Add Task"
-                                                            id="input-task"
-                                                            value={inputValue}
-                                                            // onMouseLeave={(e)=>setAddTaskInInput(false)}
-                                                            onChange={updateInputValue} onKeyPress={event => {
-                                                                if (event.key === 'Enter') {
-                                                                    newTask()
-                                                                }
-                                                            }}
-                                                        />
-                                                    </div>
-                                                    : null
-                                            }
-                                            {provided.placeholder}
-                                        </div>
-                                    )}
-                                </Droppable>
-                                <a data-tip data-for="add_t"
-                                    className="add-task-tabs mt-4 "
-                                    onClick={(e) => addTask(e)}>Add Task +</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </Draggable>
-                :<div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div> }
-                
+                        )}
+                    </Draggable>
             </div >
         </>
     )

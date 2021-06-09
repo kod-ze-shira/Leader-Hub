@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import { useForkRef } from '@material-ui/core';
 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
 
@@ -23,9 +24,11 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
+                if(data.cards.length)
                 dispatch(actions.setCards(data.cards))
+                else
+                dispatch(actions.setCards("not cards"))
                 console.log("success")
-                debugger;
                 console.log("data", data);
                 return false;
             },
@@ -53,7 +56,7 @@ export const newCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ card }),
             success: function (data) {
-                console.log("success")
+                console.log("success datyhj")
                 console.log(data);
                 dispatch(actions.addCardToCardsWhenAddCardToServer(data.card));
             },

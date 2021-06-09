@@ -2,15 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 function Logs(props) {
-    // const { members } = props.members
-    let logs=['yosi','moyshi','avreimy','moty','yeuda','david']
+    let logs=props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
+    console.log("lodsssssssssss ",logs);
+
     return (
         <>
             <div className="container- backgroundWhiteAndBorderRadius">
                 <div className="row">
                     {logs.length ?
                         logs.map(l => {
-                           return <div className='col'>{l}</div>
+                           return <div className='col'>{l.name}</div>
                         })
                         : null
                     }
@@ -26,7 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        // members: state.members
+        indexOfWorkspace:state.public_reducer.indexOfWorkspace,
+        indexCurrentProject:state.public_reducer.indexCurrentProject,
+        workspaces:state.public_reducer.workspaces
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logs);

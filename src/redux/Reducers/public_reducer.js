@@ -173,9 +173,12 @@ const publicData = {
         )
     },
     deleteCard(state, action) {
-        console.log(action.payload.dc)
+        console.log("project",action.payload.project)
         state.cards = state.cards.filter((_, i) =>
-            state.cards[i]._id !== action.payload.dc._id
+            
+               {  console.log("filter",state.cards[i])
+                return state.cards[i]._id !== action.payload.project._id}
+            
         )
     },
     
@@ -247,7 +250,6 @@ const publicData = {
     },
     setCards(state, action) {
         state.cards = action.payload;
-        debugger;
         return true
     },
     setMembers(state, action) {

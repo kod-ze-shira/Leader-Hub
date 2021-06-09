@@ -46,7 +46,6 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 dispatch(actions.setTasks(data.taskOfCards))
                 console.log("success")
-                debugger;
                 console.log("data", data);
 
 
