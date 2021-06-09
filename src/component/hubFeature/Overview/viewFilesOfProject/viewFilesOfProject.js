@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action.js';
 import './viewFilesOfProject.css'
@@ -8,18 +8,17 @@ import download from '../../../img/download.png'
 import ReactTooltip from 'react-tooltip'
 import ViewFile from './viewFile'
 
-function FilesOfProject(props){
+function FilesOfProject(props) {
 
 
-    useEffect(()=>{
-    
-       console.log('useeffect');
+    useEffect(() => {
+
+        console.log('useeffect');
         props.getFilesForProject(props.indexCurrentProject)
 
-    },[props.indexCurrentProject])
-//props.indexOfCurrentProject
+    }, [props.indexCurrentProject])
 
-const filesForDownloadOrDelete=[]
+    const filesForDownloadOrDelete = []
 
 function addOrRemoveFileToArr(e,file,ref){
         let index=0
@@ -40,21 +39,21 @@ function addOrRemoveFileToArr(e,file,ref){
             filesForDownloadOrDelete.splice(index,1)
         }
     }
-function downloadFile(e){
-//     const link = document.createElement('a');
-// link.href = "https://files.codes/uploads/renana-il/img/1622614462003__‏‏צילום מסך (4).png";
-// document.body.appendChild(link);
-// link.click();
-// document.body.removeChild(link);
-// console.log(filesForDownloadOrDelete.length);
-filesForDownloadOrDelete.forEach(f=>props.downloadFile({"file":f}))
+    function downloadFile(e) {
+        //     const link = document.createElement('a');
+        // link.href = "https://files.codes/uploads/renana-il/img/1622614462003__‏‏צילום מסך (4).png";
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
+        // console.log(filesForDownloadOrDelete.length);
+        filesForDownloadOrDelete.forEach(f => props.downloadFile({ "file": f }))
 
-}
-function deleteFile(){
+    }
+    function deleteFile() {
 
-}
+    }
 
-    return(
+    return (
         <>
         <div className="filesForProject">
             <div className="row">
@@ -76,15 +75,15 @@ function deleteFile(){
                             {title.title_downLoad}
                         </ReactTooltip>
 
+                        </div>
                     </div>
-                </div>
                 </div>
                 <hr></hr>
            
         {props.FilesOfProject.length?
 
      //
-     <div className="container">  
+     <div className="container" >  
          <div class="row row-cols-4 row-cols-lg-6 g-2">
           {props.FilesOfProject.map((card)=>
               card.files.length?
@@ -100,12 +99,11 @@ function deleteFile(){
         </>
     )
 }
-///+file.name.split()[1]
 
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
     return {
-        FilesOfProject:state.public_reducer.filesForProjectArr,
-        indexCurrentProject:state.public_reducer.indexCurrentProject
+        FilesOfProject: state.public_reducer.filesForProjectArr,
+        indexCurrentProject: state.public_reducer.indexCurrentProject
     }
 }
 const mapDispatchToProps=(dispatch)=>{
@@ -115,4 +113,4 @@ const mapDispatchToProps=(dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(FilesOfProject)
+export default connect(mapStateToProps, mapDispatchToProps)(FilesOfProject)

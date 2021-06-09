@@ -26,7 +26,8 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-
+        debugger
+        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         $(`#${props.task._id}assing-to`).css("display", "none")
@@ -121,7 +122,7 @@ function ViewTaskByCradTabs(props) {
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
-        
+
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus)
@@ -202,7 +203,7 @@ function ViewTaskByCradTabs(props) {
                         id="task-card"
                     >
 
-                        <div className="task-card mt-2 pt-2 pb-2"
+                        <div className="task-card mt-2 pt-2 pb-2 "
                             onMouseOver={(e) => showAssign(e)}
                             onMouseOut={(e) => closeAssign(e)}
                             onClick={(e) => showDetails(e)}

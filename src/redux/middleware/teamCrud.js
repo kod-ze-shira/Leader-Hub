@@ -250,10 +250,11 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
           Authorization: jwtFromCookie,
         },
       }
-    ).then(response =>{
-      return response.json()})
+    ).then(response => {
+      return response.json()
+    })
       .then(data => {
-        console.log('dataaaaa'+ data.membersList)
+        console.log('dataaaaa' + data.membersList)
         dispatch(actions.setMembers(data.membersList))
       }).catch(err => console.log('err', err))
   }
