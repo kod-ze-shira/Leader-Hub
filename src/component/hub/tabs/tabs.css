@@ -3,14 +3,18 @@
       overflow-x: auto !important;
       /* overflow-y: hidden !important; */
 }
-
-.wraperr-tabs >.row{
+@media screen and (min-width: 770px) {
+    .wraperr-tabs >.row{
   
-    white-space: nowrap !important;
-    display: block;
-}
+        white-space: nowrap !important;
+        display: block;
+    }
+  
+  }
 
-.wraperr-tabs > .row > .col-3 { 
+
+
+.wraperr-tabs > .row > .col-md-3 { 
     display: inline-block !important
     ; float: none !important;  
 }
