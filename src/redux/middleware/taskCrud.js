@@ -121,6 +121,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
+        
         console.log(task)
 
         $.ajax({

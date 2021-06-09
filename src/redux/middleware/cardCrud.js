@@ -34,6 +34,8 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
+                    if (err.status == 300)//share
+                        window.location.assign(window.origin+'/'+ err.responseJSON.routes)
                 })
             }
         });
@@ -132,8 +134,10 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.routes ?
-                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes?
+                window.location.assign(`https://accounts.codes/hub/login?routes=hub/${result.routes}`) :
                 window.location.assign(`https://accounts.codes/hub/login`)
 
             reject(false)
