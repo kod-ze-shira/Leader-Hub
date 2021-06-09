@@ -109,7 +109,7 @@ function deleteFile(){
                                     ></span>
           </label>
            </div>
-           <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name.length>12?file.name.slice(0,12)+"...":file.name}</a></div>
+           <div className="row-2 wrapLink"><a href={file.url} target="_blank">{file.name?.length>12?file.name.slice(0,12)+"...":file.name}</a></div>
                  </div>
             </div>)}</div></div>:"there arent files"}
         {/* <input type="file"></input> */}
