@@ -9,13 +9,15 @@ import public_reducer from '../Reducers/public_reducer';
 import files_reducer from '../Reducers/files_reducer'
 import share_reducer from '../Reducers/share_reducer';
 import design_reducer from '../Reducers/design_reducer';
+import overview_reducer from '../Reducers/overview_reducer';
 
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { actions } from '../actions/action.js';
 /////////////////////////////////////////////
-import { deleteProjectInServer, editProjectInServer, getProjectByIdInServer, getProjectsByWorkspaceId, newProject, getFilesForProject } from '../middleware/projectCrud';
+import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOverdueTasksByProjectId, getProjectByIdInServer, getProjectsByWorkspaceId, getTaskStatusesOfProject, newProject } from '../middleware/projectCrud';
+import { createStatus, editStatus, getAllStatusesTaskForWorkspace, removeStatus } from '../middleware/statusCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
     , moveTaskBetweenCards, dragTask, dragCard, updateLike,
@@ -25,12 +27,11 @@ import {
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
-import { createStatus, editStatus, removeStatus, getAllStatusesTaskForWorkspace } from '../middleware/statusCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
 import { uploadFiles, removeFile, downloadFile, getFiles } from '../middleware/filesCrud';
 
-const reducers = combineReducers({ project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
+const reducers = combineReducers({overview_reducer, project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
 
 const store = createStore(
     reducers,
@@ -48,6 +49,8 @@ const store = createStore(
                 getProjectsByWorkspaceId,
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
+                getOverdueTasksByProjectId,
+                getTaskStatusesOfProject,
                 getCardsByProjectId,
                 getTasksByCardId,
                 deleteWorkspaceFromServer,

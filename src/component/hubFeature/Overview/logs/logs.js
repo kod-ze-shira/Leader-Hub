@@ -17,7 +17,9 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        // members: state.members
+        indexOfWorkspace:state.public_reducer.indexOfWorkspace,
+        indexCurrentProject:state.public_reducer.indexCurrentProject,
+        workspaces:state.public_reducer.workspaces
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logs);

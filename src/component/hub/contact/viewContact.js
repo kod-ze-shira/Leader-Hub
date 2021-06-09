@@ -20,7 +20,7 @@ function ViewContact(props) {
     ]
 
     const assingTaskToContact = (email) => {
-        debugger;
+        debugger
         props.assingTo(email)
     }
 
