@@ -7,7 +7,7 @@ import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middl
 import { downloadFile, getFiles, removeFile, uploadFiles } from '../middleware/filesCrud';
 import { extractJwt } from '../middleware/loginCrud';
 /////////////////////////////////////////////
-import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOverdueTasksByProjectId, getProjectByIdInServer, getProjectsByWorkspaceId, newProject } from '../middleware/projectCrud';
+import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOverdueTasksByProjectId, getProjectByIdInServer, getProjectsByWorkspaceId, getTaskStatusesOfProject, newProject } from '../middleware/projectCrud';
 import { createStatus, editStatus, getAllStatusesTaskForWorkspace, removeStatus } from '../middleware/statusCrud';
 import {
     belongTask,
@@ -54,6 +54,7 @@ const store = createStore(
                 getTaskByIdFromServer,
                 getProjectByIdInServer,
                 getOverdueTasksByProjectId,
+                getTaskStatusesOfProject,
                 getCardsByProjectId,
                 getTasksByCardId,
                 deleteWorkspaceFromServer,
