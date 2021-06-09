@@ -27,7 +27,6 @@ export function workspace(props) {
         $(".workspaces").click(function () {
             // $(".workspaces").css("border", "none");
             flag = !flag;
-            // debugger;
             if (flag == false) {
                 $(".workspace-list").hide();
                 $(".show").hide();

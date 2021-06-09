@@ -52,11 +52,19 @@ function SelectHeader(props) {
         props.from(e)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
+    function backToPage() {
+        if (window.location.href.indexOf('workspace') != -1)
+            props.history.push("/" + props.user + "/hub/")
+        else
+            if (window.location.href.indexOf('projectPlatform') != -1)
+                props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+    }
 
     return (
         <>
 
             <div className="s-header mx-0  row align-items-center">
+                <button onClick={backToPage}>back</button>
                 {props.workspaces.length > 0 ?
                     <>
                         <div className="col-md col-sm-2 pr-0">
@@ -116,6 +124,7 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
         user: state.public_reducer.userName,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 

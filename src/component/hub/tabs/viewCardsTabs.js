@@ -88,8 +88,8 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
-            props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
             $(`#${props.cardFromMap._id}`).css("display", "none")
+            props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
     }
 
@@ -137,7 +137,7 @@ function ViewCardsTabs(props) {
                                 ref={provided.innerRef}
                             >
                                 <div className="view-cards-tabs"
-                                    id={props.cardFromMap._id + "disappear"}>
+                                    id={props.cardFromMap._id}>
                                     <div class="card" >
                                         <div class="container" >
                                             <div class="draggable card-header row">
@@ -215,7 +215,7 @@ function ViewCardsTabs(props) {
                                                 )}
                                             </Droppable>
                                             <a data-tip data-for="add_t"
-                                                className="add-task-tabs mt-4 "
+                                                className="add-task-tabs mt-4 mt-3 "
                                                 onClick={(e) => addTask(e)}>Add Task +</a>
                                         </div>
                                     </div>

@@ -35,9 +35,11 @@
   /* Track */
  ::-webkit-scrollbar-track {
     border-radius: 10px;
+    box-shadow: inset 0 0 5px grey; 
+  
   }
   ::-webkit-scrollbar-track:hover {
-      box-shadow: inset 0 0 5px grey; 
+      /* box-shadow: inset 0 0 5px grey;  */
     }
    
   /* Handle */
@@ -46,7 +48,7 @@
   }
   
   /* Handle on hover */
-  .body-workspace::-webkit-scrollbar-thumb:hover {
+  .body-workspace::-webkit-scrollbar-thumb {
     background: #919494; 
   }
   
