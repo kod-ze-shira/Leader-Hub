@@ -140,7 +140,7 @@ function Tabs(props) {
                             {...provided.droppableProps}>
 
                             <div className="wraperr-tabs">
-                                <div className="row row mx-3">
+                                <div className="row  mx-3">
                                     {props.cards.length ?
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
@@ -155,7 +155,7 @@ function Tabs(props) {
                                         </DragDropContext>
                                         : null}
                                     {/* // <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>} */}
-                                    <div className="card-width px-2 mt-4" >
+                                    <div className="col-md-3  px-2 mt-4" >
                                         <div className="view-cards-tabs  mt-1" >
                                             <div class="card new-card" >
                                                 <div id='newCardInput' class="container" >
