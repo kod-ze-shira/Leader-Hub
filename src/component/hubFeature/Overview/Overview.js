@@ -21,7 +21,7 @@ function Overview(props) {
                                 <MyChart  />
                             </div>
                             <div className='row'>
-                                {/* <FilesOfProject /> */}
+                                <FilesOfProject />
                             </div>
                         </div>
                     </div>
