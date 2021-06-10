@@ -1,7 +1,11 @@
 .scrollbarOverview{
     overflow-y: auto!important;
-    height: 82.7vh
+    height: 82.7vh;
+    overflow-x:hidden;
 }
-.filesForProject{
-    width: 100%;
+.minHeight{
+    min-height:50vh;
 }
+.scrollbarOverview::-webkit-scrollbar {
+    width: 0;
+  }

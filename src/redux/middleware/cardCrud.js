@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import { useForkRef } from '@material-ui/core';
 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
 
@@ -23,10 +24,13 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
+                if(data.cards.length)
                 dispatch(actions.setCards(data.cards))
+                else
+                dispatch(actions.setCards("not cards"))
                 console.log("success")
                 console.log("data", data);
-
+                return false;
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
@@ -54,7 +58,7 @@ export const newCard = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ card }),
             success: function (data) {
-                console.log("success")
+                console.log("success datyhj")
                 console.log(data);
                 dispatch(actions.addCardToCardsWhenAddCardToServer(data.card));
             },
@@ -131,10 +135,10 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-                window.location.assign(`https://accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
                 result.routes?
-                window.location.assign(`https://accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                window.location.assign(`https://accounts.codes/hub/login`)
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

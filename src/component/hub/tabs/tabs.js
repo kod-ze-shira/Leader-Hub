@@ -99,12 +99,12 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-
+        console.log("cardsssssssss",props.cards);
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
-
+           
         }
         setInputValue("")
         setShowInput(false)
@@ -158,7 +158,7 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {props.cards.length ?
+                                    {props.cards!=="no cards" && props.cards.length ?
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
@@ -173,8 +173,10 @@ function Tabs(props) {
                                             })}
                                         </DragDropContext>
                                         : null}
-                                    {/* // <div className="logoGifInCards ml-5 pl-5 logoGif"><img src={require('../../img/animation.gif')} /></div>} */}
-                                    <div className="card-width px-2 mt-4" >
+                                    {typeof(props.cards)!=="no cards" && !props.cards.length?
+                                         <div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
+                                        :
+                                        <div className="card-width px-2 mt-4" >
                                         <div className="view-cards-tabs  mt-1" >
                                             <div class="card new-card" >
                                                 <div id='newCardInput' class="container" >
@@ -198,15 +200,14 @@ function Tabs(props) {
                                                         >+ Add Card</button>
                                                     </div>
                                                 </div>
-                                                <div className="card-body " id={!showInput ? "add-card" : ""}>
+                                                 <div className="card-body " id={!showInput ? "add-card" : ""}>
                                                     {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
 
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>
-
+                                    </div>}
                                 </div>
                             </div>
                             {provided.placeholder}

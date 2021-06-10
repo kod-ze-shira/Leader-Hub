@@ -75,7 +75,8 @@ function ContactList(props) {
       >Send Invite</button> :
     <><div class="spinner-border" role="status">
       <span class="sr-only">Loading...</span>
-    </div></>
+    </div>
+    </>
 
   const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;
   const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200
@@ -88,17 +89,19 @@ function ContactList(props) {
       <div className='div_contacts ' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410, "width": props.hub ? width : 300, "maxHeight": 250 }}>
         <div className='container div_contacts_list  ' style={{}}>
           <div className=' row  mx-1 form-group' id='nameRequired'>
-            {props.hub ? <input placeholder="Name or email " required ref={nameRequired}
+            {/* {props.hub ? */}
+            <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
-              value={props.contactsUser.email}></input> : null}
+              value={props.contactsUser.email}></input>
+            {/* //  : null} */}
             {contactList}
-            {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
+            {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
-              value={props.contactsUser.email}></input> : null}
+              value={props.contactsUser.email}></input> : null} */}
           </div>
 
           <div class="invalid-feedback">

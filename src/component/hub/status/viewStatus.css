@@ -10,6 +10,7 @@ border-radius: 19px;
 height: 28px;
 margin-top: 1vh;
 }
+
 .menu-status:hover{
 
     border-color:  #75798E !important;
@@ -110,4 +111,7 @@ opacity: 0.15;
 .disabled{
     pointer-events: none !important;
     opacity:0.5;
+}
+.pencil-status-none{
+    display: none !important;
 }

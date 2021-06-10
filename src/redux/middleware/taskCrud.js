@@ -48,6 +48,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log("data", data);
 
+
             },
             error: function (err) {
 
@@ -120,6 +121,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
+        
         console.log(task)
 
         $.ajax({
@@ -544,8 +546,8 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.routes ?
-                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://accounts.codes/hub/login`)
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

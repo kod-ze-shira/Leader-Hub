@@ -24,11 +24,10 @@ function TaskDetails(props) {
     const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
-
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
-
     useEffect(() => {
+        debugger
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -328,24 +327,40 @@ function TaskDetails(props) {
                         <ContactList taskDetails={true}></ContactList> : null
 
                     }
-                    <div className="delete-details">
-                        <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
-                    </div>
+                    {props.task.assingTo ?
+
+                        props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
+                            : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
+                        : null}
                     <div className="assingto-details" >
 
                         <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <img data-tip data-for="assing_" className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <ReactTooltip data-tip id="assign_" place="top" effect="solid">
+                            {title.title_assing}
+                        </ReactTooltip>
                     </div>
                     <div className=" files-details">
                         <UploadFile />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <img data-tip id="save" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <ReactTooltip data-tip id="save" place="top" effect="solid">
+                            {title.title_save}
+                        </ReactTooltip>
                     </div>
+                    <div className="delete-details">
+                        <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                    </div>
+
+
+
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
+
+
                 </div>
             </div>
 
