@@ -238,7 +238,7 @@ function MyChart(props) {
     //     })
     // })
     const [countTasks, setCountTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks )
+    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
     const data1 = [
         { card: 'card 1', value: 10 },
         { card: 'card 2', value: 20 },
@@ -252,24 +252,24 @@ function MyChart(props) {
         { status: 'Done', percent: `${readyTasks}%`, color: '#5ddae0' },
         { status: 'At work', percent: `${100 - readyTasks}%`, color: '#99e2e5' }
     ];
-    const data5 = [{ category: 'Completed', val: `${readyTasks/ countTasks}` }, { category: 'Incompleted', val: `${1-readyTasks/countTasks}`}];
+    const data5 = [{ category: 'Completed', val: `${readyTasks / countTasks}` }, { category: 'Incompleted', val: `${1 - readyTasks / countTasks}` }];
     const schemeSet = ['#1FB9C1', '#6CBAFF']
     return (
         <>
-            <Paper>
+            <Paper style={{ width: '100%' }}>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Completed tasks</b><br/><b  className='bParam'>{readyTasks}</b></div>
+                            <div className='chartCol p-2'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Incomplete tasks</b><br/><b className='bParam'>2</b></div>
+                            <div className='chartCol p-2'><b>Incomplete tasks</b><br /><b className='bParam'>2</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Overdue tasks</b><br/><b className='bParam'>1</b></div>
+                            <div className='chartCol p-2'><b>Overdue tasks</b><br /><b className='bParam'>1</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Total tasks </b><br/> <b className='bParam'>{countTasks}</b></div>
+                            <div className='chartCol p-2'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
                         </div>
                     </div>
                     <div className='row'>

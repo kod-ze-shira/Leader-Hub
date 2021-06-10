@@ -15,7 +15,7 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
-import Toast from '../../toast/toastTaskCompleted'
+// import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
 
 function ViewTaskByCrad(props) {

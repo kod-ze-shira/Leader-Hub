@@ -127,7 +127,7 @@ function TasksNotBelongCardByMap(props) {
     // const selectPlaceHorder = <img className="selectPlaceHorder" src={require('../../../img/remove.svg')}></img>
 
     // const selectPlaceHorder = <img src={placeholder}></img>
-    const selectPlaceHorder = <hr className="hr-place-holder"/>
+    const selectPlaceHorder = <hr className="hr-place-holder" />
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
         if (newValue) {
@@ -292,7 +292,6 @@ function TasksNotBelongCardByMap(props) {
                             <FontAwesomeIcon className="dnd-icon  " id={props.task._id}
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
-
 
                             <input
                                 type="checkbox"

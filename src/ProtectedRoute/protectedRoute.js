@@ -10,7 +10,7 @@ function redirectToLogin(routes) {
 }
 const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     // חילוץ jwt מהקוקי
-    let jwtFromCookie=''
+    let jwtFromCookie = ''
     if (window.location.hostname == "localhost") {
         jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
     }
@@ -28,11 +28,11 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     let routes
     let userName
-    debugger
-    if(rest.computedMatch.path.includes('share'))
-    userName='share'
+
+    if (rest.computedMatch.path.includes('share'))
+        userName = 'share'
     else
-    userName = rest.computedMatch.params.userName;
+        userName = rest.computedMatch.params.userName;
     useEffect(() => {
         const isLocal = window.location.hostname == "localhost"
         const url = `${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;

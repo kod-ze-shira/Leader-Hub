@@ -121,7 +121,7 @@ function ViewTaskByCradTabs(props) {
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
-        
+
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus)
@@ -189,6 +189,13 @@ function ViewTaskByCradTabs(props) {
         setUserHasLike(!userHasLike)
         e.stopPropagation()
     }
+
+    const myFiles = props.task.files && props.task.files.length ?
+        props.task.files.map((myFile) => {
+            return <img className='imgInTask' src={myFile.url}></img>
+        })
+        : null
+
     return (
         <>
 
@@ -244,7 +251,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
-
+                                {myFiles}
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
                                     value={props.task.name}
