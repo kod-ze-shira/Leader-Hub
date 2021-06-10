@@ -12,9 +12,8 @@ import './viewCards.css';
 
 function ViewCards(props) {
     useEffect(() => {
-
     }, [props.flag])
-
+    
     const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
