@@ -23,8 +23,6 @@ function ViewMembers(props) {
         <>
 
             <div className="pt-3 ">
-
-
                 <div className="row">
                     {members?.length ?
                         members.map(m => {
@@ -50,7 +48,7 @@ function ViewMembers(props) {
                     }
                 </div>
             </div>
- 
+
 
         </>
 
