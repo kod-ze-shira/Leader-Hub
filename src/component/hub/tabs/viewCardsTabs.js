@@ -216,9 +216,12 @@ function ViewCardsTabs(props) {
                                                     </div>
                                                 )}
                                             </Droppable> : null}
-                                        <a data-tip data-for="add_t"
+                                        <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img>
+
+
+                                        {/* <a data-tip data-for="add_t"
                                             className="add-task-tabs mt-4 "
-                                            onClick={(e) => addTask(e)}>Add Task +</a>
+                                            onClick={(e) => addTask(e)}>Add Task +</a> */}
                                     </div>
                                 </div>
                             </div>

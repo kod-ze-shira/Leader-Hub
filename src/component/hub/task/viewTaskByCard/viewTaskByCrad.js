@@ -220,7 +220,7 @@ function ViewTaskByCrad(props) {
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className=" col-5">
+                                <div className=" col-4">
                                     <label
                                         title="Complete Task"
                                         className="check-task ml-4 ">
