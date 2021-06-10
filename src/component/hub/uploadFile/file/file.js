@@ -64,7 +64,6 @@ function File(props) {
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
                     {props.file.url != 'new' ?
                         <img onClick={(e) =>{
-                            debugger;
                              downloadFile(e)}} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4'
                             src={require('../../../img/download.svg')}></img>
