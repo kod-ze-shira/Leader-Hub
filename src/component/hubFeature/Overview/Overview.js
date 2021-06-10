@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-// import viewFilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
 import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
@@ -8,9 +7,8 @@ import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
 
+
 function Overview(props) {
-
-
     return (
         <>
             <div className='scrollbarOverview container-fluid'>
@@ -41,15 +39,6 @@ function Overview(props) {
         </>
     )
 }
-const mapStateToProps = (state) => {
-    return {
-
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-    }
 
 
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Overview)
+export default Overview;
