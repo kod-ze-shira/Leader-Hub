@@ -8,7 +8,7 @@ export default function members() {
         <>
             <div className="container-fluid px-0 backgroundWhiteAndBorderRadius">
 
-                <div className="row divProjectMembers pt-3 px-4">
+                <div className="row divProjectMembers pt-3 ml-2">
                     <h3>Project Members</h3>
                 </div>
 

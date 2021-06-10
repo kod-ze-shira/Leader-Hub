@@ -193,8 +193,8 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.responseJSON.routes ?
-                window.location.assign(`https://accounts.codes/hub/login?routes=${result.responseJSON.routes}`) :
-                window.location.assign(`https://accounts.codes/hub/login`)
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.responseJSON.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

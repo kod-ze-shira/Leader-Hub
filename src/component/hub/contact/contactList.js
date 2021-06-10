@@ -75,7 +75,8 @@ function ContactList(props) {
       >Send Invite</button> :
     <><div class="spinner-border" role="status">
       <span class="sr-only">Loading...</span>
-    </div></>
+    </div>
+    </>
 
   const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;
   const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200

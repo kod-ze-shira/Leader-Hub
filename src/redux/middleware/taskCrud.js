@@ -48,6 +48,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log("data", data);
 
+
             },
             error: function (err) {
 
@@ -545,8 +546,8 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.routes ?
-                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://accounts.codes/hub/login`)
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 
