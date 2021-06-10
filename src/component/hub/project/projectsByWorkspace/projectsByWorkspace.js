@@ -97,8 +97,10 @@ function ProjectsByWorkspace(props) {
     return (
         <div className='body' >
             <div className='headerProjects'>
-                <div className='betweenHeaderProjects'>
-                    <div className="titleProjects pt-2 ml-2">Leader Projects</div>
+                <div className='contentHeaderProjects'>
+                    <div className='betweenHeaderProjects'>
+                        <div className="titleProjects pt-2 ml-2">Leader Projects</div>
+                    </div>
                 </div>
             </div>
             <Table responsive className='tableProject' >
