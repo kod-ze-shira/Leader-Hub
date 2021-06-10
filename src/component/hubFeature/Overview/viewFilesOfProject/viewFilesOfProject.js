@@ -6,6 +6,7 @@ import bin from '../../../img/bin.png'
 import title from '../../../../Data/title.json'
 import download from '../../../img/download.png'
 import ReactTooltip from 'react-tooltip'
+import ViewFile from './viewFile'
 
 function FilesOfProject(props) {
 
@@ -14,30 +15,28 @@ function FilesOfProject(props) {
 
         console.log('useeffect');
         props.getFilesForProject(props.indexCurrentProject)
-        // props.setFilesOfProject(props.indexCurrentProject)
 
     }, [props.indexCurrentProject])
-    //props.indexOfCurrentProject
 
     const filesForDownloadOrDelete = []
 
-    function addOrRemoveFileToArr(e, file) {
-        //  e.currentTarget.className="fileItem fileItemFocus"
-        let index = 0
-        filesForDownloadOrDelete.forEach(f => f._id == file._id ? index = f._id : null)
+function addOrRemoveFileToArr(e,file,ref){
+        let index=0
+        filesForDownloadOrDelete.forEach(f=>f._id==file._id?index=f._id:null)
         // for(let i=0;i<filesForDownloadOrDelete.length-1;i++){
         //     if(filesForDownloadOrDelete[i]._id==file._id)
         //         index=i
         // }
-        if (index == 0) {
-            // e.currentTarget.className="fileItem"
-            e.currentTarget.children[0].checked = true
+        if(index==0) {
+            ref.current.checked=true
+            // e.currentTarget.children[0].children[1].children[0].checked=true
             filesForDownloadOrDelete.push(file)
 
         }
         else {
-            e.currentTarget.children[0].checked = false
-            filesForDownloadOrDelete.splice(index, 1)
+            ref.current.checked=false
+            e.currentTarget.children[0].children[1].children[0].checked=false   
+            filesForDownloadOrDelete.splice(index,1)
         }
     }
     function downloadFile(e) {
@@ -56,25 +55,25 @@ function FilesOfProject(props) {
 
     return (
         <>
-            <div className="filesForProject backgroundWhiteAndBorderRadius " >
-                <div className="row">
-                    <h3 className="col-9" id="title">Project Files</h3>
-                    <div className="col-3 row iconsList" >
-                        <div className=" delete iconControl"
-                            onClick={deleteFile}
-                            data-tip data-for="delete"
-                        >
-                            <img class='imageIcon' src={bin} ></img>
-                            <ReactTooltip data-tip id="delete" place="top" effect="solid">
-                                {title.title_delete}
-                            </ReactTooltip>
-                        </div>
-                        <div className="stripe stripeToSavePlace" >|</div>
-                        <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
-                            <img class='imageIcon' src={download} ></img>
-                            <ReactTooltip data-tip id="download" place="top" effect="solid">
-                                {title.title_downLoad}
-                            </ReactTooltip>
+        <div className="filesForProject backgroundWhiteAndBorderRadius">
+            <div className="row">
+           <h3 className="col-9" id="title">Project Files</h3>
+            <div className="col-3 row iconsList" >
+                    {/* <div className=" delete iconControl"
+                        onClick={deleteFile}
+                        data-tip data-for="delete"
+                    >
+                        <img class='imageIcon' src={bin} ></img>
+                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                            {title.title_delete}
+                        </ReactTooltip>
+                    </div>
+                    <div className="stripe stripeToSavePlace" >|</div> */}
+                    <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
+                        <img class='imageIcon' src={download} ></img>
+                        <ReactTooltip data-tip id="download" place="top" effect="solid">
+                            {title.title_downLoad}
+                        </ReactTooltip>
 
                         </div>
                     </div>
@@ -124,10 +123,9 @@ const mapStateToProps = (state) => {
         indexCurrentProject: state.public_reducer.indexCurrentProject
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setFilesOfProject: (f) => dispatch(actions.setFilesOfProject(f)),
-        getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        getFilesForProject:(p)=>dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
     }
 }

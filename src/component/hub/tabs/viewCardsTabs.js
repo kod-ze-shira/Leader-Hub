@@ -24,6 +24,7 @@ function ViewCardsTabs(props) {
             }
     }, [props.flag, props.openInputTask])
 
+    
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
@@ -60,6 +61,7 @@ function ViewCardsTabs(props) {
         setAddTaskInInput(!addTaskInInput)
         props.setCard(props.cardFromMap)
         e.stopPropagation();
+
     }
     // const updateCardName = (event) => {
 
@@ -124,58 +126,57 @@ function ViewCardsTabs(props) {
         function () {
             $(this).attr('contentEditable', false);
         });
-
+    console.log(props.cards);
     return (
         <>
-            <div className="col-md-3  px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
-                    {provided => (
-                        <div
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                        >
-                            <div className="view-cards-tabs"
-                                id={props.cardFromMap._id + "disappear"}>
-                                <div class="card" >
-                                    <div class="container" >
-                                        <div class="draggable card-header row">
-                                            <span
-                                                id="input-card-name"
-                                                ref={textInput}
-                                                onBlur={() => editCard()}
-                                                className="  pl-4 col-10"
-                                            // form-control              
-                                            // value={editCardName}
-                                            // onChange={updateCardName}
-                                            // title={editCardName}
-                                            // onKeyPress={event => {
-                                            //     enterK(event)
-                                            // }}
-                                            >{editCardName}
-                                            </span>
-                                            <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
-                                            >
-                                                . . .
-                                            </Button>
-                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
-                                                {title.title_more_actions}
-                                            </ReactTooltip>
-                                            <Menu
-                                                id="simple-menu"
-                                                anchorEl={anchorEl}
-                                                keepMounted
-                                                open={Boolean(anchorEl)}
-                                                onClose={handleClose}
-                                            >
-                                                <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
-                                                <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
-                                            </Menu>
+            <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
+                    <Draggable draggableId={props.cardFromMap._id} index={props.index}>
+                        {provided => (
+                            <div
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                            >
+                                <div className="view-cards-tabs"
+                                    id={props.cardFromMap._id + "disappear"}>
+                                    <div class="card" >
+                                        <div class="container" >
+                                            <div class="draggable card-header row">
+                                                <span
+                                                    id="input-card-name"
+                                                    ref={textInput}
+                                                    onBlur={() => editCard()}
+                                                    className="  pl-4 col-10"
+                                                // form-control              
+                                                // value={editCardName}
+                                                // onChange={updateCardName}
+                                                // title={editCardName}
+                                                // onKeyPress={event => {
+                                                //     enterK(event)
+                                                // }}
+                                                >{editCardName}
+                                                </span>
+                                                <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
+                                                >
+                                                    . . .
+                                    </Button>
+                                                <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                                    {title.title_more_actions}
+                                                </ReactTooltip>
+                                                <Menu
+                                                    id="simple-menu"
+                                                    anchorEl={anchorEl}
+                                                    keepMounted
+                                                    open={Boolean(anchorEl)}
+                                                    onClose={handleClose}
+                                                >
+                                                    <MenuItem className="rename-card" onClick={(e) => handleClose(actionCard.renameCard)}>Rename Card</MenuItem>
+                                                    <MenuItem onClick={(e) => handleClose(actionCard.deleteCard)}>Delete Card</MenuItem>
+                                                </Menu>
 
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body allTaskInCard">
-                                        {props.cardFromMap ?
+                                        <div class="card-body allTaskInCard">
                                             <Droppable droppableId={props.cardFromMap._id} >
                                                 {provided => (
                                                     <div className="mt-0"
@@ -215,25 +216,20 @@ function ViewCardsTabs(props) {
                                                         {provided.placeholder}
                                                     </div>
                                                 )}
-                                            </Droppable> : null}
-                                        <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img>
+                                            </Droppable>
+                                            <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img>
 
-
-                                        {/* <a data-tip data-for="add_t"
-                                            className="add-task-tabs mt-4 "
-                                            onClick={(e) => addTask(e)}>Add Task +</a> */}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                </Draggable>
+                        )}
+                    </Draggable>
             </div >
         </>
     )
 }
 const mapStateToProps = (state) => {
-
     return {
         project: state.project_reducer.project,
         cards: state.public_reducer.cards,
