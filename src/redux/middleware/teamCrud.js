@@ -254,7 +254,6 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
       return response.json()
     })
       .then(data => {
-        console.log('dataaaaa' + data.membersList)
         dispatch(actions.setMembers(data.membersList))
       }).catch(err => console.log('err', err))
   }

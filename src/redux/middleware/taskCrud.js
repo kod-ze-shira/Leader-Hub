@@ -48,6 +48,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log("data", data);
 
+
             },
             error: function (err) {
 
@@ -120,7 +121,9 @@ export const newTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
+        
         console.log(task)
+
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -210,19 +213,21 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-        if (action.payload.type && action.payload.type == 'taskNotBelong') {
-            task = action.payload.task
-            if (!task.description)
-                task.description = null
+
+        if (!action.payload.card) {
+            for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
+                if (getState().public_reducer.tasks[index]._id == action.payload._id)
+                    task = getState().public_reducer.tasks[index]
+            }
         }
         else
-            if (!action.payload.card) {
-                for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
-                    if (getState().public_reducer.tasks[index]._id == action.payload._id)
-                        task = getState().public_reducer.tasks[index]
-                }
-            }
-            else
+            if (action.payload.type && action.payload.type == 'taskNotBelong') {
+                task = action.payload.task
+                if (!task.description)
+                    task.description = null
+                // if (!task.endDate)
+                //     task.endDate = null
+            } else
                 if (action.payload.name)
                     task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
                         .tasks[getState().public_reducer.indexCurrentTask]
@@ -388,7 +393,7 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
                 console.log("success")
                 console.log(data);
 
-                // dispatch(actions.setCards(data.cards))
+                dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -417,7 +422,7 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.cards);
-                // dispatch(actions.setCards(data.cards))
+                dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -512,7 +517,6 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/${cardId}/belongTask`
-        debugger
         $.ajax({
             url: urlData,
             method: 'POST',

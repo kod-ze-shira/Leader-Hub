@@ -22,7 +22,7 @@ function ViewMembers(props) {
     return (
         <>
 
-            <div className="pt-3 px-2 ">
+            <div className="pt-3 ">
 
 
                 <div className="row">

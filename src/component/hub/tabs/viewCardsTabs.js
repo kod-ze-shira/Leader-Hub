@@ -24,6 +24,7 @@ function ViewCardsTabs(props) {
             }
     }, [props.flag, props.openInputTask])
 
+    
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
@@ -60,6 +61,7 @@ function ViewCardsTabs(props) {
         setAddTaskInInput(!addTaskInInput)
         props.setCard(props.cardFromMap)
         e.stopPropagation();
+
     }
     // const updateCardName = (event) => {
 
@@ -124,11 +126,10 @@ function ViewCardsTabs(props) {
         function () {
             $(this).attr('contentEditable', false);
         });
-
+    console.log(props.cards);
     return (
         <>
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                {props.cardFromMap ?
                     <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                         {provided => (
                             <div
@@ -158,7 +159,7 @@ function ViewCardsTabs(props) {
                                                 <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                                 >
                                                     . . .
-                                            </Button>
+                                    </Button>
                                                 <ReactTooltip data-tip id="more_a" place="top" effect="solid">
                                                     {title.title_more_actions}
                                                 </ReactTooltip>
@@ -181,6 +182,8 @@ function ViewCardsTabs(props) {
                                                     <div className="mt-0"
                                                         ref={provided.innerRef}
                                                         {...provided.droppableProps} >
+
+
                                                         {props.cardFromMap.tasks.map((task, index) => (
                                                             <ViewTaskByCradTabs
                                                                 openViewDetails={openViewDetails}
@@ -222,13 +225,12 @@ function ViewCardsTabs(props) {
                                 </div>
                             </div>
                         )}
-                    </Draggable> : null}
+                    </Draggable>
             </div >
         </>
     )
 }
 const mapStateToProps = (state) => {
-
     return {
         project: state.project_reducer.project,
         cards: state.public_reducer.cards,

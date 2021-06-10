@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 .view-cards-tabs .card-body{
-     max-height:  70vh;/* בינתיים */
+     max-height:  79vh;/* בינתיים */
     /* background: transparent linear-gradient(360deg, #87C5FE30 0%, #ebfff8 100%) 0% 0% no-repeat padding-box; */
     background-color:#EDFBFC !important ;
     border-radius: 0px 0px 8px 8px;
@@ -10,10 +10,22 @@
     overflow-y: auto;  
 
 }
-.card-width{
-  width: 20vw !important;
-  display: inline-block !important; 
+
+  .card-width{
+    width: 20vw !important;
+    display: inline-block !important; 
+  }
+
+
+@media screen and (max-width: 700px) {
+  .card-width{
+    /* width: 60vw !important; */
+    /* display: inline-block !important;  */
+  }
+
 }
+
+
 .card-body {
   padding: 1rem !important;
   /* padding-top: 0.5 !important; */
@@ -139,6 +151,9 @@ span:focus{
 {
    border: 1px solid #ced4da !important;
     /* border-radius: .25rem !important; */
+}
+.form-control:focus{
+  text-shadow: none !important;
 }
 
 .task-card .status-task-in-progress{

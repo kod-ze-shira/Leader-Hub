@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { useParams, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,33 +77,74 @@ function SelectHeader(props) {
                     <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" />
                         <Tab label="Tabs" className="tab" /></Tabs>}
 
-                <div className={classes.root} id='tabsAndList'>
-                    {props.menue ?
-                        <Tabs
-                            className="tabs-in-header offset-md-4 w-sm-15"
-                            value={value}
-                            onChange={handleChange}
-                            variant="scrollable"
-                            scrollButtons="off"
-                            TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                            aria-label="scrollable prevent tabs example"
-                        >
-                            <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
-                            <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                            <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
-                            <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+                {window.location.href.indexOf('allProjects') != -1 ||
+                    window.location.href.indexOf('workspace') != -1 ?
+                    <div className='row' id='tabsAndList' style={{
+                        'height': '50px',
+                        'margin-right': '9px',
+                        'margin-top': '9px'
+                    }}>
 
-                        </Tabs>
-                        :
-                        <Tabs
-                            className="tabs-in-header offset-md-4 w-sm-15 opacity">
-                            <Tab label="List" className="tab" />
-                            <Tab label="Calender" className="tab" />
-                            <Tab label="Gant" className="tab" />
-                            <Tab label="Tabs" className="tab" />
-                        </Tabs>
-                    }
-                </div>
+
+                        {window.location.href.indexOf('workspace') != -1 ?
+                            <>
+                                <div class="input-group inputSearchProject col-8">
+                                    <input type="text" class="" placeholder="Search project..."
+                                        onChange={(e) => props.valueSearchProject(e.target.value)}
+                                        aria-label="Username" aria-describedby="basic-addon1" />
+
+                                    <div class="input-group-prepend">
+                                        <FontAwesomeIcon icon={["fas", "search"]} />
+                                    </div>
+                                </div>
+                                <button className='buttonNewProject col-4' data-tip data-for="add_p"
+                                    onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
+                                >+ New Project</button>
+                            </>
+                            :
+                            <div class="input-group inputSearchProject col-12">
+                                <input type="text" class="" placeholder="Search project..."
+                                    onChange={(e) => props.valueSearchProject(e.target.value)}
+                                    aria-label="Username" aria-describedby="basic-addon1" />
+
+                                <div class="input-group-prepend">
+                                    <FontAwesomeIcon icon={["fas", "search"]} />
+                                </div>
+                            </div>}
+
+                    </div>
+                    :
+                    <div className={classes.root} id='tabsAndList '>
+                        {props.menue ?
+                            <Tabs
+                                className="tabs-in-header offset-md-4 w-sm-15"
+                                value={value}
+                                onChange={handleChange}
+                                variant="scrollable"
+                                scrollButtons="off"
+                                TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
+                                aria-label="scrollable prevent tabs example"
+                            >
+                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
+                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+
+                            </Tabs>
+                            :
+                            <Tabs
+                                className="tabs-in-header offset-md-4 w-sm-15 opacity">
+                                <Tab label="List" className="tab" />
+                                <Tab label="Calender" className="tab" />
+                                <Tab label="Gant" className="tab" />
+                                <Tab label="Tabs" className="tab" />
+                            </Tabs>
+                        }
+                    </div>
+
+                }
+
+
 
                 {/* {props.type == 'projects' ?
                     <span>ff</span> : null} */}

@@ -35,13 +35,13 @@ function ViewStatus(props) {
     return (
         <>
             <div className="container display-task ">
-                <div className="row ml-2">
+                <div className="row ml-3">
                     <div onClick={(id) => saveStatus1(id)} className="menu-status col-8 " style={{ backgroundColor: props.status.color }}>
                         <p >{props.status.statusName}</p>
                     </div>
                     <img
-                        className={props.index < 3 ? "disabled pencil-status ml-2" : "pencil-status ml-2"}
-                        title={props.index < 3 ? "Deputable status cannot be edited":"Edit Status"}
+                        className={props.index < 3 ? " pencil-status-none " : "pencil-status ml-2 mt-1"}
+                        title={props.index < 3 ? "Deputable status cannot be edited" : "Edit Status"}
                         onClick={(e) => openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
                 </div>

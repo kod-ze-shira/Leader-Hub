@@ -28,7 +28,6 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     let routes
     let userName
-    debugger
     if(rest.computedMatch.path.includes('share'))
     userName='share'
     else
