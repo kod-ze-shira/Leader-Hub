@@ -64,8 +64,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         closeViewDetails={props.closeViewDetails}
                         showToast={showToast}
                         setDownloadFile={(e) =>
-                                props.setDownloadFile(e)
-                       }
+                            props.setDownloadFile(e)
+                        }
                     />
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
@@ -73,7 +73,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'shareProject':
-                    return <ShareProject closeViewDetails={props.closeViewDetails} />
+                    return <ShareProject closeViewDetails={props.closeViewDetails} viewToastComplete={props.viewToastComplete} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':

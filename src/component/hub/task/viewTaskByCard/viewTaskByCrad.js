@@ -87,8 +87,8 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
     }
-    
-    $(window).on("click",function () {
+
+    $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
@@ -159,7 +159,7 @@ function ViewTaskByCrad(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
     const editTaskNameInReduxs = (taskName) => {
@@ -314,7 +314,7 @@ function ViewTaskByCrad(props) {
                                         <ViewDetails showToast={deleteTask}
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
-                                            setDownloadFile={(e) => setDownloadFile(e) }
+                                            setDownloadFile={(e) => setDownloadFile(e)}
                                         > </ViewDetails>
                                     </div>
                                     : null}
