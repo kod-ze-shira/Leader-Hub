@@ -155,7 +155,7 @@ function Tabs(props) {
                                         </DragDropContext>
                                         : null}
                                     {typeof(props.cards)!=="no cards" && !props.cards.length?
-                                         <div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
+                                         <div className="logoGif d-flex justify-content-center"><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
                                         :
                                         <div className="card-width px-2 mt-4" >
                                         <div className="view-cards-tabs  mt-1" >

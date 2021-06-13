@@ -10,7 +10,7 @@ import MyChart from '../chart/chart'
 // import { actions } from '../../hub'
 function Overview(props) {
 
-  
+
     return (
         <>
             <div className="scrollbarOverview container-fluid">
@@ -18,7 +18,7 @@ function Overview(props) {
                     <div className='col-9'>
                         <div className='container-fluid'>
                             <div className='row'>
-                                <MyChart  />
+                                <MyChart />
                             </div>
                             <div className='row'>
                                 {/* <FilesOfProject /> */}
@@ -31,7 +31,7 @@ function Overview(props) {
                                 <Members />
                             </div>
                             <div className='row'>
-                                {/* <Logs /> */}
+                                <Logs />
                             </div>
                         </div>
                     </div>
