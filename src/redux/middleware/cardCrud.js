@@ -116,7 +116,9 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                dispatch(actions.deleteCard(data))
+                console.log(data.project)
+                dispatch(actions.deleteCard(data.project))
+                // dispatch(actions.deleteCard(data))
 
             },
             error: function (err) {
@@ -135,10 +137,10 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-                window.location.assign(`https://accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
                 result.routes?
-                window.location.assign(`https://accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                window.location.assign(`https://accounts.codes/hub/login`)
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

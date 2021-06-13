@@ -3,7 +3,7 @@ import Toast from 'react-bootstrap/Toast'
 import './toast.css'
 import { useSpring, animated } from "react-spring";
 
-export default function ToastDelete1(props) {
+export default function ToastMessage(props) {
     const [key, setKey] = useState(1);
     const [show, setShow] = useState(true);
 
@@ -23,12 +23,15 @@ export default function ToastDelete1(props) {
     return (
         <>
             <animated.div style={scrolling}>
-                <Toast className="toast_delete" 
-                   onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                <Toast className="toast_delete"
+                    // show={show} autohide>
+                    onClose={() => props.viewToastComplete({ show: false })}
+                    show={show} autohide>
                     <div className="border-top-gradient"></div>
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>
                         <div className=" "></div>
-                        <span className="px-4 ">Task completed</span>
+                        <span className="px-4 ">{props.message}</span>
+                        {/* <span className="px-4 ">{props.masseg} Task completed</span> */}
                         <div className="div_btn_undo  ">
 
                         </div>

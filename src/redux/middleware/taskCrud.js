@@ -513,6 +513,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
 
 export const belongTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'BELONG_TASK') {
+
         let taskId = action.payload.taskId
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
@@ -546,8 +547,8 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.routes ?
-                window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://accounts.codes/hub/login`)
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
+                window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

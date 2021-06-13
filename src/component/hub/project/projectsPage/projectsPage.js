@@ -33,6 +33,7 @@ function ProjectsPage(props) {
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}
                 valueSearchProject={valueSearchProject}
+                viewToastComplete={props.viewToastComplete}
                 projectName={projectName}
                 showViewDitailsProject={addProject}
             />

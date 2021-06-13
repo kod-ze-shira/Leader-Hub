@@ -46,7 +46,7 @@ function MyChart(props) {
 
     return (
         <>
-            <Paper style={{'width':'100%'}}>
+            <Paper style={{ width: '100%' }}>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
@@ -69,8 +69,8 @@ function MyChart(props) {
                                 <Chart
                                     data={sticksData}
                                 >
-                                    <ArgumentAxis/>
-                                    <ValueAxis tickInterval={10}/>
+                                    <ArgumentAxis />
+                                    <ValueAxis tickInterval={10} />
                                     <BarSeries
                                         valueField="tasks"
                                         argumentField="name"
@@ -78,8 +78,8 @@ function MyChart(props) {
                                     />
                                     <Title text="Incomplete tasks by card" />
                                     {/* <EventTracker /> */}
-                                 <Tooltip />
-                                </Chart> 
+                                    <Tooltip />
+                                </Chart>
                             </div>
                         </div>
                     </div>

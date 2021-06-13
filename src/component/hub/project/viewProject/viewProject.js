@@ -13,8 +13,7 @@ import './viewProject.css';
 import TeamView from '../../teamView/teamView'
 
 function ViewProject(props) {
-    const [getProjectById, set_getProjectById] = useState(true);
-    const [viewTasks, setViewTasks] = useState(false)
+    // console.log(props.myProject.members)
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });

@@ -15,16 +15,16 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
-import Toast from '../../toast/toastTaskCompleted'
+// import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [userHasLike, setUserHasLike] = useState(false)
+    const [flag, setFlag] = useState(true)
 
     useEffect(() => {
-        debugger
         console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
@@ -49,6 +49,7 @@ function ViewTaskByCrad(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     let doneStatus = props.task.complete
+    const [downloadFile, setDownloadFile] = useState(false)
     const [task, setTask] = useState({
         "_id": props.task._id,
         "name": props.task.name,
@@ -86,9 +87,22 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
     }
-    $(window).click(function () {
-        setViewDetails(false)
-    });
+
+    $(window).on("click", function () {
+        if (flag) {
+            if (downloadFile) {
+                setViewDetails(true)
+                setFlag(false)
+                setTimeout(() => {
+                    setFlag(true)
+                    setDownloadFile(false)
+                }, 1000);
+            }
+            else {
+                setViewDetails(false)
+            }
+        }
+    })
 
     function openViewDetails(event) {
         showDetails("viewTaskByCard")
@@ -145,7 +159,7 @@ function ViewTaskByCrad(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
     const editTaskNameInReduxs = (taskName) => {
@@ -220,7 +234,7 @@ function ViewTaskByCrad(props) {
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className=" col-5">
+                                <div className=" col-4">
                                     <label
                                         title="Complete Task"
                                         className="check-task ml-4 ">
@@ -300,6 +314,7 @@ function ViewTaskByCrad(props) {
                                         <ViewDetails showToast={deleteTask}
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
+                                            setDownloadFile={(e) => setDownloadFile(e)}
                                         > </ViewDetails>
                                     </div>
                                     : null}

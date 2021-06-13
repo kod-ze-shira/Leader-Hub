@@ -4,15 +4,15 @@ import configData from './configData.json'
 
 function redirectToLogin(routes) {
     window.location.href = routes ?
-        `https://accounts.codes/hub/login?routes=${routes}` :
-        `https://accounts.codes/hub/login`;
+        `https://dev.accounts.codes/hub/login?routes=${routes}` :
+        `https://dev.accounts.codes/hub/login`;
     return null
 }
 const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     // חילוץ jwt מהקוקי
-    let jwtFromCookie=''
+    let jwtFromCookie = ''
     if (window.location.hostname == "localhost") {
-        jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
+        jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko'
     }
     else {
         if (document.cookie) {
@@ -31,7 +31,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     if(rest.computedMatch.path.includes('share'))
     userName='share'
     else
-    userName = rest.computedMatch.params.userName;
+        userName = rest.computedMatch.params.userName;
     useEffect(() => {
         const isLocal = window.location.hostname == "localhost"
         const url = `${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;
