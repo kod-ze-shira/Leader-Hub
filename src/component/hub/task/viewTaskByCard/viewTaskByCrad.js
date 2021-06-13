@@ -22,6 +22,7 @@ function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [userHasLike, setUserHasLike] = useState(false)
+    const [flag, setFlag] = useState(true)
 
     useEffect(() => {
         debugger
@@ -49,6 +50,7 @@ function ViewTaskByCrad(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     let doneStatus = props.task.complete
+    const [downloadFile, setDownloadFile] = useState(false)
     const [task, setTask] = useState({
         "_id": props.task._id,
         "name": props.task.name,
@@ -86,9 +88,22 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
     }
-    $(window).click(function () {
-        setViewDetails(false)
-    });
+    
+    $(window).on("click",function () {
+        if (flag) {
+            if (downloadFile) {
+                setViewDetails(true)
+                setFlag(false)
+                setTimeout(() => {
+                    setFlag(true)
+                    setDownloadFile(false)
+                }, 1000);
+            }
+            else {
+                setViewDetails(false)
+            }
+        }
+    })
 
     function openViewDetails(event) {
         showDetails("viewTaskByCard")
@@ -300,6 +315,7 @@ function ViewTaskByCrad(props) {
                                         <ViewDetails showToast={deleteTask}
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
+                                            setDownloadFile={(e) => setDownloadFile(e) }
                                         > </ViewDetails>
                                     </div>
                                     : null}

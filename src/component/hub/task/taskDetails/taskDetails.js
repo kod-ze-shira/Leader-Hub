@@ -181,7 +181,10 @@ function TaskDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File file={file} />
+        return <File file={file}
+        
+        setDownloadFile={(e) =>{debugger; props.setDownloadFile(e)}}
+        />
     }) : null
 
     $('.assingto-details').hover(function () {

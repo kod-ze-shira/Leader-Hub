@@ -35,12 +35,11 @@ function TasksNotBelongCardByMap(props) {
 
     const [indexOfProject, setIndexOfProject] = useState(null);
     const [indexOfCard, setIndexOfCard] = useState(null);
-    let doneStatus = props.task.complete;
+
+    let doneStatus = props.task?.complete;
     const [downloadFile, setDownloadFile] = useState(false)
-    // const cardRef = useRef()
-    //    const blurCreatable = () => {
-    //         this.creatableRef.blur();
-    //       };
+    const [flag, setFlag] = useState(true)
+
     useEffect(() => {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
@@ -81,7 +80,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            // props.viewToastComplete(true)
+            props.viewToastComplete(true)
         }
     }
 
@@ -267,12 +266,21 @@ function TasksNotBelongCardByMap(props) {
 
     }
 
-    $(window).click(function () {
-        if (!downloadFile) {
-            setViewDetails(false)
+    $(window).on("click",function () {
+        if (flag) {
+            if (downloadFile) {
+                setViewDetails(true)
+                setFlag(false)
+                setTimeout(() => {
+                    setFlag(true)
+                    setDownloadFile(false)
+                }, 1000);
+            }
+            else {
+                setViewDetails(false)
+            }
         }
-    });
-
+    })
 
     return (
         <>
@@ -428,8 +436,7 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
-                            setDownloadFile={(e) => setDownloadFile(e)}
-
+                            setDownloadFile={(e) =>setDownloadFile(e) }
                             open={true} />
                     </div>
                     : null}
