@@ -1,35 +1,43 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import MyChart from './chart/chart'
-import FilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+// import viewFilesOfProject from '../viewFilesOfProject/viewFilesOfProject'
+import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
 import Logs from './logs/logs'
-import ViewMembers from './members/veiwMembers/viewMembers'
-// import { actions } from '../../hub'
+import './overview.css'
+import MyChart from '../chart/chart'
+
 function Overview(props) {
 
-    const [showFilesForProject, setShowFilesForProject] = useState(false)
-    function openViewFilesForProject(e) {
-        setShowFilesForProject(true)
-    }
+
     return (
         <>
-            <div className=" body container-fluid">
-                <Members />
-                <MyChart />
-                <button onClick={openViewFilesForProject}>files in this project</button>
-                {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
+            <div className='scrollbarOverview container-fluid'>
+                <div className='row '>
+                    <div className='col-9 mr-3'>
+                        <div className='container-fluid px-0 '>
+                            <div className='row mb-3'>
+                                <MyChart />
+                            </div>
+                            <div className='row'>
+                                <FilesOfProject />
+                            </div>
+                        </div>
+                    </div>
 
-                {/* <Hangout></Hangout> */}
-                <ViewMembers />
-                <MyChart />
-                <button onClick={openViewFilesForProject}>files in this project</button>
-                {showFilesForProject ? <FilesOfProject></FilesOfProject> : null}
-
-
+                    <div className='col' style={{ height: '87vh' }}>
+                        <div className='container-fluid px-0 '>
+                            <div className='row mb-3 minHeight'>
+                                <Members />
+                            </div>
+                            <div className='row minHeight'>
+                                <Logs />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </>
     )
 }

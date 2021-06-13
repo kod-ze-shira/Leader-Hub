@@ -78,7 +78,7 @@ function EditProject(props) {
 
             <div className="details mr-5 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row my-4 justify-content-between headerDitails'>
+                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Project details</h5>
                         <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
@@ -98,13 +98,13 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input class="form-control descriptionProject"
+                        <div class="form-control descriptionProject"
                             name="description"
-                            id="descriptionProject" rows="3"
+                            id="descriptionProject" rows="5"
                             placeholder="Write a description about your project"
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
                             onChange={(input) => changeFiledInProject(input)} contentEditable
-                        ></input>
+                        ></div>
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">

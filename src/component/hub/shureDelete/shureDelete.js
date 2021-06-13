@@ -33,9 +33,6 @@ export default function SureDelete(props) {
 
     return (
         <>
-            {/* <Button variant="primary" onClick={handleShowModal}>
-                    Launch static backdrop modal
-            </Button> */}
             <Modal
                 show={showModal}
                 size="sm"

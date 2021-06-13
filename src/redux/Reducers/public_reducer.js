@@ -175,11 +175,13 @@ const publicData = {
     deleteCard(state, action) {
         console.log(action.payload)
         state.cards = action.payload
-        // state.cards.filter((_, i) =>
-        //     state.cards[i]._id !== action.payload._id
+        // console.log("project",action.payload.project)
+        // state.cards = state.cards.filter((_, i) =>      
+        //        {  console.log("filter",state.cards[i])
+        //         return state.cards[i]._id !== action.payload.project._id}   
         // )
     },
-    
+
     addProjectToProjects(state, action) {
 
         let workspaceId = action.payload.workspace
@@ -248,6 +250,7 @@ const publicData = {
     },
     setCards(state, action) {
         state.cards = action.payload;
+        return true
     },
     setMembers(state, action) {
         state.members = action.payload;
@@ -274,7 +277,6 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
-        debugger
         if (state.cards.length > 0)
             state.cards.push(action.payload)
         else

@@ -9,10 +9,29 @@ function redirectToLogin(routes) {
     return null
 }
 const ProtectedRoute = ({ component: Component, user, ...rest }) => {
+    // חילוץ jwt מהקוקי
+    let jwtFromCookie=''
+    if (window.location.hostname == "localhost") {
+        jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ4TXVrSUMzbGNZZ2ZQa0JCcFFkemJ1YXVLb24xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjE5NTAyNjI2fQ.o3J6R0lsxa1w8ualIKWHPueFkEa5LiaCyGmaqZO3uOk'
+    }
+    else {
+        if (document.cookie) {
+            jwtFromCookie = document.cookie.includes('jwt') ?
+                document.cookie.split(";")
+                    .filter(s => s.includes('jwt'))[0].split("=").pop()
+                : document.cookie.includes('devJwt') ?
+                    document.cookie.split(";")
+                        .filter(s => s.includes('devJwt'))[0].split("=").pop() : null;
+        }
+    }
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     let routes
-    let userName = rest.computedMatch.params.userName;
+    let userName
+    if(rest.computedMatch.path.includes('share'))
+    userName='share'
+    else
+    userName = rest.computedMatch.params.userName;
     useEffect(() => {
         const isLocal = window.location.hostname == "localhost"
         const url = `${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;
@@ -20,7 +39,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
             let response = await fetch(url, {
                 method: 'GET',
                 headers: {
-                    Authorization: user,
+                    Authorization: jwtFromCookie,
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },

@@ -26,7 +26,7 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-
+        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         if (props.task.assingTo)
@@ -231,6 +231,7 @@ function ViewTaskByCradTabs(props) {
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
                                 >
+                                    {/* <MenuItem onClick={handleClose}>Edit Task Name</MenuItem> */}
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>

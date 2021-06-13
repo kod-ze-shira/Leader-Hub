@@ -15,12 +15,12 @@ button{
 }
 .save_canges_btn{
   /* width: 118px; */
-height: 35px;
-background-color:var(--light-light-blue);
-border-radius: 5px;
-opacity: 1;
-color:white;
-text-align: center !important;
+  height: 35px;
+  background-color:hsla(183, 72%, 44%, 1);
+  border-radius: 5px;
+  opacity: 1;
+  color:white;
+  text-align: center !important;
 }
 .delete-btn{
 height: 35px;

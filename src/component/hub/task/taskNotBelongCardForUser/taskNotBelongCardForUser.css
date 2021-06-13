@@ -1,3 +1,5 @@
+
+
 .wrap-input{
     border:1px solid #1FB9C1;
     border-radius: 8px !important; 
@@ -5,21 +7,22 @@
     margin-top: 2px;
 }
 .addTaskNotBelong{
-    background: url(../../../img/check-mark.svg) no-repeat ;
+    /* background: url(../../../img/check-mark.svg) no-repeat ;
     background-size: 18px 18px;
     background-position:left ;
-    padding-left: 20px  !important;
+    padding-left: 20px  !important; */
     border: none;
     width: 94%;
+    position: relative;
 }
-/* .wrap-input:focus,.wrap-input:hover{
-    border:2px solid #07a3ac !important;
-    border-radius: 8px !important; 
-} */
+
 .addTaskNotBelong:focus,.addTaskNotBelong:hover{
     outline: none !important;
 }
 .close-add-task{
+    position: absolute;
+    right: 5px;
+    bottom: 1px;
     margin-bottom: 2px;
     background-color: transparent;
     color: #C4CCD5;
@@ -75,15 +78,28 @@
     padding-left: 0px !important;
 }
 
-.selectWorkspaceInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
+/* .selectWorkspaceInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
 {
-    /* margin-left: -7px; */
+    margin-left: -7px;
+} */
+.wrap-not-belong .check-task{
+    padding-top:unset !important;
+    padding: 0 !important;
 }
 .check-task .css-yk16xz-control{
     background: url(../../../img/down-arrow.svg) no-repeat ;
     background-size: 10px 10px;
     background-position: 90%;
+    
 }
+.wrap-all-task{
+    min-width: 630px;
+    overflow-x: scroll;
+    height: 70%;
+}
+/* .wrap-all-task-width{
+    width: 900px;
+} */
 .css-yk16xz-control .css-g1d714-ValueContainer{
   justify-content: start !important;
 }
@@ -96,9 +112,15 @@
 .workspaceN{
     padding-left: 0px !important;
 }
-
+.select-not-belong{
+    width: 6vw;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    text-align: left;
+}
 .dotProject{
-    margin-top: 5px;
+    margin-top: 9px;
     margin-left: 6px;
     margin-right: 5px;
 }
@@ -112,12 +134,12 @@
 }
 
 .logo-w-little {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.6rem;
+    height: 1.6rem;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 15px !important;
     color: white;
-    letter-spacing: 1.72px;
+    /* letter-spacing: 1.72px; */
     font-family: 'Roboto', sans-serif;
     font-size: 1.3rem;
     margin-right: 6px;
@@ -180,9 +202,7 @@
 .inputSearchTask {transition-timing-function: ease-in-out;}
 
 
-#buttonCancleSelect{
-    /* display: none; */
-}
+  
 
 #selectProjectInAllTask{
     display: none;
@@ -207,22 +227,42 @@
 }
 
 .propertiesAllTask{ 
-text-align: left;
-font: normal normal bold 14px/19px Roboto;
-letter-spacing: 0px;
-color: #68C7CB;
-text-transform: capitalize;
-/* padding-left: 59px; */
+    text-align: left;
+    font: normal normal bold 14px/19px Roboto;
+    letter-spacing: 0px;
+    color: #68C7CB;
+    text-transform: capitalize;
+    padding-left: 59px;
 }
-
+.hr-place-holder{
+    margin-left: 25%;
+    border: 0;
+    clear: solid;
+    display: block;
+    width: 7vw;
+    background-color: #68C7CB;
+    height: 2px;
+}
+@media only screen and (max-width: 1100px) {
+    /* .wrap-all-task-width{
+        width: 900px;
+    } */
+    .propertiesAllTask{
+        padding-left: 0px !important;
+    }
+    .hr-place-holder{
+        width: 5vw !important;
+    }
+  }
+.btn-open-details .svg-inline--fa{
+    vertical-align:-0.2em !important ;
+}
 .headerTableTask{
     background: #68c7cb1a  0% 0% no-repeat padding-box !important;
-    width: 100%;
+    /* width: 100%; */
 }
 
-.allTasks{
-    /* margin-top:21vh !important; */
-}
+
 .nameTaskNotBelong{
     text-align: left !important;
     text-overflow: ellipsis;
@@ -268,8 +308,3 @@ inner-addon {
     text-align: center !important;
 }
 
-@media only screen and (max-width: 700px) {
-    .input-group-task-not-belongs{
-      width: fit-content !important;
-    }
-  }

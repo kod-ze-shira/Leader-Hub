@@ -23,7 +23,6 @@ function MyChart(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
-        console.log('overdueTasks: '+props.overdueTasks);
     }, [])
 
     const [countTasks, setCountTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
@@ -101,7 +100,7 @@ function MyChart(props) {
                                     {/* <EventTracker /> */}
                                     <Tooltip />
                                 </Chart>
-                                <img src={require('../../../img/Group22306.png')} />
+                                <img src={require('../../img/Group22306.png')} />
                             </div>
                         </div>
                         <div className='col-6 p-1'>

@@ -170,6 +170,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
+                                //   viewToastComplete={(val) => setShowToastComplete(true)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
@@ -186,11 +187,9 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            <Route path="/" >
-                                <div id='cdggdfdfb'>
-
-                                </div>
-                            </Route>
+                            <ProtectedRoute path={"/"} >
+                               {/* to send login if has not userName */}
+                            </ProtectedRoute>
                         </Switch>
                     </div>
                     {showToastDelete ?
@@ -203,6 +202,7 @@ function Hub(props) {
 
                     {showToastComplete ?
                         <Toast /> : null}
+
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
