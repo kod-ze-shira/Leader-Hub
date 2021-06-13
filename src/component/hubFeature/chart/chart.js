@@ -46,11 +46,7 @@ function MyChart(props) {
 
     return (
         <>
-<<<<<<< HEAD
-            <Paper style={{ 'width': '100%' }}>
-=======
             <Paper style={{ width: '100%' }}>
->>>>>>> dev
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
