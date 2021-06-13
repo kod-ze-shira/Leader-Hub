@@ -116,7 +116,9 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                dispatch(actions.deleteCard(data))
+                console.log(data.project)
+                dispatch(actions.deleteCard(data.project))
+                // dispatch(actions.deleteCard(data))
 
             },
             error: function (err) {

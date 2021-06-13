@@ -25,7 +25,6 @@ function ViewTaskByCrad(props) {
     const [flag, setFlag] = useState(true)
 
     useEffect(() => {
-        debugger
         console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)

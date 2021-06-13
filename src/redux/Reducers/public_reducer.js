@@ -32,7 +32,7 @@ const publicData = {
         state.close = !state.close
     },
     setUserId(state, action) {
-        
+
         state.userId = action.payload
     },
     setTokenFromCookies(state, action) {
@@ -173,15 +173,15 @@ const publicData = {
         )
     },
     deleteCard(state, action) {
-        console.log("project",action.payload.project)
-        state.cards = state.cards.filter((_, i) =>
-            
-               {  console.log("filter",state.cards[i])
-                return state.cards[i]._id !== action.payload.project._id}
-            
-        )
+        console.log(action.payload)
+        state.cards = action.payload
+        // console.log("project",action.payload.project)
+        // state.cards = state.cards.filter((_, i) =>      
+        //        {  console.log("filter",state.cards[i])
+        //         return state.cards[i]._id !== action.payload.project._id}   
+        // )
     },
-    
+
     addProjectToProjects(state, action) {
 
         let workspaceId = action.payload.workspace
@@ -281,6 +281,11 @@ const publicData = {
             state.cards.push(action.payload)
         else
             state.cards[0] = action.payload
+        let cards = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
+        cards[cards.length] = action.payload
+
+        let a = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
+        console.log(a)
 
     },
     addTaskToTasksWhenAddTaskToServer(state, action) {
