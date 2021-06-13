@@ -28,8 +28,13 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     let routes
     let userName
+<<<<<<< HEAD
     if (rest.computedMatch.path.includes('share'))
         userName = 'share'
+=======
+    if(rest.computedMatch.path.includes('share'))
+    userName='share'
+>>>>>>> dev
     else
         userName = rest.computedMatch.params.userName;
     useEffect(() => {

@@ -7,7 +7,7 @@ import Overview from '../../hubFeature/Overview/Overview';
 import ProjectPlatform from '../projectPlatform/projectPlatform';
 import SelectHeader from '../SelectHeader/SelectHeader';
 import Tabs from '../tabs/tabs';
-import Hangout from "../../hubFeature/Overview/hangout/hangout";
+// import Hangout from "../../hubFeature/Overview/hangout/hangout";
 
 function CardsPage(props) {
 
@@ -81,7 +81,7 @@ function CardsPage(props) {
         <div className="">
             <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
             {renderSwitch()}
-            <Hangout></Hangout>
+            {/* <Hangout></Hangout> */}
 
         </div>
 </>

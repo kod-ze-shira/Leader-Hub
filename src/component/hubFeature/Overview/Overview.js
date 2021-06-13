@@ -34,6 +34,7 @@ function Overview(props) {
                             </div>
                         </div>
                     </div>
+<Hangout></Hangout>
                 </div>
             </div>
         </>
