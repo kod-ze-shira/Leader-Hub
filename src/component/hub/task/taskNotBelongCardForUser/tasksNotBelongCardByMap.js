@@ -301,7 +301,6 @@ function TasksNotBelongCardByMap(props) {
                                 icon={['fas', 'grip-vertical']}
                             ></FontAwesomeIcon>
 
-
                             <input
                                 type="checkbox"
                                 name="name" id="name" title={props.task.name}

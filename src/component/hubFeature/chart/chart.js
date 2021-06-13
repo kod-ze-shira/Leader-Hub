@@ -46,7 +46,7 @@ function MyChart(props) {
 
     return (
         <>
-            <Paper style={{'width':'100%'}}>
+            <Paper style={{ width: '100%' }}>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>

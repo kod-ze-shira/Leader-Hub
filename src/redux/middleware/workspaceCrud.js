@@ -31,7 +31,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
         //     urlData = `${configData.SERVER_URL}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
 
         // else
-            urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getWorkspacesForUser`
+        urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getWorkspacesForUser`
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
             {
@@ -39,11 +39,11 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 headers: { 'authorization': getState().public_reducer.tokenFromCookies }
             })
             .then((res) => {
-                console.log("res11111", res)
+                // console.log("res11111", res)
                 return res.json();
             })
             .then((result) => {
-                console.log("res", result)
+                // console.log("res", result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setUserId(result.user._id))
                     dispatch(actions.setUserEmail(result.user.email))
