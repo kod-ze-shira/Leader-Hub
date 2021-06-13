@@ -92,13 +92,14 @@ function SelectHeader(props) {
                             <>
                                 <div class="input-group inputSearchProject col-9 row mt-0 pr-0"
                                 >
+                                    <div class="input-group-prepend col2">
+                                        <FontAwesomeIcon icon={["fas", "search"]} />
+                                    </div>
                                     <input type="text" class="col-10" placeholder="Search project..."
                                         onChange={(e) => props.valueSearchProject(e.target.value)}
                                         aria-label="Username" aria-describedby="basic-addon1" />
 
-                                    <div class="input-group-prepend col2">
-                                        <FontAwesomeIcon icon={["fas", "search"]} />
-                                    </div>
+
                                 </div>
                                 <button className='buttonNewProject col-3' data-tip data-for="add_p"
                                     onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
