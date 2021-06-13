@@ -10,7 +10,7 @@ function redirectToLogin(routes) {
 }
 const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     // חילוץ jwt מהקוקי
-    let jwtFromCookie=''
+    let jwtFromCookie = ''
     if (window.location.hostname == "localhost") {
         jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko'
     }
@@ -31,7 +31,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     if(rest.computedMatch.path.includes('share'))
     userName='share'
     else
-    userName = rest.computedMatch.params.userName;
+        userName = rest.computedMatch.params.userName;
     useEffect(() => {
         const isLocal = window.location.hostname == "localhost"
         const url = `${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;

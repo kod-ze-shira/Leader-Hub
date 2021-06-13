@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,14 +11,22 @@ function TaskNotBelongCardForUser(props) {
     const [searchTask, setSearchTask] = useState('')
     const [nameTask, setNameTask] = useState('')
     const [showBtn, setShowBtn] = useState(true)
+    const addTaskInput = useRef();
     useEffect(() => {
         if (!props.tasks.length)
             props.getAllTasksNotBelongsCardForUser()
 
     }, [props.tasks])
+    useEffect(() => {
+        addTaskInput.current.focus();
+    }, [showBtn])
+
 
     function showToast(valueToDelet) {
         props.showToastDelete(valueToDelet)
+    }
+    const hundleClick = () => {
+        setShowBtn(false)
     }
     const renderTasks = props.tasks.map((task) => {
         return searchTask ? task.name.toUpperCase().includes(searchTask.toUpperCase()) ?
@@ -40,7 +48,7 @@ function TaskNotBelongCardForUser(props) {
 
                 <button
                     className={showBtn ? 'd-block btn-add-task p-2  mr-2 ml-4 mr-auto' : 'd-none '}
-                    onClick={() => setShowBtn(false)}>
+                    onClick={hundleClick}>
                     <img width="22" className="icon-complete" id="complete"
                         src={require('../../../img/checked.svg')}>
                     </img>‏
@@ -49,7 +57,9 @@ function TaskNotBelongCardForUser(props) {
                     'wrap-input d-block  col-6 col-lg-8  pr-0  mr-md-auto  mr-2 ml-4'}>
                     <input type="text" className='addTaskNotBelong '
                         value={nameTask}
+                        ref={addTaskInput}
                         placeholder="Write a task name"
+                        // onClick={hundleClick}
                         onChange={(e) => setNameTask(e.target.value)}
                         onKeyPress={e => {
                             if (e.key === 'Enter') {

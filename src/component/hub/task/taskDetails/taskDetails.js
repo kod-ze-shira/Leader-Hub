@@ -27,7 +27,6 @@ function TaskDetails(props) {
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
-        debugger
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -181,7 +180,10 @@ function TaskDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File file={file} />
+        return <File file={file}
+        
+        setDownloadFile={(e) =>{debugger; props.setDownloadFile(e)}}
+        />
     }) : null
 
     $('.assingto-details').hover(function () {
