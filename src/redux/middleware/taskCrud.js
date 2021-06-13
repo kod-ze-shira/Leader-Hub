@@ -513,6 +513,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
 
 export const belongTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'BELONG_TASK') {
+
         let taskId = action.payload.taskId
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
