@@ -12,9 +12,8 @@ import './viewCards.css';
 
 function ViewCards(props) {
     useEffect(() => {
-
     }, [props.flag])
-
+    
     const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
@@ -202,6 +201,8 @@ function ViewCards(props) {
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
+                    <p className="col">Priority</p>
+
                     <p className="col-add-task"><a>
                         <ReactTooltip data-tip id="add" place="bottom" effect="solid">
                             {title.title_add_task}
@@ -230,21 +231,21 @@ function ViewCards(props) {
                             )}
                         </Droppable> : null
                 }
-                {
-                    addTaskInInput ?
-                        <input
-                            autoFocus="true"
-                            type="text"
-                            // className="add-task"
-                            class="form-control scroll-container mt-2   ml-4"
-                            placeholder="Add Task" id="input-task"
-                            value={inputValue} onChange={updateInputValue} onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    newTask()
-                                }
-                            }}
-                        />
-                        : null
+
+                {addTaskInInput ?
+                    <input
+                        autoFocus="true"
+                        type="text"
+                        // className="add-task"
+                        class="form-control scroll-container mt-2   ml-4"
+                        placeholder="Add Task" id="input-task"
+                        value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                newTask()
+                            }
+                        }}
+                    />
+                    : null
                 }
 
                 {

@@ -183,7 +183,8 @@ function AllWorkspaces(props) {
                     <ViewDetails
                         showToast={(obj) => props.showToast(obj)}
                         closeViewDetails={() => setShowWorkspace(false)}
-                        from={addOrEditWorkspace} workspace={workspaceToEdit} /></div> : null
+                        from={addOrEditWorkspace} workspace={workspaceToEdit} />
+                        </div> : null
             }
 
         </>

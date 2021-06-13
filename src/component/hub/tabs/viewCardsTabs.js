@@ -183,7 +183,6 @@ function ViewCardsTabs(props) {
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 
-
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
                                                             openViewDetails={openViewDetails}
@@ -217,9 +216,9 @@ function ViewCardsTabs(props) {
                                                 </div>
                                             )}
                                         </Droppable>
-                                        <a data-tip data-for="add_t"
-                                            className="add-task-tabs mt-4 mt-3 "
-                                            onClick={(e) => addTask(e)}>Add Task +</a>
+                                        {/* <a data-tip data-for="add_t"
+                                            className="add-task-tabs mt-4 mt-3 " */}
+                                            <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img>
                                     </div>
                                 </div>
                             </div>

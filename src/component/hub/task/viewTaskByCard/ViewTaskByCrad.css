@@ -149,16 +149,16 @@ label{
 }
 .status-task{
 
-  border-radius: 3px;
-
+  border-radius: 15px;
+color:white;
   font-weight: 300;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   margin: auto;
-  width: 90%;
+  width: 100%;
   padding-top: 0.5vh;
   padding-bottom: 0.5vh;
-  opacity: 0.6;
   font-weight: 400;
+  display: inline-block !important;
 
 }
 .status-task-to-do{

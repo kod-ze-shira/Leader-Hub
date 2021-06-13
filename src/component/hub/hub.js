@@ -12,7 +12,7 @@ import {
 import history from "../history"
 import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
-import Toast from "./toast/toastTaskCompleted";
+import Toast from "./toast/toastMessage";
 import ProjectsPage from './project/projectsPage/projectsPage'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
@@ -29,7 +29,7 @@ import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
-
+import Hangout from "../hubFeature/Overview/hangout/hangout";
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -163,21 +163,21 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
-                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                //   viewToastComplete={(val) => setShowToastComplete(true)}
+                                  viewToastComplete={(val) => setShowToastComplete(true)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
                             {/* share url */}
                             <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
-                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -188,7 +188,7 @@ function Hub(props) {
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/"} >
-                               {/* to send login if has not userName */}
+                                {/* to send login if has not userName */}
                             </ProtectedRoute>
                         </Switch>
                     </div>
@@ -201,7 +201,7 @@ function Hub(props) {
                         : null}
 
                     {showToastComplete ?
-                        <Toast /> : null}
+                        <Toast message='Task completed' /> : null}
 
                     {showContactList ?
                         <ContactList hub={true} />
