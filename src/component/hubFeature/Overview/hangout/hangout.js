@@ -44,7 +44,19 @@ function Hangout(props) {
         // showChat ? setShowChat(false) : setShowChat(true)
         // showChat ? setSrc(null) : setSrc(`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`)
     }
+
     // document.getElementById("iframe").contentDocument.close();
+    const show = (e) => {
+        if (showChat) {
+            setShowChat(true)
+            e.target.style.height = '80%'
+        }
+        else {
+            setShowChat(false)
+            e.target.style.height = '10%'
+        }
+    }
+    
     return (
         <>
             {/* <button className='btn-show-chat'
@@ -54,7 +66,10 @@ function Hangout(props) {
                 // onClick={(e) => handleClick(e)}>
 >
             </button> */}
-            <iframe id="iframe" className={showChat ? "iframeHangout" : 'd-none'}
+            <iframe id="iframe"
+                // className={showChat ? "iframeHangout" : 'd-none'}
+                className="iframeHangout"
+                onClick={(e) => show(e)}
                 src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
                 // src={src}
 
