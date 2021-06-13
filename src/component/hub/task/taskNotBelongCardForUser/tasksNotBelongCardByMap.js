@@ -80,7 +80,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
 
@@ -226,7 +226,7 @@ function TasksNotBelongCardByMap(props) {
                 }
 
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-
+                props.viewToastComplete({ show: true, massege: 'Task assign!!' })
 
             });
         }
@@ -266,7 +266,7 @@ function TasksNotBelongCardByMap(props) {
 
     }
 
-    $(window).on("click",function () {
+    $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
@@ -436,7 +436,7 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
-                            setDownloadFile={(e) =>setDownloadFile(e) }
+                            setDownloadFile={(e) => setDownloadFile(e)}
                             open={true} />
                     </div>
                     : null}

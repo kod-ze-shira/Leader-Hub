@@ -99,6 +99,9 @@ function ShareProject(props) {
     const shareObject = () => {
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
+        if (details.shareDetails.length)
+            props.viewToastComplete({ show: true, massege: 'project shared!!' })
+
         props.closeViewDetails()//close vd
         // alert('project shared')
     }

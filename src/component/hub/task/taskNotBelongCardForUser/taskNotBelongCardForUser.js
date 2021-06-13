@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,11 +21,11 @@ function TaskNotBelongCardForUser(props) {
         addTaskInput.current.focus();
     }, [showBtn])
 
-    
+
     function showToast(valueToDelet) {
         props.showToastDelete(valueToDelet)
     }
-    const hundleClick=()=>{
+    const hundleClick = () => {
         setShowBtn(false)
     }
     const renderTasks = props.tasks.map((task) => {

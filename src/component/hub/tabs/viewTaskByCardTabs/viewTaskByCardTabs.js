@@ -126,7 +126,8 @@ function ViewTaskByCradTabs(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus)
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+
     }
     const showDetails = (event) => {
 
