@@ -50,19 +50,19 @@ function MyChart(props) {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
+                            <div className='chartCol p-2 h100'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Incomplete tasks</b><br /><b className='bParam'>{countTasks - readyTasks}</b></div>
+                            <div className='chartCol p-2 h100'><b>Incomplete tasks</b><br /><b className='bParam'>{countTasks - readyTasks}</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Overdue tasks</b><br /><b className='bParam'>{props.overdueTasks}</b></div>
+                            <div className='chartCol p-2 h100'><b>Overdue tasks</b><br /><b className='bParam'>{props.overdueTasks}</b></div>
                         </div>
                         <div className='col-3 p-1'>
-                            <div className='chartCol p-2'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
+                            <div className='chartCol p-2 h100'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
                         </div>
                     </div>
-                    <div className='row'>
+                    <div className='row' >
                         <div className='col-12 p-1'>
                             <div className='chartCol'>
                                 {/* sticks */}
