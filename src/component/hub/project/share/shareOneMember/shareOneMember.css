@@ -1,7 +1,7 @@
 .img_share_one_member{
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 43px;
+    height: 43px;
     border: 1.5px solid white;
     color: white;
 }
@@ -10,15 +10,25 @@
   font:normal normal 34px Roboto;
 }
 .name_share_one_member{
-    font: normal normal  17px/29px Roboto;
-    color: black;
+  font: normal normal 12px/19px Roboto;
+  color: black;
+  margin-left: -1px;
 }
 .email_share_one_member{
-    font: normal normal normal 14px/19px Roboto;
-letter-spacing: 0.28px;
-color: #75798E;
+  font: normal normal normal 13px/16px Roboto;
+    letter-spacing: 0.28px;
+    color: #75798E;
+    margin-left: 0px;
+}
+.logoMailShare{
+  padding-left: inherit;
 }
 
+
+.mailInShare{
+  padding-left: inherit;
+    padding-right: inherit;
+}
   .select_permission_one_member{
     border: 1px solid #87C5FE !important;
     border-radius: 14px;

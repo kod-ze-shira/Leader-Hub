@@ -227,7 +227,6 @@ function TasksNotBelongCardByMap(props) {
                     "endDate": props.task.endDate,
                     "card": props.task.card ? props.task.card : ''
                 }
-
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
                 props.viewToastComplete({ show: true, massege: 'Task assign!!' })
 
