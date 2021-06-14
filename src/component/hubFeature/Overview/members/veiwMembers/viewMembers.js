@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../../../../redux/actions/action'
-import AddMembers from '../addMembers/addMembers';
 
 import './viewMembers.css'
 
 function ViewMembers(props) {
     useEffect(() => {
-        props.getMembersByProjectId()
+        if (props.members?.length !== 0)
+            props.getMembersByProjectId()
     }, [])
 
     const members = props.members;
@@ -22,31 +22,31 @@ function ViewMembers(props) {
     return (
         <>
 
-           
-                <div className="row pt-3">
-                    {members?.length ?
-                        members.map(m => {
-                            return <>
-                                <div className="mb-2">      
-                                    <div className="row ml-4">
-                                        <div className="col-2 d-flex align-items-center">
-                                            {m.thumbnail ?
-                                                <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
-                                                : <div className="logo-contact imgMembers fomtImgMembers d-flex align-items-center justify-content-center" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
-                                                    {m.name ? m.name[0] : null}
-                                                </div>}
-                                        </div>
-                                        <div className="col-6 ml-2">
-                                            <b className="name-contact nameMembers">{m.name} </b>
-                                            <p className="email-contact emailMembers ml-2">{m.email} </p>
-                                        </div>
+
+            <div className="row pt-3">
+                {members?.length ?
+                    members.map(m => {
+                        return <>
+                            <div className="mb-2">
+                                <div className="row ml-4">
+                                    <div className="col-2 d-flex align-items-center">
+                                        {m.thumbnail ?
+                                            <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
+                                            : <div className="logo-contact imgMembers fomtImgMembers d-flex align-items-center justify-content-center" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
+                                                {m.name ? m.name[0] : null}
+                                            </div>}
+                                    </div>
+                                    <div className="col-6 ml-2">
+                                        <b className="name-contact nameMembers">{m.name} </b>
+                                        <p className="email-contact emailMembers ml-2">{m.email} </p>
                                     </div>
                                 </div>
-                            </>
-                        })
-                        : null
-                    }
-                </div>
+                            </div>
+                        </>
+                    })
+                    : null
+                }
+            </div>
 
 
         </>
@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        members: state.public_reducer.members
+        members: state.overview_reducer.members
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewMembers);

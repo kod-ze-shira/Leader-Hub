@@ -14,7 +14,6 @@ const initialState = {
     cards: [],
     tasks: [],
     milestones: [],
-    members: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -251,10 +250,6 @@ const publicData = {
     setCards(state, action) {
         state.cards = action.payload;
         return true
-    },
-    setMembers(state, action) {
-        state.members = action.payload;
-        console.log(state.members);
     },
     deleteProjectFromWorkspace(state, action) {
 

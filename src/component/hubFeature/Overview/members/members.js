@@ -2,7 +2,7 @@ import AddMembers from "./addMembers/addMembers";
 import ViewMembers from "./veiwMembers/viewMembers";
 import React from 'react';
 
-export default function members() {
+export default function Mmebers() {
 
     return(
         <>
