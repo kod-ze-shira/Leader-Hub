@@ -9,33 +9,32 @@ function Logs(props) {
         <>
             <div className="container backgroundWhiteAndBorderRadius">
                 <div className="row"><p>Project Log</p></div>
-                <div className="container">
-                                        <div className="row">
-                                            <div className="col-2">
-                                                <p>O</p>
-                                            </div>
-                                            <div className="col-10">
-                                                <p>hello.....!!!!!!!!!</p>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col ">
-                                                <p>stamm by stammmm</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                {/* <div className="row">
+                {/* <div className="container">
+                    <div className="row">
+                        <div className="col-2">
+                            <p>logs.staticLog.icon</p>
+                        </div>
+                        <div className="col-10">
+                            <p>hello.....!!!!!!!!!</p>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col ">
+                            <p>stamm by stammmm</p>
+                        </div>
+                    </div>
+                </div> */}
+                <div className="row">
                     {logs.length ?
                         logs.map(l => {
                             return <ul>
                                 <li>
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col-2">
-                                                {l.name}
-                                                <h2>O</h2>
+                                            <div className="col-2 logicon">
+                                                {l.schemaName}
                                             </div>
-                                            <div className="col-10">
+                                            <div className="col-10 logheader">
                                                 {l.name}
                                             </div>
                                         </div>
@@ -50,7 +49,7 @@ function Logs(props) {
                         })
                         : null
                     }
-                </div> */}
+                </div>
             </div>
         </>
 

@@ -158,7 +158,7 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {props.cards!=="no cards" && props.cards.length ?
+                                    {props.cards.length ?
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
@@ -173,7 +173,7 @@ function Tabs(props) {
                                             })}
                                         </DragDropContext>
                                         : null}
-                                    {typeof(props.cards)!=="no cards" && !props.cards.length?
+                                    {!props.cards.length?
                                          <div className="logoGif d-flex justify-content-center"><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
                                         :
                                         <div className="card-width px-2 mt-4" >
