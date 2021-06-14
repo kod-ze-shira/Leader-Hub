@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action.js';
 import './viewFilesOfProject.css'
@@ -19,24 +19,28 @@ function FilesOfProject(props) {
     }, [props.indexCurrentProject])
 
     const filesForDownloadOrDelete = []
+    const downloadRef=useRef()
 
 function addOrRemoveFileToArr(e,file,ref){
+
         let index=0
         filesForDownloadOrDelete.forEach(f=>f._id==file._id?index=f._id:null)
         // for(let i=0;i<filesForDownloadOrDelete.length-1;i++){
         //     if(filesForDownloadOrDelete[i]._id==file._id)
         //         index=i
         // }
-        if(index==0) {
+        if(index==0) {          
             ref.current.checked=true
             // e.currentTarget.children[0].children[1].children[0].checked=true
             filesForDownloadOrDelete.push(file)
-
+             downloadRef.current.disabled=false
         }
         else {
             ref.current.checked=false
             e.currentTarget.children[0].children[1].children[0].checked=false   
             filesForDownloadOrDelete.splice(index,1)
+            if(filesForDownloadOrDelete.length===0)
+                downloadRef.current.disabled=true
         }
     }
     function downloadFile(e) {
@@ -46,7 +50,10 @@ function addOrRemoveFileToArr(e,file,ref){
         // link.click();
         // document.body.removeChild(link);
         // console.log(filesForDownloadOrDelete.length);
-        filesForDownloadOrDelete.forEach(f => props.downloadFile({ "file": f }))
+
+        alert('download')
+
+        // filesForDownloadOrDelete.forEach(f => props.downloadFile({ "file": f }))
 
     }
     function deleteFile() {
@@ -69,7 +76,7 @@ function addOrRemoveFileToArr(e,file,ref){
                         </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div> */}
-                    <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
+                    <div className="add iconControl" ref={downloadRef} disabled="true" onClick={downloadFile} data-tip data-for="download" >
                         <img class='imageIcon' src={download} ></img>
                         <ReactTooltip data-tip id="download" place="top" effect="solid">
                             {title.title_downLoad}

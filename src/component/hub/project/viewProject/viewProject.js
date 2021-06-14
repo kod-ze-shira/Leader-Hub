@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -10,11 +10,11 @@ import share from '../../../img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
-import TeamView from '../../teamView/teamView'
+// import TeamView from '../../teamView/teamView'
 
 function ViewProject(props) {
-    const [getProjectById, set_getProjectById] = useState(true);
-    const [viewTasks, setViewTasks] = useState(false)
+    // const [getProjectById, set_getProjectById] = useState(true);
+    // const [viewTasks, setViewTasks] = useState(false)
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });

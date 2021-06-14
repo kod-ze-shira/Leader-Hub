@@ -7,6 +7,7 @@ import Members from './members/members'
 import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
+import ViewFilesByCard from './viewFilesOfProject/viewFilesByCards'
 // import { actions } from '../../hub'
 function Overview(props) {
 
@@ -21,7 +22,8 @@ function Overview(props) {
                                 <MyChart  />
                             </div>
                             <div className='row'>
-                                <FilesOfProject />
+                                {/* <FilesOfProject /> */}
+                                <ViewFilesByCard></ViewFilesByCard>
                             </div>
                         </div>
                     </div>

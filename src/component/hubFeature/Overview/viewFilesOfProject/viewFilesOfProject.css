@@ -51,7 +51,8 @@ h3{
 .iconControl{
     display: inline;
     border-radius: 50%;
-    background-color: #E8EAEC;
+    /* background-color: #E8EAEC; */
+    background-color: #38B1B5 !important;
     width: 2rem;
     height: 2rem;
     opacity: 0.5;
@@ -59,8 +60,19 @@ h3{
  .iconControl:hover{
      cursor: pointer;
  }
+ /* .iconControl:enabled{
+      background-color: #38B1B5 !important;
+ } */
+ .iconControl:disabled{
+      background-color: #E8EAEC;
+      cursor: row-resize;
+ }
  .iconControl:active{
-     background-color: #38B1B5;
+
+    background-color: #38B1B5;
+ }
+ .iconControl:active img{
+  color: white;
  }
  .fileItem{
     border: #E8EAEC;
