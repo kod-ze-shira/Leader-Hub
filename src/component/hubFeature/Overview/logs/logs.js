@@ -35,12 +35,12 @@ function Logs(props) {
                                                 {l.schemaName}
                                             </div>
                                             <div className="col-10 logheader">
-                                                {l.name}
+                                                <img src={l.staticLog.icon}></img>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col ">
-                                                {l.name}
+                                                {l.user}
                                             </div>
                                         </div>
                                     </div>
