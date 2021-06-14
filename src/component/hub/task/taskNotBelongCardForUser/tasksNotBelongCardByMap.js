@@ -80,7 +80,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
 
@@ -229,7 +229,7 @@ function TasksNotBelongCardByMap(props) {
                 }
 
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-
+                props.viewToastComplete({ show: true, massege: 'Task assign!!' })
 
             });
         }

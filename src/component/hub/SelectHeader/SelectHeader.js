@@ -13,6 +13,7 @@ import { useParams, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -53,11 +54,21 @@ function SelectHeader(props) {
         props.from(e)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
+    function backToPage() {
+        if (window.location.href.indexOf('workspace') != -1)
+            props.history.push("/" + props.user + "/hub/")
+        else
+            if (window.location.href.indexOf('projectPlatform') != -1)
+                props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+    }
 
     return (
         <>
 
-            <div className="s-header mx-0  row align-items-center ">
+            <div className="s-header mx-0  row align-items-center">
+                <FontAwesomeIcon className="ml-3"
+                onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
+
                 {props.workspaces.length > 0 ?
                     <>
                         <div className="col-md col-sm-2 pr-0">
@@ -92,13 +103,14 @@ function SelectHeader(props) {
                             <>
                                 <div class="input-group inputSearchProject col-9 row mt-0 pr-0"
                                 >
+                                    <div class="input-group-prepend col2">
+                                        <FontAwesomeIcon icon={["fas", "search"]} />
+                                    </div>
+
                                     <input type="text" class="col-10" placeholder="Search project..."
                                         onChange={(e) => props.valueSearchProject(e.target.value)}
                                         aria-label="Username" aria-describedby="basic-addon1" />
 
-                                    <div class="input-group-prepend col2">
-                                        <FontAwesomeIcon icon={["fas", "search"]} />
-                                    </div>
                                 </div>
                                 <button className='buttonNewProject col-3' data-tip data-for="add_p"
                                     onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
@@ -106,13 +118,14 @@ function SelectHeader(props) {
                             </>
                             :
                             <div class="input-group inputSearchProject col-12 row pr-0">
+                                <div class="input-group-prepend">
+                                    <FontAwesomeIcon icon={["fas", "search"]} />
+                                </div>
                                 <input type="text" class="col-10" placeholder="Search project..."
                                     onChange={(e) => props.valueSearchProject(e.target.value)}
                                     aria-label="Username" aria-describedby="basic-addon1" />
 
-                                <div class="input-group-prepend">
-                                    <FontAwesomeIcon icon={["fas", "search"]} />
-                                </div>
+
                             </div>}
 
                     </div>
@@ -157,6 +170,7 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
         user: state.public_reducer.userName,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 

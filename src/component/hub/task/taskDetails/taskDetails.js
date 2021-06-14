@@ -27,7 +27,6 @@ function TaskDetails(props) {
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
-        debugger
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))

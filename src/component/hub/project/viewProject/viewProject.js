@@ -15,7 +15,7 @@ import ProjectStyle  from "../projectStyle";
 
 
 function ViewProject(props) {
-    console.log(props.myProject.members)
+    // console.log(props.myProject.members)
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });

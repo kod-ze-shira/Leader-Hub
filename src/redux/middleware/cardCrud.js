@@ -27,7 +27,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
                 if(data.cards.length)
                 dispatch(actions.setCards(data.cards))
                 else
-                dispatch(actions.setCards("not cards"))
+                dispatch(actions.setCards([]))
                 console.log("success")
                 console.log("data", data);
                 return false;
@@ -116,7 +116,9 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
             },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                dispatch(actions.deleteCard(data))
+                console.log(data.project)
+                dispatch(actions.deleteCard(data.project))
+                // dispatch(actions.deleteCard(data))
 
             },
             error: function (err) {

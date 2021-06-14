@@ -119,6 +119,7 @@ function ProjectsByWorkspace(props) {
             {showEditOrShareProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
+                        viewToastComplete={props.viewToastComplete}
                         closeViewDetails={() => setShowEditOrShareProject(false)}
                         showToast={showToast}
                         from={editOrShareProject} workspaceId={idWorkspace} />
