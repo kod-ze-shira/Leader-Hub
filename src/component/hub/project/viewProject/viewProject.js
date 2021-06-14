@@ -160,7 +160,7 @@ function ViewProject(props) {
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
 
 
-                    <img style={myStyleIcons} src={require('../../../img/share.png')}
+                    <img style={myStyleIcons} src={require('../../../img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
                     <ReactTooltip data-tip id="share" place="bottom" effect="solid">

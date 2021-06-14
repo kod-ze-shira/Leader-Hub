@@ -108,7 +108,7 @@ function ShareProject(props) {
 
     return (
         <>
-            <div onClick={() => setShowTeams(false)} className="details mr-5 ml-4">
+            <div onClick={() => setShowTeams(false)} className="details mr-4 ml-4">
 
                 <div className='propertiesViewDitails'>
 
@@ -167,12 +167,9 @@ function ShareProject(props) {
                             </select>
                         </div>
                     </div>
-                    <div className="row pt-3">
-                        <div className="col txt_share_with">
-                            {/* <label> */}
-                            Share with:
-                            {/* </label> */}
-                        </div>
+                    {/* <div className="row pt-3"> */}
+                    <div className="row pl-3 pt-3 pb-1">
+                        <div className="txt_share">Share with:</div>
                     </div>
                     <div className="row">
                         <div className="col">
@@ -189,7 +186,7 @@ function ShareProject(props) {
                 <div className="row justify-content-end ">
                     <button className="btn_share" onClick={shareObject}>Share</button>
                 </div>
-            </div>
+            </div >
 
         </>
     )

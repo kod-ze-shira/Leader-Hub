@@ -11,10 +11,19 @@ import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import ShureDelete from '../../../shureDelete/shureDelete';
+import styled, { css } from 'styled-components'
 
 function ViewWorkspaceGrid(props) {
 
     const workspace = props.workspace
+    // const myStyle=&:hover{
+    //     'border': '1.5px solid workspace.colr'
+    // }
+    // export default function ProjectStyle(props) {
+    const myStyle = ` 
+        &:hover {
+            border: 1.5px solid ${workspace.color} !important
+        } `;
     useEffect(() => {
 
     }, [props.workspaces])
@@ -87,7 +96,9 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
                 <div className="Workspacegrid pt-2 pb-2 px-2"
-                    onClick={routeToProject} >
+                    onClick={routeToProject}
+                    style={{ myStyle }}
+                >
                     <div>
                         <div className="logoWorkspace1 " >
                             <div className="logo-w"

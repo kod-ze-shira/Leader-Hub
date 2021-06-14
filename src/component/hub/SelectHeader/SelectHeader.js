@@ -100,8 +100,10 @@ function SelectHeader(props) {
                             <>
                                 <div class="input-group inputSearchProject col-9 row mt-0 pr-0"
                                 >
-                                    <div class="input-group-prepend col2">
-                                        <FontAwesomeIcon icon={["fas", "search"]} />
+                                    <div class="input-group-prepend">
+                                        {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
+                                        <img src={require('../../img/onic-ios-search.png')} />
+
                                     </div>
 
                                     <input type="text" class="col-10" placeholder="Search project..."
@@ -116,7 +118,9 @@ function SelectHeader(props) {
                             :
                             <div class="input-group inputSearchProject col-12 row pr-0">
                                 <div class="input-group-prepend">
-                                    <FontAwesomeIcon icon={["fas", "search"]} />
+                                    {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
+                                    <img src={require('../../img/onic-ios-search.png')} />
+
                                 </div>
                                 <input type="text" class="col-10" placeholder="Search project..."
                                     onChange={(e) => props.valueSearchProject(e.target.value)}

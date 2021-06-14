@@ -76,7 +76,7 @@ function EditProject(props) {
     return (
         <>
 
-            <div className="details mr-5 ml-4">
+            <div className="details mr-4 ml-4">
                 <div className='propertiesViewDitails'>
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Project details</h5>
