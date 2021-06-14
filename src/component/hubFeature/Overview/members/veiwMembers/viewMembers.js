@@ -22,21 +22,21 @@ function ViewMembers(props) {
     return (
         <>
 
-            <div className="pt-3 ">
-                <div className="row">
+           
+                <div className="row pt-3">
                     {members?.length ?
                         members.map(m => {
                             return <>
-                                <div className="option-contact col-12 mb-2">
-                                    <div className="row">
-                                        <div className="col-2">
+                                <div className="mb-2">      
+                                    <div className="row ml-4">
+                                        <div className="col-2 d-flex align-items-center">
                                             {m.thumbnail ?
                                                 <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
                                                 : <div className="logo-contact imgMembers fomtImgMembers d-flex align-items-center justify-content-center" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
                                                     {m.name ? m.name[0] : null}
                                                 </div>}
                                         </div>
-                                        <div className="col-6">
+                                        <div className="col-6 ml-2">
                                             <b className="name-contact nameMembers">{m.name} </b>
                                             <p className="email-contact emailMembers ml-2">{m.email} </p>
                                         </div>
@@ -47,7 +47,6 @@ function ViewMembers(props) {
                         : null
                     }
                 </div>
-            </div>
 
 
         </>
