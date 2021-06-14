@@ -100,7 +100,7 @@ function ShareProject(props) {
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
         if (details.shareDetails.length)
-            props.viewToastComplete({ show: true, massege: 'project shared!!' })
+            props.viewToastComplete({ show: true, massege: 'Project shared!!' })
 
         props.closeViewDetails()//close vd
         // alert('project shared')
@@ -169,8 +169,10 @@ function ShareProject(props) {
                     </div>
                     <div className="row pt-3">
                         <div className="col txt_share_with">
+                            {/* <label> */}
                             Share with:
-                    </div>
+                            {/* </label> */}
+                        </div>
                     </div>
                     <div className="row">
                         <div className="col">
@@ -184,7 +186,7 @@ function ShareProject(props) {
                 {showTeams ? <TeamsShare addTeamToShare={addTeamMembersEmailsToMembersEmailList} /> : null}
                 {/* {clickCreateTeam ?
                     <CreateTeam /> : null} */}
-                <div className="row pt-4 row_btn_share pr-4">
+                <div className="row justify-content-end ">
                     <button className="btn_share" onClick={shareObject}>Share</button>
                 </div>
             </div>

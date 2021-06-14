@@ -10,10 +10,9 @@ import share from '../../../img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
-import TeamView from '../../teamView/teamView'
 
 function ViewProject(props) {
-    // console.log(props.myProject.members)
+    console.log(props.myProject.members)
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });

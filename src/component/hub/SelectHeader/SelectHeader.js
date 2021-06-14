@@ -67,7 +67,7 @@ function SelectHeader(props) {
 
             <div className="s-header mx-0  row align-items-center">
                 <FontAwesomeIcon className="ml-3"
-                onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
+                    onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
 
                 {props.workspaces.length > 0 ?
                     <>
@@ -93,10 +93,7 @@ function SelectHeader(props) {
 
                 {window.location.href.indexOf('allProjects') != -1 ||
                     window.location.href.indexOf('workspace') != -1 ?
-                    <div className='row col-5' id='tabsAndList' style={{
-                        'height': '50px',
-                        'margin-top': '10px'
-                    }}>
+                    <div className='row col-5' id='tabsAndList' >
 
 
                         {window.location.href.indexOf('workspace') != -1 ?

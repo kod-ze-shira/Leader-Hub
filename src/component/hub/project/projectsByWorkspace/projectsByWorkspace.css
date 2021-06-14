@@ -96,12 +96,12 @@ margin-right: 11px;
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
     padding-left: 12px;
-    padding-bottom: 8px;
+    padding-bottom: 4px;
     border: #1FB9C1 solid 1.5px;
     border-left: none;
     outline: none;
     padding-right: 6px;
-    padding-top: 4px;
+    padding-top: 2px;
     font-size: revert;
     color:#1FB9C1
 }
@@ -124,7 +124,8 @@ margin-right: 11px;
 
 .buttonNewProject{
     width: 116px;
-    height: 36px;
+    min-height: 30px;
+    height: fit-content;
     background: var(--unnamed-color-52c4a9) 0% 0% no-repeat padding-box;
     background: #1FB9C1 0% 0% no-repeat padding-box;
     border-radius: 5px;
