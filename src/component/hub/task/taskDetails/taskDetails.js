@@ -27,7 +27,6 @@ function TaskDetails(props) {
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
-        debugger
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -181,7 +180,10 @@ function TaskDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File file={file} />
+        return <File file={file}
+        
+        setDownloadFile={(e) =>{debugger; props.setDownloadFile(e)}}
+        />
     }) : null
 
     $('.assingto-details').hover(function () {
@@ -332,12 +334,18 @@ function TaskDetails(props) {
                     <div className="assingto-details" >
 
                         <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <img data-tip data-for="assing_" className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <ReactTooltip data-tip id="assign_" place="top" effect="solid">
+                            {title.title_assing}
+                        </ReactTooltip>
                     </div>
                     <div className=" files-details">
                         <UploadFile />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <img data-tip id="save" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <ReactTooltip data-tip id="save" place="top" effect="solid">
+                            {title.title_save}
+                        </ReactTooltip>
                     </div>
                     <div className="delete-details">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>

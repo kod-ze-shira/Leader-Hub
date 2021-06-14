@@ -13,6 +13,7 @@ import { useParams, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -39,7 +40,6 @@ function SelectHeader(props) {
 
     useEffect(() => {
         if (props.workspaces.length == 0)
-        if(!window.location.href.includes('share'))
             props.getAllWorkspaces()
     }, [])
 
@@ -54,11 +54,21 @@ function SelectHeader(props) {
         props.from(e)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
+    function backToPage() {
+        if (window.location.href.indexOf('workspace') != -1)
+            props.history.push("/" + props.user + "/hub/")
+        else
+            if (window.location.href.indexOf('projectPlatform') != -1)
+                props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+    }
 
     return (
         <>
 
             <div className="s-header mx-0  row align-items-center">
+                <FontAwesomeIcon className="ml-3"
+                onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
+
                 {props.workspaces.length > 0 ?
                     <>
                         <div className="col-md col-sm-2 pr-0">
@@ -74,42 +84,48 @@ function SelectHeader(props) {
                             <SelectTask />
                         </div>
                     </> :
-                    <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity"><Tab label="List" className="tab" /><Tab label="Calender" className="tab" /><Tab label="Gant" className="tab" />
-                        <Tab label="Tabs" className="tab" /></Tabs>}
+                    <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity">
+                        <Tab label="List" className="tab" />
+                        <Tab label="Calender" className="tab" />
+                        <Tab label="Gant" className="tab" />
+                        <Tab label="Tabs" className="tab" />
+                    </Tabs>}
 
                 {window.location.href.indexOf('allProjects') != -1 ||
                     window.location.href.indexOf('workspace') != -1 ?
-                    <div className='row' id='tabsAndList' style={{
+                    <div className='row col-5' id='tabsAndList' style={{
                         'height': '50px',
-                        'margin-right': '9px',
-                        'margin-top': '9px'
+                        'margin-top': '10px'
                     }}>
 
 
                         {window.location.href.indexOf('workspace') != -1 ?
                             <>
-                                <div class="input-group inputSearchProject col-8">
-                                    <input type="text" class="" placeholder="Search project..."
+                                <div class="input-group inputSearchProject col-9 row mt-0 pr-0"
+                                >
+                                    <div class="input-group-prepend col2">
+                                        <FontAwesomeIcon icon={["fas", "search"]} />
+                                    </div>
+
+                                    <input type="text" class="col-10" placeholder="Search project..."
                                         onChange={(e) => props.valueSearchProject(e.target.value)}
                                         aria-label="Username" aria-describedby="basic-addon1" />
 
-                                    <div class="input-group-prepend">
-                                        <FontAwesomeIcon icon={["fas", "search"]} />
-                                    </div>
                                 </div>
-                                <button className='buttonNewProject col-4' data-tip data-for="add_p"
+                                <button className='buttonNewProject col-3' data-tip data-for="add_p"
                                     onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
                                 >+ New Project</button>
                             </>
                             :
-                            <div class="input-group inputSearchProject col-12">
-                                <input type="text" class="" placeholder="Search project..."
-                                    onChange={(e) => props.valueSearchProject(e.target.value)}
-                                    aria-label="Username" aria-describedby="basic-addon1" />
-
+                            <div class="input-group inputSearchProject col-12 row pr-0">
                                 <div class="input-group-prepend">
                                     <FontAwesomeIcon icon={["fas", "search"]} />
                                 </div>
+                                <input type="text" class="col-10" placeholder="Search project..."
+                                    onChange={(e) => props.valueSearchProject(e.target.value)}
+                                    aria-label="Username" aria-describedby="basic-addon1" />
+
+
                             </div>}
 
                     </div>
@@ -143,11 +159,6 @@ function SelectHeader(props) {
                     </div>
 
                 }
-
-
-
-                {/* {props.type == 'projects' ?
-                    <span>ff</span> : null} */}
             </div>
 
         </>
@@ -159,6 +170,7 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         workspace: state.workspace_reducer.workspace,
         user: state.public_reducer.userName,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 

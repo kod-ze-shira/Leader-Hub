@@ -115,6 +115,8 @@
   margin-left: -3vh !important;
   z-index: 0!important;
   opacity: 0.5 !important;
+  height: 100vh !important;
+
 }
 
 .gantt_marker_content {
@@ -126,6 +128,7 @@
   margin-right: -3vh !important; */
   vertical-align: middle !important;
   background-color: #3598F4 !important;
+  height: 100vh !important;
 
 }
 .milestones_ > .gantt_marker_content{
@@ -134,8 +137,8 @@
   color: transparent !important;
   width: 5vh;
   padding: 11px !important;
-  margin-top: 8vh;
-  margin-left: -2vh;
+  margin-top: 30vh;
+  margin-left: -1.5vh;
   background-color: transparent !important;
   opacity: 1;
 

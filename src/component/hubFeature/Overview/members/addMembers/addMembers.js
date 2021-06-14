@@ -5,28 +5,33 @@ import './addMembers.css'
 
 
 function AddMembers(props) {
-    // useEffect(() => {
-    //     props.getMembersByProjectId()
-    // }, [])
+
 
     const members = props.members;
 
-
+    const clickAddMembers = () => {
+        console.log('clickAddMembers');
+        // document.getElementsByClassName('viewMembersList')[0].style.display = 'block';
+    }
     return (
         <>
 
-            <div className="divAddMembers row pt-3 px-2 d-flex align-items-center" >
+            <div className="divAddMembers row pt-3 ml-2 d-flex align-items-center" onClick={clickAddMembers}  >
                 <div className="col-2">
-                    <div className=" addMembers d-flex align-items-center"  >
-                        <div className="fontAddMembers d-flex justify-content-center " data-tip data-for="add_w">+
-                        {/* <img className="imgPlus" src={require('../../../../img/ID.png')} alt='+'/> */}
+                    <div className="addMembers"  >
+                        <div className="fontAddMembers d-flex align-items-center justify-content-center">+
                         </div>
                     </div>
                 </div>
                 <div className="col-8">
                     <b className="ml-2 membersFont">Add Members</b>
                 </div>
+
             </div>
+            {/* <div  className="viewMembersList">
+                <ContactList hub={true}/>
+            </div> */}
+
         </>
     )
 }

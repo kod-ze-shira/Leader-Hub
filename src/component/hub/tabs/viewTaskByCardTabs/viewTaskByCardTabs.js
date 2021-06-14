@@ -26,10 +26,11 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-
+        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        $(`#${props.task._id}assing-to`).css("display", "none")
+        if (props.task.assingTo)
+            $(`#${props.task._id}assing-to`).css("display", "none")
 
         let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
         if (hasLike)
@@ -121,11 +122,12 @@ function ViewTaskByCradTabs(props) {
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
-        
+
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus)
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+
     }
     const showDetails = (event) => {
 
@@ -174,14 +176,7 @@ function ViewTaskByCradTabs(props) {
     let monthName = monthNames[month];
     let dateInString = day + " " + monthName
 
-    const showAssign = () => {
-        if (!props.task.assingTo)
-            $(`#${props.task._id}assing-to`).css("display", "inline-block")
-    }
-    const closeAssign = () => {
-        if (!props.task.assingTo)
-            $(`#${props.task._id}assing-to`).css("display", "none")
-    }
+
     const updateLike = (e) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
@@ -189,6 +184,13 @@ function ViewTaskByCradTabs(props) {
         setUserHasLike(!userHasLike)
         e.stopPropagation()
     }
+
+    const myFiles = props.task.files && props.task.files.length ?
+        props.task.files.map((myFile) => {
+            return <img className='imgInTask' src={myFile.url}></img>
+        })
+        : null
+
     return (
         <>
 
@@ -201,10 +203,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
-
                         <div className="task-card mt-2 pt-2 pb-2"
-                            onMouseOver={(e) => showAssign(e)}
-                            onMouseOut={(e) => closeAssign(e)}
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className="container ">
@@ -244,7 +243,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
-
+                                {myFiles}
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
                                     value={props.task.name}
@@ -310,10 +309,11 @@ function ViewTaskByCradTabs(props) {
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>
-                                                {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
-                                                        : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                                </div> : null}
+                                                {props.task.assingTo ?
+                                                    <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                                        {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                            : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                                    </div> : null}
                                             </div>
                                         </div>
                                     </div>

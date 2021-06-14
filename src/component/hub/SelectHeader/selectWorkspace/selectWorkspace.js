@@ -8,13 +8,12 @@ import LetterLogo from '../../logo/letterLogo';
 import './selectWorkspace.css';
 
 const Input = props => <components.Input {...props} maxLength={5} />;
-const maxLength = 5;
 
 function SelectWorkspace(props) {
 
 
     useEffect(() => {
-        console.log("props.workspaces", props.workspaces);
+        // console.log("props.workspaces", props.workspaces);
     }, [props.workspaces])
 
     //to change the workspace that user selected

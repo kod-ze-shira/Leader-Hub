@@ -63,11 +63,12 @@ function File(props) {
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
                     {props.file.url != 'new' ?
-                        <img onClick={(e) => downloadFile(e)} style={{ float: 'right' }}
+                        <img onClick={(e) =>{
+                             downloadFile(e)}} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4'
                             src={require('../../../img/download.svg')}></img>
                         : null}
-                    <img onClick={(e) => downloadFile(e)} onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
+                    <img onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
                         src={require('../../../img/Group 21592.svg')}></img>
                     {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
                         icon={['fas', 'trash-alt']}
