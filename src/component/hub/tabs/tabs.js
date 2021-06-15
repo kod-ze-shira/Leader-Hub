@@ -23,6 +23,7 @@ function Tabs(props) {
     const [openInputTask, setOpenInputTask] = useState(false)
     const [downloadFile, setDownloadFile] = useState(false)
     const [flag, setFlag] = useState(true)
+    const [ifAnimation, setIfAnimation] = useState(true)
 
     useEffect(() => {
 
@@ -39,6 +40,11 @@ function Tabs(props) {
             }
         }
     }, [props.workspaces])
+
+    useEffect(() => {
+        if (props.cards.length)
+            setIfAnimation(false)
+    }, [props.cards.length])
 
 
     function onDragEndׂ(e) {
@@ -143,6 +149,7 @@ function Tabs(props) {
         event.stopPropagation();
     }
 
+
     return (
         <><div className="body body-cards">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
@@ -160,7 +167,8 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {props.cards !== "no cards" && props.cards.length > 0 ?
+                                    {props.cards.length ?
+
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
@@ -175,8 +183,13 @@ function Tabs(props) {
                                             })}
                                         </DragDropContext>
                                         : null}
-                                    {typeof (props.cards) !== "no cards" && !props.cards.length ?
-                                        <div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
+                                    {/* {!props.cards.length ? */}
+
+                                    {/* <> */}
+                                    {ifAnimation ?
+                                        <div className="logoGif d-flex justify-content-center">
+                                            <img className="LampAnimation" src={require('../../img/hub.gif')} />
+                                        </div>
                                         :
                                         <div className="card-width px-2 mt-4" >
                                             <div className="view-cards-tabs  mt-1" >

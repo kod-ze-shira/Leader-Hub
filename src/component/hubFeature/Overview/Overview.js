@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { actions } from '../../../redux/actions/action';
 import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
@@ -9,6 +10,11 @@ import MyChart from '../chart/chart'
 
 
 function Overview(props) {
+
+    useEffect(() => {
+        if (props.workspaces.length == 0)
+            props.getAllWorkspaces()
+    }, [])
     return (
         <>
             <div className='scrollbarOverview container-fluid'>
@@ -34,12 +40,23 @@ function Overview(props) {
                             </div>
                         </div>
                     </div>
-<Hangout></Hangout>
+                    {/* <Hangout></Hangout> */}
                 </div>
             </div>
         </>
     )
 }
+const mapStateToProps = (state) => {
+    return {
 
+    }
+}
 
-export default Overview;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
+
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Overview)
+

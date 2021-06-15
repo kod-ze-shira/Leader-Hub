@@ -91,23 +91,23 @@ function SelectHeader(props) {
 
                 {window.location.href.indexOf('allProjects') != -1 ||
                     window.location.href.indexOf('workspace') != -1 ?
-                    <div className='row col-5' id='tabsAndList' style={{
-                        'height': '50px',
-                        'margin-top': '10px'
-                    }}>
+                    <div className='row col-5' id='tabsAndList' >
 
 
                         {window.location.href.indexOf('workspace') != -1 ?
                             <>
                                 <div class="input-group inputSearchProject col-9 row mt-0 pr-0"
                                 >
+                                    <div class="input-group-prepend">
+                                        {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
+                                        <img src={require('../../img/onic-ios-search.png')} />
+
+                                    </div>
+
                                     <input type="text" class="col-10" placeholder="Search project..."
                                         onChange={(e) => props.valueSearchProject(e.target.value)}
                                         aria-label="Username" aria-describedby="basic-addon1" />
 
-                                    <div class="input-group-prepend col2">
-                                        <FontAwesomeIcon icon={["fas", "search"]} />
-                                    </div>
                                 </div>
                                 <button className='buttonNewProject col-3' data-tip data-for="add_p"
                                     onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
@@ -115,13 +115,16 @@ function SelectHeader(props) {
                             </>
                             :
                             <div class="input-group inputSearchProject col-12 row pr-0">
+                                <div class="input-group-prepend">
+                                    {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
+                                    <img src={require('../../img/onic-ios-search.png')} />
+
+                                </div>
                                 <input type="text" class="col-10" placeholder="Search project..."
                                     onChange={(e) => props.valueSearchProject(e.target.value)}
                                     aria-label="Username" aria-describedby="basic-addon1" />
 
-                                <div class="input-group-prepend">
-                                    <FontAwesomeIcon icon={["fas", "search"]} />
-                                </div>
+
                             </div>}
 
                     </div>

@@ -13,7 +13,7 @@ import CreatableSelect from 'react-select/creatable';
 import placeholder from '../../../img/placeholder.png'; // with import
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
-
+import ProjectStyle from "../../project/projectStyle";
 
 function TasksNotBelongCardByMap(props) {
 
@@ -80,7 +80,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
 
@@ -181,10 +181,13 @@ function TasksNotBelongCardByMap(props) {
         project.name ? {
             value: project, label:
                 <div className="d-flex flex-row" style={{ color: project.color }}>
-                    <span className="dot dotProject "
+                    {/* <span className="dot dotProject "
                         style={{ 'background-color': project.color }} >
-                    </span>
-                    <span className="select-not-belong">{project.name}</span>
+                    </span> */}
+                    <div style={{marginTop:'0.5px'}}>
+                        <ProjectStyle color={project.color}></ProjectStyle>
+                    </div>
+                    <span className="select-not-belong project-select-not-belong">{project.name}</span>
                 </div >
         } : null
     )) : null
@@ -224,9 +227,8 @@ function TasksNotBelongCardByMap(props) {
                     "endDate": props.task.endDate,
                     "card": props.task.card ? props.task.card : ''
                 }
-
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-
+                props.viewToastComplete({ show: true, massege: 'Task assign!!' })
 
             });
         }
@@ -266,7 +268,7 @@ function TasksNotBelongCardByMap(props) {
 
     }
 
-    $(window).on("click",function () {
+    $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
@@ -344,7 +346,7 @@ function TasksNotBelongCardByMap(props) {
                             })}
                             onChange={handleChangeWorkspace}
                             id='selectWorkspaceInTasksNotBelong'
-                            className='selectWorkspaceInTasksNotBelong text-center '
+                            className='selectWorkspaceInTasksNotBelong selectInTasksNotBelong text-center '
                             placeholder={selectPlaceHorder}
                             options={workspaceSelect}
                             value={indexOfWorkspace !== null ?
@@ -376,7 +378,7 @@ function TasksNotBelongCardByMap(props) {
                             },
                         })}
                         id='selectProjectInTasksNotBelong'
-                        className='selectProjectInTasksNotBelong'
+                        className='selectProjectInTasksNotBelong selectInTasksNotBelong'
                         options={projectSelect}
                         value={indexOfProject !== null ?
                             projectSelect[indexOfProject] : 'Select...'}
@@ -388,7 +390,7 @@ function TasksNotBelongCardByMap(props) {
                     <CreatableSelect
                         // isClearable
                         onChange={handleChangeCard}
-                        className='selectCardInTasksNotBelong'
+                        className='selectCardInTasksNotBelong selectInTasksNotBelong'
                         theme={theme => ({
                             ...theme,
                             border: 0,
@@ -436,7 +438,7 @@ function TasksNotBelongCardByMap(props) {
                             closeViewDetails={() => setViewDetails(false)}
                             from='taskNotBelongDetails'
                             task={props.task}
-                            setDownloadFile={(e) =>setDownloadFile(e) }
+                            setDownloadFile={(e) => setDownloadFile(e)}
                             open={true} />
                     </div>
                     : null}

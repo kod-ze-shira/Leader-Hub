@@ -129,7 +129,7 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks()
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
     const showDetails = (event) => {
@@ -151,17 +151,17 @@ function ViewTaskByCradTabs(props) {
         //     props.setTaskByFiledFromTasks(editTaskInRedux)
         // }
         // else {
-            let value = event.target.value
-            if (event.target.name == "complete") {
+        let value = event.target.value
+        if (event.target.name == "complete") {
 
-                doneStatus = !doneStatus
-                value = doneStatus
-                editCompleteTask()
-            }
-            else {
-                editTaskInRedux = { "nameFiled": event.target.name, "value": value }
-                props.setTaskByFiledFromTasks(editTaskInRedux)
-            }
+            doneStatus = !doneStatus
+            value = doneStatus
+            editCompleteTask()
+        }
+        else {
+            editTaskInRedux = { "nameFiled": event.target.name, "value": value }
+            props.setTaskByFiledFromTasks(editTaskInRedux)
+        }
         // }
     }
 
@@ -210,10 +210,10 @@ function ViewTaskByCradTabs(props) {
                         <div className="task-card mt-2 pt-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
-                            <div className="container ">
+                            <div className=" ">
                                 <label
                                     title="Complete Task"
-                                    className="check-task pb-2  check-tabs">
+                                    className="check-task pb-2  check-tabs ">
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
@@ -249,7 +249,8 @@ function ViewTaskByCradTabs(props) {
                                 </Menu>
 
                                 <input
-                                    className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
+                                    className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
+                                    style={props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}

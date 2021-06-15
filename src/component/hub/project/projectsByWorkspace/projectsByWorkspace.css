@@ -31,7 +31,7 @@
     margin-left: 2px;
     height: 54px;
     width: auto;
-    background-color: hsla(196, 44%, 95%, 1);
+    background-color: #EDFBFC;
     height: fit-content;
     margin-left: 1.08rem;
     padding-left: 15px;
@@ -85,29 +85,42 @@ margin-right: 11px;
 
 .inputSearchProject input , 
 .inputSearchProject div{
-    background-color: #b2b2b21f;
+    background-color: #EDFBFC;
 }
+.inputSearchProject input::placeholder {
+    color: #1FB9C1;
+    opacity: 1; /* Firefox */
+  }
 .inputSearchProject input{
     border: none;
-    border-top-left-radius: 50rem !important;
-    border-bottom-left-radius: 50rem !important;
-    padding-left: 12px;
-    padding-bottom: 8px;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    padding-left: 5px;
+    padding-bottom: 4px;
+    border: #1FB9C1 solid 1.5px;
+    border-left: none;
     outline: none;
     padding-right: 6px;
-    padding-top: 4px;
+    padding-top: 2px;
     font-size: revert;
-    
+    color:#1FB9C1
 }
 
 .inputSearchProject div{
-    border-top-right-radius: 50rem !important;
-    border-bottom-right-radius: 50rem !important;
-    padding-right: 14px;
-    padding-top: 8px;
-    color: #0000006e;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    padding-left: 6px;
+    padding-top: 7px;
+    border: #1FB9C1 solid 1.5px;
+    border-right: none;
+    color: #1FB9C1;
 }
 
+
+.inputSearchProject div img{
+    height: 14px;
+    width: 14px;
+}
 /* .inputSearchProjects:hover {
   width: 300px;
 } */
@@ -116,7 +129,8 @@ margin-right: 11px;
 
 .buttonNewProject{
     width: 116px;
-    height: 36px;
+    min-height: 30px;
+    height: fit-content;
     background: var(--unnamed-color-52c4a9) 0% 0% no-repeat padding-box;
     background: #1FB9C1 0% 0% no-repeat padding-box;
     border-radius: 5px;

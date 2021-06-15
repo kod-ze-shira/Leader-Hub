@@ -140,11 +140,11 @@ function DisplayGantt(props) {
         <div className="body">
             <div>
                 <div>
-                    <Gantt
+                    {/* <Gantt
                         tasks={data}
                         zoom={currentZoom}
                         onDataUpdated={logDataUpdate}
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

@@ -160,7 +160,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks()
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
     const editTaskNameInReduxs = (taskName) => {

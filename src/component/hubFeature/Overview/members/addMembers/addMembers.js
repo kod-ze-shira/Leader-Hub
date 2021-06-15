@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../../../../redux/actions/action'
-import ContactList from '../../../../hub/contact/contactList'
 import './addMembers.css'
 
 
@@ -10,17 +9,17 @@ function AddMembers(props) {
 
     const members = props.members;
 
-    const clickAddMembers=() =>{
+    const clickAddMembers = () => {
         console.log('clickAddMembers');
         // document.getElementsByClassName('viewMembersList')[0].style.display = 'block';
     }
     return (
         <>
 
-            <div className="divAddMembers row pt-3 d-flex align-items-center" onClick={clickAddMembers}  >
+            <div className="divAddMembers row pt-3 ml-2 d-flex align-items-center" onClick={clickAddMembers}  >
                 <div className="col-2">
-                    <div className=" addMembers"  >
-                        <div className="fontAddMembers  " data-tip data-for="add_w">+
+                    <div className="addMembers"  >
+                        <div className="fontAddMembers d-flex align-items-center justify-content-center">+
                         </div>
                     </div>
                 </div>

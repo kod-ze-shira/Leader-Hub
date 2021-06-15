@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { actions } from '../../../../redux/actions/action';
 import '../../body/body.css';
 import ViewDetails from '../../viewDetails/viewDetails';
 import ViewProject from '../viewProject/viewProject';
@@ -119,6 +118,7 @@ function ProjectsByWorkspace(props) {
             {showEditOrShareProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
+                        viewToastComplete={props.viewToastComplete}
                         closeViewDetails={() => setShowEditOrShareProject(false)}
                         showToast={showToast}
                         from={editOrShareProject} workspaceId={idWorkspace} />
