@@ -64,11 +64,9 @@ function SelectHeader(props) {
 
     return (
         <>
-
             <div className="s-header mx-0  row align-items-center">
                 <FontAwesomeIcon className="ml-3"
-                onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
-
+                    onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
                 {props.workspaces.length > 0 ?
                     <>
                         <div className="col-md col-sm-2 pr-0">

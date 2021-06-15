@@ -139,6 +139,16 @@ const publicData = {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject] = action.payload
 
     },
+    setCountReadyTasks(state, action) {
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countReadyTasks += 1
+    },
+    setCountTasks(state, action) {
+        if (action.payload)
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countTasks = action.payload
+        else
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countTasks -= 1
+
+    },
     setProjects(state, action) {
         state.projects = action.payload;
     },

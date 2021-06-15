@@ -10,7 +10,6 @@ function SelectProject(props) {
     const { idProject } = useParams();
 
     useEffect(() => {
-
     }, [props.workspaces])
 
     //to chang the project that user selected

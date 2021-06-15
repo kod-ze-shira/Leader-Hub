@@ -42,6 +42,7 @@ function Tabs(props) {
 
 
     function onDragEndׂ(e) {
+        debugger
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId)) {
                 onDragEndׂCard(e)
@@ -68,6 +69,7 @@ function Tabs(props) {
                 // const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard
                 props.changeTaskplace(replace)
+
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 if (replace[2] == replace[3])
                     props.dragTask(iSourse)
@@ -99,12 +101,12 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-        console.log("cardsssssssss",props.cards);
+        console.log("cardsssssssss", props.cards);
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
-           
+
         }
         setInputValue("")
         setShowInput(false)
@@ -121,7 +123,7 @@ function Tabs(props) {
     // $(window).click(function () {
     //     setViewDetails(false)
     // });
-    $(window).on("click",function () {
+    $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
@@ -158,7 +160,7 @@ function Tabs(props) {
 
                             <div className="wraperr-tabs">
                                 <div className="row row mx-3">
-                                    {props.cards!=="no cards" && props.cards.length ?
+                                    {props.cards !== "no cards" && props.cards.length > 0 ?
                                         <DragDropContext
                                             onDragEnd={(e) => onDragEndׂ(e)}>
                                             {props.cards.map((card, index) => {
@@ -168,46 +170,46 @@ function Tabs(props) {
                                                     viewContactList={props.viewContactList}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} indexCard={index}
-                                                  
-                                                    />
+
+                                                />
                                             })}
                                         </DragDropContext>
                                         : null}
-                                    {typeof(props.cards)!=="no cards" && !props.cards.length?
-                                         <div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
+                                    {typeof (props.cards) !== "no cards" && !props.cards.length ?
+                                        <div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
                                         :
                                         <div className="card-width px-2 mt-4" >
-                                        <div className="view-cards-tabs  mt-1" >
-                                            <div class="card new-card" >
-                                                <div id='newCardInput' class="container" >
-                                                    <div
-                                                        class="card-header row" data-tip data-for="add_c"
-                                                    >
-                                                        <input
-                                                            id="add-new-card"
-                                                            className="form-control "
-                                                            placeholder={""} value={inputValue}
-                                                            onChange={updateInputValue}
-                                                            onBlur={(e) => newCard()}
-                                                            onKeyPress={event => {
-                                                                if (event.key === 'Enter') {
-                                                                    newCard()
-                                                                }
-                                                            }}></input>
-                                                        <button
-                                                            className='buttonNewCard mt-3'
-                                                            onClick={(e) => setFocousCardFunc(e)}
-                                                        >+ Add Card</button>
+                                            <div className="view-cards-tabs  mt-1" >
+                                                <div class="card new-card" >
+                                                    <div id='newCardInput' class="container" >
+                                                        <div
+                                                            class="card-header row" data-tip data-for="add_c"
+                                                        >
+                                                            <input
+                                                                id="add-new-card"
+                                                                className="form-control "
+                                                                placeholder={""} value={inputValue}
+                                                                onChange={updateInputValue}
+                                                                onBlur={(e) => newCard()}
+                                                                onKeyPress={event => {
+                                                                    if (event.key === 'Enter') {
+                                                                        newCard()
+                                                                    }
+                                                                }}></input>
+                                                            <button
+                                                                className='buttonNewCard mt-3'
+                                                                onClick={(e) => setFocousCardFunc(e)}
+                                                            >+ Add Card</button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="card-body " id={!showInput ? "add-card" : ""}>
+                                                        {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
+
                                                     </div>
                                                 </div>
-                                                 <div className="card-body " id={!showInput ? "add-card" : ""}>
-                                                    {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
-
-                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>}
+                                        </div>}
                                 </div>
                             </div>
                             {provided.placeholder}
@@ -223,7 +225,7 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
-                        setDownloadFile={(e) =>setDownloadFile(e) }
+                        setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}> </ViewDetails>
                 </div>
                 : null}

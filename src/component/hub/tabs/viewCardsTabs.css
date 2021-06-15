@@ -13,15 +13,12 @@
 
   .card-width{
     width: 20vw !important;
-    display: inline-block !important; 
+    display: inline-block ; 
   }
 
 
 @media screen and (max-width: 700px) {
-  .card-width{
-    /* width: 60vw !important; */
-    /* display: inline-block !important;  */
-  }
+
 
 }
 
@@ -124,23 +121,14 @@ margin: auto !important;
     margin-top: 3vh;
 }
 .assing-icon{
-  display: none;
+  display: none; 
+}
 
-  
-}
-.task-card:hover .assing-icon {
-}
-.task-card:hover .color-task {
-}
-/* .color-task:hover{
-  display: none;
-} */
 .card-header .form-control, .task-card .form-control
 {
   color:black !important;
     border:none !important;
     outline: 0 !important;
-    /* width:70%; */
 
 }
 .card-header .form-control{

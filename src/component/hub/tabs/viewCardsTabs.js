@@ -3,7 +3,7 @@ import { Button, Menu, MenuItem } from '@material-ui/core';
 import $ from "jquery";
 import React, { useEffect, useRef, useState } from 'react';
 // import history from '../../../history'
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Draggable, Droppable, DragDropContext } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../Data/title.json';
@@ -15,13 +15,13 @@ function ViewCardsTabs(props) {
 
 
     useEffect(() => {
-
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
                 document.getElementById("add-new-card").focus();
                 setAddTaskInInput(true)
                 props.setCard(props.cardFromMap)
             }
+
     }, [props.flag, props.openInputTask])
 
 
@@ -52,6 +52,9 @@ function ViewCardsTabs(props) {
                 startDate: today, dueDate: today, "card": props.card._id
             }
             props.newTask(task)
+            let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
+            props.setCountTasks(countTasksInProject += 1)
+
         }
         setInputValue("")
         // setAddTaskInInput(!addTaskInInput)
@@ -90,7 +93,6 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
-            $(`#${props.cardFromMap._id}`).css("display", "none")
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
     }
@@ -147,13 +149,7 @@ function ViewCardsTabs(props) {
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
                                                 className="  pl-4 col-10"
-                                            // form-control              
-                                            // value={editCardName}
-                                            // onChange={updateCardName}
-                                            // title={editCardName}
-                                            // onKeyPress={event => {
-                                            //     enterK(event)
-                                            // }}
+
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
@@ -177,48 +173,48 @@ function ViewCardsTabs(props) {
                                         </div>
                                     </div>
                                     <div class="card-body allTaskInCard">
-                                        <Droppable droppableId={props.cardFromMap._id} >
-                                            {provided => (
-                                                <div className="mt-0"
-                                                    ref={provided.innerRef}
-                                                    {...provided.droppableProps} >
+                                            <Droppable droppableId={props.cardFromMap._id} >
+                                                {provided => (
+                                                    <div className="mt-0"
+                                                        ref={provided.innerRef}
+                                                        {...provided.droppableProps} >
 
-                                                    {props.cardFromMap.tasks.map((task, index) => (
-                                                        <ViewTaskByCradTabs
-                                                            openViewDetails={openViewDetails}
-                                                            objectToast={(obj) => props.showToast(obj)}
-                                                            task={props.cards[props.indexCard].tasks[index]}
-                                                            indexCard={props.indexCard}
-                                                            indexTask={index}
-                                                            viewToastComplete={props.viewToastComplete}
-                                                            viewContactList={props.viewContactList} />
-                                                    ))}
-                                                    {
-                                                        addTaskInInput ?
-                                                            <div class="mt-2">
-                                                                <input
-                                                                    autoFocus="true"
-                                                                    type="text"
-                                                                    class="form-control" placeholder="Add Task"
-                                                                    id="input-task"
-                                                                    value={inputValue}
-                                                                    // onMouseLeave={(e)=>setAddTaskInInput(false)}
-                                                                    onChange={updateInputValue} onKeyPress={event => {
-                                                                        if (event.key === 'Enter') {
-                                                                            newTask()
-                                                                        }
-                                                                    }}
-                                                                />
-                                                            </div>
-                                                            : null
-                                                    }
-                                                    {provided.placeholder}
-                                                </div>
-                                            )}
-                                        </Droppable>
+                                                        {props.cardFromMap.tasks.map((task, index) => (
+                                                            <ViewTaskByCradTabs
+                                                                openViewDetails={openViewDetails}
+                                                                objectToast={(obj) => props.showToast(obj)}
+                                                                task={props.cards[props.indexCard].tasks[index]}
+                                                                indexCard={props.indexCard}
+                                                                indexTask={index}
+                                                                viewToastComplete={props.viewToastComplete}
+                                                                viewContactList={props.viewContactList} />
+                                                        ))}
+                                                        {
+                                                            addTaskInInput ?
+                                                                <div class="mt-2">
+                                                                    <input
+                                                                        autoFocus="true"
+                                                                        type="text"
+                                                                        class="form-control" placeholder="Add Task"
+                                                                        id="input-task"
+                                                                        value={inputValue}
+                                                                        // onMouseLeave={(e)=>setAddTaskInInput(false)}
+                                                                        onChange={updateInputValue} onKeyPress={event => {
+                                                                            if (event.key === 'Enter') {
+                                                                                newTask()
+                                                                            }
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                : null
+                                                        }
+                                                        {provided.placeholder}
+                                                    </div>
+                                                )}
+                                            </Droppable>
                                         {/* <a data-tip data-for="add_t"
                                             className="add-task-tabs mt-4 mt-3 " */}
-                                            <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img>
+                                        <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img>
                                     </div>
                                 </div>
                             </div>
@@ -236,6 +232,7 @@ const mapStateToProps = (state) => {
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
@@ -245,6 +242,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCountTasks: (count) => dispatch(actions.setCountTasks(count)),
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
