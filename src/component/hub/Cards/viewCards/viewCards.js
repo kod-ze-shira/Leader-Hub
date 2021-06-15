@@ -1,6 +1,6 @@
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import $ from 'jquery';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
@@ -12,9 +12,8 @@ import './viewCards.css';
 
 function ViewCards(props) {
     useEffect(() => {
-
     }, [props.flag])
-
+    
     const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
@@ -24,6 +23,7 @@ function ViewCards(props) {
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
     const [anchorEl, setAnchorEl] = React.useState(null);
     let actionINcard = { renameCard: "rename", deleteCard: "delete" };
+    const textInput = useRef();
 
     const updateInputValue = (evt) => {
         setInputValue(evt.target.value)
@@ -48,6 +48,7 @@ function ViewCards(props) {
         setAddTaskInInput(!addTaskInInput)
     }
 
+
     const addTask = () => {
         props.setCard(props.cardFromMap)
         setAddTaskInInput(!addTaskInInput)
@@ -57,6 +58,7 @@ function ViewCards(props) {
             }
     }
     const updateCardName = (event) => {
+        debugger
         setEditCardName(event.target.value)
 
     }
@@ -69,7 +71,9 @@ function ViewCards(props) {
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
     }
     const editCard = (event) => {
-        let card = { "_id": props.cardFromMap._id, "name": editCardName, "project": props.project._id }
+        // defaultValue
+        let name = textInput.current.innerHTML ? textInput.current.innerHTML : textInput.current.defaultValue
+        let card = { "_id": props.cardFromMap._id, "name": textInput.current.innerHTML, "project": props.project._id }
         console.log("edit-card", card)
         props.EditCard(card);
     }
@@ -122,6 +126,16 @@ function ViewCards(props) {
 
     };
 
+    $('span').bind('click',
+        function () {
+            $(this).attr('contentEditable', true);
+        });
+
+    $('span').bind('blur',
+        function () {
+            $(this).attr('contentEditable', false);
+        });
+
     return (
         <>
             <div id={props.cardFromMap._id + "disappear"}>
@@ -136,21 +150,32 @@ function ViewCards(props) {
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
                         </div>
-                        <input
+                        {/* <input
+                            // id="input-card-name"
+                            // ref={textInput}
+                            // onBlur={() => editCard()}
                             // autoFocus="true"
-                            className="ml-3 show-card"
-                            value={editCardName}
-                            onChange={updateCardName}
-                            onBlur={editCard}
-                            onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    editCard()
-                                }
-                            }}
+                            // className="ml-3 show-card"
+                            // value={editCardName}
+                            // onChange={updateCardName}
+                            // onBlur={editCard}
+                            // onKeyPress={event => {
+                            //     if (event.key === 'Enter') {
+                            //         editCard()
+                            //     }
+                            // }}
                         >
-                        </input>
-                        <button data-tip data-for="add" className="new-task "
-                            id={`task${props.cardFromMap._id}`}
+                        </input> */}
+
+                        <span
+                            // id="input-card-name"
+                            ref={textInput}
+                            onBlur={() => editCard()}
+                            className="show-card ml-4 col-10"
+                        >{editCardName}
+                        </span>
+                        <button data-tip data-for="add" className="new-task ml-2"
+                            // id={`task${props.cardFromMap._id}`}
                             onClick={addTask}>+</button>
                     </div>
                     <Button className="more col-1 " data-tip data-for="more_a"
@@ -176,6 +201,8 @@ function ViewCards(props) {
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
+                    <p className="col">Priority</p>
+
                     <p className="col-add-task"><a>
                         <ReactTooltip data-tip id="add" place="bottom" effect="solid">
                             {title.title_add_task}
@@ -204,21 +231,21 @@ function ViewCards(props) {
                             )}
                         </Droppable> : null
                 }
-                {
-                    addTaskInInput ?
-                        <input
-                            autoFocus="true"
-                            type="text"
-                            // className="add-task"
-                            class="form-control scroll-container mt-2   ml-4"
-                            placeholder="Add Task" id="input-task"
-                            value={inputValue} onChange={updateInputValue} onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    newTask()
-                                }
-                            }}
-                        />
-                        : null
+
+                {addTaskInInput ?
+                    <input
+                        autoFocus="true"
+                        type="text"
+                        // className="add-task"
+                        class="form-control scroll-container mt-2   ml-4"
+                        placeholder="Add Task" id="input-task"
+                        value={inputValue} onChange={updateInputValue} onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                                newTask()
+                            }
+                        }}
+                    />
+                    : null
                 }
 
                 {

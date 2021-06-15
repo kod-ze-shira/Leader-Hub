@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import defaultFolder from '../../../img/rep.png'
+import fullFolder from '../../../img/full-folder.png'
+import emptyFolder from '../../../img/empty-folder.png'
+import {withRouter} from 'react-router-dom'
 import './viewFilesByCards.css'
 
 function FilesFolder(props){
 
     const folder=props.card
+    const currentProjectId=props.workspaces[props.indexWorkspace].projects[props.currentProject]._id
 
     function openViewFiles(){
-        //open the files of the card
-       props.history.push('/'+props.user+'/hub/projectPlatform/'+props.indexCurrentProject+'/Overview/')
+       props.history.push({pathname:'/'+props.user+'/hub/projectPlatform/'+currentProjectId+'/Overview/'+folder.card,state:{files:folder.files}})
     }
 
     return(
@@ -27,10 +29,11 @@ function FilesFolder(props){
           </label>
             </div>
             <div className="row imgRow">
-                <img src={defaultFolder}></img>
+                <img className="emptyFolder" src={emptyFolder}></img>
+                <img className="fullFolder" src={fullFolder}></img>
             </div>
             <div className="row">
-                <p>{props.card.cardName}</p>
+                <p>{folder.cardName}</p>
             </div>
             </div>
         </div>
@@ -41,8 +44,10 @@ function FilesFolder(props){
 const mapStateToProps=(state)=>{
     return{
         user: state.public_reducer.userName,
-        currentProject:state.public_reducer.indexCurrentProject
+        currentProject:state.public_reducer.indexCurrentProject,
+        workspaces:state.public_reducer.workspaces,
+        indexWorkspace:state.public_reducer.indexOfWorkspace
     }
 }
 
-export default connect(mapStateToProps)(FilesFolder)
+export default connect(mapStateToProps)(withRouter(FilesFolder))

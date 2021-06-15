@@ -21,6 +21,8 @@ function Tabs(props) {
     const [viewDetails, setViewDetails] = useState(false)
     const [taskToDetails, setTaskToDetails] = useState("")
     const [openInputTask, setOpenInputTask] = useState(false)
+    const [downloadFile, setDownloadFile] = useState(false)
+    const [flag, setFlag] = useState(true)
 
     useEffect(() => {
 
@@ -116,9 +118,24 @@ function Tabs(props) {
     const setFocousCardFunc = (e) => {
         document.getElementById("add-new-card").focus();
     }
-    $(window).click(function () {
-        setViewDetails(false)
-    });
+    // $(window).click(function () {
+    //     setViewDetails(false)
+    // });
+    $(window).on("click",function () {
+        if (flag) {
+            if (downloadFile) {
+                setViewDetails(true)
+                setFlag(false)
+                setTimeout(() => {
+                    setFlag(true)
+                    setDownloadFile(false)
+                }, 1000);
+            }
+            else {
+                setViewDetails(false)
+            }
+        }
+    })
 
     function stopP(event) {
         event.stopPropagation();
@@ -150,12 +167,14 @@ function Tabs(props) {
                                                     viewToastComplete={props.viewToastComplete}
                                                     viewContactList={props.viewContactList}
                                                     showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} indexCard={index} />
+                                                    key={card._id} cardFromMap={card} indexCard={index}
+                                                  
+                                                    />
                                             })}
                                         </DragDropContext>
                                         : null}
                                     {typeof(props.cards)!=="no cards" && !props.cards.length?
-                                         <div className=""><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
+                                         <div className="logoGif d-flex justify-content-center"><img className="LampAnimation" src={require('../../img/hub.gif')} /></div>
                                         :
                                         <div className="card-width px-2 mt-4" >
                                         <div className="view-cards-tabs  mt-1" >
@@ -204,6 +223,7 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
+                        setDownloadFile={(e) =>setDownloadFile(e) }
                         open={true}> </ViewDetails>
                 </div>
                 : null}

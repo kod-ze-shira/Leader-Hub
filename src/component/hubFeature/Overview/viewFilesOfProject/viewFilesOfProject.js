@@ -7,39 +7,40 @@ import title from '../../../../Data/title.json'
 import download from '../../../img/download.png'
 import ReactTooltip from 'react-tooltip'
 import ViewFile from './viewFile'
+import {withRouter} from 'react-router-dom'
 
 function FilesOfProject(props) {
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        console.log('useeffect');
-        props.getFilesForProject(props.indexCurrentProject)
+    //     console.log('useeffect');
+    //     props.getFilesForProject(props.indexCurrentProject)
 
-    }, [props.indexCurrentProject])
+    // }, [props.indexCurrentProject])
 
-    const filesForDownloadOrDelete = []
+    const filesForDownload = []
     const downloadRef=useRef()
 
 function addOrRemoveFileToArr(e,file,ref){
 
         let index=0
-        filesForDownloadOrDelete.forEach(f=>f._id==file._id?index=f._id:null)
-        // for(let i=0;i<filesForDownloadOrDelete.length-1;i++){
-        //     if(filesForDownloadOrDelete[i]._id==file._id)
+        filesForDownload.forEach(f=>f._id==file._id?index=f._id:null)
+        // for(let i=0;i<filesForDownload.length-1;i++){
+        //     if(filesForDownload[i]._id==file._id)
         //         index=i
         // }
         if(index==0) {          
             ref.current.checked=true
             // e.currentTarget.children[0].children[1].children[0].checked=true
-            filesForDownloadOrDelete.push(file)
+            filesForDownload.push(file)
              downloadRef.current.disabled=false
         }
         else {
             ref.current.checked=false
             e.currentTarget.children[0].children[1].children[0].checked=false   
-            filesForDownloadOrDelete.splice(index,1)
-            if(filesForDownloadOrDelete.length===0)
+            filesForDownload.splice(index,1)
+            if(filesForDownload.length===0)
                 downloadRef.current.disabled=true
         }
     }
@@ -49,11 +50,11 @@ function addOrRemoveFileToArr(e,file,ref){
         // document.body.appendChild(link);
         // link.click();
         // document.body.removeChild(link);
-        // console.log(filesForDownloadOrDelete.length);
+        // console.log(filesForDownload.length);
 
         alert('download')
 
-        // filesForDownloadOrDelete.forEach(f => props.downloadFile({ "file": f }))
+        // filesForDownload.forEach(f => props.downloadFile({ "file": f }))
 
     }
     function deleteFile() {
@@ -62,7 +63,7 @@ function addOrRemoveFileToArr(e,file,ref){
 
     return (
         <>
-        <div className="filesForProject">
+        <div className="filesForProject backgroundWhiteAndBorderRadius">
             <div className="row">
            <h3 className="col-9" id="title">Project Files</h3>
             <div className="col-3 row iconsList" >
@@ -86,23 +87,19 @@ function addOrRemoveFileToArr(e,file,ref){
                     </div>
                 </div>
                 <hr></hr>
-           
-        {props.FilesOfProject.length?
 
-     //
-     <div className="container" >  
-         <div class="row row-cols-4 row-cols-lg-6 g-2">
-          {props.FilesOfProject.map((card)=>
-              card.files.length?
-              card.files.map((file,index)=>
-          <ViewFile
-          file={file}
-          addOrRemoveFileToArr={addOrRemoveFileToArr}
-          fileRef={'ref'+index}
-          >
-          </ViewFile>):null
-        )}</div></div>:"there arent files"}
-        </div>
+                {props.location.state.files.length?
+
+                    //
+                    <div className="container" >
+                        <div class="row row-cols-4 row-cols-lg-6 g-2">
+                            {props.location.state.files.map((file,index) => 
+                            <ViewFile>
+                                file={file},
+                                addOrRemoveFileToArr={addOrRemoveFileToArr},
+                                fileRef={'ref'+index}
+                            </ViewFile>)}</div></div> : "there arent files"}
+            </div>
         </>
     )
 }
@@ -120,4 +117,4 @@ const mapDispatchToProps=(dispatch)=>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilesOfProject)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilesOfProject))

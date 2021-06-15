@@ -12,8 +12,9 @@ import {
 import history from "../history"
 import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
-import Toast from "./toast/toastTaskCompleted";
+// import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
+import ViewFilesOfProject from '../hubFeature/Overview/viewFilesOfProject/viewFilesOfProject'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
 import ToastDelete from './toastDelete/toastDelete1';
@@ -29,6 +30,7 @@ import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
+import viewFilesOfProject from '../hubFeature/Overview/viewFilesOfProject/viewFilesOfProject';
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -44,7 +46,7 @@ function Hub(props) {
     const showToastToDelete = (objectToDelete_) => {
 
         // setObjectToDelete(objectToDelete_)
-        if (objectToDelete_.type == 'Task') {
+        if (objectToDelete_.type === 'Task') {
 
             objectToDelete.push(objectToDelete_)
             setObjectToDeleteLocal(objectToDelete_)
@@ -187,6 +189,9 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
+                            <ProtectedRoute path={"/:userName/hub/projectPlatform/:indexCurrentProject/Overview/:cardId"}>
+                                <ViewFilesOfProject />
+                            </ProtectedRoute>
                             <ProtectedRoute path={"/"} >
                                {/* to send login if has not userName */}
                             </ProtectedRoute>
@@ -200,7 +205,7 @@ function Hub(props) {
                         />
                         : null}
 
-                    {showToastComplete ?
+                    {/* {showToastComplete ?
                         <Toast /> : null}
 
                     {showContactList ?
@@ -208,7 +213,7 @@ function Hub(props) {
                         : null}
                     {openCalander ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
-                        : null}
+                        : null} */}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}

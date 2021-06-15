@@ -83,3 +83,15 @@
   .imgRow{
       margin-left: 40%;
   }
+  .emptyFolder{
+      display: block;
+  }
+  .fullFolder{
+    display: none;
+}
+  .imgRow:hover .emptyFolder{
+      display: none;
+  }
+  .imgRow:hover .fullFolder{
+      display: block;
+  }

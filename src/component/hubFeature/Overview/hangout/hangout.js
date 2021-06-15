@@ -11,23 +11,28 @@ function Hangout(props) {
     const { userName } = props;
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
     const { jwtFromCookie } = props;
-    const [showChat, setShowChat] = useState(false)
+    const [showChat, setShowChat] = useState(true)
     const [src, setSrc] = useState(null)
+    const [backImg, setBackImg] = useState(imgClick)
+
 
     const handleOver = (e) => {
         if (showChat === false) {
-            e.target.style.background = `url(${imgHover})`
+            setBackImg(imgHover)
+            // e.target.style.background = `url(${imgHover})`
         }
     }
 
     const handleLeave = (e) => {
         if (showChat === false) {
-            e.target.style.background = `url(${img})`
+            setBackImg(img)
+            // e.target.style.background = `url(${img})`
         }
     }
 
     const handleClick = (e) => {
-        e.target.style.background = `url(${imgClick})`
+        setBackImg(imgClick)
+        // e.target.style.background = `url(${imgClick})`
         if (showChat) {
             setShowChat(false)
             setSrc(null)
@@ -39,18 +44,34 @@ function Hangout(props) {
         // showChat ? setShowChat(false) : setShowChat(true)
         // showChat ? setSrc(null) : setSrc(`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`)
     }
+
     // document.getElementById("iframe").contentDocument.close();
+    const show = (e) => {
+        if (showChat) {
+            setShowChat(true)
+            e.target.style.height = '80%'
+        }
+        else {
+            setShowChat(false)
+            e.target.style.height = '10%'
+        }
+    }
+    
     return (
         <>
-            <button className='btn-show-chat'
-                style={{ background: `url(${img})` }}
-                onMouseOver={(e) => handleOver(e)}
-                onMouseLeave={(e) => handleLeave(e)}
-                onClick={(e) => handleClick(e)}>
-
-            </button>
-            <iframe id="iframe" className={showChat ? "iframeHangout" : 'd-none'}
-                src={src}
+            {/* <button className='btn-show-chat'
+                // style={{ background: `url(${backImg})` }}
+                // onMouseOver={(e) => handleOver(e)}
+                // onMouseLeave={(e) => handleLeave(e)}
+                // onClick={(e) => handleClick(e)}>
+>
+            </button> */}
+            <iframe id="iframe"
+                // className={showChat ? "iframeHangout" : 'd-none'}
+                className="iframeHangout"
+                onClick={(e) => show(e)}
+                src={`https://chat.leader.codes/${userName}/hangout/${chatId}?jwt=${jwtFromCookie}`}
+                // src={src}
 
                 // src={`https://chat.leader.codes/${userName}/hangout/609d014e5cad310a76d861a8`}
                 title="hangout">

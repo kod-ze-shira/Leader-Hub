@@ -1,7 +1,7 @@
 .div_share_with{
     width: 29vw;
 height: 42vh;
-background: #eaf8f2 0% 0% no-repeat padding-box;
+background: #EDFBFC 0% 0% no-repeat padding-box;
 border-radius: 3px;
 /* opacity: 0.11; */
 overflow-x: hidden;
@@ -34,7 +34,7 @@ color: #75798E;
     float: right;
 }
 .div_choose_team{
-    background: #EDF8F6 0% 0% no-repeat padding-box;
+    background: #EDFBFC 0% 0% no-repeat padding-box;
 border-radius: 3px;
 width: 21vw;
 height: 33px;

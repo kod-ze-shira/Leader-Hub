@@ -148,6 +148,8 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
           "source": "Hub",
           "files": null
         }))
+
+
         checkPermission(result).then((ifOk) => {
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
@@ -227,8 +229,8 @@ function checkPermission(result) {
   return new Promise((resolve, reject) => {
     if (result.status == "401") {
       result.routes ?
-        window.location.assign(`https://accounts.codes/hub/login?routes=${result.routes}`) :
-        window.location.assign(`https://accounts.codes/hub/login`)
+        window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
+        window.location.assign(`https://dev.accounts.codes/hub/login`)
 
       reject(false)
 
@@ -254,7 +256,6 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
       return response.json()
     })
       .then(data => {
-        console.log('dataaaaa' + data.membersList)
         dispatch(actions.setMembers(data.membersList))
       }).catch(err => console.log('err', err))
   }
