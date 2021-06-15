@@ -148,6 +148,8 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
           "source": "Hub",
           "files": null
         }))
+
+
         checkPermission(result).then((ifOk) => {
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 

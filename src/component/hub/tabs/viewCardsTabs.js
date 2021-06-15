@@ -90,17 +90,17 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
-            props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
             $(`#${props.cardFromMap._id}`).css("display", "none")
+            props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
     }
 
-    function enterK(event) {
-        if (event.key === 'Enter') {
-            editCard()
-            document.getElementById("input-card-name").blur();
-        }
-    }
+    // function enterK(event) {
+    //     if (event.key === 'Enter') {
+    //         editCard()
+    //         document.getElementById("input-card-name").blur();
+    //     }
+    // }
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
@@ -138,7 +138,7 @@ function ViewCardsTabs(props) {
                             ref={provided.innerRef}
                         >
                             <div className="view-cards-tabs"
-                                id={props.cardFromMap._id + "disappear"}>
+                                id={props.cardFromMap._id}>
                                 <div class="card" >
                                     <div class="container" >
                                         <div class="draggable card-header row">
@@ -182,7 +182,6 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-
 
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs

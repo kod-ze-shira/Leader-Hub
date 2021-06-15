@@ -31,7 +31,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
         //     urlData = `${configData.SERVER_URL}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
 
         // else
-            urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getWorkspacesForUser`
+        urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getWorkspacesForUser`
         // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
         fetch(urlData,
             {
@@ -48,6 +48,8 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                     dispatch(actions.setUserId(result.user._id))
                     dispatch(actions.setUserEmail(result.user.email))
                     dispatch(actions.setWorkspaces(result.workspace))
+                    dispatch(actions.setPriorities(result.priorities))
+
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projects)

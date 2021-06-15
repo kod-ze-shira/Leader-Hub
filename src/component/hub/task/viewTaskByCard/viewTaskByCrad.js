@@ -15,17 +15,16 @@ import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
-import Toast from '../../toast/toastTaskCompleted'
+// import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [userHasLike, setUserHasLike] = useState(false)
+    const [flag, setFlag] = useState(true)
 
     useEffect(() => {
-        debugger
-        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null
@@ -38,6 +37,10 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
+    // useEffect(() => {
+    //     debugger
+    //     console.log(props.task);
+    // }, [props.task.priority])
     useEffect(() => {
 
     }, [props.task.status])
@@ -49,6 +52,7 @@ function ViewTaskByCrad(props) {
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     let doneStatus = props.task.complete
+    const [downloadFile, setDownloadFile] = useState(false)
     const [task, setTask] = useState({
         "_id": props.task._id,
         "name": props.task.name,
@@ -75,10 +79,16 @@ function ViewTaskByCrad(props) {
 
 
     }
-    // const viewPriortyList = props.task ? props.task.priority.map(priority => (
-    //     { value: " priority.priorityLevel", label: "priority.priorityLevel" }
-
-    // )) : null
+    const viewPriortyList = props.priorities ? props.priorities.map(priority => (
+        {
+            value: priority,
+            label:
+                <div className="prioprty-select">
+                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <p >{priority.level}</p>
+                </div>
+        }
+    )) : null
     const showDetails = (from) => {
         props.setTaskName(task.name)
         setDetailsOrEditTask(from)
@@ -86,9 +96,22 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
     }
-    $(window).click(function () {
-        setViewDetails(false)
-    });
+
+    $(window).on("click", function () {
+        if (flag) {
+            if (downloadFile) {
+                setViewDetails(true)
+                setFlag(false)
+                setTimeout(() => {
+                    setFlag(true)
+                    setDownloadFile(false)
+                }, 1000);
+            }
+            else {
+                setViewDetails(false)
+            }
+        }
+    })
 
     function openViewDetails(event) {
         showDetails("viewTaskByCard")
@@ -145,7 +168,7 @@ function ViewTaskByCrad(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.viewToastComplete(true)
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
     const editTaskNameInReduxs = (taskName) => {
@@ -168,6 +191,20 @@ function ViewTaskByCrad(props) {
         props.assingTo(emailMember.value.email)
 
     }
+    const [priorityTask, setPriorityTask] = useState()
+    const changePriority = (event) => {
+        setPriorityTask(event.value)
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        console.log(priorityTask);
+        let editTaskInRedux = { "nameFiled": "priority", "value": event.value }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        let editTask = { "_id": props.task._id, "priority": event.value._id }
+        console.log(editTask)
+        props.EditTask(editTask)
+
+
+    };
 
     const showAssigToOrCalander = (object) => {
         let e = object.e
@@ -257,7 +294,7 @@ function ViewTaskByCrad(props) {
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                 </label>
 
-                                <label className="check-task border-left    px-2 col" onMouseOver={(e) => showAssign(e)}
+                                <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
                                         {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
@@ -284,14 +321,9 @@ function ViewTaskByCrad(props) {
                                 </label>
                                 <label className="check-task border-left  px-2 col">{props.task.dueDate}
                                 </label>
-                                <label className="check-task border-left  px-2 col">
-                                    {/* <Select
-                                        classNamePrefix="select"
-                                        name="color"
-                                        options={viewPriortyList}
-                                        placeholder={"All Priorty"}
-
-                                    /> */}
+                                <label className="check-task border-left  px-2 col-priority">{props.task.priority ?
+                                    <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                    : null}
                                 </label>
                                 <label className="check-task border-left  px-2 col-add-task">
                                 </label>
@@ -300,6 +332,7 @@ function ViewTaskByCrad(props) {
                                         <ViewDetails showToast={deleteTask}
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
+                                            setDownloadFile={(e) => setDownloadFile(e)}
                                         > </ViewDetails>
                                     </div>
                                     : null}
@@ -322,7 +355,8 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         statuses: state.status_reducer.statuses,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
-        indexCurrentTask: state.public_reducer.indexCurrentTask
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
+        priorities: state.public_reducer.priorities
     }
 }
 const mapDispatchToProps = (dispatch) => {
