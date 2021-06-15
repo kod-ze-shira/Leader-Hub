@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { actions } from '../../../../redux/actions/action';
 import '../../body/body.css';
 import ViewDetails from '../../viewDetails/viewDetails';
 import ViewProject from '../viewProject/viewProject';

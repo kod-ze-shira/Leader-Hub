@@ -206,10 +206,10 @@ function ViewTaskByCradTabs(props) {
                         <div className="task-card mt-2 pt-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
-                            <div className="container ">
+                            <div className=" ">
                                 <label
                                     title="Complete Task"
-                                    className="check-task pb-2  check-tabs">
+                                    className="check-task pb-2  check-tabs ">
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
@@ -245,7 +245,8 @@ function ViewTaskByCradTabs(props) {
                                 </Menu>
                                 {myFiles}
                                 <input
-                                    className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
+                                    className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
+                                    style={props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
@@ -271,7 +272,7 @@ function ViewTaskByCradTabs(props) {
 
                                 <div className="icons-in-task-tabs pt-0">
 
-                                    <div className="row justify-content-between mx-1 mt-3 mb-0">
+                                    <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
                                             <div> {props.task.priority ?
                                                 <img className="priority-img" referrerpolicy="no-referrer" src={props.task.priority.icon} />

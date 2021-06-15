@@ -158,7 +158,7 @@ function AllWorkspaces(props) {
                             <div onClick={(e) => openAddNewWorkspace(e)}>
                                 <div className="logoWorkspace1 pt-2" >
                                     <div className="mt-1 logo-w"
-                                        style={{ backgroundColor: "#778CA2" }}
+                                        // style={{ backgroundColor: "#778CA2" }}
                                         data-tip data-for="add_w"
                                     >+ </div>
                                     {/* <ReactTooltip data-tip id="add_w" place="top" effect="solid">
@@ -184,7 +184,7 @@ function AllWorkspaces(props) {
                         showToast={(obj) => props.showToast(obj)}
                         closeViewDetails={() => setShowWorkspace(false)}
                         from={addOrEditWorkspace} workspace={workspaceToEdit} />
-                        </div> : null
+                </div> : null
             }
 
         </>
