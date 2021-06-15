@@ -27,7 +27,7 @@ function Logs(props) {
                 <div className="row">
                     {logs.length ?
                         logs.map(l => {
-                            return <ul>
+                            return <ul style={{listStyleType:'none'}}>
                                 <li>
                                     <div className="container">
                                         <div className="row">
