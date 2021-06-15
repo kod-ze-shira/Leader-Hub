@@ -244,6 +244,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
+                debugger
                 console.log("success")
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
@@ -257,6 +258,10 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                 if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
+                if (data.result.priority) {
+                    dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "priority", "value": data.result.priority }))
+                }
+
 
             },
             error: function (err) {

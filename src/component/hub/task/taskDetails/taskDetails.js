@@ -134,8 +134,29 @@ function TaskDetails(props) {
             form.classList.add('was-validated')
         }
     }
+    const viewPriortyList = props.priorities ? props.priorities.map(priority => (
+        {
+            value: priority,
+            label:
+                <div className="prioprty-select">
+                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <p >{priority.level}</p>
+                </div>
+        }
+    )) : null
+
+    const [priorityTask, setPriorityTask] = useState()
+    const changePriority = (event) => {
+        setPriorityTask(event.value)
+        console.log(priorityTask);
+        let editTaskInRedux = { "nameFiled": "priority", "value": event.value }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        let editTask = { "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id, "priority": event.value._id }
+        console.log(editTask)
+        props.EditTask(editTask)
 
 
+    };
 
     const deleteTask = (e) => {
         $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
@@ -314,6 +335,25 @@ function TaskDetails(props) {
 
                                 </label>
                             </div>
+
+                        </div>
+                        <div className="row justify-content-between ">
+                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                <label for="priority">Priority</label>
+
+                                <Select
+                                    name="priority"
+                                    className=""
+                                    // classNamePrefix="select"
+                                    options={viewPriortyList}
+                                    placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
+                                        <div className="prioprty-select">
+                                            <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
+                                            <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
+                                        </div> : "All priority"}
+                                    onChange={(e) => changePriority(e)}
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -355,15 +395,10 @@ function TaskDetails(props) {
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
-
-
-
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
-
-
                 </div>
             </div>
 
@@ -383,7 +418,7 @@ const mapStateToProps = (state) => {
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
         arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
         contactsUser: state.share_reducer.contactsUser,
-
+        priorities: state.public_reducer.priorities
 
     }
 }
