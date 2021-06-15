@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../../../../redux/actions/action'
 import './addMembers.css'
+import ListMembers from '../listMembers/listMembers'
 
 
 function AddMembers(props) {
-
 
     const members = props.members;
 
     const clickAddMembers = () => {
         console.log('clickAddMembers');
-        // document.getElementsByClassName('viewMembersList')[0].style.display = 'block';
+        document.getElementsByClassName('viewMembersList')[0].style.display = 'block';
     }
     return (
         <>
@@ -26,12 +26,10 @@ function AddMembers(props) {
                 <div className="col-8">
                     <b className="ml-2 membersFont">Add Members</b>
                 </div>
-
             </div>
-            {/* <div  className="viewMembersList">
-                <ContactList hub={true}/>
-            </div> */}
-
+            <div className="viewMembersList">
+                <ListMembers />
+            </div>
         </>
     )
 }
