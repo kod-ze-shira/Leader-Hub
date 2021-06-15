@@ -41,6 +41,7 @@ function SelectHeader(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
+     
     }, [])
 
     const handleChange = (event, newValue) => {
@@ -175,6 +176,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
     }
 }

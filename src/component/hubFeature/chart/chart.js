@@ -22,17 +22,19 @@ import './chart.css'
 
 function MyChart(props) {
     useEffect(() => {
-        debugger
-        props.getTaskStatusesOfProject()
-        console.log(props.taskStatusesOfProject);
-    }, [])
+        if (props.workspacesIndex) {
+            props.getTaskStatusesOfProject()
+            setCountTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
+            setReadyTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
+        }
+    }, [props.workspacesIndex])
 
-    const [countTasks, setCountTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
+    const [countTasks, setCountTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks : 0)
+    const [readyTasks, setReadyTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks : 0)
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#1FB9C1', '#6CBAFF']
     const barData = [];
-    const pieData = [{ category: 'Completed', val: readyTasks / countTasks}, { category: 'Incompleted', val: 1 - readyTasks / countTasks }];
+    const pieData = [{ category: 'Completed', val: readyTasks / countTasks }, { category: 'Incompleted', val: 1 - readyTasks / countTasks }];
     const sticksData = []
 
     if (cards) {
@@ -85,13 +87,13 @@ function MyChart(props) {
                                     height={350}
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis/>
+                                    <ValueAxis />
                                     <BarSeries
                                         valueField="tasks"
                                         argumentField="name"
                                         barWidth={0.2}
                                     />
-                                    <Chart.Label/>
+                                    <Chart.Label />
                                     <Title text="Incomplete tasks by card" />
                                     <Tooltip />
                                 </Chart>
@@ -141,7 +143,7 @@ function MyChart(props) {
                                     <PieSeries
                                         valueField="val"
                                         argumentField="category"
-                                   />
+                                    />
                                     <Title text="All tasks by completion status" />
                                     <EventTracker />
                                     <Tooltip />
