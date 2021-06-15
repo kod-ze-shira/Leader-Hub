@@ -58,9 +58,7 @@ function ViewCards(props) {
             }
     }
     const updateCardName = (event) => {
-        debugger
         setEditCardName(event.target.value)
-
     }
     const deleteCard = () => {
         // addNewStyle(`${props.cardFromMap._id} {display:none !important;}`)

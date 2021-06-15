@@ -7,6 +7,7 @@ import ViewMilstone from './viewMilstone';
 
 function Milestones(props) {
     const [showGif, setShowGif] = useState(true)
+    
     useEffect(() => {
         console.log("hi");
         props.getAllMilestonesTasks()
