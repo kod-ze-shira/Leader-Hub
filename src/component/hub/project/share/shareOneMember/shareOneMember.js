@@ -26,7 +26,7 @@ export default function ShareOneMember(props) {
         <>
             <div className="row pt-3 pl-4">
                 <div className="col-1 pt-3">
-                   
+
                     {/* <img src={delete_member_logo}></img> */}
                     <label
                         className="check-task py-2">
@@ -36,38 +36,40 @@ export default function ShareOneMember(props) {
                         <span className="checkmark checkmark-place ml-1"></span>
                     </label>
                 </div>
-                <div className="col-8">
+                <div className="col-10">
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-2 logoMailShare">
                             {props.member.member.thumbnail ?
                                 <img className="img_share_one_member"
                                     src={props.member.member.thumbnail}></img>
                                 // style={{ 'background': `linear-gradient(136deg,${backgroundStyle},white)` }}
 
                                 : <div ref={refToDivColor} style={{ backgroundColor: backgroundStyle }}
-                                    className="img_share_one_member div_img_share_one_member">{props.member.member.name?props.member.member.name[0]:props.member.member.email[0]}</div>}
-                                    {/* props.member.member.email-its mail that not in my contacts , he has just email*/}
+                                    className="img_share_one_member div_img_share_one_member">{props.member.member.name ? props.member.member.name[0] : props.member.member.email[0]}</div>}
+                            {/* props.member.member.email-its mail that not in my contacts , he has just email*/}
                         </div>
-                        <div className="col-9">
+                        <div className="col-7 mailInShare">
                             <div className="row name_share_one_member">
-                                {props.member.member.name?props.member.member.name:props.member.member.email}
+                                {props.member.member.name ? props.member.member.name : props.member.member.email}
                             </div>
                             <div className="row email_share_one_member">
                                 {props.member.member.email}
                             </div>
                         </div>
+                        <div className="col-2 pl-0 pt-1">
+                            <select class=" select_permission_one_member" onChange={(event) => props.changePermission(event, props.member, props.teamId)}>
+                                {/* send teamId to change perrission to change petrmission of member from true team */}
+                                <option selected>{props.member.permission}</option>
+                                {props.member.permission != 'viewer' ? <option value="1">viewer</option> : null}
+                                {props.member.permission != 'editor' ? <option value="2">editor</option> : null}
+                                {props.member.permission != 'admin' ? <option value="3">admin</option> : null}
+                            </select>
+
+                        </div>
+
                     </div>
                 </div>
-                <div className="col-3 pl-0 pt-4">
-                    <select class=" select_permission_one_member" onChange={(event)=>props.changePermission(event,props.member,props.teamId)}>
-                        {/* send teamId to change perrission to change petrmission of member from true team */}
-                        <option selected>{props.member.permission}</option>
-                        {props.member.permission != 'viewer' ? <option value="1">viewer</option> : null}
-                        {props.member.permission != 'editor' ? <option value="2">editor</option> : null}
-                        {props.member.permission != 'admin' ? <option value="3">admin</option> : null}
-                    </select>
 
-                </div>
             </div>
 
 

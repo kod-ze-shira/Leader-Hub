@@ -53,7 +53,7 @@ h3{
     display: inline;
     border-radius: 50%;
     /* background-color: #E8EAEC; */
-    background-color: #38B1B5 !important;
+    background-color: #38B1B5;
     width: 2rem;
     height: 2rem;
     opacity: 0.5;
@@ -66,7 +66,7 @@ h3{
  } */
  .iconControl:disabled{
       background-color: #E8EAEC;
-      cursor: row-resize;
+    pointer-events: none;
  }
  .iconControl:active{
 

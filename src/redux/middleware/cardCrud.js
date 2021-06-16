@@ -27,7 +27,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
                 if(data.cards.length)
                 dispatch(actions.setCards(data.cards))
                 else
-                dispatch(actions.setCards("not cards"))
+                dispatch(actions.setCards([]))
                 console.log("success")
                 console.log("data", data);
                 return false;

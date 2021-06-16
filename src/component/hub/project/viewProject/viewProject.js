@@ -11,10 +11,11 @@ import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
 // import TeamView from '../../teamView/teamView'
+import ProjectStyle from "../projectStyle";
+
 
 function ViewProject(props) {
-    // const [getProjectById, set_getProjectById] = useState(true);
-    // const [viewTasks, setViewTasks] = useState(false)
+    console.log(props.myProject.members)
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
@@ -85,7 +86,8 @@ function ViewProject(props) {
         props.editOrShareProject('shareProject')
         event.stopPropagation();
     }
-    complitedColor = complited < 30 ? '#44D7B6' : complited < 60 ? '#34A38B' : '#005750'
+
+    complitedColor = complited < 30 ? '#8ce5e7' : complited < 60 ? '#1fb9c1' : '#358a8d'
     return (
         <>
             <tr
@@ -96,7 +98,8 @@ function ViewProject(props) {
                 id={props.myProject._id}>
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
-                    <span class="dot" style={{ 'background-color': props.myProject.color }} ></span>
+                    <ProjectStyle color={props.myProject.color}></ProjectStyle>
+                    {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
                     <span class='name2ProjectInList' title={props.myProject.name}
                         style={{ 'color': props.myProject.color }}>
                         {props.myProject.name}</span>
@@ -162,7 +165,7 @@ function ViewProject(props) {
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
 
 
-                    <img style={myStyleIcons} src={require('../../../img/share.png')}
+                    <img style={myStyleIcons} src={require('../../../img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
                     <ReactTooltip data-tip id="share" place="bottom" effect="solid">

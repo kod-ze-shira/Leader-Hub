@@ -27,7 +27,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
     display: -webkit-box;
-    margin-left: 13px !important;
+    margin-left: 25px !important;
     margin-top: -23px;
 }
 .widthCellInProject{
@@ -59,6 +59,7 @@
 .designPropertiesProject{
     font-size: 16px
 }
+
 .dot {
     height: 7px;
     width: 7px;
@@ -66,11 +67,31 @@
     border-radius: 50%;
     display: inline-block;
     margin-right: 10px;
-  }
+}
+
+/* .dot {
+    background-color: #bbbd;
+    display: inline-block;
+    height: 9px;
+    position: relative;
+    width: 10px;
+    transform: rotate(90deg);
+}
+.dot:before {
+    border-bottom: 6px solid #bbbd;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: -6px;
+} */
+
 .divProgress{
     text-align: center;
-
 }
+
 .progressProject {
     display: inline-flex;
     height: 1rem;

@@ -1,3 +1,25 @@
+.iconControl{
+  display: inline;
+  border-radius: 50%;
+  background-color: #38B1B5;
+  width: 2rem;
+  height: 2rem;
+  opacity: 0.5;
+}
+.iconControl:hover{
+   cursor: pointer;
+}
+/* .iconControl:enabled{
+    background-color: #38B1B5 !important;
+} */
+.iconControl[disabled]{
+    background-color: #E8EAEC;
+  pointer-events: none;
+}
+.iconControl:active{
+
+  background-color: #38B1B5;
+}
 .filesForProject{
     background-color: white;
     border-radius: 2%;
@@ -6,11 +28,18 @@
    
 .folderItem{
     background-color: #EDFBFC;
-    border: #E8EAEC;
+    /* border: #E8EAEC;
     border-width: 0.1rem;
-    border-style: solid;
+    border-style: solid; */
      cursor: pointer;
      border-radius: 2%;
+     height: 15vh;
+ }
+ .folderItem:hover{
+  border: #38B1B5 0.1rem solid;
+ }
+ .folderItem div{
+   height: 33%;
  }
  .selectFolder{
     float: left;
@@ -38,7 +67,7 @@
     border: 1px solid #38B1B5;
         border-radius: 30%;
    opacity: 0.9;
-   margin-left: 2.5vw;
+   margin-left: 1.5vw;
   }
   
   .selectFolder:hover input ~ .checkmarkFolder{
@@ -81,8 +110,12 @@
    
   }
   .imgRow{
-      margin-left: 40%;
+
   }
+  .imgRow img{
+   height: 3vh;
+   margin-left: 40%;
+}
   .emptyFolder{
       display: block;
   }
