@@ -4,15 +4,15 @@ import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
-    const [logs, setLogs] = useState()
-    useEffect(() => {
-        if (props.workspacesIndex) {
-            setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
-            debugger
-        }
-    }, [props.workspacesIndex])
+    // const [logs, setLogs] = useState()
+    // useEffect(() => {
+    //     if (props.workspacesIndex) {
+    //         setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+    //         debugger
+    //     }
+    // }, [props.workspacesIndex])
 
-    // let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
+    let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
     console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
     let logsReverse = logs ? logs.reverse() : null;
 
@@ -31,11 +31,11 @@ function Logs(props) {
             <div className="container backgroundWhiteAndBorderRadius">
                 <div className="row mt-3 ml-2"><b>Project Log</b></div>
                 <div className="mt-1 logsHeder"></div>
-                <div className="row">
-                    {logs ? logs.length ?
+                <div className="row">{
+                    logs.length ?
                         renderViewLogs()
-                        : null : null
-                    }
+                        : null
+                }
                 </div>
             </div>
         </>
