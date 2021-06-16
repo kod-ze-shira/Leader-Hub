@@ -12,10 +12,12 @@
     background-color:#f6f7f8 !important;
 } */
 .imgInTask{
-    width: 100%;
+    max-width: 100%;
     height: 100px;
     display: block;
     margin-top: 14px;
+    margin-right: auto;
+    margin-left: auto;
 }
 .task-name-span{
     text-indent: 5vh !important;

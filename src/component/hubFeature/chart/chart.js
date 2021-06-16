@@ -5,14 +5,10 @@ import {
     ArgumentAxis,
     ValueAxis,
     Chart,
-    AreaSeries,
-    LineSeries,
-    SplineSeries,
     BarSeries,
     Title,
     Tooltip,
     PieSeries,
-    Legend,
 } from '@devexpress/dx-react-chart-material-ui';
 import { EventTracker } from '@devexpress/dx-react-chart';
 import { Animation } from '@devexpress/dx-react-chart';
@@ -22,7 +18,6 @@ import './chart.css'
 
 function MyChart(props) {
     useEffect(() => {
-        debugger
         props.getTaskStatusesOfProject()
         console.log(props.taskStatusesOfProject);
     }, [])
@@ -32,7 +27,7 @@ function MyChart(props) {
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
-    const pieData = [{ category: 'Completed', val: readyTasks / countTasks,color:'#38b1b5'}, { category: 'Incompleted', val: 1 - readyTasks / countTasks,color:'#99e2e5' }];
+    const pieData = [{ category: 'Completed', val: readyTasks / countTasks, color: '#38b1b5' }, { category: 'Incompleted', val: 1 - readyTasks / countTasks, color: '#99e2e5' }];
     const sticksData = []
 
     if (cards) {
@@ -45,13 +40,17 @@ function MyChart(props) {
     }
     if (props.taskStatusesOfProject) {
         props.taskStatusesOfProject.map((status) => {
-            debugger
             let percent = status.count / countTasks * 100;
             let color = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color;
             console.log(color);
             barData.push({ name: status.name, percent: percent, color: status.color })
         })
     }
+    let colors = []
+    barData.map(i => {
+        colors.push(i.color)
+    })
+
 
     return (
         <>
@@ -85,14 +84,14 @@ function MyChart(props) {
                                     height={300}
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis/>
+                                    <ValueAxis tickSize={10}/>
                                     <BarSeries
                                         valueField="tasks"
                                         argumentField="name"
                                         barWidth={0.2}
                                         color='#99e2e5'
                                     />
-                                    <Chart.Label/>
+                                    <Chart.Label />
                                     <Title text="Incomplete tasks by card" />
                                     <Tooltip />
                                 </Chart>
@@ -108,13 +107,12 @@ function MyChart(props) {
                                     height={300}
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis />
+                                    <ValueAxis tickSize={10}/>
                                     <BarSeries
-                                        
                                         valueField="percent"
                                         argumentField="name"
                                         barWidth={0.2}
-                                        color='#99e2e5'
+                                        color={colors[3]}
                                     />
                                     <Title text="All tasks by status" />
                                     <Tooltip />
@@ -145,7 +143,7 @@ function MyChart(props) {
                                     <PieSeries
                                         valueField="val"
                                         argumentField="category"
-                                   />
+                                    />
                                     <Title text="All tasks by completion status" />
                                     <EventTracker />
                                     <Tooltip />

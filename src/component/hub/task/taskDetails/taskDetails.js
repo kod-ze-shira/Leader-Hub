@@ -107,8 +107,12 @@ function TaskDetails(props) {
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                let r = props.task.files
-                                r.splice(index2, 1);
+                                try {
+                                    props.task.files.splice(index2, 1);
+
+                                } catch (error) {
+                                    console.log(error)
+                                }
                             }
                             // first element removed
                         }
@@ -181,8 +185,8 @@ function TaskDetails(props) {
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
-        
-        setDownloadFile={(e) =>{debugger; props.setDownloadFile(e)}}
+
+            setDownloadFile={(e) => { props.setDownloadFile(e) }}
         />
     }) : null
 

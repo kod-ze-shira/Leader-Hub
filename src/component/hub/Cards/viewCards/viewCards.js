@@ -58,7 +58,6 @@ function ViewCards(props) {
             }
     }
     const updateCardName = (event) => {
-        debugger
         setEditCardName(event.target.value)
 
     }
