@@ -108,6 +108,9 @@ const publicData = {
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
     },
+    setPriorities(state, action) {
+        state.priorities = action.payload;
+    },
     setUserEmail(state, action) {
         state.userEmail = action.payload;
     },

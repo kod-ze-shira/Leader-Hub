@@ -6,41 +6,57 @@ import './listMembers.css'
 
 
 function ListMembers(props) {
-     const {contactsList,addMembers,getContacts,shareObject}=props
-
-    const [search, setSearch] = useState('');
+    const { contactsList, getContacts, shareObject, setMembersList } = props
+    const [flagAdd, setFlagAdd] = useState(false)
     const [contacts, setContacts] = useState(contactsList);
+    const [search, setSearch] = useState('')
+    const [add, setAdd] = useState('')
 
 
     useEffect(() => {
         if (contactsList?.length !== 0)
             getContacts()
-            setContacts(contactsList)
+        setContacts(contactsList)
     }, [])
-    console.log('mina',contacts);
+    function ValidateEmail(mail) {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+            return true
+        return false
+    }
+
     function searchContacts(e) {
-        let help=[]
+        setSearch(e.target.value)
+        let help = []
         contactsList.map(cm => {
             let name = cm.name.search(e.target.value)
-            let email=cm.email.search(e.target.value)
-            if(name===0||email===0)
-              help.push(cm)
+            let email = cm.email.search(e.target.value)
+            if (name === 0 || email === 0)
+                help.push(cm)
         })
         setContacts(help)
     }
-    function clickMember(contact){
-        shareObject({membersEmails:[{contact,permission:'viewer'}]})
+    function clickMembers(contact) {
+        shareObject({ shareDetails: [{ member: contact, permission: 'viewer' }] })
+        setMembersList(false)
+
+    }
+
+    function clickAddMember() {
+        if (ValidateEmail(add)) {
+            shareObject({ shareDetails: [{ member: add, permission: 'viewer' }] })
+            setMembersList(false)
+        }
+
     }
 
     return (
         <>
-            <div className='container'>
+            <div className='container membersToAdd'>
                 <input className='row' type='text' placeholder='enter name or email' onChange={(e) => {
-                    setSearch(e);
                     searchContacts(e)
                 }} />
                 {contacts.length !== 0 ? contacts.map(cl =>
-                    <div className='row mt-2' onClick={e=>clickMember(cl)}>
+                    <div className='row mt-2' onClick={e => clickMembers(cl)}>
                         <div className="col-2 d-flex align-items-center">
                             <img referrerpolicy="no-referrer" src={cl.thumbnail} className="thumbnail-contact imgMembers" />
                         </div>
@@ -50,8 +66,15 @@ function ListMembers(props) {
                         </div>
                     </div>
                 ) : <p>No Members</p>}
-                <div>
-                    <button className='btnAddmembers'>+ Add Members</button>
+                <div className="row">
+                    {
+                        !flagAdd ?
+                            <button className='btnAddmembers' onClick={e => setFlagAdd(true)}>+ Add Members</button> :
+                            <>
+                                <input className='inputAdd col-8' type="text" defaultValue={search} placeholder='enter email' onChange={e => setAdd(e.target.value)} />
+                                <button className='col-3' onClick={e => clickAddMember()}>+ Add</button>
+                            </>
+                    }
                 </div>
             </div>
         </>
@@ -60,8 +83,8 @@ function ListMembers(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         getContacts: () => dispatch(actions.getContactsForUser()),
-        addMembers:(contact)=>dispatch(actions.addMembers(contact)),
-        shareObject:(contact)=>dispatch(actions.shareObject(contact))
+        addMembers: (contact) => dispatch(actions.addMembers(contact)),
+        shareObject: (contact) => dispatch(actions.shareObject(contact))
     }
 }
 const mapStateToProps = (state) => {

@@ -121,7 +121,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
-        
+
         console.log(task)
 
         $.ajax({
@@ -257,6 +257,10 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                 if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
+                if (data.result.priority) {
+                    dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "priority", "value": data.result.priority }))
+                }
+
 
             },
             error: function (err) {

@@ -22,7 +22,6 @@ import './chart.css'
 
 function MyChart(props) {
     useEffect(() => {
-        debugger
         props.getTaskStatusesOfProject()
         console.log(props.taskStatusesOfProject);
     }, [])
@@ -45,7 +44,6 @@ function MyChart(props) {
     }
     if (props.taskStatusesOfProject) {
         props.taskStatusesOfProject.map((status) => {
-            debugger
             let percent = status.count / countTasks * 100;
             let color = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color;
             console.log(color);
@@ -55,6 +53,7 @@ function MyChart(props) {
 
     return (
         <>
+        
             <Paper style={{ width: '100%' }}>
                 <div className='container'>
                     {/* <div className='row'>
