@@ -14,7 +14,7 @@ import placeholder from '../../../img/placeholder.png'; // with import
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import ProjectStyle from "../../project/projectStyle";
-
+import Background from '../../../img/down-arrow.svg';
 function TasksNotBelongCardByMap(props) {
 
     const [viewDetails, setViewDetails] = useState(false)
@@ -179,13 +179,17 @@ function TasksNotBelongCardByMap(props) {
     const style = {
         control: (base, state) => ({
             ...base,
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat:'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             border: 0,
             // This line disable the blue border
             boxShadow: 0,
             "&:hover": {
-                border:  0,
-                backgroundColor:'#eeeeee' ,    
+                border: 0,
+                backgroundColor: '#eeeeee',
             }
         })
     };
@@ -193,10 +197,7 @@ function TasksNotBelongCardByMap(props) {
         project.name ? {
             value: project, label:
                 <div className="d-flex flex-row" style={{ color: project.color }}>
-                    {/* <span className="dot dotProject "
-                        style={{ 'background-color': project.color }} >
-                    </span> */}
-                    <div style={{marginTop:'0.5px'}}>
+                    <div style={{ marginTop: '0.5px' }}>
                         <ProjectStyle color={project.color}></ProjectStyle>
                     </div>
                     <span className="select-not-belong project-select-not-belong">{project.name}</span>
@@ -336,7 +337,7 @@ function TasksNotBelongCardByMap(props) {
                             onClick={(e) => openViewDetails(e)}
                         >
                             view details
-                      <FontAwesomeIcon className="ml-2"
+                            <FontAwesomeIcon className="ml-2"
                                 icon={['fas', 'caret-right']}>
                             </FontAwesomeIcon>
                         </button>
@@ -363,7 +364,7 @@ function TasksNotBelongCardByMap(props) {
                             options={workspaceSelect}
                             value={indexOfWorkspace !== null ?
                                 workspaceSelect[indexOfWorkspace] : 'Select...'}
-                                styles={style}
+                        styles={style}
 
                         />
                         {/* <div className="drop-down"> 
@@ -419,7 +420,7 @@ function TasksNotBelongCardByMap(props) {
 
                         value={indexOfCard !== null ?
                             cardsSelect[indexOfCard] : 'Select...'}
-                            styles={style}
+                        styles={style}
 
                     />
 
@@ -459,7 +460,7 @@ function TasksNotBelongCardByMap(props) {
                     : null}
             </div>
 
-            { showchalalit ? <div className="animation"><Animation /> </div> : null}
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
 
         </>

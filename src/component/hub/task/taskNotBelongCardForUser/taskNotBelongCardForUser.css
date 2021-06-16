@@ -86,14 +86,8 @@
     padding-top:unset !important;
     padding: 0 !important;
 }
-.check-task .css-yk16xz-control{
-    background: url(../../../img/down-arrow.svg) no-repeat ;
-    background-size: 10px 10px;
-    background-position: 90%;
-    
-}
+
 .wrap-all-task{
-    /* min-width: 630px; */
     height: 85%;
 }
 
