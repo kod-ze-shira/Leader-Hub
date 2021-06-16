@@ -261,3 +261,31 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
   }
   return next(action);
 }
+
+
+export const addMembers = ({ dispatch, getState }) => next => action => {
+
+  if (action.type === 'ADD_MEMBERS') {
+
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/addMemberToTeam`
+    fetch(urlData,
+      {
+        method: "POST",
+        headers: {
+          Authorization: jwtFromCookie,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(action.payload)
+      }
+    ).then(response => {
+      return response.json()
+    })
+      .then(data => {
+        dispatch(actions.setMembers(action.payloadl))
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
+}

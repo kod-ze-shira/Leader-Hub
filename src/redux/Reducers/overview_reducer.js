@@ -18,6 +18,9 @@ const overview={
     setMembers(state, action) {
         state.members = action.payload;
     },
+    setMember(state, action){
+        state.members.push(action.payload);
+    }
 
 }
 export default produce((state, action) => createReducer(state, action, overview), initialState);
