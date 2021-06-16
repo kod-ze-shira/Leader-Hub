@@ -10,33 +10,32 @@ import ViewFile from './viewFile'
 
 function FilesOfProject(props) {
 
-
     useEffect(() => {
 
-        console.log('useeffect');
-        props.getFilesForProject(props.indexCurrentProject)
-
-    }, [props.indexCurrentProject])
+        if (props.workspacesIndex) {
+            props.getFilesForProject(props.indexCurrentProject)
+        }
+    }, [props.workspacesIndex])
 
     const filesForDownloadOrDelete = []
 
-function addOrRemoveFileToArr(e,file,ref){
-        let index=0
-        filesForDownloadOrDelete.forEach(f=>f._id==file._id?index=f._id:null)
+    function addOrRemoveFileToArr(e, file, ref) {
+        let index = 0
+        filesForDownloadOrDelete.forEach(f => f._id == file._id ? index = f._id : null)
         // for(let i=0;i<filesForDownloadOrDelete.length-1;i++){
         //     if(filesForDownloadOrDelete[i]._id==file._id)
         //         index=i
         // }
-        if(index==0) {
-            ref.current.checked=true
+        if (index == 0) {
+            ref.current.checked = true
             // e.currentTarget.children[0].children[1].children[0].checked=true
             filesForDownloadOrDelete.push(file)
 
         }
         else {
-            ref.current.checked=false
-            e.currentTarget.children[0].children[1].children[0].checked=false   
-            filesForDownloadOrDelete.splice(index,1)
+            ref.current.checked = false
+            e.currentTarget.children[0].children[1].children[0].checked = false
+            filesForDownloadOrDelete.splice(index, 1)
         }
     }
     function downloadFile(e) {
@@ -55,25 +54,25 @@ function addOrRemoveFileToArr(e,file,ref){
 
     return (
         <>
-        <div className="filesForProject backgroundWhiteAndBorderRadius">
-            <div className="row">
-           <h3 className="col-9" id="title">Project Files</h3>
-            <div className="col-3 row iconsList" >
-                    {/* <div className=" delete iconControl"
+            <div className="filesForProject backgroundWhiteAndBorderRadius">
+                <div className="row">
+                    <h3 className="col-9" id="title">Project Files</h3>
+                    <div className="col-3 row iconsList" >
+                        {/* <div className=" delete iconControl"
                         onClick={deleteFile}
                         data-tip data-for="delete"
                     >
-                        <img class='imageIcon' src={bin} ></img>
+                        <img class='imageIconD' src={bin} ></img>
                         <ReactTooltip data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div> */}
-                    <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
-                        <img class='imageIcon' src={download} ></img>
-                        <ReactTooltip data-tip id="download" place="top" effect="solid">
-                            {title.title_downLoad}
-                        </ReactTooltip>
+                        <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
+                            <img class='imageIconD' src={download} ></img>
+                            <ReactTooltip data-tip id="download" place="top" effect="solid">
+                                {title.title_downLoad}
+                            </ReactTooltip>
 
                         </div>
                     </div>
@@ -120,12 +119,14 @@ function addOrRemoveFileToArr(e,file,ref){
 const mapStateToProps = (state) => {
     return {
         FilesOfProject: state.public_reducer.filesForProjectArr,
-        indexCurrentProject: state.public_reducer.indexCurrentProject
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
+        workspacesIndex: state.public_reducer.indexOfWorkspace,
+
     }
 }
-const mapDispatchToProps=(dispatch)=>{
-    return{
-        getFilesForProject:(p)=>dispatch(actions.getFilesForProject(p)),
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
     }
 }

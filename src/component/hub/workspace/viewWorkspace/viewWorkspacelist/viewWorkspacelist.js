@@ -25,8 +25,8 @@ function ViewWorkspaceList(props) {
     }, [props.workspaces])
 
     const routeToProject = () => {
-        // props.setWorkspace(workspace)
         props.setIndexWorkspace(props.indexWorkspace)
+        props.setCurrentIndexProject(0)
         props.history.push("/" + props.user + "/hub/workspace/" + workspace._id)
     }
 
@@ -91,8 +91,8 @@ function ViewWorkspaceList(props) {
                     <div className="col-2 col-sm-4">
                         <div className="row  mt-4 icons-in-list-w" >
                             <div
-                             data-tip data-for="edit"
-                                className="col-1  edit iconsAction"  onClick={editWorkspace}>
+                                data-tip data-for="edit"
+                                className="col-1  edit iconsAction" onClick={editWorkspace}>
                                 <img src={pencil}></img>
                                 <ReactTooltip data-tip id="edit" place="bottom" effect="solid">
                                     {title.title_edit}
@@ -135,7 +135,8 @@ const mapDispatchToProps = (dispatch) => {
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
-        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
 
     }
 }

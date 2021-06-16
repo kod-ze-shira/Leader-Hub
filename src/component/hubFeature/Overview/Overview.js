@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect ,} from 'react'
+import { useParams, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { actions } from '../../../redux/actions/action';
 import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
@@ -9,6 +11,23 @@ import MyChart from '../chart/chart'
 
 
 function Overview(props) {
+
+    const { idProject } = useParams();
+
+    useEffect(() => {
+        if (props.workspaces.length == 0)
+            props.getAllWorkspaces()
+
+    }, [])
+    useEffect(() => {
+         for (let i = 0; i < props.workspaces.length; i++) {
+            let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
+            if (workspace) {
+                props.indexOfWorkspace(i)
+                props.getAllStatusesTaskForWorkspace()
+            }
+        }
+    }, [props.workspaces])
     return (
         <>
             <div className='scrollbarOverview container-fluid'>
@@ -34,12 +53,25 @@ function Overview(props) {
                             </div>
                         </div>
                     </div>
-{/* <Hangout></Hangout> */}
+                {/* <Hangout></Hangout> */}
                 </div>
             </div>
         </>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        workspaces:state.public_reducer.workspaces
+    }
+}
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
+        indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
+        getAllStatusesTaskForWorkspace:()=>dispatch(actions.getAllStatusesTaskForWorkspace()),
 
-export default Overview;
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Overview)
+

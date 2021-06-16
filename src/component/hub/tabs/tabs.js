@@ -74,6 +74,7 @@ function Tabs(props) {
                 // const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard
                 props.changeTaskplace(replace)
+
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 if (replace[2] == replace[3])
                     props.dragTask(iSourse)
@@ -149,7 +150,7 @@ function Tabs(props) {
 
 
     return (
-        <><div className="body body-cards">
+        <><div className="body-cards">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
@@ -221,8 +222,6 @@ function Tabs(props) {
                                             </div>
 
                                         </div>}
-                                    {/* </>  */}
-                                    {/* : null} */}
                                 </div>
                             </div>
                             {provided.placeholder}

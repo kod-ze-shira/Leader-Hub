@@ -9,6 +9,13 @@ function ViewMembers(props) {
         if (props.members?.length !== 0)
             props.getMembersByProjectId()
     }, [])
+    useEffect(() => {
+        if (props.workspacesIndex) {
+            props.getMembersByProjectId()
+        }
+    }, [props.workspacesIndex])
+
+
 
     const members = props.members;
 
@@ -53,7 +60,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        members: state.overview_reducer.members
+        members: state.overview_reducer.members,
+        workspacesIndex: state.public_reducer.indexOfWorkspace,
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewMembers);

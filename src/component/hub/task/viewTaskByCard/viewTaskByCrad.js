@@ -162,11 +162,13 @@ function ViewTaskByCrad(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.tas.files
         }
 
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
+            props.setCountReadyTasks()
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
@@ -360,6 +362,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
