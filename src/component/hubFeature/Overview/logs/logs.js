@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 function Logs(props) {
-    let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
+    const [logs, setLogs] = useState()
+    useEffect(() => {
+        if (props.workspacesIndex) {
+            setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+            debugger
+        }
+    }, [props.workspacesIndex])
+
+    // let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
     console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
 
     return (
@@ -25,7 +33,7 @@ function Logs(props) {
                     </div>
                 </div> */}
                 <div className="row">
-                    {logs.length ?
+                    {logs ? logs.length ?
                         logs.map(l => {
                             return <ul>
                                 <li>
@@ -47,7 +55,7 @@ function Logs(props) {
                                 </li>
                             </ul>
                         })
-                        : null
+                        : null : null
                     }
                 </div>
             </div>

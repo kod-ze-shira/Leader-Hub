@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, withRouter } from 'react-router-dom';
 import Select from 'react-select';
@@ -8,9 +8,6 @@ import { actions } from '../../../../redux/actions/action';
 function SelectProject(props) {
 
     const { idProject } = useParams();
-
-    useEffect(() => {
-    }, [props.workspaces])
 
     //to chang the project that user selected
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];

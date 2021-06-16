@@ -53,7 +53,7 @@ function Overview(props) {
                             </div>
                         </div>
                     </div>
-                    <Hangout></Hangout>
+                    {/* <Hangout></Hangout> */}
                 </div>
             </div>
         </>

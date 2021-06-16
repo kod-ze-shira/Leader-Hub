@@ -41,7 +41,7 @@ function SelectHeader(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
-     
+
     }, [])
 
     const handleChange = (event, newValue) => {
