@@ -11,9 +11,10 @@ function Logs(props) {
     const renderViewLogs = () => {
         return logsReverse.map(l => {
             return <ViewLogs
-                schemaName={l.schemaName}
+                schemaName={l.staticLog.name}
                 icon={l.staticLog.icon}
                 user={l.user}
+                date={l.date}
             />
         })
     }
