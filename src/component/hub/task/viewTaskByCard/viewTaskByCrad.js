@@ -169,6 +169,7 @@ function ViewTaskByCrad(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
+            props.setCountReadyTasks()
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
@@ -362,6 +363,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),

@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
-    let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
+    const [logs, setLogs] = useState()
+    useEffect(() => {
+        if (props.workspacesIndex) {
+            setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+            debugger
+        }
+    }, [props.workspacesIndex])
+
+    // let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
     console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
-    let logsReverse = logs.reverse();
+    let logsReverse = logs ? logs.reverse() : null;
 
     const renderViewLogs = () => {
         return logsReverse.map(l => {
@@ -24,9 +32,9 @@ function Logs(props) {
                 <div className="row mt-3 ml-2"><b>Project Log</b></div>
                 <div className="mt-1 logsHeder"></div>
                 <div className="row">
-                    {logs.length ?
+                    {logs ? logs.length ?
                         renderViewLogs()
-                        : null
+                        : null : null
                     }
                 </div>
             </div>

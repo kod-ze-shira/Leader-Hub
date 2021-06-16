@@ -48,6 +48,7 @@ function Tabs(props) {
 
 
     function onDragEndׂ(e) {
+        debugger
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId)) {
                 onDragEndׂCard(e)
@@ -74,6 +75,7 @@ function Tabs(props) {
                 // const replace = [iSourse, iDestination]
                 // /: taskId/:cardId/dragTaskFromCardToCard
                 props.changeTaskplace(replace)
+
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 if (replace[2] == replace[3])
                     props.dragTask(iSourse)
@@ -221,8 +223,6 @@ function Tabs(props) {
                                             </div>
 
                                         </div>}
-                                    {/* </>  */}
-                                    {/* : null} */}
                                 </div>
                             </div>
                             {provided.placeholder}

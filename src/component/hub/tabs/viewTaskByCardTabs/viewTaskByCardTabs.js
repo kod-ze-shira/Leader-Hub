@@ -122,12 +122,15 @@ function ViewTaskByCradTabs(props) {
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
         }
+        // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
+        // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
 
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
-        if (doneStatus)
+        if (doneStatus) {
+            props.setCountReadyTasks()
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
-
+        }
     }
     const showDetails = (event) => {
 
@@ -142,23 +145,24 @@ function ViewTaskByCradTabs(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux
-        if (event.name == "name") {
-            editTaskInRedux = { "nameFiled": event.name, "value": textInput.current.innerHTML }
-            props.setTaskByFiledFromTasks(editTaskInRedux)
+
+        // if (event.name == "name") {
+        //     editTaskInRedux = { "nameFiled": event.name, "value": textInput.current.innerHTML }
+        //     props.setTaskByFiledFromTasks(editTaskInRedux)
+        // }
+        // else {
+        let value = event.target.value
+        if (event.target.name == "complete") {
+
+            doneStatus = !doneStatus
+            value = doneStatus
+            editCompleteTask()
         }
         else {
-            let value = event.target.value
-            if (event.target.name == "complete") {
-
-                doneStatus = !doneStatus
-                value = doneStatus
-                editCompleteTask()
-            }
-            else {
-                editTaskInRedux = { "nameFiled": event.target.name, "value": value }
-                props.setTaskByFiledFromTasks(editTaskInRedux)
-            }
+            editTaskInRedux = { "nameFiled": event.target.name, "value": value }
+            props.setTaskByFiledFromTasks(editTaskInRedux)
         }
+        // }
     }
 
     function addChalalit(e) {
@@ -187,7 +191,7 @@ function ViewTaskByCradTabs(props) {
 
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
-            return <img className='imgInTask' src={myFile.url}></img>
+            return <img className='pt-2 imgInTask' src={myFile.url}></img>
         })
         : null
 
@@ -243,7 +247,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
-                                {myFiles}
+
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
@@ -262,14 +266,15 @@ function ViewTaskByCradTabs(props) {
                                 {/* <span
                                     name="name"
                                     ref={textInput}
-                                    value={this}
                                     onBlur={(e) => editTask(e)}
-                                    className="task-name-span ml-3  col-12 "
+                                    className="task-name-span ml-3 col-12 "
                                     onClick={(e) => e.stopPropagation()}
-                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}>
+                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}
+                                >
                                     {props.task.name}
                                 </span> */}
 
+                                {myFiles}
                                 <div className="icons-in-task-tabs pt-0">
 
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
@@ -341,6 +346,7 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         card: state.card_reducer.card,
         workspaces: state.public_reducer.workspaces,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
@@ -351,6 +357,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),

@@ -172,7 +172,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
         let project = action.payload.project;
         let projectBeforeChanges = action.payload.projectBeforeChanges;
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editProject`
-
+debugger
         $.ajax({
             url: urlData,
             type: 'POST',

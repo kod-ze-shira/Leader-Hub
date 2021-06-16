@@ -30,6 +30,7 @@ function ViewWorkspaceGrid(props) {
 
     const routeToProject = () => {
         props.setIndexWorkspace(props.indexWorkspace)
+        props.setCurrentIndexProject(0)
         props.history.push("/" + props.user + "/hub/workspace/" + workspace._id)
     }
     function outOver(id) {
@@ -124,6 +125,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
         setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),

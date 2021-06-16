@@ -9,9 +9,11 @@ function CardsByProject(props) {
 
     useEffect(() => {
         // props.getCardsByProjectId(props.projectId)
-
+    
     }, [props.projectId])
-
+    useEffect(() => {
+        // props.getCardsByProjectId(props.projectId)
+    }, [])
 
     // function onDragEndׂ(e) {
     //     let iSourse, iDestination
