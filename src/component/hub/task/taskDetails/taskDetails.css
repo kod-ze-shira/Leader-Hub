@@ -199,3 +199,6 @@ z-index: 9999 !important;
 .files-task-hover{
   display: none;
 }
+.priority-task-details .css-2b097c-container{
+  background-color: #EDFBFC!important;
+}

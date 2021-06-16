@@ -196,11 +196,11 @@ function ViewCards(props) {
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
                     {/* <p className="col">Team</p> */}
-                    <p className="col">Assignee</p>
+                    <p className="col-assignee">Assignee</p>
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
-                    <p className="col">Priority</p>
+                    <p className="col-priority">Priority</p>
 
                     <p className="col-add-task"><a>
                         <ReactTooltip data-tip id="add" place="bottom" effect="solid">
