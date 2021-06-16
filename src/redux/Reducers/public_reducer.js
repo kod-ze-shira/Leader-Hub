@@ -15,6 +15,7 @@ const initialState = {
     tasks: [],
     milestones: [],
     members: [],
+    priorities: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -64,6 +65,7 @@ const publicData = {
 
     },
     setTaskByFiledFromTasks(state, action) {
+        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
     },
@@ -108,6 +110,9 @@ const publicData = {
     },
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
+    },
+    setPriorities(state, action) {
+        state.priorities = action.payload;
     },
     setUserEmail(state, action) {
         state.userEmail = action.payload;

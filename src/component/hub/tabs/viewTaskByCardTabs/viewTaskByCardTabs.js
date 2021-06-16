@@ -246,7 +246,7 @@ function ViewTaskByCradTabs(props) {
                                 {myFiles}
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
-                                    style={props.task.files.length ? null : { 'margin-top': '20px' }}
+                                    style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
@@ -273,13 +273,17 @@ function ViewTaskByCradTabs(props) {
                                 <div className="icons-in-task-tabs pt-0">
 
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
-                                        <div
-
-                                            className={props.task.complete ? "status-task-tabs-opacity px-2" : "status-task-tabs px-2"}
-                                            style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
-                                            {props.task.status ? props.task.status.statusName : null}
+                                        <div className="p_task">
+                                            <div> {props.task.priority ?
+                                                <img className="priority-img" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                : null}
+                                            </div>
+                                            <div
+                                                className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
+                                                style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                                {props.task.status ? props.task.status.statusName : null}
+                                            </div>
                                         </div>
-
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}

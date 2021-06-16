@@ -20,10 +20,10 @@ function ViewWorkspaceGrid(props) {
     //     'border': '1.5px solid workspace.colr'
     // }
     // export default function ProjectStyle(props) {
-    const myStyle = ` 
+    const MyStyle = styled.div` 
         &:hover {
             border: 1.5px solid ${workspace.color} !important
-        } `;
+        }`;
     useEffect(() => {
 
     }, [props.workspaces])
@@ -48,10 +48,6 @@ function ViewWorkspaceGrid(props) {
         props.duplicateWorkspace(workspace._id);
     }
 
-    // $(`.ViewWorkspace`).mouseover(function () {
-    //     console.log(this.id)
-    //     $(`#${this.id} .iconsAction`).css({ 'display': 'inline' })
-    // })
     function over_workspace(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
         $(`#${id} .stripeToSavePlace`).css({ 'color': 'rgb(220 220 226)' })
@@ -95,9 +91,9 @@ function ViewWorkspaceGrid(props) {
 
                     </div>
                 </div>
-                <div className="Workspacegrid pt-2 pb-2 px-2"
+
+                <MyStyle className="Workspacegrid pt-2 pb-2 px-2 mt-1"
                     onClick={routeToProject}
-                    style={{ myStyle }}
                 >
                     <div>
                         <div className="logoWorkspace1 " >
@@ -108,12 +104,13 @@ function ViewWorkspaceGrid(props) {
                             </div>
                         </div>
                         <div className="name mt-1"><p className='nameWorkspaceInGrid' title={workspace.name}>{workspace.name}</p> </div>
-                        <p className="productionDateW" data-tip data-for="date_p">{workspace.productionDate}</p>                    </div>
+                        <p className="productionDateW" data-tip data-for="date_p">Create {workspace.productionDate}</p>                    </div>
 
-                    <ReactTooltip data-tip id="date_p" place="bottom" effect="solid">
+                    {/* <ReactTooltip data-tip id="date_p" place="bottom" effect="solid">
                         {title.title_production_date}
-                    </ReactTooltip>
-                </div>
+                    </ReactTooltip> */}
+                </MyStyle>
+
             </div>
         </>
     )
