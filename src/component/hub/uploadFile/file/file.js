@@ -25,8 +25,12 @@ function File(props) {
     }
     return (
         <>
-            <div className=' fileInTask  mb-3 row' id={props.file.url ? props.file.url : props.file.name}>
-                <div className='col-4  imgFileInTask'>
+            <div className='fileInTask  mb-3 row'
+                id={props.file.url ? props.file.url : props.file.name}>
+                <div className={props.file && (props.file.name.endsWith(".pdf") || props.file.name.endsWith(".docx")) ?
+                    'col-4  imgFileInTask ' : 'col-4  imgFileInTask pr-0'}
+                // {props.file.url ? 'mt-5' : null}
+                >
                     {props.file.url != 'new' ?
                         <a href={props.file.url} target="_blank">
                             {props.file.name.endsWith(".pdf") ?
@@ -63,12 +67,13 @@ function File(props) {
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
                     {props.file.url != 'new' ?
-                        <img onClick={(e) =>{
-                             downloadFile(e)}} style={{ float: 'right' }}
-                            className='downloadFileInTask mt-4'
+                        <img onClick={(e) => {
+                            downloadFile(e)
+                        }} style={{ float: 'right' }}
+                            className='downloadFileInTask mt-4 imgActionFile'
                             src={require('../../../img/download.svg')}></img>
                         : null}
-                    <img onClick={() => deleteFile()} className='mr-1 ml-1 mt-4' style={{ float: 'right' }}
+                    <img onClick={() => deleteFile()} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
                         src={require('../../../img/Group 21592.svg')}></img>
                     {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
                         icon={['fas', 'trash-alt']}

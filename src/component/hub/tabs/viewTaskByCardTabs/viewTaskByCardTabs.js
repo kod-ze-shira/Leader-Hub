@@ -246,7 +246,7 @@ function ViewTaskByCradTabs(props) {
                                 {myFiles}
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
-                                    style={props.task.files.length ? null : { 'margin-top': '20px' }}
+                                    style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
