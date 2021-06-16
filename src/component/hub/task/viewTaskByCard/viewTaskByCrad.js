@@ -38,7 +38,6 @@ function ViewTaskByCrad(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
     // useEffect(() => {
-    //     debugger
     //     console.log(props.task);
     // }, [props.task.priority])
     useEffect(() => {
