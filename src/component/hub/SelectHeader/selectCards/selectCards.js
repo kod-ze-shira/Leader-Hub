@@ -39,8 +39,7 @@ function SelectCards(props) {
             boxShadow: state.isFocused ? 0 : 0,
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-
+                backgroundColor:'#eeeeee' ,
             }
         })
     };
@@ -52,7 +51,15 @@ function SelectCards(props) {
                     className="select-card"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedCard(e)}
-                    name="color"
+                    theme={theme => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary25: '#68c7cb1a',
+                            primary: '#68C7CB',
+                            primary50: '#68C7CB',
+                        },
+                    })}
                     options={viewCardsList}
                     // props.card ? props.card.name :
                     placeholder={"All Cards"}

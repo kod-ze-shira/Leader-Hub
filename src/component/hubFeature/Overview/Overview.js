@@ -46,14 +46,14 @@ function Overview(props) {
                     <div className='col' style={{ height: '87vh' }}>
                         <div className='container-fluid px-0 '>
                             <div className='row mb-3 minHeight'>
-                                <Members />
+                                <Hangout></Hangout>
                             </div>
                             <div className='row minHeight'>
                                 <Logs />
                             </div>
                         </div>
                     </div>
-                {/* <Hangout></Hangout> */}
+
                 </div>
             </div>
         </>
