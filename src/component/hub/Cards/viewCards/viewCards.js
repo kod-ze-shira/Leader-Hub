@@ -199,6 +199,7 @@ function ViewCards(props) {
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
+                    
                     <p className="col">Priority</p>
 
                     <p className="col-add-task"><a>
