@@ -33,7 +33,9 @@
  {
   border: 1px #1f263ccc solid;
 }
-
+.divAddWorkspace{
+  margin-top: 1.9rem;
+}
 
 .addWorkspace:hover  .logo-w{
   background-color: #1f263ccc;

@@ -137,7 +137,7 @@ function DisplayGantt(props) {
     const { currentZoom, messages } = state;
 
     return (
-        <div className="body">
+        <div className="bodyGant">
             <div>
                 <div>
                     {/* <Gantt
