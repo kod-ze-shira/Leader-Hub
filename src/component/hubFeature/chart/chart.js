@@ -19,12 +19,7 @@ import $ from 'jquery';
 
 function MyChart(props) {
     useEffect(() => {
-<<<<<<< HEAD
-        if (!props.taskStatusesOfProject)
-            props.getTaskStatusesOfProject()
-=======
         props.getTaskStatusesOfProject()
->>>>>>> dev
         console.log(props.taskStatusesOfProject);
     }, [])
 
@@ -34,11 +29,7 @@ function MyChart(props) {
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
-<<<<<<< HEAD
-    const pieData = [{ category: 'Completed', val: readyTasks / countTasks }, { category: 'Incompleted', val: 1 - readyTasks / countTasks }];
-=======
     const pieData = [{ category: 'Completed', val: readyTasks / countTasks, color: '#38b1b5' }, { category: 'Incompleted', val: 1 - readyTasks / countTasks, color: '#99e2e5' }];
->>>>>>> dev
     const sticksData = []
 
     if (cards) {
@@ -62,36 +53,11 @@ function MyChart(props) {
 
         // })
     }
-<<<<<<< HEAD
-    // $(document).ready(function () {
-    //     $(` .father rect:eq(0)`).css('fill', 'red');
-    //     $(`.father rect:eq(1)`).css('fill', 'red');
-    //     $(`.father rect:eq(3)`).css('fill', 'red');
-    //     $(`rect:eq(4)`).css('fill', 'red');
-    //     $(`rect:eq(5)`).css('fill', 'red');
-
-    // if (barData.length) {
-    //     setTimeout(() => {
-    //         $(` .father rect:eq(0)`).css('fill', 'red');
-    //     }, 100);
-
-    // }
-    // $(document).ready(function () {
-    //     $(` .father rect:eq(0)`).css('fill', 'red');
-    //     $(`.father rect:eq(1)`).css('fill', 'red');
-    //     $(`.father rect:eq(3)`).css('fill', 'red');
-    //     $(`rect:eq(4)`).css('fill', 'red');
-    //     $(`rect:eq(5)`).css('fill', 'red');
-
-    // })
-    // })
-=======
     let colors = []
     barData.map(i => {
         colors.push(i.color)
     })
 
->>>>>>> dev
 
     return (
         <>
@@ -125,11 +91,7 @@ function MyChart(props) {
                                     height={300}
                                 >
                                     <ArgumentAxis />
-<<<<<<< HEAD
-                                    <ValueAxis />
-=======
-                                    <ValueAxis tickSize={10}/>
->>>>>>> dev
+                                    <ValueAxis tickSize={10} />
                                     <BarSeries
                                         valueField="tasks"
                                         argumentField="name"
@@ -149,22 +111,13 @@ function MyChart(props) {
                                 {/* bar */}
                                 <Chart
                                     data={barData}
-<<<<<<< HEAD
-                                    className='father'
-=======
                                     height={300}
->>>>>>> dev
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis tickSize={10}/>
+                                    <ValueAxis tickSize={10} />
                                     <BarSeries
                                         valueField="percent"
                                         argumentField="name"
-<<<<<<< HEAD
-                                        // fill={}
-                                        className='rrr'
-=======
->>>>>>> dev
                                         barWidth={0.2}
                                         color={colors[3]}
                                     />
