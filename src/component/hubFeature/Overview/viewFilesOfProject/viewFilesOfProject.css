@@ -79,9 +79,7 @@ h3{
     box-shadow: slateblue 2px 2px 2px 2px;
 }
  
- .imageIcon{
-    height: 1rem;
- }
+
  
  .iconsList{
     text-align: center;
@@ -188,7 +186,7 @@ h3{
       box-shadow: slateblue 2px 2px 2px 2px;
   }
    
-   .imageIcon{
+   .imageIconD{
       height: 1rem;
    }
    
