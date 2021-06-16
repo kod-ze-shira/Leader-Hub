@@ -137,14 +137,14 @@ function DisplayGantt(props) {
     const { currentZoom, messages } = state;
 
     return (
-        <div className="body">
+        <div className="bodyGant">
             <div>
                 <div>
-                    {/* <Gantt
+                    <Gantt
                         tasks={data}
                         zoom={currentZoom}
                         onDataUpdated={logDataUpdate}
-                    /> */}
+                    />
                 </div>
             </div>
         </div>

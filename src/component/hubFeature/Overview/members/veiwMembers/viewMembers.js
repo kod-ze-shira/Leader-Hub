@@ -7,8 +7,12 @@ import './viewMembers.css'
 
 function ViewMembers(props) {
     useEffect(() => {
-        props.getMembersByProjectId()
-    }, [])
+        if (props.workspacesIndex) {
+            props.getMembersByProjectId()
+        }
+    }, [props.workspacesIndex])
+
+
 
     const members = props.members;
     const colors = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
@@ -22,31 +26,31 @@ function ViewMembers(props) {
     return (
         <>
 
-           
-                <div className="row pt-3">
-                    {members?.length ?
-                        members.map(m => {
-                            return <>
-                                <div className="mb-2">      
-                                    <div className="row ml-4">
-                                        <div className="col-2 d-flex align-items-center">
-                                            {m.thumbnail ?
-                                                <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
-                                                : <div className="logo-contact imgMembers fomtImgMembers d-flex align-items-center justify-content-center" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
-                                                    {m.name ? m.name[0] : null}
-                                                </div>}
-                                        </div>
-                                        <div className="col-6 ml-2">
-                                            <b className="name-contact nameMembers">{m.name} </b>
-                                            <p className="email-contact emailMembers ml-2">{m.email} </p>
-                                        </div>
+
+            <div className="row pt-3">
+                {members?.length ?
+                    members.map(m => {
+                        return <>
+                            <div className="mb-2">
+                                <div className="row ml-4">
+                                    <div className="col-2 d-flex align-items-center">
+                                        {m.thumbnail ?
+                                            <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
+                                            : <div className="logo-contact imgMembers fomtImgMembers d-flex align-items-center justify-content-center" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>
+                                                {m.name ? m.name[0] : null}
+                                            </div>}
+                                    </div>
+                                    <div className="col-6 ml-2">
+                                        <b className="name-contact nameMembers">{m.name} </b>
+                                        <p className="email-contact emailMembers ml-2">{m.email} </p>
                                     </div>
                                 </div>
-                            </>
-                        })
-                        : null
-                    }
-                </div>
+                            </div>
+                        </>
+                    })
+                    : null
+                }
+            </div>
 
 
         </>
@@ -62,6 +66,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
+        workspacesIndex: state.public_reducer.indexOfWorkspace,
         members: state.public_reducer.members
     }
 }

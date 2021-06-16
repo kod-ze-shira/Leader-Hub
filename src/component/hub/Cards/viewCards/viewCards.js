@@ -13,7 +13,7 @@ import './viewCards.css';
 function ViewCards(props) {
     useEffect(() => {
     }, [props.flag])
-    
+
     const [flag, setFlag] = useState(true)
     const [flagFromSelect, setFlagFromSelect] = useState(true)
     const [cardId, setCardId] = useState("")
@@ -43,6 +43,8 @@ function ViewCards(props) {
             task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
             // console.log(props.statuses[0].statusName);
             props.newTask(task)
+            let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
+            props.setCountTasks(countTasksInProject += 1)
         }
         setInputValue("")
         setAddTaskInInput(!addTaskInInput)
@@ -58,7 +60,6 @@ function ViewCards(props) {
             }
     }
     const updateCardName = (event) => {
-        debugger
         setEditCardName(event.target.value)
 
     }
@@ -197,11 +198,11 @@ function ViewCards(props) {
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
                     {/* <p className="col">Team</p> */}
-                    <p className="col">Assignee</p>
+                    <p className="col-assignee">Assignee</p>
                     <p className="col">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
-                    <p className="col">Priority</p>
+                    <p className="col-priority">Priority</p>
 
                     <p className="col-add-task"><a>
                         <ReactTooltip data-tip id="add" place="bottom" effect="solid">
@@ -265,11 +266,13 @@ function ViewCards(props) {
 const mapStateToProps = (state) => {
 
     return {
+        workspaces: state.public_reducer.workspaces,
         project: state.project_reducer.project,
         card: state.card_reducer.card,
         task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         statuses: state.status_reducer.statuses,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
 
         // user: state.public_reducer.userName,
@@ -278,6 +281,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCountTasks: (count) => dispatch(actions.setCountTasks(count)),
         setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),

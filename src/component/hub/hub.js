@@ -27,6 +27,9 @@ import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
+import Hangout from "../hubFeature/Overview/hangout/hangout";
+import selectTask from './SelectHeader/selectTask/selectTask';
+
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -42,7 +45,7 @@ function Hub(props) {
     // }, [props.workspaces])
 
     const showToastToDelete = (objectToDelete_) => {
-
+        
         // setObjectToDelete(objectToDelete_)
         if (objectToDelete_.type == 'Task') {
 
@@ -71,9 +74,7 @@ function Hub(props) {
         setShowToastDelete(value)
         let i = objectToDelete.length - 1
         if (objectToDelete[i].type == "Card") {
-            $(`#${objectToDelete[i].object._id} `).removeClass("displayNone")
-            $(`#${objectToDelete[i].object._id} `).addClass("mt-4")
-            $(`#${objectToDelete[i].object._id} `).addClass("col-3")
+            $(`#${objectToDelete[i].object._id} `).css("display", "inline-block")
         }
         else if (!objectToDelete[i].object.card)
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
@@ -141,7 +142,7 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub mt-4" : "col-12 bodyHub mx-2 mt-4"}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub mt-3" : "col-12 bodyHub mx-2 mt-4"}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -174,6 +175,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
+                                    // viewToastComplete={(val) => setShowToastComplete(true)}
                                     viewToastComplete={(val) => setShowToastComplete(val)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
