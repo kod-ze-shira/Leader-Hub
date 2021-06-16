@@ -163,6 +163,7 @@ function ViewTaskByCrad(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.tas.files
         }
 
         props.setTaskComplete(completeTask)//redux

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import ViewLogs from "../logs/viewLogs/viewLogs"
+import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
     const [logs, setLogs] = useState()
@@ -12,49 +14,26 @@ function Logs(props) {
 
     // let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
     console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
+    let logsReverse = logs ? logs.reverse() : null;
+
+    const renderViewLogs = () => {
+        return logsReverse.map(l => {
+            return <ViewLogs
+                schemaName={l.schemaName}
+                icon={l.staticLog.icon}
+                user={l.user}
+            />
+        })
+    }
 
     return (
         <>
             <div className="container backgroundWhiteAndBorderRadius">
-                <div className="row"><p>Project Log</p></div>
-                {/* <div className="container">
-                    <div className="row">
-                        <div className="col-2">
-                            <p>logs.staticLog.icon</p>
-                        </div>
-                        <div className="col-10">
-                            <p>hello.....!!!!!!!!!</p>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col ">
-                            <p>stamm by stammmm</p>
-                        </div>
-                    </div>
-                </div> */}
+                <div className="row mt-3 ml-2"><b>Project Log</b></div>
+                <div className="mt-1 logsHeder"></div>
                 <div className="row">
                     {logs ? logs.length ?
-                        logs.map(l => {
-                            return <ul>
-                                <li>
-                                    <div className="container">
-                                        <div className="row">
-                                            <div className="col-2 logicon">
-                                                {l.schemaName}
-                                            </div>
-                                            <div className="col-10 logheader">
-                                                <img src={l.staticLog.icon}></img>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col ">
-                                                {l.user}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        })
+                        renderViewLogs()
                         : null : null
                     }
                 </div>
@@ -75,3 +54,4 @@ const mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logs);
+

@@ -62,14 +62,14 @@ function FilesOfProject(props) {
                         onClick={deleteFile}
                         data-tip data-for="delete"
                     >
-                        <img class='imageIcon' src={bin} ></img>
+                        <img class='imageIconD' src={bin} ></img>
                         <ReactTooltip data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div> */}
                         <div className="add iconControl" onClick={downloadFile} data-tip data-for="download" >
-                            <img class='imageIcon' src={download} ></img>
+                            <img class='imageIconD' src={download} ></img>
                             <ReactTooltip data-tip id="download" place="top" effect="solid">
                                 {title.title_downLoad}
                             </ReactTooltip>

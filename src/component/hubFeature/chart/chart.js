@@ -5,20 +5,17 @@ import {
     ArgumentAxis,
     ValueAxis,
     Chart,
-    AreaSeries,
-    LineSeries,
-    SplineSeries,
     BarSeries,
     Title,
     Tooltip,
     PieSeries,
-    Legend,
 } from '@devexpress/dx-react-chart-material-ui';
 import { EventTracker } from '@devexpress/dx-react-chart';
 import { Animation } from '@devexpress/dx-react-chart';
 import { Palette } from '@devexpress/dx-react-chart';
 import { actions } from '../../../redux/actions/action'
 import './chart.css'
+import $ from 'jquery';
 
 function MyChart(props) {
     useEffect(() => {
@@ -32,9 +29,9 @@ function MyChart(props) {
     const [countTasks, setCountTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks : 0)
     const [readyTasks, setReadyTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks : 0)
     const [cards, setCards] = useState(props.cards)
-    const schemeSet = ['#1FB9C1', '#6CBAFF']
+    const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
-    const pieData = [{ category: 'Completed', val: readyTasks / countTasks }, { category: 'Incompleted', val: 1 - readyTasks / countTasks }];
+    const pieData = [{ category: 'Completed', val: readyTasks / countTasks, color: '#38b1b5' }, { category: 'Incompleted', val: 1 - readyTasks / countTasks, color: '#99e2e5' }];
     const sticksData = []
 
     if (cards) {
@@ -47,13 +44,22 @@ function MyChart(props) {
     }
     if (props.taskStatusesOfProject) {
         props.taskStatusesOfProject.map((status) => {
-            debugger
             let percent = status.count / countTasks * 100;
             let color = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color;
             console.log(color);
-            barData.push({ name: status.name, percent: percent, color: color })
+            barData.push({ name: status.name, percent: percent, color: status.color })
         })
+
+        // barData.map((rect, index) => {
+
+
+        // })
     }
+    let colors = []
+    barData.map(i => {
+        colors.push(i.color)
+    })
+
 
     return (
         <>
@@ -84,14 +90,15 @@ function MyChart(props) {
                                 {/* sticks */}
                                 <Chart
                                     data={sticksData}
-                                    height={350}
+                                    height={300}
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis />
+                                    <ValueAxis tickSize={10} />
                                     <BarSeries
                                         valueField="tasks"
                                         argumentField="name"
                                         barWidth={0.2}
+                                        color='#99e2e5'
                                     />
                                     <Chart.Label />
                                     <Title text="Incomplete tasks by card" />
@@ -106,19 +113,20 @@ function MyChart(props) {
                                 {/* bar */}
                                 <Chart
                                     data={barData}
+                                    height={300}
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis />
+                                    <ValueAxis tickSize={10} />
                                     <BarSeries
                                         valueField="percent"
                                         argumentField="name"
-                                        // fill={barData.color}
                                         barWidth={0.2}
+                                        color={colors[3]}
                                     />
                                     <Title text="All tasks by status" />
                                     <Tooltip />
                                 </Chart>
-                                {/* <img src={require('../../img/Group22306.png')} /> */}
+
                                 {/* colors palette */}
                                 <div className='colorDiv d-flex justify-content-between p-5'>
                                     {barData.map(data => (
@@ -138,6 +146,7 @@ function MyChart(props) {
                                 {/* pie */}
                                 <Chart
                                     data={pieData}
+                                    height={300}
                                 >
                                     <Palette scheme={schemeSet} />
                                     <PieSeries

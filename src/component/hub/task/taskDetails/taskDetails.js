@@ -207,7 +207,7 @@ function TaskDetails(props) {
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
 
-            setDownloadFile={(e) => { debugger; props.setDownloadFile(e) }}
+            setDownloadFile={(e) => { props.setDownloadFile(e) }}
         />
     }) : null
 

@@ -33,6 +33,7 @@ overflow-x: hidden !important;
 }
 
 .propertiesViewDitails{
+  cursor: auto;
     max-height: 83vh;
     height: 83vh;
     overflow: auto;
