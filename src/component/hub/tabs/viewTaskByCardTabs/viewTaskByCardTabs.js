@@ -269,9 +269,7 @@ function ViewTaskByCradTabs(props) {
                                     onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}>
                                     {props.task.name}
                                 </span> */}
-
                                 <div className="icons-in-task-tabs pt-0">
-
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
                                             <div> {props.task.priority ?
