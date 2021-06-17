@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
 import ProjectStyle from '../../project/projectStyle'
 import CreatableSelect from 'react-select/creatable';
+import Background from '../../../img/down-arrow.svg';
 
 function SelectProject(props) {
 
@@ -49,6 +50,10 @@ function SelectProject(props) {
         const style = {
             control: (base, state) => ({
                 ...base,
+                backgroundSize: '10px 10px',
+                backgroundPosition: '90%',
+                backgroundImage: `url(${Background})`,
+                backgroundRepeat: 'no-repeat',
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
                 border: 0,
                 // This line disable the blue border
