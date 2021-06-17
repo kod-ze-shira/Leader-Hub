@@ -121,7 +121,6 @@ function Hub(props) {
     });
 
     const [focusInputCard, setFocusInputCard] = useState(false)
-
     return (
         <>
             {showModalDelete ? <ShureDelete
@@ -196,6 +195,7 @@ function Hub(props) {
                             </ProtectedRoute>
                             <ProtectedRoute path={"/"} >
                                 {/* to send login if has not userName */}
+                             
                             </ProtectedRoute>
                         </Switch>
                     </div>
@@ -222,6 +222,7 @@ function Hub(props) {
                 </div>
 
             </Router >
+          
         </>
     )
 }

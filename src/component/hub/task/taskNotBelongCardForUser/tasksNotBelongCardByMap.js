@@ -14,7 +14,7 @@ import placeholder from '../../../img/placeholder.png'; // with import
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import ProjectStyle from "../../project/projectStyle";
-
+import Background from '../../../img/down-arrow.svg';
 function TasksNotBelongCardByMap(props) {
 
     const [viewDetails, setViewDetails] = useState(false)
@@ -176,15 +176,28 @@ function TasksNotBelongCardByMap(props) {
 
         }
     };
-
+    const style = {
+        control: (base, state) => ({
+            ...base,
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat:'no-repeat',
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: 0,
+            // This line disable the blue border
+            boxShadow: 0,
+            "&:hover": {
+                border: 0,
+                backgroundColor: '#eeeeee',
+            }
+        })
+    };
     const projectSelect = myProjects ? myProjects.map((project) => (
         project.name ? {
             value: project, label:
                 <div className="d-flex flex-row" style={{ color: project.color }}>
-                    {/* <span className="dot dotProject "
-                        style={{ 'background-color': project.color }} >
-                    </span> */}
-                    <div style={{marginTop:'0.5px'}}>
+                    <div style={{ marginTop: '0.5px' }}>
                         <ProjectStyle color={project.color}></ProjectStyle>
                     </div>
                     <span className="select-not-belong project-select-not-belong">{project.name}</span>
@@ -291,7 +304,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className="wrap-not-belong col-4 col-lg-5 row">
+                <div className="wrap-not-belong col-4 col-xl-5 row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -324,7 +337,7 @@ function TasksNotBelongCardByMap(props) {
                             onClick={(e) => openViewDetails(e)}
                         >
                             view details
-                      <FontAwesomeIcon className="ml-2"
+                            <FontAwesomeIcon className="ml-2"
                                 icon={['fas', 'caret-right']}>
                             </FontAwesomeIcon>
                         </button>
@@ -351,6 +364,7 @@ function TasksNotBelongCardByMap(props) {
                             options={workspaceSelect}
                             value={indexOfWorkspace !== null ?
                                 workspaceSelect[indexOfWorkspace] : 'Select...'}
+                        styles={style}
 
                         />
                         {/* <div className="drop-down"> 
@@ -362,9 +376,7 @@ function TasksNotBelongCardByMap(props) {
                     </div>
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2 " >
-                    {/* <div id='chooseProject' onClick={() => chooseProject()}>--</div> */}
                     <CreatableSelect
-                        // id='selectProjectInAllTask'
                         isClearable
                         onChange={handleChangeProject}
                         placeholder={selectPlaceHorder}
@@ -380,8 +392,10 @@ function TasksNotBelongCardByMap(props) {
                         id='selectProjectInTasksNotBelong'
                         className='selectProjectInTasksNotBelong selectInTasksNotBelong'
                         options={projectSelect}
-                        value={indexOfProject !== null ?
-                            projectSelect[indexOfProject] : 'Select...'}
+                        // value={indexOfProject !== null ?
+                        //     projectSelect[indexOfProject] : 'Select...'}
+                        styles={style}
+
                     />
                 </label>
                 <label className="check-task border-left  py-2  px-2 col-2">
@@ -406,6 +420,8 @@ function TasksNotBelongCardByMap(props) {
 
                         value={indexOfCard !== null ?
                             cardsSelect[indexOfCard] : 'Select...'}
+                        styles={style}
+
                     />
 
 
@@ -443,11 +459,8 @@ function TasksNotBelongCardByMap(props) {
                     </div>
                     : null}
             </div>
-            {/* </div>
-                )}
-            </Draggable> */}
 
-            { showchalalit ? <div className="animation"><Animation /> </div> : null}
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
 
         </>

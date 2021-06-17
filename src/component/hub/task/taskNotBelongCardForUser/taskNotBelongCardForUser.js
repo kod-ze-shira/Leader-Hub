@@ -49,9 +49,10 @@ function TaskNotBelongCardForUser(props) {
                 <button
                     className={showBtn ? 'd-block btn-add-task p-2  mr-2 ml-4 mr-auto' : 'd-none '}
                     onClick={hundleClick}>
-                    <img width="22" className="icon-complete" id="complete"
+                    {/* <img width="22" className="icon-complete" id="complete"
                         src={require('../../../img/checked.svg')}>
-                    </img>‏
+                    </img>‏ */}
+                    <span className="icon-complete">+</span>
                     Add Task </button>
                 <div className={showBtn ? 'd-none' :
                     'wrap-input d-block  col-6 col-lg-8  pr-0  mr-md-auto  mr-2 ml-4'}>
@@ -83,7 +84,7 @@ function TaskNotBelongCardForUser(props) {
             <div className="wrap-all-task">
                 <div className="wrap-all-task-width">
                     <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                        <label class="ml-3 pl-6 col-3 col-lg-4 labelAllTask"> My task </label>
+                        <label class="ml-3 pl-6 col-3 col-xl-4 labelAllTask"> My task </label>
                         <label class="col-2 propertiesAllTask ml-4">Workspace</label>
                         <label class="col-2 propertiesAllTask">Project</label>
                         <label class=" col-2 propertiesAllTask">Card</label>
