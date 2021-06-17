@@ -14,18 +14,21 @@ import { EventTracker } from '@devexpress/dx-react-chart';
 import { Animation } from '@devexpress/dx-react-chart';
 import { Palette } from '@devexpress/dx-react-chart';
 import { actions } from '../../../redux/actions/action'
+import Members from '../Overview/members/members'
 import './chart.css'
 import $ from 'jquery';
 
 function MyChart(props) {
     useEffect(() => {
-        props.getTaskStatusesOfProject()
-        console.log(props.taskStatusesOfProject);
-    }, [])
+        if (props.workspacesIndex) {
+            props.getTaskStatusesOfProject()
+            setCountTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
+            setReadyTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
+        }
+    }, [props.workspacesIndex])
 
-
-    const [countTasks, setCountTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
+    const [countTasks, setCountTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks : 0)
+    const [readyTasks, setReadyTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks : 0)
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
@@ -61,6 +64,7 @@ function MyChart(props) {
 
     return (
         <>
+
             <Paper style={{ width: '100%' }}>
                 <div className='container'>
                     {/* <div className='row'>

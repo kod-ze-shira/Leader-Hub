@@ -6,6 +6,7 @@ import { actions } from '../../../../redux/actions/action';
 // import Select from 'react-select';
 import LetterLogo from '../../logo/letterLogo';
 import './selectWorkspace.css';
+import Background from '../../../img/down-arrow.svg';
 
 const Input = props => <components.Input {...props} maxLength={5} />;
 
@@ -37,6 +38,10 @@ function SelectWorkspace(props) {
     const style = {
         control: (base, state) => ({
             ...base,
+            // backgroundSize: '10px 10px',
+            // backgroundPosition: '90%',
+            // backgroundImage: `url(${Background})`,
+            // backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             border: state.isFocused ? 0 : 0,
             // This line disable the blue border
