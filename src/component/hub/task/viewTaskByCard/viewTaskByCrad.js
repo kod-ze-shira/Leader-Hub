@@ -69,7 +69,6 @@ function ViewTaskByCrad(props) {
             doneStatus = !doneStatus
             value = doneStatus
             editCompleteTask()
-
         }
         else {
             let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
@@ -120,6 +119,8 @@ function ViewTaskByCrad(props) {
         event.stopPropagation();
     }
     function addChalalit() {
+
+
         if (props.task.complete == false)
             setShowChalalit(true)
     }
@@ -162,7 +163,7 @@ function ViewTaskByCrad(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
-            "files": props.tas.files
+            "files": props.task.files
         }
 
         props.setTaskComplete(completeTask)//redux

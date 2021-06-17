@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
+import Background from '../../../img/down-arrow.svg';
 
 
 function SelectCards(props) {
@@ -33,6 +34,10 @@ function SelectCards(props) {
     const style = {
         control: (base, state) => ({
             ...base,
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             border: state.isFocused ? 0 : 0,
             // This line disable the blue border

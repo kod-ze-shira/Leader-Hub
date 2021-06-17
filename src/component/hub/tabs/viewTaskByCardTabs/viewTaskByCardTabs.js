@@ -12,6 +12,8 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
+import Animation from '../../animation/animation'
+
 import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
@@ -132,6 +134,8 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks()
+            setShowChalalit(true)
+
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
     }
@@ -169,8 +173,8 @@ function ViewTaskByCradTabs(props) {
     }
 
     function addChalalit(e) {
-        if (props.task.complete == false)
-            setShowChalalit(true)
+        // if (props.task.complete == false)
+        // setShowChalalit(true)
         e.stopPropagation()
     }
 
@@ -194,12 +198,15 @@ function ViewTaskByCradTabs(props) {
 
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
-            return <img className='pt-2 imgInTask' src={myFile.url}></img>
+            return myFile.url.endsWith(".pdf") || myFile.url.endsWith(".docx") ?
+                null : <img className='imgInTask' src={myFile.url}></img>
+
         })
         : null
 
     return (
         <>
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
