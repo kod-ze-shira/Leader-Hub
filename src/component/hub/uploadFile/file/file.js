@@ -1,9 +1,10 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './file.css'
-// import { actions } from '../../../../redux/actions/action'
+import { actions } from '../../../../redux/actions/action'
+
 function File(props) {
 
     const [file, setFile] = useState()
