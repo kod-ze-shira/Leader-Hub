@@ -168,13 +168,12 @@ function ViewCards(props) {
                         >
                         </input> */}
 
-                        <span
-                            // id="input-card-name"
+                        <div><span  // id="input-card-name"
                             ref={textInput}
                             onBlur={() => editCard()}
-                            className="show-card ml-4 col-10"
-                        >{editCardName}
-                        </span>
+                            className="show-card ml-4 col-10 ">
+                        >{editCardName}</span>  
+                        </div>
                         <button data-tip data-for="add" className="new-task ml-2"
                             // id={`task${props.cardFromMap._id}`}
                             onClick={addTask}>+</button>
@@ -254,7 +253,8 @@ function ViewCards(props) {
                         <div className="closeDet">
                             <ViewDetails viewContactList={props.viewContactList}
                                 closeViewDetails={() => setViewDetails(false)}
-                                cardId={cardId} from={"addTask"}>
+                                cardId={cardId} from={"addTask"}
+                                viewToastComplete={props.viewToastComplete}>
                             </ViewDetails>
                         </div>
                         : null

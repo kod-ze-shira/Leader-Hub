@@ -334,6 +334,7 @@ function ViewTaskByCrad(props) {
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
+                                            viewToastComplete={props.viewToastComplete}
                                         > </ViewDetails>
                                     </div>
                                     : null}
