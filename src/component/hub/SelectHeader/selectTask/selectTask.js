@@ -25,8 +25,7 @@ function SelectTask(props) {
             boxShadow: state.isFocused ? 0 : 0,
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-
+                backgroundColor:'#eeeeee' ,
             }
         })
     };
@@ -36,13 +35,23 @@ function SelectTask(props) {
                 <Select
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedTask(e)}
-                    name="color"
+                    // name="color"
+                    theme={theme => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary25: '#68c7cb1a',
+                            primary: '#68C7CB',
+                            primary50: '#68C7CB',
+                        },
+                    })}
                     options={viewTasksList}
                     placeholder={"All Tasks"}
                     styles={style}
 
                 />
             </div>
+            
 
         </>
     )

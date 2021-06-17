@@ -10,13 +10,12 @@ import ViewFile from './viewFile'
 
 function FilesOfProject(props) {
 
-
     useEffect(() => {
 
-        console.log('useeffect');
-        props.getFilesForProject(props.indexCurrentProject)
-
-    }, [props.indexCurrentProject])
+        if (props.workspacesIndex) {
+            props.getFilesForProject(props.indexCurrentProject)
+        }
+    }, [props.workspacesIndex])
 
     const filesForDownloadOrDelete = []
 
@@ -120,7 +119,9 @@ function FilesOfProject(props) {
 const mapStateToProps = (state) => {
     return {
         FilesOfProject: state.public_reducer.filesForProjectArr,
-        indexCurrentProject: state.public_reducer.indexCurrentProject
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
+        workspacesIndex: state.public_reducer.indexOfWorkspace,
+
     }
 }
 const mapDispatchToProps = (dispatch) => {

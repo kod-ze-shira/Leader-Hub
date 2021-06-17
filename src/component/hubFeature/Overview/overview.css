@@ -9,3 +9,8 @@
 .scrollbarOverview::-webkit-scrollbar {
     width: 0;
   }
+  .projectName{
+    width: 100%;
+    border-bottom: 1px solid #E9E9E9;
+    background-color: white;
+  }

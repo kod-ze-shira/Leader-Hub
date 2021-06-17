@@ -1,0 +1,36 @@
+.logicon{
+ height: 60%;   
+}
+
+.logSchemaName{
+    font-weight: 500;
+    display: contents;
+}
+
+.logUser{
+    color: #6CBAFF;
+    margin-top: -12px;
+    font-size: small;
+}
+
+.logsHeder{
+    border-bottom: 1px solid ;
+    border-color: #F5F4F4;
+}
+
+.logDate{
+    font-size: xx-small;
+    margin-right: 0vw;
+
+}
+
+.logsContainer{
+
+}
+
+.logsDashed{
+    border-right: 1px dashed;
+    color: #98A9BC;
+    height: 45px;
+    margin-left: 2.7vw;
+}

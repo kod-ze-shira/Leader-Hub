@@ -86,26 +86,15 @@
     padding-top:unset !important;
     padding: 0 !important;
 }
-.check-task .css-yk16xz-control{
-    background: url(../../../img/down-arrow.svg) no-repeat ;
-    background-size: 10px 10px;
-    background-position: 90%;
-    
-}
+
 .wrap-all-task{
-    min-width: 630px;
-    overflow-x: scroll;
     height: 85%;
 }
-/* .wrap-all-task-width{
-    width: 900px;
-} */
+
 .css-yk16xz-control .css-g1d714-ValueContainer{
   justify-content: start !important;
 }
-/* .selectPlaceHorder{
-    width: 80%;
-} */
+
 .css-yk16xz-control .css-g1d714-ValueContainer{
     justify-content: center;
 }
@@ -247,9 +236,7 @@
     height: 2px;
 }
 @media only screen and (max-width: 1100px) {
-    /* .wrap-all-task-width{
-        width: 900px;
-    } */
+    
     .propertiesAllTask{
         padding-left: 0px !important;
     }
@@ -260,14 +247,8 @@
 .btn-open-details .svg-inline--fa{
     vertical-align:-0.2em !important ;
 }
-.selectInTasksNotBelong{
-    transition: border-radius 0.2s,background-color 0.2s;
-}
-.selectInTasksNotBelong:hover{
-    background-color: #eeefef;
-    border-radius: 22px;
-    /* margin-top: 7px; */
-}
+
+
 .selectWorkspaceInTasksNotBelong:hover{
      margin-left: 7px;
 }

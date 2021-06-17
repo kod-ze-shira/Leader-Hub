@@ -20,7 +20,8 @@
     margin-left: auto;
 }
 .task-name-span{
-    text-indent: 5vh !important;
+    /* text-indent: 5vh !important; */
+    /* display: inline-block !important; */
 }
 /* .input-card-name{
     height: 65vh !important;

@@ -25,13 +25,13 @@ import {
     completeTask, belongTask, newTaskNotBelong
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId } from '../middleware/teamCrud';
+import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId, addMembers } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
 import { uploadFiles, removeFile, downloadFile, getFiles } from '../middleware/filesCrud';
 
-const reducers = combineReducers({overview_reducer, project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
+const reducers = combineReducers({ overview_reducer, project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
 
 const store = createStore(
     reducers,
@@ -86,7 +86,8 @@ const store = createStore(
                 shareObject,
                 assingTo,
                 updateLike,
-                getMembersByProjectId
+                getMembersByProjectId,
+                addMembers
             ))
 )
 store.dispatch(actions.extractJwt());

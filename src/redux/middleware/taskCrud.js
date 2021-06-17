@@ -355,8 +355,10 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
 
-                if (data.result.card)
+                if (data.result.card) {
                     dispatch(actions.deletTask(data.result))
+                    dispatch(actions.setCountTasks())
+                }
                 else
                     dispatch(actions.deletTaskNotBelong(data.result))
 
@@ -384,7 +386,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -396,8 +397,8 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
             success: function (data) {
                 console.log("success")
                 console.log(data);
-
-                dispatch(actions.setCards(data.cards))
+                // לא לשחרר מירוק!!
+                // dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -426,7 +427,8 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.cards);
-                dispatch(actions.setCards(data.cards))
+                // לא לשחרר מירוק!!
+                // dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
@@ -446,7 +448,6 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
 
         let cardsList = getState().public_reducer.cards
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragCard`
-        console.log(urlData)
 
         $.ajax({
             url: urlData,
@@ -459,6 +460,7 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data);
+                // לא לשחרר מירוק!!
                 // dispatch(actions.setCards(data.cards))
             },
             error: function (err) {
