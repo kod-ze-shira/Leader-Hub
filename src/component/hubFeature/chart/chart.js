@@ -14,6 +14,7 @@ import { EventTracker } from '@devexpress/dx-react-chart';
 import { Animation } from '@devexpress/dx-react-chart';
 import { Palette } from '@devexpress/dx-react-chart';
 import { actions } from '../../../redux/actions/action'
+import Members from '../Overview/members/members'
 import './chart.css'
 import $ from 'jquery';
 
@@ -63,7 +64,7 @@ function MyChart(props) {
 
     return (
         <>
-        
+
             <Paper style={{ width: '100%' }}>
                 <div className='container'>
                     {/* <div className='row'>
