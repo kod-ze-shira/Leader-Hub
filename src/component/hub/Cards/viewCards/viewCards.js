@@ -197,7 +197,7 @@ function ViewCards(props) {
                     </Menu>
                     {/* <p className="col">Team</p> */}
                     <p className="col-assignee">Assignee</p>
-                    <p className="col">Status</p>
+                    <p className="col-status ">Status</p>
                     <p className="col">Start date</p>
                     <p className="col">Due date</p>
                     <p className="col-priority">Priority</p>

@@ -65,7 +65,6 @@ const publicData = {
 
     },
     setTaskByFiledFromTasks(state, action) {
-        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
     },

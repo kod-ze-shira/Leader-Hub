@@ -29,9 +29,9 @@
     display: inline-block !important;
    
 }
+
 .priority-img{
-   /* margin-bottom: 10px; */
-   
+    vertical-align: top !important;
 }
 .status-task-tabs{
     color:white;

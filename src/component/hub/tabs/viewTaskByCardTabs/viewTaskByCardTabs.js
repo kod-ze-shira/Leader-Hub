@@ -121,6 +121,9 @@ function ViewTaskByCradTabs(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.task.files ? props.task.files : null,
+            "priority": props.task.priority
+
         }
 
         props.setTaskComplete(completeTask)//redux
