@@ -144,7 +144,9 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
             success: function (data) {
                 console.log('succes delete files!!')
-                // dispatch(actions.deleteFilesInTask(data.urls))
+
+                if (window.location.href.indexOf('projectPlatform') != -1)
+                    dispatch(actions.deleteFilesInTask(fileUrlArr))
 
             },
             error: function (err) {

@@ -1,10 +1,9 @@
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './file.css'
-import { actions } from '../../../../redux/actions/action'
-
+// import { actions } from '../../../../redux/actions/action'
 function File(props) {
 
     const [file, setFile] = useState()
@@ -100,7 +99,7 @@ export default connect(
         return {
             downloadFile: (file) => dispatch(actions.downloadFile(file)),
             removeFileInRedux: (filesArr) => dispatch(actions.removeFileInRedux(filesArr)),
-            deleteFilesInTask: (filesArr) => dispatch(actions.deleteFilesInTask(filesArr)),
+
         }
     }
 )(File)
