@@ -12,8 +12,8 @@ function AddMembers(props) {
     const members = props.members;
     return (
         <>
-
-            <div className="divAddMembers row pt-3 ml-2 d-flex align-items-center" onClick={e=>setMembersList(!membersList)}  >
+        
+            <div className="divAddMembers col-4 pt-3 ml-2 d-flex align-items-center" onClick={e=>setMembersList(!membersList)}  >
                 <div className="col-2">
                     <div className="addMembers"  >
                         <div className="fontAddMembers d-flex align-items-center justify-content-center">+
@@ -40,5 +40,6 @@ const mapStateToProps = (state) => {
     return {
         members: state.public_reducer.members
     }
+
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddMembers);
