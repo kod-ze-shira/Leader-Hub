@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
+import FilesOfProject from './viewFilesOfProject/viewFilesByCard'
 import Hangout from './hangout/hangout'
 import Members from './members/members'
 import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
-import ViewFilesByCard from './viewFilesOfProject/viewFilesByCards'
+import ViewFilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 // import { actions } from '../../hub'
 function Overview(props) {
 
@@ -21,8 +21,7 @@ function Overview(props) {
                                 <MyChart />
                             </div>
                             <div className='row'>
-                                {/* <FilesOfProject /> */}
-                                <ViewFilesByCard></ViewFilesByCard>
+                                <ViewFilesOfProject></ViewFilesOfProject>
                             </div>
                         </div>
                     </div>
@@ -37,7 +36,7 @@ function Overview(props) {
                             </div>
                         </div>
                     </div>
-{/* <Hangout></Hangout> */}
+                    {/* <Hangout></Hangout> */}
                 </div>
             </div>
         </>

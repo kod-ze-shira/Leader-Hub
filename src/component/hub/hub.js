@@ -14,7 +14,7 @@ import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
 // import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
-import ViewFilesOfProject from '../hubFeature/Overview/viewFilesOfProject/viewFilesOfProject'
+// import ViewFilesOfProject from '../hubFeature/Overview/viewFilesOfProject/viewFilesOfProject'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
 import ToastDelete from './toastDelete/toastDelete1';
@@ -22,7 +22,7 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 // import AddObject from './addObject/addObject'
-import HeaderLeader from '@leadercodes/leader-header'
+// import HeaderLeader from '@leadercodes/leader-header'
 // import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
@@ -30,7 +30,6 @@ import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
-import viewFilesOfProject from '../hubFeature/Overview/viewFilesOfProject/viewFilesOfProject';
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -172,7 +171,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                //   viewToastComplete={(val) => setShowToastComplete(true)}
+                                    //   viewToastComplete={(val) => setShowToastComplete(true)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
@@ -189,11 +188,11 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
-                            <ProtectedRoute path={"/:userName/hub/projectPlatform/:indexCurrentProject/Overview/:cardId"}>
+                            {/* <ProtectedRoute path={"/:userName/hub/projectPlatform/:indexCurrentProject/Overview/:cardId"}>
                                 <ViewFilesOfProject />
-                            </ProtectedRoute>
+                            </ProtectedRoute> */}
                             <ProtectedRoute path={"/"} >
-                               {/* to send login if has not userName */}
+                                {/* to send login if has not userName */}
                             </ProtectedRoute>
                         </Switch>
                     </div>

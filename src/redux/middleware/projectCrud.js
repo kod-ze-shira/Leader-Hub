@@ -125,6 +125,10 @@ export const getFilesForProject = ({ dispatch, getState }) => next => action => 
             },
             error: (err) => {
                 console.log('err' + err.statusText);
+
+                checkPermission(err).then((ifOk) => {
+
+                })
             }
         })
     }
