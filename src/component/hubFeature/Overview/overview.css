@@ -2,6 +2,7 @@
     overflow-y: auto!important;
     height: 82.7vh;
     overflow-x:hidden;
+    border-radius: 5px;
 }
 .minHeight{
     min-height:50vh;
@@ -11,6 +12,6 @@
   }
   .projectName{
     width: 100%;
-    border-bottom: 1px solid #E9E9E9;
+    /* border-bottom: 1px solid #E9E9E9; */
     background-color: white;
   }

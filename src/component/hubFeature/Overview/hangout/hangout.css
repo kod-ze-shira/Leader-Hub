@@ -1,16 +1,19 @@
 .iframeHangout{
-    height:58vh;
+    /* height:58vh; */
     width: 100%;
     border: none;
-    /* z-index: 101; */
-    /* right:2% ;  */
-    /* position: fixed;  */
-    /* bottom: 0%; */
+    overflow: hidden;
+   /* position: fixed; */
  }  
+ .wrap-iframe{
+    height:58vh;
+    width: 100%;
+    position: relative;
+ }
     /* position: absolute;
     right:calc(5% + 4vw) ;
     margin-bottom: 10px; */
-
+  
 
 .btn-show-chat{
     background-color: transparent;
