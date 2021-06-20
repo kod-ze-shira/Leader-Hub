@@ -17,7 +17,7 @@ function Logs(props) {
     let logsReverse = logs ? logs.reverse() : null;
 
     const renderViewLogs = () => {
-        return logsReverse.map(log => {
+        return logs.map(log => {
             return <ViewLogs
                 schemaName={log.staticLog.name}
                 icon={log.staticLog.icon}
