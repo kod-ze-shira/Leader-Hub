@@ -6,7 +6,6 @@ import { actions } from '../../../../redux/actions/action';
 
 
 function SelectProject(props) {
-
     const { idProject } = useParams();
 
     //to chang the project that user selected
@@ -21,10 +20,10 @@ function SelectProject(props) {
     const dot = (color = '#ccc') => ({
         alignItems: 'center',
         display: 'flex',
-        color: props.workspaces[props.indexWorkspace].projects[props.indexProject].color,
+        color: props.workspaces[props.indexWorkspace].projects[props.indexProject] ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : null,
 
         ':before': {
-            backgroundColor: props.workspaces[props.indexWorkspace].projects[props.indexProject].color,
+            backgroundColor: props.workspaces[props.indexWorkspace].projects[props.indexProject] ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : null,
             borderRadius: 10,
             content: '" "',
             display: 'block',
@@ -82,7 +81,6 @@ function SelectProject(props) {
         // option:(styles, { color }) => ({ ...styles, ...dot(color) }),
 
     };
-
     const viewProjectsList = props.workspaces[props.indexWorkspace].projects ?
         props.workspaces[props.indexWorkspace].projects.map((project, index) => (
             { value: project._id, label: project.name, projectIndex: index }
@@ -97,7 +95,7 @@ function SelectProject(props) {
                     onChange={(e) => changeSelectedProject(e)}
                     name="color"
                     options={viewProjectsList}
-                    placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject].name ?
+                    placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject] ?
                         props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"}
                     styles={colourStyles}
 

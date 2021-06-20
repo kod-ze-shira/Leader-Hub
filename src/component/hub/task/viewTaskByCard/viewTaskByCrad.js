@@ -38,7 +38,7 @@ function ViewTaskByCrad(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
     // useEffect(() => {
-    //     debugger
+    //     
     //     console.log(props.task);
     // }, [props.task.priority])
     useEffect(() => {
@@ -163,15 +163,17 @@ function ViewTaskByCrad(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
-            "files": props.tas.files
+            "files": props.task.files
         }
 
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.setCountReadyTasks()
+            props.setCountReadyTasks(true)
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
+        else
+            props.setCountReadyTasks(false)
     }
     const editTaskNameInReduxs = (taskName) => {
 
@@ -363,7 +365,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),

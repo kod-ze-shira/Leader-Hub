@@ -14,7 +14,9 @@
 
         
 }
-
+.back-header{
+        cursor: pointer;
+}
 .select__control{
         border:none !important;
 }

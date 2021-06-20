@@ -56,7 +56,8 @@ function SelectHeader(props) {
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
     function backToPage() {
-        if (window.location.href.indexOf('workspace') != -1)
+
+        if (window.location.href.indexOf('workspace') != -1 || window.location.href.indexOf('allProjects') != -1)
             props.history.push("/" + props.user + "/hub/")
         else
             if (window.location.href.indexOf('projectPlatform') != -1)
@@ -66,7 +67,7 @@ function SelectHeader(props) {
     return (
         <>
             <div className="s-header mx-0  row align-items-center">
-                <FontAwesomeIcon className="ml-3"
+                <FontAwesomeIcon className="ml-3 back-header"
                     onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
                 {props.workspaces.length > 0 ?
                     <>
@@ -176,7 +177,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
+        // indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
     }
 }

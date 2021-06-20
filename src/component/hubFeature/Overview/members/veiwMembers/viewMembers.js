@@ -7,10 +7,9 @@ import './viewMembers.css'
 
 function ViewMembers(props) {
     useEffect(() => {
-        if (props.workspacesIndex) {
-            props.getMembersByProjectId()
-        }
-    }, [props.workspacesIndex])
+        props.getMembersByProjectId()
+        
+    }, [])
 
 
 

@@ -116,7 +116,6 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
 
             },
             error: function (err) {
-                console.log(err);
                 checkPermission(err).then((ifOk) => {
 
                 })

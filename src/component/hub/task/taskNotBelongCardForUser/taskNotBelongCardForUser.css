@@ -36,12 +36,7 @@
     margin-left: 0px;
     margin-right: 0px
 }
-/* 
-.selectWorkspaceInTasksNotBelong,
-.selectProjectInTasksNotBelong,
-.selectCardInTasksNotBelong{
-    display: none;
-} */
+
 .icon-complete{
     width: 22px;
     padding-right: 5px;
@@ -68,9 +63,9 @@
  .selectCardInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row{
     margin-right: 0px;
     margin-left: 0px;
-    -webkit-line-clamp: 1;
+    /* -webkit-line-clamp: 1; */
     overflow: hidden;
-    display: -webkit-box;
+    /* display: -webkit-box; */
 }
 .selectProjectInTasksNotBelong .css-yk16xz-control  .css-g1d714-ValueContainer  .css-1uccc91-singleValue .row
 {
@@ -86,6 +81,7 @@
     padding-top:unset !important;
     padding: 0 !important;
 }
+
 .check-task .css-yk16xz-control{
     background: url(../../../img/down-arrow.svg) no-repeat ;
     background-size: 10px 10px;
@@ -94,12 +90,12 @@
 }
 .wrap-all-task{
     min-width: 630px;
-    overflow-x: scroll;
     height: 85%;
 }
-/* .wrap-all-task-width{
-    width: 900px;
+/* .wrap-all-task > .selectCardInTasksNotBelong:focus{
+    overflow-x: hidden !important;
 } */
+
 .css-yk16xz-control .css-g1d714-ValueContainer{
   justify-content: start !important;
 }
@@ -262,6 +258,7 @@
 }
 .selectInTasksNotBelong{
     transition: border-radius 0.2s,background-color 0.2s;
+
 }
 .selectInTasksNotBelong:hover{
     background-color: #eeefef;
