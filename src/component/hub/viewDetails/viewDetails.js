@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    function ViewDetails(props) {
+    function ViewDetails( props) {
 
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
@@ -46,6 +46,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         task={props.task}
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
+                        setDownloadFile={(e) => props.setDownloadFile(e)}
+                        viewToastComplete={props.viewToastComplete}
+
                     />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails}
@@ -61,7 +64,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
                         showToast={showToast}
-                        setDownloadFile={(e) => props.setDownloadFile(e)}
+                        setDownloadFile={(e) =>
+                            props.setDownloadFile(e)
+                        }
                     />
                 case 'newProject':
                     return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
@@ -69,7 +74,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'shareProject':
-                    return <ShareProject closeViewDetails={props.closeViewDetails}/>
+                    return <ShareProject closeViewDetails={props.closeViewDetails} viewToastComplete={props.viewToastComplete} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':

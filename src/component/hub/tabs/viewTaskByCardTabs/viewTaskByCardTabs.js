@@ -12,6 +12,8 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
+import Animation from '../../animation/animation'
+
 import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
@@ -26,11 +28,11 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-        debugger
         console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        $(`#${props.task._id}assing-to`).css("display", "none")
+        if (props.task.assingTo)
+            $(`#${props.task._id}assing-to`).css("display", "none")
 
         let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
         if (hasLike)
@@ -121,12 +123,24 @@ function ViewTaskByCradTabs(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.task.files ? props.task.files : null,
+            "priority": props.task.priority
+
         }
+        // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
+        // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
 
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
-        if (doneStatus)
-            props.viewToastComplete(true)
+        if (doneStatus) {
+            props.setCountReadyTasks(true)
+            setShowChalalit(true)
+
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+        }
+        else {
+            props.setCountReadyTasks(false)
+        }
     }
     const showDetails = (event) => {
 
@@ -141,28 +155,29 @@ function ViewTaskByCradTabs(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux
-        if (event.name == "name") {
-            editTaskInRedux = { "nameFiled": event.name, "value": textInput.current.innerHTML }
-            props.setTaskByFiledFromTasks(editTaskInRedux)
+
+        // if (event.name == "name") {
+        //     editTaskInRedux = { "nameFiled": event.name, "value": textInput.current.innerHTML }
+        //     props.setTaskByFiledFromTasks(editTaskInRedux)
+        // }
+        // else {
+        let value = event.target.value
+        if (event.target.name == "complete") {
+
+            doneStatus = !doneStatus
+            value = doneStatus
+            editCompleteTask()
         }
         else {
-            let value = event.target.value
-            if (event.target.name == "complete") {
-
-                doneStatus = !doneStatus
-                value = doneStatus
-                editCompleteTask()
-            }
-            else {
-                editTaskInRedux = { "nameFiled": event.target.name, "value": value }
-                props.setTaskByFiledFromTasks(editTaskInRedux)
-            }
+            editTaskInRedux = { "nameFiled": event.target.name, "value": value }
+            props.setTaskByFiledFromTasks(editTaskInRedux)
         }
+        // }
     }
 
     function addChalalit(e) {
-        if (props.task.complete == false)
-            setShowChalalit(true)
+        // if (props.task.complete == false)
+        // setShowChalalit(true)
         e.stopPropagation()
     }
 
@@ -175,14 +190,7 @@ function ViewTaskByCradTabs(props) {
     let monthName = monthNames[month];
     let dateInString = day + " " + monthName
 
-    const showAssign = () => {
-        if (!props.task.assingTo)
-            $(`#${props.task._id}assing-to`).css("display", "inline-block")
-    }
-    const closeAssign = () => {
-        if (!props.task.assingTo)
-            $(`#${props.task._id}assing-to`).css("display", "none")
-    }
+
     const updateLike = (e) => {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
@@ -193,12 +201,15 @@ function ViewTaskByCradTabs(props) {
 
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
-            return <img className='imgInTask' src={myFile.url}></img>
+            return myFile.url.endsWith(".pdf") || myFile.url.endsWith(".docx") ?
+                null : <img className='imgInTask' src={myFile.url}></img>
+
         })
         : null
 
     return (
         <>
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
@@ -209,16 +220,13 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
-
-                        <div className="task-card mt-2 pt-2 pb-2 "
-                            onMouseOver={(e) => showAssign(e)}
-                            onMouseOut={(e) => closeAssign(e)}
+                        <div className="task-card mt-2 pt-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
-                            <div className="container ">
+                            <div className=" ">
                                 <label
                                     title="Complete Task"
-                                    className="check-task pb-2  check-tabs">
+                                    className="check-task pb-2  check-tabs ">
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
@@ -253,8 +261,10 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
                                 {myFiles}
+
                                 <input
-                                    className={props.task.complete ? "disabled form-control col-12 mx-0 mt-2" : "form-control col-12 mx-0 mt-2"}
+                                    className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
+                                    style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
@@ -265,29 +275,32 @@ function ViewTaskByCradTabs(props) {
                                             editTask()
                                         }
                                     }}
-                                ></input>
+                                />
 
                                 {/* <span
                                     name="name"
                                     ref={textInput}
-                                    value={this}
                                     onBlur={(e) => editTask(e)}
-                                    className="task-name-span ml-3  col-12 "
+                                    className="task-name-span ml-3 col-12 "
                                     onClick={(e) => e.stopPropagation()}
-                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}>
+                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}
+                                >
                                     {props.task.name}
                                 </span> */}
 
                                 <div className="icons-in-task-tabs pt-0">
-
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
-                                        <div
-
-                                            className={props.task.complete ? "status-task-tabs-opacity px-2" : "status-task-tabs px-2"}
-                                            style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
-                                            {props.task.status ? props.task.status.statusName : null}
+                                        <div className="p_task">
+                                            <div> {props.task.priority ?
+                                                <img className="priority-img" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                : null}
+                                            </div>
+                                            <div
+                                                className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
+                                                style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                                {props.task.status ? props.task.status.statusName : null}
+                                            </div>
                                         </div>
-
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
                                         className="color-task col-3  "
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
@@ -318,10 +331,11 @@ function ViewTaskByCradTabs(props) {
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>
                                                 </img>
-                                                {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                                    {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
-                                                        : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                                </div> : null}
+                                                {props.task.assingTo ?
+                                                    <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                                        {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                            : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                                    </div> : null}
                                             </div>
                                         </div>
                                     </div>
@@ -344,6 +358,7 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         card: state.card_reducer.card,
         workspaces: state.public_reducer.workspaces,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
@@ -354,6 +369,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),

@@ -59,7 +59,8 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     },
                     error: function (err) {
 
-                        console.log(err)
+                        checkPermission(err).then((ifOk) => {
+                        })
                     }
                 })
             }
@@ -67,6 +68,23 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 
+}
+
+function checkPermission(result) {
+    return new Promise((resolve, reject) => {
+        if (result.status == "401") {
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
+    })
 }
 
 
@@ -83,7 +101,8 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
             },
             error: function (err) {
 
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         })
     }
@@ -92,9 +111,7 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
 
 
 export const downloadFile = ({ dispatch, getState }) => next => action => {
-
     if (action.type === 'DOWNLOAD_FILE') {
-        debugger;
         let file = action.payload.file
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
         fetch(
@@ -146,12 +163,16 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
             success: function (data) {
                 console.log('succes delete files!!')
-                // dispatch(actions.deleteFilesInTask(data.urls))
+
+                if (window.location.href.indexOf('projectPlatform') != -1)
+                    dispatch(actions.deleteFilesInTask(fileUrlArr))
 
             },
             error: function (err) {
-                console.log(err);
-            },
+
+                checkPermission(err).then((ifOk) => {
+                })
+            }
         });
 
     }

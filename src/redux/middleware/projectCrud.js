@@ -39,7 +39,6 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
 //********for overview*********
 export const getOverdueTasksByProjectId = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_OVERDUE_TASKS_BY_PROJECT_ID') {
-        console.log(getState());
         var projectId = action.payload;
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/getOverdueTasksOfProject`
 
@@ -63,26 +62,27 @@ export const getOverdueTasksByProjectId = ({ dispatch, getState }) => next => ac
 }
 
 export const getTaskStatusesOfProject = ({ dispatch, getState }) => next => action => {
+
     if (action.type === 'GET_TASK_STATUSES_OF_PROJECT') {
-        console.log(getState());
-        var projectId = action.payload;
+        let reducer = getState().public_reducer
+        var projectId = reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id;
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${projectId}/getTaskStatusesOfProject`
 
-        $.ajax({
-            url: urlData,
-            type: 'GET',
-            headers: {
-                Authorization: getState().public_reducer.tokenFromCookies
-            },
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                dispatch(actions.setTaskStatusesOfProject(data))
-            },
-            error: function (err) {
-                checkPermission(err).then((ifOk) => {
+        fetch(urlData,
+            {
+                method: 'GET',
+                headers: { authorization: reducer.tokenFromCookies }
+            })
+            .then((result) => {
+                return result.json()
+            })
+            .then((result) => {
+
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setTaskStatusesOfProject(result.statuses))
+
                 })
-            }
-        });
+            })
     }
     return next(action);
 }
@@ -113,20 +113,22 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
 
 
 //////////////////////////////////////////////////
-export const getFilesForProject=({dispatch,getState})=>next=>action=>{
-    if(action.type==='GET_FILES_FOR_PROJECT'){  
-        let jwtFromCookie=getState().public_reducer.tokenFromCookies
-        let url=`https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
+export const getFilesForProject = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'GET_FILES_FOR_PROJECT') {
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies
+        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
         $.ajax({
-            type:"GET",           
-            url:url,
-            headers:{authorization:jwtFromCookie},
-            success:(data)=>{       
-                console.log('data'+data.projectFiles );
+            type: "GET",
+            url: url,
+            headers: { authorization: jwtFromCookie },
+            success: (data) => {
+                console.log('data' + data.projectFiles);
                 dispatch(actions.setFilesForProject(data.projectFiles))
             },
-            error:(err)=>{
-                console.log('err'+err.statusText);
+            error: function (err) {
+
+                checkPermission(err).then((ifOk) => {
+                })
             }
         })
     }
@@ -152,6 +154,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 }),
             dataType: 'json',
             success: function (data) {
+                debugger
                 dispatch(actions.addProjectToProjects(data.message))
 
             },

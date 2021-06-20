@@ -1,0 +1,20 @@
+.viewMembersList{
+    display:none;
+}
+.btnAddmembers{
+    background-color:transparent;
+}
+.cursorPoint{
+    cursor: pointer !important;
+}
+.membersToAdd{
+    width:fit-content;
+}
+.membersToAdd{
+    border:1px solid rgb(196, 184, 184);
+    border-radius:5%;
+    box-shadow: 1px 1px 1px rgb(196, 184, 184) ;
+}
+.inputSearch{
+    justify-content:center;
+}

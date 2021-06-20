@@ -29,7 +29,7 @@ export default function Colors(props) {
                     onChangeComplete={(color) => props.changeStatusColor({ value: color.hex, name: "color" })}
                     colors={colors} />
                 {/* <span id="color_front"></span>
-                <input type='color'  class='bar' id='colour'/>            </div> */}
+                <input type='color'  className='bar' id='colour'/>            </div> */}
                 <img src={require('../../img/ID.svg')}></img>
             </div>
         </>

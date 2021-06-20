@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
-
+import ProjectStyle from '../../project/projectStyle'
+import CreatableSelect from 'react-select/creatable';
+import Background from '../../../img/down-arrow.svg';
 
 function SelectProject(props) {
-
     const { idProject } = useParams();
-
-    useEffect(() => {
-
-    }, [props.workspaces])
 
     //to chang the project that user selected
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
@@ -25,10 +22,10 @@ function SelectProject(props) {
     const dot = (color = '#ccc') => ({
         alignItems: 'center',
         display: 'flex',
-        color: props.workspaces[props.indexWorkspace].projects[props.indexProject].color,
+        color: props.workspaces[props.indexWorkspace].projects[props.indexProject] ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : null,
 
         ':before': {
-            backgroundColor: props.workspaces[props.indexWorkspace].projects[props.indexProject].color,
+            backgroundColor: props.workspaces[props.indexWorkspace].projects[props.indexProject] ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : null,
             borderRadius: 10,
             content: '" "',
             display: 'block',
@@ -86,27 +83,73 @@ function SelectProject(props) {
         // option:(styles, { color }) => ({ ...styles, ...dot(color) }),
 
     };
-
     const viewProjectsList = props.workspaces[props.indexWorkspace].projects ?
         props.workspaces[props.indexWorkspace].projects.map((project, index) => (
-            { value: project._id, label: project.name, projectIndex: index }
+            project.name ?  {
+                value: project._id, label:
+                <div className="d-flex flex-row" style={{ color: project.color }}>
+                {/* <span className="dot dotProject "
+                    style={{ 'background-color': project.color }} >
+                </span> */}
+                <div style={{marginTop:'0.5px'}}>
+                    <ProjectStyle color={project.color}></ProjectStyle>
+                </div>
+                <span className="select-not-belong project-select-not-belong">{project.name}</span>
+            </div >,
+                projectIndex: index
+            }: null
         )) : null
+        const placeholder=props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.name ?
+            <div className="d-flex flex-row" style={{ color: project.color }}>
+            <div style={{marginTop:'0.5px'}}>
+                <ProjectStyle color={project.color}></ProjectStyle>
+            </div>
+            <span className="select-not-belong project-select-not-belong">{project.name}</span>
+        </div >
+       :"All Projects"
+  
+        // props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"
+        const style = {
+            control: (base, state) => ({
+                ...base,
+                backgroundSize: '10px 10px',
+                backgroundPosition: '90%',
+                backgroundImage: `url(${Background})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+                border: 0,
+                // This line disable the blue border
+                boxShadow: 0,
+                "&:hover": {
+                    border:  0,
+                    backgroundColor:'#eeeeee' ,    
+                }
+            })
+        };
     return (
         <>
             <div className="react-select">
-
-                < Select
-                    className="select-project"
-                    classNamePrefix="select"
+                <CreatableSelect
+                    theme={theme => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary25: '#68c7cb1a',
+                            primary: '#68C7CB',
+                            primary50: '#68C7CB',
+                        },
+                    })}
                     onChange={(e) => changeSelectedProject(e)}
-                    name="color"
+                    className="select-project"
+                    placeholder={placeholder}
+                   name="color"
                     options={viewProjectsList}
-                    placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject].name ?
+                    placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject] ?
                         props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"}
-                    styles={colourStyles}
+                    styles={style}
 
                 />
-
+               
             </div>
         </>
     )

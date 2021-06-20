@@ -50,9 +50,7 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
 
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });
@@ -105,9 +103,7 @@ export const getAllMilestonesTasks = ({ dispatch, getState }) => next => action 
 
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });
@@ -148,9 +144,8 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                 // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -252,11 +247,15 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                 if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
+                if (data.result.priority) {
+                    dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "priority", "value": data.result.priority }))
+                }
+
 
             },
             error: function (err) {
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -281,9 +280,8 @@ export const updateLike = ({ dispatch, getState }) => next => action => {
                 console.log(data.result);
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -323,9 +321,8 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                 // console.log(data.result);
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -346,8 +343,13 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
 
-                if (data.result.card)
+                if (data.result.card) {
                     dispatch(actions.deletTask(data.result))
+                    dispatch(actions.setCountTasks())
+                    debugger
+                    if (data.result.complete)
+                        dispatch(actions.setCountReadyTasks(false))
+                }
                 else
                     dispatch(actions.deletTaskNotBelong(data.result))
 
@@ -356,9 +358,7 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
                 console.log("data", data.result);
             },
             error: function (err) {
-
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });
@@ -370,12 +370,11 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'MOVE_TASK_BETWEEN_CARDS') {
-
+        debugger
         let cardSours = getState().public_reducer.cards[action.payload[3]].tasks ? getState().public_reducer.cards[action.payload[3]].tasks : []
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -387,14 +386,13 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
             success: function (data) {
                 console.log("success")
                 console.log(data);
-
+                // לא לשחרר מירוק!!
                 // dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -417,13 +415,13 @@ export const dragTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data.cards);
+                // לא לשחרר מירוק!!
                 // dispatch(actions.setCards(data.cards))
 
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -437,7 +435,6 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
 
         let cardsList = getState().public_reducer.cards
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/dragCard`
-        console.log(urlData)
 
         $.ajax({
             url: urlData,
@@ -450,12 +447,12 @@ export const dragCard = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 console.log("success")
                 console.log(data);
+                // לא לשחרר מירוק!!
                 // dispatch(actions.setCards(data.cards))
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -495,9 +492,8 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
                 }))
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -508,6 +504,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
 
 export const belongTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'BELONG_TASK') {
+
         let taskId = action.payload.taskId
         let cardId = action.payload.cardId
         let workspaceId = action.payload.workspaceId
@@ -526,9 +523,8 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.removeTask(taskId))
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                // console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
 

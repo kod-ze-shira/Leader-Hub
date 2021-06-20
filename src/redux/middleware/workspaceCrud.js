@@ -39,15 +39,17 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                 headers: { 'authorization': getState().public_reducer.tokenFromCookies }
             })
             .then((res) => {
-                // console.log("res11111", res)
+                console.log("res11111", res)
                 return res.json();
             })
             .then((result) => {
-                // console.log("res", result)
+                console.log("res", result)
                 checkPermission(result).then((ifOk) => {
                     dispatch(actions.setUserId(result.user._id))
                     dispatch(actions.setUserEmail(result.user.email))
                     dispatch(actions.setWorkspaces(result.workspace))
+                    dispatch(actions.setPriorities(result.priorities))
+
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projects)
@@ -81,9 +83,9 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }

@@ -62,14 +62,10 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
         // dispatch({ type: '', payload: data })
       },
       error: function (err) {
-        //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-        console.log("error")
-        console.log(err)
 
-        // checkPermission(err).then((ifOk) => {
-
-        // })
-      }
+        checkPermission(err).then((ifOk) => {
+        })
+    }
     });
 
   }
@@ -106,7 +102,6 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
 }
 
 export const shareObject = ({ dispatch, getState }) => next => action => {
-
   if (action.type === 'SHARE_OBJECT') {
     let teamsMembersAndPermission = action.payload.teams
     let membersEmails = action.payload.shareDetails
@@ -147,12 +142,15 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
           "from": "hub@noreply.leader.codes",
           "source": "Hub",
           "files": null
-        }))
+        })).catch(err=>{
+          console.log(err);
+        })
+
 
 
        
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
-
+          dispatch(actions.setMembers(result))
         })
 
       })
@@ -224,6 +222,66 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
+
+
+export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
+
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
+    fetch(urlData,
+      {
+        method: "GET",
+        headers: {
+          Authorization: jwtFromCookie,
+        },
+      }
+    ).then(response => {
+      return response.json()
+    })
+      .then(data => {
+        checkPermission(data).then((ifOk) => {
+          dispatch(actions.setMembers(data.membersList))
+
+        })
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
+}
+
+
+export const addMembers = ({ dispatch, getState }) => next => action => {
+
+  if (action.type === 'ADD_MEMBERS') {
+
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/addMemberToTeam`
+    fetch(urlData,
+      {
+        method: "POST",
+        headers: {
+          Authorization: jwtFromCookie,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(action.payload)
+      }
+    ).then(response => {
+      return response.json()
+    })
+      .then(data => {
+        checkPermission(data).then(() => {
+
+          console.log(data);
+          dispatch(actions.setMembers(data))
+        })
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
+}
+
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
   return new Promise((resolve, reject) => {
@@ -239,25 +297,4 @@ function checkPermission(result) {
 
   })
 }
-export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
-  if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
-    let reducer = getState().public_reducer
-    let jwtFromCookie = reducer.tokenFromCookies;
 
-    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project1/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
-    fetch(urlData,
-      {
-        method: "GET",
-        headers: {
-          Authorization: jwtFromCookie,
-        },
-      }
-    ).then(response => {
-      return response.json()
-    })
-      .then(data => {
-        dispatch(actions.setMembers(data.membersList))
-      }).catch(err => console.log('err', err))
-  }
-  return next(action);
-}

@@ -1,15 +1,20 @@
 .iframeHangout{
-    height:62%;
+    height:58vh;
+    width: 100%;
     border: none;
-    z-index: 101;
-    position: absolute;
-    bottom: 4%;
+    /* z-index: 101; */
+    /* right:2% ;  */
+    /* position: fixed;  */
+    /* bottom: 0%; */
+ }  
+    /* position: absolute;
     right:calc(5% + 4vw) ;
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
 
-}
+
 .btn-show-chat{
-    /* background: url(../../../img/btn-chat.svg); */
+    background-color: transparent;
+    background-image: url(../../../img/btn-chat.svg);
     background-size: cover !important;
     background-repeat: no-repeat !important;
     width: 5vw;
@@ -18,4 +23,8 @@
     bottom: 4%;
     right: 2%;
     z-index: 100;
+    transition: background-image 0.5s;
+}
+.btn-show-chat:hover{
+    background-image: url(../../../img/btn-chat-hover.svg);
 }

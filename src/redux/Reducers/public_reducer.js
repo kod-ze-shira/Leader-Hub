@@ -14,7 +14,6 @@ const initialState = {
     cards: [],
     tasks: [],
     milestones: [],
-    members: [],
     isConfiguratorOpen: "false",
     indexCurrentTask: 0,
     idCurrentCard: 0,
@@ -32,7 +31,7 @@ const publicData = {
         state.close = !state.close
     },
     setUserId(state, action) {
-        
+
         state.userId = action.payload
     },
     setTokenFromCookies(state, action) {
@@ -49,13 +48,20 @@ const publicData = {
         }
 
     },
+    deleteFilesInTask(state, action) {
+        for (let indexUrl = 0; indexUrl < action.payload.length; indexUrl++)
+            for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
+                if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload[indexUrl])
+                    state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
+            }
+
+    },
     setNewFilesInTaskNotBelong(state, action) {
         let myFiles = Object.values(action.payload.file)
         let indexTask
         for (let index = 0; index < state.tasks.length; index++) {
             if (state.tasks[index]._id == action.payload.id)
                 indexTask = index;
-
         }
         for (let index = 0; index < myFiles.length; index++) {
             state.tasks[indexTask].files
@@ -98,6 +104,14 @@ const publicData = {
     },
     setFileFromTask(state, action) {
         state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.size })
+        // if (window.location.href.indexOf('projectPlatform') != -1)
+        //     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
+        //         .push({
+        //             'name': action.payload.name,
+        //             'url': 'new',
+        //             '_id': '',
+        //             'size': action.payload.size
+        //         })
     },
     /////////////////////////////////////////
     setFilesForProject(state, action) {
@@ -108,6 +122,9 @@ const publicData = {
     },
     setWorkspaces(state, action) {
         state.workspaces = action.payload;
+    },
+    setPriorities(state, action) {
+        state.priorities = action.payload;
     },
     setUserEmail(state, action) {
         state.userEmail = action.payload;
@@ -137,6 +154,21 @@ const publicData = {
     },
     setProjectInWorkspace(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject] = action.payload
+
+    },
+    setCountReadyTasks(state, action) {
+        debugger
+        if (action.payload)
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countReadyTasks += 1
+        else
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countReadyTasks -= 1
+
+    },
+    setCountTasks(state, action) {
+        if (action.payload)
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countTasks = action.payload
+        else
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countTasks -= 1
 
     },
     setProjects(state, action) {
@@ -173,15 +205,15 @@ const publicData = {
         )
     },
     deleteCard(state, action) {
-        console.log("project",action.payload.project)
-        state.cards = state.cards.filter((_, i) =>
-            
-               {  console.log("filter",state.cards[i])
-                return state.cards[i]._id !== action.payload.project._id}
-            
-        )
+        console.log(action.payload)
+        state.cards = action.payload
+        // console.log("project",action.payload.project)
+        // state.cards = state.cards.filter((_, i) =>      
+        //        {  console.log("filter",state.cards[i])
+        //         return state.cards[i]._id !== action.payload.project._id}   
+        // )
     },
-    
+
     addProjectToProjects(state, action) {
 
         let workspaceId = action.payload.workspace
@@ -252,10 +284,6 @@ const publicData = {
         state.cards = action.payload;
         return true
     },
-    setMembers(state, action) {
-        state.members = action.payload;
-        console.log(state.members);
-    },
     deleteProjectFromWorkspace(state, action) {
 
         state.workspaces[state.indexOfWorkspace].projects.filter((_, i) =>
@@ -281,6 +309,11 @@ const publicData = {
             state.cards.push(action.payload)
         else
             state.cards[0] = action.payload
+        let cards = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
+        cards[cards.length] = action.payload
+
+        let a = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
+        console.log(a)
 
     },
     addTaskToTasksWhenAddTaskToServer(state, action) {

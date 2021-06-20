@@ -27,7 +27,6 @@ function TaskDetails(props) {
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
-        debugger
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
@@ -93,7 +92,10 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
+
         if (nameRequired.current.value) {
+            if (milstone)
+                props.viewToastComplete({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -108,8 +110,12 @@ function TaskDetails(props) {
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                let r = props.task.files
-                                r.splice(index2, 1);
+                                try {
+                                    props.task.files.splice(index2, 1);
+
+                                } catch (error) {
+                                    console.log(error)
+                                }
                             }
                             // first element removed
                         }
@@ -120,7 +126,9 @@ function TaskDetails(props) {
                     props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
-                } else
+                }
+
+                else
                     props.EditTask(props.task)
             props.closeViewDetails();
 
@@ -131,8 +139,29 @@ function TaskDetails(props) {
             form.classList.add('was-validated')
         }
     }
+    const viewPriortyList = props.priorities ? props.priorities.map(priority => (
+        {
+            value: priority,
+            label:
+                <div className="prioprty-select">
+                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <p >{priority.level}</p>
+                </div>
+        }
+    )) : null
+
+    const [priorityTask, setPriorityTask] = useState()
+    const changePriority = (event) => {
+        setPriorityTask(event.value)
+        console.log(priorityTask);
+        let editTaskInRedux = { "nameFiled": "priority", "value": event.value }
+        props.setTaskByFiledFromTasks(editTaskInRedux)
+        let editTask = { "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id, "priority": event.value._id }
+        console.log(editTask)
+        props.EditTask(editTask)
 
 
+    };
 
     const deleteTask = (e) => {
         $(`#${props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id + "disappear"}`).css("display", "none")
@@ -154,12 +183,12 @@ function TaskDetails(props) {
         let editTaskInRedux
         let value = input.target.value
         if (input.target.name == "startDate") {
-            value = startDateTask.split("-")[2] + '/' + startDateTask.split("-")[1] + '/' + startDateTask.split("-")[0];
+            value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
         }
         else
             if (input.target.name == "dueDate") {
-                value = dueDateTask.split("-")[2] + '/' + dueDateTask.split("-")[1] + '/' + dueDateTask.split("-")[0];
+                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             }
             else
@@ -181,7 +210,9 @@ function TaskDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        return <File file={file} />
+        return <File file={file}
+            setDownloadFile={(e) => { props.setDownloadFile(e) }}
+        />
     }) : null
 
     $('.assingto-details').hover(function () {
@@ -308,6 +339,25 @@ function TaskDetails(props) {
 
                                 </label>
                             </div>
+
+                        </div>
+                        <div className="row justify-content-between ">
+                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                <label for="priority">Priority</label>
+
+                                <Select
+                                    name="priority"
+                                    className=""
+                                    // classNamePrefix="select"
+                                    options={viewPriortyList}
+                                    placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
+                                        <div className="prioprty-select">
+                                            <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
+                                            <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
+                                        </div> : "All priority"}
+                                    onChange={(e) => changePriority(e)}
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -349,15 +399,10 @@ function TaskDetails(props) {
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
-
-
-
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
-
-
                 </div>
             </div>
 
@@ -377,7 +422,7 @@ const mapStateToProps = (state) => {
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
         arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
         contactsUser: state.share_reducer.contactsUser,
-
+        priorities: state.public_reducer.priorities
 
     }
 }

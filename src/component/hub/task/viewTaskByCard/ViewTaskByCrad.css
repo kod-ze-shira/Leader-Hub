@@ -177,7 +177,23 @@ color:white;
 padding: 4px;
 }
 .col-add-task{
- width: 2vw;
+ width: 3vw;
+}
+.col-priority{
+  width: 5vw;
+
+}
+.col-assignee{
+  width: 6.5vw;
+
+}
+.col-status , .col-date{
+  width: 8vw;
+
+}
+.col-name-task{
+  /* width: 30vw; */
+
 }
 .check-task .css-yk16xz-control{
 border: none !important;
@@ -244,5 +260,13 @@ float: right !important;
 .assing-to-list {
   float:left ;
 }
+.prioprty-select{
+}
+.prioprty-select p{
+  font-weight: bold;
+  display: inline-block !important;
+  text-align:right !important;
+  margin-left: 3px;
 
+}
 

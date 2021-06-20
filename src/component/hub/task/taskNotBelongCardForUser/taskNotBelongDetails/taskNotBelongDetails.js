@@ -6,7 +6,7 @@ import { actions } from '../../../../../redux/actions/action'
 import '../../taskDetails/taskDetails.css'
 import UploadFile from '../../../uploadFile/uploadFile'
 import File from '../../../uploadFile/file/file'
-import ViewAllStatuses from '../../../status/viewAllStatuses';
+// import ViewAllStatuses from '../../../status/viewAllStatuses';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
@@ -77,27 +77,33 @@ function TaskNotBelongDetails(props) {
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
-                newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
+                newFiles = props.arrFilesOfTask.filter((file) => file.url === 'new')
             if (newFiles.length) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task, 'type': 'taskNotBelong' })
             }
             else
                 if (props.arrDeleteFilesOfTask.length) {
+
+
+                    let arrayUrl = []
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
+                        arrayUrl.push(props.arrDeleteFilesOfTask[index].url)
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                //    props.task.files.splice(index2,1);
-                                delete props.task.files[index2];
+                                props.task.files.splice(index2, 1);
+                                // delete props.task.files[index2];
                             }
                             // first element removed
                         }
                         // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
 
                     }
+
+                    props.removeFile(arrayUrl)
+                    debugger
                     props.EditTask(props.task)
-                    // props.removeFile(props.ArrDeleteFilesOfTask)
 
                 } else
                     props.EditTask({ 'type': 'taskNotBelong2', 'idTask': props.task._id })
@@ -132,12 +138,12 @@ function TaskNotBelongDetails(props) {
     const changeFiledInTask = (input) => {
         let editTaskInRedux
         let value = input.target.value
-        if (input.target.name == "startDate") {
+        if (input.target.name === "startDate") {
             value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
         }
         else
-            if (input.target.name == "dueDate") {
+            if (input.target.name === "dueDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             }
@@ -184,8 +190,9 @@ function TaskNotBelongDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-
-        return <File file={file} setDownloadFile={(e) => props.setDownloadFile(e)} />
+        return <File file={file}
+            setDownloadFile={(e) => props.setDownloadFile(e)}
+        />
     }) : null
     return (
         <>

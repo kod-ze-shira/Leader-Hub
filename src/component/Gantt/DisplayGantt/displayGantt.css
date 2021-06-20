@@ -6,3 +6,22 @@
     resize: both;
     overflow: auto
 }
+
+.gantt_task_line {
+
+    border-radius: 5px !important;
+    border:  #F8B520 3px solid !important;
+    background-color: white !important;
+}
+.gantt_task_content {
+    background-color: #ffff !important;
+}
+
+.bodyGant{
+    height: 82.7vh;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    opacity: 1;
+    overflow-y: auto!important;
+    box-shadow: 0px 3px 6px #00000029;
+}
