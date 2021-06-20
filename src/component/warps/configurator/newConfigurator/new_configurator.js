@@ -96,10 +96,13 @@ function NewConfigorator(props) {
                             <p>All Projects</p>
                         </li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
-                            <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
+                            {/* <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img> */}
+                            <FontAwesomeIcon
+                                className="mr-2" icon={["fas", "tasks"]}
+                            />
                             <p>My Tasks</p>
                         </li>
-                        <li id='milestone'onClick={(e) => goToMilestones(e.target)}>
+                        <li id='milestone' onClick={(e) => goToMilestones(e.target)}>
                             <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
                             <p>Milestones</p>
                         </li>
