@@ -112,6 +112,7 @@ const publicData = {
         //             '_id': '',
         //             'size': action.payload.size
         //         })
+
     },
     /////////////////////////////////////////
     setFilesForProject(state, action) {
