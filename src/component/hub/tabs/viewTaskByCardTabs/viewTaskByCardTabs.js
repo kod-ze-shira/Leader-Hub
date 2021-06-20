@@ -130,10 +130,13 @@ function ViewTaskByCradTabs(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.setCountReadyTasks()
+            props.setCountReadyTasks(true)
             setShowChalalit(true)
 
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+        }
+        else {
+            props.setCountReadyTasks(false)
         }
     }
     const showDetails = (event) => {
@@ -364,7 +367,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),

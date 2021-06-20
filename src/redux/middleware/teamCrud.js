@@ -62,14 +62,10 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
         // dispatch({ type: '', payload: data })
       },
       error: function (err) {
-        //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-        console.log("error")
-        console.log(err)
 
-        // checkPermission(err).then((ifOk) => {
-
-        // })
-      }
+        checkPermission(err).then((ifOk) => {
+        })
+    }
     });
 
   }
@@ -245,7 +241,10 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
       return response.json()
     })
       .then(data => {
-        dispatch(actions.setMembers(data.membersList))
+        checkPermission(data).then((ifOk) => {
+          dispatch(actions.setMembers(data.membersList))
+
+        })
       }).catch(err => console.log('err', err))
   }
   return next(action);

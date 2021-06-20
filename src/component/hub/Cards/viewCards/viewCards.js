@@ -212,25 +212,27 @@ function ViewCards(props) {
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                        <Droppable droppableId={props.cardFromMap._id}  >
-                            {provided => (
-                                <div
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}>
-                                    {props.cardFromMap.tasks.map((task, index) => (
-                                        <ViewTaskByCrad
-                                            viewContactList={props.viewContactList}
-                                            viewToastComplete={props.viewToastComplete}
-                                            objectToast={(task) => props.showToastDelete(task)}
-                                            key={task._id} task={task}
-                                            indexCard={props.indexCard}
-                                            indexTask={index}
-                                        />
-                                    ))}
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable> : null
+                        <div className="allTaskInCard">
+                            <Droppable droppableId={props.cardFromMap._id}  >
+                                {provided => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}>
+                                        {props.cardFromMap.tasks.map((task, index) => (
+                                            <ViewTaskByCrad
+                                                viewContactList={props.viewContactList}
+                                                viewToastComplete={props.viewToastComplete}
+                                                objectToast={(task) => props.showToastDelete(task)}
+                                                key={task._id} task={task}
+                                                indexCard={props.indexCard}
+                                                indexTask={index}
+                                            />
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </div> : null
                 }
 
                 {addTaskInInput ?

@@ -59,7 +59,8 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     },
                     error: function (err) {
 
-                        console.log(err)
+                        checkPermission(err).then((ifOk) => {
+                        })
                     }
                 })
             }
@@ -67,6 +68,23 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 
+}
+
+function checkPermission(result) {
+    return new Promise((resolve, reject) => {
+        if (result.status == "401") {
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
+    })
 }
 
 
@@ -83,7 +101,8 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
             },
             error: function (err) {
 
-                console.log(err)
+                checkPermission(err).then((ifOk) => {
+                })
             }
         })
     }
@@ -150,8 +169,10 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
             },
             error: function (err) {
-                console.log(err);
-            },
+
+                checkPermission(err).then((ifOk) => {
+                })
+            }
         });
 
     }

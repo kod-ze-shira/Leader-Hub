@@ -19,16 +19,9 @@ import './chart.css'
 import $ from 'jquery';
 
 function MyChart(props) {
-    useEffect(() => {
-        if (props.workspacesIndex) {
-            props.getTaskStatusesOfProject()
-            setCountTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-            setReadyTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
-        }
-    }, [props.workspacesIndex])
 
-    const [countTasks, setCountTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks : 0)
-    const [readyTasks, setReadyTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks : 0)
+    let countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
+    let readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
