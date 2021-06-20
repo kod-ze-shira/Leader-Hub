@@ -62,14 +62,10 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
         // dispatch({ type: '', payload: data })
       },
       error: function (err) {
-        //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-        console.log("error")
-        console.log(err)
 
-        // checkPermission(err).then((ifOk) => {
-
-        // })
-      }
+        checkPermission(err).then((ifOk) => {
+        })
+    }
     });
 
   }
@@ -125,7 +121,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       }).then((result) => {
         return result.json();
       }).then((result) => {
-
+        checkPermission(result).then((ifOk) => {
         let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
         dispatch(actions.createSystemWave({
           "subject": "Share project",
@@ -152,7 +148,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 
 
 
-        checkPermission(result).then((ifOk) => {
+       
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
           dispatch(actions.setMembers(result))
         })
@@ -245,7 +241,10 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
       return response.json()
     })
       .then(data => {
-        dispatch(actions.setMembers(data.membersList))
+        checkPermission(data).then((ifOk) => {
+          dispatch(actions.setMembers(data.membersList))
+
+        })
       }).catch(err => console.log('err', err))
   }
   return next(action);

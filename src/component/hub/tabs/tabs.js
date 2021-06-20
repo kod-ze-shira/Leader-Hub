@@ -14,7 +14,7 @@ import title from '../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 
 function Tabs(props) {
-
+    
     const { idProject } = useParams();
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -66,13 +66,9 @@ function Tabs(props) {
                     if (props.cards[iDestination]._id == e.destination.droppableId) {
                         iCardTo = props.cards[iDestination]._id;
                         break
-
                     }
                 }
-                // console.log(e.source.index, e.destination.index, iSourse, iDestination)
                 let replace = [e.source.index, e.destination.index, iSourse, iDestination]
-                // const replace = [iSourse, iDestination]
-                // /: taskId/:cardId/dragTaskFromCardToCard
                 props.changeTaskplace(replace)
 
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
@@ -80,7 +76,6 @@ function Tabs(props) {
                     props.dragTask(iSourse)
                 else
                     props.moveTaskBetweenCards(replaceIServer)
-
             }
         }
     };
@@ -237,8 +232,10 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
+                        viewToastComplete={props.viewToastComplete}
                         setDownloadFile={(e) => setDownloadFile(e)}
-                        open={true}> </ViewDetails>
+                        open={true}>
+                             </ViewDetails>
                 </div>
                 : null}
         </div>

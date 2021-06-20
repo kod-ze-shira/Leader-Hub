@@ -5,7 +5,7 @@
     border-radius: 8px !important; 
     margin-bottom: 2px;
     margin-top: 2px;
-    padding: 2px 0 2px 8px ;
+    padding: 2px 0 1px 8px ;
 }
 .addTaskNotBelong{
     /* background: url(../../../img/check-mark.svg) no-repeat ;
@@ -37,12 +37,7 @@
     margin-left: 0px;
     margin-right: 0px
 }
-/* 
-.selectWorkspaceInTasksNotBelong,
-.selectProjectInTasksNotBelong,
-.selectCardInTasksNotBelong{
-    display: none;
-} */
+
 .icon-complete{
     width: 22px;
     padding-right: 5px;

@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function AllWorkspaces(props) {
     // const [showToastDelete, setShowToastDelete] = useState(false)
     // const [showModalDelete, setShowModalDelete] = useState(false)
-    const refToDeleteToast = useRef(null);
+    // const refToDeleteToast = useRef(null);
 
 
     useEffect(() => {

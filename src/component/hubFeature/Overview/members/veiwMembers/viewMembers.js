@@ -6,14 +6,9 @@ import './viewMembers.css'
 
 function ViewMembers(props) {
     useEffect(() => {
-        if (props.members?.length !== 0)
-            props.getMembersByProjectId()
+        props.getMembersByProjectId()
+        
     }, [])
-    // useEffect(() => {
-    //     if (props.workspacesIndex) {
-    //         props.getMembersByProjectId()
-    //     }
-    // }, [props.workspacesIndex])
 
 
 
@@ -24,11 +19,11 @@ function ViewMembers(props) {
 
 
             <div className="pt-3">
-                {members?.length ?
+                {members?.length ? 
                     members.map(m => {
                         return <>
-                            {/* <div className="mb-2"> */}
-                                {/* <div className="row ml-4"> */}
+                            {/* <div className="mb-2">
+                                <div className="row ml-4"> */}
                                     <div className="col-4">
                                         <div className="col-2 d-flex align-items-center">
                                             <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
@@ -38,8 +33,8 @@ function ViewMembers(props) {
                                             <p className="email-contact emailMembers ml-2">{m.email} </p>
                                         </div>
                                     </div>
-                                {/* </div> */}
-                            {/* </div> */}
+                                {/* </div>
+                            </div> */}
                         </>
                     })
                     : null

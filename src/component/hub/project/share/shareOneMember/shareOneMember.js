@@ -18,10 +18,13 @@ export default function ShareOneMember(props) {
             colors[Math.floor(Math.random() * colors.length)] :
         colors[Math.floor(Math.random() * colors.length)]
 
-    useEffect(() => {
-        console.log(refToDivColor);
-
-    })
+        //onclick checkbox
+    const changePermissionToNone = () => {
+        setIfCheckedMember(!ifCheckedMember)
+        ifCheckedMember?
+        props.changePermission('none', props.member, props.teamId):
+        props.changePermission('viewer', props.member, props.teamId)
+    }
     return (
         <>
             <div className="row pt-3 pl-4">
@@ -31,7 +34,7 @@ export default function ShareOneMember(props) {
                     <label
                         className="check-task py-2">
                         <input type="checkbox" checked={ifCheckedMember}
-                            onChange={() => setIfCheckedMember(!ifCheckedMember)}
+                            onChange={changePermissionToNone}
                         />
                         <span className="checkmark checkmark-place ml-1"></span>
                     </label>
@@ -57,7 +60,7 @@ export default function ShareOneMember(props) {
                             </div>
                         </div>
                         <div className="col-2 pl-0 pt-1">
-                            <select class=" select_permission_one_member" onChange={(event) => props.changePermission(event, props.member, props.teamId)}>
+                            <select class=" select_permission_one_member" onChange={(event) => props.changePermission(event.target.options[event.target.selectedIndex].label, props.member, props.teamId)}>
                                 {/* send teamId to change perrission to change petrmission of member from true team */}
                                 <option selected>{props.member.permission}</option>
                                 {props.member.permission != 'viewer' ? <option value="1">viewer</option> : null}

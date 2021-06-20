@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux'
-import Paper from '@material-ui/core/Paper';
+import { Animation, EventTracker, Palette } from '@devexpress/dx-react-chart';
 import {
     ArgumentAxis,
-    ValueAxis,
-    Chart,
     BarSeries,
+    Chart,
+    PieSeries,
     Title,
     Tooltip,
-    PieSeries,
+    ValueAxis
 } from '@devexpress/dx-react-chart-material-ui';
-import { EventTracker } from '@devexpress/dx-react-chart';
-import { Animation } from '@devexpress/dx-react-chart';
-import { Palette } from '@devexpress/dx-react-chart';
-import { actions } from '../../../redux/actions/action'
-import Members from '../Overview/members/members'
-import './chart.css'
+import Paper from '@material-ui/core/Paper';
 import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { actions } from '../../../redux/actions/action';
+import './chart.css';
 
 function MyChart(props) {
     useEffect(() => {
-        if (props.workspacesIndex) {
-            props.getTaskStatusesOfProject()
-            setCountTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-            setReadyTasks(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
-        }
-    }, [props.workspacesIndex])
+        props.getTaskStatusesOfProject()
+    }, [])
 
-    const [countTasks, setCountTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks : 0)
-    const [readyTasks, setReadyTasks] = useState(props.workspacesIndex ? props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks : 0)
+    let countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
+    let readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
     const pieData = [{ category: 'Completed', val: readyTasks / countTasks, color: '#38b1b5' }, { category: 'Incompleted', val: 1 - readyTasks / countTasks, color: '#99e2e5' }];
     const sticksData = []
-
     if (cards) {
         cards.map(c => {
             let ta = []
@@ -47,31 +39,20 @@ function MyChart(props) {
         props.taskStatusesOfProject.map((status) => {
             let percent = status.count / countTasks * 100;
             let color = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color;
-            console.log(color);
             barData.push({ name: status.name, percent: percent, color: status.color })
         })
-
-        // barData.map((rect, index) => {
-
-
-        // })
+        setTimeout(() => {
+            barData.map((item, index) => {
+                $(`.chart rect:eq(${index + 1})`).css('fill', item.color);
+            })
+        }, 100)
     }
-    let colors = []
-    barData.map(i => {
-        colors.push(i.color)
-    })
-
 
     return (
         <>
 
-            <Paper style={{ width: '100%' }}>
+            <Paper style={{ width: '100%'}}>
                 <div className='container'>
-                    {/* <div className='row'>
-                        <div className='col'>
-                            <h1></h1>
-                        </div>
-                    </div> */}
                     <div className='row'>
                         <div className='col-3 p-1'>
                             <div className='chartCol p-2 h100'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
@@ -95,14 +76,13 @@ function MyChart(props) {
                                     height={300}
                                 >
                                     <ArgumentAxis />
-                                    <ValueAxis tickSize={10} />
+                                    <ValueAxis  allowDecimals={false} />
                                     <BarSeries
                                         valueField="tasks"
                                         argumentField="name"
                                         barWidth={0.2}
                                         color='#99e2e5'
                                     />
-                                    <Chart.Label />
                                     <Title text="Incomplete tasks by card" />
                                     <Tooltip />
                                 </Chart>
@@ -113,24 +93,23 @@ function MyChart(props) {
                         <div className='col-6 p-1 '>
                             <div className='chartCol'>
                                 {/* bar */}
-                                <Chart
+                                <Chart className='chart'
                                     data={barData}
                                     height={300}
                                 >
-                                    <ArgumentAxis />
-                                    <ValueAxis tickSize={10} />
+                                    {/* <ValueAxis tickSize={10} /> */}
                                     <BarSeries
                                         valueField="percent"
                                         argumentField="name"
-                                        barWidth={0.2}
-                                        color={colors[3]}
+                                        barWidth={0.7}
                                     />
                                     <Title text="All tasks by status" />
+
                                     <Tooltip />
                                 </Chart>
 
                                 {/* colors palette */}
-                                <div className='colorDiv d-flex justify-content-between p-5'>
+                                <div className='colorDiv d-flex justify-content-between p-5 mx-2'>
                                     {barData.map(data => (
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <div

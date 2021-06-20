@@ -92,7 +92,10 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
+
         if (nameRequired.current.value) {
+            if (milstone)
+                props.viewToastComplete({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -123,7 +126,9 @@ function TaskDetails(props) {
                     props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
-                } else
+                }
+
+                else
                     props.EditTask(props.task)
             props.closeViewDetails();
 
