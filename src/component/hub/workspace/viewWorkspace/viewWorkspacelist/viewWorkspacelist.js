@@ -64,7 +64,7 @@ function ViewWorkspaceList(props) {
 
                     onMouseOver={() => func_over(workspace._id)}
                     onMouseOut={() => outOver(workspace._id)}  >
-                    <div className="col-10 col-sm-8" onClick={() => routeToProject(workspace._id)}
+                    <div className="col-10" onClick={() => routeToProject(workspace._id)}
                     >
 
                         <div className="row "  >
@@ -88,7 +88,7 @@ function ViewWorkspaceList(props) {
                     </div>
                     {/* { */}
                     {/* // over ? */}
-                    <div className="col-2 col-sm-4">
+                    <div className="col-2">
                         <div className="row  mt-4 icons-in-list-w" >
                             <div
                                 data-tip data-for="edit"

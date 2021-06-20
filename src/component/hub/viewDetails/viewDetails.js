@@ -47,6 +47,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
                         setDownloadFile={(e) => props.setDownloadFile(e)}
+                        viewToastComplete={props.viewToastComplete}
 
                     />
                 case 'editWorkspace'://on click edit button of workspace

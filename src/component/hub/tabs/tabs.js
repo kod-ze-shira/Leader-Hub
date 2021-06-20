@@ -232,8 +232,10 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
+                        viewToastComplete={props.viewToastComplete}
                         setDownloadFile={(e) => setDownloadFile(e)}
-                        open={true}> </ViewDetails>
+                        open={true}>
+                             </ViewDetails>
                 </div>
                 : null}
         </div>
