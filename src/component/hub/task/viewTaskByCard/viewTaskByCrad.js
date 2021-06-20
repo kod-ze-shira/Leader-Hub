@@ -255,7 +255,7 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon pl-3 " id={props.task._id}></img>
+                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}

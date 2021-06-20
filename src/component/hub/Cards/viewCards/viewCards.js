@@ -148,7 +148,7 @@ function ViewCards(props) {
                     >
                         <div className="wrap-triangle">
                             <div id={props.cardFromMap._id}
-                                className=" newTriangle "
+                                className=" newTriangle ml-1"
                                 onClick={(e) => changeSelectedCard(e)} ></div>
                         </div>
                         {/* <input
