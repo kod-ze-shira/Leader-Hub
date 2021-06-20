@@ -8,7 +8,7 @@ import Members from './members/members'
 import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
-
+import Description from "./description/description";
 
 function Overview(props) {
 
@@ -36,11 +36,7 @@ function Overview(props) {
                         <div className='container-fluid px-0 '>
                             <div className='row mb-3'>
                                 <div className='projectName' >
-                                    <p>
-                                        This template is your jumping-off point to make your project plans, goals, communications,
-                                        and files clear and accessible in one place.
-                                        Use the priority and progress fields to clearly organize your work.
-                                    </p>
+                                <Description></Description>
                                 </div>
                                 <Members />
 
@@ -63,6 +59,7 @@ function Overview(props) {
                         </div>
                     </div>
                 </div>
+             
             </div>
         </>
     )
