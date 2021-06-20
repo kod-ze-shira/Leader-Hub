@@ -37,10 +37,7 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
-    // useEffect(() => {
-    //     
-    //     console.log(props.task);
-    // }, [props.task.priority])
+ 
     useEffect(() => {
 
     }, [props.task.status])
@@ -70,7 +67,6 @@ function ViewTaskByCrad(props) {
             doneStatus = !doneStatus
             value = doneStatus
             editCompleteTask()
-
         }
         else {
             let editTaskInRedux = { "nameFiled": input.target.name, "value": value }
@@ -121,6 +117,8 @@ function ViewTaskByCrad(props) {
         event.stopPropagation();
     }
     function addChalalit() {
+
+
         if (props.task.complete == false)
             setShowChalalit(true)
     }

@@ -13,7 +13,7 @@ import MyChart from '../chart/chart'
 function Overview(props) {
 
     const { idProject } = useParams();
-    const [refresf, setRefresh] = useState(false)
+    const [refresh, setRefresh] = useState(false)
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
@@ -43,25 +43,35 @@ function Overview(props) {
                 <div className='row '>
                     <div className='col-9 mr-3'>
                         <div className='container-fluid px-0 '>
-                            {refresf ?
-                                <>
-                                    <div className='row mb-3'>
+                            <div className='row mb-3'>
+                                <div className='projectName' >
+                                    <p>
+                                        This template is your jumping-off point to make your project plans, goals, communications,
+                                        and files clear and accessible in one place.
+                                        Use the priority and progress fields to clearly organize your work.
+                                    </p>
+                                </div>
+                                {refresh ?
+                                    <>
+                                        <Members />
+
                                         <MyChart />
-                                    </div>
-                                    <div className='row'>
-                                        <FilesOfProject />
-                                    </div>
-                                </>
-                                : null}
+                                    </> : null}
+                            </div>
+                            <div className='row'>
+                                {refresh ?
+                                    <FilesOfProject />
+                                    : null}
+                            </div>
                         </div>
                     </div>
 
                     <div className='col' style={{ height: '87vh' }}>
                         <div className='container-fluid px-0 '>
-                            {refresf ?
+                            {refresh ?
                                 <>
                                     <div className='row mb-3 minHeight'>
-                                        <Members />
+                                        <Hangout></Hangout>
                                     </div>
                                     <div className='row minHeight'>
                                         <Logs />
@@ -70,7 +80,6 @@ function Overview(props) {
                                 : null}
                         </div>
                     </div>
-                    {/* <Hangout></Hangout> */}
                 </div>
 
             </div>

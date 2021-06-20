@@ -100,7 +100,7 @@ export default connect(
         return {
             downloadFile: (file) => dispatch(actions.downloadFile(file)),
             removeFileInRedux: (filesArr) => dispatch(actions.removeFileInRedux(filesArr)),
-            deleteFilesInTask: (filesArr) => dispatch(actions.deleteFilesInTask(filesArr)),
+
         }
     }
 )(File)

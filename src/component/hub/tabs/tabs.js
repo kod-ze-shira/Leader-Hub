@@ -48,7 +48,6 @@ function Tabs(props) {
 
 
     function onDragEndׂ(e) {
-
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId)) {
                 onDragEndׂCard(e)

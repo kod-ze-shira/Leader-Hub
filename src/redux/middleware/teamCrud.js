@@ -102,7 +102,6 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
 }
 
 export const shareObject = ({ dispatch, getState }) => next => action => {
-
   if (action.type === 'SHARE_OBJECT') {
     let teamsMembersAndPermission = action.payload.teams
     let membersEmails = action.payload.shareDetails
@@ -110,7 +109,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       .projects[getState().public_reducer.indexCurrentProject]._id
     console.log(objectId);
     ///:userName/:objectId/:schemaName/:applicationName/shareObject
-    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project1/hub/shareMembersAndTeams`,
+    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project/hub/shareMembersAndTeams`,
       {
         method: 'POST',
         headers: {
@@ -143,12 +142,15 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
           "from": "hub@noreply.leader.codes",
           "source": "Hub",
           "files": null
-        }))
+        })).catch(err=>{
+          console.log(err);
+        })
+
 
 
         checkPermission(result).then((ifOk) => {
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
-
+          dispatch(actions.setMembers(result))
         })
 
       })
@@ -220,27 +222,14 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
-//this func to check the headers jwt and username, if them not good its throw to login
-function checkPermission(result) {
-  return new Promise((resolve, reject) => {
-    if (result.status == "401") {
-      result.routes ?
-        window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-        window.location.assign(`https://dev.accounts.codes/hub/login`)
 
-      reject(false)
 
-    }
-    resolve(true)
-
-  })
-}
 export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
   if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
     let reducer = getState().public_reducer
     let jwtFromCookie = reducer.tokenFromCookies;
 
-    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project1/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
     fetch(urlData,
       {
         method: "GET",
@@ -260,3 +249,52 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
   }
   return next(action);
 }
+
+
+export const addMembers = ({ dispatch, getState }) => next => action => {
+
+  if (action.type === 'ADD_MEMBERS') {
+
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/addMemberToTeam`
+    fetch(urlData,
+      {
+        method: "POST",
+        headers: {
+          Authorization: jwtFromCookie,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(action.payload)
+      }
+    ).then(response => {
+      return response.json()
+    })
+      .then(data => {
+        checkPermission(data).then(() => {
+
+          console.log(data);
+          dispatch(actions.setMembers(data))
+        })
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
+}
+
+//this func to check the headers jwt and username, if them not good its throw to login
+function checkPermission(result) {
+  return new Promise((resolve, reject) => {
+    if (result.status == "401") {
+      result.routes ?
+        window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
+        window.location.assign(`https://dev.accounts.codes/hub/login`)
+
+      reject(false)
+
+    }
+    resolve(true)
+
+  })
+}
+

@@ -239,7 +239,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
-
                 console.log("success")
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
@@ -339,7 +338,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_TASK_BY_ID') {
         // let workspace = getState().workspace_reducer;
-
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
         $.ajax({
             url: urlData,
@@ -382,7 +380,6 @@ export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action =
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
         console.log("cardToTasks", cardDest)
-
         $.ajax({
             url: urlData,
             method: 'POST',
