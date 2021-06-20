@@ -16,29 +16,32 @@ function ViewLogs(props) {
     return (
         <>
             <div className="container logsContainer ">
-                <div className="row  mt-4">
-                    <div className="col-2 ml-3">
+                <div className="row logRowOne  mt-4">
+                    <div className="col-2">
                         <img className="logicon" src={icon}></img>
                     </div>
-                    <div className="col-7 mr-5 logSchemaName">
+                    <div className="col-6 logSchemaName">
                         {schemaName}
                     </div>
-                    <div className="col-3  logDate">
+                    <div className="col-3 logDate">
                         {dateInString}
                     </div>
                 </div>
+                {/* <div className=" logDate">
+                    {dateInString}
+                </div> */}
                 <div className="row">
                     <div className="col ml-5 logUser">
                         {user}
                     </div>
                 </div>
-                {!schemaName.includes("Project")?
-                <div className="row">
-                    <div className="logsDashed "></div>
-                </div>
-                : null
+                {!schemaName.includes("Project Created") ?
+                    <div className="row">
+                        <div className="logsDashed "></div>
+                    </div>
+                    : null
                 }
-                
+
             </div>
         </>
     )
