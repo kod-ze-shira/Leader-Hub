@@ -58,16 +58,17 @@ function ShareProject(props) {
         setPermissionTeam(event.target.options[event.target.selectedIndex].label)
     }
     //onchange perrmision of contact
-    const changePermissionContactAfterRender = (event, shareDetailWithNewPermission) => {
-        let permission = event.target.options[event.target.selectedIndex].label
+    const changePermissionContactAfterRender = (permission, shareDetailWithNewPermission) => {
+        // let permission = event.target.options[event.target.selectedIndex].label
         shareDetails.find(detail => {
             if (detail.member.email == shareDetailWithNewPermission.member.email)
                 detail.permission = permission
         })
     }
     //onchange perrmision of team member
-    const changePermissionMemberAfterRender = (event, shareDetailWithNewPermission, teamId) => {
-        let permission = event.target.options[event.target.selectedIndex].label
+    const changePermissionMemberAfterRender = (permission, shareDetailWithNewPermission, teamId) => {
+        // let permission = event.target.options[event.target.selectedIndex].label
+     
         teams.forEach(team => {
             if (team.teamId == teamId)
                 team.members.find(member => {

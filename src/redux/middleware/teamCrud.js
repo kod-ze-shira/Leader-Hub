@@ -114,7 +114,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       .projects[getState().public_reducer.indexCurrentProject]._id
     console.log(objectId);
     ///:userName/:objectId/:schemaName/:applicationName/shareObject
-    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project1/hub/shareMembersAndTeams`,
+    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project/hub/shareMembersAndTeams`,
       {
         method: 'POST',
         headers: {
@@ -126,7 +126,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       }).then((result) => {
         return result.json();
       }).then((result) => {
-
+        checkPermission(result).then((ifOk) => {
         let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
         dispatch(actions.createSystemWave({
           "subject": "Share project",
@@ -150,7 +150,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         }))
 
 
-        checkPermission(result).then((ifOk) => {
+       
           // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
         })
