@@ -36,9 +36,9 @@
     display: inline-block;
     width: 6px; 
 }
-.card-name .show-card{
+/* .card-name .show-card{
     display:inline;
-}
+} */
 .show-card{
     background-color: transparent;
     border: none;

@@ -168,12 +168,11 @@ function ViewCards(props) {
                         >
                         </input> */}
 
-                        <div><span  // id="input-card-name"
+                        <span  // id="input-card-name"
                             ref={textInput}
                             onBlur={() => editCard()}
                             className="show-card ml-4 col-10 ">
-                        >{editCardName}</span>  
-                        </div>
+                            {editCardName}</span>
                         <button data-tip data-for="add" className="new-task ml-2"
                             // id={`task${props.cardFromMap._id}`}
                             onClick={addTask}>+</button>
