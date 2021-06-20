@@ -82,9 +82,9 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
