@@ -12,10 +12,8 @@ function FilesOfProject(props) {
 
     useEffect(() => {
 
-        if (props.workspacesIndex) {
             props.getFilesForProject(props.indexCurrentProject)
-        }
-    }, [props.workspacesIndex])
+    }, [])
 
     const filesForDownloadOrDelete = []
 

@@ -130,10 +130,13 @@ function ViewTaskByCradTabs(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.setCountReadyTasks()
+            props.setCountReadyTasks(true)
             setShowChalalit(true)
 
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+        }
+        else {
+            props.setCountReadyTasks(false)
         }
     }
     const showDetails = (event) => {
@@ -254,6 +257,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
+                                {myFiles}
 
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
@@ -268,7 +272,7 @@ function ViewTaskByCradTabs(props) {
                                             editTask()
                                         }
                                     }}
-                                ></input>
+                                />
 
                                 {/* <span
                                     name="name"
@@ -281,7 +285,6 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.name}
                                 </span> */}
 
-                                {myFiles}
                                 <div className="icons-in-task-tabs pt-0">
 
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
@@ -364,7 +367,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
