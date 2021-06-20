@@ -346,7 +346,7 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
                 if (data.result.card) {
                     dispatch(actions.deletTask(data.result))
                     dispatch(actions.setCountTasks())
-                    debugger
+
                     if (data.result.complete)
                         dispatch(actions.setCountReadyTasks(false))
                 }

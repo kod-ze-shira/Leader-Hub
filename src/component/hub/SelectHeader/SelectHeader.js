@@ -11,6 +11,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { useParams, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import history from "../../history"
 
 
 
@@ -41,6 +42,14 @@ function SelectHeader(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
+        if (history.location.pathname.indexOf('list') != -1)
+            setValue(1)
+        else
+            if (history.location.pathname.indexOf('Overview') != -1)
+                setValue(2)
+            else
+                if (history.location.pathname.indexOf('gantt') != -1)
+                    setValue(3)
 
     }, [])
 

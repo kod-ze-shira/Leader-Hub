@@ -9,6 +9,8 @@ import './new_configurator.css';
 
 function NewConfigorator(props) {
     const [closeOrOpenConfigurator, setCloseOrOpenConfigurator] = useState(true)
+    const [viewDetails, setViewDetails] = useState(false)
+
     // checkTheUrl()
     // function checkTheUrl() {
     $(document).ready(function () {
