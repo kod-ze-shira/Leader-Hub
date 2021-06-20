@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action';
 function DetailsProject(props) {
 
-     const [isHasProject, setIsHasProject] = useState(false);
-     useEffect(() => {
-         if (!isHasProject) {
-             setIsHasProject(true)
-             props.getProjectByIdInServer(props.projectId)
-         }
-     })
-    return(
+    const [isHasProject, setIsHasProject] = useState(false);
+    useEffect(() => {
+        if (!isHasProject) {
+            setIsHasProject(true)
+            props.getProjectByIdInServer(props.projectId)
+        }
+    })
+    return (
         <div className="detailsproject">
-         
+
             <div >subject: {props.project.subject}</div>
             <div>{props.project.description}</div>
 
@@ -30,9 +30,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    
+
     return {
-        
+
         getProjectByIdInServer: (projectId) => dispatch(actions.getProjectByIdInServer(projectId))
     }
 }

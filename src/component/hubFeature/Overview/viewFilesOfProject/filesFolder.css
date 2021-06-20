@@ -1,0 +1,106 @@
+.folderItem{
+    background-color: #EDFBFC;
+    /* border: #E8EAEC;
+    border-width: 0.1rem;
+    border-style: solid; */
+     cursor: pointer;
+     border-radius: 2%;
+     height: 15vh;
+ }
+ .folderItem:hover{
+  border: #38B1B5 0.1rem solid;
+ }
+ .folderItem div{
+   height: 33%;
+ }
+ .selectFolder{
+    float: left;
+    /* position: absolute; */
+    margin: 0vw;
+    padding: 0;
+    z-index: 8000000;
+  }
+ .selectFolder:first-child {
+    color: #778CA2;
+    cursor: pointer;
+    float: left;
+  }
+  .selectFolder input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  width: 0;
+  height: 0;
+  }
+  .checkmarkFolder {
+    position: absolute;
+    height: 0.7em;
+    width: 0.7em;
+    background-color: #fff;
+    border: 1px solid #38B1B5;
+        border-radius: 30%;
+   opacity: 0.9;
+   margin-left: 1.5vw;
+   z-index: 800000;
+  }
+  
+  .selectFolder:hover input ~ .checkmarkFolder{
+ 
+    opacity: 1;
+  }
+
+  .selectFolder input:checked ~ .checkmarkFolder {
+    opacity: 1;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .selectFolder input:checked .checkmarkFolder::before {
+    background-color:rgb(79, 216, 186);
+    content: "\2713";
+    opacity: 0.8;
+  }
+    /* Create the checkmarkFile/indicator (hidden when not checked) */
+    .checkmarkFolder:after {
+        content: "";
+        position: absolute;
+        opacity:0.8;
+        /* display: none; */
+      }
+      
+      /* Show the checkmarkFile when checked */
+      .selectFolder input:checked ~ .checkmarkFolder:after {
+        display: block;
+        background-color:#38B1B5 ;
+        content: "\2713";
+        font-size:0.6vw;
+        font-weight: bolder;
+        color: white;
+        width:-webkit-fill-available;
+        height: -webkit-fill-available;
+        opacity: 0.8;
+        border-radius: 30%;
+        transition: 0.2s;
+       
+      }
+
+      .imgRow img{
+        height: 3vh;
+        margin-left: 40%;
+        pointer-events: none;
+     }
+       .emptyFolder{
+           display: block;
+       }
+       .fullFolder{
+         display: none;
+     }
+       .imgRow:hover .emptyFolder{
+           display: none;
+       }
+       .imgRow:hover .fullFolder{
+           display: block;
+       }
+       .cardName{
+         text-align: center;
+         margin: 0;
+       }

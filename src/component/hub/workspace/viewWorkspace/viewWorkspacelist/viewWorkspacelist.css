@@ -54,7 +54,7 @@
 
 .workspace-name-list{
     margin-top:1vh;
-    font-weight: 400;
+    font-weight: 500;
     color: black !important;
     font-size: 17px;
     -webkit-box-orient: vertical;
@@ -62,6 +62,7 @@
     overflow: hidden;
     display: -webkit-inline-box;
     max-width: 54vw;
+
 }
 .WorkspaceList:hover{
   background-color:#F6F6FA;
@@ -69,9 +70,13 @@
 .WorkspaceList{
     cursor: pointer ;
     border-bottom:#F6F6FA 1px solid ;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 8px;
+
     display: flex;
     justify-content:space-between; 
-    width: 73.2vw;
+    width: 76vw;
 }
 
 .stripe{

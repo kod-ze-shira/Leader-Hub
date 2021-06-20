@@ -5,9 +5,9 @@ import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
 import ProjectStyle from '../../project/projectStyle'
 import CreatableSelect from 'react-select/creatable';
+import Background from '../../../img/down-arrow.svg';
 
 function SelectProject(props) {
-
     const { idProject } = useParams();
 
     //to chang the project that user selected
@@ -18,8 +18,71 @@ function SelectProject(props) {
         props.getCardsByProjectId(project._id)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + project._id)
     }
-   
 
+    const dot = (color = '#ccc') => ({
+        alignItems: 'center',
+        display: 'flex',
+        color: props.workspaces[props.indexWorkspace].projects[props.indexProject] ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : null,
+
+        ':before': {
+            backgroundColor: props.workspaces[props.indexWorkspace].projects[props.indexProject] ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : null,
+            borderRadius: 10,
+            content: '" "',
+            display: 'block',
+            marginRight: 8,
+            height: 10,
+            width: 10,
+        },
+    });
+
+    const colourStyles = {
+        control: (base, state) => ({
+            ...base,
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: state.isFocused ? 0 : 0,
+            // This line disable the blue border
+            boxShadow: state.isFocused ? 0 : 0,
+            "&:hover": {
+                border: state.isFocused ? 0 : 0,
+                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+
+            }
+        }),
+        option: (styles, { isDisabled, isFocused, isSelected }) => {
+            const color = props.workspaces[props.indexWorkspace].projects[props.indexProject].color;
+            return {
+                ...styles,
+                backgroundColor: isDisabled,
+
+                // color:props.workspaces[props.indexWorkspace].projects[props.indexProject].color  ? props.workspaces[props.indexWorkspace].projects[props.indexProject].color : "red"
+                //     ? null
+                //     : isSelected
+                //         ? color
+                //         : isFocused
+                //             ? "white"
+                //             : null,
+                color: isDisabled
+                    ? '#ccc'
+                    : isSelected
+                        ? color > 2
+                            ? 'white'
+                            : 'black'
+                        : "black",
+                cursor: isDisabled ? 'not-allowed' : 'default',
+
+                ':active': {
+                    ...styles[':active'],
+                    color:
+                        !isDisabled && (isSelected ? color : "black"),
+                },
+            };
+        },
+        input: styles => ({ ...styles, ...dot() }),
+        placeholder: styles => ({ ...styles, ...dot() }),
+        singleValue: (styles, { color }) => ({ ...styles, ...dot(color) }),
+        // option:(styles, { color }) => ({ ...styles, ...dot(color) }),
+
+    };
     const viewProjectsList = props.workspaces[props.indexWorkspace].projects ?
         props.workspaces[props.indexWorkspace].projects.map((project, index) => (
             project.name ?  {
@@ -49,6 +112,10 @@ function SelectProject(props) {
         const style = {
             control: (base, state) => ({
                 ...base,
+                backgroundSize: '10px 10px',
+                backgroundPosition: '90%',
+                backgroundImage: `url(${Background})`,
+                backgroundRepeat: 'no-repeat',
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
                 border: 0,
                 // This line disable the blue border
@@ -77,8 +144,10 @@ function SelectProject(props) {
                     placeholder={placeholder}
                    name="color"
                     options={viewProjectsList}
+                    placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject] ?
+                        props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"}
                     styles={style}
-                
+
                 />
                
             </div>

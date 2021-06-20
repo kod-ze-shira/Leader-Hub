@@ -6,14 +6,9 @@ import './viewMembers.css'
 
 function ViewMembers(props) {
     useEffect(() => {
-        if (props.members?.length !== 0)
-            props.getMembersByProjectId()
+        props.getMembersByProjectId()
+        
     }, [])
-    // useEffect(() => {
-    //     if (props.workspacesIndex) {
-    //         props.getMembersByProjectId()
-    //     }
-    // }, [props.workspacesIndex])
 
 
 

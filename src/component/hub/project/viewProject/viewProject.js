@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -10,7 +10,7 @@ import share from '../../../img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
-import TeamView from '../../teamView/teamView'
+// import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
 
 

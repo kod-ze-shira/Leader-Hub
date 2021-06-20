@@ -4,25 +4,25 @@ import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
-    const [logs, setLogs] = useState()
-    useEffect(() => {
-        if (props.workspacesIndex) {
-            setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
-            debugger
-        }
-    }, [props.workspacesIndex])
+    // const [logs, setLogs] = useState()
+    // useEffect(() => {
+    //     if (props.workspacesIndex) {
+    //         setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+    //         debugger
+    //     }
+    // }, [props.workspacesIndex])
 
-    // let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
+    let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
     console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
     let logsReverse = logs ? logs.reverse() : null;
 
     const renderViewLogs = () => {
-        return logsReverse.map(l => {
+        return logs.map(log => {
             return <ViewLogs
-                schemaName={l.staticLog.name}
-                icon={l.staticLog.icon}
-                user={l.user}
-                date={l.date}
+                schemaName={log.staticLog.name}
+                icon={log.staticLog.icon}
+                user={log.user}
+                date={log.date}
             />
         })
     }
@@ -32,11 +32,11 @@ function Logs(props) {
             <div className="container backgroundWhiteAndBorderRadius">
                 <div className="row mt-3 ml-2"><b>Project Log</b></div>
                 <div className="mt-1 logsHeder"></div>
-                <div className="row">
-                    {logs ? logs.length ?
+                <div className="row">{
+                    logs.length ?
                         renderViewLogs()
-                        : null : null
-                    }
+                        : null
+                }
                 </div>
             </div>
         </>
