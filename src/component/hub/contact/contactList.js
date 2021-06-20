@@ -104,7 +104,7 @@ function ContactList(props) {
               value={props.contactsUser.email}></input> : null} */}
           </div>
 
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please enter valid email.
             </div>
         </div>

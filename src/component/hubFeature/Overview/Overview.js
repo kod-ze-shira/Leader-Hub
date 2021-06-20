@@ -8,17 +8,19 @@ import Members from './members/members'
 import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
-
-
+import ViewFilesOfProject from './viewFilesOfProject/viewFilesOfProject'
+// import { actions } from '../../hub'
 function Overview(props) {
+
+
 
     const { idProject } = useParams();
     const [refresh, setRefresh] = useState(false)
-    useEffect(() => {
-        if (props.workspaces.length == 0)
-            props.getAllWorkspaces()
+    // useEffect(() => {
+    //     if (props.workspaces.length == 0)
+    //         props.getAllWorkspaces()
 
-    }, [])
+    // }, [])
     useEffect(() => {
         for (let i = 0; i < props.workspaces.length; i++) {
             let project = props.workspaces[i].projects.find((p) => p._id == idProject)
@@ -30,12 +32,12 @@ function Overview(props) {
             }
         }
     }, [props.workspaces])
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (props.indexOfCurrentWorkspace && props.workspaces.length) {
-            setRefresh(true)
-        }
-    }, [props.indexOfCurrentWorkspace])
+    //     if (props.indexOfCurrentWorkspace && props.workspaces.length) {
+    //         setRefresh(true)
+    //     }
+    // }, [props.indexOfCurrentWorkspace])
     return (
         <>
             <div className='scrollbarOverview container-fluid'>
@@ -51,48 +53,51 @@ function Overview(props) {
                                         Use the priority and progress fields to clearly organize your work.
                                     </p>
                                 </div>
-                                {refresh ?
-                                    <>
-                                        <Members />
+                                {/* {refresh ? */}
+                                <>
+                                    <Members />
 
-                                        <MyChart />
-                                    </> : null}
+                                    <MyChart />
+                                </>
+                                {/* : null} */}
                             </div>
                             <div className='row'>
-                                {refresh ?
-                                    <FilesOfProject />
-                                    : null}
+                                {/* {refresh ? */}
+                                <FilesOfProject />
+                                {/* : null} */}
                             </div>
                         </div>
                     </div>
 
                     <div className='col' style={{ height: '87vh' }}>
                         <div className='container-fluid px-0 '>
-                            {refresh ?
-                                <>
-                                    <div className='row mb-3 minHeight'>
-                                        <Hangout></Hangout>
-                                    </div>
-                                    <div className='row minHeight'>
-                                        <Logs />
-                                    </div>
-                                </>
-                                : null}
+                            {/* {refresh ? */}
+                            <>
+                                <div className='row mb-3 minHeight'>
+                                    <Hangout></Hangout>
+                                </div>
+                                <div className='row minHeight'>
+                                    <Logs />
+                                </div>
+                            </>
+                            {/* : null} */}
                         </div>
                     </div>
+                    {/* <Hangout></Hangout> */}
                 </div>
 
             </div>
         </>
     )
 }
+
+
 const mapStateToProps = (state) => {
     return {
         workspaces: state.public_reducer.workspaces,
         indexOfCurrentWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
-
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
