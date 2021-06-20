@@ -184,7 +184,15 @@ padding: 4px;
 
 }
 .col-assignee{
-  width: 6vw;
+  width: 6.5vw;
+
+}
+.col-status , .col-date{
+  width: 8vw;
+
+}
+.col-name-task{
+  /* width: 30vw; */
 
 }
 .check-task .css-yk16xz-control{

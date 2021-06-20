@@ -73,7 +73,7 @@ function ContactList(props) {
       <button className="ml-2 col-4 my-2 invite-button  " autocomplete="chrome-off"
         onClick={(e) => assingTaskToContact(e)}
       >Send Invite</button> :
-    <><div class="spinner-border" role="status">
+    <><div class="spinner-border my-2 mx-3" role="status">
       <span class="sr-only">Loading...</span>
     </div>
     </>
@@ -104,7 +104,7 @@ function ContactList(props) {
               value={props.contactsUser.email}></input> : null} */}
           </div>
 
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please enter valid email.
             </div>
         </div>

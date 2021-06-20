@@ -37,12 +37,7 @@
     margin-left: 0px;
     margin-right: 0px
 }
-/* 
-.selectWorkspaceInTasksNotBelong,
-.selectProjectInTasksNotBelong,
-.selectCardInTasksNotBelong{
-    display: none;
-} */
+
 .icon-complete{
     width: 22px;
     padding-right: 5px;

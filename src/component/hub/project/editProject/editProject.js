@@ -20,18 +20,19 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
+        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
-        let value = input.target.value
+        let value = input.target.value ? input.target.value : input.target.innerText
         if (!value)
             value = ''
-        let editProjectInRedux = { "nameFiled": input.target.name, "value": value }
+        let editProjectInRedux = { "nameFiled": input.target.name ? input.target.name : "description", "value": value }
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
         // props.workspaces[props.indexWorkspace].projects[props.indexProject][input.target.name] = input.target.value
     }
 
     const changeDateInProject = (input) => {
-
-        let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
+        debugger
+        let res = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
         let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         setDueDateProject(input.target.value)
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
@@ -45,11 +46,8 @@ function EditProject(props) {
         let year = newDate.getFullYear();
         project = props.workspaces[props.indexWorkspace].projects[props.indexProject]
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
-        // let res = dueDateProject.split("-")[2] + '/' + dueDateProject.split("-")[1] + '/' + dueDateProject.split("-")[0];
-        // project.dueDate = res
 
         if (nameRequired.current.value) {
-            debugger
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
             props.closeViewDetails(false)
@@ -79,7 +77,7 @@ function EditProject(props) {
 
             <div className="details mr-4 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Project details</h5>
                         <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
@@ -101,11 +99,13 @@ function EditProject(props) {
                         <label for="description">Description</label>
                         <div class="form-control descriptionProject"
                             name="description"
-                            id="descriptionProject" rows="5"
+                            id="descriptionProject" rows="3"
                             placeholder="Write a description about your project"
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
-                            onChange={(input) => changeFiledInProject(input)} contentEditable
-                        ></div>
+                            // onChange={(input) => changeFiledInProject(input)}
+                            contentEditable
+                            onBlur={(input) => changeFiledInProject(input)}
+                        >{props.workspaces[props.indexWorkspace].projects[props.indexProject].description}</div>
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">
