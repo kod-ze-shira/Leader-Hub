@@ -8,6 +8,7 @@
     letter-spacing: 0px;
     color: #0A102E;
     overflow-y: auto;  
+    overflow-x: hidden;
 
 }
 
@@ -85,7 +86,7 @@ margin: auto !important;
   /* margin-bottom: 9px; */
 }
 .allTaskInCard div:hover{
-  border-color:#52C4A9  !important;
+  /* border-color:#52C4A9  !important; */
 
   }
 
@@ -168,6 +169,7 @@ margin: auto !important;
     background-color: #EDFBFC ;
     width: 6px;
   }
+  
    
     /* Track */
     .view-cards-tabs .card-body::-webkit-scrollbar-track {

@@ -10,7 +10,6 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
-import placeholder from '../../../img/placeholder.png'; // with import
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import ProjectStyle from "../../project/projectStyle";
@@ -107,25 +106,21 @@ function TasksNotBelongCardByMap(props) {
     const workspaceSelect = props.workspaces ? props.workspaces.map((workspace) => (
         workspace.name ? {
             value: workspace, label:
-                // <div className="container">
-                <div className="row pl-2" style={{ width: '200px' }}>
-                    <div className=" " style={{ display: 'inline-block' }} >
-                        <div className="  logo-w-little "
-                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
-                        >
-                            {workspace.name ? workspace.name[0].toUpperCase() : null}
+                    <div className="d-flex flex-row" >
+                        <div  >
+                            <div className="  logo-w-little "
+                                style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
+                            >
+                                {workspace.name ? workspace.name[0].toUpperCase() : null}
+                            </div>
                         </div>
-                    </div>
-                    <div className="select-not-belong">
-                        {workspace.name}
-                    </div>
-
-                </div >
+                        <div className="select-not-belong">
+                            {workspace.name}
+                        </div>
+                    </div >
         } : null
     )) : null
-    // const selectPlaceHorder = <img className="selectPlaceHorder" src={require('../../../img/remove.svg')}></img>
-
-    // const selectPlaceHorder = <img src={placeholder}></img>
+   
     const selectPlaceHorder = <hr className="hr-place-holder" />
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
@@ -182,7 +177,7 @@ function TasksNotBelongCardByMap(props) {
             backgroundSize: '10px 10px',
             backgroundPosition: '90%',
             backgroundImage: `url(${Background})`,
-            backgroundRepeat:'no-repeat',
+            backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             border: 0,
             // This line disable the blue border
@@ -364,7 +359,7 @@ function TasksNotBelongCardByMap(props) {
                             options={workspaceSelect}
                             value={indexOfWorkspace !== null ?
                                 workspaceSelect[indexOfWorkspace] : 'Select...'}
-                        styles={style}
+                            styles={style}
 
                         />
                         {/* <div className="drop-down"> 

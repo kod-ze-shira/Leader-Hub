@@ -29,7 +29,6 @@ export default connect(
     },
     (dispatch) => {
         return {
-            setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
             addFile: (files) => dispatch(actions.addFile(files)),
         }
     }

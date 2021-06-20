@@ -30,7 +30,7 @@ function ViewWorkspaceGrid(props) {
 
     const routeToProject = () => {
         props.setIndexWorkspace(props.indexWorkspace)
-        props.setCurrentIndexProject(0)
+        // props.setCurrentIndexProject(0)
         props.history.push("/" + props.user + "/hub/workspace/" + workspace._id)
     }
     function outOver(id) {

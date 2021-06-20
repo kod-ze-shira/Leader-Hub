@@ -12,6 +12,8 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
+import Animation from '../../animation/animation'
+
 import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
@@ -121,6 +123,9 @@ function ViewTaskByCradTabs(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.task.files ? props.task.files : null,
+            "priority": props.task.priority
+
         }
         // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
         // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
@@ -128,8 +133,13 @@ function ViewTaskByCradTabs(props) {
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
-            props.setCountReadyTasks()
+            props.setCountReadyTasks(true)
+            setShowChalalit(true)
+
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+        }
+        else {
+            props.setCountReadyTasks(false)
         }
     }
     const showDetails = (event) => {
@@ -166,8 +176,8 @@ function ViewTaskByCradTabs(props) {
     }
 
     function addChalalit(e) {
-        if (props.task.complete == false)
-            setShowChalalit(true)
+        // if (props.task.complete == false)
+        // setShowChalalit(true)
         e.stopPropagation()
     }
 
@@ -191,12 +201,15 @@ function ViewTaskByCradTabs(props) {
 
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
-            return <img className='pt-2 imgInTask' src={myFile.url}></img>
+            return myFile.url.endsWith(".pdf") || myFile.url.endsWith(".docx") ?
+                null : <img className='imgInTask' src={myFile.url}></img>
+
         })
         : null
 
     return (
         <>
+            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
@@ -247,6 +260,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
+                                {myFiles}
 
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
@@ -261,7 +275,7 @@ function ViewTaskByCradTabs(props) {
                                             editTask()
                                         }
                                     }}
-                                ></input>
+                                />
 
                                 {/* <span
                                     name="name"
@@ -274,9 +288,7 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.name}
                                 </span> */}
 
-                                {myFiles}
                                 <div className="icons-in-task-tabs pt-0">
-
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
                                             <div> {props.task.priority ?
@@ -357,7 +369,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCountReadyTasks: () => dispatch(actions.setCountReadyTasks()),
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
