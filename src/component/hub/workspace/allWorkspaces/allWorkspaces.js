@@ -16,7 +16,7 @@ import ReactTooltip from 'react-tooltip';
 function AllWorkspaces(props) {
     // const [showToastDelete, setShowToastDelete] = useState(false)
     // const [showModalDelete, setShowModalDelete] = useState(false)
-    const refToDeleteToast = useRef(null);
+    // const refToDeleteToast = useRef(null);
 
 
     useEffect(() => {
@@ -154,9 +154,9 @@ function AllWorkspaces(props) {
                         </div>
 
                         :
-                        <div className="Workspacegrid addWorkspace mt-4" >
-                            <div onClick={(e) => openAddNewWorkspace(e)}>
-                                <div className="logoWorkspace1 pt-2" >
+                        <div className="Workspacegrid addWorkspace divAddWorkspace" >
+                            <div onClick={(e) => openAddNewWorkspace(e)} >
+                                <div className="logoWorkspace1 pt-2 px-1" >
                                     <div className="mt-1 logo-w"
                                         // style={{ backgroundColor: "#778CA2" }}
                                         data-tip data-for="add_w"

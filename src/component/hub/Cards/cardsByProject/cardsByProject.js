@@ -11,7 +11,9 @@ function CardsByProject(props) {
         // props.getCardsByProjectId(props.projectId)
 
     }, [props.projectId])
-
+    useEffect(() => {
+        // props.getCardsByProjectId(props.projectId)
+    }, [])
 
     // function onDragEndׂ(e) {
     //     let iSourse, iDestination
@@ -32,7 +34,39 @@ function CardsByProject(props) {
 
     // };
 
+    // function onDragEndׂ(e) {
+    //     if (e.source.droppableId && e.destination) {
+
+
+    //         let iSourse, iDestination
+    //         let iCardTo, iCardFrom;
+    //         for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
+    //             if (props.cards[iSourse]._id == e.source.droppableId) {
+    //                 iCardFrom = props.cards[iSourse]._id;
+    //                 break
+    //             }
+    //         }
+    //         for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
+    //             if (props.cards[iDestination]._id == e.destination.droppableId) {
+    //                 iCardTo = props.cards[iDestination]._id;
+    //                 break
+
+    //             }
+    //         }
+    //         // console.log(e.source.index, e.destination.index, iSourse, iDestination)
+    //         const replace = [e.source.index, e.destination.index, iSourse, iDestination]
+    //         // const replace = [iSourse, iDestination]
+    //         // /: taskId/:cardId/dragTaskFromCardToCard‏
+    //         props.changeTaskplace(replace)
+    //         const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
+    //         props.moveTaskBetweenCards(replaceIServer)
+
+    //         // }
+    //     }
+    // };
+
     function onDragEndׂ(e) {
+
         if (e.source.droppableId && e.destination) {
             // if (props.cards.find(card => card._id == e.draggableId)) {
             //     onDragEndׂCard(e)
@@ -51,21 +85,19 @@ function CardsByProject(props) {
                 if (props.cards[iDestination]._id == e.destination.droppableId) {
                     iCardTo = props.cards[iDestination]._id;
                     break
-
                 }
             }
-            // console.log(e.source.index, e.destination.index, iSourse, iDestination)
-            const replace = [e.source.index, e.destination.index, iSourse, iDestination]
-            // const replace = [iSourse, iDestination]
-            // /: taskId/:cardId/dragTaskFromCardToCard‏
+            let replace = [e.source.index, e.destination.index, iSourse, iDestination]
             props.changeTaskplace(replace)
-            const replaceIServer = [e.draggableId, iCardFrom, iCardTo]
-            props.moveTaskBetweenCards(replaceIServer)
 
+            const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
+            if (replace[2] == replace[3])
+                props.dragTask(iSourse)
+            else
+                props.moveTaskBetweenCards(replaceIServer)
             // }
         }
     };
-    console.log(props.cards)
     return (
         <>
             {props.cards.length ?
@@ -98,6 +130,7 @@ export default connect(
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),
+            dragTask: (cardOfTask) => dispatch(actions.dragTask(cardOfTask)),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
 
         }

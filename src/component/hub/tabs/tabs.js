@@ -14,7 +14,7 @@ import title from '../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 
 function Tabs(props) {
-
+    
     const { idProject } = useParams();
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -66,20 +66,16 @@ function Tabs(props) {
                     if (props.cards[iDestination]._id == e.destination.droppableId) {
                         iCardTo = props.cards[iDestination]._id;
                         break
-
                     }
                 }
-                // console.log(e.source.index, e.destination.index, iSourse, iDestination)
                 let replace = [e.source.index, e.destination.index, iSourse, iDestination]
-                // const replace = [iSourse, iDestination]
-                // /: taskId/:cardId/dragTaskFromCardToCard
                 props.changeTaskplace(replace)
+
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
                 if (replace[2] == replace[3])
                     props.dragTask(iSourse)
                 else
                     props.moveTaskBetweenCards(replaceIServer)
-
             }
         }
     };
@@ -149,7 +145,7 @@ function Tabs(props) {
 
 
     return (
-        <><div className="body body-cards">
+        <><div className="body-cards">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
@@ -221,8 +217,6 @@ function Tabs(props) {
                                             </div>
 
                                         </div>}
-                                    {/* </>  */}
-                                    {/* : null} */}
                                 </div>
                             </div>
                             {provided.placeholder}
@@ -238,8 +232,10 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
+                        viewToastComplete={props.viewToastComplete}
                         setDownloadFile={(e) => setDownloadFile(e)}
-                        open={true}> </ViewDetails>
+                        open={true}>
+                             </ViewDetails>
                 </div>
                 : null}
         </div>

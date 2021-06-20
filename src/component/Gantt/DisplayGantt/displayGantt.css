@@ -16,3 +16,12 @@
 .gantt_task_content {
     background-color: #ffff !important;
 }
+
+.bodyGant{
+    height: 82.7vh;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    opacity: 1;
+    overflow-y: auto!important;
+    box-shadow: 0px 3px 6px #00000029;
+}

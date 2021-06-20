@@ -1,19 +1,30 @@
 import AddMembers from "./addMembers/addMembers";
 import ViewMembers from "./veiwMembers/viewMembers";
-import React from 'react';
+import React, { useState } from 'react';
+import ListMembers from "./listMembers/listMembers";
+import './members.css'
 
-export default function members() {
+export default function Mmebers() {
+    const [membersList, setMembersList] = useState(false);
+    console.log("membersList", membersList)
 
-    return(
+    return (
         <>
-            <div className="container-fluid px-0 backgroundWhiteAndBorderRadius">
+            <div className="container-fluid px-0 " style={{ 'background-color': 'white' }}>
 
                 <div className="row divProjectMembers pt-3 ml-2">
                     <h4>Project Members</h4>
                 </div>
-
-                <AddMembers />
-                <ViewMembers/>
+                <div className="row">
+                    <AddMembers setMembersList={setMembersList} />
+                    <ViewMembers />
+                </div>
+                {
+                    membersList ?
+                        <div className="positionListMembers d-flex justify-content-center">
+                            <ListMembers setMembersList={setMembersList} membersList={membersList} />
+                        </div> : null
+                }
             </div>
         </>
     )

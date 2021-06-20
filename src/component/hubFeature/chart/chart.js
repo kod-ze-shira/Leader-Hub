@@ -1,4 +1,4 @@
-import { Animation, EventTracker, Palette, ValueScale } from '@devexpress/dx-react-chart';
+import { Animation, EventTracker, Palette } from '@devexpress/dx-react-chart';
 import {
     ArgumentAxis,
     BarSeries,
@@ -20,8 +20,8 @@ function MyChart(props) {
         props.getTaskStatusesOfProject()
     }, [])
 
-    const [countTasks, setCountTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks)
-    const [readyTasks, setReadyTasks] = useState(props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks)
+    let countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
+    let readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
     const [cards, setCards] = useState(props.cards)
     const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
@@ -50,7 +50,8 @@ function MyChart(props) {
 
     return (
         <>
-            <Paper style={{ width: '100%' }}>
+
+            <Paper style={{ width: '100%'}}>
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3 p-1'>
