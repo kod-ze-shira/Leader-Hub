@@ -24,10 +24,10 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                if(data.cards.length)
-                dispatch(actions.setCards(data.cards))
+                if (data.cards.length)
+                    dispatch(actions.setCards(data.cards))
                 else
-                dispatch(actions.setCards([]))
+                    dispatch(actions.setCards([]))
                 console.log("success")
                 console.log("data", data);
                 return false;
@@ -35,7 +35,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
                     if (err.status == 300)//share
-                        window.location.assign(window.origin+'/'+ err.responseJSON.routes)
+                        window.location.assign(window.origin + '/' + err.responseJSON.routes)
                 })
             }
         });
@@ -63,9 +63,9 @@ export const newCard = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.addCardToCardsWhenAddCardToServer(data.card));
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+
+                checkPermission(err).then((ifOk) => {
+                })
             }
         });
     }
@@ -94,10 +94,11 @@ export const editCard = ({ dispatch, getState }) => next => action => {
                 dispatch(actions.setCardNameInput(data.result))
             },
             error: function (err) {
-                //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
-                console.log("error")
-                console.log(err)
+
+                checkPermission(err).then((ifOk) => {
+                })
             }
+
         });
     }
     return next(action);
@@ -117,6 +118,7 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log(data.project)
+                debugger
                 dispatch(actions.deleteCard(data.project))
                 // dispatch(actions.deleteCard(data))
 
@@ -138,9 +140,9 @@ function checkPermission(result) {
         if (result.status == "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
                 window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
-                result.routes?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
+import Background from '../../../img/down-arrow.svg';
 
 function SelectTask(props) {
     useEffect(() => {
@@ -13,20 +14,24 @@ function SelectTask(props) {
         myTask = props.tasks.find(p => p._id == id.value)
         props.setTask(myTask)
     }
+    
     const viewTasksList = props.card.tasks ? props.card.tasks.map((task) => (
         { value: task._id, label: task.name }
     )) : null
     const style = {
         control: (base, state) => ({
             ...base,
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             border: state.isFocused ? 0 : 0,
             // This line disable the blue border
             boxShadow: state.isFocused ? 0 : 0,
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-
+                backgroundColor:'#eeeeee' ,
             }
         })
     };
@@ -36,13 +41,23 @@ function SelectTask(props) {
                 <Select
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedTask(e)}
-                    name="color"
+                    // name="color"
+                    theme={theme => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary25: '#68c7cb1a',
+                            primary: '#68C7CB',
+                            primary50: '#68C7CB',
+                        },
+                    })}
                     options={viewTasksList}
                     placeholder={"All Tasks"}
                     styles={style}
 
                 />
             </div>
+            
 
         </>
     )

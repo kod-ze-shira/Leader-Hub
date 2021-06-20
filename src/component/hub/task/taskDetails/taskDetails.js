@@ -92,7 +92,10 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
+
         if (nameRequired.current.value) {
+            if (milstone)
+                props.viewToastComplete({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -123,7 +126,9 @@ function TaskDetails(props) {
                     props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
-                } else
+                }
+
+                else
                     props.EditTask(props.task)
             props.closeViewDetails();
 
@@ -178,12 +183,12 @@ function TaskDetails(props) {
         let editTaskInRedux
         let value = input.target.value
         if (input.target.name == "startDate") {
-            value = startDateTask.split("-")[2] + '/' + startDateTask.split("-")[1] + '/' + startDateTask.split("-")[0];
+            value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
         }
         else
             if (input.target.name == "dueDate") {
-                value = dueDateTask.split("-")[2] + '/' + dueDateTask.split("-")[1] + '/' + dueDateTask.split("-")[0];
+                value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             }
             else
@@ -206,8 +211,7 @@ function TaskDetails(props) {
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
-
-            setDownloadFile={(e) => { debugger; props.setDownloadFile(e) }}
+            setDownloadFile={(e) => { props.setDownloadFile(e) }}
         />
     }) : null
 

@@ -14,7 +14,9 @@
 
         
 }
-
+.back-header{
+        cursor: pointer;
+}
 .select__control{
         border:none !important;
 }
@@ -59,8 +61,7 @@ border-radius:50%;
         height: 10px;
         width: 10px;
 }
-.select-name-project{
-}
+
 
 .MuiTab-root:focus{
         outline: 0 !important;

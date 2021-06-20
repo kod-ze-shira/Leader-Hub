@@ -84,20 +84,26 @@ function TaskNotBelongDetails(props) {
             }
             else
                 if (props.arrDeleteFilesOfTask.length) {
+
+
+                    let arrayUrl = []
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
+                        arrayUrl.push(props.arrDeleteFilesOfTask[index].url)
                         // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                //    props.task.files.splice(index2,1);
-                                delete props.task.files[index2];
+                                props.task.files.splice(index2, 1);
+                                // delete props.task.files[index2];
                             }
                             // first element removed
                         }
                         // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
 
                     }
+
+                    props.removeFile(arrayUrl)
+                    debugger
                     props.EditTask(props.task)
-                    // props.removeFile(props.ArrDeleteFilesOfTask)
 
                 } else
                     props.EditTask({ 'type': 'taskNotBelong2', 'idTask': props.task._id })
@@ -184,10 +190,9 @@ function TaskNotBelongDetails(props) {
     }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
-        debugger;
         return <File file={file}
-         setDownloadFile={(e) =>props.setDownloadFile(e)} 
-             />
+            setDownloadFile={(e) => props.setDownloadFile(e)}
+        />
     }) : null
     return (
         <>

@@ -23,6 +23,10 @@ function ViewFilesOfProject(props) {
     const [countFoldersArr, setCountFoldersArr] = useState(0)
     const [cardName, setCardName] = useState('')
 
+    useEffect(() => {
+
+        props.getFilesForProject(props.indexCurrentProject)
+    }, [])
 
     function downloadFile(e) {
 
@@ -91,10 +95,13 @@ function ViewFilesOfProject(props) {
 
 const mapStateToProps = (state) => {
     return {
-        FilesOfProject: state.public_reducer.filesForProjectArr
+        FilesOfProject: state.public_reducer.filesForProjectArr,
+        indexCurrentProject: state.public_reducer.indexCurrentProject,
+        workspacesIndex: state.public_reducer.indexOfWorkspace,
+
     }
 }
-const mapdispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
@@ -102,4 +109,4 @@ const mapdispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapdispatchToProps)(ViewFilesOfProject)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewFilesOfProject)

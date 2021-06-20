@@ -13,7 +13,6 @@ function FilesOfProject(props) {
 
 
     const filesForDownload = []
-    const downloadRef = useRef()
 
     function addOrRemoveFileToArr(e, file, ref) {
 

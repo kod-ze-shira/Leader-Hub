@@ -77,9 +77,11 @@ export const getTaskStatusesOfProject = ({ dispatch, getState }) => next => acti
                 return result.json()
             })
             .then((result) => {
-                dispatch(actions.setTaskStatusesOfProject(result.statuses))
-            }).catch(err => {
-                console.log(err);
+
+                checkPermission(result).then((ifOk) => {
+                    dispatch(actions.setTaskStatusesOfProject(result.statuses))
+
+                })
             })
     }
     return next(action);
@@ -123,11 +125,9 @@ export const getFilesForProject = ({ dispatch, getState }) => next => action => 
                 console.log('data' + data.projectFiles);
                 dispatch(actions.setFilesForProject(data.projectFiles))
             },
-            error: (err) => {
-                console.log('err' + err.statusText);
+            error: function (err) {
 
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         })
@@ -154,6 +154,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 }),
             dataType: 'json',
             success: function (data) {
+                debugger
                 dispatch(actions.addProjectToProjects(data.message))
 
             },

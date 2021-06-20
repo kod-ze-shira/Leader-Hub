@@ -86,6 +86,15 @@ textarea:focus{
 .css-2b097c-container{
     border:none !important;
 }
+.css-2b097c-container:active{
+  background-color:#98A9BC !important;
+}
+.css-2b097c-container:focus{
+  background-color:#98A9BC !important;
+}
+.css-2b097c-container:active{
+  background-color:#98A9BC !important;
+}
 .mils{
     display: inline;
 }
