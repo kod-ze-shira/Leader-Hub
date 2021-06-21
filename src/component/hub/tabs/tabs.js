@@ -14,7 +14,7 @@ import title from '../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 
 function Tabs(props) {
-    
+
     const { idProject } = useParams();
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -42,9 +42,12 @@ function Tabs(props) {
     }, [props.workspaces])
 
     useEffect(() => {
-        if (props.cards.length)
+        debugger
+        // if (props.cards.length) {
+        if (props.cards.length || props.cardsEmpty == true) {
             setIfAnimation(false)
-    }, [props.cards.length])
+        }
+    }, [props.cards.length, props.cardsEmpty])
 
 
     function onDragEndׂ(e) {
@@ -232,8 +235,10 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
+                        viewToastComplete={props.viewToastComplete}
                         setDownloadFile={(e) => setDownloadFile(e)}
-                        open={true}> </ViewDetails>
+                        open={true}>
+                    </ViewDetails>
                 </div>
                 : null}
         </div>
@@ -255,7 +260,9 @@ export default connect(
             workspaces: state.public_reducer.workspaces,
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-            statuses: state.public_reducer.statuses
+            statuses: state.public_reducer.statuses,
+            cardsEmpty: state.public_reducer.cardsEmpty
+
         }
     },
     (dispatch) => {

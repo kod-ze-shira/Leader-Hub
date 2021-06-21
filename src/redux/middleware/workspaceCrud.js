@@ -55,6 +55,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projects)
                 })
             })
+            
     }
 
     return next(action);
@@ -170,7 +171,8 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
                     dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
                 })
-
+            }).catch((error)=>{
+                console.log(error);
             })
     }
     return next(action);
@@ -178,19 +180,6 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 }
 
 //this func to check the headers jwt and username, if them not good its throw to login
-// function checkPermission(result) {
-//     return new Promise((resolve, reject) => {
-//         if (result.status == "401") {
-//             result.routes ?
-//                 window.location.assign(`https://dev.leader.codes/login?des=${result.des}'&routes='${result.routes}`) :
-//                 window.location.assign(`https://dev.leader.codes/login?des=${result.des}`)
-//             reject(false)
-
-//         }
-//         resolve(true)
-
-//     })
-// }
 
 function checkPermission(result) {
     return new Promise((resolve, reject) => {

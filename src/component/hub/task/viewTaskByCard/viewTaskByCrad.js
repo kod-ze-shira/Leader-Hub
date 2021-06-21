@@ -255,7 +255,7 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon pl-3 " id={props.task._id}></img>
+                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
@@ -314,14 +314,14 @@ function ViewTaskByCrad(props) {
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
-                                <label className="check-task border-left    px-2 col " >
+                                <label className="check-task border-left    px-2 col-status " >
                                     <div className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
                                     </div>
                                 </label>
-                                <label className="check-task border-left  px-2 col">{props.task.startDate}
+                                <label className="check-task border-left  col">{props.task.startDate}
                                 </label>
-                                <label className="check-task border-left  px-2 col">{props.task.dueDate}
+                                <label className="check-task border-left  col">{props.task.dueDate}
                                 </label>
                                 <label className="check-task border-left  px-2 col-priority">{props.task.priority ?
                                     <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
@@ -335,6 +335,7 @@ function ViewTaskByCrad(props) {
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
+                                            viewToastComplete={props.viewToastComplete}
                                         > </ViewDetails>
                                     </div>
                                     : null}

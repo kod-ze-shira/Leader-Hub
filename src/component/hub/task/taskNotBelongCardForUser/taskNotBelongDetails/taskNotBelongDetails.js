@@ -6,7 +6,7 @@ import { actions } from '../../../../../redux/actions/action'
 import '../../taskDetails/taskDetails.css'
 import UploadFile from '../../../uploadFile/uploadFile'
 import File from '../../../uploadFile/file/file'
-import ViewAllStatuses from '../../../status/viewAllStatuses';
+// import ViewAllStatuses from '../../../status/viewAllStatuses';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
@@ -77,7 +77,7 @@ function TaskNotBelongDetails(props) {
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
-                newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
+                newFiles = props.arrFilesOfTask.filter((file) => file.url === 'new')
             if (newFiles.length) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task, 'type': 'taskNotBelong' })
@@ -137,12 +137,12 @@ function TaskNotBelongDetails(props) {
     const changeFiledInTask = (input) => {
         let editTaskInRedux
         let value = input.target.value
-        if (input.target.name == "startDate") {
+        if (input.target.name === "startDate") {
             value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
         }
         else
-            if (input.target.name == "dueDate") {
+            if (input.target.name === "dueDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             }

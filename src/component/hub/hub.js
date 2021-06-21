@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
+
     // Link,
     // Redirect,
 } from 'react-router-dom';
 import history from "../history"
 import CalendarComponent from './calendar/CalendarComponent';
 import CardsPage from './cardsPage/cardsPage'
-import ToastMessage from "./toast/toastMessage";
+// import Toast from "./toast/toastTaskCompleted";
 import ProjectsPage from './project/projectsPage/projectsPage'
+// import ViewFilesOfProject from '../hubFeature/Overview/viewFilesOfProject/viewFilesOfProject'
 import './hub.css'
 import TaskNotBelongCardForUser from './task/taskNotBelongCardForUser/taskNotBelongCardForUser'
 import ToastDelete from './toastDelete/toastDelete1';
@@ -20,6 +22,7 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 // import AddObject from './addObject/addObject'
+// import HeaderLeader from '@leadercodes/leader-header'
 // import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
@@ -27,27 +30,25 @@ import { Token } from '../../redux/Store/Store'
 import DisplayGantt from '../Gantt/DisplayGantt/displayGantt';
 import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
-import Hangout from "../hubFeature/Overview/hangout/hangout";
+// import Hangout from "../hubFeature/Overview/hangout/hangout";
 import selectTask from './SelectHeader/selectTask/selectTask';
+import ToastMessage from '../hub/toast/toastMessage'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
-    const [showToastComplete, setShowToastComplete] = useState({ show: false })
+    const [showToastComplete, setShowToastComplete] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     const [openCalander, setOpenCalander] = useState(false)
     // const [objectToDelete, setObjectToDelete] = useState()
-    // useEffect(() => {
-    //     props.objectBeforeChanges({ 'type': 'workspace', 'workspace': workspaceBeforeChanges })
-    // }, [props.workspaces])
 
     const showToastToDelete = (objectToDelete_) => {
-        
+
         // setObjectToDelete(objectToDelete_)
-        if (objectToDelete_.type == 'Task') {
+        if (objectToDelete_.type === 'Task') {
 
             objectToDelete.push(objectToDelete_)
             setObjectToDeleteLocal(objectToDelete_)
@@ -91,7 +92,6 @@ function Hub(props) {
         setObjectToDelete([])
         setObjectToDeleteLocal()
     }
-
 
     const showToast = () => {
         objectToDelete.push(objectToDeleteLocal)
@@ -193,9 +193,12 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
+                            {/* <ProtectedRoute path={"/:userName/hub/projectPlatform/:indexCurrentProject/Overview/:cardId"}>
+                                <ViewFilesOfProject />
+                            </ProtectedRoute> */}
                             <ProtectedRoute path={"/"} >
                                 {/* to send login if has not userName */}
-                             
+
                             </ProtectedRoute>
                         </Switch>
                     </div>
@@ -208,21 +211,25 @@ function Hub(props) {
                         : null}
 
                     {showToastComplete.show ?
-                        <ToastMessage message={showToastComplete.massege} viewToastComplete={(val) => setShowToastComplete(val)} /> : null}
 
-                    {showContactList ?
+                        <ToastMessage message={showToastComplete.massege}
+                            viewToastComplete={(val => setShowToastComplete(val))}
+                        />
+                        : null}
+
+                    {/*   {showContactList ?
                         <ContactList hub={true} />
                         : null}
                     {openCalander ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
-                        : null}
+                        : null} */}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
                 </div>
 
             </Router >
-          
+
         </>
     )
 }

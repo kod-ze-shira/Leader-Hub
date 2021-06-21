@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    function ViewDetails( props) {
+    function ViewDetails(props) {
 
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)
@@ -47,6 +47,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
                         setDownloadFile={(e) => props.setDownloadFile(e)}
+                        viewToastComplete={props.viewToastComplete}
 
                     />
                 case 'editWorkspace'://on click edit button of workspace

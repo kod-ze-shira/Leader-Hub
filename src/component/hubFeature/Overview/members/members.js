@@ -1,8 +1,12 @@
 import AddMembers from "./addMembers/addMembers";
 import ViewMembers from "./veiwMembers/viewMembers";
-import React from 'react';
+import React, { useState } from 'react';
+import ListMembers from "./listMembers/listMembers";
+import './members.css'
 
 export default function Mmebers() {
+    const [membersList, setMembersList] = useState(false);
+    console.log("membersList", membersList)
 
     return (
         <>
@@ -12,9 +16,15 @@ export default function Mmebers() {
                     <h4>Project Members</h4>
                 </div>
                 <div className="row">
-                    <AddMembers />
+                    <AddMembers setMembersList={setMembersList} />
                     <ViewMembers />
                 </div>
+                {
+                    membersList ?
+                        <div className="positionListMembers d-flex justify-content-center">
+                            <ListMembers setMembersList={setMembersList} membersList={membersList} />
+                        </div> : null
+                }
             </div>
         </>
     )

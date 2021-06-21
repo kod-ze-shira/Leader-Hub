@@ -92,7 +92,10 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
+
         if (nameRequired.current.value) {
+            if (milstone)
+                props.viewToastComplete({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -123,7 +126,9 @@ function TaskDetails(props) {
                     props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
-                } else
+                }
+
+                else
                     props.EditTask(props.task)
             props.closeViewDetails();
 
@@ -251,7 +256,7 @@ function TaskDetails(props) {
 
                         <div className="row justify-content-between mx-1" >
                             <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>

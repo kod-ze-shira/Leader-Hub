@@ -85,47 +85,47 @@ function SelectProject(props) {
     };
     const viewProjectsList = props.workspaces[props.indexWorkspace].projects ?
         props.workspaces[props.indexWorkspace].projects.map((project, index) => (
-            project.name ?  {
+            project.name ? {
                 value: project._id, label:
-                <div className="d-flex flex-row" style={{ color: project.color }}>
-                {/* <span className="dot dotProject "
+                    <div className="d-flex flex-row" style={{ color: project.color }}>
+                        {/* <span className="dot dotProject "
                     style={{ 'background-color': project.color }} >
                 </span> */}
-                <div style={{marginTop:'0.5px'}}>
-                    <ProjectStyle color={project.color}></ProjectStyle>
-                </div>
-                <span className="select-not-belong project-select-not-belong">{project.name}</span>
-            </div >,
+                        <div style={{ marginTop: '0.5px' }}>
+                            <ProjectStyle color={project.color}></ProjectStyle>
+                        </div>
+                        <span className="select-not-belong project-select-not-belong">{project.name}</span>
+                    </div >,
                 projectIndex: index
-            }: null
+            } : null
         )) : null
-        const placeholder=props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.name ?
-            <div className="d-flex flex-row" style={{ color: project.color }}>
-            <div style={{marginTop:'0.5px'}}>
+    const placeholder = props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.name ?
+        <div className="d-flex flex-row" style={{ color: project.color }}>
+            <div style={{ marginTop: '0.5px' }}>
                 <ProjectStyle color={project.color}></ProjectStyle>
             </div>
             <span className="select-not-belong project-select-not-belong">{project.name}</span>
         </div >
-       :"All Projects"
-  
-        // props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"
-        const style = {
-            control: (base, state) => ({
-                ...base,
-                backgroundSize: '10px 10px',
-                backgroundPosition: '90%',
-                backgroundImage: `url(${Background})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+        : "All Projects"
+
+    // props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"
+    const style = {
+        control: (base, state) => ({
+            ...base,
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            border: 0,
+            // This line disable the blue border
+            boxShadow: 0,
+            "&:hover": {
                 border: 0,
-                // This line disable the blue border
-                boxShadow: 0,
-                "&:hover": {
-                    border:  0,
-                    backgroundColor:'#eeeeee' ,    
-                }
-            })
-        };
+                backgroundColor: '#eeeeee',
+            }
+        })
+    };
     return (
         <>
             <div className="react-select">
@@ -142,14 +142,14 @@ function SelectProject(props) {
                     onChange={(e) => changeSelectedProject(e)}
                     className="select-project"
                     placeholder={placeholder}
-                   name="color"
+                    name="color"
                     options={viewProjectsList}
-                    placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject] ?
-                        props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"}
+                    // placeholder={props.workspaces[props.indexWorkspace].projects[props.indexProject] ?
+                    //     props.workspaces[props.indexWorkspace].projects[props.indexProject].name : "All Projects"}
                     styles={style}
 
                 />
-               
+
             </div>
         </>
     )

@@ -123,6 +123,9 @@ function ViewTaskByCradTabs(props) {
             "likes": props.task.likes,
             "assingTo": props.task.assingTo,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.task.files ? props.task.files : null,
+            "priority": props.task.priority
+
         }
         // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
         // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
@@ -257,6 +260,7 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
+                                {myFiles}
 
                                 <input
                                     className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
@@ -271,7 +275,7 @@ function ViewTaskByCradTabs(props) {
                                             editTask()
                                         }
                                     }}
-                                ></input>
+                                />
 
                                 {/* <span
                                     name="name"
@@ -284,9 +288,7 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.name}
                                 </span> */}
 
-                                {myFiles}
                                 <div className="icons-in-task-tabs pt-0">
-
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
                                             <div> {props.task.priority ?

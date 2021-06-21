@@ -14,6 +14,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     if (window.location.hostname == "localhost") {
         jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko'
     }
+    
     else {
         if (document.cookie) {
             jwtFromCookie = document.cookie.includes('jwt') ?
@@ -28,8 +29,9 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     let routes
     let userName
-    if(rest.computedMatch.path.includes('share'))
-    userName='share'
+
+    if (rest.computedMatch.path.includes('share'))
+        userName = 'share'
     else
         userName = rest.computedMatch.params.userName;
     useEffect(() => {
