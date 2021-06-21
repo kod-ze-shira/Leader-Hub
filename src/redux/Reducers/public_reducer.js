@@ -157,12 +157,10 @@ const publicData = {
 
     },
     setCountReadyTasks(state, action) {
-        debugger
         if (action.payload)
             state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countReadyTasks += 1
         else
             state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].countReadyTasks -= 1
-
     },
     setCountTasks(state, action) {
         if (action.payload)
@@ -346,9 +344,11 @@ const publicData = {
         )
     },
 
-
     addWorkspaceToWorkspaces(state, action) {
         state.workspaces.push(action.payload)
+    },
+    addWorkspaceToWorkspacesFromServer(state, action) {
+            state.workspaces[state.indexOfWorkspace] = action.payload
     },
 
 

@@ -78,12 +78,14 @@ function AllWorkspaces(props) {
     //     $('[data-toggle="tooltip"]').tooltip()
     // })
     function openAddNewWorkspace(e) {
+        props.addWorkspaceToWorkspaces({ description: "", name: "" })
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
         e.stopPropagation()
     }
     $(window).click(function () {
         setShowWorkspace(false)
+        // props.addWorkspaceToWorkspacesFromServer(null)//to delete workspace in redux
     });
     function stopP(event) {
         event.stopPropagation();
@@ -203,12 +205,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
+        addWorkspaceToWorkspaces: (props) => dispatch(actions.addWorkspaceToWorkspaces(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser())
-
+        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser()),
+        addWorkspaceToWorkspacesFromServer: (obj) => dispatch(actions.addWorkspaceToWorkspacesFromServer(obj))
     }
 
 

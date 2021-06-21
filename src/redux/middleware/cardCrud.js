@@ -118,7 +118,6 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log(data.project)
-                debugger
                 dispatch(actions.deleteCard(data.project))
                 // dispatch(actions.deleteCard(data))
 

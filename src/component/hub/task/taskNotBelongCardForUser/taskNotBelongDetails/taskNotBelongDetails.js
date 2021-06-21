@@ -102,7 +102,6 @@ function TaskNotBelongDetails(props) {
                     }
 
                     props.removeFile(arrayUrl)
-                    debugger
                     props.EditTask(props.task)
 
                 } else

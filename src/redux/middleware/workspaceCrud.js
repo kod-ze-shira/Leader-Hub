@@ -78,7 +78,7 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                dispatch(actions.addNewWorkspace(data.message))
+                dispatch(actions.addWorkspaceToWorkspacesFromServer(data.message))
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
@@ -153,6 +153,7 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
+      
         fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',

@@ -20,7 +20,6 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value = input.target.value ? input.target.value : input.target.innerText
         if (!value)
@@ -31,7 +30,7 @@ function EditProject(props) {
     }
 
     const changeDateInProject = (input) => {
-        debugger
+        
         let res = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
         let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         setDueDateProject(input.target.value)
