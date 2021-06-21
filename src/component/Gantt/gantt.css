@@ -36,7 +36,7 @@
   background : linear-gradient(to right, #c5eee5 0%, #34A38B 100%);
   color: white;
 }
-.greenBorder {
+.gantt_task_line.greenBorder {
   border-radius: 5px !important;
   border: #34A38B 3px solid !important;
   color: white !important;
@@ -47,9 +47,9 @@
   color: white !important;
 }
 .greenBorder .gantt_task_content{
-  color: white !important;
+  /* color: white !important; */
 }
-.pinkBorder {
+.gantt_task_line.pinkBorder  {
   border-radius: 5px !important;
   border: #FD808B 3px solid !important;
   background-color: white !important;
@@ -64,7 +64,7 @@
   text-align: end;
   align-items: end;
 }
-.orangeBorder {
+.gantt_task_line.orangeBorder {
   border-radius: 5px !important;
   border:  #F8B520 3px solid !important;
   background-color: white !important;

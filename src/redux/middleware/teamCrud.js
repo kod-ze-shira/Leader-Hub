@@ -268,7 +268,6 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
     })
       .then(data => {
         checkPermission(data).then(() => {
-
           console.log(data);
           dispatch(actions.setMembers(data))
         })
