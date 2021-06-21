@@ -4,7 +4,7 @@ import createReducer from './reducerUtils';
 const initialState = {
     overdueTasks:0,
     taskStatusesOfProject:[],  
-    members: [],
+    // members: [],
 
 }
 
@@ -15,12 +15,12 @@ const overview={
     setTaskStatusesOfProject(state, action) {
         state.taskStatusesOfProject = action.payload;
     },
-    setMembers(state, action) {
-        state.members = action.payload;
-    },
-    setMember(state, action){
-        state.members.push(action.payload);
-    }
+    // setMembers(state, action) {
+    //     state.members = action.payload;
+    // },
+    // setMember(state, action){
+    //     state.members.push(action.payload);
+    // }
 
 }
 export default produce((state, action) => createReducer(state, action, overview), initialState);

@@ -27,9 +27,6 @@ function ViewLogs(props) {
                         {dateInString}
                     </div>
                 </div>
-                {/* <div className=" logDate">
-                    {dateInString}
-                </div> */}
                 <div className="row">
                     <div className="col ml-5 logUser">
                         {user}

@@ -34,7 +34,7 @@ function SelectHeader(props) {
     const classes = useStyles();
 
     // const [value, setValue] = useState(props.number);
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
 
     const color = '#00C6EA'
     const { idProject } = useParams();
@@ -154,9 +154,9 @@ function SelectHeader(props) {
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                                 aria-label="scrollable prevent tabs example"
                             >
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
                                 <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
                                 <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
                                 <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
 
                             </Tabs>

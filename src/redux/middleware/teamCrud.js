@@ -119,6 +119,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         },
         body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
+        console.log('resultShareObject',result);
         return result.json();
       }).then((result) => {
         checkPermission(result).then((ifOk) => {
@@ -268,7 +269,6 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
     })
       .then(data => {
         checkPermission(data).then(() => {
-
           console.log(data);
           dispatch(actions.setMembers(data))
         })
