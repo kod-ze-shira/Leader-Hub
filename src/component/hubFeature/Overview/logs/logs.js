@@ -4,24 +4,30 @@ import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
-    // const [logs, setLogs] = useState()
-    // useEffect(() => {
-    //     if (props.workspacesIndex) {
-    //         setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
-    //     }
-    // }, [props.workspacesIndex])
+    const [logs, setLogs] = useState(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+    useEffect(() => {
+        if (props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs) {
+            setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+        }
+    }, [props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs])
 
-    let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
+    let logsReverse = [...logs];
+    logsReverse.reverse();
 
     const renderViewLogs = () => {
-        return logs.reverse().map(log => {
-            return <ViewLogs
-                schemaName={log.staticLog.name}
-                icon={log.staticLog.icon}
-                user={log.user}
-                date={log.date}
-            />
-        })
+        debugger
+
+        if (typeof(logsReverse[0]) !== "string")
+            return logsReverse.map(log => {
+                return <ViewLogs
+                    schemaName={log.staticLog.name}
+                    icon={log.staticLog.icon}
+                    user={log.user}
+                    date={log.date}
+                />
+            })
+        else
+            return null;
     }
 
     return (
