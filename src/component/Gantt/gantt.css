@@ -51,7 +51,7 @@
 }
 .pinkBorder {
   border-radius: 5px !important;
-  border: #FD808B 3px solid !important;
+  border:  3px solid #FD808B!important;
   background-color: white !important;
 }
 .pinkBorder:hover {
