@@ -209,7 +209,7 @@ function TaskNotBelongDetails(props) {
 
                         <div className="row justify-content-between mx-1" >
                             <label>Create {props.task.startDate}</label>
-                            <label className="">Last Update {props.task.dueDate}</label>
+                            <label className="">Last Update {props.task.updateDates}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>

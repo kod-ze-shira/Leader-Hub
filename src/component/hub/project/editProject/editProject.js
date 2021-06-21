@@ -20,7 +20,7 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-        debugger
+
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value = input.target.value ? input.target.value : input.target.innerText
         if (!value)
