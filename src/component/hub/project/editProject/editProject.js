@@ -20,7 +20,6 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value = input.target.value ? input.target.value : input.target.innerText
         if (!value)
@@ -31,7 +30,7 @@ function EditProject(props) {
     }
 
     const changeDateInProject = (input) => {
-        debugger
+        
         let res = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
         let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         setDueDateProject(input.target.value)
@@ -77,7 +76,7 @@ function EditProject(props) {
 
             <div className="details mr-4 ml-4">
                 <div className='propertiesViewDitails'>
-                    <div className='row mt-4 mb-1 justify-content-between headerDitails'>
+                    <div className='row my-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Project details</h5>
                         <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
@@ -99,7 +98,7 @@ function EditProject(props) {
                         <label for="description">Description</label>
                         <div class="form-control descriptionProject"
                             name="description"
-                            id="descriptionProject" rows="5"
+                            id="descriptionProject" rows="3"
                             placeholder="Write a description about your project"
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
                             // onChange={(input) => changeFiledInProject(input)}

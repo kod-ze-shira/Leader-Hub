@@ -18,11 +18,12 @@ function SelectWorkspace(props) {
     }, [props.workspaces])
 
     //to change the workspace that user selected
-    let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
+
+        let myWorkspace = props.workspace;
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
 
-        if (myWorkspace.projects[0]) {
+        if (myWorkspace?.projects?.[0]) {
             props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
         }
@@ -32,22 +33,67 @@ function SelectWorkspace(props) {
 
     }
 
-    const viewWorkspacesList = props.workspaces.map((workspace, index) => (
-        { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
-    ))
+    // const viewWorkspacesList = props.workspaces.map((workspace, index) => (
+    //     { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
+    // ))
+
+    const viewWorkspacesList = props.workspaces ? props.workspaces.map((workspace, index) => (
+        workspace.name ? {
+            value: workspace._id, label:
+                <div className="d-flex flex-row" >
+                    <div  >
+                        <div className="  logo-w-little workspace-wrap-logo"
+                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
+                        >
+                            {workspace.name ? workspace.name[0].toUpperCase() : null}
+                        </div>
+                    </div>
+                    <div className="select-not-belong">
+                        {workspace.name}
+                    </div>
+                </div >, title: workspace.name, workspaceIndex: index
+        } : null
+    )) : null
+
+
+    const placeholder = props.workspaces[props.indexOfWorkspace] ?
+        <div className="d-flex flex-row" >
+            <div  >
+                <div className="logo-w-little workspace-wrap-logo"
+                    style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', 'text-align': 'center' }}
+                >
+                    {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
+                </div>
+            </div>
+            <div className="select-not-belong">
+                {props.workspaces[props.indexOfWorkspace].name}
+            </div>
+        </div >
+        : <div className="d-flex flex-row" >
+            <div  >
+                <div className="logo-w-little workspace-wrap-logo"
+                    style={{ backgroundColor: props.workspaces[0]?.color, display: 'inline-block', 'text-align': 'center' }}
+                >
+                    {props.workspaces[0]?.name ? props.workspaces[0]?.name[0].toUpperCase() : null}
+                </div>
+            </div>
+            <div className="select-not-belong">
+                {props.workspaces[0]?.name}
+            </div>
+        </div >
     const style = {
         control: (base, state) => ({
             ...base,
-            // backgroundSize: '10px 10px',
-            // backgroundPosition: '90%',
-            // backgroundImage: `url(${Background})`,
-            // backgroundRepeat: 'no-repeat',
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-            border: state.isFocused ? 0 : 0,
+            border:  0,
             // This line disable the blue border
-            boxShadow: state.isFocused ? 0 : 0,
+            boxShadow:  0,
             "&:hover": {
-                border: state.isFocused ? 0 : 0,
+                border: 0,
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             }
         })
@@ -58,15 +104,25 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                <LetterLogo className="workspace-logo"
-                    nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
+                {/* <LetterLogo className="workspace-logo"
+                    nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} /> */}
                 <Select
+                    theme={theme => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary25: '#68c7cb1a',
+                            primary: '#68C7CB',
+                            primary50: '#68C7CB',
+                        },
+                    })}
                     className="select-workspace selectInHeader"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
-                    placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
+                    placeholder={placeholder}
+                    // placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
                     styles={style}
                     components={{ Input }}
                 // onInputChange={inputValue =>

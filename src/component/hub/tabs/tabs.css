@@ -83,10 +83,11 @@ a .add-card-tabs{
     /* Handle */
     .body-cards::-webkit-scrollbar-thumb { 
       border-radius: 10px;
+      background: #b0b1b1; 
     }
     
     /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #919494; 
-    }
+    /* ::-webkit-scrollbar-thumb:hover {
+      background: #b0b1b1; 
+    } */
     
