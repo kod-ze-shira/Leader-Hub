@@ -65,7 +65,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
         checkPermission(err).then((ifOk) => {
         })
-    }
+      }
     });
 
   }
@@ -122,40 +122,35 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         console.log('resultShareObject',result);
         return result.json();
       }).then((result) => {
-
-        let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
-        dispatch(actions.createSystemWave({
-          "subject": "Share project",
-          "body":
-            `<p>Hi ${getState().public_reducer.userName}</p>
-          <p>You have successfully shared the project 
-          <span  style='background-color: ${project.color} !important;
-          height: 7px;
-          width: 7px;
-          background-color: #bbb;
-          border-radius: 50%;
-          display: inline-block;
-          margin-right: 2px;
-          margin-left: 4px;'></span>
-          <span style='color:${project.color} !important'> ${project.name}</span></p> 
-          <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
-          "to": [getState().public_reducer.userName],
-          "from": "hub@noreply.leader.codes",
-          "source": "Hub",
-          "files": null
-        })).catch(err=>{
-          console.log(err);
-        })
-
-
-
         checkPermission(result).then((ifOk) => {
-          // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
-          dispatch(actions.setMembers(result))
+          let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
+          dispatch(actions.createSystemWave({
+            "subject": "Share project",
+            "body":
+              `<p>Hi ${getState().public_reducer.userName}</p>
+            <p>You have successfully shared the project 
+            <span  style='background-color: ${project.color} !important;
+            height: 7px;
+            width: 7px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 2px;
+            margin-left: 4px;'></span>
+            <span style='color:${project.color} !important'> ${project.name}</span></p> 
+            <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+            "to": [getState().public_reducer.userName],
+            "from": "hub@noreply.leader.codes",
+            "source": "Hub",
+            "files": null
+
+
+          }))
         })
 
       })
-
+    // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
+    // })
   }
   return next(action);
 }
@@ -274,7 +269,6 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
     })
       .then(data => {
         checkPermission(data).then(() => {
-
           console.log(data);
           dispatch(actions.setMembers(data))
         })

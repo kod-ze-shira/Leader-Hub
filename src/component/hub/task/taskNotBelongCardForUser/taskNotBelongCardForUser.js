@@ -46,12 +46,12 @@ function TaskNotBelongCardForUser(props) {
             <div className='input-group-task-not-belongs d-flex '>
 
                 <button
-                    className={showBtn ? 'd-block btn-add-task p-2  mr-2 ml-4 mr-auto' : 'd-none '}
+                    className={showBtn ? 'd-block btn-add-task py-1 px-3 mr-2 ml-4 mr-auto' : 'd-none '}
                     onClick={hundleClick}>
                     {/* <img width="22" className="icon-complete" id="complete"
                         src={require('../../../img/plus.png')}>
                     </img>‏ */}
-                    <span className="icon-complete">+</span>
+                    {/* <span className="icon-complete">+</span> */}
                     Add Task </button>
                 <div className={showBtn ? 'd-none' :
                     'wrap-input d-block  col-6 col-lg-8  pr-0  mr-md-auto  mr-2 ml-4'}>
