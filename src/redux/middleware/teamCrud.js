@@ -119,6 +119,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         },
         body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
+        console.log('resultShareObject',result);
         return result.json();
       }).then((result) => {
 

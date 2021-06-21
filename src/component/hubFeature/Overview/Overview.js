@@ -74,7 +74,7 @@ function Overview(props) {
                             {/* {refresh ? */}
                             <>
                                 <div className='row mb-3 minHeight'>
-                                    <Hangout></Hangout>
+                                    {/* <Hangout></Hangout> */}
                                 </div>
                                 <div className='row minHeight'>
                                     <Logs />

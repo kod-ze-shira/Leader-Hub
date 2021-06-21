@@ -154,7 +154,6 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 }),
             dataType: 'json',
             success: function (data) {
-                debugger
                 dispatch(actions.addProjectToProjects(data.message))
 
             },
