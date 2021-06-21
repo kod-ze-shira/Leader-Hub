@@ -8,16 +8,13 @@ function Logs(props) {
     // useEffect(() => {
     //     if (props.workspacesIndex) {
     //         setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
-    //         debugger
     //     }
     // }, [props.workspacesIndex])
 
     let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
-    console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
-    let logsReverse = logs ? logs.reverse() : null;
 
     const renderViewLogs = () => {
-        return logs.map(log => {
+        return logs.reverse().map(log => {
             return <ViewLogs
                 schemaName={log.staticLog.name}
                 icon={log.staticLog.icon}

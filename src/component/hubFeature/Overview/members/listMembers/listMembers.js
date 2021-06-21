@@ -20,10 +20,10 @@ function ListMembers(props) {
             getContacts()
         setContacts(contactsList)
     }, [])
-    useEffect(()=>{
-        if(flagAdd===true)
-        document.getElementsByClassName('inputAdd')[0].focus();
-    },[flagAdd])
+    useEffect(() => {
+        if (flagAdd === true)
+            document.getElementsByClassName('inputAdd')[0].focus();
+    }, [flagAdd])
 
 
     function ValidateEmail(mail) {
@@ -52,6 +52,7 @@ function ListMembers(props) {
     function clickAddMember() {
         if (ValidateEmail(add)) {
             shareObject({ shareDetails: [{ member: add, permission: 'viewer' }] })
+            getContacts();
             setMembersList(false)
         }
         else {
@@ -62,10 +63,11 @@ function ListMembers(props) {
     return (
         <>
             <div className='container membersToAdd'>
-                <input className='row inputSearch' type='text' placeholder='enter name or email' onChange={(e) => {
+                <input className='row inputSearch mt-1 ml-1' type='text' placeholder='enter name or email' onChange={(e) => {
                     searchContacts(e)
                 }} />
-                {contacts.length !== 0 ? contacts.map(cl => <OneMemberToAdd member={cl} clickMembers={clickMembers} />)
+                {contacts.length !== 0 ?
+                    contacts.map(cl => <OneMemberToAdd member={cl} clickMembers={clickMembers} />)
                     : <p>No Members</p>}
                 <div className="row">
                     {
@@ -74,8 +76,10 @@ function ListMembers(props) {
                                 setFlagAdd(true)
                             }}>+ Add Members</button> :
                             <>
-                                <input className='inputAdd col-8' type="text" defaultValue={search} placeholder='enter email' onChange={e => setAdd(e.target.value)} />
-                                <button className='col-4 cursorPoint' onClick={e => clickAddMember()}>+ Add</button>
+                                <div className='d-flex justify-content-around'>
+                                    <input className='inputAdd col-7 mb-1 ' type="text" defaultValue={search} placeholder='enter email' onChange={e => setAdd(e.target.value)} />
+                                    <button className=' buttonAdd col-4  mb-1 cursorPoint' onClick={e => clickAddMember()}>+ Add</button>
+                                </div>
                                 {validEmail ?
                                     <p>The mail is not valid</p> : null}
                             </>
