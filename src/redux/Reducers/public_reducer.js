@@ -12,6 +12,7 @@ const initialState = {
     workspaces: [],
     projects: [],
     cards: [],
+    cardsEmpty: false,
     tasks: [],
     milestones: [],
     isConfiguratorOpen: "false",
@@ -282,6 +283,7 @@ const publicData = {
     },
     setCards(state, action) {
         state.cards = action.payload;
+        state.cardsEmpty = true
         return true
     },
     deleteProjectFromWorkspace(state, action) {
@@ -295,6 +297,8 @@ const publicData = {
         state.projects.find(project => {
             if (project._id == action.payload)
                 state.cards = project.cards
+            state.cardsEmpty = true
+
         })
     },
 
@@ -309,6 +313,7 @@ const publicData = {
             state.cards.push(action.payload)
         else
             state.cards[0] = action.payload
+        state.cardsEmpty = true
         let cards = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
         cards[cards.length] = action.payload
 
