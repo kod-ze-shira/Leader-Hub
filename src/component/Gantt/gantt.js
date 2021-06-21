@@ -87,7 +87,7 @@ export default class Gantt extends Component {
                 + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
 
             let editTaskInRedux = { "_id": task.id, "dueDate": newEndDate, "startDate": newStartDate }
-            store.dispatch(actions.editTask(editTaskInRedux))
+            // store.dispatch(actions.editTask(editTaskInRedux))
             if (task.progress > 1) {
                 // return task.text;
             }
@@ -139,12 +139,13 @@ export default class Gantt extends Component {
 
         });
 
-        gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
-            if (task.priority == "high") {
-                return true;
-            }
-            return false;
-        });
+        // gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
+        //     if (task.priority == "high") {
+        //         return true;
+        //     }
+        //     return false;
+       
+        // });
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;
         gantt.init(this.ganttContainer);
@@ -159,14 +160,27 @@ export default class Gantt extends Component {
 
         gantt.templates.task_class = function (start, end, task) {
 
-            if (task.progress > 0 && task.progress < 1) {
-                // return task.class = "pinkBorder";
+            // if (task.progress > 0 && task.progress < 1) {
+            //     // return task.class = "pinkBorder";
+            // }
+            // if (task.progress === 1) {
+            //     // return task.class = "greenBorder vv";
+            // }
+            // else {
+            //     // return task.class = "orangeBorder";
+            // }
+            // return task.class = "orangeBorder";
+
+            if (task.priority ==="High") {
+                debugger
+                return task.class = "pinkBorder";
             }
-            if (task.progress === 1) {
-                // return task.class = "greenBorder vv";
+            if (task.priority === "Low") {
+                debugger
+                return task.class = "greenBorder";
             }
             else {
-                // return task.class = "orangeBorder";
+                return task.class = "orangeBorder";
             }
             return task.class = "orangeBorder";
 

@@ -52,7 +52,7 @@ function DisplayGantt(props) {
             else cardName = card.name
             theTasks.push({
                 cardName: cardName,
-                priority: "high",
+                priority: task.priority ? task.priority.level : "Low",
                 id: task._id, text:
                     task.name, start_date:
                     startDate,
@@ -66,15 +66,15 @@ function DisplayGantt(props) {
     console.log("mone", mone);
     let currDate;
 
-    theTasks.push(
+    // theTasks.push(
 
-        {
-            "id": 2985730,
-            "text": "first",
-            "start_date": currDate,
-            "duration": 3,
-            "progress": 0.6,
-        })
+    //     {
+    //         "id": 2985730,
+    //         "text": "first",
+    //         "start_date": currDate,
+    //         "duration": 3,
+    //         "progress": 0.6,
+    //     })
 
 
     console.log("theTasks", theTasks);

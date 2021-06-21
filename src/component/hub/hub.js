@@ -32,6 +32,7 @@ import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
 // import Hangout from "../hubFeature/Overview/hangout/hangout";
 import selectTask from './SelectHeader/selectTask/selectTask';
+import ToastMessage from '../hub/toast/toastMessage'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -146,7 +147,9 @@ function Hub(props) {
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
                             <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
                                 <div className="body-workspace mt-4">
@@ -154,7 +157,9 @@ function Hub(props) {
                                 </div>
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                />
                             </ProtectedRoute>
 
                             {/* <ProtectedRoute path={"/workspacePlatform"}>
@@ -163,7 +168,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
-                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -178,7 +183,7 @@ function Hub(props) {
                             {/* share url */}
                             <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
-                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -205,10 +210,14 @@ function Hub(props) {
                         />
                         : null}
 
-                    {/* {showToastComplete ?
-                        <Toast /> : null}
+                    {showToastComplete.show ?
 
-                    {showContactList ?
+                        <ToastMessage message={showToastComplete.massege}
+                            viewToastComplete={(val => setShowToastComplete(val))}
+                        />
+                        : null}
+
+                    {/*   {showContactList ?
                         <ContactList hub={true} />
                         : null}
                     {openCalander ?

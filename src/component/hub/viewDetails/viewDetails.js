@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    function ViewDetails( props) {
+    function ViewDetails(props) {
 
         const [close, setclose] = useState(true)
         const [open, setOpen] = useState(true)

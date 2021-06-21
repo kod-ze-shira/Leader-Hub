@@ -10,7 +10,7 @@
 .gantt_task_line {
 
     border-radius: 5px !important;
-    border:  #F8B520 3px solid !important;
+    /* border:  #F8B520 3px solid !important; */
     background-color: white !important;
 }
 .gantt_task_content {
