@@ -70,9 +70,9 @@ function Overview(props) {
                         <div className='container-fluid px-0 '>
                             {/* {refresh ? */}
                             <>
-                                <div className='row mb-3 minHeight'>
+                                {/* <div className='row mb-3 minHeight'>
                                     <Hangout></Hangout>
-                                </div>
+                                </div> */}
                                 <div className='row minHeight'>
                                     <Logs />
                                 </div>
