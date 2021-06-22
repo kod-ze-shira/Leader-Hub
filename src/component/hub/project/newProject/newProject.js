@@ -15,7 +15,7 @@ function NewProject(props) {
     let [myStyle, setMyStyle] = useState('');
     let [myDueDate, setMyDueDate] = useState('')
     const nameRequired = useRef()
-
+  
     // let [dufultDateDueDate, setDufultDateDueDate] = useState()
     let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
@@ -150,7 +150,7 @@ function NewProject(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeNameInProject(e)}
-                            required ref={nameRequired}
+                            required ref={nameRequired} autoFocus 
                             id='nameProject' type="text" class="form-control" value={nameProject} />
                         <div class="invalid-feedback">
                             Please enter project name.

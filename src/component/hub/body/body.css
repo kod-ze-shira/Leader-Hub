@@ -51,4 +51,7 @@
   .body-workspace::-webkit-scrollbar-thumb {
     background: #b0b1b1; 
   }
+  .body::-webkit-scrollbar-thumb {
+    background: #b0b1b1; 
+  }
   
