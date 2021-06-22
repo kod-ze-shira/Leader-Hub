@@ -65,7 +65,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
         checkPermission(err).then((ifOk) => {
         })
-    }
+      }
     });
 
   }
@@ -142,7 +142,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
           "from": "hub@noreply.leader.codes",
           "source": "Hub",
           "files": null
-        })).catch(err=>{
+        })).catch(err => {
           console.log(err);
         })
 
@@ -190,7 +190,6 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 export const assingTo = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'ASSING_TO') {
-
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;
@@ -286,9 +285,11 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
   return new Promise((resolve, reject) => {
     if (result.status == "401") {
-      result.routes ?
-        window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-        window.location.assign(`https://dev.accounts.codes/hub/login`)
+      result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+        window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+        result.routes ?
+          window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+          window.location.assign(`https://dev.accounts.codes/hub/login`)
 
       reject(false)
 
@@ -297,4 +298,3 @@ function checkPermission(result) {
 
   })
 }
-

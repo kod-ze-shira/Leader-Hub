@@ -351,7 +351,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
                 if (data.result.card) {
                     dispatch(actions.deletTask(data.result))
                     dispatch(actions.setCountTasks())
-                    debugger
                     if (data.result.complete)
                         dispatch(actions.setCountReadyTasks(false))
                 }
@@ -375,7 +374,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'MOVE_TASK_BETWEEN_CARDS') {
-        debugger
         let cardSours = getState().public_reducer.cards[action.payload[3]].tasks ? getState().public_reducer.cards[action.payload[3]].tasks : []
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
@@ -541,9 +539,11 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

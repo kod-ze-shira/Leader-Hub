@@ -36,9 +36,10 @@ span:focus{
   outline: 0!important;
 }
 #input-card-name{
-  font-size: medium;
+  font-size: 16px;
+  margin-top: 5px;
   font-weight: bold !important;
-  background-color:  #EDFBFC  !important;
+  background-color: #EDFBFC !important;
 }
 .more {
   right: 6px;
@@ -192,4 +193,7 @@ margin: auto !important;
     .hand-drag{
       display: inline-block;
       opacity: 0.5;
+    }
+    .new-task-tabs{
+      cursor: pointer;
     }

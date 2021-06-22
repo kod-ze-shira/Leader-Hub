@@ -20,7 +20,9 @@ function SelectWorkspace(props) {
     //to change the workspace that user selected
     let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
+
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
+
 
         if (myWorkspace.projects[0]) {
             props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
@@ -35,6 +37,9 @@ function SelectWorkspace(props) {
     const viewWorkspacesList = props.workspaces.map((workspace, index) => (
         { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
     ))
+
+
+    
     const style = {
         control: (base, state) => ({
             ...base,
@@ -59,6 +64,7 @@ function SelectWorkspace(props) {
         <>
             <div className="react-select">
                 <LetterLogo className="workspace-logo"
+
                     nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
                 <Select
                     className="select-workspace selectInHeader"
@@ -69,6 +75,7 @@ function SelectWorkspace(props) {
                     placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
                     styles={style}
                     components={{ Input }}
+
                 // onInputChange={inputValue =>
                 //     (inputValue.length <= maxLength ? inputValue : inputValue.substr(0, maxLength))
                 // }

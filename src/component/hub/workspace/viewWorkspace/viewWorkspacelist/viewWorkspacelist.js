@@ -10,6 +10,7 @@ import pencil from '../../../../img/pencil-write.png'
 import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
+import styled, { css } from 'styled-components'
 
 
 function ViewWorkspaceList(props) {
@@ -19,7 +20,10 @@ function ViewWorkspaceList(props) {
 
     const [indexWorkspace, setIndexWorkspace] = useState()
 
-
+    const MyStyle = styled.div` 
+    &:hover {
+        border: 1.5px solid ${workspace.color} !important
+    }`;
     useEffect(() => {
         setIndexWorkspace(props.index)
     }, [props.workspaces])
@@ -67,14 +71,20 @@ function ViewWorkspaceList(props) {
                     <div className="col-10" onClick={() => routeToProject(workspace._id)}
                     >
 
+
                         <div className="row "  >
-                            <div className="Workspace "  >
-                                <div className="logoWorkspacelist logo-w "
+                            <MyStyle className="Workspace"
+                                onClick={routeToProject}
+                            >
+                                {/* <div className="Workspace "  > */}
+
+                                <div className="logoWorkspacelist logo-w-list "
                                     style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}>
                                     {workspace.name ? workspace.name[0].toUpperCase() : null}                            </div>
 
 
-                            </div>
+                                {/* </div> */}
+                            </MyStyle>
                             <div className="col-9 col-sm-7">
                                 <p className="workspace-name-list">{workspace.name} </p>
                                 <div className="description-and-date">

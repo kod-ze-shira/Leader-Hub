@@ -41,6 +41,7 @@ function SelectHeader(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
+            
 
     }, [])
 
@@ -52,7 +53,9 @@ function SelectHeader(props) {
         props.flag(value)
     }
     const changePresent = (e) => {
+
         props.from(e)
+
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
     function backToPage() {
@@ -77,6 +80,7 @@ function SelectHeader(props) {
                         <div className="col-md col-sm-2 pr-0">
                             <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
                         </div>
+
                         <div className="col-md col-sm-2 pr-0">
                             <SelectCards flag={changeFlag} />
                         </div>
@@ -145,6 +149,8 @@ function SelectHeader(props) {
                                 scrollButtons="off"
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                                 aria-label="scrollable prevent tabs example"
+
+                                
                             >
                                 <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
                                 <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
