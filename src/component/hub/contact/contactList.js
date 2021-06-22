@@ -109,7 +109,7 @@ function ContactList(props) {
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input> : null} */}
 
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please enter valid email.
             </div>
         </div>

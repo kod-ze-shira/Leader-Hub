@@ -1,0 +1,26 @@
+.body-hangoutAndLogs::-webkit-scrollbar {
+    background-color: #ffff;
+    height: 10px;
+  }
+   
+    .body-hangoutAndLogs::-webkit-scrollbar-track:hover {
+        box-shadow: inset 0 0 5px grey; 
+      }
+     
+    /* Handle */
+    .body-hangoutAndLogs::-webkit-scrollbar-thumb { 
+      border-radius: 10px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #919494; 
+    }
+
+
+    .body-hangoutAndLogs{
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100vh;
+    }
+    

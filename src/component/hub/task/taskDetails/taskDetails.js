@@ -293,7 +293,7 @@ function TaskDetails(props) {
 
                         <div className="row justify-content-between mx-1" >
                             <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>

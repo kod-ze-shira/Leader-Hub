@@ -183,11 +183,13 @@ margin: auto !important;
     /* Handle */
     .view-cards-tabs .card-body::-webkit-scrollbar-thumb { 
       border-radius: 15px;
+        background: #b0b1b1; 
     }
     
     /* Handle on hover */
     .view-cards-tabs .card-body::-webkit-scrollbar-thumb:hover {
-      background: #919494; 
+      /* background: #919494;  */
+
     }
     
     .hand-drag{

@@ -4,3 +4,29 @@
 .btnAddmembers{
     background-color:transparent;
 }
+.cursorPoint{
+    cursor: pointer !important;
+}
+.membersToAdd{
+    width:fit-content;
+}
+.membersToAdd{
+    border:1px solid rgb(196, 184, 184);
+    /* box-shadow: 1px 1px 1px rgb(196, 184, 184) ; */
+}
+.inputSearch{
+    background-color: #EDFBFC;
+    border:none;
+    width:100%
+}
+.inputAdd{
+    border: none;
+    background-color: #EDFBFC;
+}
+.inputSearch:focus, .inputAdd:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+.buttonAdd{
+    background-color: rgb(153, 226, 229);
+}

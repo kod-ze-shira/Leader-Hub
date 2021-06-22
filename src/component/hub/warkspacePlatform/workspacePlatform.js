@@ -23,9 +23,9 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
     const renderedWorkspacesName = props.workspaces.map(todo => {
-        return <ViewWorkspaceName key={todo._id} workspace={todo}
-            viewToastComplete={props.viewToastComplete}
-        />
+        // return <ViewWorkspaceName key={todo._id} workspace={todo}
+        //     viewToastComplete={props.viewToastComplete}
+        // />
     })
     // useEffect(() => {
 
