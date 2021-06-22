@@ -49,7 +49,7 @@ function Overview(props) {
                         <div className='container-fluid px-0 '>
                             <div className='row mb-3'>
                                 <div className='projectName' >
-                                <Description></Description>
+                                    <Description></Description>
                                 </div>
                                 {/* {refresh ? */}
                                 <>
@@ -69,9 +69,9 @@ function Overview(props) {
 
                     <div className='col' style={{ height: '87vh' }}>
                         <div className='container-fluid px-0 '>
-                            {refresh ?
-                                <HangoutAndLogs></HangoutAndLogs>
-                                : null}
+                            {/* {refresh ? */}
+                            <HangoutAndLogs></HangoutAndLogs>
+                            {/* : null} */}
                         </div>
                     </div>
                     {/* <Hangout></Hangout> */}
