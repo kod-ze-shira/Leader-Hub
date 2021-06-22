@@ -8,6 +8,7 @@ import Members from './members/members'
 import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
+import HangoutAndLogs from './HangoutAndLogs/HangoutAndLogs'
 import Description from "./description/description";
 import ViewFilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 // import { actions } from '../../hub'
@@ -48,7 +49,7 @@ function Overview(props) {
                         <div className='container-fluid px-0 '>
                             <div className='row mb-3'>
                                 <div className='projectName' >
-                                <Description></Description>
+                                    <Description></Description>
                                 </div>
                                 {/* {refresh ? */}
                                 <>
@@ -69,14 +70,7 @@ function Overview(props) {
                     <div className='col' style={{ height: '87vh' }}>
                         <div className='container-fluid px-0 '>
                             {/* {refresh ? */}
-                            <>
-                                {/* <div className='row mb-3 minHeight'>
-                                    <Hangout></Hangout>
-                                </div> */}
-                                <div className='row minHeight'>
-                                    <Logs />
-                                </div>
-                            </>
+                            <HangoutAndLogs></HangoutAndLogs>
                             {/* : null} */}
                         </div>
                     </div>
