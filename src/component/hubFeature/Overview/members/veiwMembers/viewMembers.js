@@ -5,7 +5,6 @@ import { actions } from '../../../../../redux/actions/action'
 import './viewMembers.css'
 
 function ViewMembers(props) {
-
     const { workspaces, projectIndex, workspacesIndex } = props
     const [members, setMembers] = useState(workspaces[workspacesIndex].projects[projectIndex].members)
 

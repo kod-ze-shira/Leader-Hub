@@ -159,10 +159,10 @@ function SelectHeader(props) {
 
                                 
                             >
-                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
-                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
-                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false"/>
+                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false"/>
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false"/>
+                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false"/>
 
                             </Tabs>
                             :

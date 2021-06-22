@@ -99,7 +99,8 @@ function ViewWorkspaceGrid(props) {
                     <div>
                         <div className="logoWorkspace1 " >
                             <div className="logo-w"
-                                style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
+                                // style={{ backgroundColor: workspace.color ? workspace.color ? workspace.color : "#F7B500" : "#F7B500" }}
+                                style={{ backgroundColor: workspace.color ? workspace.color : "transparent" }}
                             >
                                 {workspace.name ? workspace.name[0].toUpperCase() : null}
                             </div>

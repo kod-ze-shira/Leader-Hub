@@ -144,7 +144,7 @@ export default class Gantt extends Component {
         //         return true;
         //     }
         //     return false;
-       
+
         // });
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;
@@ -171,7 +171,7 @@ export default class Gantt extends Component {
             // }
             // return task.class = "orangeBorder";
 
-            if (task.priority ==="High") {
+            if (task.priority === "High") {
                 debugger
                 return task.class = "pinkBorder";
             }

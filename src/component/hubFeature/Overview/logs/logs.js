@@ -15,7 +15,6 @@ function Logs(props) {
     logsReverse.reverse();
 
     const renderViewLogs = () => {
-        debugger
 
         if (typeof(logsReverse[0]) !== "string")
             return logsReverse.map(log => {
