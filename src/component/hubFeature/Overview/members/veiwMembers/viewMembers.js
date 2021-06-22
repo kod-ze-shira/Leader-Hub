@@ -9,10 +9,9 @@ function ViewMembers(props) {
     const { workspaces, projectIndex, workspacesIndex } = props
     const [members, setMembers] = useState(workspaces[workspacesIndex].projects[projectIndex].members)
 
-    // useEffect(() => {
-    //     setMembers(workspaces[workspacesIndex].projects[projectIndex].members)
-    // }, [members])
-    console.log('mmm', members);
+    useEffect(() => {
+        setMembers(workspaces[workspacesIndex].projects[projectIndex].members)
+    }, [workspaces])
 
     return (
         <>
@@ -20,7 +19,8 @@ function ViewMembers(props) {
                 members.map(m => {
                     let mc = m.contact;
                     return (
-                        mc ? <>
+                        mc ?
+                         <>
                             <div className="col-4 pt-3">
                                 <div className="container">
                                     <div className="row">
@@ -34,7 +34,8 @@ function ViewMembers(props) {
                                     </div>
                                 </div>
                             </div>
-                        </> : null)
+                        </> 
+                        : null)
                 })
                 : null
             }

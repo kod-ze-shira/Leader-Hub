@@ -7,7 +7,7 @@ import './listMembers.css'
 
 
 function ListMembers(props) {
-    const { contactsList, getContacts, shareObject, setMembersList } = props
+    const { contactsList, getContacts, shareObject, setMembersList ,getAllWorkspacesFromServer} = props
     const [flagAdd, setFlagAdd] = useState(false)
     const [contacts, setContacts] = useState(contactsList);
     const [search, setSearch] = useState('')
@@ -43,17 +43,16 @@ function ListMembers(props) {
         })
         setContacts(help)
     }
+
     function clickMembers(contact) {
         shareObject({ shareDetails: [{ member: contact, permission: 'viewer' }] })
+        getAllWorkspacesFromServer()
         setMembersList(false)
-
     }
 
     function clickAddMember() {
         if (ValidateEmail(add)) {
-            shareObject({ shareDetails: [{ member: add, permission: 'viewer' }] })
-            getContacts();
-            setMembersList(false)
+            clickMembers(add)
         }
         else {
             setValidEmail(true)
@@ -83,7 +82,6 @@ function ListMembers(props) {
                                 {validEmail ?
                                     <p>The mail is not valid</p> : null}
                             </>
-
                     }
                 </div>
             </div>
@@ -92,6 +90,7 @@ function ListMembers(props) {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAllWorkspacesFromServer:()=>dispatch(actions.getAllWorkspacesFromServer()),
         getContacts: () => dispatch(actions.getContactsForUser()),
         addMembers: (contact) => dispatch(actions.addMembers(contact)),
         shareObject: (contact) => dispatch(actions.shareObject(contact))
