@@ -350,7 +350,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
                 if (data.result.card) {
                     dispatch(actions.deletTask(data.result))
                     dispatch(actions.setCountTasks())
-
                     if (data.result.complete)
                         dispatch(actions.setCountReadyTasks(false))
                 }
@@ -539,9 +538,11 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

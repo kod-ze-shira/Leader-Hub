@@ -1,7 +1,12 @@
 body{
   background-color: #E8EAEC;
 }
-
+::-webkit-scrollbar-thumb {
+  background: #b0b1b1; 
+}
+::-webkit-scrollbar-thumb { 
+  border-radius: 15px;
+}
 button{
   outline: 0 !important;
   border: none !important;

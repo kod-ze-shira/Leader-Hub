@@ -18,36 +18,41 @@ function SelectWorkspace(props) {
     }, [props.workspaces])
 
     //to change the workspace that user selected
-    let myWorkspace = props.workspace;
     const changeSelectedWorkspace = (id) => {
+
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
 
-        if (myWorkspace.projects[0]) {
-            props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
-        }
-        else {
-            props.setProjectName("No Projects")
-        }
+        // if (myWorkspace.projects[0]) {
+        debugger
+        props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+
+        // }
+        // else {
+        //     props.setProjectName("No Projects")
+        // }
 
     }
 
     const viewWorkspacesList = props.workspaces.map((workspace, index) => (
         { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
     ))
+
+
+
     const style = {
         control: (base, state) => ({
             ...base,
-            // backgroundSize: '10px 10px',
-            // backgroundPosition: '90%',
-            // backgroundImage: `url(${Background})`,
-            // backgroundRepeat: 'no-repeat',
+            backgroundSize: '10px 10px',
+            backgroundPosition: '90%',
+            backgroundImage: `url(${Background})`,
+            backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-            border: state.isFocused ? 0 : 0,
+            border: 0,
             // This line disable the blue border
-            boxShadow: state.isFocused ? 0 : 0,
+            boxShadow: 0,
             "&:hover": {
-                border: state.isFocused ? 0 : 0,
+                border: 0,
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
             }
         })
@@ -59,16 +64,28 @@ function SelectWorkspace(props) {
         <>
             <div className="react-select">
                 <LetterLogo className="workspace-logo"
+
                     nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
                 <Select
+                    theme={theme => ({
+                        ...theme,
+                        colors: {
+                            ...theme.colors,
+                            primary25: '#68c7cb1a',
+                            primary: '#68C7CB',
+                            primary50: '#68C7CB',
+                        },
+                    })}
                     className="select-workspace selectInHeader"
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
+                    // placeholder={placeholder}
                     placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
                     styles={style}
                     components={{ Input }}
+
                 // onInputChange={inputValue =>
                 //     (inputValue.length <= maxLength ? inputValue : inputValue.substr(0, maxLength))
                 // }

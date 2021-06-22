@@ -154,7 +154,6 @@ export const newProject = ({ dispatch, getState }) => next => action => {
                 }),
             dataType: 'json',
             success: function (data) {
-                debugger
                 dispatch(actions.addProjectToProjects(data.message))
 
             },
@@ -245,13 +244,15 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 //     }
 // }
 
-//this func to check the headers jwt and username, if them not good its throw to login
+///this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status === "401") {
-            result.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+        if (result.status == "401") {
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 
@@ -260,5 +261,3 @@ function checkPermission(result) {
 
     })
 }
-
-

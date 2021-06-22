@@ -91,6 +91,7 @@ function NewProject(props) {
         project.dueDate = res
 
         if (nameRequired.current.value) {
+            debugger
             props.newProject(project)
             document.getElementById('nameProject').value = ''
             document.getElementById('descriptionProject').value = ''

@@ -191,12 +191,13 @@ function ViewCardsTabs(props) {
                                                     ))}
                                                     {
                                                         addTaskInInput ?
-                                                            <div class="mt-2">
+                                                            <div class="mt-3">
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
                                                                     class="form-control" placeholder="Add Task"
                                                                     id="input-task"
+                                                                    autocomplete="chrome-off"
                                                                     value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
                                                                     onChange={updateInputValue} onKeyPress={event => {
@@ -214,7 +215,7 @@ function ViewCardsTabs(props) {
                                         </Droppable>
                                         <a data-tip data-for="add_t" onClick={(e) => addTask(e)}
                                             className="add-task-tabs mt-4 mt-3 ">Add Task</a>
-                                        {/* <img onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img> */}
+                                        {/* <img className="mt-2 new-task-tabs" onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img> */}
                                     </div>
                                 </div>
                             </div>
