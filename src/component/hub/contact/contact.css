@@ -170,16 +170,14 @@ body {
     background: white;
     position: absolute;
     z-index: 999999999;
-    /* overflow-x: scroll; */
-    /* top: 304px;
-   left:934px; */
+  overflow: auto;
    box-shadow: 0px 3px 6px #00000029;
 }
 .div_contacts_list{
-    overflow-y: auto;
-    overflow-x: hidden !important;
-    /* height: 400px; */
+  overflow-y: auto;
+
     }
+  
 .invite-button{
   border-radius: 3px;
 background-color: #E8EAEC;
