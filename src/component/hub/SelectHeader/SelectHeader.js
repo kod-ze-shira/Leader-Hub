@@ -154,10 +154,10 @@ function SelectHeader(props) {
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                                 aria-label="scrollable prevent tabs example"
                             >
-                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
-                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
-                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false"/>
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false"/>
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false" />
+                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false"/>
 
                             </Tabs>
                             :
