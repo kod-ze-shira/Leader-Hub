@@ -42,7 +42,6 @@ function Tabs(props) {
     }, [props.workspaces])
 
     useEffect(() => {
-        debugger
         // if (props.cards.length) {
         if (props.cards.length || props.cardsEmpty == true) {
             setIfAnimation(false)
@@ -190,7 +189,7 @@ function Tabs(props) {
                                         :
                                         <div className="card-width px-2 mt-4" >
                                             <div className="view-cards-tabs  mt-1" >
-                                                <div class="card new-card" >
+                                                <div class="card new-card mt-1" >
                                                     <div id='newCardInput' class="container" >
                                                         <div
                                                             class="card-header row" data-tip data-for="add_c"

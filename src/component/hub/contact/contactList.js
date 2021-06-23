@@ -48,12 +48,18 @@ function ContactList(props) {
       $(".invite-button").css("backgroundColor", "#68C7CB");
       $(".invite-button").css("color", "#358A8D");
       props.assingTo(valueSearch)
+
+      setTimeout(() => {
+        $(".div_contacts").css("display", "none");
+
+      }, 1500);
     }
     else {
       nameRequired.current.focus()
       $(".invalid-feedback").css("display", "block");
     }
   }
+
 
   function ValidateEmail(mail) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valueSearch)) {
@@ -96,13 +102,12 @@ function ContactList(props) {
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
             {/* //  : null} */}
-            {contactList}
-            {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
+            {contactList}</div>
+          {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input> : null} */}
-          </div>
 
           <div className="invalid-feedback">
             Please enter valid email.

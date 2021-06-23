@@ -14,11 +14,11 @@ function NewProject(props) {
     let project = { 'updateDates': [] }
     let [myColor, setMyColor] = useState("#C967B6")
     let [nameProject, setNameProject] = useState('')
-    // let [descriptioneProject, setDescriptionProject] = useState('')
+    let [description, setDescription] = useState('')
     let [myStyle, setMyStyle] = useState('');
     let [myDueDate, setMyDueDate] = useState('')
     const nameRequired = useRef()
-    let [description, setDescription] = useState('')
+
     // let [dufultDateDueDate, setDufultDateDueDate] = useState()
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
@@ -92,6 +92,7 @@ function NewProject(props) {
         project.dueDate = res
 
         if (nameRequired.current.value) {
+            debugger
             props.newProject(project)
             document.getElementById('nameProject').value = ''
             // document.getElementById('descriptionProject').value = ''
@@ -151,7 +152,7 @@ function NewProject(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeNameInProject(e)}
-                            required ref={nameRequired}
+                            required ref={nameRequired} autoFocus
                             id='nameProject' type="text" class="form-control" value={nameProject} />
                         <div class="invalid-feedback">
                             Please enter project name.

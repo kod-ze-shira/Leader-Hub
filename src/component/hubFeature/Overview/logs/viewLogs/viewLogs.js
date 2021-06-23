@@ -17,7 +17,7 @@ function ViewLogs(props) {
         <>
             <div className="container logsContainer ">
                 <div className="row logRowOne  mt-4">
-                    <div className="col-2">
+                    <div className="col-2 logColIcon">
                         <img className="logicon" src={icon}></img>
                     </div>
                     <div className="col-6 logSchemaName">
@@ -28,7 +28,7 @@ function ViewLogs(props) {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col ml-5 logUser">
+                    <div className="col logUser">
                         {user}
                     </div>
                 </div>
