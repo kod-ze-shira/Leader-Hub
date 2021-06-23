@@ -32,36 +32,34 @@
   font-weight: 800 !important;
 }
 
-.greenBorder .gantt_task_progress {
-  background : linear-gradient(to right, #c5eee5 0%, #34A38B 100%);
+.yellowBorder .gantt_task_progress {
+  background : linear-gradient(to right, #e9f0af 0%, rgb(218, 199, 24) 100%);
   color: white;
 }
-.gantt_task_line.greenBorder {
+.gantt_task_line.yellowBorder {
   border-radius: 5px !important;
-  border: #34A38B 3px solid !important;
+  border: rgb(218, 199, 24) 3px solid !important;
   color: white !important;
 }
-.greenBorder:hover {
-  border-left: #34A38B 10px solid !important;
-  border-right: #34A38B 10px solid !important;
+.yellowBorder:hover {
+  border-left: rgb(218, 199, 24) 10px solid !important;
+  border-right: rgb(218, 199, 24) 10px solid !important;
   color: white !important;
-}
-.greenBorder .gantt_task_content{
-  /* color: white !important; */
-}
-.gantt_task_line.pinkBorder  {
-  border-radius: 5px !important;
-  border:  3px solid #FD808B!important;
-  background-color: white !important;
-}
-.pinkBorder:hover {
-  border-left: #FD808B 10px solid !important;
-  border-right: #FD808B 10px solid !important;
 }
 
-.pinkBorder .gantt_task_progress {
+.gantt_task_line.redBorder  {
+  border-radius: 5px !important;
+  border:  3px solid red!important;
+  background-color: white !important;
+}
+.redBorder:hover {
+  border-left: red 10px solid !important;
+  border-right: red 10px solid !important;
+}
+
+.redBorder .gantt_task_progress {
   position: absolute;
-  background: linear-gradient(to right,#faced1,  #FD808B)  !important;
+  background: linear-gradient(to right,rgb(233, 139, 139),  red)  !important;
   text-align: end;
   align-items: end;
 }
@@ -149,6 +147,22 @@
 
 
 }
+/* .gantt_ver_scroll {
+  overflow: scroll;
+} */
 
-
-
+.gantt_grid_data .gantt_row.odd:hover,
+.gantt_grid_data .gantt_row:hover,
+.gantt_grid_data .gantt_row.gantt_selected,
+.gantt_grid_data .gantt_row.odd.gantt_selected, 
+.gantt_task_row.gantt_selected
+ {
+  background-color:#68c7cb1a !important;
+}
+.gantt_row.ll.gantt_row_task{
+  text-align: start;
+}
+.gantt_data_area{
+  
+  overflow-x: scroll !important;
+}

@@ -48,6 +48,9 @@ export default class Gantt extends Component {
             gantt.clearAll();
             gantt.config.xml_date = "%Y-%m-%d %H:%i";
             const { tasks } = this.props;
+
+            gantt.config.autoscroll = true;
+            // gantt.config.autoscroll_speed = 50;
             gantt.init(this.ganttContainer);
             this.initGanttDataProcessor();
             gantt.parse(tasks);
@@ -94,7 +97,6 @@ export default class Gantt extends Component {
         };
 
         gantt.templates.task_class = function (start, end, task) {
-            console.log("vggrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
             // if (task.progress > 0 && task.progress < 1) {
             //     // return task.class = "pinkBorder";
             // }
@@ -107,10 +109,10 @@ export default class Gantt extends Component {
             // return task.class = "orangeBorder";
 
             if (task.priority === "High") {
-                return task.class = "pinkBorder";
+                return task.class = "redBorder";
             }
             if (task.priority === "Low") {
-                return task.class = "greenBorder";
+                return task.class = "yellowBorder";
             }
             else {
                 return task.class = "orangeBorder";
@@ -192,7 +194,7 @@ export default class Gantt extends Component {
 
         // gantt.init(this.ganttContainer);
 
-        
+
         gantt.templates.tooltip_date_format = function (date) {
             var formatFunc = gantt.date.date_to_str("%Y-%m-%d");
             return formatFunc(date);
@@ -211,7 +213,7 @@ export default class Gantt extends Component {
                 <br/>
                 </i>${task.cardName}</div>`;
         }
-       
+
         var data = {
             tasks: [
                 { id: "p_1", text: "one card", start_date: "01-04-2020", duration: 18 },
