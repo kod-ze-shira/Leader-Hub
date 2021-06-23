@@ -185,6 +185,7 @@ function ViewCardsTabs(props) {
                                                             objectToast={(obj) => props.showToast(obj)}
                                                             task={props.cards[props.indexCard].tasks[index]}
                                                             indexCard={props.indexCard}
+                                                            showRocketShip={props.showRocketShip}
                                                             indexTask={index}
                                                             viewToastComplete={props.viewToastComplete}
                                                             viewContactList={props.viewContactList} />

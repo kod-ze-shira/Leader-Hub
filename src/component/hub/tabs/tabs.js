@@ -172,6 +172,7 @@ function Tabs(props) {
                                                     openInputTask={openInputTask}
                                                     viewToastComplete={props.viewToastComplete}
                                                     viewContactList={props.viewContactList}
+                                                    showRocketShip={props.showRocketShip}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} indexCard={index}
 
