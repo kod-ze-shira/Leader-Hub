@@ -24,10 +24,13 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
-
+    descriptionNewProject: ''
 }
 
 const publicData = {
+    setDescriptionNewProject(state, action) {
+        state.descriptionNewProject = action.payload
+    },
     setclose(state, action) {
         state.close = !state.close
     },
@@ -354,7 +357,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     addWorkspaceToWorkspacesFromServer(state, action) {
-            state.workspaces[state.indexOfWorkspace] = action.payload
+        state.workspaces[state.indexOfWorkspace] = action.payload
     },
 
 
