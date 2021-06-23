@@ -33,6 +33,7 @@ import ContactList from './contact/contactList';
 // import Hangout from "../hubFeature/Overview/hangout/hangout";
 import selectTask from './SelectHeader/selectTask/selectTask';
 import ToastMessage from '../hub/toast/toastMessage'
+import RocketShip from './rocketShip/rocketShip'
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -43,6 +44,8 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     const [openCalander, setOpenCalander] = useState(false)
+    const [showRocketShip, setShowRocketShip] = useState(false)
+
     // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
@@ -168,6 +171,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
+                                    showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -175,7 +179,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                    // viewToastComplete={(val) => setShowToastComplete(true)}
+                                    showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastComplete={(val) => setShowToastComplete(val)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
@@ -183,6 +187,7 @@ function Hub(props) {
                             {/* share url */}
                             <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
+                                    showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
@@ -217,12 +222,14 @@ function Hub(props) {
                         />
                         : null}
 
-                      {showContactList ?
+                    {showContactList ?
                         <ContactList hub={true} />
                         : null}
                     {openCalander ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
                         : null}
+                    {showRocketShip ? <RocketShip show={(val) => setShowRocketShip(val)} /> : null}
+                    {/* {showRocketShip ? <RocketShip show={(val) => console.log(val)} /> : null} */}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
