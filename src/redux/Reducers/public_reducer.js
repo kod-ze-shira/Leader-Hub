@@ -24,10 +24,13 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
-
+    descriptionNewProject: ''
 }
 
 const publicData = {
+    setDescriptionNewProject(state, action) {
+        state.descriptionNewProject = action.payload
+    },
     setclose(state, action) {
         state.close = !state.close
     },
