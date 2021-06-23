@@ -2,7 +2,7 @@ body{
   background-color: #E8EAEC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b0b1b1; 
+  background: #b0b1b1 !important; 
 }
 ::-webkit-scrollbar-thumb { 
   border-radius: 15px;
