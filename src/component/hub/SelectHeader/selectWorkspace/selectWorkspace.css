@@ -18,13 +18,11 @@
     overflow: hidden;
     white-space: nowrap;
 }
-.workspace-wrap-logo{
-    margin-right: 5px !important;
-}
-.react-select .select-workspace .css-1sxybcb-control .css-g1d714-ValueContainer{
-    padding-left: 0px !important;
-}
 
+.select-workspace .css-1uccc91-singleValue, .select-workspace .css-1wa3eu0-placeholder,.select-workspace .css-b8ldur-Input{
+   margin-left: 2.8vw !important;
+
+}
 
 .css-5duvv3-control{
     border:none !important;
