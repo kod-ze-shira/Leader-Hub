@@ -11,17 +11,22 @@
     width:fit-content;
 }
 .membersToAdd{
-    border:1px solid rgb(196, 184, 184);
-    /* box-shadow: 1px 1px 1px rgb(196, 184, 184) ; */
+    /* border:1px solid rgb(196, 184, 184); */
+    box-shadow: 0 0 0 0.1rem  #E9E9E9;
+
 }
 .inputSearch{
     background-color: #EDFBFC;
     border:none;
-    width:100%
+    width:100%;
+    border-radius: 0.2em;
+
 }
 .inputAdd{
     border: none;
     background-color: #EDFBFC;
+    border-radius:0.2em;
+
 }
 .inputSearch:focus, .inputAdd:focus{
     outline: 0;
@@ -29,4 +34,11 @@
 }
 .buttonAdd{
     background-color: rgb(153, 226, 229);
+    border-radius: 0.2em;
+}
+.mailNotValid{
+    width:96%;
+}
+.mailNotValid p{
+    color:red;
 }

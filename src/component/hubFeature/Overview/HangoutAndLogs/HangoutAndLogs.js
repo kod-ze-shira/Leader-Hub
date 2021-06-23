@@ -5,12 +5,11 @@ import Logs from '../logs/logs'
 import Hangout from '../hangout/hangout'
 
 function HangoutAndLogs(props) {
-    debugger
     return (
         <>
             <div className="body-hangoutAndLogs" >
                 <div className='row mb-3 minHeight'>
-                    <Hangout></Hangout>
+                    {/* <Hangout></Hangout> */}
                 </div>
                 <div className='row minHeight'>
                     <Logs />

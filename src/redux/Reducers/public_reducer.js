@@ -41,6 +41,9 @@ const publicData = {
     setFilesFromTask(state, action) {
         state.arrFilesOfTask = action.payload
     },
+    setMember(state,action){
+        state.workspace[state.indexOfWorkspace].projects[state.indexCurrentProject].members.push(action)
+    },
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -70,6 +73,7 @@ const publicData = {
         }
 
     },
+   
     setTaskByFiledFromTasks(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value

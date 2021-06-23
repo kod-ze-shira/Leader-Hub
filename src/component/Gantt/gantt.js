@@ -172,11 +172,9 @@ export default class Gantt extends Component {
             // return task.class = "orangeBorder";
 
             if (task.priority ==="High") {
-                debugger
                 return task.class = "pinkBorder";
             }
             if (task.priority === "Low") {
-                debugger
                 return task.class = "greenBorder";
             }
             else {

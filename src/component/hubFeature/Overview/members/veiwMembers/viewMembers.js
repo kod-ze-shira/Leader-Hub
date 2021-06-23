@@ -11,7 +11,7 @@ function ViewMembers(props) {
 
     useEffect(() => {
         setMembers(workspaces[workspacesIndex].projects[projectIndex].members)
-    }, [workspaces])
+    }, [workspaces[workspacesIndex].projects[projectIndex].members])
 
     return (
         <>
@@ -35,7 +35,8 @@ function ViewMembers(props) {
                                 </div>
                             </div>
                         </> 
-                        : null)
+                        : null
+                        )
                 })
                 : null
             }

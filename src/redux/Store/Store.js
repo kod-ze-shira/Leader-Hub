@@ -86,7 +86,7 @@ const store = createStore(
                 shareObject,
                 assingTo,
                 updateLike,
-                getMembersByProjectId,
+                // getMembersByProjectId,
                 addMembers
             ))
 )
