@@ -354,7 +354,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     addWorkspaceToWorkspacesFromServer(state, action) {
-            state.workspaces[state.indexOfWorkspace] = action.payload
+        state.workspaces[state.indexOfWorkspace] = action.payload
     },
 
 
@@ -433,7 +433,14 @@ const publicData = {
     saveIndexOfWorkspaceInRedux(state, action) {
         state.indexOfWorkspace = action.payload
     },
+    setDateTaskFromGantt(state, action) {
+        let cIndex = state.cards.findIndex(c => c._id === action.payload.card_id)
+        let tIndex = state.cards[cIndex].tasks.
+            findIndex(t => t._id === action.payload._id)
+        state.cards[cIndex].tasks[tIndex].dueDate = action.payload.dueDate
+        state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
 
+    },
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  

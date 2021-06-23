@@ -58,6 +58,7 @@
   border-left: #FD808B 10px solid !important;
   border-right: #FD808B 10px solid !important;
 }
+
 .pinkBorder .gantt_task_progress {
   position: absolute;
   background: linear-gradient(to right,#faced1,  #FD808B)  !important;
@@ -148,3 +149,6 @@
 
 
 }
+
+
+
