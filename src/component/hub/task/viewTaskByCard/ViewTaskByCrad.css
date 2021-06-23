@@ -64,7 +64,7 @@ opacity: 0.3;
   color: white;
 }
 .checkmark-tabs{
-  left: 6% !important;
+  left: 4% !important;
 }
 .checkmark-place{
   top: 9px;
@@ -234,7 +234,7 @@ height: 0;
 }
 .dnd-icon{
 opacity: 0;
-margin-top: -10px !important;  
+/* margin-top: -10px !important;   */
 /* display: none; */
 }
 .view-details-in-list{

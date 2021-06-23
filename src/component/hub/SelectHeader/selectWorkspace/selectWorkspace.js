@@ -20,68 +20,26 @@ function SelectWorkspace(props) {
     //to change the workspace that user selected
     const changeSelectedWorkspace = (id) => {
 
-        let myWorkspace = props.workspace;
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
 
-        if (myWorkspace?.projects?.[0]) {
-        // if (myWorkspace.projects[0]) {
-            props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
-        }
-        else {
-            props.setProjectName("No Projects")
-        }
+        // if (myWorkspace.projects[0]) {
+        debugger
+        props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+
+        // }
+        // else {
+        //     props.setProjectName("No Projects")
+        // }
 
     }
 
-    // const viewWorkspacesList = props.workspaces.map((workspace, index) => (
-    //     { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
-    // ))
-
-    const viewWorkspacesList = props.workspaces ? props.workspaces.map((workspace, index) => (
-        workspace.name ? {
-            value: workspace._id, label:
-                <div className="d-flex flex-row" >
-                    <div  >
-                        <div className="  logo-w-little workspace-wrap-logo"
-                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
-                        >
-                            {workspace.name ? workspace.name[0].toUpperCase() : null}
-                        </div>
-                    </div>
-                    <div className="select-not-belong">
-                        {workspace.name}
-                    </div>
-                </div >, title: workspace.name, workspaceIndex: index
-        } : null
-    )) : null
+    const viewWorkspacesList = props.workspaces.map((workspace, index) => (
+        { value: workspace._id, label: workspace.name, title: workspace.name, workspaceIndex: index }
+    ))
 
 
-    const placeholder = props.workspaces[props.indexOfWorkspace] ?
-        <div className="d-flex flex-row" >
-            <div  >
-                <div className="logo-w-little workspace-wrap-logo"
-                    style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', 'text-align': 'center' }}
-                >
-                    {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
-                </div>
-            </div>
-            <div className="select-not-belong">
-                {props.workspaces[props.indexOfWorkspace].name}
-            </div>
-        </div >
-        : <div className="d-flex flex-row" >
-            <div  >
-                <div className="logo-w-little workspace-wrap-logo"
-                    style={{ backgroundColor: props.workspaces[0]?.color, display: 'inline-block', 'text-align': 'center' }}
-                >
-                    {props.workspaces[0]?.name ? props.workspaces[0]?.name[0].toUpperCase() : null}
-                </div>
-            </div>
-            <div className="select-not-belong">
-                {props.workspaces[0]?.name}
-            </div>
-        </div >
+
     const style = {
         control: (base, state) => ({
             ...base,
@@ -90,9 +48,9 @@ function SelectWorkspace(props) {
             backgroundImage: `url(${Background})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: state.isFocused ? '#eeeeee' : 'white',
-            border:  0,
+            border: 0,
             // This line disable the blue border
-            boxShadow:  0,
+            boxShadow: 0,
             "&:hover": {
                 border: 0,
                 backgroundColor: state.isFocused ? '#eeeeee' : 'white',
@@ -105,8 +63,9 @@ function SelectWorkspace(props) {
     return (
         <>
             <div className="react-select">
-                {/* <LetterLogo className="workspace-logo"
-                    nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} /> */}
+                <LetterLogo className="workspace-logo"
+
+                    nameWorkspace={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace] : null} />
                 <Select
                     theme={theme => ({
                         ...theme,
@@ -122,10 +81,11 @@ function SelectWorkspace(props) {
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
                     options={viewWorkspacesList}
-                    placeholder={placeholder}
-                    // placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
+                    // placeholder={placeholder}
+                    placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
                     styles={style}
                     components={{ Input }}
+
                 // onInputChange={inputValue =>
                 //     (inputValue.length <= maxLength ? inputValue : inputValue.substr(0, maxLength))
                 // }

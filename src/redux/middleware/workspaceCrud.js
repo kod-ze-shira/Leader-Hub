@@ -181,12 +181,15 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 
 //this func to check the headers jwt and username, if them not good its throw to login
 
+//this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.responseJSON.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.responseJSON.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

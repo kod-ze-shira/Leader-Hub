@@ -20,7 +20,7 @@ function ViewContact(props) {
     ]
 
     const assingTaskToContact = (email) => {
-        props.assingTo(email)
+            props.assingTo(email)
     }
 
 
@@ -30,7 +30,6 @@ function ViewContact(props) {
                 {props.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
                     : <div className="logo-contact ml-3" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
                 <p className="name-contact ">{props.contact.name} </p>   <p className="email-contact ">{props.contact.email} </p></div>
-
         </>
 
     )
@@ -39,7 +38,6 @@ function ViewContact(props) {
 const mapStateToProps = (state) => {
 
     return {
-
     }
 }
 const mapDispatchToProps = (dispatch) => {

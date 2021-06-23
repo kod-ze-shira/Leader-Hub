@@ -107,6 +107,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
+        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -199,6 +200,15 @@ function ViewTaskByCradTabs(props) {
         e.stopPropagation()
     }
 
+    $('.span-name-task').on('DOMSubtreeModified', function (event) {
+        $(".span-name-task").text($(this).val());
+        var val = $(".span-name-task").text($(this).val());
+        console.log(val);
+
+
+    })
+
+
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
             return myFile.url.endsWith(".pdf") || myFile.url.endsWith(".docx") ?
@@ -261,9 +271,14 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
                                 {myFiles}
+                                {/* <div>
+                                    <span className="span-name-task mt-2" contentEditable={true} >
+                                        {props.task.name}
+                                    </span>
 
-                                <input
-                                    className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
+                                </div> */}
+                                <textarea 
+                                    className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
