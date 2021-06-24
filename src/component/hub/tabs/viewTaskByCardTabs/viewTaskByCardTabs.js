@@ -134,8 +134,8 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            setShowChalalit(true)
-
+            // alert('fff')
+            props.showRocketShip(true)
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else {
@@ -218,8 +218,6 @@ function ViewTaskByCradTabs(props) {
 
     return (
         <>
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
-
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
@@ -276,7 +274,7 @@ function ViewTaskByCradTabs(props) {
                                     </span>
 
                                 </div> */}
-                                <textarea 
+                                <textarea
                                     className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}

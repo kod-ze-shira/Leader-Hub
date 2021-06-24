@@ -7,10 +7,10 @@ import './members.css'
 
 export default function Mmebers() {
     const [membersList, setMembersList] = useState(false);
-    // $(window).click(function () {
-    //     if (membersList)
-    //         setMembersList(false);
-    // });
+    $(window).click(function () {
+        if (membersList)
+            setMembersList(false);
+    });
 
 
     return (

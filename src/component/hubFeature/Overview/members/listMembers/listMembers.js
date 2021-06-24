@@ -5,8 +5,6 @@ import OneMemberToAdd from '../oneMemberToAdd/oneMemberToAdd'
 import $ from 'jquery'
 import './listMembers.css'
 
-
-
 function ListMembers(props) {
     const { contactsList, getContacts, shareObject, setMembersList, membersList } = props
     const [flagAdd, setFlagAdd] = useState(false)
@@ -17,16 +15,14 @@ function ListMembers(props) {
     const inputAdd = useRef()
     console.log('ccccc', contactsList);
     useEffect(() => {
-        if (contactsList?.length === 0)
-            getContacts()
-        setContacts(contactsList)
+        getContacts()
+        setContacts(contactsList);
+        console.log('contactsList', contactsList);
     }, [])
     useEffect(() => {
         if (flagAdd === true)
             inputAdd.current.focus();
     }, [flagAdd])
-
-
 
 
     function ValidateEmail(mail) {
@@ -63,14 +59,15 @@ function ListMembers(props) {
 
     return (
         <>
-            <div className='container membersToAdd' id='membersToAdd' onClick={e => setMembersList(true)}>
-                <input className='row inputSearch mt-1 ml-1' type='text' placeholder='enter name or email' onChange={(e) => {
-                    searchContacts(e)
-                }} />
-                {contacts?.length === 0 ?
-                    contacts.map(cl => <OneMemberToAdd member={cl} clickMembers={clickMembers} />)
-                    : <p className='row m-2'>No Members</p>}
-                    {
+            <div className='container membersToAdd' id='membersToAdd' onClick={(e) => e.stopPropagation()}>
+                <input className='row inputSearch mt-1 ml-1' type='text' placeholder='enter name or email' onChange={(e) => { searchContacts(e) }} />
+                {
+                    contacts.length !== 0 ?
+                        contacts.map(cl => <OneMemberToAdd member={cl} clickMembers={clickMembers} />)
+                        :
+                        <p className='row m-2'>No Members</p>
+                }
+                {
                     !flagAdd ?
                         <button className='row btnAddmembers cursorPoint' onClick={e => {
                             setFlagAdd(true)
@@ -83,11 +80,12 @@ function ListMembers(props) {
                             {validEmail ?
                                 <div className='d-flex justify-content-center my-2' style={{ width: '100%' }}><div className='row mailNotValid'><p>The mail is not valid</p></div> </div> : null}
                         </>
-                    }
+                }
             </div>
         </>
     )
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         getContacts: () => dispatch(actions.getContactsForUser()),
@@ -95,6 +93,7 @@ const mapDispatchToProps = (dispatch) => {
         shareObject: (contact) => dispatch(actions.shareObject(contact))
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         contactsList: state.share_reducer.contactsUser,

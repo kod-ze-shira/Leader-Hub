@@ -10,7 +10,7 @@ const divAddMembers =useRef()
 // divAddMembers.current.removeEventListener("click");
     return (
         <>
-            <div className="divAddMembers col-md-4  col-sm-12 pt-3  "  ref={divAddMembers} onClick={e => props.setMembersList(!props.membersList)}>
+            <div className="divAddMembers col-md-4  col-sm-12 pt-3  "  ref={divAddMembers} onClick={(e) =>{ props.setMembersList(!props.membersList); e.stopPropagation()}}>
                 <div className="container">
                     <div className="row d-flex align-items-center">
                         <div className="col-2">

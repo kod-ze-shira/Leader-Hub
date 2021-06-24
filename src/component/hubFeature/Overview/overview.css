@@ -16,3 +16,12 @@
     /* border-bottom: 1px solid #E9E9E9; */
     background-color: white;
   }
+
+  .divChartAndMembers{
+    background-color:white;
+    border-radius:0.2em;
+  }
+
+.scrollbarOverview2{
+  width:100%;
+}

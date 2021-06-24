@@ -5,19 +5,21 @@ import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
 import { actions } from '../../../../redux/actions/action'
 import './newProject.css'
+import QuillNewProject from '../myQuill/quillNewProject'
+
+
 
 function NewProject(props) {
     let [flag, setFlag] = useState(false)
     let project = { 'updateDates': [] }
     let [myColor, setMyColor] = useState("#C967B6")
     let [nameProject, setNameProject] = useState('')
-    let [descriptioneProject, setDescriptionProject] = useState('')
+    let [description, setDescription] = useState('')
     let [myStyle, setMyStyle] = useState('');
     let [myDueDate, setMyDueDate] = useState('')
     const nameRequired = useRef()
-  
+
     // let [dufultDateDueDate, setDufultDateDueDate] = useState()
-    let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
         "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
@@ -49,9 +51,7 @@ function NewProject(props) {
     $(`#dueDateProject`).val(d)
     // document.getElementById("dueDateProject").defaultValue = d;
 
-    const changeDescriptionInProject = (input) => {
-        setDescriptionProject(input.target.value)
-    }
+
 
     const changeDueDateInProject = (input) => {
         setMyDueDate(input.target.value)
@@ -80,7 +80,8 @@ function NewProject(props) {
         project.color = myColor
         project.workspace = props.workspace._id
         project.name = nameProject
-        project.description = descriptioneProject
+        debugger
+        project.description = description
 
         // if (!project.dueDate) {
         //     project.dueDate = myDueDate
@@ -93,7 +94,7 @@ function NewProject(props) {
         if (nameRequired.current.value) {
             props.newProject(project)
             document.getElementById('nameProject').value = ''
-            document.getElementById('descriptionProject').value = ''
+            // document.getElementById('descriptionProject').value = ''
             setMyStyle({ 'border-bottom': ' rgb(129, 129, 165) solid 1px' })
             document.getElementById('dueDateProject').value = ''
             // props.closeViewDetails(false)
@@ -150,7 +151,7 @@ function NewProject(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeNameInProject(e)}
-                            required ref={nameRequired} autoFocus 
+                            required ref={nameRequired} autoFocus
                             id='nameProject' type="text" class="form-control" value={nameProject} />
                         <div class="invalid-feedback">
                             Please enter project name.
@@ -158,11 +159,11 @@ function NewProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
+                        <QuillNewProject text={(e) => setDescription(e)} />
 
-
-                        <div class="form-control descriptionProject" name="description"
+                        {/* <div class="form-control descriptionProject" name="description"
                             id="descriptionProject" rows="5" placeholder="Write a description about your project"
-                            onChange={(e) => changeDescriptionInProject(e)} value={descriptioneProject} contentEditable></div>
+                            ref={descriptionInput} contentEditable></div> */}
                     </div>
                     <div className="row justify-content-between" >
                         <div class="form-group col-5 ditailsAction col-md-4">
@@ -209,6 +210,7 @@ export default connect(
     (state) => {
         return {
             workspace: state.workspace_reducer.workspace,
+            descriptionNewProject: state.public_reducer.descriptionNewProject
         }
     },
     (dispatch) => {

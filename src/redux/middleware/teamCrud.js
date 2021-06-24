@@ -88,7 +88,6 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
       }
     )
       .then(res => {
-        console.log(res);
         return res.json()
       })
       .then(result => {
@@ -120,7 +119,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         },
         body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
-        console.log('resultShareObject', result);
+        console.log('resultShareObject',result);
         return result.json();
       }).then((result) => {
         checkPermission(result).then((ifOk) => {
@@ -147,9 +146,9 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 
 
           }))
-          dispatch(actions.setMembers(result))
+          console.log(result);
+          dispatch(actions.setMember(result))
         })
-        .catch(err => { console.log(err) })
 
       })
     // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
@@ -222,31 +221,31 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
 }
 
 
-// export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
-//   if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
-//     let reducer = getState().public_reducer
-//     let jwtFromCookie = reducer.tokenFromCookies;
+export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'GET_MEMBERS_BY_PROJECT_ID') {
+    let reducer = getState().public_reducer
+    let jwtFromCookie = reducer.tokenFromCookies;
 
-//     let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
-//     fetch(urlData,
-//       {
-//         method: "GET",
-//         headers: {
-//           Authorization: jwtFromCookie,
-//         },
-//       }
-//     ).then(response => {
-//       return response.json()
-//     })
-//       .then(data => {
-//         checkPermission(data).then((ifOk) => {
-//           dispatch(actions.setMembers(data.membersList))
+    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
+    fetch(urlData,
+      {
+        method: "GET",
+        headers: {
+          Authorization: jwtFromCookie,
+        },
+      }
+    ).then(response => {
+      return response.json()
+    })
+      .then(data => {
+        checkPermission(data).then((ifOk) => {
+          dispatch(actions.setMembers(data.membersList))
 
-//         })
-//       }).catch(err => console.log('err', err))
-//   }
-//   return next(action);
-// }
+        })
+      }).catch(err => console.log('err', err))
+  }
+  return next(action);
+}
 
 
 export const addMembers = ({ dispatch, getState }) => next => action => {
