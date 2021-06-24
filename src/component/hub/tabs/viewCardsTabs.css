@@ -36,9 +36,10 @@ span:focus{
   outline: 0!important;
 }
 #input-card-name{
-  font-size: medium;
+  font-size: 16px;
+  margin-top: 5px;
   font-weight: bold !important;
-  background-color:  #EDFBFC  !important;
+  background-color: #EDFBFC !important;
 }
 .more {
   right: 6px;
@@ -179,17 +180,11 @@ margin: auto !important;
         box-shadow: inset 0 0 5px grey; 
       }
      
-    /* Handle */
-    .view-cards-tabs .card-body::-webkit-scrollbar-thumb { 
-      border-radius: 15px;
-    }
-    
-    /* Handle on hover */
-    .view-cards-tabs .card-body::-webkit-scrollbar-thumb:hover {
-      background: #919494; 
-    }
     
     .hand-drag{
       display: inline-block;
       opacity: 0.5;
+    }
+    .new-task-tabs{
+      cursor: pointer;
     }

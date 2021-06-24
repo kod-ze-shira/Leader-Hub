@@ -32,11 +32,13 @@ function TaskNotBelongCardForUser(props) {
             <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
+                showRocketShip={props.showRocketShip}
                 viewToastComplete={props.viewToastComplete}
             /> : null
             : <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
+                showRocketShip={props.showRocketShip}
                 viewToastComplete={props.viewToastComplete}
             />
     })
@@ -46,35 +48,45 @@ function TaskNotBelongCardForUser(props) {
             <div className='input-group-task-not-belongs d-flex '>
 
                 <button
-                    className={showBtn ? 'd-block btn-add-task p-2  mr-2 ml-4 mr-auto' : 'd-none '}
+                    className={showBtn ? 'd-block btn-add-task py-1 px-3 mr-2 ml-4 mr-auto' : 'd-none '}
                     onClick={hundleClick}>
                     {/* <img width="22" className="icon-complete" id="complete"
                         src={require('../../../img/plus.png')}>
                     </img>‏ */}
-                    <span className="icon-complete">+</span>
+                    {/* <span className="icon-complete">+</span> */}
                     Add Task </button>
-                <div className={showBtn ? 'd-none' :
-                    'wrap-input d-block  col-6 col-lg-8  pr-0  mr-md-auto  mr-2 ml-4'}>
-                    <input type="text" className='addTaskNotBelong '
-                        value={nameTask}
-                        ref={addTaskInput}
-                        placeholder="Write a task name"
-                        // onClick={hundleClick}
-                        onChange={(e) => setNameTask(e.target.value)}
-                        onKeyPress={e => {
-                            if (e.key === 'Enter') {
-                                if (nameTask !== '') {
-                                    props.newTaskNotBelong(nameTask)
-                                    setNameTask('')
+                <div className={showBtn ? 'd-none' :'d-block d-flex   col-6 col-lg-8  p-0  mr-md-auto  mr-2 ml-4'}>
+                    <div className="wrap-input mr-2 col-8 col-lg-11  ">
+                        <input type="text" className='addTaskNotBelong '
+                            value={nameTask}
+                            ref={addTaskInput}
+                            placeholder="Write a task name"
+                            // onClick={hundleClick}
+                            onChange={(e) => setNameTask(e.target.value)}
+                            onKeyPress={e => {
+                                if (e.key === 'Enter') {
+                                    if (nameTask !== '') {
+                                        props.newTaskNotBelong(nameTask)
+                                        setNameTask('')
+                                    }
+                                    setShowBtn(true)
                                 }
-                                setShowBtn(true)
+                            }} />
+                        <button className="close-add-task" onClick={() => setShowBtn(true)}>
+                            <img width="75%"
+                                src={require('../../../img/close-icon.svg')}>
+                            </img>
+                        </button>
+                    </div>
+                    <button
+                    className= "btn-add-task py-1 px-3"
+                    onClick={() => {
+                            if (nameTask !== '') {
+                                props.newTaskNotBelong(nameTask)
+                                setNameTask('')
                             }
-                        }} />
-                    <button className="close-add-task" onClick={() => setShowBtn(true)}>
-                        <img width="75%"
-                            src={require('../../../img/close-icon.svg')}>
-                        </img>
-                    </button>
+                            setShowBtn(true)  }}>
+                     Save</button>
                 </div>
                 <div class="input-group inputSearchProject inputSearchTask  ml-2 mr-5 "
                 >

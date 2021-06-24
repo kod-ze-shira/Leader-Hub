@@ -57,13 +57,16 @@ function CardsPage(props) {
         switch (present) {
             case 'tabs':
                 return <Tabs showToast={showToast}
+                    showRocketShip={props.showRocketShip}
                     focusInputCard={props.focusInputCard}
                     viewToastComplete={props.viewToastComplete}
                     viewContactList={props.viewContactList} />
             case 'list':
                 return <ProjectPlatform
                     viewToastComplete={props.viewToastComplete}
-                    showToast={showToast} flag={flag} focusInputCard={props.focusInputCard}
+                    showRocketShip={props.showRocketShip}
+                    showToast={showToast} flag={flag}
+                    focusInputCard={props.focusInputCard}
                     viewContactList={props.viewContactList} />
             case 'gantt':
                 return <DisplayGantt />
@@ -72,19 +75,20 @@ function CardsPage(props) {
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform
+                    showRocketShip={props.showRocketShip}
                     viewToastComplete={props.viewToastComplete}
                     showToast={showToast} flag={flag} />
         }
     }
     return (
         <>
-        <div className="">
-            <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
-            {renderSwitch()}
-            {/* <Hangout></Hangout> */}
+            <div className="">
+                <SelectHeader number={number} flag={changeFlag} from={howToPresent} menue={true} type='cards' />
+                {renderSwitch()}
+                {/* <Hangout></Hangout> */}
 
-        </div>
-</>
+            </div>
+        </>
     )
 }
 const mapStateToProps = (state) => {

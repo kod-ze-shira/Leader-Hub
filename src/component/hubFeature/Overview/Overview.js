@@ -8,6 +8,8 @@ import Members from './members/members'
 import Logs from './logs/logs'
 import './overview.css'
 import MyChart from '../chart/chart'
+import HangoutAndLogs from './HangoutAndLogs/HangoutAndLogs'
+import Description from "./description/description";
 import ViewFilesOfProject from './viewFilesOfProject/viewFilesOfProject'
 // import { actions } from '../../hub'
 function Overview(props) {
@@ -32,12 +34,14 @@ function Overview(props) {
             }
         }
     }, [props.workspaces])
-    // useEffect(() => {
+    useEffect(() => {
+        // props.indexOfCurrentWorkspace ||
+        if (props.workspaces.length) {
+            setRefresh(true)
+        }
+        // }, [props.indexOfCurrentWorkspace])
+    }, [props.workspaces])
 
-    //     if (props.indexOfCurrentWorkspace && props.workspaces.length) {
-    //         setRefresh(true)
-    //     }
-    // }, [props.indexOfCurrentWorkspace])
     return (
         <>
             <div className='scrollbarOverview container-fluid'>
@@ -47,45 +51,33 @@ function Overview(props) {
                         <div className='container-fluid px-0 '>
                             <div className='row mb-3'>
                                 <div className='projectName' >
-                                    <p>
-                                        This template is your jumping-off point to make your project plans, goals, communications,
-                                        and files clear and accessible in one place.
-                                        Use the priority and progress fields to clearly organize your work.
-                                    </p>
+                                    <Description></Description>
                                 </div>
-                                {/* {refresh ? */}
-                                <>
-                                    <Members />
+                                {refresh ?
+                                    <>
+                                        <Members />
 
-                                    <MyChart />
-                                </>
-                                {/* : null} */}
+                                        <MyChart />
+                                    </>
+                                    : null}
                             </div>
                             <div className='row'>
-                                {/* {refresh ? */}
-                                <FilesOfProject />
-                                {/* : null} */}
+                                {refresh ?
+                                    <FilesOfProject />
+                                    : null}
                             </div>
                         </div>
                     </div>
 
                     <div className='col' style={{ height: '87vh' }}>
                         <div className='container-fluid px-0 '>
-                            {/* {refresh ? */}
-                            <>
-                                <div className='row mb-3 minHeight'>
-                                    <Hangout></Hangout>
-                                </div>
-                                <div className='row minHeight'>
-                                    <Logs />
-                                </div>
-                            </>
-                            {/* : null} */}
+                            {refresh ?
+                                <HangoutAndLogs></HangoutAndLogs>
+                                : null}
                         </div>
                     </div>
                     {/* <Hangout></Hangout> */}
                 </div>
-
             </div>
         </>
     )

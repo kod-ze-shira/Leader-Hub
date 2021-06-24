@@ -66,6 +66,7 @@ function ProjectPlatform(props) {
             <div className=" bodyListTak container-fluid">
                 <div className="cards">
                     <CardsByProject
+                        showRocketShip={props.showRocketShip}
                         viewToastComplete={props.viewToastComplete}
                         showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag}
                         viewContactList={props.viewContactList} />

@@ -107,6 +107,7 @@ function CardsByProject(props) {
                             viewToastComplete={props.viewToastComplete}
                             showToastDelete={(object) => props.showToast(object)}
                             viewContactList={props.viewContactList}
+                            showRocketShip={props.showRocketShip}
                             key={card._id}
                             cardFromMap={card} flag={props.flag} indexCard={index} />
                     })}

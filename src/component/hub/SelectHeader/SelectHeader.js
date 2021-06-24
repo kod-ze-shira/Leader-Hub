@@ -11,6 +11,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { useParams, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import history from "../../history"
 
 
 
@@ -33,7 +34,7 @@ function SelectHeader(props) {
     const classes = useStyles();
 
     // const [value, setValue] = useState(props.number);
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
 
     const color = '#00C6EA'
     const { idProject } = useParams();
@@ -41,6 +42,14 @@ function SelectHeader(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
+        // if (history.location.pathname.indexOf('list') != -1)
+        //     setValue(1)
+        // else
+        //     if (history.location.pathname.indexOf('Overview') != -1)
+        //         setValue(2)
+        //     else
+        //         if (history.location.pathname.indexOf('gantt') != -1)
+        //             setValue(3)
 
     }, [])
 
@@ -52,7 +61,9 @@ function SelectHeader(props) {
         props.flag(value)
     }
     const changePresent = (e) => {
+
         props.from(e)
+
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject + '/' + e)
     }
     function backToPage() {
@@ -77,6 +88,7 @@ function SelectHeader(props) {
                         <div className="col-md col-sm-2 pr-0">
                             <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
                         </div>
+
                         <div className="col-md col-sm-2 pr-0">
                             <SelectCards flag={changeFlag} />
                         </div>
@@ -133,7 +145,6 @@ function SelectHeader(props) {
                         }
                     </>
 
-
                     :
                     <div className={classes.root} id='tabsAndList '>
                         {props.menue ?
@@ -145,11 +156,13 @@ function SelectHeader(props) {
                                 scrollButtons="off"
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
                                 aria-label="scrollable prevent tabs example"
+
+                                
                             >
-                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} />
-                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} />
-                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} />
-                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} />
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false"/>
+                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false"/>
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false"/>
+                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false"/>
 
                             </Tabs>
                             :

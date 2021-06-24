@@ -39,6 +39,7 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
@@ -238,6 +239,42 @@ function TaskDetails(props) {
         $(this).find('.files-task-hover').hide();
         $(this).find('.files-task').show();
     });
+    const completeTask = () => {
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth() + 1
+        const yyyy = today.getFullYear()
+        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
+        let completeTask = {
+            "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id,
+            "name": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name,
+            "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description,
+            "dueDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate,
+            "startDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate,
+            "complete": doneStatus,
+            "endDate": today,
+            "likes": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].likes,
+            "assingTo": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assingTo,
+            "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.task.files ? props.task.files : null,
+            "priority": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority
+
+        }
+        // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
+        // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
+
+        props.setTaskComplete(completeTask)//redux
+        props.completeTask(completeTask)//server
+        if (doneStatus) {
+            props.setCountReadyTasks(true)
+            // setShowChalalit(true)
+
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+        }
+        else {
+            props.setCountReadyTasks(false)
+        }
+    }
 
 
     return (
@@ -256,7 +293,7 @@ function TaskDetails(props) {
 
                         <div className="row justify-content-between mx-1" >
                             <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>
@@ -399,6 +436,8 @@ function TaskDetails(props) {
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
+                    {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
+
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip data-tip id="save" place="top" effect="solid">
                         {title.title_save}
