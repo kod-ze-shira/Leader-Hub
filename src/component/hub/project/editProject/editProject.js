@@ -15,7 +15,8 @@ function EditProject(props) {
 
     }, [props.workspaces])
 
-    let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate ? props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate : "";
+    debugger
+    let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
     const nameRequired = useRef()

@@ -32,11 +32,13 @@ function TaskNotBelongCardForUser(props) {
             <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
+                showRocketShip={props.showRocketShip}
                 viewToastComplete={props.viewToastComplete}
             /> : null
             : <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
+                showRocketShip={props.showRocketShip}
                 viewToastComplete={props.viewToastComplete}
             />
     })

@@ -17,7 +17,6 @@ import Background from '../../../img/down-arrow.svg';
 function TasksNotBelongCardByMap(props) {
 
     const [viewDetails, setViewDetails] = useState(false)
-    const [showchalalit, setShowChalalit] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
     const [cardId, setCardId] = useState()
@@ -56,7 +55,9 @@ function TasksNotBelongCardByMap(props) {
 
     function addChalalit() {
         if (props.task.complete == false)
-            setShowChalalit(true)
+            props.showRocketShip(true)
+
+
     }
 
     const editCompleteTask = (comlited) => {
@@ -106,21 +107,21 @@ function TasksNotBelongCardByMap(props) {
     const workspaceSelect = props.workspaces ? props.workspaces.map((workspace) => (
         workspace.name ? {
             value: workspace, label:
-                    <div className="d-flex flex-row" >
-                        <div  >
-                            <div className="  logo-w-little "
-                                style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
-                            >
-                                {workspace.name ? workspace.name[0].toUpperCase() : null}
-                            </div>
+                <div className="d-flex flex-row" >
+                    <div  >
+                        <div className="  logo-w-little "
+                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
+                        >
+                            {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
-                        <div className="select-not-belong">
-                            {workspace.name}
-                        </div>
-                    </div >
+                    </div>
+                    <div className="select-not-belong">
+                        {workspace.name}
+                    </div>
+                </div >
         } : null
     )) : null
-   
+
     const selectPlaceHorder = <hr className="hr-place-holder" />
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
@@ -454,8 +455,6 @@ function TasksNotBelongCardByMap(props) {
                     </div>
                     : null}
             </div>
-
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
 
         </>
