@@ -149,7 +149,7 @@ function TaskDetails(props) {
         {
             value: priority,
             label:
-                <div className="prioprty-select dropdown-toggle ">
+                <div className="prioprty-select ">
                     <img referrerpolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
