@@ -44,6 +44,13 @@ const publicData = {
     setFilesFromTask(state, action) {
         state.arrFilesOfTask = action.payload
     },
+    setMember(state, action) {
+        action.payload.contact.map(payload =>
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members.push({contact:payload})
+
+        )
+        console.log(state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members);
+    },
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -73,6 +80,7 @@ const publicData = {
         }
 
     },
+
     setTaskByFiledFromTasks(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
@@ -332,9 +340,14 @@ const publicData = {
 
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
-        state.workspaces = state.workspaces.filter((_, i) =>
-            state.workspaces[i]._id !== action.payload._id
-        )
+        if (action.payload == undefined)
+            state.workspaces = state.workspaces.filter((_, i) =>
+                state.workspaces[i]._id !== undefined)
+
+        else
+            state.workspaces = state.workspaces.filter((_, i) =>
+                state.workspaces[i]._id !== action.payload._id
+            )
     },
 
     setCardNameInput(state, action) {

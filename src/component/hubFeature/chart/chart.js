@@ -36,7 +36,7 @@ function MyChart(props) {
         //         $(`.chart rect:eq(${index + 1})`).css('fill', item.color);
         //     })
         // }, 100)
-    } 
+    }
     const optionsSticks = {
         chart: {
             id: "bar"
@@ -225,6 +225,9 @@ function MyChart(props) {
     return (
         <>
             <div className='container chartContainer'>
+                <div className="row divProjectStatistics pt-3 ml-2">
+                    <h4>Project Statistics</h4>
+                </div>
                 <div className='row'>
                     <div className='col-3 p-1'>
                         <div className='chartCol p-2 h100'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
