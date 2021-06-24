@@ -227,6 +227,11 @@ function MyChart(props) {
     const seriesPie = pieData.map(p => p.val)
     return (
         <>
+            <div className="row divProjectStatistics pt-3 ml-2">
+                    <h4>Project Statistics</h4>
+                </div>
+
+           
             <div className='container'>
                 <div className='row'>
                     <div className='col-3 p-1'>
