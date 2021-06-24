@@ -5,6 +5,7 @@ import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
     const [logs, setLogs] = useState(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+    console.log("🚀 ~ file: logs.js ~ line 8 ~ Logs ~ logs", logs)
     useEffect(() => {
         if (props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs) {
             setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
@@ -15,7 +16,6 @@ function Logs(props) {
     logsReverse.reverse();
 
     const renderViewLogs = () => {
-        debugger
 
         if (typeof(logsReverse[0]) !== "string")
             return logsReverse.map(log => {

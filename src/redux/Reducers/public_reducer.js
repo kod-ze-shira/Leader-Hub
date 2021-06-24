@@ -24,10 +24,13 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
-
+    descriptionNewProject: ''
 }
 
 const publicData = {
+    setDescriptionNewProject(state, action) {
+        state.descriptionNewProject = action.payload
+    },
     setclose(state, action) {
         state.close = !state.close
     },
@@ -40,6 +43,13 @@ const publicData = {
     },
     setFilesFromTask(state, action) {
         state.arrFilesOfTask = action.payload
+    },
+    setMember(state, action) {
+        action.payload.contact.map(payload =>
+            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members.push({contact:payload})
+
+        )
+        console.log(state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members);
     },
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
@@ -70,6 +80,7 @@ const publicData = {
         }
 
     },
+
     setTaskByFiledFromTasks(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
@@ -329,9 +340,14 @@ const publicData = {
 
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
-        state.workspaces = state.workspaces.filter((_, i) =>
-            state.workspaces[i]._id !== action.payload._id
-        )
+        if (action.payload == undefined)
+            state.workspaces = state.workspaces.filter((_, i) =>
+                state.workspaces[i]._id !== undefined)
+
+        else
+            state.workspaces = state.workspaces.filter((_, i) =>
+                state.workspaces[i]._id !== action.payload._id
+            )
     },
 
     setCardNameInput(state, action) {
@@ -354,7 +370,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     addWorkspaceToWorkspacesFromServer(state, action) {
-            state.workspaces[state.indexOfWorkspace] = action.payload
+        state.workspaces[state.indexOfWorkspace] = action.payload
     },
 
 
@@ -433,7 +449,14 @@ const publicData = {
     saveIndexOfWorkspaceInRedux(state, action) {
         state.indexOfWorkspace = action.payload
     },
+    setDateTaskFromGantt(state, action) {
+        let cIndex = state.cards.findIndex(c => c._id === action.payload.card_id)
+        let tIndex = state.cards[cIndex].tasks.
+            findIndex(t => t._id === action.payload._id)
+        state.cards[cIndex].tasks[tIndex].dueDate = action.payload.dueDate
+        state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
 
+    },
     // setWorkspaceByFiledFromWorkspaces(state, action) {
     //     console.log("workspace", action.payload);
     //     for (let index = 0; index < workspaces.length; index++) {  

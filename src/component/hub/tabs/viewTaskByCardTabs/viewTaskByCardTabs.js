@@ -23,6 +23,8 @@ function ViewTaskByCradTabs(props) {
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [showchalalit, setShowChalalit] = useState(false)
     const [userHasLike, setUserHasLike] = useState(false)
+    const [numOfRows, setNumOfRows] = useState(1)
+
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -74,12 +76,14 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
+        setNumOfRows(numOfRows + 1)
         let task1 = {
             "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         // setTask(task1)
         props.EditTask(task1);
+
     }
 
     const showAssigToOrCalander = (object) => {
@@ -134,8 +138,8 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            setShowChalalit(true)
-
+            // alert('fff')
+            props.showRocketShip(true)
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else {
@@ -199,6 +203,15 @@ function ViewTaskByCradTabs(props) {
         e.stopPropagation()
     }
 
+    $('.span-name-task').on('DOMSubtreeModified', function (event) {
+        $(".span-name-task").text($(this).val());
+        var val = $(".span-name-task").text($(this).val());
+        console.log(val);
+
+
+    })
+
+
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
             return myFile.url.endsWith(".pdf") || myFile.url.endsWith(".docx") ?
@@ -209,8 +222,6 @@ function ViewTaskByCradTabs(props) {
 
     return (
         <>
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
-
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
@@ -220,7 +231,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
-                        <div className="task-card mt-2 pt-2 pb-2"
+                        <div className="task-card mb-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className=" ">
@@ -238,6 +249,7 @@ function ViewTaskByCradTabs(props) {
                                         className="checkmark checkmark-tabs"
                                         onClick={(e) => addChalalit(e)}></span>
                                 </label>
+                                {/* <img className="files-task" src={require('../../../img/files-icon.png')} ></img> */}
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
                                 <Button className="more col-3 mr-0 more-task"
@@ -261,14 +273,19 @@ function ViewTaskByCradTabs(props) {
                                     <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                 </Menu>
                                 {myFiles}
+                                {/* <div>
+                                    <span className="span-name-task mt-2" contentEditable={true} >
+                                        {props.task.name}
+                                    </span>
 
-                                <input
-                                    className={props.task.complete ? "disabled form-control col-12 mx-0" : "form-control col-12 mx-0"}
+                                </div> */}
+                                <textarea
+                                    className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
+                                    // rows={numOfRows}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                    onClick={(e) => e.stopPropagation()}
                                     onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
@@ -292,11 +309,11 @@ function ViewTaskByCradTabs(props) {
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
                                             <div> {props.task.priority ?
-                                                <img className="priority-img" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                                 : null}
                                             </div>
                                             <div
-                                                className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
+                                                className={props.task.complete ? "status-task-tabs-opacity px-2  " : "status-task-tabs px-2 "}
                                                 style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                                 {props.task.status ? props.task.status.statusName : null}
                                             </div>
@@ -306,10 +323,11 @@ function ViewTaskByCradTabs(props) {
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
                                         <div className="icons-task-tabs">
 
-                                            <div className="due-date-hover">
+                                            <div className="due-date-hover" title={title.title_due_date}>
                                                 <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
                                                 >{dateInString}</p>
                                             </div>
+
                                             <div className="like-hover">
                                                 <img
                                                     className="like-icon-tabs"
@@ -317,16 +335,18 @@ function ViewTaskByCradTabs(props) {
                                                     src={require('../../../img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
-                                                    <p className="mr-1">{props.task.likes.length}</p>
+                                                    <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
                                                         src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                        {/* src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}> */}
                                                     </img>
                                                 </div>
                                             </div>
                                             <div>
                                                 <img
                                                     id={`${props.task._id}assing-to`}
+                                                    title={title.title_assing}
                                                     className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>

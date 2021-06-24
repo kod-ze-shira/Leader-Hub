@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 .view-cards-tabs .card-body{
-     max-height:  80vh;/* בינתיים */
+     max-height:  72vh;
     /* background: transparent linear-gradient(360deg, #87C5FE30 0%, #ebfff8 100%) 0% 0% no-repeat padding-box; */
     background-color:#EDFBFC !important ;
     border-radius: 0px 0px 8px 8px;
@@ -9,6 +9,9 @@
     color: #0A102E;
     overflow-y: auto;  
     overflow-x: hidden;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  
 
 }
 
@@ -36,9 +39,10 @@ span:focus{
   outline: 0!important;
 }
 #input-card-name{
-  font-size: medium;
+  font-size: 16px;
+  margin-top: 5px;
   font-weight: bold !important;
-  background-color:  #EDFBFC  !important;
+  background-color: #EDFBFC !important;
 }
 .more {
   right: 6px;
@@ -55,8 +59,8 @@ span:focus{
   border-bottom: none !important;
 }
 #task-card:hover{
-  border-color:#52C4A9  !important;
-
+  /* box-shadow: 2px 1px 2px 1px #00000029; */
+          box-shadow: 0px 3px 6px #00000029;
 }
 .more{
     background-color: transparent;
@@ -79,16 +83,10 @@ span:focus{
 margin: auto !important;    
 }
 .allTaskInCard div{
-  /* padding-right: 5px !important;
-  padding-left: 5px !important; */
-  min-height: 10px;
 
-  /* margin-bottom: 9px; */
+  /* min-height: 10px; */
 }
-.allTaskInCard div:hover{
-  /* border-color:#52C4A9  !important; */
 
-  }
 
 .add-task-tabs:hover{
   color:black  !important;
@@ -100,13 +98,6 @@ margin: auto !important;
     /* height: 115px; */
     border-radius: 5px;
     position: relative !important;
-}
-.task-card:hover{
-    border:1px solid #52C4A9!important;
-}
-.task-card input{
-  /* margin-top:20px !important;  */
-
 }
 .task-card p{
     color:black !important;
@@ -141,7 +132,6 @@ margin: auto !important;
 .card-header .form-control:focus
 {
    border: 1px solid #ced4da !important;
-    /* border-radius: .25rem !important; */
 }
 .form-control:focus{
   text-shadow: none !important;
@@ -165,33 +155,25 @@ margin: auto !important;
   .MuiMenuItem-root{
       font-size: 0.9rem !important;
   }
-  .view-cards-tabs .card-body::-webkit-scrollbar {
+  /* .view-cards-tabs .card-body::-webkit-scrollbar {
     background-color: #EDFBFC ;
     width: 6px;
-  }
+  } */
   
    
     /* Track */
-    .view-cards-tabs .card-body::-webkit-scrollbar-track {
+    /* .view-cards-tabs .card-body::-webkit-scrollbar-track {
       border-radius: 10px;
     }
     .view-cards-tabs .card-body::-webkit-scrollbar-track:hover {
         box-shadow: inset 0 0 5px grey; 
-      }
+      } */
      
-    /* Handle */
-    .view-cards-tabs .card-body::-webkit-scrollbar-thumb { 
-      border-radius: 15px;
-        background: #b0b1b1; 
-    }
-    
-    /* Handle on hover */
-    .view-cards-tabs .card-body::-webkit-scrollbar-thumb:hover {
-      /* background: #919494;  */
-
-    }
     
     .hand-drag{
       display: inline-block;
       opacity: 0.5;
+    }
+    .new-task-tabs{
+      cursor: pointer;
     }

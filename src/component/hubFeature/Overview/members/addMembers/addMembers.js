@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../../../../redux/actions/action'
 import './addMembers.css'
@@ -6,11 +6,11 @@ import './addMembers.css'
 
 
 function AddMembers(props) {
-
-
+const divAddMembers =useRef()
+// divAddMembers.current.removeEventListener("click");
     return (
         <>
-            <div className="divAddMembers col-4 pt-3  " onClick={e => props.setMembersList(!props.membersList)}>
+            <div className="divAddMembers col-md-4  col-sm-12 pt-3  "  ref={divAddMembers} onClick={(e) =>{ props.setMembersList(!props.membersList); e.stopPropagation()}}>
                 <div className="container">
                     <div className="row d-flex align-items-center">
                         <div className="col-2">
