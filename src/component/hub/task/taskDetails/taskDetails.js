@@ -36,6 +36,11 @@ function TaskDetails(props) {
 
     }, [props.cards])
 
+    useEffect(() => {
+        nameRequired.current.focus();
+    }, [])
+
+
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
@@ -387,6 +392,7 @@ function TaskDetails(props) {
                                 <label for="priority">Priority</label>
 
                                 <Select
+                                    isSearchable={false}
                                     name="priority"
                                     className=""
                                     // classNamePrefix="select"

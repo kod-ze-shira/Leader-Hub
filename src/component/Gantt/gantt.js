@@ -11,6 +11,7 @@ export default class Gantt extends Component {
     constructor(props) {
         super(props);
         this.initZoom();
+        this.state = { endDate: 0, startDate: 0 };
     }
 
     dataProcessor = null;
@@ -41,20 +42,23 @@ export default class Gantt extends Component {
         const onDataUpdated = this.props.onDataUpdated;
     }
     componentDidUpdate() {
-
+        console.log(this.state.endDate);
         if (this.props.tasks) {
 
             gantt.clearAll();
             gantt.config.xml_date = "%Y-%m-%d %H:%i";
             const { tasks } = this.props;
+
+            gantt.config.autoscroll = true;
+            // gantt.config.autoscroll_speed = 50;
             gantt.init(this.ganttContainer);
             this.initGanttDataProcessor();
             gantt.parse(tasks);
 
         }
     }
-    componentDidMount() {
 
+    componentDidMount() {
         gantt.plugins({
             tooltip: true,
             marker: true
@@ -71,23 +75,7 @@ export default class Gantt extends Component {
 
 
         gantt.templates.task_text = function (start, end, task) {
-            let a = new Date(end)
-            a.setDate(a.getDate() + 1);
-            let endDate = JSON.stringify(a)
-            let ed = JSON.parse(endDate)
-            let newEndDate = ed.split("-")[2][0]
-                + ed.split("-")[2][1] + '/' + ed.split("-")[1] + '/' + ed.split("-")[0];
 
-            let b = new Date(start)
-            b.setDate(b.getDate() + 1);
-            let startDate = JSON.stringify(b)
-            let sd = JSON.parse(startDate)
-
-            let newStartDate = sd.split("-")[2][0]
-                + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
-
-            let editTaskInRedux = { "_id": task.id, "dueDate": newEndDate, "startDate": newStartDate }
-            // store.dispatch(actions.editTask(editTaskInRedux))
             if (task.progress > 1) {
                 // return task.text;
             }
@@ -105,16 +93,34 @@ export default class Gantt extends Component {
                 });
                 gantt.getMarker(markerId);
             }
-
             return task.text;
-
-
         };
 
-        // gantt.attachEvent("onAfterTaskDrag", function (id, mode, e, start, end) {
-        //     // store.dispatch(actions.editTask(editTaskInRedux))
-        // });
+        gantt.templates.task_class = function (start, end, task) {
+            // if (task.progress > 0 && task.progress < 1) {
+            //     // return task.class = "pinkBorder";
+            // }
+            // if (task.progress === 1) {
+            //     // return task.class = "greenBorder vv";
+            // }
+            // else {
+            //     // return task.class = "orangeBorder";
+            // }
+            // return task.class = "orangeBorder";
 
+            if (task.priority === "High") {
+                return task.class = "redBorder";
+            }
+            if (task.priority === "Low") {
+                return task.class = "yellowBorder";
+            }
+            else {
+                return task.class = "orangeBorder";
+            }
+        };
+        gantt.config.columns = [
+            { id: "c_1", name: "cardName", label: "Card name", width: 200, template: myFunc },
+        ];
         gantt.templates.gantt_cell = function (start, end, task) {
             return task.text = "knkl";
         }
@@ -144,8 +150,38 @@ export default class Gantt extends Component {
         //         return true;
         //     }
         //     return false;
-       
+
         // });
+        gantt.attachEvent("onAfterTaskUpdate", function (id, task) {
+
+            let a = new Date(task.end_date)
+            a.setDate(a.getDate() + 1);
+            let endDate = JSON.stringify(a)
+            let ed = JSON.parse(endDate)
+            let newEndDate = ed.split("-")[2][0]
+                + ed.split("-")[2][1] + '/' + ed.split("-")[1] + '/' + ed.split("-")[0];
+
+            let b = new Date(task.start_date)
+            b.setDate(b.getDate() + 1);
+            let startDate = JSON.stringify(b)
+            let sd = JSON.parse(startDate)
+
+            let newStartDate = sd.split("-")[2][0]
+                + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
+
+            let editTaskInRedux = {
+                "_id": id,
+                "dueDate": newEndDate,
+                "startDate": newStartDate
+            }
+
+            store.dispatch(actions.editTask(editTaskInRedux))
+            console.log(editTaskInRedux);
+
+            store.dispatch(actions.setDateTaskFromGantt({ ...editTaskInRedux, card_id: task.card }))
+        });
+
+
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;
         gantt.init(this.ganttContainer);
@@ -158,33 +194,7 @@ export default class Gantt extends Component {
 
         // gantt.init(this.ganttContainer);
 
-        gantt.templates.task_class = function (start, end, task) {
 
-            // if (task.progress > 0 && task.progress < 1) {
-            //     // return task.class = "pinkBorder";
-            // }
-            // if (task.progress === 1) {
-            //     // return task.class = "greenBorder vv";
-            // }
-            // else {
-            //     // return task.class = "orangeBorder";
-            // }
-            // return task.class = "orangeBorder";
-
-            if (task.priority ==="High") {
-                debugger
-                return task.class = "pinkBorder";
-            }
-            if (task.priority === "Low") {
-                debugger
-                return task.class = "greenBorder";
-            }
-            else {
-                return task.class = "orangeBorder";
-            }
-            return task.class = "orangeBorder";
-
-        };
         gantt.templates.tooltip_date_format = function (date) {
             var formatFunc = gantt.date.date_to_str("%Y-%m-%d");
             return formatFunc(date);
@@ -201,12 +211,9 @@ export default class Gantt extends Component {
                 return `<div class='important'><i class="material-icons">
                 arrow_drop_down
                 <br/>
-
-    </i>${task.cardName}</div>`;
+                </i>${task.cardName}</div>`;
         }
-        gantt.config.columns = [
-            { id: "c_1", name: "cardName", label: "Card name", width: 200, template: myFunc },
-        ];
+
         var data = {
             tasks: [
                 { id: "p_1", text: "one card", start_date: "01-04-2020", duration: 18 },
@@ -222,6 +229,7 @@ export default class Gantt extends Component {
         background: '#fff',
         newDatesInTask: {}
     };
+
 
     handleChangeComplete = (color) => {
 
@@ -243,7 +251,9 @@ export default class Gantt extends Component {
         return (
             <>
                 <center>
-                    <div ref={(input) => { this.ganttContainer = input }}
+                    <div ref={(input) => {
+                        this.ganttContainer = input;
+                    }}
                         style={{ width: '100%', height: '80vh' }}
                     >
                     </div>

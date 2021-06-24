@@ -11,16 +11,14 @@
     .body-hangoutAndLogs::-webkit-scrollbar-thumb { 
       border-radius: 10px;
     }
-    
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #919494; 
-    }
-
 
     .body-hangoutAndLogs{
       overflow-x: hidden;
       overflow-y: auto;
       height: 100vh;
+      margin-top: 2%;
     }
     
+    .minHeight{
+      /* width: 100%; */
+    }

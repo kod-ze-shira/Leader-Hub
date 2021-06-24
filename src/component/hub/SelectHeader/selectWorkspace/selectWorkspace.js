@@ -23,10 +23,13 @@ function SelectWorkspace(props) {
         props.saveIndexOfWorkspaceInRedux(id.workspaceIndex)
 
 
+
         // if (myWorkspace.projects[0]) {
+        debugger
         props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
         // }
+
         // else {
         //     props.setProjectName("No Projects")
         // }
@@ -79,8 +82,8 @@ function SelectWorkspace(props) {
                     classNamePrefix="select"
                     onChange={(e) => changeSelectedWorkspace(e)}
                     name="color"
-                    options={viewWorkspacesList}
                     // placeholder={placeholder}
+                    options={viewWorkspacesList}
                     placeholder={props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null}
                     styles={style}
                     components={{ Input }}

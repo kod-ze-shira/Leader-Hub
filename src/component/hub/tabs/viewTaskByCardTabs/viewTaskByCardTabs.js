@@ -111,6 +111,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
+        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -138,8 +139,8 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            setShowChalalit(true)
-
+            // alert('fff')
+            props.showRocketShip(true)
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else {
@@ -222,8 +223,6 @@ function ViewTaskByCradTabs(props) {
 
     return (
         <>
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
-
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
                 {provided => (
@@ -233,7 +232,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
-                        <div className="task-card mt-2 pt-2 pb-2"
+                        <div className="task-card mb-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className=" ">
@@ -251,6 +250,7 @@ function ViewTaskByCradTabs(props) {
                                         className="checkmark checkmark-tabs"
                                         onClick={(e) => addChalalit(e)}></span>
                                 </label>
+                                {/* <img className="files-task" src={require('../../../img/files-icon.png')} ></img> */}
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
                                 <Button className="more col-3 mr-0 more-task"
@@ -287,7 +287,6 @@ function ViewTaskByCradTabs(props) {
                                     // rows={numOfRows}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                    onClick={(e) => e.stopPropagation()}
                                     onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
@@ -336,11 +335,12 @@ function ViewTaskByCradTabs(props) {
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
                                                     src={require('../../../img/like-icon.png')}>
                                                 </img>
-                                                <div title={title.title_like} onClick={(e) => updateLike(e)}>
-                                                    <p className="mr-1">{props.task.likes.length}</p>
+                                                <div onClick={(e) => updateLike(e)}>
+                                                    <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
                                                         src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                        {/* src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}> */}
                                                     </img>
                                                 </div>
                                             </div>

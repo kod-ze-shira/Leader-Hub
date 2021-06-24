@@ -152,7 +152,7 @@ function Tabs(props) {
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
 
-            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
+            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)} >
                 <Droppable
                     droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
                 >
@@ -172,6 +172,7 @@ function Tabs(props) {
                                                     openInputTask={openInputTask}
                                                     viewToastComplete={props.viewToastComplete}
                                                     viewContactList={props.viewContactList}
+                                                    showRocketShip={props.showRocketShip}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} indexCard={index}
 
