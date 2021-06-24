@@ -285,9 +285,11 @@ function ViewTaskByCrad(props) {
                                     </input>
                                 </div>
                                 <div onClick={(e) => updateLike(e)} className="p-2">
-                                    <p className="likes-num mr-1">{props.task.likes.length}</p>
+
+                                    <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                     <img
                                         onClick={updateLike}
+                                        // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
                                         src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
                                     </img>
                                 </div>
