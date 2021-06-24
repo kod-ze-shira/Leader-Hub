@@ -24,7 +24,8 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
-    descriptionNewProject: ''
+    descriptionNewProject: '',
+    priorities:[]
 }
 
 const publicData = {

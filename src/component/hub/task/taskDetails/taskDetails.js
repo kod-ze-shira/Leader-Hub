@@ -149,7 +149,7 @@ function TaskDetails(props) {
         {
             value: priority,
             label:
-                <div className="prioprty-select">
+                <div className="prioprty-select dropdown-toggle ">
                     <img referrerpolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
@@ -398,10 +398,13 @@ function TaskDetails(props) {
                                     // classNamePrefix="select"
                                     options={viewPriortyList}
                                     placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
-                                        <div className="prioprty-select">
+                                        <div className="prioprty-select  dropdown-toggle">
                                             <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
                                             <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
-                                        </div> : "All priority"}
+                                        </div> : <div className="prioprty-select  dropdown-toggle">
+                                            <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
+                                            <p >{props.priorities[0].level}</p>
+                                        </div>}
                                     onChange={(e) => changePriority(e)}
                                 />
                             </div>

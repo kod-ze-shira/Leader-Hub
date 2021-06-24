@@ -175,7 +175,7 @@ function ViewCardsTabs(props) {
                                     <div class="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div className="mt-0 glila"
+                                                <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 

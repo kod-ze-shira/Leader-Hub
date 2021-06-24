@@ -116,7 +116,8 @@ z-index: 9999 !important;
 }
 .color-status-first{
   text-align: center;
-  max-width: 90px !important;
+  /* max-width: 90px !important; */
+  width: 85px;
     /* /* width: 26px; */
     height: 25px; 
     color: white;
@@ -126,8 +127,8 @@ z-index: 9999 !important;
 
 }
 .dropdown-toggle::after {
-  float: right;
-  margin-top: 8px;
+  /* float: right; */
+  margin-top: 11px;
 
 }
 
