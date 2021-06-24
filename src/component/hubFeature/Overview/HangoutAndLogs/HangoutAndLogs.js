@@ -9,9 +9,9 @@ function HangoutAndLogs(props) {
     return (
         <>
             <div className="body-hangoutAndLogs" >
-                <div className='row mb-3 minHeight'>
+                {/* <div className='row mb-3 minHeight'>
                     <Hangout></Hangout>
-                </div>
+                </div> */}
                 <div className='row minHeight'>
                     <Logs />
                 </div>
