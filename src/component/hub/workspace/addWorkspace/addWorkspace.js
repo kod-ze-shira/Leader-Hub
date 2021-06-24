@@ -122,6 +122,7 @@ function AddWorkspace(props) {
                         <label for="name">Name</label>
                         <input name="name" ref={nameworkspae} required
                             // onChange={handleChange}
+                            autoFocus
                             onChange={(input) => changeFiledInWorkspace(input)}
                             type="text" class="form-control" id="workspace-name" />
                         <div class="invalid-feedback">
@@ -147,7 +148,7 @@ function AddWorkspace(props) {
                             value={myColor}
                             // onChange={(e) => changeColorWorkspace(e)}
                             onChange={(input) => changeFiledInWorkspace(input)}
-                            />
+                        />
                         {/* onChange={handleChange} /> */}
                     </div>
                 </div>

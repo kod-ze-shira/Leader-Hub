@@ -144,7 +144,7 @@ export default class Gantt extends Component {
         //         return true;
         //     }
         //     return false;
-       
+
         // });
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;

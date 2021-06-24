@@ -50,6 +50,9 @@ function MyChart(props) {
 
     return (
         <>
+            <div className="row divProjectStatistics pt-3 ml-2">
+                    <h4>Project Statistics</h4>
+                </div>
 
             <Paper style={{ width: '100%'}}>
                 <div className='container'>

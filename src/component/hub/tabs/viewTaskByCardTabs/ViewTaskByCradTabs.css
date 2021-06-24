@@ -1,6 +1,12 @@
 .task-card{
     cursor: pointer;
 }
+.textarea-name-task{
+    box-shadow: none !important;
+    /* overflow: hidden !important; */
+    max-height: 500px;
+    /* padding: 0 !important; */
+}
 .more-task {
     float: right;
   }

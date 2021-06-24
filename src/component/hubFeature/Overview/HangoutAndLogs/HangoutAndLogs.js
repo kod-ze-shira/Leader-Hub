@@ -5,6 +5,7 @@ import Logs from '../logs/logs'
 import Hangout from '../hangout/hangout'
 
 function HangoutAndLogs(props) {
+    
     return (
         <>
             <div className="body-hangoutAndLogs" >

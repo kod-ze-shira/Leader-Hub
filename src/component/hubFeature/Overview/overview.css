@@ -3,6 +3,7 @@
     height: 82.7vh;
     overflow-x:hidden;
     border-radius: 5px;
+    
 }
 .minHeight{
     min-height:50vh;

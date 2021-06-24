@@ -8,7 +8,9 @@
     cursor: pointer !important;
 }
 .membersToAdd{
-    width:fit-content;
+    width:30vw;
+max-height: 40vh;    
+overflow-y: scroll;
 }
 .membersToAdd{
     /* border:1px solid rgb(196, 184, 184); */

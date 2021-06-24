@@ -21,7 +21,12 @@
     font-size: 1.5rem;
     font-weight: 500;
 }
-
+.MuiPaper-rounded{
+    border-radius:0 !important;
+}
 .h100{
     height: 100%;
+}
+.divProjectStatistics{
+    background-color:white;
 }

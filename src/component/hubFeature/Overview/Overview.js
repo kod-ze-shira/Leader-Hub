@@ -33,12 +33,14 @@ function Overview(props) {
             }
         }
     }, [props.workspaces])
-    // useEffect(() => {
+    useEffect(() => {
+        // props.indexOfCurrentWorkspace ||
+        if (props.workspaces.length) {
+            setRefresh(true)
+        }
+        // }, [props.indexOfCurrentWorkspace])
+    }, [props.workspaces])
 
-    //     if (props.indexOfCurrentWorkspace && props.workspaces.length) {
-    //         setRefresh(true)
-    //     }
-    // }, [props.indexOfCurrentWorkspace])
     return (
         <>
             <div className='scrollbarOverview container-fluid'>
@@ -46,22 +48,22 @@ function Overview(props) {
                 <div className='row '>
                     <div className='col-9 mr-3'>
                         <div className='container-fluid px-0 '>
-                            <div className='row mb-3'>
+                            <div className='row mb-3 '  style={{ 'background-color': 'white','border-raduis':'0.2em' }}>
                                 <div className='projectName' >
                                 <Description></Description>
                                 </div>
-                                {/* {refresh ? */}
-                                <>
-                                    <Members />
+                                {refresh ?
+                                    <>
+                                        <Members />
 
-                                    <MyChart />
-                                </>
-                                {/* : null} */}
+                                        <MyChart />
+                                    </>
+                                    : null}
                             </div>
                             <div className='row'>
-                                {/* {refresh ? */}
-                                <FilesOfProject />
-                                {/* : null} */}
+                                {refresh ?
+                                    <FilesOfProject />
+                                    : null}
                             </div>
                         </div>
                     </div>
@@ -80,7 +82,6 @@ function Overview(props) {
                             {/* : null} */}
                         </div>
                     </div>
-                    {/* <Hangout></Hangout> */}
                 </div>
             </div>
         </>
