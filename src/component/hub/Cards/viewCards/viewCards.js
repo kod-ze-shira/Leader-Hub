@@ -224,6 +224,7 @@ function ViewCards(props) {
                                                 key={task._id} task={task}
                                                 indexCard={props.indexCard}
                                                 indexTask={index}
+                                                showRocketShip={props.showRocketShip}
                                             />
                                         ))}
                                         {provided.placeholder}

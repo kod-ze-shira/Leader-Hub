@@ -135,8 +135,8 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            setShowChalalit(true)
-
+            // alert('fff')
+            props.showRocketShip(true)
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else {
@@ -219,8 +219,6 @@ function ViewTaskByCradTabs(props) {
 
     return (
         <>
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
-
             <Draggable
                 draggableId={props.task._id} index={props.indexTask}>
                 {provided => (

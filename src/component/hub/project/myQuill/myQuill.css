@@ -1,0 +1,42 @@
+#textQuil .ql-toolbar.ql-snow .ql-formats{
+    margin-right: 0px;
+}
+
+#textQuil .ql-container.ql-snow{
+    border: none;
+}
+
+#textQuil.ql-toolbar.ql-snow {
+    border: none;
+    padding: 4px;
+}
+
+#textQuil .ql-snow:nth-of-type(2){
+    max-height: 22vh;
+    height: auto;
+    overflow: auto;
+    min-height: 18vh;
+}
+#textQuil .ql-snow{
+    background-color: #EDFBFC!important;
+    border: none !important;
+    text-align: left;
+    padding-bottom: 0px;
+}
+
+#textQuil .ql-snow .ql-tooltip{
+    left:0px !important;
+}
+
+
+#textQuil .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg{
+    right: auto;  
+}
+
+#textQuil .ql-snow .ql-picker.ql-header{
+    width: 65px;
+}
+
+#textQuil .ql-snow .ql-picker.ql-header .ql-picker-label{
+    padding-left: 0px;
+}

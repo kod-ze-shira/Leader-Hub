@@ -319,12 +319,8 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                         "source": "Hub",
                         "files": null
                     }))
-
-
                 }
-                debugger
                 dispatch(actions.setProjectInWorkspace(data.project))
-
                 console.log("success")
                 // console.log(data.result);
             },

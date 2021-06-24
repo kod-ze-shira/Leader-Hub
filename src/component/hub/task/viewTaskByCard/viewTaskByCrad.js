@@ -44,7 +44,6 @@ function ViewTaskByCrad(props) {
     const [status, setStatus] = useState()
     const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [viewDetails, setViewDetails] = useState(false)
-    const [showchalalit, setShowChalalit] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     const [detailsOrEditTask, setDetailsOrEditTask] = useState()
     const [editTaskName, setEditTaskName] = useState(props.task.name)
@@ -120,7 +119,7 @@ function ViewTaskByCrad(props) {
 
 
         if (props.task.complete == false)
-            setShowChalalit(true)
+            props.showRocketShip(true)
     }
 
     function deleteTask() {
@@ -346,7 +345,6 @@ function ViewTaskByCrad(props) {
                     </div>
                 )}
             </Draggable>
-            {showchalalit ? <div className="animation"><Animation /> </div> : null}
 
         </>
     )

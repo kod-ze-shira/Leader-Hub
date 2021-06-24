@@ -1,6 +1,7 @@
 
 
 .wrap-input{
+    position: relative;
     border:1.5px solid #1FB9C1;
     border-radius: 8px !important; 
     margin-bottom: 2px;
@@ -49,6 +50,7 @@
 }
 .btn-add-task{
     padding: 4px;
+    margin: 2px 0;
     color: white;
     border-radius: 6px;
     background-color: #68C7CB;
