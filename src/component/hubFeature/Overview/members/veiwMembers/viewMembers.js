@@ -24,7 +24,7 @@ function ViewMembers(props) {
                         return <>
                             {/* <div className="mb-2">
                                 <div className="row ml-4"> */}
-                                    <div className="col-4">
+                                    {/* <div className="col-4">
                                         <div className="col-2 d-flex align-items-center">
                                             <img referrerpolicy="no-referrer" src={m.thumbnail} className="thumbnail-contact imgMembers" />
                                         </div>
@@ -32,7 +32,7 @@ function ViewMembers(props) {
                                             <b className="name-contact nameMembers">{m.name} </b>
                                             <p className="email-contact emailMembers ml-2">{m.email} </p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 {/* </div>
                             </div> */}
                         </>

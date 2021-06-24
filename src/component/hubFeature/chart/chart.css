@@ -1,11 +1,5 @@
-/* .chartRow{
-    height:30vh;
-} */
 .colorDiv{
     width: 100%;
-}
-.rect{
-    background-color:green !important;
 }
 .colorName{
     font-size:1vw;
@@ -25,3 +19,6 @@
 .h100{
     height: 100%;
 }
+/* .sticks{
+    height:30vh;
+} */
