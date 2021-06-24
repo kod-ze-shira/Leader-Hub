@@ -76,10 +76,12 @@ function ViewFilesOfProject(props) {
                 <hr></hr>
                 {showCards ?
                     <ViewCards
+                        showRocketShip={props.showRocketShip}
                         setFiles={setCurrentFiles}
                         setShowCards={setShowCards}
                         setFoldersForDownload={setFoldersForDownload}
                         setCardName={setCardName}
+                        showRocketShip={props.showRocketShip}
                         setCountFoldersArr={setCountFoldersArr}
                     ></ViewCards> :
                     <ViewFilesByCard
