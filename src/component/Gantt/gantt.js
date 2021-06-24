@@ -206,13 +206,14 @@ export default class Gantt extends Component {
         });
 
         function myFunc(task) {
-            if (task.cardName)
+            if (task.cardName) {
                 return (`<div class='important'>
                 <i class="material-icons">
                 arrow_drop_down
                 </i> 
                ${task.cardName}
                 </div>`);
+            }
         }
 
         var data = {
