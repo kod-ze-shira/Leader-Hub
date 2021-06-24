@@ -329,9 +329,14 @@ const publicData = {
 
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
-        state.workspaces = state.workspaces.filter((_, i) =>
-            state.workspaces[i]._id !== action.payload._id
-        )
+        if (action.payload == undefined)
+            state.workspaces = state.workspaces.filter((_, i) =>
+                state.workspaces[i]._id !== undefined)
+
+        else
+            state.workspaces = state.workspaces.filter((_, i) =>
+                state.workspaces[i]._id !== action.payload._id
+            )
     },
 
     setCardNameInput(state, action) {
@@ -354,7 +359,7 @@ const publicData = {
         state.workspaces.push(action.payload)
     },
     addWorkspaceToWorkspacesFromServer(state, action) {
-            state.workspaces[state.indexOfWorkspace] = action.payload
+        state.workspaces[state.indexOfWorkspace] = action.payload
     },
 
 

@@ -132,7 +132,7 @@ function ViewCardsTabs(props) {
     return (
         <>
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
+                <Draggable draggableId={props.cardFromMap._id} index={props.index} >
                     {provided => (
                         <div
                             {...provided.draggableProps}
@@ -142,13 +142,13 @@ function ViewCardsTabs(props) {
                             <div className="view-cards-tabs"
                                 id={props.cardFromMap._id}>
                                 <div class="card" >
-                                    <div class="container" >
+                                    <div class="container " >
                                         <div class="draggable card-header row">
                                             <span
                                                 id="input-card-name"
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
-                                                className="  pl-4 col-10"
+                                                className=" mb-2 pl-4 col-10"
 
                                             >{editCardName}
                                             </span>
@@ -172,10 +172,10 @@ function ViewCardsTabs(props) {
 
                                         </div>
                                     </div>
-                                    <div class="card-body allTaskInCard">
+                                    <div class="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div className="mt-0"
+                                                <div className="mt-0 glila"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 

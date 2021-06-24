@@ -230,7 +230,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
-                        <div className="task-card mt-2 pt-2 pb-2"
+                        <div className="task-card mb-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className=" ">
@@ -248,6 +248,7 @@ function ViewTaskByCradTabs(props) {
                                         className="checkmark checkmark-tabs"
                                         onClick={(e) => addChalalit(e)}></span>
                                 </label>
+                                {/* <img className="files-task" src={require('../../../img/files-icon.png')} ></img> */}
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
                                 <Button className="more col-3 mr-0 more-task"
@@ -277,13 +278,12 @@ function ViewTaskByCradTabs(props) {
                                     </span>
 
                                 </div> */}
-                                <textarea 
+                                <textarea
                                     className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                    onClick={(e) => e.stopPropagation()}
                                     onBlur={(e) => editTask()}
                                     onKeyPress={event => {
                                         if (event.key === 'Enter') {
@@ -332,10 +332,11 @@ function ViewTaskByCradTabs(props) {
                                                     src={require('../../../img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
-                                                    <p className="mr-1">{props.task.likes.length}</p>
+                                                    <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
                                                         src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                        {/* src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}> */}
                                                     </img>
                                                 </div>
                                             </div>

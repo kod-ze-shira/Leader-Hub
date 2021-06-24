@@ -11,7 +11,7 @@ function SelectCards(props) {
     useEffect(() => {
         if (props.cards[0])
             props.setCard(props.cards[0])
-            
+
     }, [])
 
 
@@ -44,7 +44,7 @@ function SelectCards(props) {
             boxShadow: state.isFocused ? 0 : 0,
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
-                backgroundColor:'#eeeeee' ,
+                backgroundColor: '#eeeeee',
             }
         })
     };
