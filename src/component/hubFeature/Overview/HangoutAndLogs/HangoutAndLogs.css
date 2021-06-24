@@ -16,5 +16,9 @@
       overflow-x: hidden;
       overflow-y: auto;
       height: 100vh;
+      margin-top: 2%;
     }
     
+    .minHeight{
+      /* width: 100%; */
+    }
