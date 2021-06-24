@@ -37,7 +37,7 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
- 
+
     useEffect(() => {
 
     }, [props.task.status])

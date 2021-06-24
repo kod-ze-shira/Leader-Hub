@@ -347,9 +347,13 @@ function TaskDetails(props) {
                             <div class="dropdown col-md-6 col-lg-5">
                                 <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
-
-                                        <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
+                                        <div
+                                            className="color-status-first px-3"
+                                            style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color : null }} >
+                                            {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName : null}
+                                        </div>
+                                        {/* <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
+                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span> */}
                                     </> : null}
                                 </button>
                                 {openPopUp ?
@@ -416,30 +420,33 @@ function TaskDetails(props) {
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
                         : null}
-                    <div className="assingto-details" >
+                    <div className="assingto-details" data-tip data-for="assing">
 
                         <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img data-tip data-for="assing_" className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
-                        <ReactTooltip data-tip id="assign_" place="top" effect="solid">
+                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <ReactTooltip data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
-                    <div className=" files-details">
+                    <div className=" files-details" data-tip id="files">
                         <UploadFile />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img data-tip id="save" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
-                        <ReactTooltip data-tip id="save" place="top" effect="solid">
-                            {title.title_save}
+                        <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <ReactTooltip place="top" effect="solid">
+                            {title.title_files}
                         </ReactTooltip>
                     </div>
-                    <div className="delete-details">
+                    <div className="delete-details" data-tip data-for="delete">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <ReactTooltip data-tip id="delete" place="top" effect="solid" >
+                            {title.title_delete}
+                        </ReactTooltip>
                     </div>
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>
                 </div>

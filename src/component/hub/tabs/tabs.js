@@ -42,7 +42,6 @@ function Tabs(props) {
     }, [props.workspaces])
 
     useEffect(() => {
-        debugger
         // if (props.cards.length) {
         if (props.cards.length || props.cardsEmpty == true) {
             setIfAnimation(false)

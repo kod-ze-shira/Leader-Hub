@@ -217,12 +217,12 @@ function Hub(props) {
                         />
                         : null}
 
-                    {/*   {showContactList ?
+                    {showContactList ?
                         <ContactList hub={true} />
                         : null}
                     {openCalander ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
-                        : null} */}
+                        : null}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
