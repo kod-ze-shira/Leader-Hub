@@ -19,7 +19,6 @@ export default class Gantt extends Component {
     initZoom() {
         gantt.ext.zoom.init({
             levels: [
-
                 {
                     name: 'Days',
                     scale_height: 60,
@@ -208,10 +207,12 @@ export default class Gantt extends Component {
 
         function myFunc(task) {
             if (task.cardName)
-                return `<div class='important'><i class="material-icons">
+                return (`<div class='important'>
+                <i class="material-icons">
                 arrow_drop_down
-                <br/>
-                </i>${task.cardName}</div>`;
+                </i> 
+               ${task.cardName}
+                </div>`);
         }
 
         var data = {
