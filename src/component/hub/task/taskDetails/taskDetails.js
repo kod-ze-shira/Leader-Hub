@@ -388,6 +388,7 @@ function TaskDetails(props) {
                                 <label for="priority">Priority</label>
 
                                 <Select
+                                    isSearchable={false}
                                     name="priority"
                                     className=""
                                     // classNamePrefix="select"

@@ -122,7 +122,13 @@ function Hub(props) {
         setOpenCalander(false)
 
     });
-
+    const deleteWorkspaceInRedux = () => {
+       
+        if (props.workspaces[props.workspaces.length - 1]._id == undefined){
+            props.removeOneWorkspaceFromWorkspaces()
+             debugger
+        }
+    }
     const [focusInputCard, setFocusInputCard] = useState(false)
     return (
         <>
@@ -139,7 +145,7 @@ function Hub(props) {
             </div> */}
             <Router history={history}>
 
-                <div className="row back-screen">
+                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
@@ -243,7 +249,8 @@ function Hub(props) {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+        workspaces: state.public_reducer.workspaces
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -253,6 +260,7 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
+        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces())
     }
 
 
