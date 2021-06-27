@@ -4,8 +4,8 @@ import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
+
     const [logs, setLogs] = useState(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
-    console.log("🚀 ~ file: logs.js ~ line 8 ~ Logs ~ logs", logs)
     useEffect(() => {
         if (props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs) {
             setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
@@ -14,16 +14,31 @@ function Logs(props) {
 
     let logsReverse = [...logs];
     logsReverse.reverse();
+    console.log("logs", logs, "projectsssssssssssssssss", props.workspaces[props.indexOfWorkspace].projects)
 
+    let cardName = (log) => {
+        let project = props.workspaces[props.indexOfWorkspace].projects
+        if (log.schemaName.includes("Task")) {
+            project[0].cards.map((card) => {
+                card.tasks.map((task) => {
+                    if (task._id == log.objectId)
+                        return log.objectId
+                }
+                )
+            })
+        }
+    }
     const renderViewLogs = () => {
 
-        if (typeof(logsReverse[0]) !== "string")
+        if (typeof (logsReverse[0]) !== "string")
             return logsReverse.map(log => {
                 return <ViewLogs
                     schemaName={log.staticLog.name}
                     icon={log.staticLog.icon}
                     user={log.user}
                     date={log.date}
+                    _id={log._id}
+                    cardName={cardName(log)}
                 />
             })
         else
@@ -48,13 +63,14 @@ function Logs(props) {
 
 }
 const mapDispatchToProps = (dispatch) => {
+    return {}
 }
 
 const mapStateToProps = (state) => {
     return {
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
-        workspaces: state.public_reducer.workspaces
+        workspaces: state.public_reducer.workspaces,
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logs);

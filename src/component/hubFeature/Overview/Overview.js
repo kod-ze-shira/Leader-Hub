@@ -57,11 +57,10 @@ function Overview(props) {
 
     return (
         <>
-            {sizeScreen > 880 ?
                 <div className='scrollbarOverview container-fluid'>
 
                     <div className='row '>
-                        <div className='col-9 mr-3'>
+                        <div className='col-lg-9 col-md-12 mr-3'>
 
                             <div className='container-fluid px-0 '>
                                 <div className='row mb-3'>
@@ -94,47 +93,6 @@ function Overview(props) {
                         {/* <Hangout></Hangout> */}
                     </div>
                 </div>
-                :
-                <div className='scrollbarOverview scrollbarOverview2 container-fluid'>
-
-                    <div className='row '>
-                        <div className='col '>
-
-                            <div className='container-fluid px-0 '>
-                                <div className='row mb-3'>
-                                    <div className='projectName' >
-                                        <Description></Description>
-                                    </div>
-                                    {refresh ?
-                                        <>
-                                            <Members />
-
-                                            <MyChart />
-                                        </>
-                                        : null}
-                                </div>
-                                <div className='row'>
-                                    {refresh ?
-                                        <FilesOfProject />
-                                        : null}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <row>
-                        <div className='col' style={{ height: '87vh' }}>
-                            <div className='container-fluid px-0  downWidthHangoutAndLogs'>
-                                {refresh ?
-                                    <HangoutAndLogs></HangoutAndLogs>
-                                    : null}
-                            </div>
-                        </div>
-                        {/* <Hangout></Hangout> */}
-                    </row>
-                </div>
-
-            }
-
         </>
     )
 }
