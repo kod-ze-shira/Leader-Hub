@@ -1,17 +1,14 @@
-import React, { useState, useEffect, } from 'react'
-import { useParams, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { actions } from '../../../redux/actions/action';
-import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
-import Hangout from './hangout/hangout'
-import Members from './members/members'
-import Logs from './logs/logs'
-import './overview.css'
-import MyChart from '../chart/chart'
-import HangoutAndLogs from './HangoutAndLogs/HangoutAndLogs'
+import MyChart from '../chart/chart';
 import Description from "./description/description";
-import ViewFilesOfProject from './viewFilesOfProject/viewFilesOfProject'
-// import { actions } from '../../hub'
+import HangoutAndLogs from './HangoutAndLogs/HangoutAndLogs';
+import Logs from './logs/logs';
+import Members from './members/members';
+import './overview.css';
+import FilesOfProject from './viewFilesOfProject/viewFilesOfProject';
 function Overview(props) {
 
 
@@ -63,7 +60,7 @@ function Overview(props) {
                         <div className='col-lg-9 col-md-12 mr-3'>
 
                             <div className='container-fluid px-0 '>
-                                <div className='row mb-3'>
+                                <div className='row mb-3 divChartAndMembers'>
                                     <div className='projectName' >
                                         <Description></Description>
                                     </div>

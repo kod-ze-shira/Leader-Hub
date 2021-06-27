@@ -3,6 +3,11 @@
   top:10%;
   left:35%;
   z-index: 100;
-  background-color:white;
-   
+  background-color:white;   
 }
+.divAllMembers{  
+  border-bottom:1px solid #E9E9E9;
+}
+.divProjectMembers{
+  align-items: center;
+} 

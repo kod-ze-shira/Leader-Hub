@@ -85,6 +85,7 @@ function AllWorkspaces(props) {
     }
     $(window).click(function () {
         setShowWorkspace(false)
+
         // props.addWorkspaceToWorkspacesFromServer(null)//to delete workspace in redux
     });
     function stopP(event) {
@@ -97,7 +98,7 @@ function AllWorkspaces(props) {
 
 
             <div className="row mt-5"></div>
-            <div className="col-12">
+            <div className="col-12" >
                 <div className="row borderBottom mx-5">
                     <div className="MyWorkspace">My Workspace</div>
                     <div className="row">

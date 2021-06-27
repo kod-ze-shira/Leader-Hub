@@ -42,14 +42,14 @@ function SelectHeader(props) {
     useEffect(() => {
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
-        // if (history.location.pathname.indexOf('list') != -1)
-        //     setValue(1)
-        // else
-        //     if (history.location.pathname.indexOf('Overview') != -1)
-        //         setValue(2)
-        //     else
-        //         if (history.location.pathname.indexOf('gantt') != -1)
-        //             setValue(3)
+        if (history.location.pathname.indexOf('list') != -1)
+            setValue(2)
+        else
+            if (history.location.pathname.indexOf('Overview') != -1)
+                setValue(0)
+            else
+                if (history.location.pathname.indexOf('gantt') != -1)
+                    setValue(3)
 
     }, [])
 
@@ -114,13 +114,10 @@ function SelectHeader(props) {
                                     <div class="input-group-prepend">
                                         {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
                                         <img src={require('../../img/onic-ios-search.png')} />
-
                                     </div>
-
                                     <input type="text" class="col-10" placeholder="Search project..."
                                         onChange={(e) => props.valueSearchProject(e.target.value)}
                                         aria-label="Username" aria-describedby="basic-addon1" />
-
                                 </div>
                                 <button className='buttonNewProject col-3' data-tip data-for="add_p"
                                     onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
@@ -128,7 +125,6 @@ function SelectHeader(props) {
                             </div>
                             :
                             <div className='row col-4 pr-0' id='tabsAndList' >
-
                                 <div class="input-group inputSearchProject col-12 row pr-0">
                                     <div class="input-group-prepend">
                                         {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
@@ -138,8 +134,6 @@ function SelectHeader(props) {
                                     <input type="text" class="col-10" placeholder="Search project..."
                                         onChange={(e) => props.valueSearchProject(e.target.value)}
                                         aria-label="Username" aria-describedby="basic-addon1" />
-
-
                                 </div>
                             </div>
                         }
@@ -155,15 +149,12 @@ function SelectHeader(props) {
                                 variant="scrollable"
                                 scrollButtons="off"
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                                aria-label="scrollable prevent tabs example"
-
-                                
+                                aria-label="scrollable prevent tabs example"   
                             >
                                 <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false"/>
                                 <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false"/>
                                 <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false"/>
                                 <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false"/>
-
                             </Tabs>
                             :
                             <Tabs
