@@ -16,10 +16,10 @@ function Logs(props) {
     logsReverse.reverse();
     console.log("logs", logs, "projectsssssssssssssssss", props.workspaces[props.indexOfWorkspace].projects)
 
-    let cardName = (log) => {
-        let project = props.workspaces[props.indexOfWorkspace].projects
+    let taskName = (log) => {
+        // let project = props.workspaces[props.indexOfWorkspace].projects
         if (log.schemaName.includes("Task")) {
-            project[0].cards.map((card) => {
+            props.cards.map((card) => {
                 card.tasks.map((task) => {
                     if (task._id == log.objectId)
                         return log.objectId
@@ -38,7 +38,7 @@ function Logs(props) {
                     user={log.user}
                     date={log.date}
                     _id={log._id}
-                    cardName={cardName(log)}
+                    cardName={taskName(log)}
                 />
             })
         else
@@ -71,6 +71,7 @@ const mapStateToProps = (state) => {
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         workspaces: state.public_reducer.workspaces,
+        cards: state.public_reducer.cards
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logs);
