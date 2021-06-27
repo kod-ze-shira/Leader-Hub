@@ -1,3 +1,6 @@
+.chartContainer{
+    background-color:#fff;
+}
 .colorDiv{
     width: 100%;
 }
@@ -7,6 +10,7 @@
 .chartCol{
     border: 0.1em solid rgb(204 238 240);
     border-radius: 1%;
+    height:100%;
 }
 .col-3>.chartCol{
     border-radius: 3%;
@@ -20,6 +24,18 @@
 }
 .h100{
     height: 100%;
+}
+.sticks{
+    height:45vh;
+}
+.barAndPie{
+    height:50vh;
+}
+g g g g g text{
+    font-size: 1.2vw !important;
+}
+.apexcharts-datalabels g text{
+    font-size: 0.9vw !important;
 }
 .divProjectStatistics{
     background-color:white;
