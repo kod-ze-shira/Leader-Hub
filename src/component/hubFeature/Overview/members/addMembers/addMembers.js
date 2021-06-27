@@ -6,11 +6,9 @@ import './addMembers.css'
 
 
 function AddMembers(props) {
-const divAddMembers =useRef()
-// divAddMembers.current.removeEventListener("click");
     return (
         <>
-            <div className="divAddMembers col-md-4  col-sm-12 pt-3  "  ref={divAddMembers} onClick={(e) =>{ props.setMembersList(!props.membersList); e.stopPropagation()}}>
+            <div className="divAddMembers col-lg-4 col-md-6 col-sm-12 pt-3" onClick={(e) =>{ props.setMembersList(!props.membersList); e.stopPropagation()}}>
                 <div className="container">
                     <div className="row d-flex align-items-center">
                         <div className="col-2">
@@ -19,7 +17,7 @@ const divAddMembers =useRef()
                         </div>
                             </div>
                         </div>
-                        <div className="col-8">
+                        <div className="col">
                             <b className="ml-2 membersFont">Add Members</b>
                         </div>
 

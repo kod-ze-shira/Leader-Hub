@@ -22,7 +22,7 @@ function ViewMembers(props) {
                     return (
                         mc ?
                             <>
-                                <div className="col-md-4 col-sm-12 pt-3">
+                                <div className="col-lg-4 col-md-6 col-sm-12 pt-3">
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-2 d-flex align-items-center">
