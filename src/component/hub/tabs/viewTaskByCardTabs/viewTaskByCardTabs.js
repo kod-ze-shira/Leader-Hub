@@ -284,7 +284,7 @@ function ViewTaskByCradTabs(props) {
                                     className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
-                                    // rows={numOfRows}
+                                    // rows={1}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onBlur={(e) => editTask()}
