@@ -44,11 +44,6 @@ function ViewTaskByCradTabs(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
-    // useEffect(() => {
-
-    // }, [props.task.status])
-
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
@@ -107,7 +102,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
-        debugger
+        
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -309,6 +304,7 @@ function ViewTaskByCradTabs(props) {
                                                 : null}
                                             </div>
                                             <div
+                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
                                                 className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
                                                 style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                                 {props.task.status ? props.task.status.statusName : null}

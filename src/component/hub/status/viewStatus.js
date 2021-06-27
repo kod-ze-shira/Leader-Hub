@@ -25,12 +25,15 @@ function ViewStatus(props) {
 
     }
     const saveStatus1 = (id) => {
+        debugger
         props.saveStatus(props.status)
         if (props.status.statusName === props.statuses[2].statusName) {
             let editTaskInRedux = { "nameFiled": "complete", "value": true }
             props.setTaskByFiledFromTasks(editTaskInRedux)
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         }
+        if (props.fromHub)
+            props.editTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
     }
     return (
         <>
@@ -40,7 +43,7 @@ function ViewStatus(props) {
                         <p >{props.status.statusName}</p>
                     </div>
                     <img
-                        className={props.index < 3 ? " pencil-status-none " : "pencil-status ml-2 mt-1"}
+                        className={props.index < 3 || props.fromHub ? " pencil-status-none " : "pencil-status ml-2 mt-1"}
                         title={props.index < 3 ? "Deputable status cannot be edited" : "Edit Status"}
                         onClick={(e) => openEditTask(e)}
                         src={require('../../img/pencil-write.svg')} />
@@ -67,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
         saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
-
+        editTask: (task) => dispatch(actions.editTask(task))
     }
 
 
