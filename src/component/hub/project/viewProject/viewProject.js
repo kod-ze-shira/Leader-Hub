@@ -158,8 +158,8 @@ function ViewProject(props) {
                 </td>
                 <td className='widthCellInProject' style={{ 'text-align': 'center' }}>
                     {members}
-                    {props.myProject.members.length > 1 ?
-                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 1)} />
+                    {props.myProject.members.length > 2 ?
+                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 2)} />
                         : null
                     }
 
@@ -193,8 +193,8 @@ function ViewProject(props) {
                     <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
-                    
-                {props.fromShare?<td><img src={userfriend}></img></td>:null}
+
+                {props.fromShare ? <td><img src={userfriend}></img></td> : null}
 
             </tr >
         </>
