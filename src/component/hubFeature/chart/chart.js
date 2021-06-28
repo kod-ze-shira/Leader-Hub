@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Chart from "react-apexcharts";
-import $ from 'jquery'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './chart.css';
-
 
 function MyChart(props) {
     useEffect(() => {
         props.getTaskStatusesOfProject()
     }, [])
 
-    let countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
-    let readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
+    const countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
+    const readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
     const [cards, setCards] = useState(props.cards)
     const barData = [];
     const pieData = [{ category: 'Completed', val: Math.round(readyTasks / countTasks * 100), color: '#38b1b5' }, { category: 'Incompleted', val: Math.round((1 - readyTasks / countTasks) * 100), color: '#99e2e5' }];
     const sticksData = []
-    const a = ['dw', 'sad', 'sfca', 'asfca', 'sdvca']
+
     if (cards) {
         cards.map(c => {
             let ta = []
@@ -31,12 +29,6 @@ function MyChart(props) {
             let percent = Math.round(status.count / countTasks * 100);
             barData.push({ name: status.name, percent: percent, color: status.color })
         })
-
-        // setTimeout(() => {
-        //     barData.map((item, index) => {
-        //         $(`.chart rect:eq(${index + 1})`).css('fill', item.color);
-        //     })
-        // }, 100)
     }
     const optionsSticks = {
         chart: {
@@ -61,12 +53,12 @@ function MyChart(props) {
                 },
             },
             labels: {
-                formatter: function(val) {
-                  return val.toFixed(0);
+                formatter: function (val) {
+                    return val.toFixed(0);
                 }
-              }
+            }
         },
-        colors:'#99e2e5',
+        colors: '#99e2e5',
         dataLabels: {
             enabled: false,
             font: function (context) {
@@ -156,9 +148,8 @@ function MyChart(props) {
                     font: function (context) {
                         var width = context.chart.width;
                         var size = Math.round(width / 32);
-
                         return {
-                            weight: 'bold',
+                            // weight: 'bold',
                             size: size
                         };
                     },
@@ -167,7 +158,7 @@ function MyChart(props) {
             },
         },
         grid: {
-            show: false
+            show: false,
         },
         tooltip: {
             x: {
@@ -199,9 +190,9 @@ function MyChart(props) {
     const optionsPie = {
         chart: {
             type: 'pie',
-                // sparkline: {
-                //     enabled: true
-                //   }
+            // sparkline: {
+            //     enabled: true
+            // }
         },
         series: pieData.map(p => p.val),
         chartOptions: {
@@ -212,19 +203,19 @@ function MyChart(props) {
                 bottom: -5
             }
         },
-        xaxis:{
+        xaxis: {
             gridLines: {
                 display: false,
                 tickMarkLength: 0,
-              },
+            },
         },
         grid: {
             show: true,
             padding: {
-              top: 0,
-              bottom: 0
+                top: 0,
+                bottom: 0
             }
-          },
+        },
         colors: pieData.map(p => p.color),
         dataLabels: {
             enabled: true,
@@ -239,7 +230,7 @@ function MyChart(props) {
                 enabled: false
             }
         },
-   
+
         labels: pieData.map(p => p.category),
         plotOptions: {
             pie: {
@@ -255,7 +246,7 @@ function MyChart(props) {
             },
         },
         legend: {
-            position: "bottom",
+        position: "bottom",
             style: {
                 margin: '0'
             }
@@ -322,7 +313,7 @@ function MyChart(props) {
                     <div className='col-12 '>
                         <div className='chartCol'>
                             {/* sticks */}
-                            <Chart 
+                            <Chart
                                 options={optionsSticks}
                                 series={seriesSticks}
                                 type="bar"
