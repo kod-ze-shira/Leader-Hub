@@ -12,7 +12,7 @@ import CellDescription from './cellDescription';
 import './viewProject.css';
 // import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
-
+import userfriend from '../../../img/userfriend.png'
 
 function ViewProject(props) {
     console.log(props.myProject.members)
@@ -186,6 +186,8 @@ function ViewProject(props) {
                     <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
+                    
+                {props.fromShare?<td><img src={userfriend}></img></td>:null}
 
             </tr >
         </>

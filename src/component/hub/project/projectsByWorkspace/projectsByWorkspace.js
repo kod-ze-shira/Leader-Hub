@@ -62,7 +62,18 @@ function ProjectsByWorkspace(props) {
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
                 : null
         }) : null
-
+        //view projects shared
+        const viewSharedProjects = 
+        props.sharedProjects.map((project, index) => {
+            return project.objectId?project.objectId.name.toUpperCase().includes(valueSearch.toUpperCase())
+                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                    closeViewDetails={false}
+                    indexProject={index}
+                    myProject={project.objectId}
+                    fromShare='true'
+                    editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
+                : null:null
+        })
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects.map((project, index) => {
             return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
@@ -105,6 +116,7 @@ function ProjectsByWorkspace(props) {
             <Table responsive className='tableProject' >
                 <tbody className="mx-3">
                     {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
+                    {!idWorkspace ? viewSharedProjects : null}
                 </tbody>
             </Table>
             { showProject ?
@@ -135,6 +147,7 @@ const mapStateToProps = (state) => {
         projectToDelete: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
+        sharedProjects:state.public_reducer.sharedProjects
     }
 }
 const mapDispatchToProps = (dispatch) => {
