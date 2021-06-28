@@ -132,7 +132,7 @@ function ViewCardsTabs(props) {
     return (
         <>
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                <Draggable draggableId={props.cardFromMap._id} index={props.index} >
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
                             {...provided.draggableProps}
@@ -149,7 +149,6 @@ function ViewCardsTabs(props) {
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
                                                 className=" mb-2 pl-4 col-10"
-
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"

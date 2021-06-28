@@ -93,7 +93,7 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
 
-                <MyStyle className="Workspacegrid pt-2 pb-2 px-2 mt-1"
+                <MyStyle className="Workspacegrid pt-2 pb-2 px-2 mt-1 " id={props.workspace._id ? "" : "disable-workspace"}
                     onClick={routeToProject}
                 >
                     <div>
