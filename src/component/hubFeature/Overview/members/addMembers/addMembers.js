@@ -1,30 +1,32 @@
-import React, { useState ,useRef} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../../../../redux/actions/action'
 import './addMembers.css'
-// import ListMembers from '../listMembers/listMembers'
+import $ from 'jquery'
 
 
 function AddMembers(props) {
+    // setTimeout(() => {
+    //     var width = document.getElementsByClassName('addMembers')[0].offsetWidth
+    //     $('.addMembers').css({ 'height': width + 'px' });
+    // }, 100);
+
     return (
         <>
-            <div className="divAddMembers col-lg-4 col-md-6 col-sm-12 pt-3" onClick={(e) =>{ props.setMembersList(!props.membersList); e.stopPropagation()}}>
+            <div className="divAddMembers col-lg-4 col-md-6 col-sm-12 pt-3" onClick={(e) => { props.setMembersList(!props.membersList); e.stopPropagation() }}>
                 <div className="container">
                     <div className="row d-flex align-items-center">
-                        <div className="col-2">
+                        <div className="col-2 px-0">
                             <div className="addMembers"  >
-                                <div className="fontAddMembers d-flex align-items-center justify-content-center">+
-                        </div>
+                                <div className="fontAddMembers d-flex align-items-center justify-content-center">+</div>
                             </div>
                         </div>
                         <div className="col">
                             <b className="ml-2 membersFont">Add Members</b>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

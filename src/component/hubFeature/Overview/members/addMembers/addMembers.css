@@ -4,22 +4,28 @@
     background: #F6F6FA;
     text-align: center;
     cursor: pointer;
-    width: 3vw;
-    height: 3vw;
+    width: 100%;
+    /* height: ; */
+    
 }
+.membersFont{
+    color:#75798E;
+}
+
 .fontAddMembers{
     color:#75798E;
     font-size:4vw;
     font-weight:600;
     height: 100%;
 }
-.divAddMembers:hover , .divAddMembers:hover .fontAddMembers {
-    color:#38B1B5 !important;
+.divAddMembers:hover .fontAddMembers ,.divAddMembers:hover .membersFont {
+    color:#38B1B5;
     cursor: pointer;
 }
 .divAddMembers:hover .addMembers{
-    border-color:#38B1B5
+    border-color:#38B1B5;
 }
+
 
 
 
