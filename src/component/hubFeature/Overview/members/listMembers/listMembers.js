@@ -50,7 +50,9 @@ function ListMembers(props) {
 
     function clickAddMember() {
         if (ValidateEmail(add)) {
-            clickMembers(add)
+            debugger
+            shareObject( { member: add, permission: 'viewer' })
+            setMembersList(false)
         }
         else {
             setValidEmail(true)
@@ -69,13 +71,13 @@ function ListMembers(props) {
                 }
                 {
                     !flagAdd ?
-                        <button className='row btnAddmembers cursorPoint' onClick={e => {
+                        <button className='row btnAddMembers cursorPoint' onClick={e => {
                             setFlagAdd(true)
                         }}>+ Add Members</button> :
                         <>
                             <div className='row d-flex justify-content-between m-0 mt-2' style={{ width: '100%' }}>
-                                <input className='inputAdd col-7 mb-1' ref={inputAdd} type="text" defaultValue={search} placeholder='enter email' onChange={e => setAdd(e.target.value)} />
-                                <button className=' buttonAdd col-4  mb-1 cursorPoint' onClick={e => clickAddMember()}>+ Add</button>
+                                <input className='inputAdd col-12 col-md-7 mb-1' ref={inputAdd} type="text" defaultValue={search} placeholder='enter email' onChange={e => setAdd(e.target.value)} />
+                                <button className=' buttonAdd col-12 col-md-4 mb-1 cursorPoint' onClick={e => clickAddMember()}>+ Add</button>
                             </div>
                             {validEmail ?
                                 <div className='d-flex justify-content-center my-2' style={{ width: '100%' }}><div className='row mailNotValid'><p>The mail is not valid</p></div> </div> : null}
