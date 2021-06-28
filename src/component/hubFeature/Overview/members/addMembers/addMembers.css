@@ -5,6 +5,8 @@
     text-align: center;
     cursor: pointer;
     width: 100%;
+    padding-top: 100%;
+    position: relative;
     /* height: ; */
     
 }
@@ -16,7 +18,10 @@
     color:#75798E;
     font-size:4vw;
     font-weight:600;
-    height: 100%;
+    height: 0px;
+    position: absolute;
+    top:44%;
+    
 }
 .divAddMembers:hover .fontAddMembers ,.divAddMembers:hover .membersFont {
     color:#38B1B5;

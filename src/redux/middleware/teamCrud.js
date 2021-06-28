@@ -147,9 +147,8 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 
           }))
           console.log(result);
-          dispatch(actions.addMember(result.contacts))
+          dispatch(actions.addMember(result.updatedObject.members))
         })
-
       })
     // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
     // })

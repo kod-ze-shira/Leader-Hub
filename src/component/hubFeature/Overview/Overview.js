@@ -57,7 +57,7 @@ function Overview(props) {
                 <div className='scrollbarOverview container-fluid'>
 
                     <div className='row '>
-                        <div className='col-9 mr-3'>
+                        <div className='col-lg-9 col-md-12 mr-3'>
 
                             <div className='container-fluid px-0 '>
                                 <div className='row mb-3 divChartAndMembers'>

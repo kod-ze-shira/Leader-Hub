@@ -22,10 +22,10 @@ function ViewMembers(props) {
                     return (
                         mc ?
                             <>
-                                <div className="col-lg-4 col-md-6 col-sm-12 pt-3">
+                                <div className="col-lg-4 col-sm-6 col-xs-12 pt-3">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col-2 d-flex align-items-center px-0">
+                                            <div className="col-1 col-sm-2  d-flex align-items-center px-0">
                                                 <img referrerpolicy="no-referrer" src={mc.thumbnail} className="thumbnail-contact imgMembers" />
                                             </div>
                                             <div className="col-6 ml-2">
