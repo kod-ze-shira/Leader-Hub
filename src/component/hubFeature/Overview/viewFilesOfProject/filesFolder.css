@@ -10,9 +10,7 @@
  .folderItem:hover{
   border: #38B1B5 0.1rem solid;
  }
- .folderItem div{
-   height: 33%;
- }
+
  .selectFolder{
     float: left;
     /* position: absolute; */
@@ -94,13 +92,34 @@
        .fullFolder{
          display: none;
      }
-       .imgRow:hover .emptyFolder{
+       .folderItem:hover .emptyFolder{
            display: none;
        }
-       .imgRow:hover .fullFolder{
+       .folderItem:hover .fullFolder{
            display: block;
        }
-       .cardName{
+       .cardDetails{
          text-align: center;
          margin: 0;
+         color: #38B1B5;
+         height: 40%;
+       }
+       .cardName{
+         font-size: small;
+         color: black;
+       }
+       .cardDetails p{
+        text-align: center;
+      }
+       .filesNumber{
+         font-size: x-small;
+               color: #778CA2;
+       }
+       .checkboxRow{
+         height: 30%;
+
+       }
+       .imgRow{
+         height: 25%;
+   
        }

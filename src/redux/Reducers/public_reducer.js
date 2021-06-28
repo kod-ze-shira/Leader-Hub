@@ -23,7 +23,7 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
-
+    foldersForDownload: []
 }
 
 const publicData = {
@@ -116,6 +116,9 @@ const publicData = {
     /////////////////////////////////////////
     setFilesForProject(state, action) {
         state.filesForProjectArr = action.payload
+    },
+    setFoldersForDownload(state, action) {
+        state.foldersForDownload = action.payload
     },
     setUserName(state, action) {
         state.userName = action.payload;

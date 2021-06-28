@@ -98,14 +98,12 @@ const mapStateToProps = (state) => {
         FilesOfProject: state.public_reducer.filesForProjectArr,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         workspacesIndex: state.public_reducer.indexOfWorkspace,
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
-
     }
 }
 
