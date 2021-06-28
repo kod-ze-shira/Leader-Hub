@@ -48,17 +48,6 @@ const publicData = {
     },
     addMember(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members=action.payload
-        // let members = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members
-        // action.payload.map(payload => {
-        //     let flag = false;
-        //     members.map(member => {
-        //         if (member.contact.email === payload.email)
-        //             flag = true;
-        //     })
-        //     if (!flag)
-        //         members.push({ contact: payload })
-        // })
-        // state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = members
     },
     
     setNewFilesInTask(state, action) {

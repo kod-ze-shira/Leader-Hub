@@ -26,7 +26,7 @@ export default function Mmebers() {
                 </div>
                 {
                     membersList ?
-                        <div className="positionListMembers d-flex justify-content-center">
+                        <div className="positionListMembers">
                             <ListMembers setMembersList={setMembersList} membersList={membersList} />
                         </div> : null
                 }
