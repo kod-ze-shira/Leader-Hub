@@ -424,20 +424,18 @@ function TasksNotBelongCardByMap(props) {
                 </label>
                 <label className="check-task border-left d-flex justify-content-around align-items-center  py-2  px-2 col">
 
-                    {myWorkspace && !cardId ?
+                    {!cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
                             <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
-
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">move to</button>
                         </>
                         : null
                     }
 
                     {cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
                             <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
-
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
                         </> : null
 
                     }
