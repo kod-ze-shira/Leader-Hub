@@ -22,7 +22,7 @@ function AddStatus(props) {
 
 
     const addStatus = (e) => {
-        debugger
+        
         console.log(openPopUp);
         props.createStatus(newStatus)
         console.log(props.statuses);
