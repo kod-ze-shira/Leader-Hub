@@ -447,11 +447,9 @@ const publicData = {
         state.indexOfWorkspace = action.payload
     },
     setDateTaskFromGantt(state, action) {
-        let cIndex = state.cards.findIndex(c => c._id === action.payload.card_id)
-        let tIndex = state.cards[cIndex].tasks.
-            findIndex(t => t._id === action.payload._id)
-        state.cards[cIndex].tasks[tIndex].dueDate = action.payload.dueDate
-        state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
+        let task=action.payload.task
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].dueDate = task.dueDate
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].startDate = task.startDate
 
     },
     setSharedProjects(state, action) {
