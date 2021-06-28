@@ -60,6 +60,7 @@ const publicData = {
         // })
         // state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = members
     },
+    
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
