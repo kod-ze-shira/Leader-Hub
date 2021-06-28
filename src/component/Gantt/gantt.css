@@ -89,10 +89,10 @@
 .bbb{
   display: none !important;
 }
-.gantt_task_progress_drag{display:none !important}
+/* .gantt_task_progress_drag{display:none !important}
 .gantt_hor_scroll{
   overflow: hidden !important;
-}
+} */
 .gantt_delete_button{
   background:red;
 }
@@ -164,10 +164,10 @@
   display: flex;
   align-items: center;
 }
-.gantt_data_area{
+/* .gantt_data_area{
   
   overflow-x: scroll !important;
-}
+} */
 .gantt_data_area::-webkit-scrollbar{
   display:block;
 }

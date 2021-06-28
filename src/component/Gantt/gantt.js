@@ -144,13 +144,13 @@ export default class Gantt extends Component {
 
         });
 
-        // gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
-        //     if (task.priority == "high") {
-        //         return true;
-        //     }
-        //     return false;
+        gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
+            if (task.priority === "ggg") {
+                return false;
+            }
+            return true;
 
-        // });
+        });
         gantt.attachEvent("onAfterTaskUpdate", function (id, task) {
 
             let a = new Date(task.end_date)
