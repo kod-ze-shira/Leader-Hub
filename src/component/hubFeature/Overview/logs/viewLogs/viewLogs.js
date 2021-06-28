@@ -19,7 +19,7 @@ function ViewLogs(props) {
 
     return (
         <>
-            <div data-tip={taskName} data-for='toolTip1' data-place='top'>
+            <div data-tip={taskName} data-for='logsToolTip' data-place='top'>
                 <div data-tip data-for="projectName" className=" container logsContainer " >
                     <div className="row logRowOne  mt-4">
                         <div className="col-2 logColIcon">
@@ -45,7 +45,7 @@ function ViewLogs(props) {
                     }
                 </div>
             </div>
-            <ReactTooltip id="toolTip1" ></ReactTooltip>
+            <ReactTooltip id="logsToolTip"/>
         </>
     )
 }
