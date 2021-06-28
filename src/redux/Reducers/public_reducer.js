@@ -25,7 +25,7 @@ const initialState = {
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
     descriptionNewProject: '',
-    priorities:[]
+    sharedProjects:[] //projects that user shared  
 }
 
 const publicData = {
@@ -46,7 +46,7 @@ const publicData = {
         state.arrFilesOfTask = action.payload
     },
     setMember(state, action) {
-        action.payload.contact.map(payload =>
+        action.payload.contacts.map(payload =>
             state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members.push({contact:payload})
 
         )
@@ -401,22 +401,6 @@ const publicData = {
                 state.tasks[index] = action.payload
         })
     },
-    //         })
-    //     }
-    // })
-    //    state.cards.find(card=>card._id==state.idCurrentCard).tasks.map(task=>{
-    //       if(task._id==state.indexCurrentTask)
-    //     {
-    //         task[action.payload.nameFiled]=action.payload.value
-    //                 console.log(task);
-    //     }
-    //    })
-
-    // state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled] = action.payload.value
-    // let a = state.cards[state.idCurrentCard].tasks[state.indexCurrentTask][action.payload.nameFiled]
-    // console.log(a);   
-    // },
-
     deleteFilesInArr(state, action) {
         state.arrDeleteFilesOfTask = []
     },
@@ -458,12 +442,9 @@ const publicData = {
         state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
 
     },
-    // setWorkspaceByFiledFromWorkspaces(state, action) {
-    //     console.log("workspace", action.payload);
-    //     for (let index = 0; index < workspaces.length; index++) {  
-    //         let a = state.workspaces[index][action.payload.nameFiled]    
-    //     }      
-    // },
+    setSharedProjects(state,action){
+        state.sharedProjects=action.payload
+    }
 
 }
 

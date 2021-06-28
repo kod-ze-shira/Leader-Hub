@@ -433,7 +433,7 @@ function TaskDetails(props) {
 
                         <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
-                        <ReactTooltip data-tip id="assing" place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
@@ -441,21 +441,21 @@ function TaskDetails(props) {
                         <UploadFile />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
-                        <ReactTooltip place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" place="top" effect="solid">
                             {title.title_files}
                         </ReactTooltip>
                     </div>
                     <div className="delete-details" data-tip data-for="delete">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <ReactTooltip data-tip id="delete" place="top" effect="solid" >
+                        <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid" >
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>
                 </div>

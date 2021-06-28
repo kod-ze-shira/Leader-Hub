@@ -99,7 +99,7 @@ function EditWorkspace(props) {
                         <img src={require('../../../img/bin.png')}></img> Delete
                     </button>
                     <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>

@@ -181,7 +181,7 @@ function ViewCards(props) {
                         onClick={handleClick}>
                         . . .
                 </Button>
-                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                         {title.title_more_actions}
                     </ReactTooltip>
                     <Menu
@@ -203,7 +203,7 @@ function ViewCards(props) {
                     <p className="col-priority">Priority</p>
 
                     <p className="col-add-task"><a>
-                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
                             {title.title_add_task}
                         </ReactTooltip>
                     </a></p>

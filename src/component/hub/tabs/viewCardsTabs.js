@@ -156,7 +156,7 @@ function ViewCardsTabs(props) {
                                             >
                                                 . . .
                                              </Button>
-                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                            <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
                                             <Menu
