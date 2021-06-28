@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Chart from "react-apexcharts";
+import $ from 'jquery'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './chart.css';
@@ -14,9 +15,9 @@ function MyChart(props) {
     let readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
     const [cards, setCards] = useState(props.cards)
     const barData = [];
-    const pieData = [{ category: 'Completed', val: readyTasks / countTasks, color: '#38b1b5' }, { category: 'Incompleted', val: 1 - readyTasks / countTasks, color: '#99e2e5' }];
+    const pieData = [{ category: 'Completed', val: Math.round(readyTasks / countTasks * 100), color: '#38b1b5' }, { category: 'Incompleted', val: Math.round((1 - readyTasks / countTasks) * 100), color: '#99e2e5' }];
     const sticksData = []
-
+    const a = ['dw', 'sad', 'sfca', 'asfca', 'sdvca']
     if (cards) {
         cards.map(c => {
             let ta = []
@@ -27,7 +28,7 @@ function MyChart(props) {
     }
     if (props.taskStatusesOfProject) {
         props.taskStatusesOfProject.map((status) => {
-            let percent = status.count / countTasks * 100;
+            let percent = Math.round(status.count / countTasks * 100);
             barData.push({ name: status.name, percent: percent, color: status.color })
         })
 
@@ -59,7 +60,13 @@ function MyChart(props) {
                     cssClass: 'apexcharts-yaxis-title',
                 },
             },
+            labels: {
+                formatter: function(val) {
+                  return val.toFixed(0);
+                }
+              }
         },
+        colors:'#99e2e5',
         dataLabels: {
             enabled: false,
             font: function (context) {
@@ -93,7 +100,7 @@ function MyChart(props) {
         },
         plotOptions: {
             bar: {
-                columnWidth: '20%',
+                columnWidth: '15%',
             },
         }
     }
@@ -105,12 +112,22 @@ function MyChart(props) {
     ]
     const optionsBar = {
         chart: {
-            id: "bar"
+            id: "bar",
         },
         xaxis: {
-            categories: barData.map(bd => bd.name)
+            categories: barData.map(bd => bd.name),
+            labels: {
+                show: false
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
         },
         yaxis: { show: false },
+
         colors: barData.map(bd => bd.color),
         dataLabels: {
             enabled: true,
@@ -121,17 +138,17 @@ function MyChart(props) {
             font: function (context) {
                 var width = context.chart.width;
                 var size = Math.round(width / 32);
-
                 return {
                     weight: 'bold',
                     size: size
                 };
             },
             formatter: function (val) {
-                return Math.round(val) + "%"
+                return val + "%"
             },
             offsetX: 0
         },
+        labels: barData.map(bd => bd.name),
         plotOptions: {
             bar: {
                 dataLabels: {
@@ -147,16 +164,25 @@ function MyChart(props) {
                     },
                 },
                 distributed: true,
-            }
+            },
         },
         grid: {
             show: false
+        },
+        tooltip: {
+            x: {
+
+            },
+            y: {
+                formatter: function (val) {
+                    return val + '%';
+                },
+            },
         },
         title: {
             text: 'All tasks by status',
             align: 'left',
             floating: false,
-
             style: {
                 fontSize: '16px',
                 margin: 20,
@@ -172,12 +198,33 @@ function MyChart(props) {
     ]
     const optionsPie = {
         chart: {
-            type: 'pie'
+            type: 'pie',
+                // sparkline: {
+                //     enabled: true
+                //   }
         },
         series: pieData.map(p => p.val),
         chartOptions: {
             labels: pieData.map(p => p.category),
         },
+        layout: {
+            padding: {
+                bottom: -5
+            }
+        },
+        xaxis:{
+            gridLines: {
+                display: false,
+                tickMarkLength: 0,
+              },
+        },
+        grid: {
+            show: true,
+            padding: {
+              top: 0,
+              bottom: 0
+            }
+          },
         colors: pieData.map(p => p.color),
         dataLabels: {
             enabled: true,
@@ -186,17 +233,16 @@ function MyChart(props) {
                 colors: ['#fff']
             },
             formatter: function (val) {
-                return Math.round(val) + "%"
+                return val + "%"
+            },
+            dropShadow: {
+                enabled: false
             }
         },
+   
         labels: pieData.map(p => p.category),
         plotOptions: {
             pie: {
-                startAngle: 0,
-                endAngle: 360,
-                expandOnClick: true,
-                offsetX: 0,
-                offsetY: 0,
                 customScale: 0.8,
                 dataLabels: {
                     offset: -25,
@@ -204,6 +250,35 @@ function MyChart(props) {
                     dropShadow: {
                         enabled: false
                     }
+                },
+                expandOnClick: false,
+            },
+        },
+        legend: {
+            position: "bottom",
+            style: {
+                margin: '0'
+            }
+        },
+        tooltip: {
+            x: {
+                show: false
+            },
+            y: {
+                formatter: function (val) {
+                    return val + '%';
+                }
+            }
+        },
+        states: {
+            hover: {
+                filter: {
+                    type: 'none',
+                }
+            },
+            active: {
+                filter: {
+                    type: 'none',
                 }
             }
         },
@@ -220,6 +295,7 @@ function MyChart(props) {
                 fontWeight: 'bold'
             },
         },
+
     }
     const seriesPie = pieData.map(p => p.val)
     return (
@@ -228,25 +304,25 @@ function MyChart(props) {
                 <div className="row divProjectStatistics pt-3 ml-2">
                     <h4>Project Statistics</h4>
                 </div>
-                <div className='row'>
-                    <div className='col-3 p-1'>
+                <div className='row p-2'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
                     </div>
-                    <div className='col-3 p-1'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Incomplete tasks</b><br /><b className='bParam'>{countTasks - readyTasks}</b></div>
                     </div>
-                    <div className='col-3 p-1'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Overdue tasks</b><br /><b className='bParam'>{props.overdueTasks}</b></div>
                     </div>
-                    <div className='col-3 p-1'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
                     </div>
                 </div>
                 <div className='row sticks' >
-                    <div className='col-12 p-1'>
+                    <div className='col-12 '>
                         <div className='chartCol'>
                             {/* sticks */}
-                            <Chart
+                            <Chart 
                                 options={optionsSticks}
                                 series={seriesSticks}
                                 type="bar"
@@ -256,7 +332,7 @@ function MyChart(props) {
                     </div>
                 </div>
                 <div className='row barAndPie'>
-                    <div className='col-6 p-1 '>
+                    <div className='col-6 py-3'>
                         <div className='chartCol mixed-chart'>
                             {/* bar */}
                             <Chart
@@ -267,13 +343,16 @@ function MyChart(props) {
                             />
                         </div>
                     </div>
-                    <div className='col-6 p-1'>
+                    <div className='col-6 py-3'>
                         <div className='chartCol'>
                             {/* pie */}
                             <Chart
                                 options={optionsPie}
                                 series={seriesPie}
                                 type="pie"
+                                height='100%'
+                                width='100%'
+                                className='pChart'
                             />
                         </div>
                     </div>

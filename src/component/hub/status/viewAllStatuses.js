@@ -72,7 +72,7 @@ function ViewAllStatuses(props) {
                             <button onClick={(e) => openAddStatus(e)} className="create-label">Create New Status</button>
                         </div>
                         : null}
-                    {openPopUpToAdd ? <AddStatus task={props.task} status={props.status} /> : null}
+                    {openPopUpToAdd ? <AddStatus openPopUpToAdd={openPopUpToAdd} task={props.task} status={props.status} /> : null}
                 </div>
             </div>
         </>
