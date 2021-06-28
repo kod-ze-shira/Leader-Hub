@@ -8,6 +8,7 @@ import QuillEditProject from '../myQuill/quillEditProject.js'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
+    debugger
     const [projectBeforeChanges] = useState({ ...props.workspaces[props.indexWorkspace].projects[props.indexProject] })
     let project;
     useEffect(() => {
