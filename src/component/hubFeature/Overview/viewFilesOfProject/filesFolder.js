@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import fullFolder from '../../../img/full-folder.png'
 import emptyFolder from '../../../img/empty-folder.png'
@@ -8,15 +8,17 @@ import './filesFolder.css'
 function FilesFolder(props) {
 
     const folder = props.card
-    const currentProjectId = props.workspaces[props.indexWorkspace].projects[props.currentProject]._id
+
 
     function openViewFiles(e) {
-        e.stopPropagation()
+        // if (e.target.children[0].children[0].children[0].checked)
+        //     props.addOrRemoveFolderToArr(e, folder)
         props.setFiles(folder.files)
         props.setShowCards(false)
         props.setCardName(folder.cardName ? folder.cardName : "card name")
     }
 
+    //onDoubleClick={(e) => openViewFiles(e)} onClick={(e) => openViewFiles(e)}
     return (
         <>
             <div className="viewFolder col p-2 conteiner">
@@ -25,18 +27,20 @@ function FilesFolder(props) {
                         <label
                             title="check folder"
                             className="selectFolder py-2 check-tabs row">
-                            <input type="checkbox" onChange={(e) => props.addOrRemoveFolderToArr(e, folder)} />
+                            <input type="checkbox"
+                                onChange={(e) => props.addOrRemoveFolderToArr(e, folder)} />
                             <span
                                 className="checkmarkFolder checkmarkFolder-tabs"
                             ></span>
                         </label>
                     </div>
-                    <div className=" imgRow" >
+                    <div className=" imgRow" onDoubleClick={(e) => openViewFiles(e)}>
                         <img className="emptyFolder" src={emptyFolder}></img>
                         <img className="fullFolder" src={fullFolder}></img>
                     </div>
-                    <div className="cardName">
-                        <p>{folder.cardName ? folder.cardName : "card name"}</p>
+                    <div className="cardDetails" onDoubleClick={(e) => openViewFiles(e)}>
+                        <p className="cardName">{folder.cardName ? folder.cardName : "card name"}</p>
+                        <p className="filesNumber">{folder.files.length + " files"}</p>
                     </div>
                 </div>
             </div>
@@ -47,9 +51,6 @@ function FilesFolder(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
-        currentProject: state.public_reducer.indexCurrentProject,
-        workspaces: state.public_reducer.workspaces,
-        indexWorkspace: state.public_reducer.indexOfWorkspace
     }
 }
 

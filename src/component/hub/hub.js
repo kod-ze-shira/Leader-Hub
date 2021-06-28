@@ -136,7 +136,6 @@ function Hub(props) {
 
         if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
             props.removeOneWorkspaceFromWorkspaces()
-            debugger
         }
     }
     const [focusInputCard, setFocusInputCard] = useState(false)

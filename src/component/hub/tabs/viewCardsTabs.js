@@ -155,7 +155,7 @@ function ViewCardsTabs(props) {
                                             >
                                                 . . .
                                              </Button>
-                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                            <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
                                             <Menu
@@ -174,7 +174,7 @@ function ViewCardsTabs(props) {
                                     <div class="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div className="mt-0 glila"
+                                                <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 

@@ -208,7 +208,7 @@ function ViewTaskByCrad(props) {
     };
 
     const showAssigToOrCalander = (object) => {
-        debugger
+        
         let e = object.e
         let name = object.name
         e.stopPropagation()

@@ -20,10 +20,8 @@ margin: auto;
 margin: auto;
 /* margin-top: 1vh; */
     border-color:  #75798E !important; 
-    border-width: 3px !important;
-    border-style: double !important; 
-    
-
+    border-width: 1px !important;
+    border-style: solid !important; 
 }
 .display-task{
     margin-bottom: 1vh;
@@ -48,7 +46,7 @@ opacity: 0.9;
 border-bottom: 1px solid gray;
 }
 .add-status  , .edit-status{
-    background-color:  #3598F4;
+    background-color:  hsla(183, 72%, 44%, 1);
 border-radius: 5px;
 color: white;
 opacity: 0.9;
@@ -61,7 +59,7 @@ opacity: 0.9;
     opacity: 0.4;
 }
 .circle-picker {
-    width: 140% !important;
+    width: 100% !important;
 }
 .pencil-status{
     display: inline;
@@ -99,6 +97,7 @@ z-index: 9999999;
   display: inline-block;
 }
 .status-list{
+    margin-bottom:3vh;
     margin-top: 1vh;
     max-height: 150px;
     /* overflow-y: auto; */

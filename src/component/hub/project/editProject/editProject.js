@@ -15,7 +15,7 @@ function EditProject(props) {
 
     }, [props.workspaces])
 
-    debugger
+    
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -143,12 +143,12 @@ function EditProject(props) {
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style"  data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </button>
                     <button data-tip data-for="save" onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>
