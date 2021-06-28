@@ -4,7 +4,6 @@ import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
-
     const [logs, setLogs] = useState(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
     useEffect(() => {
         if (props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs) {
@@ -17,15 +16,32 @@ function Logs(props) {
     console.log("logs", logs, "projectsssssssssssssssss", props.workspaces[props.indexOfWorkspace].projects)
 
     let taskName = (log) => {
-        // let project = props.workspaces[props.indexOfWorkspace].projects
+        let objectId = null;
         if (log.schemaName.includes("Task")) {
+            // for (let i = 0; i < props.cards.length; i++) {
+            //     for (let j = 0; j < props.cards[i].tasks.length; j++) {
+            //         if (props.cards[i].tasks[0]._id == log.objectId) {
+            //             objectId = log.objectId;
+            //             break;
+            //         }
+
+            //     }
+            //     if (objectId !== null) {
+            //         break;
+            //     }
+
+            // }
             props.cards.map((card) => {
                 card.tasks.map((task) => {
-                    if (task._id == log.objectId)
-                        return log.objectId
+                    if (task._id == log.objectId) {
+                        objectId = task.name
+                    }
+
                 }
                 )
             })
+            return objectId
+
         }
     }
     const renderViewLogs = () => {
@@ -37,8 +53,7 @@ function Logs(props) {
                     icon={log.staticLog.icon}
                     user={log.user}
                     date={log.date}
-                    _id={log._id}
-                    cardName={taskName(log)}
+                    taskName={taskName(log)}
                 />
             })
         else

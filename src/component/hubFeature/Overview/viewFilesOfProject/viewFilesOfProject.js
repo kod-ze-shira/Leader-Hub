@@ -66,7 +66,7 @@ function ViewFilesOfProject(props) {
                         <div className="add iconControl"
                             data-tip data-for="download" disabled={showCards ? countFoldersArr === 0 : countFilesArr === 0} onClick={showCards ? downloadFolder : downloadFile}>
                             <img class='imageIcon' src={download} ></img>
-                            <ReactTooltip data-tip id="download" place="top" effect="solid">
+                            <ReactTooltip className="tooltip-style" data-tip id="download" place="top" effect="solid">
                                 {title.title_downLoad}
                             </ReactTooltip>
 
