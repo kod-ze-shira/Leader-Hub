@@ -9,6 +9,7 @@ function Description(props) {
     let description = useRef()
     useEffect(() => {
         description.current.innerHTML = props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.description
+        // description.current.innerHTML ? description.current.innerHTML : ''
     }, [props.workspaces])
 
     return (

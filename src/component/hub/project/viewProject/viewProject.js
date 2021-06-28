@@ -10,12 +10,12 @@ import share from '../../../img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
-// import TeamView from '../../teamView/teamView'
+import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
 
 
 function ViewProject(props) {
-    console.log(props.myProject.members)
+
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
@@ -86,6 +86,14 @@ function ViewProject(props) {
         props.editOrShareProject('shareProject')
         event.stopPropagation();
     }
+    const [membersPlus, setMembersPlus] = useState(0)
+    const members = props.myProject.members.length ?
+        props.myProject.members.map((member, index) => {
+            return index < 2 ?
+                <TeamView marginTeam='' imgTeam={member.contact.thumbnail} />
+                : <></>
+        }) : null
+
 
     complitedColor = complited < 30 ? '#8ce5e7' : complited < 60 ? '#1fb9c1' : '#358a8d'
     return (
@@ -111,7 +119,7 @@ function ViewProject(props) {
                     <Cell item={props.myProject.dueDate} />
                     <CellDescription description='Due date' />
                 </td>
-                <td className='widthCellInProject'  >
+                <td style={{ width: '5%' }}  >
                     <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ?
                         props.myProject.cards.length : "0"} /></div>
                     <ReactTooltip data-tip id="card_n" place="bottom" effect="solid">
@@ -147,16 +155,15 @@ function ViewProject(props) {
                     </div>
                     <CellDescription description={(complited ? complited : 0) + '% complete'} />
                 </td>
+                <td className='widthCellInProject' style={{ 'text-align': 'center' }}>
+                    {members}
+                    {props.myProject.members.length > 1 ?
+                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 1)} />
+                        : null
+                    }
 
-                {/* {props.myProject.members.length ?
-                    <td style={{ 'text-align': 'center' }}>
-                        <TeamView marginTeam='' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
-                        <TeamView marginTeam='marginTeam' imgTeam='https://images1.calcalist.co.il/PicServer3/2019/12/12/954216/1LM.jpg' />
-                        <TeamView marginTeam='marginTeam' numberTeams={'+' + 3} />
-
-                        <CellDescription description='Team' />
-                    </td>
-                    : null} */}
+                    <CellDescription description='Team' />
+                </td>
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
                     <CellDescription description='Last Update' />
