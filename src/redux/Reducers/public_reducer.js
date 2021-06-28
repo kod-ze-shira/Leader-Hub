@@ -24,8 +24,9 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
+    foldersForDownload: [],
     descriptionNewProject: '',
-    sharedProjects:[] //projects that user shared  
+    sharedProjects: [] //projects that user shared  
 }
 
 const publicData = {
@@ -45,13 +46,21 @@ const publicData = {
     setFilesFromTask(state, action) {
         state.arrFilesOfTask = action.payload
     },
-    setMember(state, action) {
-        action.payload.contacts.map(payload =>
-            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members.push({contact:payload})
-
-        )
-        console.log(state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members);
+    addMember(state, action) {
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members=action.payload
+        // let members = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members
+        // action.payload.map(payload => {
+        //     let flag = false;
+        //     members.map(member => {
+        //         if (member.contact.email === payload.email)
+        //             flag = true;
+        //     })
+        //     if (!flag)
+        //         members.push({ contact: payload })
+        // })
+        // state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = members
     },
+    
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -130,6 +139,9 @@ const publicData = {
     /////////////////////////////////////////
     setFilesForProject(state, action) {
         state.filesForProjectArr = action.payload
+    },
+    setFoldersForDownload(state, action) {
+        state.foldersForDownload = action.payload
     },
     setUserName(state, action) {
         state.userName = action.payload;
@@ -442,8 +454,8 @@ const publicData = {
         state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
 
     },
-    setSharedProjects(state,action){
-        state.sharedProjects=action.payload
+    setSharedProjects(state, action) {
+        state.sharedProjects = action.payload
     }
 
 }

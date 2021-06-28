@@ -80,7 +80,6 @@ function NewProject(props) {
         project.color = myColor
         project.workspace = props.workspace._id
         project.name = nameProject
-        debugger
         project.description = description
 
         // if (!project.dueDate) {
@@ -191,7 +190,7 @@ function NewProject(props) {
                 <div className="row justify-content-end">
                     <button onClick={() => addProject()} data-tip data-for="save"
                         style={{ 'margin-top': '0px !important;' }} className="save_canges_btn px-5">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>
