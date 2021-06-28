@@ -11,7 +11,8 @@ function AddStatus(props) {
 
     useEffect(() => {
 
-    }, [props.statuses])
+    }, [props.statuses, props.openPopUp])
+    const [openPopUp, setOpenPopUp] = useState(props.openPopUpToAdd)
 
     const [newStatus, setNewStatus] = useState({
         task: props.task._id,
@@ -21,10 +22,13 @@ function AddStatus(props) {
 
 
     const addStatus = (e) => {
-        console.log(newStatus);
+        debugger
+        console.log(openPopUp);
         props.createStatus(newStatus)
         console.log(props.statuses);
-        e.stopPropagation();
+        // e.stopPropagation();
+        setOpenPopUp(false)
+        console.log(openPopUp);
 
     }
     const handleChangeStatus = (event) => {

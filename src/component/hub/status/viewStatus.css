@@ -20,10 +20,8 @@ margin: auto;
 margin: auto;
 /* margin-top: 1vh; */
     border-color:  #75798E !important; 
-    border-width: 3px !important;
-    border-style: double !important; 
-    
-
+    border-width: 1px !important;
+    border-style: solid !important; 
 }
 .display-task{
     margin-bottom: 1vh;

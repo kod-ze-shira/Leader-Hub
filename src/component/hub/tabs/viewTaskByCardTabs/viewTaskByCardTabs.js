@@ -57,6 +57,31 @@ function ViewTaskByCradTabs(props) {
 
     };
 
+
+    autosize();
+
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+            }
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
     const handleClose = (e, event) => {
 
         setAnchorEl(null);
@@ -280,10 +305,14 @@ function ViewTaskByCradTabs(props) {
 
                                 </div> */}
                                 <textarea
-                                    className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
+                                    className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
+                                    onClick={(e) => e.stopPropagation()}
+                                    // id="note"
                                     // rows={1}
+                                    // class="autosize"
+                                    
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onBlur={(e) => editTask()}

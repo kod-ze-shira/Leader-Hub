@@ -87,6 +87,7 @@
     font-size: smaller !important;
     color:#68C7CB!important;
 }
+
 .like-hover p{
     font-size: smaller !important;
     color:#68C7CB!important;
@@ -99,3 +100,12 @@
     margin-bottom: 0!important;
     padding-bottom: 0 !important;
 }
+.autosize {
+    resize: none;
+     overflow: hidden;
+     max-height: 80px;
+    /* -webkit-box-orient: vertical; */ 
+    /* -webkit-line-clamp: 4;
+    overflow: hidden;
+    display: -webkit-box; */
+  }

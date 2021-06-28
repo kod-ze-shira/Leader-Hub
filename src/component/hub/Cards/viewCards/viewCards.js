@@ -142,7 +142,7 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-5 "
+                    <div className="col-4 "
                         onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
                         onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
                     >
@@ -197,9 +197,9 @@ function ViewCards(props) {
                     </Menu>
                     {/* <p className="col">Team</p> */}
                     <p className="col-assignee">Assignee</p>
-                    <p className="col-status ">Status</p>
+                    <p className="col ">Status</p>
                     <p className="col">Start date</p>
-                    <p className="col">Due date</p>
+                    <p className="col-status">Due date</p>
                     <p className="col-priority">Priority</p>
 
                     <p className="col-add-task"><a>
