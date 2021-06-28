@@ -118,7 +118,7 @@ function ViewProject(props) {
                     <ReactTooltip data-tip id="card_n" place="bottom" effect="solid">
                         {title.title_number_of_cards}
                     </ReactTooltip>
-                    <CellDescription description='card' />
+                    <CellDescription description='cards' />
                 </td>
                 <td>
                     <span className='task widthCellInProject' >
@@ -133,7 +133,7 @@ function ViewProject(props) {
                                 {title.title_count_task}
                             </ReactTooltip></span>
                     </span>
-                    <CellDescription description='Task' />
+                    <CellDescription description='Tasks' />
                 </td>
                 <td>
                     <div className='divProgress'>
