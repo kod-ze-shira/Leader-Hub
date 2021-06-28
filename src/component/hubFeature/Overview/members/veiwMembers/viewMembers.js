@@ -8,10 +8,11 @@ function ViewMembers(props) {
     const { workspaces, projectIndex, workspacesIndex } = props
     const [members, setMembers] = useState(workspaces[workspacesIndex].projects[projectIndex].members)
 
-    // useEffect(() => {
-    //     setMembers(workspaces[workspacesIndex].projects[projectIndex].members)
-    // }, [members])
-    console.log('mmm', members);
+    useEffect(() => {
+        if (workspaces[workspacesIndex].projects[projectIndex].members) {
+            setMembers(workspaces[workspacesIndex].projects[projectIndex].members)
+        }
+    }, [workspaces[workspacesIndex].projects[projectIndex].members])
 
     return (
         <>
@@ -19,21 +20,24 @@ function ViewMembers(props) {
                 members.map(m => {
                     let mc = m.contact;
                     return (
-                        mc ? <>
-                            <div className="col-4 pt-3">
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-2 d-flex align-items-center">
-                                            <img referrerpolicy="no-referrer" src={mc.thumbnail} className="thumbnail-contact imgMembers" />
-                                        </div>
-                                        <div className="col-6 ml-2">
-                                            <b className="name-contact nameMembers">{mc.name} </b>
-                                            <p className="email-contact emailMembers ml-2">{mc.email} </p>
+                        mc ?
+                            <>
+                                <div className="col-lg-4 col-sm-6 col-xs-12 pt-3">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-1 col-sm-2  d-flex align-items-center px-0">
+                                                <img referrerpolicy="no-referrer" src={mc.thumbnail} className="thumbnail-contact imgMembers" />
+                                            </div>
+                                            <div className="col-6 ml-2">
+                                                <b className="name-contact nameMembers">{mc.name} </b>
+                                                <p className="email-contact emailMembers ml-2">{mc.email} </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </> : null)
+                            </>
+                            :
+                          null                )
                 })
                 : null
             }

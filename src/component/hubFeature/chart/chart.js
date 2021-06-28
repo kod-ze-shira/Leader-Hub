@@ -1,20 +1,9 @@
-import { Animation, EventTracker, Palette, ValueScale } from '@devexpress/dx-react-chart';
-// import {
-//     ArgumentAxis,
-//     BarSeries,
-// Chart,
-//     PieSeries,
-//     Title,
-//     Tooltip,
-//     ValueAxis
-// } from '@devexpress/dx-react-chart-material-ui';
-// import Paper from '@material-ui/core/Paper';
-import $ from 'jquery';
 import React, { useEffect, useState } from 'react';
+import Chart from "react-apexcharts";
+import $ from 'jquery'
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './chart.css';
-import Chart from "react-apexcharts";
 
 
 function MyChart(props) {
@@ -25,11 +14,10 @@ function MyChart(props) {
     let countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
     let readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
     const [cards, setCards] = useState(props.cards)
-    const schemeSet = ['#38b1b5', '#99e2e5']
     const barData = [];
-    const pieData = [{ category: 'Completed', val: readyTasks / countTasks, color: '#38b1b5' }, { category: 'Incompleted', val: 1 - readyTasks / countTasks, color: '#99e2e5' }];
+    const pieData = [{ category: 'Completed', val: Math.round(readyTasks / countTasks * 100), color: '#38b1b5' }, { category: 'Incompleted', val: Math.round((1 - readyTasks / countTasks) * 100), color: '#99e2e5' }];
     const sticksData = []
-
+    const a = ['dw', 'sad', 'sfca', 'asfca', 'sdvca']
     if (cards) {
         cards.map(c => {
             let ta = []
@@ -40,7 +28,7 @@ function MyChart(props) {
     }
     if (props.taskStatusesOfProject) {
         props.taskStatusesOfProject.map((status) => {
-            let percent = status.count / countTasks * 100;
+            let percent = Math.round(status.count / countTasks * 100);
             barData.push({ name: status.name, percent: percent, color: status.color })
         })
 
@@ -50,14 +38,9 @@ function MyChart(props) {
         //     })
         // }, 100)
     }
-    // const labelFunc = () => {
-    //     document.getElementsByTagName("rect")[1].innerHTML +='<label id="lbl">tzipi</label>'
-    //     // document.getElementsByTagName("div")[76].innerHTML +='<label id="lbl">tzipi</label>'
-    // }   
     const optionsSticks = {
         chart: {
-            id: "bar",
-            height: 100
+            id: "bar"
         },
         xaxis: {
             categories: sticksData.map(bd => bd.name)
@@ -77,9 +60,24 @@ function MyChart(props) {
                     cssClass: 'apexcharts-yaxis-title',
                 },
             },
+            labels: {
+                formatter: function (val) {
+                    return val.toFixed(0);
+                }
+            }
         },
+        colors: '#99e2e5',
         dataLabels: {
-            enabled: false
+            enabled: false,
+            font: function (context) {
+                var width = context.chart.width;
+                var size = Math.round(width / 32);
+
+                return {
+                    weight: 'bold',
+                    size: size
+                };
+            }
         },
         layout: {
             padding: {
@@ -100,6 +98,11 @@ function MyChart(props) {
                 fontWeight: 'bold'
             },
         },
+        plotOptions: {
+            bar: {
+                columnWidth: '15%',
+            },
+        }
     }
     const seriesSticks = [
         {
@@ -109,12 +112,22 @@ function MyChart(props) {
     ]
     const optionsBar = {
         chart: {
-            id: "bar"
+            id: "bar",
         },
         xaxis: {
-            categories: barData.map(bd => bd.name)
+            categories: barData.map(bd => bd.name),
+            labels: {
+                show: false
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
         },
         yaxis: { show: false },
+
         colors: barData.map(bd => bd.color),
         dataLabels: {
             enabled: true,
@@ -122,27 +135,54 @@ function MyChart(props) {
             style: {
                 colors: ['#fff'],
             },
+            font: function (context) {
+                var width = context.chart.width;
+                var size = Math.round(width / 32);
+                return {
+                    weight: 'bold',
+                    size: size
+                };
+            },
             formatter: function (val) {
-                return Math.round(val) + "%"
+                return val + "%"
             },
             offsetX: 0
         },
+        labels: barData.map(bd => bd.name),
         plotOptions: {
             bar: {
                 dataLabels: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    font: function (context) {
+                        var width = context.chart.width;
+                        var size = Math.round(width / 32);
+
+                        return {
+                            weight: 'bold',
+                            size: size
+                        };
+                    },
                 },
                 distributed: true,
-            }
+            },
         },
         grid: {
             show: false
+        },
+        tooltip: {
+            x: {
+
+            },
+            y: {
+                formatter: function (val) {
+                    return val + '%';
+                },
+            },
         },
         title: {
             text: 'All tasks by status',
             align: 'left',
             floating: false,
-
             style: {
                 fontSize: '16px',
                 margin: 20,
@@ -159,22 +199,32 @@ function MyChart(props) {
     const optionsPie = {
         chart: {
             type: 'pie',
+            // sparkline: {
+            //     enabled: true
+            //   }
         },
         series: pieData.map(p => p.val),
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                chart: {
-                    width: 200
-                },
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }],
         chartOptions: {
             labels: pieData.map(p => p.category),
-          },
+        },
+        layout: {
+            padding: {
+                bottom: -5
+            }
+        },
+        xaxis: {
+            gridLines: {
+                display: false,
+                tickMarkLength: 0,
+            },
+        },
+        grid: {
+            show: true,
+            padding: {
+                top: 0,
+                bottom: 0
+            }
+        },
         colors: pieData.map(p => p.color),
         dataLabels: {
             enabled: true,
@@ -183,35 +233,57 @@ function MyChart(props) {
                 colors: ['#fff']
             },
             formatter: function (val) {
-                return Math.round(val) + "%"
+                return val + "%"
             },
-            font: function (context) {
-                var avgSize = Math.round((context.chart.height + context.chart.width) / 2);
-                var size = Math.round(avgSize / 32);
-                size = size > 12 ? 12 : size; // setting max limit to 12
-                return {
-                    size: size,
-                    weight: 'bold'
-                };
-            },
+            dropShadow: {
+                enabled: false
+            }
         },
+
         labels: pieData.map(p => p.category),
         plotOptions: {
             pie: {
-                startAngle: 0,
-                endAngle: 360,
-                expandOnClick: true,
-                offsetX: 0,
-                offsetY: 0,
                 customScale: 0.8,
                 dataLabels: {
-                    offset: 0,
-                    minAngleToShowLabel: 10
+                    offset: -25,
+                    minAngleToShowLabel: 10,
+                    dropShadow: {
+                        enabled: false
+                    }
+                },
+                expandOnClick: false,
+            },
+        },
+        legend: {
+            position: "bottom",
+            style: {
+                margin: '0'
+            }
+        },
+        tooltip: {
+            x: {
+                show: false
+            },
+            y: {
+                formatter: function (val) {
+                    return val + '%';
+                }
+            }
+        },
+        states: {
+            hover: {
+                filter: {
+                    type: 'none',
+                }
+            },
+            active: {
+                filter: {
+                    type: 'none',
                 }
             }
         },
         stroke: {
-            show:false
+            show: false
         },
         title: {
             text: 'All tasks by completion status',
@@ -223,165 +295,69 @@ function MyChart(props) {
                 fontWeight: 'bold'
             },
         },
+
     }
     const seriesPie = pieData.map(p => p.val)
     return (
         <>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-3 p-1'>
+            <div className='container chartContainer'>
+                <div className="row divProjectStatistics pt-3 ml-2">
+                    <h4>Project Statistics</h4>
+                </div>
+                <div className='row p-2'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
                     </div>
-                    <div className='col-3 p-1'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Incomplete tasks</b><br /><b className='bParam'>{countTasks - readyTasks}</b></div>
                     </div>
-                    <div className='col-3 p-1'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Overdue tasks</b><br /><b className='bParam'>{props.overdueTasks}</b></div>
                     </div>
-                    <div className='col-3 p-1'>
+                    <div className='col-3 p-2'>
                         <div className='chartCol p-2 h100'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
                     </div>
                 </div>
                 <div className='row sticks' >
-                    <div className='col-12 p-1'>
+                    <div className='col-12 '>
                         <div className='chartCol'>
                             {/* sticks */}
                             <Chart
                                 options={optionsSticks}
                                 series={seriesSticks}
                                 type="bar"
+                                height="100%"
                             />
                         </div>
                     </div>
                 </div>
-                <div className='row'>
-                    <div className='col-6 p-1 '>
+                <div className='row barAndPie'>
+                    <div className='col-6 py-3'>
                         <div className='chartCol mixed-chart'>
                             {/* bar */}
                             <Chart
                                 options={optionsBar}
                                 series={seriesBar}
                                 type="bar"
+                                height="100%"
                             />
                         </div>
                     </div>
-                    <div className='col-6 p-1'>
+                    <div className='col-6 py-3'>
                         <div className='chartCol'>
                             {/* pie */}
                             <Chart
                                 options={optionsPie}
                                 series={seriesPie}
                                 type="pie"
+                                height='100%'
+                                width='100%'
+                                className='pChart'
                             />
                         </div>
                     </div>
                 </div>
             </div>
-            {/* <Paper style={{ width: '100%' }}>
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col-3 p-1'>
-                            <div className='chartCol p-2 h100'><b>Completed tasks</b><br /><b className='bParam'>{readyTasks}</b></div>
-                        </div>
-                        <div className='col-3 p-1'>
-                            <div className='chartCol p-2 h100'><b>Incomplete tasks</b><br /><b className='bParam'>{countTasks - readyTasks}</b></div>
-                        </div>
-                        <div className='col-3 p-1'>
-                            <div className='chartCol p-2 h100'><b>Overdue tasks</b><br /><b className='bParam'>{props.overdueTasks}</b></div>
-                        </div>
-                        <div className='col-3 p-1'>
-                            <div className='chartCol p-2 h100'><b>Total tasks </b><br /> <b className='bParam'>{countTasks}</b></div>
-                        </div>
-                    </div>
-                    <div className='row' >
-                        <div className='col-12 p-1'>
-                            <div className='chartCol'> */}
-            {/* sticks */}
-            {/* <Chart
-                                    data={sticksData}
-                                    height={300}
-                                >
-                                    <ArgumentAxis />
-                                    <ValueAxis allowDecimals={false} />
-                                    <BarSeries
-                                        valueField="tasks"
-                                        argumentField="name"
-                                        barWidth={0.2}
-                                        color='#99e2e5'
-                                    />
-                                    <Title text="Incomplete tasks by card" />
-                                    <Tooltip />
-                                </Chart>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-6 p-1 '>
-                            <div className='chartCol'> */}
-            {/* bar */}
-            {/* <Chart className='chart'
-                                    data={barData}
-                                    height={300}
-                                > */}
-            {/* <ValueAxis tickSize={10} /> */}
-            {/* <BarSeries
-                                        valueField="percent"
-                                        argumentField="name"
-                                        barWidth={0.7}
-                                    />
-                                    <Title text="All tasks by status" />
-
-                                    <Tooltip />
-                                </Chart> */}
-
-            {/* colors palette */}
-            {/* <div className='colorDiv d-flex justify-content-between p-5 mx-2'>
-                                    {barData.map(data => (
-                                        <div className='d-flex justify-content-between align-items-center'>
-                                            <div
-                                                key={data.name}
-                                                style={{ backgroundColor: data.color, width: '3vh', height: '3vh' }}
-                                            />
-                                            <p className='colorName'>{data.name}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-6 p-1'>
-                            <div className='chartCol'> */}
-            {/* pie */}
-            {/* <Chart
-                                    data={pieData}
-                                    height={300}
-                                >
-                                    <Palette scheme={schemeSet} />
-                                    <PieSeries
-                                        valueField="val"
-                                        argumentField="category"
-                                    />
-                                    <Title text="All tasks by completion status" />
-                                    <EventTracker />
-                                    <Tooltip />
-                                    <Animation />
-                                </Chart> */}
-            {/* colors palette */}
-            {/* <div className='colorDiv d-flex justify-content-between p-5'>
-                                    {pieData.map(data => (
-                                        <div className='d-flex justify-content-between align-items-center'>
-                                            <div
-                                                key={data.category}
-                                                style={{ backgroundColor: data.color, width: '3vh', height: '3vh' }}
-                                            />
-                                            <p className='colorName'>{data.category}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Paper> */}
         </>
     )
 }

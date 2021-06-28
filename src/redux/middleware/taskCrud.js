@@ -207,24 +207,30 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-        if (action.payload.type && action.payload.type == 'taskNotBelong') {
+
+        if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
             task = action.payload.task
-            if (!task.description)
-                task.description = null
+            console.log("Dxffdgggggghggg",task);
         }
         else
-            if (!action.payload.card) {
-                for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
-                    if (getState().public_reducer.tasks[index]._id == action.payload._id)
-                        task = getState().public_reducer.tasks[index]
-                }
+            if (action.payload.type && action.payload.type == 'taskNotBelong') {
+                task = action.payload.task
+                if (!task.description)
+                    task.description = null
             }
             else
-                if (action.payload.name)
-                    task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-                        .tasks[getState().public_reducer.indexCurrentTask]
+                if (!action.payload.card) {
+                    for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
+                        if (getState().public_reducer.tasks[index]._id == action.payload._id)
+                            task = getState().public_reducer.tasks[index]
+                    }
+                }
                 else
-                    task = action.payload
+                    if (action.payload.name)
+                        task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+                            .tasks[getState().public_reducer.indexCurrentTask]
+                    else
+                        task = action.payload
 
 
         $.ajax({
@@ -236,7 +242,8 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
-                // dispatch(actions.setProjectInWorkspace(data.project))
+                if (data.project)
+                    dispatch(actions.setProjectInWorkspace(data.project))
                 console.log("success")
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
@@ -318,10 +325,8 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                         "source": "Hub",
                         "files": null
                     }))
-
                 }
                 dispatch(actions.setProjectInWorkspace(data.project))
-
                 console.log("success")
                 // console.log(data.result);
             },

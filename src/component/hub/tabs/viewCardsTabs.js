@@ -142,21 +142,20 @@ function ViewCardsTabs(props) {
                             <div className="view-cards-tabs"
                                 id={props.cardFromMap._id}>
                                 <div class="card" >
-                                    <div class="container" >
+                                    <div class="container " >
                                         <div class="draggable card-header row">
                                             <span
                                                 id="input-card-name"
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
-                                                className="  pl-4 col-10"
-
+                                                className=" mb-2 pl-4 col-10"
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
                                              </Button>
-                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                            <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
                                             <Menu
@@ -172,10 +171,10 @@ function ViewCardsTabs(props) {
 
                                         </div>
                                     </div>
-                                    <div class="card-body allTaskInCard">
+                                    <div class="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div className="mt-0"
+                                                <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 

@@ -261,12 +261,13 @@ float: right !important;
   float:left ;
 }
 .prioprty-select{
+  /* margin:auto !important; */
 }
 .prioprty-select p{
   font-weight: bold;
   display: inline-block !important;
   text-align:right !important;
-  margin-left: 3px;
+  margin-left: 7px;
 
 }
 

@@ -27,8 +27,8 @@
 }
 
 .weekend {
-  background: #ecfbf8 !important;
-  color: #44d7b6 !important;
+  background: #68c7cb1a !important;
+  color:  #68C7CB !important;
   font-weight: 800 !important;
 }
 
@@ -89,10 +89,10 @@
 .bbb{
   display: none !important;
 }
-.gantt_task_progress_drag{display:none !important}
+/* .gantt_task_progress_drag{display:none !important}
 .gantt_hor_scroll{
   overflow: hidden !important;
-}
+} */
 .gantt_delete_button{
   background:red;
 }
@@ -159,10 +159,15 @@
  {
   background-color:#68c7cb1a !important;
 }
-.gantt_row.ll.gantt_row_task{
+.important{
   text-align: start;
+  display: flex;
+  align-items: center;
 }
-.gantt_data_area{
+/* .gantt_data_area{
   
   overflow-x: scroll !important;
+} */
+.gantt_data_area::-webkit-scrollbar{
+  display:block;
 }

@@ -208,7 +208,7 @@ function TaskNotBelongDetails(props) {
 
                         <div className="row justify-content-between mx-1" >
                             <label>Create {props.task.startDate}</label>
-                            <label className="">Last Update {props.task.updateDates}</label>
+                            <label className="">Last Update {props.task.dueDate}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>
@@ -282,7 +282,7 @@ function TaskNotBelongDetails(props) {
                     </div>
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>

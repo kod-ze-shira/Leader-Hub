@@ -146,8 +146,9 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 
 
           }))
+          console.log(result);
+          dispatch(actions.addMember(result.updatedObject.members))
         })
-
       })
     // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
     // })
@@ -205,6 +206,8 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
         console.log("data", data);
         let editTaskInRedux = { "nameFiled": "assingTo", "value": data.task.assingTo }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
+        dispatch(actions.addContactToContactList(data.task.assingTo.contact))
+
 
       },
 

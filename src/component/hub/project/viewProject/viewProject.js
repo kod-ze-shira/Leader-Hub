@@ -12,7 +12,7 @@ import CellDescription from './cellDescription';
 import './viewProject.css';
 import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
-
+import userfriend from '../../../img/userfriend.png'
 
 function ViewProject(props) {
 
@@ -26,7 +26,7 @@ function ViewProject(props) {
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
-        props.setCurrentIndexProject(props.indexProject)
+        // props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
         // console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
@@ -35,8 +35,9 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
+        let index = props.workspaces.findIndex(w => w.projects.find(project => project._id == props.myProject._id))
+        props.saveIndexOfWorkspaceInRedux(index)
         props.setCurrentIndexProject(props.indexProject)
-        // props.addProjectTArray(project)
         props.editOrShareProject('editProject')
         event.stopPropagation();
     }
@@ -122,25 +123,25 @@ function ViewProject(props) {
                 <td style={{ width: '5%' }}  >
                     <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ?
                         props.myProject.cards.length : "0"} /></div>
-                    <ReactTooltip data-tip id="card_n" place="bottom" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="card_n" place="bottom" effect="solid">
                         {title.title_number_of_cards}
                     </ReactTooltip>
-                    <CellDescription description='card' />
+                    <CellDescription description='cards' />
                 </td>
                 <td>
                     <span className='task widthCellInProject' >
                         <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }} data-tip data-for="task_c">
-                            <ReactTooltip data-tip id="task_c" place="bottom" effect="solid">
+                            <ReactTooltip className="tooltip-style" data-tip id="task_c" place="bottom" effect="solid">
                                 {title.title_task_complete}
                             </ReactTooltip>
                             {props.myProject.countReadyTasks}</span>
                         <span className='designPropertiesProject' data-tip data-for="task_count">
                             /{props.myProject.countTasks}
-                            <ReactTooltip data-tip id="task_count" place="bottom" effect="solid">
+                            <ReactTooltip className="tooltip-style" data-tip id="task_count" place="bottom" effect="solid">
                                 {title.title_count_task}
                             </ReactTooltip></span>
                     </span>
-                    <CellDescription description='Task' />
+                    <CellDescription description='Tasks' />
                 </td>
                 <td>
                     <div className='divProgress'>
@@ -148,7 +149,7 @@ function ViewProject(props) {
                             <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
-                        <ReactTooltip data-tip id="percentage" place="bottom" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="percentage" place="bottom" effect="solid">
                             {title.title_percentage}
                         </ReactTooltip>
                         {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
@@ -175,23 +176,25 @@ function ViewProject(props) {
                     <img style={myStyleIcons} src={require('../../../img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
-                    <ReactTooltip data-tip id="share" place="bottom" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="share" place="bottom" effect="solid">
                         {title.title_share}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
                         src={require('../../../img/pencil-edit.png')} data-tip data-for="edit_" />
-                    <ReactTooltip data-tip id="edit_" place="bottom" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
                         src={require('../../../img/remove.png')} data-tip data-for="delete" />
-                    <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
+                    
+                {props.fromShare?<td><img src={userfriend}></img></td>:null}
 
             </tr >
         </>
