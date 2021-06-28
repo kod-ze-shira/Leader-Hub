@@ -37,6 +37,7 @@ function ViewLogs(props) {
                             {user}
                         </div>
                     </div>
+
                     {!schemaName.includes("Project Created") ?
                         <div className="row">
                             <div className="logsDashed "></div>
@@ -45,7 +46,7 @@ function ViewLogs(props) {
                     }
                 </div>
             </div>
-            <ReactTooltip id="logsToolTip"/>
+            <ReactTooltip id="logsToolTip" />
         </>
     )
 }
