@@ -9,6 +9,9 @@ function Description(props) {
     let description = useRef()
     useEffect(() => {
         description.current.innerHTML = props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.description
+        if( description.current.innerHTML==='undefined'){
+            description.current.innerHTML='No description'
+        }
     }, [props.workspaces])
 
     return (

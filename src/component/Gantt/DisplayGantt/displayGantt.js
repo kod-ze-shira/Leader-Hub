@@ -47,12 +47,15 @@ function DisplayGantt(props) {
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
             let cardName
             let a = theTasks.find(task => task.cardName == card.name)
-            
+
             if (a)
                 cardName = null
-            else cardName = card.name
+            else
+                cardName = card.name
             theTasks.push({
-                card:card._id,
+                indexCard:index,
+                indexTask:index1,
+                card: card._id,
                 cardName: cardName,
                 priority: task.priority ? task.priority.level : "Low",
                 id: task._id, text:

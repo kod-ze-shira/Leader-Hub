@@ -169,15 +169,20 @@ export default class Gantt extends Component {
                 + sd.split("-")[2][1] + '/' + sd.split("-")[1] + '/' + sd.split("-")[0];
 
             let editTaskInRedux = {
-                "_id": id,
-                "dueDate": newEndDate,
-                "startDate": newStartDate
+                task: {
+                    "_id": id,
+                    "dueDate": newEndDate,
+                    "startDate": newStartDate
+                },
+                type: "editTaskFromGantt"
             }
-
+            store.dispatch(actions.saveCurrentIndexOfTaskInRedux(task.indexTask))
+            store.dispatch(actions.saveCurrentIndexOfCardInRedux(task.indexCard))
             store.dispatch(actions.editTask(editTaskInRedux))
             console.log(editTaskInRedux);
 
-            store.dispatch(actions.setDateTaskFromGantt({ ...editTaskInRedux, card_id: task.card }))
+            store.dispatch(actions.setDateTaskFromGantt(editTaskInRedux))
+
         });
 
 
