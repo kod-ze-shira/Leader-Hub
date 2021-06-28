@@ -102,7 +102,7 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description} indexW={props.indexWorkspace} indexP={props.indexProject} />
+                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description?props.workspaces[props.indexWorkspace].projects[props.indexProject].description:null} indexW={props.indexWorkspace} indexP={props.indexProject} />
 
                         {/* <div class="form-control descriptionProject"
                             name="description"
