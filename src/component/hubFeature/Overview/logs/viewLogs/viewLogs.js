@@ -4,9 +4,9 @@ import './viewLogs.css'
 import ReactTooltip from 'react-tooltip';
 
 
-function ViewLogs(props) {
 
-    const { schemaName, icon, user, date, _id,cardName } = props;
+function ViewLogs(props) {
+    const { schemaName, icon, user, date, taskName } = props;
 
     // date in  words
     let day = date.slice(8, 10)
@@ -19,40 +19,33 @@ function ViewLogs(props) {
 
     return (
         <>
-            <div data-tip data-for="projectName" className="container logsContainer" >
-                <h1>{cardName}</h1>
-                <div className="row logRowOne  mt-4">
-                    <div className="col-2 logColIcon">
-                        <img className="logicon" src={icon}></img>
+            <div data-tip={taskName} data-for='toolTip1' data-place='top'>
+                <div data-tip data-for="projectName" className=" container logsContainer " >
+                    <div className="row logRowOne  mt-4">
+                        <div className="col-2 logColIcon">
+                            <img className="logicon" src={icon}></img>
+                        </div>
+                        <div className="col-6 logSchemaName">
+                            {schemaName}
+                        </div>
+                        <div className="col-3 logDate">
+                            {dateInString}
+                        </div>
                     </div>
-                    <div className="col-6 logSchemaName">
-                        {schemaName}
-                    </div>
-                    <div className="col-3 logDate">
-                        {dateInString}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col logUser">
-                        {user}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col logUser">
-                        {_id}
-                    </div>
-                </div>
-                {!schemaName.includes("Project Created") ?
                     <div className="row">
-                        <div className="logsDashed "></div>
+                        <div className="col logUser">
+                            {user}
+                        </div>
                     </div>
-                    : null
-                }
+                    {!schemaName.includes("Project Created") ?
+                        <div className="row">
+                            <div className="logsDashed "></div>
+                        </div>
+                        : null
+                    }
+                </div>
             </div>
-            <ReactTooltip data-tip id="projectName" place="top" effect="solid">
-                {_id}
-            </ReactTooltip>
-
+            <ReactTooltip id="toolTip1" ></ReactTooltip>
         </>
     )
 }
