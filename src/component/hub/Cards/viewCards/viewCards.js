@@ -224,6 +224,7 @@ function ViewCards(props) {
                                                 key={task._id} task={task}
                                                 indexCard={props.indexCard}
                                                 indexTask={index}
+                                                showRocketShip={props.showRocketShip}
                                             />
                                         ))}
                                         {provided.placeholder}
@@ -240,6 +241,7 @@ function ViewCards(props) {
                         // className="add-task"
                         class="form-control scroll-container mt-2   ml-4"
                         placeholder="Add Task" id="input-task"
+                        autocomplete="chrome-off"
                         value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 newTask()

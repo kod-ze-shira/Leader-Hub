@@ -59,7 +59,7 @@ function ViewFilesOfProject(props) {
                                 <FontAwesomeIcon className="rowIcon"
                                     icon={['fas', 'chevron-left']}>
                                 </FontAwesomeIcon>
-                                {'   ' + cardName}</p> : ''}
+                                {'      ' + cardName}</p> : ''}
 
                     </div>
                     <div className="col-3 row iconsList" >
@@ -76,10 +76,12 @@ function ViewFilesOfProject(props) {
                 <hr></hr>
                 {showCards ?
                     <ViewCards
+                        showRocketShip={props.showRocketShip}
                         setFiles={setCurrentFiles}
                         setShowCards={setShowCards}
                         setFoldersForDownload={setFoldersForDownload}
                         setCardName={setCardName}
+                        showRocketShip={props.showRocketShip}
                         setCountFoldersArr={setCountFoldersArr}
                     ></ViewCards> :
                     <ViewFilesByCard

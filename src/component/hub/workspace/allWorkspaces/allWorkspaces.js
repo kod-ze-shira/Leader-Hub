@@ -10,7 +10,7 @@ import ViewDetails from '../../viewDetails/viewDetails'
 import title from '../../../../Data/title.json'
 import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function AllWorkspaces(props) {
@@ -20,10 +20,9 @@ function AllWorkspaces(props) {
 
 
     useEffect(() => {
-        props.getAllWorkspaces()
         props.getContactsForUser()
         props.getAllTeamsForUser()
-
+        props.getAllWorkspaces()
 
     }, []);
 
@@ -78,12 +77,15 @@ function AllWorkspaces(props) {
     //     $('[data-toggle="tooltip"]').tooltip()
     // })
     function openAddNewWorkspace(e) {
+        props.addWorkspaceToWorkspaces({ description: "", name: "" })
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
         e.stopPropagation()
     }
     $(window).click(function () {
         setShowWorkspace(false)
+
+        // props.addWorkspaceToWorkspacesFromServer(null)//to delete workspace in redux
     });
     function stopP(event) {
         event.stopPropagation();
@@ -95,7 +97,7 @@ function AllWorkspaces(props) {
 
 
             <div className="row mt-5"></div>
-            <div className="col-12">
+            <div className="col-12" >
                 <div className="row borderBottom mx-5">
                     <div className="MyWorkspace">My Workspace</div>
                     <div className="row">
@@ -104,22 +106,30 @@ function AllWorkspaces(props) {
                                 <>
 
                                     {/* <img data-tip data-for="registerTip" src={copy} id="img1" onClick={copyToClipboard} className="img_copy"></img> */}
-                                    <div data-tip data-for="Grid" className="col-1 grid" onClick={chenge_grid}><img src={require('../../../img/Group 19506.png')}></img></div>
+                                    <div data-tip data-for="Grid" className="col-1 grid" onClick={chenge_grid}>
+                                        <img src={require('../../../img/gridIcon.png')} />
+                                    </div>
                                     <ReactTooltip id="Grid" place="bottom" effect="solid">
                                         {title.title_view_grid}
                                     </ReactTooltip>
-                                    <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}><img src={require('../../../img/list1.png')}></img></div>
+                                    <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}>
+                                        <img src={require('../../../img/list1.png')} />
+                                    </div>
                                     <ReactTooltip data-tip id="List" place="bottom" effect="solid">
                                         {title.title_view_list}
                                     </ReactTooltip>
                                 </>
                                 :
                                 <>
-                                    <div data-tip className="col-1 grid" data-for="Grid" onClick={chenge_grid}><img src={require('../../../img/Group 19507.png')}></img></div>
+                                    <div data-tip className="col-1 grid" data-for="Grid" onClick={chenge_grid}>
+                                        <img src={require('../../../img/Group 19507.png')} />
+                                    </div>
                                     <ReactTooltip id="Grid" place="bottom" effect="solid">
                                         {title.title_view_grid}
                                     </ReactTooltip>
-                                    <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}><img src={require('../../../img/list.png')}></img></div>
+                                    <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}>
+                                        <img src={require('../../../img/listIcon.png')} />
+                                    </div>
                                     <ReactTooltip data-tip id="List" place="bottom" effect="solid">
                                         {title.title_view_list}
                                     </ReactTooltip>
@@ -178,13 +188,14 @@ function AllWorkspaces(props) {
                     }
                 </div>
             </div>
-            {showAddWorkspace ?
-                <div className="closeDet" onClick={(e) => stopP(e)}>
-                    <ViewDetails
-                        showToast={(obj) => props.showToast(obj)}
-                        closeViewDetails={() => setShowWorkspace(false)}
-                        from={addOrEditWorkspace} workspace={workspaceToEdit} />
-                </div> : null
+            {
+                showAddWorkspace ?
+                    <div className="closeDet" onClick={(e) => stopP(e)}>
+                        <ViewDetails
+                            showToast={(obj) => props.showToast(obj)}
+                            closeViewDetails={() => setShowWorkspace(false)}
+                            from={addOrEditWorkspace} workspace={workspaceToEdit} />
+                    </div> : null
             }
 
         </>
@@ -203,12 +214,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
+        addWorkspaceToWorkspaces: (props) => dispatch(actions.addWorkspaceToWorkspaces(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser())
-
+        getAllTeamsForUser: () => dispatch(actions.getAllTeamsForUser()),
+        addWorkspaceToWorkspacesFromServer: (obj) => dispatch(actions.addWorkspaceToWorkspacesFromServer(obj))
     }
 
 

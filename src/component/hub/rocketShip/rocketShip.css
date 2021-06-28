@@ -1,0 +1,51 @@
+.rocketShip {
+    top: 90vh;
+    height:93px;
+    position: relative;
+    animation-name: example;
+    animation-duration: 0.9s;
+    z-index: 99999;
+    /* animation-iteration-count:infinite; */
+  }
+
+  .divRocketShip{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+  }
+  
+  @keyframes example {
+     /* 0%   { left:0px; top:0px;} */
+   /* 40%  { left:50%; top:0px;}  */
+
+    /* 0%       { transform: translatex(300px) translatey(-500px) } */
+    /* 50%       { transform: translatex(300px) translatey(-500px) } */
+    /* 50%       { transform: translatex(300px) translatey(-500px) } */
+    /* 50%       { transform: translatex(30vw)  translatex(30vw) translatey(-50vh) }
+    75%      { transform: translatex(40vw) translatey(-40vh); }
+    100%     { transform: translatex(50vw) translatey(-30vh) } */
+    50%       { transform:translatex(50vw) translatey(-60vh) }
+    65%      { transform:translatex(55vw) translatey(-55vh); }
+    75%     { transform:translatex(70vw) translatey(-80vh) }
+    100%     { transform:translatex(80vw) translatey(-100vh) }
+    /* 100%{opacity: 0;} */
+        /* transform:rot.ate(360deg);} */
+
+      /* 0% {
+        transform: translate3d(50px, 40px, 0px);
+        animation-timing-function: ease-in;
+    }
+    50% {
+        transform: translate3d(400px, 50px, 0px);
+        animation-timing-function: ease-out;
+    }
+    100% {
+        transform: translate3d(900px, 40px, 0px);
+    }
+    /* 25%  {background-color:yellow; left:400px; top:0px;} */
+  
+    
+  } 
+
+

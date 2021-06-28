@@ -59,7 +59,8 @@ function AddWorkspace(props) {
 
         if (nameworkspae.current.value) {
             workspace.color = myColor
-            props.addNewWorkspaceToServer(workspace)
+            // props.addNewWorkspaceToServer(workspace)
+            props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
             props.closeViewDetails()
 
         }
@@ -80,6 +81,7 @@ function AddWorkspace(props) {
             ...prevState,
             [name]: value
         }));
+        // props.setWorkspaceInRedux()
     }
     // (function () {
     //     // 'use strict'
@@ -98,20 +100,14 @@ function AddWorkspace(props) {
     //         form.classList.add('was-validated')
     //     }, false)
     // })()
-
+    const changeFiledInWorkspace = (input) => {
+        let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
+        props.saveIndexOfWorkspaceInRedux(props.workspaces.length - 1)
+        props.setWorkspaceByFiled(editWorkspaceInRedux)
+    }
     return (
         <>
 
-            {/* <h5 className="mt-5">Add Workspace</h5>
-            <input type="text" name="name" class="form-control mr-5 mt-2"
-                id="workspace-name" placeholder="Enter workspace name"
-                onChange={handleChange}
-            />
-            <input type="text" name="description" class="form-control mr-5 mt-2"
-                id="workspace-describtion" placeholder="Enter workspace describtion"
-                onChange={handleChange}
-            />
-            <button className="save_canges_btn" onClick={addNewWorkspace}>save workspace</button> */}
 
             <div className="details d-workspace mr-5 ml-4" >
                 <div className='propertiesViewDitails'>
@@ -125,7 +121,10 @@ function AddWorkspace(props) {
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" ref={nameworkspae} required
-                            onChange={handleChange} type="text" class="form-control" id="workspace-name" />
+                            // onChange={handleChange}
+                            autoFocus
+                            onChange={(input) => changeFiledInWorkspace(input)}
+                            type="text" class="form-control" id="workspace-name" />
                         <div class="invalid-feedback">
                             Please enter workspace name.
                      </div>
@@ -135,7 +134,9 @@ function AddWorkspace(props) {
                         <label for="description">Description</label>
                         <textarea class="form-control descriptionWorkspace"
                             id="description" rows="2" placeholder="Write a description about your workspace"
-                            onChange={handleChange} contentEditable></textarea>
+                            // onChange={handleChange} 
+                            onChange={(input) => changeFiledInWorkspace(input)}
+                            contentEditable></textarea>
                     </div>
                     <div class="form-group">
                         <label for="color">Logo Color</label>
@@ -145,7 +146,9 @@ function AddWorkspace(props) {
                             type="color"
                             // id='colorProject'
                             value={myColor}
-                            onChange={(e) => changeColorWorkspace(e)} />
+                            // onChange={(e) => changeColorWorkspace(e)}
+                            onChange={(input) => changeFiledInWorkspace(input)}
+                        />
                         {/* onChange={handleChange} /> */}
                     </div>
                 </div>
@@ -168,6 +171,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addNewWorkspaceToServer: (props) => dispatch(actions.addNewWorkspaceToServer(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+        setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
+        saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
 
     }
 

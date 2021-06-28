@@ -36,9 +36,15 @@ function TaskDetails(props) {
 
     }, [props.cards])
 
+    useEffect(() => {
+        nameRequired.current.focus();
+    }, [])
+
+
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
@@ -238,6 +244,42 @@ function TaskDetails(props) {
         $(this).find('.files-task-hover').hide();
         $(this).find('.files-task').show();
     });
+    const completeTask = () => {
+        let today = new Date()
+        let dd = today.getDate()
+        let mm = today.getMonth() + 1
+        const yyyy = today.getFullYear()
+        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
+        let completeTask = {
+            "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id,
+            "name": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name,
+            "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description,
+            "dueDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate,
+            "startDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate,
+            "complete": doneStatus,
+            "endDate": today,
+            "likes": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].likes,
+            "assingTo": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assingTo,
+            "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
+            "files": props.task.files ? props.task.files : null,
+            "priority": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority
+
+        }
+        // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
+        // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
+
+        props.setTaskComplete(completeTask)//redux
+        props.completeTask(completeTask)//server
+        if (doneStatus) {
+            props.setCountReadyTasks(true)
+            // setShowChalalit(true)
+
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+        }
+        else {
+            props.setCountReadyTasks(false)
+        }
+    }
 
 
     return (
@@ -256,7 +298,7 @@ function TaskDetails(props) {
 
                         <div className="row justify-content-between mx-1" >
                             <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate}</label>
+                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>
@@ -310,9 +352,13 @@ function TaskDetails(props) {
                             <div class="dropdown col-md-6 col-lg-5">
                                 <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
-
-                                        <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span>
+                                        <div
+                                            className="color-status-first px-3"
+                                            style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color : null }} >
+                                            {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName : null}
+                                        </div>
+                                        {/* <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
+                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span> */}
                                     </> : null}
                                 </button>
                                 {openPopUp ?
@@ -346,6 +392,7 @@ function TaskDetails(props) {
                                 <label for="priority">Priority</label>
 
                                 <Select
+                                    isSearchable={false}
                                     name="priority"
                                     className=""
                                     // classNamePrefix="select"
@@ -379,28 +426,33 @@ function TaskDetails(props) {
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
                         : null}
-                    <div className="assingto-details" >
+                    <div className="assingto-details" data-tip data-for="assing">
 
                         <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img data-tip data-for="assing_" className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
-                        <ReactTooltip data-tip id="assign_" place="top" effect="solid">
+                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <ReactTooltip data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
-                    <div className=" files-details">
+                    <div className=" files-details" data-tip id="files">
                         <UploadFile />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img data-tip id="save" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
-                        <ReactTooltip data-tip id="save" place="top" effect="solid">
-                            {title.title_save}
+                        <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <ReactTooltip place="top" effect="solid">
+                            {title.title_files}
                         </ReactTooltip>
                     </div>
-                    <div className="delete-details">
+                    <div className="delete-details" data-tip data-for="delete">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <ReactTooltip data-tip id="delete" place="top" effect="solid" >
+                            {title.title_delete}
+                        </ReactTooltip>
                     </div>
+                    {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
+
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>
                 </div>

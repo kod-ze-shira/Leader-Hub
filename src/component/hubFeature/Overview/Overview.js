@@ -1,21 +1,21 @@
-import React, { useState, useEffect, } from 'react'
-import { useParams, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { actions } from '../../../redux/actions/action';
-import FilesOfProject from './viewFilesOfProject/viewFilesOfProject'
-import Hangout from './hangout/hangout'
-import Members from './members/members'
-import Logs from './logs/logs'
-import './overview.css'
-import MyChart from '../chart/chart'
-import ViewFilesOfProject from './viewFilesOfProject/viewFilesOfProject'
-// import { actions } from '../../hub'
+import MyChart from '../chart/chart';
+import Description from "./description/description";
+import HangoutAndLogs from './HangoutAndLogs/HangoutAndLogs';
+import Logs from './logs/logs';
+import Members from './members/members';
+import './overview.css';
+import FilesOfProject from './viewFilesOfProject/viewFilesOfProject';
 function Overview(props) {
 
 
 
     const { idProject } = useParams();
     const [refresh, setRefresh] = useState(false)
+    const [sizeScreen, setSizeScreen] = useState(window.innerWidth)
     // useEffect(() => {
     //     if (props.workspaces.length == 0)
     //         props.getAllWorkspaces()
@@ -32,61 +32,64 @@ function Overview(props) {
             }
         }
     }, [props.workspaces])
-    // useEffect(() => {
 
-    //     if (props.indexOfCurrentWorkspace && props.workspaces.length) {
-    //         setRefresh(true)
-    //     }
-    // }, [props.indexOfCurrentWorkspace])
+    let checkScreenSize = () => {
+        setSizeScreen(window.innerWidth);
+    };
+
+    useEffect(() => {
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
+
+    useEffect(() => {
+        // props.indexOfCurrentWorkspace ||
+        if (props.workspaces.length) {
+            setRefresh(true)
+        }
+        // }, [props.indexOfCurrentWorkspace])
+    }, [props.workspaces])
+
     return (
         <>
-            <div className='scrollbarOverview container-fluid'>
+                <div className='scrollbarOverview container-fluid'>
 
-                <div className='row '>
-                    <div className='col-9 mr-3'>
-                        <div className='container-fluid px-0 '>
-                            <div className='row mb-3'>
-                                <div className='projectName' >
-                                    <p>
-                                        This template is your jumping-off point to make your project plans, goals, communications,
-                                        and files clear and accessible in one place.
-                                        Use the priority and progress fields to clearly organize your work.
-                                    </p>
+                    <div className='row '>
+                        <div className='col-lg-9 col-md-12 mr-3'>
+
+                            <div className='container-fluid px-0 '>
+                                <div className='row mb-3 divChartAndMembers'>
+                                    <div className='projectName' >
+                                        <Description></Description>
+                                    </div>
+                                    {refresh ?
+                                        <>
+                                            <Members />
+
+                                            <MyChart />
+                                        </>
+                                        : null}
                                 </div>
-                                {/* {refresh ? */}
-                                <>
-                                    <Members />
-
-                                    <MyChart />
-                                </>
-                                {/* : null} */}
-                            </div>
-                            <div className='row'>
-                                {/* {refresh ? */}
-                                <FilesOfProject />
-                                {/* : null} */}
+                                <div className='row'>
+                                    {refresh ?
+                                        <FilesOfProject />
+                                        : null}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className='col' style={{ height: '87vh' }}>
-                        <div className='container-fluid px-0 '>
-                            {/* {refresh ? */}
-                            <>
-                                <div className='row mb-3 minHeight'>
-                                    <Hangout></Hangout>
-                                </div>
-                                <div className='row minHeight'>
-                                    <Logs />
-                                </div>
-                            </>
-                            {/* : null} */}
+                        <div className='col' style={{ height: '87vh' }}>
+                            <div className='container-fluid px-0 '>
+                                {refresh ?
+                                    <HangoutAndLogs></HangoutAndLogs>
+                                    : null}
+                            </div>
                         </div>
+                        {/* <Hangout></Hangout> */}
                     </div>
-                    {/* <Hangout></Hangout> */}
                 </div>
-
-            </div>
         </>
     )
 }

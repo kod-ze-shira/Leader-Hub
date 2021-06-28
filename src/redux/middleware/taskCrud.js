@@ -48,7 +48,6 @@ export const getTasksByCardId = ({ dispatch, getState }) => next => action => {
                 console.log("success")
                 console.log("data", data);
 
-
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
@@ -117,9 +116,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newTask`
         let task = action.payload;
-
         console.log(task)
-
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -144,6 +141,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                     "source": "Hub",
                     "files": null
                 }))
+
                 // createNewEventWhenNewTask(data.message, getState().public_reducer.userName, getState().public_reducer.tokenFromCookies)
             },
             error: function (err) {
@@ -156,6 +154,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
 }
 
 function createNewEventWhenNewTask(task, userName, jwt) {
+
     let timeStart = new Date(task.startDate);
     timeStart.setHours(11);
     let startTime = timeStart.toISOString()
@@ -208,21 +207,19 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-
-        if (!action.payload.card) {
-            for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
-                if (getState().public_reducer.tasks[index]._id == action.payload._id)
-                    task = getState().public_reducer.tasks[index]
-            }
+        if (action.payload.type && action.payload.type == 'taskNotBelong') {
+            task = action.payload.task
+            if (!task.description)
+                task.description = null
         }
         else
-            if (action.payload.type && action.payload.type == 'taskNotBelong') {
-                task = action.payload.task
-                if (!task.description)
-                    task.description = null
-                // if (!task.endDate)
-                //     task.endDate = null
-            } else
+            if (!action.payload.card) {
+                for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
+                    if (getState().public_reducer.tasks[index]._id == action.payload._id)
+                        task = getState().public_reducer.tasks[index]
+                }
+            }
+            else
                 if (action.payload.name)
                     task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
                         .tasks[getState().public_reducer.indexCurrentTask]
@@ -239,6 +236,8 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ task }),
             success: function (data) {
+                if (data.project)
+                    dispatch(actions.setProjectInWorkspace(data.project))
                 console.log("success")
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
@@ -296,7 +295,6 @@ export const updateLike = ({ dispatch, getState }) => next => action => {
 export const completeTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'COMPLETE_TASK') {
         let taskId = action.payload._id
-
         // let taskId= getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
         // .tasks[getState().public_reducer.indexCurrentTask]._id
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/completeTask`
@@ -322,6 +320,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                         "files": null
                     }))
                 }
+                dispatch(actions.setProjectInWorkspace(data.project))
                 console.log("success")
                 // console.log(data.result);
             },
@@ -351,7 +350,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
                 if (data.result.card) {
                     dispatch(actions.deletTask(data.result))
                     dispatch(actions.setCountTasks())
-                    debugger
                     if (data.result.complete)
                         dispatch(actions.setCountReadyTasks(false))
                 }
@@ -375,7 +373,6 @@ export const removeTaskById = ({ dispatch, getState }) => next => action => {
 export const moveTaskBetweenCards = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'MOVE_TASK_BETWEEN_CARDS') {
-        debugger
         let cardSours = getState().public_reducer.cards[action.payload[3]].tasks ? getState().public_reducer.cards[action.payload[3]].tasks : []
         let cardDest = getState().public_reducer.cards[action.payload[4]].tasks
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload[0]}/${action.payload[1]}/${action.payload[2]}/dragTaskFromCardToCard`
@@ -541,9 +538,11 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

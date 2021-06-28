@@ -14,7 +14,7 @@ import title from '../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 
 function Tabs(props) {
-    
+
     const { idProject } = useParams();
     const [showInput, setShowInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -42,9 +42,11 @@ function Tabs(props) {
     }, [props.workspaces])
 
     useEffect(() => {
-        if (props.cards.length)
+        // if (props.cards.length) {
+        if (props.cards.length || props.cardsEmpty == true) {
             setIfAnimation(false)
-    }, [props.cards.length])
+        }
+    }, [props.cards.length, props.cardsEmpty])
 
 
     function onDragEndׂ(e) {
@@ -150,7 +152,7 @@ function Tabs(props) {
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
 
-            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
+            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)} >
                 <Droppable
                     droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
                 >
@@ -170,6 +172,7 @@ function Tabs(props) {
                                                     openInputTask={openInputTask}
                                                     viewToastComplete={props.viewToastComplete}
                                                     viewContactList={props.viewContactList}
+                                                    showRocketShip={props.showRocketShip}
                                                     showToast={(obj) => props.showToast(obj)}
                                                     key={card._id} cardFromMap={card} indexCard={index}
 
@@ -187,7 +190,7 @@ function Tabs(props) {
                                         :
                                         <div className="card-width px-2 mt-4" >
                                             <div className="view-cards-tabs  mt-1" >
-                                                <div class="card new-card" >
+                                                <div class="card new-card mt-1" >
                                                     <div id='newCardInput' class="container" >
                                                         <div
                                                             class="card-header row" data-tip data-for="add_c"
@@ -235,7 +238,7 @@ function Tabs(props) {
                         viewToastComplete={props.viewToastComplete}
                         setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}>
-                             </ViewDetails>
+                    </ViewDetails>
                 </div>
                 : null}
         </div>
@@ -257,7 +260,9 @@ export default connect(
             workspaces: state.public_reducer.workspaces,
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-            statuses: state.public_reducer.statuses
+            statuses: state.public_reducer.statuses,
+            cardsEmpty: state.public_reducer.cardsEmpty
+
         }
     },
     (dispatch) => {

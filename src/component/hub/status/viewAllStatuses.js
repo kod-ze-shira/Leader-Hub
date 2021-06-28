@@ -10,7 +10,7 @@ function ViewAllStatuses(props) {
 
     useEffect(() => {
         console.log(props.task._id);
-      
+
         console.log(props.statuses);
         console.log(props.status);
     }, [props.cards])
@@ -55,7 +55,7 @@ function ViewAllStatuses(props) {
 
         <>
 
-            <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}>
+            <div className={openPopUp || openPopUpToAdd ? "menu__ mb-4" : ""}>
                 <div className="status-list">
                     {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
 
@@ -68,9 +68,9 @@ function ViewAllStatuses(props) {
 
                     )) : null}
                     {openPopUp ?
-                        // <div className="container">
-                        <button onClick={(e) => openAddStatus(e)} className="ml-3 create-label">Create New Status</button>
-                        // </div>
+                        <div className="row">
+                            <button onClick={(e) => openAddStatus(e)} className="create-label">Create New Status</button>
+                        </div>
                         : null}
                     {openPopUpToAdd ? <AddStatus task={props.task} status={props.status} /> : null}
                 </div>

@@ -24,6 +24,7 @@
 }
 .rowIcon{
   font-size: small;
+  margin-right: 1.5vw;
 }
 .cardNameTitle{
   display: inline-block;

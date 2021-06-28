@@ -12,7 +12,7 @@ import CellDescription from './cellDescription';
 import './viewProject.css';
 // import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
-
+import userfriend from '../../../img/userfriend.png'
 
 function ViewProject(props) {
     console.log(props.myProject.members)
@@ -26,7 +26,7 @@ function ViewProject(props) {
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
-        props.setCurrentIndexProject(props.indexProject)
+        // props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
         // console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
@@ -35,8 +35,9 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
+        let index = props.workspaces.findIndex(w => w.projects.find(project => project._id == props.myProject._id))
+        props.saveIndexOfWorkspaceInRedux(index)
         props.setCurrentIndexProject(props.indexProject)
-        // props.addProjectTArray(project)
         props.editOrShareProject('editProject')
         event.stopPropagation();
     }
@@ -185,6 +186,8 @@ function ViewProject(props) {
                     <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>
+                    
+                {props.fromShare?<td><img src={userfriend}></img></td>:null}
 
             </tr >
         </>

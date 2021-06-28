@@ -4,27 +4,60 @@ import ViewLogs from "../logs/viewLogs/viewLogs"
 import '../logs/viewLogs/viewLogs.css'
 
 function Logs(props) {
-    // const [logs, setLogs] = useState()
-    // useEffect(() => {
-    //     if (props.workspacesIndex) {
-    //         setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
-    //         debugger
-    //     }
-    // }, [props.workspacesIndex])
+    const [logs, setLogs] = useState(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+    useEffect(() => {
+        if (props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs) {
+            setLogs(props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs)
+        }
+    }, [props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs])
 
-    let logs = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].logs
-    console.log("🚀 ~ file: logs.js ~ line 6 ~ Logs ~ logs", logs)
-    let logsReverse = logs ? logs.reverse() : null;
+    let logsReverse = [...logs];
+    logsReverse.reverse();
+    console.log("logs", logs, "projectsssssssssssssssss", props.workspaces[props.indexOfWorkspace].projects)
 
+    let taskName = (log) => {
+        let objectId = null;
+        if (log.schemaName.includes("Task")) {
+            // for (let i = 0; i < props.cards.length; i++) {
+            //     for (let j = 0; j < props.cards[i].tasks.length; j++) {
+            //         if (props.cards[i].tasks[0]._id == log.objectId) {
+            //             objectId = log.objectId;
+            //             break;
+            //         }
+
+            //     }
+            //     if (objectId !== null) {
+            //         break;
+            //     }
+
+            // }
+            props.cards.map((card) => {
+                card.tasks.map((task) => {
+                    if (task._id == log.objectId) {
+                        objectId = task.name
+                    }
+
+                }
+                )
+            })
+            return objectId
+
+        }
+    }
     const renderViewLogs = () => {
-        return logs.map(log => {
-            return <ViewLogs
-                schemaName={log.staticLog.name}
-                icon={log.staticLog.icon}
-                user={log.user}
-                date={log.date}
-            />
-        })
+
+        if (typeof (logsReverse[0]) !== "string")
+            return logsReverse.map(log => {
+                return <ViewLogs
+                    schemaName={log.staticLog.name}
+                    icon={log.staticLog.icon}
+                    user={log.user}
+                    date={log.date}
+                    taskName={taskName(log)}
+                />
+            })
+        else
+            return null;
     }
 
     return (
@@ -45,13 +78,15 @@ function Logs(props) {
 
 }
 const mapDispatchToProps = (dispatch) => {
+    return {}
 }
 
 const mapStateToProps = (state) => {
     return {
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
-        workspaces: state.public_reducer.workspaces
+        workspaces: state.public_reducer.workspaces,
+        cards: state.public_reducer.cards
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Logs);
