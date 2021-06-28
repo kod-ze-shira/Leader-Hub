@@ -24,6 +24,9 @@
 .Workspacegrid:last-child{
 
 }
+#disable-workspace{
+   pointer-events: none;
+}
 
 
 

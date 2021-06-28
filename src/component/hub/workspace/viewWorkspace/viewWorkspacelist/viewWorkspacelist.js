@@ -104,7 +104,7 @@ function ViewWorkspaceList(props) {
                                 data-tip data-for="edit"
                                 className="col-1  edit iconsAction" onClick={editWorkspace}>
                                 <img src={pencil}></img>
-                                <ReactTooltip data-tip id="edit" place="bottom" effect="solid">
+                                <ReactTooltip className="tooltip-style" data-tip id="edit" place="bottom" effect="solid">
                                     {title.title_edit}
                                 </ReactTooltip>
                             </div>
@@ -113,14 +113,14 @@ function ViewWorkspaceList(props) {
                                 data-tip data-for="duplicate"
                                 className="col-1 ml-1 delete iconsAction" onClick={duplicateWorkspace} >
                                 <img src={duplicate}></img>
-                                <ReactTooltip data-tip id="duplicate" place="bottom" effect="solid">
+                                <ReactTooltip className="tooltip-style" data-tip id="duplicate" place="bottom" effect="solid">
                                     {title.title_duplicate}
                                 </ReactTooltip>
                             </div>
                             <div className="ml-1 stripe">|</div>
                             <div
                                 className="col-1 ml-1 delete iconsAction" data-tip data-for="delete" onClick={delete_workspace} >
-                                <ReactTooltip data-tip id="delete" place="bottom" effect="solid">
+                                <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                                     {title.title_delete}
                                 </ReactTooltip>
                                 <img src={bin}></img>

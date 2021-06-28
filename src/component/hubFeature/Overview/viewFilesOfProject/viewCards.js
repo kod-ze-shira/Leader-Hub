@@ -19,11 +19,11 @@ function ViewFilesByCards(props) {
 
 
     function addOrRemoveFolderToArr(e, folder) {
-        e.stopPropagation()
-        let index = 0
-        foldersForDownloadArr.forEach(f => f._id == folder._id ? index = f._id : null)
+        // e.stopPropagation()
+        let index = -1
+        foldersForDownloadArr.forEach((f, i) => f.cardId == folder.cardId ? index = i : null)
 
-        if (index == 0) {
+        if (index == -1) {
             // ref.current.checked=true
             foldersForDownloadArr.push(folder)
             // props.downloadRef.current.disabled = false

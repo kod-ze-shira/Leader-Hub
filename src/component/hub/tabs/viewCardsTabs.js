@@ -132,7 +132,7 @@ function ViewCardsTabs(props) {
     return (
         <>
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                <Draggable draggableId={props.cardFromMap._id} index={props.index} >
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
                             {...provided.draggableProps}
@@ -149,14 +149,13 @@ function ViewCardsTabs(props) {
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
                                                 className=" mb-2 pl-4 col-10"
-
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
                                              </Button>
-                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                            <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
                                             <Menu
@@ -175,7 +174,7 @@ function ViewCardsTabs(props) {
                                     <div class="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div className="mt-0 glila"
+                                                <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 

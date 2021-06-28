@@ -1,16 +1,3 @@
-
-/* .addMembers{
-    border-radius:50%;
-    border:1px dashed #75798E;
-    width: 5rem;
-    background: #F6F6FA;
-    height: 5rem;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    margin-right: 1rem;
-    cursor: pointer;
-} */
 .fontAddMembers{
     color:#75798E;
     font-size:2vw;
@@ -28,14 +15,13 @@
     width: fit-content !important;
 }
 .imgMembers{
-    width: 3vw;
-    height: 3vw;
+    width: 100%;
+    height: auto;
 }
 .nameMembers{
-    /* text-align: left; */
     font-weight: bold;
 }
 .backgroundWhiteAndBorderRadius{
-    border-radius: 2%;
+    border-radius: 0.2em;
     background-color: white;
 }
