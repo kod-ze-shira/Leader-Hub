@@ -13,9 +13,7 @@ const share = {
         state.contactsUser = action.payload
     },
     addContactToContactList(state, action) {
-        debugger
         let isContact = false
-
         state.contactsUser.map(contact => {
             if (contact._id == action.payload._id)
                 isContact = true

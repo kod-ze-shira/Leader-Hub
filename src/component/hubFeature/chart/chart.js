@@ -61,12 +61,12 @@ function MyChart(props) {
                 },
             },
             labels: {
-                formatter: function(val) {
-                  return val.toFixed(0);
+                formatter: function (val) {
+                    return val.toFixed(0);
                 }
-              }
+            }
         },
-        colors:'#99e2e5',
+        colors: '#99e2e5',
         dataLabels: {
             enabled: false,
             font: function (context) {
@@ -199,9 +199,9 @@ function MyChart(props) {
     const optionsPie = {
         chart: {
             type: 'pie',
-                // sparkline: {
-                //     enabled: true
-                //   }
+            // sparkline: {
+            //     enabled: true
+            //   }
         },
         series: pieData.map(p => p.val),
         chartOptions: {
@@ -212,19 +212,19 @@ function MyChart(props) {
                 bottom: -5
             }
         },
-        xaxis:{
+        xaxis: {
             gridLines: {
                 display: false,
                 tickMarkLength: 0,
-              },
+            },
         },
         grid: {
             show: true,
             padding: {
-              top: 0,
-              bottom: 0
+                top: 0,
+                bottom: 0
             }
-          },
+        },
         colors: pieData.map(p => p.color),
         dataLabels: {
             enabled: true,
@@ -239,7 +239,7 @@ function MyChart(props) {
                 enabled: false
             }
         },
-   
+
         labels: pieData.map(p => p.category),
         plotOptions: {
             pie: {
@@ -322,7 +322,7 @@ function MyChart(props) {
                     <div className='col-12 '>
                         <div className='chartCol'>
                             {/* sticks */}
-                            <Chart 
+                            <Chart
                                 options={optionsSticks}
                                 series={seriesSticks}
                                 type="bar"

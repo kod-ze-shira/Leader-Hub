@@ -24,8 +24,9 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
+    foldersForDownload: [],
     descriptionNewProject: '',
-    sharedProjects:[] //projects that user shared  
+    sharedProjects: [] //projects that user shared  
 }
 
 const publicData = {
@@ -137,6 +138,9 @@ const publicData = {
     /////////////////////////////////////////
     setFilesForProject(state, action) {
         state.filesForProjectArr = action.payload
+    },
+    setFoldersForDownload(state, action) {
+        state.foldersForDownload = action.payload
     },
     setUserName(state, action) {
         state.userName = action.payload;
@@ -449,8 +453,8 @@ const publicData = {
         state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
 
     },
-    setSharedProjects(state,action){
-        state.sharedProjects=action.payload
+    setSharedProjects(state, action) {
+        state.sharedProjects = action.payload
     }
 
 }
