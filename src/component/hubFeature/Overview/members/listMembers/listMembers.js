@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import OneMemberToAdd from '../oneMemberToAdd/oneMemberToAdd'
-import $ from 'jquery'
 import './listMembers.css'
 
 function ListMembers(props) {
@@ -13,24 +12,23 @@ function ListMembers(props) {
     const [add, setAdd] = useState('')
     const [validEmail, setValidEmail] = useState(false)
     const inputAdd = useRef()
-    console.log('ccccc', contactsList);
     useEffect(() => {
         getContacts()
-        setContacts(contactsList);
-        console.log('contactsList', contactsList);
     }, [])
+    useEffect(() => {
+        setContacts(contactsList);
+    }, [contactsList])
+
     useEffect(() => {
         if (flagAdd === true)
             inputAdd.current.focus();
     }, [flagAdd])
-
 
     function ValidateEmail(mail) {
         if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
             return true
         return false
     }
-
     function searchContacts(e) {
         setSearch(e.target.value)
         let help = []
@@ -50,8 +48,7 @@ function ListMembers(props) {
 
     function clickAddMember() {
         if (ValidateEmail(add)) {
-            debugger
-            shareObject( { member: add, permission: 'viewer' })
+            shareObject({ member: add, permission: 'viewer' })
             setMembersList(false)
         }
         else {
@@ -61,8 +58,8 @@ function ListMembers(props) {
 
     return (
         <>
-            <div className='container membersToAdd' id='membersToAdd' onClick={(e) => e.stopPropagation()}>
-                <input className='row inputSearch mt-1 ml-1' type='text' placeholder='enter name or email' onChange={(e) => { searchContacts(e) }} />
+            <div className='container membersToAdd' onClick={(e) => e.stopPropagation()}>
+                <input className='row inputSearch mt-1 ml-1' type='text' placeholder='name or email' onChange={(e) => { searchContacts(e) }} />
                 {
                     contacts.length !== 0 ?
                         contacts.map(cl => <OneMemberToAdd member={cl} clickMembers={clickMembers} />)
