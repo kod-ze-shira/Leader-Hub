@@ -25,7 +25,6 @@ function ViewStatus(props) {
 
     }
     const saveStatus1 = (id) => {
-        debugger
         props.saveStatus(props.status)
         if (props.status.statusName === props.statuses[2].statusName) {
             let editTaskInRedux = { "nameFiled": "complete", "value": true }
@@ -38,9 +37,13 @@ function ViewStatus(props) {
     return (
         <>
             <div className="container display-task ">
-                <div className="row ml-3">
-                    <div onClick={(id) => saveStatus1(id)} className="menu-status col-8 " style={{ backgroundColor: props.status.color }}>
-                        <p >{props.status.statusName}</p>
+                <div className="row ">
+                    <div onClick={(id) => saveStatus1(id)} className={props.index < 3 ? " menu-status col-8 " : "menu-status col-8"} style={{ backgroundColor: props.status.color }}>
+                        <p  >{props.status.statusName}</p>   <img
+                            className={props.index < 3 ? " pencil-status-none " : "pencil-status "}
+                            title={props.index < 3 ? "Deputable status cannot be edited" : "Edit Status"}
+                            // onClick={(e) => openEditTask(e)}
+                            src={require('../../img/pencil-write.svg')} />
                     </div>
                     <img
                         className={props.index < 3 || props.fromHub ? " pencil-status-none " : "pencil-status ml-2 mt-1"}

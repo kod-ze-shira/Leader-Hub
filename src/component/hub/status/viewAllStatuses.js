@@ -19,7 +19,6 @@ function ViewAllStatuses(props) {
     const [openPopUpToAdd, setOpenPopUpToAdd] = useState(false)
     const [status, setStatus] = useState()
 
-
     const openPopUpStatus = (e) => {
         // setOpenPopUp(!openPopUp)
         if (openPopUpToAdd === true)
@@ -31,14 +30,13 @@ function ViewAllStatuses(props) {
         e.stopPropagation()
     }
     const saveStatus = (value) => {
-        // if (!props.task.complete) {
         let editStatusInRedux
         editStatusInRedux = { "nameFiled": "status", "value": value }
-        if (props.task.complete)
-            editStatusInRedux = { "nameFiled": "complete", "value": false }
         props.setTaskByFiledFromTasks(editStatusInRedux)
-
-        // }
+        if (props.task.complete && value.statusName !== props.statuses[2].statusName) {
+            editStatusInRedux = { "nameFiled": "complete", "value": false }
+            props.setTaskByFiledFromTasks(editStatusInRedux)
+        }
     }
 
     const changeStatusByIndex = (indexOfStatus) => {
@@ -60,24 +58,21 @@ function ViewAllStatuses(props) {
         <>
             <div className={props.hub ? "view-list-status-from-platform" : null}
                 style={{ "width": props.hub ? width : 300, "height": props.hub ? height : 200, "left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
-
-                <div className={openPopUp || openPopUpToAdd ? "menu__" : ""}  >
+                <div className={openPopUp || openPopUpToAdd ? "menu__ mb-4" : ""}>
                     <div className="status-list">
-                        {openPopUp && props.statuses.length ?
-                            props.statuses.map((status, index) => (
+                        {openPopUp && props.statuses.length ? props.statuses.map((status, index) => (
 
-                                < ViewStatus saveStatus={(e) => saveStatus(e)}
-                                    changeStatus={changeStatusByIndex}
-                                    status={status} index={index}
-                                    openPopUp={props.openPopUp}
-                                    fromHub={props.hub}
-                                />
-                            ))
-                            : null}
+                            < ViewStatus saveStatus={(e) => saveStatus(e)}
+                                changeStatus={changeStatusByIndex}
+                                status={status} index={index}
+                                openPopUp={props.openPopUp}
+                                fromHub={props.hub}
+                            />
+                        )) : null}
                         {openPopUp && !props.hub ?
-                            // <div className="container">
-                            <button onClick={(e) => openAddStatus(e)} className="ml-3 create-label">Create New Status</button>
-                            // </div>
+                            <div className="row">
+                                <button onClick={(e) => openAddStatus(e)} className="create-label mb-1">Create New Status</button>
+                            </div>
                             : null}
                         {openPopUpToAdd ? <AddStatus task={props.task} status={props.status} /> : null}
                     </div>

@@ -23,6 +23,8 @@ function ViewTaskByCradTabs(props) {
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [showchalalit, setShowChalalit] = useState(false)
     const [userHasLike, setUserHasLike] = useState(false)
+    const [numOfRows, setNumOfRows] = useState(1)
+
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -69,12 +71,14 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
+        setNumOfRows(numOfRows + 1)
         let task1 = {
             "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
             , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
         }
         // setTask(task1)
         props.EditTask(task1);
+
     }
 
     const showAssigToOrCalander = (object) => {
@@ -275,6 +279,7 @@ function ViewTaskByCradTabs(props) {
                                     className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
+                                    // rows={numOfRows}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onBlur={(e) => editTask()}
@@ -300,7 +305,7 @@ function ViewTaskByCradTabs(props) {
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
                                             <div> {props.task.priority ?
-                                                <img className="priority-img" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                                 : null}
                                             </div>
                                             <div
@@ -315,10 +320,11 @@ function ViewTaskByCradTabs(props) {
                                         style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
                                         <div className="icons-task-tabs">
 
-                                            <div className="due-date-hover">
+                                            <div className="due-date-hover" title={title.title_due_date}>
                                                 <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
                                                 >{dateInString}</p>
                                             </div>
+
                                             <div className="like-hover">
                                                 <img
                                                     className="like-icon-tabs"
@@ -337,6 +343,7 @@ function ViewTaskByCradTabs(props) {
                                             <div>
                                                 <img
                                                     id={`${props.task._id}assing-to`}
+                                                    title={title.title_assing}
                                                     className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../img/share-icon.png')}>

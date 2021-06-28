@@ -25,7 +25,6 @@ function SelectWorkspace(props) {
 
 
         // if (myWorkspace.projects[0]) {
-        debugger
         props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
 
         // }

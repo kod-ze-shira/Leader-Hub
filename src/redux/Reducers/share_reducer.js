@@ -12,7 +12,9 @@ const share = {
     setContactsUser(state, action) {//for array contacts to select team new members
         state.contactsUser = action.payload
     },
-
+addContactToContactList(state,action) {
+    
+}
 }
 
 export default produce((state, action) => createReducer(state, action, share), initialState); 
