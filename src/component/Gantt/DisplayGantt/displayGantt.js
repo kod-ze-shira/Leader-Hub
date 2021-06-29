@@ -11,15 +11,19 @@ import { gantt } from 'dhtmlx-gantt';
 function DisplayGantt(props) {
 
     useEffect(() => {
-
-    }, [props.cards])
+        return () => {
+            theCards = []
+            theTasks = []
+            mone = []
+          }
+    }, [])
 
     const allWorkspace = { workspaces };
     console.log(allWorkspace);
 
-    const theCards = []
-    const theTasks = []
-    const mone = []
+    let theCards = []
+    let theTasks = []
+    let mone = []
 
 
     props.cards.map((card, index) => {
@@ -98,7 +102,7 @@ function DisplayGantt(props) {
         })
     }
 
-    currDate = currDate == undefined ?  2023:parseInt(currDate) 
+    currDate = currDate == undefined ?parseInt(  new Date().getFullYear()) :parseInt(currDate) 
     currDate = currDate + 2
     currDate = currDate.toString();
     currDate = currDate.concat('-01-01')
@@ -112,7 +116,7 @@ function DisplayGantt(props) {
             "priority": "ggg",
             "id": 2985730,
             "text": "first",
-            "start_date": currDate ? currDate : '2022-01-01',
+            "start_date": currDate ,
             "duration": 3,
             "progress": 0.6,
             "milestones": null
