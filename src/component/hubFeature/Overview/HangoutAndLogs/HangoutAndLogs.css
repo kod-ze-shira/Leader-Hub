@@ -1,24 +1,21 @@
-.body-hangoutAndLogs::-webkit-scrollbar {
+.HangoutAndLogs::-webkit-scrollbar {
     background-color: #ffff;
     height: 10px;
   }
    
-    .body-hangoutAndLogs::-webkit-scrollbar-track:hover {
+    .HangoutAndLogs::-webkit-scrollbar-track:hover {
         box-shadow: inset 0 0 5px grey; 
       }
      
     /* Handle */
-    .body-hangoutAndLogs::-webkit-scrollbar-thumb { 
+    .HangoutAndLogs::-webkit-scrollbar-thumb { 
       border-radius: 10px;
     }
 
-    .body-hangoutAndLogs{
+    .HangoutAndLogs{
       overflow-x: hidden;
       overflow-y: auto;
       height: 100vh;
-      margin-top: 2%;
+      background-color: white;
     }
     
-    .minHeight{
-      /* width: 100%; */
-    }

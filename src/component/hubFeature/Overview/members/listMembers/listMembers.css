@@ -1,8 +1,13 @@
 .viewMembersList{
     display:none;
 }
-.btnAddmembers{
+.btnAddMembers{
     background-color:transparent;
+    font-weight: 500;
+    font-size:130%;
+}
+.btnAddMembers:hover{
+    color:#38B1B5;
 }
 .cursorPoint{
     cursor: pointer !important;
@@ -13,7 +18,6 @@ max-height: 40vh;
 overflow-y: scroll;
 }
 .membersToAdd{
-    /* border:1px solid rgb(196, 184, 184); */
     box-shadow: 0 0 0 0.1rem  #E9E9E9;
 
 }
