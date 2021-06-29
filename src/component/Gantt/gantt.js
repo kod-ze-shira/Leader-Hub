@@ -200,6 +200,9 @@ export default class Gantt extends Component {
             return true;
 
         });
+        gantt.templates.scale_cell_class = function (date) {
+            return "weekend";
+        }
         gantt.attachEvent("onAfterTaskUpdate", function (id, task) {
 
             let a = new Date(task.end_date)
@@ -239,9 +242,7 @@ export default class Gantt extends Component {
         this.initGanttDataProcessor();
         gantt.parse(tasks);
 
-        gantt.templates.scale_cell_class = function (date) {
-            return "weekend";
-        }
+       
 
         // gantt.init(this.ganttContainer);
 
