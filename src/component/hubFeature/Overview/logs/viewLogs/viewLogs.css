@@ -49,6 +49,11 @@
     margin:0;
 }
 
+.logTaskName{
+    font-size: small;
+    margin-left: 15%;
+}
+
 @media screen and (max-width: 1300px) {
     .logUser{
     }

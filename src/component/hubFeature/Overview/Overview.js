@@ -9,13 +9,13 @@ import Logs from './logs/logs';
 import Members from './members/members';
 import './overview.css';
 import FilesOfProject from './viewFilesOfProject/viewFilesOfProject';
+import useWindowsWidth from '../Overview/hookResize'
 function Overview(props) {
 
 
 
     const { idProject } = useParams();
     const [refresh, setRefresh] = useState(false)
-    const [sizeScreen, setSizeScreen] = useState(window.innerWidth)
     // useEffect(() => {
     //     if (props.workspaces.length == 0)
     //         props.getAllWorkspaces()
@@ -33,17 +33,6 @@ function Overview(props) {
         }
     }, [props.workspaces])
 
-    let checkScreenSize = () => {
-        setSizeScreen(window.innerWidth);
-    };
-
-    useEffect(() => {
-        checkScreenSize();
-        window.addEventListener("resize", checkScreenSize);
-        return () => window.removeEventListener("resize", checkScreenSize);
-    }, []);
-
-
     useEffect(() => {
         // props.indexOfCurrentWorkspace ||
         if (props.workspaces.length) {
@@ -52,44 +41,58 @@ function Overview(props) {
         // }, [props.indexOfCurrentWorkspace])
     }, [props.workspaces])
 
+    const sizeScreen = useWindowsWidth(window.innerWidth);
+
     return (
         <>
-                <div className='scrollbarOverview container-fluid'>
+            <div className='overview container-fluid '>
 
-                    <div className='row '>
-                        <div className='col-lg-9 col-md-12 mr-3'>
+                <div className='row '>
+                    <div className='col-lg-9 col-md-12 mr-3 scrollOverview'>
 
-                            <div className='container-fluid px-0 '>
-                                <div className='row mb-3 divChartAndMembers'>
-                                    <div className='projectName' >
-                                        <Description></Description>
-                                    </div>
-                                    {refresh ?
-                                        <>
-                                            <Members />
-
-                                            <MyChart />
-                                        </>
-                                        : null}
+                        <div className='container-fluid px-0 '>
+                            <div className='row mb-3 divChartAndMembers'>
+                                <div className='projectName' >
+                                    <Description></Description>
                                 </div>
-                                <div className='row'>
-                                    {refresh ?
-                                        <FilesOfProject />
-                                        : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='col' style={{ height: '87vh' }}>
-                            <div className='container-fluid px-0 '>
                                 {refresh ?
-                                    <HangoutAndLogs></HangoutAndLogs>
+                                    <>
+                                        <Members />
+                                        <MyChart />
+                                    </>
                                     : null}
                             </div>
                         </div>
-                        {/* <Hangout></Hangout> */}
+
+                        <div className='col ' style={{ height: '87vh' }}>
+                            <div className='container-fluid px-0 '>
+                                {refresh ?
+                                    <FilesOfProject />
+                                    : null}
+                            </div>
+
+                            <div className='row HangoutAndLogs d-xs-block d-lg-none'>
+                                <div className='col-12'>
+                                    <div className='container-fluid px-0 '>
+                                        {refresh ?
+                                            <HangoutAndLogs></HangoutAndLogs>
+                                            : null}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div className='col d-xs-none d-lg-block scrollOverview ' style={{ height: '87vh' }}>
+                        <div className='container-fluid px-0 '>
+                            {refresh ?
+                                <HangoutAndLogs></HangoutAndLogs>
+                                : null}
+                        </div>
+                    </div>
+                    {/* <Hangout></Hangout> */}
                 </div>
+            </div>
         </>
     )
 }

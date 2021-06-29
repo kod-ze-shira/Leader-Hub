@@ -14,7 +14,7 @@ import ShureDelete from '../../../shureDelete/shureDelete';
 import styled, { css } from 'styled-components'
 
 function ViewWorkspaceGrid(props) {
-
+    console.log("hi")
     const workspace = props.workspace
     // const myStyle=&:hover{
     //     'border': '1.5px solid workspace.colr'
