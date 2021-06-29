@@ -1,27 +1,29 @@
-.scrollbarOverview{
-    overflow-y: auto!important;
-    height: 82.7vh;
-    overflow-x:hidden;
-    border-radius: 5px;
+.overview{
+  height: 82.7vh;
+  border-radius: 5px;
     
 }
 .minHeight{
-    min-height:50vh;
+  min-height:50vh;
 }
-.scrollbarOverview::-webkit-scrollbar {
-    width: 0;
-  }
-  .projectName{
-    width: 100%;
-    /* border-bottom: 1px solid #E9E9E9; */
-    background-color: white;
-  }
+.projectName{
+  width: 100%;
+  background-color: white;
+}
 
-  .divChartAndMembers{
-    background-color:white;
-    border-radius:0.2em;
-  }
+.divChartAndMembers{
+  background-color:white;
+  border-radius:0.2em;
+}
 
 .scrollbarOverview2{
   width:100%;
+}
+.scrollOverview{
+  overflow-y: scroll;
+  height: 87.5vh;
+}
+.scrollOverview::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
