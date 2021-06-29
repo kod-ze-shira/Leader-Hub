@@ -9,13 +9,13 @@ import Logs from './logs/logs';
 import Members from './members/members';
 import './overview.css';
 import FilesOfProject from './viewFilesOfProject/viewFilesOfProject';
+import useWindowsWidth from '../Overview/hookResize'
 function Overview(props) {
 
 
 
     const { idProject } = useParams();
     const [refresh, setRefresh] = useState(false)
-    const [sizeScreen, setSizeScreen] = useState(window.innerWidth)
     // useEffect(() => {
     //     if (props.workspaces.length == 0)
     //         props.getAllWorkspaces()
@@ -33,17 +33,6 @@ function Overview(props) {
         }
     }, [props.workspaces])
 
-    let checkScreenSize = () => {
-        setSizeScreen(window.innerWidth);
-    };
-
-    useEffect(() => {
-        checkScreenSize();
-        window.addEventListener("resize", checkScreenSize);
-        return () => window.removeEventListener("resize", checkScreenSize);
-    }, []);
-
-
     useEffect(() => {
         // props.indexOfCurrentWorkspace ||
         if (props.workspaces.length) {
@@ -51,6 +40,8 @@ function Overview(props) {
         }
         // }, [props.indexOfCurrentWorkspace])
     }, [props.workspaces])
+
+    const sizeScreen = useWindowsWidth(window.innerWidth);
 
     return (
         <>
@@ -80,7 +71,7 @@ function Overview(props) {
                             </div>
                         </div>
 
-                        <div className='col' style={{ height: '87vh' }}>
+                        <div className='col HangoutAndLogs' style={{ height: '87vh' }}>
                             <div className='container-fluid px-0 '>
                                 {refresh ?
                                     <HangoutAndLogs></HangoutAndLogs>
