@@ -15,8 +15,8 @@ function Logs(props) {
     logsReverse.reverse();
     console.log("logs", logs, "projectsssssssssssssssss", props.workspaces[props.indexOfWorkspace].projects)
 
-    let taskName = (log) => {
-        let objectId = null;
+    let returenProjectOrTaskName = (log) => {
+        let objectName = null;
         if (log.schemaName.includes("Task")) {
             // for (let i = 0; i < props.cards.length; i++) {
             //     for (let j = 0; j < props.cards[i].tasks.length; j++) {
@@ -34,15 +34,20 @@ function Logs(props) {
             props.cards.map((card) => {
                 card.tasks.map((task) => {
                     if (task._id == log.objectId) {
-                        objectId = task.name
+                        objectName = task.name
                     }
 
                 }
                 )
             })
-            return objectId
+            return objectName
 
         }
+        else
+            if (log.schemaName.includes("Project")) {
+                objectName = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].name
+                return objectName
+            }
     }
     const renderViewLogs = () => {
 
@@ -53,7 +58,7 @@ function Logs(props) {
                     icon={log.staticLog.icon}
                     user={log.user}
                     date={log.date}
-                    taskName={taskName(log)}
+                    projectOrTaskName={returenProjectOrTaskName(log)}
                 />
             })
         else
@@ -65,7 +70,7 @@ function Logs(props) {
             <div className="container backgroundWhiteAndBorderRadius">
                 <div className="row mt-3 ml-2"><b>Project Log</b></div>
                 <div className="mt-1 logsHeder"></div>
-                <div className="row">{
+                <div className="">{
                     logs.length ?
                         renderViewLogs()
                         : null

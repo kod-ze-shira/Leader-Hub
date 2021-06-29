@@ -48,7 +48,7 @@ function Tabs(props) {
             setIfAnimation(false)
         }
     }, [props.cards.length, props.cardsEmpty])
-    const [dragTask, setDragTask] = useState(true)
+    const [dragTask, setDragTask] = useState(false)
     useEffect(() => {
 
     }, [dragTask])
@@ -56,12 +56,14 @@ function Tabs(props) {
     function onDragStart(e) {
         let card = props.cards.find(card => card._id == e.draggableId)
         if (!card) {
-            setDragTask(true)
+            setDragTaskF()
+            
+            let b = dragTask
             // alert("true")
         }
-        else
-            // alert("fals")
-            console.log("index   @@@@@@@@@@@@")
+    }
+    function setDragTaskF() {
+        setDragTask(true)
     }
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
@@ -169,8 +171,8 @@ function Tabs(props) {
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
-                        droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
-
+                        // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
+                        droppableId={props.cards[props.cards.length - 1]._id}
                     >
                         {provided => (
                             <div
@@ -216,7 +218,7 @@ function Tabs(props) {
                                                                     className="form-control "
                                                                     placeholder={""} value={inputValue}
                                                                     onChange={updateInputValue}
-                                                                    onBlur={(e) => newCard()}
+                                                                    // onBlur={(e) => newCard()}
                                                                     onKeyPress={event => {
                                                                         if (event.key === 'Enter') {
                                                                             newCard()
