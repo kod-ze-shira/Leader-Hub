@@ -133,10 +133,10 @@ function Hub(props) {
 
     });
     const deleteWorkspaceInRedux = () => {
-
-        if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
-            props.removeOneWorkspaceFromWorkspaces()
-        }
+        if (props.workspaces[props.workspaces.length - 1])
+            if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
+                props.removeOneWorkspaceFromWorkspaces()
+            }
     }
     const [focusInputCard, setFocusInputCard] = useState(false)
     return (

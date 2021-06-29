@@ -18,17 +18,15 @@ function ViewProject(props) {
     console.log(props.myProject.members)
     let complited = props.myProject.countReadyTasks
         , complitedColor;
-    let [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
-    let [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
+    const [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
+    const [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
     // props.setProject(props.myProject)
     let refToProject = useRef('')
     useEffect(() => {
     }, [props.indexOfWorkspace])
 
     const routeToCards = (e) => {
-        // props.setCurrentIndexProject(props.indexProject)
         let idProject = props.myProject._id;
-        // console.log("project" + props.myProject._id)
         props.getCardsByProjectId(props.myProject._id)
         props.setCurrentIndexProject(props.indexProject)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + idProject)
@@ -94,12 +92,12 @@ function ViewProject(props) {
             <tr
                 className='projectForWorkspace col-12 '
                 onClick={(e) => routeToCards(e)}
-                onMouseOver={() => overProject(props.myProject._id)}
-                onMouseOut={() => outOver(props.myProject._id)}
+                onMouseOver={(e) => overProject(props.myProject._id)}
+                onMouseOut={(e) => outOver(props.myProject._id)}
                 id={props.myProject._id}>
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
-                    <ProjectStyle color={props.myProject.color}></ProjectStyle>
+                    {/* <ProjectStyle color={props.myProject.color}></ProjectStyle> */}
                     {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
                     <span class='name2ProjectInList' title={props.myProject.name}
                         style={{ 'color': props.myProject.color }}>
