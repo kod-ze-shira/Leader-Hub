@@ -24,8 +24,9 @@ const initialState = {
     arrFilesOfTask: [],
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
+    foldersForDownload: [],
     descriptionNewProject: '',
-    sharedProjects:[] //projects that user shared  
+    sharedProjects: [] //projects that user shared  
 }
 
 const publicData = {
@@ -45,13 +46,10 @@ const publicData = {
     setFilesFromTask(state, action) {
         state.arrFilesOfTask = action.payload
     },
-    setMember(state, action) {
-        action.payload.contacts.map(payload =>
-            state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members.push({contact:payload})
-
-        )
-        console.log(state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members);
+    addMember(state, action) {
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members=action.payload
     },
+    
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -130,6 +128,9 @@ const publicData = {
     /////////////////////////////////////////
     setFilesForProject(state, action) {
         state.filesForProjectArr = action.payload
+    },
+    setFoldersForDownload(state, action) {
+        state.foldersForDownload = action.payload
     },
     setUserName(state, action) {
         state.userName = action.payload;
@@ -435,15 +436,13 @@ const publicData = {
         state.indexOfWorkspace = action.payload
     },
     setDateTaskFromGantt(state, action) {
-        let cIndex = state.cards.findIndex(c => c._id === action.payload.card_id)
-        let tIndex = state.cards[cIndex].tasks.
-            findIndex(t => t._id === action.payload._id)
-        state.cards[cIndex].tasks[tIndex].dueDate = action.payload.dueDate
-        state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
+        let task=action.payload.task
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].dueDate = task.dueDate
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].startDate = task.startDate
 
     },
-    setSharedProjects(state,action){
-        state.sharedProjects=action.payload
+    setSharedProjects(state, action) {
+        state.sharedProjects = action.payload
     }
 
 }

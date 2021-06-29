@@ -109,13 +109,13 @@ function AllWorkspaces(props) {
                                     <div data-tip data-for="Grid" className="col-1 grid" onClick={chenge_grid}>
                                         <img src={require('../../../img/gridIcon.png')} />
                                     </div>
-                                    <ReactTooltip id="Grid" place="bottom" effect="solid">
+                                    <ReactTooltip className="tooltip-style" id="Grid" place="bottom" effect="solid">
                                         {title.title_view_grid}
                                     </ReactTooltip>
                                     <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}>
                                         <img src={require('../../../img/list1.png')} />
                                     </div>
-                                    <ReactTooltip data-tip id="List" place="bottom" effect="solid">
+                                    <ReactTooltip className="tooltip-style" data-tip id="List" place="bottom" effect="solid">
                                         {title.title_view_list}
                                     </ReactTooltip>
                                 </>
@@ -124,13 +124,13 @@ function AllWorkspaces(props) {
                                     <div data-tip className="col-1 grid" data-for="Grid" onClick={chenge_grid}>
                                         <img src={require('../../../img/Group 19507.png')} />
                                     </div>
-                                    <ReactTooltip id="Grid" place="bottom" effect="solid">
+                                    <ReactTooltip className="tooltip-style" id="Grid" place="bottom" effect="solid">
                                         {title.title_view_grid}
                                     </ReactTooltip>
                                     <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}>
                                         <img src={require('../../../img/listIcon.png')} />
                                     </div>
-                                    <ReactTooltip data-tip id="List" place="bottom" effect="solid">
+                                    <ReactTooltip className="tooltip-style" data-tip id="List" place="bottom" effect="solid">
                                         {title.title_view_list}
                                     </ReactTooltip>
                                 </>

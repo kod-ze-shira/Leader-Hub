@@ -46,17 +46,37 @@ function ViewTaskByCradTabs(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
-    // useEffect(() => {
-
-    // }, [props.task.status])
-
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
 
     };
 
+
+    autosize();
+
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+            }
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
     const handleClose = (e, event) => {
 
         setAnchorEl(null);
@@ -111,6 +131,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
+        
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -258,7 +279,7 @@ function ViewTaskByCradTabs(props) {
                                     . . .
                                     </Button>
 
-                                <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                     {title.title_more_actions}
                                 </ReactTooltip>
                                 <Menu
@@ -280,10 +301,14 @@ function ViewTaskByCradTabs(props) {
 
                                 </div> */}
                                 <textarea
-                                    className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
+                                    className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
-                                    // rows={numOfRows}
+                                    onClick={(e) => e.stopPropagation()}
+                                    // id="note"
+                                    // rows={1}
+                                    // class="autosize"
+                                    
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onBlur={(e) => editTask()}
@@ -313,7 +338,8 @@ function ViewTaskByCradTabs(props) {
                                                 : null}
                                             </div>
                                             <div
-                                                className={props.task.complete ? "status-task-tabs-opacity px-2  " : "status-task-tabs px-2 "}
+                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
+                                                className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
                                                 style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                                 {props.task.status ? props.task.status.statusName : null}
                                             </div>
