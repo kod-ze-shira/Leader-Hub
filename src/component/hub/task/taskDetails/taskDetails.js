@@ -290,7 +290,7 @@ function TaskDetails(props) {
                     <div className='mr-4 '>
                         <div className='row mt-4 justify-content-between headerDitails'>
                             <h5 className=" title-view-details   pl-3">Task details</h5>
-                            {/* <img className="files-task-hover" src={require('../../../img/close.svg')} ></img> */}
+                            {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
 
                             <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
@@ -431,23 +431,23 @@ function TaskDetails(props) {
                         : null}
                     <div className="assingto-details" data-tip data-for="assing">
 
-                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                         <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
                     <div className=" files-details" data-tip id="files">
                         <UploadFile />
-                        <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
+                        <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">
                             {title.title_files}
                         </ReactTooltip>
                     </div>
                     <div className="delete-details" data-tip data-for="delete">
-                        <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>

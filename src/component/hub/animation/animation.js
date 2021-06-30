@@ -11,7 +11,7 @@ export default function Animation(props) {
     }
     return (
         <>
-            <img className='animationRocketShip' src={require('../../img/Group 19471.svg')} />‏
+            <img className='animationRocketShip' src={require('../../../assets/img/Group 19471.svg')} />‏
         </>
     )
 

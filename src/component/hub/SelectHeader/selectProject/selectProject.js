@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
 import ProjectStyle from '../../project/projectStyle'
 import CreatableSelect from 'react-select/creatable';
-import Background from '../../../img/down-arrow.svg';
+import Background from '../../../../assets/img/down-arrow.svg';
 
 function SelectProject(props) {
     const { idProject } = useParams();

@@ -21,7 +21,7 @@ export default function Tools()
             <div className="row onclick" >
                        <div className="col-1"></div>
                        <div className="aicon">
-                       <div className="col-1 mt-2 imgaicon1"><img src={require('../../img/rep.png')}></img></div>
+                       <div className="col-1 mt-2 imgaicon1"><img src={require('../../assets/img/rep.png')}></img></div>
                        </div>
                        <div className="col-2 mt-4">Report</div>
            </div>
@@ -31,7 +31,7 @@ export default function Tools()
                 
                     <div className="col-2 mt-2  aicon ">
                      <div className="icon">
-                      <img src={require('../../img/team.png')}></img>
+                      <img src={require('../../assets/img/team.png')}></img>
                     </div>
                     </div>
                      <div className="col-1 mt-3">Team</div>
@@ -43,7 +43,7 @@ export default function Tools()
                 <div className="aicon" >
                     
                     <div className="col-1 mt-2 icon">
-                    <img src={require('../../img/harchive.png')}></img>
+                    <img src={require('../../assets/img/harchive.png')}></img>
 
                     </div>
                 </div>
@@ -55,7 +55,7 @@ export default function Tools()
                     <div className="col-1"></div>
                      <div className="aicon" >
                        <div className="col-1 mt-2 icon">
-                          <img src={require('../../img/ana.png')}></img>
+                          <img src={require('../../assets/img/ana.png')}></img>
                        </div>
                      </div>
                 <div className="col-2 mt-4">analytics</div>
@@ -65,7 +65,7 @@ export default function Tools()
                    <div className="col-1"></div>
                    <div className="aicon">
                    <div className="col-1 mt-2 icon">
-                     <img src={require('../../img/clasmall.png')}></img>
+                     <img src={require('../../assets/img/clasmall.png')}></img>
                     </div>
                  </div>
                 <div className="col-2 mt-4">Calendar</div>

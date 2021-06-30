@@ -11,7 +11,7 @@ function viewMilstone(props) {
     return (
         <div>
             <div className="show-task row mx-4 py-2 border-bottom ">
-                <img src={require("../../img/milstoneIcon.png")}></img>
+                <img src={require("../../../assets/img/milstoneIcon.png")}></img>
                 <div className="col-4">
                     {props.milestone.name}</div>
                 <label className="check-task view-details-btn" title="View Details">

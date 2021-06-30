@@ -198,8 +198,7 @@ function ViewCardsTabs(props) {
                                                                     type="text"
                                                                     class="form-control" placeholder="Add Task"
                                                                     id="input-task"
-                                                                    autocomplete="chrome-off"
-                                                                    value={inputValue}
+                                                                    autocomplete="off"                                                                    value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
                                                                     onChange={updateInputValue} onKeyPress={event => {
                                                                         if (event.key === 'Enter') {

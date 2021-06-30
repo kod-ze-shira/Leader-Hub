@@ -110,6 +110,7 @@ body {
     text-align: right;
     margin-top:1px;
     opacity:0.9;
+    margin-left: 5px;
 }
 .name-contact{
   /* -webkit-box-orient: vertical;
@@ -170,9 +171,9 @@ body {
     background: white;
     position: absolute;
     z-index: 999999999;
-  overflow: auto;
+  overflow-y: auto;
    box-shadow: 0px 3px 6px #00000029;
-   overflow:hidden !important ;
+   /* overflow:hidden !important ; */
 }
 .div_contacts_list{
   overflow-y: auto;

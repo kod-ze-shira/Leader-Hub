@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
-import Background from '../../../img/down-arrow.svg';
+import Background from '../../../../assets/img/down-arrow.svg';
 
 function SelectTask(props) {
     useEffect(() => {

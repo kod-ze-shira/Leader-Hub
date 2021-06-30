@@ -361,13 +361,13 @@ function ViewTaskByCradTabs(props) {
                                                 <img
                                                     className="like-icon-tabs"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
-                                                    src={require('../../../img/like-icon.png')}>
+                                                    src={require('../../../../assets/img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
                                                     <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
-                                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                        src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/heart.png')}>
                                                         {/* src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}> */}
                                                     </img>
                                                 </div>
@@ -378,7 +378,7 @@ function ViewTaskByCradTabs(props) {
                                                     title={title.title_assing}
                                                     className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-                                                    src={require('../../../img/share-icon.png')}>
+                                                    src={require('../../../../assets/img/share-icon.png')}>
                                                 </img>
                                                 {props.task.assingTo ?
                                                     <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >

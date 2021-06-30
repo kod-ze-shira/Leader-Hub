@@ -41,7 +41,7 @@ function AllWorkspaces(props) {
             //   bin={disableBin}
             />
         }) :
-        <div className="logoGif"><img src={require('../../../img/animation.gif')} /></div>
+        <div className="logoGif"><img src={require('../../../../assets/img/animation.gif')} /></div>
 
 
     const renderedGridWorkspaces =
@@ -54,7 +54,7 @@ function AllWorkspaces(props) {
                     index={index}
                     workspace={workspace} editWorkspace={openEditWorkspace} />
             }) :
-            <div className="logoGif"><img src={require('../../../img/animation.gif')} /></div>
+            <div className="logoGif"><img src={require('../../../../assets/img/animation.gif')} /></div>
 
     const [workspaceToEdit, setWorspaceToEdit] = useState()
 
@@ -107,13 +107,13 @@ function AllWorkspaces(props) {
 
                                     {/* <img data-tip data-for="registerTip" src={copy} id="img1" onClick={copyToClipboard} className="img_copy"></img> */}
                                     <div data-tip data-for="Grid" className="col-1 grid" onClick={chenge_grid}>
-                                        <img src={require('../../../img/gridIcon.png')} />
+                                        <img src={require('../../../../assets/img/gridIcon.png')} />
                                     </div>
                                     <ReactTooltip className="tooltip-style" id="Grid" place="bottom" effect="solid">
                                         {title.title_view_grid}
                                     </ReactTooltip>
                                     <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}>
-                                        <img src={require('../../../img/list1.png')} />
+                                        <img src={require('../../../../assets/img/list1.png')} />
                                     </div>
                                     <ReactTooltip className="tooltip-style" data-tip id="List" place="bottom" effect="solid">
                                         {title.title_view_list}
@@ -122,13 +122,13 @@ function AllWorkspaces(props) {
                                 :
                                 <>
                                     <div data-tip className="col-1 grid" data-for="Grid" onClick={chenge_grid}>
-                                        <img src={require('../../../img/Group 19507.png')} />
+                                        <img src={require('../../../../assets/img/Group 19507.png')} />
                                     </div>
                                     <ReactTooltip className="tooltip-style" id="Grid" place="bottom" effect="solid">
                                         {title.title_view_grid}
                                     </ReactTooltip>
                                     <div data-tip className="col-1 list" data-for="List" onClick={chenge_list1}>
-                                        <img src={require('../../../img/listIcon.png')} />
+                                        <img src={require('../../../../assets/img/listIcon.png')} />
                                     </div>
                                     <ReactTooltip className="tooltip-style" data-tip id="List" place="bottom" effect="solid">
                                         {title.title_view_list}

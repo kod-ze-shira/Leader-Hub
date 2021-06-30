@@ -71,10 +71,10 @@ function File(props) {
                             downloadFile(e)
                         }} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4 imgActionFile'
-                            src={require('../../../img/download.svg')}></img>
+                            src={require('../../../../assets/img/ID.svg')}></img>
                         : null}
                     <img onClick={() => deleteFile()} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
-                        src={require('../../../img/Group 21592.svg')}></img>
+                        src={require('../../../../assets/img/Group 21592.svg')}></img>
                     {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
                         icon={['fas', 'trash-alt']}
                     ></FontAwesomeIcon> */}

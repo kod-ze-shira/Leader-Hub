@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import { connect } from 'react-redux';
 import { actions } from "../../../../redux/actions/action";
-import img from "../../../img/btn-chat.svg";
-import imgHover from "../../../img/btn-chat-hover.svg";
-import imgClick from "../../../img/btn-chat-close.svg";
+import img from "../../../../assets/img/btn-chat.svg";
+import imgHover from '../../../../assets/img/btn-chat-hover.svg';
+import imgClick from "../../../../assets/img/btn-chat-close.svg";
 import Iframe from "./iframe";
 import $ from 'jquery'
 
