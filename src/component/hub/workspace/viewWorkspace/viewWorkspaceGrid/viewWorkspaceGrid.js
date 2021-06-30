@@ -28,7 +28,7 @@ function ViewWorkspaceGrid(props) {
 
     }, [props.workspaces])
 
-    const routeToProject = () => {
+    const routeToProject = (e) => {
         props.setIndexWorkspace(props.indexWorkspace)
         // props.setCurrentIndexProject(0)
         props.history.push("/" + props.user + "/hub/workspace/" + workspace._id)
@@ -94,7 +94,7 @@ function ViewWorkspaceGrid(props) {
                 </div>
 
                 <MyStyle className="Workspacegrid pt-2 pb-2 px-2 mt-1 " id={props.workspace._id ? "" : "disable-workspace"}
-                    onClick={routeToProject}
+                    onClick={(e) => routeToProject(e)}
                 >
                     <div>
                         <div className="logoWorkspace1 " >

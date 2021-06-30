@@ -132,11 +132,12 @@ function Hub(props) {
 
 
     });
-    const deleteWorkspaceInRedux = () => {
-        if (props.workspaces[props.workspaces.length - 1])
-            if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
-                props.removeOneWorkspaceFromWorkspaces()
-            }
+    const deleteWorkspaceInRedux = (e) => {
+        console.log(e.target.className)
+        // if (props.workspaces[props.workspaces.length - 1])
+        //     if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
+        //         props.removeOneWorkspaceFromWorkspaces()
+        //     }
     }
     const [focusInputCard, setFocusInputCard] = useState(false)
     return (
@@ -154,7 +155,7 @@ function Hub(props) {
             </div> */}
             <Router history={history}>
 
-                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
+                <div className="row back-screen" onClick={(e) => deleteWorkspaceInRedux(e)}>
 
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
@@ -242,8 +243,7 @@ function Hub(props) {
                             task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
                             status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
                             openPopUp={true}
-                            hub={true}
-                        />
+                            hub={true} />
                         : null}
                     {showContactList ?
                         <ContactList hub={true} />

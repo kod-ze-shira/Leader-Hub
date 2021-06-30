@@ -92,8 +92,8 @@ function ContactList(props) {
   return (
     <>
 
-      <div className='div_contacts ' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 460, "width": props.hub ? width : 300, "maxHeight": 250 }}>
-        <div className='container div_contacts_list'>
+      <div className='div_contacts ' style={{ "left": props.hub ? left : "", "top": props.hub ? top : 410, "width": props.hub ? width : 300, "maxHeight": 250 }}>
+        <div className='container div_contacts_list  ' style={{}}>
           <div className=' row  mx-1 form-group' id='nameRequired'>
             {/* {props.hub ? */}
             <input placeholder="Name or email " required ref={nameRequired}
@@ -101,7 +101,7 @@ function ContactList(props) {
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
-            {/* //  : null} */} 
+            {/* //  : null} */}
             {contactList}</div>
           {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
