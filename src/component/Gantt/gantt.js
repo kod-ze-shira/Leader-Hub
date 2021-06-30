@@ -15,7 +15,6 @@ export default class Gantt extends Component {
     }
 
     dataProcessor = null;
-
     initZoom() {
         gantt.ext.zoom.init({
             levels: [
@@ -27,7 +26,18 @@ export default class Gantt extends Component {
                     scales: [
 
                         { unit: "month", step: 1, format: "%F %Y" },
-                        { unit: "day", step: 1, format: "%j" }
+                        {
+                            unit: "day", step: 1, format: "%j", css: (date) => {
+                                let dateToStr = gantt.date.date_to_str("%D");
+                                if (date === new Date().getDate()) {
+                                    return "today-scale"
+                                }
+                                if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat")
+                                    return "last-weekend";
+
+                                return "";
+                            }
+                        }
                     ]
                 },
             ]
@@ -41,21 +51,50 @@ export default class Gantt extends Component {
         const onDataUpdated = this.props.onDataUpdated;
     }
     componentDidUpdate() {
-        console.log(this.state.endDate);
+
+        console.log("pppp" + this.state.daysStyle);
         if (this.props.tasks) {
 
             gantt.clearAll();
             gantt.config.xml_date = "%Y-%m-%d %H:%i";
             const { tasks } = this.props;
 
-            gantt.config.autoscroll = true;
-            // gantt.config.autoscroll_speed = 50;
+
             gantt.init(this.ganttContainer);
             this.initGanttDataProcessor();
             gantt.parse(tasks);
-
+            gantt.plugins({
+                tooltip: true,
+                marker: true
+            });
+            var dateToStr = gantt.date.date_to_str(gantt.config.task_date);
+            var markerId = gantt.addMarker({
+                start_date: new Date(),
+                css: "today",
+                text: "Now",
+                title: dateToStr(new Date())
+            });
+            gantt.getMarker(markerId);
         }
+        // gantt.templates.scales.unit.day=function(date,aa){
+        //         if(date.getDay()==0||date.getDay()==6){
+        //             return "today-scale";
+        //         }
+        //     };
+
+
+        // gantt.templates.scale_cell_class = function(date,aa){
+        //     if(date.getDay()==0||date.getDay()==6){
+        //         return "today-scale";
+        //     }
+        // };
+        // gantt.templates.timeline_cell_class = function(task,date){
+        //     if(date.getDay()==0||date.getDay()==6){ 
+        //         return "today-scale" ;
+        //     }
+        // };
     }
+
 
     componentDidMount() {
         gantt.plugins({
@@ -117,8 +156,10 @@ export default class Gantt extends Component {
                 return task.class = "orangeBorder";
             }
         };
+        // this.setState({  daysStyle: "weekend"   })
         gantt.config.columns = [
-            { id: "c_1", name: "cardName", label: "Card name", width: 200, template: myFunc },
+            { id: "c_1", name: "cardName", label: "", width: 200, template: myFunc },
+            // { id: "c_1", name: "cardName", label: "Card name", width: 200, template: myFunc },
         ];
         gantt.templates.gantt_cell = function (start, end, task) {
             return task.text = "knkl";
@@ -142,6 +183,14 @@ export default class Gantt extends Component {
                 }
             });
 
+            // this.setState({
+            //     daysStyle: function (date) {
+            //         var dateToStr = gantt.date.date_to_str("%j");
+            //         if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat") return "weekend";
+
+            //         return "";
+            //     }
+            // })
         });
 
         gantt.attachEvent("onBeforeTaskDisplay", function (id, task) {
@@ -151,6 +200,9 @@ export default class Gantt extends Component {
             return true;
 
         });
+        gantt.templates.scale_cell_class = function (date) {
+            return "weekend";
+        }
         gantt.attachEvent("onAfterTaskUpdate", function (id, task) {
 
             let a = new Date(task.end_date)
@@ -184,17 +236,13 @@ export default class Gantt extends Component {
             store.dispatch(actions.setDateTaskFromGantt(editTaskInRedux))
 
         });
-
-
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;
         gantt.init(this.ganttContainer);
         this.initGanttDataProcessor();
         gantt.parse(tasks);
 
-        gantt.templates.scale_cell_class = function (date) {
-            return "weekend";
-        }
+       
 
         // gantt.init(this.ganttContainer);
 
@@ -250,6 +298,7 @@ export default class Gantt extends Component {
             this.dataProcessor.destructor();
             this.dataProcessor = null;
         }
+        gantt.clearAll();
     }
 
     render() {

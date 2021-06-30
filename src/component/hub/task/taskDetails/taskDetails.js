@@ -21,20 +21,24 @@ import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
 
 function TaskDetails(props) {
+    debugger
     const nameRequired = useRef()
-    const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
+    let [taskBeforeChanges,setTaskBeforeChanges]=useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
+        if(props.cards){
+            setTaskBeforeChanges( ({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
+
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
         if (!(props.statuses && props.statuses.length > 0))
             props.getAllStatusesTaskForWorkspace();
         if (props.contactsUser.length == 0)
             props.getContactsForUser()
-
+        }
     }, [props.cards])
 
     useEffect(() => {

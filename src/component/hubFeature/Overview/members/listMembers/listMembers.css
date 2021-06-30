@@ -17,6 +17,9 @@
 max-height: 40vh;    
 overflow-y: scroll;
 }
+.membersToAdd::-webkit-scrollbar{
+    height: 0;
+}
 .membersToAdd{
     box-shadow: 0 0 0 0.1rem  #E9E9E9;
 
