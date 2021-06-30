@@ -1,7 +1,12 @@
 body{
   background-color: #E8EAEC;
 }
-
+::-webkit-scrollbar-thumb {
+  background: #b0b1b1 !important; 
+}
+::-webkit-scrollbar-thumb { 
+  border-radius: 15px;
+}
 button{
   outline: 0 !important;
   border: none !important;
@@ -44,25 +49,19 @@ margin-top: 15vh
   color: #75798E;
   text-transform: capitalize;
   margin-bottom: 0.2rem !important;
-  opacity: 0.9;}
-
-
-/* .details .form-control {
-  height:calc(1.5em + .75rem ) !important;
-} */
+  opacity: 0.9;
+}
 
 
  button{
    cursor: pointer !important;
  }
-
-
-
 .containerHeader >nav{
   padding-left: 0px !important;
 }
-
-
 input,textarea,p,div,span{
   unicode-bidi: plaintext !important;
+}
+.tooltip-style{
+  padding:4px !important;
 }

@@ -52,6 +52,7 @@ border-radius: 3px;
     padding-left: 4vh;
     line-height: 2.8; 
   }
+
   li p{
     line-height: 1.4 !important; 
   }
@@ -62,7 +63,7 @@ border-radius: 3px;
      background-repeat: no-repeat;
      border-left:16px solid var(--light-light-blue); 
      left:2.5vh !important;
-     padding-left: 24px;
+     padding-left: 4vh;
      /* border-left: 16px solid #44D7B6 !important;‏ */    
 }
 

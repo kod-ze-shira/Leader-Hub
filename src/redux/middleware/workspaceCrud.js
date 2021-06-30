@@ -49,7 +49,8 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                     dispatch(actions.setUserEmail(result.user.email))
                     dispatch(actions.setWorkspaces(result.workspace))
                     dispatch(actions.setPriorities(result.priorities))
-
+                    dispatch(actions.setSharedProjects(result.sharedProjects))
+                    
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projects)
@@ -79,7 +80,7 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                dispatch(actions.addNewWorkspace(data.message))
+                dispatch(actions.addWorkspaceToWorkspacesFromServer(data.message))
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
@@ -154,6 +155,7 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
+      
         fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',
@@ -180,12 +182,15 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 
 //this func to check the headers jwt and username, if them not good its throw to login
 
+//this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.responseJSON.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.responseJSON.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

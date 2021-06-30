@@ -26,45 +26,51 @@
   display: none;
 }
 
+.last-weekend{
+  background: #adadad1a !important;
+  color:  #636363 !important;
+}
 .weekend {
-  background: #ecfbf8 !important;
-  color: #44d7b6 !important;
+  background: #68c7cb1a !important;
+  color:  #68C7CB !important;
   font-weight: 800 !important;
 }
-
-.greenBorder .gantt_task_progress {
-  background : linear-gradient(to right, #c5eee5 0%, #34A38B 100%);
+.gantt_task_line{
+  z-index: 3;
+}
+.yellowBorder .gantt_task_progress {
+  background : linear-gradient(to right, #e9f0af 0%, rgb(218, 199, 24) 100%);
   color: white;
 }
-.greenBorder {
+
+.gantt_task_line.yellowBorder {
   border-radius: 5px !important;
-  border: #34A38B 3px solid !important;
+  border: rgb(218, 199, 24) 3px solid !important;
   color: white !important;
 }
-.greenBorder:hover {
-  border-left: #34A38B 10px solid !important;
-  border-right: #34A38B 10px solid !important;
+.yellowBorder:hover {
+  border-left: rgb(218, 199, 24) 10px solid !important;
+  border-right: rgb(218, 199, 24) 10px solid !important;
   color: white !important;
 }
-.greenBorder .gantt_task_content{
-  color: white !important;
-}
-.pinkBorder {
+
+.gantt_task_line.redBorder  {
   border-radius: 5px !important;
-  border: #FD808B 3px solid !important;
+  border:  3px solid red!important;
   background-color: white !important;
 }
-.pinkBorder:hover {
-  border-left: #FD808B 10px solid !important;
-  border-right: #FD808B 10px solid !important;
+.redBorder:hover {
+  border-left: red 10px solid !important;
+  border-right: red 10px solid !important;
 }
-.pinkBorder .gantt_task_progress {
+
+.redBorder .gantt_task_progress {
   position: absolute;
-  background: linear-gradient(to right,#faced1,  #FD808B)  !important;
+  background: linear-gradient(to right,rgb(233, 139, 139),  red)  !important;
   text-align: end;
   align-items: end;
 }
-.orangeBorder {
+.gantt_task_line.orangeBorder {
   border-radius: 5px !important;
   border:  #F8B520 3px solid !important;
   background-color: white !important;
@@ -90,9 +96,15 @@
 .bbb{
   display: none !important;
 }
-.gantt_task_progress_drag{display:none !important}
+/* .gantt_task_progress_drag{display:none !important}
 .gantt_hor_scroll{
   overflow: hidden !important;
+} */
+.gantt_task_progress_drag{
+  display: none !important
+}
+.gantt_layout_cell.gantt_hor_scroll{
+  height: 11px !important;
 }
 .gantt_delete_button{
   background:red;
@@ -111,14 +123,18 @@
 }
 .today{
   background-color: rgb(218, 246, 247) !important;
-  width: 6vh !important;
+  width: 40px !important;
   margin-left: -3vh !important;
-  z-index: 0!important;
+  z-index: 1!important;
   opacity: 0.5 !important;
   height: 100vh !important;
-
+  border-left: 2px solid #68C7CB;
+  border-right: 2px solid #68C7CB;
 }
-
+.today-scale{
+  color:#68C7CB !important;
+  background-color: rgb(218, 246, 247) !important;
+}
 .gantt_marker_content {
   color: black !important;
 
@@ -147,4 +163,31 @@
 
 
 
+}
+/* .gantt_ver_scroll {
+  overflow: scroll;
+} */
+
+.gantt_grid_data .gantt_row.odd:hover,
+.gantt_grid_data .gantt_row:hover,
+.gantt_grid_data .gantt_row.gantt_selected,
+.gantt_grid_data .gantt_row.odd.gantt_selected, 
+.gantt_task_row.gantt_selected
+ {
+  background-color:#68c7cb1a !important;
+}
+.important{
+  text-align: start;
+  display: flex;
+  align-items: center;
+}
+/* .gantt_data_area{
+  
+  overflow-x: scroll !important;
+} */
+.gantt_data_area::-webkit-scrollbar{
+  display:block;
+}
+.gantt_row, .gantt_task_row{
+  /* border-bottom: none !important; */
 }

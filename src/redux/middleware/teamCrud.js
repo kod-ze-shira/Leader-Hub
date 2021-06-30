@@ -65,7 +65,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
         checkPermission(err).then((ifOk) => {
         })
-    }
+      }
     });
 
   }
@@ -119,42 +119,39 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         },
         body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
+        console.log('resultShareObject',result);
         return result.json();
       }).then((result) => {
         checkPermission(result).then((ifOk) => {
-        let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
-        dispatch(actions.createSystemWave({
-          "subject": "Share project",
-          "body":
-            `<p>Hi ${getState().public_reducer.userName}</p>
-          <p>You have successfully shared the project 
-          <span  style='background-color: ${project.color} !important;
-          height: 7px;
-          width: 7px;
-          background-color: #bbb;
-          border-radius: 50%;
-          display: inline-block;
-          margin-right: 2px;
-          margin-left: 4px;'></span>
-          <span style='color:${project.color} !important'> ${project.name}</span></p> 
-          <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
-          "to": [getState().public_reducer.userName],
-          "from": "hub@noreply.leader.codes",
-          "source": "Hub",
-          "files": null
-        })).catch(err=>{
-          console.log(err);
+          let project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject];
+          dispatch(actions.createSystemWave({
+            "subject": "Share project",
+            "body":
+              `<p>Hi ${getState().public_reducer.userName}</p>
+            <p>You have successfully shared the project 
+            <span  style='background-color: ${project.color} !important;
+            height: 7px;
+            width: 7px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 2px;
+            margin-left: 4px;'></span>
+            <span style='color:${project.color} !important'> ${project.name}</span></p> 
+            <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+            "to": [getState().public_reducer.userName],
+            "from": "hub@noreply.leader.codes",
+            "source": "Hub",
+            "files": null
+
+
+          }))
+          console.log(result);
+          dispatch(actions.addMember(result.updatedObject.members))
         })
-
-
-
-       
-          // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
-          dispatch(actions.setMembers(result))
-        })
-
       })
-
+    // dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
+    // })
   }
   return next(action);
 }
@@ -190,7 +187,6 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 export const assingTo = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'ASSING_TO') {
-
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;
@@ -210,6 +206,8 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
         console.log("data", data);
         let editTaskInRedux = { "nameFiled": "assingTo", "value": data.task.assingTo }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
+        dispatch(actions.addContactToContactList(data.task.assingTo.contact))
+
 
       },
 
@@ -273,7 +271,6 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
     })
       .then(data => {
         checkPermission(data).then(() => {
-
           console.log(data);
           dispatch(actions.setMembers(data))
         })
@@ -286,9 +283,11 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
   return new Promise((resolve, reject) => {
     if (result.status == "401") {
-      result.routes ?
-        window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-        window.location.assign(`https://dev.accounts.codes/hub/login`)
+      result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+        window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+        result.routes ?
+          window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+          window.location.assign(`https://dev.accounts.codes/hub/login`)
 
       reject(false)
 
@@ -297,4 +296,3 @@ function checkPermission(result) {
 
   })
 }
-

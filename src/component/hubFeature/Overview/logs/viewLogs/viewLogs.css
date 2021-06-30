@@ -1,5 +1,11 @@
 .logicon{
- height: 60%;   
+    height: auto;
+    width: 70%;
+}
+
+.logColIcon{
+    padding-right: 1%;
+    padding-left:5%;
 }
 
 .logSchemaName{
@@ -11,6 +17,7 @@
 .logUser{
     color: #6CBAFF;
     font-size: small;
+    margin-left: 15%;
 }
 
 .logsHeder{
@@ -34,7 +41,7 @@
     border-right: 1px dashed;
     color: #98A9BC;
     height: 45px;
-    margin-left: 2.7vw;
+    margin-left: 2.6vw;
 }
 
 .logRowOne{
@@ -42,35 +49,49 @@
     margin:0;
 }
 
+.logTaskName{
+    font-size: small;
+    margin-left: 15%;
+}
+
 @media screen and (max-width: 1300px) {
+    .logUser{
+    }
     .logsDashed{
-        margin-left: 3vw;
+        margin-left: 2.6vw;
     }
 }
 
 @media screen and (max-width: 1100px) {
+    .logUser{
+    }
     .logsDashed{
-        margin-left: 3.5vw;
+        margin-left: 2.8vw;
     }
 }
 
 @media screen and (max-width: 880px) {
+    
     .logsDashed{
-        margin-left: 4.5vw;
+        margin-left: 3.3vw;
     }
 }
 
 @media screen and (max-width: 700px){
+    
     .logsDashed{
-        margin-left: 5.5vw;
+        margin-left: 3.5vw;
+        
     }
 }
 
 @media screen and (max-width: 500px){
+    
     .logsDashed{
         margin-left: 7.5vw;
     }
 }
+
 
 
 

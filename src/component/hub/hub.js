@@ -32,6 +32,10 @@ import ShureDelete from './shureDelete/shureDelete'
 import ContactList from './contact/contactList';
 // import Hangout from "../hubFeature/Overview/hangout/hangout";
 import selectTask from './SelectHeader/selectTask/selectTask';
+import ToastMessage from '../hub/toast/toastMessage'
+import RocketShip from './rocketShip/rocketShip'
+import ViewAllStatuses from '../hub/status/viewAllStatuses';
+
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -41,7 +45,11 @@ function Hub(props) {
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
+    const [showStatusesList, setShowStatusesList] = useState(false)
+
     const [openCalander, setOpenCalander] = useState(false)
+    const [showRocketShip, setShowRocketShip] = useState(false)
+
     // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
@@ -105,6 +113,9 @@ function Hub(props) {
             case "share":
                 setShowContactList(true)
                 break;
+            case "status":
+                setShowStatusesList(true)
+                break;
             default:
                 break;
         }
@@ -112,13 +123,21 @@ function Hub(props) {
     $(window).click(function () {
         setShowContactList(false)
         setOpenCalander(false)
+        setShowStatusesList(false)
     });
     $(window).scroll(function () {
         setShowContactList(false)
         setOpenCalander(false)
+        setShowStatusesList(false)
+
 
     });
-
+    const deleteWorkspaceInRedux = () => {
+        if (props.workspaces[props.workspaces.length - 1])
+            if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
+                props.removeOneWorkspaceFromWorkspaces()
+            }
+    }
     const [focusInputCard, setFocusInputCard] = useState(false)
     return (
         <>
@@ -135,7 +154,7 @@ function Hub(props) {
             </div> */}
             <Router history={history}>
 
-                <div className="row back-screen">
+                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
@@ -146,7 +165,9 @@ function Hub(props) {
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
                             <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
                                 <div className="body-workspace mt-4">
@@ -154,7 +175,9 @@ function Hub(props) {
                                 </div>
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
-                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                />
                             </ProtectedRoute>
 
                             {/* <ProtectedRoute path={"/workspacePlatform"}>
@@ -163,14 +186,15 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
-                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    showRocketShip={(val) => setShowRocketShip(val)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
-                                    // viewToastComplete={(val) => setShowToastComplete(true)}
+                                    showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastComplete={(val) => setShowToastComplete(val)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
@@ -178,7 +202,8 @@ function Hub(props) {
                             {/* share url */}
                             <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
-                                    viewToastComplete={(val) => setShowToastComplete(true)}
+                                    showRocketShip={(val) => setShowRocketShip(val)}
+                                    viewToastComplete={(val) => setShowToastComplete(val)}
                                     viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -205,15 +230,29 @@ function Hub(props) {
                         />
                         : null}
 
-                    {/* {showToastComplete ?
-                        <Toast /> : null}
+                    {showToastComplete.show ?
 
+                        <ToastMessage message={showToastComplete.massege}
+                            viewToastComplete={(val => setShowToastComplete(val))}
+                        />
+                        : null}
+                    {showStatusesList ?
+                        // <h1 className="h1tocheck">vvvvvvvvv</h1>
+                        <ViewAllStatuses
+                            task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                            status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                            openPopUp={true}
+                            hub={true}
+                        />
+                        : null}
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
                     {openCalander ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
-                        : null} */}
+                        : null}
+                    {showRocketShip ? <RocketShip show={(val) => setShowRocketShip(val)} /> : null}
+                    {/* {showRocketShip ? <RocketShip show={(val) => console.log(val)} /> : null} */}
 
                     {/* <AddObject setShowViewDitails={(obj) => openViewDetails(obj)} focusInputCard={() => setFocusInputCard(true)} /> */}
                     {/* setShowViewDitails={} */}
@@ -227,7 +266,11 @@ function Hub(props) {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.public_reducer.userName
+        user: state.public_reducer.userName,
+        workspaces: state.public_reducer.workspaces,
+        cards: state.public_reducer.cards,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -237,6 +280,7 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
+        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces())
     }
 
 

@@ -25,8 +25,8 @@ body {
   display: inline-block;
 }
 .thumbnail-contact-details{
-  width:30px;
-  height:30px;
+  width:35px;
+  height:35px;
   border-radius:50%;
   display: inline-block;
 }
@@ -170,16 +170,15 @@ body {
     background: white;
     position: absolute;
     z-index: 999999999;
-    /* overflow-x: scroll; */
-    /* top: 304px;
-   left:934px; */
+  overflow: auto;
    box-shadow: 0px 3px 6px #00000029;
+   overflow:hidden !important ;
 }
 .div_contacts_list{
-    overflow-y: auto;
-    overflow-x: hidden !important;
-    /* height: 400px; */
+  overflow-y: auto;
+
     }
+  
 .invite-button{
   border-radius: 3px;
 background-color: #E8EAEC;

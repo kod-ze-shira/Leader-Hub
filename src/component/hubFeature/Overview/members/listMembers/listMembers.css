@@ -1,20 +1,53 @@
 .viewMembersList{
     display:none;
 }
-.btnAddmembers{
+.btnAddMembers{
     background-color:transparent;
+    font-weight: 500;
+    font-size:130%;
+}
+.btnAddMembers:hover{
+    color:#38B1B5;
 }
 .cursorPoint{
     cursor: pointer !important;
 }
 .membersToAdd{
-    width:fit-content;
+    width:30vw;
+max-height: 40vh;    
+overflow-y: scroll;
+}
+.membersToAdd::-webkit-scrollbar{
+    height: 0;
 }
 .membersToAdd{
-    border:1px solid rgb(196, 184, 184);
-    border-radius:5%;
-    box-shadow: 1px 1px 1px rgb(196, 184, 184) ;
+    box-shadow: 0 0 0 0.1rem  #E9E9E9;
+
 }
 .inputSearch{
-    justify-content:center;
+    background-color: #EDFBFC;
+    border:none;
+    width:100%;
+    border-radius: 0.2em;
+
+}
+.inputAdd{
+    border: none;
+    background-color: #EDFBFC;
+    border-radius:0.2em;
+
+}
+.inputSearch:focus, .inputAdd:focus{
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+.buttonAdd{
+    background-color: rgb(153, 226, 229);
+    border-radius: 0.2em;
+}
+.mailNotValid{
+    width:96%;
+}
+.mailNotValid p{
+    color:red;
 }

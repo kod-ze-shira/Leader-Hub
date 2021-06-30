@@ -1,15 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from 'react-redux';
-import  "./description.css";
+import "./description.css";
 function Description(props) {
+    // dangerouslySetInnerHTML={{ __html: this.props.objMagazine.logoQuill }}‏‏
+
     const projectName = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.name;
     const projectDescription = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.description;
+    let description = useRef()
+    useEffect(() => {
+        description.current.innerHTML = props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.description
+        if (description.current.innerHTML === 'undefined') {
+            description.current.innerHTML = 'No description'
+        }
+    }, [props.workspaces])
+
     return (
         <div >
             <div className="row  pt-3 ml-4 mt-3">
                 <h4>{projectName}</h4>
             </div>
-            <p className="pt-3 pb-4 ml-4 des-overview">{projectDescription}</p>
+            <p className="pt-3 pb-4 ml-4 des-overview"
+                ref={description}
+            // dangerouslySetInnerHTML={{ __html: props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.description }}
+            > </p>
         </div>
     )
 }

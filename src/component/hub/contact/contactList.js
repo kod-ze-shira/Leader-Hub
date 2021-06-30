@@ -48,12 +48,18 @@ function ContactList(props) {
       $(".invite-button").css("backgroundColor", "#68C7CB");
       $(".invite-button").css("color", "#358A8D");
       props.assingTo(valueSearch)
+
+      setTimeout(() => {
+        $(".div_contacts").css("display", "none");
+
+      }, 1500);
     }
     else {
       nameRequired.current.focus()
       $(".invalid-feedback").css("display", "block");
     }
   }
+
 
   function ValidateEmail(mail) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valueSearch)) {
@@ -86,8 +92,8 @@ function ContactList(props) {
   return (
     <>
 
-      <div className='div_contacts ' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410, "width": props.hub ? width : 300, "maxHeight": 250 }}>
-        <div className='container div_contacts_list  ' style={{}}>
+      <div className='div_contacts ' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 460, "width": props.hub ? width : 300, "maxHeight": 250 }}>
+        <div className='container div_contacts_list'>
           <div className=' row  mx-1 form-group' id='nameRequired'>
             {/* {props.hub ? */}
             <input placeholder="Name or email " required ref={nameRequired}
@@ -95,14 +101,13 @@ function ContactList(props) {
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
-            {/* //  : null} */}
-            {contactList}
-            {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
+            {/* //  : null} */} 
+            {contactList}</div>
+          {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input> : null} */}
-          </div>
 
           <div className="invalid-feedback">
             Please enter valid email.

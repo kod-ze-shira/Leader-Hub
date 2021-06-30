@@ -18,7 +18,7 @@ overflow-y: auto;
 .status-list{
     margin-top: 1vh;
     max-height: 150px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     justify-content: center;
 
 }
@@ -46,8 +46,9 @@ overflow-y: auto;
 background: #75798E 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
 opacity: 0.15;
-    margin-top: 1vh;
-    margin-bottom: 3vh;
+    margin-top: 1vh ;
+    margin-bottom: 3vh ;
+    margin:auto ;
     /* vertical-align: middle !important; */
 
     /* justify-content: center !important; */
@@ -114,13 +115,26 @@ z-index: 9999 !important;
     z-index: 99999 !important;
 }
 .color-status-first{
+  text-align: center;
+  /* max-width: 90px !important; */
+  width: 85px;
     /* /* width: 26px; */
-    height: 1.5vh; 
-    border-radius: 5px;
+    height: 25px; 
+    color: white;
+    border-radius: 19px;
     opacity: 1;
     display: inline-block;
 
 }
+#assing{
+  padding:4px !important;
+}
+.dropdown-toggle::after {
+  /* float: right; */
+  margin-top: 11px;
+
+}
+
 .btn-option-in-task{
   display: inline-block !important;
 }

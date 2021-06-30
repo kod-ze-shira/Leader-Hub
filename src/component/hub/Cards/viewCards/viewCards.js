@@ -142,7 +142,7 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-5 "
+                    <div className="col-4 "
                         onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
                         onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
                     >
@@ -181,7 +181,7 @@ function ViewCards(props) {
                         onClick={handleClick}>
                         . . .
                 </Button>
-                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                         {title.title_more_actions}
                     </ReactTooltip>
                     <Menu
@@ -197,13 +197,13 @@ function ViewCards(props) {
                     </Menu>
                     {/* <p className="col">Team</p> */}
                     <p className="col-assignee">Assignee</p>
-                    <p className="col-status ">Status</p>
+                    <p className="col ">Status</p>
                     <p className="col">Start date</p>
-                    <p className="col">Due date</p>
+                    <p className="col-status">Due date</p>
                     <p className="col-priority">Priority</p>
 
                     <p className="col-add-task"><a>
-                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
                             {title.title_add_task}
                         </ReactTooltip>
                     </a></p>
@@ -224,6 +224,7 @@ function ViewCards(props) {
                                                 key={task._id} task={task}
                                                 indexCard={props.indexCard}
                                                 indexTask={index}
+                                                showRocketShip={props.showRocketShip}
                                             />
                                         ))}
                                         {provided.placeholder}
@@ -240,6 +241,7 @@ function ViewCards(props) {
                         // className="add-task"
                         class="form-control scroll-container mt-2   ml-4"
                         placeholder="Add Task" id="input-task"
+                        autocomplete="chrome-off"
                         value={inputValue} onChange={updateInputValue} onKeyPress={event => {
                             if (event.key === 'Enter') {
                                 newTask()

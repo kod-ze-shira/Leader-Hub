@@ -70,6 +70,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
 
 }
 
+//this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
@@ -149,6 +150,44 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
 
 }
 
+export const downloadFiles = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DOWNLOAD_FILE') {
+        let file = action.payload.file
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies
+        fetch(
+            "https://files.codes/api/" +
+            getState().public_reducer.userName +
+            "/download/" +
+            file.url,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: jwtFromCookie,
+                },
+            }
+        )
+            .then((resp) =>
+
+                resp.blob()
+            )
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                // action.payload.e.stopPropagation()
+                a.click();
+                window.URL.revokeObjectURL(url);
+
+            })
+            .catch(() => console.log("oh no!"));
+    }
+    return next(action);
+
+}
+
 export const removeFile = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_FILE') {
@@ -162,9 +201,7 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
             data: { 'urls': fileUrlArr },
 
             success: function (data) {
-                debugger
                 console.log('succes delete files!!')
-
                 if (window.location.href.indexOf('projectPlatform') != -1)
                     dispatch(actions.deleteFilesInTask(fileUrlArr))
 

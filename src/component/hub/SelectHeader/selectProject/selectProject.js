@@ -9,7 +9,7 @@ import Background from '../../../img/down-arrow.svg';
 
 function SelectProject(props) {
     const { idProject } = useParams();
-
+  
     //to chang the project that user selected
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
     const changeSelectedProject = (id) => {

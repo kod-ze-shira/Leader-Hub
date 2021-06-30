@@ -20,7 +20,7 @@
     }
     
     body {
-        font-size: 1.1rem;
+        /* font-size: 1.1rem; */
     }
 
     .divtext {
@@ -30,7 +30,7 @@
         min-height: 5em;
         overflow: auto;
     }
-      
+    
     
       
     .calender-tabs{

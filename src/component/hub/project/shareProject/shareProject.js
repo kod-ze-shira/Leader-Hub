@@ -68,7 +68,7 @@ function ShareProject(props) {
     //onchange perrmision of team member
     const changePermissionMemberAfterRender = (permission, shareDetailWithNewPermission, teamId) => {
         // let permission = event.target.options[event.target.selectedIndex].label
-     
+
         teams.forEach(team => {
             if (team.teamId == teamId)
                 team.members.find(member => {

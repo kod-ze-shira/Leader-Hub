@@ -24,7 +24,7 @@ export default function Colors(props) {
 
     return (
         <>
-            <div className="ml-2 mr-3" onClick={(e) => stopP(e)}>
+            <div className="m-auto" onClick={(e) => stopP(e)}>
                 <CirclePicker circleSize={18}
                     onChangeComplete={(color) => props.changeStatusColor({ value: color.hex, name: "color" })}
                     colors={colors} />

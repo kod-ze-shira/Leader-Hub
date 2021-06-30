@@ -4,14 +4,18 @@ import { connect } from 'react-redux'
 import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
 import { actions } from '../../../../redux/actions/action'
+import QuillEditProject from '../myQuill/quillEditProject.js'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
+
     const [projectBeforeChanges] = useState({ ...props.workspaces[props.indexWorkspace].projects[props.indexProject] })
     let project;
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
+
     }, [props.workspaces])
+
 
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
@@ -20,9 +24,11 @@ function EditProject(props) {
 
 
     const changeFiledInProject = (input) => {
-        debugger
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
-        let value = input.target.value ? input.target.value : input.target.innerText
+        let value;
+        if (input.target.attributes[1].nodeValue == 'description')
+            value = input.target.value ? input.target.innerHTML : input.target.innerHTML
+        else value = input.target.value ? input.target.value : input.target.innerText
         if (!value)
             value = ''
         let editProjectInRedux = { "nameFiled": input.target.name ? input.target.name : "description", "value": value }
@@ -31,7 +37,7 @@ function EditProject(props) {
     }
 
     const changeDateInProject = (input) => {
-        debugger
+
         let res = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
         let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         setDueDateProject(input.target.value)
@@ -72,6 +78,7 @@ function EditProject(props) {
         props.closeViewDetails()
     }
 
+
     return (
         <>
 
@@ -82,7 +89,6 @@ function EditProject(props) {
                         <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
                     </div>
-
                     <div class="row justify-content-between  mx-1 mb-2">
                         <label>workspace: {props.workspace.name}</label>
                     </div>
@@ -97,15 +103,16 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div class="form-control descriptionProject"
+                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description ? props.workspaces[props.indexWorkspace].projects[props.indexProject].description : ''} indexW={props.indexWorkspace} indexP={props.indexProject} />
+
+                        {/* <div class="form-control descriptionProject"
                             name="description"
                             id="descriptionProject" rows="3"
-                            placeholder="Write a description about your project"
-                            value={props.workspaces[props.indexWorkspace].projects[props.indexProject].description}
-                            // onChange={(input) => changeFiledInProject(input)}
+                            ref={descriptionInput}
+                            placeholder="Write a description about your project"                           
                             contentEditable
                             onBlur={(input) => changeFiledInProject(input)}
-                        >{props.workspaces[props.indexWorkspace].projects[props.indexProject].description}</div>
+                        ></div> */}
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">
@@ -137,12 +144,12 @@ function EditProject(props) {
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </button>
                     <button data-tip data-for="save" onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>

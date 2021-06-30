@@ -4,7 +4,7 @@ import configData from '../../ProtectedRoute/configData.json'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
-        
+
         let workspaceId;
         if (action.payload) {
             if (action.payload.workspaceId)
@@ -22,7 +22,7 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                
+
                 dispatch(actions.setStatuses(data.statuses))
                 console.log("success")
                 if (action.payload) {
@@ -164,9 +164,11 @@ export const removeStatus = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-            result.routes ?
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=${result.routes}`) :
-                window.location.assign(`https://dev.accounts.codes/hub/login`)
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
+                    window.location.assign(`https://dev.accounts.codes/hub/login`)
 
             reject(false)
 

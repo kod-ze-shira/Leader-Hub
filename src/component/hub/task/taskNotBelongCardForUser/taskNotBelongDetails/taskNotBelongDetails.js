@@ -102,7 +102,6 @@ function TaskNotBelongDetails(props) {
                     }
 
                     props.removeFile(arrayUrl)
-                    debugger
                     props.EditTask(props.task)
 
                 } else
@@ -283,7 +282,7 @@ function TaskNotBelongDetails(props) {
                     </div>
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>
