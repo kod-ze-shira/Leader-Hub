@@ -42,7 +42,7 @@ function ViewStatus(props) {
                         <p  >{props.status.statusName}</p>   <img
                             className={props.index < 3 ? " pencil-status-none " : "pencil-status "}
                             title={props.index < 3 ? "Deputable status cannot be edited" : "Edit Status"}
-                            // onClick={(e) => openEditTask(e)}
+                            onClick={(e) => openEditTask(e)}
                             src={require('../../img/pencil-write.svg')} />
                     </div>
                     <img

@@ -47,9 +47,9 @@ const publicData = {
         state.arrFilesOfTask = action.payload
     },
     addMember(state, action) {
-        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members=action.payload
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = action.payload
     },
-    
+
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -383,7 +383,10 @@ const publicData = {
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },
+    setStartHourId(state, action) {
 
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].workingTime.push(action.payload)
+    },
 
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {
@@ -436,7 +439,7 @@ const publicData = {
         state.indexOfWorkspace = action.payload
     },
     setDateTaskFromGantt(state, action) {
-        let task=action.payload.task
+        let task = action.payload.task
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].dueDate = task.dueDate
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].startDate = task.startDate
 
