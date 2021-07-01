@@ -173,6 +173,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
 
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
         // let projectBeforeChanges = getState().public_reducer.projects[0];
+        console.log(action.payload);
         let project = action.payload.project;
         let projectBeforeChanges = action.payload.projectBeforeChanges;
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editProject`
