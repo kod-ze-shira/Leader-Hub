@@ -8,6 +8,7 @@ import QuillEditProject from '../myQuill/quillEditProject.js'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
+
     const [projectBeforeChanges] = useState({ ...props.workspaces[props.indexWorkspace].projects[props.indexProject] })
     let project;
     useEffect(() => {
@@ -15,7 +16,7 @@ function EditProject(props) {
 
     }, [props.workspaces])
 
-    
+
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -102,7 +103,7 @@ function EditProject(props) {
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description} indexW={props.indexWorkspace} indexP={props.indexProject} />
+                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description ? props.workspaces[props.indexWorkspace].projects[props.indexProject].description : ''} indexW={props.indexWorkspace} indexP={props.indexProject} />
 
                         {/* <div class="form-control descriptionProject"
                             name="description"
@@ -143,7 +144,7 @@ function EditProject(props) {
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                        <ReactTooltip className="tooltip-style"  data-tip id="delete" place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </button>

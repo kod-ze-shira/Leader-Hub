@@ -47,20 +47,9 @@ const publicData = {
         state.arrFilesOfTask = action.payload
     },
     addMember(state, action) {
-        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members=action.payload
-        // let members = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members
-        // action.payload.map(payload => {
-        //     let flag = false;
-        //     members.map(member => {
-        //         if (member.contact.email === payload.email)
-        //             flag = true;
-        //     })
-        //     if (!flag)
-        //         members.push({ contact: payload })
-        // })
-        // state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = members
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = action.payload
     },
-    
+
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -393,7 +382,10 @@ const publicData = {
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },
+    setStartHourId(state, action) {
 
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].workingTime.push(action.payload)
+    },
 
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {
@@ -446,11 +438,9 @@ const publicData = {
         state.indexOfWorkspace = action.payload
     },
     setDateTaskFromGantt(state, action) {
-        let cIndex = state.cards.findIndex(c => c._id === action.payload.card_id)
-        let tIndex = state.cards[cIndex].tasks.
-            findIndex(t => t._id === action.payload._id)
-        state.cards[cIndex].tasks[tIndex].dueDate = action.payload.dueDate
-        state.cards[cIndex].tasks[tIndex].startDate = action.payload.startDate
+        let task = action.payload.task
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].dueDate = task.dueDate
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].startDate = task.startDate
 
     },
     setSharedProjects(state, action) {
