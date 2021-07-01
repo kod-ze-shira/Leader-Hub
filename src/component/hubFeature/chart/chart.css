@@ -4,9 +4,6 @@
 .colorDiv{
     width: 100%;
 }
-.colorName{
-    font-size:1vw;
-}
 .chartCol{
     border: 0.1em solid rgb(204 238 240);
     border-radius: 1%;
@@ -32,13 +29,13 @@
     height:45vh;
 }
 .barAndPie{
-    height:50vh;
+    height:60vh;
 }
 g g g g g text{
     font-size: 1.2vw !important;
 }
 .apexcharts-datalabels g text{
-    font-size: 0.9vw !important;
+    font-size: 0.8vw !important;
 }
 .divProjectStatistics{
     background-color:white;
