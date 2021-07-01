@@ -57,7 +57,7 @@ function Tabs(props) {
         let card = props.cards.find(card => card._id == e.draggableId)
         if (!card) {
             setDragTaskF()
-            
+
             let b = dragTask
             // alert("true")
         }
@@ -163,7 +163,7 @@ function Tabs(props) {
 
 
     return (
-        <><div className="body-cards">
+        <><div className="body-cards ">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
@@ -182,7 +182,7 @@ function Tabs(props) {
                                     <div className="row row mx-3">
                                         {props.cards.length ?
                                             <DragDropContext
-                                                onDragStart={(e) => onDragStart(e)}
+                                                // onDragStart={(e) => onDragStart(e)}
                                                 onDragEnd={(e) => onDragEndׂ(e)} >
 
                                                 {props.cards.map((card, index) => {
