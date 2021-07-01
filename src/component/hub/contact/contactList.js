@@ -17,11 +17,13 @@ function ContactList(props) {
   const [valueSearch, setValueSearch] = useState("")
   const nameRequired = useRef()
 
+
+
   const setFIlter = () => {
     let arrayTemp = [];
     if (props.contactsUser.length)
       props.contactsUser.map((contact) => {
-        if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
+        if (contact.email.toUpperCase().includes(valueSearch.toUpperCase()) || contact.name.toUpperCase().includes(valueSearch.toUpperCase())) {
           arrayTemp.push(contact);
         }
       })
@@ -97,11 +99,11 @@ function ContactList(props) {
           <div className=' row  mx-1 form-group' id='nameRequired'>
             {/* {props.hub ? */}
             <input placeholder="Name or email " required ref={nameRequired}
-              className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+              className={arrayFilter && arrayFilter.length ? "form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
-            {/* //  : null} */} 
+            {/* //  : null} */}
             {contactList}</div>
           {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
