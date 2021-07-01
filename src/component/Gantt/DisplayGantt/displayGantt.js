@@ -15,7 +15,7 @@ function DisplayGantt(props) {
             theCards = []
             theTasks = []
             mone = []
-          }
+        }
     }, [])
 
     const allWorkspace = { workspaces };
@@ -24,7 +24,7 @@ function DisplayGantt(props) {
     let theCards = []
     let theTasks = []
     let mone = []
-
+    let cnt=-1;
 
     props.cards.map((card, index) => {
         if (index == 0 & theCards.length > 0)
@@ -45,26 +45,73 @@ function DisplayGantt(props) {
         let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
         return Difference_In_Days
     }
+
     theCards.map((card, index) => {
         card.tasks.map((task, index1) => {
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
-            let cardName
+            let cardName=null
             let a = theTasks.find(task => task.cardName == card.name)
-
+            // if (!a){
+            //     // index++;
+            //     theTasks.push(
+            //         {
+            //             indexCard: -1,
+            //             indexTask: -1,
+            //             card: -1,
+            //             cardName: card.name,
+            //             priority: "not-show-task-gantt",
+            //             priority: "low",
+            //             id: -1,
+            //             text: task.name,
+            //             start_date: startDate,
+            //             duration: diffDays,
+            //             progress: 0.3,
+            //             milestones:null
+            //             // "indexCard": -1,
+            //             // "indexTask": -1,
+            //             // "card":card.name,
+            //             // "cardName": "",
+            //             // "priority": "not-show-task-gantt",
+            //             // "id": 2985730,
+            //             // "text": "first",
+            //             // "start_date": startDate,
+            //             // "duration": 3,
+            //             // "progress": 0.6,
+            //             // "milestones": null
+            //         })
+            // }
             if (a)
                 cardName = null
-            else
-                cardName = card.name
+            else{
+
+                // cardName = card.name
+                theTasks.push({
+                    indexCard: cnt--,
+                    indexTask: -1,
+                    card:-1,
+                    cardName: card.name,
+                    priority: "not-show-task-gantt",
+                    id: cnt--,
+                    text: task.name,
+                    start_date: startDate,
+                    duration: diffDays,
+                    progress: 0.3,
+                    milestones: task.milestones
+                })
+            }
+            if(diffDays===0){
+                diffDays =1;
+            }
             theTasks.push({
                 indexCard: index,
                 indexTask: index1,
                 card: card._id,
                 cardName: cardName,
                 priority: task.priority ? task.priority.level : "Low",
-                id: task._id, text:
-                    task.name, start_date:
-                    startDate,
+                id: task._id,
+                text: task.name,
+                start_date: startDate,
                 duration: diffDays,
                 progress: 0.3,
                 milestones: task.milestones
@@ -72,6 +119,7 @@ function DisplayGantt(props) {
         })
         mone.push(index)
     })
+
     console.log("mone", mone);
     let currDate;
 
@@ -102,7 +150,7 @@ function DisplayGantt(props) {
         })
     }
 
-    currDate = currDate == undefined ?parseInt(  new Date().getFullYear()) :parseInt(currDate) 
+    currDate = currDate == undefined ? parseInt(new Date().getFullYear()) : parseInt(currDate)
     currDate = currDate + 2
     currDate = currDate.toString();
     currDate = currDate.concat('-01-01')
@@ -116,17 +164,10 @@ function DisplayGantt(props) {
             "priority": "ggg",
             "id": 2985730,
             "text": "first",
-            "start_date": currDate ,
+            "start_date": currDate,
             "duration": 3,
             "progress": 0.6,
             "milestones": null
-
-
-            // "id": 2985730,
-            // "text": "first",
-            // "start_date": currDate,
-            // "duration": 3,
-            // "progress": 0.6,
         })
     const state = {
         currentZoom: 'Days',

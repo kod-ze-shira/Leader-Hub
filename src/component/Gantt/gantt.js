@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, setState } from 'react';
 import { gantt } from 'dhtmlx-gantt';
 import './gantt.css';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
@@ -11,7 +11,7 @@ export default class Gantt extends Component {
     constructor(props) {
         super(props);
         this.initZoom();
-        this.state = { endDate: 0, startDate: 0 };
+        this.state = { endDate: 0, startDate: 0, currDate: new Date() };
     }
 
     dataProcessor = null;
@@ -29,7 +29,10 @@ export default class Gantt extends Component {
                         {
                             unit: "day", step: 1, format: "%j", css: (date) => {
                                 let dateToStr = gantt.date.date_to_str("%D");
-                                if (date === new Date().getDate()) {
+                                if (date.getDate() === new Date().getDate() &&
+                                    date.getMonth() === new Date().getMonth() &&
+                                    date.getYear() === new Date().getYear()
+                                ) {
                                     return "today-scale"
                                 }
                                 if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat")
@@ -52,7 +55,6 @@ export default class Gantt extends Component {
     }
     componentDidUpdate() {
 
-        console.log("pppp" + this.state.daysStyle);
         if (this.props.tasks) {
 
             gantt.clearAll();
@@ -71,28 +73,17 @@ export default class Gantt extends Component {
             var markerId = gantt.addMarker({
                 start_date: new Date(),
                 css: "today",
-                text: "Now",
+                // text: "Now",
                 title: dateToStr(new Date())
             });
             gantt.getMarker(markerId);
         }
-        // gantt.templates.scales.unit.day=function(date,aa){
-        //         if(date.getDay()==0||date.getDay()==6){
-        //             return "today-scale";
-        //         }
-        //     };
-
-
-        // gantt.templates.scale_cell_class = function(date,aa){
-        //     if(date.getDay()==0||date.getDay()==6){
-        //         return "today-scale";
-        //     }
-        // };
-        // gantt.templates.timeline_cell_class = function(task,date){
-        //     if(date.getDay()==0||date.getDay()==6){ 
-        //         return "today-scale" ;
-        //     }
-        // };
+        showDate(this.state.currDate);
+        function showDate(date) {
+            var date_x = gantt.posFromDate(date);
+            var scroll_to = Math.max(date_x - gantt.config.task_scroll_offset, 0);
+            gantt.scrollTo(scroll_to);
+        };
     }
 
 
@@ -106,7 +97,7 @@ export default class Gantt extends Component {
         var markerId = gantt.addMarker({
             start_date: new Date(),
             css: "today",
-            text: "Now",
+            // text: "Now",
             title: dateToStr(new Date())
         });
         gantt.getMarker(markerId);
@@ -152,14 +143,15 @@ export default class Gantt extends Component {
             if (task.priority === "Low") {
                 return task.class = "yellowBorder";
             }
+            if(task.priority==="not-show-task-gantt"){
+                return task.class = "not-show-task-gantt"
+            }
             else {
                 return task.class = "orangeBorder";
             }
         };
-        // this.setState({  daysStyle: "weekend"   })
         gantt.config.columns = [
             { id: "c_1", name: "cardName", label: "", width: 200, template: myFunc },
-            // { id: "c_1", name: "cardName", label: "Card name", width: 200, template: myFunc },
         ];
         gantt.templates.gantt_cell = function (start, end, task) {
             return task.text = "knkl";
@@ -234,15 +226,15 @@ export default class Gantt extends Component {
             console.log(editTaskInRedux);
 
             store.dispatch(actions.setDateTaskFromGantt(editTaskInRedux))
-
-        });
+            this.setState({ currDate: task.start_date })
+        }.bind(this));
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;
         gantt.init(this.ganttContainer);
         this.initGanttDataProcessor();
         gantt.parse(tasks);
 
-       
+
 
         // gantt.init(this.ganttContainer);
 
@@ -267,23 +259,30 @@ export default class Gantt extends Component {
                ${task.cardName}
                 </div>`);
             }
+            else{
+                return (`<div class='task-name-gantt'>
+              
+               ${task.text}
+                </div>`);
+            }
         }
 
-        var data = {
-            tasks: [
-                { id: "p_1", text: "one card", start_date: "01-04-2020", duration: 18 },
-                {
-                    id: "t_1", text: "Task #1", start_date: "02-04-2020", duration: 8,
-                    parent: "p_1"
-                }
-            ]
-        };
+        // var data = {
+        //     tasks: [
+        //         { id: "p_1", text: "one card", start_date: "01-04-2020", duration: 18 },
+        //         {
+        //             id: "t_1", text: "Task #1", start_date: "02-04-2020", duration: 8,
+        //             parent: "p_1"
+        //         }
+        //     ]
+        // };
         gantt.open("p_1");
     }
     state = {
         background: '#fff',
         newDatesInTask: {}
     };
+
 
 
     handleChangeComplete = (color) => {
