@@ -205,11 +205,9 @@ function TaskDetails(props) {
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
-
     const assingto = (e) => {
         setShowContactList(true)
     }
-
     function closeViewDetailsInTask() {
         props.setTaskFromTasks(taskBeforeChanges)
         props.closeViewDetails()
