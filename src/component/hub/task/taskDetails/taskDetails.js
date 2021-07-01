@@ -21,23 +21,22 @@ import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
 
 function TaskDetails(props) {
-    debugger
     const nameRequired = useRef()
-    let [taskBeforeChanges,setTaskBeforeChanges]=useState();
+    let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
-        if(props.cards){
-            setTaskBeforeChanges( ({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
+        if (props.cards) {
+            setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
 
-        props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-        props.setFilesFromTask(props.task.files)
-        if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
-        if (props.contactsUser.length == 0)
-            props.getContactsForUser()
+            props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
+            props.setFilesFromTask(props.task.files)
+            if (!(props.statuses && props.statuses.length > 0))
+                props.getAllStatusesTaskForWorkspace();
+            if (props.contactsUser.length == 0)
+                props.getContactsForUser()
         }
     }, [props.cards])
 
@@ -49,6 +48,9 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    const [startTimerComp, setStartTimerComp] = useState(false)
+    const [stopTimerComp, setStopTimerComp] = useState(false)
+
     let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
     const openPopUpStatus = (event) => {
@@ -60,18 +62,14 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
     });
 
-
-
     function stopP(event) {
         event.stopPropagation();
     }
     function closeStatus(event) {
         setOpenPopUp(false)
-
     }
     function closeContactList(event) {
         setShowContactList(false)
-
     }
 
     const compressedFile = async (myFiles) => {
@@ -293,11 +291,10 @@ function TaskDetails(props) {
             props.setCountReadyTasks(false)
         }
     }
-    const [startTimerComp, setStartTimerComp] = useState(false)
+
     const startTimer = () => {
         setStartTimerComp(true)
         props.displayLineByStart()
-        debugger
     }
     return (
         <>
@@ -430,9 +427,9 @@ function TaskDetails(props) {
                                 />
                             </div>
                             {/* <div className="form-group col-md-6 col-lg-5 priority-task-details">
-                                <button onClick={startTimer}>start</button>
-                                <button onClick={(e) => props.disaplayLineByStop()}>stop</button>
-                                <Timer startTimerComp={startTimerComp}></Timer>
+                                <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
+                                <button onClick={(e) => { setStopTimerComp(true); props.disaplayLineByStop() }}>stop</button>
+                                <Timer startTimerComp={startTimerComp} stopTimerComp={stopTimerComp}></Timer>
 
                             </div> */}
                         </div>
