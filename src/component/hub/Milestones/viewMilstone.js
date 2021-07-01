@@ -20,7 +20,7 @@ function ViewMilstone(props) {
 
     }
     function openDetails() {
-        debugger
+        
         getCardsByProject().then((result) => {
             props.saveCurrentIndexOfCardInRedux(props.milestone.card.index)
             props.saveCurrentIndexOfTaskInRedux(props.milestone.task.index)

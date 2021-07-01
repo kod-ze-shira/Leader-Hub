@@ -8,7 +8,7 @@ import './timer.css';
 
 
 function Timer(props) {
-    debugger
+    
     const { continuedTimerContact, flagUserInContact } = props
     const [seconds, setSeconds] = useState(0);
     const [minutes, setminutes] = useState(0);
@@ -30,6 +30,7 @@ function Timer(props) {
         // }
 
         if (props.startTimerComp) {
+            debugger
             interval = setInterval(() => {
                 setSeconds(seconds => seconds + 1);
             }, 1000);
