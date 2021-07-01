@@ -176,7 +176,6 @@ const publicData = {
     setProjectByFiledFromWorkspace(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject]
         [action.payload.nameFiled] = action.payload.value
-
     },
     setProjectInWorkspace(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject] = action.payload

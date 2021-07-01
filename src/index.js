@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
 import Favicon from 'react-favicon';
 
 library.add(fab, fas)

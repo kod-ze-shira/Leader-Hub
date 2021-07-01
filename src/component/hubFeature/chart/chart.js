@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action';
 import './chart.css';
 
+
 function MyChart(props) {
     useEffect(() => {
         props.getTaskStatusesOfProject()
@@ -11,7 +12,7 @@ function MyChart(props) {
 
     const countTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countTasks
     const readyTasks = props.workspaces[props.workspacesIndex].projects[props.indexCurrentProject].countReadyTasks
-    const [cards, setCards] = useState(props.cards)
+    const cards =props.cards
     const barData = [];
     const pieData = [{ category: 'Completed', val: Math.round(readyTasks / countTasks * 100), color: '#38b1b5' }, { category: 'Incompleted', val: Math.round((1 - readyTasks / countTasks) * 100), color: '#99e2e5' }];
     const sticksData = []
@@ -246,7 +247,7 @@ function MyChart(props) {
             },
         },
         legend: {
-        position: "bottom",
+            position: "bottom",
             style: {
                 margin: '0'
             }
@@ -289,9 +290,11 @@ function MyChart(props) {
 
     }
     const seriesPie = pieData.map(p => p.val)
+
     return (
         <>
             <div className='container chartContainer'>
+     
                 <div className="row divProjectStatistics pt-3 ml-2">
                     <h4>Project Statistics</h4>
                 </div>
