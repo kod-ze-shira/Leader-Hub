@@ -25,7 +25,6 @@ function TaskDetails(props) {
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
-
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
@@ -101,7 +100,7 @@ function TaskDetails(props) {
 
         if (nameRequired.current.value) {
             if (milstone)
-                props.viewToastComplete({ show: true, massege: 'Mark milstone!!' })
+                props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -110,32 +109,31 @@ function TaskDetails(props) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
             }
+            // else
+            //     if (props.arrDeleteFilesOfTask.length) {
+            //         for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
+            //             // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
+            //             for (let index2 = 0; index2 < props.task.files.length; index2++) {
+            //                 if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
+            //                     try {
+            //                         props.task.files.splice(index2, 1);
+            //                     } catch (error) {
+            //                         console.log(error)
+            //                     }
+            //                 }
+
+            //                 // first element removed
+            //             }
+            //             // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
+
+            //         }
+            //         props.EditTask(props.task)
+            //         // props.removeFile(props.ArrDeleteFilesOfTask)
+
+            //     }
+
             else
-                if (props.arrDeleteFilesOfTask.length) {
-                    for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
-                        // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-                        for (let index2 = 0; index2 < props.task.files.length; index2++) {
-                            if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                try {
-                                    props.task.files.splice(index2, 1);
-
-                                } catch (error) {
-                                    console.log(error)
-                                }
-                            }
-                            // first element removed
-                        }
-                        // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
-
-                    }
-                    let r = props.task.files
-                    props.EditTask(props.task)
-                    // props.removeFile(props.ArrDeleteFilesOfTask)
-
-                }
-
-                else
-                    props.EditTask(props.task)
+                props.EditTask(props.task)
             props.closeViewDetails();
 
         }
@@ -165,8 +163,6 @@ function TaskDetails(props) {
         let editTask = { "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id, "priority": event.value._id }
         console.log(editTask)
         props.EditTask(editTask)
-
-
     };
 
     const deleteTask = (e) => {
@@ -201,6 +197,8 @@ function TaskDetails(props) {
                 if (input.target.name == "milestones") {
                     setMilstone(!props.task.milestones)
                     value = !milstone
+                    if (!milstone)
+                        props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
                 }
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
@@ -274,7 +272,7 @@ function TaskDetails(props) {
             props.setCountReadyTasks(true)
             // setShowChalalit(true)
 
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else {
             props.setCountReadyTasks(false)
@@ -381,9 +379,8 @@ function TaskDetails(props) {
                                         onChange={(e) => changeFiledInTask(e)}
                                     />
                                     <span className="slider round" ></span>
-
-
                                 </label>
+
                             </div>
 
                         </div>
@@ -409,6 +406,8 @@ function TaskDetails(props) {
                                 />
                             </div>
                         </div>
+
+
                     </div>
 
                     <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
@@ -421,7 +420,8 @@ function TaskDetails(props) {
 
                 <div className="row justify-content-around mx-1 ">
                     {showContactList ?
-                        <ContactList taskDetails={true}></ContactList> : null
+                        <ContactList taskDetails={true}
+                            viewToastMassege={props.viewToastMassege} /> : null
 
                     }
                     {props.task.assingTo ?

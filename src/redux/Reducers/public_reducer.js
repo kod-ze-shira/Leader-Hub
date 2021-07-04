@@ -25,14 +25,11 @@ const initialState = {
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
     foldersForDownload: [],
-    descriptionNewProject: '',
     sharedProjects: [] //projects that user shared  
 }
 
 const publicData = {
-    setDescriptionNewProject(state, action) {
-        state.descriptionNewProject = action.payload
-    },
+
     setclose(state, action) {
         state.close = !state.close
     },
@@ -47,7 +44,7 @@ const publicData = {
         state.arrFilesOfTask = action.payload
     },
     addMember(state, action) {
-        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members=action.payload
+        state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = action.payload
         // let members = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members
         // action.payload.map(payload => {
         //     let flag = false;
@@ -60,7 +57,7 @@ const publicData = {
         // })
         // state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = members
     },
-    
+
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
@@ -102,6 +99,9 @@ const publicData = {
                 indexTask = index
             }
         }
+        if (!state.tasks[indexTask].priority)
+            state.tasks[indexTask].priority = ''
+
         state.tasks[indexTask][action.payload.nameFiled] = action.payload.value
     },
     setIdFiles(state, action) {
@@ -425,10 +425,26 @@ const publicData = {
             else
                 state.arrDeleteFilesOfTask = fileToDelete
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
+            if (state.cards && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
+                for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
+                    if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
+                        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
+                        console.log('ll');
+                        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files =
+                        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
+
+                    }
+                }
+
+                // .filter((file) => file.url != action.payload.url)
+            }
         }
         else {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
+
+
+
     },
 
     saveCurrentIndexOfTaskInRedux(state, action) {
@@ -447,7 +463,7 @@ const publicData = {
         state.indexOfWorkspace = action.payload
     },
     setDateTaskFromGantt(state, action) {
-        let task=action.payload.task
+        let task = action.payload.task
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].dueDate = task.dueDate
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].startDate = task.startDate
 

@@ -128,7 +128,6 @@ function ViewCardsTabs(props) {
         function () {
             $(this).attr('contentEditable', false);
         });
-    console.log(props.cards);
     return (
         <>
             <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
@@ -186,7 +185,7 @@ function ViewCardsTabs(props) {
                                                             indexCard={props.indexCard}
                                                             showRocketShip={props.showRocketShip}
                                                             indexTask={index}
-                                                            viewToastComplete={props.viewToastComplete}
+                                                            viewToastMassege={props.viewToastMassege}
                                                             viewContactList={props.viewContactList} />
                                                     ))}
                                                     {

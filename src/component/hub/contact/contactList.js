@@ -73,7 +73,7 @@ function ContactList(props) {
   const contactList = props.contactsUser.length > 0 ?
     arrayFilter && arrayFilter.length ?
       arrayFilter.map((contact) =>
-        <ViewContact contact={contact}></ViewContact>
+        <ViewContact contact={contact} viewToastMassege={props.viewToastMassege} />
       )
       :
       <button className="ml-2 col-4 my-2 invite-button  " autocomplete="chrome-off"
@@ -101,7 +101,7 @@ function ContactList(props) {
               onChange={(e) => handleChange(e)}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
-            {/* //  : null} */} 
+            {/* //  : null} */}
             {contactList}</div>
           {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}

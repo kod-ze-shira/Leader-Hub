@@ -10,22 +10,29 @@ import File from '../../../uploadFile/file/file'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
+import Select from 'react-select';
 
 function TaskNotBelongDetails(props) {
     const nameRequired = useRef()
     const [taskBeforeChanges] = useState({ ...props.task })
-    // const [completeTask, setCompleteTask] = useState(props.task.complete)
+    const [milstone, setMilstone] = useState(props.task.milestones)
+    const [openPopUp, setOpenPopUp] = useState(false)
+    const [fileComponentArr, setFileComponentArr] = useState([])
 
+    let dueDate = props.task.dueDate;
+    let startDate = props.task.startDate;
+    let dueDate_ = dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
+    let startDate_ = startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
 
+    let [dueDateTask, setDueDateTask] = useState(dueDate_)
+    let [startDateTask, setStartDateTask] = useState(startDate_)
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
         props.setFilesFromTask(props.task.files)
 
     }, [props.task])
 
-    // const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
-    const [openPopUp, setOpenPopUp] = useState(false)
-    const [fileComponentArr, setFileComponentArr] = useState([])
+
 
     // const openPopUpStatus = (event) => {
     //     setOpenPopUp(true)
@@ -73,6 +80,7 @@ function TaskNotBelongDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
+
         if (nameRequired.current.value) {
             props.objectBeforeChanges(null)
             let newFiles
@@ -105,7 +113,7 @@ function TaskNotBelongDetails(props) {
                     props.EditTask(props.task)
 
                 } else
-                    props.EditTask({ 'type': 'taskNotBelong2', 'idTask': props.task._id })
+                    props.EditTask({ 'type': 'taskNotBelong', 'idTask': props.task._id, 'task': props.task })
             props.closeViewDetails();
 
         }
@@ -125,13 +133,7 @@ function TaskNotBelongDetails(props) {
 
     }
 
-    let dueDate = props.task.dueDate;
-    let startDate = props.task.startDate;
-    let dueDate_ = dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
-    let startDate_ = startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
 
-    let [dueDateTask, setDueDateTask] = useState(dueDate_)
-    let [startDateTask, setStartDateTask] = useState(startDate_)
 
 
     const changeFiledInTask = (input) => {
@@ -145,7 +147,12 @@ function TaskNotBelongDetails(props) {
             if (input.target.name === "dueDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
-            }
+            } else
+                if (input.target.name == "milestones") {
+                    props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
+                    setMilstone(!props.task.milestones)
+                    value = !milstone
+                }
         // else
         //     if (input.target.name == "milestones") {
         //         setMilstone(!props.task.milestones)
@@ -193,9 +200,27 @@ function TaskNotBelongDetails(props) {
             setDownloadFile={(e) => props.setDownloadFile(e)}
         />
     }) : null
+
+    const changePriority = (event) => {
+        // setPriorityTask(event.value)
+        let editTaskInRedux = { "nameFiled": "priority", "value": event.value, 'idTask': props.task._id }
+        props.setTaskByFiledFromTasksNotBelong(editTaskInRedux)
+    };
+
+    const viewPriortyList = props.priorities ? props.priorities.map(priority => (
+        {
+            value: priority,
+            label:
+                <div className="prioprty-select ">
+                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <p>{priority.level}</p>
+                </div>
+        }
+    )) : null
+
     return (
         <>
-            <div className="details task-details ml-4"
+            <div className="detailsTaskNotBelong task-details ml-4"
                 onClick={(e) => stopP(e)}
             >
                 <div className='propertiesViewDitails'>
@@ -214,7 +239,7 @@ function TaskNotBelongDetails(props) {
                             <label for="name">Name</label>
                             <input name="name"
                                 required ref={nameRequired}
-                                type="text" class="form-control"
+                                type="text" class="form-control inputTaskN"
                                 id="name"
                                 onChange={(e) => changeFiledInTask(e)}
                                 value={props.task.name} />
@@ -227,6 +252,7 @@ function TaskNotBelongDetails(props) {
                             <label for="description">Description</label>
                             <textarea class="form-control"
                                 rows="3"
+                                className='inputTaskN'
                                 placeholder="Write a description about your workspace"
                                 name="description"
                                 value={props.task.description}
@@ -237,7 +263,7 @@ function TaskNotBelongDetails(props) {
                             <div class="form-group col-md-6 col-lg-5">
                                 <label for="startDate">Start Date</label>
                                 <input
-                                    className="form-control"
+                                    className="form-control inputTaskN"
                                     name="startDate"
                                     type="date"
                                     id="startDate"
@@ -248,7 +274,7 @@ function TaskNotBelongDetails(props) {
                             <div class="form-group col-md-6 col-lg-5">
                                 <label for="dueDate">Due Date</label>
                                 <input
-                                    className="form-control "
+                                    className="form-control inputTaskN"
                                     name="dueDate"
                                     type="date"
                                     id="dueDate"
@@ -260,6 +286,51 @@ function TaskNotBelongDetails(props) {
                         </div>
                         <div className="row justify-content-between">
                         </div>
+
+                        <div className='row d-flex justify-content-between'>
+                            {/* Priority */}
+                            <div className="col-md-6 col-lg-5 ">
+                                <div className="form-group  priority-task-details">
+                                    <label for="priority">Priority</label>
+
+                                    <Select
+                                        isSearchable={false}
+                                        name="priority"
+                                        className="bacW"
+                                        // classNamePrefix="select"
+                                        options={viewPriortyList}
+                                        placeholder={props.task.priority ?
+                                            <div className="prioprty-select  dropdown-toggle">
+                                                <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                <p>{props.task.priority.level}</p>
+                                            </div> : <div className="prioprty-select  dropdown-toggle">
+                                                <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
+                                                <p >{props.priorities[0].level}</p>
+                                            </div>}
+                                        onChange={(e) => changePriority(e)}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* milestone */}
+                            <div className="col-md-6 col-lg-5">
+                                <span className="milestones-span mt-2">Mark as milestone</span>
+                                <label className="switch ml-2 mt-1">
+                                    <input type="checkbox"
+                                        name="milestones"
+                                        checked={milstone}
+                                        value={props.task.milestones}
+                                        onChange={(e) => changeFiledInTask(e)}
+                                    />
+                                    <span className="slider round" ></span>
+
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
                     </div>
                     <div className='row  d-flex justify-content-between mr-3 ml-3'>
                         {newFileComponentArr}
@@ -296,7 +367,8 @@ const mapStateToProps = (state) => {
         user: state.public_reducer.userName,
         statuses: state.status_reducer.statuses,
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
-        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask
+        priorities: state.public_reducer.priorities,
+        arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
 
     }
 }

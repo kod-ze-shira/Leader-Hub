@@ -30,7 +30,6 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         if (props.task.assingTo)
@@ -131,7 +130,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
-        
+
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -161,7 +160,7 @@ function ViewTaskByCradTabs(props) {
             props.setCountReadyTasks(true)
             // alert('fff')
             props.showRocketShip(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else {
             props.setCountReadyTasks(false)
@@ -308,7 +307,7 @@ function ViewTaskByCradTabs(props) {
                                     // id="note"
                                     // rows={1}
                                     // class="autosize"
-                                    
+
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onBlur={(e) => editTask()}

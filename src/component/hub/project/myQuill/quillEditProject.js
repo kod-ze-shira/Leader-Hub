@@ -24,9 +24,9 @@ class QuillEditProject extends Component {
     }
 
 
-    componentDidMount() {
-        this.changeFiledInEditProject(this.props.text)
-    }
+    // componentDidMount() {
+    //     this.changeFiledInEditProject(this.props.text)
+    // }
 
     modules = {
         // כאן ניתן להוסיף\להסיר עוד אלמנטים לעיצוב הטקסט
