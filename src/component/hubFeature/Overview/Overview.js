@@ -80,11 +80,11 @@ function Overview(props) {
                                             : null}
                                     </div>
                                 </div>
-                            </div>
+                                </div>
                         </div>
                     </div>
 
-                    <div className='col d-xs-none d-lg-block scrollOverview '>
+                    <div className='col d-xs-none d-lg-block scrollOverview'>
                         <div className='container-fluid px-0 '>
                             {refresh ?
                                 <HangoutAndLogs></HangoutAndLogs>
