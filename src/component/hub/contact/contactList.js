@@ -40,6 +40,7 @@ function ContactList(props) {
   }, [])
 
   const assingTaskToContact = (e) => {
+
     e.stopPropagation()
     let isValid = ValidateEmail(valueSearch)
     console.log(isValid)
@@ -118,6 +119,7 @@ function ContactList(props) {
     </>
   )
 }
+
 export default connect(
   (state) => {
     return {

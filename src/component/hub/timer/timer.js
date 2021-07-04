@@ -8,7 +8,7 @@ import './timer.css';
 
 
 function Timer(props) {
-    
+
     const { continuedTimerContact, flagUserInContact } = props
     const [seconds, setSeconds] = useState(0);
     const [minutes, setminutes] = useState(0);
@@ -30,7 +30,6 @@ function Timer(props) {
         // }
 
         if (props.startTimerComp) {
-            debugger
             interval = setInterval(() => {
                 setSeconds(seconds => seconds + 1);
             }, 1000);
@@ -56,7 +55,7 @@ function Timer(props) {
 
 
     const convertHour = (timer1) => {
-        console.log("timer>>>>>>", timer1)
+        console.log("timer", timer1)
         let timer = new Date(timer1)
         setHours(Number(timer.getHours() - 3))
         setminutes(Number(timer.getMinutes()));

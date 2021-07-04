@@ -583,11 +583,11 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
 }
 export const disaplayLineByStop = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DISAPLAY_LINE_BY_STOP') {
-
+debugger
         let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
         let _id = task.workingTime[task.workingTime.length - 1]
         let userName = getState().public_reducer.userName
-        let totalHour = "2020-11-02T00:00:00.000Z"
+        // let totalHour = "2020-11-02T00:00:00.000Z"
         let endWork = new Date();
         let description = "dgghje"
         let urlDataP = "https://time.leader.codes/api/" + userName + "/updateEndHour"
@@ -597,9 +597,8 @@ export const disaplayLineByStop = ({ dispatch, getState }) => next => action => 
             withCradentials: true,
             async: false,
             contentType: "application/json; charset=utf-8",
-            // data: userIdP,
             data: JSON.stringify({
-                _id, endWork, totalHour, description
+                _id, endWork,/* totalHour,*/ description
             }),
             headers: {
                 "Authorization": getState().public_reducer.tokenFromCookies
