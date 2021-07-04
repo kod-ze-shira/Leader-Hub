@@ -20,8 +20,8 @@
 }
 
 .select-workspace .css-1uccc91-singleValue, .select-workspace .css-1wa3eu0-placeholder,.select-workspace .css-b8ldur-Input{
-   margin-left: 2.8vw !important;
-
+   /* margin-left: 2.8vw !important; */
+   margin-left: calc(2vh + 20px) !important;
 }
 
 .css-5duvv3-control{

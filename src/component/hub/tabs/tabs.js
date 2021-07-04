@@ -152,7 +152,11 @@ function Tabs(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                }
+
             }
         }
     })
@@ -272,6 +276,7 @@ export default connect(
     (state) => {
         return {
             indexCurrentCard: state.public_reducer.indexCurrentCard,
+            indexCurrentTask: state.public_reducer.indexCurrentTask,
             project: state.project_reducer.project,
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
@@ -280,7 +285,7 @@ export default connect(
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
             statuses: state.public_reducer.statuses,
-            cardsEmpty: state.public_reducer.cardsEmpty
+            cardsEmpty: state.public_reducer.cardsEmpty,
 
         }
     },
@@ -301,6 +306,7 @@ export default connect(
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
             getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
             newCard: (cardname) => dispatch(actions.newCard(cardname)),
+            EditTask: (task) => dispatch(actions.editTask(task)),
 
         }
     }
