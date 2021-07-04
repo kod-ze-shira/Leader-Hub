@@ -8,6 +8,9 @@ import $ from 'jquery'
 
 function ContactList(props) {
   const [arrayFilter, setArrayFilter] = useState(null);
+  const [contacts, setContacts] = useState(props.contactsUser);
+  const [search, setSearch] = useState('')
+
   useEffect(() => {
     $(".invalid-feedback").css("display", "none");
     if (props.contactsUser.length == 0)
@@ -16,28 +19,40 @@ function ContactList(props) {
 
   const [valueSearch, setValueSearch] = useState("")
   const nameRequired = useRef()
-
-  const setFIlter = () => {
-    let arrayTemp = [];
-    if (props.contactsUser.length)
-      props.contactsUser.map((contact) => {
-        if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
-          arrayTemp.push(contact);
-        }
-      })
-    setArrayFilter(arrayTemp)
+  function searchContacts(e) {
+    setSearch(e.target.value)
+    let help = []
+    props.contactsUser.map(cm => {
+      let name = cm.name.search(e.target.value)
+      let email = cm.email.search(e.target.value)
+      if (name === 0 || email === 0)
+        help.push(cm)
+    })
+    setContacts(help)
   }
+
+  // const setFIlter = () => {
+  //   let arrayTemp = [];
+  //   if (props.contactsUser.length)
+  //     props.contactsUser.map((contact) => {
+  //       if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
+  //         arrayTemp.push(contact);
+  //       }
+  //     })
+  //   setArrayFilter(arrayTemp)
+  // }
+
 
   const handleChange = (event) => {
     setValueSearch(event.target.value)
-    setFIlter();
+    searchContacts(event);
     if (valueSearch)
       $(".invalid-feedback").css("display", "none");
   }
 
-  useEffect(() => {
-    setFIlter();
-  }, [])
+  // useEffect(() => {
+  //   setFIlter();
+  // }, [])
 
   const assingTaskToContact = (e) => {
     e.stopPropagation()
@@ -71,8 +86,8 @@ function ContactList(props) {
   }
 
   const contactList = props.contactsUser.length > 0 ?
-    arrayFilter && arrayFilter.length ?
-      arrayFilter.map((contact) =>
+    contacts && contacts.length ?
+      contacts.map((contact) =>
         <ViewContact contact={contact}></ViewContact>
       )
       :
@@ -98,10 +113,10 @@ function ContactList(props) {
             {/* {props.hub ? */}
             <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => { handleChange(e); }}
               onClick={(e) => e.stopPropagation()}
               value={props.contactsUser.email}></input>
-            {/* //  : null} */} 
+            {/* //  : null} */}
             {contactList}</div>
           {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
               className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
