@@ -131,7 +131,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
-        
+
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -308,7 +308,7 @@ function ViewTaskByCradTabs(props) {
                                     // id="note"
                                     // rows={1}
                                     // class="autosize"
-                                    
+
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
                                     onBlur={(e) => editTask()}
@@ -333,15 +333,16 @@ function ViewTaskByCradTabs(props) {
                                 <div className="icons-in-task-tabs pt-0">
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
-                                            <div> {props.task.priority ?
-                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
-                                                : null}
-                                            </div>
+
                                             <div
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
                                                 className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
                                                 style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                                 {props.task.status ? props.task.status.statusName : null}
+                                            </div>
+                                            <div className="pl-2"> {props.task.priority ?
+                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                : null}
                                             </div>
                                         </div>
                                         {/* {props.task.status ? <div title={props.task.status.statusName}

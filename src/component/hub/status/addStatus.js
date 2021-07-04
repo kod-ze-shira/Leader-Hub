@@ -22,14 +22,10 @@ function AddStatus(props) {
 
 
     const addStatus = (e) => {
-        
-        console.log(openPopUp);
         props.createStatus(newStatus)
-        console.log(props.statuses);
         // e.stopPropagation();
         setOpenPopUp(false)
-        console.log(openPopUp);
-
+        props.closeStatuses()
     }
     const handleChangeStatus = (event) => {
         const { name, value } = event.target
