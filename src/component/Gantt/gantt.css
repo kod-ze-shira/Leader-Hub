@@ -17,7 +17,9 @@
 .gantt_task_row {
   display: none;
 }
-
+.gantt_row, .gantt_task_row{
+  /* border:unset !important */
+}
 .gantt_line_wrapper {
   display: none;
 }
@@ -124,7 +126,7 @@
 .today{
   background-color: rgb(218, 246, 247) !important;
   width: 40px !important;
-  margin-left: -22px !important;
+  margin-left: -20px !important;
   z-index: 1!important;
   opacity: 0.5 !important;
   height: 100vh !important;
@@ -147,7 +149,7 @@
   vertical-align: middle !important;
   background-color: #3598F4 !important;
   height: 100vh !important;
-
+  z-index: 4;
 }
 .milestones_ > .gantt_marker_content{
   background-image: url("../img/milstone.svg") !important;
@@ -156,7 +158,7 @@
   width: 5vh;
   padding: 11px !important;
   margin-top: 30vh;
-  margin-left: -1.5vh;
+  margin-left: -2.5vh;
   background-color: transparent !important;
   opacity: 1;
 
@@ -183,10 +185,23 @@
   display: flex;
   align-items: center;
 }
-/* .gantt_data_area{
-  
-  overflow-x: scroll !important;
-} */
+
+.gantt_link_control div{
+  border-radius: unset !important;
+  height:20px !important;
+  width:2px !important;
+  margin-top: -12.5px !important;
+  border: 1px dotted white !important;
+  background-color:white !important;
+}
+
+.gantt_link_control.task_left div{
+  margin-right: -10px !important;
+}
+.gantt_link_control.task_right div{
+  margin-left: -10px !important;
+}
+
 .gantt_data_area::-webkit-scrollbar{
   display:block;
 }
@@ -200,4 +215,12 @@
   align-items: center;
   color: grey !important;
   font-weight :500 !important;
+  margin-left: 2vw;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  cursor: pointer !important;
+  text-align: start;
+  /* display: flex; */
+  /* align-items: center; */
 }
