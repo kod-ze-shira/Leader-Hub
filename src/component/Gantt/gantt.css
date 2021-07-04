@@ -124,7 +124,7 @@
 .today{
   background-color: rgb(218, 246, 247) !important;
   width: 40px !important;
-  margin-left: -3vh !important;
+  margin-left: -22px !important;
   z-index: 1!important;
   opacity: 0.5 !important;
   height: 100vh !important;
@@ -133,7 +133,9 @@
 }
 .today-scale{
   color:#68C7CB !important;
-  background-color: rgb(218, 246, 247) !important;
+  /* background-color: rgb(218, 246, 247) !important; */
+  border-left: 2px solid #68C7CB;
+  border-right: 2px solid #68C7CB !important;
 }
 .gantt_marker_content {
   color: black !important;
@@ -190,4 +192,12 @@
 }
 .gantt_row, .gantt_task_row{
   /* border-bottom: none !important; */
+}
+.not-show-task-gantt{
+  display: none !important;
+}
+.task-name-gantt{
+  align-items: center;
+  color: grey !important;
+  font-weight :500 !important;
 }
