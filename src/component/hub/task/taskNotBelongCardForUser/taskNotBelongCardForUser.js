@@ -108,7 +108,7 @@ function TaskNotBelongCardForUser(props) {
             <div className="wrap-all-task">
                 <div className="wrap-all-task-width">
                     <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                        <label class="ml-3 pl-6 col-3 col-xl-4 labelAllTask"> My task </label>
+                        <label class="ml-3 pl-6 col-3  labelAllTask"> My task </label>
                         <label class="col-2 propertiesAllTask ml-4">Workspace</label>
                         <label class="col-2 propertiesAllTask">Project</label>
                         <label class=" col-2 propertiesAllTask">Card</label>

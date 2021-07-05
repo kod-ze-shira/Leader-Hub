@@ -301,3 +301,8 @@ inner-addon {
     text-align: center !important;
 }
 
+.task-name-no-belong{
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
