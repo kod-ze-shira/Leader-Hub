@@ -9,7 +9,8 @@ export const setIfShowShareProjectsToTrue = ({ dispatch, getState }) => next => 
                 authorization: getState().public_reducer.tokenFromCookies,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            body:JSON.stringify(getState.public_reducer.sharedProjects)
         })
     }
     return next(action)
