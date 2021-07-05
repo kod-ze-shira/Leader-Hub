@@ -48,7 +48,7 @@ function Tabs(props) {
             setIfAnimation(false)
         }
     }, [props.cards.length, props.cardsEmpty])
-    const [dragTask, setDragTask] = useState(true)
+    const [dragTask, setDragTask] = useState(false)
     useEffect(() => {
 
     }, [dragTask])
@@ -56,12 +56,14 @@ function Tabs(props) {
     function onDragStart(e) {
         let card = props.cards.find(card => card._id == e.draggableId)
         if (!card) {
-            setDragTask(true)
+            setDragTaskF()
+
+            let b = dragTask
             // alert("true")
         }
-        else
-            // alert("fals")
-            console.log("index   @@@@@@@@@@@@")
+    }
+    function setDragTaskF() {
+        setDragTask(true)
     }
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
@@ -150,7 +152,11 @@ function Tabs(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                }
+
             }
         }
     })
@@ -161,7 +167,7 @@ function Tabs(props) {
 
 
     return (
-        <><div className="body-cards">
+        <><div className="body-cards ">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
@@ -169,8 +175,8 @@ function Tabs(props) {
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
-                        droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
-
+                        // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
+                        droppableId={props.cards[props.cards.length - 1]._id}
                     >
                         {provided => (
                             <div
@@ -180,7 +186,7 @@ function Tabs(props) {
                                     <div className="row row mx-3">
                                         {props.cards.length ?
                                             <DragDropContext
-                                                onDragStart={(e) => onDragStart(e)}
+                                                // onDragStart={(e) => onDragStart(e)}
                                                 onDragEnd={(e) => onDragEndׂ(e)} >
 
                                                 {props.cards.map((card, index) => {
@@ -216,7 +222,7 @@ function Tabs(props) {
                                                                     className="form-control "
                                                                     placeholder={""} value={inputValue}
                                                                     onChange={updateInputValue}
-                                                                    onBlur={(e) => newCard()}
+                                                                    // onBlur={(e) => newCard()}
                                                                     onKeyPress={event => {
                                                                         if (event.key === 'Enter') {
                                                                             newCard()
@@ -270,6 +276,7 @@ export default connect(
     (state) => {
         return {
             indexCurrentCard: state.public_reducer.indexCurrentCard,
+            indexCurrentTask: state.public_reducer.indexCurrentTask,
             project: state.project_reducer.project,
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
@@ -278,7 +285,7 @@ export default connect(
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
             statuses: state.public_reducer.statuses,
-            cardsEmpty: state.public_reducer.cardsEmpty
+            cardsEmpty: state.public_reducer.cardsEmpty,
 
         }
     },
@@ -299,6 +306,7 @@ export default connect(
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
             getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
             newCard: (cardname) => dispatch(actions.newCard(cardname)),
+            EditTask: (task) => dispatch(actions.editTask(task)),
 
         }
     }

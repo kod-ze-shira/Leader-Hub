@@ -45,17 +45,6 @@ const publicData = {
     },
     addMember(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = action.payload
-        // let members = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members
-        // action.payload.map(payload => {
-        //     let flag = false;
-        //     members.map(member => {
-        //         if (member.contact.email === payload.email)
-        //             flag = true;
-        //     })
-        //     if (!flag)
-        //         members.push({ contact: payload })
-        // })
-        // state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].members = members
     },
 
     setNewFilesInTask(state, action) {
@@ -176,7 +165,6 @@ const publicData = {
     setProjectByFiledFromWorkspace(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject]
         [action.payload.nameFiled] = action.payload.value
-
     },
     setProjectInWorkspace(state, action) {
         state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject] = action.payload
@@ -394,7 +382,10 @@ const publicData = {
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },
+    setStartHourId(state, action) {
 
+        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].workingTime.push(action.payload)
+    },
 
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {

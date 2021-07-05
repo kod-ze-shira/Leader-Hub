@@ -55,7 +55,7 @@ function TaskNotBelongCardForUser(props) {
                     </img>‏ */}
                     {/* <span className="icon-complete">+</span> */}
                     Add Task </button>
-                <div className={showBtn ? 'd-none' : 'd-block d-flex   col-6 col-lg-8  p-0  mr-md-auto  mr-2 ml-4'}>
+                <div className={showBtn ? 'd-none' : 'd-block d-flex   col-4 col-xl-5  p-0  mr-md-auto  mr-2 ml-4'}>
                     <div className="wrap-input mr-2 col-8 col-lg-11  ">
                         <input type="text" className='addTaskNotBelong '
                             value={nameTask}

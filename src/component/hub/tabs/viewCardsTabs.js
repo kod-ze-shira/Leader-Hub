@@ -52,6 +52,7 @@ function ViewCardsTabs(props) {
                 startDate: today, dueDate: today, "card": props.card._id
             }
             props.newTask(task)
+            //לבדוק נפילה
             let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
             props.setCountTasks(countTasksInProject += 1)
 
@@ -130,7 +131,7 @@ function ViewCardsTabs(props) {
         });
     return (
         <>
-            <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
+            <div className="card-width px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -186,7 +187,8 @@ function ViewCardsTabs(props) {
                                                             showRocketShip={props.showRocketShip}
                                                             indexTask={index}
                                                             viewToastMassege={props.viewToastMassege}
-                                                            viewContactList={props.viewContactList} />
+                                                            viewContactList={props.viewContactList}
+                                                            openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?
@@ -213,7 +215,7 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t" onClick={(e) => addTask(e)}
-                                            className="add-task-tabs mt-4 mt-3 ">Add Task</a>
+                                            className="add-task-tabs mt-4 mt-3 pl-1 ">Add Task</a>
                                         {/* <img className="mt-2 new-task-tabs" onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img> */}
                                     </div>
                                 </div>
