@@ -12,7 +12,7 @@ import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
+import socket from '../../../../socket/socket'
 function AllWorkspaces(props) {
     // const [showToastDelete, setShowToastDelete] = useState(false)
     // const [showModalDelete, setShowModalDelete] = useState(false)
@@ -23,6 +23,10 @@ function AllWorkspaces(props) {
         props.getContactsForUser()
         props.getAllTeamsForUser()
         props.getAllWorkspaces()
+        socket.on("connect", () => {
+            console.log(socket);
+            console.log('connect');
+        });
 
     }, []);
 

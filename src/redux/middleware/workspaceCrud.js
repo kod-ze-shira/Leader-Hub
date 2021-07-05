@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
-
+import socket from '../../socket/socket'
 // ${configData.SERVER_URL}
 export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type == "GET_WORKSPACE_BY_ID_FROM_SERVER") {
@@ -16,7 +16,7 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
         }).then((result) => {
             console.log(result)
             checkPermission(result).then((ifOk) => {
-                dispatch(actions.setWorkspace(result.result))
+                                dispatch(actions.setWorkspace(result.result))
 
             })
         })
@@ -81,6 +81,9 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
                 console.log("success")
                 console.log(data);
                 dispatch(actions.addWorkspaceToWorkspacesFromServer(data.message))
+                socket.emit('addWorkspace',()=>{
+                    console.log('ddd');
+                })
                 // dispatch(actions.addTaskToTasksWhenAddTaskToServer(data.message));
             },
             error: function (err) {
