@@ -147,6 +147,7 @@ function EditProject(props) {
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
+
                     </button>
                     <button data-tip data-for="save" onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">

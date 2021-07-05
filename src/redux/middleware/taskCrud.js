@@ -244,7 +244,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 if (data.project)
                     dispatch(actions.setProjectInWorkspace(data.project))
-                console.log("success")
+
                 if (getState().public_reducer.arrDeleteFilesOfTask.length) {
                     let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
                     for (let index = 0; index < arr.length; index++) {
@@ -257,7 +257,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                 if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
-                if (data.result.priority) {
+                if (data.result.priority && data.result.card) {
                     dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "priority", "value": data.result.priority }))
                 }
 

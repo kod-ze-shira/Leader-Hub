@@ -67,7 +67,7 @@ function ProjectPlatform(props) {
                 <div className="cards">
                     <CardsByProject
                         showRocketShip={props.showRocketShip}
-                        viewToastComplete={props.viewToastComplete}
+                        viewToastMassege={props.viewToastMassege}
                         showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag}
                         viewContactList={props.viewContactList} />
                     <div className="add-new-pop-up ">
@@ -105,7 +105,7 @@ function ProjectPlatform(props) {
                         name={taskOrCard.name} /> : null}
                 {showToastDelete ?
                     <ContactList toSetShowToastDelete={() => { setShowToastDelete(false) }}
-                    /> : null}
+                        viewToastMassege={props.viewToastMassege} /> : null}
             </div>
         </>
     )

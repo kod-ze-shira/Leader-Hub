@@ -25,14 +25,11 @@ const initialState = {
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
     foldersForDownload: [],
-    descriptionNewProject: '',
     sharedProjects: [] //projects that user shared  
 }
 
 const publicData = {
-    setDescriptionNewProject(state, action) {
-        state.descriptionNewProject = action.payload
-    },
+
     setclose(state, action) {
         state.close = !state.close
     },
@@ -91,6 +88,9 @@ const publicData = {
                 indexTask = index
             }
         }
+        if (!state.tasks[indexTask].priority)
+            state.tasks[indexTask].priority = ''
+
         state.tasks[indexTask][action.payload.nameFiled] = action.payload.value
     },
     setIdFiles(state, action) {
@@ -416,10 +416,26 @@ const publicData = {
             else
                 state.arrDeleteFilesOfTask = fileToDelete
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
+            if (state.cards && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
+                for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
+                    if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
+                        state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
+                        console.log('ll');
+                        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files =
+                        // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
+
+                    }
+                }
+
+                // .filter((file) => file.url != action.payload.url)
+            }
         }
         else {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
+
+
+
     },
 
     saveCurrentIndexOfTaskInRedux(state, action) {

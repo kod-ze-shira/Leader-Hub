@@ -89,7 +89,7 @@ function ContactList(props) {
   const contactList = props.contactsUser.length > 0 ?
     contacts && contacts.length ?
       contacts.map((contact) =>
-        <ViewContact contact={contact}></ViewContact>
+        <ViewContact contact={contact} viewToastMassege={props.viewToastMassege} />
       )
       :
       <button className="ml-2 col-4 my-2 invite-button  " autocomplete="chrome-off"

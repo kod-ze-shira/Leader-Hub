@@ -85,10 +85,9 @@ function ViewProject(props) {
         props.editOrShareProject('shareProject')
         event.stopPropagation();
     }
-    const [membersPlus, setMembersPlus] = useState(0)
-    const members = props.myProject.members.length ?
+    const members = props.myProject.members.length > 0 ?
         props.myProject.members.map((member, index) => {
-            return index < 2 ?
+            return index < 3 && member.contact ?
                 <TeamView marginTeam='' imgTeam={member.contact.thumbnail} />
                 : <></>
         }) : null
@@ -156,12 +155,12 @@ function ViewProject(props) {
                 </td>
                 <td className='widthCellInProject' style={{ 'text-align': 'center' }}>
                     {members}
-                    {props.myProject.members.length > 2 ?
-                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 2)} />
+                    {props.myProject.members.length > 3 ?
+                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 3)} />
                         : null
                     }
 
-                    <CellDescription description='Team' />
+                    <CellDescription description='Members' />
                 </td>
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />

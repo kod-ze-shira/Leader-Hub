@@ -37,7 +37,6 @@ function TasksNotBelongCardByMap(props) {
     let doneStatus = props.task?.complete;
     const [downloadFile, setDownloadFile] = useState(false)
     const [flag, setFlag] = useState(true)
-
     useEffect(() => {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
@@ -80,7 +79,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
     }
 
@@ -237,7 +236,7 @@ function TasksNotBelongCardByMap(props) {
                     "card": props.task.card ? props.task.card : ''
                 }
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-                props.viewToastComplete({ show: true, massege: 'Task assign!!' })
+                props.viewToastMassege({ show: true, massege: 'Task assign!!' })
 
             });
         }
@@ -449,6 +448,7 @@ function TasksNotBelongCardByMap(props) {
                             from='taskNotBelongDetails'
                             task={props.task}
                             setDownloadFile={(e) => setDownloadFile(e)}
+                            viewToastMassege={props.viewToastMassege}
                             open={true} />
                     </div>
                     : null}

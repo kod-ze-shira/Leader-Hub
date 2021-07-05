@@ -192,7 +192,7 @@ function Tabs(props) {
                                                 {props.cards.map((card, index) => {
                                                     return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                         openInputTask={openInputTask}
-                                                        viewToastComplete={props.viewToastComplete}
+                                                        viewToastMassege={props.viewToastMassege}
                                                         viewContactList={props.viewContactList}
                                                         showRocketShip={props.showRocketShip}
                                                         showToast={(obj) => props.showToast(obj)}
@@ -257,7 +257,7 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
-                        viewToastComplete={props.viewToastComplete}
+                        viewToastMassege={props.viewToastMassege}
                         setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}>
                     </ViewDetails>

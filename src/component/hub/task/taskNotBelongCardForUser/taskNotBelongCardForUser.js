@@ -12,9 +12,9 @@ function TaskNotBelongCardForUser(props) {
     const [showBtn, setShowBtn] = useState(true)
     const addTaskInput = useRef();
     useEffect(() => {
-        if (!props.tasks.length)
+        if (!props.tasks.length) {
             props.getAllTasksNotBelongsCardForUser()
-
+        }
     }, [props.tasks])
     useEffect(() => {
         addTaskInput.current.focus();
@@ -33,13 +33,13 @@ function TaskNotBelongCardForUser(props) {
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
                 showRocketShip={props.showRocketShip}
-                viewToastComplete={props.viewToastComplete}
+                viewToastMassege={props.viewToastMassege}
             /> : null
             : <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
                 showRocketShip={props.showRocketShip}
-                viewToastComplete={props.viewToastComplete}
+                viewToastMassege={props.viewToastMassege}
             />
     })
 
