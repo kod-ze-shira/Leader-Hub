@@ -300,7 +300,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className="wrap-not-belong col-4 col-xl-5 row">
+                <div className="wrap-not-belong col-4  row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -323,7 +323,7 @@ function TasksNotBelongCardByMap(props) {
                                 onClick={(e) => { addChalalit(); changeFiledInTask(e) }}></span>
 
                         </label>
-                        <label className='col-10 mt-2 '>
+                        <label className='col-10 mt-2 task-name-no-belong'>
                             {props.task.name}
                         </label>
                     </label>

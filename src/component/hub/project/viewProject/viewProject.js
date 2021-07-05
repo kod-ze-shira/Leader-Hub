@@ -105,7 +105,7 @@ function ViewProject(props) {
                 id={props.myProject._id}>
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
-                    {/* <ProjectStyle color={props.myProject.color}></ProjectStyle> */}
+                    <ProjectStyle color={props.myProject.color}></ProjectStyle>
                     {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
                     <span class='name2ProjectInList' title={props.myProject.name}
                         style={{ 'color': props.myProject.color }}>
