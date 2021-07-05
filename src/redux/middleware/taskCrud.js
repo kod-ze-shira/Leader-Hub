@@ -210,7 +210,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
         if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
             task = action.payload.task
-            console.log("Dxffdgggggghggg",task);
+            console.log("Dxffdgggggghggg", task);
         }
         else
             if (action.payload.type && action.payload.type == 'taskNotBelong') {
@@ -541,9 +541,8 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
 
 }
 
-export const disaplayLineByStart = ({ dispatch, getState }) => next => action => {
+export const displayLineByStart = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DISPLAY_LINE_BY_START') {
-        debugger
         let username = getState().public_reducer.userName
         // let renderTimeline = getState().public_reducer.jsonline
         let workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
@@ -552,10 +551,8 @@ export const disaplayLineByStart = ({ dispatch, getState }) => next => action =>
         let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]._id
         //   let LocationWork = getState().public_reducer.CurrentAddress
 
-        console.log("username", username)
         let urlDataP = "https://time.leader.codes/api/" + username + "/newHour"
         // let urlDataP = "https://time.leader.codes/api/" + username + "/" + userId + "/newHour"
-
         $.ajax({
             url: urlDataP,
             type: 'POST',
@@ -564,16 +561,16 @@ export const disaplayLineByStart = ({ dispatch, getState }) => next => action =>
             contentType: "application/json; charset=utf-8",
             // data: userIdP,
             data: JSON.stringify({
-                 workspaceId, projectId, cardId, taskId
+                workspaceId, projectId, cardId, taskId
             }),
             headers: {
-                "Authorization": getState().userReducer.cookie
+                "Authorization": getState().public_reducer.tokenFromCookies
             },
             dataType: 'json',
-            success: function (data1) {
+            success: function (data) {
                 console.log("success")
-                console.log(data1);
-                dispatch({ type: 'SET_LINE_1', payload: data1 })
+                console.log(data);
+                dispatch(actions.setStartHourId(data.currentHour._id))
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
@@ -584,7 +581,43 @@ export const disaplayLineByStart = ({ dispatch, getState }) => next => action =>
     }
     return next(action);
 }
-
+export const disaplayLineByStop = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DISAPLAY_LINE_BY_STOP') {
+debugger
+        let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
+        let _id = task.workingTime[task.workingTime.length - 1]
+        let userName = getState().public_reducer.userName
+        // let totalHour = "2020-11-02T00:00:00.000Z"
+        let endWork = new Date();
+        let description = "dgghje"
+        let urlDataP = "https://time.leader.codes/api/" + userName + "/updateEndHour"
+        $.ajax({
+            url: urlDataP,
+            type: 'POST',
+            withCradentials: true,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                _id, endWork,/* totalHour,*/ description
+            }),
+            headers: {
+                "Authorization": getState().public_reducer.tokenFromCookies
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch({ type: 'SET_LINE_STOP', payload: data })
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                    console.log(err)
+                })
+            }
+        });
+    }
+    return next(action);
+}
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {

@@ -17,7 +17,9 @@
 .gantt_task_row {
   display: none;
 }
-
+.gantt_row, .gantt_task_row{
+  /* border:unset !important */
+}
 .gantt_line_wrapper {
   display: none;
 }
@@ -26,16 +28,23 @@
   display: none;
 }
 
+.last-weekend{
+  background: #adadad1a !important;
+  color:  #636363 !important;
+}
 .weekend {
   background: #68c7cb1a !important;
   color:  #68C7CB !important;
   font-weight: 800 !important;
 }
-
+.gantt_task_line{
+  z-index: 3;
+}
 .yellowBorder .gantt_task_progress {
   background : linear-gradient(to right, #e9f0af 0%, rgb(218, 199, 24) 100%);
   color: white;
 }
+
 .gantt_task_line.yellowBorder {
   border-radius: 5px !important;
   border: rgb(218, 199, 24) 3px solid !important;
@@ -93,6 +102,12 @@
 .gantt_hor_scroll{
   overflow: hidden !important;
 } */
+.gantt_task_progress_drag{
+  display: none !important
+}
+.gantt_layout_cell.gantt_hor_scroll{
+  height: 11px !important;
+}
 .gantt_delete_button{
   background:red;
 }
@@ -110,14 +125,20 @@
 }
 .today{
   background-color: rgb(218, 246, 247) !important;
-  width: 6vh !important;
-  margin-left: -3vh !important;
-  z-index: 0!important;
+  width: 40px !important;
+  margin-left: -20px !important;
+  z-index: 1!important;
   opacity: 0.5 !important;
   height: 100vh !important;
-
+  border-left: 2px solid #68C7CB;
+  border-right: 2px solid #68C7CB;
 }
-
+.today-scale{
+  color:#68C7CB !important;
+  /* background-color: rgb(218, 246, 247) !important; */
+  border-left: 2px solid #68C7CB;
+  border-right: 2px solid #68C7CB !important;
+}
 .gantt_marker_content {
   color: black !important;
 
@@ -128,7 +149,7 @@
   vertical-align: middle !important;
   background-color: #3598F4 !important;
   height: 100vh !important;
-
+  z-index: 4;
 }
 .milestones_ > .gantt_marker_content{
   background-image: url("../img/milstone.svg") !important;
@@ -137,7 +158,7 @@
   width: 5vh;
   padding: 11px !important;
   margin-top: 30vh;
-  margin-left: -1.5vh;
+  margin-left: -2.5vh;
   background-color: transparent !important;
   opacity: 1;
 
@@ -164,10 +185,42 @@
   display: flex;
   align-items: center;
 }
-/* .gantt_data_area{
-  
-  overflow-x: scroll !important;
-} */
+
+.gantt_link_control div{
+  border-radius: unset !important;
+  height:20px !important;
+  width:2px !important;
+  margin-top: -12.5px !important;
+  border: 1px dotted white !important;
+  background-color:white !important;
+}
+
+.gantt_link_control.task_left div{
+  margin-right: -10px !important;
+}
+.gantt_link_control.task_right div{
+  margin-left: -10px !important;
+}
+
 .gantt_data_area::-webkit-scrollbar{
   display:block;
+}
+.gantt_row, .gantt_task_row{
+  /* border-bottom: none !important; */
+}
+.not-show-task-gantt{
+  display: none !important;
+}
+.task-name-gantt{
+  align-items: center;
+  color: grey !important;
+  font-weight :500 !important;
+  margin-left: 2vw;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  cursor: pointer !important;
+  text-align: start;
+  /* display: flex; */
+  /* align-items: center; */
 }

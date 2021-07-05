@@ -260,9 +260,7 @@ float: right !important;
 .assing-to-list {
   float:left ;
 }
-.prioprty-select{
-  /* margin:auto !important; */
-}
+
 .prioprty-select p{
   font-weight: bold;
   display: inline-block !important;
