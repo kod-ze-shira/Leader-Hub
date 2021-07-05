@@ -55,32 +55,30 @@
 }
 
 @media screen and (max-width: 1300px) {
-    .logUser{
-    }
     .logsDashed{
         margin-left: 2.6vw;
     }
 }
 
 @media screen and (max-width: 1100px) {
-    .logUser{
-    }
     .logsDashed{
         margin-left: 2.8vw;
     }
 }
-
+/* 
 @media screen and (max-width: 880px) {
     
     .logsDashed{
         margin-left: 3.3vw;
     }
-}
+} */
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 989px){
     
     .logsDashed{
-        margin-left: 3.5vw;
+        /* margin-left: 3.5vw; */
+        margin-left: 7vw;
+
         
     }
 }
