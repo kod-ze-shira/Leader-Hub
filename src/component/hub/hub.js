@@ -153,12 +153,7 @@ function Hub(props) {
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div> */}
             <Router history={history}>
-                <div style={{
-                    position: 'absolute',
-                    'z-index': '999',
-                    right: '8px',
-                    top: '19px'
-                }}>
+                <div className='headerLeaderHub'>
                     <HeaderLeader userName={props.userName} appName='hub' />‏
                </div>
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>

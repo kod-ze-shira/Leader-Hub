@@ -127,7 +127,7 @@ function AddWorkspace(props) {
                             type="text" class="form-control" id="workspace-name" />
                         <div class="invalid-feedback">
                             Please enter workspace name.
-                     </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
