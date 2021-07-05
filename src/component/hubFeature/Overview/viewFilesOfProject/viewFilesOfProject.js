@@ -59,7 +59,7 @@ function ViewFilesOfProject(props) {
                                 <FontAwesomeIcon className="rowIcon"
                                     icon={['fas', 'chevron-left']}>
                                 </FontAwesomeIcon>
-                                {'   ' + cardName}</p> : ''}
+                                {'      ' + cardName}</p> : ''}
 
                     </div>
                     <div className="col-3 row iconsList" >
@@ -100,14 +100,12 @@ const mapStateToProps = (state) => {
         FilesOfProject: state.public_reducer.filesForProjectArr,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         workspacesIndex: state.public_reducer.indexOfWorkspace,
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
-
     }
 }
 

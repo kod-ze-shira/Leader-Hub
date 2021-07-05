@@ -16,7 +16,7 @@
 }
 
   .card-width{
-    width: 20vw !important;
+    /* width: 20vw !important; */
     display: inline-block ; 
   }
 
@@ -84,7 +84,7 @@ margin: auto !important;
 }
 .allTaskInCard div{
 
-  /* min-height: 10px; */
+  min-height: 10px;
 }
 
 

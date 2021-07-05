@@ -34,6 +34,8 @@ import ContactList from './contact/contactList';
 import selectTask from './SelectHeader/selectTask/selectTask';
 import ToastMessage from '../hub/toast/toastMessage'
 import RocketShip from './rocketShip/rocketShip'
+import ViewAllStatuses from '../hub/status/viewAllStatuses';
+
 
 function Hub(props) {
     const [open, setOpen] = useState(true);
@@ -43,6 +45,8 @@ function Hub(props) {
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
+    const [showStatusesList, setShowStatusesList] = useState(false)
+
     const [openCalander, setOpenCalander] = useState(false)
     const [showRocketShip, setShowRocketShip] = useState(false)
 
@@ -109,6 +113,9 @@ function Hub(props) {
             case "share":
                 setShowContactList(true)
                 break;
+            case "status":
+                setShowStatusesList(true)
+                break;
             default:
                 break;
         }
@@ -116,18 +123,21 @@ function Hub(props) {
     $(window).click(function () {
         setShowContactList(false)
         setOpenCalander(false)
+        setShowStatusesList(false)
     });
     $(window).scroll(function () {
         setShowContactList(false)
         setOpenCalander(false)
+        setShowStatusesList(false)
+
 
     });
-    const deleteWorkspaceInRedux = () => {
-       
-        if (props.workspaces[props.workspaces.length - 1]._id == undefined){
-            props.removeOneWorkspaceFromWorkspaces()
-             debugger
-        }
+    const deleteWorkspaceInRedux = (e) => {
+        console.log(e.target.className)
+        // if (props.workspaces[props.workspaces.length - 1])
+        //     if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
+        //         props.removeOneWorkspaceFromWorkspaces()
+        //     }
     }
     const [focusInputCard, setFocusInputCard] = useState(false)
     return (
@@ -145,7 +155,7 @@ function Hub(props) {
             </div> */}
             <Router history={history}>
 
-                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
+                <div className="row back-screen" onClick={(e) => deleteWorkspaceInRedux(e)}>
 
                     <div className="col-2 px-0">
                         <Configurator openOrClose={(e) => setOpen(!open)} />
@@ -227,7 +237,14 @@ function Hub(props) {
                             viewToastComplete={(val => setShowToastComplete(val))}
                         />
                         : null}
-
+                    {showStatusesList ?
+                        // <h1 className="h1tocheck">vvvvvvvvv</h1>
+                        <ViewAllStatuses
+                            task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                            status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                            openPopUp={true}
+                            hub={true} />
+                        : null}
                     {showContactList ?
                         <ContactList hub={true} />
                         : null}
@@ -250,7 +267,10 @@ function Hub(props) {
 const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
-        workspaces: state.public_reducer.workspaces
+        workspaces: state.public_reducer.workspaces,
+        cards: state.public_reducer.cards,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
     }
 }
 const mapDispatchToProps = (dispatch) => {

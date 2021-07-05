@@ -103,6 +103,36 @@ function ViewCardsTabs(props) {
     //         document.getElementById("input-card-name").blur();
     //     }
     // }
+    autosize();
+
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+
+            }
+            if (e.key == 'Enter') {
+                newTask()
+
+            }
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
@@ -131,8 +161,8 @@ function ViewCardsTabs(props) {
     console.log(props.cards);
     return (
         <>
-            <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                <Draggable draggableId={props.cardFromMap._id} index={props.index} >
+            <div className="col-md-3 col-sm-10 px-2 mt-4" id={props.cards[props.indexCard]._id}>
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
                             {...provided.draggableProps}
@@ -149,7 +179,6 @@ function ViewCardsTabs(props) {
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
                                                 className=" mb-2 pl-4 col-10"
-
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
@@ -193,18 +222,19 @@ function ViewCardsTabs(props) {
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-3">
-                                                                <input
+                                                                <textarea
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="form-control" placeholder="Add Task"
+                                                                    class="autosize textarea-name-task form-control col-12 mx-0" placeholder="Add Task"
                                                                     id="input-task"
-                                                                    autocomplete="off"                                                                    value={inputValue}
+                                                                    autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
-                                                                    onChange={updateInputValue} onKeyPress={event => {
-                                                                        if (event.key === 'Enter') {
-                                                                            newTask()
-                                                                        }
-                                                                    }}
+                                                                    onChange={updateInputValue}
+                                                                // onKeyPress={event => {
+                                                                //     if (event.key === 'Enter') {
+                                                                //         newTask()
+                                                                //     }
+                                                                // }}
                                                                 />
                                                             </div>
                                                             : null
@@ -214,7 +244,7 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t" onClick={(e) => addTask(e)}
-                                            className="add-task-tabs mt-4 mt-3 ">Add Task</a>
+                                            className="add-task-tabs mt-4 mt-3 pl-1 ">Add Task</a>
                                         {/* <img className="mt-2 new-task-tabs" onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img> */}
                                     </div>
                                 </div>

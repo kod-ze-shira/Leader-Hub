@@ -18,22 +18,26 @@ import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
+import Timer from '../../timer/timer'
 
 function TaskDetails(props) {
     const nameRequired = useRef()
-    const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
+    let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
 
     useEffect(() => {
-        props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-        props.setFilesFromTask(props.task.files)
-        if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
-        if (props.contactsUser.length == 0)
-            props.getContactsForUser()
+        if (props.cards) {
+            setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
 
+            props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
+            props.setFilesFromTask(props.task.files)
+            if (!(props.statuses && props.statuses.length > 0))
+                props.getAllStatusesTaskForWorkspace();
+            if (props.contactsUser.length == 0)
+                props.getContactsForUser()
+        }
     }, [props.cards])
 
     useEffect(() => {
@@ -44,6 +48,9 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    const [startTimerComp, setStartTimerComp] = useState(false)
+    const [stopTimerComp, setStopTimerComp] = useState(false)
+
     let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
     const openPopUpStatus = (event) => {
@@ -55,18 +62,14 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
     });
 
-
-
     function stopP(event) {
         event.stopPropagation();
     }
     function closeStatus(event) {
         setOpenPopUp(false)
-
     }
     function closeContactList(event) {
         setShowContactList(false)
-
     }
 
     const compressedFile = async (myFiles) => {
@@ -206,6 +209,14 @@ function TaskDetails(props) {
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
     const assingto = (e) => {
+        var x = e.clientX;
+        var y = e.clientY;
+        var height = $(window).height();
+        var width = $(window).width();
+        props.setLeftContactList(x)
+        props.setTopContactList(y)
+        props.setWidthScreen(width)
+        props.setHeightScreen(height)
         setShowContactList(true)
     }
     function closeViewDetailsInTask() {
@@ -279,7 +290,10 @@ function TaskDetails(props) {
         }
     }
 
-
+    const startTimer = () => {
+        setStartTimerComp(true)
+        props.displayLineByStart()
+    }
     return (
         <>
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
@@ -348,7 +362,10 @@ function TaskDetails(props) {
                         </div>
                         <div className="row justify-content-between">
                             <div class="dropdown col-md-6 col-lg-5">
-                                <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {/* form-control */}
+                                <label for="status">Status</label>
+
+                                <button onClick={(e) => openPopUpStatus(e)} class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
                                         <div
                                             className="color-status-first px-3"
@@ -364,7 +381,8 @@ function TaskDetails(props) {
                                         <ViewAllStatuses
                                             task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
                                             status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                            openPopUp={openPopUp} />
+                                            openPopUp={openPopUp}
+                                            closeStatuses={(e) => setOpenPopUp(false)} />
                                     </div>
                                     : null}
 
@@ -386,13 +404,13 @@ function TaskDetails(props) {
 
                         </div>
                         <div className="row justify-content-between ">
-                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                            <div className=" col-md-6 col-lg-5 mt-2 priority-task-details">
                                 <label for="priority">Priority</label>
 
                                 <Select
                                     isSearchable={false}
                                     name="priority"
-                                    className=""
+
                                     // classNamePrefix="select"
                                     options={viewPriortyList}
                                     placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
@@ -405,6 +423,12 @@ function TaskDetails(props) {
                                         </div>}
                                     onChange={(e) => changePriority(e)}
                                 />
+                            </div>
+                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                {/* <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
+                                <button onClick={(e) => { setStopTimerComp(true); props.disaplayLineByStop() }}>stop</button>
+                                <Timer startTimerComp={startTimerComp} stopTimerComp={stopTimerComp}></Timer> */}
+
                             </div>
                         </div>
                     </div>
@@ -475,7 +499,8 @@ const mapStateToProps = (state) => {
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
         arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
         contactsUser: state.share_reducer.contactsUser,
-        priorities: state.public_reducer.priorities
+        priorities: state.public_reducer.priorities,
+
 
     }
 }
@@ -491,7 +516,12 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-
+        displayLineByStart: () => dispatch(actions.displayLineByStart()),
+        disaplayLineByStop: () => dispatch(actions.disaplayLineByStop()),
+        setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
+        setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
+        setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
+        setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
 
     }
 }

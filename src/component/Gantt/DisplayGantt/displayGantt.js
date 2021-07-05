@@ -11,15 +11,19 @@ import { gantt } from 'dhtmlx-gantt';
 function DisplayGantt(props) {
 
     useEffect(() => {
-
-    }, [props.cards])
+        return () => {
+            theCards = []
+            theTasks = []
+            mone = []
+          }
+    }, [])
 
     const allWorkspace = { workspaces };
     console.log(allWorkspace);
 
-    const theCards = []
-    const theTasks = []
-    const mone = []
+    let theCards = []
+    let theTasks = []
+    let mone = []
 
 
     props.cards.map((card, index) => {
@@ -47,12 +51,15 @@ function DisplayGantt(props) {
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
             let cardName
             let a = theTasks.find(task => task.cardName == card.name)
-            
+
             if (a)
                 cardName = null
-            else cardName = card.name
+            else
+                cardName = card.name
             theTasks.push({
-                card:card._id,
+                indexCard: index,
+                indexTask: index1,
+                card: card._id,
                 cardName: cardName,
                 priority: task.priority ? task.priority.level : "Low",
                 id: task._id, text:
@@ -68,15 +75,7 @@ function DisplayGantt(props) {
     console.log("mone", mone);
     let currDate;
 
-    // theTasks.push(
 
-    //     {
-    //         "id": 2985730,
-    //         "text": "first",
-    //         "start_date": currDate,
-    //         "duration": 3,
-    //         "progress": 0.6,
-    //     })
 
 
     console.log("theTasks", theTasks);
@@ -103,12 +102,32 @@ function DisplayGantt(props) {
         })
     }
 
-    currDate = parseInt(currDate)
+    currDate = currDate == undefined ?parseInt(  new Date().getFullYear()) :parseInt(currDate) 
     currDate = currDate + 2
     currDate = currDate.toString();
     currDate = currDate.concat('-01-01')
     maxYear = currDate;
+    theTasks.push(
+        {
+            "indexCard": -1,
+            "indexTask": -1,
+            "card": -1,
+            "cardName": "",
+            "priority": "ggg",
+            "id": 2985730,
+            "text": "first",
+            "start_date": currDate ,
+            "duration": 3,
+            "progress": 0.6,
+            "milestones": null
 
+
+            // "id": 2985730,
+            // "text": "first",
+            // "start_date": currDate,
+            // "duration": 3,
+            // "progress": 0.6,
+        })
     const state = {
         currentZoom: 'Days',
         messages: []
@@ -135,7 +154,6 @@ function DisplayGantt(props) {
         });
     }
 
-
     const { currentZoom, messages } = state;
 
     return (
@@ -145,8 +163,7 @@ function DisplayGantt(props) {
                     <Gantt
                         tasks={data}
                         zoom={currentZoom}
-                        onDataUpdated={logDataUpdate}
-                    />
+                        onDataUpdated={logDataUpdate} />
                 </div>
             </div>
         </div>

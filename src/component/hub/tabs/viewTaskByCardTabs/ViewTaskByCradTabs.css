@@ -6,6 +6,7 @@
     /* overflow: hidden !important; */
     max-height: 500px;
     resize: none;
+    border:none !important;
 
     /* padding: 0 !important; */
 }
@@ -102,10 +103,16 @@
 }
 .autosize {
     resize: none;
-     overflow: hidden;
+     /* overflow: hidden; */
      max-height: 80px;
     /* -webkit-box-orient: vertical; */ 
     /* -webkit-line-clamp: 4;
     overflow: hidden;
     display: -webkit-box; */
+  }
+  .autosize::-webkit-scrollbar-thumb{
+    background: white !important; 
+  }
+  .autosize::-webkit-scrollbar-track{
+    box-shadow: none; 
   }

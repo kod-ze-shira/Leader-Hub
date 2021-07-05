@@ -80,7 +80,6 @@ function NewProject(props) {
         project.color = myColor
         project.workspace = props.workspace._id
         project.name = nameProject
-        debugger
         project.description = description
 
         // if (!project.dueDate) {

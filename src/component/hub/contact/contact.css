@@ -189,10 +189,11 @@ height:35px;
 text-align:left;
 color:black;
 
-/* display: inline-block; */
+display: inline-block;
 }
 .div_contacts_list > .form-group{
   margin-bottom: 0 !important;
+  /* position: flex; */
 }
     .invite-contact{
         background-color:#f7f5f5 !important;

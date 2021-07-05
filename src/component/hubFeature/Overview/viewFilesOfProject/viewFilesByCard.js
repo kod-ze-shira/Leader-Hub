@@ -9,7 +9,7 @@ import ReactTooltip from 'react-tooltip'
 import ViewFile from './viewFile'
 import { withRouter } from 'react-router-dom'
 
-function FilesOfProject(props) {
+function viewFilesByCard(props) {
 
 
     const filesForDownload = []
@@ -73,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilesOfProject))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(viewFilesByCard))
