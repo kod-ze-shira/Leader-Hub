@@ -411,10 +411,12 @@ const publicData = {
 
         if (action.payload.url != 'new') {
             let fileToDelete = state.arrFilesOfTask.find((file) => file.url == action.payload.url)
-            if (state.arrDeleteFilesOfTask)
+            if (state.arrDeleteFilesOfTask.length) {
                 state.arrDeleteFilesOfTask.push(fileToDelete)
-            else
-                state.arrDeleteFilesOfTask = fileToDelete
+            }
+            else {
+                state.arrDeleteFilesOfTask[0] = fileToDelete
+            }
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
             if (state.cards && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
                 for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
@@ -429,6 +431,7 @@ const publicData = {
 
                 // .filter((file) => file.url != action.payload.url)
             }
+
         }
         else {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')

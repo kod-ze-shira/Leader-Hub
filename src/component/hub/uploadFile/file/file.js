@@ -17,6 +17,7 @@ function File(props) {
     }, [props.file])
     function deleteFile() {
         props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
+        // props.removeFileInTaskAndServerFiles({ 'name': props.file.name, 'url': props.file.url })
     }
     function downloadFile(e) {
         props.setDownloadFile(true)
@@ -54,7 +55,7 @@ function File(props) {
                                 ></FontAwesomeIcon> :
                                 <img src={file}></img>}
 
-‏
+                    ‏
 
                 </div>
                 <div className='col-8  nameFileAndAction'>

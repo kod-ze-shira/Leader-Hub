@@ -44,7 +44,8 @@ function TaskDetails(props) {
     useEffect(() => {
         nameRequired.current.focus();
     }, [])
-
+    useEffect(() => {
+    }, [props.arrFilesOfTask])
 
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
@@ -320,7 +321,7 @@ function TaskDetails(props) {
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                             <div class="invalid-feedback">
                                 Please enter task name.
-                     </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
