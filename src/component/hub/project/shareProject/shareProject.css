@@ -10,6 +10,11 @@ overflow-x: hidden;
 /* top: 0;
 left: 0; */
 }
+.iconQuestion{
+    cursor: pointer;
+    font-size: smaller;
+}
+
 .txt_share{
     font: normal normal normal 13px/15px Roboto;
     color: #0A102E;

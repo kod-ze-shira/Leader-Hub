@@ -28,7 +28,6 @@ function ViewTaskByCradTabs(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         if (props.task.assingTo)
@@ -68,7 +67,7 @@ function ViewTaskByCradTabs(props) {
                 // prevent default behavior
                 e.preventDefault();
             }
-            if (e.key == 'Enter'){
+            if (e.key == 'Enter') {
                 editTask()
             }
 
@@ -158,7 +157,7 @@ function ViewTaskByCradTabs(props) {
         if (doneStatus) {
             props.setCountReadyTasks(true)
             props.showRocketShip(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else {
             props.setCountReadyTasks(false)
@@ -304,12 +303,12 @@ function ViewTaskByCradTabs(props) {
                                     onClick={(e) => e.stopPropagation()}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                    // onBlur={(e) => editTask()}
-                                    // onKeyPress={event => {
-                                    //     if (event.key === 'Enter') {
-                                    //         editTask()
-                                    //     }
-                                    // }}
+                                // onBlur={(e) => editTask()}
+                                // onKeyPress={event => {
+                                //     if (event.key === 'Enter') {
+                                //         editTask()
+                                //     }
+                                // }}
                                 />
 
                                 {/* <span

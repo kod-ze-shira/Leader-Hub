@@ -62,17 +62,17 @@ function ProjectsByWorkspace(props) {
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
                 : null
         }) : null
-        //view projects shared
-        const viewSharedProjects = 
+    //view projects shared
+    const viewSharedProjects =
         props.sharedProjects.map((project, index) => {
-            return project.objectId?project.objectId.name.toUpperCase().includes(valueSearch.toUpperCase())
+            return project.objectId ? project.objectId.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     indexProject={index}
                     myProject={project.objectId}
                     fromShare='true'
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
-                : null:null
+                : null : null
         })
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects.map((project, index) => {
@@ -122,7 +122,7 @@ function ProjectsByWorkspace(props) {
             { showProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
-                        viewToastComplete={props.viewToastComplete}
+                        viewToastMassege={props.viewToastMassege}
                         closeViewDetails={() => setShowProject(false)}
                         showToast={showToast}
                         from={addOrEditProject} workspaceId={idWorkspace} />
@@ -131,7 +131,7 @@ function ProjectsByWorkspace(props) {
             {showEditOrShareProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
-                        viewToastComplete={props.viewToastComplete}
+                        viewToastMassege={props.viewToastMassege}
                         closeViewDetails={() => setShowEditOrShareProject(false)}
                         showToast={showToast}
                         from={editOrShareProject} workspaceId={idWorkspace} />
@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
         projectToDelete: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-        sharedProjects:state.public_reducer.sharedProjects
+        sharedProjects: state.public_reducer.sharedProjects
     }
 }
 const mapDispatchToProps = (dispatch) => {

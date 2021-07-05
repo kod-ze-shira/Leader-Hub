@@ -4,17 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+// import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import Favicon from 'react-favicon';
 
-library.add(fab, fas)
+// library.add(fab, fas)
 
 
 ReactDOM.render(
   <React.StrictMode>
-     <Favicon url='https://files.leader.codes/favicon.ico' />
-      <App />
+    <Favicon url='https://files.leader.codes/favicon.ico' />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -20,11 +20,8 @@
   .details .form-control {
       background-color: #EDFBFC!important;
       border:none !important;
-
-      /* color: var(--unnamed-color-0a102e); */
       text-align: left;
       font: normal normal medium 16px/21px Roboto;
-      /* letter-spacing: 0.32px; */
   }
   .details  .css-yk16xz-control{
     background-color: transparent!important;
