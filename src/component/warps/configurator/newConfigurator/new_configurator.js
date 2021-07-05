@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { actions } from '../../../../redux/actions/action'
+import { actions } from '../../../../redux/actions/action'
 import $ from 'jquery';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-// import history from '../../../history'
 import { withRouter } from 'react-router-dom';
 import './new_configurator.css';
-
+import NumberOfNotShowShareProjects from '../numberOfNotShowShareProjects/numberOfNotShowShareProjects'
 function NewConfigorator(props) {
     const [closeOrOpenConfigurator, setCloseOrOpenConfigurator] = useState(true)
     const [viewDetails, setViewDetails] = useState(false)
@@ -55,6 +54,7 @@ function NewConfigorator(props) {
     }
     function goToAllProjects(e) {
         changeBackground(e)
+        props.setIfShowShareProjectsToTrue()
         props.history.push("/" + props.user + "/hub/allProjects")
     }
     function goToMyTasks(e) {
@@ -96,6 +96,7 @@ function NewConfigorator(props) {
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                             <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                             <p>All Projects</p>
+                            <NumberOfNotShowShareProjects/>
                         </li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                             {/* <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img> */}
@@ -135,6 +136,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setIfShowShareProjectsToTrue:dispatch(actions.setIfShowShareProjectsToTrue())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewConfigorator))
