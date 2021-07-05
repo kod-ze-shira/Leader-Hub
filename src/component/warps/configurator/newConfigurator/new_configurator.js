@@ -71,12 +71,12 @@ function NewConfigorator(props) {
     // }
     return (
         <>
-            <div>
+            {/* <div>
                 <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
 
-            </div>
+            </div> */}
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
 
