@@ -54,6 +54,7 @@ const publicData = {
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
 
+
     },
     deleteFilesInTask(state, action) {
         for (let indexUrl = 0; indexUrl < action.payload.length; indexUrl++)
@@ -114,16 +115,12 @@ const publicData = {
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
-        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.size })
-        // if (window.location.href.indexOf('projectPlatform') != -1)
-        //     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-        //         .push({
-        //             'name': action.payload.name,
-        //             'url': 'new',
-        //             '_id': '',
-        //             'size': action.payload.size
-        //         })
-
+        state.arrFilesOfTask.push({
+            'url': 'new',
+            'name': action.payload.name,
+            'file': action.payload,
+            'size': action.payload.size
+        })
     },
     /////////////////////////////////////////
     setFilesForProject(state, action) {
@@ -418,7 +415,7 @@ const publicData = {
                 state.arrDeleteFilesOfTask[0] = fileToDelete
             }
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
-            if (state.cards && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
+            if (state.cards && state.cards[state.indexCurrentCard] && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
                 for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
                     if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
                         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)

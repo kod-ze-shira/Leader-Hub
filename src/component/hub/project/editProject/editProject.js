@@ -99,20 +99,11 @@ function EditProject(props) {
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
                         <div class="invalid-feedback">
                             Please enter project name.
-                     </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description ? props.workspaces[props.indexWorkspace].projects[props.indexProject].description : ''} indexW={props.indexWorkspace} indexP={props.indexProject} />
-
-                        {/* <div class="form-control descriptionProject"
-                            name="description"
-                            id="descriptionProject" rows="3"
-                            ref={descriptionInput}
-                            placeholder="Write a description about your project"                           
-                            contentEditable
-                            onBlur={(input) => changeFiledInProject(input)}
-                        ></div> */}
+                        <QuillEditProject indexW={props.indexWorkspace} indexP={props.indexProject} />
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">

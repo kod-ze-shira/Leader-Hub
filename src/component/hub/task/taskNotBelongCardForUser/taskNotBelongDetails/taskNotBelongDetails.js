@@ -198,6 +198,8 @@ function TaskNotBelongDetails(props) {
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
             setDownloadFile={(e) => props.setDownloadFile(e)}
+            taskId={props.task._id}
+
         />
     }) : null
 
@@ -245,7 +247,7 @@ function TaskNotBelongDetails(props) {
                                 value={props.task.name} />
                             <div class="invalid-feedback">
                                 Please enter task name.
-                     </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -347,7 +349,7 @@ function TaskNotBelongDetails(props) {
                     </div>
 
                     <div className="files-details ">
-                        <UploadFile />
+                        <UploadFile taskId={props.task._id} />
                         <img className="files-task" src={require('../../../../img/files-icon.png')} ></img>
                         <img className="files-task-hover" src={require('../../../../img/files-hover.png')} ></img>
                     </div>

@@ -31,9 +31,9 @@ function TaskDetails(props) {
     useEffect(() => {
         if (props.cards) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
+            props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
 
             props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-            props.setFilesFromTask(props.task.files)
             if (!(props.statuses && props.statuses.length > 0))
                 props.getAllStatusesTaskForWorkspace();
             if (props.contactsUser.length == 0)
@@ -45,6 +45,7 @@ function TaskDetails(props) {
         nameRequired.current.focus();
     }, [])
     useEffect(() => {
+
     }, [props.arrFilesOfTask])
 
     const [openPopUp, setOpenPopUp] = useState(false)
@@ -113,29 +114,6 @@ function TaskDetails(props) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
             }
-            // else
-            //     if (props.arrDeleteFilesOfTask.length) {
-            //         for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
-            //             // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-            //             for (let index2 = 0; index2 < props.task.files.length; index2++) {
-            //                 if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-            //                     try {
-            //                         props.task.files.splice(index2, 1);
-            //                     } catch (error) {
-            //                         console.log(error)
-            //                     }
-            //                 }
-
-            //                 // first element removed
-            //             }
-            //             // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
-
-            //         }
-            //         props.EditTask(props.task)
-            //         // props.removeFile(props.ArrDeleteFilesOfTask)
-
-            //     }
-
             else
                 props.EditTask(props.task)
             props.closeViewDetails();
@@ -228,6 +206,7 @@ function TaskDetails(props) {
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
             setDownloadFile={(e) => { props.setDownloadFile(e) }}
+            taskId=''
         />
     }) : null
 
@@ -465,7 +444,7 @@ function TaskDetails(props) {
                         </ReactTooltip>
                     </div>
                     <div className=" files-details" data-tip id="files">
-                        <UploadFile />
+                        <UploadFile taskId='' />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">

@@ -14,12 +14,11 @@ import Hub from './component/hub/hub';
 export default function App(props) {
   return (
     <>
-      <Favicon url={require('./leader.png')} />
+      <Favicon url={require('../src/component/img/faviconHub.png')} />
 
       <Provider store={Store}>
         <>
           <Hub></Hub>
-          {/* <FilesOfProject></FilesOfProject> */}
           {/* <BodyEmailOfAssignmentTask/> */}
           {/* <ContactList /> */}
           {/* <HeaderLeader /> */}
