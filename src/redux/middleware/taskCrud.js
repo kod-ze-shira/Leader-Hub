@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import { act } from 'react-dom/test-utils';
 
 export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
@@ -244,16 +245,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 if (data.project)
                     dispatch(actions.setProjectInWorkspace(data.project))
-
-                if (getState().public_reducer.arrDeleteFilesOfTask.length) {
-                    let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
-                    for (let index = 0; index < arr.length; index++) {
-                        urlsFile.push(arr[index].url)
-                    }
-                    dispatch(actions.removeFile(urlsFile));
-                    dispatch(actions.deleteFilesInArr());
-                    // dispatch(actions.setNewFilesInTask(data.filesData))
-                }
                 if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
@@ -271,6 +262,49 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
+export const removeFileInTaskAndServerFiles = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'REMOVE_FILE_IN_TASK_AND_SERVER_FILES') {
+        let task = {}
+        if (action.payload.taskId == '' && getState().public_reducer.cards &&
+            getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks
+            && getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
+        ) {
+            task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
+
+        }
+        else if (getState().public_reducer.tasks) {
+            task = getState().public_reducer.tasks.find((task) => task._id == action.payload.taskId)
+        }
+
+
+        fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`,
+            {
+                method: 'POST',
+                headers: {
+                    authorization: getState().public_reducer.tokenFromCookies,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task })
+            }).then((result) => {
+                return result.json();
+            }).then((result) => {
+
+                checkPermission(result).then((ifOk) => {
+                    console.log(result);
+                    if (result.massege == 'task updated successfully')
+                        dispatch(actions.removeFile([action.payload.url]))
+                })
+
+            })
+
+    }
+    return next(action);
+
+    // removeFileInTaskAndServerFiles
+}
+
 
 export const updateLike = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPDATE_LIKE') {
@@ -583,7 +617,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
 }
 export const disaplayLineByStop = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DISAPLAY_LINE_BY_STOP') {
-debugger
+
         let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
         let _id = task.workingTime[task.workingTime.length - 1]
         let userName = getState().public_reducer.userName

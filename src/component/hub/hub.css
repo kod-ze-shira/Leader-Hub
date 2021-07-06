@@ -20,6 +20,7 @@ margin-left: 8vh;
     right: 21px;
     top: 18px;
     z-index: 199;
+    cursor: pointer;
 }
 .back-screen{
 background-color: #E8EAEC !important;

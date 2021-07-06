@@ -20,7 +20,7 @@ import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOver
 import { createStatus, editStatus, getAllStatusesTaskForWorkspace, removeStatus } from '../middleware/statusCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask, dragCard, updateLike,
+    , moveTaskBetweenCards, dragTask, dragCard, updateLike, removeFileInTaskAndServerFiles,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong, displayLineByStart, disaplayLineByStop
 } from '../middleware/taskCrud';
@@ -86,6 +86,7 @@ const store = createStore(
                 shareObject,
                 assingTo,
                 updateLike,
+                removeFileInTaskAndServerFiles,
                 // getMembersByProjectId,
                 addMembers,
                 displayLineByStart,
