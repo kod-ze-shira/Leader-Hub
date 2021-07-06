@@ -23,7 +23,7 @@ function AllWorkspaces(props) {
         props.getContactsForUser()
         props.getAllTeamsForUser()
         props.getAllWorkspaces()
-        socket.on("connect", () => {
+        socket.on("connection", () => {
             console.log(socket);
             console.log('connect');
         });
