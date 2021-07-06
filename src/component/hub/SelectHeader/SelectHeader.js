@@ -82,7 +82,7 @@ function SelectHeader(props) {
                     onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
                 {props.workspaces.length > 0 ?
                     <>
-                        <div className="col-md col-sm-2 pr-0">
+                        {/* <div className="col-md col-sm-2 pr-0">
                             <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
                         </div>
                         <div className="col-md col-sm-2 pr-0">
@@ -94,7 +94,23 @@ function SelectHeader(props) {
                         </div>
                         <div className="col-md col-sm-2 pr-0">
                             <SelectTask />
-                        </div>
+                        </div> */}
+                        <div className="col-5">
+                            <div className="row">
+                                <div className=" col-sm px-1">
+                                    <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
+                                </div>
+                                <div className=" col-sm px-1">
+                                    <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
+                                </div>
+
+                                <div className=" col-sm px-1">
+                                    <SelectCards flag={changeFlag} />
+                                </div>
+                                <div className=" col-sm px-1">
+                                    <SelectTask />
+                                </div>
+                            </div></div>
                     </> :
                     <Tabs className="tabs-in-header offset-md-4 w-sm-15 opacity">
                         <Tab label="List" className="tab" />
@@ -149,12 +165,12 @@ function SelectHeader(props) {
                                 variant="scrollable"
                                 scrollButtons="off"
                                 TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                                aria-label="scrollable prevent tabs example"   
+                                aria-label="scrollable prevent tabs example"
                             >
-                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false"/>
-                                <Tab label="Tabs" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false"/>
-                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false"/>
-                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false"/>
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false" />
+                                <Tab label="Cards" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false" />
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false" />
+                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false" />
                             </Tabs>
                             :
                             <Tabs

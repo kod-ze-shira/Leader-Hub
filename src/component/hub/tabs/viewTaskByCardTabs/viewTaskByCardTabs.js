@@ -18,12 +18,10 @@ import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
     const textInput = useRef();
-
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [showchalalit, setShowChalalit] = useState(false)
     const [userHasLike, setUserHasLike] = useState(false)
-    const [numOfRows, setNumOfRows] = useState(1)
 
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
@@ -70,6 +68,10 @@ function ViewTaskByCradTabs(props) {
                 // prevent default behavior
                 e.preventDefault();
             }
+            if (e.key == 'Enter'){
+                editTask()
+            }
+
         });
 
         function resize($text) {
@@ -96,14 +98,10 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
-        setNumOfRows(numOfRows + 1)
-        let task1 = {
-            "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
-            , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-        }
-        // setTask(task1)
-        props.EditTask(task1);
-
+        
+        let task_ = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
+        props.EditTask(task_);
+        // props.openNewInputTask(task_.card)
     }
 
     const showAssigToOrCalander = (object) => {
@@ -159,7 +157,6 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            // alert('fff')
             props.showRocketShip(true)
             props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
@@ -305,18 +302,14 @@ function ViewTaskByCradTabs(props) {
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
                                     onClick={(e) => e.stopPropagation()}
-                                    // id="note"
-                                    // rows={1}
-                                    // class="autosize"
-
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                    onBlur={(e) => editTask()}
-                                    onKeyPress={event => {
-                                        if (event.key === 'Enter') {
-                                            editTask()
-                                        }
-                                    }}
+                                    // onBlur={(e) => editTask()}
+                                    // onKeyPress={event => {
+                                    //     if (event.key === 'Enter') {
+                                    //         editTask()
+                                    //     }
+                                    // }}
                                 />
 
                                 {/* <span
@@ -343,6 +336,11 @@ function ViewTaskByCradTabs(props) {
                                             <div className="pl-2"> {props.task.priority ?
                                                 <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                                 : null}
+                                            </div>
+                                            <div className="pl-2">
+                                                {props.task.milestones ?
+                                                    <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
+                                                    : null}
                                             </div>
                                         </div>
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
@@ -433,4 +431,5 @@ const mapDispatchToProps = (dispatch) => {
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTabs)

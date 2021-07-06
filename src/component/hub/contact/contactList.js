@@ -8,40 +8,54 @@ import $ from 'jquery'
 
 function ContactList(props) {
   const [arrayFilter, setArrayFilter] = useState(null);
+  const [contacts, setContacts] = useState(props.contactsUser);
+  const [search, setSearch] = useState('')
+
   useEffect(() => {
     $(".invalid-feedback").css("display", "none");
-    if (props.contactsUser.length == 0)
-      props.getContactsForUser()
+
   }, [])
+
 
   const [valueSearch, setValueSearch] = useState("")
   const nameRequired = useRef()
-
-
-
-  const setFIlter = () => {
-    let arrayTemp = [];
-    if (props.contactsUser.length)
-      props.contactsUser.map((contact) => {
-        if (contact.email.toUpperCase().includes(valueSearch.toUpperCase()) || contact.name.toUpperCase().includes(valueSearch.toUpperCase())) {
-          arrayTemp.push(contact);
-        }
-      })
-    setArrayFilter(arrayTemp)
+  function searchContacts(e) {
+    setSearch(e.target.value)
+    let help = []
+    props.contactsUser.map(cm => {
+      let name = cm.name.search(e.target.value)
+      let email = cm.email.search(e.target.value)
+      if (name === 0 || email === 0)
+        help.push(cm)
+    })
+    setContacts(help)
   }
+
+  // const setFIlter = () => {
+  //   let arrayTemp = [];
+  //   if (props.contactsUser.length)
+  //     props.contactsUser.map((contact) => {
+  //       if (contact.email.toUpperCase().includes(valueSearch.toUpperCase())) {
+  //         arrayTemp.push(contact);
+  //       }
+  //     })
+  //   setArrayFilter(arrayTemp)
+  // }
+
 
   const handleChange = (event) => {
     setValueSearch(event.target.value)
-    setFIlter();
+    searchContacts(event);
     if (valueSearch)
       $(".invalid-feedback").css("display", "none");
   }
 
-  useEffect(() => {
-    setFIlter();
-  }, [])
+  // useEffect(() => {
+  //   setFIlter();
+  // }, [])
 
   const assingTaskToContact = (e) => {
+    
     e.stopPropagation()
     let isValid = ValidateEmail(valueSearch)
     console.log(isValid)
@@ -49,7 +63,7 @@ function ContactList(props) {
       $(".invalid-feedback").css("display", "none");
       $(".invite-button").css("backgroundColor", "#68C7CB");
       $(".invite-button").css("color", "#358A8D");
-      props.assingTo(valueSearch)
+      props.assingToMany(valueSearch)
 
       setTimeout(() => {
         $(".div_contacts").css("display", "none");
@@ -73,8 +87,8 @@ function ContactList(props) {
   }
 
   const contactList = props.contactsUser.length > 0 ?
-    arrayFilter && arrayFilter.length ?
-      arrayFilter.map((contact) =>
+    contacts && contacts.length ?
+      contacts.map((contact) =>
         <ViewContact contact={contact}></ViewContact>
       )
       :
@@ -94,16 +108,16 @@ function ContactList(props) {
   return (
     <>
 
-      <div className='div_contacts ' style={{ "left": props.hub ? left : "", "top": props.hub ? top : "", "width": props.hub ? width : 300, "maxHeight": 250, "bottom":props.taskDetails ? bottom :""}}>
+      <div className='div_contacts ' style={{ "left": props.hub ? left : "", "top": props.hub ? top : "", "width": props.hub ? width : 300, "maxHeight": 250, "bottom": props.taskDetails ? bottom : "" }}>
         <div className='container div_contacts_list  ' style={{}}>
           <div className=' row  mx-1 form-group' id='nameRequired'>
-            {props.hub ?
-              <input placeholder="Name or email " required ref={nameRequired}
-                className={arrayFilter && arrayFilter.length ? "form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-                onChange={(e) => handleChange(e)}
-                onClick={(e) => e.stopPropagation()}
-                value={props.contactsUser.email}></input>
-              : null}
+            {/* {props.hub ? */}
+            <input placeholder="Name or email " required ref={nameRequired}
+              className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+              onChange={(e) => { handleChange(e); }}
+              onClick={(e) => e.stopPropagation()}
+              value={props.contactsUser.email}></input>
+            {/* //  : null} */}
             {contactList}</div>
           {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
             className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
@@ -120,6 +134,7 @@ function ContactList(props) {
     </>
   )
 }
+
 export default connect(
   (state) => {
     return {
@@ -136,7 +151,8 @@ export default connect(
   (dispatch) => {
     return {
       getContactsForUser: () => dispatch(actions.getContactsForUser()),
-      assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+      assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
+      assingToMany: (emailOfContact) => dispatch(actions.assingToMany(emailOfContact))
 
     }
   }

@@ -52,6 +52,7 @@ function ViewCardsTabs(props) {
                 startDate: today, dueDate: today, "card": props.card._id
             }
             props.newTask(task)
+            //לבדוק נפילה
             let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
             props.setCountTasks(countTasksInProject += 1)
 
@@ -161,7 +162,7 @@ function ViewCardsTabs(props) {
     console.log(props.cards);
     return (
         <>
-            <div className="col-md-3 col-sm-10 px-2 mt-4" id={props.cards[props.indexCard]._id}>
+            <div className="col-md-3 col-sm-10 px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -217,15 +218,16 @@ function ViewCardsTabs(props) {
                                                             showRocketShip={props.showRocketShip}
                                                             indexTask={index}
                                                             viewToastComplete={props.viewToastComplete}
-                                                            viewContactList={props.viewContactList} />
+                                                            viewContactList={props.viewContactList}
+                                                            openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-3">
-                                                                <textarea
+                                                                <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="autosize textarea-name-task form-control col-12 mx-0" placeholder="Add Task"
+                                                                    class="  form-control col-12 mx-0" placeholder="Add Task"
                                                                     id="input-task"
                                                                     autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}

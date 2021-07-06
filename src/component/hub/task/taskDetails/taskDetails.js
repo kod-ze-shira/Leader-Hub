@@ -26,8 +26,10 @@ function TaskDetails(props) {
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
+    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     useEffect(() => {
+        debugger
         if (props.cards) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
 
@@ -38,18 +40,16 @@ function TaskDetails(props) {
             if (props.contactsUser.length == 0)
                 props.getContactsForUser()
         }
-    }, [props.cards])
+    }, [props.cards, milstone])
 
     useEffect(() => {
         nameRequired.current.focus();
     }, [])
 
 
-    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
     const [startTimerComp, setStartTimerComp] = useState(false)
-    const [stopTimerComp, setStopTimerComp] = useState(false)
 
     let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
@@ -132,7 +132,7 @@ function TaskDetails(props) {
 
                     }
                     let r = props.task.files
-                    props.EditTask(props.task)
+                    // props.EditTask(props.task)
                     // props.removeFile(props.ArrDeleteFilesOfTask)
 
                 }
@@ -168,7 +168,6 @@ function TaskDetails(props) {
         let editTask = { "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id, "priority": event.value._id }
         console.log(editTask)
         props.EditTask(editTask)
-
 
     };
 
@@ -290,10 +289,6 @@ function TaskDetails(props) {
         }
     }
 
-    const startTimer = () => {
-        setStartTimerComp(true)
-        props.displayLineByStart()
-    }
     return (
         <>
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
@@ -319,10 +314,12 @@ function TaskDetails(props) {
                                 class="form-control"
                                 id="name"
                                 onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
+                                // onMouseLeave={(e) => alert("ff")}
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                             <div class="invalid-feedback">
                                 Please enter task name.
-                     </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -332,7 +329,9 @@ function TaskDetails(props) {
                                 placeholder="Write a description about your workspace"
                                 name="description"
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}
-                                onChange={(e) => changeFiledInTask(e)} contentEditable
+                                onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
+                                contentEditable
                             ></textarea>
                         </div>
                         <div className="row justify-content-between">
@@ -345,6 +344,7 @@ function TaskDetails(props) {
                                     id="startDate"
                                     value={startDateTask}
                                     onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
                                 />
                             </div>
                             <div class="form-group col-md-6 col-lg-5">
@@ -356,6 +356,7 @@ function TaskDetails(props) {
                                     id="dueDate"
                                     value={dueDateTask}
                                     onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
                                 />
                             </div>
 
@@ -395,6 +396,7 @@ function TaskDetails(props) {
                                         checked={milstone}
                                         value={props.task.milestones}
                                         onChange={(e) => changeFiledInTask(e)}
+                                    // onBlur={(e) => editTaskInServer()}
                                     />
                                     <span className="slider round" ></span>
 
@@ -425,10 +427,9 @@ function TaskDetails(props) {
                                 />
                             </div>
                             <div className="form-group col-md-6 col-lg-5 priority-task-details">
-                                {/* <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
-                                <button onClick={(e) => { setStopTimerComp(true); props.disaplayLineByStop() }}>stop</button>
-                                <Timer startTimerComp={startTimerComp} stopTimerComp={stopTimerComp}></Timer> */}
-
+                                <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
+                                <button onClick={(e) => { setStartTimerComp(false); props.disaplayLineByStop() }}>stop</button>
+                                <Timer startTimerComp={startTimerComp} ></Timer>
                             </div>
                         </div>
                     </div>
@@ -443,14 +444,18 @@ function TaskDetails(props) {
 
                 <div className="row justify-content-around mx-1 ">
                     {showContactList ?
-                        <ContactList taskDetails={true}></ContactList> : null
-
+                        <ContactList taskDetails={true} ></ContactList> : null
                     }
-                    {props.task.assingTo ?
+                    {props.task.assingTo1 ? props.task.assingTo1.map(assingTo => {
+                        return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
+                            : <div className="logo-contact-details mr-1 mt-1" >{assingTo.contact.name ? assingTo.contact.name[0] : null}</div>
+
+                    }) : null}
+                    {/* {props.task.assingTo ?
 
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
-                        : null}
+                        : null} */}
                     <div className="assingto-details" data-tip data-for="assing">
 
                         <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
