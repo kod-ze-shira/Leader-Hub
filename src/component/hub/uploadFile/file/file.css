@@ -18,6 +18,19 @@
     padding-left: 30px;
 }
 
+.progressFile {
+    display: inline-flex;
+    height: 1rem;
+    overflow: hidden;
+    line-height: 0;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+    /* width:  10vw !important;  */
+    width:  116px !important; 
+    height: 7px;  
+}
+
 .fileNotImgInTask a img,
 .fileNotImgInTask  img{
     height: 64px;
