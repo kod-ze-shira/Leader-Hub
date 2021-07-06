@@ -11,37 +11,42 @@ import { useRef } from 'react'
 
 function AddWorkspace(props) {
 
-    let tempColor
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
         "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
         "#F8B520", "#F88C20", "#F84A20", "#F13B7F", "#FD808B",
         "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
         "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"]
-    let [flag, setFlag] = useState(false)
-    let [myColor, setMyColor] = useState("#C967B6")
-
-    const nameworkspae = useRef()
-    // useEffect(() => {
-
-    // }, []);
-
-    const changeColorWorkspace = (event) => {
-        setMyColor(event.target.value)
-        const { name, value } = event.target
-        setWorkspace(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
-    if (!flag) {
-        fun()
-        setFlag(true)
-    }
-    function fun() {
+    // let [myColor, setMyColor] = useState("#C967B6")
+    let [myColor, setMyColor] = useState()
+    const [workspace, setWorkspace] = useState({
+        name: "",
+        description: "",
+        color: ""
+    })
+    useEffect(() => {
         let p = getRandomColor()
         setMyColor(p)
-    }
+        workspace.color = myColor
+    }, [])
+    const nameworkspae = useRef()
+
+    // const changeColorWorkspace = (event) => {
+    //     setMyColor(event.target.value)
+    //     const { name, value } = event.target
+    //     setWorkspace(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+    // }
+    // if (!flag) {
+    //     fun()
+    //     setFlag(true)
+    // }
+    // function fun() {
+    //     let p = getRandomColor()
+    //     setMyColor(p)
+    // }
 
     function getRandomColor() {
         const randColor = Math.floor((Math.random() * colorList.length) + 0)
@@ -49,57 +54,31 @@ function AddWorkspace(props) {
         return color;
     }
 
-    const [workspace, setWorkspace] = useState({
-        name: "",
-        description: "",
-        color: ''
-    })
+
 
     function addNewWorkspace() {
-
+        debugger
         if (nameworkspae.current.value) {
             workspace.color = myColor
             // props.addNewWorkspaceToServer(workspace)
             props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
             props.closeViewDetails()
-
         }
         else {
             nameworkspae.current.focus()
             var form = document.getElementById('nameRequired')
             form.classList.add('was-validated')
-        }
-        // else {
-        // document.getElementById('workspace-name').classList.add('errorNameEmpty')
-
-        // }
+        }     
     }
 
-    const handleChange = (event) => {
-        const { name, value } = event.target
-        setWorkspace(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-        // props.setWorkspaceInRedux()
-    }
-    // (function () {
-    //     // 'use strict'
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target
+    //     setWorkspace(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+    // }
 
-    //     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    //     var form = document.getElementById('sevaNewWorkspace')
-
-    //     // Loop over them and prevent submission
-
-    //     form.addEventListener('click', function (event) {
-    //         if (!form.checkValidity()) {
-    //             event.preventDefault()
-    //             event.stopPropagation()
-    //         }
-
-    //         form.classList.add('was-validated')
-    //     }, false)
-    // })()
     const changeFiledInWorkspace = (input) => {
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.saveIndexOfWorkspaceInRedux(props.workspaces.length - 1)
@@ -145,8 +124,7 @@ function AddWorkspace(props) {
                             styles="height: 50px"
                             type="color"
                             // id='colorProject'
-                            value={myColor}
-                            // onChange={(e) => changeColorWorkspace(e)}
+                            // value={myColor}
                             onChange={(input) => changeFiledInWorkspace(input)}
                         />
                         {/* onChange={handleChange} /> */}

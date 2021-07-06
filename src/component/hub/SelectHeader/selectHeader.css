@@ -30,19 +30,12 @@ margin-right: 0px;
 }
 #tabsAndList{
         /* padding-bottom: 8px; */
-        justify-content: flex-end;
-        align-items: center;
+        /* justify-content: flex-end; */
+        align-items: flex-end;
 }
 .listInSelect, .tabsInSelect{
         border-bottom: 2px solid rgb(210, 200, 200) !important}
 
-/* .listInSelect .MuiTab-wrapper ,
- .tabsInSelect  .MuiTab-wrapper{
-   margin-bottom: -8px;
-}
-.listInSelect, .tabsInSelect{
-        border-bottom: 2px solid rgb(210, 200, 200) !important
-} */
 .MuiTab-root{
         min-width: 75px !important;
         /* color:'#00C6EA' !important; */

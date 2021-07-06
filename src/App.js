@@ -11,7 +11,7 @@ import Hub from './component/hub/hub';
 // import HeaderLeader from '@leadercodes/leader-header'
 import BodyEmailOfAssignmentTask from './component/hub/BodyOfAssignmentTask/BodyEmailOfAssignmentTask';
 import ContactList from './component/hub/contact/contactList';
-import $ from 'jquery'
+import TablePage from '../src/component/hub/task/dynamicTable/dynamicTable'
 
 export default function App(props) {
   return (
@@ -19,6 +19,8 @@ export default function App(props) {
       <Provider store={Store}>
         <>
           <Hub></Hub>
+
+          {/* <TablePage></TablePage> */}
           {/* <FilesOfProject></FilesOfProject> */}
           {/* <BodyEmailOfAssignmentTask/> */}
           {/* <ContactList /> */}

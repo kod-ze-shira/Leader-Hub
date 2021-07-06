@@ -288,7 +288,10 @@ function TasksNotBelongCardByMap(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.task)
+                }
             }
         }
     })
