@@ -100,7 +100,7 @@ function ShareProject(props) {
         })
     }
     const shareObject = () => {
-        debugger
+        
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
         if (details.shareDetails.length)

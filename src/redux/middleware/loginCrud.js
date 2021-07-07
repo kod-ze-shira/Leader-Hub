@@ -1,3 +1,4 @@
+
 export const extractJwt = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EXTRACT_JWT') {
 

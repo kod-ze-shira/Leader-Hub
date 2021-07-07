@@ -8,6 +8,10 @@ function UploadFile(props) {
     const fileInputRef = useRef()
     useEffect(() => {
         console.log(props);
+        if (props.fromTaskTabs) {
+            props.setCurrentIndexCard(props.indexCard)
+            props.setCurrentIndexTask(props.indexTask)
+        }
     }, [props.files])
 
     const compressedFile = async (myFiles) => {
@@ -104,7 +108,10 @@ export default connect(
         return {
             setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
             addFile: (files) => dispatch(actions.addFile(files)),
-            uploadFiles: (file) => dispatch(actions.uploadFiles(file))
+            uploadFiles: (file) => dispatch(actions.uploadFiles(file)),
+            setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
+            setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+
         }
     }
 )(UploadFile)

@@ -45,30 +45,27 @@ function Overview(props) {
 
     return (
         <>
-            <div className='overview container-fluid '>
+            <div className='scrollbarOverview container-fluid'>
 
                 <div className='row '>
-                    <div className='col-lg-9 col-md-12 mr-3 scrollOverview'>
+                    <div className='col-lg-9 col-md-12 mr-3'>
 
                         <div className='container-fluid px-0 '>
                             <div className='row mb-3 divChartAndMembers'>
-
+                                <div className='projectName' >
+                                    <Description></Description>
+                                </div>
                                 {refresh ?
                                     <>
-                                        <div className='projectName' >
-                                            <Description></Description>
-                                        </div>
                                         <Members />
+
                                         <MyChart />
                                     </>
                                     : null}
                             </div>
-                        </div>
-
-                        <div className='col ' >
-                            <div className='container-fluid px-0 '>
+                            <div className='row'>
                                 {refresh ?
-                                    <FilesOfProject />
+                                    <FilesOfProject className="filesOfProject" />
                                     : null}
                             </div>
 
@@ -80,7 +77,7 @@ function Overview(props) {
                                             : null}
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -91,9 +88,17 @@ function Overview(props) {
                                 : null}
                         </div>
                     </div>
-                {/* <Hangout></Hangout> */}
+
+                    <div className='col' style={{ height: '87vh' }}>
+                        <div className='container-fluid px-0 '>
+                            {refresh ?
+                                <HangoutAndLogs></HangoutAndLogs>
+                                : null}
+                        </div>
+                    </div>
+                    {/* <Hangout></Hangout> */}
+                </div>
             </div>
-        </div>
         </>
     )
 }

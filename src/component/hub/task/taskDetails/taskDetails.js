@@ -5,10 +5,6 @@ import $ from 'jquery'
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
-import task_reducer from '../../../../redux/Reducers/task_reducer';
-import { createStatus } from '../../../../redux/middleware/statusCrud';
-import ViewStatus from '../../status/viewStatus'
-import AddStatus from '../../status/addStatus'
 import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'

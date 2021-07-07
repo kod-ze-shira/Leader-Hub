@@ -12,6 +12,7 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
+import UploadFile from '../../uploadFile/uploadFile'
 import Animation from '../../animation/animation'
 
 import ContactList from '../../contact/contactList';
@@ -248,6 +249,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
+
                         <div className="task-card mb-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
@@ -341,10 +343,12 @@ function ViewTaskByCradTabs(props) {
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
+                                            <div className="pl-2 attachment-alt">
+                                                <UploadFile taskId='' fromTaskTabs={true} indexTask={props.indexCurrentTask} indexCard={props.indexCurrentCard} />
+                                                <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            </div>
                                         </div>
-                                        {/* {props.task.status ? <div title={props.task.status.statusName}
-                                        className="color-task col-3  "
-                                        style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
+
                                         <div className="icons-task-tabs">
 
                                             <div className="due-date-hover" title={title.title_due_date}>

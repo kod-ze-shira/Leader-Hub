@@ -49,6 +49,7 @@ const publicData = {
 
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
+        debugger
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
