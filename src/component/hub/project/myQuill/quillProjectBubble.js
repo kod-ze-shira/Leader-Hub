@@ -11,10 +11,9 @@ import './myQuill.css'
 import { actions } from '../../../../redux/actions/action'
 import { connect } from 'react-redux'
 
-class QuillEditProject extends Component {
+class QuillProjectBubble extends Component {
 
-
-    changeFiledInEditProject = (e) => {
+    editText = (e) => {
         // כאן ניתן להשתמש בטקסט המעוצב
         console.log(e)//HTML מכיל את הטקסט כולל עיצוב e המשתנה 
         let editProjectInRedux = {
@@ -22,11 +21,15 @@ class QuillEditProject extends Component {
         }
         this.props.setProjectByFiledFromWorkspace(editProjectInRedux)
     }
+    saveText = (e) => {
+        debugger
+        let project = this.props.workspaces[this.props.workspaceIndex].projects[this.props.projectIndex]
+        this.props.editProjectInServer({ "project": project, 'projectBeforeChanges': this.props.projectBeforeChanges })
+    }
 
-
-    // componentDidMount() {
-    //     this.changeFiledInEditProject(this.props.text)
-    // }
+    componentDidMount() {
+        this.editText(this.props.text)
+    }
 
     modules = {
         // כאן ניתן להוסיף\להסיר עוד אלמנטים לעיצוב הטקסט
@@ -77,21 +80,19 @@ class QuillEditProject extends Component {
 
 
     render() {
-
         return (
             <>
-
                 <ReactQuill
-                    theme="snow"
+                    theme="bubble"
                     id="textQuil"
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description?this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description:null}
-                    onChange={(e) => this.changeFiledInEditProject(e)}
+                    value={this.props.text}
+                    placeholder='type here description'
+                    onChange={(e) => this.editText(e)}
+                    onBlur={(e) => this.saveText(e)}
                 >
                 </ReactQuill>
-
-
             </>
         );
     }
@@ -100,11 +101,15 @@ export default connect(
     (state) => {
         return {
             workspaces: state.public_reducer.workspaces,
+            descriptionNewProject: state.public_reducer.descriptionNewProject,
+            workspaceIndex: state.public_reducer.indexOfWorkspace,
+            projectIndex: state.public_reducer.indexCurrentProject,
         }
     },
     (dispatch) => {
         return {
             setProjectByFiledFromWorkspace: (p) => dispatch(actions.setProjectByFiledFromWorkspace(p)),
+            editProjectInServer: (p) => dispatch(actions.editProjectInServer(p))
         }
     }
-)(QuillEditProject)
+)(QuillProjectBubble)

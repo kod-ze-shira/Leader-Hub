@@ -167,7 +167,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -208,6 +208,7 @@ function ViewTaskByCrad(props) {
     };
 
     const showAssigToOrCalander = (object) => {
+
         let e = object.e
         let name = object.name
         e.stopPropagation()
@@ -316,8 +317,9 @@ function ViewTaskByCrad(props) {
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
                                 <label className="check-task border-left    px-2 col-status " >
-                                    <div className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                    <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
+
                                     </div>
                                 </label>
                                 <label className="check-task border-left  col">{props.task.startDate}
@@ -336,7 +338,7 @@ function ViewTaskByCrad(props) {
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
-                                            viewToastComplete={props.viewToastComplete}
+                                            viewToastMassege={props.viewToastMassege}
                                         > </ViewDetails>
                                     </div>
                                     : null}

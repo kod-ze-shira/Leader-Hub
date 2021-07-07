@@ -12,9 +12,9 @@ function TaskNotBelongCardForUser(props) {
     const [showBtn, setShowBtn] = useState(true)
     const addTaskInput = useRef();
     useEffect(() => {
-        if (!props.tasks.length)
+        if (!props.tasks.length) {
             props.getAllTasksNotBelongsCardForUser()
-
+        }
     }, [props.tasks])
     useEffect(() => {
         addTaskInput.current.focus();
@@ -33,13 +33,13 @@ function TaskNotBelongCardForUser(props) {
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
                 showRocketShip={props.showRocketShip}
-                viewToastComplete={props.viewToastComplete}
+                viewToastMassege={props.viewToastMassege}
             /> : null
             : <TasksNotBelongCardByMap key={task._id} task={task}
                 objectToast={(task) => props.showToastDelete(task)}
                 showToast={showToast}
                 showRocketShip={props.showRocketShip}
-                viewToastComplete={props.viewToastComplete}
+                viewToastMassege={props.viewToastMassege}
             />
     })
 
@@ -55,7 +55,7 @@ function TaskNotBelongCardForUser(props) {
                     </img>‏ */}
                     {/* <span className="icon-complete">+</span> */}
                     Add Task </button>
-                <div className={showBtn ? 'd-none' :'d-block d-flex   col-6 col-lg-8  p-0  mr-md-auto  mr-2 ml-4'}>
+                <div className={showBtn ? 'd-none' : 'd-block d-flex   col-4 col-xl-5  p-0  mr-md-auto  mr-2 ml-4'}>
                     <div className="wrap-input mr-2 col-8 col-lg-11  ">
                         <input type="text" className='addTaskNotBelong '
                             value={nameTask}
@@ -79,14 +79,15 @@ function TaskNotBelongCardForUser(props) {
                         </button>
                     </div>
                     <button
-                    className= "btn-add-task py-1 px-3"
-                    onClick={() => {
+                        className="btn-add-task py-1 px-3"
+                        onClick={() => {
                             if (nameTask !== '') {
                                 props.newTaskNotBelong(nameTask)
                                 setNameTask('')
                             }
-                            setShowBtn(true)  }}>
-                     Save</button>
+                            setShowBtn(true)
+                        }}>
+                        Save</button>
                 </div>
                 <div class="input-group inputSearchProject inputSearchTask  ml-2 mr-5 "
                 >
@@ -107,7 +108,7 @@ function TaskNotBelongCardForUser(props) {
             <div className="wrap-all-task">
                 <div className="wrap-all-task-width">
                     <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                        <label class="ml-3 pl-6 col-3 col-xl-4 labelAllTask"> My task </label>
+                        <label class="ml-3 pl-6 col-3  labelAllTask"> My task </label>
                         <label class="col-2 propertiesAllTask ml-4">Workspace</label>
                         <label class="col-2 propertiesAllTask">Project</label>
                         <label class=" col-2 propertiesAllTask">Card</label>

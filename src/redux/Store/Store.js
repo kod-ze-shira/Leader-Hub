@@ -20,9 +20,9 @@ import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOver
 import { createStatus, editStatus, getAllStatusesTaskForWorkspace, removeStatus } from '../middleware/statusCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask, dragCard, updateLike,
+    , moveTaskBetweenCards, dragTask, dragCard, updateLike, removeFileInTaskAndServerFiles,
     // moveCards,
-    completeTask, belongTask, newTaskNotBelong
+    completeTask, belongTask, newTaskNotBelong, displayLineByStart, disaplayLineByStop
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
 import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId, addMembers } from '../middleware/teamCrud';
@@ -87,8 +87,11 @@ const store = createStore(
                 shareObject,
                 assingTo,
                 updateLike,
+                removeFileInTaskAndServerFiles,
                 // getMembersByProjectId,
-                addMembers
+                addMembers,
+                displayLineByStart,
+                disaplayLineByStop
             ))
 )
 store.dispatch(actions.extractJwt());

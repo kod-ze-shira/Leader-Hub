@@ -20,9 +20,9 @@ function ViewContact(props) {
     ]
 
     const assingTaskToContact = (email) => {
-            props.assingTo(email)
+        props.viewToastMassege({ show: true, massege: 'Task assign!!' })
+        props.assingTo(email)
     }
-
 
     return (
         <>
@@ -38,16 +38,15 @@ function ViewContact(props) {
 const mapStateToProps = (state) => {
 
     return {
+        cards: state.public_reducer.cards,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
-
-
     }
-
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewContact)

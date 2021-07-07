@@ -37,7 +37,6 @@ function TasksNotBelongCardByMap(props) {
     let doneStatus = props.task?.complete;
     const [downloadFile, setDownloadFile] = useState(false)
     const [flag, setFlag] = useState(true)
-
     useEffect(() => {
         if (!props.workspaces.length) {
             props.getAllWorkspacesFromServer()
@@ -80,7 +79,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(completeTask)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
     }
 
@@ -237,7 +236,7 @@ function TasksNotBelongCardByMap(props) {
                     "card": props.task.card ? props.task.card : ''
                 }
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-                props.viewToastComplete({ show: true, massege: 'Task assign!!' })
+                props.viewToastMassege({ show: true, massege: 'Task assign!!' })
 
             });
         }
@@ -300,7 +299,7 @@ function TasksNotBelongCardByMap(props) {
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
-                <div className="wrap-not-belong col-4 col-xl-5 row">
+                <div className="wrap-not-belong col-4  row">
                     <label className="check-task1 py-2 row col-8    nameTaskNotBelong">
 
                         <label
@@ -323,7 +322,7 @@ function TasksNotBelongCardByMap(props) {
                                 onClick={(e) => { addChalalit(); changeFiledInTask(e) }}></span>
 
                         </label>
-                        <label className='col-10 mt-2 '>
+                        <label className='col-10 mt-2 task-name-no-belong'>
                             {props.task.name}
                         </label>
                     </label>
@@ -424,20 +423,18 @@ function TasksNotBelongCardByMap(props) {
                 </label>
                 <label className="check-task border-left d-flex justify-content-around align-items-center  py-2  px-2 col">
 
-                    {myWorkspace && !cardId ?
+                    {!cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">save</button>
                             <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
-
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">move to</button>
                         </>
                         : null
                     }
 
                     {cardId ?
                         <>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>save</button>
                             <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
-
+                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
                         </> : null
 
                     }
@@ -451,6 +448,7 @@ function TasksNotBelongCardByMap(props) {
                             from='taskNotBelongDetails'
                             task={props.task}
                             setDownloadFile={(e) => setDownloadFile(e)}
+                            viewToastMassege={props.viewToastMassege}
                             open={true} />
                     </div>
                     : null}

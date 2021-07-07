@@ -54,8 +54,8 @@ function EditStatus(props) {
     return (
         <>
             <div className="container edit-status-wraps">
-                <div className="title-edit-label py-2 mb-1" onClick={(e) => viewAllStatus(e)}> Edit Label</div>
-                <div class="form-group row mx-2">
+                <div className="title-edit-label py-2 mb-1" > Edit Label</div>
+                <div class="form-group row mx-auto">
 
                     <label for="name">Name</label>
                     <input name="statusName"
@@ -65,7 +65,7 @@ function EditStatus(props) {
                         onClick={(e) => stopP(e)}
                         onChange={(e) => handleChangeStatus(e)}
                     />
-                    <div class="form-group row mx-2">
+                    <div class="form-group row mx-auto">
                         <label for="color">Select Color</label>
                         <input name="color"
                             type="color" class="form-control"
@@ -76,8 +76,8 @@ function EditStatus(props) {
 
                         />
                     </div>
-                    <div className=" row justify-content-between">
-                        <button className=" edit-status px-3 ml-3" onClick={(e) => editStatus_(e)}>Save</button>
+                    <div className="  row mx-auto">
+                        <button className=" edit-status px-3 " onClick={(e) => editStatus_(e)}>Save</button>
                         <button className=" delete-status ml-3" onClick={(e) => deleteStatus(e)}>Delete</button>
                     </div>
 

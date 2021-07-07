@@ -25,7 +25,7 @@ export default function ToastMessage(props) {
             <animated.div style={scrolling}>
                 <Toast className="toast_delete"
                     // show={show} autohide>
-                    onClose={() => props.viewToastComplete({ show: false })}
+                    onClose={() => props.viewToastMassege({ show: false })}
                     show={show} autohide>
                     <div className="border-top-gradient"></div>
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>

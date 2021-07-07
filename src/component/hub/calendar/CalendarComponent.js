@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 // import ViewContact from './viewContact';
 import { actions } from '../../../redux/actions/action'
 import Calendar from 'react-calendar';
+// import Calendar, { useCalendarBind } from 'react-nice-calendar' 
+
 
 
 
@@ -31,17 +33,22 @@ function CalendarComponent(props) {
     const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200;
     const left = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.leftContactList : props.widthCurrentScreen - 350
     const width = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.widthContactsList : props.widthContactsList
+    const [selectedDate, setSelectedDate] = useState()
 
     return (
         <>
 
             <div onClick={(e) => e.stopPropagation()}
                 className='div_contacts' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
-                <div className='container div_contacts_list mt-2' style={{ "width": props.hub ? width : 300, "height": props.hub ? height : 200 }}>
+                <div className='container div_contacts_list m-2' >
                     <Calendar
                         onChange={(e) => handleChange(e)}
                         value={value}
                     />
+                    {/* <Calendar
+                        selectedDate={value}
+                        onChangeSelectedDate={(e) => handleChange(e)}
+                    /> */}
                 </div>
 
             </div>

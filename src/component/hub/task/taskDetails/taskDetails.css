@@ -99,15 +99,9 @@ textarea:focus{
 .mils{
     display: inline;
 }
-.task-details{
-  /* overflow-x: auto !important; */
+.form-control{
+    background-color: transparent !important;
 }
-.btns-in-view-details-task{
-  /* margin-top:8vh  !important; */
-}
-.task-details > .form-group{
-    /* margin-bottom: 0.5rem !important; */
-  }
   .task-details > .dropdown{
 z-index: 9999 !important; 
  }
@@ -116,7 +110,8 @@ z-index: 9999 !important;
 }
 .color-status-first{
   text-align: center;
-  max-width: 90px !important;
+  /* max-width: 90px !important; */
+  width: 85px;
     /* /* width: 26px; */
     height: 25px; 
     color: white;
@@ -125,12 +120,23 @@ z-index: 9999 !important;
     display: inline-block;
 
 }
+#assing{
+  padding:4px !important;
+}
 .dropdown-toggle::after {
-  float: right;
-  margin-top: 8px;
+  /* float: right; */
+  margin-top: 11px;
 
 }
-
+.details .form-control .details .aaaaaaaaa  .css-yk16xz-control {
+  background-color: transparent !important;
+}
+.dropdown-toggle{
+  background-color:white;
+}
+.css-yk16xz-control,.css-2b097c-container{
+  background-color: none !important;
+}
 .btn-option-in-task{
   display: inline-block !important;
 }
@@ -213,11 +219,12 @@ z-index: 9999 !important;
     /* margin-left: 2%; */
   }
 .assingto-task-hover{
+  position: relative;
   display: none;
 }
 .files-task-hover{
   display: none;
 }
 .priority-task-details .css-2b097c-container{
-  background-color: #EDFBFC!important;
+  /* background-color: #EDFBFC!important; */
 }

@@ -142,7 +142,7 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-5 "
+                    <div className="col-4 "
                         onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
                         onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
                     >
@@ -181,7 +181,7 @@ function ViewCards(props) {
                         onClick={handleClick}>
                         . . .
                 </Button>
-                    <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                         {title.title_more_actions}
                     </ReactTooltip>
                     <Menu
@@ -197,13 +197,13 @@ function ViewCards(props) {
                     </Menu>
                     {/* <p className="col">Team</p> */}
                     <p className="col-assignee">Assignee</p>
-                    <p className="col-status ">Status</p>
+                    <p className="col ">Status</p>
                     <p className="col">Start date</p>
-                    <p className="col">Due date</p>
+                    <p className="col-status">Due date</p>
                     <p className="col-priority">Priority</p>
 
                     <p className="col-add-task"><a>
-                        <ReactTooltip data-tip id="add" place="bottom" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
                             {title.title_add_task}
                         </ReactTooltip>
                     </a></p>
@@ -219,7 +219,7 @@ function ViewCards(props) {
                                         {props.cardFromMap.tasks.map((task, index) => (
                                             <ViewTaskByCrad
                                                 viewContactList={props.viewContactList}
-                                                viewToastComplete={props.viewToastComplete}
+                                                viewToastMassege={props.viewToastMassege}
                                                 objectToast={(task) => props.showToastDelete(task)}
                                                 key={task._id} task={task}
                                                 indexCard={props.indexCard}
@@ -257,7 +257,7 @@ function ViewCards(props) {
                             <ViewDetails viewContactList={props.viewContactList}
                                 closeViewDetails={() => setViewDetails(false)}
                                 cardId={cardId} from={"addTask"}
-                                viewToastComplete={props.viewToastComplete}>
+                                viewToastMassege={props.viewToastMassege}>
                             </ViewDetails>
                         </div>
                         : null

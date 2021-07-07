@@ -52,6 +52,7 @@ function ViewCardsTabs(props) {
                 startDate: today, dueDate: today, "card": props.card._id
             }
             props.newTask(task)
+            //לבדוק נפילה
             let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
             props.setCountTasks(countTasksInProject += 1)
 
@@ -128,11 +129,10 @@ function ViewCardsTabs(props) {
         function () {
             $(this).attr('contentEditable', false);
         });
-    console.log(props.cards);
     return (
         <>
-            <div className="card-width px-2 mt-4" id={props.cards[props.indexCard]._id}>
-                <Draggable draggableId={props.cardFromMap._id} index={props.index} >
+            <div className="card-width px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
+                <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
                             {...provided.draggableProps}
@@ -149,14 +149,13 @@ function ViewCardsTabs(props) {
                                                 ref={textInput}
                                                 onBlur={() => editCard()}
                                                 className=" mb-2 pl-4 col-10"
-
                                             >{editCardName}
                                             </span>
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
                                              </Button>
-                                            <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                            <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
                                             <Menu
@@ -175,7 +174,7 @@ function ViewCardsTabs(props) {
                                     <div class="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
-                                                <div className="mt-0 glila"
+                                                <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
 
@@ -187,8 +186,9 @@ function ViewCardsTabs(props) {
                                                             indexCard={props.indexCard}
                                                             showRocketShip={props.showRocketShip}
                                                             indexTask={index}
-                                                            viewToastComplete={props.viewToastComplete}
-                                                            viewContactList={props.viewContactList} />
+                                                            viewToastMassege={props.viewToastMassege}
+                                                            viewContactList={props.viewContactList}
+                                                            openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
                                                     ))}
                                                     {
                                                         addTaskInInput ?
@@ -215,7 +215,7 @@ function ViewCardsTabs(props) {
                                             )}
                                         </Droppable>
                                         <a data-tip data-for="add_t" onClick={(e) => addTask(e)}
-                                            className="add-task-tabs mt-4 mt-3 ">Add Task</a>
+                                            className="add-task-tabs mt-4 mt-3 pl-1 ">Add Task</a>
                                         {/* <img className="mt-2 new-task-tabs" onClick={(e) => addTask(e)} src={require('../../img/Link.png')}></img> */}
                                     </div>
                                 </div>

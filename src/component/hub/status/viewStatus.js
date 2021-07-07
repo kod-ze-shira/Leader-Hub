@@ -31,6 +31,8 @@ function ViewStatus(props) {
             props.setTaskByFiledFromTasks(editTaskInRedux)
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         }
+        if (props.fromHub)
+            props.editTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
     }
     return (
         <>
@@ -43,7 +45,11 @@ function ViewStatus(props) {
                             onClick={(e) => openEditTask(e)}
                             src={require('../../img/pencil-write.svg')} />
                     </div>
-
+                    <img
+                        className={props.index < 3 || props.fromHub ? " pencil-status-none " : "pencil-status ml-2 mt-1"}
+                        title={props.index < 3 ? "Deputable status cannot be edited" : "Edit Status"}
+                        onClick={(e) => openEditTask(e)}
+                        src={require('../../img/pencil-write.svg')} />
                 </div>
             </div>
 
@@ -67,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
         saveIndexOfStatusInRedux: (index) => dispatch(actions.saveIndexOfStatusInRedux(index)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
-
+        editTask: (task) => dispatch(actions.editTask(task))
     }
 
 

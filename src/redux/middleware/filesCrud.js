@@ -7,68 +7,67 @@ import f from 'js-file-download'
 
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
-    // let files = getState().files_reducer.files
     if (action.type === 'UPLOAD_FILES') {
 
         let files = action.payload.files
+        var formData = new FormData()
+        // var myFiles = Object.values(files)
+        if (files.length < 1) { console.log("ooops... not files to upload") }
+        else {
+            files.forEach((file, index) => {
+                formData.append("file" + index, file, file.name)
+            })
+        }
+        // console.log(formData)
+        let jwtFromCookie = getState().public_reducer.tokenFromCookies;
+        if (!!formData.entries().next().value === true) {
+            $.ajax({
+                url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                method: 'post',
+                contentType: false,
+                processData: false,
+                headers: { "authorization": jwtFromCookie },
+                data: formData,
+                success: (data) => {
 
-        if (action.type === 'UPLOAD_FILES') {
-            var formData = new FormData()
-            // var myFiles = Object.values(files)
-            if (files.length < 1) { console.log("ooops... not files to upload") }
-            else {
-                files.forEach((file, index) => {
-                    formData.append("file" + index, file, file.name)
-                })
-            }
-            console.log(formData)
-            let jwtFromCookie = getState().public_reducer.tokenFromCookies;
-            if (!!formData.entries().next().value === true) {
-                $.ajax({
-                    url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
-                    method: 'post',
-                    contentType: false,
-                    processData: false,
-                    headers: { "authorization": jwtFromCookie },
-                    data: formData,
-                    success: (data) => {
+                    // let size = data.filesData.file0.size / 1024 / 1024
+                    var myData = { "files": data.filesData }
+                    if (action.payload.type === 'taskNotBelong')
+                        dispatch(actions.setNewFilesInTaskNotBelong({
+                            'file': data.filesData,
+                            'id': action.payload.task._id
+                        }))
+                    else
+                        dispatch(actions.setNewFilesInTask(data.filesData))
+                    console.log("finish first ajax  " + JSON.stringify(myData));
+                    setTimeout(() => {
+                        $.ajax({
+                            // url: `https://files.codes/api/renana-il/savedMultiFilesDB`,
+                            url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
+                            method: 'POST',
+                            headers: { "authorization": jwtFromCookie },
+                            data: myData,
+                            success: (data) => {
+                                // if (action.payload.type !== 'taskNotBelong') {
 
-                        // let size = data.filesData.file0.size / 1024 / 1024
-                        var myData = { "files": data.filesData }
-                        if (action.payload.type === 'taskNotBelong')
-                            dispatch(actions.setNewFilesInTaskNotBelong({ 'file': data.filesData, 'id': action.payload.task._id }))
-                        else
-                            dispatch(actions.setNewFilesInTask(data.filesData))
-                        console.log("finish first ajax  " + JSON.stringify(myData));
-                        setTimeout(() => {
-                            $.ajax({
-                                // url: `https://files.codes/api/renana-il/savedMultiFilesDB`,
-                                url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
-                                method: 'POST',
-                                headers: { "authorization": jwtFromCookie },
-                                data: myData,
-                                success: (data) => {
-                                    if (action.payload.type !== 'taskNotBelong') {
+                                //     let cards = getState().public_reducer.cards;
+                                //     let indexCurrentCard = getState().public_reducer.indexCurrentCard
+                                //     let indexCurrentTask = getState().public_reducer.indexCurrentTask
+                                //     // dispatch(actions.editTask(cards[indexCurrentCard].tasks[indexCurrentTask]))
+                                // }
+                                // else
+                                // dispatch(actions.editTask(action.payload.task))
 
-                                        let cards = getState().public_reducer.cards;
-                                        let indexCurrentCard = getState().public_reducer.indexCurrentCard
-                                        let indexCurrentTask = getState().public_reducer.indexCurrentTask
-                                        dispatch(actions.editTask(cards[indexCurrentCard].tasks[indexCurrentTask]))
-                                    }
-                                    else
-                                        dispatch(actions.editTask(action.payload.task))
-
-                                }
-                            })
-                        }, 2000);
-                    },
-                    error: function (err) {
-
-                        checkPermission(err).then((ifOk) => {
+                            }
                         })
-                    }
-                })
-            }
+                    }, 2000);
+                },
+                error: function (err) {
+
+                    checkPermission(err).then((ifOk) => {
+                    })
+                }
+            })
         }
     }
     return next(action);

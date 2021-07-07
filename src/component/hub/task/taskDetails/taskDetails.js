@@ -18,32 +18,40 @@ import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
+import Timer from '../../timer/timer'
 
 function TaskDetails(props) {
     const nameRequired = useRef()
-    const [taskBeforeChanges] = useState({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] })
+    let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
+    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     useEffect(() => {
-        props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-        props.setFilesFromTask(props.task.files)
-        if (!(props.statuses && props.statuses.length > 0))
-            props.getAllStatusesTaskForWorkspace();
-        if (props.contactsUser.length == 0)
-            props.getContactsForUser()
+        if (props.cards) {
+            setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
+            props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
 
-    }, [props.cards])
+            props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
+            if (!(props.statuses && props.statuses.length > 0))
+                props.getAllStatusesTaskForWorkspace();
+            if (props.contactsUser.length == 0)
+                props.getContactsForUser()
+        }
+    }, [props.cards, milstone])
 
     useEffect(() => {
         nameRequired.current.focus();
     }, [])
+    useEffect(() => {
 
+    }, [props.arrFilesOfTask])
 
-    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    const [startTimerComp, setStartTimerComp] = useState(false)
+
     let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
     const openPopUpStatus = (event) => {
@@ -55,18 +63,14 @@ function TaskDetails(props) {
         setOpenPopUp(!openPopUp)
     });
 
-
-
     function stopP(event) {
         event.stopPropagation();
     }
     function closeStatus(event) {
         setOpenPopUp(false)
-
     }
     function closeContactList(event) {
         setShowContactList(false)
-
     }
 
     const compressedFile = async (myFiles) => {
@@ -101,7 +105,7 @@ function TaskDetails(props) {
 
         if (nameRequired.current.value) {
             if (milstone)
-                props.viewToastComplete({ show: true, massege: 'Mark milstone!!' })
+                props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -111,31 +115,7 @@ function TaskDetails(props) {
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
             }
             else
-                if (props.arrDeleteFilesOfTask.length) {
-                    for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
-                        // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-                        for (let index2 = 0; index2 < props.task.files.length; index2++) {
-                            if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-                                try {
-                                    props.task.files.splice(index2, 1);
-
-                                } catch (error) {
-                                    console.log(error)
-                                }
-                            }
-                            // first element removed
-                        }
-                        // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
-
-                    }
-                    let r = props.task.files
-                    props.EditTask(props.task)
-                    // props.removeFile(props.ArrDeleteFilesOfTask)
-
-                }
-
-                else
-                    props.EditTask(props.task)
+                props.EditTask(props.task)
             props.closeViewDetails();
 
         }
@@ -149,7 +129,7 @@ function TaskDetails(props) {
         {
             value: priority,
             label:
-                <div className="prioprty-select">
+                <div className="prioprty-select ">
                     <img referrerpolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
@@ -165,8 +145,6 @@ function TaskDetails(props) {
         let editTask = { "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id, "priority": event.value._id }
         console.log(editTask)
         props.EditTask(editTask)
-
-
     };
 
     const deleteTask = (e) => {
@@ -201,12 +179,22 @@ function TaskDetails(props) {
                 if (input.target.name == "milestones") {
                     setMilstone(!props.task.milestones)
                     value = !milstone
+                    if (!milstone)
+                        props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
                 }
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
 
     const assingto = (e) => {
+        var x = e.clientX;
+        var y = e.clientY;
+        var height = $(window).height();
+        var width = $(window).width();
+        props.setLeftContactList(x)
+        props.setTopContactList(y)
+        props.setWidthScreen(width)
+        props.setHeightScreen(height)
         setShowContactList(true)
     }
 
@@ -218,6 +206,7 @@ function TaskDetails(props) {
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
             setDownloadFile={(e) => { props.setDownloadFile(e) }}
+            taskId=''
         />
     }) : null
 
@@ -274,13 +263,12 @@ function TaskDetails(props) {
             props.setCountReadyTasks(true)
             // setShowChalalit(true)
 
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else {
             props.setCountReadyTasks(false)
         }
     }
-
 
     return (
         <>
@@ -307,10 +295,12 @@ function TaskDetails(props) {
                                 class="form-control"
                                 id="name"
                                 onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
+                                // onMouseLeave={(e) => alert("ff")}
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                             <div class="invalid-feedback">
                                 Please enter task name.
-                     </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -320,7 +310,9 @@ function TaskDetails(props) {
                                 placeholder="Write a description about your workspace"
                                 name="description"
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}
-                                onChange={(e) => changeFiledInTask(e)} contentEditable
+                                onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
+                                contentEditable
                             ></textarea>
                         </div>
                         <div className="row justify-content-between">
@@ -333,6 +325,7 @@ function TaskDetails(props) {
                                     id="startDate"
                                     value={startDateTask}
                                     onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
                                 />
                             </div>
                             <div class="form-group col-md-6 col-lg-5">
@@ -344,13 +337,17 @@ function TaskDetails(props) {
                                     id="dueDate"
                                     value={dueDateTask}
                                     onChange={(e) => changeFiledInTask(e)}
+                                // onBlur={(e) => editTaskInServer()}
                                 />
                             </div>
 
                         </div>
                         <div className="row justify-content-between">
                             <div class="dropdown col-md-6 col-lg-5">
-                                <button onClick={(e) => openPopUpStatus(e)} class="form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {/* form-control */}
+                                <label for="status">Status</label>
+
+                                <button onClick={(e) => openPopUpStatus(e)} class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
                                         <div
                                             className="color-status-first px-3"
@@ -366,7 +363,8 @@ function TaskDetails(props) {
                                         <ViewAllStatuses
                                             task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
                                             status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                            openPopUp={openPopUp} />
+                                            openPopUp={openPopUp}
+                                            closeStatuses={(e) => setOpenPopUp(false)} />
                                     </div>
                                     : null}
 
@@ -379,33 +377,43 @@ function TaskDetails(props) {
                                         checked={milstone}
                                         value={props.task.milestones}
                                         onChange={(e) => changeFiledInTask(e)}
+                                    // onBlur={(e) => editTaskInServer()}
                                     />
                                     <span className="slider round" ></span>
-
-
                                 </label>
+
                             </div>
 
                         </div>
                         <div className="row justify-content-between ">
-                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                            <div className=" col-md-6 col-lg-5 mt-2 priority-task-details">
                                 <label for="priority">Priority</label>
 
                                 <Select
                                     isSearchable={false}
                                     name="priority"
-                                    className=""
+
                                     // classNamePrefix="select"
                                     options={viewPriortyList}
                                     placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
-                                        <div className="prioprty-select">
+                                        <div className="prioprty-select  dropdown-toggle">
                                             <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
                                             <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
-                                        </div> : "All priority"}
+                                        </div> : <div className="prioprty-select  dropdown-toggle">
+                                            <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
+                                            <p >{props.priorities[0].level}</p>
+                                        </div>}
                                     onChange={(e) => changePriority(e)}
                                 />
                             </div>
+                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
+                                <button onClick={(e) => { setStartTimerComp(false); props.disaplayLineByStop() }}>stop</button>
+                                <Timer startTimerComp={startTimerComp} ></Timer>
+                            </div>
                         </div>
+
+
                     </div>
 
                     <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
@@ -418,7 +426,8 @@ function TaskDetails(props) {
 
                 <div className="row justify-content-around mx-1 ">
                     {showContactList ?
-                        <ContactList taskDetails={true}></ContactList> : null
+                        <ContactList taskDetails={true}
+                            viewToastMassege={props.viewToastMassege} /> : null
 
                     }
                     {props.task.assingTo ?
@@ -430,29 +439,29 @@ function TaskDetails(props) {
 
                         <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
-                        <ReactTooltip data-tip id="assing" place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
                     <div className=" files-details" data-tip id="files">
-                        <UploadFile />
+                        <UploadFile taskId='' />
                         <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
-                        <ReactTooltip place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" place="top" effect="solid">
                             {title.title_files}
                         </ReactTooltip>
                     </div>
                     <div className="delete-details" data-tip data-for="delete">
                         <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <ReactTooltip data-tip id="delete" place="top" effect="solid" >
+                        <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid" >
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>
                 </div>
@@ -474,7 +483,8 @@ const mapStateToProps = (state) => {
         arrFilesOfTask: state.public_reducer.arrFilesOfTask,
         arrDeleteFilesOfTask: state.public_reducer.arrDeleteFilesOfTask,
         contactsUser: state.share_reducer.contactsUser,
-        priorities: state.public_reducer.priorities
+        priorities: state.public_reducer.priorities,
+
 
     }
 }
@@ -490,7 +500,12 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-
+        displayLineByStart: () => dispatch(actions.displayLineByStart()),
+        disaplayLineByStop: () => dispatch(actions.disaplayLineByStop()),
+        setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
+        setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
+        setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
+        setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
 
     }
 }

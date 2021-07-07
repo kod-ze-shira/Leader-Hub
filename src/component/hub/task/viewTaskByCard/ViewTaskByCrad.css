@@ -260,13 +260,12 @@ float: right !important;
 .assing-to-list {
   float:left ;
 }
-.prioprty-select{
-}
+
 .prioprty-select p{
   font-weight: bold;
   display: inline-block !important;
   text-align:right !important;
-  margin-left: 3px;
+  margin-left: 7px;
 
 }
 

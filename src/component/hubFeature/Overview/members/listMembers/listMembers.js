@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import OneMemberToAdd from '../oneMemberToAdd/oneMemberToAdd'
-import $ from 'jquery'
 import './listMembers.css'
 
 function ListMembers(props) {
@@ -12,17 +11,18 @@ function ListMembers(props) {
     const [search, setSearch] = useState('')
     const [add, setAdd] = useState('')
     const [validEmail, setValidEmail] = useState(false)
-    const inputAdd = useRef()
-    console.log('ccccc', contactsList);
+    // const inputAdd = useRef()
     useEffect(() => {
         getContacts()
-        setContacts(contactsList);
-        console.log('contactsList', contactsList);
     }, [])
     useEffect(() => {
-        if (flagAdd === true)
-            inputAdd.current.focus();
-    }, [flagAdd])
+        setContacts(contactsList);
+
+    }, [contactsList])
+    // useEffect(() => {
+    //     if (flagAdd === true)
+    //         inputAdd.current.focus();
+    // }, [flagAdd])
 
 
     function ValidateEmail(mail) {
@@ -50,39 +50,53 @@ function ListMembers(props) {
 
     function clickAddMember() {
         if (ValidateEmail(add)) {
-            clickMembers(add)
-        }
-        else {
+            shareObject({ member: add, permission: 'viewer' })
+            setMembersList(false)
+        } else {
             setValidEmail(true)
         }
     }
 
-    return (
-        <>
-            <div className='container membersToAdd' id='membersToAdd' onClick={(e) => e.stopPropagation()}>
-                <input className='row inputSearch mt-1 ml-1' type='text' placeholder='enter name or email' onChange={(e) => { searchContacts(e) }} />
-                {
-                    contacts.length !== 0 ?
-                        contacts.map(cl => <OneMemberToAdd member={cl} clickMembers={clickMembers} />)
-                        :
-                        <p className='row m-2'>No Members</p>
-                }
-                {
-                    !flagAdd ?
-                        <button className='row btnAddmembers cursorPoint' onClick={e => {
-                            setFlagAdd(true)
-                        }}>+ Add Members</button> :
-                        <>
-                            <div className='row d-flex justify-content-between m-0 mt-2' style={{ width: '100%' }}>
-                                <input className='inputAdd col-7 mb-1' ref={inputAdd} type="text" defaultValue={search} placeholder='enter email' onChange={e => setAdd(e.target.value)} />
-                                <button className=' buttonAdd col-4  mb-1 cursorPoint' onClick={e => clickAddMember()}>+ Add</button>
-                            </div>
-                            {validEmail ?
-                                <div className='d-flex justify-content-center my-2' style={{ width: '100%' }}><div className='row mailNotValid'><p>The mail is not valid</p></div> </div> : null}
-                        </>
-                }
-            </div>
-        </>
+    return (<>
+        <div className='container membersToAdd'
+            onClick={
+                (e) => e.stopPropagation()
+            } >
+            <input className='row inputSearch mt-1 ml-1'
+                // ref={inputSearch}
+                type='text'
+                placeholder='name or email'
+                onChange={(e) => {searchContacts(e) }} />
+            {
+                contacts.length !== 0 ?
+                    contacts.map(cl => < OneMemberToAdd member={cl}
+                        clickMembers={clickMembers}
+                    />) :
+                    <p className='row m-2' > No Members </p>
+            } {
+                !flagAdd ?
+                    <button className='row btnAddMembers cursorPoint'
+                        onClick={
+                            e => {
+                                setFlagAdd(true)
+                            }
+                        } > +Add Members </button> : <>
+                        <div className='row d-flex justify-content-between m-0 mt-2' style={{ width: '100%' }} >
+                            <input className='inputAdd col-12 col-md-7 mb-1'
+                                // ref={inputAdd}
+                                type="text"
+                                defaultValue={search}
+                                placeholder='enter email'
+                                onChange={e => setAdd(e.target.value)} />
+                            <button className=' buttonAdd col-12 col-md-4 mb-1 cursorPoint'
+                                onClick={e => clickAddMember()} > +Add </button>
+                        </div > {
+                            validEmail ?
+                                <div className='d-flex justify-content-center my-2'
+                                    style={
+                                        { width: '100%' }
+                                    }> <div className='row mailNotValid' > <p> The mail is not valid </p></div> </div> : null} </>
+            } </div> </>
     )
 }
 

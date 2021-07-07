@@ -8,6 +8,7 @@ import QuillEditProject from '../myQuill/quillEditProject.js'
 // import '../../inputDitails/inputDitails.css'
 
 function EditProject(props) {
+
     const [projectBeforeChanges] = useState({ ...props.workspaces[props.indexWorkspace].projects[props.indexProject] })
     let project;
     useEffect(() => {
@@ -15,7 +16,7 @@ function EditProject(props) {
 
     }, [props.workspaces])
 
-    debugger
+
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -98,20 +99,11 @@ function EditProject(props) {
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
                         <div class="invalid-feedback">
                             Please enter project name.
-                     </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description} indexW={props.indexWorkspace} indexP={props.indexProject} />
-
-                        {/* <div class="form-control descriptionProject"
-                            name="description"
-                            id="descriptionProject" rows="3"
-                            ref={descriptionInput}
-                            placeholder="Write a description about your project"                           
-                            contentEditable
-                            onBlur={(input) => changeFiledInProject(input)}
-                        ></div> */}
+                        <QuillEditProject indexW={props.indexWorkspace} indexP={props.indexProject} />
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">
@@ -143,12 +135,13 @@ function EditProject(props) {
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
                         <img src={require('../../../img/bin.png')}></img> Delete
-                        <ReactTooltip data-tip id="delete" place="top" effect="solid">
+                        <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
+
                     </button>
                     <button data-tip data-for="save" onClick={() => saveProject()} className="save_canges_btn col-3">Save</button>
-                    <ReactTooltip data-tip id="save" place="top" effect="solid">
+                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>

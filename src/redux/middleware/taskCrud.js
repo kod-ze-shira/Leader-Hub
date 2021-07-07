@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import { act } from 'react-dom/test-utils';
 
 export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_TASK_BY_ID_FROM_SERVER') {
@@ -207,24 +208,30 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-        if (action.payload.type && action.payload.type == 'taskNotBelong') {
+
+        if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
             task = action.payload.task
-            if (!task.description)
-                task.description = null
+            console.log("Dxffdgggggghggg", task);
         }
         else
-            if (!action.payload.card) {
-                for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
-                    if (getState().public_reducer.tasks[index]._id == action.payload._id)
-                        task = getState().public_reducer.tasks[index]
-                }
+            if (action.payload.type && action.payload.type == 'taskNotBelong') {
+                task = action.payload.task
+                if (!task.description)
+                    task.description = null
             }
             else
-                if (action.payload.name)
-                    task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
-                        .tasks[getState().public_reducer.indexCurrentTask]
+                if (!action.payload.card) {
+                    for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
+                        if (getState().public_reducer.tasks[index]._id == action.payload._id)
+                            task = getState().public_reducer.tasks[index]
+                    }
+                }
                 else
-                    task = action.payload
+                    if (action.payload.name)
+                        task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+                            .tasks[getState().public_reducer.indexCurrentTask]
+                    else
+                        task = action.payload
 
 
         $.ajax({
@@ -238,20 +245,10 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             success: function (data) {
                 if (data.project)
                     dispatch(actions.setProjectInWorkspace(data.project))
-                console.log("success")
-                if (getState().public_reducer.arrDeleteFilesOfTask.length) {
-                    let urlsFile = [], arr = getState().public_reducer.arrDeleteFilesOfTask;
-                    for (let index = 0; index < arr.length; index++) {
-                        urlsFile.push(arr[index].url)
-                    }
-                    dispatch(actions.removeFile(urlsFile));
-                    dispatch(actions.deleteFilesInArr());
-                    // dispatch(actions.setNewFilesInTask(data.filesData))
-                }
                 if (getState().public_reducer.arrFilesOfTask.length && task.card) {
                     dispatch(actions.setIdFiles(data.result.files));
                 }
-                if (data.result.priority) {
+                if (data.result.priority && data.result.card) {
                     dispatch(actions.setTaskByFiledFromTasks({ "nameFiled": "priority", "value": data.result.priority }))
                 }
 
@@ -265,6 +262,49 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 }
+
+export const removeFileInTaskAndServerFiles = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'REMOVE_FILE_IN_TASK_AND_SERVER_FILES') {
+        let task = {}
+        if (action.payload.taskId == '' && getState().public_reducer.cards &&
+            getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks
+            && getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
+        ) {
+            task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
+
+        }
+        else if (getState().public_reducer.tasks) {
+            task = getState().public_reducer.tasks.find((task) => task._id == action.payload.taskId)
+        }
+
+
+        fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/editTask`,
+            {
+                method: 'POST',
+                headers: {
+                    authorization: getState().public_reducer.tokenFromCookies,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task })
+            }).then((result) => {
+                return result.json();
+            }).then((result) => {
+
+                checkPermission(result).then((ifOk) => {
+                    console.log(result);
+                    if (result.massege == 'task updated successfully')
+                        dispatch(actions.removeFile([action.payload.url]))
+                })
+
+            })
+
+    }
+    return next(action);
+
+    // removeFileInTaskAndServerFiles
+}
+
 
 export const updateLike = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPDATE_LIKE') {
@@ -533,6 +573,84 @@ export const belongTask = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 
+}
+
+export const displayLineByStart = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DISPLAY_LINE_BY_START') {
+        let username = getState().public_reducer.userName
+        // let renderTimeline = getState().public_reducer.jsonline
+        let workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
+        let projectId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id
+        let cardId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]._id
+        let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]._id
+        //   let LocationWork = getState().public_reducer.CurrentAddress
+
+        let urlDataP = "https://time.leader.codes/api/" + username + "/newHour"
+        // let urlDataP = "https://time.leader.codes/api/" + username + "/" + userId + "/newHour"
+        $.ajax({
+            url: urlDataP,
+            type: 'POST',
+            withCradentials: true,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            // data: userIdP,
+            data: JSON.stringify({
+                workspaceId, projectId, cardId, taskId
+            }),
+            headers: {
+                "Authorization": getState().public_reducer.tokenFromCookies
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch(actions.setStartHourId(data.currentHour._id))
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                    console.log(err)
+                })
+            }
+        });
+    }
+    return next(action);
+}
+export const disaplayLineByStop = ({ dispatch, getState }) => next => action => {
+    if (action.type === 'DISAPLAY_LINE_BY_STOP') {
+
+        let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
+        let _id = task.workingTime[task.workingTime.length - 1]
+        let userName = getState().public_reducer.userName
+        // let totalHour = "2020-11-02T00:00:00.000Z"
+        let endWork = new Date();
+        let description = "dgghje"
+        let urlDataP = "https://time.leader.codes/api/" + userName + "/updateEndHour"
+        $.ajax({
+            url: urlDataP,
+            type: 'POST',
+            withCradentials: true,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                _id, endWork,/* totalHour,*/ description
+            }),
+            headers: {
+                "Authorization": getState().public_reducer.tokenFromCookies
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log("success")
+                console.log(data);
+                dispatch({ type: 'SET_LINE_STOP', payload: data })
+            },
+            error: function (err) {
+                checkPermission(err).then((ifOk) => {
+                    console.log(err)
+                })
+            }
+        });
+    }
+    return next(action);
 }
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {

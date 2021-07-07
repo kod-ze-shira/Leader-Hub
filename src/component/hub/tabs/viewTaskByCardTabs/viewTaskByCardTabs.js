@@ -18,19 +18,16 @@ import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
     const textInput = useRef();
-
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [showchalalit, setShowChalalit] = useState(false)
     const [userHasLike, setUserHasLike] = useState(false)
-    const [numOfRows, setNumOfRows] = useState(1)
 
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
     let doneStatus = props.task.complete
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
-        console.log(props.task);
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         if (props.task.assingTo)
@@ -46,17 +43,41 @@ function ViewTaskByCradTabs(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
-    // useEffect(() => {
-
-    // }, [props.task.status])
-
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
 
     };
 
+
+    autosize();
+
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+            }
+            if (e.key == 'Enter') {
+                editTask()
+            }
+
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
     const handleClose = (e, event) => {
 
         setAnchorEl(null);
@@ -76,14 +97,10 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
-        setNumOfRows(numOfRows + 1)
-        let task1 = {
-            "milestones": props.task.milestones, "_id": props.task._id, "name": props.task.name, "description": props.task.description
-            , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-        }
-        // setTask(task1)
-        props.EditTask(task1);
-
+        debugger
+        let task_ = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
+        props.EditTask(task_);
+        // props.openNewInputTask(task_.card)
     }
 
     const showAssigToOrCalander = (object) => {
@@ -111,6 +128,7 @@ function ViewTaskByCradTabs(props) {
     ]
 
     const editCompleteTask = () => {
+
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -138,9 +156,8 @@ function ViewTaskByCradTabs(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            // alert('fff')
             props.showRocketShip(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else {
             props.setCountReadyTasks(false)
@@ -258,7 +275,7 @@ function ViewTaskByCradTabs(props) {
                                     . . .
                                     </Button>
 
-                                <ReactTooltip data-tip id="more_a" place="top" effect="solid">
+                                <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                     {title.title_more_actions}
                                 </ReactTooltip>
                                 <Menu
@@ -280,18 +297,18 @@ function ViewTaskByCradTabs(props) {
 
                                 </div> */}
                                 <textarea
-                                    className={props.task.complete ? "disabled form-control textarea-name-task col-12 mx-0" : "textarea-name-task form-control col-12 mx-0"}
+                                    className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
                                     value={props.task.name}
-                                    // rows={numOfRows}
+                                    onClick={(e) => e.stopPropagation()}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                    onBlur={(e) => editTask()}
-                                    onKeyPress={event => {
-                                        if (event.key === 'Enter') {
-                                            editTask()
-                                        }
-                                    }}
+                                // onBlur={(e) => editTask()}
+                                // onKeyPress={event => {
+                                //     if (event.key === 'Enter') {
+                                //         editTask()
+                                //     }
+                                // }}
                                 />
 
                                 {/* <span
@@ -308,14 +325,21 @@ function ViewTaskByCradTabs(props) {
                                 <div className="icons-in-task-tabs pt-0">
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
-                                            <div> {props.task.priority ?
+
+                                            <div
+                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
+                                                className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
+                                                style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                                {props.task.status ? props.task.status.statusName : null}
+                                            </div>
+                                            <div className="pl-2"> {props.task.priority ?
                                                 <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                                 : null}
                                             </div>
-                                            <div
-                                                className={props.task.complete ? "status-task-tabs-opacity px-2  " : "status-task-tabs px-2 "}
-                                                style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
-                                                {props.task.status ? props.task.status.statusName : null}
+                                            <div className="pl-2">
+                                                {props.task.milestones ?
+                                                    <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
+                                                    : null}
                                             </div>
                                         </div>
                                         {/* {props.task.status ? <div title={props.task.status.statusName}
@@ -406,4 +430,5 @@ const mapDispatchToProps = (dispatch) => {
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTabs)

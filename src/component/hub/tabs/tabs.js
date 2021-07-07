@@ -12,6 +12,7 @@ import taskDetails from '../task/taskDetails/taskDetails'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../Data/title.json'
 import { useParams } from 'react-router-dom';
+import { dragTask } from '../../../redux/middleware/taskCrud'
 
 function Tabs(props) {
 
@@ -47,8 +48,23 @@ function Tabs(props) {
             setIfAnimation(false)
         }
     }, [props.cards.length, props.cardsEmpty])
+    const [dragTask, setDragTask] = useState(false)
+    useEffect(() => {
 
+    }, [dragTask])
 
+    function onDragStart(e) {
+        let card = props.cards.find(card => card._id == e.draggableId)
+        if (!card) {
+            setDragTaskF()
+
+            let b = dragTask
+            // alert("true")
+        }
+    }
+    function setDragTaskF() {
+        setDragTask(true)
+    }
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
             if (props.cards.find(card => card._id == e.draggableId)) {
@@ -136,7 +152,11 @@ function Tabs(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                }
+
             }
         }
     })
@@ -147,87 +167,89 @@ function Tabs(props) {
 
 
     return (
-        <><div className="body-cards">
+        <><div className="body-cards ">
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
+            {props.cards[props.indexCurrentCard] ?
+                <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
+                    <Droppable
+                        // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
+                        // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
+                        droppableId={props.cards[props.cards.length - 1]._id}
+                    >
+                        {provided => (
+                            <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}>
+                                <div className="wraperr-tabs">
+                                    <div className="row row mx-3">
+                                        {props.cards.length ?
+                                            <DragDropContext
+                                                // onDragStart={(e) => onDragStart(e)}
+                                                onDragEnd={(e) => onDragEndׂ(e)} >
 
-            <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)} >
-                <Droppable
-                    droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
-                >
-                    {provided => (
-                        <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}>
+                                                {props.cards.map((card, index) => {
+                                                    return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                        openInputTask={openInputTask}
+                                                        viewToastMassege={props.viewToastMassege}
+                                                        viewContactList={props.viewContactList}
+                                                        showRocketShip={props.showRocketShip}
+                                                        showToast={(obj) => props.showToast(obj)}
+                                                        key={card._id} cardFromMap={card} indexCard={index}
 
-                            <div className="wraperr-tabs">
-                                <div className="row row mx-3">
-                                    {props.cards.length ?
+                                                    />
+                                                })}
+                                            </DragDropContext>
+                                            : null}
+                                        {/* {!props.cards.length ? */}
 
-                                        <DragDropContext
-                                            onDragEnd={(e) => onDragEndׂ(e)}>
-                                            {props.cards.map((card, index) => {
-                                                return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
-                                                    openInputTask={openInputTask}
-                                                    viewToastComplete={props.viewToastComplete}
-                                                    viewContactList={props.viewContactList}
-                                                    showRocketShip={props.showRocketShip}
-                                                    showToast={(obj) => props.showToast(obj)}
-                                                    key={card._id} cardFromMap={card} indexCard={index}
+                                        {/* <> */}
+                                        {ifAnimation ?
+                                            <div className="logoGif d-flex justify-content-center">
+                                                <img className="LampAnimation" src={require('../../img/hub.gif')} />
+                                            </div>
+                                            :
+                                            <div className="card-width px-2 mt-4" >
+                                                <div className="view-cards-tabs  mt-1" >
+                                                    <div class="card new-card mt-1" >
+                                                        <div id='newCardInput' class="container" >
+                                                            <div
+                                                                class="card-header row" data-tip data-for="add_c"
+                                                            >
+                                                                <input
+                                                                    id="add-new-card"
+                                                                    className="form-control "
+                                                                    placeholder={""} value={inputValue}
+                                                                    onChange={updateInputValue}
+                                                                    // onBlur={(e) => newCard()}
+                                                                    onKeyPress={event => {
+                                                                        if (event.key === 'Enter') {
+                                                                            newCard()
+                                                                        }
+                                                                    }}></input>
+                                                                <button
+                                                                    className='buttonNewCard mt-3'
+                                                                    onClick={(e) => setFocousCardFunc(e)}
+                                                                >+ Add Card</button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="card-body " id={!showInput ? "add-card" : ""}>
+                                                            {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
 
-                                                />
-                                            })}
-                                        </DragDropContext>
-                                        : null}
-                                    {/* {!props.cards.length ? */}
-
-                                    {/* <> */}
-                                    {ifAnimation ?
-                                        <div className="logoGif d-flex justify-content-center">
-                                            <img className="LampAnimation" src={require('../../img/hub.gif')} />
-                                        </div>
-                                        :
-                                        <div className="card-width px-2 mt-4" >
-                                            <div className="view-cards-tabs  mt-1" >
-                                                <div class="card new-card mt-1" >
-                                                    <div id='newCardInput' class="container" >
-                                                        <div
-                                                            class="card-header row" data-tip data-for="add_c"
-                                                        >
-                                                            <input
-                                                                id="add-new-card"
-                                                                className="form-control "
-                                                                placeholder={""} value={inputValue}
-                                                                onChange={updateInputValue}
-                                                                onBlur={(e) => newCard()}
-                                                                onKeyPress={event => {
-                                                                    if (event.key === 'Enter') {
-                                                                        newCard()
-                                                                    }
-                                                                }}></input>
-                                                            <button
-                                                                className='buttonNewCard mt-3'
-                                                                onClick={(e) => setFocousCardFunc(e)}
-                                                            >+ Add Card</button>
                                                         </div>
                                                     </div>
-                                                    <div className="card-body " id={!showInput ? "add-card" : ""}>
-                                                        {/* <a className="add-card-tabs" onClick={() => showInputToAddCard()}>Add Card+</a> */}
-
-                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>}
+                                            </div>}
+                                    </div>
                                 </div>
+                                {provided.placeholder}
                             </div>
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
-
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                : null}
             {viewDetails ?
                 <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails
@@ -235,12 +257,13 @@ function Tabs(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
-                        viewToastComplete={props.viewToastComplete}
+                        viewToastMassege={props.viewToastMassege}
                         setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}>
                     </ViewDetails>
                 </div>
                 : null}
+
         </div>
 
         </>
@@ -253,6 +276,7 @@ export default connect(
     (state) => {
         return {
             indexCurrentCard: state.public_reducer.indexCurrentCard,
+            indexCurrentTask: state.public_reducer.indexCurrentTask,
             project: state.project_reducer.project,
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
@@ -261,7 +285,7 @@ export default connect(
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
             statuses: state.public_reducer.statuses,
-            cardsEmpty: state.public_reducer.cardsEmpty
+            cardsEmpty: state.public_reducer.cardsEmpty,
 
         }
     },
@@ -282,6 +306,7 @@ export default connect(
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
             getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
             newCard: (cardname) => dispatch(actions.newCard(cardname)),
+            EditTask: (task) => dispatch(actions.editTask(task)),
 
         }
     }
