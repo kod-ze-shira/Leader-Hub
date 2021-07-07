@@ -14,7 +14,7 @@ import Hub from './component/hub/hub';
 export default function App(props) {
   return (
     <>
-      <Favicon url={require('../src/component/img/faviconHub.png')} />
+      <Favicon url={require('../src/component/img/FaviconHub.png')} />
 
       <Provider store={Store}>
         <>

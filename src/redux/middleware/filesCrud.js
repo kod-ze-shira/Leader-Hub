@@ -21,12 +21,11 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                 headers: { "authorization": jwtFromCookie },
                 data: formData,
                 success: (data) => {
-                    // let size = data.filesData.file0.size / 1024 / 1024
-                    var myData = { "files": data.filesData }
+                    let myData = { "files": data.filesData }
                     if (action.payload.type === 'taskNotBelong')
                         dispatch(actions.setNewFilesInTaskNotBelong({
                             'file': data.filesData,
-                            'id': action.payload.task._id
+                            'id': action.payload.task[0]._id
                         }))
                     else
                         dispatch(actions.setNewFilesInTask(data.filesData))
@@ -38,6 +37,10 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                             headers: { "authorization": jwtFromCookie },
                             data: myData,
                             success: (data) => {
+                            },
+                            error: function (err) {
+                                checkPermission(err).then((ifOk) => {
+                                })
                             }
                         })
                     }, 2000);
