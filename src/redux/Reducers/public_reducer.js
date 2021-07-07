@@ -81,9 +81,13 @@ const publicData = {
     },
 
     setTaskByFiledFromTasks(state, action) {
+
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
+        console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
+        [action.payload.nameFiled])
     },
+    
     setTaskByFiledFromTasksNotBelong(state, action) {
         let indexTask;
         for (let index = 0; index < state.tasks.length; index++) {

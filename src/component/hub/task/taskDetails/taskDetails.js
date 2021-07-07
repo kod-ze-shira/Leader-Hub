@@ -29,7 +29,8 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     useEffect(() => {
-        debugger
+
+        console.log(props.task.assingTo1);
         if (props.cards) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
 
@@ -289,6 +290,7 @@ function TaskDetails(props) {
         }
     }
 
+
     return (
         <>
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
@@ -442,21 +444,23 @@ function TaskDetails(props) {
 
                 </div>
 
-                <div className="row justify-content-around mx-1 ">
+                <div className="row   ">
                     {showContactList ?
                         <ContactList taskDetails={true} ></ContactList> : null
-                    }
-                    {props.task.assingTo1 ? props.task.assingTo1.map(assingTo => {
-                        return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
-                            : <div className="logo-contact-details mr-1 mt-1" >{assingTo.contact.name ? assingTo.contact.name[0] : null}</div>
-
-                    }) : null}
+                    }<div className="widthofContacts col-4">
+                        {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                            if (index < 3)
+                                return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                    : null
+                        }) : null}
+                        {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
+                    </div>
                     {/* {props.task.assingTo ?
 
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
                         : null} */}
-                    <div className="assingto-details" data-tip data-for="assing">
+                    <div className="assingto-details mr-2" data-tip data-for="assing">
 
                         <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
@@ -464,7 +468,7 @@ function TaskDetails(props) {
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
-                    <div className=" files-details" data-tip id="files">
+                    <div className=" files-details mx-1" data-tip id="files">
                         <UploadFile />
                         <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
@@ -472,16 +476,17 @@ function TaskDetails(props) {
                             {title.title_files}
                         </ReactTooltip>
                     </div>
-                    <div className="delete-details" data-tip data-for="delete">
+                    <div className="delete-details mx-2" data-tip data-for="delete">
                         <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
+
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
-                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
+                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn col-3 mr-0 ml-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>

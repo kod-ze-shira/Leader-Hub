@@ -55,7 +55,7 @@ function ContactList(props) {
   // }, [])
 
   const assingTaskToContact = (e) => {
-    
+
     e.stopPropagation()
     let isValid = ValidateEmail(valueSearch)
     console.log(isValid)
@@ -111,23 +111,24 @@ function ContactList(props) {
       <div className='div_contacts ' style={{ "left": props.hub ? left : "", "top": props.hub ? top : "", "width": props.hub ? width : 300, "maxHeight": 250, "bottom": props.taskDetails ? bottom : "" }}>
         <div className='container div_contacts_list  ' style={{}}>
           <div className=' row  mx-1 form-group' id='nameRequired'>
-            {/* {props.hub ? */}
-            <input placeholder="Name or email " required ref={nameRequired}
-              className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-              onChange={(e) => { handleChange(e); }}
-              onClick={(e) => e.stopPropagation()}
-              value={props.contactsUser.email}></input>
-            {/* //  : null} */}
+            {props.hub ?
+              <input placeholder="Name or email " required ref={nameRequired}
+                className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+                onChange={(e) => { handleChange(e); }}
+                onClick={(e) => e.stopPropagation()}
+                value={props.contactsUser.email}></input>
+              : null}
             {contactList}</div>
-          {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
-            className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-            onChange={(e) => handleChange(e)}
-            onClick={(e) => e.stopPropagation()}
-            value={props.contactsUser.email}></input> : null}
+          {props.taskDetails ?   <input placeholder="Name or email " required ref={nameRequired}
+                className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+                onChange={(e) => { handleChange(e); }}
+                onClick={(e) => e.stopPropagation()}
+                value={props.contactsUser.email}></input>
+              : null}
 
           <div className="invalid-feedback">
             Please enter valid email.
-            </div>
+          </div>
         </div>
 
       </div>

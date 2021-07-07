@@ -26,29 +26,21 @@ function ViewContact(props) {
     const assingTaskToContact = (email) => {
         let member
         let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1
-        debugger
+        let isExistContactInList = false
         let i
         for (i = 0; i < assign.length; i++) {
 
-            if (assign[i].contact == props.contact._id)
-                alert("huuuuuuuuuuuu")
+            if (assign[i].contact._id == props.contact._id)
+                isExistContactInList = true
 
         }
-
-        if (!(i < assign.length)) {
+        if (!isExistContactInList) {
             if (admin && props.contact._id == contactId)
                 member = { "email": email, "level": "admin" }
             else
                 member = { "email": email }
-
-            // props.pushAssignToInRedux(member)
             props.assingToMany(member)
-            let assign1 = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1[0]
-
-            console.log(assign1);
         }
-
-
     }
     const markAsAdmin = (contactId) => {
         setAdmin(true)

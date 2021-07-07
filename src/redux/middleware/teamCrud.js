@@ -224,7 +224,6 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
 
 export const assingToMany = ({ dispatch, getState }) => next => action => {
   if (action.type === 'ASSING_TO_MANY') {
-    debugger
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let assign = action.payload
@@ -242,7 +241,8 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       success: function (data) {
         console.log("success")
         console.log("data", data);
-        let editTaskInRedux = { "nameFiled": "assingTo1", "value": data.task.assingTo1 }
+        debugger
+        let editTaskInRedux = { "nameFiled": "assingTo1", "value": data.task.assignTo1 }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
         dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
       },

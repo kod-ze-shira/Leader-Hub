@@ -108,6 +108,9 @@ z-index: 9999 !important;
 .task-details .status-btn .save_canges_btn{
     z-index: 99999 !important;
 }
+.btn-block{
+  height: 39px;
+}
 .color-status-first{
   text-align: center;
   /* max-width: 90px !important; */
