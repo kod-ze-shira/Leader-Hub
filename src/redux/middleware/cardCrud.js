@@ -138,13 +138,8 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
-<<<<<<< HEAD
-            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-                window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
-=======
             result.responseJSON.routes ?//in ajax has responseJSON but in in  has routes
                 window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
->>>>>>> ff8e8ec993fb1c73dd1cecfb74353dea33aeca17
                 result.routes ?
                     window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
                     window.location.assign(`${keys.API_URL_LOGIN}`)

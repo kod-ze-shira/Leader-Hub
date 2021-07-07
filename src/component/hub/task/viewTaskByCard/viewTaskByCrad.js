@@ -167,7 +167,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -295,7 +295,12 @@ function ViewTaskByCrad(props) {
                                     </img>
                                 </div>
                                 <label className="check-task view-details-btn" title="View Details">
-                                    <button onClick={(e) => openViewDetails(e)}>view details +</button>
+                                    <button onClick={(e) => openViewDetails(e)}>
+                                        view details
+                                        <FontAwesomeIcon className="ml-2"
+                                            icon={['fas', 'caret-right']}>
+                                        </FontAwesomeIcon>
+                                    </button>
                                 </label>
 
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
@@ -338,7 +343,7 @@ function ViewTaskByCrad(props) {
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
-                                            viewToastMassege={props.viewToastMassege}
+                                            viewToastComplete={props.viewToastComplete}
                                         > </ViewDetails>
                                     </div>
                                     : null}

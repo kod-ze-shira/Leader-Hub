@@ -616,7 +616,6 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
 }
 export const disaplayLineByStop = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DISAPLAY_LINE_BY_STOP') {
-
         let task = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
         let _id = task.workingTime[task.workingTime.length - 1]
         let userName = getState().public_reducer.userName

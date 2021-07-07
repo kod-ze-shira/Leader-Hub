@@ -115,3 +115,5 @@
   .autosize::-webkit-scrollbar-track{
     box-shadow: none; 
   }
+  .attachment-alt .spanUploadFileNew{
+background-color: transparent !important;  }
