@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import keys from '../../config/env/keys'
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPLOAD_FILES') {
@@ -17,7 +18,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         if (!!formData.entries().next().value === true) {
             $.ajax({
-                url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
                 method: 'post',
                 contentType: false,
                 processData: false,
@@ -37,8 +38,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     console.log("finish first ajax  " + JSON.stringify(myData));
                     setTimeout(() => {
                         $.ajax({
-                            // url: `https://files.codes/api/renana-il/savedMultiFilesDB`,
-                            url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
+                            url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
                             method: 'POST',
                             headers: { "authorization": jwtFromCookie },
                             data: myData,
@@ -74,10 +74,10 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?
-                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                    window.location.assign(`https://dev.accounts.codes/hub/login`)
+                    window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+                    window.location.assign(`${keys.API_URL_LOGIN}`)
 
             reject(false)
 
@@ -94,7 +94,7 @@ export const getFiles = ({ dispatch, getState }) => next => action => {
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
             type: "GET",
-            url: `https://files.codes/api/${getState().public_reducer.userName}`,
+            url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}`,
             headers: { Authorization: jwtFromCookie },
             success: (data) => {
                 console.log(data)
@@ -115,7 +115,7 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
         let file = action.payload.file
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
         fetch(
-            "https://files.codes/api/" +
+            keys.API_URL_FILES+"/api/" +
             getState().public_reducer.userName +
             "/download/" +
             file.url,
@@ -154,7 +154,7 @@ export const downloadFiles = ({ dispatch, getState }) => next => action => {
         let file = action.payload.file
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
         fetch(
-            "https://files.codes/api/" +
+            keys.API_URL_FILES+"/api/" +
             getState().public_reducer.userName +
             "/download/" +
             file.url,
@@ -195,7 +195,7 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 
         $.ajax({
             type: "POST",
-            url: `https://files.codes/api/${getState().public_reducer.userName}/removeMultipleFiles`,
+            url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/removeMultipleFiles`,
             headers: { Authorization: jwtFromCookie },
             data: { 'urls': fileUrlArr },
 
