@@ -4,7 +4,7 @@
     border-width: 0.1rem;
     border-style: solid; */
      cursor: pointer;
-     border-radius: 2%;
+     border-radius: 3%;
      height: 15vh;
  }
  .folderItem:hover{

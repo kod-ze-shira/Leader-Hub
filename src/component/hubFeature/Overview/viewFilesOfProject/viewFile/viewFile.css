@@ -1,14 +1,14 @@
 
 .fileItem{
-    height: 15vh;
+    height: 17vh;
     cursor: pointer;
-    border-radius: 2%;
+    border-radius: 3%;
 }
 .fileItem:hover{
   border: #1FB9C1;
    border-width: 0.1vh;
    border-style: solid;
-   padding-bottom: 15.5vh;
+   /* padding-bottom: 15.5vh; */
 }
 .selectFile:first-child {
     color: #778CA2;
@@ -76,6 +76,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+    height: 70%;
 }
 
 
@@ -84,9 +85,9 @@
      text-align: center;
      padding: 0.2rem;
      border-bottom-right-radius: 3%;
-     border-bottom-left-radius: 3%;
+     border-bottom-left-radius:3%;
 }
-.fileItem a{
+.viewFile a{
        color: black;
        text-decoration: none; 
        cursor: pointer;
@@ -95,11 +96,15 @@
    overflow: hidden;
    display: -webkit-box; */
 }
+
 .imgFile{
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     max-width: 100%;
-    /* max-height: 100%; */
-    height: auto;
+    max-height: 100%;
+    width: max-content;
+    border-top-left-radius: 3%;
+    border-top-right-radius: 3%;
+    /* height: auto; */
 }

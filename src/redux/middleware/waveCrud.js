@@ -1,12 +1,12 @@
 
 import $ from 'jquery'
 import { actions } from '../actions/action'
+import keys from '../../config/env/keys'
 
 export const createSystemWave = ({ dispatch, getState }) => next => action => {
-    // let url='https://api.dev.leader.codes/michalgiladi/createSystemWave'
     if (action.type === 'CREATE_SYSTEM_WAVE') {
         let massege = action.payload;
-        fetch(`https://api.dev.leader.codes/createSystemWave`,
+        fetch(`${keys.API_URL_MASTER}/createSystemWave`,
             {
                 method: 'POST',
                 headers: {
@@ -24,4 +24,22 @@ export const createSystemWave = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 
+}
+
+//this func to check the headers jwt and username, if them not good its throw to login
+function checkPermission(result) {
+    return new Promise((resolve, reject) => {
+        if (result.status == "401") {
+            result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+                window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
+                result.routes ?
+                    window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+                    window.location.assign(`${keys.API_URL_LOGIN}`)
+
+            reject(false)
+
+        }
+        resolve(true)
+
+    })
 }
