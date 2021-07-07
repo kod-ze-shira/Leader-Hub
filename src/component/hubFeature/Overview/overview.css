@@ -2,7 +2,7 @@
     overflow-y: auto!important;
     height: 82.7vh;
     overflow-x:hidden;
-    border-radius: 5px;
+    border-radius: 0.4em;
     
 }
 .minHeight{
@@ -19,9 +19,17 @@
 
   .divChartAndMembers{
     background-color:white;
-    border-radius:0.2em;
+    border-radius:0.4em;
   }
 
 .scrollbarOverview2{
   width:100%;
+}
+.filesOfProject{
+  /* border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
+  border-bottom-left-radius: 3%;
+  border-bottom-right-radius: 3%; */
+border-radius: 0.4em;
+width: 100%;
 }

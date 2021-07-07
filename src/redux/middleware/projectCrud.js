@@ -116,7 +116,7 @@ export const getProjectsByWorkspaceId = ({ dispatch, getState }) => next => acti
 export const getFilesForProject = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_FILES_FOR_PROJECT') {
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
-        let url = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
+        let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]._id}/getFilesForProject`
         $.ajax({
             type: "GET",
             url: url,

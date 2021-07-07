@@ -54,42 +54,42 @@ function Overview(props) {
 
     return (
         <>
-                <div className='scrollbarOverview container-fluid'>
+            <div className='scrollbarOverview container-fluid'>
 
-                    <div className='row '>
-                        <div className='col-lg-9 col-md-12 mr-3'>
+                <div className='row '>
+                    <div className='col-lg-9 col-md-12 mr-3'>
 
-                            <div className='container-fluid px-0 '>
-                                <div className='row mb-3 divChartAndMembers'>
-                                    <div className='projectName' >
-                                        <Description></Description>
-                                    </div>
-                                    {refresh ?
-                                        <>
-                                            <Members />
-
-                                            <MyChart />
-                                        </>
-                                        : null}
+                        <div className='container-fluid px-0 '>
+                            <div className='row mb-3 divChartAndMembers'>
+                                <div className='projectName' >
+                                    <Description></Description>
                                 </div>
-                                <div className='row'>
-                                    {refresh ?
-                                        <FilesOfProject />
-                                        : null}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='col' style={{ height: '87vh' }}>
-                            <div className='container-fluid px-0 '>
                                 {refresh ?
-                                    <HangoutAndLogs></HangoutAndLogs>
+                                    <>
+                                        <Members />
+
+                                        <MyChart />
+                                    </>
+                                    : null}
+                            </div>
+                            <div className='row'>
+                                {refresh ?
+                                    <FilesOfProject className="filesOfProject" />
                                     : null}
                             </div>
                         </div>
-                        {/* <Hangout></Hangout> */}
                     </div>
+
+                    <div className='col' style={{ height: '87vh' }}>
+                        <div className='container-fluid px-0 '>
+                            {refresh ?
+                                <HangoutAndLogs></HangoutAndLogs>
+                                : null}
+                        </div>
+                    </div>
+                    {/* <Hangout></Hangout> */}
                 </div>
+            </div>
         </>
     )
 }
