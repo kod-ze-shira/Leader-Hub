@@ -22,7 +22,7 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 // import AddObject from './addObject/addObject'
-import HeaderLeader from '@leadercodes/header'
+// import HeaderLeader from '@leadercodes/Leader-header'
 // import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
@@ -154,8 +154,8 @@ function Hub(props) {
             </div> */}
             <Router history={history}>
                 <div className='headerLeaderHub'>
-                    <HeaderLeader userName={props.userName} appName='hub' />‏
-               </div>
+                    {/* <HeaderLeader userName={props.userName} appName='hub' />‏ */}
+                </div>
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="configuratorBlue col-2 ">
