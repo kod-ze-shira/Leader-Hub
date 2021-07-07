@@ -73,6 +73,8 @@ const publicData = {
                 indexTask = index;
         }
         for (let index = 0; index < myFiles.length; index++) {
+            if (!state.tasks[indexTask].files)
+                state.tasks[indexTask].files = []
             state.tasks[indexTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
@@ -90,7 +92,7 @@ const publicData = {
                 indexTask = index
             }
         }
-        if (!state.tasks[indexTask].priority)
+        if (state.tasks[indexTask] && !state.tasks[indexTask].priority)
             state.tasks[indexTask].priority = ''
 
         state.tasks[indexTask][action.payload.nameFiled] = action.payload.value

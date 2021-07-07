@@ -15,7 +15,7 @@ import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
-
+import QuillEditTask from '../quilEditTask/quillEditTask';
 function TaskDetails(props) {
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
@@ -281,8 +281,10 @@ function TaskDetails(props) {
                         </div>
 
                         <div className="row justify-content-between mx-1" >
-                            <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
+                            <label>Create
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                            <label className="">Last Update
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>
@@ -301,7 +303,10 @@ function TaskDetails(props) {
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control"
+                            <QuillEditTask />
+
+
+                            {/* <textarea class="form-control"
                                 rows="3"
                                 placeholder="Write a description about your workspace"
                                 name="description"
@@ -309,7 +314,7 @@ function TaskDetails(props) {
                                 onChange={(e) => changeFiledInTask(e)}
                                 // onBlur={(e) => editTaskInServer()}
                                 contentEditable
-                            ></textarea>
+                            ></textarea> */}
                         </div>
                         <div className="row justify-content-between">
                             <div class="form-group col-md-6 col-lg-5">
