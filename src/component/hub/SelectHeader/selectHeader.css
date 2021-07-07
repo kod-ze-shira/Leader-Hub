@@ -36,6 +36,27 @@ margin-right: 0px;
 .listInSelect, .tabsInSelect{
         border-bottom: 2px solid rgb(210, 200, 200) !important}
 
+/* .listInSelect .MuiTab-wrapper ,
+ .tabsInSelect  .MuiTab-wrapper{
+   margin-bottom: -8px;
+}
+.listInSelect, .tabsInSelect{
+        border-bottom: 2px solid rgb(210, 200, 200) !important
+} */
+
+
+
+.tabs-in-header .MuiTab-wrapper{
+        color: rgb(66 77 87);
+}
+
+
+.tabs-in-header .MuiButtonBase-root:hover{
+        background: rgb(68 215 182 / 13%);
+        border-bottom: rgb(68 215 182 / 50%) 2px solid !important;
+
+}
+
 .MuiTab-root{
         min-width: 75px !important;
         /* color:'#00C6EA' !important; */

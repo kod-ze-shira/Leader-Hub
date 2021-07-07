@@ -57,7 +57,7 @@ function AddWorkspace(props) {
 
 
     function addNewWorkspace() {
-        debugger
+        
         if (nameworkspae.current.value) {
             workspace.color = myColor
             // props.addNewWorkspaceToServer(workspace)
@@ -106,7 +106,7 @@ function AddWorkspace(props) {
                             type="text" class="form-control" id="workspace-name" />
                         <div class="invalid-feedback">
                             Please enter workspace name.
-                     </div>
+                        </div>
                     </div>
 
                     <div class="form-group">

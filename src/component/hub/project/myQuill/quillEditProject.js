@@ -24,9 +24,9 @@ class QuillEditProject extends Component {
     }
 
 
-    componentDidMount() {
-        this.changeFiledInEditProject(this.props.text)
-    }
+    // componentDidMount() {
+    //     this.changeFiledInEditProject(this.props.text)
+    // }
 
     modules = {
         // כאן ניתן להוסיף\להסיר עוד אלמנטים לעיצוב הטקסט
@@ -86,7 +86,7 @@ class QuillEditProject extends Component {
                     id="textQuil"
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description}
+                    value={this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description?this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description:null}
                     onChange={(e) => this.changeFiledInEditProject(e)}
                 >
                 </ReactQuill>

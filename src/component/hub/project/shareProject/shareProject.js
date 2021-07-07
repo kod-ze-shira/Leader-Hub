@@ -4,7 +4,9 @@ import { actions } from '../../../../redux/actions/action'
 import DynamicSelect from '../../team/dynamicSelect'
 import TeamsShare from '../../team/teamsShare/teamsShare'
 import ShareOneMember from '../share/shareOneMember/shareOneMember'
+import ReactTooltip from 'react-tooltip';
 import './shareProject.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import $ from 'jquery'
 import arrow_select from '../../../../component/img/arrow_select.svg'
 function ShareProject(props) {
@@ -98,10 +100,11 @@ function ShareProject(props) {
         })
     }
     const shareObject = () => {
+        
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
         if (details.shareDetails.length)
-            props.viewToastComplete({ show: true, massege: 'Project shared!!' })
+            props.viewToastMassege({ show: true, massege: 'Project shared!!' })
 
         props.closeViewDetails()//close vd
         // alert('project shared')
@@ -122,6 +125,14 @@ function ShareProject(props) {
                     </div>
                     <div className="row pl-3 pt-3 pb-1">
                         <div className="txt_share">Share With Email Address</div>
+                        {/* <i class="fas fa-question"></i> */}
+                        <FontAwesomeIcon icon={["fas", "question"]} data-tip
+                            className='iconQuestion' data-for="iconQuestion" />
+                        <ReactTooltip className="tooltip-style" data-tip id="iconQuestion" place="top" effect="solid">
+                            Select a member from the list or type a new member
+                            and press enter
+                               </ReactTooltip>
+
                     </div>
                     <div className="row">
                         <div className="col-md-9">

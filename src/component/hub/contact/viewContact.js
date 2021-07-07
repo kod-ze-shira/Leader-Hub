@@ -20,6 +20,7 @@ function ViewContact(props) {
     ]
 
     const assingTaskToContact = (email) => {
+        props.viewToastMassege({ show: true, massege: 'Task assign!!' })
         props.assingTo(email)
     }
 

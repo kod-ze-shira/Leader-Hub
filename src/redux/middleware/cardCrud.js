@@ -13,7 +13,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
 
         else
             urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
-        debugger
+        
         // let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
         $.ajax({
             url: urlData,
