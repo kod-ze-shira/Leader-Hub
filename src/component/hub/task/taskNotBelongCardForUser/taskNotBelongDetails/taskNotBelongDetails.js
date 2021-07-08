@@ -11,6 +11,7 @@ import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import Select from 'react-select';
+import QuillEditTaskNotBelong from '../quillEditTaskNotBelong/quillEditTaskNotBelong'
 
 function TaskNotBelongDetails(props) {
     const nameRequired = useRef()
@@ -252,6 +253,7 @@ function TaskNotBelongDetails(props) {
 
                         <div class="form-group">
                             <label for="description">Description</label>
+                            <QuillEditTaskNotBelong taskId={props.taskId} />
                             <textarea class="form-control"
                                 rows="3"
                                 className='inputTaskN'

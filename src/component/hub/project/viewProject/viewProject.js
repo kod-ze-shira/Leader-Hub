@@ -143,7 +143,8 @@ function ViewProject(props) {
                 <td>
                     <div className='divProgress'>
                         <div class="progressProject" ref={refToProject}>
-                            <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
+                            <div role="progressbar" class="progressProject-bar "
+                                style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
                         <ReactTooltip className="tooltip-style" data-tip id="percentage" place="bottom" effect="solid">
