@@ -2,9 +2,9 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 import keys from '../../config/env/keys'
 import jsZip from 'jszip'
-import FileSaver from 'file-saver'
+// import FileSaver from 'file-saver'
 import configData from '../../ProtectedRoute/configData.json'
-import f from 'js-file-download'
+// import f from 'js-file-download'
 
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {

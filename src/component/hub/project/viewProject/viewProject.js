@@ -6,13 +6,13 @@ import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json';
 import { actions } from '../../../../redux/actions/action';
-import share from '../../../img/share.svg';
+import share from '../../../../assets/img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
 import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
-import userfriend from '../../../img/userfriend.png'
+import userfriend from '../../../../assets/img/userfriend.png'
 
 function ViewProject(props) {
 
@@ -171,7 +171,7 @@ function ViewProject(props) {
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
 
 
-                    <img style={myStyleIcons} src={require('../../../img/shareNew.svg')}
+                    <img style={myStyleIcons} src={require('../../../../assets/img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
                     <ReactTooltip className="tooltip-style" data-tip id="share" place="bottom" effect="solid">
@@ -180,14 +180,14 @@ function ViewProject(props) {
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
-                        src={require('../../../img/pencil-edit.png')} data-tip data-for="edit_" />
+                        src={require('../../../../assets/img/pencil-edit.png')} data-tip data-for="edit_" />
                     <ReactTooltip className="tooltip-style" data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
-                        src={require('../../../img/remove.png')} data-tip data-for="delete" />
+                        src={require('../../../../assets/img/remove.png')} data-tip data-for="delete" />
                     <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>        </td>

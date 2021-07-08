@@ -120,7 +120,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         },
         body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
-        console.log('resultShareObject',result);
+        console.log('resultShareObject', result);
         return result.json();
       }).then((result) => {
         checkPermission(result).then((ifOk) => {
@@ -210,6 +210,42 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
         dispatch(actions.addContactToContactList(data.task.assingTo.contact))
 
 
+      },
+
+      error: function (err) {
+        checkPermission(err).then((ifOk) => {
+        })
+      }
+    });
+
+  }
+  return next(action);
+}
+// https://reacthub.dev.leader.codes/api/{{userName}}/{{taskId}}/assingToMany
+
+export const assingToMany = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'ASSING_TO_MANY') {
+    let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+      .tasks[getState().public_reducer.indexCurrentTask]._id
+    let assign = action.payload
+    console.log(taskId);
+    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingToMany`
+    $.ajax({
+      url: urlData,
+      type: 'POST',
+      headers: {
+        Authorization: getState().public_reducer.tokenFromCookies
+      },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ assign }),
+
+      success: function (data) {
+        console.log("success")
+        console.log("data", data);
+        debugger
+        let editTaskInRedux = { "nameFiled": "assingTo1", "value": data.task.assignTo1 }
+        dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
+        dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
       },
 
       error: function (err) {

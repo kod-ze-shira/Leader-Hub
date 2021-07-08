@@ -8,7 +8,7 @@ import ReactTooltip from 'react-tooltip';
 import './shareProject.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import $ from 'jquery'
-import arrow_select from '../../../../component/img/arrow_select.svg'
+import arrow_select from '../../../../assets/img/arrow_select.svg'
 function ShareProject(props) {
     const [shareDetails, setShareDetails] = useState([])//all contacts details
     const [membersTeamEmails, setMembersTeamEmails] = useState([])//team members
