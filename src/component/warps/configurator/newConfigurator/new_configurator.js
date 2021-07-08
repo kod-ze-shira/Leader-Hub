@@ -71,23 +71,23 @@ function NewConfigorator(props) {
     // }
     return (
         <>
-            <div>
+            {/* <div>
                 <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
 
-            </div>
+            </div> */}
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
 
                     {/* pt-4 mt-5 */}
-                    <div className=" col-8  ml-1">
-                        {/* <img src={require('../../../img/logo-hub.png')}></img> */}
-                        {/* <div onClick={props.openConfigurator} >
+                    {/* <div className=" col-8"> */}
+                    {/* <img src={require('../../../img/logo-hub.png')}></img> */}
+                    {/* <div onClick={props.openConfigurator} >
                         <img className="ml-4 my-2" src={require('../../../img/menu.png')}></img>
                     </div> */}
 
-                    </div>
+                    {/* </div> */}
                     <ul className="list_config ">
                         <li id='li-back' className='li-back' onClick={(e) => changeBackground(e.target)}>
                             <img className="mr-2" src={require('../../../../assets/img/workspace.svg')}></img>

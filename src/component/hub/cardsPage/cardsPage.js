@@ -61,11 +61,11 @@ function CardsPage(props) {
                 return <Tabs showToast={showToast}
                     showRocketShip={props.showRocketShip}
                     focusInputCard={props.focusInputCard}
-                    viewToastComplete={props.viewToastComplete}
+                    viewToastMassege={props.viewToastMassege}
                     viewContactList={props.viewContactList} />
             case 'list':
                 return <ProjectPlatform
-                    viewToastComplete={props.viewToastComplete}
+                    viewToastMassege={props.viewToastMassege}
                     showRocketShip={props.showRocketShip}
                     showToast={showToast} flag={flag}
                     focusInputCard={props.focusInputCard}
@@ -78,7 +78,7 @@ function CardsPage(props) {
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform
                     showRocketShip={props.showRocketShip}
-                    viewToastComplete={props.viewToastComplete}
+                    viewToastMassege={props.viewToastMassege}
                     showToast={showToast} flag={flag} />
         }
     }

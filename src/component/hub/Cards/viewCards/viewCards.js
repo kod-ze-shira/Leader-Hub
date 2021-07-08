@@ -231,7 +231,7 @@ function ViewCards(props) {
                                         {props.cardFromMap.tasks.map((task, index) => (
                                             <ViewTaskByCrad
                                                 viewContactList={props.viewContactList}
-                                                viewToastComplete={props.viewToastComplete}
+                                                viewToastMassege={props.viewToastMassege}
                                                 objectToast={(task) => props.showToastDelete(task)}
                                                 key={task._id} task={task}
                                                 indexCard={props.indexCard}
@@ -269,7 +269,7 @@ function ViewCards(props) {
                             <ViewDetails viewContactList={props.viewContactList}
                                 closeViewDetails={() => setViewDetails(false)}
                                 cardId={cardId} from={"addTask"}
-                                viewToastComplete={props.viewToastComplete}>
+                                viewToastMassege={props.viewToastMassege}>
                             </ViewDetails>
                         </div>
                         : null

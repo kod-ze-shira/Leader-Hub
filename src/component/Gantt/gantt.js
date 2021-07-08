@@ -86,10 +86,10 @@ export default class Gantt extends Component {
         gantt.scrollTo(scroll_to);
     };
 
-    handleClickTask(task) {
-        this.setState({ currDate: task.start_date })
-        this.showDate(task.start_date);
-    }
+    // handleClickTask(task) {
+    //     this.setState({ currDate: task.start_date })
+    //     this.showDate(task.start_date);
+    // }
 
     componentDidMount() {
         gantt.plugins({
@@ -107,7 +107,7 @@ export default class Gantt extends Component {
 
 
         gantt.templates.task_text = function (start, end, task) {
-        
+
             return task.text;
         }.bind(this);
 
@@ -129,6 +129,12 @@ export default class Gantt extends Component {
         gantt.config.columns = [
             { id: "c_1", name: "cardName", label: "", width: 200, template: myFunc },
         ];
+        gantt.attachEvent("onTaskRowClick", function (id, row) {
+            let taskSelect = gantt.getTask(id);
+            this.setState({ currDate: taskSelect.start_date })
+            this.showDate(taskSelect.start_date);
+        }.bind(this));
+
         gantt.templates.gantt_cell = function (start, end, task) {
             return task.text = "knkl";
         }
@@ -141,7 +147,7 @@ export default class Gantt extends Component {
             var task = gantt.getTask(id);
             var date = task.date;
             var eDate = gantt.calculateEndDate({ start_date: task.start_date, duration: task.duration, task: task }).toISOString().replace('-', '/').split('T')[0].replace('-', '/');
-          
+
             if (!task.cardName) {
                 gantt.modalbox({
                     title: task.text,
@@ -161,7 +167,7 @@ export default class Gantt extends Component {
                     start_date: task.end_date,
                     css: "milestones_",
                     text: document.createAttribute("img"),
-                   
+
                     title: dateToStr(task.end_date)
                 });
                 gantt.getMarker(markerId);
@@ -228,7 +234,7 @@ export default class Gantt extends Component {
             gantt.message("Grid is now <br>" + new_width + "</br>px width");
             return true;
         });
-
+     
         function myFunc(task) {
             if (task.cardName) {
                 return (`<div class='important'>
@@ -239,13 +245,12 @@ export default class Gantt extends Component {
                 </div>`);
             }
             else {
-                return (`<div class='task-name-gantt'
-                 onClick={this.handleClickTask(task)}>
+                return (`<div class='task-name-gantt'>
+
                   ${task.text}
                 </div>`);
             }
         }
-
 
         gantt.open("p_1");
     }

@@ -20,9 +20,12 @@ function AllWorkspaces(props) {
 
 
     useEffect(() => {
-        props.getContactsForUser()
-        props.getAllTeamsForUser()
-        props.getAllWorkspaces()
+        if (!props.contactsUser.length)
+            props.getContactsForUser()
+        if (!props.teamsUser.length)
+            props.getAllTeamsForUser()
+        if (!props.workspaces.length)
+            props.getAllWorkspaces()
 
     }, []);
 

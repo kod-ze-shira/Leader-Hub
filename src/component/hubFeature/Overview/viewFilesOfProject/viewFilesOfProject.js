@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import FilesFolder from './filesFolder'
+import FilesFolder from './filesFolder/filesFolder'
 import download from '../../../../assets/img/download.png'
 import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
 import { actions } from '../../../../redux/actions/action'
 import './viewFilesOfProject.css'
-import ViewCards from './viewCards'
-import ViewFilesByCard from './viewFilesByCard'
+import ViewCards from './viewCards/viewCards'
+import ViewFilesByCard from './viewFilesbyCard/viewFilesByCard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import jsZip from 'jszip'
 
 
 function ViewFilesOfProject(props) {
@@ -22,6 +23,7 @@ function ViewFilesOfProject(props) {
     const [countFilesArr, setCountFilesArr] = useState(0)
     const [countFoldersArr, setCountFoldersArr] = useState(0)
     const [cardName, setCardName] = useState('')
+    const [ifAnimation, setIfanimation] = useState(false)
 
     useEffect(() => {
 
@@ -30,21 +32,26 @@ function ViewFilesOfProject(props) {
 
     function downloadFile(e) {
 
-        alert('download')
-
-        // filesForDownload.forEach(f => props.downloadFile({ "file": f }))
+        // alert('download')
+        if (foldersForDownload.length > 7)
+            setIfanimation(true)
+        filesForDownload.forEach(f => props.downloadFile({ "file": f }))
 
     }
 
     function downloadFolder(e) {
 
-        alert('download')
+        // alert('download')
+        foldersForDownload.forEach(folder => folder.files.forEach(file => props.downloadFile({ "file": file })))
+        // foldersForDownload.forEach(folder => props.downloadFiles({ "folder": folder }))
 
-        // foldersForDownloadArr.forEach(folder => folder.files.forEach(file => props.downloadFile({ "file": file })))
     }
     function backToAllFiles() {
         setCardName('')
         setShowCards(true)
+    }
+    function zipFolder(files) {
+
     }
 
 
@@ -59,7 +66,7 @@ function ViewFilesOfProject(props) {
                                 <FontAwesomeIcon className="rowIcon"
                                     icon={['fas', 'chevron-left']}>
                                 </FontAwesomeIcon>
-                                {'      ' + cardName}</p> : ''}
+                                {cardName}</p> : ''}
 
                     </div>
                     <div className="col-3 row iconsList" >
@@ -83,13 +90,17 @@ function ViewFilesOfProject(props) {
                         setCardName={setCardName}
                         showRocketShip={props.showRocketShip}
                         setCountFoldersArr={setCountFoldersArr}
+                        ifShow={showCards}
                     ></ViewCards> :
                     <ViewFilesByCard
                         files={currentFiles}
                         setFilesForDownload={setFilesForDownload}
                         setCountFilesArr={setCountFilesArr}
                         setCardName={setCardName}
+                        ifShow={showCards}
                     ></ViewFilesByCard>}
+                {ifAnimation ?
+                    <div className="waitForDownload"></div> : null}
             </div>
         </>
     )
@@ -106,6 +117,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
+        downloadFiles: (files) => dispatch(actions.downloadFiles(files))
     }
 }
 

@@ -14,7 +14,7 @@ import ShureDelete from '../../../shureDelete/shureDelete';
 import styled, { css } from 'styled-components'
 
 function ViewWorkspaceGrid(props) {
-    console.log("hi")
+    // console.log("ViewWorkspaceGrid")
     const workspace = props.workspace
     // const myStyle=&:hover{
     //     'border': '1.5px solid workspace.colr'
@@ -45,7 +45,7 @@ function ViewWorkspaceGrid(props) {
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
-        console.log(workspace)
+        // console.log(workspace)
         props.duplicateWorkspace(workspace._id);
     }
 

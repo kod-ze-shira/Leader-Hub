@@ -20,7 +20,7 @@ import { deleteProjectInServer, editProjectInServer, getFilesForProject, getOver
 import { createStatus, editStatus, getAllStatusesTaskForWorkspace, removeStatus } from '../middleware/statusCrud';
 import {
     editTask, getTaskByIdFromServer, getTasksByCardId, newTask, removeTaskById, getAllTasksNotBelongsCardForUser, getAllMilestonesTasks
-    , moveTaskBetweenCards, dragTask, dragCard, updateLike,
+    , moveTaskBetweenCards, dragTask, dragCard, updateLike, removeFileInTaskAndServerFiles,
     // moveCards,
     completeTask, belongTask, newTaskNotBelong, displayLineByStart, disaplayLineByStop
 } from '../middleware/taskCrud';
@@ -29,7 +29,7 @@ import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareO
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
-import { uploadFiles, removeFile, downloadFile, getFiles } from '../middleware/filesCrud';
+import { uploadFiles, removeFile, downloadFile, downloadFolder, getFiles } from '../middleware/filesCrud';
 
 const reducers = combineReducers({ overview_reducer, project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
 
@@ -67,6 +67,7 @@ const store = createStore(
                 createStatus,
                 uploadFiles,
                 downloadFile,
+                downloadFolder,
                 extractJwt,
                 getFiles,
                 /////////////////////////////////////////////////////
@@ -86,6 +87,7 @@ const store = createStore(
                 shareObject,
                 assingTo,
                 updateLike,
+                removeFileInTaskAndServerFiles,
                 // getMembersByProjectId,
                 addMembers,
                 displayLineByStart,

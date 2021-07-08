@@ -22,7 +22,7 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 // import AddObject from './addObject/addObject'
-// import HeaderLeader from '@leadercodes/leader-header'
+// import HeaderLeader from '@leadercodes/Leader-header'
 // import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
@@ -41,7 +41,7 @@ function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
-    const [showToastComplete, setShowToastComplete] = useState(false)
+    const [showToastMassege, setShowToastMassege] = useState(false)
     const [objectToDelete, setObjectToDelete] = useState([])
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
@@ -149,25 +149,28 @@ function Hub(props) {
             /> : null}
 
 
-            {/* <HeaderLeader userName={props.user} appName='hub' />‏
-            <div onClick={openConfigurator} >
+            {/*   <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div> */}
             <Router history={history}>
+                <div className='headerLeaderHub'>
+                    {/* <HeaderLeader userName={props.userName} appName='hub' />‏ */}
+                </div>
+                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
-                <div className="row back-screen" onClick={(e) => deleteWorkspaceInRedux(e)}>
-
-                    <div className="col-2 px-0">
+                    <div className="configuratorBlue col-2 ">
+                        {/* <div className="col-2 px-0"> */}
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }} className={open ? "col-10 bodyHub mt-3" : "col-12 bodyHub mx-2 mt-4"}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }}
+                        className={open ? "bodyHub mt-3" : "col-12 bodyHub mx-2 mt-4"}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
                             <ProtectedRoute path={"/:userName/hub/workspace/:idWorkspace"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)}
-                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                    viewToastMassege={(val) => setShowToastMassege(val)}
                                 />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/gantt"} user={Token} >
@@ -177,7 +180,7 @@ function Hub(props) {
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/allProjects"} user={Token} >
                                 <ProjectsPage showToastDelete={(obj) => showToastToDelete(obj)}
-                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                    viewToastMassege={(val) => setShowToastMassege(val)}
                                 />
                             </ProtectedRoute>
 
@@ -188,7 +191,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     showRocketShip={(val) => setShowRocketShip(val)}
-                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                    viewToastMassege={(val) => setShowToastMassege(val)}
                                     viewContactList={(val) => ShowObject(val)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -196,7 +199,7 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
                                     showRocketShip={(val) => setShowRocketShip(val)}
-                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                    viewToastMassege={(val) => setShowToastMassege(val)}
                                     showToastDelete={(object) => showToastToDelete(object)}
                                 />
                             </ProtectedRoute>
@@ -204,7 +207,7 @@ function Hub(props) {
                             <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
                                     showRocketShip={(val) => setShowRocketShip(val)}
-                                    viewToastComplete={(val) => setShowToastComplete(val)}
+                                    viewToastMassege={(val) => setShowToastMassege(val)}
                                     viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
@@ -231,10 +234,10 @@ function Hub(props) {
                         />
                         : null}
 
-                    {showToastComplete.show ?
+                    {showToastMassege.show ?
 
-                        <ToastMessage message={showToastComplete.massege}
-                            viewToastComplete={(val => setShowToastComplete(val))}
+                        <ToastMessage message={showToastMassege.massege}
+                            viewToastMassege={(val => setShowToastMassege(val))}
                         />
                         : null}
                     {showStatusesList ?
@@ -246,7 +249,7 @@ function Hub(props) {
                             hub={true} />
                         : null}
                     {showContactList ?
-                        <ContactList hub={true} />
+                        <ContactList hub={true} viewToastMassege={(val) => setShowToastMassege(val)} />
                         : null}
                     {openCalander ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />

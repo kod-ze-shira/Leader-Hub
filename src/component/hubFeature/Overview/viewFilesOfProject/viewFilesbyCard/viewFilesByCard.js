@@ -1,18 +1,23 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../../../redux/actions/action.js';
+import { actions } from '../../../../../redux/actions/action.js';
 import './viewFilesByCard.css'
-import bin from '../../../../assets/img/bin.png'
-import title from '../../../../Data/title.json'
-import download from '../../../../assets/img/download.png'
+import bin from '../../../../../assets/img/bin.png'
+import title from '../../../../../Data/title.json'
+import download from '../../../../../assets/img/download.png'
 import ReactTooltip from 'react-tooltip'
-import ViewFile from './viewFile'
+import ViewFile from '../viewFile/viewFile'
 import { withRouter } from 'react-router-dom'
 
-function viewFilesByCard(props) {
+function ViewFilesByCard(props) {
 
 
-    const filesForDownload = []
+    useEffect(() => {
+        props.setFilesForDownload([])
+        props.setCountFilesArr(0)
+    }, [])
+
+    let filesForDownload = [];
 
     function addOrRemoveFileToArr(e, file, ref) {
 
@@ -73,4 +78,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(viewFilesByCard))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewFilesByCard))

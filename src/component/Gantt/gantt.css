@@ -44,7 +44,9 @@
   background : linear-gradient(to right, #e9f0af 0%, rgb(218, 199, 24) 100%);
   color: white;
 }
-
+.gantt_task_line.gantt_selected.yellowBorder {
+  box-shadow: 0 0 5px rgb(218, 199, 24) !important;
+}
 .gantt_task_line.yellowBorder {
   border-radius: 5px !important;
   border: rgb(218, 199, 24) 3px solid !important;
@@ -55,7 +57,9 @@
   border-right: rgb(218, 199, 24) 10px solid !important;
   color: white !important;
 }
-
+.gantt_task_line.gantt_selected.redBorder {
+  box-shadow: 0 0 5px red !important;
+}
 .gantt_task_line.redBorder  {
   border-radius: 5px !important;
   border:  3px solid red!important;
@@ -71,6 +75,9 @@
   background: linear-gradient(to right,rgb(233, 139, 139),  red)  !important;
   text-align: end;
   align-items: end;
+}
+.gantt_task_line.gantt_selected.orangeBorder {
+  box-shadow: 0 0 5px #F8B520 !important;
 }
 .gantt_task_line.orangeBorder {
   border-radius: 5px !important;
