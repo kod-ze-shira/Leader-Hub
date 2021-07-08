@@ -46,6 +46,9 @@
     text-align: left;
   
 }
+.show-card-list{
+    padding-right: 0 !important;
+}
 #input-card-name {
 background-color: transparent!important;
 }

@@ -255,44 +255,46 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
-                                {/* <FontAwesomeIcon  title="Drag and Drop"
+                                <div className=" col-4">
+                                    <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
+                                    {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className=" col-4">
-                                    <label
-                                        title="Complete Task"
-                                        className="check-task ml-4 ">
-                                        <input type="checkbox"
-                                            name="complete"
-                                            checked={doneStatus}
-                                            value={props.task.complete}
+                                    <div >
+                                        <label
+                                            title="Complete Task"
+                                            className="check-task ml-4 ">
+                                            <input type="checkbox"
+                                                name="complete"
+                                                checked={doneStatus}
+                                                value={props.task.complete}
+                                                onChange={(e) => changeFiledInTask(e)}
+                                            />
+                                            <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
+                                        </label>
+                                        <input
+                                            name="name" id="name" title={props.task.name}
+                                            className={props.task.complete ? "disabled show-task mt-2" : "show-task mt-2"}
+                                            value={props.task.name}
                                             onChange={(e) => changeFiledInTask(e)}
-                                        />
-                                        <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
-                                    </label>
-                                    <input
-                                        name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? "disabled show-task mt-2" : "show-task mt-2"}
-                                        value={props.task.name}
-                                        onChange={(e) => changeFiledInTask(e)}
-                                        onBlur={(e) => editTask()}
-                                        onKeyPress={e => {
-                                            if (e.key === 'Enter') {
-                                                editTask()
-                                            }
-                                        }}
-                                    >
-                                    </input>
-                                </div>
-                                <div onClick={(e) => updateLike(e)} className="p-2">
+                                            onBlur={(e) => editTask()}
+                                            onKeyPress={e => {
+                                                if (e.key === 'Enter') {
+                                                    editTask()
+                                                }
+                                            }}
+                                        >
+                                        </input>
+                                    </div>
+                                    <div onClick={(e) => updateLike(e)} className="p-2">
 
-                                    <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
-                                    <img
-                                        onClick={updateLike}
-                                        // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
-                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
-                                    </img>
+                                        <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
+                                        <img
+                                            onClick={updateLike}
+                                            // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
+                                            src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                        </img>
+                                    </div>
                                 </div>
                                 <label className="check-task view-details-btn" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}>view details +</button>

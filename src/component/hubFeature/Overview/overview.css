@@ -4,7 +4,12 @@
     
 }
 .minHeight{
-  min-height:50vh;
+  min-height:37vh;
+}
+.minHeightChat{
+  min-height:63vh;
+  max-height:63vh;
+height: 63vh;
 }
 .projectName{
   width: 100%;
