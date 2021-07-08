@@ -208,7 +208,7 @@ function ViewTaskByCradTabs(props) {
     let day = Number(dayNumber)
     let monthNumber = props.task.dueDate.split("/")[1];
     let month = Number(monthNumber)
-    let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[month];
     let dateInString = day + " " + monthName
 
@@ -237,7 +237,12 @@ function ViewTaskByCradTabs(props) {
 
         })
         : null
-
+    const beforeUploadFile = (e) => {
+        debugger
+        e.stopPropagation()
+        props.setCurrentIndexTask(props.indexTask)
+        props.setCurrentIndexCard(props.indexCard)
+    }
     return (
         <>
             <Draggable
@@ -343,9 +348,9 @@ function ViewTaskByCradTabs(props) {
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
-                                            <div className="pl-2 attachment-alt">
-                                                <UploadFile taskId='' fromTaskTabs={true} indexTask={props.indexCurrentTask} indexCard={props.indexCurrentCard} />
-                                                <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            <div className="pl-2 attachment-alt " onClick={(e) => beforeUploadFile(e)}>
+                                                <UploadFile taskId=''  />
+                                                <img className="mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
                                             </div>
                                         </div>
 

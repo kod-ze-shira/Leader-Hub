@@ -376,6 +376,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
 export const removeTaskById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_TASK_BY_ID') {
+        debugger
         // let workspace = getState().workspace_reducer;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
         $.ajax({
@@ -585,7 +586,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
         let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]._id
         //   let LocationWork = getState().public_reducer.CurrentAddress
 
-        let urlDataP =keys.API_URL_TIME+ "/" + username + "/newHour"
+        let urlDataP = keys.API_URL_TIME + "/" + username + "/newHour"
         $.ajax({
             url: urlDataP,
             type: 'POST',

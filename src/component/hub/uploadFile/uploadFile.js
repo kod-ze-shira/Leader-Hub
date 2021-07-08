@@ -8,10 +8,6 @@ function UploadFile(props) {
     const fileInputRef = useRef()
     useEffect(() => {
         console.log(props);
-        if (props.fromTaskTabs) {
-            props.setCurrentIndexCard(props.indexCard)
-            props.setCurrentIndexTask(props.indexTask)
-        }
     }, [props.files])
 
     const compressedFile = async (myFiles) => {

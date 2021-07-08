@@ -9,7 +9,7 @@ import f from 'js-file-download'
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPLOAD_FILES') {
-
+debugger
         let files = action.payload.files
         var formData = new FormData()
         // var myFiles = Object.values(files)
