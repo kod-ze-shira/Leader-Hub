@@ -348,10 +348,10 @@ function ViewTaskByCradTabs(props) {
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
-                                            <div className="pl-2 attachment-alt " onClick={(e) => beforeUploadFile(e)}>
+                                            {/* <div className="pl-2 attachment-alt " onClick={(e) => beforeUploadFile(e)}>
                                                 <UploadFile taskId=''  />
                                                 <img className="mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
-                                            </div>
+                                            </div> */}
                                         </div>
 
                                         <div className="icons-task-tabs">

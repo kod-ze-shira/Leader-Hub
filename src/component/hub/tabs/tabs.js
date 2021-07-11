@@ -119,6 +119,7 @@ function Tabs(props) {
     }
 
     const newCard = () => {
+        debugger
         console.log("cardsssssssss", props.cards);
         let card;
         if (inputValue) {
@@ -126,10 +127,10 @@ function Tabs(props) {
             props.newCard(card)
 
         }
-        setInputValue("")
-        setShowInput(false)
-        props.setCurrentIndexCard(props.cards.length)
-        setOpenInputTask(true)
+        // setInputValue("")
+        // setShowInput(false)
+        // props.setCurrentIndexCard(props.cards.length)
+        // setOpenInputTask(true)
     }
     const openViewDetails = (task) => {
         setViewDetails(true)

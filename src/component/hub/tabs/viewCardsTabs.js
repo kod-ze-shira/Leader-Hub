@@ -13,7 +13,6 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs';
 
 function ViewCardsTabs(props) {
 
-
     useEffect(() => {
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
@@ -177,19 +176,18 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-
                                                     {props.cardFromMap.tasks.map((task, index) => (
-                                                        <ViewTaskByCradTabs
-                                                            openViewDetails={openViewDetails}
-                                                            objectToast={(obj) => props.showToast(obj)}
-                                                            task={props.cards[props.indexCard].tasks[index]}
-                                                            indexCard={props.indexCard}
-                                                            showRocketShip={props.showRocketShip}
-                                                            indexTask={index}
-                                                            viewToastMassege={props.viewToastMassege}
-                                                            viewContactList={props.viewContactList}
-                                                            openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
-                                                    ))}
+                                                    <ViewTaskByCradTabs
+                                                        openViewDetails={openViewDetails}
+                                                        objectToast={(obj) => props.showToast(obj)}
+                                                        task={props.cards[props.indexCard].tasks[index]}
+                                                        indexCard={props.indexCard}
+                                                        showRocketShip={props.showRocketShip}
+                                                        indexTask={index}
+                                                        viewToastMassege={props.viewToastMassege}
+                                                        viewContactList={props.viewContactList}
+                                                        openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
+                                                        ))}
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-3">

@@ -318,6 +318,7 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
+        debugger
         if (state.cards.length > 0)
             state.cards.push(action.payload)
         else
