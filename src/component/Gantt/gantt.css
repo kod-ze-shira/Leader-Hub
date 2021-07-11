@@ -40,6 +40,9 @@
 .gantt_task_line{
   z-index: 3;
 }
+.gantt_task_line:hover{
+  box-shadow: 0px 3px 6px #00000029;
+}
 .yellowBorder .gantt_task_progress {
   background : linear-gradient(to right, #e9f0af 0%, rgb(218, 199, 24) 100%);
   color: white;
@@ -131,12 +134,14 @@
   background-color:#ecfbf8 !important;
 }
 .today{
+  /* left: 0px !important; */
   background-color: rgb(218, 246, 247) !important;
   width: 40px !important;
-  margin-left: -20px !important;
+  margin-left: -21px !important;
   z-index: 1!important;
   opacity: 0.5 !important;
-  height: 100vh !important;
+  min-height: 100vh !important;
+  height: 100%;
   border-left: 2px solid #68C7CB;
   border-right: 2px solid #68C7CB;
 }
@@ -159,7 +164,7 @@
   z-index: 4;
 }
 .milestones_ > .gantt_marker_content{
-  background-image: url("../img/milstone.svg") !important;
+  background-image: url("../../assets/img/milstone.svg") !important;
   background-repeat: no-repeat !important;
   color: transparent !important;
   width: 5vh;
@@ -191,6 +196,7 @@
   text-align: start;
   display: flex;
   align-items: center;
+  font-family: 'Roboto' !important;
 }
 
 .gantt_link_control div{
@@ -227,7 +233,29 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
   cursor: pointer !important;
-  text-align: start;
+  text-align: left;
   /* display: flex; */
   /* align-items: center; */
+  font-family: 'Roboto' !important;
+}
+.gantt_layout_cell.gantt_hor_scroll{
+  height: 17px !important;
+}
+.gantt_layout_cell.gantt_layout.gantt_layout_x.gantt_layout_cell_border_transparent.gantt_layout_cell_border_bottom{
+  height: 317px !important;
+}
+.gantt_layout_cell.scrollHor_cell{
+  position: absolute;
+  bottom:12px;
+}
+.gantt_layout_cell.gantt_layout_root.gantt_layout.gantt_layout_y.gantt_container.gantt_layout_cell_border_left.gantt_layout_cell_border_top.gantt_layout_cell_border_right.gantt_layout_cell_border_bottom{
+  height: 103% !important;
+}
+.zoom-label{
+  position: absolute;
+  bottom:40px;
+  right: 40px;
+}
+.gantt_task .gantt_task_scale .gantt_scale_cell,.gantt_task_content{
+  font-family: 'Roboto';
 }

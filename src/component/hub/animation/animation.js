@@ -13,9 +13,7 @@ export default function Animation(props) {
     }
     return (
         <>
-
-            <img alt="" id="rocketShip" className='rocketShip' src={require('../../img/Group 19471.svg')}></img>‏
-            {/* <i className="far fa-trash-alt"></i> */}
+            <img className='animationRocketShip' src={require('../../../assets/img/Group 19471.svg')} />‏
         </>
     )
 

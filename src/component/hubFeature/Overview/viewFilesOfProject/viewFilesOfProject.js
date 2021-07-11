@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import FilesFolder from './filesFolder/filesFolder'
-import download from '../../../img/download.png'
+import download from '../../../../assets/img/download.png'
 import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
 import { actions } from '../../../../redux/actions/action'

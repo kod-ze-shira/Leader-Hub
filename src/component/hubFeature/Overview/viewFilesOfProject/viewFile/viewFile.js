@@ -17,8 +17,8 @@ function ViewFile(props) {
                         {/* <div> */}
                         <div className="row-10 wrapImg">
 
-                            <img alt="Responsive image" src={file.name.endsWith('.pdf') ? require('.././../../../img/file_pdf.png') :
-                                file.name.endsWith('.doc') ? require('../../../../img/word.png') : file.url} className="imgFile img-fluid"></img>
+                            <img alt="Responsive image" src={file.name.endsWith('.pdf') ? require('../../.././../../assets/img/file_pdf.png') :
+                                file.name.endsWith('.doc') ? require('../../../../../assets/img/word.png') : file.url} className="imgFile img-fluid"></img>
                             <label
                                 title="check file"
                                 className="selectFile py-2 check-tabs row">

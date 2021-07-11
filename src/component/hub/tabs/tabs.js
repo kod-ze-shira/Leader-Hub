@@ -207,10 +207,10 @@ function Tabs(props) {
                                         {/* <> */}
                                         {ifAnimation ?
                                             <div className="logoGif d-flex justify-content-center">
-                                                <img className="LampAnimation" src={require('../../img/hub.gif')} />
+                                                <img className="LampAnimation" src={require('../../../assets/img/hub.gif')} />
                                             </div>
                                             :
-                                            <div className="card-width px-2 mt-4" >
+                                            <div className="col-md-3 col-sm-10 px-2 mt-4" >
                                                 <div className="view-cards-tabs  mt-1" >
                                                     <div class="card new-card mt-1" >
                                                         <div id='newCardInput' class="container" >
