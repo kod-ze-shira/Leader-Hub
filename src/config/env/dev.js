@@ -9,13 +9,8 @@ module.exports = {
     API_URL_SOCKET: 'http://localhost:5001',
     API_URL_FILES: 'https://files.codes',
     API_URL_TIME: 'https://time.leader.codes/api',
-<<<<<<< HEAD
     API_URL_MASTER: 'https://api.dev.leader.codes',
-    DOMAIN: "hub.dev.leader.codes"
-=======
-    API_URL_MASTER:'https://api.dev.leader.codes',
     DOMAIN: "hub.dev.leader.codes",
-    JWT:"devJwt"
->>>>>>> dev
+    JWT: "devJwt"
 }
 
