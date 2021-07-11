@@ -288,7 +288,7 @@ function ViewTaskByCradTabs(props) {
         e.stopPropagation()
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        
+
     }
     return (
         <>
