@@ -13,7 +13,6 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs';
 
 function ViewCardsTabs(props) {
 
-
     useEffect(() => {
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
@@ -207,7 +206,6 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-
                                                     {props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
                                                             openViewDetails={openViewDetails}
@@ -231,11 +229,11 @@ function ViewCardsTabs(props) {
                                                                     autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
                                                                     onChange={updateInputValue}
-                                                                // onKeyPress={event => {
-                                                                //     if (event.key === 'Enter') {
-                                                                //         newTask()
-                                                                //     }
-                                                                // }}
+                                                                    onKeyPress={event => {
+                                                                        if (event.key === 'Enter') {
+                                                                            newTask()
+                                                                        }
+                                                                    }}
                                                                 />
                                                             </div>
                                                             : null

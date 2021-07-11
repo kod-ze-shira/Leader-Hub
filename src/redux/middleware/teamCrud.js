@@ -242,7 +242,6 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       success: function (data) {
         console.log("success")
         console.log("data", data);
-        debugger
         let editTaskInRedux = { "nameFiled": "assingTo1", "value": data.task.assignTo1 }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
         dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
