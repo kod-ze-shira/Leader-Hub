@@ -227,7 +227,7 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
   if (action.type === 'ASSING_TO_MANY') {
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
-    let assign = action.payload
+    let assigns = action.payload
     console.log(taskId);
     let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingToMany`
     $.ajax({
@@ -237,13 +237,14 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
         Authorization: getState().public_reducer.tokenFromCookies
       },
       contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({ assign }),
+      data: JSON.stringify({ assigns }),
 
       success: function (data) {
+        debugger
         console.log("success")
         console.log("data", data);
         debugger
-        let editTaskInRedux = { "nameFiled": "assingTo1", "value": data.task.assignTo1 }
+        let editTaskInRedux = { "nameFiled": "assignTo1", "value": data.task.assignTo1 }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
         dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
       },
@@ -319,17 +320,17 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
   return new Promise((resolve, reject) => {
-      if (result.status == "401") {
-          result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-              window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
-              result.routes ?
-                  window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
-                  window.location.assign(`${keys.API_URL_LOGIN}`)
+    if (result.status == "401") {
+      result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
+        window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
+        result.routes ?
+          window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+          window.location.assign(`${keys.API_URL_LOGIN}`)
 
-          reject(false)
+      reject(false)
 
-      }
-      resolve(true)
+    }
+    resolve(true)
 
   })
 }

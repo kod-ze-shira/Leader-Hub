@@ -5,10 +5,11 @@ margin-left: 8vh;
 }
 
 .bodyHub {
-    padding-right: 1.8rem !important;
-    flex: 0 0 84.333333%;
-    max-width: 86.333333%;
-    margin-left: 16px;
+    padding-right:10px ;
+    margin-top: 10px;
+    flex: 0 0 85%;
+    max-width: 85%;
+    /* margin-left: 16px; */
 }
 
 .headerLeaderHub{
@@ -27,8 +28,11 @@ background-color: #E8EAEC !important;
 /* height: 100vh; */
 }
 .configuratorBlue{
-flex: 0 0 13.666667%;
-max-width: 13.666667%;
+    flex: 0 0 15%;
+    max-width: 15%;
+    padding-right: 10px;
+
+/* padding: 0; */
 }
 
 #cdggdfdfb{
