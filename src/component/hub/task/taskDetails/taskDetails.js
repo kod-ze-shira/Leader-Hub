@@ -5,6 +5,10 @@ import $ from 'jquery'
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
+import task_reducer from '../../../../redux/Reducers/task_reducer';
+import { createStatus } from '../../../../redux/middleware/statusCrud';
+import ViewStatus from '../../status/viewStatus'
+import AddStatus from '../../status/addStatus'
 import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'
@@ -25,8 +29,6 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     useEffect(() => {
-
-        console.log(props.task.assingTo1);
         if (props.cards) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
             props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
@@ -183,6 +185,7 @@ function TaskDetails(props) {
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
+
     const assingto = (e) => {
         var x = e.clientX;
         var y = e.clientY;
@@ -194,6 +197,7 @@ function TaskDetails(props) {
         props.setHeightScreen(height)
         setShowContactList(true)
     }
+
     function closeViewDetailsInTask() {
         props.setTaskFromTasks(taskBeforeChanges)
         props.closeViewDetails()
@@ -266,7 +270,6 @@ function TaskDetails(props) {
         }
     }
 
-
     return (
         <>
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
@@ -275,7 +278,7 @@ function TaskDetails(props) {
                     <div className='mr-4 '>
                         <div className='row mt-4 justify-content-between headerDitails'>
                             <h5 className=" title-view-details   pl-3">Task details</h5>
-                            {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
+                            {/* <img className="files-task-hover" src={require('../../../img/close.svg')} ></img> */}
 
                             <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
@@ -426,23 +429,18 @@ function TaskDetails(props) {
 
                 </div>
 
-                <div className="row   ">
+                <div className="row justify-content-around mx-1 ">
                     {showContactList ?
-                        <ContactList taskDetails={true} ></ContactList> : null
-                    }<div className="widthofContacts col-4">
-                        {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
-                            if (index < 3)
-                                return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
-                                    : null
-                        }) : null}
-                        {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
-                    </div>
-                    {/* {props.task.assingTo ?
+                        <ContactList taskDetails={true}
+                            viewToastMassege={props.viewToastMassege} /> : null
+
+                    }
+                    {props.task.assingTo ?
 
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
-                        : null} */}
-                    <div className="assingto-details mr-2" data-tip data-for="assing">
+                        : null}
+                    <div className="assingto-details" data-tip data-for="assing">
 
                         <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
                         <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
@@ -450,25 +448,24 @@ function TaskDetails(props) {
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
-                    <div className=" files-details mx-1" data-tip id="files">
-                        <UploadFile />
+                    <div className=" files-details" data-tip id="files">
+                        <UploadFile taskId='' />
                         <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">
                             {title.title_files}
                         </ReactTooltip>
                     </div>
-                    <div className="delete-details mx-2" data-tip data-for="delete">
+                    <div className="delete-details" data-tip data-for="delete">
                         <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
                         <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
-
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
-                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn col-3 mr-0 ml-3 btn-block mb-lg-4">Save</button>
+                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>

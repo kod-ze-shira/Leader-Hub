@@ -7,6 +7,7 @@
     min-width:208px;
     max-width: min-content;
     height: 66px;
+    margin-right: 1px;
 }
 .imgFileInTask a img,
 .imgFileInTask img
@@ -66,9 +67,9 @@
     display: -webkit-box;
     font-size: small;
 }
-{
+/* {
     display: inline-block;
-}
+} */
 
 
 
