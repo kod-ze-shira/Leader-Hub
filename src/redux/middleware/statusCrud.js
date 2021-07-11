@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import keys from '../../config/env/keys'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
@@ -12,7 +13,7 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
         }
         else
             workspaceId = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace]._id
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/getAllStatusesTaskForWorkspace`
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -61,7 +62,7 @@ export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next =
 
 export const createStatus = ({ dispatch, getState }) => next => action => {
     if (action.type === 'CREATE_STATUS') {
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/createStatus`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/createStatus`
         let statusTask = action.payload
         console.log(statusTask)
         $.ajax({
@@ -98,7 +99,7 @@ export const editStatus = ({ dispatch, getState }) => next => action => {
             .tasks[getState().public_reducer.indexCurrentTask]._id
         console.log(taskId);
         let status = action.payload
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/editStatus`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${taskId}/editStatus`
         console.log(urlData);
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -133,7 +134,7 @@ export const removeStatus = ({ dispatch, getState }) => next => action => {
             .tasks[getState().public_reducer.indexCurrentTask]._id
         let statusId = action.payload;
         console.log(taskId);
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${statusId}/${taskId}/removeStatus`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${statusId}/${taskId}/removeStatus`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -165,10 +166,10 @@ function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?
-                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                    window.location.assign(`https://dev.accounts.codes/hub/login`)
+                    window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+                    window.location.assign(`${keys.API_URL_LOGIN}`)
 
             reject(false)
 

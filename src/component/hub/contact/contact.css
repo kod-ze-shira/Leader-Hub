@@ -110,6 +110,7 @@ body {
     text-align: right;
     margin-top:1px;
     opacity:0.9;
+    margin-left: 5px;
 }
 .name-contact{
   /* -webkit-box-orient: vertical;
@@ -170,9 +171,9 @@ body {
     background: white;
     position: absolute;
     z-index: 999999999;
-  overflow: auto;
+  overflow-y: auto;
    box-shadow: 0px 3px 6px #00000029;
-   overflow:hidden !important ;
+   /* overflow:hidden !important ; */
 }
 .div_contacts_list{
   overflow-y: auto;
@@ -188,10 +189,11 @@ height:35px;
 text-align:left;
 color:black;
 
-/* display: inline-block; */
+display: inline-block;
 }
 .div_contacts_list > .form-group{
   margin-bottom: 0 !important;
+  /* position: flex; */
 }
     .invite-contact{
         background-color:#f7f5f5 !important;
@@ -221,3 +223,20 @@ margin-bottom: 0.5vh !important; */
         /* And hide the input's outline, so the form looks like the outline */
         border:none;
       }
+
+      .imgContact{
+        border-radius: 50%;
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        background-color: #C4CCD5;
+        text-align: left;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        text-transform: capitalize;
+        opacity: 1;
+        font-size: 16px;
+        text-align: center;
+        position: relative;
+    
+    }

@@ -5,10 +5,6 @@ import $ from 'jquery'
 import { actions } from '../../../../redux/actions/action'
 import Select from 'react-select';
 import './taskDetails.css'
-import task_reducer from '../../../../redux/Reducers/task_reducer';
-import { createStatus } from '../../../../redux/middleware/statusCrud';
-import ViewStatus from '../../status/viewStatus'
-import AddStatus from '../../status/addStatus'
 import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
 import File from '../../uploadFile/file/file'
@@ -19,7 +15,7 @@ import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
-
+import QuillEditTask from '../quilEditTask/quillEditTask';
 function TaskDetails(props) {
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
@@ -29,11 +25,13 @@ function TaskDetails(props) {
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     useEffect(() => {
+
+        console.log(props.task.assingTo1);
         if (props.cards) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
+            props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
 
             props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
-            props.setFilesFromTask(props.task.files)
             if (!(props.statuses && props.statuses.length > 0))
                 props.getAllStatusesTaskForWorkspace();
             if (props.contactsUser.length == 0)
@@ -44,7 +42,9 @@ function TaskDetails(props) {
     useEffect(() => {
         nameRequired.current.focus();
     }, [])
+    useEffect(() => {
 
+    }, [props.arrFilesOfTask])
 
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
@@ -112,29 +112,6 @@ function TaskDetails(props) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
             }
-            // else
-            //     if (props.arrDeleteFilesOfTask.length) {
-            //         for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
-            //             // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
-            //             for (let index2 = 0; index2 < props.task.files.length; index2++) {
-            //                 if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
-            //                     try {
-            //                         props.task.files.splice(index2, 1);
-            //                     } catch (error) {
-            //                         console.log(error)
-            //                     }
-            //                 }
-
-            //                 // first element removed
-            //             }
-            //             // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
-
-            //         }
-            //         props.EditTask(props.task)
-            //         // props.removeFile(props.ArrDeleteFilesOfTask)
-
-            //     }
-
             else
                 props.EditTask(props.task)
             props.closeViewDetails();
@@ -206,7 +183,6 @@ function TaskDetails(props) {
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
     }
-
     const assingto = (e) => {
         var x = e.clientX;
         var y = e.clientY;
@@ -218,7 +194,6 @@ function TaskDetails(props) {
         props.setHeightScreen(height)
         setShowContactList(true)
     }
-
     function closeViewDetailsInTask() {
         props.setTaskFromTasks(taskBeforeChanges)
         props.closeViewDetails()
@@ -227,6 +202,7 @@ function TaskDetails(props) {
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
             setDownloadFile={(e) => { props.setDownloadFile(e) }}
+            taskId=''
         />
     }) : null
 
@@ -290,6 +266,7 @@ function TaskDetails(props) {
         }
     }
 
+
     return (
         <>
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
@@ -298,15 +275,17 @@ function TaskDetails(props) {
                     <div className='mr-4 '>
                         <div className='row mt-4 justify-content-between headerDitails'>
                             <h5 className=" title-view-details   pl-3">Task details</h5>
-                            {/* <img className="files-task-hover" src={require('../../../img/close.svg')} ></img> */}
+                            {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
 
                             <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
                         </div>
 
                         <div className="row justify-content-between mx-1" >
-                            <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
+                            <label>Create
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                            <label className="">Last Update
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>
@@ -320,12 +299,15 @@ function TaskDetails(props) {
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
                             <div class="invalid-feedback">
                                 Please enter task name.
-                     </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control"
+                            <QuillEditTask />
+
+
+                            {/* <textarea class="form-control"
                                 rows="3"
                                 placeholder="Write a description about your workspace"
                                 name="description"
@@ -333,7 +315,7 @@ function TaskDetails(props) {
                                 onChange={(e) => changeFiledInTask(e)}
                                 // onBlur={(e) => editTaskInServer()}
                                 contentEditable
-                            ></textarea>
+                            ></textarea> */}
                         </div>
                         <div className="row justify-content-between">
                             <div class="form-group col-md-6 col-lg-5">
@@ -444,43 +426,49 @@ function TaskDetails(props) {
 
                 </div>
 
-                <div className="row justify-content-around mx-1 ">
+                <div className="row   ">
                     {showContactList ?
-                        <ContactList taskDetails={true}
-                            viewToastMassege={props.viewToastMassege} /> : null
-
-                    }
-                    {props.task.assingTo ?
+                        <ContactList taskDetails={true} ></ContactList> : null
+                    }<div className="widthofContacts col-4">
+                        {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                            if (index < 3)
+                                return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                    : null
+                        }) : null}
+                        {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
+                    </div>
+                    {/* {props.task.assingTo ?
 
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
-                        : null}
-                    <div className="assingto-details" data-tip data-for="assing">
+                        : null} */}
+                    <div className="assingto-details mr-2" data-tip data-for="assing">
 
-                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                         <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
-                    <div className=" files-details" data-tip id="files">
+                    <div className=" files-details mx-1" data-tip id="files">
                         <UploadFile />
-                        <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
+                        <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">
                             {title.title_files}
                         </ReactTooltip>
                     </div>
-                    <div className="delete-details" data-tip data-for="delete">
-                        <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                    <div className="delete-details mx-2" data-tip data-for="delete">
+                        <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
+
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
-                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>
+                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn col-3 mr-0 ml-3 btn-block mb-lg-4">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
                         {title.title_save}
                     </ReactTooltip>

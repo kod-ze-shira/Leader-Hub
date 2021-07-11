@@ -12,6 +12,7 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
+import UploadFile from '../../uploadFile/uploadFile'
 import Animation from '../../animation/animation'
 
 import ContactList from '../../contact/contactList';
@@ -97,7 +98,7 @@ function ViewTaskByCradTabs(props) {
             e.stopPropagation()
     };
     const editTask = (event) => {
-        debugger
+
         let task_ = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
         props.EditTask(task_);
         // props.openNewInputTask(task_.card)
@@ -207,7 +208,7 @@ function ViewTaskByCradTabs(props) {
     let day = Number(dayNumber)
     let monthNumber = props.task.dueDate.split("/")[1];
     let month = Number(monthNumber)
-    let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let monthName = monthNames[month];
     let dateInString = day + " " + monthName
 
@@ -236,7 +237,7 @@ function ViewTaskByCradTabs(props) {
 
         })
         : null
-
+    let admin = props.task.assingTo1 ? props.task.assingTo1.find(contact => contact.level == 'admin') : null
     return (
         <>
             <Draggable
@@ -248,6 +249,7 @@ function ViewTaskByCradTabs(props) {
                         ref={provided.innerRef}
                         id="task-card"
                     >
+
                         <div className="task-card mb-2 pb-2"
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
@@ -273,7 +275,7 @@ function ViewTaskByCradTabs(props) {
                                     data-tip data-for="more_a"
                                     aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                     . . .
-                                    </Button>
+                                </Button>
 
                                 <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                     {title.title_more_actions}
@@ -341,10 +343,12 @@ function ViewTaskByCradTabs(props) {
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
+                                            <div className="pl-2 attachment-alt">
+                                                <UploadFile taskId='' fromTaskTabs={true} indexTask={props.indexCurrentTask} indexCard={props.indexCurrentCard} />
+                                                <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            </div>
                                         </div>
-                                        {/* {props.task.status ? <div title={props.task.status.statusName}
-                                        className="color-task col-3  "
-                                        style={{ "backgroundColor": props.task.status.color }}></div> : null} */}
+
                                         <div className="icons-task-tabs">
 
                                             <div className="due-date-hover" title={title.title_due_date}>
@@ -356,13 +360,13 @@ function ViewTaskByCradTabs(props) {
                                                 <img
                                                     className="like-icon-tabs"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "like" })}
-                                                    src={require('../../../img/like-icon.png')}>
+                                                    src={require('../../../../assets/img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
                                                     <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
-                                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                        src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/heart.png')}>
                                                         {/* src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}> */}
                                                     </img>
                                                 </div>
@@ -373,13 +377,13 @@ function ViewTaskByCradTabs(props) {
                                                     title={title.title_assing}
                                                     className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-                                                    src={require('../../../img/share-icon.png')}>
+                                                    src={require('../../../../assets/img/share-icon.png')}>
                                                 </img>
-                                                {props.task.assingTo ?
+                                                {/* {props.task.assingTo1 && admin != -1 ?
                                                     <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                                        {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
-                                                            : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                                    </div> : null}
+                                                        {props.task.assingTo1 ? <img referrerpolicy="no-referrer" src={props.task.assingTo1? admin.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                            : <div className="logo-contact ml-2" >{admin.name ? admin.name[0] : null}</div>}
+                                                    </div> : null} */}
                                             </div>
                                         </div>
                                     </div>

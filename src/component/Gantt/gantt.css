@@ -164,7 +164,7 @@
   z-index: 4;
 }
 .milestones_ > .gantt_marker_content{
-  background-image: url("../img/milstone.svg") !important;
+  background-image: url("../../assets/img/milstone.svg") !important;
   background-repeat: no-repeat !important;
   color: transparent !important;
   width: 5vh;

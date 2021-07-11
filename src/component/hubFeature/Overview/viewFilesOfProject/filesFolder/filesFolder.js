@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import fullFolder from '../../../img/full-folder.png'
-import emptyFolder from '../../../img/empty-folder.png'
+import fullFolder from '../../../../../assets/img/full-folder.png'
+import emptyFolder from '../../../../../assets/img/empty-folder.png'
 import { withRouter } from 'react-router-dom'
 import './filesFolder.css'
 

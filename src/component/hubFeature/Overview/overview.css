@@ -1,6 +1,8 @@
-.overview{
-  height: 82.7vh;
-  border-radius: 5px;
+.scrollbarOverview{
+    overflow-y: auto!important;
+    height: 82.7vh;
+    overflow-x:hidden;
+    border-radius: 0.4em;
     
 }
 .minHeight{
@@ -16,24 +18,19 @@ height: 63vh;
   background-color: white;
 }
 
-.divChartAndMembers{
-  background-color:white;
-  border-radius:0.2em;
-}
+  .divChartAndMembers{
+    background-color:white;
+    border-radius:0.4em;
+  }
 
 .scrollbarOverview2{
   width:100%;
 }
-.scrollOverview{
-  overflow-y: scroll;
-  height: 87.5vh;
-}
-.scrollOverview::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-}
-
-.HangoutAndLogs{
-  border-radius: 2%;
-  background-color: white;
+.filesOfProject{
+  /* border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
+  border-bottom-left-radius: 3%;
+  border-bottom-right-radius: 3%; */
+border-radius: 0.4em;
+width: 100%;
 }

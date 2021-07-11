@@ -4,19 +4,51 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './file.css'
 import { actions } from '../../../../redux/actions/action'
+import $ from 'jquery'
 
 function File(props) {
-
+    const [progressFile, setProgressFile] = useState(10)
     const [file, setFile] = useState()
+    // if (progressFile < 99) {
+    //     setTimeout(() => {
+    //         setProgressFile(40)
+    //     }, 300);
+    //     setTimeout(() => {
+    //         setProgressFile(70)
+    //     }, 300);
+    // }
     useEffect(() => {
 
         if (props.file.url == 'new' && props.file) {
             setFile(URL.createObjectURL(props.file.file))
+            setTimeout(() => {
+                setProgressFile(30)
+            }, 200);
+            setTimeout(() => {
+                setProgressFile(60)
+            }, 400);
+            setTimeout(() => {
+                setProgressFile(80)
+            }, 600);
+        } else {
+            setProgressFile(99)
+            setTimeout(() => {
+                setProgressFile(100)
+            }, 400);
+
         }
 
     }, [props.file])
-    function deleteFile() {
+    function deleteFile(e) {
         props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
+        props.removeFileInTaskAndServerFiles({
+            'name': props.file.name,
+            'url': props.file.url,
+            'taskId': props.taskId
+        })
+        // let r = document.getElementById(e.currentTarget.id)
+        // $(`#file_${e.currentTarget.id}`).remove();
+
     }
     function downloadFile(e) {
         props.setDownloadFile(true)
@@ -25,7 +57,7 @@ function File(props) {
     }
     return (
         <>
-            <div className='fileInTask  mb-3 row'
+            <div className='fileInTask  mb-3 row' id={`file_${props.file.name}`}
                 id={props.file.url ? props.file.url : props.file.name}>
                 <div className={props.file && (props.file.name.endsWith(".pdf") || props.file.name.endsWith(".docx")) ?
                     'col-4  imgFileInTask ' : 'col-4  imgFileInTask pr-0'}
@@ -54,7 +86,7 @@ function File(props) {
                                 ></FontAwesomeIcon> :
                                 <img src={file}></img>}
 
-‏
+                    ‏
 
                 </div>
                 <div className='col-8  nameFileAndAction'>
@@ -66,21 +98,38 @@ function File(props) {
                     </span>
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
+                    {(progressFile != 100 && props.file.url == 'new') ?
+                        <div class="progressFile"
+                            // ref={refToProject}
+                            style={{ backgroundColor: '#e9ecef' }}
+                        >
+
+
+                            <div role="progressbar" class="progressProject-bar "
+                                style={{ "width": progressFile + "%", background: 'rgb(53, 138, 141)' }}
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                data-tip data-for="percentage" >
+
+                            </div>
+
+                        </div>
+                        : null
+                    }
+
                     {props.file.url != 'new' ?
                         <img onClick={(e) => {
                             downloadFile(e)
                         }} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4 imgActionFile'
-                            src={require('../../../img/download.svg')}></img>
+                            src={require('../../../../assets/img/ID.svg')}></img>
                         : null}
-                    <img onClick={() => deleteFile()} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
-                        src={require('../../../img/Group 21592.svg')}></img>
-                    {/* <FontAwesomeIcon onClick={() => deleteFile()} className='mr-1 ml-1' style={{ float: 'right' }}
-                        icon={['fas', 'trash-alt']}
-                    ></FontAwesomeIcon> */}
+                    <img onClick={(e) => deleteFile(e)} id={props.file.name} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
+                        src={require('../../../../assets/img/Group 21592.svg')}></img>
+
 
 
                 </div>
+
             </div>
 
 
@@ -100,7 +149,7 @@ export default connect(
         return {
             downloadFile: (file) => dispatch(actions.downloadFile(file)),
             removeFileInRedux: (filesArr) => dispatch(actions.removeFileInRedux(filesArr)),
-
+            removeFileInTaskAndServerFiles: (file) => dispatch(actions.removeFileInTaskAndServerFiles(file))
         }
     }
 )(File)

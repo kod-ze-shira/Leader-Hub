@@ -49,10 +49,12 @@ const publicData = {
 
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
+        debugger
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
+
 
     },
     deleteFilesInTask(state, action) {
@@ -71,6 +73,8 @@ const publicData = {
                 indexTask = index;
         }
         for (let index = 0; index < myFiles.length; index++) {
+            if (!state.tasks[indexTask].files)
+                state.tasks[indexTask].files = []
             state.tasks[indexTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
@@ -78,9 +82,13 @@ const publicData = {
     },
 
     setTaskByFiledFromTasks(state, action) {
+
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
+        console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
+        [action.payload.nameFiled])
     },
+    
     setTaskByFiledFromTasksNotBelong(state, action) {
         let indexTask;
         for (let index = 0; index < state.tasks.length; index++) {
@@ -88,7 +96,7 @@ const publicData = {
                 indexTask = index
             }
         }
-        if (!state.tasks[indexTask].priority)
+        if (state.tasks[indexTask] && !state.tasks[indexTask].priority)
             state.tasks[indexTask].priority = ''
 
         state.tasks[indexTask][action.payload.nameFiled] = action.payload.value
@@ -114,16 +122,12 @@ const publicData = {
         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[action.payload.index]._id = action.payload._id
     },
     setFileFromTask(state, action) {
-        state.arrFilesOfTask.push({ 'url': 'new', 'name': action.payload.name, 'file': action.payload, 'size': action.payload.size })
-        // if (window.location.href.indexOf('projectPlatform') != -1)
-        //     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-        //         .push({
-        //             'name': action.payload.name,
-        //             'url': 'new',
-        //             '_id': '',
-        //             'size': action.payload.size
-        //         })
-
+        state.arrFilesOfTask.push({
+            'url': 'new',
+            'name': action.payload.name,
+            'file': action.payload,
+            'size': action.payload.size
+        })
     },
     /////////////////////////////////////////
     setFilesForProject(state, action) {
@@ -411,12 +415,14 @@ const publicData = {
 
         if (action.payload.url != 'new') {
             let fileToDelete = state.arrFilesOfTask.find((file) => file.url == action.payload.url)
-            if (state.arrDeleteFilesOfTask)
+            if (state.arrDeleteFilesOfTask.length) {
                 state.arrDeleteFilesOfTask.push(fileToDelete)
-            else
-                state.arrDeleteFilesOfTask = fileToDelete
+            }
+            else {
+                state.arrDeleteFilesOfTask[0] = fileToDelete
+            }
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
-            if (state.cards && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
+            if (state.cards && state.cards[state.indexCurrentCard] && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
                 for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
                     if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
                         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
@@ -429,6 +435,7 @@ const publicData = {
 
                 // .filter((file) => file.url != action.payload.url)
             }
+
         }
         else {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
@@ -461,6 +468,11 @@ const publicData = {
     },
     setSharedProjects(state, action) {
         state.sharedProjects = action.payload
+    },
+    pushAssignToInRedux(state, action) {
+        let assign = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].assignTo1
+        assign.push(action.payload)
+        let a = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
     }
 
 }

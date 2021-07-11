@@ -6,6 +6,7 @@
     /* overflow: hidden !important; */
     max-height: 500px;
     resize: none;
+    border:none !important;
 
     /* padding: 0 !important; */
 }
@@ -115,3 +116,5 @@
   .autosize::-webkit-scrollbar-track{
     box-shadow: none; 
   }
+  .attachment-alt .spanUploadFileNew{
+background-color: transparent !important;  }

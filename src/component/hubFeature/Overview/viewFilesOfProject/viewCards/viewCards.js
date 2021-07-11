@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import FilesFolder from './filesFolder'
-import download from '../../../img/download.png'
+import FilesFolder from '../filesFolder/filesFolder'
+import download from '../../../../../assets/img/download.png'
 import ReactTooltip from 'react-tooltip'
-import title from '../../../../Data/title.json'
-import { actions } from '../../../../redux/actions/action'
+import title from '../../../../../Data/title.json'
+import { actions } from '../../../../../redux/actions/action'
 import './viewCards.css'
 
 function ViewFilesByCards(props) {
@@ -13,6 +13,8 @@ function ViewFilesByCards(props) {
 
         console.log('useeffect');
         props.getFilesForProject(props.indexCurrentProject)
+        props.setFoldersForDownload([])
+        props.setCountFoldersArr(0)
 
     }, [props.indexCurrentProject])
     const foldersForDownloadArr = []

@@ -57,7 +57,7 @@ function ViewAllStatuses(props) {
 
         <>
             <div className={props.hub ? "view-list-status-from-platform" : null}
-            // , "height": props.hub ? height : 200
+                // , "height": props.hub ? height : 200
                 style={{ "width": props.hub ? width : 300, "left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
 
                 <div className={openPopUp || openPopUpToAdd ? "menu__ mb-4" : ""}>
@@ -73,8 +73,8 @@ function ViewAllStatuses(props) {
 
                         )) : null}
                         {openPopUp && !props.hub ?
-                            <div className="row">
-                                <button onClick={(e) => openAddStatus(e)} className="create-label">Create New Status</button>
+                            <div className="row border-top  mx-2">
+                                <button onClick={(e) => openAddStatus(e)} className="create-label mt-2">Create New Status</button>
                             </div>
                             : null}
                         {openPopUpToAdd ?

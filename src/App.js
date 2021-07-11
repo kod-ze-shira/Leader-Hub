@@ -10,16 +10,14 @@ import Store from './redux/Store/Store';
 import Hub from './component/hub/hub';
 // import HeaderLeader from '@leadercodes/leader-header'
 
-
 export default function App(props) {
   return (
     <>
-      <Favicon url={require('./leader.png')} />
+      <Favicon url={require('../src/component/img/faviconHub.png')} />
 
       <Provider store={Store}>
         <>
           <Hub></Hub>
-          {/* <FilesOfProject></FilesOfProject> */}
           {/* <BodyEmailOfAssignmentTask/> */}
           {/* <ContactList /> */}
           {/* <HeaderLeader /> */}

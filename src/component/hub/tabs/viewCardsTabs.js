@@ -104,6 +104,36 @@ function ViewCardsTabs(props) {
     //         document.getElementById("input-card-name").blur();
     //     }
     // }
+    autosize();
+
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+
+            }
+            if (e.key == 'Enter') {
+                newTask()
+
+            }
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
@@ -131,7 +161,7 @@ function ViewCardsTabs(props) {
         });
     return (
         <>
-            <div className="card-width px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
+            <div className="col-md-3 col-sm-10 px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -196,16 +226,16 @@ function ViewCardsTabs(props) {
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="form-control" placeholder="Add Task"
+                                                                    class="  form-control col-12 mx-0" placeholder="Add Task"
                                                                     id="input-task"
-                                                                    autocomplete="chrome-off"
-                                                                    value={inputValue}
+                                                                    autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
-                                                                    onChange={updateInputValue} onKeyPress={event => {
-                                                                        if (event.key === 'Enter') {
-                                                                            newTask()
-                                                                        }
-                                                                    }}
+                                                                    onChange={updateInputValue}
+                                                                // onKeyPress={event => {
+                                                                //     if (event.key === 'Enter') {
+                                                                //         newTask()
+                                                                //     }
+                                                                // }}
                                                                 />
                                                             </div>
                                                             : null

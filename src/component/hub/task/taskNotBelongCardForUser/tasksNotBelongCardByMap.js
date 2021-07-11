@@ -13,7 +13,7 @@ import CreatableSelect from 'react-select/creatable';
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import ProjectStyle from "../../project/projectStyle";
-import Background from '../../../img/down-arrow.svg';
+import Background from '../../../../assets/img/down-arrow.svg';
 function TasksNotBelongCardByMap(props) {
 
     const [viewDetails, setViewDetails] = useState(false)
@@ -287,7 +287,10 @@ function TasksNotBelongCardByMap(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.task)
+                }
             }
         }
     })

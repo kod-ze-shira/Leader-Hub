@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 // import Select from 'react-select';
 import LetterLogo from '../../logo/letterLogo';
 import './selectWorkspace.css';
-import Background from '../../../img/down-arrow.svg';
+import Background from '../../../../assets/img/down-arrow.svg';
 
 const Input = props => <components.Input {...props} maxLength={5} />;
 

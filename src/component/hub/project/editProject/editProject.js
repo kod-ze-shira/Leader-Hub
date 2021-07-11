@@ -99,20 +99,11 @@ function EditProject(props) {
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
                         <div class="invalid-feedback">
                             Please enter project name.
-                     </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <QuillEditProject text={props.workspaces[props.indexWorkspace].projects[props.indexProject].description ? props.workspaces[props.indexWorkspace].projects[props.indexProject].description : ''} indexW={props.indexWorkspace} indexP={props.indexProject} />
-
-                        {/* <div class="form-control descriptionProject"
-                            name="description"
-                            id="descriptionProject" rows="3"
-                            ref={descriptionInput}
-                            placeholder="Write a description about your project"                           
-                            contentEditable
-                            onBlur={(input) => changeFiledInProject(input)}
-                        ></div> */}
+                        <QuillEditProject indexW={props.indexWorkspace} indexP={props.indexProject} />
                     </div>
                     <div className="row justify-content-between">
                         <div class="form-group col-5 ditailsAction">
@@ -143,7 +134,7 @@ function EditProject(props) {
                         onClick={deletProject}
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
-                        <img src={require('../../../img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
