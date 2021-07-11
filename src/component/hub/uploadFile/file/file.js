@@ -55,6 +55,7 @@ function File(props) {
         props.downloadFile({ 'file': props.file, 'e': e })
         // props.showViewDetails(true)
     }
+
     return (
         <>
             <div className='fileInTask  mb-3 row' id={`file_${props.file.name}`}
@@ -131,7 +132,6 @@ function File(props) {
                 </div>
 
             </div>
-
 
 
 
