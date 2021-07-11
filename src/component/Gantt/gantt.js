@@ -6,25 +6,62 @@ import '../Gantt/gantt.css';
 import { LinearProgress } from '@material-ui/core';
 import { actions } from '../../redux/actions/action'
 import store from '../../redux/Store/Store'
+import $ from 'jquery'
 
 export default class Gantt extends Component {
     constructor(props) {
         super(props);
         this.initZoom();
-        this.state = { endDate: 0, startDate: 0, currDate: new Date() };
+        this.state = {
+            endDate: 0,
+            startDate: 0,
+            currDate: new Date(),
+            y: 1,
+            zoomDate: "Day"
+        };
     }
 
     dataProcessor = null;
     initZoom() {
+
+        // gantt.ext.zoom.init({
+        //     levels: [
+
+        //  {
+        //     name: 'Days',
+        //     scale_height: 60,
+        //     min_column_width: 40,
+
+        //     scales: [
+
+        //         { unit: "month", step: 1, format: "%F %Y" },
+        //         {
+        //             unit: "day", step: 1, format: "%j", css: (date) => {
+        //                 let dateToStr = gantt.date.date_to_str("%D");
+        //                 if (date.getDate() === new Date().getDate() &&
+        //                     date.getMonth() === new Date().getMonth() &&
+        //                     date.getYear() === new Date().getYear()
+        //                 ) {
+        //                     return "today-scale"
+        //                 }
+        //                 if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat")
+        //                     return "last-weekend";
+
+        //                 return "";
+        //             }
+        // },
+
+
+
+        //     ]
+        // });
         gantt.ext.zoom.init({
             levels: [
                 {
-                    name: 'Days',
-                    scale_height: 60,
+                    name: "Day",
+                    scale_height: 50,
                     min_column_width: 40,
-
                     scales: [
-
                         { unit: "month", step: 1, format: "%F %Y" },
                         {
                             unit: "day", step: 1, format: "%j", css: (date) => {
@@ -37,18 +74,68 @@ export default class Gantt extends Component {
                                 }
                                 if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat")
                                     return "last-weekend";
-
                                 return "";
                             }
                         }
                     ]
                 },
+                {
+                    name: "week",
+                    scale_height: 50,
+                    min_column_width: 50,
+                    scales: [
+                        {
+                            unit: "week", step: 1, format: function (date) {
+                                var dateToStr = gantt.date.date_to_str("%d %M");
+                                var endDate = gantt.date.add(date, 6, "day");
+                                var weekNum = gantt.date.date_to_str("%W")(date);
+                                return "#" + weekNum + ", " + dateToStr(date) + " - " + dateToStr(endDate);
+                            }
+                        },
+                        { unit: "day", step: 1, format: "%j %D" }
+                    ]
+                },
+                {
+                    name: "month",
+                    scale_height: 50,
+                    min_column_width: 120,
+                    scales: [
+                        { unit: "month", format: "%F, %Y" },
+                        { unit: "week", format: "Week #%W" }
+                    ]
+                },
+                {
+                    name: "quarter",
+                    height: 50,
+                    min_column_width: 90,
+                    scales: [
+                        { unit: "month", step: 1, format: "%M" },
+                        {
+                            unit: "quarter", step: 1, format: function (date) {
+                                var dateToStr = gantt.date.date_to_str("%M");
+                                var endDate = gantt.date.add(gantt.date.add(date, 3, "month"), -1, "day");
+                                return dateToStr(date) + " - " + dateToStr(endDate);
+                            }
+                        }
+                    ]
+                },
+                {
+                    name: "year",
+                    scale_height: 50,
+                    min_column_width: 30,
+                    scales: [
+                        { unit: "year", step: 1, format: "%Y" }
+                    ]
+                }
             ]
         });
+
+
     }
 
     setZoom(value) {
-        gantt.ext.zoom.setLevel(value);
+        gantt.ext.zoom.setLevel(this.state.zoomDate);
+        // gantt.ext.zoom.setLevel(value);
     }
     initGanttDataProcessor() {
         const onDataUpdated = this.props.onDataUpdated;
@@ -77,13 +164,14 @@ export default class Gantt extends Component {
             });
             gantt.getMarker(markerId);
         }
-        this.showDate(this.state.currDate);
+        this.showDate(this.state.currDate, this.state.y);
 
     }
-    showDate(date) {
+    showDate(date, y) {
+        y *= 35;
         var date_x = gantt.posFromDate(date);
         var scroll_to = Math.max(date_x - gantt.config.task_scroll_offset, 0);
-        gantt.scrollTo(scroll_to);
+        gantt.scrollTo(scroll_to, y / 2);
     };
 
     // handleClickTask(task) {
@@ -132,7 +220,8 @@ export default class Gantt extends Component {
         gantt.attachEvent("onTaskRowClick", function (id, row) {
             let taskSelect = gantt.getTask(id);
             this.setState({ currDate: taskSelect.start_date })
-            this.showDate(taskSelect.start_date);
+            this.setState({ y: taskSelect.index })
+            this.showDate(taskSelect.start_date, taskSelect.index);
         }.bind(this));
 
         gantt.templates.gantt_cell = function (start, end, task) {
@@ -209,10 +298,10 @@ export default class Gantt extends Component {
             store.dispatch(actions.saveCurrentIndexOfTaskInRedux(task.indexTask))
             store.dispatch(actions.saveCurrentIndexOfCardInRedux(task.indexCard))
             store.dispatch(actions.editTask(editTaskInRedux))
-            console.log(editTaskInRedux);
 
             store.dispatch(actions.setDateTaskFromGantt(editTaskInRedux))
             this.setState({ currDate: task.start_date })
+            this.setState({ y: task.index })
         }.bind(this));
         gantt.config.xml_date = "%Y-%m-%d %H:%i";
         const { tasks } = this.props;
@@ -234,7 +323,8 @@ export default class Gantt extends Component {
             gantt.message("Grid is now <br>" + new_width + "</br>px width");
             return true;
         });
-     
+
+
         function myFunc(task) {
             if (task.cardName) {
                 return (`<div class='important'>
@@ -259,12 +349,39 @@ export default class Gantt extends Component {
         newDatesInTask: {}
     };
 
+    // handleYearZoom(e) {
+    //     gantt.ext.zoom.setLevel("year");
+    // }
+    handleIncrease(e) {
+        gantt.ext.zoom.zoomOut();
+        
+        $('.today').css('display','none')
+    }
+    handleDecrease(e) {
+        gantt.ext.zoom.zoomIn();
+        if(gantt.ext.zoom.getCurrentLevel()===0 || gantt.ext.zoom.getCurrentLevel()===1){
+            $('.today').css('display','block')
+        }
+        else{
+            $('.today').css('display','none')
+        }
 
-    handleChangeComplete = (color) => {
+    }
+    // handleDayZoom(e) {
 
-        this.setState({ background: color.hex });
-        document.documentElement.style.setProperty('--color1', color)
-    };
+    //     gantt.ext.zoom.setLevel("Day");
+    // }
+    // handleMonthZoom(e) {
+    //     gantt.ext.zoom.setLevel("month");
+    // }
+    // handleWeekZoom(e) {
+    //     gantt.ext.zoom.setLevel("week");
+    // }
+    // handleChangeComplete = (color) => {
+
+    //     this.setState({ background: color.hex });
+    //     document.documentElement.style.setProperty('--color1', color)
+    // };
 
     componentWillUnmount() {
 
@@ -274,6 +391,7 @@ export default class Gantt extends Component {
         }
         gantt.clearAll();
     }
+
 
     render() {
         const { zoom } = this.props;
@@ -287,7 +405,16 @@ export default class Gantt extends Component {
                         style={{ width: '100%', height: '80vh' }}
                     >
                     </div>
+
                 </center>
+                <div className="zoom-label">
+                    <button onClick={(e) => { this.handleIncrease(e) }}>+</button>
+                    <button onClick={(e) => { this.handleDecrease(e) }}>-</button>
+                    {/* <label><input type="radio" name="scale" value="day" onChange={(e) => { this.handleDayZoom(e) }} />Day scale</label>
+                    <label><input type="radio" name="scale" value="week" onChange={(e) => { this.handleWeekZoom(e) }} />Week scale</label>
+                    <label><input type="radio" name="scale" value="month" onChange={(e) => { this.handleMonthZoom(e) }} />Month scale</label>
+                    <label><input type="radio" name="scale" value="year" onChange={(e) => { this.handleYearZoom(e) }} />Year scale</label> */}
+                </div>
             </>
         );
     }

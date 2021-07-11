@@ -8,7 +8,6 @@ function Description(props) {
     const projectName = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.name;
     const [projectBeforeChanges] = useState({ ...props.workspaces[props.workspaceIndex].projects[props.projectIndex] })
     let description = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.description
-
     return (
         <div >
             <div className="row  pt-3 ml-4 mt-3">

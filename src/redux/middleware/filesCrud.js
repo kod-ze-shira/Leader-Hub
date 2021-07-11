@@ -20,7 +20,8 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         if (!!formData.entries().next().value === true) {
             $.ajax({
-                url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                // url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
                 method: 'post',
                 contentType: false,
                 processData: false,
@@ -61,6 +62,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
     return next(action);
 
 }
+
 
 
 //this func to check the headers jwt and username, if them not good its throw to login
@@ -148,8 +150,6 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
 
 export const downloadFolder = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILES') {
-
-        debugger;
         let folder = action.payload.folder
 
         console.log("folder " + JSON.stringify({ folder }));

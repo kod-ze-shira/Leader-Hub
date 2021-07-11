@@ -8,7 +8,7 @@ function HangoutAndLogs(props) {
     return (
         <>
             <div className="body-hangoutAndLogs" >
-                {/* <div className='row mb-3 minHeight'>
+                {/* <div className='row mb-3 minHeightChat'>
                     <Hangout></Hangout>
                 </div> */}
                 <div className='row minHeight'>

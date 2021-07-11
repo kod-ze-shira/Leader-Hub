@@ -12,6 +12,7 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
+import imageCompression from "browser-image-compression";
 import UploadFile from '../../uploadFile/uploadFile'
 import Animation from '../../animation/animation'
 
@@ -237,7 +238,58 @@ function ViewTaskByCradTabs(props) {
 
         })
         : null
-    let admin = props.task.assingTo1 ? props.task.assingTo1.find(contact => contact.level == 'admin') : null
+    const fileInputRef = useRef()
+
+    const uploadMulti = async () => {
+        if (fileInputRef.current.files) {
+            props.setFileFromTask(fileInputRef.current.files[0])
+            let file = [{
+                'url': 'new',
+                'name': fileInputRef.current.files[0].name,
+                'file': fileInputRef.current.files[0],
+                'size': fileInputRef.current.files[0].size
+            }]
+            file = await compressedFile(file)
+            let task = {}, type
+            type = 'task'
+            props.uploadFiles({ 'files': file, 'task': task, type: type })
+        }
+    }
+    const compressedFile = async (myFiles) => {
+
+        let compressedFile;
+        let compressedFiles = [];
+
+        await Promise.all(
+            myFiles.map(async (file) => {
+                if (file.file.type.includes("image")) {
+                    const options = {
+                        maxSizeMB: 1,
+                        maxWidthOrHeight: 1920,
+                        useWebWorker: true,
+                    };
+                    compressedFile = await imageCompression(file.file, options);
+
+                    console.log(
+                        `compressedFile size ${compressedFile.size / 1024} MB`
+                    );
+                } else {
+                    compressedFile = file.file;
+                }
+                compressedFiles.push(compressedFile)
+
+            })
+        )
+
+        return compressedFiles
+    }
+
+    const setIndex = (e) => {
+        e.stopPropagation()
+        setCurrentIndexTask(props.indexTask)
+        setCurrentIndexCard(props.indexCard)
+
+    }
     return (
         <>
             <Draggable
@@ -302,12 +354,7 @@ function ViewTaskByCradTabs(props) {
 
 
                                 {myFiles}
-                                {/* <div>
-                                    <span className="span-name-task mt-2" contentEditable={true} >
-                                        {props.task.name}
-                                    </span>
 
-                                </div> */}
                                 <textarea
                                     className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
                                     style={props.task.files && props.task.files.length ? null : { 'marginTop': '12px' }}
@@ -322,18 +369,6 @@ function ViewTaskByCradTabs(props) {
                                 //     }
                                 // }}
                                 />
-
-                                {/* <span
-                                    name="name"
-                                    ref={textInput}
-                                    onBlur={(e) => editTask(e)}
-                                    className="task-name-span ml-3 col-12 "
-                                    onClick={(e) => e.stopPropagation()}
-                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}
-                                >
-                                    {props.task.name}
-                                </span> */}
-
                                 <div className="icons-in-task-tabs pt-0">
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
@@ -362,10 +397,24 @@ function ViewTaskByCradTabs(props) {
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
-                                            {/* <div className="pl-2 attachment-alt">
-                                                <UploadFile taskId='' fromTaskTabs={true} indexTask={props.indexCurrentTask} indexCard={props.indexCurrentCard} />
-                                                <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
-                                            </div> */}
+                                            <label for="fileFromTask">
+                                                <img className="mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            </label>
+                                            <input
+                                                type={"file"}
+                                                id="fileFromTask"
+                                                htmlFor="myInput"
+                                                // accept="image/*"
+                                                style={{
+                                                    display: 'none',
+                                                    background: 'red',
+                                                    cursor: 'pointer',
+                                                }}
+                                                ref={fileInputRef}
+                                                multiple
+                                                onClick={(e) => setIndex(e)}
+                                                onChange={(e) => uploadMulti(e)}
+                                            />
                                         </div>
 
                                         <div className="icons-task-tabs">
@@ -436,7 +485,10 @@ const mapDispatchToProps = (dispatch) => {
         setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
-        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
+        setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
+        uploadFiles: (file) => dispatch(actions.uploadFiles(file)),
+
     }
 }
 
