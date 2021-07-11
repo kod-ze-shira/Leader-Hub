@@ -119,7 +119,6 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-        console.log("cardsssssssss", props.cards);
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
@@ -171,7 +170,7 @@ function Tabs(props) {
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
-            {props.cards[props.indexCurrentCard] ?
+            {props.cards[props.indexCurrentCard] && props.workspaces.length?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
