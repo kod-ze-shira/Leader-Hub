@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './file.css'
 import { actions } from '../../../../redux/actions/action'
+
+
 import $ from 'jquery'
 
 function File(props) {
@@ -122,10 +124,13 @@ function File(props) {
                             downloadFile(e)
                         }} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4 imgActionFile'
-                            src={require('../../../../assets/img/ID.svg')}></img>
+                            src={require('../../../../assets/img/download.svg')}></img>
                         : null}
-                    <img onClick={(e) => deleteFile(e)} id={props.file.name} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
-                        src={require('../../../../assets/img/Group 21592.svg')}></img>
+                    {props.file.url != 'new' &&
+                        <img onClick={(e) => deleteFile(e)} id={props.file.name} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
+                            src={require('../../../../assets/img/Group 21592.svg')}></img>
+                    }
+
 
 
 
