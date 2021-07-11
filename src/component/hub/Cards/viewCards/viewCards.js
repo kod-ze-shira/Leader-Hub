@@ -48,9 +48,6 @@ function ViewCards(props) {
         }
         setInputValue("")
         setAddTaskInInput(!addTaskInInput)
-
-
-
     }
 
 
@@ -60,12 +57,10 @@ function ViewCards(props) {
         if (props.cardFromMap.tasks.length)
             if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
                 changeSelectedCard()
-
             }
     }
     const updateCardName = (event) => {
         setEditCardName(event.target.value)
-
 
     }
     const deleteCard = () => {
@@ -92,7 +87,6 @@ function ViewCards(props) {
         if ($(`#${id}`).hasClass("newTriangle")) {
             $(`#${id}`).addClass("triangle")
             $(`#${id}`).removeClass("newTriangle")
-
         }
         else {
             $(`#${id}`).removeClass("triangle")
@@ -107,7 +101,6 @@ function ViewCards(props) {
             setFlagFromSelect(false)
             setAddTaskInInput(false)
 
-
         }
         else
             if (!flag && props.cardFromMap.tasks[0]) {
@@ -120,7 +113,6 @@ function ViewCards(props) {
             }
 
     }
-
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -150,8 +142,8 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-
-                    <div className="col-4 col-sm-12"
+                    <div className="col-4 d-flex justify-content-between">
+                    <div className=" "
                         onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
                         onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
                     >
@@ -180,18 +172,16 @@ function ViewCards(props) {
                         <span  // id="input-card-name"
                             ref={textInput}
                             onBlur={() => editCard()}
-                            className="show-card ml-4 col-10 ">
-                           
+                            className="show-card show-card-list ml-4 col-10 ">
                             {editCardName}</span>
                         <button data-tip data-for="add" className="new-task ml-2"
                             // id={`task${props.cardFromMap._id}`}
                             onClick={addTask}>+</button>
                     </div>
-                    <Button className="more col-1 " data-tip data-for="more_a"
+                    <Button className="more  " data-tip data-for="more_a"
                         onClick={handleClick}>
                         . . .
                 </Button>
-
                     <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                         {title.title_more_actions}
                     </ReactTooltip>
@@ -206,12 +196,17 @@ function ViewCards(props) {
                         <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
+                    </div>
                     {/* <p className="col">Team</p> */}
+                    <p className="col">start</p>
+                    <p className="col">end</p>
+                    <p className="col">total</p>
                     <p className="col-assignee">Assignee</p>
                     <p className="col ">Status</p>
-                    <p className="col">Start date</p>
+                    {/* <p className="col">Start date</p> */}
                     <p className="col-status">Due date</p>
                     <p className="col-priority">Priority</p>
+                    <p className="col"></p>
 
                     <p className="col-add-task"><a>
                         <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
@@ -224,7 +219,6 @@ function ViewCards(props) {
                         <div className="allTaskInCard">
                             <Droppable droppableId={props.cardFromMap._id}  >
                                 {provided => (
-
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}>
@@ -301,9 +295,6 @@ const mapDispatchToProps = (dispatch) => {
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         EditCard: (card) => dispatch(actions.editCard(card)),
-
-
-        
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ViewCards)

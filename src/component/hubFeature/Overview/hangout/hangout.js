@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef ,useEffect} from "react";
 import { connect } from 'react-redux';
 import { actions } from "../../../../redux/actions/action";
 import img from "../../../../assets/img/btn-chat.svg";
@@ -13,6 +13,8 @@ function Hangout(props) {
     const { userName } = props;
     const chatId = props.workspaces[props.workspaceIndex]?.projects[props.projectIndex]?.chatId;
     const { jwtFromCookie } = props;
+    useEffect(() => {
+    },[])
     // const [showChat, setShowChat] = useState(true)
     // const [src, setSrc] = useState(null)
     // const [backImg, setBackImg] = useState(imgClick)

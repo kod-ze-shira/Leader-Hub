@@ -1,12 +1,12 @@
 .iframeHangout{
-    /* height:58vh; */
+    height:63vh !important;
     width: 100%;
     border: none;
     overflow: hidden;
    /* position: fixed; */
  }  
  .wrap-iframe{
-    height:58vh;
+    /* height:58vh; */
     width: 100%;
     position: relative;
  }
