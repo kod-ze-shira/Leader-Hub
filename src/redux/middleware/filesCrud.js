@@ -20,8 +20,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         if (!!formData.entries().next().value === true) {
             $.ajax({
-                url: `https://files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
-                // url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
                 method: 'post',
                 contentType: false,
                 processData: false,
@@ -111,6 +110,7 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
         let file = action.payload.file
         console.log(file);
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
+
         fetch(
             keys.API_URL_FILES + "/api/" +
             getState().public_reducer.userName +

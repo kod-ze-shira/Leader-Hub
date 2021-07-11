@@ -253,7 +253,7 @@ function TaskNotBelongDetails(props) {
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <QuillEditTaskNotBelong taskId={props.taskId} />
+                            <QuillEditTaskNotBelong taskId={props.task._id} />
                             <textarea class="form-control"
                                 rows="3"
                                 className='inputTaskN'

@@ -21,7 +21,9 @@ class QuillEditTaskNotBelong extends Component {
         // console.log(e)//HTML מכיל את הטקסט כולל עיצוב e המשתנה 
         this.flug = false
         let editTaskInRedux = {
-            "nameFiled": 'description', "value": e,
+            "idTask": this.props.taskId,
+            "nameFiled": 'description',
+            "value": e,
         }
         let text = e
         if (text.includes("https://") || text.includes("https://")) {
@@ -51,8 +53,11 @@ class QuillEditTaskNotBelong extends Component {
         }
         if (this.flug) {
             editTaskInRedux = {
-                "nameFiled": 'description', "value": text,
+                "nameFiled": 'description',
+                "value": text,
+                "idTask": this.props.taskId
             }
+
             setTimeout(() => {
                 this.props.setTaskByFiledFromTasksNotBelong(editTaskInRedux)
             }, 300);
@@ -183,8 +188,7 @@ class QuillEditTaskNotBelong extends Component {
                     id="textQuil"
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.props.tasks.filter((task) => task._id == this.props.taskId) && this.props.tasks.filter((task) => task._id == this.props.taskId).description &&
-                        this.props.tasks.filter((task) => task._id == this.props.taskId).description ?
+                    value={this.props.tasks.filter((task) => task._id == this.props.taskId).description ?
                         this.props.tasks.filter((task) => task._id == this.props.taskId).description
                         : null}
                     onChange={(e) => this.changeFiledInEditTask(e)}
