@@ -78,86 +78,88 @@ function SelectHeader(props) {
     return (
         <>
             <div className="s-header mx-0  row align-items-center">
-
-                <FontAwesomeIcon className="ml-3 back-header"
-                    onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
-                {props.workspaces.length > 0 ?
-                    <>
-                        <div className="col-5">
-                            <div className="row">
-                                <div className=" col-sm px-1">
-                                    <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
-                                </div>
-                                <div className=" col-sm px-1">
-                                    <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
-                                </div>
-
-                                <div className=" col-sm px-1">
-                                    <SelectCards flag={changeFlag} />
-                                </div>
-                                <div className=" col-sm px-1">
-                                    <SelectTask />
-                                </div>
-                            </div></div>
-                    </> : null}
-
-                {window.location.href.indexOf('allProjects') != -1 ||
-                    window.location.href.indexOf('workspace') != -1 ?
-
-                    <>
-                        {window.location.href.indexOf('workspace') != -1 ?
-                            <div className='row col-5 offset-1' id='tabsAndList' >
-
-                                <div class="input-group inputSearchProject col-9 row mt-0 pr-0" >
-                                    <div class="input-group-prepend">
-                                        {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
-                                        <img src={require('../../img/onic-ios-search.png')} />
+              
+                    <FontAwesomeIcon className="ml-3 back-header"
+                        onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
+                    {props.workspaces.length > 0 ?
+                        <>
+                            <div className="col-5">
+                                <div className="row">
+                                    <div className=" col-sm px-1">
+                                        <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
                                     </div>
-                                    <input type="text" class="col-10" placeholder="Search project..."
-                                        onChange={(e) => props.valueSearchProject(e.target.value)}
-                                        aria-label="Username" aria-describedby="basic-addon1" />
-                                </div>
-                                <button className='buttonNewProject col-3' data-tip data-for="add_p"
-                                    onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
-                                >+ New Project</button>
-                            </div>
-                            :
-                            <div className='row col-4 pr-0' id='tabsAndList' >
-                                <div class="input-group inputSearchProject col-12 row pr-0">
-                                    <div class="input-group-prepend">
-                                        <img src={require('../../img/onic-ios-search.png')} />
+                                    <div className=" col-sm px-1">
+                                        <SelectProject selectProject={props.selectProject} workspaces={props.workspaces} />
                                     </div>
-                                    <input type="text" class="col-10" placeholder="Search project..."
-                                        onChange={(e) => props.valueSearchProject(e.target.value)}
-                                        aria-label="Username" aria-describedby="basic-addon1" />
+
+                                    <div className=" col-sm px-1">
+                                        <SelectCards flag={changeFlag} />
+                                    </div>
+                                    <div className=" col-sm px-1">
+                                        <SelectTask />
+                                    </div>
+                                </div></div>
+                        </> : null}
+
+                    {window.location.href.indexOf('allProjects') != -1 ||
+                        window.location.href.indexOf('workspace') != -1 ?
+
+                        <>
+                            {window.location.href.indexOf('workspace') != -1 ?
+                                <div className='row col-5 offset-1' id='tabsAndList' >
+
+                                    <div class="input-group inputSearchProject col-9 row mt-0 pr-0" >
+                                        <div class="input-group-prepend">
+                                            {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
+                                            <img src={require('../../../assets/img/onic-ios-search.png')} />
+                                        </div>
+                                        <input type="text" class="col-10" placeholder="Search project..."
+                                            onChange={(e) => props.valueSearchProject(e.target.value)}
+                                            aria-label="Username" aria-describedby="basic-addon1" />
+                                    </div>
+                                    <button className='buttonNewProject col-3' data-tip data-for="add_p"
+                                        onClick={(e) => props.openViewDitailsAddProject({ 'e': e, 'show': true })}
+                                    >+ New Project</button>
                                 </div>
-                            </div>
-                        }
-                    </>
-                    // w-sm-15
-                    :
+                                :
+                                <div className='row col-4 pr-0' id='tabsAndList' >
+                                    <div class="input-group inputSearchProject col-12 row pr-0">
+                                        <div class="input-group-prepend">
+                                            {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
+                                            <img src={require('../../../assets/img/onic-ios-search.png')} />
+
+                                        </div>
+                                        <input type="text" class="col-10" placeholder="Search project..."
+                                            onChange={(e) => props.valueSearchProject(e.target.value)}
+                                            aria-label="Username" aria-describedby="basic-addon1" />
+                                    </div>
+                                </div>
+                            }
+                        </>
+                        // w-sm-15
+                        :
 
 
-                    <div className={classes.root} id='tabsAndList '>
-                        {/* {props.menue ? */}
-                        <Tabs
-                            className="offset-5"
-                            value={value}
-                            onChange={handleChange}
-                            variant="scrollable"
-                            scrollButtons="off"
-                            TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
-                            aria-label="scrollable prevent tabs example"
-                        >
-                            <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false" />
-                            <Tab label="Cards" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false" />
-                            <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false" />
-                            <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false" />
-                        </Tabs>
-                    </div>
+                        <div className={classes.root} id='tabsAndList '>
+                            {/* {props.menue ? */}
+                            <Tabs
+                                className="offset-5"
+                                value={value}
+                                onChange={handleChange}
+                                variant="scrollable"
+                                scrollButtons="off"
+                                TabIndicatorProps={{ style: { backgroundColor: '#44D7B6' } }}
+                                aria-label="scrollable prevent tabs example"
+                            >
+                                <Tab label="Overview" className='tabsInSelect' onClick={(e) => changePresent("Overview")} contenteditable="false" />
+                                <Tab label="Cards" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false" />
+                                <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false" />
+                                <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false" />
+                            </Tabs>
+                        </div>
 
-                }
-            </div>
+                    }
+                </div>
 
         </>
     )

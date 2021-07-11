@@ -142,7 +142,8 @@ function ViewCards(props) {
             <div id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-4 "
+                    <div className="col-4 d-flex justify-content-between">
+                    <div className=" "
                         onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
                         onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
                     >
@@ -171,13 +172,13 @@ function ViewCards(props) {
                         <span  // id="input-card-name"
                             ref={textInput}
                             onBlur={() => editCard()}
-                            className="show-card ml-4 col-10 ">
+                            className="show-card show-card-list ml-4 col-10 ">
                             {editCardName}</span>
                         <button data-tip data-for="add" className="new-task ml-2"
                             // id={`task${props.cardFromMap._id}`}
                             onClick={addTask}>+</button>
                     </div>
-                    <Button className="more col-1 " data-tip data-for="more_a"
+                    <Button className="more  " data-tip data-for="more_a"
                         onClick={handleClick}>
                         . . .
                 </Button>
@@ -195,12 +196,17 @@ function ViewCards(props) {
                         <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
                         <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
                     </Menu>
+                    </div>
                     {/* <p className="col">Team</p> */}
+                    <p className="col">start</p>
+                    <p className="col">end</p>
+                    <p className="col">total</p>
                     <p className="col-assignee">Assignee</p>
                     <p className="col ">Status</p>
-                    <p className="col">Start date</p>
+                    {/* <p className="col">Start date</p> */}
                     <p className="col-status">Due date</p>
                     <p className="col-priority">Priority</p>
+                    <p className="col"></p>
 
                     <p className="col-add-task"><a>
                         <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">

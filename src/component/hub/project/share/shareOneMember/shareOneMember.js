@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './shareOneMember.css'
-import delete_member_logo from '../../../../img/delete_member_logo.svg'
+import delete_member_logo from '../../../../../assets/img/delete_member_logo.svg'
 
 export default function ShareOneMember(props) {
     const colors = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",

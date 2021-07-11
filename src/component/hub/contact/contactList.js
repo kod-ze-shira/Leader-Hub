@@ -13,9 +13,9 @@ function ContactList(props) {
 
   useEffect(() => {
     $(".invalid-feedback").css("display", "none");
-    if (props.contactsUser.length == 0)
-      props.getContactsForUser()
+
   }, [])
+
 
   const [valueSearch, setValueSearch] = useState("")
   const nameRequired = useRef()
@@ -63,7 +63,7 @@ function ContactList(props) {
       $(".invalid-feedback").css("display", "none");
       $(".invite-button").css("backgroundColor", "#68C7CB");
       $(".invite-button").css("color", "#358A8D");
-      props.assingTo(valueSearch)
+      props.assingToMany(valueSearch)
 
       setTimeout(() => {
         $(".div_contacts").css("display", "none");
@@ -104,30 +104,31 @@ function ContactList(props) {
   const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200
   const left = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.leftContactList : props.widthCurrentScreen - 350
   const width = props.leftContactList + props.widthContactsList < props.widthCurrentScreen ? props.widthContactsList : props.widthContactsList
-
+  const bottom = props.heightCurrentScreen - props.topContactList
   return (
     <>
 
-      <div className='div_contacts ' style={{ "left": props.hub ? left : "", "top": props.hub ? top : 410, "width": props.hub ? width : 300, "maxHeight": 250 }}>
+      <div className='div_contacts ' style={{ "left": props.hub ? left : "", "top": props.hub ? top : "", "width": props.hub ? width : 300, "maxHeight": 250, "bottom": props.taskDetails ? bottom : "" }}>
         <div className='container div_contacts_list  ' style={{}}>
           <div className=' row  mx-1 form-group' id='nameRequired'>
-            {/* {props.hub ? */}
-            <input placeholder="Name or email " required ref={nameRequired}
-              className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-              onChange={(e) => { handleChange(e); }}
-              onClick={(e) => e.stopPropagation()}
-              value={props.contactsUser.email}></input>
-            {/* //  : null} */}
+            {props.hub ?
+              <input placeholder="Name or email " required ref={nameRequired}
+                className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+                onChange={(e) => { handleChange(e); }}
+                onClick={(e) => e.stopPropagation()}
+                value={props.contactsUser.email}></input>
+              : null}
             {contactList}</div>
-          {/* {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
-              className={arrayFilter && arrayFilter.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-              onChange={(e) => handleChange(e)}
-              onClick={(e) => e.stopPropagation()}
-              value={props.contactsUser.email}></input> : null} */}
+          {props.taskDetails ?   <input placeholder="Name or email " required ref={nameRequired}
+                className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+                onChange={(e) => { handleChange(e); }}
+                onClick={(e) => e.stopPropagation()}
+                value={props.contactsUser.email}></input>
+              : null}
 
           <div className="invalid-feedback">
             Please enter valid email.
-            </div>
+          </div>
         </div>
 
       </div>
@@ -151,7 +152,8 @@ export default connect(
   (dispatch) => {
     return {
       getContactsForUser: () => dispatch(actions.getContactsForUser()),
-      assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+      assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
+      assingToMany: (emailOfContact) => dispatch(actions.assingToMany(emailOfContact))
 
     }
   }

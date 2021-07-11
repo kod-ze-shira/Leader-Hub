@@ -376,7 +376,6 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
 export const removeTaskById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_TASK_BY_ID') {
-        debugger
         // let workspace = getState().workspace_reducer;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
         $.ajax({
