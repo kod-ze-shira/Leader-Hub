@@ -11,4 +11,5 @@ module.exports = {
     API_URL_TIME: 'https://time.leader.codes/api',
     API_URL_MASTER: 'https://api.leader.codes',
     DOMAIN: "hub.leader.codes",
+    JWT:"jwt"
 }

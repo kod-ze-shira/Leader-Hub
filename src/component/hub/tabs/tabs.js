@@ -119,7 +119,6 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-        console.log("cardsssssssss", props.cards);
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }

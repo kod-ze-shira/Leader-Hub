@@ -150,8 +150,6 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
 
 export const downloadFolder = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILES') {
-
-        debugger;
         let folder = action.payload.folder
 
         console.log("folder " + JSON.stringify({ folder }));

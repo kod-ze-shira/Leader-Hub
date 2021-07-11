@@ -451,7 +451,7 @@ function TaskDetails(props) {
                         </ReactTooltip>
                     </div>
                     <div className=" files-details mx-1" data-tip id="files">
-                        <UploadFile />
+                        <UploadFile taskId=''/>
                         <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">

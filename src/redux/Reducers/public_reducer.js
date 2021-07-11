@@ -53,8 +53,6 @@ const publicData = {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
-
-
     },
     deleteFilesInTask(state, action) {
         for (let indexUrl = 0; indexUrl < action.payload.length; indexUrl++)
@@ -323,6 +321,7 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
+        
         if (state.cards.length > 0)
             state.cards.push(action.payload)
         else
