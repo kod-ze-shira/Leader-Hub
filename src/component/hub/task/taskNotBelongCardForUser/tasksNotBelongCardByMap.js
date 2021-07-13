@@ -14,6 +14,8 @@ import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import ProjectStyle from "../../project/projectStyle";
 import Background from '../../../../assets/img/down-arrow.svg';
+import ReactTooltip from 'react-tooltip';
+
 function TasksNotBelongCardByMap(props) {
 
     const [viewDetails, setViewDetails] = useState(false)
@@ -316,11 +318,16 @@ function TasksNotBelongCardByMap(props) {
 
                             <input
                                 type="checkbox"
-                                name="name" id="name" title={props.task.name}
+                                name="name" id="name"
+                                data-tip data-for="task_not_belong_name"
                                 checked={props.task.complete}
                                 className={props.task.complete ?
                                     "disabled show-card " : "show-card "}
                             />
+
+                            <ReactTooltip className="tooltip-style" data-tip id="task_not_belong_name" place="top" effect="solid">
+                                {props.task.name}
+                            </ReactTooltip>
                             <span className="checkmark checkmark-place"
                                 onClick={(e) => { addChalalit(); changeFiledInTask(e) }}></span>
 

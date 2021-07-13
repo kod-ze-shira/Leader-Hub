@@ -208,7 +208,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-
+        // console.log('EDIT_TASK')
         if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
             task = action.payload.task
         }

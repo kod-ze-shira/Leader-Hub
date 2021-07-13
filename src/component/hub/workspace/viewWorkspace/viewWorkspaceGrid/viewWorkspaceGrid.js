@@ -67,7 +67,7 @@ function ViewWorkspaceGrid(props) {
                 <div className="row iconsActions" >
                     <div
                         className=" edit iconsAction" onClick={editWorkspace}>
-                        <img class='imageIcon' src={pencil} data-tip data-for="edit"
+                        <img className='imageIcon' src={pencil} data-tip data-for="edit"
                         ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="edit" place="top" effect="solid">
                             {title.title_edit}

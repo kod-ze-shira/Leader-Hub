@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
-import { InputGroup, FormControl, Table } from 'react-bootstrap'
+import imageCompression from "browser-image-compression";
 import $ from 'jquery';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,6 @@ import title from '../../../../Data/title.json'
 import { useParams } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import './ViewTaskByCradTabs.css'
-import imageCompression from "browser-image-compression";
 import UploadFile from '../../uploadFile/uploadFile'
 import Animation from '../../animation/animation'
 
@@ -145,7 +144,7 @@ function ViewTaskByCradTabs(props) {
             "complete": doneStatus,
             "endDate": today,
             "likes": props.task.likes,
-            "assingTo": props.task.assingTo,
+            "assingTo1": props.task.assingTo1 ? props.task.assingTo1 : null,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
             "files": props.task.files ? props.task.files : null,
             "priority": props.task.priority
@@ -306,9 +305,38 @@ function ViewTaskByCradTabs(props) {
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className=" ">
+                                <div className="row justify-content-between mx-1 mt-1">
+                                    <div
+                                        onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
+                                        className={props.task.complete ? "status-task-tabs-opacity px-2 ml-1 " : "status-task-tabs px-2 ml-1"}
+                                        style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                        {props.task.status ? props.task.status.statusName : null}
+                                    </div>
+                                    <Button className="more col-3 mr-0 more-task"
+                                        data-tip data-for="more_a"
+                                        aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                                        . . .
+                                    </Button>
+
+                                    <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
+                                        {title.title_more_actions}
+                                    </ReactTooltip>
+                                    <Menu
+                                        id="simple-menu"
+                                        anchorEl={anchorEl}
+                                        keepMounted
+                                        open={Boolean(anchorEl)}
+                                        onClose={handleClose}
+                                    >
+                                        {/* <MenuItem onClick={handleClose}>Edit Task Name</MenuItem> */}
+                                        <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
+                                        <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
+                                    </Menu>
+                                </div>
                                 <label
-                                    title="Complete Task"
-                                    className="check-task pb-2  check-tabs ">
+                                    className="check-task pb-2  check-tabs "
+                                    data-tip data-for="complite_task"
+                                >
                                     <input type="checkbox"
                                         name="complete"
                                         checked={doneStatus}
@@ -316,6 +344,9 @@ function ViewTaskByCradTabs(props) {
                                         onChange={(e) => changeFiledInTask(e)}
                                         onClick={(e) => e.stopPropagation()}
                                     />
+                                    <ReactTooltip className="tooltip-style" data-tip id="complite_task" place="top" effect="solid">
+                                        Complete Task
+                                    </ReactTooltip>
                                     <span
                                         className="checkmark checkmark-tabs"
                                         onClick={(e) => addChalalit(e)}></span>
@@ -323,31 +354,18 @@ function ViewTaskByCradTabs(props) {
                                 {/* <img className="files-task" src={require('../../../img/files-icon.png')} ></img> */}
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
-                                <Button className="more col-3 mr-0 more-task"
-                                    data-tip data-for="more_a"
-                                    aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                                    . . .
-                                </Button>
 
-                                <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
-                                    {title.title_more_actions}
-                                </ReactTooltip>
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                >
-                                    {/* <MenuItem onClick={handleClose}>Edit Task Name</MenuItem> */}
-                                    <MenuItem onClick={(e) => handleClose(actionCard.viewCard, e)} >View Details</MenuItem>
-                                    <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
-                                </Menu>
+
                                 {myFiles}
+                                {/* <div>
+                                    <span className="span-name-task mt-2" contentEditable={true} >
+                                        {props.task.name}
+                                    </span>
 
+                                </div> */}
                                 <textarea
                                     className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
-                                    style={props.task.files && props.task.files.length ? null : { 'margin-top': '20px' }}
+                                    style={props.task.files && props.task.files.length ? null : { 'marginTop': '12px' }}
                                     value={props.task.name}
                                     onClick={(e) => e.stopPropagation()}
                                     name="name"
@@ -359,27 +377,45 @@ function ViewTaskByCradTabs(props) {
                                 //     }
                                 // }}
                                 />
+
+                                {/* <span
+                                    name="name"
+                                    ref={textInput}
+                                    onBlur={(e) => editTask(e)}
+                                    className="task-name-span ml-3 col-12 "
+                                    onClick={(e) => e.stopPropagation()}
+                                    onKeyPress={(e) => changeFiledInTask({ event: e, name: "name" })}
+                                >
+                                    {props.task.name}
+                                </span> */}
+
                                 <div className="icons-in-task-tabs pt-0">
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
+                                            <div>
+                                                {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
+                                                    {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                                        if (index < 2)
+                                                            return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
+                                                                : null
+                                                    }) : null}
+                                                    {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
+                                                </div> : <img
+                                                    // id={`${props.task._id}assing-to`}
+                                                    className="ml-1 assing-to-icon"
+                                                    onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
+                                                    src={require('../../../../assets/img/share-icon.png')}>
+                                                </img>}
+                                            </div>
 
-                                            <div
-                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
-                                                className={props.task.complete ? "status-task-tabs-opacity px-2 ml-2 " : "status-task-tabs px-2 ml-2"}
-                                                style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
-                                                {props.task.status ? props.task.status.statusName : null}
-                                            </div>
-                                            <div className="pl-2"> {props.task.priority ?
-                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
-                                                : null}
-                                            </div>
-                                            <div className="pl-2">
+
+                                            <div className="pl-1">
                                                 {props.task.milestones ?
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
                                             <label for="fileFromTask">
-                                                <img className="mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                                <img className="mr-1 ml-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
                                             </label>
                                             <input
                                                 type={"file"}
@@ -398,12 +434,17 @@ function ViewTaskByCradTabs(props) {
                                         </div>
 
                                         <div className="icons-task-tabs">
-
+                                            <div className="px-1"> {props.task.priority ?
+                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                : null}
+                                            </div>
                                             <div className="due-date-hover" title={title.title_due_date}>
                                                 <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
                                                 >{dateInString}</p>
                                             </div>
-
+                                            <ReactTooltip className="tooltip-style" data-tip id="title_due" place="top" effect="solid">
+                                                {title.title_due_date}
+                                            </ReactTooltip>
                                             <div className="like-hover">
                                                 <img
                                                     className="like-icon-tabs"
@@ -411,27 +452,13 @@ function ViewTaskByCradTabs(props) {
                                                     src={require('../../../../assets/img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
-                                                    <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
+                                                    <p className="pr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
                                                         src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/heart.png')}>
                                                         {/* src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}> */}
                                                     </img>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <img
-                                                    id={`${props.task._id}assing-to`}
-                                                    title={title.title_assing}
-                                                    className="ml-2 assing-to-icon"
-                                                    onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-                                                    src={require('../../../../assets/img/share-icon.png')}>
-                                                </img>
-                                                {/* {props.task.assingTo1 && admin != -1 ?
-                                                    <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                                        {props.task.assingTo1 ? <img referrerpolicy="no-referrer" src={props.task.assingTo1? admin.thumbnail : null} className="thumbnail-contact ml-2" />
-                                                            : <div className="logo-contact ml-2" >{admin.name ? admin.name[0] : null}</div>}
-                                                    </div> : null} */}
                                             </div>
                                         </div>
                                     </div>
@@ -447,7 +474,6 @@ function ViewTaskByCradTabs(props) {
     )
 }
 const mapStateToProps = (state) => {
-
     return {
         userId: state.public_reducer.userId,
         tasks: state.public_reducer.tasks,
@@ -465,11 +491,13 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
+        addFile: (files) => dispatch(actions.addFile(files)),
+        uploadFiles: (file) => dispatch(actions.uploadFiles(file)),
         setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
-        setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
@@ -479,10 +507,7 @@ const mapDispatchToProps = (dispatch) => {
         setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
-        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
-        setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
-        uploadFiles: (file) => dispatch(actions.uploadFiles(file)),
-
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
     }
 }
 

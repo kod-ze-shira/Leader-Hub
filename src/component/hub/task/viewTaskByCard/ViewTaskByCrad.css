@@ -12,6 +12,10 @@
   vertical-align: middle !important;
 
 }
+.widthofContacts{
+  display: inline !important;
+  padding: 0 !important;
+}
 
 .check-task button:focus{
   outline: 0;
