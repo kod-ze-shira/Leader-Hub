@@ -85,7 +85,6 @@ const publicData = {
         [action.payload.nameFiled])
     },
 
-
     setTaskByFiledFromTasksNotBelong(state, action) {
         let indexTask;
         for (let index = 0; index < state.tasks.length; index++) {

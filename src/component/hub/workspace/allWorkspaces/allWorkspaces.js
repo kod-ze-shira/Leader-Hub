@@ -17,7 +17,14 @@ function AllWorkspaces(props) {
     // const [showToastDelete, setShowToastDelete] = useState(false)
     // const [showModalDelete, setShowModalDelete] = useState(false)
     // const refToDeleteToast = useRef(null);
-
+    const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
+        "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
+        "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
+        "#F8B520", "#F88C20", "#F84A20", "#F13B7F", "#FD808B",
+        "#FCB3EE", "#CA79E0", "#8868FC", "#B6B3FC", "#67B0F5", "#6FDEED", "#6FD6C0", "#86D44A", "#C4D44A", "#F0DE54",
+        "#F7C352", "#F7A452", "#F77352", "#F26B9C", "#FCB3B9"]
+    // let [myColor, setMyColor] = useState("#C967B6")
+    let [myColor, setMyColor] = useState()
 
     useEffect(() => {
         if (!props.contactsUser.length)
@@ -79,8 +86,16 @@ function AllWorkspaces(props) {
     // $(function () {
     //     $('[data-toggle="tooltip"]').tooltip()
     // })
+    function getRandomColor() {
+        const randColor = Math.floor((Math.random() * colorList.length) + 0)
+        const color = colorList[randColor]
+        return color;
+    }
+
     function openAddNewWorkspace(e) {
-        props.addWorkspaceToWorkspaces({ description: "", name: "" })
+        let p = getRandomColor()
+        setMyColor(p)
+        props.addWorkspaceToWorkspaces({ description: "", name: "", color: p })
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
         e.stopPropagation()
@@ -197,7 +212,9 @@ function AllWorkspaces(props) {
                         <ViewDetails
                             showToast={(obj) => props.showToast(obj)}
                             closeViewDetails={() => setShowWorkspace(false)}
-                            from={addOrEditWorkspace} workspace={workspaceToEdit} />
+                            from={addOrEditWorkspace} workspace={workspaceToEdit}
+                            colorWorkspace={myColor}
+                        />
                     </div> : null
             }
 
