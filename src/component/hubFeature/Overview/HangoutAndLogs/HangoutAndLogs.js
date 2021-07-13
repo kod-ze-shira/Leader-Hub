@@ -11,7 +11,7 @@ function HangoutAndLogs(props) {
                 <div className='row mb-3 minHeightChat'>
                     <Hangout></Hangout>
                 </div>
-                <div className='row minHeight'>
+                <div className='row minHeight mb-4'>
                     <Logs />
                 </div>
             </div>

@@ -84,7 +84,7 @@ function Overview(props) {
                         </div>
                     </div>
 
-                    <div className='col d-xs-none d-lg-block scrollOverview'>
+                    <div className='col d-xs-none d-lg-block scrollOverview mr-3'>
                         <div className='container-fluid px-0 '>
                             {refresh ?
                                 <HangoutAndLogs></HangoutAndLogs>
