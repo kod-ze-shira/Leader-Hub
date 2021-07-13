@@ -427,16 +427,7 @@ function TaskDetails(props) {
                 </div>
 
                 <div className="row   ">
-                    {showContactList ?
-                        <ContactList taskDetails={true} ></ContactList> : null
-                    }<div className="widthofContacts col-4">
-                        {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
-                            if (index < 3)
-                                return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
-                                    : null
-                        }) : null}
-                        {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
-                    </div>
+
                     {/* {props.task.assingTo ?
 
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
@@ -464,6 +455,16 @@ function TaskDetails(props) {
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>
+                    </div>
+                    {showContactList ?
+                        <ContactList taskDetails={true} ></ContactList> : null
+                    }<div className="widthofContacts col-4">
+                        {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                            if (index < 3)
+                                return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                    : null
+                        }) : null}
+                        {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
                     </div>
 
                     {/* <button onClick={(e) => completeTask(e)}>complete</button> */}

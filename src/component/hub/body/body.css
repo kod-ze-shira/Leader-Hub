@@ -7,7 +7,7 @@
   overflow-y: auto!important;
 }
 .body-workspace{
-  height: 97vh;
+  height: 96.5vh;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 5px;
   opacity: 1;
@@ -19,10 +19,10 @@
 }
 @media screen and (min-width: 1550px) {
   .body-workspace {
-    height:97vh;
+    height:96.5vh;
   }
   .view-details{
-    height: 97vh;
+    height: 96.5vh;
 
   }
 

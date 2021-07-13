@@ -145,7 +145,7 @@ function ViewTaskByCradTabs(props) {
             "complete": doneStatus,
             "endDate": today,
             "likes": props.task.likes,
-            "assingTo1": props.task.assingTo1? props.task.assingTo1 :null,
+            "assingTo1": props.task.assingTo1 ? props.task.assingTo1 : null,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
             "files": props.task.files ? props.task.files : null,
             "priority": props.task.priority
@@ -372,7 +372,7 @@ function ViewTaskByCradTabs(props) {
                                 <div className="icons-in-task-tabs pt-0">
                                     <div className="row justify-content-between mx-2 mt-3 mb-0">
                                         <div className="p_task">
-                                        <div>
+                                            <div>
                                                 {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
                                                     {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                         if (index < 2)
@@ -388,11 +388,8 @@ function ViewTaskByCradTabs(props) {
                                                 </img>}
                                             </div>
 
-                                            <div className="pl-2"> {props.task.priority ?
-                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
-                                                : null}
-                                            </div>
-                                            <div className="pl-2">
+
+                                            <div className="pl-1">
                                                 {props.task.milestones ?
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
@@ -418,7 +415,10 @@ function ViewTaskByCradTabs(props) {
                                         </div>
 
                                         <div className="icons-task-tabs">
-
+                                            <div className="px-1"> {props.task.priority ?
+                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                : null}
+                                            </div>
                                             <div className="due-date-hover" title={title.title_due_date}>
                                                 <p onClick={(e) => showAssigToOrCalander({ "e": e, "name": "calander" })}
                                                 >{dateInString}</p>
@@ -431,7 +431,7 @@ function ViewTaskByCradTabs(props) {
                                                     src={require('../../../../assets/img/like-icon.png')}>
                                                 </img>
                                                 <div onClick={(e) => updateLike(e)}>
-                                                    <p className="mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
+                                                    <p className="pr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                                     <img
                                                         onClick={updateLike}
                                                         src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/heart.png')}>
@@ -439,7 +439,7 @@ function ViewTaskByCradTabs(props) {
                                                     </img>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>

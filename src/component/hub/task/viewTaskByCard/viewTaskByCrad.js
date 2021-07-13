@@ -25,7 +25,6 @@ function ViewTaskByCrad(props) {
     const [flag, setFlag] = useState(true)
 
     useEffect(() => {
-        debugger
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
         let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null

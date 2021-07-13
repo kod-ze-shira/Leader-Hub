@@ -227,7 +227,7 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
   if (action.type === 'ASSING_TO_MANY') {
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
-    let assigns = action.payload
+    let assign = action.payload
     console.log(taskId);
     let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingToMany`
     $.ajax({
@@ -237,14 +237,15 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
         Authorization: getState().public_reducer.tokenFromCookies
       },
       contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({ assigns }),
+      data: JSON.stringify({ assign }),
 
       success: function (data) {
-        debugger
         console.log("success")
         console.log("data", data);
         debugger
-        let editTaskInRedux = { "nameFiled": "assignTo1", "value": data.task.assignTo1 }
+        let editTaskInRedux = {
+          "nameFiled": "assignTo1", "value": data.task.assignTo1
+        }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
         dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
       },

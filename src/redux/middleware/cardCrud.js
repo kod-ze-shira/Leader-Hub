@@ -48,7 +48,6 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
 export const newCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_CARD') {
-        debugger
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newCard`
         let card = action.payload;
         $.ajax({
