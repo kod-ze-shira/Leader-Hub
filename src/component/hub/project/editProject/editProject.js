@@ -16,7 +16,6 @@ function EditProject(props) {
 
     }, [props.workspaces])
 
-
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -52,12 +51,11 @@ function EditProject(props) {
         let year = newDate.getFullYear();
         project = props.workspaces[props.indexWorkspace].projects[props.indexProject]
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
-
+        
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
             props.closeViewDetails(false)
-
         }
         else {
             nameRequired.current.focus()

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
-import { InputGroup, FormControl, Table } from 'react-bootstrap'
+import imageCompression from "browser-image-compression";
 import $ from 'jquery';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -165,7 +165,7 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const showDetails = (event) => {
-
+     
         if (anchorEl == null) {
             props.setCurrentIndexTask(currentIndexTask)
             props.setCurrentIndexCard(currentIndexCard)
@@ -237,7 +237,58 @@ function ViewTaskByCradTabs(props) {
 
         })
         : null
-    let admin = props.task.assingTo1 ? props.task.assingTo1.find(contact => contact.level == 'admin') : null
+    const fileInputRef = useRef()
+
+    const uploadMulti = async () => {
+        debugger
+        if (fileInputRef.current.files) {
+            props.setFileFromTask(fileInputRef.current.files[0])
+            let file = [{
+                'url': 'new',
+                'name': fileInputRef.current.files[0].name,
+                'file': fileInputRef.current.files[0],
+                'size': fileInputRef.current.files[0].size
+            }]
+            file = await compressedFile(file)
+            let task = {}, type
+            type = 'task'
+            props.uploadFiles({ 'files': file, 'task': task, type: type })
+        }
+    }
+    const compressedFile = async (myFiles) => {
+
+        let compressedFile;
+        let compressedFiles = [];
+
+        await Promise.all(
+            myFiles.map(async (file) => {
+                if (file.file.type.includes("image")) {
+                    const options = {
+                        maxSizeMB: 1,
+                        maxWidthOrHeight: 1920,
+                        useWebWorker: true,
+                    };
+                    compressedFile = await imageCompression(file.file, options);
+
+                    console.log(
+                        `compressedFile size ${compressedFile.size / 1024} MB`
+                    );
+                } else {
+                    compressedFile = file.file;
+                }
+                compressedFiles.push(compressedFile)
+
+            })
+        )
+
+        return compressedFiles
+    }
+    const setIndex = (e) => {
+        e.stopPropagation()
+        setCurrentIndexTask(props.indexTask)
+        setCurrentIndexCard(props.indexCard)
+
+    }
     return (
         <>
             <Draggable
@@ -363,10 +414,23 @@ function ViewTaskByCradTabs(props) {
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
-                                            <div className="pl-2 attachment-alt">
-                                                <UploadFile taskId='' fromTaskTabs={true} indexTask={props.indexCurrentTask} indexCard={props.indexCurrentCard} />
-                                                <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
-                                            </div>
+                                            <label for="fileFromTask">
+                                                <img className="mr-1 ml-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            </label>
+                                            <input
+                                                type={"file"}
+                                                id="fileFromTask"
+                                                htmlFor="myInput"
+                                                style={{
+                                                    display: 'none',
+                                                    background: 'red',
+                                                    cursor: 'pointer',
+                                                }}
+                                                ref={fileInputRef}
+                                                multiple
+                                                onClick={(e) => setIndex(e)}
+                                                onChange={(e) => uploadMulti(e)}
+                                            />
                                         </div>
 
                                         <div className="icons-task-tabs">
@@ -427,11 +491,13 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
+        addFile: (files) => dispatch(actions.addFile(files)),
+        uploadFiles: (file) => dispatch(actions.uploadFiles(file)),
         setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
         updateLike: (taskId) => dispatch(actions.updateLike(taskId)),
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
-        setTaskName: (name) => dispatch(actions.setTaskNameInTaskReducer(name)),
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
         setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),

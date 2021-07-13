@@ -50,13 +50,13 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                     dispatch(actions.setWorkspaces(result.workspace))
                     dispatch(actions.setPriorities(result.priorities))
                     dispatch(actions.setSharedProjects(result.sharedProjects))
-                    
+
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projects)
                 })
             })
-            
+
     }
 
     return next(action);
@@ -126,6 +126,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
+        debugger
         let workspaceId = action.payload
         let workspace = getState().workspace_reducer.workspace;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
@@ -155,7 +156,7 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
-      
+
         fetch(`${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',
@@ -172,7 +173,7 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
                     dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
                 })
-            }).catch((error)=>{
+            }).catch((error) => {
                 console.log(error);
             })
     }
