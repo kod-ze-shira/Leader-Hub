@@ -2,6 +2,7 @@ import $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { actions } from '../../../../redux/actions/action'
 import { useParams } from 'react-router-dom';
 import '../../body/body.css';
 import ViewDetails from '../../viewDetails/viewDetails';
@@ -20,16 +21,15 @@ function ProjectsByWorkspace(props) {
     const [e, setE] = useState('')
 
     useEffect(() => {
-        // if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
 
-        // if (props.showViewDitailsProject) {
         if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
 
             setShowProject(props.showViewDitailsProject.show)
             setAddOrEditProject("newProject")
             setE(props.showViewDitailsProject.e)
             props.showViewDitailsProject.e.stopPropagation()
-        } else
+        }
+        else
             setShowProject(false)
 
         if (props.valueSearchProject) {
@@ -40,17 +40,9 @@ function ProjectsByWorkspace(props) {
     }, [props.workspaces, props.indexOfWorkspace, props.showViewDitailsProject, props.valueSearchProject]);
 
     function openEditOrShareProject(from) {
-        // setAddOrEditProject(from)
         setEditOrShareProject(from)
-        // setShowProject(true)
         setShowEditOrShareProject(true)
     }
-    // function openEditOrShareProject(from) {
-    //     // setAddOrEditProject(from)
-    //     setEditOrShareProject(from)
-    //     // setShowProject(true)
-    //     showEditOrShareProject(true)
-    // }
 
     const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
         props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
@@ -97,9 +89,12 @@ function ProjectsByWorkspace(props) {
     }
 
     $(window).click(function () {
+        // if ( showEditOrShareProject)
+        //     props.editProjectInServer()
         setShowProject(false)
         setShowEditOrShareProject(false)
     });
+
     function stopP(event) {
         event.stopPropagation();
     }
@@ -152,9 +147,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        editProjectInServer: () => dispatch(actions.editProjectInServer()),
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsByWorkspace)

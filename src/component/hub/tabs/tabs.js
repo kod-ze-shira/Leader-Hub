@@ -119,7 +119,6 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-        console.log("cardsssssssss", props.cards);
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
@@ -138,9 +137,7 @@ function Tabs(props) {
     const setFocousCardFunc = (e) => {
         document.getElementById("add-new-card").focus();
     }
-    // $(window).click(function () {
-    //     setViewDetails(false)
-    // });
+
     $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
@@ -153,10 +150,10 @@ function Tabs(props) {
             }
             else {
                 if (viewDetails) {
+                    // debugger
                     setViewDetails(false)
                     props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
-
             }
         }
     })
@@ -171,7 +168,7 @@ function Tabs(props) {
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
-            {props.cards[props.indexCurrentCard] ?
+            {props.cards[props.indexCurrentCard] && props.workspaces.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}

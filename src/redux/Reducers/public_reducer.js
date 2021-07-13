@@ -49,13 +49,10 @@ const publicData = {
 
     setNewFilesInTask(state, action) {
         let myFiles = Object.values(action.payload)
-        debugger
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
                 .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
-
-
     },
     deleteFilesInTask(state, action) {
         for (let indexUrl = 0; indexUrl < action.payload.length; indexUrl++)
@@ -82,13 +79,12 @@ const publicData = {
     },
 
     setTaskByFiledFromTasks(state, action) {
-
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
         console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled])
     },
-    
+
     setTaskByFiledFromTasksNotBelong(state, action) {
         let indexTask;
         for (let index = 0; index < state.tasks.length; index++) {
@@ -324,6 +320,7 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
+
         if (state.cards.length > 0)
             state.cards.push(action.payload)
         else
@@ -470,6 +467,7 @@ const publicData = {
         state.sharedProjects = action.payload
     },
     pushAssignToInRedux(state, action) {
+       
         let assign = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].assignTo1
         assign.push(action.payload)
         let a = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]

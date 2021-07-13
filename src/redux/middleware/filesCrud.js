@@ -63,6 +63,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
 }
 
 
+
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
@@ -109,6 +110,7 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
         let file = action.payload.file
         console.log(file);
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
+
         fetch(
             keys.API_URL_FILES + "/api/" +
             getState().public_reducer.userName +
@@ -148,8 +150,6 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
 
 export const downloadFolder = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILES') {
-
-        debugger;
         let folder = action.payload.folder
 
         console.log("folder " + JSON.stringify({ folder }));
@@ -302,3 +302,41 @@ export const removeFile = ({ dispatch, getState }) => next => action => {
 //         }
 //     }
 // }  
+// var JSZip = require("jszip");
+// ddd()
+
+// function ddd() {
+
+
+//     // Basic manipulations
+//     // The first step is to create an instance of JSZip :
+
+//     var zip = new JSZip();
+//     // On this instance, we can add (and update) files and folders with .file(name, content) and .folder(name). They return the current JSZip instance so you can chain the calls.
+
+//     // create a file
+//     zip.file("hello.txt", "Hello[p my)6cxsw2q");
+//     // oops, cat on keyboard. Fixing !
+//     zip.file("hello.txt", "Hello World\n");
+
+//     // create a file and a folder
+//     zip.file("nested/hello.txt", "Hello World\n");
+//     // same as
+//     zip.folder("nested").file("hello.txt", "Hello World\n");
+
+//     var photoZip = zip.folder("photos");
+//     // this call will create photos/README
+//     photoZip.file("README", "a folder with photos");
+//     // You can access the file content with .file(name) and its getters :
+
+//     zip.file("hello.txt").async("string").then(function (data) {
+//         // data is "Hello World\n"
+//     });
+
+//     if (JSZip.support.uint8array) {
+//         zip.file("hello.txt").async("uint8array").then(function (data) {
+//             // data is Uint8Array { 0=72, 1=101, 2=108, more...}
+//         });
+//     }
+// }
+

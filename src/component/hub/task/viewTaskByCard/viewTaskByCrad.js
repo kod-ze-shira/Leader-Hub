@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 // import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
+import ReactTooltip from 'react-tooltip';
+
 
 function ViewTaskByCrad(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -103,7 +105,11 @@ function ViewTaskByCrad(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                }
+                // setViewDetails(false)
             }
         }
     })
@@ -256,12 +262,12 @@ function ViewTaskByCrad(props) {
                                 className="show-task row mx-4 border-bottom "
                             >
                                 <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
-                                {/* <FontAwesomeIcon  title="Drag and Drop"
+                                {/* <FontAwesomeIcon  
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
                                 <div className=" col-4">
                                     <label
-                                        title="Complete Task"
+                                        data-tip data-for="comlite_task"
                                         className="check-task ml-4 ">
                                         <input type="checkbox"
                                             name="complete"
@@ -269,10 +275,13 @@ function ViewTaskByCrad(props) {
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
                                         />
+                                        <ReactTooltip className="tooltip-style" data-tip id="comlite_task" place="top" effect="solid">
+                                            Complete Task
+                                        </ReactTooltip>
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
-                                        name="name" id="name" title={props.task.name}
+                                        name="name" id="name" data-tip data-for="task_name"
                                         className={props.task.complete ? "disabled show-task mt-2" : "show-task mt-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
@@ -284,6 +293,9 @@ function ViewTaskByCrad(props) {
                                         }}
                                     >
                                     </input>
+                                    <ReactTooltip className="tooltip-style" data-tip id="task_name" place="top" effect="solid">
+                                        {props.task.name}
+                                    </ReactTooltip>
                                 </div>
                                 <div onClick={(e) => updateLike(e)} className="p-2">
 
@@ -294,7 +306,7 @@ function ViewTaskByCrad(props) {
                                         src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
                                     </img>
                                 </div>
-                                <label className="check-task view-details-btn" title="View Details">
+                                <label className="check-task view-details-btn">
                                     <button onClick={(e) => openViewDetails(e)}>
                                         view details
                                         <FontAwesomeIcon className="ml-2"
@@ -310,12 +322,20 @@ function ViewTaskByCrad(props) {
                                             {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
                                                 : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {!props.task.assingTo ? <img
+                                        {props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
+                                            {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                                if (index < 3)
+                                                    return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+                                                        : null
+                                            }) : null}
+                                            {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
+                                        </div> : <img
                                             // id={`${props.task._id}assing-to`}
                                             className="ml-2 assing-to-icon"
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                             src={require('../../../../assets/img/share-icon.png')}>
-                                        </img> : null}
+                                        </img>}
+                                        {/* {props.task.assingTo1 ?  : null} */}
                                     </div>
                                     {/* <DynamicSelect
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}

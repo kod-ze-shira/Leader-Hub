@@ -13,7 +13,6 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs';
 
 function ViewCardsTabs(props) {
 
-
     useEffect(() => {
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
@@ -137,9 +136,10 @@ function ViewCardsTabs(props) {
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
-        setTask(task)
-        props.openViewDetails(task)
-
+        if (task != false) {
+            setTask(task)
+            props.openViewDetails(task)
+        }
     };
 
     $(window).click(function () {
@@ -184,7 +184,7 @@ function ViewCardsTabs(props) {
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
-                                             </Button>
+                                            </Button>
                                             <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
@@ -207,8 +207,7 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-
-                                                    {props.cardFromMap.tasks.map((task, index) => (
+                                                    {props.cardFromMap.tasks ? props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
                                                             openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
@@ -219,7 +218,7 @@ function ViewCardsTabs(props) {
                                                             viewToastMassege={props.viewToastMassege}
                                                             viewContactList={props.viewContactList}
                                                             openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
-                                                    ))}
+                                                    )) : null}
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-3">
@@ -231,11 +230,11 @@ function ViewCardsTabs(props) {
                                                                     autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
                                                                     onChange={updateInputValue}
-                                                                // onKeyPress={event => {
-                                                                //     if (event.key === 'Enter') {
-                                                                //         newTask()
-                                                                //     }
-                                                                // }}
+                                                                    onKeyPress={event => {
+                                                                        if (event.key === 'Enter') {
+                                                                            newTask()
+                                                                        }
+                                                                    }}
                                                                 />
                                                             </div>
                                                             : null

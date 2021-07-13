@@ -208,10 +208,9 @@ export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
-
+        // console.log('EDIT_TASK')
         if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
             task = action.payload.task
-            console.log("Dxffdgggggghggg", task);
         }
         else
             if (action.payload.type && action.payload.type == 'taskNotBelong') {
@@ -232,8 +231,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                             .tasks[getState().public_reducer.indexCurrentTask]
                     else
                         task = action.payload
-
-
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -585,7 +582,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
         let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]._id
         //   let LocationWork = getState().public_reducer.CurrentAddress
 
-        let urlDataP =keys.API_URL_TIME+ "/" + username + "/newHour"
+        let urlDataP = keys.API_URL_TIME + "/" + username + "/newHour"
         $.ajax({
             url: urlDataP,
             type: 'POST',

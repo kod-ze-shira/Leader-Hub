@@ -253,15 +253,15 @@ function TaskNotBelongDetails(props) {
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <QuillEditTaskNotBelong taskId={props.taskId} />
-                            <textarea class="form-control"
+                            <QuillEditTaskNotBelong taskId={props.task._id} />
+                            {/* <textarea class="form-control"
                                 rows="3"
                                 className='inputTaskN'
                                 placeholder="Write a description about your workspace"
                                 name="description"
                                 value={props.task.description}
                                 onChange={(e) => changeFiledInTask(e)} contentEditable
-                            ></textarea>
+                            ></textarea> */}
                         </div>
                         <div className="row justify-content-between">
                             <div class="form-group col-md-6 col-lg-5">

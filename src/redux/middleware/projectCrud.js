@@ -142,6 +142,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
 
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newProject`
         let project = action.payload;
+        
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -156,12 +157,10 @@ export const newProject = ({ dispatch, getState }) => next => action => {
             dataType: 'json',
             success: function (data) {
                 dispatch(actions.addProjectToProjects(data.message))
-
             },
             error: function (err) {
                 //בדיקה אם חוזר 401 זאת אומרת שצריך לזרוק אותו ללוגין
                 checkPermission(err).then((ifOk) => {
-
                 })
             }
         });
@@ -175,10 +174,16 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
     if (action.type === 'EDIT_PROJECT_IN_SERVER') {
         // let projectBeforeChanges = getState().public_reducer.projects[0];
         console.log(action.payload);
-        let project = action.payload.project;
-        let projectBeforeChanges = action.payload.projectBeforeChanges;
+        let project
+        let projectBeforeChanges
+        if (action.payload == undefined)
+            project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]
+        else {
+            project = action.payload.project;
+            projectBeforeChanges = action.payload.projectBeforeChanges;
+        }
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editProject`
-
+        debugger
         $.ajax({
             url: urlData,
             type: 'POST',

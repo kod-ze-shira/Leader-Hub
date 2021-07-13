@@ -8,11 +8,9 @@ function UploadFile(props) {
     const fileInputRef = useRef()
     useEffect(() => {
         console.log(props);
-        if (props.fromTaskTabs) {
-            props.setCurrentIndexCard(props.indexCard)
-            props.setCurrentIndexTask(props.indexTask)
-        }
-    }, [props.files])
+      
+
+    }, [])
 
     const compressedFile = async (myFiles) => {
 
@@ -44,6 +42,7 @@ function UploadFile(props) {
     }
 
     const uploadMulti = async () => {
+        debugger
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{
@@ -93,6 +92,7 @@ function UploadFile(props) {
         </div>
     )
 }
+
 export default connect(
     (state) => {
         return {
