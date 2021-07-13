@@ -12,10 +12,6 @@
   vertical-align: middle !important;
 
 }
-.widthofContacts{
-  display: inline !important;
-  padding: 0 !important;
-}
 
 .check-task button:focus{
   outline: 0;
@@ -71,8 +67,9 @@ opacity: 0.3;
   left: 4% !important;
 }
 .checkmark-place{
+
   top: 9px;
-  left: 0;
+  left: 25px;
  
 }
 
@@ -237,6 +234,7 @@ width: 0 !important;
 height: 0;
 }
 .dnd-icon{
+  width:4%;
 opacity: 0;
 /* margin-top: -10px !important;   */
 /* display: none; */

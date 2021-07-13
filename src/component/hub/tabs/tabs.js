@@ -137,9 +137,7 @@ function Tabs(props) {
     const setFocousCardFunc = (e) => {
         document.getElementById("add-new-card").focus();
     }
-    // $(window).click(function () {
-    //     setViewDetails(false)
-    // });
+
     $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
@@ -152,10 +150,10 @@ function Tabs(props) {
             }
             else {
                 if (viewDetails) {
+                    // debugger
                     setViewDetails(false)
                     props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
-
             }
         }
     })

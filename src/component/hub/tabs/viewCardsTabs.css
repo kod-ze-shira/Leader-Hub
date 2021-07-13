@@ -63,7 +63,13 @@ span:focus{
 }
 #task-card:hover{
   /* box-shadow: 2px 1px 2px 1px #00000029; */
-          box-shadow: 0px 3px 6px #00000029;
+  /* box-shadow: 0px 3px 6px #00000029; */
+ 
+        
+}
+.task-card:hover{
+  border: 1px solid #1FB9C1;
+  border-radius:5px;
 }
 .more{
     background-color: transparent;
