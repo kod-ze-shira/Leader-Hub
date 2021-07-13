@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import './ViewTaskByCradTry.css'
+import './ViewTaskByCradTryS.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ import task_reducer from '../../../../redux/Reducers/task_reducer';
 // import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
 
-function ViewTaskByCradTry(props) {
+function ViewTaskByCradTryS(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [userHasLike, setUserHasLike] = useState(false)
@@ -392,4 +392,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTry)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTryS)
