@@ -211,7 +211,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 
         if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
             task = action.payload.task
-            console.log("Dxffdgggggghggg", task);
         }
         else
             if (action.payload.type && action.payload.type == 'taskNotBelong') {
@@ -232,8 +231,6 @@ export const editTask = ({ dispatch, getState }) => next => action => {
                             .tasks[getState().public_reducer.indexCurrentTask]
                     else
                         task = action.payload
-
-
         $.ajax({
             url: urlData,
             method: 'POST',

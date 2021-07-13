@@ -80,6 +80,7 @@ function AllWorkspaces(props) {
     //     $('[data-toggle="tooltip"]').tooltip()
     // })
     function openAddNewWorkspace(e) {
+        debugger
         props.addWorkspaceToWorkspaces({ description: "", name: "" })
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)

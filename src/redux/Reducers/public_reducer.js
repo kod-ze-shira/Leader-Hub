@@ -85,7 +85,7 @@ const publicData = {
         console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled])
     },
-    
+
     setTaskByFiledFromTasksNotBelong(state, action) {
         let indexTask;
         for (let index = 0; index < state.tasks.length; index++) {
@@ -321,7 +321,7 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
-        
+
         if (state.cards.length > 0)
             state.cards.push(action.payload)
         else
@@ -468,6 +468,7 @@ const publicData = {
         state.sharedProjects = action.payload
     },
     pushAssignToInRedux(state, action) {
+       
         let assign = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].assignTo1
         assign.push(action.payload)
         let a = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]

@@ -97,7 +97,7 @@ z-index: 9999999;
   display: inline-block;
 }
 .status-list{
-    margin-bottom:3vh;
+    margin-bottom:1vh;
     margin-top: 1vh;
     max-height: 150px;
     /* overflow-y: auto; */

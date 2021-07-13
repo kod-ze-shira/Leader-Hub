@@ -27,6 +27,7 @@
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
+    border: 0.5px solid #ddd7d7;
 }
 .task-name-span{
     /* text-indent: 5vh !important; */
@@ -117,4 +118,8 @@
     box-shadow: none; 
   }
   .attachment-alt .spanUploadFileNew{
-background-color: transparent !important;  }
+background-color: transparent !important;  
+}
+.uploadFileIcon{
+    cursor: pointer !important;
+}

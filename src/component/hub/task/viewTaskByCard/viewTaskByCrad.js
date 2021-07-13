@@ -103,7 +103,11 @@ function ViewTaskByCrad(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                }
+                // setViewDetails(false)
             }
         }
     })

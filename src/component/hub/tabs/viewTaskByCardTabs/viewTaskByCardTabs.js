@@ -166,7 +166,7 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const showDetails = (event) => {
-
+     
         if (anchorEl == null) {
             props.setCurrentIndexTask(currentIndexTask)
             props.setCurrentIndexCard(currentIndexCard)
@@ -241,6 +241,7 @@ function ViewTaskByCradTabs(props) {
     const fileInputRef = useRef()
 
     const uploadMulti = async () => {
+        debugger
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{
@@ -283,7 +284,6 @@ function ViewTaskByCradTabs(props) {
 
         return compressedFiles
     }
-
     const setIndex = (e) => {
         e.stopPropagation()
         setCurrentIndexTask(props.indexTask)
@@ -385,7 +385,6 @@ function ViewTaskByCradTabs(props) {
                                                 type={"file"}
                                                 id="fileFromTask"
                                                 htmlFor="myInput"
-                                                // accept="image/*"
                                                 style={{
                                                     display: 'none',
                                                     background: 'red',
