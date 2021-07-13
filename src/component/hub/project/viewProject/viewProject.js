@@ -106,9 +106,15 @@ function ViewProject(props) {
                 <td className='nameProjectInList' >
                     <ProjectStyle color={props.myProject.color}></ProjectStyle>
                     {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
-                    <span class='name2ProjectInList' title={props.myProject.name}
-                        style={{ 'color': props.myProject.color }}>
+                    <span class='name2ProjectInList'
+                        style={{ 'color': props.myProject.color }}
+                        data-tip data-for="project_name"
+                    >
                         {props.myProject.name}</span>
+                    {/* <ReactTooltip className="tooltip-style" data-tip id="project_name"
+                        place="bottom" effect="solid">
+                        {props.myProject.name}
+                    </ReactTooltip> */}
                     {/* <span class='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span> */}
@@ -128,7 +134,8 @@ function ViewProject(props) {
                 <td>
                     <span className='task widthCellInProject' >
                         <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }} data-tip data-for="task_c">
-                            <ReactTooltip className="tooltip-style" data-tip id="task_c" place="bottom" effect="solid">
+                            <ReactTooltip className="tooltip-style" data-tip id="task_c"
+                                place="bottom" effect="solid">
                                 {title.title_task_complete}
                             </ReactTooltip>
                             {props.myProject.countReadyTasks}</span>

@@ -105,6 +105,7 @@ class QuillEditTaskNotBelong extends Component {
             url = document.getElementById('inputImageInD').value;
         // צריכה לבדוק פה אם הכתובת תקינה?
         // this.props.setTaskByFiledFromTasks(url)
+        url = decodeURI(url)
         let isGood = this.checkURL(url)
 
         if (isGood) {
