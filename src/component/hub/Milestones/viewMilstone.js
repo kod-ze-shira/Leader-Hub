@@ -8,7 +8,7 @@ function ViewMilstone(props) {
     const [viewDetails, setViewDetails] = useState(false)
 
     const getCardsByProject = () => {
-        return new Promise(async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
                 let cards = await props.getCardsByProjectId(props.milestone.card.project)
                 resolve(cards)
@@ -20,7 +20,7 @@ function ViewMilstone(props) {
 
     }
     function openDetails() {
-        
+
         getCardsByProject().then((result) => {
             props.saveCurrentIndexOfCardInRedux(props.milestone.card.index)
             props.saveCurrentIndexOfTaskInRedux(props.milestone.task.index)
@@ -34,7 +34,7 @@ function ViewMilstone(props) {
                 <img src={require("../../../assets/img/milstoneIcon.png")}></img>
                 <div className="col-4">
                     {props.milestone.task.name}</div>
-                <label className="check-task view-details-btn" title="View Details">
+                <label className="check-task view-details-btn">
                     <button onClick={() => openDetails()}>view details +</button>
                 </label>
             </div>
