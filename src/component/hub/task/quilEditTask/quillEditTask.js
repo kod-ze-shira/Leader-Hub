@@ -12,7 +12,6 @@ import { actions } from '../../../../redux/actions/action'
 import { connect } from 'react-redux'
 import imageCompression from "browser-image-compression";
 
-
 class QuillEditTask extends Component {
 
     flug = false
@@ -93,7 +92,14 @@ class QuillEditTask extends Component {
         return compressedFiles
     }
 
+
+
+
+
+
     addFile = async (file) => {
+
+
         let url
         if (file)
             url = file
@@ -113,6 +119,18 @@ class QuillEditTask extends Component {
                 .then(blobFile => new File([blobFile],
                     url.match(/.*\/(.*)$/)[1],
                     { type: "image/jpeg" }))
+            // הורדת קובץ
+            debugger
+            const url2 = window.URL.createObjectURL(file);
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = url2;
+            a.download = file.name;
+            document.body.appendChild(a);
+            // action.payload.e.stopPropagation()
+            a.click();
+            window.URL.revokeObjectURL(url2);
+
 
             console.log(file)
             this.props.setFileFromTask(file)
