@@ -47,7 +47,7 @@ function ViewCards(props) {
             props.setCountTasks(countTasksInProject += 1)
         }
         setInputValue("")
-        setAddTaskInInput(!addTaskInInput)
+        // setAddTaskInInput(!addTaskInInput)
     }
 
 
@@ -143,16 +143,16 @@ function ViewCards(props) {
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
                     <div className="col-4 d-flex justify-content-between">
-                    <div className=" "
-                        onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
-                        onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
-                    >
-                        <div className="wrap-triangle">
-                            <div id={props.cardFromMap._id}
-                                className=" newTriangle ml-1"
-                                onClick={(e) => changeSelectedCard(e)} ></div>
-                        </div>
-                        {/* <input
+                        <div className=" "
+                            onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
+                            onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
+                        >
+                            <div className="wrap-triangle">
+                                <div id={props.cardFromMap._id}
+                                    className=" newTriangle ml-1"
+                                    onClick={(e) => changeSelectedCard(e)} ></div>
+                            </div>
+                            {/* <input
                             // id="input-card-name"
                             // ref={textInput}
                             // onBlur={() => editCard()}
@@ -169,33 +169,33 @@ function ViewCards(props) {
                         >
                         </input> */}
 
-                        <span  // id="input-card-name"
-                            ref={textInput}
-                            onBlur={() => editCard()}
-                            className="show-card show-card-list ml-4 col-10 ">
-                            {editCardName}</span>
-                        <button data-tip data-for="add" className="new-task ml-2"
-                            // id={`task${props.cardFromMap._id}`}
-                            onClick={addTask}>+</button>
-                    </div>
-                    <Button className="more  " data-tip data-for="more_a"
-                        onClick={handleClick}>
-                        . . .
+                            <span  // id="input-card-name"
+                                ref={textInput}
+                                onBlur={() => editCard()}
+                                className="show-card show-card-list ml-4 col-10 ">
+                                {editCardName}</span>
+                            <button data-tip data-for="add" className="new-task ml-2"
+                                // id={`task${props.cardFromMap._id}`}
+                                onClick={addTask}>+</button>
+                        </div>
+                        <Button className="more  " data-tip data-for="more_a"
+                            onClick={handleClick}>
+                            . . .
                 </Button>
-                    <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
-                        {title.title_more_actions}
-                    </ReactTooltip>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                        value={actionINcard}
-                    >
-                        <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
-                        <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
-                    </Menu>
+                        <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
+                            {title.title_more_actions}
+                        </ReactTooltip>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                            value={actionINcard}
+                        >
+                            <MenuItem className="rename-card" onClick={(e) => handleClose(actionINcard.renameCard)}>Rename Card</MenuItem>
+                            <MenuItem onClick={(e) => handleClose(actionINcard.deleteCard)} > Delete Card</MenuItem>
+                        </Menu>
                     </div>
                     {/* <p className="col">Team</p> */}
                     <p className="col">start</p>

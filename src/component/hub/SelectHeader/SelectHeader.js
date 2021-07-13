@@ -77,7 +77,7 @@ function SelectHeader(props) {
 
     return (
         <>
-            <div className="s-header mx-0  row align-items-center">
+            <div className="s-header ml-0  row align-items-center">
               
                     <FontAwesomeIcon className="ml-3 back-header"
                         onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
