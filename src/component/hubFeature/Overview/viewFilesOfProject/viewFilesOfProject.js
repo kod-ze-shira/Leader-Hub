@@ -55,7 +55,14 @@ function ViewFilesOfProject(props) {
         zip.generateAsync({
             type: "base64"
         }).then(function (content) {
-            window.location.href = "data:application/zip;base64," + content;
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = "data:application/zip;base64," + content;
+            a.download = foldersForDownload[0].cardName;
+            document.body.appendChild(a);
+            a.click();
+
+            // window.location.href = "data:application/zip;base64," + content;
         });
 
     }
