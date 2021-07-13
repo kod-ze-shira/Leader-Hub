@@ -8,7 +8,9 @@ function UploadFile(props) {
     const fileInputRef = useRef()
     useEffect(() => {
         console.log(props);
-    }, [props.files])
+      
+
+    }, [])
 
     const compressedFile = async (myFiles) => {
 
@@ -40,6 +42,7 @@ function UploadFile(props) {
     }
 
     const uploadMulti = async () => {
+        debugger
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{
@@ -49,13 +52,17 @@ function UploadFile(props) {
                 'size': fileInputRef.current.files[0].size
             }]
             file = await compressedFile(file)
-            let task = {}
-            if (props.taskId == '')
+            let task = {}, type
+            if (props.taskId == '') {
                 task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
-            else
+                type = 'task'
+            }
+            else {
                 task = props.tasks.filter((task) => task._id == props.taskId)
+                type = 'taskNotBelong'
 
-            props.uploadFiles({ 'files': file, 'task': task })
+            }
+            props.uploadFiles({ 'files': file, 'task': task, type: type })
 
 
 
@@ -85,6 +92,7 @@ function UploadFile(props) {
         </div>
     )
 }
+
 export default connect(
     (state) => {
         return {
@@ -100,7 +108,10 @@ export default connect(
         return {
             setFileFromTask: (file) => dispatch(actions.setFileFromTask(file)),
             addFile: (files) => dispatch(actions.addFile(files)),
-            uploadFiles: (file) => dispatch(actions.uploadFiles(file))
+            uploadFiles: (file) => dispatch(actions.uploadFiles(file)),
+            setCurrentIndexTask: (index) => dispatch(actions.saveCurrentIndexOfTaskInRedux(index)),
+            setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
+
         }
     }
 )(UploadFile)

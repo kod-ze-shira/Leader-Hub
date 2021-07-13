@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import star from '../.././../img/1star-solid.png'
+import star from '../../.././../assets/img/1star-solid.png'
 import './createTeam.css'
 export default function CreateTeam() {
 

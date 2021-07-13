@@ -2,24 +2,21 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 import keys from '../../config/env/keys'
 import jsZip from 'jszip'
-import FileSaver from 'file-saver'
+// import FileSaver from 'file-saver'
 import configData from '../../ProtectedRoute/configData.json'
-import f from 'js-file-download'
+// import f from 'js-file-download'
 
 
 export const uploadFiles = ({ dispatch, getState }) => next => action => {
     if (action.type === 'UPLOAD_FILES') {
-
         let files = action.payload.files
         var formData = new FormData()
-        // var myFiles = Object.values(files)
         if (files.length < 1) { console.log("ooops... not files to upload") }
         else {
             files.forEach((file, index) => {
                 formData.append("file" + index, file, file.name)
             })
         }
-        // console.log(formData)
         let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         if (!!formData.entries().next().value === true) {
             $.ajax({
@@ -30,40 +27,31 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                 headers: { "authorization": jwtFromCookie },
                 data: formData,
                 success: (data) => {
-
-                    // let size = data.filesData.file0.size / 1024 / 1024
-                    var myData = { "files": data.filesData }
+                    let myData = { "files": data.filesData }
                     if (action.payload.type === 'taskNotBelong')
                         dispatch(actions.setNewFilesInTaskNotBelong({
                             'file': data.filesData,
-                            'id': action.payload.task._id
+                            'id': action.payload.task[0]._id
                         }))
                     else
                         dispatch(actions.setNewFilesInTask(data.filesData))
                     console.log("finish first ajax  " + JSON.stringify(myData));
                     setTimeout(() => {
                         $.ajax({
-                            url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
+                            url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
                             method: 'POST',
                             headers: { "authorization": jwtFromCookie },
                             data: myData,
                             success: (data) => {
-                                // if (action.payload.type !== 'taskNotBelong') {
-
-                                //     let cards = getState().public_reducer.cards;
-                                //     let indexCurrentCard = getState().public_reducer.indexCurrentCard
-                                //     let indexCurrentTask = getState().public_reducer.indexCurrentTask
-                                //     // dispatch(actions.editTask(cards[indexCurrentCard].tasks[indexCurrentTask]))
-                                // }
-                                // else
-                                // dispatch(actions.editTask(action.payload.task))
-
+                            },
+                            error: function (err) {
+                                checkPermission(err).then((ifOk) => {
+                                })
                             }
                         })
                     }, 2000);
                 },
                 error: function (err) {
-
                     checkPermission(err).then((ifOk) => {
                     })
                 }
@@ -74,6 +62,9 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
 
 }
 
+
+
+//this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
@@ -119,8 +110,9 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
         let file = action.payload.file
         console.log(file);
         let jwtFromCookie = getState().public_reducer.tokenFromCookies
+
         fetch(
-            keys.API_URL_FILES+"/api/" +
+            keys.API_URL_FILES + "/api/" +
             getState().public_reducer.userName +
             "/download/" +
             file.url,
@@ -158,8 +150,6 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
 
 export const downloadFolder = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DOWNLOAD_FILES') {
-
-        debugger;
         let folder = action.payload.folder
 
         console.log("folder " + JSON.stringify({ folder }));

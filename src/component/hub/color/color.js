@@ -30,7 +30,7 @@ export default function Colors(props) {
                     colors={colors} />
                 {/* <span id="color_front"></span>
                 <input type='color'  className='bar' id='colour'/>            </div> */}
-                <img src={require('../../img/ID.svg')}></img>
+                <img src={require('../../../assets/img/ID.svg')}></img>
             </div>
         </>
     )

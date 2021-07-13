@@ -22,7 +22,7 @@ class QuillProjectBubble extends Component {
         this.props.setProjectByFiledFromWorkspace(editProjectInRedux)
     }
     saveText = (e) => {
-        debugger
+        
         let project = this.props.workspaces[this.props.workspaceIndex].projects[this.props.projectIndex]
         this.props.editProjectInServer({ "project": project, 'projectBeforeChanges': this.props.projectBeforeChanges })
     }

@@ -1,3 +1,4 @@
+import keys from '../../config/env/keys'
 
 // import reducer from './reducers';
 import project_reducer from '../Reducers/project_reducer';
@@ -25,7 +26,7 @@ import {
     completeTask, belongTask, newTaskNotBelong, displayLineByStart, disaplayLineByStop
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId, addMembers } from '../middleware/teamCrud';
+import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId, addMembers, assingToMany } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
@@ -91,7 +92,8 @@ const store = createStore(
                 // getMembersByProjectId,
                 addMembers,
                 displayLineByStart,
-                disaplayLineByStop
+                disaplayLineByStop,
+                assingToMany
             ))
 )
 store.dispatch(actions.extractJwt());
@@ -105,15 +107,18 @@ if (window.location.hostname == "localhost") {
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
 }
 else {
-    if (document.cookie) {
-        jwtFromCookie = document.cookie.includes('jwt') ?
-            document.cookie.split(";")
-                .filter(s => s.includes('jwt'))[0].split("=").pop()
-            : document.cookie.includes('devJwt') ?
-                document.cookie.split(";")
-                    .filter(s => s.includes('devJwt'))[0].split("=").pop() : null;
-        store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
-    }
+    jwtFromCookie = document.cookie && document.cookie.includes(keys.JWT) ? document.cookie.split(";")
+        .filter(s => s.includes(keys.JWT))[0].split("=").pop() : null;
+
+    // if (document.cookie) {
+    //     jwtFromCookie = document.cookie.includes('jwt') ?
+    //         document.cookie.split(";")
+    //             .filter(s => s.includes('jwt'))[0].split("=").pop()
+    //         : document.cookie.includes('devJwt') ?
+    //             document.cookie.split(";")
+    //                 .filter(s => s.includes('devJwt'))[0].split("=").pop() : null;
+    store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
+// }
 }
 window.store = store;
 export const Token = jwtFromCookie;

@@ -16,7 +16,7 @@
 }
 
   .card-width{
-    width: 20vw !important;
+    /* width: 20vw !important; */
     display: inline-block ; 
   }
 
@@ -26,7 +26,9 @@
 
 }
 
-
+.card{
+  border:none !important;
+}
 .card-body {
   padding: 1rem ;
   padding-bottom: 4px !important;

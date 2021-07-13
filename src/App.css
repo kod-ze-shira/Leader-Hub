@@ -19,7 +19,7 @@ button{
   --green:#34A38B;
 }
 .save_canges_btn{
-  /* width: 118px; */
+  
   height: 35px;
   background-color:hsla(183, 72%, 44%, 1);
   border-radius: 5px;

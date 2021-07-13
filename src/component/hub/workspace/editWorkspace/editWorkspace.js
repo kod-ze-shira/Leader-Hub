@@ -96,7 +96,7 @@ function EditWorkspace(props) {
                         title="Garbage"
                         className="delete-btn col-4 "
                         onClick={(e) => deleteWorkspace(e)}>
-                        <img src={require('../../../img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
                     </button>
                     <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">

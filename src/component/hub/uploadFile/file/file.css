@@ -7,6 +7,7 @@
     min-width:208px;
     max-width: min-content;
     height: 66px;
+    margin-right: 1px;
 }
 .imgFileInTask a img,
 .imgFileInTask img
@@ -16,6 +17,19 @@
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 30px;
+}
+
+.progressFile {
+    display: inline-flex;
+    height: 1rem;
+    overflow: hidden;
+    line-height: 0;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+    /* width:  10vw !important;  */
+    width:  116px !important; 
+    height: 7px;  
 }
 
 .fileNotImgInTask a img,
@@ -53,9 +67,9 @@
     display: -webkit-box;
     font-size: small;
 }
-{
+/* {
     display: inline-block;
-}
+} */
 
 
 

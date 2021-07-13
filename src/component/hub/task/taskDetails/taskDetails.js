@@ -19,7 +19,7 @@ import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
-
+import QuillEditTask from '../quilEditTask/quillEditTask';
 function TaskDetails(props) {
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
@@ -285,8 +285,10 @@ function TaskDetails(props) {
                         </div>
 
                         <div className="row justify-content-between mx-1" >
-                            <label>Create {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
+                            <label>Create
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                            <label className="">Last Update
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                         </div>
                         <div class="form-group" id='nameRequired'>
                             <label for="name">Name</label>
@@ -305,7 +307,10 @@ function TaskDetails(props) {
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control"
+                            <QuillEditTask />
+
+
+                            {/* <textarea class="form-control"
                                 rows="3"
                                 placeholder="Write a description about your workspace"
                                 name="description"
@@ -313,7 +318,7 @@ function TaskDetails(props) {
                                 onChange={(e) => changeFiledInTask(e)}
                                 // onBlur={(e) => editTaskInServer()}
                                 contentEditable
-                            ></textarea>
+                            ></textarea> */}
                         </div>
                         <div className="row justify-content-between">
                             <div class="form-group col-md-6 col-lg-5">
@@ -437,23 +442,23 @@ function TaskDetails(props) {
                         : null}
                     <div className="assingto-details" data-tip data-for="assing">
 
-                        <img className="assingto-task" src={require('../../../img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img className="assingto-task-hover" src={require('../../../img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                        <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
+                        <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
                         <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
                             {title.title_assing}
                         </ReactTooltip>
                     </div>
                     <div className=" files-details" data-tip id="files">
                         <UploadFile taskId='' />
-                        <img className="files-task" src={require('../../../img/files-icon.png')} ></img>
-                        <img data-tip id="files" className="files-task-hover" src={require('../../../img/files-hover.png')} ></img>
+                        <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
+                        <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">
                             {title.title_files}
                         </ReactTooltip>
                     </div>
                     <div className="delete-details" data-tip data-for="delete">
-                        <img className="delete-task" src={require('../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img className="delete-task-hover" src={require('../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                             {title.title_delete}
                         </ReactTooltip>

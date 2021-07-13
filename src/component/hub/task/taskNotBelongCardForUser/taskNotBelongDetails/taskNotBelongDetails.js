@@ -11,6 +11,7 @@ import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import Select from 'react-select';
+import QuillEditTaskNotBelong from '../quillEditTaskNotBelong/quillEditTaskNotBelong'
 
 function TaskNotBelongDetails(props) {
     const nameRequired = useRef()
@@ -252,6 +253,7 @@ function TaskNotBelongDetails(props) {
 
                         <div class="form-group">
                             <label for="description">Description</label>
+                            <QuillEditTaskNotBelong taskId={props.task._id} />
                             <textarea class="form-control"
                                 rows="3"
                                 className='inputTaskN'
@@ -344,14 +346,14 @@ function TaskNotBelongDetails(props) {
                 <div className="row justify-content-around mx-1 ">
 
                     <div className="delete-details">
-                        <img className="delete-task" src={require('../../../../img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img className="delete-task-hover" src={require('../../../../img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task" src={require('../../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                        <img className="delete-task-hover" src={require('../../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                     </div>
 
                     <div className="files-details ">
                         <UploadFile taskId={props.task._id} />
-                        <img className="files-task" src={require('../../../../img/files-icon.png')} ></img>
-                        <img className="files-task-hover" src={require('../../../../img/files-hover.png')} ></img>
+                        <img className="files-task" src={require('../../../../../assets/img/files-icon.png')} ></img>
+                        <img className="files-task-hover" src={require('../../../../../assets/img/files-hover.png')} ></img>
                     </div>
 
                     <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn offset-4  col-3 btn-block mb-lg-4">Save</button>

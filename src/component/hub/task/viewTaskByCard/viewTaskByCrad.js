@@ -167,7 +167,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -255,7 +255,7 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
+                                <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
@@ -291,11 +291,16 @@ function ViewTaskByCrad(props) {
                                     <img
                                         onClick={updateLike}
                                         // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
-                                        src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                        src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
                                     </img>
                                 </div>
                                 <label className="check-task view-details-btn" title="View Details">
-                                    <button onClick={(e) => openViewDetails(e)}>view details +</button>
+                                    <button onClick={(e) => openViewDetails(e)}>
+                                        view details
+                                        <FontAwesomeIcon className="ml-2"
+                                            icon={['fas', 'caret-right']}>
+                                        </FontAwesomeIcon>
+                                    </button>
                                 </label>
 
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
@@ -309,7 +314,7 @@ function ViewTaskByCrad(props) {
                                             // id={`${props.task._id}assing-to`}
                                             className="ml-2 assing-to-icon"
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-                                            src={require('../../../img/share-icon.png')}>
+                                            src={require('../../../../assets/img/share-icon.png')}>
                                         </img> : null}
                                     </div>
                                     {/* <DynamicSelect
@@ -338,7 +343,7 @@ function ViewTaskByCrad(props) {
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
-                                            viewToastMassege={props.viewToastMassege}
+                                            viewToastComplete={props.viewToastComplete}
                                         > </ViewDetails>
                                     </div>
                                     : null}
