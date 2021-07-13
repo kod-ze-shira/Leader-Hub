@@ -183,7 +183,7 @@ function ViewCardsTabs(props) {
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
-                                             </Button>
+                                            </Button>
                                             <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>

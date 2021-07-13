@@ -67,7 +67,7 @@ function EditWorkspace(props) {
 
                         <div class="invalid-feedback">
                             Please enter workspace name.
-                     </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -93,7 +93,6 @@ function EditWorkspace(props) {
                 </div>
                 <div className="row justify-content-between">
                     <button data-toggle="tooltip" data-placement="top"
-                        title="Garbage"
                         className="delete-btn col-4 "
                         onClick={(e) => deleteWorkspace(e)}>
                         <img src={require('../../../../assets/img/bin.png')}></img> Delete

@@ -101,6 +101,9 @@ class QuillEditTask extends Component {
             url = document.getElementById('inputImageInD').value;
         // צריכה לבדוק פה אם הכתובת תקינה?
         // this.props.setTaskByFiledFromTasks(url)
+
+        url = decodeURI(url)
+
         let isGood = this.checkURL(url)
 
         if (isGood) {
@@ -192,8 +195,8 @@ class QuillEditTask extends Component {
                     onChange={(e) => this.changeFiledInEditTask(e)}
                 >
                 </ReactQuill>
-                {/* <input type='text' placeholder='input inport image' id='inputImageInD' /> */}
-                {/* <button onClick={() => this.addFile('')}>add</button> */}
+                {/* <input type='text' placeholder='input inport image' id='inputImageInD' />
+                <button onClick={() => this.addFile('')}>add</button> */}
 
             </>
         );
