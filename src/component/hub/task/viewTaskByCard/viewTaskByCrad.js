@@ -122,8 +122,6 @@ function ViewTaskByCrad(props) {
         event.stopPropagation();
     }
     function addChalalit() {
-
-
         if (props.task.complete == false)
             props.showRocketShip(true)
     }
@@ -173,7 +171,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -318,9 +316,9 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
-                                        {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                            {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
-                                                : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                        {props.task.assignTo1 ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                            {props.task.assignTo1 ? <img referrerpolicy="no-referrer" src={ props.task.assignTo1.contact.thumbnail } className="thumbnail-contact ml-2" />
+                                                : <div className="logo-contact ml-2" >{props.task.assignTo1.contact.name ? props.task.assignTo1.contact.name[0] : null}</div>}
                                         </div> : null}
                                         {props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
                                             {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
@@ -335,11 +333,7 @@ function ViewTaskByCrad(props) {
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                             src={require('../../../../assets/img/share-icon.png')}>
                                         </img>}
-                                        {/* {props.task.assingTo1 ?  : null} */}
                                     </div>
-                                    {/* <DynamicSelect
-                                        value={props.task.assingTo ? props.task.assingTo.contact : null}
-                                        setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
                                 <label className="check-task border-left    px-2 col-status " >
                                     <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >

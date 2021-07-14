@@ -181,7 +181,7 @@ function ViewCards(props) {
                         <Button className="more  " data-tip data-for="more_a"
                             onClick={handleClick}>
                             . . .
-                </Button>
+                        </Button>
                         <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                             {title.title_more_actions}
                         </ReactTooltip>
@@ -231,6 +231,7 @@ function ViewCards(props) {
                                                 indexCard={props.indexCard}
                                                 indexTask={index}
                                                 showRocketShip={props.showRocketShip}
+
                                             />
                                         ))}
                                         {provided.placeholder}

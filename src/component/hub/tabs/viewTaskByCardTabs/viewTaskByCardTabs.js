@@ -165,7 +165,7 @@ function ViewTaskByCradTabs(props) {
         }
     }
     const showDetails = (event) => {
-     
+
         if (anchorEl == null) {
             props.setCurrentIndexTask(currentIndexTask)
             props.setCurrentIndexCard(currentIndexCard)
@@ -240,7 +240,7 @@ function ViewTaskByCradTabs(props) {
     const fileInputRef = useRef()
 
     const uploadMulti = async () => {
-        debugger
+
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{

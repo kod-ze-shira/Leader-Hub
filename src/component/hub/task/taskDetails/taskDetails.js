@@ -21,11 +21,13 @@ import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
 import QuillEditTask from '../quilEditTask/quillEditTask';
 function TaskDetails(props) {
+    debugger
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
+
     const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
 
     useEffect(() => {
@@ -397,7 +399,6 @@ function TaskDetails(props) {
                                 <Select
                                     isSearchable={false}
                                     name="priority"
-
                                     // classNamePrefix="select"
                                     options={viewPriortyList}
                                     placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?

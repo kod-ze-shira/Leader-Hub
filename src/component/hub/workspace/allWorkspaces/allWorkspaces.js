@@ -102,7 +102,6 @@ function AllWorkspaces(props) {
     }
     $(window).click(function () {
         setShowWorkspace(false)
-
         // props.addWorkspaceToWorkspacesFromServer(null)//to delete workspace in redux
     });
     function stopP(event) {

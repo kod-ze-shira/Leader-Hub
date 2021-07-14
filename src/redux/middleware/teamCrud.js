@@ -242,7 +242,6 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       success: function (data) {
         console.log("success")
         console.log("data", data);
-        debugger
         let editTaskInRedux = {
           "nameFiled": "assignTo1", "value": data.task.assignTo1
         }
