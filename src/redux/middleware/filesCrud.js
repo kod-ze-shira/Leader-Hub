@@ -200,47 +200,6 @@ export const downloadFolder = ({ dispatch, getState }) => next => action => {
 
         });
 
-        // .then((response) => {
-        //     console.log(response);
-        //     return response.blob()
-
-        //     // return response.json();
-
-        // }).then((blob) => {
-        //     // blob.blob()
-        //     console.log("blob " + blob);
-
-        //     // zipFolder.file(file.name, blob)
-
-        // f(blob, 'ghhj.zip')
-        //     // const url = window.URL.createObjectURL(blob);
-        //     // const a = document.createElement("a");
-        //     // a.style.display = "none";
-        //     // a.href = url;
-        //     // a.download = folder.cardName;
-        //     // document.body.appendChild(a);
-        //     // a.click();
-        //     // document.body.removeChild(a)
-        //     // a.remove()
-        //     // window.URL.revokeObjectURL(url);
-
-        // })
-        // .catch((err) => {
-        //     checkPermission(err).then((ifOk) => {
-        //         console.log(err)
-        //     })
-
-        // });
-
-
-
-        // })
-
-        // zip.generateAsync({ type: "blob" }).then((content) => {
-
-        //     FileSaver.saveAs(content, folder.name)
-        // })
-
 
     }
 
