@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import FilesFolder from './filesFolder/filesFolder'
+// import FilesFolder from './filesFolder/filesFolder'
 import download from '../../../../assets/img/download.png'
 import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
@@ -9,8 +9,9 @@ import './viewFilesOfProject.css'
 import ViewCards from './viewCards/viewCards'
 import ViewFilesByCard from './viewFilesbyCard/viewFilesByCard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import jsZip from 'jszip'
-
+// import jsZip from 'jszip'
+// import { downloadFolder } from '../../../../redux/middleware/filesCrud'
+import JSZip from "jszip";
 
 function ViewFilesOfProject(props) {
 
@@ -39,13 +40,37 @@ function ViewFilesOfProject(props) {
 
     }
 
-    function downloadFolder(e) {
+    async function downloadFolder1() {
 
-        // alert('download')
-        foldersForDownload.forEach(folder => folder.files.forEach(file => props.downloadFile({ "file": file })))
-        // foldersForDownload.forEach(folder => props.downloadFiles({ "folder": folder }))
+        let file
+        let zip = new JSZip();
+        for (var i = 0; i < foldersForDownload[0].files.length; i++) {
+            file = await fetch(foldersForDownload[0].files[i].url)
+                .then(r => r.blob())
+                .then(blobFile => new File([blobFile],
+                    foldersForDownload[0].files[i].url.match(/.*\/(.*)$/)[1],
+                    { type: "image/jpeg" }))
+            zip.file(i + file.name, file);
+        }
+        zip.generateAsync({
+            type: "base64"
+        }).then(function (content) {
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = "data:application/zip;base64," + content;
+            a.download = foldersForDownload[0].cardName;
+            document.body.appendChild(a);
+            a.click();
+
+            // window.location.href = "data:application/zip;base64," + content;
+        });
 
     }
+    // alert('download')
+    // foldersForDownload.forEach(folder => folder.files.forEach(file => props.downloadFile({ "file": file })))
+    // foldersForDownload.forEach(folder => props.downloadFiles({ "folder": folder }))
+
+
     function backToAllFiles() {
         setCardName('')
         setShowCards(true)
@@ -71,7 +96,7 @@ function ViewFilesOfProject(props) {
                     </div>
                     <div className="col-3 row iconsList" >
                         <div className="add iconControl"
-                            data-tip data-for="download" disabled={showCards ? countFoldersArr === 0 : countFilesArr === 0} onClick={showCards ? downloadFolder : downloadFile}>
+                            data-tip data-for="download" disabled={showCards ? countFoldersArr === 0 : countFilesArr === 0} onClick={showCards ? downloadFolder1 : downloadFile}>
                             <img class='imageIcon' src={download} ></img>
                             <ReactTooltip className="tooltip-style" data-tip id="download" place="top" effect="solid">
                                 {title.title_downLoad}
