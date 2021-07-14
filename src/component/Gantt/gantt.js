@@ -406,7 +406,7 @@ export default class Gantt extends Component {
                     <div ref={(input) => {
                         this.ganttContainer = input;
                     }}
-                        style={{ width: '100%', height: '80vh' }}
+                        style={{ width: '100%', height: '83vh'}}
                     >
                     </div>
                     <div className="zoom-label">

@@ -126,7 +126,6 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
-        debugger
         let workspaceId = action.payload
         let workspace = getState().workspace_reducer.workspace;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
@@ -156,7 +155,7 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
-
+        
         fetch(`${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',
