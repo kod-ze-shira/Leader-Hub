@@ -50,6 +50,7 @@ function ListMembers(props) {
 
     function clickAddMember() {
         if (ValidateEmail(add)) {
+            debugger;
             shareObject({ member: add, permission: 'viewer' })
             setMembersList(false)
         } else {
@@ -63,7 +64,6 @@ function ListMembers(props) {
                 (e) => e.stopPropagation()
             } >
             <input className='row inputSearch mt-1 ml-1'
-                // ref={inputSearch}
                 type='text'
                 placeholder='name or email'
                 onChange={(e) => {searchContacts(e) }} />
