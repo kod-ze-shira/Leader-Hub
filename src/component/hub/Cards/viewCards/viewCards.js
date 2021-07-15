@@ -152,24 +152,7 @@ function ViewCards(props) {
                                     className=" newTriangle ml-1"
                                     onClick={(e) => changeSelectedCard(e)} ></div>
                             </div>
-                            {/* <input
-                            // id="input-card-name"
-                            // ref={textInput}
-                            // onBlur={() => editCard()}
-                            // autoFocus="true"
-                            // className="ml-3 show-card"
-                            // value={editCardName}
-                            // onChange={updateCardName}
-                            // onBlur={editCard}
-                            // onKeyPress={event => {
-                            //     if (event.key === 'Enter') {
-                            //         editCard()
-                            //     }
-                            // }}
-                        >
-                        </input> */}
-
-                            <span  // id="input-card-name"
+                            <span  
                                 ref={textInput}
                                 onBlur={() => editCard()}
                                 className="show-card show-card-list ml-2 col-10 ">
