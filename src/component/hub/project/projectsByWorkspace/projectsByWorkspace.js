@@ -19,11 +19,14 @@ function ProjectsByWorkspace(props) {
     const [addOrEditProject, setAddOrEditProject] = useState(false)
     const [editOrShareProject, setEditOrShareProject] = useState(false)
     const [e, setE] = useState('')
-
+    const [fromAllproject, setFromAllproject] = useState(false)
     useEffect(() => {
 
         if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
 
+            if (props.showViewDitailsProject.fromAllProject) {
+                setFromAllproject(true)
+            }
             setShowProject(props.showViewDitailsProject.show)
             setAddOrEditProject("newProject")
             setE(props.showViewDitailsProject.e)
@@ -89,8 +92,8 @@ function ProjectsByWorkspace(props) {
     }
 
     $(window).click(function () {
-        // if ( showEditOrShareProject)
-        //     props.editProjectInServer()
+        if (showEditOrShareProject)
+            props.editProjectInServer()
         setShowProject(false)
         setShowEditOrShareProject(false)
     });
@@ -114,9 +117,10 @@ function ProjectsByWorkspace(props) {
                     {!idWorkspace ? viewSharedProjects : null}
                 </tbody>
             </Table>
-            { showProject ?
+            {showProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
+                        fromAllproject={fromAllproject}
                         viewToastMassege={props.viewToastMassege}
                         closeViewDetails={() => setShowProject(false)}
                         showToast={showToast}

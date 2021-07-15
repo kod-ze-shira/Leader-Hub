@@ -136,19 +136,22 @@ function ViewCards(props) {
                                 className=" newTriangle "
                                 onClick={(e) => changeSelectedCard(e)} ></div>
                         </div>
-                        <input
-                            // autoFocus="true"
-                            className="ml-3 show-card"
-                            value={editCardName}
-                            onChange={updateCardName}
-                            onBlur={editCard}
-                            onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    editCard()
-                                }
-                            }}
+                        <Button className="more  " data-tip data-for="more_a"
+                            onClick={handleClick}>
+                            . . .
+                        </Button>
+                        <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
+                            {title.title_more_actions}
+                        </ReactTooltip>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                            value={actionINcard}
                         >
-                        </input>
+                        </Menu>
                         <button data-tip data-for="add" className="new-task "
                             id={`task${props.cardFromMap._id}`}
                             onClick={addTask}>+</button>
@@ -184,25 +187,29 @@ function ViewCards(props) {
                 </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?
-                        <Droppable droppableId={props.cardFromMap._id}  >
-                            {provided => (
-                                <div
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}>
-                                    {props.cardFromMap.tasks.map((task, index) => (
-                                        <ViewTaskByCrad
-                                            viewContactList={props.viewContactList}
-                                            viewToastComplete={props.viewToastComplete}
-                                            objectToast={(task) => props.showToastDelete(task)}
-                                            key={task._id} task={task}
-                                            indexCard={props.indexCard}
-                                            indexTask={index}
-                                        />
-                                    ))}
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable> : null
+                        <div className="allTaskInCard">
+                            <Droppable droppableId={props.cardFromMap._id}  >
+                                {provided => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}>
+                                        {props.cardFromMap.tasks.map((task, index) => (
+                                            <ViewTaskByCrad
+                                                viewContactList={props.viewContactList}
+                                                viewToastMassege={props.viewToastMassege}
+                                                objectToast={(task) => props.showToastDelete(task)}
+                                                key={task._id} task={task}
+                                                indexCard={props.indexCard}
+                                                indexTask={index}
+                                                showRocketShip={props.showRocketShip}
+
+                                            />
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </div> : null
                 }
                 {
                     addTaskInInput ?

@@ -150,7 +150,6 @@ function Tabs(props) {
             }
             else {
                 if (viewDetails) {
-                    // debugger
                     setViewDetails(false)
                     props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
