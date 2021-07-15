@@ -8,7 +8,6 @@ import { InputGroup, FormControl, Table } from 'react-bootstrap'
 // import './viewTaskByCard.css'
 // import './viewTaskByCrad.css'
 import Select from 'react-select';
-
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
@@ -259,7 +258,7 @@ function ViewTaskByCrad(props) {
 
     //                                 <div className="d-flex flex-row justify-content-between col-4 task-name">
     //                                     <div>
-    //                                         <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
+    //                                         <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
     //                                         {/* <FontAwesomeIcon  title="Drag and Drop"
     //                                 icon={['fas', 'grip-vertical']}
     //                             ></FontAwesomeIcon> */}
@@ -298,8 +297,8 @@ function ViewTaskByCrad(props) {
     //                                     <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
     //                                     <img
     //                                         onClick={updateLike}
-    //                                         // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
-    //                                         src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+    //                                         // src={userHasLike ? require('../../../../assets/img/heart.png') : props.task.likes.length > 0 ? require('../../../../assets/img/border-heart.svg') : require('../../img/like-icon.png')}>
+    //                                         src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
     //                                     </img>
     //                                 </div>
     //                                 <label className="check-task view-details-btn" title="View Details">
@@ -317,7 +316,7 @@ function ViewTaskByCrad(props) {
     //                                             // id={`${props.task._id}assing-to`}
     //                                             className="ml-2 assing-to-icon"
     //                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-    //                                             src={require('../../../img/share-icon.png')}>
+    //                                             src={require('../../../../assets/img/share-icon.png')}>
     //                                         </img> : null}
     //                                     </div>
     //                                     {/* <DynamicSelect
@@ -384,7 +383,7 @@ function ViewTaskByCrad(props) {
                                         <td>
                                             <div className="d-flex flex-row justify-content-between col-4 task-name">
                                                 <div>
-                                                    <img src={require('../../../img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
+                                                    <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
                                                     {/* <FontAwesomeIcon  title="Drag and Drop"
                                                  icon={['fas', 'grip-vertical']}
                                                  ></FontAwesomeIcon> */}
@@ -427,14 +426,14 @@ function ViewTaskByCrad(props) {
                                             <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                             <img
                                                 onClick={updateLike}
-                                                // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
-                                                src={userHasLike ? require('../../../img/heart.png') : require('../../../img/border-heart.svg')}>
+                                                // src={userHasLike ? require('../../../../assets/img/heart.png') : props.task.likes.length > 0 ? require('../../../../assets/img/border-heart.svg') : require('../../../../assets/img/like-icon.png')}>
+                                                src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
                                             </img>
                                         </div>
                                         <label className="check-task view-details-btn" title="View Details">
                                             <button onClick={(e) => openViewDetails(e)}>view details +</button>
                                         </label>
-
+                                        dnd-icon.svg
                                         <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
                                             onMouseOut={(e) => closeAssign(e)}>
                                             <div className="assing-to-list">
@@ -446,7 +445,7 @@ function ViewTaskByCrad(props) {
                                                     // id={`${props.task._id}assing-to`}
                                                     className="ml-2 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-                                                    src={require('../../../img/share-icon.png')}>
+                                                    src={require('../../../../assets/img/share-icon.png')}>
                                                 </img> : null}
                                             </div>
                                             {/* <DynamicSelect

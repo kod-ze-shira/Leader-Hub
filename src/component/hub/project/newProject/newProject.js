@@ -82,10 +82,6 @@ function NewProject(props) {
         project.name = nameProject
         project.description = description
 
-        // if (!project.dueDate) {
-        //     project.dueDate = myDueDate
-
-        // }
         let myDate = myDueDate
         let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
         project.dueDate = res
@@ -104,20 +100,15 @@ function NewProject(props) {
             var form = document.getElementById('nameRequired')
             form.classList.add('was-validated')
         }
-
-
-
     }
 
     function dueDate() {
         let date = new Date()
         date.setMonth(date.getMonth() + 3)
-        console.log("date : ", date)
         let month = date.getMonth() + 1
         let day = date.getDate()
         let year = date.getFullYear()
         const finalDate = year + '-' + (month <= 9 ? '0' + month : month) + '-' + (day <= 9 ? '0' + day : day)
-        console.log("finalDate : ", finalDate)
         return (finalDate)
     }
 
@@ -128,10 +119,7 @@ function NewProject(props) {
     }
 
     return (
-
-
         <>
-
             <div className="details mr-4 ml-4">
                 <div className='propertiesViewDitails'>
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>

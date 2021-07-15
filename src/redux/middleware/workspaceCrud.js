@@ -1,12 +1,13 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import keys from '../../config/env/keys'
 
-// ${configData.SERVER_URL}
+// ${keys.API_URL_BASE_SERVER}
 export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type == "GET_WORKSPACE_BY_ID_FROM_SERVER") {
         let workspaceId = action.payload;
-        let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
+        let url = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
         fetch(url, {
             method: 'GET',
             headers: { authorization: getState().public_reducer.tokenFromCookies }
@@ -28,11 +29,10 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData;
         // if (window.location.href.includes('share'))//get carrds for user that share
-        //     urlData = `${configData.SERVER_URL}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
+        //     urlData = `${keys.API_URL_BASE_SERVER}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
 
         // else
-        urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getWorkspacesForUser`
-        // let urlData = "https://reacthub.dev.leader.codes/api/" + getState().public_reducer.userName + "/getAllWorkspacesForUser"
+        urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getWorkspacesForUser`
         fetch(urlData,
             {
                 method: 'GET',
@@ -50,13 +50,13 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
                     dispatch(actions.setWorkspaces(result.workspace))
                     dispatch(actions.setPriorities(result.priorities))
                     dispatch(actions.setSharedProjects(result.sharedProjects))
-                    
+
                     //if user refresh page give him the first project
                     // dispatch(actions.setWorkspace(result.userWorkspaces[0]))
                     // dispatch(actions.setProjects(result.userWorkspaces[0]).projects)
                 })
             })
-            
+
     }
 
     return next(action);
@@ -66,7 +66,7 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
 export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newWorkspace`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newWorkspace`
         let workspace = action.payload
         $.ajax({
             url: urlData,
@@ -100,7 +100,7 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
         let workspaceBeforeChanges = action.payload.workspaceBeforeChanges
         let workspace = { 'workspace': getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace] };
         // delete workspace.workspace.projects
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editWorkspace`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editWorkspace`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -126,9 +126,10 @@ export const editWorkspaceInServer = ({ dispatch, getState }) => next => action 
 export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
+        debugger
         let workspaceId = action.payload
         let workspace = getState().workspace_reducer.workspace;
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
 
         $.ajax({
             url: urlData,
@@ -155,8 +156,8 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
-      
-        fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
+
+        fetch(`${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',
                 headers: {
@@ -172,7 +173,7 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
                     dispatch(actions.addWorkspaceToWorkspaces(result.workspace))
 
                 })
-            }).catch((error)=>{
+            }).catch((error) => {
                 console.log(error);
             })
     }
@@ -180,17 +181,16 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 
 }
 
-//this func to check the headers jwt and username, if them not good its throw to login
 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
         if (result.status == "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-                window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+                window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?
-                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                    window.location.assign(`https://dev.accounts.codes/hub/login`)
+                    window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+                    window.location.assign(`${keys.API_URL_LOGIN}`)
 
             reject(false)
 

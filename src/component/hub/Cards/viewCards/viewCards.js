@@ -45,7 +45,7 @@ function ViewCards(props) {
             props.newTask(task)
         }
         setInputValue("")
-        setAddTaskInInput(!addTaskInInput)
+        // setAddTaskInInput(!addTaskInInput)
     }
 
     const addTask = () => {

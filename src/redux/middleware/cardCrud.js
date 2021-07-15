@@ -2,6 +2,7 @@ import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
 import { useForkRef } from '@material-ui/core';
+import keys from '../../config/env/keys'
 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
 
@@ -9,12 +10,12 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
         var projectId = action.payload;
         let urlData;
         if (window.location.href.includes('share'))//get carrds for user that share
-            urlData = `${configData.SERVER_URL}/share/${projectId}/${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getCardsByProjectId`
+            urlData = `${keys.API_URL_BASE_SERVER}/share/${projectId}/${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getCardsByProjectId`
 
         else
-            urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
+            urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/` + projectId + "/getCardsByProjectId"
 
-        // let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
+        // let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/`+ projectId + "/getSortCardsProjectByIndex"
         $.ajax({
             url: urlData,
             type: 'GET',
@@ -47,7 +48,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
 export const newCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_CARD') {
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/newCard`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newCard`
         let card = action.payload;
         $.ajax({
             url: urlData,
@@ -75,7 +76,7 @@ export const newCard = ({ dispatch, getState }) => next => action => {
 export const editCard = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'EDIT_CARD') {
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/editCard`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editCard`
         let card = action.payload;
         // let taskId = task._id
         console.log("a" + card.name)
@@ -108,7 +109,7 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_CARD_BY_ID') {
         // let workspace = getState().workspace_reducer;
-        let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${action.payload}/removeCardById`
+        let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${action.payload}/removeCardById`
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -140,8 +141,8 @@ function checkPermission(result) {
             result.responseJSON.routes ?//in ajax has responseJSON but in in  has routes
                 window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?
-                    window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
-                    window.location.assign(`https://dev.accounts.codes/hub/login`)
+                    window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+                    window.location.assign(`${keys.API_URL_LOGIN}`)
 
             reject(false)
 

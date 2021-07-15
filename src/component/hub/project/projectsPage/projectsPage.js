@@ -23,7 +23,6 @@ function ProjectsPage(props) {
     const selectProject = (value) => {
         setProjectName(value)
     }
-
     return (
         <div className="" >
             <SelectHeader selectProject={selectProject} flag={changeFlag}

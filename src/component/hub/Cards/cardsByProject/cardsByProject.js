@@ -290,7 +290,7 @@ function CardsByProject(props) {
 
                 </DragDropContext>
                 :
-                <div className="logoGif"><img src={require('../../../img/hub.gif')} /></div>
+                <div className="logoGif"><img src={require('../../../../assets/img/hub.gif')} /></div>
             }
         </>
     )

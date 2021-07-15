@@ -2,6 +2,9 @@ import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action.js';
 import './viewFile.css'
+import title from '../../../../../Data/title.json'
+import ReactTooltip from 'react-tooltip'
+
 
 function ViewFile(props) {
     const file = props.file
@@ -17,8 +20,8 @@ function ViewFile(props) {
                         {/* <div> */}
                         <div className="row-10 wrapImg">
 
-                            <img alt="Responsive image" src={file.name.endsWith('.pdf') ? require('.././../../../img/file_pdf.png') :
-                                file.name.endsWith('.doc') ? require('../../../../img/word.png') : file.url} className="imgFile img-fluid"></img>
+                            <img alt="Responsive image" src={file.name.endsWith('.pdf') ? require('../../.././../../assets/img/file_pdf.png') :
+                                file.name.endsWith('.doc') ? require('../../../../../assets/img/word.png') : file.url} className="imgFile img-fluid"></img>
                             <label
                                 title="check file"
                                 className="selectFile py-2 check-tabs row">
@@ -27,6 +30,11 @@ function ViewFile(props) {
                                     className="checkmarkFile checkmarkFile-tabs"
                                 ></span>
                             </label>
+                            <ReactTooltip className="tooltip-style" data-tip id="checkFile" place="top" effect="solid">
+                                {
+                                    title.title_check_file
+                                }
+                            </ReactTooltip>
                         </div>
                         <div className="row-2 wrapLink">
                             <p>{file.name.length > 10 ? file.name.slice(0, 10) + "..." : file.name}</p>

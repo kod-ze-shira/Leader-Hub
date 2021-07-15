@@ -1,6 +1,6 @@
 
 .fileItem{
-    height: 17vh;
+    height: 15vh;
     cursor: pointer;
     border-radius: 3%;
 }
@@ -59,7 +59,7 @@
     position: absolute;
     height: 0.9em;
     width: 0.9em;
-    background-color: #fff;
+    background-color: #c4ccd4;
     border: 1px solid #fff;
     border-radius: 30%;
    opacity: 0.8;

@@ -67,7 +67,7 @@ function EditWorkspace(props) {
 
                         <div class="invalid-feedback">
                             Please enter workspace name.
-                     </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -93,10 +93,9 @@ function EditWorkspace(props) {
                 </div>
                 <div className="row justify-content-between">
                     <button data-toggle="tooltip" data-placement="top"
-                        title="Garbage"
                         className="delete-btn col-4 "
                         onClick={(e) => deleteWorkspace(e)}>
-                        <img src={require('../../../img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
                     </button>
                     <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">

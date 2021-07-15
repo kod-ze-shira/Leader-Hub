@@ -16,7 +16,6 @@ function EditProject(props) {
 
     }, [props.workspaces])
 
-
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
     let [dueDateProject, setDueDateProject] = useState(dueDate1)
@@ -52,12 +51,11 @@ function EditProject(props) {
         let year = newDate.getFullYear();
         project = props.workspaces[props.indexWorkspace].projects[props.indexProject]
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
-
+        
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
             props.closeViewDetails(false)
-
         }
         else {
             nameRequired.current.focus()
@@ -134,7 +132,7 @@ function EditProject(props) {
                         onClick={deletProject}
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
-                        <img src={require('../../../img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>

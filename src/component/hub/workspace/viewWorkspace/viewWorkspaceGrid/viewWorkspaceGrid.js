@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
-import bin from '../../../../img/bin.png'
-import duplicate from '../../../../img/duplicate-outline.png'
-import pencil from '../../../../img/pencil-write.png'
+import bin from '../../../../../assets/img/bin.png'
+import duplicate from '../../../../../assets/img/duplicate-outline.png'
+import pencil from '../../../../../assets/img/pencil-write.png'
 import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
@@ -67,7 +67,7 @@ function ViewWorkspaceGrid(props) {
                 <div className="row iconsActions" >
                     <div
                         className=" edit iconsAction" onClick={editWorkspace}>
-                        <img class='imageIcon' src={pencil} data-tip data-for="edit"
+                        <img className='imageIcon' src={pencil} data-tip data-for="edit"
                         ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="edit" place="top" effect="solid">
                             {title.title_edit}

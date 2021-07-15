@@ -33,14 +33,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewProject(
 
                             <div className="row mt-5 img_right">
                                 <div className="col-1"></div>
-                                <div className="col-3"><img src={require('../../../img/sun.png')}></img></div>
+                                <div className="col-3"><img src={require('../../../assets/img/sun.png')}></img></div>
                                 <div className="col-5"></div>
-                                <div className="col"><img src={require('../../../img/adjust-solid.png')}></img> </div>
+                                <div className="col"><img src={require('../../..//assets/img/adjust-solid.png')}></img> </div>
                             </div>
                             <div className="row mt-3">
                                 <div className="col-1"></div>
                                 <div className="col-8" style={{ color: 'white' }}>Create New Project</div>
-                                <div className="col-1"><img src={require('../../../img/down-arrow.png')}></img></div>
+                                <div className="col-1"><img src={require('../../../assets/img/down-arrow.png')}></img></div>
                             </div>
 
                             <div className="row mt-2">
