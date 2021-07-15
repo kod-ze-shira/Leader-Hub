@@ -322,14 +322,16 @@ function ViewTaskByCrad(props) {
                                             {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
                                                 : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
+                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ? 
+                                        <div className="widthofContacts col-4">
                                             {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                 if (index < 3)
                                                     return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
                                                         : null
                                             }) : null}
                                             {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
-                                        </div> : <img
+                                        </div> 
+                                        : <img
                                             // id={`${props.task._id}assing-to`}
                                             className="ml-2 assing-to-icon"
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
