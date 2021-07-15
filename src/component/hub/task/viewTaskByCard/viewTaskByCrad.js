@@ -320,7 +320,8 @@ function ViewTaskByCrad(props) {
                                             {props.task.assignTo1 ? <img referrerpolicy="no-referrer" src={ props.task.assignTo1.contact.thumbnail } className="thumbnail-contact ml-2" />
                                                 : <div className="logo-contact ml-2" >{props.task.assignTo1.contact.name ? props.task.assignTo1.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
+                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ? 
+                                        <div className="widthofContacts col-4">
                                             {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                 if (index < 3)
                                                     return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />

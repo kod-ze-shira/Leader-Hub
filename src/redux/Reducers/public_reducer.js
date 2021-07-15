@@ -384,7 +384,7 @@ const publicData = {
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },
-    setStartHourId(state, action) {
+    setStartHour(state, action) {
 
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].workingTime.push(action.payload)
     },

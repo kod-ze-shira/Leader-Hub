@@ -57,19 +57,20 @@ opacity: 0.3;
   background-color: #FFFFFF;
   border: 0.5px solid #C4CCD5;
   border-radius: 50%;
- 
 }
+
 .checkmark:focus,.checkmark:checked{
   border: 1px solid white;
   color: white;
 }
+
 .checkmark-tabs{
   left: 4% !important;
 }
-.checkmark-place{
 
+.checkmark-place{
   top: 9px;
-  left: 25px;
+  left: 10px;
  
 }
 
@@ -101,13 +102,14 @@ opacity: 0.3;
 }
 .view-details-btn{
   text-align: right!important;
- 
+  /* width: 100%; */
 }
 .view-details-btn>button{
   border-radius: 5px;
   margin-right: 1vh;
-padding-top: 0.5vh;
-padding-bottom: 0.5vh;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  width:100px;
 
 }
 .view-details-btn>button:hover{
@@ -130,9 +132,18 @@ padding-bottom: 0.5vh;
 
 .show-task{
   background-color: transparent !important;
+ 
+}
+.show-task1 label{
+  padding:unset;
+  text-align: center;
 }
 label{
   text-align: center;
+}
+.show-task1>div, .show-task1>label {
+  padding-top: 1vh;
+  margin-bottom: 0px !important;
 }
 /* .status-task{
   background: var(--unnamed-color-fe4d97) 0% 0% no-repeat padding-box;
@@ -220,8 +231,8 @@ border: none !important;
   width: 75%;
   padding-top: 0.5vh;
   padding-bottom: 0.5vh;
-      /* opacity: 0.6; */
-      font-weight: 400;
+  /* opacity: 0.6; */
+  font-weight: 400;
 }
 .task-name-in-list{
   width: 600px;
@@ -233,9 +244,12 @@ width: 0 !important;
 .animation{
 height: 0;
 }
-.dnd-icon{
+.dnd-icon-1{
   width:4%;
-opacity: 0;
+}
+.dnd-icon{
+  
+  opacity: 0;
 /* margin-top: -10px !important;   */
 /* display: none; */
 }
@@ -261,6 +275,8 @@ float: right !important;
 }
 .assing-to-list {
   float:left ;
+  width:100%;
+  padding: 0;
 }
 
 .prioprty-select p{

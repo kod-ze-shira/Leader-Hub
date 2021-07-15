@@ -328,7 +328,7 @@ function TasksNotBelongCardByMap(props) {
                             <ReactTooltip className="tooltip-style" data-tip id="task_not_belong_name" place="top" effect="solid">
                                 {props.task.name}
                             </ReactTooltip>
-                            <span className="checkmark checkmark-place"
+                            <span className="checkmark checkmark-place1"
                                 onClick={(e) => { addChalalit(); changeFiledInTask(e) }}></span>
 
                         </label>
