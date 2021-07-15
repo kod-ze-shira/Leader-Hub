@@ -17,7 +17,6 @@ import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
 import QuillEditTask from '../quilEditTask/quillEditTask';
 function TaskDetails(props) {
-    debugger
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
@@ -50,7 +49,6 @@ function TaskDetails(props) {
 
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
-    const [startTimerComp, setStartTimerComp] = useState(false)
 
     let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
@@ -409,11 +407,9 @@ function TaskDetails(props) {
                                     onChange={(e) => changePriority(e)}
                                 />
                             </div>
-                            {/* <div className="form-group col-md-6 col-lg-5 priority-task-details">
-                                <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
-                                <button onClick={(e) => { setStartTimerComp(false); props.disaplayLineByStop() }}>stop</button>
-                                <Timer startTimerComp={startTimerComp} ></Timer>
-                            </div> */}
+                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                <Timer></Timer>
+                            </div>
                         </div>
 
 
@@ -510,8 +506,6 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-        displayLineByStart: () => dispatch(actions.displayLineByStart()),
-        disaplayLineByStop: () => dispatch(actions.disaplayLineByStop()),
         setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
         setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
         setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),

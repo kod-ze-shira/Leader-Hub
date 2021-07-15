@@ -87,7 +87,6 @@ function NewProject(props) {
         let myDate = myDueDate
         let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
         project.dueDate = res
-        debugger
         if (props.fromAllproject) {
             if (!workspaceForProject) {
                 alert("choose workspace")
