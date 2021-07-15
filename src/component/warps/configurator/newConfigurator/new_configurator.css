@@ -23,11 +23,7 @@ li img{
   animation: closeConfigurator 2s ;
 
 }
-/* @keyframes closeConfigurator {
-  0%   {width: 100%; }
- 99%   {width: 0%; }
- 100%{display: none !important}
-} */
+
 
 .left_nav li{
   color: #FFFFFF;
@@ -88,14 +84,6 @@ border-radius: 3px;
      cursor: pointer;
  }
 
- /* @-webkit-keyframes slide-in {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-} */
    .list_config  li:focus{
     background-color:white;
   }

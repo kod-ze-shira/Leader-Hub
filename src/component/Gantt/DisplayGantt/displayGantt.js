@@ -70,7 +70,8 @@ function DisplayGantt(props) {
                     start_date: startDate,
                     duration: diffDays,
                     progress: 0.3,
-                    milestones: task.milestones
+                    milestones: task.milestones,
+                    status: task.status,
                 })
             }
             if(diffDays===0){
@@ -88,7 +89,8 @@ function DisplayGantt(props) {
                 start_date: startDate,
                 duration: diffDays,
                 progress: 0.3,
-                milestones: task.milestones
+                milestones: task.milestones,
+                status: task.status
             })
         })
         mone.push(index)
@@ -140,7 +142,8 @@ function DisplayGantt(props) {
             "start_date": currDate,
             "duration": 3,
             "progress": 0.6,
-            "milestones": null
+            "milestones": null,
+            status: {},
         })
     const state = {
         currentZoom: 'Days',

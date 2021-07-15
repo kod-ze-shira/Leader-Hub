@@ -70,7 +70,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         }
                     />
                 case 'newProject':
-                    return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
+                    return <NewProject fromAllproject={props.fromAllproject}closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />

@@ -136,9 +136,10 @@ function ViewCardsTabs(props) {
     const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
-        setTask(task)
-        props.openViewDetails(task)
-
+        if (task != false) {
+            setTask(task)
+            props.openViewDetails(task)
+        }
     };
 
     $(window).click(function () {
@@ -206,7 +207,7 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-                                                    {props.cardFromMap.tasks.map((task, index) => (
+                                                    {props.cardFromMap.tasks ? props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
                                                             openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
@@ -217,7 +218,7 @@ function ViewCardsTabs(props) {
                                                             viewToastMassege={props.viewToastMassege}
                                                             viewContactList={props.viewContactList}
                                                             openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
-                                                    ))}
+                                                    )) : null}
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-3">

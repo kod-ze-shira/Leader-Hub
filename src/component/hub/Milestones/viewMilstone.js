@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import ViewDetails from '../viewDetails/viewDetails'
 import { actions } from '../../../redux/actions/action'
+import $ from 'jquery'
 import './Milstones.css';
 
 function ViewMilstone(props) {
@@ -19,7 +20,7 @@ function ViewMilstone(props) {
         })
 
     }
-    function openDetails() {
+    function openDetails(e) {
 
         getCardsByProject().then((result) => {
             props.saveCurrentIndexOfCardInRedux(props.milestone.card.index)
@@ -27,7 +28,7 @@ function ViewMilstone(props) {
             setViewDetails(true)
         })
     }
-
+  
     return (
         <div>
             <div className="show-task row mx-4 py-2 border-bottom ">
@@ -35,7 +36,7 @@ function ViewMilstone(props) {
                 <div className="col-4">
                     {props.milestone.task.name}</div>
                 <label className="check-task view-details-btn">
-                    <button onClick={() => openDetails()}>view details +</button>
+                    <button onClick={(e) => openDetails(e)}>view details +</button>
                 </label>
             </div>
 

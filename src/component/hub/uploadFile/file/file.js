@@ -100,7 +100,7 @@ function File(props) {
 
                     </span>
                     {/* <div> */}
-                    <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Mb</span>
+                    <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Kb</span>
                     {(progressFile != 100 && props.file.url == 'new') ?
                         <div class="progressFile"
                             // ref={refToProject}

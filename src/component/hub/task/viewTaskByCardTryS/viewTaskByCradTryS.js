@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import './ViewTaskByCrad.css'
+import './ViewTaskByCradTryS.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
@@ -17,10 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import task_reducer from '../../../../redux/Reducers/task_reducer';
 // import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
-import ReactTooltip from 'react-tooltip';
 
-
-function ViewTaskByCrad(props) {
+function ViewTaskByCradTryS(props) {
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
     const [userHasLike, setUserHasLike] = useState(false)
@@ -105,11 +103,7 @@ function ViewTaskByCrad(props) {
                 }, 1000);
             }
             else {
-                if (viewDetails) {
-                    setViewDetails(false)
-                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
-                }
-                // setViewDetails(false)
+                setViewDetails(false)
             }
         }
     })
@@ -122,6 +116,8 @@ function ViewTaskByCrad(props) {
         event.stopPropagation();
     }
     function addChalalit() {
+
+
         if (props.task.complete == false)
             props.showRocketShip(true)
     }
@@ -171,7 +167,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -259,13 +255,13 @@ function ViewTaskByCrad(props) {
                                 onMouseOut={() => outOver(props.task._id)}
                                 className="show-task row mx-4 border-bottom "
                             >
-                                <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
-                                {/* <FontAwesomeIcon  
+                                {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className=" col-4">
+                                <div className=" col-4 d-flex">
+                                <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
                                     <label
-                                        data-tip data-for="comlite_task"
+                                        title="Complete Task"
                                         className="check-task ml-4 ">
                                         <input type="checkbox"
                                             name="complete"
@@ -273,14 +269,11 @@ function ViewTaskByCrad(props) {
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
                                         />
-                                        <ReactTooltip className="tooltip-style" data-tip id="comlite_task" place="top" effect="solid">
-                                            Complete Task
-                                        </ReactTooltip>
                                         <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
-                                        name="name" id="name" data-tip data-for="task_name"
-                                        className={props.task.complete ? "disabled show-task mt-2" : "show-task mt-2"}
+                                        name="name" id="name" title={props.task.name}
+                                        className={props.task.complete ? "disabled show-task ml-2" : "show-task ml-2"}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -291,48 +284,37 @@ function ViewTaskByCrad(props) {
                                         }}
                                     >
                                     </input>
-                                    <ReactTooltip className="tooltip-style" data-tip id="task_name" place="top" effect="solid">
-                                        {props.task.name}
-                                    </ReactTooltip>
-                                </div>
-                                <div onClick={(e) => updateLike(e)} className="p-2">
 
-                                    <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
-                                    <img
-                                        onClick={updateLike}
-                                        // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
-                                        src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
-                                    </img>
+                                    <div onClick={(e) => updateLike(e)} className="p-2 ml-auto">
+
+                                        <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
+                                        <img
+                                            onClick={updateLike}
+                                            // src={userHasLike ? require('../../../img/heart.png') : props.task.likes.length > 0 ? require('../../../img/border-heart.svg') : require('../../../img/like-icon.png')}>
+                                            src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
+                                        </img>
+                                    </div>
                                 </div>
-                                <label className="check-task view-details-btn">
-                                    <button onClick={(e) => openViewDetails(e)}>
-                                        view details
-                                        <FontAwesomeIcon className="ml-2"
-                                            icon={['fas', 'caret-right']}>
-                                        </FontAwesomeIcon>
-                                    </button>
+                               
+                                <label className="check-task border-left  col">{props.task.startDate}
                                 </label>
-
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
-                                    {/* <div className="assing-to-list">
-                                        {props.task.assignTo1 ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                            {props.task.assignTo1 ? <img referrerpolicy="no-referrer" src={ props.task.assignTo1.contact.thumbnail } className="thumbnail-contact ml-2" />
-                                                : <div className="logo-contact ml-2" >{props.task.assignTo1.contact.name ? props.task.assignTo1.contact.name[0] : null}</div>}
+                                    <div className="assing-to-list">
+                                        {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                            {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
-                                            {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
-                                                if (index < 3)
-                                                    return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
-                                                        : null
-                                            }) : null}
-                                            {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
-                                        </div> : <img
+                                        {!props.task.assingTo ? <img
+                                            // id={`${props.task._id}assing-to`}
                                             className="ml-2 assing-to-icon"
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                             src={require('../../../../assets/img/share-icon.png')}>
-                                        </img>} 
-                                    </div>*/}
+                                        </img> : null}
+                                    </div>
+                                    {/* <DynamicSelect
+                                        value={props.task.assingTo ? props.task.assingTo.contact : null}
+                                        setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
                                 <label className="check-task border-left    px-2 col-status " >
                                     <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
@@ -349,6 +331,14 @@ function ViewTaskByCrad(props) {
                                     : null}
                                 </label>
                                 <label className="check-task border-left  px-2 col-add-task">
+                                </label>
+                                <label className="check-task view-details-btn col" title="View Details">
+                                    <button onClick={(e) => openViewDetails(e)}>
+                                        view details
+                                        <FontAwesomeIcon className="ml-2"
+                                            icon={['fas', 'caret-right']}>
+                                        </FontAwesomeIcon>
+                                    </button>
                                 </label>
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
@@ -402,4 +392,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCrad)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewTaskByCradTryS)
