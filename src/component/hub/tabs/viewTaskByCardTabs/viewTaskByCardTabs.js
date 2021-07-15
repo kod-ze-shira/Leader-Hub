@@ -254,18 +254,36 @@ function ViewTaskByCradTabs(props) {
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className=" ">
-                                <div className="row justify-content-between mx-1 mt-1">
+                                <div className="row  mx-1 mt-1">
+                                    <label
+                                        className="check-task pb-2  check-tabs "
+                                        data-tip data-for="complite_task"
+                                    >
+                                        <input type="checkbox"
+                                            name="complete"
+                                            checked={doneStatus}
+                                            value={props.task.complete}
+                                            onChange={(e) => changeFiledInTask(e)}
+                                            onClick={(e) => e.stopPropagation()}
+                                        />
+                                        <ReactTooltip className="tooltip-style" data-tip id="complite_task" place="top" effect="solid">
+                                            Complete Task
+                                        </ReactTooltip>
+                                        <span
+                                            className="checkmark checkmark-tabs"
+                                            onClick={(e) => addChalalit(e)}></span>
+                                    </label>
                                     <div
                                         onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
-                                        className={props.task.complete ? "status-task-tabs-opacity px-2 ml-1 " : "status-task-tabs px-2 ml-1"}
+                                        className={props.task.complete ? "status-task-tabs-opacity px-2 ml-5" : "status-task-tabs px-2 ml-5"}
                                         style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
                                     </div>
-                                    <Button className="more col-3 mr-0 more-task"
+                                    {/* <Button className="more col align-self-end mr-0 more-task"
                                         data-tip data-for="more_a"
                                         aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                                         . . .
-                                    </Button>
+                                    </Button> */}
 
                                     <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                         {title.title_more_actions}
@@ -282,24 +300,7 @@ function ViewTaskByCradTabs(props) {
                                         <MenuItem onClick={(e) => handleClose(actionCard.deleteCard, e)}>Delete Task</MenuItem>
                                     </Menu>
                                 </div>
-                                <label
-                                    className="check-task pb-2  check-tabs "
-                                    data-tip data-for="complite_task"
-                                >
-                                    <input type="checkbox"
-                                        name="complete"
-                                        checked={doneStatus}
-                                        value={props.task.complete}
-                                        onChange={(e) => changeFiledInTask(e)}
-                                        onClick={(e) => e.stopPropagation()}
-                                    />
-                                    <ReactTooltip className="tooltip-style" data-tip id="complite_task" place="top" effect="solid">
-                                        Complete Task
-                                    </ReactTooltip>
-                                    <span
-                                        className="checkmark checkmark-tabs"
-                                        onClick={(e) => addChalalit(e)}></span>
-                                </label>
+
                                 {/* <img className="files-task" src={require('../../../img/files-icon.png')} ></img> */}
 
                                 {/* <button className="more col-4 mr-0">. . .</button> */}
@@ -365,7 +366,7 @@ function ViewTaskByCradTabs(props) {
                                             </div>
                                             <div className="pl-2 attachment-alt">
                                                 <UploadFile taskId='' fromTaskTabs={true} indexTask={props.indexCurrentTask} indexCard={props.indexCurrentCard} />
-                                                <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                                <img className=" ml-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
                                             </div>
                                         </div>
 

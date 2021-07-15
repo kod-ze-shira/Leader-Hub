@@ -5,6 +5,7 @@ import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacel
 import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
 import ViewDetails from '../../viewDetails/viewDetails'
 import { useRef } from 'react'
+import ColorWorkspace from '../../color/colorWorkspace'
 
 // let workspace;
 
@@ -24,6 +25,11 @@ function AddWorkspace(props) {
         workspace.color = myColor
     }, [])
     const nameworkspae = useRef()
+
+    const changeColorFiledInWorkspace = (color) => {
+        let editWorkspaceInRedux = { "nameFiled": "color", "value": color}
+        props.setWorkspaceByFiled(editWorkspaceInRedux)
+    }
 
     // const changeColorWorkspace = (event) => {
     //     setMyColor(event.target.value)
@@ -107,18 +113,13 @@ function AddWorkspace(props) {
                             onChange={(input) => changeFiledInWorkspace(input)}
                             contentEditable></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="color">Logo Color</label>
-                        <input name="color"
-                            className="ml-2 "
-                            styles="height: 50px"
-                            type="color"
-                            name='color'
-                            value={myColor}
-                            onChange={(input) => changeFiledInWorkspace(input)}
-                        />
+                    {/* <div class="form-group"> */}
+                        <label className="row ml-2" for="color">Logo Color</label>
+                        <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />  
+
                         {/* onChange={handleChange} /> */}
-                    </div>
+                    {/* </div> */}
+
                 </div>
                 <div className="row justify-content-end">
                     <button onClick={addNewWorkspace} className="save_canges_btn px-5" id='sevaNewWorkspace'>Save</button>

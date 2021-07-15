@@ -79,6 +79,7 @@ const publicData = {
     },
 
     setTaskByFiledFromTasks(state, action) {
+        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
         console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
@@ -320,7 +321,7 @@ const publicData = {
         })
     },
     addCardToCardsWhenAddCardToServer(state, action) {
-        
+
         if (state.cards.length > 0)
             state.cards.push(action.payload)
         else

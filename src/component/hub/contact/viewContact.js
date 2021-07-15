@@ -40,7 +40,7 @@ function ViewContact(props) {
             else
                 member = { "email": email }
             props.assingToMany(member)
-            props.viewToastMassege({ show: true, massege: 'Task assign!!' })
+            // props.viewToastMassege({ show: true, massege: 'Task assign!!' })
 
         }
     }
