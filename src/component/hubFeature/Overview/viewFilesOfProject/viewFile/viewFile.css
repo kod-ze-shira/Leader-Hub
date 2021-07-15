@@ -1,6 +1,6 @@
 
 .fileItem{
-    height: 17vh;
+    height: 15vh;
     cursor: pointer;
     border-radius: 3%;
 }
@@ -54,17 +54,20 @@
     opacity: 1;
     border-radius: 30%;
     transition: 0.2s;
-   
   }
   .checkmarkFile {
     position: absolute;
     height: 0.9em;
     width: 0.9em;
-    background-color: #fff;
+    background-color: #c4ccd4;
     border: 1px solid #fff;
     border-radius: 30%;
    opacity: 0.8;
    margin-left: 1vw;
+  }
+  .checkmarkFile:hover{
+    /* background-color: #c4ccd4; */
+    background-color: red;
   }
   .checkmarkFile:after {
     content: "";
@@ -86,6 +89,8 @@
      padding: 0.2rem;
      border-bottom-right-radius: 3%;
      border-bottom-left-radius:3%;
+     font-size: 0.8em;
+     color: #778CA2;
 }
 .viewFile a{
        color: black;
@@ -103,7 +108,7 @@
     background-size: contain;
     max-width: 100%;
     max-height: 100%;
-    width: max-content;
+    /* width: max-content; */
     border-top-left-radius: 3%;
     border-top-right-radius: 3%;
     /* height: auto; */
