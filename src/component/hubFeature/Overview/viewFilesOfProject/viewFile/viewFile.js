@@ -2,6 +2,9 @@ import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action.js';
 import './viewFile.css'
+import title from '../../../../../Data/title.json'
+import ReactTooltip from 'react-tooltip'
+
 
 function ViewFile(props) {
     const file = props.file
@@ -27,6 +30,11 @@ function ViewFile(props) {
                                     className="checkmarkFile checkmarkFile-tabs"
                                 ></span>
                             </label>
+                            <ReactTooltip className="tooltip-style" data-tip id="checkFile" place="top" effect="solid">
+                                {
+                                    title.title_check_file
+                                }
+                            </ReactTooltip>
                         </div>
                         <div className="row-2 wrapLink">
                             <p>{file.name.length > 10 ? file.name.slice(0, 10) + "..." : file.name}</p>

@@ -7,7 +7,9 @@ import { photos } from "./photos";
 // import { actions } from '../../../redux/actions/action';
 import { connect } from 'react-redux'
 
+// export default 
 function ModalFiles(props) {
+    let p = photos
     const [currentImage, setCurrentImage] = useState(0);
     const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
@@ -28,7 +30,7 @@ function ModalFiles(props) {
     return (
         <div>
             {/* <Gallery photos={photos} onClick={openLightbox} /> */}
-            <img src={photos[0].url} onClick={() => openLightbox(1)}
+            <img src={photos[0].src} onClick={() => openLightbox(1)}
             // photos={photos}
             ></img>
             <ModalGateway>
@@ -38,8 +40,8 @@ function ModalFiles(props) {
                             currentIndex={currentImage}
                             views={photos.map(x => ({
                                 ...x,
-                                srcset: x.srcSet,
-                                caption: x.title
+                                srcset: x,
+                                caption: x.name
                             }))}
                         />
                     </Modal>

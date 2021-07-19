@@ -305,3 +305,8 @@ inner-addon {
     overflow: hidden !important;
     text-overflow: ellipsis;
 }
+
+.checkmark-place1 {
+    left:0 !important;
+    top:8px !important;
+} 

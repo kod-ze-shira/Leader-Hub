@@ -42,6 +42,7 @@ function UploadFile(props) {
     }
 
     const uploadMulti = async () => {
+
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{

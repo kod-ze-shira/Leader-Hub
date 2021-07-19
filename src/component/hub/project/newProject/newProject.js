@@ -6,7 +6,7 @@ import title from '../../../../Data/title.json'
 import { actions } from '../../../../redux/actions/action'
 import './newProject.css'
 import QuillNewProject from '../myQuill/quillNewProject'
-
+import AssignWorkspaceToNewProject from '../../assignWorkspaceToNewProject/assignWorkspaceToNewProject'
 
 
 function NewProject(props) {
@@ -17,9 +17,10 @@ function NewProject(props) {
     let [description, setDescription] = useState('')
     let [myStyle, setMyStyle] = useState('');
     let [myDueDate, setMyDueDate] = useState('')
+    const [workspaceForProject, setWorkspaceForProject] = useState()
+
     const nameRequired = useRef()
 
-    // let [dufultDateDueDate, setDufultDateDueDate] = useState()
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
         "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
@@ -77,6 +78,7 @@ function NewProject(props) {
         let year = newDate.getFullYear();
         console.log(date + '/' + month + '/' + year)
         project.updateDates[0] = date + '/' + month + '/' + year
+        console.log(project)
         project.color = myColor
         project.workspace = props.workspace._id
         project.name = nameProject
@@ -85,7 +87,13 @@ function NewProject(props) {
         let myDate = myDueDate
         let res = myDate.split("-")[2] + '/' + myDate.split("-")[1] + '/' + myDate.split("-")[0];
         project.dueDate = res
-
+        if (props.fromAllproject) {
+            if (!workspaceForProject) {
+                alert("choose workspace")
+                return
+            }
+            project.workspace = workspaceForProject
+        }
         if (nameRequired.current.value) {
             props.newProject(project)
             document.getElementById('nameProject').value = ''
@@ -111,8 +119,6 @@ function NewProject(props) {
         const finalDate = year + '-' + (month <= 9 ? '0' + month : month) + '-' + (day <= 9 ? '0' + day : day)
         return (finalDate)
     }
-
-
     const changeColorProject = (input) => {
         setMyColor(input.target.value)
         project[input.target.name] = input.target.value
@@ -130,10 +136,14 @@ function NewProject(props) {
 
                     </div>
 
-
-                    <div class="row justify-content-between  mx-1 mb-2">
-                        <label>workspace: {props.workspace.name}</label>
-                    </div>
+                    {!props.fromAllproject ?
+                        <div class="row justify-content-between  mx-1 mb-2">
+                            <label>workspace: {props.workspace.name}</label>
+                        </div> :
+                        <div className=" col-3 px-1">
+                            <label>choose workspace: </label>
+                            <AssignWorkspaceToNewProject setWorkspaceToProject={(w) => setWorkspaceForProject(w)} />
+                        </div>}
 
                     <div class="form-group" id='nameRequired'>
                         <label for="name">Name</label>
@@ -142,7 +152,7 @@ function NewProject(props) {
                             id='nameProject' type="text" class="form-control" value={nameProject} />
                         <div class="invalid-feedback">
                             Please enter project name.
-                     </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>

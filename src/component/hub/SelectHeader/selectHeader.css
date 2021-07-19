@@ -84,13 +84,6 @@ border-radius:50%;
         color:var(--light-light-blue)  !important;
 }
 
-.select__placeholder{
-        /* font-size: small !important; */
-}
-.s-header svg{
-        /* margin-right: 30px !important; */
-}
-
 .opacity{
         opacity: 0;
 }

@@ -328,7 +328,7 @@ function TasksNotBelongCardByMap(props) {
                             <ReactTooltip className="tooltip-style" data-tip id="task_not_belong_name" place="top" effect="solid">
                                 {props.task.name}
                             </ReactTooltip>
-                            <span className="checkmark checkmark-place"
+                            <span className="checkmark checkmark-place1"
                                 onClick={(e) => { addChalalit(); changeFiledInTask(e) }}></span>
 
                         </label>
@@ -435,7 +435,7 @@ function TasksNotBelongCardByMap(props) {
 
                     {!cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">move to</button>
                         </>
                         : null
@@ -443,7 +443,7 @@ function TasksNotBelongCardByMap(props) {
 
                     {cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
                         </> : null
 

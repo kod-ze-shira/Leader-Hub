@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../src/Data/title.json';
 import { actions } from '../../../../redux/actions/action';
-import ViewTaskByCrad from '../../task/viewTaskByCard/viewTaskByCrad';
+import ViewTaskByCradTryS from '../../task/viewTaskByCardTryS/viewTaskByCradTryS';
 import ViewDetails from '../../viewDetails/viewDetails';
 import './viewCards.css';
 
@@ -139,7 +139,7 @@ function ViewCards(props) {
 
     return (
         <>
-            <div id={props.cardFromMap._id + "disappear"}>
+            <div className="container-scroll" id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
                     <div className="col-4 d-flex justify-content-between">
@@ -152,27 +152,10 @@ function ViewCards(props) {
                                     className=" newTriangle ml-1"
                                     onClick={(e) => changeSelectedCard(e)} ></div>
                             </div>
-                            {/* <input
-                            // id="input-card-name"
-                            // ref={textInput}
-                            // onBlur={() => editCard()}
-                            // autoFocus="true"
-                            // className="ml-3 show-card"
-                            // value={editCardName}
-                            // onChange={updateCardName}
-                            // onBlur={editCard}
-                            // onKeyPress={event => {
-                            //     if (event.key === 'Enter') {
-                            //         editCard()
-                            //     }
-                            // }}
-                        >
-                        </input> */}
-
-                            <span  // id="input-card-name"
+                            <span  
                                 ref={textInput}
                                 onBlur={() => editCard()}
-                                className="show-card show-card-list ml-4 col-10 ">
+                                className="show-card show-card-list ml-2 col-10 ">
                                 {editCardName}</span>
                             <button data-tip data-for="add" className="new-task ml-2"
                                 // id={`task${props.cardFromMap._id}`}
@@ -198,22 +181,23 @@ function ViewCards(props) {
                         </Menu>
                     </div>
                     {/* <p className="col">Team</p> */}
-                    <p className="col">start</p>
-                    <p className="col">end</p>
-                    <p className="col">total</p>
-                    <p className="col-assignee">Assignee</p>
-                    <p className="col ">Status</p>
+                     
+                    <p className="col-1">Start</p>
+                    <p className="col-1">End</p>
+                    <p className="col-1">Total</p>
+                    <p className="col-1">Assignee</p>
+                    <p className="col-1 ">Status</p>
                     {/* <p className="col">Start date</p> */}
-                    <p className="col-status">Due date</p>
-                    <p className="col-priority">Priority</p>
-                    <p className="col"></p>
+                    <p className="col-1 ">Due date</p>
+                    <p className="col-1">Priority</p>
+                 
 
-                    <p className="col-add-task"><a>
+                </div >
+                    <p className=""><a>
                         <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
                             {title.title_add_task}
                         </ReactTooltip>
                     </a></p>
-                </div >
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?
                         <div className="allTaskInCard">
@@ -223,7 +207,7 @@ function ViewCards(props) {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}>
                                         {props.cardFromMap.tasks.map((task, index) => (
-                                            <ViewTaskByCrad
+                                            <ViewTaskByCradTryS
                                                 viewContactList={props.viewContactList}
                                                 viewToastMassege={props.viewToastMassege}
                                                 objectToast={(task) => props.showToastDelete(task)}

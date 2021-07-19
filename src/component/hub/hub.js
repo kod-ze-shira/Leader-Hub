@@ -35,8 +35,8 @@ import selectTask from './SelectHeader/selectTask/selectTask';
 import ToastMessage from '../hub/toast/toastMessage'
 import RocketShip from './rocketShip/rocketShip'
 import ViewAllStatuses from '../hub/status/viewAllStatuses';
+import HeaderLeader from '@leadercodes/header';
 import ModalFiles from './modalFIles/modalFiles';
-
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -154,7 +154,7 @@ function Hub(props) {
             </div> */}
             <Router history={history}>
                 <div className='headerLeaderHub'>
-                    {/* <HeaderLeader userName={props.userName} appName='hub' />‏ */}
+                    <HeaderLeader userName={props.userName} appName='hub' />‏
                 </div>
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 

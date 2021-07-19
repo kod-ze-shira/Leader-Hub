@@ -22,12 +22,12 @@ function TaskDetails(props) {
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
-    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
+    const [milstone, setMilstone] = useState()
 
     useEffect(() => {
-
+        setMilstone(props.cards[props.indexCurrentCard] && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
         console.log(props.task.assingTo1);
-        if (props.cards) {
+        if (props.cards.length > 0) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
             props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
 
@@ -40,7 +40,7 @@ function TaskDetails(props) {
     }, [props.cards, milstone])
 
     useEffect(() => {
-        nameRequired.current.focus();
+        // nameRequired.current.focus();
     }, [])
     useEffect(() => {
 
@@ -51,7 +51,8 @@ function TaskDetails(props) {
     const [startTimerComp, setStartTimerComp] = useState(false)
     const [shoewModalFiles, setShoewModalFiles] = useState(false)
     const [url, setUrl] = useState('dddd')
-    let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
+    let doneStatus = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete : null
+
 
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
@@ -59,7 +60,8 @@ function TaskDetails(props) {
 
     }
     $(window).click(function () {
-        setOpenPopUp(!openPopUp)
+        debugger
+        setOpenPopUp(false)
     });
 
     function stopP(event) {
@@ -153,10 +155,10 @@ function TaskDetails(props) {
 
     }
 
-    let dueDate = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate;
-    let startDate = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate;
-    let dueDate_ = dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
-    let startDate_ = startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
+    let dueDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate : null;
+    let startDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate : null;
+    let dueDate_ = ''// dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
+    let startDate_ = ''//startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
 
     let [dueDateTask, setDueDateTask] = useState(dueDate_)
     let [startDateTask, setStartDateTask] = useState(startDate_)
@@ -276,48 +278,51 @@ function TaskDetails(props) {
 
     return (
         <>
-            {shoewModalFiles &&
+            {
+                shoewModalFiles &&
                 <ModalFiles url={url} show={(val) => setShoewModalFiles(val)} />
             }
-            {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
-            <div className="details task-details ml-4" onClick={(e) => closeStatus(e)}>
-                <div className='propertiesViewDitails' onClick={(e) => closeContactList(e)}>
-                    <div className='mr-4 '>
-                        <div className='row mt-4 justify-content-between headerDitails'>
-                            <h5 className=" title-view-details   pl-3">Task details</h5>
-                            {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
+            {props.cards[props.indexCurrentCard] && props.priorities.length > 0 &&
+                <div>
+                    {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
+                    <div className="details task-details ml-4" onClick={(e) => closeStatus(e)}>
+                        <div className='propertiesViewDitails' onClick={(e) => closeContactList(e)}>
+                            <div className='mr-4 '>
+                                <div className='row mt-4 justify-content-between headerDitails'>
+                                    <h5 className=" title-view-details   pl-3">Task details</h5>
+                                    {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
 
-                            <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
+                                    <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
-                        </div>
+                                </div>
 
-                        <div className="row justify-content-between mx-1" >
-                            <label>Create
-                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
-                            <label className="">Last Update
-                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
-                        </div>
-                        <div class="form-group" id='nameRequired'>
-                            <label for="name">Name</label>
-                            <input name="name"
-                                required ref={nameRequired}
-                                class="form-control"
-                                id="name"
-                                onChange={(e) => changeFiledInTask(e)}
-                                // onBlur={(e) => editTaskInServer()}
-                                // onMouseLeave={(e) => alert("ff")}
-                                value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
-                            <div class="invalid-feedback">
-                                Please enter task name.
-                            </div>
-                        </div>
+                                <div className="row justify-content-between mx-1" >
+                                    <label>Create
+                                        {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
+                                    <label className="">Last Update
+                                        {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
+                                </div>
+                                <div class="form-group" id='nameRequired'>
+                                    <label for="name">Name</label>
+                                    <input name="name"
+                                        required ref={nameRequired}
+                                        class="form-control"
+                                        id="name"
+                                        onChange={(e) => changeFiledInTask(e)}
+                                        // onBlur={(e) => editTaskInServer()}
+                                        // onMouseLeave={(e) => alert("ff")}
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
+                                    <div class="invalid-feedback">
+                                        Please enter task name.
+                                    </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <QuillEditTask />
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <QuillEditTask />
 
 
-                            {/* <textarea class="form-control"
+                                    {/* <textarea class="form-control"
                                 rows="3"
                                 placeholder="Write a description about your workspace"
                                 name="description"
@@ -326,166 +331,163 @@ function TaskDetails(props) {
                                 // onBlur={(e) => editTaskInServer()}
                                 contentEditable
                             ></textarea> */}
-                        </div>
-                        <div className="row justify-content-between">
-                            <div class="form-group col-md-6 col-lg-5">
-                                <label for="startDate">Start Date</label>
-                                <input
-                                    className="form-control"
-                                    name="startDate"
-                                    type="date"
-                                    id="startDate"
-                                    value={startDateTask}
-                                    onChange={(e) => changeFiledInTask(e)}
-                                // onBlur={(e) => editTaskInServer()}
-                                />
-                            </div>
-                            <div class="form-group col-md-6 col-lg-5">
-                                <label for="dueDate">Due Date</label>
-                                <input
-                                    className="form-control "
-                                    name="dueDate"
-                                    type="date"
-                                    id="dueDate"
-                                    value={dueDateTask}
-                                    onChange={(e) => changeFiledInTask(e)}
-                                // onBlur={(e) => editTaskInServer()}
-                                />
-                            </div>
-
-                        </div>
-                        <div className="row justify-content-between">
-                            <div class="dropdown col-md-6 col-lg-5">
-                                {/* form-control */}
-                                <label for="status">Status</label>
-
-                                <button onClick={(e) => openPopUpStatus(e)} class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
-                                        <div
-                                            className="color-status-first px-3"
-                                            style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color : null }} >
-                                            {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName : null}
-                                        </div>
-                                        {/* <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
-                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span> */}
-                                    </> : null}
-                                </button>
-                                {openPopUp ?
-                                    <div onClick={(e) => stopP(e)}>
-                                        <ViewAllStatuses
-                                            task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
-                                            status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
-                                            openPopUp={openPopUp}
-                                            closeStatuses={(e) => setOpenPopUp(false)} />
+                                </div>
+                                <div className="row justify-content-between">
+                                    <div class="form-group col-md-6 col-lg-5">
+                                        <label for="startDate">Start Date</label>
+                                        <input
+                                            className="form-control"
+                                            name="startDate"
+                                            type="date"
+                                            id="startDate"
+                                            value={startDateTask}
+                                            onChange={(e) => changeFiledInTask(e)}
+                                        // onBlur={(e) => editTaskInServer()}
+                                        />
                                     </div>
-                                    : null}
+                                    <div class="form-group col-md-6 col-lg-5">
+                                        <label for="dueDate">Due Date</label>
+                                        <input
+                                            className="form-control "
+                                            name="dueDate"
+                                            type="date"
+                                            id="dueDate"
+                                            value={dueDateTask}
+                                            onChange={(e) => changeFiledInTask(e)}
+                                        // onBlur={(e) => editTaskInServer()}
+                                        />
+                                    </div>
+
+                                </div>
+                                <div className="row justify-content-between">
+                                    <div class="dropdown col-md-6 col-lg-5">
+                                        {/* form-control */}
+                                        <label for="status">Status</label>
+
+                                        <button onClick={(e) => openPopUpStatus(e)} class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
+                                                <div
+                                                    className="color-status-first px-3"
+                                                    style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color : null }} >
+                                                    {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName : null}
+                                                </div>
+                                                {/* <div className="color-status-first col-3 mt-1 mx-1" style={{ "backgroundColor": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.color }} > </div>
+                                        <span className="ml-1">{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status.statusName}</span> */}
+                                            </> : null}
+                                        </button>
+                                        {openPopUp ?
+                                            <div onClick={(e) => stopP(e)}>
+                                                <ViewAllStatuses
+                                                    task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
+                                                    status={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].status}
+                                                    openPopUp={openPopUp}
+                                                    closeStatuses={(e) => setOpenPopUp(false)} />
+                                            </div>
+                                            : null}
+
+                                    </div>
+                                    <div className="col-md-6 col-lg-5">
+                                        <span className="milestones-span mt-2">Mark as milestone</span>
+                                        <label className="switch ml-2 mt-1">
+                                            <input type="checkbox"
+                                                name="milestones"
+                                                checked={milstone}
+                                                value={props.task.milestones}
+                                                onChange={(e) => changeFiledInTask(e)}
+                                            // onBlur={(e) => editTaskInServer()}
+                                            />
+                                            <span className="slider round" ></span>
+                                        </label>
+
+                                    </div>
+
+                                </div>
+                                <div className="row justify-content-between ">
+                                    <div className=" col-md-6 col-lg-5 mt-2 priority-task-details">
+                                        <label for="priority">Priority</label>
+
+                                        <Select
+                                            isSearchable={false}
+                                            name="priority"
+                                            // classNamePrefix="select"
+                                            options={viewPriortyList}
+                                            placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
+                                                <div className="prioprty-select  dropdown-toggle">
+                                                    <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
+                                                    <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
+                                                </div> : <div className="prioprty-select  dropdown-toggle">
+                                                    <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
+                                                    <p >{props.priorities[0].level}</p>
+                                                </div>}
+                                            onChange={(e) => changePriority(e)}
+                                        />
+                                    </div>
+                                    <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                        <Timer></Timer>
+                                    </div>
+                                </div>
+
 
                             </div>
-                            <div className="col-md-6 col-lg-5">
-                                <span className="milestones-span mt-2">Mark as milestone</span>
-                                <label className="switch ml-2 mt-1">
-                                    <input type="checkbox"
-                                        name="milestones"
-                                        checked={milstone}
-                                        value={props.task.milestones}
-                                        onChange={(e) => changeFiledInTask(e)}
-                                    // onBlur={(e) => editTaskInServer()}
-                                    />
-                                    <span className="slider round" ></span>
-                                </label>
 
+                            <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
+
+                                {newFileComponentArr}
                             </div>
+                            <hr></hr>
 
                         </div>
-                        <div className="row justify-content-between ">
-                            <div className=" col-md-6 col-lg-5 mt-2 priority-task-details">
-                                <label for="priority">Priority</label>
 
-                                <Select
-                                    isSearchable={false}
-                                    name="priority"
+                        <div className="row   ">
 
-                                    // classNamePrefix="select"
-                                    options={viewPriortyList}
-                                    placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
-                                        <div className="prioprty-select  dropdown-toggle">
-                                            <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
-                                            <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
-                                        </div> : <div className="prioprty-select  dropdown-toggle">
-                                            <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
-                                            <p >{props.priorities[0].level}</p>
-                                        </div>}
-                                    onChange={(e) => changePriority(e)}
-                                />
-                            </div>
-                            {/* <div className="form-group col-md-6 col-lg-5 priority-task-details">
-                                <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
-                                <button onClick={(e) => { setStartTimerComp(false); props.disaplayLineByStop() }}>stop</button>
-                                <Timer startTimerComp={startTimerComp} ></Timer>
-                            </div> */}
-                        </div>
-
-
-                    </div>
-
-                    <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
-
-                        {newFileComponentArr}
-                    </div>
-                    <hr></hr>
-
-                </div>
-
-                <div className="row   ">
-
-                    {/* {props.task.assingTo ?
+                            {/* {props.task.assingTo ?
 
                         props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
                         : null} */}
-                    <div className="assingto-details mr-2" data-tip data-for="assing">
+                            <div className="assingto-details mr-2" data-tip data-for="assing">
 
-                        <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
-                        <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
-                        <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
-                            {title.title_assing}
-                        </ReactTooltip>
-                    </div>
-                    <div className=" files-details mx-1" data-tip id="files">
-                        <UploadFile taskId='' />
-                        <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
-                        <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
-                        <ReactTooltip className="tooltip-style" place="top" effect="solid">
-                            {title.title_files}
-                        </ReactTooltip>
-                    </div>
-                    <div className="delete-details mx-2" data-tip data-for="delete">
-                        <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
-                        <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
-                            {title.title_delete}
-                        </ReactTooltip>
-                    </div>
-                    {showContactList ?
-                        <ContactList taskDetails={true} viewToastMassege={props.viewToastMassege}></ContactList> : null
-                    }<div className="widthofContacts col-4 mt-1 ml-1">
-                        {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
-                            if (index < 3)
-                                return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
-                                    : null
-                        }) : null}
-                        {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
-                    </div>
+                                <img className="assingto-task" src={require('../../../../assets/img/share-contact.svg')} onClick={(e) => alert()}></img>
+                                <img className="assingto-task-hover" src={require('../../../../assets/img/share-hover.png')} onClick={(e) => assingto(e)}></img>
+                                <ReactTooltip className="tooltip-style" data-tip id="assing" place="top" effect="solid">
+                                    {title.title_assing}
+                                </ReactTooltip>
+                            </div>
+                            <div className=" files-details mx-1" data-tip id="files">
+                                <UploadFile taskId='' />
+                                <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
+                                <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
+                                <ReactTooltip className="tooltip-style" place="top" effect="solid">
+                                    {title.title_files}
+                                </ReactTooltip>
+                            </div>
+                            <div className="delete-details mx-2" data-tip data-for="delete">
+                                <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                                <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
+                                <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
+                                    {title.title_delete}
+                                </ReactTooltip>
+                            </div>
+                            {showContactList ?
+                                <ContactList taskDetails={true} viewToastMassege={props.viewToastMassege}></ContactList> : null
+                            }<div className="widthofContacts col-4 mt-1 ml-1">
+                                {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                    if (index < 3)
+                                        return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                            : null
+                                }) : null}
+                                {props.task.assignTo1 && props.task.assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.task.assignTo1.length - 3}</div> : null}
+                            </div>
 
-                    {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
+                            {/* <button onClick={(e) => completeTask(e)}>complete</button> */}
 
-                    <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn col-3 mr-0 ml-3 btn-block mb-lg-4">Save</button>
-                    <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
-                        {title.title_save}
-                    </ReactTooltip>
-                </div>
-            </div>
-
+                            <button data-tip data-for="save" onClick={(e) => saveTask(e)} className=" save_canges_btn col-3 mr-0 ml-3 btn-block mb-lg-4">Save</button>
+                            <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid" >
+                                {title.title_save}
+                            </ReactTooltip>
+                        </div>
+                    </div>
+                </div >}
         </>
 
     )
@@ -519,8 +521,6 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-        displayLineByStart: () => dispatch(actions.displayLineByStart()),
-        disaplayLineByStop: () => dispatch(actions.disaplayLineByStop()),
         setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
         setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
         setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),

@@ -2,64 +2,23 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Select, { components } from "react-select";
-import { actions } from '../../../../redux/actions/action';
+import { actions } from '../../../redux/actions/action';
 import { useParams } from 'react-router-dom';
-
-// import Select from 'react-select';
-import LetterLogo from '../../logo/letterLogo';
-import './selectWorkspace.css';
-import Background from '../../../../assets/img/down-arrow.svg';
+import '../SelectHeader/selectWorkspace/selectWorkspace.css';
+import Background from '../../../assets/img/down-arrow.svg';
 
 const Input = props => <components.Input {...props} maxLength={5} />;
 
-function SelectWorkspace(props) {
+function AssignWorkspaceToNewProject(props) {
 
-    let { idWorkspace, idProject } = useParams();
     useEffect(() => {
-        if (props.workspaces) {
-            if (window.location.href.indexOf('workspace') != -1) {
-                // props.getProjectsByWorkspaceId(idWorkspace)
-                let w = props.workspaces.find(w => w._id == idWorkspace)
-                props.setWorkspace(w)
-                w = props.workspaces.findIndex(w => w._id == idWorkspace)
-                props.saveIndexOfWorkspaceInRedux(w)
 
-            }
-            else
-                if (window.location.href.indexOf('allProjects') != -1) {
-                    props.saveIndexOfWorkspaceInRedux(0)
-                    props.setWorkspace(props.workspaces[0])
-                }
-                else
-                    if (window.location.href.indexOf('projectPlatform') != -1) {
-
-                        for (let index = 0; index < props.workspaces.length; index++) {
-                            for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                if (idProject == props.workspaces[index].projects[j]._id) {
-                                    props.saveIndexOfWorkspaceInRedux(index)
-
-                                    props.setWorkspace(props.workspaces[index])
-                                    props.setProject(props.workspaces[index].projects[j])
-                                    //sssssssss
-                                    // props.getCardsByProjectId(props.workspaces[index].projects[j]._id)
-                                }
-                            }
-                        }
-                    }
-        }
     }, [props.workspace])
-    useEffect(() => {
-        // console.log("props.workspaces", props.workspaces);
-    }, [props.workspaces])
+
 
     //to change the workspace that user selected
     const changeSelectedWorkspace = (workspace) => {
-
-        props.saveIndexOfWorkspaceInRedux(workspace.workspaceIndex)
-        props.history.push("/" + props.user + "/hub/workspace/" + workspace.value)
-
-
-
+        props.setWorkspaceToProject(workspace.value)
     }
 
 
@@ -82,31 +41,21 @@ function SelectWorkspace(props) {
             workspaceIndex: index
         }
     ))
-    const placeholderWorkspace =props.workspaces[props.indexOfWorkspace] ? 
-    <div className="d-flex flex-row" >
-                <div>
-                    <div className="  logo-w-little header-w-select "
-                        style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', 'text-align': 'center' }}
-                    >
-                        {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
-                    </div>
+    const placeholderWorkspace = props.workspaces[props.indexOfWorkspace] ?
+        <div className="d-flex flex-row" >
+            <div>
+                <div className="  logo-w-little header-w-select "
+                    style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', 'text-align': 'center' }}
+                >
+                    {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
                 </div>
-                <div className="select-not-belong header-w-name">
-                    { props.workspaces[props.indexOfWorkspace].name }
-                </div>
-            </div >
-   
-    : null
-    // const viewWorkspacesList = props.workspaces.map((workspace, index) => (
-    //     {
-    //         value: workspace._id,
-    //         label: workspace.name,
-    //         title: workspace.name,
-    //         workspaceIndex: index
-    //     }
-    // ))
+            </div>
+            <div className="select-not-belong header-w-name">
+                {props.workspaces[props.indexOfWorkspace].name}
+            </div>
+        </div >
 
-
+        : null
 
     const style = {
         control: (base, state) => ({
@@ -184,4 +133,4 @@ const mapDispatchToProps = (dispatch) => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectWorkspace))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AssignWorkspaceToNewProject))

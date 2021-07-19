@@ -102,18 +102,195 @@ function CardsByProject(props) {
         <>
             {props.cards.length ?
                 <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
-                    {props.cards.map((card, index) => {
-                        return <ViewCards
-                            viewToastMassege={props.viewToastMassege}
-                            showToastDelete={(object) => props.showToast(object)}
-                            viewContactList={props.viewContactList}
-                            showRocketShip={props.showRocketShip}
-                            key={card._id}
-                            cardFromMap={card} flag={props.flag} indexCard={index} />
-                    })}
+                    <div className="showCardList">
+                        {props.cards.map((card, index) =>
+
+                            <ViewCards
+                                viewToastMassege={props.viewToastMassege}
+                                showToastDelete={(object) => props.showToast(object)}
+                                viewContactList={props.viewContactList}
+                                showRocketShip={props.showRocketShip}
+                                key={card._id}
+                                cardFromMap={card} flag={props.flag} indexCard={index} />
+
+                        )}
+                        {/* {props.cards.map((card, index) =>
+
+                            <ViewCrads
+                                viewToastMassege={props.viewToastMassege}
+                                showToastDelete={(object) => props.showToast(object)}
+                                viewContactList={props.viewContactList}
+                                showRocketShip={props.showRocketShip}
+                                key={card._id}
+                                cardFromMap={card} flag={props.flag} indexCard={index} />
+
+                        )} */}
+                    </div>
+                    {/* <div className="table-responsive">
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <div>
+                                        <th>
+                                            <div scope="col">A</div></th>
+                                        <th>
+                                            <div scope="col">B</div></th>
+                                        <th>
+                                            <div scope="col">C</div></th>
+                                        <th>
+                                            <div scope="col">D</div></th>
+                                    </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"gfeewfewfwef"</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div className="table-responsive">
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div scope="col">A</div></th>
+                                    <th>
+                                        <div scope="col">B</div></th>
+                                    <th>
+                                        <div scope="col">C</div></th>
+                                    <th>
+                                        <div scope="col">D</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>"fewf"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"fwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"fwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"dvewf"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>"fewfew"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"fewfw"</div>
+                                    </td>
+                                    <td>
+                                        <div>"fwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"fwef"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>"fewf"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"fw"</div>
+                                    </td>
+                                    <td>
+                                        <div>"fwef"</div>
+                                    </td>
+                                    <td>
+                                        <div>"fwqf"</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>"fw"</div>
+
+                                    </td>
+                                    <td>
+                                        <div>"efwe"</div>
+                                    </td>
+                                    <td>
+                                        <div>"efdewq"</div>
+                                    </td>
+                                    <td>
+                                        <div>"ydgwjw"</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> */}
+
                 </DragDropContext>
                 :
-                <div className="logoGif"><img src={require('../../../../assets/img/hub.gif')} /></div>}
+                <div className="logoGif"><img src={require('../../../../assets/img/hub.gif')} /></div>
+            }
         </>
     )
 }

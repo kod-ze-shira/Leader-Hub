@@ -183,7 +183,7 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
             projectBeforeChanges = action.payload.projectBeforeChanges;
         }
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editProject`
-        debugger
+        
         $.ajax({
             url: urlData,
             type: 'POST',
