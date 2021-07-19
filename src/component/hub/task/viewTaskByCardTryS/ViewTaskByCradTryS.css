@@ -69,11 +69,21 @@ opacity: 0.3;
 }
 
 .checkmark-place{
+<<<<<<< HEAD
   top: 2vh;
   left: 1vw;
+=======
+  top: 11px;
+  left: 10px;
+>>>>>>> dev
  
 }
-
+.span-total-task{
+  color:#358a8d;
+  border-radius: 8px;
+  padding:8px;
+  background-color:#68c7cb1a;
+}
 
 .check-task:hover input ~ .checkmark {
   background-color: #FFFFFF;
@@ -142,7 +152,10 @@ label{
   text-align: center;
 }
 .show-task1>div, .show-task1>label {
-  padding-top: 1vh;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  /* padding-top: 1vh; */
   margin-bottom: 0px !important;
 }
 /* .status-task{
@@ -245,7 +258,7 @@ width: 0 !important;
 height: 0;
 }
 .dnd-icon-1{
-  width:4%;
+  width:3%;
 }
 .dnd-icon{
   
