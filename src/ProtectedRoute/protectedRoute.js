@@ -8,7 +8,7 @@ function redirectToLogin(routes) {
         `${keys.API_URL_LOGIN}`;
     return null
 }
-const ProtectedRoute = ({ component: Component, user, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
     // חילוץ jwt מהקוקי
     let jwtFromCookie = ''
     if (window.location.hostname == "localhost") {
