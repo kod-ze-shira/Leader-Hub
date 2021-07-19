@@ -253,13 +253,14 @@ function ViewTaskByCradTryS(props) {
                         <div id={props.task._id + "disappear"}>
                             <div onMouseOver={(e) => overTask(props.task._id)}
                                 onMouseOut={() => outOver(props.task._id)}
-                                className="show-task row mx-4 border-bottom "
+                                className="show-task show-task1 row mx-4  border-bottom"
                             >
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className=" col-4 d-flex">
-                                <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
+                                <div className="col-3 d-flex pt-0 pb-2 pl-0">
+                                    <img src={require('../../../../assets/img/dnd-icon.svg')} 
+                                    className="dnd-icon dnd-icon-1 mt-1" id={props.task._id}></img>
                                     <label
                                         title="Complete Task"
                                         className="check-task ml-4 ">
@@ -273,7 +274,8 @@ function ViewTaskByCradTryS(props) {
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? "disabled show-task ml-2" : "show-task ml-2"}
+                                        className={props.task.complete ? 
+                                            "disabled show-task mt-1 ml-2 " : "show-task mt-1 ml-2 "}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -295,10 +297,19 @@ function ViewTaskByCradTryS(props) {
                                         </img>
                                     </div>
                                 </div>
-                               
-                                <label className="check-task border-left  col">{props.task.startDate}
+                                
+                                <label className=" border-left  col-1">
+                                    9:32:01
+                                    {/* {props.task.startDate} */}
                                 </label>
-                                <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
+                                <label className=" border-left  col-1">
+                                    12:14:05
+                                    {/* {props.task.dueDate} */}
+                                </label>
+                                <label className="border-left  col-1">
+                                    {props.task.startDate}
+                                </label>
+                                <label className=" border-left  col-1 " onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
                                         {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
@@ -307,7 +318,7 @@ function ViewTaskByCradTryS(props) {
                                         </div> : null}
                                         {!props.task.assingTo ? <img
                                             // id={`${props.task._id}assing-to`}
-                                            className="ml-2 assing-to-icon"
+                                            className="mx-auto assing-to-icon"
                                             onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                             src={require('../../../../assets/img/share-icon.png')}>
                                         </img> : null}
@@ -316,30 +327,29 @@ function ViewTaskByCradTryS(props) {
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
-                                <label className="check-task border-left    px-2 col-status " >
+                                <label className=" border-left  col-1 px-1" >
                                     <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
 
                                     </div>
                                 </label>
-                                <label className="check-task border-left  col">{props.task.startDate}
+                                <label className="border-left col-1">
+                                    {props.task.dueDate}
                                 </label>
-                                <label className="check-task border-left  col">{props.task.dueDate}
-                                </label>
-                                <label className="check-task border-left  px-2 col-priority">{props.task.priority ?
+                                <label className="border-left px-2 col-1">{props.task.priority ?
                                     <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
-                                    : null}
+                                    : <hr></hr>}
                                 </label>
-                                <label className="check-task border-left  px-2 col-add-task">
-                                </label>
-                                <label className="check-task view-details-btn col" title="View Details">
-                                    <button onClick={(e) => openViewDetails(e)}>
+                                <label className="view-details-btn col-1 border-left px-2" title="View Details">
+                                    <button onClick={(e) => openViewDetails(e)}
+                                    className="mx-auto">
                                         view details
                                         <FontAwesomeIcon className="ml-2"
                                             icon={['fas', 'caret-right']}>
                                         </FontAwesomeIcon>
                                     </button>
                                 </label>
+                               
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask}

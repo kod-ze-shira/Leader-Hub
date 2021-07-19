@@ -71,7 +71,7 @@ function DisplayGantt(props) {
                     duration: diffDays,
                     progress: 0.3,
                     milestones: task.milestones,
-                    status: task.status,
+                    contacts: [],
                 })
             }
             if(diffDays===0){
@@ -90,7 +90,7 @@ function DisplayGantt(props) {
                 duration: diffDays,
                 progress: 0.3,
                 milestones: task.milestones,
-                status: task.status
+                contacts: task.assignTo1.map((c)=>{return c?.contact?.thumbnail})
             })
         })
         mone.push(index)
@@ -144,6 +144,7 @@ function DisplayGantt(props) {
             "progress": 0.6,
             "milestones": null,
             status: {},
+            contacts:[]
         })
     const state = {
         currentZoom: 'Days',

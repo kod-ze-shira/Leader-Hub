@@ -600,7 +600,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
             success: function (data) {
                 console.log("success")
                 console.log(data);
-                dispatch(actions.setStartHourId(data.currentHour))
+                dispatch(actions.setStartHour(data.currentHour))
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {

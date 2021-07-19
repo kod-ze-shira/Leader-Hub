@@ -10,6 +10,9 @@ import './Milstones.css';
 function ViewMilstone(props) {
     const [viewDetails, setViewDetails] = useState(false)
 
+    useEffect(()=>{
+        console.log(props.milestone);
+    })
     const getCardsByProject = () => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -22,13 +25,15 @@ function ViewMilstone(props) {
         })
 
     }
-    function openDetails(e) {
+    function openDetails(event) {
 
         getCardsByProject().then((result) => {
             props.saveCurrentIndexOfCardInRedux(props.milestone.card.index)
             props.saveCurrentIndexOfTaskInRedux(props.milestone.task.index)
             setViewDetails(true)
+             
         })
+        // event.stopPropagation()//to do statuses not opend
     }
     function viewInGantt() {
         props.history.push("/" + props.user + "/hub/projectPlatform/"+props.milestone.card.project+'/gantt')

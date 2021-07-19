@@ -25,7 +25,8 @@ const initialState = {
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
     foldersForDownload: [],
-    sharedProjects: [] //projects that user shared  
+    sharedProjects: [] ,//projects that user shared  
+    priorities:[]
 }
 
 const publicData = {
@@ -384,7 +385,7 @@ const publicData = {
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },
-    setStartHourId(state, action) {
+    setStartHour(state, action) {
 
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].workingTime.push(action.payload)
     },
