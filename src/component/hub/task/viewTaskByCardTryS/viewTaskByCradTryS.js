@@ -258,9 +258,9 @@ function ViewTaskByCradTryS(props) {
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className="col-3 d-flex pt-0 pb-2 pl-0">
-                                    <img src={require('../../../../assets/img/dnd-icon.svg')} 
-                                    className="dnd-icon dnd-icon-1 mt-1" id={props.task._id}></img>
+                                <div className="col-3 d-flex pt-0 pb-0 pl-0">
+                                    <img src={require('../../../../assets/img/dnd-icon.svg')}
+                                        className="dnd-icon dnd-icon-1 mt-1" id={props.task._id}></img>
                                     <label
                                         title="Complete Task"
                                         className="check-task ml-4 ">
@@ -274,7 +274,7 @@ function ViewTaskByCradTryS(props) {
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
-                                        className={props.task.complete ? 
+                                        className={props.task.complete ?
                                             "disabled show-task mt-1 ml-2 " : "show-task mt-1 ml-2 "}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
@@ -286,8 +286,18 @@ function ViewTaskByCradTryS(props) {
                                         }}
                                     >
                                     </input>
+                                    {/* //////////////////////////// */}
+                                    <label className="view-details-btn mt-2 px-2" title="View Details">
+                                        <button onClick={(e) => openViewDetails(e)}
+                                            className="mx-auto">
+                                            view details
+                                        <FontAwesomeIcon className="ml-2"
+                                                icon={['fas', 'caret-right']}>
+                                            </FontAwesomeIcon>
+                                        </button>
+                                    </label>
 
-                                    <div onClick={(e) => updateLike(e)} className="p-2 ml-auto">
+                                    <div onClick={(e) => updateLike(e)} className="p-2 ml-auto likeDiv">
 
                                         <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                         <img
@@ -297,7 +307,7 @@ function ViewTaskByCradTryS(props) {
                                         </img>
                                     </div>
                                 </div>
-                                
+
                                 <label className=" border-left  col-1">
                                     9:32:01
                                     {/* {props.task.startDate} */}
@@ -340,18 +350,10 @@ function ViewTaskByCradTryS(props) {
                                     <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                     : <hr></hr>}
                                 </label>
-                                <label className="view-details-btn col-1 border-left px-2" title="View Details">
-                                    <button onClick={(e) => openViewDetails(e)}
-                                    className="mx-auto">
-                                        view details
-                                        <FontAwesomeIcon className="ml-2"
-                                            icon={['fas', 'caret-right']}>
-                                        </FontAwesomeIcon>
-                                    </button>
-                                </label>
-                               
+                                {/* ///////////////////////////////// */}
+
                                 {viewDetails ?
-                                    <div className="closeDet" onClick={(e) => stopP(e)}>
+                                    <div className="closeDet    " onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask}
                                             closeViewDetails={() => setViewDetails(false)}
                                             from={detailsOrEditTask} task={props.task} open={true}
