@@ -22,12 +22,12 @@ function TaskDetails(props) {
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
     // const [completeTask, setCompleteTask] = useState(props.task.complete)
-    const [milstone, setMilstone] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
+    const [milstone, setMilstone] = useState()
 
     useEffect(() => {
-
+setMilstone(props.cards[props.indexCurrentCard]&&props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
         console.log(props.task.assingTo1);
-        if (props.cards) {
+        if (props.cards.length>0) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
             props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
 
@@ -40,7 +40,7 @@ function TaskDetails(props) {
     }, [props.cards, milstone])
 
     useEffect(() => {
-        nameRequired.current.focus();
+        // nameRequired.current.focus();
     }, [])
     useEffect(() => {
 
@@ -50,7 +50,7 @@ function TaskDetails(props) {
     const [fileComponentArr, setFileComponentArr] = useState([])
     const [startTimerComp, setStartTimerComp] = useState(false)
 
-    let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
+    let doneStatus = props.cards[props.indexCurrentCard]?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete:null
 
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
@@ -58,7 +58,8 @@ function TaskDetails(props) {
 
     }
     $(window).click(function () {
-        setOpenPopUp(!openPopUp)
+        debugger
+        setOpenPopUp(false)
     });
 
     function stopP(event) {
@@ -152,10 +153,10 @@ function TaskDetails(props) {
 
     }
 
-    let dueDate = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate;
-    let startDate = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate;
-    let dueDate_ = dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
-    let startDate_ = startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
+    let dueDate =props.cards[props.indexCurrentCard]? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate:null;
+    let startDate = props.cards[props.indexCurrentCard]?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate:null;
+    let dueDate_ =''// dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
+    let startDate_ = ''//startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
 
     let [dueDateTask, setDueDateTask] = useState(dueDate_)
     let [startDateTask, setStartDateTask] = useState(startDate_)
@@ -269,6 +270,8 @@ function TaskDetails(props) {
 
     return (
         <>
+             {props.cards[props.indexCurrentCard]&&props.priorities.length>0&&
+        <div>
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
             <div className="details task-details ml-4" onClick={(e) => closeStatus(e)}>
                 <div className='propertiesViewDitails' onClick={(e) => closeContactList(e)}>
@@ -475,7 +478,7 @@ function TaskDetails(props) {
                     </ReactTooltip>
                 </div>
             </div>
-
+            </div>}
         </>
 
     )

@@ -25,7 +25,8 @@ const initialState = {
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
     foldersForDownload: [],
-    sharedProjects: [] //projects that user shared  
+    sharedProjects: [] ,//projects that user shared  
+    priorities:[]
 }
 
 const publicData = {
