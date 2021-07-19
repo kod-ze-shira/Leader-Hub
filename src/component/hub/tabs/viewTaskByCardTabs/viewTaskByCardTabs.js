@@ -173,7 +173,51 @@ function ViewTaskByCradTabs(props) {
             event.stopPropagation()
         }
     }
+
+    const checkURL = (url) => {
+        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png|PNG)$/) != null);
+    }
+
+    const addFile = async (file) => {
+
+
+        let url
+        if (file)
+            url = file
+        // else
+        //     url = document.getElementById('inputImageInD').value;
+        // צריכה לבדוק פה אם הכתובת תקינה?
+        // this.props.setTaskByFiledFromTasks(url)
+
+        url = decodeURI(url)
+
+        let isGood = checkURL(url)
+
+        if (isGood) {
+            // flug = true;
+            let file = await fetch(url)
+                .then(r => r.blob())
+                .then(blobFile => new File([blobFile],
+                    url.match(/.*\/(.*)$/)[1],
+                    { type: "image/jpeg" }))
+            console.log(file)
+            props.setFileFromTask(file)
+            file = [{
+                'url': 'new',
+                'name': file.name,
+                'file': file,
+                'size': file.size
+            }]
+            file = await compressedFile(file)
+            let task = {}
+
+            task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
+            props.uploadFiles({ 'files': file, 'task': task, type: 'task' })
+        }
+    }
+
     const changeFiledInTask = (event) => {
+
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux
@@ -191,6 +235,35 @@ function ViewTaskByCradTabs(props) {
             editCompleteTask()
         }
         else {
+
+            let text = value
+            debugger
+            if (text.includes("https://") || text.includes("https://")) {
+                if (text.includes("https://"))
+                    text = "https://" + text.split("https://")[1]
+                else if (text.includes("http://"))
+                    text = "http://" + text.split("http://")[1]
+                // let myText
+                if (text.includes('.jpg')) {
+                    text = text.split('.jpg')[0] + '.jpg'
+                    addFile(text)
+                    // text = event.replace(text, '')
+                } else if (text.includes('.png')) {
+                    text = text.split('.png')[0] + '.png'
+                    addFile(text)
+                    // text = event.replace(text, '')
+                } else if (text.includes('.jpeg')) {
+                    text = text.split('.jpeg')[0] + '.jpeg'
+                    addFile(text)
+                    // text = event.replace(text, '')
+                }
+                if (text.includes('.gif')) {
+                    text = text.split('.gif')[0] + '.gif'
+                    addFile(text)
+                    // text = event.replace(text, '')
+                }
+            }
+
             editTaskInRedux = { "nameFiled": event.target.name, "value": value }
             props.setTaskByFiledFromTasks(editTaskInRedux)
         }
@@ -240,7 +313,6 @@ function ViewTaskByCradTabs(props) {
     const fileInputRef = useRef()
 
     const uploadMulti = async () => {
-
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{

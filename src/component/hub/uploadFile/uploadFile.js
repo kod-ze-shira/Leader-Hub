@@ -8,7 +8,7 @@ function UploadFile(props) {
     const fileInputRef = useRef()
     useEffect(() => {
         console.log(props);
-      
+
 
     }, [])
 
@@ -42,7 +42,7 @@ function UploadFile(props) {
     }
 
     const uploadMulti = async () => {
-        
+
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{
@@ -62,6 +62,7 @@ function UploadFile(props) {
                 type = 'taskNotBelong'
 
             }
+            debugger
             props.uploadFiles({ 'files': file, 'task': task, type: type })
 
 

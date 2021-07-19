@@ -28,7 +28,7 @@ function ViewContact(props) {
         let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1
         let isExistContactInList = false
         let i
-        
+
         for (i = 0; i < assign.length; i++) {
 
             if (assign[i].contact._id == props.contact._id)
@@ -40,8 +40,9 @@ function ViewContact(props) {
                 member = { "email": email, "level": "admin" }
             else
                 member = { "email": email }
+            debugger
             props.assingToMany(member)
-            // props.viewToastMassege({ show: true, massege: 'Task assign!!' })
+            props.viewToastMassege({ show: true, massege: props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name + ' assign!!' })
 
         }
     }
