@@ -2,7 +2,8 @@
     color: var(--unnamed-color-000000);
     text-align: left;
    font-size: medium;
-    color: #000000;
+    color: black;
+    padding-bottom: 0px !important;
     /* border-bottom: gray solid 1px; */
     background-color:#f9ffff;
     padding-top: 1vh;
@@ -11,26 +12,30 @@
     border-bottom: 1px  solid #98A9BC ;
 
 }
-
+.card-name p{
+    color: #c5c5c5;
+    border-left: 1px solid #c5c5c5;
+}
 .title-table-in-list{
     width: 600px;
 }
 .newTriangle{
-        width: 0; 
-        height: 0; 
-        display: inline-block;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent; 
-        border-top: 6px solid black;
-        cursor: pointer;
+    margin-bottom: 2px;
+   width: 0; 
+   height: 0; 
+   display: inline-block;
+   border-left: 6px solid transparent;
+   border-right: 6px solid transparent; 
+   border-top: 6px solid black;
+   cursor: pointer;
 }
 .triangle{
-        width: 0; 
-        height: 0; 
-        display: inline-block;
-        border-top: 6px solid transparent;
-        border-left: 6px solid #000000;
-        border-bottom: 6px solid transparent;
+    width: 0; 
+    height: 0; 
+    display: inline-block;
+    border-top: 6px solid transparent;
+    border-left: 6px solid #000000;
+    border-bottom: 6px solid transparent;
 }
 .wrap-triangle{
     display: inline-block;
@@ -49,18 +54,19 @@
 .show-card-list{
     padding-right: 0 !important;
 }
+
 #input-card-name {
 background-color: transparent!important;
 }
+
 .show-task{
     outline: 0!important;
     border: none ;
     text-align: left;
-
 }
+
 .show-card{
     font-weight: bold;
-
 }
 
 .title-card{
@@ -79,8 +85,9 @@ background-color: transparent!important;
     /* border-radius: 2px !important; */
     /* border: 1px solid blue; */
 }
+
 .card-name >p{
-   font-size:15px;
+   font-size: 0.83em;;
     text-align: center;
 }
 p{ 
@@ -112,9 +119,23 @@ p{
 .name-and-triangle{
     display: inline-block !important;
 }
-
+.container-scroll::-webkit-scrollbar-thumb{
+    background-color: transparent !important;
+}
+.container-scroll::-webkit-scrollbar-thumb{
+    background-color: transparent !important;
+}
+.container-scroll::-webkit-scrollbar-track{
+    background-color: transparent !important;
+}
 .scroll-container {
     overflow-y: scroll;
     scroll-behavior: smooth;
     width: 48% !important;
 }
+.container-scroll {
+    overflow-x: auto;
+  }
+  .container-scroll .row {
+    width: 115%; /* = 100% * 4/3 */
+  }

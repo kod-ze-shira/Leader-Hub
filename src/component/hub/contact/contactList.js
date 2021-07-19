@@ -53,9 +53,29 @@ function ContactList(props) {
   // useEffect(() => {
   //   setFIlter();
   // }, [])
+  //   const assingTaskToContact = (email) => {
+  //     let member
+  //     let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1
+  //     let isExistContactInList = false
+  //     let i
+  //     for (i = 0; i < assign.length; i++) {
+
+  //         if (assign[i].contact._id == props.contact._id)
+  //             isExistContactInList = true
+
+  //     }
+  //     if (!isExistContactInList) {
+  //         if (admin && props.contact._id == contactId)
+  //             member = { "email": email, "level": "admin" }
+  //         else
+  //             member = { "email": email }
+  //         props.assingToMany(member)
+
+  //     }
+  // }
 
   const assingTaskToContact = (e) => {
-
+    let member
     e.stopPropagation()
     let isValid = ValidateEmail(valueSearch)
     console.log(isValid)
@@ -63,11 +83,12 @@ function ContactList(props) {
       $(".invalid-feedback").css("display", "none");
       $(".invite-button").css("backgroundColor", "#68C7CB");
       $(".invite-button").css("color", "#358A8D");
-      props.assingToMany(valueSearch)
+
+      member = { "email": valueSearch }
+      props.assingToMany(member)
 
       setTimeout(() => {
         $(".div_contacts").css("display", "none");
-
       }, 1500);
     }
     else {
@@ -75,7 +96,6 @@ function ContactList(props) {
       $(".invalid-feedback").css("display", "block");
     }
   }
-
 
   function ValidateEmail(mail) {
     if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(valueSearch)) {
@@ -119,12 +139,12 @@ function ContactList(props) {
                 value={props.contactsUser.email}></input>
               : null}
             {contactList}</div>
-          {props.taskDetails ?   <input placeholder="Name or email " required ref={nameRequired}
-                className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
-                onChange={(e) => { handleChange(e); }}
-                onClick={(e) => e.stopPropagation()}
-                value={props.contactsUser.email}></input>
-              : null}
+          {props.taskDetails ? <input placeholder="Name or email " required ref={nameRequired}
+            className={contacts && contacts.length ? " form-control invite-contact col-12 my-2 " : "form-control invite-contact col-7 my-2 "}
+            onChange={(e) => { handleChange(e); }}
+            onClick={(e) => e.stopPropagation()}
+            value={props.contactsUser.email}></input>
+            : null}
 
           <div className="invalid-feedback">
             Please enter valid email.

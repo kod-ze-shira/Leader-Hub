@@ -20,9 +20,7 @@ function ViewCardsTabs(props) {
                 setAddTaskInInput(true)
                 props.setCard(props.cardFromMap)
             }
-
     }, [props.flag, props.openInputTask])
-
 
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -93,16 +91,11 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
+            $(`#${props.cards[props.indexCard]._id }`).css("display", "none")
+
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
     }
-
-    // function enterK(event) {
-    //     if (event.key === 'Enter') {
-    //         editCard()
-    //         document.getElementById("input-card-name").blur();
-    //     }
-    // }
     autosize();
 
     function autosize() {
@@ -133,11 +126,9 @@ function ViewCardsTabs(props) {
             $text.css('height', $text[0].scrollHeight + 'px');
         }
     }
-    const [task, setTask] = useState(false)
 
     const openViewDetails = (task) => {
         if (task != false) {
-            setTask(task)
             props.openViewDetails(task)
         }
     };

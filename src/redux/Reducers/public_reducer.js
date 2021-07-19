@@ -80,6 +80,7 @@ const publicData = {
     },
 
     setTaskByFiledFromTasks(state, action) {
+        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
         console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
@@ -384,7 +385,7 @@ const publicData = {
     setTaskComplete(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask] = action.payload
     },
-    setStartHourId(state, action) {
+    setStartHour(state, action) {
 
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].workingTime.push(action.payload)
     },
@@ -424,10 +425,8 @@ const publicData = {
                 for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
                     if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
                         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
-                        console.log('ll');
                         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files =
                         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
-
                     }
                 }
 
@@ -438,8 +437,6 @@ const publicData = {
         else {
             state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
         }
-
-
 
     },
 

@@ -197,15 +197,35 @@ export default class Gantt extends Component {
         };
         gantt.templates.rightside_text = function (start, end, task) {
             var eDate = gantt.calculateEndDate({ start_date: task.start_date, duration: task.duration, task: task }).toISOString().replace('-', '.').split('T')[0].replace('-', '.');
-            console.log(task.status.statusName);
+            console.log(task.contacts);
 
             //  <div class="gantt_status_right" 
             //     style="background-color:${task.status.color} !important">
             //     <p class="p-gantt-status"> ${task.status.statusName}</p>
-            // </div>|\xa0\xa0\xa0\xa0\xa0
-            return (`   <div style="display:inline-block">
+            // </div>|
+            let contact = ""
+           
+            if (task.contacts && task.contacts.length > 0) {
+                contact = `<div class="gantt_status_right">`
+                task.contacts.map((c, index) => {
+                    if (index < 3)
+                        contact += `<img referrerpolicy="no-referrer" src=${c} class="imgTeamGantt" />`
+
+                })
+                if(task.contacts.length>3){
+
+                    contact += ` <div class="imgTeamGantt marginTeam"  >+${ task.contacts.length - 3 }</div>`
+                }
+                contact += `</div>`
+
+            }
+            console.log(contact);
+            return (`   <div style="display:inline-flex" >
+             ${contact}
+             <div style="display:inline-block" class="ml-2">
               ${task.start_date.toISOString().replace('-', '.').split('T')[0].replace('-', '.')} \xa0-\xa0 ${eDate}
-            </div>`  );
+             </div>
+           </div>`  );
 
         };
         gantt.config.columns = [
@@ -406,7 +426,7 @@ export default class Gantt extends Component {
                     <div ref={(input) => {
                         this.ganttContainer = input;
                     }}
-                        style={{ width: '100%', height: '80vh' }}
+                        style={{ width: '100%', height: '83vh'}}
                     >
                     </div>
                     <div className="zoom-label">

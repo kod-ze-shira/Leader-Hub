@@ -48,7 +48,6 @@ setMilstone(props.cards[props.indexCurrentCard]&&props.cards[props.indexCurrentC
 
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
-    const [startTimerComp, setStartTimerComp] = useState(false)
 
     let doneStatus = props.cards[props.indexCurrentCard]?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete:null
 
@@ -397,7 +396,6 @@ setMilstone(props.cards[props.indexCurrentCard]&&props.cards[props.indexCurrentC
                                 <Select
                                     isSearchable={false}
                                     name="priority"
-
                                     // classNamePrefix="select"
                                     options={viewPriortyList}
                                     placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
@@ -411,11 +409,9 @@ setMilstone(props.cards[props.indexCurrentCard]&&props.cards[props.indexCurrentC
                                     onChange={(e) => changePriority(e)}
                                 />
                             </div>
-                            {/* <div className="form-group col-md-6 col-lg-5 priority-task-details">
-                                <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
-                                <button onClick={(e) => { setStartTimerComp(false); props.disaplayLineByStop() }}>stop</button>
-                                <Timer startTimerComp={startTimerComp} ></Timer>
-                            </div> */}
+                            <div className="form-group col-md-6 col-lg-5 priority-task-details">
+                                <Timer></Timer>
+                            </div>
                         </div>
 
 
@@ -512,8 +508,6 @@ const mapDispatchToProps = (dispatch) => {
         setTaskByFiledFromTasks: (taskDetails) => dispatch(actions.setTaskByFiledFromTasks(taskDetails)),
         setTaskFromTasks: (task) => dispatch(actions.setTaskFromTasks(task)),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
-        displayLineByStart: () => dispatch(actions.displayLineByStart()),
-        disaplayLineByStop: () => dispatch(actions.disaplayLineByStop()),
         setTopContactList: (top) => dispatch(actions.saveTopContactListInRedux(top)),
         setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
         setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
