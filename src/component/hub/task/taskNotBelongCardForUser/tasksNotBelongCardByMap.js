@@ -238,7 +238,7 @@ function TasksNotBelongCardByMap(props) {
                     "card": props.task.card ? props.task.card : ''
                 }
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-                props.viewToastMassege({ show: true, massege: 'Task assign!!' })
+                props.viewToastMassege({ show: true, massege: props.task.name + ' assign!!' })
 
             });
         }

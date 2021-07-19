@@ -259,7 +259,7 @@ function ViewTaskByCradTryS(props) {
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
                                 <div className=" col-4 d-flex">
-                                <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
+                                    <img src={require('../../../../assets/img/dnd-icon.svg')} className="dnd-icon  " id={props.task._id}></img>
                                     <label
                                         title="Complete Task"
                                         className="check-task ml-4 ">
@@ -295,7 +295,7 @@ function ViewTaskByCradTryS(props) {
                                         </img>
                                     </div>
                                 </div>
-                               
+
                                 <label className="check-task border-left  col">{props.task.startDate}
                                 </label>
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}

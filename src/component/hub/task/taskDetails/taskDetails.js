@@ -7,15 +7,15 @@ import Select from 'react-select';
 import './taskDetails.css'
 import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
-import File from '../../uploadFile/file/file'
+import File from '../../file/file'
 import ViewAllStatuses from '../../status/viewAllStatuses';
-import file from '../../uploadFile/file/file';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
 import QuillEditTask from '../quilEditTask/quillEditTask';
+import ModalFiles from '../../modalFIles/modalFiles';
 function TaskDetails(props) {
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
@@ -49,7 +49,8 @@ function TaskDetails(props) {
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
     const [startTimerComp, setStartTimerComp] = useState(false)
-
+    const [shoewModalFiles, setShoewModalFiles] = useState(false)
+    const [url, setUrl] = useState('dddd')
     let doneStatus = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete
 
     const openPopUpStatus = (event) => {
@@ -198,11 +199,17 @@ function TaskDetails(props) {
         props.setTaskFromTasks(taskBeforeChanges)
         props.closeViewDetails()
     }
+    function func(val) {
+        // alert(val)
+        setShoewModalFiles(val)
+    }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
             setDownloadFile={(e) => { props.setDownloadFile(e) }}
             taskId=''
+            url={(val) => setUrl(val)}
+            shoewModalFiles={(val) => func(val)}
         />
     }) : null
 
@@ -269,6 +276,9 @@ function TaskDetails(props) {
 
     return (
         <>
+            {shoewModalFiles &&
+                <ModalFiles url={url} show={(val) => setShoewModalFiles(val)} />
+            }
             {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}
             <div className="details task-details ml-4" onClick={(e) => closeStatus(e)}>
                 <div className='propertiesViewDitails' onClick={(e) => closeContactList(e)}>
@@ -442,7 +452,7 @@ function TaskDetails(props) {
                         </ReactTooltip>
                     </div>
                     <div className=" files-details mx-1" data-tip id="files">
-                        <UploadFile />
+                        <UploadFile taskId='' />
                         <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
                         <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                         <ReactTooltip className="tooltip-style" place="top" effect="solid">
@@ -457,7 +467,7 @@ function TaskDetails(props) {
                         </ReactTooltip>
                     </div>
                     {showContactList ?
-                        <ContactList taskDetails={true} ></ContactList> : null
+                        <ContactList taskDetails={true} viewToastMassege={props.viewToastMassege}></ContactList> : null
                     }<div className="widthofContacts col-4 mt-1 ml-1">
                         {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                             if (index < 3)

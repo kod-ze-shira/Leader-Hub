@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './file.css'
-import { actions } from '../../../../redux/actions/action'
+import { actions } from '../../../redux/actions/action';
 
 
 import $ from 'jquery'
@@ -57,7 +57,10 @@ function File(props) {
         props.downloadFile({ 'file': props.file, 'e': e })
         // props.showViewDetails(true)
     }
-
+    function showFiles(url) {
+        props.url(url)
+        props.shoewModalFiles(true)
+    }
     return (
         <>
             <div className='fileInTask  mb-3 row' id={`file_${props.file.name}`}
@@ -95,7 +98,12 @@ function File(props) {
                 <div className='col-8  nameFileAndAction'>
                     <span className='nameFileInTask'>
                         {props.file.url != 'new' ?
-                            <a href={props.file.url} target="_blank" style={{ 'color': '#358A8D' }}>{props.file.name}</a>
+                            // <a href={props.file.url} target="_blank"
+                            <a href='#'
+                                onClick={() => showFiles(props.file.url)}
+                                style={{ 'color': '#358A8D' }}
+                            >{props.file.name}
+                            </a>
                             : <span> {props.file.name}</span>}
 
                     </span>
@@ -124,11 +132,11 @@ function File(props) {
                             downloadFile(e)
                         }} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4 imgActionFile'
-                            src={require('../../../../assets/img/download.svg')}></img>
+                            src={require('../../../assets/img/download.svg')}></img>
                         : null}
                     {props.file.url != 'new' &&
                         <img onClick={(e) => deleteFile(e)} id={props.file.name} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
-                            src={require('../../../../assets/img/Group 21592.svg')}></img>
+                            src={require('../../../assets/img/Group 21592.svg')}></img>
                     }
 
 

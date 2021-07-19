@@ -48,7 +48,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         closeViewDetails={props.closeViewDetails}
                         setDownloadFile={(e) => props.setDownloadFile(e)}
                         viewToastMassege={props.viewToastMassege}
-
                     />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails}

@@ -334,4 +334,5 @@ function checkPermission(result) {
     resolve(true)
 
   })
+
 }

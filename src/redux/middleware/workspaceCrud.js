@@ -32,6 +32,8 @@ export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => ac
         //     urlData = `${keys.API_URL_BASE_SERVER}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
 
         // else
+
+
         urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getWorkspacesForUser`
         fetch(urlData,
             {
