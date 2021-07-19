@@ -65,18 +65,10 @@
         margin-left: 2.8vw;
     }
 }
-/* 
-@media screen and (max-width: 880px) {
-    
-    .logsDashed{
-        margin-left: 3.3vw;
-    }
-} */
 
 @media screen and (max-width: 989px){
     
     .logsDashed{
-        /* margin-left: 3.5vw; */
         margin-left: 7vw;
 
         
@@ -89,10 +81,3 @@
         margin-left: 7.5vw;
     }
 }
-
-
-
-
-
-
-

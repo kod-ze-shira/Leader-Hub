@@ -18,28 +18,27 @@ function Logs(props) {
     let returenProjectOrTaskName = (log) => {
         let objectName = null;
         if (log.schemaName.includes("Task")) {
-            // for (let i = 0; i < props.cards.length; i++) {
-            //     for (let j = 0; j < props.cards[i].tasks.length; j++) {
-            //         if (props.cards[i].tasks[0]._id == log.objectId) {
-            //             objectId = log.objectId;
-            //             break;
+            for (let i = 0; i < props.cards.length; i++) {
+                for (let j = 0; j < props.cards[i].tasks.length; j++) {
+                    if (props.cards[i].tasks[0]._id == log.objectId) {
+                        objectName = props.cards[i].tasks[0].name;
+                        break;
+                    }
+                }
+                if (objectName !== null) {
+                    break;
+                }
+
+            }
+            // props.cards.map((card) => {
+            //     card.tasks.map((task) => {
+            //         if (task._id == log.objectId) {
+            //             objectName = task.name
             //         }
 
             //     }
-            //     if (objectId !== null) {
-            //         break;
-            //     }
-
-            // }
-            props.cards.map((card) => {
-                card.tasks.map((task) => {
-                    if (task._id == log.objectId) {
-                        objectName = task.name
-                    }
-
-                }
-                )
-            })
+            //     )
+            // })
             return objectName
 
         }
