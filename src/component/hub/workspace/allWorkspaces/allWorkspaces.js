@@ -99,7 +99,7 @@ function AllWorkspaces(props) {
             <div className="row mt-5"></div>
             <div className="col-12" >
                 <div className="row borderBottom mx-5">
-                    <div className="MyWorkspace">My Workspace</div>
+                    <div className="MyWorkspace">My Workspaces</div>
                     <div className="row">
                         {
                             grid ?

@@ -2,7 +2,7 @@ import $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter} from 'react-router-dom';
 import '../../body/body.css';
 import ViewDetails from '../../viewDetails/viewDetails';
 import ViewProject from '../viewProject/viewProject';
@@ -18,8 +18,9 @@ function ProjectsByWorkspace(props) {
     const [addOrEditProject, setAddOrEditProject] = useState(false)
     const [editOrShareProject, setEditOrShareProject] = useState(false)
     const [e, setE] = useState('')
-
+    let workspaceName=''
     useEffect(() => {
+
         // if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
 
         // if (props.showViewDitailsProject) {
@@ -36,9 +37,15 @@ function ProjectsByWorkspace(props) {
             setValueSearch(props.valueSearchProject)
         } else
             setValueSearch(props.projectName)
-
+    
     }, [props.workspaces, props.indexOfWorkspace, props.showViewDitailsProject, props.valueSearchProject]);
 
+    if (props.history.location.pathname.includes('allProjects')) {
+        workspaceName='All Projects'       
+    }
+    else{
+        workspaceName=props.workspaces[props.indexOfWorkspace].name
+    }
     function openEditOrShareProject(from) {
         // setAddOrEditProject(from)
         setEditOrShareProject(from)
@@ -62,17 +69,17 @@ function ProjectsByWorkspace(props) {
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
                 : null
         }) : null
-        //view projects shared
-        const viewSharedProjects = 
+    //view projects shared
+    const viewSharedProjects =
         props.sharedProjects.map((project, index) => {
-            return project.objectId?project.objectId.name.toUpperCase().includes(valueSearch.toUpperCase())
+            return project.objectId ? project.objectId.name.toUpperCase().includes(valueSearch.toUpperCase())
                 ? <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
                     indexProject={index}
                     myProject={project.objectId}
                     fromShare='true'
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)} />
-                : null:null
+                : null : null
         })
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects.map((project, index) => {
@@ -109,17 +116,32 @@ function ProjectsByWorkspace(props) {
             <div className='headerProjects'>
                 <div className='contentHeaderProjects'>
                     <div className='betweenHeaderProjects'>
-                        <div className="titleProjects pt-2 ml-2">Leader Projects</div>
+                        <div className="titleProjects pt-2 ml-2">{workspaceName}</div>
                     </div>
                 </div>
             </div>
             <Table responsive className='tableProject' >
+                <thead className="mx-3">
+                    <tr className='projectsTitle'>
+                        <th className='nameProjectInList'>
+                            <span className='name2ProjectInList'>{workspaceName}</span>
+                        </th>
+                        <th className='widthCellInProject'><span>Due Date</span></th>
+                        <th ><span>Cards</span></th>
+                        <th ><span >Task</span></th>
+                        <th ><span >Complete</span></th>
+                        <th className='widthCellInProject'><span>Members</span></th>
+                        <th className='widthCellInProject'><span>Last Update</span></th>
+                        <th className='actionsProject'><span>Shared Projects</span></th>
+                        {/* <th ></th> */}
+                    </tr>
+                </thead>
                 <tbody className="mx-3">
                     {idWorkspace ? viewProjectsByWorkspace : viewAllProjects}
                     {!idWorkspace ? viewSharedProjects : null}
                 </tbody>
             </Table>
-            { showProject ?
+            {showProject ?
                 <div className="closeDet" onClick={(e) => stopP(e)}>
                     <ViewDetails
                         viewToastComplete={props.viewToastComplete}
@@ -147,7 +169,7 @@ const mapStateToProps = (state) => {
         projectToDelete: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-        sharedProjects:state.public_reducer.sharedProjects
+        sharedProjects: state.public_reducer.sharedProjects
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -157,4 +179,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsByWorkspace)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProjectsByWorkspace))
