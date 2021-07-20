@@ -4,7 +4,7 @@ export const setIfShowShareProjectsToTrue = ({ dispatch, getState }) => next => 
     if (action.type === 'SET_IF_SHOW_SHARE_PROJECTS_TO_TRUE') {
         let shareProjectsId = getState().public_reducer.sharedProjects.map(shareProject => shareProject._id);
  
-        // let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/setIfShowShareProjectsToTrue`
+        // let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/setIfShowShareObjectsToTrue`
         // fetch(url, {
         //     method: 'POST',
         //     headers: {
