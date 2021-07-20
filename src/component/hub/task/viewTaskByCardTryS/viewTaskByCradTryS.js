@@ -307,8 +307,13 @@ function ViewTaskByCradTryS(props) {
                                     </label>
                                 </div>
 
-                                <label className="check-task border-left  col">
-                                    {props.task.startDate}
+                                <label className=" border-left  col-1">
+                                    9:32:01
+                                    {/* {props.task.startDate} */}
+                                </label>
+                                <label className=" border-left  col-1">
+                                    12:14:05
+                                    {/* {props.task.dueDate} */}
                                 </label>
                                 <label className="border-left  col-1">
                                     <span className="span-total-task"> {props.task.startDate}</span>
@@ -316,28 +321,32 @@ function ViewTaskByCradTryS(props) {
                                 <label className=" border-left  col-1 " onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
-                                        <div>
-                                            {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts ">
+                                        {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                            {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                        </div> : null}
+                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ?
+                                            <div className="widthofContacts ">
                                                 {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
-                                                    if (index < 2)
-                                                        return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
+                                                    if (index < 3)
+                                                        // return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+                                                        return assingTo.contact ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+
                                                             : null
                                                 }) : null}
-                                                {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
+                                                {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
                                             </div> : <img
-                                                // id={`${props.task._id}assing-to`}
-                                                className="ml-1 assing-to-icon"
+                                                className="ml-2 assing-to-icon"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                 src={require('../../../../assets/img/share-icon.png')}>
                                             </img>}
-                                        </div>
                                     </div>
                                     {/* <DynamicSelect
                                         value={props.task.assingTo ? props.task.assingTo.contact : null}
                                         setContactEmail={setStateMailToContactMail} options={'contacts'} /> */}
                                 </label>
-                                <label className=" border-left  col-1 px-1" >
-                                    <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
+                                <label className=" border-left col-1" >
+                                    <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task mb-2  mx-0" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
 
                                     </div>
@@ -349,7 +358,15 @@ function ViewTaskByCradTryS(props) {
                                     <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                     : <hr></hr>}
                                 </label>
-
+                                {/* <label className="view-details-btn col-1 border-left px-2" title="View Details">
+                                    <button onClick={(e) => openViewDetails(e)}
+                                        className="mx-auto">
+                                        view details
+                                        <FontAwesomeIcon className="ml-2"
+                                            icon={['fas', 'caret-right']}>
+                                        </FontAwesomeIcon>
+                                    </button>
+                                </label> */}
 
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>

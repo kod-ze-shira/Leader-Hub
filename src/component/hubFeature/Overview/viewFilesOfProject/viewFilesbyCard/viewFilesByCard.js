@@ -2,16 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action.js';
 import './viewFilesByCard.css'
-import bin from '../../../../../assets/img/bin.png'
-import title from '../../../../../Data/title.json'
-import download from '../../../../../assets/img/download.png'
-import ReactTooltip from 'react-tooltip'
 import ViewFile from '../viewFile/viewFile'
 import { withRouter } from 'react-router-dom'
 
 function ViewFilesByCard(props) {
-
-
     useEffect(() => {
         props.setFilesForDownload([])
         props.setCountFilesArr(0)

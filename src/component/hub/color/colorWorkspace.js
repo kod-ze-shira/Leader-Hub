@@ -26,21 +26,19 @@ export default function
         event.stopPropagation();
     }
     function handleChange(color) {
-        debugger
         props.setColorWorkspace(color)
     }
 
     return (
         <>
-            {colors.map(color => {
+            {colors.map((color, index) => {
 
-                return <div className="select-color-workspace" onClick={(e) => handleChange(color)} style={{ "backgroundColor": color }}></div>
-            })}
-            <div className="add-color-workspace">+
+                return <>
+                    <label className="select-color-workspace" onClick={(e) => handleChange(color)} style={{ "backgroundColor": color }}></label>
+                </>
+            })} <div className="add-color-workspace">+
                 <input onChange={(e) => handleChange(e.target.value)} type="color" />
             </div>
-            {/* <div className="add-color-workspace">+</div> */}
-
         </>
     )
 }

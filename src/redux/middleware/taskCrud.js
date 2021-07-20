@@ -598,6 +598,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
             },
             dataType: 'json',
             success: function (data) {
+                
                 console.log("success")
                 console.log(data);
                 dispatch(actions.setStartHour(data.currentHour))

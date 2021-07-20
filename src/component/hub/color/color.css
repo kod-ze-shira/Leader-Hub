@@ -24,16 +24,17 @@
   border:1px solid black;
   margin-left: 5px;
   position: relative;
-
+  display: inline-block;
+  top: 0 !important;
+  left: 0 !important;
 
 }
 
 .add-color-workspace input {
-  position: absolute;
+   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
   cursor: pointer;
+  opacity: 0;
+  display: inline-block
 }

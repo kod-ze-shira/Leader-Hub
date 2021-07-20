@@ -31,7 +31,7 @@ function ViewStatus(props) {
             props.setTaskByFiledFromTasks(editTaskInRedux)
             props.completeTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
         }
-        if (props.fromHub)
+        // if (props.fromHub)
             props.editTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
     }
     return (

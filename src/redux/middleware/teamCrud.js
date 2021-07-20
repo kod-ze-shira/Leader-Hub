@@ -242,7 +242,7 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ assign }),
 
       success: function (data) {
-        debugger
+      
         console.log("success")
         console.log("data", data);
         // if (data.task.assignTo1.contact)

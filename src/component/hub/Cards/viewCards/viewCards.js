@@ -131,6 +131,10 @@ function ViewCards(props) {
         function () {
             $(this).attr('contentEditable', true);
         });
+        
+    $(window).on("click", function () {
+        setAddTaskInInput(false)
+    })
 
     $('span').bind('blur',
         function () {
@@ -152,7 +156,7 @@ function ViewCards(props) {
                                     className=" newTriangle ml-1"
                                     onClick={(e) => changeSelectedCard(e)} ></div>
                             </div>
-                            <span  
+                            <span
                                 ref={textInput}
                                 onBlur={() => editCard()}
                                 className="show-card show-card-list ml-2 col-10 ">
@@ -181,7 +185,7 @@ function ViewCards(props) {
                         </Menu>
                     </div>
                     {/* <p className="col">Team</p> */}
-                     
+
                     <p className="col-1">Start</p>
                     <p className="col-1">End</p>
                     <p className="col-1">Total</p>
@@ -190,14 +194,14 @@ function ViewCards(props) {
                     {/* <p className="col">Start date</p> */}
                     <p className="col-1 ">Due date</p>
                     <p className="col-1">Priority</p>
-                 
+                    {/* <p className="col-1 "></p> */}
 
                 </div >
-                    <p className=""><a>
-                        <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
-                            {title.title_add_task}
-                        </ReactTooltip>
-                    </a></p>
+                <p className=""><a>
+                    <ReactTooltip className="tooltip-style" data-tip id="add" place="bottom" effect="solid">
+                        {title.title_add_task}
+                    </ReactTooltip>
+                </a></p>
                 {
                     props.flag == props.cardFromMap._id && flagFromSelect || flag ?
                         <div className="allTaskInCard">
