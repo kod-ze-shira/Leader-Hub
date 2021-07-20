@@ -54,7 +54,8 @@ function NewConfigorator(props) {
     }
     function goToAllProjects(e) {
         changeBackground(e)
-        props.setIfShowShareProjectsToTrue()
+        if (props.sharedProjects.filter(shareProject => shareProject.ifShow == false).length > 0)
+            props.setIfShowShareProjectsToTrue()
         props.history.push("/" + props.user + "/hub/allProjects")
     }
     function goToMyTasks(e) {
@@ -96,7 +97,7 @@ function NewConfigorator(props) {
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
                             <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
                             <p>All Projects</p>
-                            <NumberOfNotShowShareProjects/>
+                            <NumberOfNotShowShareProjects />
                         </li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
                             {/* <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img> */}
@@ -131,12 +132,12 @@ const mapStateToProps = (state) => {
 
     return {
         user: state.public_reducer.userName,
-
+        sharedProjects: state.public_reducer.sharedProjects//to know if has objects that yet not show
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setIfShowShareProjectsToTrue:()=>dispatch(actions.setIfShowShareProjectsToTrue())
+        setIfShowShareProjectsToTrue: () => dispatch(actions.setIfShowShareProjectsToTrue())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewConfigorator))

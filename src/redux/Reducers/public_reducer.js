@@ -461,6 +461,10 @@ const publicData = {
     },
     setSharedProjects(state, action) {
         state.sharedProjects = action.payload
+    },
+    setIfShowShareProjectsInReduxToTrue(state,action){
+        state.sharedProjects.map(shareProject=>
+            shareProject.ifShow=true)
     }
 
 }
