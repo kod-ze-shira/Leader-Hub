@@ -51,7 +51,7 @@ function TaskNotBelongCardForUser(props) {
                     className={showBtn ? 'd-block btn-add-task py-1 px-3 mr-2 ml-4 mr-auto' : 'd-none '}
                     onClick={hundleClick}>
                     {/* <img width="22" className="icon-complete" id="complete"
-                        src={require('../../../img/plus.png')}>
+                        src={require('../../../assets/img/plus.png')}>
                     </img>‏ */}
                     {/* <span className="icon-complete">+</span> */}
                     Add Task </button>
@@ -74,7 +74,7 @@ function TaskNotBelongCardForUser(props) {
                             }} />
                         <button className="close-add-task" onClick={() => setShowBtn(true)}>
                             <img width="75%"
-                                src={require('../../../img/close-icon.svg')}>
+                                src={require('../../../../assets/img/close-icon.svg')}>
                             </img>
                         </button>
                     </div>
@@ -93,7 +93,7 @@ function TaskNotBelongCardForUser(props) {
                 >
                     <div class="input-group-prepend">
                         {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
-                        <img src={require('../../../img/onic-ios-search.png')} />
+                        <img src={require('../../../../assets/img/onic-ios-search.png')} />
 
                     </div>
 
@@ -108,7 +108,7 @@ function TaskNotBelongCardForUser(props) {
             <div className="wrap-all-task">
                 <div className="wrap-all-task-width">
                     <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                        <label class="ml-3 pl-6 col-3 col-xl-4 labelAllTask"> My task </label>
+                        <label class="ml-3 pl-6 col-3  labelAllTask"> My task </label>
                         <label class="col-2 propertiesAllTask ml-4">Workspace</label>
                         <label class="col-2 propertiesAllTask">Project</label>
                         <label class=" col-2 propertiesAllTask">Card</label>

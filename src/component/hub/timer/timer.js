@@ -14,10 +14,14 @@ function Timer(props) {
     const [minutes, setminutes] = useState(0);
     const [hours, setHours] = useState(0);
     const [ten, setTen] = useState(10);
-    // const refminutes = props.refMinutes;
+    const [startTimerComp, setStartTimerComp] = useState(false)
 
+    // const refminutes = props.refMinutes;
+    let a = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
+    debugger
     useEffect(() => {
         let interval = null;
+
 
         // if (props.flagTrueTimer1 === true) {
         //     convertHour(props.continuedTimer1);
@@ -29,12 +33,12 @@ function Timer(props) {
         //     props.setTrueTimer1(false);
         // }
 
-        if (props.startTimerComp) {
+        if (startTimerComp) {
             interval = setInterval(() => {
                 setSeconds(seconds => seconds + 1);
             }, 1000);
         } else
-            if (!props.startTimerComp && seconds !== 0) {
+            if (!startTimerComp && seconds !== 0) {
                 clearInterval(interval);
             }
 
@@ -50,7 +54,7 @@ function Timer(props) {
 
         return () => clearInterval(interval);
         // }, [props.startTimerComp, seconds, props.flagTrueTimer1, props.FlagTimerdDisplay1]);
-    }, [props.startTimerComp, seconds]);
+    }, [startTimerComp, seconds]);
 
 
 
@@ -68,6 +72,8 @@ function Timer(props) {
     return (
         <>
 
+            <button onClick={(e) => { setStartTimerComp(true); props.displayLineByStart() }}>start</button>
+            <button onClick={(e) => { setStartTimerComp(false); props.disaplayLineByStop() }}>stop</button>
 
 
             <span className="timertime">
@@ -101,9 +107,13 @@ function Timer(props) {
 }
 const mapStateToProps = (state) => {
     return {
+        cards: state.public_reducer.cards,
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
+        indexCurrentTask: state.public_reducer.indexCurrentTask,
         // flagTrueTimer1: state.userReducer.flagTrueTimer,
         // continuedTimer1: state.userReducer.continuedTimer,
         // FlagTimerdDisplay1: state.flags_reducer.FlagTimerdDisplay
+
 
     }
 }
@@ -112,6 +122,8 @@ const mapDispatchToProps = (dispatch) => {
         trueTimer1: (a) => dispatch(actions.trueTimer(a)),
         flagTimerDisplay1: (a) => dispatch(actions.flagTimerDisplay(a)),
         setTrueTimer1: (a) => dispatch(actions.setTrueTimer(a)),
+        displayLineByStart: () => dispatch(actions.displayLineByStart()),
+        disaplayLineByStop: () => dispatch(actions.disaplayLineByStop()),
     }
 }
 

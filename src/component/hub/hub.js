@@ -22,7 +22,7 @@ import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 // import AddObject from './addObject/addObject'
-import HeaderLeader from '@leadercodes/header'
+// import HeaderLeader from '@leadercodes/Leader-header'
 // import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
@@ -35,8 +35,8 @@ import selectTask from './SelectHeader/selectTask/selectTask';
 import ToastMessage from '../hub/toast/toastMessage'
 import RocketShip from './rocketShip/rocketShip'
 import ViewAllStatuses from '../hub/status/viewAllStatuses';
-
-
+import HeaderLeader from '@leadercodes/header';
+import ModalFiles from './modalFIles/modalFiles';
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -153,14 +153,9 @@ function Hub(props) {
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div> */}
             <Router history={history}>
-                <div style={{
-                    position: 'absolute',
-                    'z-index': '999',
-                    right: '8px',
-                    top: '19px'
-                }}>
+                <div className='headerLeaderHub'>
                     <HeaderLeader userName={props.userName} appName='hub' />‏
-               </div>
+                </div>
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="configuratorBlue col-2 ">
@@ -219,6 +214,12 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones />
                             </ProtectedRoute>
+
+                            <ProtectedRoute path={"/:userName/ModalFiles"}>
+                                <ModalFiles />
+
+                            </ProtectedRoute>
+
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>

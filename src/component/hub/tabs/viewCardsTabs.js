@@ -13,7 +13,6 @@ import ViewTaskByCradTabs from './viewTaskByCardTabs/viewTaskByCardTabs';
 
 function ViewCardsTabs(props) {
 
-
     useEffect(() => {
         if (props.cards[props.indexCurrentCard])
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
@@ -21,9 +20,7 @@ function ViewCardsTabs(props) {
                 setAddTaskInInput(true)
                 props.setCard(props.cardFromMap)
             }
-
     }, [props.flag, props.openInputTask])
-
 
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
@@ -94,22 +91,46 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
+            $(`#${props.cards[props.indexCard]._id }`).css("display", "none")
+
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
     }
+    autosize();
 
-    // function enterK(event) {
-    //     if (event.key === 'Enter') {
-    //         editCard()
-    //         document.getElementById("input-card-name").blur();
-    //     }
-    // }
-    const [task, setTask] = useState(false)
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+
+            }
+            if (e.key == 'Enter') {
+                newTask()
+
+            }
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
 
     const openViewDetails = (task) => {
-        setTask(task)
-        props.openViewDetails(task)
-
+        if (task != false) {
+            props.openViewDetails(task)
+        }
     };
 
     $(window).click(function () {
@@ -131,7 +152,7 @@ function ViewCardsTabs(props) {
         });
     return (
         <>
-            <div className="card-width px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
+            <div className="col-md-3 col-sm-10 px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
                         <div
@@ -154,7 +175,7 @@ function ViewCardsTabs(props) {
                                             <Button className="more col-2" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} data-tip data-for="more_a"
                                             >
                                                 . . .
-                                             </Button>
+                                            </Button>
                                             <ReactTooltip className="tooltip-style" data-tip id="more_a" place="top" effect="solid">
                                                 {title.title_more_actions}
                                             </ReactTooltip>
@@ -177,8 +198,7 @@ function ViewCardsTabs(props) {
                                                 <div className="mt-0 glila mb-2"
                                                     ref={provided.innerRef}
                                                     {...provided.droppableProps} >
-
-                                                    {props.cardFromMap.tasks.map((task, index) => (
+                                                    {props.cardFromMap.tasks ? props.cardFromMap.tasks.map((task, index) => (
                                                         <ViewTaskByCradTabs
                                                             openViewDetails={openViewDetails}
                                                             objectToast={(obj) => props.showToast(obj)}
@@ -189,19 +209,19 @@ function ViewCardsTabs(props) {
                                                             viewToastMassege={props.viewToastMassege}
                                                             viewContactList={props.viewContactList}
                                                             openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
-                                                    ))}
+                                                    )) : null}
                                                     {
                                                         addTaskInInput ?
                                                             <div class="mt-3">
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="form-control" placeholder="Add Task"
+                                                                    class="  form-control col-12 mx-0" placeholder="Add Task"
                                                                     id="input-task"
-                                                                    autocomplete="chrome-off"
-                                                                    value={inputValue}
+                                                                    autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}
-                                                                    onChange={updateInputValue} onKeyPress={event => {
+                                                                    onChange={updateInputValue}
+                                                                    onKeyPress={event => {
                                                                         if (event.key === 'Enter') {
                                                                             newTask()
                                                                         }

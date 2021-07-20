@@ -48,7 +48,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         closeViewDetails={props.closeViewDetails}
                         setDownloadFile={(e) => props.setDownloadFile(e)}
                         viewToastMassege={props.viewToastMassege}
-
                     />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails}
@@ -70,7 +69,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         }
                     />
                 case 'newProject':
-                    return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
+                    return <NewProject fromAllproject={props.fromAllproject}closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
@@ -79,7 +78,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
-                    return <AddWorkspace closeViewDetails={props.closeViewDetails} />
+                    return <AddWorkspace closeViewDetails={props.closeViewDetails} colorWorkspace={props.colorWorkspace} />
                 default:
                     return null;
 

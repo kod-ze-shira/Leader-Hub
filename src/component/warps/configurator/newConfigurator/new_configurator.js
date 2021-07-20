@@ -72,12 +72,12 @@ function NewConfigorator(props) {
     // }
     return (
         <>
-            <div>
+            {/* <div>
                 <FontAwesomeIcon title="Close menu"
                     icon={["fas", "bars"]} class='closeConfigurator' onClick={(e) => closeConfigurator(e)
                     } />
 
-            </div>
+            </div> */}
             {closeOrOpenConfigurator ?
                 <div className="left_nav ">
 
@@ -91,23 +91,22 @@ function NewConfigorator(props) {
                     {/* </div> */}
                     <ul className="list_config ">
                         <li id='li-back' className='li-back' onClick={(e) => changeBackground(e.target)}>
-                            <img className="mr-2" src={require('../../../img/workspace.svg')}></img>
+                            <img className="mr-2" src={require('../../../../assets/img/workspace.svg')}></img>
                             <p>My Workspaces</p>
                         </li>
                         <li id='allProjects' onClick={(e) => goToAllProjects(e.target)}>
-                            <img className="mr-2" src={require('../../../img/bag-check.svg')}></img>
+                            <img className="mr-2" src={require('../../../../assets/img/bag-check.svg')}></img>
                             <p>All Projects</p>
                             <NumberOfNotShowShareProjects />
                         </li>
                         <li id='myTask' onClick={(e) => goToMyTasks(e.target)}>
-                            {/* <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img> */}
                             <FontAwesomeIcon
                                 className="mr-2" icon={["fas", "tasks"]}
                             />
                             <p>My Tasks</p>
                         </li>
                         <li id='milestone' onClick={(e) => goToMilestones(e.target)}>
-                            <img className="mr-2" src={require('../../../img/flag-alt.svg')}></img>
+                            <img className="mr-2" src={require('../../../../assets/img/flag-alt.svg')}></img>
                             <p>Milestones</p>
                         </li>
 

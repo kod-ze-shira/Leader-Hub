@@ -9,10 +9,9 @@
     padding: 2px 0 1px 8px ;
 }
 .addTaskNotBelong{
-    /* background: url(../../../img/check-mark.svg) no-repeat ;
     background-size: 18px 18px;
     background-position:left ;
-    padding-left: 20px  !important; */
+    padding-left: 20px  !important; 
     border: none;
     width: 94%;
     position: relative;
@@ -21,9 +20,9 @@
 .bacW .css-yk16xz-control{
     border: none !important;
 }
-.bacW .css-yk16xz-control::after { 
-    /* content: url(https://static.thenounproject.com/png/551749-200.png); */
-  }
+/* .bacW .css-yk16xz-control::after { 
+    content: url(https://static.thenounproject.com/png/551749-200.png);
+  } */
 .bacW{
     background-color: white !important;
 }
@@ -110,7 +109,7 @@
     padding-left: 0px !important;
 }
 .select-not-belong{
-    width: 6vw;
+    width: 4vw;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
@@ -301,3 +300,13 @@ inner-addon {
     text-align: center !important;
 }
 
+.task-name-no-belong{
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.checkmark-place1 {
+    left:0 !important;
+    top:8px !important;
+} 

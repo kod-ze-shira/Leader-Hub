@@ -65,35 +65,34 @@ function Overview(props) {
                             </div>
                         </div>
 
-                        <div className='col ' >
-                            <div className='container-fluid px-0 '>
-                                {refresh ?
-                                    <FilesOfProject />
-                                    : null}
-                            </div>
-
-                            <div className='row HangoutAndLogs d-xs-block d-lg-none'>
-                                <div className='col-12'>
-                                    <div className='container-fluid px-0 '>
-                                        {refresh ?
-                                            <HangoutAndLogs></HangoutAndLogs>
-                                            : null}
-                                    </div>
-                                </div>
-                                </div>
+                        {/* <div className='col ' > */}
+                        <div className='container-fluid px-0 '>
+                            {refresh ?
+                                <FilesOfProject />
+                                : null}
                         </div>
+
+                        <div className='row HangoutAndLogs d-xs-block d-lg-none'>
+                            <div className='col-12'>
+                                <div className='container-fluid px-0 '>
+                                    {refresh ?
+                                        <HangoutAndLogs></HangoutAndLogs>
+                                        : null}
+                                </div>
+                            </div>
+                        </div>
+                        {/* </div> */}
                     </div>
 
-                    <div className='col d-xs-none d-lg-block scrollOverview'>
+                    <div className='col d-xs-none d-lg-block scrollOverview mr-3'>
                         <div className='container-fluid px-0 '>
                             {refresh ?
                                 <HangoutAndLogs></HangoutAndLogs>
                                 : null}
                         </div>
                     </div>
-                {/* <Hangout></Hangout> */}
+                </div>
             </div>
-        </div>
         </>
     )
 }
@@ -115,4 +114,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Overview)
+
+
 

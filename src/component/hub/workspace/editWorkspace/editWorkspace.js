@@ -5,6 +5,8 @@ import { actions } from '../../../../redux/actions/action'
 import $ from 'jquery'
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
+import ColorWorkspace from '../../color/colorWorkspace';
+
 
 function EditWorkspace(props) {
 
@@ -35,9 +37,16 @@ function EditWorkspace(props) {
     }
 
     const changeFiledInWorkspace = (input) => {
+        debugger
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
+
+    const changeColorFiledInWorkspace = (color) => {
+        let editWorkspaceInRedux = { "nameFiled": "color", "value": color}
+        props.setWorkspaceByFiled(editWorkspaceInRedux)
+    }
+
     const deleteWorkspace = (e) => {
         $(`#${props.workspaces[props.indexOfWorkspace]._id}`).css("display", "none")
         props.showToast({ 'type': 'Workspace', 'object': props.workspaces[props.indexOfWorkspace] })
@@ -67,7 +76,7 @@ function EditWorkspace(props) {
 
                         <div class="invalid-feedback">
                             Please enter workspace name.
-                     </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -80,23 +89,15 @@ function EditWorkspace(props) {
                             onChange={(input) => changeFiledInWorkspace(input)} contentEditable
                         ></div>
                     </div>
-                    <div class="form-group">
-                        <label for="color">Color</label>
-                        <input name="color"
-                            className="ml-2 "
-                            styles="height: 50px"
-                            type="color"
-                            id='colorProject'
-                            value={props.workspaces[props.indexOfWorkspace].color}
-                            onChange={(e) => changeFiledInWorkspace(e)} />
-                    </div>
+                    <label className="row ml-2" for="color">Logo Color</label>
+                        <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />  
+
                 </div>
                 <div className="row justify-content-between">
                     <button data-toggle="tooltip" data-placement="top"
-                        title="Garbage"
                         className="delete-btn col-4 "
                         onClick={(e) => deleteWorkspace(e)}>
-                        <img src={require('../../../img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
                     </button>
                     <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">

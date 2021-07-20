@@ -1,4 +1,4 @@
-import configData from '../../ProtectedRoute/configData.json'
+import keys from '../../config/env/keys'
 import { actions } from '../actions/action';
 
 export const setIfShowShareProjectsToTrue = ({ dispatch, getState }) => next => action => {
@@ -13,7 +13,7 @@ export const setIfShowShareProjectsToTrue = ({ dispatch, getState }) => next => 
             }
         });
         console.log(shareProjectsId);
-        let url = `${configData.SERVER_URL}/${getState().public_reducer.userName}/setIfShowShareObjectsToTrue`
+        let url = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/setIfShowShareObjectsToTrue`
         fetch(url, {
             method: 'POST',
             headers: {

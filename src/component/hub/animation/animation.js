@@ -1,17 +1,19 @@
 import React from 'react'
 import './animation.css'
+import $ from 'jquery'
 
 export default function Animation(props) {
     fun()
     function fun() {
         setTimeout(() => {
-            props.show(false)
-        }, 2000);
+            $(".rocketShip").remove();
+            // $('.rocketShip').css('display', 'none')
+        }, 3000);
 
     }
     return (
         <>
-            <img className='animationRocketShip' src={require('../../img/Group 19471.svg')} />‏
+            <img className='animationRocketShip' src={require('../../../assets/img/Group 19471.svg')} />‏
         </>
     )
 

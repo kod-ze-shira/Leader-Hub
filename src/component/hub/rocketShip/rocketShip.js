@@ -12,7 +12,7 @@ export default function RocketShip(props) {
     return (
         <>
             <div className='divRocketShip'>
-                <img className='rocketShip' src={require('../../img/Group 19471.svg')} />
+                <img className='rocketShip' src={require('../../../assets/img/Group 19471.svg')} />
             </div>‏
         </>
     )

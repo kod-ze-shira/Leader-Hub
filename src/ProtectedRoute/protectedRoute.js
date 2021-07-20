@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Route, Redirect } from 'react-router-dom';
-import configData from './configData.json'
+import keys from '../config/env/keys'
 
 function redirectToLogin(routes) {
     window.location.href = routes ?
-        `https://dev.accounts.codes/hub/login?routes=${routes}` :
-        `https://dev.accounts.codes/hub/login`;
+        `${keys.API_URL_LOGIN}?routes=${routes}` :
+        `${keys.API_URL_LOGIN}`;
     return null
 }
-const ProtectedRoute = ({ component: Component, user, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
     // חילוץ jwt מהקוקי
     let jwtFromCookie = ''
     if (window.location.hostname == "localhost") {
@@ -36,7 +36,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => {
         userName = rest.computedMatch.params.userName;
     useEffect(() => {
         const isLocal = window.location.hostname == "localhost"
-        const url = `${configData.SERVER_URL}/${userName}/isPermission?isLocal=${isLocal}`;
+        const url = `${keys.API_URL_BASE_SERVER}/${userName}/isPermission?isLocal=${isLocal}`;
         const isPermission = async () => {
             let response = await fetch(url, {
                 method: 'GET',
