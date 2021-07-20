@@ -133,6 +133,7 @@ function Tabs(props) {
     const openViewDetails = (task) => {
         setViewDetails(true)
         setTaskToDetails(task)
+        props.closeCalendarOrContact(false)
     }
     const setFocousCardFunc = (e) => {
         document.getElementById("add-new-card").focus();
@@ -142,6 +143,7 @@ function Tabs(props) {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
+                props.closeCalendarOrContact(false)
                 setFlag(false)
                 setTimeout(() => {
                     setFlag(true)
@@ -151,6 +153,8 @@ function Tabs(props) {
             else {
                 if (viewDetails) {
                     setViewDetails(false)
+                    props.closeCalendarOrContact(true)
+
                     props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
             }
@@ -250,7 +254,7 @@ function Tabs(props) {
                 <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails
                         showToast={(obj) => props.showToast(obj)}
-                        closeViewDetails={() => setViewDetails(false)}
+                        closeViewDetails={() => { setViewDetails(false); props.closeCalendarOrContact(true) }}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
                         viewToastMassege={props.viewToastMassege}

@@ -37,7 +37,6 @@ function EditWorkspace(props) {
     }
 
     const changeFiledInWorkspace = (input) => {
-        debugger
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }

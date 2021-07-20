@@ -37,8 +37,9 @@ function ViewTaskByCradTabs(props) {
         let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
         if (hasLike)
             setUserHasLike(true)
-
-    }, [props.cards, props.userId])
+        let projectColor = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].color
+        console.log("projectColor:", projectColor);
+    }, [props.cards, props.userId ,props.workspaces])
 
     useEffect(() => {
         doneStatus = props.task.complete
@@ -150,7 +151,6 @@ function ViewTaskByCradTabs(props) {
             "priority": props.task.priority
 
         }
-        // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
         // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
 
         props.setTaskComplete(completeTask)//redux
@@ -302,6 +302,7 @@ function ViewTaskByCradTabs(props) {
                     >
 
                         <div className="task-card mb-2 pb-2"
+
                             onClick={(e) => showDetails(e)}
                             id={props.task._id + "disappear"}>
                             <div className=" ">

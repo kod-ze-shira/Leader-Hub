@@ -20,10 +20,12 @@ function ViewCardsTabs(props) {
                 setAddTaskInInput(true)
                 props.setCard(props.cardFromMap)
             }
+           
 
     }, [props.flag, props.openInputTask])
 
-
+    const projectColor = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].color
+    console.log("projectColor:", projectColor);
     const [addTaskInInput, setAddTaskInInput] = useState(false)
     const [inputValue, setInputValue] = useState()
     const [editCardName, setEditCardName] = useState(props.cardFromMap.name)
@@ -201,7 +203,7 @@ function ViewCardsTabs(props) {
 
                                         </div>
                                     </div>
-                                    <div class="card-body allTaskInCard " >
+                                    <div class="card-body allTaskInCard " style={{"backgroundColor":projectColor}}>
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
                                                 <div className="mt-0 glila mb-2"

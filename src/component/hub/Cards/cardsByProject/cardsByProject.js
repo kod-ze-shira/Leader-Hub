@@ -104,6 +104,7 @@ function CardsByProject(props) {
                 <DragDropContext onDragEnd={(e) => onDragEndׂ(e)}>
                     {props.cards.map((card, index) => {
                         return <ViewCards
+                            closeCalendarOrContact={props.closeCalendarOrContact}
                             viewToastMassege={props.viewToastMassege}
                             showToastDelete={(object) => props.showToast(object)}
                             viewContactList={props.viewContactList}

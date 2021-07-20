@@ -11,10 +11,47 @@ margin-left: 8vh;
     max-width: 85%;
     /* margin-left: 16px; */
 }
+.font-logo-header{
+    color:white;
+
+}
+@media screen and (min-width: 1550px) {
+    .icons-header{
+      margin-left:1000px;
+    }
+  }
+  @media screen and (min-width: 700px) {
+    .icons-header{
+        margin-left:505px;
+    }
+  }
+  /* @media screen and (min-width: 850px) {
+    .icons-header{
+        margin-left:750px;
+    }
+  } */
+  @media screen and (min-width: 1150px) {
+    .icons-header{
+        margin-left:1000px;
+    }
+  }
+.icons-header img{
+margin-left:15px;
+}
+.icons-header{
+    margin-right:5px; 
+}
 
 .headerLeaderHub{
-    display: flex;
-    height: 0px;
+    background-color: #1FB9C1;
+    box-shadow: 0px 3px 6px #00000029;
+    padding-top: 8px;
+    /* height: 40px; */
+
+    /* display: flex; */
+    /* height: 0px; */
+}
+.icons-header{
 }
 .headerLeaderHub .LC_imageUser{
     position: absolute;

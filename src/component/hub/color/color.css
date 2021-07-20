@@ -16,7 +16,9 @@
 
 }
 .add-color-workspace{
-  background-color:white;
+  /* display: inline-block; */
+
+  /* background-color:white; */
   text-align:center;
   width:35px;
   height:35px;

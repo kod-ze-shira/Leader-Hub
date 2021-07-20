@@ -59,12 +59,14 @@ function CardsPage(props) {
         switch (present) {
             case 'tabs':
                 return <Tabs showToast={showToast}
+                    closeCalendarOrContact={props.closeCalendarOrContact}
                     showRocketShip={props.showRocketShip}
                     focusInputCard={props.focusInputCard}
                     viewToastMassege={props.viewToastMassege}
                     viewContactList={props.viewContactList} />
             case 'list':
                 return <ProjectPlatform
+                    closeCalendarOrContact={props.closeCalendarOrContact}
                     viewToastMassege={props.viewToastMassege}
                     showRocketShip={props.showRocketShip}
                     showToast={showToast} flag={flag}
@@ -77,6 +79,7 @@ function CardsPage(props) {
             default:
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform
+                    closeCalendarOrContact={props.closeCalendarOrContact}
                     showRocketShip={props.showRocketShip}
                     viewToastMassege={props.viewToastMassege}
                     showToast={showToast} flag={flag} />

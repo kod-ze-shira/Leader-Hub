@@ -224,6 +224,7 @@ function ViewCards(props) {
                                         {...provided.droppableProps}>
                                         {props.cardFromMap.tasks.map((task, index) => (
                                             <ViewTaskByCrad
+                                                closeCalendarOrContact={props.closeCalendarOrContact}
                                                 viewContactList={props.viewContactList}
                                                 viewToastMassege={props.viewToastMassege}
                                                 objectToast={(task) => props.showToastDelete(task)}

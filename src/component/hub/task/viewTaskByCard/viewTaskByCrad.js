@@ -92,12 +92,15 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         setViewDetails(true)
+        props.closeCalendarOrContact(false)
+
     }
 
     $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
+                props.closeCalendarOrContact(false)
                 setFlag(false)
                 setTimeout(() => {
                     setFlag(true)
@@ -107,6 +110,7 @@ function ViewTaskByCrad(props) {
             else {
                 if (viewDetails) {
                     setViewDetails(false)
+                    props.closeCalendarOrContact(true)
                     props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
                 // setViewDetails(false)
@@ -353,7 +357,7 @@ function ViewTaskByCrad(props) {
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
                                         <ViewDetails showToast={deleteTask}
-                                            closeViewDetails={() => setViewDetails(false)}
+                                            closeViewDetails={() => { setViewDetails(false); props.closeCalendarOrContact(true)} }
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
                                             viewToastComplete={props.viewToastComplete}
