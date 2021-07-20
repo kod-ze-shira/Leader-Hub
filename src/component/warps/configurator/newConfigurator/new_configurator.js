@@ -136,7 +136,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setIfShowShareProjectsToTrue:dispatch(actions.setIfShowShareProjectsToTrue())
+        setIfShowShareProjectsToTrue:()=>dispatch(actions.setIfShowShareProjectsToTrue())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewConfigorator))

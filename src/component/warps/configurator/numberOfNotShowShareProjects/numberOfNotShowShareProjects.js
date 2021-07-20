@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+
+//component to show num of share projects that user show
+
 function NumberOfNotShowShareProjects(props){
     const [numOfNotShowShareProjects,setNumOfNotShowShareProjects]=useState()
         useEffect(()=>{
@@ -7,7 +10,7 @@ function NumberOfNotShowShareProjects(props){
         })
     return(
         <>
-        {numOfNotShowShareProjects}
+        {numOfNotShowShareProjects?numOfNotShowShareProjects:null}
         </>
     )
 }
