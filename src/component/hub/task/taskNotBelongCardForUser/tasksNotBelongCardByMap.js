@@ -238,7 +238,7 @@ function TasksNotBelongCardByMap(props) {
                     "card": props.task.card ? props.task.card : ''
                 }
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-                props.viewToastMassege({ show: true, massege: 'Task assign!!' })
+                props.viewToastMassege({ show: true, massege: props.task.name + ' assign!!' })
 
             });
         }
@@ -435,7 +435,7 @@ function TasksNotBelongCardByMap(props) {
 
                     {!cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">move to</button>
                         </>
                         : null
@@ -443,7 +443,7 @@ function TasksNotBelongCardByMap(props) {
 
                     {cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancle</button>
+                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
                             <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
                         </> : null
 

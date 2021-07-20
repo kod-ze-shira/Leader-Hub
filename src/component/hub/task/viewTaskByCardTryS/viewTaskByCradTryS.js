@@ -258,7 +258,7 @@ function ViewTaskByCradTryS(props) {
                                 {/* <FontAwesomeIcon  title="Drag and Drop"
                                     icon={['fas', 'grip-vertical']}
                                 ></FontAwesomeIcon> */}
-                                <div className="col-3 d-flex pt-0 pb-2 pl-0">
+                                <div className="col-4 d-flex pt-0 pb-2 pl-0">
                                     <img src={require('../../../../assets/img/dnd-icon.svg')}
                                         className="dnd-icon dnd-icon-1 mt-1" id={props.task._id}></img>
                                     <label
@@ -296,6 +296,15 @@ function ViewTaskByCradTryS(props) {
                                             src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
                                         </img>
                                     </div>
+                                    <label className="view-details-btn   px-2" title="View Details">
+                                        <button onClick={(e) => openViewDetails(e)}
+                                            className="mx-auto mt-2">
+                                            view details
+                                            <FontAwesomeIcon className="ml-2"
+                                                icon={['fas', 'caret-right']}>
+                                            </FontAwesomeIcon>
+                                        </button>
+                                    </label>
                                 </div>
 
                                 <label className=" border-left  col-1">
@@ -307,7 +316,7 @@ function ViewTaskByCradTryS(props) {
                                     {/* {props.task.dueDate} */}
                                 </label>
                                 <label className="border-left  col-1">
-                                    {props.task.startDate}
+                                    <span className="span-total-task"> {props.task.startDate}</span>
                                 </label>
                                 <label className=" border-left  col-1 " onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
@@ -349,7 +358,7 @@ function ViewTaskByCradTryS(props) {
                                     <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                     : <hr></hr>}
                                 </label>
-                                <label className="view-details-btn col-1 border-left px-2" title="View Details">
+                                {/* <label className="view-details-btn col-1 border-left px-2" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}
                                         className="mx-auto">
                                         view details
@@ -357,7 +366,7 @@ function ViewTaskByCradTryS(props) {
                                             icon={['fas', 'caret-right']}>
                                         </FontAwesomeIcon>
                                     </button>
-                                </label>
+                                </label> */}
 
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>

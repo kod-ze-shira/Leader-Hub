@@ -5,7 +5,7 @@ import $ from 'jquery'
 import { actions } from '../../../../../redux/actions/action'
 import '../../taskDetails/taskDetails.css'
 import UploadFile from '../../../uploadFile/uploadFile'
-import File from '../../../uploadFile/file/file'
+import File from '../../../file/file'
 // import ViewAllStatuses from '../../../status/viewAllStatuses';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'

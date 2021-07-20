@@ -36,7 +36,7 @@ import ToastMessage from '../hub/toast/toastMessage'
 import RocketShip from './rocketShip/rocketShip'
 import ViewAllStatuses from '../hub/status/viewAllStatuses';
 import HeaderLeader from '@leadercodes/header';
-
+import ModalFiles from './modalFIles/modalFiles';
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -163,8 +163,8 @@ function Hub(props) {
                         <Configurator openOrClose={(e) => setOpen(!open)} />
                     </div>
 
-                    <div onScroll={(e) => setShowContactList(false)} style={{ 'marginTop': '24px !important' }}
-                        className={open ? "bodyHub " : "col-12 bodyHub mx-2 "}>
+                    <div onScroll={(e) => setShowContactList(false)} style={{ 'margin-top': '24px !important' }}
+                        className={open ? "bodyHub mt-3" : "col-12 bodyHub mx-2 mt-4"}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -214,6 +214,12 @@ function Hub(props) {
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
                                 <Milestones showToastDelete={(obj) => {showToastToDelete(obj);setDeleteMilstone(true)}} />
                             </ProtectedRoute>
+
+                            <ProtectedRoute path={"/:userName/ModalFiles"}>
+                                <ModalFiles />
+
+                            </ProtectedRoute>
+
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>

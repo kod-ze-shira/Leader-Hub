@@ -7,15 +7,16 @@ import Select from 'react-select';
 import './taskDetails.css'
 import UploadFile from '../../uploadFile/uploadFile'
 import editStatus from '../../status/editStatus';
-import File from '../../uploadFile/file/file'
+import File from '../../file/file'
 import ViewAllStatuses from '../../status/viewAllStatuses';
-import file from '../../uploadFile/file/file';
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json'
 import imageCompression from "browser-image-compression";
 import ContactList from '../../contact/contactList';
 import Timer from '../../timer/timer'
 import QuillEditTask from '../quilEditTask/quillEditTask';
+import ModalFiles from '../../modalFIles/modalFiles';
+
 function TaskDetails(props) {
     const nameRequired = useRef()
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
@@ -50,6 +51,9 @@ function TaskDetails(props) {
     }, [props.arrFilesOfTask])
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
+    const [startTimerComp, setStartTimerComp] = useState(false)
+    const [shoewModalFiles, setShoewModalFiles] = useState(false)
+    const [url, setUrl] = useState('dddd')
 
 
     const openPopUpStatus = (event) => {
@@ -198,11 +202,17 @@ function TaskDetails(props) {
         props.setTaskFromTasks(taskBeforeChanges)
         props.closeViewDetails()
     }
+    function func(val) {
+        // alert(val)
+        setShoewModalFiles(val)
+    }
 
     const newFileComponentArr = props.arrFilesOfTask ? props.arrFilesOfTask.map((file) => {
         return <File file={file}
             setDownloadFile={(e) => { props.setDownloadFile(e) }}
             taskId=''
+            url={(val) => setUrl(val)}
+            shoewModalFiles={(val) => func(val)}
         />
     }) : null
 
@@ -268,6 +278,10 @@ function TaskDetails(props) {
 
     return (
         <>
+            {
+                shoewModalFiles &&
+                <ModalFiles url={url} show={(val) => setShoewModalFiles(val)} />
+            }
             {props.cards[props.indexCurrentCard] && props.priorities.length > 0 &&
                 <div>
                     {/* <div className="details task-details mr-4 ml-4" onClick={(e) => closeStatus(e)}> */}

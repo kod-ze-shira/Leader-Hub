@@ -146,7 +146,7 @@ function ViewCards(props) {
             <div className="container-scroll" id={props.cardFromMap._id + "disappear"}>
                 <div className=" row justify-content-start card-name  mx-4 mt-4"
                 >
-                    <div className="col-3 d-flex justify-content-between">
+                    <div className="col-4 d-flex justify-content-between">
                         <div className=" "
                             onMouseOver={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'inline' })}
                             onMouseOut={(e) => $(`#task${props.cardFromMap._id}`).css({ 'display': 'none' })}
@@ -194,7 +194,7 @@ function ViewCards(props) {
                     {/* <p className="col">Start date</p> */}
                     <p className="col-1 ">Due date</p>
                     <p className="col-1">Priority</p>
-                    <p className="col-1 "></p>
+                    {/* <p className="col-1 "></p> */}
 
                 </div >
                 <p className=""><a>
@@ -251,7 +251,9 @@ function ViewCards(props) {
                             <ViewDetails viewContactList={props.viewContactList}
                                 closeViewDetails={() => setViewDetails(false)}
                                 cardId={cardId} from={"addTask"}
-                                viewToastMassege={props.viewToastMassege}>
+                                viewToastMassege={props.viewToastMassege}
+                            >
+
                             </ViewDetails>
                         </div>
                         : null

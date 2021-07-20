@@ -142,6 +142,7 @@ class QuillEditTask extends Component {
         toolbar: [
             [{ header: [1, 2, false] }],
             [{ 'color': [] }, { 'background': [] }],
+            // ['image'],
             ["bold", "italic", "underline", "strike"],
             [{ list: "ordered" }, { list: "bullet" }],
             ["link"]
@@ -171,6 +172,7 @@ class QuillEditTask extends Component {
         "header",
         "color",
         "background",
+        "image",
         "bold",
         "italic",
         "underline",
