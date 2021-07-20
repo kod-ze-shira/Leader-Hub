@@ -202,7 +202,6 @@ class QuillEditTask extends Component {
                 </ReactQuill>
                 {/* <input type='text' placeholder='input inport image' id='inputImageInD' />
                 <button onClick={() => this.addFile('')}>add</button> */}
-
             </>
         );
     }

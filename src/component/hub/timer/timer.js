@@ -17,12 +17,9 @@ function Timer(props) {
     const [startTimerComp, setStartTimerComp] = useState(false)
 
     // const refminutes = props.refMinutes;
-    let a = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].workingTime
  
     useEffect(() => {
         let interval = null;
-
-
         // if (props.flagTrueTimer1 === true) {
         //     convertHour(props.continuedTimer1);
         //     props.setTrueTimer1(false);
@@ -34,7 +31,6 @@ function Timer(props) {
         // }
 
         if (startTimerComp) {
-            debugger
             interval = setInterval(() => {
                 setSeconds(seconds => seconds + 1);
             }, 1000);

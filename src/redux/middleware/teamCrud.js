@@ -241,13 +241,13 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ assign }),
 
       success: function (data) {
-        debugger
+      
         console.log("success")
         console.log("data", data);
         // if (data.task.assignTo1.contact)
-          editTaskInRedux = {
-            "nameFiled": "assignTo1", "value": data.task.assignTo1
-          }
+        editTaskInRedux = {
+          "nameFiled": "assignTo1", "value": data.task.assignTo1
+        }
         dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
         dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
       },

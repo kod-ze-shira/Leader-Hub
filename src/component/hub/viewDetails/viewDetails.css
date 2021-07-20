@@ -34,7 +34,7 @@ margin-top: 10px;
 }
 
 .propertiesViewDitails{
-  cursor: auto;
+    cursor: auto;
     max-height: 83vh;
     height: 83vh;
     overflow: auto;
@@ -44,7 +44,6 @@ margin-top: 10px;
 
 .propertiesViewDitails .headerDitails{
   border-bottom: 1px solid #707070
-
 }
 
 .ditailsAction{

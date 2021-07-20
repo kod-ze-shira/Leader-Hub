@@ -155,7 +155,7 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 export const duplicateWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'DUPLICATE_WORKSPACE') {
         let workspaceId = action.payload
-        
+
         fetch(`${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/duplicateWorkspace`,
             {
                 method: 'POST',

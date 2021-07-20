@@ -15,7 +15,6 @@ import './ViewTaskByCradTabs.css'
 import UploadFile from '../../uploadFile/uploadFile'
 import Animation from '../../animation/animation'
 
-import ContactList from '../../contact/contactList';
 
 function ViewTaskByCradTabs(props) {
     const textInput = useRef();
@@ -25,7 +24,7 @@ function ViewTaskByCradTabs(props) {
     const [userHasLike, setUserHasLike] = useState(false)
 
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
-    let doneStatus = props.task.complete
+    let doneStatus = props.task ? props.task.complete : null
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     useEffect(() => {
@@ -390,17 +389,18 @@ function ViewTaskByCradTabs(props) {
                                     {props.task.name}
                                 </span> */}
 
-                                <div className="icons-in-task-tabs pt-0">
-                                    <div className="row justify-content-between mx-2 mt-3 mb-0">
-                                        <div className="p_task">
+                                <div className=" icons-in-task-tabs pt-0">
+                                    <div className="mx-2  row justify-content-between  mt-3 mb-0">
+                                        <div className="p_task ">
                                             <div>
+                                                {/* ? assingTo.contact.thumbnail */}
                                                 {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
                                                     {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                         if (index < 2)
-                                                            return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
+                                                            return assingTo.contact ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
                                                                 : null
                                                     }) : null}
-                                                    {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
+                                                    {props.task.assignTo1 ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
                                                 </div> : <img
                                                     // id={`${props.task._id}assing-to`}
                                                     className="ml-1 assing-to-icon"
@@ -410,7 +410,7 @@ function ViewTaskByCradTabs(props) {
                                             </div>
 
 
-                                            <div className="pl-1">
+                                            <div>
                                                 {props.task.milestones ?
                                                     <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}

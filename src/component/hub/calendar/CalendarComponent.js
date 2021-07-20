@@ -40,7 +40,7 @@ function CalendarComponent(props) {
 
             <div onClick={(e) => e.stopPropagation()}
                 className='div_contacts' style={{ "left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
-                <div className='container div_contacts_list m-2' >
+                <div className='div_contacts_list' >
                     <Calendar
                         onChange={(e) => handleChange(e)}
                         value={value}

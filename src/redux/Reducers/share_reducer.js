@@ -15,12 +15,11 @@ const share = {
     addContactToContactList(state, action) {
         let isContact = false
         state.contactsUser.map(contact => {
-            if (contact._id == action.payload._id)
-                isContact = true
+                if (contact._id == action.payload._id)
+                    isContact = true
         })
         if (isContact == false)
             state.contactsUser.push(action.payload)
-
     }
 }
 

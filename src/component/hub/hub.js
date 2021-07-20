@@ -46,7 +46,7 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     const [showStatusesList, setShowStatusesList] = useState(false)
-
+    const [deleteMilstone, setDeleteMilstone] = useState(true)
     const [openCalander, setOpenCalander] = useState(false)
     const [showRocketShip, setShowRocketShip] = useState(false)
 
@@ -84,7 +84,7 @@ function Hub(props) {
         if (objectToDelete[i].type == "Card") {
             $(`#${objectToDelete[i].object._id} `).css("display", "inline-block")
         }
-        else if (!objectToDelete[i].object.card)
+        else if (!objectToDelete[i].object.card || deleteMilstone)
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
         else if (objectToDelete[i].type == "Task")
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
@@ -212,7 +212,7 @@ function Hub(props) {
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
-                                <Milestones />
+                                <Milestones showToastDelete={(obj) => {showToastToDelete(obj);setDeleteMilstone(true)}} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName"}>
                                 <Body showToastDelete={(obj) => showToastToDelete(obj)} />
