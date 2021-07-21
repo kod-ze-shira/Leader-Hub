@@ -107,7 +107,7 @@ function ViewTaskByCrad(props) {
             else {
                 if (viewDetails) {
                     setViewDetails(false)
-                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                    // props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
                 // setViewDetails(false)
             }
