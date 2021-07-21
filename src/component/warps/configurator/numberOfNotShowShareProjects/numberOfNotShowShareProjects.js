@@ -8,7 +8,7 @@ import ReactTooltip from 'react-tooltip';
 function NumberOfNotShowShareProjects(props) {
     const [numOfNotShowShareProjects, setNumOfNotShowShareProjects] = useState()
     useEffect(() => {
-        setNumOfNotShowShareProjects(props.sharedProjects.filter(x => x.ifShow == false).length)
+        setNumOfNotShowShareProjects(props.sharedProjects.filter(x => x.ifShow === false).length)
     }, [props.sharedProjects])
     return (
         <>

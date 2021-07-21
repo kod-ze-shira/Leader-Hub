@@ -7,7 +7,7 @@ export default function ToastMessage(props) {
     const [key, setKey] = useState(1);
     const [show, setShow] = useState(true);
 
-    const toggleShowToast = () => setShow(!show);
+    // const toggleShowToast = () => setShow(!show);
 
     const scrolling = useSpring({
         from: { transform: "translate(-60%,0)" },

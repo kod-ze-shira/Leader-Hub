@@ -48,7 +48,7 @@ function ViewFilesByCard(props) {
 
                 //
                 <div className="container" >
-                    <div class="row row-cols-4 row-cols-lg-6 g-2">
+                    <div className="row row-cols-4 row-cols-lg-6 g-2">
                         {props.files.map((file, index) =>
                             <ViewFile
                                 file={file}

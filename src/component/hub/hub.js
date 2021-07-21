@@ -133,7 +133,7 @@ function Hub(props) {
 
     });
     const deleteWorkspaceInRedux = (e) => {
-        console.log(e.target.className)
+        // console.log(e.target.className)
         // if (props.workspaces[props.workspaces.length - 1])
         //     if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
         //         props.removeOneWorkspaceFromWorkspaces()

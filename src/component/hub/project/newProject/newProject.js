@@ -131,13 +131,13 @@ function NewProject(props) {
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Add Project</h5>
 
-                        <div class="close pr-3" onClick={() => props.closeViewDetails()}>x</div>
+                        <div className="close pr-3" onClick={() => props.closeViewDetails()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5> */}
 
                     </div>
 
                     {!props.fromAllproject ?
-                        <div class="row justify-content-between  mx-1 mb-2">
+                        <div className="row justify-content-between  mx-1 mb-2">
                             <label>workspace: {props.workspace.name}</label>
                         </div> :
                         <div className=" col-3 px-1">
@@ -145,25 +145,25 @@ function NewProject(props) {
                             <AssignWorkspaceToNewProject setWorkspaceToProject={(w) => setWorkspaceForProject(w)} />
                         </div>}
 
-                    <div class="form-group" id='nameRequired'>
+                    <div className="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeNameInProject(e)}
                             required ref={nameRequired} autoFocus
-                            id='nameProject' type="text" class="form-control" value={nameProject} />
-                        <div class="invalid-feedback">
+                            id='nameProject' type="text" className="form-control" value={nameProject} />
+                        <div className="invalid-feedback">
                             Please enter project name.
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label for="description">Description</label>
                         <QuillNewProject text={(e) => setDescription(e)} />
 
-                        {/* <div class="form-control descriptionProject" name="description"
+                        {/* <div className="form-control descriptionProject" name="description"
                             id="descriptionProject" rows="5" placeholder="Write a description about your project"
                             ref={descriptionInput} contentEditable></div> */}
                     </div>
                     <div className="row justify-content-between" >
-                        <div class="form-group col-5 ditailsAction col-md-4">
+                        <div className="form-group col-5 ditailsAction col-md-4">
                             <label for="color">Project color</label>
                             <input name="color"
                                 className="form-control"
@@ -173,7 +173,7 @@ function NewProject(props) {
                                 value={myColor}
                             />
                         </div>
-                        <div class="form-group col-5 ditailsAction col-md-8" >
+                        <div className="form-group col-5 ditailsAction col-md-8" >
                             <label for="color">Due Date</label>
                             <input
                                 className="form-control "

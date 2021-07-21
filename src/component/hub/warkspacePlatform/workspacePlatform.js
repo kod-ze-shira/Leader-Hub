@@ -39,8 +39,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
             <div className="container-fluid">
                 <button className="warkspace-paltform-show  pl-5 row" onClick={() => props.getAllWorkspaces()}
                 >
-                    <div class="arrow-down mt-3 mr-3 ml-5"></div>
-                Recent workspace
+                    <div className="arrow-down mt-3 mr-3 ml-5"></div>
+                    Recent workspace
                 </button>
                 <div className="border-bottom row mx-5 mt-3"></div>
 

@@ -98,9 +98,9 @@ function File(props) {
                 <div className='col-8  nameFileAndAction'>
                     <span className='nameFileInTask'>
                         {props.file.url != 'new' ?
-                            // <a href={props.file.url} target="_blank"
-                            <a href='#'
-                                onClick={() => showFiles(props.file.url)}
+                            <a href={props.file.url} target="_blank"
+                                // <a href='#'
+                                // onClick={() => showFiles(props.file.url)}
                                 style={{ 'color': '#358A8D' }}
                             >{props.file.name}
                             </a>
@@ -110,13 +110,13 @@ function File(props) {
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Kb</span>
                     {(progressFile != 100 && props.file.url == 'new') ?
-                        <div class="progressFile"
+                        <div className="progressFile"
                             // ref={refToProject}
                             style={{ backgroundColor: '#e9ecef' }}
                         >
 
 
-                            <div role="progressbar" class="progressProject-bar "
+                            <div role="progressbar" className="progressProject-bar "
                                 style={{ "width": progressFile + "%", background: 'rgb(53, 138, 141)' }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
                                 data-tip data-for="percentage" >

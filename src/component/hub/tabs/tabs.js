@@ -194,10 +194,10 @@ function Tabs(props) {
                                             :
                                             <div className="col-md-3 col-sm-10 px-2 mt-4" >
                                                 <div className="view-cards-tabs  mt-1" >
-                                                    <div class="card new-card mt-1" >
-                                                        <div id='newCardInput' class="container" >
+                                                    <div className="card new-card mt-1" >
+                                                        <div id='newCardInput' className="container" >
                                                             <div
-                                                                class="card-header row" data-tip data-for="add_c"
+                                                                className="card-header row" data-tip data-for="add_c"
                                                             >
                                                                 <input
                                                                     id="add-new-card"

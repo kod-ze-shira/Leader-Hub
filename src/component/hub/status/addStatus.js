@@ -58,7 +58,7 @@ function AddStatus(props) {
                 <label for="name">Name</label>
                 <input name="statusName" onChange={(e) => handleChangeStatus(e)}
                     onClick={(e) => stopP(e)}
-                    type="text" class="form-control"
+                    type="text" className="form-control"
                     id="statusName"
                     placeholder="enter status name"
                 />
@@ -67,7 +67,7 @@ function AddStatus(props) {
                 <button className="add-status px-3 m-auto" onClick={(e) => addStatus(e)}>Save</button>
 
             </div>
-            { view ? <ViewAllStatuses /> : null}
+            {view ? <ViewAllStatuses /> : null}
         </>
 
     )
