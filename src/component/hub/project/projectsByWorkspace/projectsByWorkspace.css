@@ -31,7 +31,7 @@
     margin-left: 2px;
     height: 54px;
     width: auto;
-    background-color: #EDFBFC;
+    /* background-color: #EDFBFC; */
     height: fit-content;
     margin-left: 1.08rem;
     padding-left: 15px;
@@ -153,4 +153,19 @@ table td, .table th {
 }
 .table{
     margin-bottom: 0 !important;
+}
+.tableTitle{
+    list-style-type: none;
+}
+.projectsTitle{
+    background-color: #EDFBFC;  
+}
+.projectsTitle th{
+    border:none;
+}
+.projectsTitle th{
+    text-align:center;
+}
+.table thead th{
+    border-bottom:none;
 }

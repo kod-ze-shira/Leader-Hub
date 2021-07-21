@@ -7,7 +7,7 @@
 }
 .nameProjectInList{
    padding-left: 2rem !important;
-   width: 30%;
+   width: 15%;
 }
 
 #nameRequired input
@@ -54,6 +54,7 @@
 }
 .actionsProject{
     text-align: center;
+    justify-content: center;
 }
 
 .designPropertiesProject{
