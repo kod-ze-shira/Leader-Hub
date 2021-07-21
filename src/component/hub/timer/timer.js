@@ -18,7 +18,6 @@ function Timer(props) {
 
     // const refminutes = props.refMinutes;
     let a = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
-    debugger
     useEffect(() => {
         let interval = null;
 

@@ -28,7 +28,6 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData;
-        debugger
         // if (window.location.href.includes('share'))//get carrds for user that share
         //     urlData = `${keys.API_URL_BASE_SERVER}/share//${window.location.href.split('/')[6]}/${window.location.href.split('/')[7]}/getWorkspacesForUser`
 

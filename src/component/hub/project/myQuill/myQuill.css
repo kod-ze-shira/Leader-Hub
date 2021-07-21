@@ -12,10 +12,10 @@
 }
 
 #textQuil .ql-snow:nth-of-type(2){
-    max-height: 22vh;
+    /* max-height: 22vh; */
     height: auto;
     overflow: auto;
-    min-height: 18vh;
+    /* min-height: 18vh; */
 }
 #textQuil .ql-snow{
     background-color: #EDFBFC!important;

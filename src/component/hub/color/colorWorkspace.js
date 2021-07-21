@@ -26,7 +26,6 @@ export default function
         event.stopPropagation();
     }
     function handleChange(color) {
-        debugger
         props.setColorWorkspace(color)
     }
 

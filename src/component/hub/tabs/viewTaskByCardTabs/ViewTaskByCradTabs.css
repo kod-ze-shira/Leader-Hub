@@ -3,7 +3,7 @@
 }
 .textarea-name-task{
     box-shadow: none !important;
-    /* overflow: hidden !important; */
+    overflow: hidden !important;
     max-height: 500px;
     resize: none;
     border:none !important;
@@ -105,15 +105,20 @@
     margin-bottom: 0!important;
     padding-bottom: 0 !important;
 }
+.autosize:focus{
+    border:none !important;
+    outline: none !important;
+}
 .autosize {
+    border:none !important;
     padding:10px;
     resize: none;
      /* overflow: hidden; */
-     max-height: 80px;
-    /* -webkit-box-orient: vertical; */ 
-    /* -webkit-line-clamp: 4;
+     /* max-height: 80px; */
+    -webkit-box-orient: vertical; 
+     -webkit-line-clamp: 4;
     overflow: hidden;
-    display: -webkit-box; */
+    display: -webkit-box;
   }
   .autosize::-webkit-scrollbar-thumb{
     background: white !important; 

@@ -62,7 +62,6 @@ function UploadFile(props) {
                 type = 'taskNotBelong'
 
             }
-            debugger
             props.uploadFiles({ 'files': file, 'task': task, type: type })
 
 

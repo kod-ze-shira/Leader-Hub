@@ -60,7 +60,6 @@ function TaskDetails(props) {
 
     }
     $(window).click(function () {
-        debugger
         setOpenPopUp(false)
     });
 
@@ -274,7 +273,33 @@ function TaskDetails(props) {
             props.setCountReadyTasks(false)
         }
     }
+    autosize();
+    function autosize() {
+        var text = $('.autosize');
 
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+            }
+            if (e.key == 'Enter') {
+                // editTask()
+            }
+
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
 
     return (
         <>
@@ -304,14 +329,21 @@ function TaskDetails(props) {
                                 </div>
                                 <div class="form-group" id='nameRequired'>
                                     <label for="name">Name</label>
-                                    <input name="name"
+                                    <textarea
+                                        required ref={nameRequired}
+                                        className= "autosize textarea-name-task form-control"
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name}                                         onClick={(e) => e.stopPropagation()}
+                                        name="name"
+                                        onChange={(e) => changeFiledInTask(e)}
+                                    />
+                                    {/* <input name="name"
                                         required ref={nameRequired}
                                         class="form-control"
                                         id="name"
                                         onChange={(e) => changeFiledInTask(e)}
                                         // onBlur={(e) => editTaskInServer()}
                                         // onMouseLeave={(e) => alert("ff")}
-                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} /> */}
                                     <div class="invalid-feedback">
                                         Please enter task name.
                                     </div>

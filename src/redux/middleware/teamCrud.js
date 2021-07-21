@@ -74,7 +74,6 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 }
 export const getContactsForUser = ({ dispatch, getState }) => next => action => {
   if (action.type === 'GET_CONTACTS_FOR_USER') {
-    debugger
     fetch(
       `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getContactsForUser`,
       // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
@@ -242,7 +241,6 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ assign }),
 
       success: function (data) {
-        debugger
         console.log("success")
         console.log("data", data);
         // if (data.task.assignTo1.contact)
