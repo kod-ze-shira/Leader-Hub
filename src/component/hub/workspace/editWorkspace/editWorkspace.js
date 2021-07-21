@@ -67,8 +67,9 @@ function EditWorkspace(props) {
                         <label for="name">Name</label>
                         <input name="name" ref={nameRequired} required
                             onChange={(input) => changeFiledInWorkspace(input)}
-                            type="text" class="form-control" id="name"
+                            type="text" class="" className="form-control input-name" id="name"
                             // value={props.workspace.name} 
+                            
                             value={props.workspaces[props.indexOfWorkspace].name}
                         />
 
@@ -79,7 +80,7 @@ function EditWorkspace(props) {
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label className="label" for="description">Description</label>
                         <div class="form-control descriptionWorkspace"
                             id="description" rows="5"
                             placeholder="Write a description about your workspace"
@@ -96,7 +97,7 @@ function EditWorkspace(props) {
                     <button data-toggle="tooltip" data-placement="top"
                         className="delete-btn col-4 "
                         onClick={(e) => deleteWorkspace(e)}>
-                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.svg')}></img> Delete
                     </button>
                     <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">

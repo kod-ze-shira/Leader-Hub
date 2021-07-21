@@ -30,10 +30,8 @@ function ViewContact(props) {
         let i
 
         for (i = 0; i < assign.length; i++) {
-
             if (assign[i].contact._id == props.contact._id)
                 isExistContactInList = true
-
         }
         if (!isExistContactInList) {
             if (admin && props.contact._id == contactId)
@@ -44,6 +42,7 @@ function ViewContact(props) {
             props.viewToastMassege({ show: true, massege: props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name + ' assign!!' })
 
         }
+        props.closeContactList()
     }
     const markAsAdmin = (contactId) => {
         setAdmin(true)
@@ -55,7 +54,7 @@ function ViewContact(props) {
                 {props.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
                     : <div className="logo-contact ml-3" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
                 <p className="name-contact ">{props.contact.name} </p>   <p className="email-contact ">{props.contact.email} </p>
-                <input type="radio" onClick={(e) => e.stopPropagation()} onChange={() => markAsAdmin(props.contact._id)}></input>
+                {/* <input type="radio" onClick={(e) => e.stopPropagation()} onChange={() => markAsAdmin(props.contact._id)}></input> */}
             </div>
         </>
 

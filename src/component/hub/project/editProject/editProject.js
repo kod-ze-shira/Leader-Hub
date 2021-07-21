@@ -132,7 +132,7 @@ function EditProject(props) {
                         onClick={deletProject}
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
-                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.svg')}></img> Delete
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>

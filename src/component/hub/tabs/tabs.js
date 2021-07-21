@@ -35,7 +35,7 @@ function Tabs(props) {
                 props.getAllStatusesTaskForWorkspace()
             }
         }
-    }, [props.workspaces])
+    }, [props.workspaces,props.cards])
 
     useEffect(() => {
         // if (props.cards.length) {
@@ -153,12 +153,12 @@ function Tabs(props) {
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
             {/* {props.cards[props.indexCurrentCard] && */}
-             {props.workspaces.length ?
+            {props.workspaces.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
                         // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
-                        droppableId={props.cards.length ?props.cards[props.cards.length - 1]._id:null}
+                        droppableId={props.cards.length ? props.cards[props.cards.length - 1]._id : null}
                     >
                         {provided => (
                             <div
@@ -231,7 +231,7 @@ function Tabs(props) {
                     </Droppable>
                 </DragDropContext>
                 : null}
-            {viewDetails ?
+            {viewDetails && props.cards.length ?
                 <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails
                         showToast={(obj) => props.showToast(obj)}
