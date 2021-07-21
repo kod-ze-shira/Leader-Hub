@@ -30,7 +30,8 @@ import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareO
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
-import { uploadFiles, removeFile, downloadFile, downloadFolder, getFiles } from '../middleware/filesCrud';
+import { uploadFiles, removeFile, downloadFile, getFiles, downloadFolder } from '../middleware/filesCrud';
+import { setIfShowShareProjectsToTrue } from '../middleware/shareProjectsCrud';
 
 const reducers = combineReducers({ overview_reducer, project_reducer, task_reducer, workspace_reducer, public_reducer, card_reducer, status_reducer, files_reducer, share_reducer, design_reducer });
 
@@ -93,6 +94,7 @@ const store = createStore(
                 addMembers,
                 displayLineByStart,
                 disaplayLineByStop,
+                setIfShowShareProjectsToTrue,
                 assingToMany
             ))
 )

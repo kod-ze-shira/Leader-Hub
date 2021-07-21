@@ -107,7 +107,7 @@ function ViewTaskByCrad(props) {
             else {
                 if (viewDetails) {
                     setViewDetails(false)
-                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                    // props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
                 // setViewDetails(false)
             }
@@ -185,7 +185,6 @@ function ViewTaskByCrad(props) {
         setTask(temp);
     }
     const [assigneeDetails, setAssigneeDetails] = useState()//all contacts detail
-    let contact
     const setStateMailToContactMail = (emailMember) => {
 
         setAssigneeDetails(emailMember.value.email)
@@ -245,6 +244,8 @@ function ViewTaskByCrad(props) {
         setUserHasLike(!userHasLike)
         e.stopPropagation()
     }
+
+ 
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
@@ -315,27 +316,27 @@ function ViewTaskByCrad(props) {
 
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
-                                    {/* <div className="assing-to-list">
+                                    <div className="assing-to-list">
                                         {props.task.assignTo1 ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                            {props.task.assignTo1 ? <img referrerpolicy="no-referrer" src={ props.task.assignTo1.contact.thumbnail } className="thumbnail-contact ml-2" />
+                                            {props.task.assignTo1 ? <img referrerpolicy="no-referrer" src={props.task.assignTo1.contact.thumbnail} className="thumbnail-contact ml-2" />
                                                 : <div className="logo-contact ml-2" >{props.task.assignTo1.contact.name ? props.task.assignTo1.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ? 
-                                        <div className="widthofContacts col-4">
-                                            {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
-                                                if (index < 3)
-                                                    return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
-                                                        : null
-                                            }) : null}
-                                            {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
-                                        </div> : <img
-                                            className="ml-2 assing-to-icon"
-                                            onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
-                                            src={require('../../../../assets/img/share-icon.png')}>
-                                        </img>} 
-                                    </div>*/}
+                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ?
+                                            <div className="widthofContacts col-4">
+                                                {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                                    if (index < 3)
+                                                        return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+                                                            : null
+                                                }) : null}
+                                                {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
+                                            </div> : <img
+                                                className="ml-2 assing-to-icon"
+                                                onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
+                                                src={require('../../../../assets/img/share-icon.png')}>
+                                            </img>}
+                                    </div>
                                 </label>
-                                <label className="check-task border-left    px-2 col-status " >
+                                <label className="check-task border-left px-1 col-status " >
                                     <div onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })} className="status-task mb-2" style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
 

@@ -27,7 +27,6 @@ function Tabs(props) {
     const [ifAnimation, setIfAnimation] = useState(true)
 
     useEffect(() => {
-
         for (let i = 0; i < props.workspaces.length; i++) {
             let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
             if (workspace) {
@@ -35,7 +34,7 @@ function Tabs(props) {
                 props.getAllStatusesTaskForWorkspace()
             }
         }
-    }, [props.workspaces])
+    }, [props.workspaces, props.cards])
 
     useEffect(() => {
         // if (props.cards.length) {
@@ -118,6 +117,7 @@ function Tabs(props) {
     const openViewDetails = (task) => {
         setViewDetails(true)
         setTaskToDetails(task)
+        props.closeCalendarOrContact(false)
     }
     const setFocousCardFunc = (e) => {
         document.getElementById("add-new-card").focus();
@@ -127,6 +127,7 @@ function Tabs(props) {
         if (flag) {
             if (downloadFile) {
                 setViewDetails(true)
+                props.closeCalendarOrContact(false)
                 setFlag(false)
                 setTimeout(() => {
                     setFlag(true)
@@ -134,9 +135,10 @@ function Tabs(props) {
                 }, 1000);
             }
             else {
-                if (viewDetails) {
+                if (viewDetails === true) {
                     setViewDetails(false)
-                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                    props.closeCalendarOrContact(true)
+                    // props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
             }
         }
@@ -153,12 +155,12 @@ function Tabs(props) {
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
             {/* {props.cards[props.indexCurrentCard] && */}
-             {props.workspaces.length ?
+            {props.workspaces.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
                         // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
-                        droppableId={props.cards.length ?props.cards[props.cards.length - 1]._id:null}
+                        droppableId={props.cards.length ? props.cards[props.cards.length - 1]._id : null}
                     >
                         {provided => (
                             <div
@@ -231,11 +233,11 @@ function Tabs(props) {
                     </Droppable>
                 </DragDropContext>
                 : null}
-            {viewDetails ?
+            {viewDetails && props.cards.length ?
                 <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails
                         showToast={(obj) => props.showToast(obj)}
-                        closeViewDetails={() => setViewDetails(false)}
+                        closeViewDetails={() => { setViewDetails(false); props.closeCalendarOrContact(true) }}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
                         viewToastMassege={props.viewToastMassege}

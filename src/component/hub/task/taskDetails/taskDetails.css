@@ -101,9 +101,14 @@ textarea:focus{
 }
 .form-control{
     background-color: transparent !important;
+    box-shadow: none !important;
+
+}
+.form-control:focus{
+   outline: none !important;
 }
   .task-details > .dropdown{
-z-index: 9999 !important; 
+    z-index: 9999 !important; 
  }
 .task-details .status-btn .save_canges_btn{
     z-index: 99999 !important;
@@ -114,7 +119,7 @@ z-index: 9999 !important;
 .color-status-first{
   text-align: center;
   /* max-width: 90px !important; */
-  width: 85px;
+  /* width: 85px; */
     /* /* width: 26px; */
     height: 25px; 
     color: white;

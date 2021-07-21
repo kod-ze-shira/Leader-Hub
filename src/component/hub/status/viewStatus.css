@@ -13,19 +13,20 @@ border-radius: 19px;
 height: 28px;
 margin-top: 2vh;
 margin: auto;
+cursor: pointer !important;
 
 }
 
-.menu-status:hover{
-margin: auto;
-/* margin-top: 1vh; */
+/* .menu-status:hover{
+    margin: auto;
     border-color:  #75798E !important; 
     border-width: 1px !important;
     border-style: solid !important; 
-}
+} */
 .display-task{
     margin-bottom: 1vh;
     display: inline-block;
+    padding: 0;
 }
  .btn:focus
 {
