@@ -6,13 +6,13 @@ import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../Data/title.json';
 import { actions } from '../../../../redux/actions/action';
-import share from '../../../img/share.svg';
+import share from '../../../../assets/img/share.svg';
 import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
 import TeamView from '../../teamView/teamView'
 import ProjectStyle from "../projectStyle";
-import userfriend from '../../../img/userfriend.png'
+import userfriend from '../../../../assets/img/userfriend.png'
 
 function ViewProject(props) {
 
@@ -85,10 +85,9 @@ function ViewProject(props) {
         props.editOrShareProject('shareProject')
         event.stopPropagation();
     }
-    const [membersPlus, setMembersPlus] = useState(0)
-    const members = props.myProject.members.length ?
+    const members = props.myProject.members.length > 0 ?
         props.myProject.members.map((member, index) => {
-            return index < 2 ?
+            return index < 3 && member.contact ?
                 <TeamView marginTeam='' imgTeam={member.contact.thumbnail} />
                 : <></>
         }) : null
@@ -105,11 +104,17 @@ function ViewProject(props) {
                 id={props.myProject._id}>
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
-                    {/* <ProjectStyle color={props.myProject.color}></ProjectStyle> */}
+                    <ProjectStyle color={props.myProject.color}></ProjectStyle>
                     {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
-                    <span class='name2ProjectInList' title={props.myProject.name}
-                        style={{ 'color': props.myProject.color }}>
+                    <span class='name2ProjectInList'
+                        style={{ 'color': props.myProject.color }}
+                        data-tip data-for="project_name"
+                    >
                         {props.myProject.name}</span>
+                    {/* <ReactTooltip className="tooltip-style" data-tip id="project_name"
+                        place="bottom" effect="solid">
+                        {props.myProject.name}
+                    </ReactTooltip> */}
                     {/* <span class='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span> */}
@@ -129,7 +134,8 @@ function ViewProject(props) {
                 <td>
                     <span className='task widthCellInProject' >
                         <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }} data-tip data-for="task_c">
-                            <ReactTooltip className="tooltip-style" data-tip id="task_c" place="bottom" effect="solid">
+                            <ReactTooltip className="tooltip-style" data-tip id="task_c"
+                                place="bottom" effect="solid">
                                 {title.title_task_complete}
                             </ReactTooltip>
                             {props.myProject.countReadyTasks}</span>
@@ -144,7 +150,8 @@ function ViewProject(props) {
                 <td>
                     <div className='divProgress'>
                         <div class="progressProject" ref={refToProject}>
-                            <div role="progressbar" class="progressProject-bar " style={{ "width": complited + "%", background: complitedColor }}
+                            <div role="progressbar" class="progressProject-bar "
+                                style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
                         <ReactTooltip className="tooltip-style" data-tip id="percentage" place="bottom" effect="solid">
@@ -156,8 +163,8 @@ function ViewProject(props) {
                 </td>
                 <td className='widthCellInProject' style={{ 'text-align': 'center' }}>
                     {members}
-                    {props.myProject.members.length > 2 ?
-                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 2)} />
+                    {props.myProject.members.length > 3 ?
+                        <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 3)} />
                         : null
                     }
 
@@ -167,8 +174,8 @@ function ViewProject(props) {
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
                     {/* <CellDescription description='Last Update' /> */}
                 </td>
-                <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>{props.fromShare ? <img src={userfriend}></img> : null}
-                    <img style={myStyleIcons} src={require('../../../img/shareNew.svg')}
+                <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
+                    <img style={myStyleIcons} src={require('../../../../assets/img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
                     <ReactTooltip className="tooltip-style" data-tip id="share" place="bottom" effect="solid">
@@ -177,14 +184,14 @@ function ViewProject(props) {
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
-                        src={require('../../../img/pencil-edit.png')} data-tip data-for="edit_" />
+                        src={require('../../../../assets/img/pencil-edit.png')} data-tip data-for="edit_" />
                     <ReactTooltip className="tooltip-style" data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}
                     </ReactTooltip>
                     <div style={myStyleStripe} className='stripeActionsProject'>|</div>
 
                     <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
-                        src={require('../../../img/remove.png')} data-tip data-for="delete" />
+                        src={require('../../../../assets/img/remove.png')} data-tip data-for="delete" />
                     <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>

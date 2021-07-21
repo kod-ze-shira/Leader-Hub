@@ -8,10 +8,10 @@
         padding-top: 0.7vh;
         padding-bottom: 1.5vh;
         background: #FFFFFF 0% 0% no-repeat padding-box;
-        border-radius: 12px;
+        border-radius: 5px;
         opacity: 1;
-        box-shadow: 0px 3px 6px #00000029;
-
+        /* box-shadow: 0px 3px 6px #00000029; */
+        margin-right: 10px;
         
 }
 .back-header{
@@ -30,8 +30,10 @@ margin-right: 0px;
 }
 #tabsAndList{
         /* padding-bottom: 8px; */
-        justify-content: flex-end;
-        align-items: center;
+        /* justify-content: flex-end; */
+        align-items: flex-end;
+        margin-top: 0.8vh;
+        margin-bottom: 0.8vh;
 }
 .listInSelect, .tabsInSelect{
         border-bottom: 2px solid rgb(210, 200, 200) !important}
@@ -43,6 +45,20 @@ margin-right: 0px;
 .listInSelect, .tabsInSelect{
         border-bottom: 2px solid rgb(210, 200, 200) !important
 } */
+
+
+
+.tabs-in-header .MuiTab-wrapper{
+        color: rgb(66 77 87);
+}
+
+
+.tabs-in-header .MuiButtonBase-root:hover{
+        background: rgb(68 215 182 / 13%);
+        border-bottom: rgb(68 215 182 / 50%) 2px solid !important;
+
+}
+
 .MuiTab-root{
         min-width: 75px !important;
         /* color:'#00C6EA' !important; */
@@ -66,13 +82,6 @@ border-radius:50%;
 .MuiTab-root:focus{
         outline: 0 !important;
         color:var(--light-light-blue)  !important;
-}
-
-.select__placeholder{
-        /* font-size: small !important; */
-}
-.s-header svg{
-        /* margin-right: 30px !important; */
 }
 
 .opacity{

@@ -21,6 +21,8 @@ function CardsPage(props) {
         if (props.cards.length < 1) {
             props.getCardsByProjectId(idProject)
         }
+        if (props.contactsUser.length == 0)
+            props.getContactsForUser()
 
         if ((window.location.href.indexOf('list') != -1)) {
             setPresent("list")
@@ -59,11 +61,11 @@ function CardsPage(props) {
                 return <Tabs showToast={showToast}
                     showRocketShip={props.showRocketShip}
                     focusInputCard={props.focusInputCard}
-                    viewToastComplete={props.viewToastComplete}
+                    viewToastMassege={props.viewToastMassege}
                     viewContactList={props.viewContactList} />
             case 'list':
                 return <ProjectPlatform
-                    viewToastComplete={props.viewToastComplete}
+                    viewToastMassege={props.viewToastMassege}
                     showRocketShip={props.showRocketShip}
                     showToast={showToast} flag={flag}
                     focusInputCard={props.focusInputCard}
@@ -76,7 +78,7 @@ function CardsPage(props) {
                 // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform
                     showRocketShip={props.showRocketShip}
-                    viewToastComplete={props.viewToastComplete}
+                    viewToastMassege={props.viewToastMassege}
                     showToast={showToast} flag={flag} />
         }
     }
@@ -97,6 +99,7 @@ const mapStateToProps = (state) => {
         project: state.project_reducer.project,
         cards: state.public_reducer.cards,
         statuses: state.status_reducer.statuses,
+        contactsUser: state.share_reducer.contactsUser,
 
     }
 }
@@ -104,6 +107,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
+        getContactsForUser: () => dispatch(actions.getContactsForUser()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CardsPage)

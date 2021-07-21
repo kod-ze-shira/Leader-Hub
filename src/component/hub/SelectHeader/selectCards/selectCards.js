@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
-import Background from '../../../img/down-arrow.svg';
+import Background from '../../../../assets/img/down-arrow.svg';
 
 
 function SelectCards(props) {
@@ -28,7 +28,7 @@ function SelectCards(props) {
         //     props.setTaskName("No Cards")
     }
     const viewCardsList = props.cards.length ? props.cards.map((card) => (
-        { value: card._id, label: card.name }
+        card != null ? { value: card._id, label: card.name } : null
     )) : null;
 
     const style = {

@@ -23,7 +23,6 @@ function ProjectsPage(props) {
     const selectProject = (value) => {
         setProjectName(value)
     }
-
     return (
         <div className="" >
             <SelectHeader selectProject={selectProject} flag={changeFlag}
@@ -33,7 +32,7 @@ function ProjectsPage(props) {
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}
                 valueSearchProject={valueSearchProject}
-                viewToastComplete={props.viewToastComplete}
+                viewToastMassege={props.viewToastMassege}
                 projectName={projectName}
                 showViewDitailsProject={addProject}
             />

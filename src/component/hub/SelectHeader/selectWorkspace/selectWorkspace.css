@@ -19,11 +19,16 @@
     white-space: nowrap;
 }
 
-.select-workspace .css-1uccc91-singleValue, .select-workspace .css-1wa3eu0-placeholder,.select-workspace .css-b8ldur-Input{
-   margin-left: 2.8vw !important;
 
+.header-w-name{
+    width:4vw !important;
 }
-
+.header-w-select{
+    margin-right: 5px !important;
+}
+.logo-w-little.header-w-select{
+    margin-left:0px !important;
+}
 .css-5duvv3-control{
     border:none !important;
 }

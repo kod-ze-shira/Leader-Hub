@@ -1,42 +1,60 @@
 .toastDeleteOnStage{
-    margin-top: 75vh;
-    position: fixed;
-    margin-left: 8vh;
-    }
-    
-    .bodyHub {
-        padding-right: 1.8rem !important;
-        /* margin-top:24px !important; */
-    }
-    .back-screen{
-        background-color: #E8EAEC !important;
-        /* height: 100vh; */
-    }
-    
-    
-    #cdggdfdfb{
-        margin-top: 100px;
-        margin-left: 400px;
-    }
-    
-    body {
-        /* font-size: 1.1rem; */
-    }
+margin-top: 75vh;
+position: fixed;
+margin-left: 8vh;
+}
 
-    .divtext {
-        border: ridge 2px;
-        padding: 5px;
-        width: 20em;
-        min-height: 5em;
-        overflow: auto;
-    }
+.bodyHub {
+    padding-right:10px ;
+    margin-top: 10px;
+    flex: 0 0 85%;
+    max-width: 85%;
+    /* margin-left: 16px; */
+}
+
+.headerLeaderHub{
+    display: flex;
+    height: 0px;
+}
+.headerLeaderHub .LC_imageUser{
+    position: absolute;
+    right: 21px;
+    top: 18px;
+    z-index: 199;
+    cursor: pointer;
+}
+.back-screen{
+background-color: #E8EAEC !important;
+/* height: 100vh; */
+}
+.configuratorBlue{
+    flex: 0 0 15%;
+    max-width: 15%;
+    padding-right: 10px;
+
+/* padding: 0; */
+}
+
+#cdggdfdfb{
+margin-top: 100px;
+margin-left: 400px;
+}
+
+
+
+.divtext {
+border: ridge 2px;
+padding: 5px;
+width: 20em;
+min-height: 5em;
+overflow: auto;
+}
+
+
     
-    
-      
-    .calender-tabs{
-        z-index: 9999999; 
-        position: relative;  
-        /* top:100px;
-        left:100px */
-    }
-    
+.calender-tabs{
+    z-index: 9999999; 
+    position: relative;  
+    /* top:100px;
+    left:100px */
+}

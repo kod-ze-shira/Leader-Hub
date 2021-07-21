@@ -47,8 +47,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
                         setDownloadFile={(e) => props.setDownloadFile(e)}
-                        viewToastComplete={props.viewToastComplete}
-
+                        viewToastMassege={props.viewToastMassege}
                     />
                 case 'editWorkspace'://on click edit button of workspace
                     return <EditWorkspace closeViewDetails={props.closeViewDetails}
@@ -63,22 +62,23 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                     return <TaskNotBelongDetails task={props.task}
                         objectBeforeChanges={(e) => setOldObject(e)}
                         closeViewDetails={props.closeViewDetails}
+                        viewToastMassege={props.viewToastMassege}
                         showToast={showToast}
                         setDownloadFile={(e) =>
                             props.setDownloadFile(e)
                         }
                     />
                 case 'newProject':
-                    return <NewProject closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
+                    return <NewProject fromAllproject={props.fromAllproject}closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
                 case 'shareProject':
-                    return <ShareProject closeViewDetails={props.closeViewDetails} viewToastComplete={props.viewToastComplete} />
+                    return <ShareProject closeViewDetails={props.closeViewDetails} viewToastMassege={props.viewToastMassege} />
                 case 'addTask':
                     return <AddTask cardId={props.cardId} />
                 case 'addWorkspace':
-                    return <AddWorkspace closeViewDetails={props.closeViewDetails} />
+                    return <AddWorkspace closeViewDetails={props.closeViewDetails} colorWorkspace={props.colorWorkspace} />
                 default:
                     return null;
 

@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
-import bin from '../../../../img/bin.png'
-import duplicate from '../../../../img/duplicate-outline.png'
-import pencil from '../../../../img/pencil-write.png'
+import bin from '../../../../../assets/img/bin.svg'
+import duplicate from '../../../../../assets/img/duplicate-outline.svg'
+import pencil from '../../../../../assets/img/pencil-write.svg'
 import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
@@ -14,7 +14,7 @@ import ShureDelete from '../../../shureDelete/shureDelete';
 import styled, { css } from 'styled-components'
 
 function ViewWorkspaceGrid(props) {
-    console.log("hi")
+    // console.log("ViewWorkspaceGrid")
     const workspace = props.workspace
     // const myStyle=&:hover{
     //     'border': '1.5px solid workspace.colr'
@@ -45,7 +45,7 @@ function ViewWorkspaceGrid(props) {
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
-        console.log(workspace)
+        // console.log(workspace)
         props.duplicateWorkspace(workspace._id);
     }
 
@@ -67,7 +67,7 @@ function ViewWorkspaceGrid(props) {
                 <div className="row iconsActions" >
                     <div
                         className=" edit iconsAction" onClick={editWorkspace}>
-                        <img class='imageIcon' src={pencil} data-tip data-for="edit"
+                        <img className='imageIcon' src={pencil} data-tip data-for="edit"
                         ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="edit" place="top" effect="solid">
                             {title.title_edit}

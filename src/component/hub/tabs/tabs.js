@@ -28,11 +28,6 @@ function Tabs(props) {
 
     useEffect(() => {
 
-    }, [props.projectId, props.focusInputCard, props.cards])
-
-    useEffect(() => {
-        // if (props.workspaces.length == 0)
-        //     props.getAllWorkspaces()
         for (let i = 0; i < props.workspaces.length; i++) {
             let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
             if (workspace) {
@@ -40,7 +35,7 @@ function Tabs(props) {
                 props.getAllStatusesTaskForWorkspace()
             }
         }
-    }, [props.workspaces])
+    }, [props.workspaces,props.cards])
 
     useEffect(() => {
         // if (props.cards.length) {
@@ -53,15 +48,6 @@ function Tabs(props) {
 
     }, [dragTask])
 
-    function onDragStart(e) {
-        let card = props.cards.find(card => card._id == e.draggableId)
-        if (!card) {
-            setDragTaskF()
-
-            let b = dragTask
-            // alert("true")
-        }
-    }
     function setDragTaskF() {
         setDragTask(true)
     }
@@ -119,12 +105,10 @@ function Tabs(props) {
     }
 
     const newCard = () => {
-        console.log("cardsssssssss", props.cards);
         let card;
         if (inputValue) {
             card = { "project": props.project._id, name: inputValue }
             props.newCard(card)
-
         }
         setInputValue("")
         setShowInput(false)
@@ -138,9 +122,7 @@ function Tabs(props) {
     const setFocousCardFunc = (e) => {
         document.getElementById("add-new-card").focus();
     }
-    // $(window).click(function () {
-    //     setViewDetails(false)
-    // });
+
     $(window).on("click", function () {
         if (flag) {
             if (downloadFile) {
@@ -152,7 +134,10 @@ function Tabs(props) {
                 }, 1000);
             }
             else {
-                setViewDetails(false)
+                if (viewDetails) {
+                    setViewDetails(false)
+                    props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+                }
             }
         }
     })
@@ -167,12 +152,13 @@ function Tabs(props) {
             {/* לא מגיע אל הפונקציה הזאת בדרופ */}
             {/* droppableId   לכאורה צריך להוסיף א הפונ' שבעת לקיחה של האוביקט הוא שם את האי די של כרד ב */}
             {/* ואז זה יעבור תקין */}
-            {props.cards[props.indexCurrentCard] ?
+            {/* {props.cards[props.indexCurrentCard] && */}
+            {props.workspaces.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
                         // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
                         // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
-                        droppableId={props.cards[props.cards.length - 1]._id}
+                        droppableId={props.cards.length ? props.cards[props.cards.length - 1]._id : null}
                     >
                         {provided => (
                             <div
@@ -182,19 +168,17 @@ function Tabs(props) {
                                     <div className="row row mx-3">
                                         {props.cards.length ?
                                             <DragDropContext
-                                                // onDragStart={(e) => onDragStart(e)}
                                                 onDragEnd={(e) => onDragEndׂ(e)} >
-
                                                 {props.cards.map((card, index) => {
-                                                    return <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                    return card != null ? <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                         openInputTask={openInputTask}
-                                                        viewToastComplete={props.viewToastComplete}
+                                                        viewToastMassege={props.viewToastMassege}
                                                         viewContactList={props.viewContactList}
                                                         showRocketShip={props.showRocketShip}
                                                         showToast={(obj) => props.showToast(obj)}
                                                         key={card._id} cardFromMap={card} indexCard={index}
 
-                                                    />
+                                                    /> : null
                                                 })}
                                             </DragDropContext>
                                             : null}
@@ -203,10 +187,10 @@ function Tabs(props) {
                                         {/* <> */}
                                         {ifAnimation ?
                                             <div className="logoGif d-flex justify-content-center">
-                                                <img className="LampAnimation" src={require('../../img/hub.gif')} />
+                                                <img className="LampAnimation" src={require('../../../assets/img/hub.gif')} />
                                             </div>
                                             :
-                                            <div className="card-width px-2 mt-4" >
+                                            <div className="col-md-3 col-sm-10 px-2 mt-4" >
                                                 <div className="view-cards-tabs  mt-1" >
                                                     <div class="card new-card mt-1" >
                                                         <div id='newCardInput' class="container" >
@@ -223,7 +207,8 @@ function Tabs(props) {
                                                                         if (event.key === 'Enter') {
                                                                             newCard()
                                                                         }
-                                                                    }}></input>
+                                                                    }}
+                                                                ></input>
                                                                 <button
                                                                     className='buttonNewCard mt-3'
                                                                     onClick={(e) => setFocousCardFunc(e)}
@@ -246,14 +231,14 @@ function Tabs(props) {
                     </Droppable>
                 </DragDropContext>
                 : null}
-            {viewDetails ?
+            {viewDetails && props.cards.length ?
                 <div className="closeDet" onClick={(e) => stopP(e)} >
                     <ViewDetails
                         showToast={(obj) => props.showToast(obj)}
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={taskToDetails}
-                        viewToastComplete={props.viewToastComplete}
+                        viewToastMassege={props.viewToastMassege}
                         setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}>
                     </ViewDetails>
@@ -272,6 +257,7 @@ export default connect(
     (state) => {
         return {
             indexCurrentCard: state.public_reducer.indexCurrentCard,
+            indexCurrentTask: state.public_reducer.indexCurrentTask,
             project: state.project_reducer.project,
             cards: state.public_reducer.cards,
             projects: state.project_reducer.projects,
@@ -280,7 +266,7 @@ export default connect(
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
             statuses: state.public_reducer.statuses,
-            cardsEmpty: state.public_reducer.cardsEmpty
+            cardsEmpty: state.public_reducer.cardsEmpty,
 
         }
     },
@@ -301,6 +287,7 @@ export default connect(
             getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
             getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
             newCard: (cardname) => dispatch(actions.newCard(cardname)),
+            EditTask: (task) => dispatch(actions.editTask(task)),
 
         }
     }

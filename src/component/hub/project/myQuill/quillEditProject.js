@@ -15,6 +15,7 @@ class QuillEditProject extends Component {
 
 
     changeFiledInEditProject = (e) => {
+        
         // כאן ניתן להשתמש בטקסט המעוצב
         console.log(e)//HTML מכיל את הטקסט כולל עיצוב e המשתנה 
         let editProjectInRedux = {
@@ -24,9 +25,9 @@ class QuillEditProject extends Component {
     }
 
 
-    componentDidMount() {
-        this.changeFiledInEditProject(this.props.text)
-    }
+    // componentDidMount() {
+    //     this.changeFiledInEditProject(this.props.text)
+    // }
 
     modules = {
         // כאן ניתן להוסיף\להסיר עוד אלמנטים לעיצוב הטקסט
@@ -86,8 +87,9 @@ class QuillEditProject extends Component {
                     id="textQuil"
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description}
-                    onChange={(e) => this.changeFiledInEditProject(e)}
+                    value={this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description ? this.props.workspaces[this.props.indexW] && this.props.workspaces[this.props.indexW].projects[this.props.indexP] && this.props.workspaces[this.props.indexW].projects[this.props.indexP].description : null}
+                    // onChange={(e) => this.changeFiledInEditProject(e)}
+                    onBlur={(e) => this.changeFiledInEditProject(e)}
                 >
                 </ReactQuill>
 

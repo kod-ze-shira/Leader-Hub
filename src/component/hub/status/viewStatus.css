@@ -13,19 +13,20 @@ border-radius: 19px;
 height: 28px;
 margin-top: 2vh;
 margin: auto;
+cursor: pointer !important;
 
 }
 
-.menu-status:hover{
-margin: auto;
-/* margin-top: 1vh; */
+/* .menu-status:hover{
+    margin: auto;
     border-color:  #75798E !important; 
     border-width: 1px !important;
     border-style: solid !important; 
-}
+} */
 .display-task{
     margin-bottom: 1vh;
     display: inline-block;
+    padding: 0;
 }
  .btn:focus
 {
@@ -97,7 +98,7 @@ z-index: 9999999;
   display: inline-block;
 }
 .status-list{
-    margin-bottom:3vh;
+    margin-bottom:1vh;
     margin-top: 1vh;
     max-height: 150px;
     /* overflow-y: auto; */
@@ -118,9 +119,9 @@ z-index: 9999999;
 }
 .create-label{
   background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box;
-background: #75798E 0% 0% no-repeat padding-box;
+background:#f1f2f5  0% 0% no-repeat padding-box;
 border: 1px solid #707070;
-opacity: 0.15;
+/* opacity: 0.15; */
     margin-top: 1vh;
     margin-bottom: 3vh;
     text-align:left;

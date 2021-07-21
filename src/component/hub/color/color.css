@@ -8,3 +8,33 @@
   /* background-color:red; */
   display:inline-block;
 }
+.select-color-workspace{
+  width:35px;
+  height:35px;
+  display: inline-block;
+  margin-left: 5px;
+
+}
+.add-color-workspace{
+  background-color:white;
+  text-align:center;
+  width:35px;
+  height:35px;
+  /* font-size:large; */
+  border:1px solid black;
+  margin-left: 5px;
+  position: relative;
+  display: inline-block;
+  top: 0 !important;
+  left: 0 !important;
+
+}
+
+.add-color-workspace input {
+   position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  opacity: 0;
+  display: inline-block
+}

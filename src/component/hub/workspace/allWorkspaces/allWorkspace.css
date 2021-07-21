@@ -27,7 +27,7 @@
     color: #778CA2 !important;
   }
 .addWorkspace{
-  border:1px #778CA2 dashed ;
+  /* border:1px #778CA2 dashed ; */
 }
 .addWorkspace:hover
  {

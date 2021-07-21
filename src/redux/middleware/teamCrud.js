@@ -1,11 +1,12 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
 import configData from '../../ProtectedRoute/configData.json'
+import keys from '../../config/env/keys'
 
 export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'GET_ALL_TEAMS_FOR_USER') {
-    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/getAllTeamsForUser`
+    let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getAllTeamsForUser`
     fetch(urlData,
       {
         method: 'GET',
@@ -32,7 +33,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 
   if (action.type === 'CREATE_NEW_TEAM') {
     console.log('CREATE_NEW_TEAM')
-    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/addNewTeam`
+    let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/addNewTeam`
     // let team = getState().team_reducer.team;
     let team = action.payload;
     // team 
@@ -73,8 +74,9 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 }
 export const getContactsForUser = ({ dispatch, getState }) => next => action => {
   if (action.type === 'GET_CONTACTS_FOR_USER') {
+    debugger
     fetch(
-      `${configData.SERVER_URL}/${getState().public_reducer.userName}/getContactsForUser`,
+      `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getContactsForUser`,
       // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
 
       {
@@ -109,7 +111,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
       .projects[getState().public_reducer.indexCurrentProject]._id
     console.log(objectId);
     ///:userName/:objectId/:schemaName/:applicationName/shareObject
-    fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${objectId}/Project/hub/shareMembersAndTeams`,
+    fetch(`${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${objectId}/Project/hub/shareMembersAndTeams`,
       {
         method: 'POST',
         headers: {
@@ -119,7 +121,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
         },
         body: JSON.stringify({ teamsMembersAndPermission, membersEmails })
       }).then((result) => {
-        console.log('resultShareObject',result);
+        console.log('resultShareObject', result);
         return result.json();
       }).then((result) => {
         checkPermission(result).then((ifOk) => {
@@ -162,7 +164,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
 //     let email = action.payload
 //     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
 //     .tasks[getState().public_reducer.indexCurrentTask]._id
-//     fetch(`${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingTo`,
+//     fetch(`${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${taskId}/assingTo`,
 //       {
 //         method: 'POST',
 //         headers: {
@@ -191,7 +193,7 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload;
     console.log(taskId);
-    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingTo`
+    let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${taskId}/assingTo`
     $.ajax({
       url: urlData,
       type: 'POST',
@@ -220,6 +222,45 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
+// https://reacthub.dev.leader.codes/api/{{userName}}/{{taskId}}/assingToMany
+
+export const assingToMany = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'ASSING_TO_MANY') {
+    let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+      .tasks[getState().public_reducer.indexCurrentTask]._id
+    let assign = action.payload
+    let editTaskInRedux
+    console.log(taskId);
+    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/assingToMany`
+    $.ajax({
+      url: urlData,
+      type: 'POST',
+      headers: {
+        Authorization: getState().public_reducer.tokenFromCookies
+      },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ assign }),
+
+      success: function (data) {
+      
+        console.log("success")
+        console.log("data", data);
+        // if (data.task.assignTo1.contact)
+        editTaskInRedux = {
+          "nameFiled": "assignTo1", "value": data.task.assignTo1
+        }
+        dispatch(actions.setTaskByFiledFromTasks(editTaskInRedux))
+        dispatch(actions.addContactToContactList(data.task.assignTo1[data.task.assignTo1.length - 1].contact))
+      },
+      error: function (err) {
+        checkPermission(err).then((ifOk) => {
+        })
+      }
+    });
+
+  }
+  return next(action);
+}
 
 
 export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {
@@ -227,7 +268,7 @@ export const getMembersByProjectId = ({ dispatch, getState }) => next => action 
     let reducer = getState().public_reducer
     let jwtFromCookie = reducer.tokenFromCookies;
 
-    let urlData = `${configData.SERVER_URL}/${reducer.userName}/Project/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
+    let urlData = `${keys.API_URL_BASE_SERVER}/${reducer.userName}/Project/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/getAllMembersForObject`
     fetch(urlData,
       {
         method: "GET",
@@ -255,7 +296,7 @@ export const addMembers = ({ dispatch, getState }) => next => action => {
 
     let reducer = getState().public_reducer
     let jwtFromCookie = reducer.tokenFromCookies;
-    let urlData = `${configData.SERVER_URL}/${reducer.userName}/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/addMemberToTeam`
+    let urlData = `${keys.API_URL_BASE_SERVER}/${reducer.userName}/${reducer.workspaces[reducer.indexOfWorkspace].projects[reducer.indexCurrentProject]._id}/addMemberToTeam`
     fetch(urlData,
       {
         method: "POST",
@@ -284,10 +325,10 @@ function checkPermission(result) {
   return new Promise((resolve, reject) => {
     if (result.status == "401") {
       result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
-        window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.responseJSON.routes}`) :
+        window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
         result.routes ?
-          window.location.assign(`https://dev.accounts.codes/hub/login?routes=hub/${result.routes}`) :
-          window.location.assign(`https://dev.accounts.codes/hub/login`)
+          window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.routes}`) :
+          window.location.assign(`${keys.API_URL_LOGIN}`)
 
       reject(false)
 
@@ -295,4 +336,5 @@ function checkPermission(result) {
     resolve(true)
 
   })
+
 }

@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 import ViewDetails from '../../../viewDetails/viewDetails'
-import bin from '../../../../img/bin.png'
-import duplicate from '../../../../img/duplicate-outline.png'
-import pencil from '../../../../img/pencil-write.png'
+import bin from '../../../../../assets/img/bin.svg'
+import duplicate from '../../../../../assets/img/duplicate-outline.svg'
+import pencil from '../../../../../assets/img/pencil-write.svg'
 import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'

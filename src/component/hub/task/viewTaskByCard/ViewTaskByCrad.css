@@ -12,6 +12,10 @@
   vertical-align: middle !important;
 
 }
+.widthofContacts{
+  display: inline !important;
+  padding: 0 !important;
+}
 
 .check-task button:focus{
   outline: 0;
@@ -100,7 +104,6 @@ opacity: 0.3;
 }
 .view-details-btn{
   text-align: right!important;
- 
 }
 .view-details-btn>button{
   border-radius: 5px;
@@ -219,8 +222,8 @@ border: none !important;
   width: 75%;
   padding-top: 0.5vh;
   padding-bottom: 0.5vh;
-      /* opacity: 0.6; */
-      font-weight: 400;
+  /* opacity: 0.6; */
+  font-weight: 400;
 }
 .task-name-in-list{
   width: 600px;
@@ -257,9 +260,7 @@ float: right !important;
 .check-task .assing-to{
   display: inline-block;
 }
-.assing-to-list {
-  float:left ;
-}
+
 
 .prioprty-select p{
   font-weight: bold;

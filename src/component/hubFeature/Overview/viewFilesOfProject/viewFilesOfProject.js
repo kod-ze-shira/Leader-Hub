@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import FilesFolder from './filesFolder'
-import download from '../../../img/download.png'
+// import FilesFolder from './filesFolder/filesFolder'
+import download from '../../../../assets/img/download.png'
 import ReactTooltip from 'react-tooltip'
 import title from '../../../../Data/title.json'
 import { actions } from '../../../../redux/actions/action'
 import './viewFilesOfProject.css'
-import ViewCards from './viewCards'
-import ViewFilesByCard from './viewFilesByCard'
+import ViewCards from './viewCards/viewCards'
+import ViewFilesByCard from './viewFilesbyCard/viewFilesByCard'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// import jsZip from 'jszip'
+// import { downloadFolder } from '../../../../redux/middleware/filesCrud'
+import JSZip from "jszip";
 
 function ViewFilesOfProject(props) {
 
@@ -22,6 +24,7 @@ function ViewFilesOfProject(props) {
     const [countFilesArr, setCountFilesArr] = useState(0)
     const [countFoldersArr, setCountFoldersArr] = useState(0)
     const [cardName, setCardName] = useState('')
+    const [ifAnimation, setIfanimation] = useState(false)
 
     useEffect(() => {
 
@@ -30,21 +33,50 @@ function ViewFilesOfProject(props) {
 
     function downloadFile(e) {
 
-        alert('download')
-
-        // filesForDownload.forEach(f => props.downloadFile({ "file": f }))
+        // alert('download')
+        if (foldersForDownload.length > 7)
+            setIfanimation(true)
+        filesForDownload.forEach(f => props.downloadFile({ "file": f }))
 
     }
 
-    function downloadFolder(e) {
+    async function downloadFolder1() {
 
-        alert('download')
+        let file
+        let zip = new JSZip();
+        for (var i = 0; i < foldersForDownload[0].files.length; i++) {
+            file = await fetch(foldersForDownload[0].files[i].url)
+                .then(r => r.blob())
+                .then(blobFile => new File([blobFile],
+                    foldersForDownload[0].files[i].url.match(/.*\/(.*)$/)[1],
+                    { type: "image/jpeg" }))
+            zip.file(i + file.name, file);
+        }
+        zip.generateAsync({
+            type: "base64"
+        }).then(function (content) {
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = "data:application/zip;base64," + content;
+            a.download = foldersForDownload[0].cardName;
+            document.body.appendChild(a);
+            a.click();
 
-        // foldersForDownloadArr.forEach(folder => folder.files.forEach(file => props.downloadFile({ "file": file })))
+            // window.location.href = "data:application/zip;base64," + content;
+        });
+
     }
+    // alert('download')
+    // foldersForDownload.forEach(folder => folder.files.forEach(file => props.downloadFile({ "file": file })))
+    // foldersForDownload.forEach(folder => props.downloadFiles({ "folder": folder }))
+
+
     function backToAllFiles() {
         setCardName('')
         setShowCards(true)
+    }
+    function zipFolder(files) {
+
     }
 
 
@@ -59,15 +91,17 @@ function ViewFilesOfProject(props) {
                                 <FontAwesomeIcon className="rowIcon"
                                     icon={['fas', 'chevron-left']}>
                                 </FontAwesomeIcon>
-                                {'      ' + cardName}</p> : ''}
+                                {cardName}</p> : ''}
 
                     </div>
                     <div className="col-3 row iconsList" >
                         <div className="add iconControl"
-                            data-tip data-for="download" disabled={showCards ? countFoldersArr === 0 : countFilesArr === 0} onClick={showCards ? downloadFolder : downloadFile}>
+                            data-tip data-for="download" disabled={showCards ? countFoldersArr === 0 : countFilesArr === 0} onClick={showCards ? downloadFolder1 : downloadFile}>
                             <img class='imageIcon' src={download} ></img>
                             <ReactTooltip className="tooltip-style" data-tip id="download" place="top" effect="solid">
-                                {title.title_downLoad}
+                                {showCards ? title.title_download_folder :
+                                    title.title_downLoad
+                                }
                             </ReactTooltip>
 
                         </div>
@@ -83,13 +117,17 @@ function ViewFilesOfProject(props) {
                         setCardName={setCardName}
                         showRocketShip={props.showRocketShip}
                         setCountFoldersArr={setCountFoldersArr}
+                        ifShow={showCards}
                     ></ViewCards> :
                     <ViewFilesByCard
                         files={currentFiles}
                         setFilesForDownload={setFilesForDownload}
                         setCountFilesArr={setCountFilesArr}
                         setCardName={setCardName}
+                        ifShow={showCards}
                     ></ViewFilesByCard>}
+                {ifAnimation ?
+                    <div className="waitForDownload"></div> : null}
             </div>
         </>
     )
@@ -106,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getFilesForProject: (p) => dispatch(actions.getFilesForProject(p)),
         downloadFile: (file) => dispatch(actions.downloadFile(file)),
+        downloadFiles: (files) => dispatch(actions.downloadFiles(files))
     }
 }
 

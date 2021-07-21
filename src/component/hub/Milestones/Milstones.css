@@ -26,3 +26,6 @@ font-weight: bold;}
 .LampAnimation{
     height: 70vh;
 }
+.milstoneName{
+    cursor: pointer;
+}

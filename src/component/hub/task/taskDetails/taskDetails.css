@@ -42,10 +42,10 @@ overflow-y: auto;
 
 }
 .create-label{
-  background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box;
-background: #75798E 0% 0% no-repeat padding-box;
+  /* background: var(--unnamed-color-75798e) 0% 0% no-repeat padding-box; */
+background: #f1f2f5 0% 0% no-repeat padding-box;
 border: 1px solid #707070;
-opacity: 0.15;
+/* opacity: 0.15; */
     margin-top: 1vh ;
     margin-bottom: 3vh ;
     margin:auto ;
@@ -101,17 +101,25 @@ textarea:focus{
 }
 .form-control{
     background-color: transparent !important;
+    box-shadow: none !important;
+
+}
+.form-control:focus{
+   outline: none !important;
 }
   .task-details > .dropdown{
-z-index: 9999 !important; 
+    z-index: 9999 !important; 
  }
 .task-details .status-btn .save_canges_btn{
     z-index: 99999 !important;
 }
+.btn-block{
+  height: 39px;
+}
 .color-status-first{
   text-align: center;
   /* max-width: 90px !important; */
-  width: 85px;
+  /* width: 85px; */
     /* /* width: 26px; */
     height: 25px; 
     color: white;

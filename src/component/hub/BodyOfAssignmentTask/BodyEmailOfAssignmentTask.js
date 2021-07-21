@@ -16,12 +16,12 @@ function BodyEmailOfAssignmentTask(props) {
         <>
             <div className="container">
                 <div className="col align-self-center">
-                    <img src={require('../../img/border-top-email.png')}
+                    <img src={require('../../../assets/img/border-top-email.png')}
                     ></img>
                     <div className="body-email-assingTo ">
                         <div className="col align-self-cente mt-3">
                             {/* תמונת לוגו פרויקט */}
-                            <img className=" logo-workspace-email" src={require('../../img/logo-workspace-email.png')} ></img>
+                            <img className=" logo-workspace-email" src={require('../../../assets/img/logo-workspace-email.png')} ></img>
                             {/* שם הפרויקט */}
                             <div className="row justify-content-center">
                                 <h1 className="col-12  name-workspace-email">Hub</h1>
@@ -50,11 +50,11 @@ function BodyEmailOfAssignmentTask(props) {
                                     <div className="col-10 mt-5 border-line"></div>
                                     <div className="col-12 mt-5">
                                         <div className="col-5 assigned-to">
-                                            <img src={require('../../img/members.svg')}></img>
+                                            <img src={require('../../../assets/img/members.svg')}></img>
                                             <p className="ml-2">Assigned To</p>
                                         </div>
                                         <div className="col-5 mb-2 assigned-to">
-                                            <img src={require('../../img/members.svg')}></img>
+                                            <img src={require('../../../assets/img/members.svg')}></img>
                                             <p className="ml-2">Due Date</p>
                                         </div>
                                         <div className="det col-5 mb-3">Yael Levi</div>
@@ -69,7 +69,7 @@ function BodyEmailOfAssignmentTask(props) {
                         </div>
                     </div>
                     <div className="pb-0 mb-0">
-                        <img src={require('../../img/border-bottom-email.png')} ></img>
+                        <img src={require('../../../assets/img/border-bottom-email.png')} ></img>
                     </div>
                 </div>
             </div>

@@ -16,11 +16,9 @@
   border-radius:0.2em;
 }
 
-.scrollbarOverview2{
-  width:100%;
-}
 .scrollOverview{
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 87.5vh;
 }
 .scrollOverview::-webkit-scrollbar {
@@ -31,4 +29,12 @@
 .HangoutAndLogs{
   border-radius: 2%;
   background-color: white;
+}
+.filesOfProject{
+  /* border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
+  border-bottom-left-radius: 3%;
+  border-bottom-right-radius: 3%; */
+border-radius: 5px;
+width: 100%;
 }

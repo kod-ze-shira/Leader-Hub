@@ -15,17 +15,18 @@ function DisplayGantt(props) {
             theCards = []
             theTasks = []
             mone = []
-          }
+            cnt=-1;
+            i=1;
+        }
     }, [])
 
     const allWorkspace = { workspaces };
-    console.log(allWorkspace);
 
     let theCards = []
     let theTasks = []
     let mone = []
-
-
+    let cnt=-1;
+    let i=1;
     props.cards.map((card, index) => {
         if (index == 0 & theCards.length > 0)
             theCards.clear()
@@ -34,7 +35,6 @@ function DisplayGantt(props) {
         }
     })
 
-    console.log("theCards", theCards)
 
     function calculateDiff(end, start) {
         let endDate = end.split("/")[1] + "/" + end.split("/")[0] + "/" + end.split("/")[2]
@@ -45,40 +45,62 @@ function DisplayGantt(props) {
         let Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
         return Difference_In_Days
     }
+
     theCards.map((card, index) => {
         card.tasks.map((task, index1) => {
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
-            let cardName
+            let cardName=null
             let a = theTasks.find(task => task.cardName == card.name)
-
+         
             if (a)
                 cardName = null
-            else
-                cardName = card.name
+            else{
+
+                
+                theTasks.push({
+                    index:i++,
+                    indexCard: cnt--,
+                    indexTask: -1,
+                    card:-1,
+                    cardName: card.name,
+                    priority: "not-show-task-gantt",
+                    id: cnt--,
+                    text: task.name,
+                    start_date: startDate,
+                    duration: diffDays,
+                    progress: 0.3,
+                    milestones: task.milestones,
+                    contacts: [],
+                })
+            }
+            if(diffDays===0){
+                diffDays =1;
+            }
             theTasks.push({
+                index:i++,
                 indexCard: index,
                 indexTask: index1,
                 card: card._id,
                 cardName: cardName,
                 priority: task.priority ? task.priority.level : "Low",
-                id: task._id, text:
-                    task.name, start_date:
-                    startDate,
+                id: task._id,
+                text: task.name,
+                start_date: startDate,
                 duration: diffDays,
                 progress: 0.3,
-                milestones: task.milestones
+                milestones: task.milestones,
+                contacts: task.assignTo1.map((c)=>{return c?.contact?.thumbnail})
             })
         })
         mone.push(index)
     })
-    console.log("mone", mone);
+
     let currDate;
 
 
 
 
-    console.log("theTasks", theTasks);
 
     let minYear = "3000-01-01";
     let maxYear = "1000-01-01";
@@ -102,13 +124,14 @@ function DisplayGantt(props) {
         })
     }
 
-    currDate = currDate == undefined ?parseInt(  new Date().getFullYear()) :parseInt(currDate) 
+    currDate = currDate == undefined ? parseInt(new Date().getFullYear()) : parseInt(currDate)
     currDate = currDate + 2
     currDate = currDate.toString();
     currDate = currDate.concat('-01-01')
     maxYear = currDate;
     theTasks.push(
         {
+            "index":i++,
             "indexCard": -1,
             "indexTask": -1,
             "card": -1,
@@ -116,17 +139,12 @@ function DisplayGantt(props) {
             "priority": "ggg",
             "id": 2985730,
             "text": "first",
-            "start_date": currDate ,
+            "start_date": currDate,
             "duration": 3,
             "progress": 0.6,
-            "milestones": null
-
-
-            // "id": 2985730,
-            // "text": "first",
-            // "start_date": currDate,
-            // "duration": 3,
-            // "progress": 0.6,
+            "milestones": null,
+            status: {},
+            contacts:[]
         })
     const state = {
         currentZoom: 'Days',
@@ -148,11 +166,11 @@ function DisplayGantt(props) {
         this.addMessage(message);
     }
 
-    const handleZoomChange = (zoom) => {
-        this.setState({
-            currentZoom: zoom
-        });
-    }
+    // const handleZoomChange = (zoom) => {
+    //     this.setState({
+    //         currentZoom: zoom
+    //     });
+    // }
 
     const { currentZoom, messages } = state;
 
