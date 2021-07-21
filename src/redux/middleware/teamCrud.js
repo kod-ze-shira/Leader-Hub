@@ -74,7 +74,7 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 }
 export const getContactsForUser = ({ dispatch, getState }) => next => action => {
   if (action.type === 'GET_CONTACTS_FOR_USER') {
-    debugger
+    
     fetch(
       `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getContactsForUser`,
       // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,

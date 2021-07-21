@@ -131,7 +131,7 @@ function ViewCards(props) {
         function () {
             $(this).attr('contentEditable', true);
         });
-        
+
     $(window).on("click", function () {
         setAddTaskInInput(false)
     })
@@ -212,6 +212,7 @@ function ViewCards(props) {
                                         {...provided.droppableProps}>
                                         {props.cardFromMap.tasks.map((task, index) => (
                                             <ViewTaskByCradTryS
+                                                closeCalendarOrContact={props.closeCalendarOrContact}
                                                 viewContactList={props.viewContactList}
                                                 viewToastMassege={props.viewToastMassege}
                                                 objectToast={(task) => props.showToastDelete(task)}

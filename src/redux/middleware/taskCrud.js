@@ -206,6 +206,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 
 export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
+        
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
         // console.log('EDIT_TASK')
