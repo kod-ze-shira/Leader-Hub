@@ -91,7 +91,7 @@ function ViewCardsTabs(props) {
         setAnchorEl(null)
         // textInput.current.focus()
         if (nameAction == "delete") {
-            $(`#${props.cards[props.indexCard]._id }`).css("display", "none")
+            $(`#${props.cards[props.indexCard]._id}`).css("display", "none")
 
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
@@ -162,9 +162,9 @@ function ViewCardsTabs(props) {
                         >
                             <div className="view-cards-tabs"
                                 id={props.cardFromMap._id}>
-                                <div class="card" >
-                                    <div class="container " >
-                                        <div class="draggable card-header row">
+                                <div className="card" >
+                                    <div className="container " >
+                                        <div className="draggable card-header row">
                                             <span
                                                 id="input-card-name"
                                                 ref={textInput}
@@ -192,7 +192,7 @@ function ViewCardsTabs(props) {
 
                                         </div>
                                     </div>
-                                    <div class="card-body allTaskInCard " >
+                                    <div className="card-body allTaskInCard " >
                                         <Droppable droppableId={props.cardFromMap._id} >
                                             {provided => (
                                                 <div className="mt-0 glila mb-2"
@@ -212,11 +212,11 @@ function ViewCardsTabs(props) {
                                                     )) : null}
                                                     {
                                                         addTaskInInput ?
-                                                            <div class="mt-3">
+                                                            <div className="mt-3">
                                                                 <input
                                                                     autoFocus="true"
                                                                     type="text"
-                                                                    class="  form-control col-12 mx-0" placeholder="Add Task"
+                                                                    className="  form-control col-12 mx-0" placeholder="Add Task"
                                                                     id="input-task"
                                                                     autocomplete="off" value={inputValue}
                                                                     // onMouseLeave={(e)=>setAddTaskInInput(false)}

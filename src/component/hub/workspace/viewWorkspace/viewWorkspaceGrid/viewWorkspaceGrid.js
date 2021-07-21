@@ -73,14 +73,14 @@ function ViewWorkspaceGrid(props) {
                         onClick={delete_workspace}
                         data-tip data-for="delete"
                     >
-                        <img class='imageIcon' src={bin} ></img>
+                        <img className='imageIcon' src={bin} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div>
                     <div className="add iconsAction" onClick={duplicateWorkspace} data-tip data-for="duplicate" >
-                        <img class='imageIcon' src={duplicate} ></img>
+                        <img className='imageIcon' src={duplicate} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="duplicate" place="top" effect="solid">
                             {title.title_duplicate}
                         </ReactTooltip>

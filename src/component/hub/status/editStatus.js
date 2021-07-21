@@ -55,20 +55,20 @@ function EditStatus(props) {
         <>
             <div className="container edit-status-wraps">
                 <div className="title-edit-label py-2 mb-1" > Edit Label</div>
-                <div class="form-group row mx-auto">
+                <div className="form-group row mx-auto">
 
                     <label for="name">Name</label>
                     <input name="statusName"
-                        type="text" class="form-control"
+                        type="text" className="form-control"
                         id="statusName"
                         value={props.status.statusName}
                         onClick={(e) => stopP(e)}
                         onChange={(e) => handleChangeStatus(e)}
                     />
-                    <div class="form-group row mx-auto">
+                    <div className="form-group row mx-auto">
                         <label for="color">Select Color</label>
                         <input name="color"
-                            type="color" class="form-control"
+                            type="color" className="form-control"
                             id="color"
                             value={props.status.color}
                             onClick={(e) => stopP(e)}

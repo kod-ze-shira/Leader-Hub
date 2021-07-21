@@ -105,8 +105,8 @@ function ViewProject(props) {
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
                     <ProjectStyle color={props.myProject.color}></ProjectStyle>
-                    {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
-                    <span class='name2ProjectInList'
+                    {/* <span className="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
+                    <span className='name2ProjectInList'
                         style={{ 'color': props.myProject.color }}
                         data-tip data-for="project_name"
                     >
@@ -115,7 +115,7 @@ function ViewProject(props) {
                         place="bottom" effect="solid">
                         {props.myProject.name}
                     </ReactTooltip> */}
-                    {/* <span class='stripeProject'
+                    {/* <span className='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span> */}
                 </td>
@@ -149,8 +149,8 @@ function ViewProject(props) {
                 </td>
                 <td>
                     <div className='divProgress'>
-                        <div class="progressProject" ref={refToProject}>
-                            <div role="progressbar" class="progressProject-bar "
+                        <div className="progressProject" ref={refToProject}>
+                            <div role="progressbar" className="progressProject-bar "
                                 style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
