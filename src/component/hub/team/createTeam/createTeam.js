@@ -16,9 +16,9 @@ export default function CreateTeam() {
          </div> */}
                 <div className="row">
                     <div className="col">
-                        <label for="teamLogo" className="lbl_img">
+                        <label htmlFor="teamLogo" className="lbl_img">
                             <img className="img_logo"
-                                referrerpolicy="no-referrer"
+                                referrerPolicy="no-referrer"
                                 src={star} />
                         </label>
                         <input

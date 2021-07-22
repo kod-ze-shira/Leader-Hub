@@ -91,7 +91,7 @@ function EditProject(props) {
                         <label>workspace: {props.workspace.name}</label>
                     </div>
                     <div className="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input name="name" onChange={(e) => changeFiledInProject(e)}
                             type="text" className="form-control" required ref={nameRequired}
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
@@ -100,12 +100,12 @@ function EditProject(props) {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <QuillEditProject indexW={props.indexWorkspace} indexP={props.indexProject} />
                     </div>
                     <div className="row justify-content-between">
                         <div className="form-group col-5 ditailsAction">
-                            <label for="color">Project color</label>
+                            <label htmlFor="color">Project color</label>
                             <input name="color"
                                 className=" form-control "
                                 onChange={(e) => changeFiledInProject(e)}
@@ -115,7 +115,7 @@ function EditProject(props) {
                             />
                         </div>
                         <div className="form-group col-5 ditailsAction ">
-                            <label for="color">Due Date</label>
+                            <label htmlFor="color">Due Date</label>
                             <input
                                 className="form-control "
                                 name="dueDate"

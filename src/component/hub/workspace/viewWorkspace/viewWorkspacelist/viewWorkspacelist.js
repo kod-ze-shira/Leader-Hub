@@ -11,6 +11,7 @@ import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
 import styled, { css } from 'styled-components'
+import { MyStyleGrid } from '../viewWorkspaceGrid/viewWorkspaceGrid.style'
 
 
 function ViewWorkspaceList(props) {
@@ -20,10 +21,10 @@ function ViewWorkspaceList(props) {
 
     const [indexWorkspace, setIndexWorkspace] = useState()
 
-    const MyStyle = styled.div` 
-    &:hover {
-        border: 1.5px solid ${workspace.color} !important
-    }`;
+    // const MyStyle = styled.div` 
+    // &:hover {
+    //     border: 1.5px solid ${workspace.color} !important
+    // }`;
     useEffect(() => {
         setIndexWorkspace(props.index)
     }, [props.workspaces])
@@ -73,7 +74,7 @@ function ViewWorkspaceList(props) {
 
 
                         <div className="row "  >
-                            <MyStyle className="Workspace"
+                            <MyStyleGrid className="Workspace"
                                 onClick={routeToProject}
                             >
                                 {/* <div className="Workspace "  > */}
@@ -84,7 +85,7 @@ function ViewWorkspaceList(props) {
 
 
                                 {/* </div> */}
-                            </MyStyle>
+                            </MyStyleGrid>
                             <div className="col-9 col-sm-7">
                                 <p className="workspace-name-list">{workspace.name} </p>
                                 <div className="description-and-date">
