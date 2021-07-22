@@ -43,6 +43,7 @@ function ViewTaskByCradTabs(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
@@ -157,7 +158,7 @@ function ViewTaskByCradTabs(props) {
         if (doneStatus) {
             props.setCountReadyTasks(true)
             props.showRocketShip(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else {
             props.setCountReadyTasks(false)
@@ -474,7 +475,7 @@ function ViewTaskByCradTabs(props) {
                                                     {props.task.assignTo1 ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
                                                 </div> : <img
                                                     // id={`${props.task._id}assing-to`}
-                                                    className="mx-1 assing-to-icon"
+                                                    className="mx-1 "
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../../assets/img/share-icon.png')}>
                                                 </img>}

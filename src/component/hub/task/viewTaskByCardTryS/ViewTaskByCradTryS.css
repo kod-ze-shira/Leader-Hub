@@ -168,11 +168,10 @@ label{
  display: inline-block;
 }
 .status-task{
-
+  cursor: pointer !important;
   border-radius: 15px;
-color:white;
+  color:white;
   font-weight: 300;
-  /* opacity: 0.9; */
   margin: auto;
   width: 85%;
   padding-top: 0.5vh;
@@ -285,6 +284,7 @@ float: right !important;
   float:left ;
   width:100%;
   padding: 0;
+  cursor: pointer;
 }
 
 .prioprty-select p{

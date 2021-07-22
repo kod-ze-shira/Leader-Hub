@@ -171,7 +171,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -330,7 +330,7 @@ function ViewTaskByCrad(props) {
                                                 }) : null}
                                                 {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
                                             </div> : <img
-                                                className="ml-2 assing-to-icon"
+                                                className="ml-2"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                 src={require('../../../../assets/img/share-icon.png')}>
                                             </img>}

@@ -139,7 +139,6 @@ export const getFilesForProject = ({ dispatch, getState }) => next => action => 
 export const newProject = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'NEW_PROJECT') {
-
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newProject`
         let project = action.payload;
         

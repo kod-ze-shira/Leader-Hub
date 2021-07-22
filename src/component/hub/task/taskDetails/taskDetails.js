@@ -22,7 +22,7 @@ function TaskDetails(props) {
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
-    // const [completeTask, setCompleteTask] = useState(props.task.complete)
+    const [taskName, setTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
     const [milstone, setMilstone] = useState()
 
     useEffect(() => {
@@ -38,11 +38,9 @@ function TaskDetails(props) {
             if (props.contactsUser.length == 0)
                 props.getContactsForUser()
         }
+        setTaskName(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
     }, [props.cards, milstone])
 
-    // useEffect(() => {
-    //     // nameRequired.current.focus();
-    // }, [])
 
     let doneStatus = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete : null
     useEffect(() => {
@@ -108,7 +106,7 @@ function TaskDetails(props) {
         if (nameRequired.current.value) {
             if (milstone)
                 // props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
-            props.objectBeforeChanges(null)
+                props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
                 newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
@@ -158,16 +156,16 @@ function TaskDetails(props) {
 
     let dueDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate : null;
     let startDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate : null;
-    let dueDate_ =  dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
-    let startDate_ =startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
+    let dueDate_ = dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
+    let startDate_ = startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
 
     let [dueDateTask, setDueDateTask] = useState(dueDate_)
     let [startDateTask, setStartDateTask] = useState(startDate_)
 
-
     const changeFiledInTask = (input) => {
         let editTaskInRedux
         let value = input.target.value
+        // setTaskName(input.target.value)
         if (input.target.name == "startDate") {
             value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
@@ -269,13 +267,12 @@ function TaskDetails(props) {
             props.setCountReadyTasks(true)
             // setShowChalalit(true)
 
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else {
             props.setCountReadyTasks(false)
         }
     }
-
     return (
         <>
             {
@@ -308,9 +305,12 @@ function TaskDetails(props) {
                                         class="form-control"
                                         id="name"
                                         onChange={(e) => changeFiledInTask(e)}
+                                        // onChange={(e) => {setTaskName(e.target.value);changeFiledInTask(e)}}
+                                        // value={taskName}
                                         // onBlur={(e) => editTaskInServer()}
                                         // onMouseLeave={(e) => alert("ff")}
-                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name}
+                                    />
                                     <div class="invalid-feedback">
                                         Please enter task name.
                                     </div>

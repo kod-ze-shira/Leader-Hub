@@ -173,7 +173,7 @@ function ViewTaskByCradTryS(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastComplete({ show: true, massege: 'Completed task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -302,7 +302,7 @@ function ViewTaskByCradTryS(props) {
                                             src={userHasLike ? require('../../../../assets/img/heart.png') : require('../../../../assets/img/border-heart.svg')}>
                                         </img>
                                     </div>
-                                    <label className="view-details-btn   px-2" title="View Details">
+                                    {/* <label className="view-details-btn   px-2" title="View Details">
                                         <button onClick={(e) => openViewDetails(e)}
                                             className="mx-auto mt-2">
                                             view details
@@ -310,7 +310,7 @@ function ViewTaskByCradTryS(props) {
                                                 icon={['fas', 'caret-right']}>
                                             </FontAwesomeIcon>
                                         </button>
-                                    </label>
+                                    </label> */}
                                 </div>
 
                                 <label className=" border-left  col-1">
@@ -342,7 +342,7 @@ function ViewTaskByCradTryS(props) {
                                                 }) : null}
                                                 {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
                                             </div> : <img
-                                                className="ml-2 assing-to-icon"
+                                                className="ml-2"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                 src={require('../../../../assets/img/share-icon.png')}>
                                             </img>}
@@ -364,7 +364,7 @@ function ViewTaskByCradTryS(props) {
                                     <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
                                     : <hr></hr>}
                                 </label>
-                                {/* <label className="view-details-btn col-1 border-left px-2" title="View Details">
+                                <label className="view-details-btn col-1 border-left px-2" title="View Details">
                                     <button onClick={(e) => openViewDetails(e)}
                                         className="mx-auto">
                                         view details
@@ -372,7 +372,7 @@ function ViewTaskByCradTryS(props) {
                                             icon={['fas', 'caret-right']}>
                                         </FontAwesomeIcon>
                                     </button>
-                                </label> */}
+                                </label>
 
                                 {viewDetails ?
                                     <div className="closeDet" onClick={(e) => stopP(e)}>
