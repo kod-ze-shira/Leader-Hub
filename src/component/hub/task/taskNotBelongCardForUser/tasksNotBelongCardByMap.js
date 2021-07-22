@@ -12,9 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
-import ProjectStyle from "../../project/projectStyle";
 import Background from '../../../../assets/img/down-arrow.svg';
 import ReactTooltip from 'react-tooltip';
+import {ProjectStyleLabel} from '../../project/projectStyle.style'
 
 function TasksNotBelongCardByMap(props) {
 
@@ -66,7 +66,7 @@ function TasksNotBelongCardByMap(props) {
         props.completeTask(props.task._id)
         doneStatus = !doneStatus
         if (doneStatus) {
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
     }
 
@@ -96,7 +96,7 @@ function TasksNotBelongCardByMap(props) {
                 <div className="d-flex flex-row" >
                     <div  >
                         <div className="  logo-w-little "
-                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
+                            style={{ backgroundColor: workspace.color, display: 'inline-block', textAlign: 'center' }}
                         >
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
@@ -180,7 +180,7 @@ function TasksNotBelongCardByMap(props) {
             value: project, label:
                 <div className="d-flex flex-row" style={{ color: project.color }}>
                     <div style={{ marginTop: '0.5px' }}>
-                        <ProjectStyle color={project.color}></ProjectStyle>
+                        <ProjectStyleLabel color={props.myProject.color}></ProjectStyleLabel>
                     </div>
                     <span className="select-not-belong project-select-not-belong">{project.name}</span>
                 </div >

@@ -2,7 +2,7 @@ import React from 'react'
 import './new_tasck.css';
 import Configurator from '../configurator';
 import { connect } from 'react-redux';
-import { actions} from '../../../../redux/actions/action'
+import { actions } from '../../../../redux/actions/action'
 
 const mapStateToProps = (state) => {
     return {
@@ -17,19 +17,18 @@ const mapDispatchToProps = (dispatch) => {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props)
-{
-   
-   
-    return(
+export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(props) {
+
+
+    return (
         <>
-    
-       
+
+
             {props.task.isConfiguratorOpenTask ?
                 <Configurator />
-      
-            :  
-              <>
+
+                :
+                <>
                     < div className="right_nav" >
 
                         <div className="row mt-5 img_right">
@@ -82,8 +81,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
                             <div className="col-1"></div>
                             <div className="text_tast" style={{ color: "#999CAC" }}>
                                 <br></br>
-                    I'm a product designer based in<br></br> Tel-Aviv with experience in<br></br> delivering end-to-end UX/UI <br></br>design for software products.
-            </div>
+                                I'm a product designer based in<br></br> Tel-Aviv with experience in<br></br> delivering end-to-end UX/UI <br></br>design for software products.
+                            </div>
                         </div>
                         <div className="row mt-2">
                             <div className="col-1"></div>
@@ -100,11 +99,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(function NewTasck(pr
                         </div>
 
                     </div>
-             
-             </>
-}
+
+                </>
+            }
         </>
-        
+
 
     )
 })

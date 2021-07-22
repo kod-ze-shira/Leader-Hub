@@ -129,7 +129,7 @@ function NewProject(props) {
             <div className="details mr-4 ml-4">
                 <div className='propertiesViewDitails'>
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
-                        <h5 className=" title-view-details  pl-3">Add Project</h5>
+                        <h5 className=" title-view-details  pl-4">Add Project</h5>
 
                         <div className="close pr-3" onClick={() => props.closeViewDetails()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Add Project</h5> */}
@@ -146,7 +146,7 @@ function NewProject(props) {
                         </div>}
 
                     <div className="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input name="name" onChange={(e) => changeNameInProject(e)}
                             required ref={nameRequired} autoFocus
                             id='nameProject' type="text" className="form-control" value={nameProject} />
@@ -155,7 +155,7 @@ function NewProject(props) {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <QuillNewProject text={(e) => setDescription(e)} />
 
                         {/* <div className="form-control descriptionProject" name="description"
@@ -164,7 +164,7 @@ function NewProject(props) {
                     </div>
                     <div className="row justify-content-between" >
                         <div className="form-group col-5 ditailsAction col-md-4">
-                            <label for="color">Project color</label>
+                            <label htmlFor="color">Project color</label>
                             <input name="color"
                                 className="form-control"
                                 onChange={(e) => changeColorProject(e)}
@@ -174,7 +174,7 @@ function NewProject(props) {
                             />
                         </div>
                         <div className="form-group col-5 ditailsAction col-md-8" >
-                            <label for="color">Due Date</label>
+                            <label htmlFor="color">Due Date</label>
                             <input
                                 className="form-control "
                                 name="dueDate"
@@ -183,16 +183,16 @@ function NewProject(props) {
                                 value={myDueDate}
                                 onChange={(e) => changeDueDateInProject(e)} />
                         </div>
-                    </div>
-                </div>
+                    </div >
+                </div >
                 <div className="row justify-content-end">
                     <button onClick={() => addProject()} data-tip data-for="save"
-                        style={{ 'margin-top': '0px !important;' }} className="save_canges_btn px-5">Save</button>
+                        style={{ marginTop: '0px !important;' }} className="save_canges_btn px-5">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
                 </div>
-            </div>
+            </div >
 
 
         </>

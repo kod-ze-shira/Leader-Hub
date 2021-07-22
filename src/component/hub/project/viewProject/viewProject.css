@@ -9,7 +9,9 @@
    padding-left: 2rem !important;
    width: 15%;
 }
-
+.actionsProject{
+    opacity: 0;
+}
 #nameRequired input
 {
     /* width: 97%; */

@@ -57,7 +57,7 @@ function EditStatus(props) {
                 <div className="title-edit-label py-2 mb-1" > Edit Label</div>
                 <div className="form-group row mx-auto">
 
-                    <label for="name">Name</label>
+                    <label htmlFor="name">Name</label>
                     <input name="statusName"
                         type="text" className="form-control"
                         id="statusName"
@@ -66,7 +66,7 @@ function EditStatus(props) {
                         onChange={(e) => handleChangeStatus(e)}
                     />
                     <div className="form-group row mx-auto">
-                        <label for="color">Select Color</label>
+                        <label htmlFor="color">Select Color</label>
                         <input name="color"
                             type="color" className="form-control"
                             id="color"
@@ -83,10 +83,13 @@ function EditStatus(props) {
 
                 </div>
 
-            </div>
-            {viewList ?
-                <ViewAllStatuses status={props.status} />
-                : null}
+            </div >
+            {
+                viewList ?
+                    <ViewAllStatuses status={props.status
+                    } />
+                    : null
+            }
         </>
 
     )

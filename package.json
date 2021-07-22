@@ -15,7 +15,6 @@
     "@leadercodes/header": "^0.1.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/data-grid": "^4.0.0-alpha.10",
-    "@material-ui/styles": "^4.11.1",
     "@material/radio": "^9.0.0",
     "@material/react-tab": "^0.15.0",
     "@react-md/icon": "^2.5.5",

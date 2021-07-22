@@ -20,7 +20,7 @@ function ProjectsByWorkspace(props) {
     const [e, setE] = useState('')
     const [fromAllproject, setFromAllproject] = useState(false)
 
-    let workspaceName=''
+    let workspaceName = ''
     useEffect(() => {
         if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
             if (props.showViewDitailsProject.fromAllProject) {
@@ -38,14 +38,14 @@ function ProjectsByWorkspace(props) {
             setValueSearch(props.valueSearchProject)
         } else
             setValueSearch(props.projectName)
-    
+
     }, [props.workspaces, props.indexOfWorkspace, props.showViewDitailsProject, props.valueSearchProject]);
 
     if (props.history.location.pathname.includes('allProjects')) {
-        workspaceName='All Projects'       
+        workspaceName = 'All Projects'
     }
     else{
-        workspaceName=props.workspaces[props.indexOfWorkspace]&&props.workspaces[props.indexOfWorkspace].name
+        workspaceName=props.workspaces[props.indexOfWorkspace]&&props.workspaces[props.indexOfWorkspace].name+' projects'
     }
     function openEditOrShareProject(from) {
         setEditOrShareProject(from)
@@ -112,7 +112,7 @@ function ProjectsByWorkspace(props) {
             <div className='headerProjects'>
                 <div className='contentHeaderProjects'>
                     <div className='betweenHeaderProjects'>
-                        <div className="titleProjects pt-2 ml-2">{workspaceName} projects</div>
+                        <div className="titleProjects pt-2 ml-2">{workspaceName}</div>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@ function ProjectsByWorkspace(props) {
                 <thead className="mx-3">
                     <tr className='projectsTitle'>
                         <th className='nameProjectInList'>
-                            <span className='name2ProjectInList'>{workspaceName} projects</span>
+                            <span className='name2ProjectInList'>{workspaceName}</span>
                         </th>
                         <th className='widthCellInProject'><span>Due Date</span></th>
                         <th ><span>Cards</span></th>

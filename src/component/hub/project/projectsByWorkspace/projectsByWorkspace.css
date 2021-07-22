@@ -160,6 +160,12 @@ table td, .table th {
 .projectsTitle{
     background-color: #EDFBFC;  
 }
+.nameProjectInList{
+    text-align: left !important;
+}
+.nameProject{
+    text-align: left !important;
+}
 .projectsTitle th{
     border:none;
 }

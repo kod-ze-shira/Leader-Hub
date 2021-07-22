@@ -209,7 +209,7 @@ export default class Gantt extends Component {
                 contact = `<div class="gantt_status_right">`
                 task.contacts.map((c, index) => {
                     if (index < 3)
-                        contact += `<img referrerpolicy="no-referrer" src=${c} class="imgTeamGantt" />`
+                        contact += `<img referrerPolicy="no-referrer" src=${c} class="imgTeamGantt" />`
 
                 })
                 if (task.contacts.length > 3) {
