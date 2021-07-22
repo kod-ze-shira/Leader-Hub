@@ -26,7 +26,7 @@ function ViewMembers(props) {
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-1 col-sm-2  d-flex align-items-center px-0">
-                                                <img referrerpolicy="no-referrer" src={mc.thumbnail} className="thumbnail-contact imgMembers" />
+                                                <img referrerPolicy="no-referrer" src={mc.thumbnail} className="thumbnail-contact imgMembers" />
                                             </div>
                                             <div className="col-6 ml-2">
                                                 <b className="name-contact nameMembers">{mc.name} </b>
@@ -37,7 +37,7 @@ function ViewMembers(props) {
                                 </div>
                             </>
                             :
-                          null                )
+                            null)
                 })
                 : null
             }

@@ -9,6 +9,7 @@ function ViewProjectNew(props) {
                 <div className="row" >
                     <div className="col">
                         <div>name:{props.project.name}</div>
+                    
                         {/* <div>description:{props.project.description}</div> */}
                     </div>
                 </div>

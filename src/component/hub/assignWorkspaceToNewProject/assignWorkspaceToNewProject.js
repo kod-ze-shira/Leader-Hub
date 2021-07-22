@@ -28,7 +28,7 @@ function AssignWorkspaceToNewProject(props) {
             label: <div className="d-flex flex-row" >
                 <div>
                     <div className=" logo-w-little header-w-select"
-                        style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
+                        style={{ backgroundColor: workspace.color, display: 'inline-block', textAlign: 'center' }}
                     >
                         {workspace.name ? workspace.name[0].toUpperCase() : null}
                     </div>

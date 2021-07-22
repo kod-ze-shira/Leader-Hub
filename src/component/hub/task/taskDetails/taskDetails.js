@@ -130,7 +130,7 @@ function TaskDetails(props) {
             value: priority,
             label:
                 <div className="prioprty-select ">
-                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <img referrerPolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
         }
@@ -289,7 +289,7 @@ function TaskDetails(props) {
                                     <h5 className=" title-view-details   pl-3">Task details</h5>
                                     {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
 
-                                    <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
+                                    <div className="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
                                 </div>
 
                                 <div className="row justify-content-between mx-1" >
@@ -298,30 +298,29 @@ function TaskDetails(props) {
                                     <label className="">Last Update
                                         {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                                 </div>
-                                <div class="form-group" id='nameRequired'>
-                                    <label for="name">Name</label>
+                                <div className="form-group" id='nameRequired'>
+                                    <label htmlFor="name">Name</label>
                                     <input name="name"
                                         required ref={nameRequired}
-                                        class="form-control"
+                                        className="form-control"
                                         id="name"
                                         onChange={(e) => changeFiledInTask(e)}
                                         // onChange={(e) => {setTaskName(e.target.value);changeFiledInTask(e)}}
                                         // value={taskName}
                                         // onBlur={(e) => editTaskInServer()}
                                         // onMouseLeave={(e) => alert("ff")}
-                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name}
-                                    />
-                                    <div class="invalid-feedback">
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
+                                    <div className="invalid-feedback">
                                         Please enter task name.
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="description">Description</label>
+                                <div className="form-group">
+                                    <label htmlFor="description">Description</label>
                                     <QuillEditTask />
 
 
-                                    {/* <textarea class="form-control"
+                                    {/* <textarea className="form-control"
                                 rows="3"
                                 placeholder="Write a description about your workspace"
                                 name="description"
@@ -332,8 +331,8 @@ function TaskDetails(props) {
                             ></textarea> */}
                                 </div>
                                 <div className="row justify-content-between">
-                                    <div class="form-group col-md-6 col-lg-5">
-                                        <label for="startDate">Start Date</label>
+                                    <div className="form-group col-md-6 col-lg-5">
+                                        <label htmlFor="startDate">Start Date</label>
                                         <input
                                             className="form-control"
                                             name="startDate"
@@ -344,8 +343,8 @@ function TaskDetails(props) {
                                         // onBlur={(e) => editTaskInServer()}
                                         />
                                     </div>
-                                    <div class="form-group col-md-6 col-lg-5">
-                                        <label for="dueDate">Due Date</label>
+                                    <div className="form-group col-md-6 col-lg-5">
+                                        <label htmlFor="dueDate">Due Date</label>
                                         <input
                                             className="form-control "
                                             name="dueDate"
@@ -359,11 +358,11 @@ function TaskDetails(props) {
 
                                 </div>
                                 <div className="row justify-content-between">
-                                    <div class="dropdown col-md-6 col-lg-5">
+                                    <div className="dropdown col-md-6 col-lg-5">
                                         {/* form-control */}
-                                        <label for="status">Status</label>
+                                        <label htmlFor="status">Status</label>
 
-                                        <button onClick={(e) => openPopUpStatus(e)} class=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button onClick={(e) => openPopUpStatus(e)} className=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
                                                 <div
                                                     className="color-status-first px-3"
@@ -403,7 +402,7 @@ function TaskDetails(props) {
                                 </div>
                                 <div className="row justify-content-between ">
                                     <div className=" col-md-6 col-lg-5 mt-2 priority-task-details">
-                                        <label for="priority">Priority</label>
+                                        <label htmlFor="priority">Priority</label>
 
                                         <Select
                                             isSearchable={false}
@@ -412,10 +411,10 @@ function TaskDetails(props) {
                                             options={viewPriortyList}
                                             placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
                                                 <div className="prioprty-select  dropdown-toggle">
-                                                    <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
+                                                    <img referrerPolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
                                                     <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
                                                 </div> : <div className="prioprty-select  dropdown-toggle">
-                                                    <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
+                                                    <img referrerPolicy="no-referrer" src={props.priorities[0].icon} />
                                                     <p >{props.priorities[0].level}</p>
                                                 </div>}
                                             onChange={(e) => changePriority(e)}
@@ -424,21 +423,21 @@ function TaskDetails(props) {
                                     <div className="form-group col-md-6 col-lg-5 priority-task-details">
                                         <Timer></Timer>
                                     </div>
-                                </div>
-                            </div>
+                                </div >
+                            </div >
 
                             <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
                                 {newFileComponentArr}
                             </div>
                             <hr></hr>
 
-                        </div>
+                        </div >
 
                         <div className="row   ">
 
                             {/* {props.task.assingTo ?
 
-                        props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
+                        props.task.assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
                         : null} */}
                             <div className="assingto-details mr-2" data-tip data-for="assing">
@@ -470,8 +469,8 @@ function TaskDetails(props) {
                             <div className="widthofContacts col-4 mt-1 ml-1">
                                 {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1 ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1.map((assingTo, index) => {
                                     if (index < 3)
-                                        // return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
-                                        return assingTo.contact !== null ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                        // return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                        return assingTo.contact !== null ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
 
                                             : null
                                 }) : null}
@@ -485,8 +484,8 @@ function TaskDetails(props) {
                                 {title.title_save}
                             </ReactTooltip>
                         </div>
-                    </div>
-                </div>}
+                    </div >
+                </div >}
         </>
 
     )

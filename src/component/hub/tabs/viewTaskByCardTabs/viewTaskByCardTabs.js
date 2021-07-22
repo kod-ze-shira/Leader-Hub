@@ -437,7 +437,7 @@ function ViewTaskByCradTabs(props) {
                                 </div> */}
                                 <textarea
                                     className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
-                                    style={props.task.files && props.task.files.length ? null : { 'marginTop': '12px' }}
+                                    style={props.task.files && props.task.files.length ? null : { marginTop: '12px' }}
                                     value={props.task.name}
                                     onClick={(e) => e.stopPropagation()}
                                     name="name"
@@ -469,7 +469,7 @@ function ViewTaskByCradTabs(props) {
                                                 {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts mr-1">
                                                     {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                         if (index < 2)
-                                                            return assingTo.contact ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
+                                                            return assingTo.contact ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
                                                                 : null
                                                     }) : null}
                                                     {props.task.assignTo1 ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
@@ -484,11 +484,11 @@ function ViewTaskByCradTabs(props) {
 
                                             <div>
                                                 {props.task.milestones ?
-                                                    <img className=" mx-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
+                                                    <img className=" mx-1" referrerPolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
-                                            <label for="fileFromTask">
-                                                <img className="mr-1 ml-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            <label htmlFor="fileFromTask">
+                                                <img className="mr-1 ml-1" referrerPolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
                                             </label>
                                             <input
                                                 type={"file"}
@@ -508,7 +508,7 @@ function ViewTaskByCradTabs(props) {
 
                                         <div className="icons-task-tabs">
                                             <div className="px-1"> {props.task.priority ?
-                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                <img className="priority-img mr-1" referrerPolicy="no-referrer" src={props.task.priority.icon} />
                                                 : null}
                                             </div>
                                             <div className="due-date-hover" title={title.title_due_date}>

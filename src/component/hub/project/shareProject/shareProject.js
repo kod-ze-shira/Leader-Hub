@@ -100,7 +100,7 @@ function ShareProject(props) {
         })
     }
     const shareObject = () => {
-        
+
         let details = { shareDetails: shareDetails, teams: teams }
         props.shareObject(details)
         if (details.shareDetails.length)
@@ -118,20 +118,20 @@ function ShareProject(props) {
 
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details pl-3">Share Project</h5>
-                        <div class="close pr-3" onClick={() => props.closeViewDetails()}>x</div>
+                        <div className="close pr-3" onClick={() => props.closeViewDetails()}>x</div>
                     </div>
-                    <div class="row justify-content-between  mx-1 mb-2">
+                    <div className="row justify-content-between  mx-1 mb-2">
                         <p className="txt_description_share">your teammates will get an email that gives them access to your team.</p>
                     </div>
                     <div className="row pl-3 pt-3 pb-1">
                         <div className="txt_share">Share With Email Address</div>
-                        {/* <i class="fas fa-question"></i> */}
+                        {/* <i className="fas fa-question"></i> */}
                         <FontAwesomeIcon icon={["fas", "question"]} data-tip
                             className='iconQuestion' data-for="iconQuestion" />
                         <ReactTooltip className="tooltip-style" data-tip id="iconQuestion" place="top" effect="solid">
                             Select a member from the list or type a new member
                             and press enter
-                               </ReactTooltip>
+                        </ReactTooltip>
 
                     </div>
                     <div className="row">
@@ -141,7 +141,7 @@ function ShareProject(props) {
                                 options={'contacts'} />
                         </div>
                         <div className="col-3 pl-0">
-                            <select class="form-control select_permission" onChange={(e) => setStatePerrmissionContact(e)}>
+                            <select className="form-control select_permission" onChange={(e) => setStatePerrmissionContact(e)}>
                                 {/* <option disabled selected>Select...</option> */}
                                 <option value="1">viewer</option>
                                 <option value="2">editor</option>
@@ -158,7 +158,7 @@ function ShareProject(props) {
                                 <div className='col-10'>
                                     <div className='div_choose_team'>
                                         Choose Team
-                        </div>
+                                    </div>
                                 </div>
                                 <div className='col-1 my-auto' onClick={(e) => { setShowTeams(true); e.stopPropagation() }}>
                                     <img src={arrow_select}></img>
@@ -171,7 +171,7 @@ function ShareProject(props) {
                             addMemberEmailToMembersEmailList={addTeamMemberEmailToMembersEmailList} /> */}
                         </div>
                         <div className="col-md-3 pl-0">
-                            <select class="select_permission form-control" onChange={(e) => setStatePermissionTean(e)}>
+                            <select className="select_permission form-control" onChange={(e) => setStatePermissionTean(e)}>
                                 {/* <option disabled selected>Select...</option> */}
                                 <option value="1">viewer</option>
                                 <option value="2">editor</option>

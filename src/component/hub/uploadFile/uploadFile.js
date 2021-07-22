@@ -68,7 +68,7 @@ function UploadFile(props) {
 
     return (
         <div className='divFile'>
-            <label for="logouug" className="lbl_img">
+            <label htmlFor="logouug" className="lbl_img">
                 <span className='spanUploadFileNew'>
                 </span>
             </label>
@@ -86,7 +86,7 @@ function UploadFile(props) {
                 onChange={() => uploadMulti()}
             />
             <div id='myFile'></div>
-        </div>
+        </div >
     )
 }
 

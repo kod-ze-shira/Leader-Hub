@@ -115,6 +115,7 @@ opacity: 0.3;
   padding-top: 0.5vh;
   padding-bottom: 0.5vh;
   width:100px;
+  background-color: #FFFFFF;
 
 }
 .view-details-btn>button:hover{
@@ -284,7 +285,7 @@ float: right !important;
   float:left ;
   width:100%;
   padding: 0;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .prioprty-select p{

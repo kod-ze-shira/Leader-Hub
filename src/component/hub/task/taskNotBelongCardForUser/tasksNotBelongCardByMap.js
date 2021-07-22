@@ -12,9 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
 import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
-import ProjectStyle from "../../project/projectStyle";
 import Background from '../../../../assets/img/down-arrow.svg';
 import ReactTooltip from 'react-tooltip';
+import {ProjectStyleLabel} from '../../project/projectStyle.style'
 
 function TasksNotBelongCardByMap(props) {
 
@@ -111,7 +111,7 @@ function TasksNotBelongCardByMap(props) {
                 <div className="d-flex flex-row" >
                     <div  >
                         <div className="  logo-w-little "
-                            style={{ backgroundColor: workspace.color, display: 'inline-block', 'text-align': 'center' }}
+                            style={{ backgroundColor: workspace.color, display: 'inline-block', textAlign: 'center' }}
                         >
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
                         </div>
@@ -195,7 +195,7 @@ function TasksNotBelongCardByMap(props) {
             value: project, label:
                 <div className="d-flex flex-row" style={{ color: project.color }}>
                     <div style={{ marginTop: '0.5px' }}>
-                        <ProjectStyle color={project.color}></ProjectStyle>
+                        <ProjectStyleLabel color={props.myProject.color}></ProjectStyleLabel>
                     </div>
                     <span className="select-not-belong project-select-not-belong">{project.name}</span>
                 </div >
@@ -246,6 +246,7 @@ function TasksNotBelongCardByMap(props) {
 
     function deleteAllSelect() {
         setMyCards(null)
+        setCardId(null)
         setMyProjects(null)
         setIndexOfProject(null)
         setIndexOfCard(null)
@@ -373,7 +374,7 @@ function TasksNotBelongCardByMap(props) {
 
                         />
                         {/* <div className="drop-down"> 
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <i className="fa fa-angle-down" aria-hidden="true"></i>
                             <FontAwesomeIcon 
                                 Icon='chevron-down'>
                             </FontAwesomeIcon>
@@ -435,16 +436,16 @@ function TasksNotBelongCardByMap(props) {
 
                     {!cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">move to</button>
+                            <button id='buttonCancleSelect' type="button" className="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
+                            <button id='buttonSaveSelect' type="button" className="btn-sm saveSelect">move to</button>
                         </>
                         : null
                     }
 
                     {cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
+                            <button id='buttonCancleSelect' type="button" className="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
+                            <button id='buttonSaveSelect' type="button" className="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
                         </> : null
 
                     }

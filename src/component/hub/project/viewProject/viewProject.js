@@ -11,15 +11,14 @@ import Cell from './cell';
 import CellDescription from './cellDescription';
 import './viewProject.css';
 import TeamView from '../../teamView/teamView'
-import ProjectStyle from "../projectStyle";
+import { ProjectStyleLabel } from '../projectStyle.style'
 import userfriend from '../../../../assets/img/userfriend.png'
 
 function ViewProject(props) {
 
     let complited = props.myProject.countReadyTasks
         , complitedColor;
-    const [myStyleIcons, setMyStyleIcons] = useState({ 'opacity': '0' });
-    const [myStyleStripe, setMyStyleStripe] = useState({ 'color': 'white' });
+    let styleIcon = useRef()
     // props.setProject(props.myProject)
     let refToProject = useRef('')
     useEffect(() => {
@@ -60,15 +59,12 @@ function ViewProject(props) {
 
     }
     function overProject(id) {
-        setMyStyleIcons({ 'opacity': '1' })
-        setMyStyleStripe({ 'color': 'rgb(152 169 188 / 38%)' })
+        styleIcon.current.style.opacity = 1
         refToProject.current.style.backgroundColor = "white"
     }
     function outOver(id) {
-        setMyStyleIcons({ 'opacity': '0' })
-        setMyStyleStripe({ 'color': 'white' })
+        styleIcon.current.style.opacity = 0
         refToProject.current.style.backgroundColor = "#e9ecef"
-
     }
     const openShareProject = (event) => {
         for (let index = 0; index < props.workspaces.length; index++) {
@@ -96,17 +92,17 @@ function ViewProject(props) {
     complitedColor = complited < 30 ? '#8ce5e7' : complited < 60 ? '#1fb9c1' : '#358a8d'
     return (
         <>
+
             <tr
                 className='projectForWorkspace col-12 '
                 onClick={(e) => routeToCards(e)}
                 onMouseOver={(e) => overProject(props.myProject._id)}
                 onMouseOut={(e) => outOver(props.myProject._id)}
                 id={props.myProject._id}>
-                {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
-                    <ProjectStyle color={props.myProject.color}></ProjectStyle>
-                    {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
-                    <span class='name2ProjectInList'
+                    <ProjectStyleLabel color={props.myProject.color}></ProjectStyleLabel>
+                    {/* <span className="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
+                    <span className='name2ProjectInList'
                         style={{ 'color': props.myProject.color }}
                         data-tip data-for="project_name"
                     >
@@ -115,7 +111,7 @@ function ViewProject(props) {
                         place="bottom" effect="solid">
                         {props.myProject.name}
                     </ReactTooltip> */}
-                    {/* <span class='stripeProject'
+                    {/* <span className='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span> */}
                 </td>
@@ -133,7 +129,7 @@ function ViewProject(props) {
                 </td>
                 <td>
                     <span className='task widthCellInProject' >
-                        <span className='designPropertiesProject' style={{ 'font-weight': 'bold' }} data-tip data-for="task_c">
+                        <span className='designPropertiesProject' style={{ fontWeight: 'bold' }} data-tip data-for="task_c">
                             <ReactTooltip className="tooltip-style" data-tip id="task_c"
                                 place="bottom" effect="solid">
                                 {title.title_task_complete}
@@ -149,8 +145,8 @@ function ViewProject(props) {
                 </td>
                 <td>
                     <div className='divProgress'>
-                        <div class="progressProject" ref={refToProject}>
-                            <div role="progressbar" class="progressProject-bar "
+                        <div className="progressProject" ref={refToProject}>
+                            <div role="progressbar" className="progressProject-bar "
                                 style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
@@ -161,42 +157,42 @@ function ViewProject(props) {
                     </div>
                     {/* <CellDescription description={(complited ? complited : 0) + '% complete'} /> */}
                 </td>
-                <td className='widthCellInProject' style={{ 'text-align': 'center' }}>
+                <td className='widthCellInProject' style={{ textAlign: 'center' }}>
                     {members}
                     {props.myProject.members.length > 3 ?
                         <TeamView marginTeam='marginTeam' numberTeams={'+' + (props.myProject.members.length - 3)} />
                         : null
                     }
-
                     {/* <CellDescription description='Team' /> */}
                 </td>
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
                     {/* <CellDescription description='Last Update' /> */}
                 </td>
-                <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
-                    <img style={myStyleIcons} src={require('../../../../assets/img/shareNew.svg')}
+
+                <td ref={styleIcon} className='actionsProject iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
+                    <img src={require('../../../../assets/img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
                     <ReactTooltip className="tooltip-style" data-tip id="share" place="bottom" effect="solid">
                         {title.title_share}
                     </ReactTooltip>
-                    <div style={myStyleStripe} className='stripeActionsProject'>|</div>
+                    <div className='stripeActionsProject'>|</div>
 
-                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
+                    <img className='mr-1 iconsProject' onClick={(event) => editProject(props.myProject, event)}
                         src={require('../../../../assets/img/pencil-edit.png')} data-tip data-for="edit_" />
                     <ReactTooltip className="tooltip-style" data-tip id="edit_" place="bottom" effect="solid">
                         {title.title_edit}
                     </ReactTooltip>
-                    <div style={myStyleStripe} className='stripeActionsProject'>|</div>
-
-                    <img style={myStyleIcons} className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
+                    <div className='stripeActionsProject'>|</div>
+                    <img className='mr-1 iconsProject' onClick={(event) => deleteMyProject(event)}
                         src={require('../../../../assets/img/remove.png')} data-tip data-for="delete" />
                     <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
                     </ReactTooltip>
                 </td>
             </tr >
+
         </>
     )
 }

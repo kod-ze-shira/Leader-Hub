@@ -27,7 +27,7 @@ function AddWorkspace(props) {
     const nameworkspae = useRef()
 
     const changeColorFiledInWorkspace = (color) => {
-        let editWorkspaceInRedux = { "nameFiled": "color", "value": color}
+        let editWorkspaceInRedux = { "nameFiled": "color", "value": color }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
 
@@ -88,40 +88,40 @@ function AddWorkspace(props) {
                 <div className='propertiesViewDitails'>
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details pl-3">Add Workspace </h5>
-                        <div class="close pr-3" onClick={() => props.closeViewDetails()} >x</div>
+                        <div className="close pr-3" onClick={() => props.closeViewDetails()} >x</div>
                     </div>
-                    <div class="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
+                    <div className="form-group" id='nameRequired'>
+                        <label htmlFor="name">Name</label>
                         <input name="name" ref={nameworkspae} required
                             // onChange={handleChange}
                             autoFocus
                             onChange={(input) => changeFiledInWorkspace(input)}
-                            type="text" class="form-control" id="workspace-name" />
-                        <div class="invalid-feedback">
+                            type="text" className="form-control" id="workspace-name" />
+                        <div className="invalid-feedback">
                             Please enter workspace name.
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control descriptionWorkspace"
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <textarea className="form-control descriptionWorkspace"
                             id="description" rows="2" placeholder="Write a description about your workspace"
                             // onChange={handleChange} 
                             onChange={(input) => changeFiledInWorkspace(input)}
                             contentEditable></textarea>
                     </div>
-                    {/* <div class="form-group"> */}
-                        <label className="row ml-2" for="color">Logo Color</label>
-                        <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />  
+                    {/* <div className="form-group"> */}
+                    <label className="row ml-2" htmlFor="color">Logo Color</label>
+                    <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />
 
-                        {/* onChange={handleChange} /> */}
+                    {/* onChange={handleChange} /> */}
                     {/* </div> */}
 
                 </div>
                 <div className="row justify-content-end">
                     <button onClick={addNewWorkspace} className="save_canges_btn px-5" id='sevaNewWorkspace'>Save</button>
                 </div>
-            </div>
+            </div >
         </>
 
     )
