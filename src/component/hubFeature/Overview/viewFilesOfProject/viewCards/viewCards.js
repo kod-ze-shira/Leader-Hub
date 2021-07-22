@@ -61,7 +61,7 @@ function ViewFilesByCards(props) {
 
             {props.FilesOfProject.length ?
                 <div className="container" >
-                    <div class="row row-cols-4 row-cols-lg-6 g-2">
+                    <div className="row row-cols-4 row-cols-lg-6 g-2">
                         {renderViewFolders()}
                     </div>
                 </div> : "there arent cards"}

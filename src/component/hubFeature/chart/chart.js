@@ -190,10 +190,7 @@ function MyChart(props) {
     ]
     const optionsPie = {
         chart: {
-            type: 'pie',
-            // sparkline: {
-            //     enabled: true
-            // }
+            type: 'pie'
         },
         series: pieData.map(p => p.val),
         chartOptions: {

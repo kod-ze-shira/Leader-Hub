@@ -105,8 +105,8 @@ function ViewProject(props) {
                 {/* <div className="col-12" > */}
                 <td className='nameProjectInList' >
                     <ProjectStyle color={props.myProject.color}></ProjectStyle>
-                    {/* <span class="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
-                    <span class='name2ProjectInList'
+                    {/* <span className="dot" style={{ 'background-color': props.myProject.color }} ></span> */}
+                    <span className='name2ProjectInList'
                         style={{ 'color': props.myProject.color }}
                         data-tip data-for="project_name"
                     >
@@ -115,13 +115,13 @@ function ViewProject(props) {
                         place="bottom" effect="solid">
                         {props.myProject.name}
                     </ReactTooltip> */}
-                    {/* <span class='stripeProject'
+                    {/* <span className='stripeProject'
                         // style={{ 'background-color': props.color }}></span>
                         style={{ 'background-color': props.myProject.color }}></span> */}
                 </td>
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.dueDate} />
-                    <CellDescription description='Due date' />
+                    {/* <CellDescription description='Due date' /> */}
                 </td>
                 <td style={{ width: '5%' }}  >
                     <div data-tip data-for="card_n"><Cell item={props.myProject.cards.length ?
@@ -129,7 +129,7 @@ function ViewProject(props) {
                     <ReactTooltip className="tooltip-style" data-tip id="card_n" place="bottom" effect="solid">
                         {title.title_number_of_cards}
                     </ReactTooltip>
-                    <CellDescription description='cards' />
+                    {/* <CellDescription description='cards' /> */}
                 </td>
                 <td>
                     <span className='task widthCellInProject' >
@@ -145,12 +145,12 @@ function ViewProject(props) {
                                 {title.title_count_task}
                             </ReactTooltip></span>
                     </span>
-                    <CellDescription description='Tasks' />
+                    {/* <CellDescription description='Tasks' /> */}
                 </td>
                 <td>
                     <div className='divProgress'>
-                        <div class="progressProject" ref={refToProject}>
-                            <div role="progressbar" class="progressProject-bar "
+                        <div className="progressProject" ref={refToProject}>
+                            <div role="progressbar" className="progressProject-bar "
                                 style={{ "width": complited + "%", background: complitedColor }}
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-tip data-for="percentage" ></div>
                         </div>
@@ -159,7 +159,7 @@ function ViewProject(props) {
                         </ReactTooltip>
                         {/* <ProgressBar now={60} style={{ "height": "5px", "width": "54%" }} /> */}
                     </div>
-                    <CellDescription description={(complited ? complited : 0) + '% complete'} />
+                    {/* <CellDescription description={(complited ? complited : 0) + '% complete'} /> */}
                 </td>
                 <td className='widthCellInProject' style={{ 'text-align': 'center' }}>
                     {members}
@@ -168,16 +168,13 @@ function ViewProject(props) {
                         : null
                     }
 
-                    <CellDescription description='Members' />
+                    {/* <CellDescription description='Team' /> */}
                 </td>
                 <td className='widthCellInProject'>
                     <Cell item={props.myProject.updateDates[props.myProject.updateDates.length - 1]} />
-                    <CellDescription description='Last Update' />
+                    {/* <CellDescription description='Last Update' /> */}
                 </td>
-
                 <td className='actionsProject  iconsProjectInLine' onClick={(e) => e.stopPropagation()}>
-
-
                     <img style={myStyleIcons} src={require('../../../../assets/img/shareNew.svg')}
                         className='iconsProject' data-tip data-for="share"
                         onClick={(event) => openShareProject(event)} src={share} />
@@ -197,10 +194,8 @@ function ViewProject(props) {
                         src={require('../../../../assets/img/remove.png')} data-tip data-for="delete" />
                     <ReactTooltip className="tooltip-style" data-tip id="delete" place="bottom" effect="solid">
                         {title.title_delete}
-                    </ReactTooltip>        </td>
-
-                {props.fromShare ? <td><img src={userfriend}></img></td> : null}
-
+                    </ReactTooltip>
+                </td>
             </tr >
         </>
     )

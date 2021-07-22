@@ -106,19 +106,29 @@ function ContactList(props) {
     }
   }
 
-  const contactList = props.contactsUser.length > 0 ?
+  // const contactList = props.contactsUser.length > 0 ?
+  //   contacts && contacts.length ?
+  //     contacts.map((contact) =>
+  //       <ViewContact contact={contact} viewToastMassege={props.viewToastMassege} closeContactList={(e)=>props.taskDetails?props.closeContactList():null}/>
+  //     )
+  //     :
+  //     <button className="ml-2 col-4 my-2 invite-button  " autocomplete="chrome-off"
+  //       onClick={(e) => assingTaskToContact(e)}
+  //     >Send Invite</button> :
+  //   <><div className="spinner-border my-2 mx-3" role="status">
+  //     <span className="sr-only">Loading...</span>
+  //   </div>
+  //   </>
+
+  const contactList =
     contacts && contacts.length ?
       contacts.map((contact) =>
-        <ViewContact contact={contact} viewToastMassege={props.viewToastMassege} />
+        <ViewContact contact={contact} viewToastMassege={props.viewToastMassege} closeContactList={(e) => props.taskDetails ? props.closeContactList() : null} />
       )
       :
       <button className="ml-2 col-4 my-2 invite-button  " autocomplete="chrome-off"
         onClick={(e) => assingTaskToContact(e)}
-      >Send Invite</button> :
-    <><div class="spinner-border my-2 mx-3" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-    </>
+      >Send Invite</button>
 
   const top = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.topContactList - 5 : props.topContactList - 50;
   const height = props.topContactList + props.heightContactsList < props.heightCurrentScreen ? props.heightContactsList : props.heightContactsList - 200

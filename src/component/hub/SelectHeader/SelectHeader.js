@@ -115,12 +115,12 @@ function SelectHeader(props) {
                         {/* {window.location.href.indexOf('workspace') != -1 ? */}
                         <div className='row col-5 offset-1' id='tabsAndList' >
 
-                            <div class="input-group inputSearchProject col-9 row mt-0 pr-0" >
-                                <div class="input-group-prepend">
+                            <div className="input-group inputSearchProject col-9 row mt-0 pr-0" >
+                                <div className="input-group-prepend">
                                     {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
                                     <img src={require('../../../assets/img/onic-ios-search.png')} />
                                 </div>
-                                <input type="text" class="col-10" placeholder="Search project..."
+                                <input type="text" className="col-10" placeholder="Search project..."
                                     onChange={(e) => props.valueSearchProject(e.target.value)}
                                     aria-label="Username" aria-describedby="basic-addon1" />
                             </div>
@@ -130,12 +130,12 @@ function SelectHeader(props) {
                         </div>
                         {/* :
                                 <div className='row col-4 pr-0' id='tabsAndList' >
-                                    <div class="input-group inputSearchProject col-12 row pr-0">
-                                        <div class="input-group-prepend">
+                                    <div className="input-group inputSearchProject col-12 row pr-0">
+                                        <div className="input-group-prepend">
                                             <img src={require('../../../assets/img/onic-ios-search.png')} />
 
                                         </div>
-                                        <input type="text" class="col-10" placeholder="Search project..."
+                                        <input type="text" className="col-10" placeholder="Search project..."
                                             onChange={(e) => props.valueSearchProject(e.target.value)}
                                             aria-label="Username" aria-describedby="basic-addon1" />
                                     </div>

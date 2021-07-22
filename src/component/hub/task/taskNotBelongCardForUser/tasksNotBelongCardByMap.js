@@ -231,6 +231,7 @@ function TasksNotBelongCardByMap(props) {
 
     function deleteAllSelect() {
         setMyCards(null)
+        setCardId(null)
         setMyProjects(null)
         setIndexOfProject(null)
         setIndexOfCard(null)
@@ -358,7 +359,7 @@ function TasksNotBelongCardByMap(props) {
 
                         />
                         {/* <div className="drop-down"> 
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <i className="fa fa-angle-down" aria-hidden="true"></i>
                             <FontAwesomeIcon 
                                 Icon='chevron-down'>
                             </FontAwesomeIcon>
@@ -420,16 +421,16 @@ function TasksNotBelongCardByMap(props) {
 
                     {!cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelect">move to</button>
+                            <button id='buttonCancleSelect' type="button" className="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
+                            <button id='buttonSaveSelect' type="button" className="btn-sm saveSelect">move to</button>
                         </>
                         : null
                     }
 
                     {cardId ?
                         <>
-                            <button id='buttonCancleSelect' type="button" class="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
-                            <button id='buttonSaveSelect' type="button" class="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
+                            <button id='buttonCancleSelect' type="button" className="btn-sm" onClick={() => deleteAllSelect()}>cancel</button>
+                            <button id='buttonSaveSelect' type="button" className="btn-sm saveSelectActive" onClick={() => belongTask()}>move to</button>
                         </> : null
 
                     }

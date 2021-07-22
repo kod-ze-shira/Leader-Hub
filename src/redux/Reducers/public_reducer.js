@@ -24,8 +24,8 @@ const initialState = {
     arrDeleteFilesOfTask: [],
     filesForProjectArr: [],
     foldersForDownload: [],
-    sharedProjects: [] ,//projects that user shared  
-    priorities:[]
+    sharedProjects: [],//projects that user shared  
+    priorities: []
 }
 
 const publicData = {
@@ -79,7 +79,6 @@ const publicData = {
     },
 
     setTaskByFiledFromTasks(state, action) {
-        debugger
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
         console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
@@ -463,6 +462,11 @@ const publicData = {
     setSharedProjects(state, action) {
         state.sharedProjects = action.payload
     },
+    setIfShowShareProjectsInReduxToTrue(state, action) {
+        state.sharedProjects.map(shareProject =>
+            shareProject.ifShow = true)
+    },
+
     pushAssignToInRedux(state, action) {
 
         let assign = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].assignTo1

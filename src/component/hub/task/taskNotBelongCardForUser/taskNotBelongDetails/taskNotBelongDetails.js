@@ -230,7 +230,7 @@ function TaskNotBelongDetails(props) {
                     <div className='mr-4 '>
                         <div className='row mt-4 justify-content-between headerDitails'>
                             <h5 className=" title-view-details   pl-3">Task details</h5>
-                            <div class="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
+                            <div className="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
 
                         </div>
 
@@ -238,23 +238,23 @@ function TaskNotBelongDetails(props) {
                             <label>Create {props.task.startDate}</label>
                             <label className="">Last Update {props.task.dueDate}</label>
                         </div>
-                        <div class="form-group" id='nameRequired'>
+                        <div className="form-group" id='nameRequired'>
                             <label for="name">Name</label>
                             <input name="name"
                                 required ref={nameRequired}
-                                type="text" class="form-control inputTaskN"
+                                type="text" className="form-control inputTaskN"
                                 id="name"
                                 onChange={(e) => changeFiledInTask(e)}
                                 value={props.task.name} />
-                            <div class="invalid-feedback">
+                            <div className="invalid-feedback">
                                 Please enter task name.
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div className="form-group">
                             <label for="description">Description</label>
                             <QuillEditTaskNotBelong taskId={props.task._id} />
-                            {/* <textarea class="form-control"
+                            {/* <textarea className="form-control"
                                 rows="3"
                                 className='inputTaskN'
                                 placeholder="Write a description about your workspace"
@@ -264,7 +264,7 @@ function TaskNotBelongDetails(props) {
                             ></textarea> */}
                         </div>
                         <div className="row justify-content-between">
-                            <div class="form-group col-md-6 col-lg-5">
+                            <div className="form-group col-md-6 col-lg-5">
                                 <label for="startDate">Start Date</label>
                                 <input
                                     className="form-control inputTaskN"
@@ -275,7 +275,7 @@ function TaskNotBelongDetails(props) {
                                     onChange={(e) => changeFiledInTask(e)}
                                 />
                             </div>
-                            <div class="form-group col-md-6 col-lg-5">
+                            <div className="form-group col-md-6 col-lg-5">
                                 <label for="dueDate">Due Date</label>
                                 <input
                                     className="form-control inputTaskN"

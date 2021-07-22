@@ -51,7 +51,7 @@ function EditProject(props) {
         let year = newDate.getFullYear();
         project = props.workspaces[props.indexWorkspace].projects[props.indexProject]
         project.updateDates[project.updateDates.length] = date + '/' + month + '/' + year
-        
+
         if (nameRequired.current.value) {
             props.editProjectInServer({ "project": project, 'projectBeforeChanges': projectBeforeChanges })
             props.objectBeforeChanges(null)
@@ -84,27 +84,27 @@ function EditProject(props) {
                 <div className='propertiesViewDitails'>
                     <div className='row my-4 justify-content-between headerDitails'>
                         <h5 className=" title-view-details  pl-3">Project details</h5>
-                        <div class="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
+                        <div className="close pr-3" onClick={() => closeViewDetailsInProject()}>x</div>
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
                     </div>
-                    <div class="row justify-content-between  mx-1 mb-2">
+                    <div className="row justify-content-between  mx-1 mb-2">
                         <label>workspace: {props.workspace.name}</label>
                     </div>
-                    <div class="form-group" id='nameRequired'>
+                    <div className="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" onChange={(e) => changeFiledInProject(e)}
-                            type="text" class="form-control" required ref={nameRequired}
+                            type="text" className="form-control" required ref={nameRequired}
                             value={props.workspaces[props.indexWorkspace].projects[props.indexProject].name} placeholder='Write a name' />
-                        <div class="invalid-feedback">
+                        <div className="invalid-feedback">
                             Please enter project name.
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label for="description">Description</label>
                         <QuillEditProject indexW={props.indexWorkspace} indexP={props.indexProject} />
                     </div>
                     <div className="row justify-content-between">
-                        <div class="form-group col-5 ditailsAction">
+                        <div className="form-group col-5 ditailsAction">
                             <label for="color">Project color</label>
                             <input name="color"
                                 className=" form-control "
@@ -114,7 +114,7 @@ function EditProject(props) {
                                 value={props.workspaces[props.indexWorkspace].projects[props.indexProject].color}
                             />
                         </div>
-                        <div class="form-group col-5 ditailsAction ">
+                        <div className="form-group col-5 ditailsAction ">
                             <label for="color">Due Date</label>
                             <input
                                 className="form-control "
@@ -132,7 +132,7 @@ function EditProject(props) {
                         onClick={deletProject}
                         className="delete-btn col-4 "
                         data-tip data-for="delete" >
-                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.svg')}></img> Delete
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>

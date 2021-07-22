@@ -27,7 +27,10 @@ function Milestones(props) {
                     if (task.milestones) {
                         let milestone = { 'task': task, 'card': card }
                         console.log(milestone);
-                        return <ViewMilstone milestone={milestone}/>
+                        return <ViewMilstone
+                            viewToastMassege={props.viewToastMassege}
+                            showToast={(obj) => props.showToastDelete(obj)}
+                            milestone={milestone} />
                     }
                 })
             })
@@ -43,8 +46,8 @@ function Milestones(props) {
 
             <div className="mt-5">
                 {props.workspaces.length ?
-                renderTasks
-                : showGif ?
+                    renderTasks
+                    : showGif ?
                         <div className="logoGif d-flex justify-content-center"><img className="LampAnimation" src={require('../../../assets/img/hub.gif')} /></div>
                         : <div className="ml-5"><h1 className="ml-5">No Milestones</h1></div>}
             </div>

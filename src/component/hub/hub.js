@@ -46,10 +46,10 @@ function Hub(props) {
     const [objectToDeleteLocal, setObjectToDeleteLocal] = useState()
     const [showContactList, setShowContactList] = useState(false)
     const [showStatusesList, setShowStatusesList] = useState(false)
-
+    const [deleteMilstone, setDeleteMilstone] = useState(true)
     const [openCalander, setOpenCalander] = useState(false)
     const [showRocketShip, setShowRocketShip] = useState(false)
-
+    const [closeElementsOnScreen, setCloseElementsOnScreen] = useState(true)
     // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
@@ -84,7 +84,7 @@ function Hub(props) {
         if (objectToDelete[i].type == "Card") {
             $(`#${objectToDelete[i].object._id} `).css("display", "inline-block")
         }
-        else if (!objectToDelete[i].object.card)
+        else if (!objectToDelete[i].object.card || deleteMilstone)
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
         else if (objectToDelete[i].type == "Task")
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
@@ -133,7 +133,7 @@ function Hub(props) {
 
     });
     const deleteWorkspaceInRedux = (e) => {
-        console.log(e.target.className)
+        // console.log(e.target.className)
         // if (props.workspaces[props.workspaces.length - 1])
         //     if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
         //         props.removeOneWorkspaceFromWorkspaces()
@@ -190,6 +190,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
+                                    closeCalendarOrContact={(e) => setCloseElementsOnScreen(e)}
                                     showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastMassege={(val) => setShowToastMassege(val)}
                                     viewContactList={(val) => ShowObject(val)}
@@ -206,13 +207,14 @@ function Hub(props) {
                             {/* share url */}
                             <ProtectedRoute path={'/share/hub/:idProject/:emailShared/:userName'}>
                                 <CardsPage
+                                    closeCalendarOrContact={(e) => setCloseElementsOnScreen(e)}
                                     showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastMassege={(val) => setShowToastMassege(val)}
                                     viewContactList={(val) => setShowContactList(true)}
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
-                                <Milestones />
+                                <Milestones showToastDelete={(obj) => { showToastToDelete(obj); setDeleteMilstone(true) }} />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/ModalFiles"}>
@@ -246,7 +248,7 @@ function Hub(props) {
                             viewToastMassege={(val => setShowToastMassege(val))}
                         />
                         : null}
-                    {showStatusesList ?
+                    {showStatusesList && closeElementsOnScreen ?
                         // <h1 className="h1tocheck">vvvvvvvvv</h1>
                         <ViewAllStatuses
                             task={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]}
@@ -254,10 +256,10 @@ function Hub(props) {
                             openPopUp={true}
                             hub={true} />
                         : null}
-                    {showContactList ?
+                    {showContactList && closeElementsOnScreen ?
                         <ContactList hub={true} viewToastMassege={(val) => setShowToastMassege(val)} />
                         : null}
-                    {openCalander ?
+                    {openCalander && closeElementsOnScreen ?
                         <CalendarComponent hub={true} closeCalendar={(e) => setOpenCalander(false)} />
                         : null}
                     {showRocketShip ? <RocketShip show={(val) => setShowRocketShip(val)} /> : null}

@@ -37,13 +37,12 @@ function EditWorkspace(props) {
     }
 
     const changeFiledInWorkspace = (input) => {
-        debugger
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
 
     const changeColorFiledInWorkspace = (color) => {
-        let editWorkspaceInRedux = { "nameFiled": "color", "value": color}
+        let editWorkspaceInRedux = { "nameFiled": "color", "value": color }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
 
@@ -60,28 +59,29 @@ function EditWorkspace(props) {
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
                         <h5 className=" title-view-details pl-3">Workspace details</h5>
 
-                        <div class="close pr-3" onClick={() => closeViewDetailsInWorkspace()}>x</div>
+                        <div className="close pr-3" onClick={() => closeViewDetailsInWorkspace()}>x</div>
 
                         {/* <h5 className="my-5 title-view-details pb-2 col-10">Workspace details</h5> */}
                     </div>
-                    <div class="form-group" id='nameRequired'>
+                    <div className="form-group" id='nameRequired'>
                         <label for="name">Name</label>
                         <input name="name" ref={nameRequired} required
                             onChange={(input) => changeFiledInWorkspace(input)}
-                            type="text" class="form-control" id="name"
+                            type="text" className="" className="form-control input-name" id="name"
                             // value={props.workspace.name} 
+
                             value={props.workspaces[props.indexOfWorkspace].name}
                         />
 
 
-                        <div class="invalid-feedback">
+                        <div className="invalid-feedback">
                             Please enter workspace name.
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <div class="form-control descriptionWorkspace"
+                    <div className="form-group">
+                        <label className="label" for="description">Description</label>
+                        <div className="form-control descriptionWorkspace"
                             id="description" rows="5"
                             placeholder="Write a description about your workspace"
                             name="description"
@@ -90,14 +90,14 @@ function EditWorkspace(props) {
                         ></div>
                     </div>
                     <label className="row ml-2" for="color">Logo Color</label>
-                        <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />  
+                    <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />
 
                 </div>
                 <div className="row justify-content-between">
                     <button data-toggle="tooltip" data-placement="top"
                         className="delete-btn col-4 "
                         onClick={(e) => deleteWorkspace(e)}>
-                        <img src={require('../../../../assets/img/bin.png')}></img> Delete
+                        <img src={require('../../../../assets/img/bin.svg')}></img> Delete
                     </button>
                     <button data-tip data-for="save" onClick={saveEdit} className="save_canges_btn col-3">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">

@@ -13,11 +13,11 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
         headers: { 'authorization': getState().public_reducer.tokenFromCookies }
       })
       .then((res) => {
-        console.log("res11111", res)
+        // console.log("res11111", res)
         return res.json();
       })
       .then((result) => {
-        console.log("res", result)
+        // console.log("res", result)
         checkPermission(result).then((ifOk) => {
           dispatch(actions.setTeams(result.teams))
 
@@ -74,15 +74,17 @@ export const createNewTeam = ({ dispatch, getState }) => next => action => {
 }
 export const getContactsForUser = ({ dispatch, getState }) => next => action => {
   if (action.type === 'GET_CONTACTS_FOR_USER') {
-    debugger
+
     fetch(
       `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getContactsForUser`,
-      // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
 
       {
         method: 'GET',
         headers: {
-          Authorization: getState().public_reducer.tokenFromCookies,
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko',
+
+          //  getState().public_reducer.tokenFromCookies,
           // Accept: 'application/json',
           // 'Content-Type': 'application/json'
         },
@@ -240,7 +242,7 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ assign }),
 
       success: function (data) {
-        debugger
+
         console.log("success")
         console.log("data", data);
         // if (data.task.assignTo1.contact)
