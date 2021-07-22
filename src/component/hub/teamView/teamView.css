@@ -16,6 +16,7 @@
     margin-right: -2px;
 }
 .imgTeamTabs{
+    position: relative;
     border-radius: 50%;
     display: inline-block;
     height: 23px;

@@ -63,9 +63,6 @@ function UploadFile(props) {
 
             }
             props.uploadFiles({ 'files': file, 'task': task, type: type })
-
-
-
         }
     }
 

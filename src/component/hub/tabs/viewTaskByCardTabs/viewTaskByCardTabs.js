@@ -236,7 +236,6 @@ function ViewTaskByCradTabs(props) {
         else {
 
             let text = value
-            debugger
             if (text.includes("https://") || text.includes("https://")) {
                 if (text.includes("https://"))
                     text = "https://" + text.split("https://")[1]
@@ -291,6 +290,11 @@ function ViewTaskByCradTabs(props) {
         props.updateLike(props.task._id)
         setUserHasLike(!userHasLike)
         e.stopPropagation()
+    }
+    const removeMemberFromAssign = (email) => {
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.removeMemberFromAssign(email)
     }
 
     $('.span-name-task').on('DOMSubtreeModified', function (event) {
@@ -462,20 +466,20 @@ function ViewTaskByCradTabs(props) {
                                 </span> */}
 
                                 <div className=" icons-in-task-tabs pt-0">
-                                    <div className="mx-2  row justify-content-between  mt-3 mb-0">
+                                    <div className="mx-2 row justify-content-between  mt-3 mb-0">
                                         <div className="p_task ">
                                             <div>
                                                 {/* ? assingTo.contact.thumbnail */}
-                                                {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts col-4">
+                                                {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts mr-1">
                                                     {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                         if (index < 2)
-                                                            return assingTo.contact ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
+                                                            return assingTo.contact ?<> <p className="remove-member-from-assign" onClick={(e) =>  removeMemberFromAssign(assingTo.contact.email)}>x</p><img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" /></>
                                                                 : null
                                                     }) : null}
                                                     {props.task.assignTo1 ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
                                                 </div> : <img
                                                     // id={`${props.task._id}assing-to`}
-                                                    className="ml-1 assing-to-icon"
+                                                    className="mx-1 assing-to-icon"
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../../assets/img/share-icon.png')}>
                                                 </img>}
@@ -484,7 +488,7 @@ function ViewTaskByCradTabs(props) {
 
                                             <div>
                                                 {props.task.milestones ?
-                                                    <img className=" mr-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
+                                                    <img className=" mx-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
                                             <label for="fileFromTask">
@@ -580,7 +584,9 @@ const mapDispatchToProps = (dispatch) => {
         setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
-        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
+        removeMemberFromAssign: (member) => dispatch(actions.removeMemberFromAssign(member)),
+
     }
 }
 

@@ -106,6 +106,7 @@ function CardsByProject(props) {
                         {props.cards.map((card, index) =>
 
                             <ViewCards
+                                closeCalendarOrContact={props.closeCalendarOrContact}
                                 viewToastMassege={props.viewToastMassege}
                                 showToastDelete={(object) => props.showToast(object)}
                                 viewContactList={props.viewContactList}
@@ -144,6 +145,7 @@ function CardsByProject(props) {
                             </thead>
                             <tbody>
                                 <tr>
+
                                     <td>
                                         <div>"gfeewfewfwef"</div>
 

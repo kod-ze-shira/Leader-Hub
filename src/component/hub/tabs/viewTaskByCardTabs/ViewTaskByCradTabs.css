@@ -37,8 +37,7 @@
     height: 65vh !important;
 }*/
 .p_task > div {
-    display: inline-block !important;
-   
+    display: inline-block !important; 
 }
 
 .priority-img{
@@ -134,6 +133,17 @@
   }
   .autosize::-webkit-scrollbar {
     display: none;
+}
+.remove-member-from-assign{
+    z-index: 99999;
+    display:inline-block;
+    position: absolute;
+    margin-top: -13px;
+    color:gray !important;
+
+}
+.remove-member-from-assign:hover{
+    /* display: block; */
 }
   /* .autosize::-webkit-scrollbar-thumb{
     background: white !important; 

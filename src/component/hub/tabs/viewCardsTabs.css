@@ -61,12 +61,7 @@ span:focus{
   padding: 4px !important;
   border-bottom: none !important;
 }
-#task-card:hover{
-  /* box-shadow: 2px 1px 2px 1px #00000029; */
-  /* box-shadow: 0px 3px 6px #00000029; */
- 
-        
-}
+
 .task-card:hover{
   border: 1px solid #1FB9C1;
   border-radius:5px;
@@ -166,10 +161,11 @@ margin: auto !important;
   .MuiMenuItem-root{
       font-size: 0.9rem !important;
   }
-  /* .view-cards-tabs .card-body::-webkit-scrollbar {
-    background-color: #EDFBFC ;
-    width: 6px;
-  } */
+  .view-cards-tabs .card-body::-webkit-scrollbar {
+    display: none ;
+    /* background-color: #EDFBFC ;
+    width: 6px; */
+  }
   
    
     /* Track */
@@ -179,7 +175,9 @@ margin: auto !important;
     .view-cards-tabs .card-body::-webkit-scrollbar-track:hover {
         box-shadow: inset 0 0 5px grey; 
       } */
-     
+      .textarea-name-task::-webkit-scrollbar{
+        opacity: 0;
+      }
     
     .hand-drag{
       display: inline-block;

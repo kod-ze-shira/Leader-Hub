@@ -107,7 +107,7 @@ function TaskDetails(props) {
 
         if (nameRequired.current.value) {
             if (milstone)
-                props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
+                // props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -156,10 +156,10 @@ function TaskDetails(props) {
 
     }
 
-    // let dueDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate : null;
-    // let startDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate : null;
-    let dueDate_ = ''// dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
-    let startDate_ = ''//startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
+    let dueDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate : null;
+    let startDate = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate : null;
+    let dueDate_ =  dueDate.split("/")[2] + '-' + dueDate.split("/")[1] + '-' + dueDate.split("/")[0];
+    let startDate_ =startDate.split("/")[2] + '-' + startDate.split("/")[1] + '-' + startDate.split("/")[0];
 
     let [dueDateTask, setDueDateTask] = useState(dueDate_)
     let [startDateTask, setStartDateTask] = useState(startDate_)
@@ -485,14 +485,14 @@ function TaskDetails(props) {
                             </div>
                             <div className=" files-details mx-1" data-tip id="files">
                                 <UploadFile />
-                                <img className="files-task" src={require('../../../../assets/img/files-icon.png')} ></img>
+                                <img className="files-task" src={require('../../../../assets/img/files-icon.svg')} ></img>
                                 <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                                 <ReactTooltip className="tooltip-style" place="top" effect="solid">
                                     {title.title_files}
                                 </ReactTooltip>
                             </div>
                             <div className="delete-details mx-2" data-tip data-for="delete">
-                                <img className="delete-task" src={require('../../../../assets/img/delete-icon.png')} onClick={(e) => deleteTask(e)} ></img>
+                                <img className="delete-task" src={require('../../../../assets/img/delete-icon.svg')} onClick={(e) => deleteTask(e)} ></img>
                                 <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                                 <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                                     {title.title_delete}

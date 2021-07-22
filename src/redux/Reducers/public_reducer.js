@@ -339,6 +339,10 @@ const publicData = {
                 card.tasks.push(action.payload);
         })
     },
+    removeMemberFromAssignToTask(state, action) {
+     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]=action.payload
+
+    },
 
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {

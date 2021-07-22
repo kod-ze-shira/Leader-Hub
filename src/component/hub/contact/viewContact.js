@@ -28,8 +28,9 @@ function ViewContact(props) {
         let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1
         let isExistContactInList = false
         let i
-
+//check if contact is in assign exist
         for (i = 0; i < assign.length; i++) {
+            debugger
             if (assign[i].contact._id == props.contact._id)
                 isExistContactInList = true
         }
@@ -48,13 +49,19 @@ function ViewContact(props) {
         setAdmin(true)
         setContactId(contactId)
     }
+    const removeMemberFromAssign = (email) => {
+        props.removeMemberFromAssign(email)
+    }
+
+
     return (
         <>
-            <div className="option-contact row mb-2" onClick={() => assingTaskToContact(props.contact.email)}>
-                {props.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
+            <div onClick={() => assingTaskToContact(props.contact.email)} className="option-contact row mb-2" >
+                {props.contact.thumbnail ? <img  referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
                     : <div className="logo-contact ml-3" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
                 <p className="name-contact ">{props.contact.name} </p>   <p className="email-contact ">{props.contact.email} </p>
-                {/* <input type="radio" onClick={(e) => e.stopPropagation()} onChange={() => markAsAdmin(props.contact._id)}></input> */}
+                {/* <p className="remove-member" onClick={(e) => {e.stopPropagation(); removeMemberFromAssign(props.contact.email)}}>   x</p> */}
+                {/* <input type="radio"  onChange={() => markAsAdmin(props.contact._id)}></input> */}
             </div>
         </>
 
@@ -73,7 +80,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
         assingToMany: (member) => dispatch(actions.assingToMany(member)),
-
+        removeMemberFromAssign: (member) => dispatch(actions.removeMemberFromAssign(member)),
     }
 }
 

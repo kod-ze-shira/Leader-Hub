@@ -26,7 +26,7 @@ import {
     completeTask, belongTask, newTaskNotBelong, displayLineByStart, disaplayLineByStop
 } from '../middleware/taskCrud';
 import { addNewWorkspaceToServer, deleteWorkspaceFromServer, duplicateWorkspace, editWorkspaceInServer, getAllWorkspacesFromServer } from '../middleware/workspaceCrud';
-import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId, addMembers, assingToMany } from '../middleware/teamCrud';
+import { assingTo, createNewTeam, getAllTeamsForUser, getContactsForUser, shareObject, getMembersByProjectId, addMembers, assingToMany, removeMemberFromAssign } from '../middleware/teamCrud';
 import { editCard, getCardsByProjectId, newCard, removeCardById } from '../middleware/cardCrud';
 import { createSystemWave } from '../middleware/waveCrud'
 import { extractJwt } from '../middleware/loginCrud';
@@ -95,7 +95,8 @@ const store = createStore(
                 displayLineByStart,
                 disaplayLineByStop,
                 setIfShowShareProjectsToTrue,
-                assingToMany
+                assingToMany,
+                removeMemberFromAssign
             ))
 )
 store.dispatch(actions.extractJwt());
