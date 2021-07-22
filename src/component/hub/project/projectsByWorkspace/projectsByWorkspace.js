@@ -45,7 +45,7 @@ function ProjectsByWorkspace(props) {
         workspaceName='All Projects'       
     }
     else{
-        workspaceName=props.workspaces[props.indexOfWorkspace].name
+        workspaceName=props.workspaces[props.indexOfWorkspace]&&props.workspaces[props.indexOfWorkspace].name
     }
     function openEditOrShareProject(from) {
         setEditOrShareProject(from)
@@ -112,7 +112,7 @@ function ProjectsByWorkspace(props) {
             <div className='headerProjects'>
                 <div className='contentHeaderProjects'>
                     <div className='betweenHeaderProjects'>
-                        <div className="titleProjects pt-2 ml-2">{workspaceName}</div>
+                        <div className="titleProjects pt-2 ml-2">{workspaceName} projects</div>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@ function ProjectsByWorkspace(props) {
                 <thead className="mx-3">
                     <tr className='projectsTitle'>
                         <th className='nameProjectInList'>
-                            <span className='name2ProjectInList'>{workspaceName}</span>
+                            <span className='name2ProjectInList'>{workspaceName} projects</span>
                         </th>
                         <th className='widthCellInProject'><span>Due Date</span></th>
                         <th ><span>Cards</span></th>
