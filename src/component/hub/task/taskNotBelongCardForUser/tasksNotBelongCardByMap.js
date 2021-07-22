@@ -61,24 +61,9 @@ function TasksNotBelongCardByMap(props) {
 
     }
 
-    const editCompleteTask = (comlited) => {
+    const editCompleteTask = (complete) => {
 
-        let today = new Date()
-        let dd = today.getDate()
-        let mm = today.getMonth() + 1
-        const yyyy = today.getFullYear()
-        today = (dd <= 9 ? '0' + dd : dd) + '/' + (mm <= 9 ? '0' + mm : mm) + '/' + yyyy
-        let completeTask = {
-            "_id": props.task._id,
-            "name": props.task.name,
-            "description": props.task.description,
-            "dueDate": props.task.dueDate,
-            "startDate": props.task.startDate,
-            "complete": comlited,
-            "endDate": props.task.endDate ? props.task.endDatet : today,
-            "card": props.task.card ? props.task.card : ''
-        }
-        props.completeTask(completeTask)
+        props.completeTask(props.task._id)
         doneStatus = !doneStatus
         if (doneStatus) {
             props.viewToastMassege({ show: true, massege: 'comlited task!!' })
@@ -94,7 +79,7 @@ function TasksNotBelongCardByMap(props) {
         let value = input.target.value
         let editTaskInRedux = { "index": indexTask, "value": !props.task.complete }
         editCompleteTask(!props.task.complete)
-        props.setComlitedTask(editTaskInRedux)
+        props.setCompleteTask(editTaskInRedux)
 
 
     }
@@ -238,7 +223,7 @@ function TasksNotBelongCardByMap(props) {
                     "card": props.task.card ? props.task.card : ''
                 }
                 props.belongTask({ 'taskId': task._id, 'cardId': cardId, 'workspaceId': idWorkspace })
-                props.viewToastMassege({ show: true, massege: props.task.name + ' assign!!' })
+                props.viewToastMassege({ show: true, massege: props.task.name + ' assign' })
 
             });
         }
@@ -260,7 +245,7 @@ function TasksNotBelongCardByMap(props) {
             "description": props.task.description,
             "dueDate": props.task.dueDate,
             "startDate": props.task.startDate,
-            "complete": props.task.comlited,
+            "complete": props.task.complete,
             "endDate": props.task.endDate,
             // "status": props.statuses[0],
             "card": props.task.card ? props.task.card : ''
@@ -483,7 +468,7 @@ const mapDispatchToProps = (dispatch) => {
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
         getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
         completeTask: (task) => dispatch(actions.completeTask(task)),
-        setComlitedTask: (taskDetails) => dispatch(actions.setComlitedTask(taskDetails)),
+        setCompleteTask: (taskDetails) => dispatch(actions.setCompleteTask(taskDetails)),
         belongTask: (ids) => dispatch(actions.belongTask(ids)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
 

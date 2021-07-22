@@ -38,7 +38,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                     console.log("finish first ajax  " + JSON.stringify(myData));
                     setTimeout(() => {
                         $.ajax({
-                            url: `https://files.codes/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
+                            url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/savedMultiFilesDB`,
                             method: 'POST',
                             headers: { "authorization": jwtFromCookie },
                             data: myData,

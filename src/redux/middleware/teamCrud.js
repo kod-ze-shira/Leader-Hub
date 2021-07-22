@@ -140,7 +140,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
             margin-right: 2px;
             margin-left: 4px;'></span>
             <span style='color:${project.color} !important'> ${project.name}</span></p> 
-            <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+            <a href='https://${keys.DOMAIN}/${getState().public_reducer.userName}/hub' >Go to Hub</a>`,
             "to": [getState().public_reducer.userName],
             "from": "hub@noreply.leader.codes",
             "source": "Hub",
@@ -222,8 +222,6 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
-// https://reacthub.dev.leader.codes/api/{{userName}}/{{taskId}}/assingToMany
-
 export const assingToMany = ({ dispatch, getState }) => next => action => {
   if (action.type === 'ASSING_TO_MANY') {
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
