@@ -134,7 +134,7 @@ export const newTask = ({ dispatch, getState }) => next => action => {
                     "subject": "New task",
                     "body": `<p>Hi ${getState().public_reducer.userName}</p> 
                     <p> Task added to you: <span style="font-weight: 600;">${task.name}</span></p> 
-                    <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+                    <a href='https://${keys.DOMAIN}/${getState().public_reducer.userName}/hub' >Go to Hub</a>`,
 
                     // "to": ['bp63447@gmail.com'],
                     "to": [getState().public_reducer.userName],
@@ -172,7 +172,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
     timeEnd.setHours(23);
     let endTimeEnd = timeEnd.toISOString();
     //create event on task's startDate
-    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+    fetch(`${keys.API_URL_CALENDAR}/${userName}/newEvent`,
         {
             method: 'POST',
             headers: {
@@ -188,7 +188,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
         })
     //create event on task's endDate
 
-    fetch(`https://calendar.dev.leader.codes/api/${userName}/newEvent`,
+    fetch(`${keys.API_URL_CALENDAR}/${userName}/newEvent`,
         {
             method: 'POST',
             headers: {
@@ -351,7 +351,7 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
                         "body":
                             `<p>Hi ${getState().public_reducer.userName}</p>
                         <p>Task: <span style="font-weight: 600;"> ${action.payload.name} </span>successfully completed!</p>
-                        <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+                        <a href='https://${keys.DOMAIN}/${getState().public_reducer.userName}/hub' >Go to Hub</a>`,
                         "to": [getState().public_reducer.userName],
                         "from": "hub@noreply.leader.codes",
                         "source": "Hub",
@@ -523,8 +523,7 @@ export const newTaskNotBelong = ({ dispatch, getState }) => next => action => {
                     "subject": "New task",
                     "body": `<p>Hi ${getState().public_reducer.userName}</p> 
                     <p> Task added to you: <span style="font-weight: 600;">${task.name}</span></p> 
-                    <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
-
+                    <a href='https://${keys.DOMAIN}/${getState().public_reducer.userName}/hub' >Go to Hub</a>`,
                     "to": [getState().public_reducer.userName],
                     "from": "hub@noreply.leader.codes",
                     "source": "Hub",
@@ -621,7 +620,7 @@ export const disaplayLineByStop = ({ dispatch, getState }) => next => action => 
         // let totalHour = "2020-11-02T00:00:00.000Z"
         let endWork = new Date();
         let description = "dgghje"
-        let urlDataP = "https://time.leader.codes/api/" + userName + "/updateEndHour"
+        let urlDataP = `${keys.API_URL_TIME}/${userName}/updateEndHour`
         $.ajax({
             url: urlDataP,
             type: 'POST',

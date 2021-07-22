@@ -241,15 +241,6 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
     }
     return next(action);
 }
-
-// export const duplicateProject = ({ dispatch, getState }) => next => action => {
-//     if (action.type === 'DUPLICATE_PROJECT') {
-//         let projectId = getState().project_reducer.project;
-//         let urlData = `https://reacthub.dev.leader.codes/api/${getState().public_reducer.userName}/:${projectId}/${project._id}/duplicateProject`
-
-//     }
-// }
-
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
