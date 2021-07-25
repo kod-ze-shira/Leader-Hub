@@ -10,6 +10,7 @@ module.exports = {
     API_URL_FILES: 'https://files.codes',
     API_URL_TIME: 'https://time.leader.codes/api',
     API_URL_MASTER: 'https://api.leader.codes',
+    API_URL_CALENDAR:'https://calendar.leader.codes/api',
     DOMAIN: "hub.leader.codes",
     JWT:"jwt"
 }

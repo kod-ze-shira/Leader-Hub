@@ -380,7 +380,7 @@ const publicData = {
     },
 
 
-    setComlitedTask(state, action) {
+    setCompleteTask(state, action) {
         state.tasks[action.payload.index].complete = action.payload.value
     },
 

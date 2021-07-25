@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './viewWorkspaceGrid.css';
 import { connect } from 'react-redux'
-import ViewDetails from '../../../viewDetails/viewDetails'
 import { actions } from '../../../../../redux/actions/action'
 import { withRouter } from 'react-router-dom';
 import bin from '../../../../../assets/img/bin.svg'
@@ -10,20 +9,17 @@ import pencil from '../../../../../assets/img/pencil-write.svg'
 import $ from "jquery";
 import ReactTooltip from 'react-tooltip';
 import title from '../../../../../Data/title.json'
-import ShureDelete from '../../../shureDelete/shureDelete';
-import styled, { css } from 'styled-components'
+import { MyStyleGrid } from './viewWorkspaceGrid.style'
+
+
 
 function ViewWorkspaceGrid(props) {
-    // console.log("ViewWorkspaceGrid")
     const workspace = props.workspace
-    // const myStyle=&:hover{
-    //     'border': '1.5px solid workspace.colr'
-    // }
-    // export default function ProjectStyle(props) {
-    const MyStyle = styled.div` 
-        &:hover {
-            border: 1.5px solid ${workspace.color} !important
-        }`;
+
+    // const MyStyle = styled.div` 
+    //     &:hover {
+    //         border: 1.5px solid ${workspace.color} !important
+    //     }`;
     useEffect(() => {
 
     }, [props.workspaces])
@@ -45,7 +41,6 @@ function ViewWorkspaceGrid(props) {
     }
     function duplicateWorkspace() {
         props.setWorkspace(workspace);
-        // console.log(workspace)
         props.duplicateWorkspace(workspace._id);
     }
 
@@ -78,14 +73,14 @@ function ViewWorkspaceGrid(props) {
                         onClick={delete_workspace}
                         data-tip data-for="delete"
                     >
-                        <img class='imageIcon' src={bin} ></img>
+                        <img className='imageIcon' src={bin} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid">
                             {title.title_delete}
                         </ReactTooltip>
                     </div>
                     <div className="stripe stripeToSavePlace" >|</div>
                     <div className="add iconsAction" onClick={duplicateWorkspace} data-tip data-for="duplicate" >
-                        <img class='imageIcon' src={duplicate} ></img>
+                        <img className='imageIcon' src={duplicate} ></img>
                         <ReactTooltip className="tooltip-style" data-tip id="duplicate" place="top" effect="solid">
                             {title.title_duplicate}
                         </ReactTooltip>
@@ -93,9 +88,12 @@ function ViewWorkspaceGrid(props) {
                     </div>
                 </div>
 
-                <MyStyle className="Workspacegrid pt-2 pb-2 px-2 mt-1 " id={props.workspace._id ? "" : "disable-workspace"}
+                <MyStyleGrid color={workspace.color}
+                    className="Workspacegrid pt-2 pb-2 px-2 mt-1 "
+                    id={props.workspace._id ? "" : "disable-workspace"}
                     onClick={(e) => routeToProject(e)}
                 >
+
                     <div>
                         <div className="logoWorkspace1 " >
                             <div className="logo-w"
@@ -111,7 +109,7 @@ function ViewWorkspaceGrid(props) {
                     {/* <ReactTooltip data-tip id="date_p" place="bottom" effect="solid">
                         {title.title_production_date}
                     </ReactTooltip> */}
-                </MyStyle>
+                </MyStyleGrid>
 
             </div>
         </>

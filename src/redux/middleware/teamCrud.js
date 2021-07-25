@@ -13,11 +13,11 @@ export const getAllTeamsForUser = ({ dispatch, getState }) => next => action => 
         headers: { 'authorization': getState().public_reducer.tokenFromCookies }
       })
       .then((res) => {
-        console.log("res11111", res)
+        // console.log("res11111", res)
         return res.json();
       })
       .then((result) => {
-        console.log("res", result)
+        // console.log("res", result)
         checkPermission(result).then((ifOk) => {
           dispatch(actions.setTeams(result.teams))
 
@@ -77,12 +77,14 @@ export const getContactsForUser = ({ dispatch, getState }) => next => action => 
 
     fetch(
       `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getContactsForUser`,
-      // `https://api.dev.leader.codes/${getState().public_reducer.userName}/getContacts/?includesConversations=false`,
 
       {
         method: 'GET',
         headers: {
-          Authorization: getState().public_reducer.tokenFromCookies,
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko',
+
+          //  getState().public_reducer.tokenFromCookies,
           // Accept: 'application/json',
           // 'Content-Type': 'application/json'
         },
@@ -140,7 +142,7 @@ export const shareObject = ({ dispatch, getState }) => next => action => {
             margin-right: 2px;
             margin-left: 4px;'></span>
             <span style='color:${project.color} !important'> ${project.name}</span></p> 
-            <a href='https://reacthub.dev.leader.codes' >Go to Hub</a>`,
+            <a href='https://${keys.DOMAIN}/${getState().public_reducer.userName}/hub' >Go to Hub</a>`,
             "to": [getState().public_reducer.userName],
             "from": "hub@noreply.leader.codes",
             "source": "Hub",
@@ -222,8 +224,6 @@ export const assingTo = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
-// https://reacthub.dev.leader.codes/api/{{userName}}/{{taskId}}/assingToMany
-
 export const assingToMany = ({ dispatch, getState }) => next => action => {
   if (action.type === 'ASSING_TO_MANY') {
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]

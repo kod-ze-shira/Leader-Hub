@@ -234,7 +234,7 @@ function ViewCards(props) {
                         autoFocus="true"
                         type="text"
                         // className="add-task"
-                        class="form-control scroll-container mt-2   ml-4"
+                        className="form-control scroll-container mt-2   ml-4"
                         placeholder="Add Task" id="input-task"
                         autocomplete="chrome-off"
                         value={inputValue} onChange={updateInputValue} onKeyPress={event => {

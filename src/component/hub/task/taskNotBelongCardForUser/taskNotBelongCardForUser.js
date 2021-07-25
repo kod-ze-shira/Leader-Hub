@@ -89,30 +89,30 @@ function TaskNotBelongCardForUser(props) {
                         }}>
                         Save</button>
                 </div>
-                <div class="input-group inputSearchProject inputSearchTask  ml-2 mr-5 "
+                <div className="input-group inputSearchProject inputSearchTask  ml-2 mr-5 "
                 >
-                    <div class="input-group-prepend">
+                    <div className="input-group-prepend">
                         {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
                         <img src={require('../../../../assets/img/onic-ios-search.png')} />
 
                     </div>
 
-                    <input type="text" class="col-10" placeholder="Search task..."
+                    <input type="text" className="col-10" placeholder="Search task..."
                         onChange={(e) => setSearchTask(e.target.value)}
                         aria-label="Username" aria-describedby="basic-addon1" />
 
                 </div>
-                {/* <input type="text" class="inputSearchTask ml-2 mr-5 " placeholder="Search task"
+                {/* <input type="text" className="inputSearchTask ml-2 mr-5 " placeholder="Search task"
                     onChange={(e) => setSearchTask(e.target.value)} /> */}
             </div>
             <div className="wrap-all-task">
                 <div className="wrap-all-task-width">
-                    <div class="show-task row mx-4 mt-3 headerTableTask pt-2" >
-                        <label class="ml-3 pl-6 col-3  labelAllTask"> My task </label>
-                        <label class="col-2 propertiesAllTask ml-4">Workspace</label>
-                        <label class="col-2 propertiesAllTask">Project</label>
-                        <label class=" col-2 propertiesAllTask">Card</label>
-                        <label class=" col propertiesAllTask"></label>
+                    <div className="show-task row mx-4 mt-3 headerTableTask pt-2" >
+                        <label className="ml-3 pl-6 col-3  labelAllTask"> My task </label>
+                        <label className="col-2 propertiesAllTask ml-4">Workspace</label>
+                        <label className="col-2 propertiesAllTask">Project</label>
+                        <label className=" col-2 propertiesAllTask">Card</label>
+                        <label className=" col propertiesAllTask"></label>
                     </div>
 
                     <div className=" allTasks">
