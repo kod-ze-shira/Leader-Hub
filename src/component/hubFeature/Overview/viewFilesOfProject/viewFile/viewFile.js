@@ -15,13 +15,13 @@ function ViewFile(props) {
             <div className="viewFile col p-2">
 
                 {/* <input type="checkbox" className="selectFile" ></input>   */}
-                <a href={file.url} target="_blank" className="fileName">
+                <a href={file.src} target="_blank" className="fileName">
                     <div className="fileItem">
                         {/* <div> */}
                         <div className="row-10 wrapImg">
 
                             <img alt="Responsive image" src={file.name.endsWith('.pdf') ? require('../../.././../../assets/img/file_pdf.png') :
-                                file.name.endsWith('.doc') ? require('../../../../../assets/img/word.png') : file.url} className="imgFile img-fluid"></img>
+                                file.name.endsWith('.doc') ? require('../../../../../assets/img/word.png') : file.src} className="imgFile img-fluid"></img>
                             <label
                                 title="check file"
                                 className="selectFile py-2 check-tabs row">

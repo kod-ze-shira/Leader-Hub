@@ -3,7 +3,6 @@ import { actions } from '../../../../redux/actions/action'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect, useRef } from 'react'
 // import './ViewTaskByCrad.css'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';

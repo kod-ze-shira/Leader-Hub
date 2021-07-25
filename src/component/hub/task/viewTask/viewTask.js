@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom'
 import React, { useState } from 'react';
 import DetailsTask from '../detailsTask/detailsTask'
 import { connect } from 'react-redux';

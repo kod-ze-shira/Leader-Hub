@@ -53,7 +53,7 @@ function TaskDetails(props) {
     const [fileComponentArr, setFileComponentArr] = useState([])
     const [startTimerComp, setStartTimerComp] = useState(false)
     const [shoewModalFiles, setShoewModalFiles] = useState(false)
-    const [url, setUrl] = useState('dddd')
+    const [src, setSrc] = useState('dddd')
 
 
     const openPopUpStatus = (event) => {
@@ -111,7 +111,7 @@ function TaskDetails(props) {
                 props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
-                newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
+                newFiles = props.arrFilesOfTask.filter((file) => file.src == 'new')
             if (newFiles.length) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
@@ -211,7 +211,7 @@ function TaskDetails(props) {
         return <File file={file}
             setDownloadFile={(e) => { props.setDownloadFile(e) }}
             taskId=''
-            url={(val) => setUrl(val)}
+            src={(val) => setSrc(val)}
             shoewModalFiles={(val) => func(val)}
         />
     }) : null
@@ -280,7 +280,7 @@ function TaskDetails(props) {
         <>
             {
                 shoewModalFiles &&
-                <ModalFiles url={url} show={(val) => setShoewModalFiles(val)} />
+                <ModalFiles src={src} show={(val) => setShoewModalFiles(val)} />
             }
             {props.cards[props.indexCurrentCard] && props.priorities.length > 0 &&
                 <div>
@@ -450,7 +450,7 @@ function TaskDetails(props) {
                                 </ReactTooltip>
                             </div>
                             <div className=" files-details mx-1" data-tip id="files">
-                                <UploadFile />
+                                <UploadFile taskId='' />
                                 <img className="files-task" src={require('../../../../assets/img/files-icon.svg')} ></img>
                                 <img data-tip id="files" className="files-task-hover" src={require('../../../../assets/img/files-hover.png')} ></img>
                                 <ReactTooltip className="tooltip-style" place="top" effect="solid">

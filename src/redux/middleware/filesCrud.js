@@ -21,6 +21,7 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
         if (!!formData.entries().next().value === true) {
             $.ajax({
                 url: `${keys.API_URL_FILES}/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
+                // url: `https://dev.files.codes/api/${getState().public_reducer.userName}/uploadMultipleFiles`,
                 method: 'post',
                 contentType: false,
                 processData: false,
@@ -43,10 +44,11 @@ export const uploadFiles = ({ dispatch, getState }) => next => action => {
                             headers: { "authorization": jwtFromCookie },
                             data: myData,
                             success: (data) => {
+                                console.log(data)
+
                             },
                             error: function (err) {
-                                checkPermission(err).then((ifOk) => {
-                                })
+                                console.log(err)
                             }
                         })
                     }, 2000);
@@ -115,7 +117,7 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
             keys.API_URL_FILES + "/api/" +
             getState().public_reducer.userName +
             "/download/" +
-            file.url,
+            file.src,
             {
                 method: "GET",
                 headers: {
@@ -129,15 +131,15 @@ export const downloadFile = ({ dispatch, getState }) => next => action => {
             }
             )
             .then((blob) => {
-                const url = window.URL.createObjectURL(blob);
+                const src = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
                 a.style.display = "none";
-                a.href = url;
+                a.href = src;
                 a.download = file.name;
                 document.body.appendChild(a);
                 // action.payload.e.stopPropagation()
                 a.click();
-                window.URL.revokeObjectURL(url);
+                window.URL.revokeObjectURL(src);
 
             })
             .catch(() => console.log("oh no!"));

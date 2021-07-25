@@ -18,10 +18,11 @@ function File(props) {
     //     setTimeout(() => {
     //         setProgressFile(70)
     //     }, 300);
+
     // }
     useEffect(() => {
 
-        if (props.file.url == 'new' && props.file) {
+        if (props.file.src == 'new' && props.file) {
             setFile(URL.createObjectURL(props.file.file))
             setTimeout(() => {
                 setProgressFile(30)
@@ -42,10 +43,10 @@ function File(props) {
 
     }, [props.file])
     function deleteFile(e) {
-        props.removeFileInRedux({ 'name': props.file.name, 'url': props.file.url })
+        props.removeFileInRedux({ 'name': props.file.name, 'src': props.file.src })
         props.removeFileInTaskAndServerFiles({
             'name': props.file.name,
-            'url': props.file.url,
+            'src': props.file.src,
             'taskId': props.taskId
         })
         // let r = document.getElementById(e.currentTarget.id)
@@ -58,19 +59,19 @@ function File(props) {
         // props.showViewDetails(true)
     }
     function showFiles(url) {
-        props.url(url)
+        props.src(url)
         props.shoewModalFiles(true)
     }
     return (
         <>
             <div className='fileInTask  mb-3 row' id={`file_${props.file.name}`}
-                id={props.file.url ? props.file.url : props.file.name}>
+                id={props.file.src ? props.file.src : props.file.name}>
                 <div className={props.file && (props.file.name.endsWith(".pdf") || props.file.name.endsWith(".docx")) ?
                     'col-4  imgFileInTask ' : 'col-4  imgFileInTask pr-0'}
-                // {props.file.url ? 'mt-5' : null}
+                // {props.file.src ? 'mt-5' : null}
                 >
-                    {props.file.url != 'new' ?
-                        <a href={props.file.url} target="_blank">
+                    {props.file.src != 'new' ?
+                        <a href={props.file.src} target="_blank">
                             {props.file.name.endsWith(".pdf") ?
                                 <FontAwesomeIcon className='fontAwesomeIconFile pdfFile'
                                     icon={['fas', 'file-pdf']}
@@ -79,7 +80,7 @@ function File(props) {
                                     ? <FontAwesomeIcon className='fontAwesomeIconFile'
                                         icon={['fas', 'file-word']}
                                     ></FontAwesomeIcon> :
-                                    <img src={props.file.url}></img>
+                                    <img src={props.file.src}></img>
                             }
                         </a> :
                         props.file.name.endsWith(".pdf") ?
@@ -97,10 +98,10 @@ function File(props) {
                 </div>
                 <div className='col-8  nameFileAndAction'>
                     <span className='nameFileInTask'>
-                        {props.file.url != 'new' ?
-                            <a href={props.file.url} target="_blank"
+                        {props.file.src != 'new' ?
+                            <a href={props.file.src} target="_blank"
                                 // <a href='#'
-                                // onClick={() => showFiles(props.file.url)}
+                                // onClick={() => showFiles(props.file.src)}
                                 style={{ 'color': '#358A8D' }}
                             >{props.file.name}
                             </a>
@@ -109,7 +110,7 @@ function File(props) {
                     </span>
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Kb</span>
-                    {(progressFile != 100 && props.file.url == 'new') ?
+                    {(progressFile != 100 && props.file.src == 'new') ?
                         <div className="progressFile"
                             // ref={refToProject}
                             style={{ backgroundColor: '#e9ecef' }}
@@ -127,14 +128,14 @@ function File(props) {
                         : null
                     }
 
-                    {props.file.url != 'new' ?
+                    {props.file.src != 'new' ?
                         <img onClick={(e) => {
                             downloadFile(e)
                         }} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4 imgActionFile'
                             src={require('../../../assets/img/download.svg')}></img>
                         : null}
-                    {props.file.url != 'new' &&
+                    {props.file.src != 'new' &&
                         <img onClick={(e) => deleteFile(e)} id={props.file.name} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
                             src={require('../../../assets/img/Group 21592.svg')}></img>
                     }

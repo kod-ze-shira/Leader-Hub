@@ -206,7 +206,7 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 
 export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
-        
+
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
         // console.log('EDIT_TASK')
@@ -292,7 +292,7 @@ export const removeFileInTaskAndServerFiles = ({ dispatch, getState }) => next =
                 checkPermission(result).then((ifOk) => {
                     console.log(result);
                     if (result.massege == 'task updated successfully')
-                        dispatch(actions.removeFile([action.payload.url]))
+                        dispatch(actions.removeFile([action.payload.src]))
                 })
 
             })
@@ -599,7 +599,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
             },
             dataType: 'json',
             success: function (data) {
-                
+
                 console.log("success")
                 console.log(data);
                 dispatch(actions.setStartHour(data.currentHour))

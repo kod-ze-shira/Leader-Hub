@@ -7,9 +7,9 @@ module.exports = {
     API_URL_BASE_CLIENT: 'https://hub.leader.codes',
     API_URL_BASE_SERVER: 'https://hub.leader.codes/api',
     API_URL_SOCKET: 'https://socket.hub.leader.codes',
-    API_URL_FILES: 'https://files.codes',
+    API_URL_FILES: 'https://dev.files.codes',
     API_URL_TIME: 'https://time.leader.codes/api',
     API_URL_MASTER: 'https://api.leader.codes',
     DOMAIN: "hub.leader.codes",
-    JWT:"jwt"
+    JWT: "jwt"
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './ViewTaskByCradTryS.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl, Table } from 'react-bootstrap'

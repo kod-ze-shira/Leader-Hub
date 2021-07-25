@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import ReactDOM from "react-dom";
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/actions/action'
 import "./style.css";

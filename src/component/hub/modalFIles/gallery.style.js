@@ -43,11 +43,12 @@ export const GaleryGridStyle = createGlobalStyle`
     .ReactGridGallery_custom-overlay{
         pointer-events:auto!important
     }
-    .react-photo-gallery--gallery img{
-        cursor:${props => props.lightbox && 'pointer' || 'auto'} 
-    }
+   
     
 `
+// .react-photo-gallery--gallery img{
+//     cursor:${props => props.lightbox && 'pointer' || 'auto'} 
+// }
 
 export const WrapGridGallery = styled.div`
     display: block;
@@ -57,7 +58,8 @@ export const WrapGridGallery = styled.div`
 `
 const ArrowGalleryCarousel = css`
     // display:none;
-    color: ${(props) => props.color || 'gray'};
+    // color: ${(props) => props.color || 'gray'};
+    color:  'gray';
     font-size: 60px;
     font-weight: 900;
     @media(max - width: 600px) {

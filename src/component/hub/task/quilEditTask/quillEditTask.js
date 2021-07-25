@@ -100,29 +100,29 @@ class QuillEditTask extends Component {
     addFile = async (file) => {
 
 
-        let url
+        let src
         if (file)
-            url = file
+            src = file
         else
-            url = document.getElementById('inputImageInD').value;
+            src = document.getElementById('inputImageInD').value;
         // צריכה לבדוק פה אם הכתובת תקינה?
-        // this.props.setTaskByFiledFromTasks(url)
+        // this.props.setTaskByFiledFromTasks(src)
 
-        url = decodeURI(url)
+        src = decodeURI(src)
 
-        let isGood = this.checkURL(url)
+        let isGood = this.checkURL(src)
 
         if (isGood) {
             this.flug = true;
-            let file = await fetch(url)
+            let file = await fetch(src)
                 .then(r => r.blob())
                 .then(blobFile => new File([blobFile],
-                    url.match(/.*\/(.*)$/)[1],
+                    src.match(/.*\/(.*)$/)[1],
                     { type: "image/jpeg" }))
             console.log(file)
             this.props.setFileFromTask(file)
             file = [{
-                'url': 'new',
+                'src': 'new',
                 'name': file.name,
                 'file': file,
                 'size': file.size

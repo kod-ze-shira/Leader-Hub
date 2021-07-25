@@ -46,7 +46,7 @@ function UploadFile(props) {
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{
-                'url': 'new',
+                'src': 'new',
                 'name': fileInputRef.current.files[0].name,
                 'file': fileInputRef.current.files[0],
                 'size': fileInputRef.current.files[0].size

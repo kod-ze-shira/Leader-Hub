@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './ViewTaskByCrad.css'
 import CardsByProject from '../../Cards/cardsByProject/cardsByProject'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl, Table } from 'react-bootstrap'
@@ -245,7 +244,7 @@ function ViewTaskByCrad(props) {
         e.stopPropagation()
     }
 
- 
+
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">

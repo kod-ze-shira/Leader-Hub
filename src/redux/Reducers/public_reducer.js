@@ -51,13 +51,13 @@ const publicData = {
         let myFiles = Object.values(action.payload)
         for (let index = 0; index < myFiles.length; index++) {
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files
-                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
+                .push({ 'name': myFiles[index].name, 'src': myFiles[index].src, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
     },
     deleteFilesInTask(state, action) {
         for (let indexUrl = 0; indexUrl < action.payload.length; indexUrl++)
             for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
-                if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload[indexUrl])
+                if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].src == action.payload[indexUrl])
                     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
             }
 
@@ -73,7 +73,7 @@ const publicData = {
             if (!state.tasks[indexTask].files)
                 state.tasks[indexTask].files = []
             state.tasks[indexTask].files
-                .push({ 'name': myFiles[index].name, 'url': myFiles[index].url, '_id': myFiles[index]._id, 'size': myFiles[index].size })
+                .push({ 'name': myFiles[index].name, 'src': myFiles[index].src, '_id': myFiles[index]._id, 'size': myFiles[index].size })
         }
 
     },
@@ -101,17 +101,17 @@ const publicData = {
         // dispatch(actions.setIdFiles(data.result.files));
         action.payload.map((file) => {
             state.arrFilesOfTask.map((myFile, index) => {
-                if (myFile.url == 'new' && file.name == file.name) {
+                if (myFile.src == 'new' && file.name == file.name) {
                     state.arrFilesOfTask[index]._id = file._id
-                    state.arrFilesOfTask[index].url = file.url
+                    state.arrFilesOfTask[index].src = file.src
                 }
             })
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.map((myFile, index) => {
-                if (myFile.url == file.url) {
+                if (myFile.src == file.src) {
                     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index]._id = file._id
                     // state.task._id = file._id
-                    state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url = file.url
-                    // state.task.url = file.url
+                    state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].src = file.src
+                    // state.task.src = file.src
                 }
             })
         })
@@ -119,7 +119,7 @@ const publicData = {
     },
     setFileFromTask(state, action) {
         state.arrFilesOfTask.push({
-            'url': 'new',
+            'src': 'new',
             'name': action.payload.name,
             'file': action.payload,
             'size': action.payload.size
@@ -410,30 +410,30 @@ const publicData = {
     },
     removeFileInRedux(state, action) {
 
-        if (action.payload.url != 'new') {
-            let fileToDelete = state.arrFilesOfTask.find((file) => file.url == action.payload.url)
+        if (action.payload.src != 'new') {
+            let fileToDelete = state.arrFilesOfTask.find((file) => file.src == action.payload.src)
             if (state.arrDeleteFilesOfTask.length) {
                 state.arrDeleteFilesOfTask.push(fileToDelete)
             }
             else {
                 state.arrDeleteFilesOfTask[0] = fileToDelete
             }
-            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
+            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.src != action.payload.src)
             if (state.cards && state.cards[state.indexCurrentCard] && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
                 for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
-                    if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
+                    if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].src == action.payload.src) {
                         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
                         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files =
                         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
                     }
                 }
 
-                // .filter((file) => file.url != action.payload.url)
+                // .filter((file) => file.src != action.payload.src)
             }
 
         }
         else {
-            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
+            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.src != 'new')
         }
 
     },

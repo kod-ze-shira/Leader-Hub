@@ -86,7 +86,7 @@ function TaskNotBelongDetails(props) {
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
-                newFiles = props.arrFilesOfTask.filter((file) => file.url === 'new')
+                newFiles = props.arrFilesOfTask.filter((file) => file.src === 'new')
             if (newFiles.length) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task, 'type': 'taskNotBelong' })
@@ -97,8 +97,8 @@ function TaskNotBelongDetails(props) {
 
                     let arrayUrl = []
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
-                        arrayUrl.push(props.arrDeleteFilesOfTask[index].url)
-                        // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
+                        arrayUrl.push(props.arrDeleteFilesOfTask[index].src)
+                        // props.task.files.filter((myFile) => myFile.src == props.arrDeleteFilesOfTask[index].src)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
                             if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
                                 props.task.files.splice(index2, 1);
@@ -106,7 +106,7 @@ function TaskNotBelongDetails(props) {
                             }
                             // first element removed
                         }
-                        // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
+                        // props.task.files.filter((myFile) => myFile.src != props.arrDeleteFilesOfTask[index].src)
 
                     }
 

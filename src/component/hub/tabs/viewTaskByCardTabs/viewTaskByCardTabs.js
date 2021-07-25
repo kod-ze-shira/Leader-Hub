@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux';
 import { actions } from '../../../../redux/actions/action'
 import imageCompression from "browser-image-compression";
@@ -180,29 +179,29 @@ function ViewTaskByCradTabs(props) {
     const addFile = async (file) => {
 
 
-        let url
+        let src
         if (file)
-            url = file
+            src = file
         // else
-        //     url = document.getElementById('inputImageInD').value;
+        //     src = document.getElementById('inputImageInD').value;
         // צריכה לבדוק פה אם הכתובת תקינה?
-        // this.props.setTaskByFiledFromTasks(url)
+        // this.props.setTaskByFiledFromTasks(src)
 
-        url = decodeURI(url)
+        src = decodeURI(src)
 
-        let isGood = checkURL(url)
+        let isGood = checkURL(src)
 
         if (isGood) {
             // flug = true;
-            let file = await fetch(url)
+            let file = await fetch(src)
                 .then(r => r.blob())
                 .then(blobFile => new File([blobFile],
-                    url.match(/.*\/(.*)$/)[1],
+                    src.match(/.*\/(.*)$/)[1],
                     { type: "image/jpeg" }))
             console.log(file)
             props.setFileFromTask(file)
             file = [{
-                'url': 'new',
+                'src': 'new',
                 'name': file.name,
                 'file': file,
                 'size': file.size
@@ -303,8 +302,8 @@ function ViewTaskByCradTabs(props) {
 
     const myFiles = props.task.files && props.task.files.length ?
         props.task.files.map((myFile) => {
-            return myFile.url.endsWith(".pdf") || myFile.url.endsWith(".docx") ?
-                null : <img className='imgInTask' src={myFile.url}></img>
+            return myFile.src.endsWith(".pdf") || myFile.src.endsWith(".docx") ?
+                null : <img className='imgInTask' src={myFile.src}></img>
 
         })
         : null
@@ -314,7 +313,7 @@ function ViewTaskByCradTabs(props) {
         if (fileInputRef.current.files) {
             props.setFileFromTask(fileInputRef.current.files[0])
             let file = [{
-                'url': 'new',
+                'src': 'new',
                 'name': fileInputRef.current.files[0].name,
                 'file': fileInputRef.current.files[0],
                 'size': fileInputRef.current.files[0].size

@@ -45,10 +45,10 @@ function ViewFilesOfProject(props) {
         let file
         let zip = new JSZip();
         for (var i = 0; i < foldersForDownload[0].files.length; i++) {
-            file = await fetch(foldersForDownload[0].files[i].url)
+            file = await fetch(foldersForDownload[0].files[i].src)
                 .then(r => r.blob())
                 .then(blobFile => new File([blobFile],
-                    foldersForDownload[0].files[i].url.match(/.*\/(.*)$/)[1],
+                    foldersForDownload[0].files[i].src.match(/.*\/(.*)$/)[1],
                     { type: "image/jpeg" }))
             zip.file(i + file.name, file);
         }
