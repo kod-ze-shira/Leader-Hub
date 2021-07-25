@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip';
 import './shareProject.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import $ from 'jquery'
+import ContactList from '../../contact/contactList'
 import arrow_select from '../../../../assets/img/arrow_select.svg'
 function ShareProject(props) {
     const [shareDetails, setShareDetails] = useState([])//all contacts details
@@ -136,9 +137,11 @@ function ShareProject(props) {
                     </div>
                     <div className="row">
                         <div className="col-md-9">
-                            <DynamicSelect
+                            {/* <DynamicSelect
                                 setContactEmail={setStateMailToContactMail}
-                                options={'contacts'} />
+                                options={'contacts'} /> */}
+                                {/* <ContactList  ></ContactList>  */}
+                            
                         </div>
                         <div className="col-3 pl-0">
                             <select className="form-control select_permission" onChange={(e) => setStatePerrmissionContact(e)}>

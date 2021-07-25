@@ -44,11 +44,8 @@ function ProjectsByWorkspace(props) {
     if (props.history.location.pathname.includes('allProjects')) {
         workspaceName = 'All Projects'
     }
-    else {
-        workspaceName = props.workspaces[props.indexOfWorkspace] ? props.workspaces[props.indexOfWorkspace].name : null
-        //after use socet change to:
-        // workspaceName = props.workspaces[props.indexOfWorkspace].name
-
+    else{
+        workspaceName=props.workspaces[props.indexOfWorkspace]&&props.workspaces[props.indexOfWorkspace].name+' projects'
     }
     function openEditOrShareProject(from) {
         setEditOrShareProject(from)
@@ -115,14 +112,14 @@ function ProjectsByWorkspace(props) {
             <div className='headerProjects'>
                 <div className='contentHeaderProjects'>
                     <div className='betweenHeaderProjects'>
-                        <div className="titleProjects pt-2 ml-">Leader Project</div>
+                        <div className="titleProjects pt-2 ml-2">{workspaceName}</div>
                     </div>
                 </div>
             </div>
             <Table responsive className='tableProject' >
                 <thead className="mx-3">
                     <tr className='projectsTitle'>
-                        <th className='nameProject'>
+                        <th className='nameProjectInList'>
                             <span className='name2ProjectInList'>{workspaceName}</span>
                         </th>
                         <th className='widthCellInProject'><span>Due Date</span></th>
