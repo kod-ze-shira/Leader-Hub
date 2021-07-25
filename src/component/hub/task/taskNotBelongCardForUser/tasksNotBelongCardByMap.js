@@ -10,7 +10,7 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
-import { blue } from '@material-ui/core/colors';
+// import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import Background from '../../../../assets/img/down-arrow.svg';
 import ReactTooltip from 'react-tooltip';
