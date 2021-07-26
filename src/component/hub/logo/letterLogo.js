@@ -9,25 +9,25 @@ function LetterLogo(props) {
     let { idWorkspace, idProject } = useParams();
     useEffect(() => {
         if (props.workspaces) {
-            if (window.location.href.indexOf('workspace') != -1) {
+            if (window.location.href.indexOf('workspace') !== -1) {
                 // props.getProjectsByWorkspaceId(idWorkspace)
-                let w = props.workspaces.find(w => w._id == idWorkspace)
+                let w = props.workspaces.find(w => w._id === idWorkspace)
                 props.setWorkspace(w)
-                w = props.workspaces.findIndex(w => w._id == idWorkspace)
+                w = props.workspaces.findIndex(w => w._id === idWorkspace)
                 props.setIndexWorkspace(w)
 
             }
             else
-                if (window.location.href.indexOf('allProjects') != -1) {
+                if (window.location.href.indexOf('allProjects') !== -1) {
                     props.setIndexWorkspace(0)
                     props.setWorkspace(props.workspaces[0])
                 }
                 else
-                    if (window.location.href.indexOf('projectPlatform') != -1) {
+                    if (window.location.href.indexOf('projectPlatform') !== -1) {
 
                         for (let index = 0; index < props.workspaces.length; index++) {
                             for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                if (idProject == props.workspaces[index].projects[j]._id) {
+                                if (idProject === props.workspaces[index].projects[j]._id) {
                                     props.setIndexWorkspace(index)
 
                                     props.setWorkspace(props.workspaces[index])

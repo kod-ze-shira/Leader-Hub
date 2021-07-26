@@ -27,7 +27,7 @@ function ViewTaskByCradTryS(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null
+        let hasLike = props.task.likes.length ? props.task.likes.find(user => user === props.userId) : null
         if (hasLike)
             setUserHasLike(true)
         $(`#${props.task._id}assing-to`).css("display", "none")
@@ -62,7 +62,7 @@ function ViewTaskByCradTryS(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
-        if (input.target.name == "complete") {
+        if (input.target.name === "complete") {
             doneStatus = !doneStatus
             value = doneStatus
             editCompleteTask()
@@ -124,7 +124,7 @@ function ViewTaskByCradTryS(props) {
     function addChalalit() {
 
 
-        if (props.task.complete == false)
+        if (props.task.complete === false)
             props.showRocketShip(true)
     }
 
@@ -266,7 +266,7 @@ function ViewTaskByCradTryS(props) {
                                 ></FontAwesomeIcon> */}
                                 <div className="col-4 d-flex pt-0 pb-2 pl-0">
                                     <img src={require('../../../../assets/img/dnd-icon.svg')}
-                                        className="dnd-icon dnd-icon-1 mt-1" id={props.task._id}></img>
+                                        className="dnd-icon mt-1" id={props.task._id}></img>
                                     <label
                                         title="Complete Task"
                                         className="check-task ml-4 ">
@@ -276,12 +276,12 @@ function ViewTaskByCradTryS(props) {
                                             value={props.task.complete}
                                             onChange={(e) => changeFiledInTask(e)}
                                         />
-                                        <span className="checkmark checkmark-place ml-1" onClick={() => addChalalit()}></span>
+                                        <span className="checkmark checkmark-place ml-2 " onClick={() => addChalalit()}></span>
                                     </label>
                                     <input
                                         name="name" id="name" title={props.task.name}
                                         className={props.task.complete ?
-                                            "disabled show-task mt-1 ml-2 " : "show-task mt-1 ml-2 "}
+                                            "disabled show-task mt-1 ml-3 pl-2 " : "show-task mt-1 ml-3 "}
                                         value={props.task.name}
                                         onChange={(e) => changeFiledInTask(e)}
                                         onBlur={(e) => editTask()}
@@ -292,9 +292,7 @@ function ViewTaskByCradTryS(props) {
                                         }}
                                     >
                                     </input>
-
                                     <div onClick={(e) => updateLike(e)} className="p-2 ml-auto">
-
                                         <p className="likes-num mr-1">{props.task.likes.length > 0 ? props.task.likes.length : null}</p>
                                         <img
                                             onClick={updateLike}

@@ -53,12 +53,12 @@ function UploadFile(props) {
             }]
             file = await compressedFile(file)
             let task = {}, type
-            if (props.taskId == '') {
+            if (props.taskId === '') {
                 task = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]
                 type = 'task'
             }
             else {
-                task = props.tasks.filter((task) => task._id == props.taskId)
+                task = props.tasks.filter((task) => task._id === props.taskId)
                 type = 'taskNotBelong'
 
             }

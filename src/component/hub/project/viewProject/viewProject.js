@@ -32,7 +32,7 @@ function ViewProject(props) {
     }
 
     function editProject(project, event) {
-        let index = props.workspaces.findIndex(w => w.projects.find(project => project._id == props.myProject._id))
+        let index = props.workspaces.findIndex(w => w.projects.find(project => project._id === props.myProject._id))
         props.saveIndexOfWorkspaceInRedux(index)
         props.setCurrentIndexProject(props.indexProject)
         props.editOrShareProject('editProject')
@@ -53,7 +53,7 @@ function ViewProject(props) {
     if (props.myProject.countTasks) {
         complited = 100 / props.myProject.countTasks;
         complited = complited * props.myProject.countReadyTasks
-        if (complited % 1 != 0)
+        if (complited % 1 !== 0)
             complited = complited.toFixed(2);
         complited = Math.round(complited);
 
@@ -69,7 +69,7 @@ function ViewProject(props) {
     const openShareProject = (event) => {
         for (let index = 0; index < props.workspaces.length; index++) {
             for (let index2 = 0; index2 < props.workspaces[index].projects.length; index2++) {
-                if (props.workspaces[index].projects[index2]._id == props.myProject._id) {
+                if (props.workspaces[index].projects[index2]._id === props.myProject._id) {
                     props.setCurrentIndexProject(index2)
                     props.saveIndexOfWorkspaceInRedux(index)
                 }

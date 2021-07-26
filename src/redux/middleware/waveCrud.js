@@ -29,7 +29,7 @@ export const createSystemWave = ({ dispatch, getState }) => next => action => {
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status == "401") {
+        if (result.status === "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
                 window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?

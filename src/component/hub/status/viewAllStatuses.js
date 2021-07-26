@@ -58,7 +58,7 @@ function ViewAllStatuses(props) {
         <>
             <div className={props.hub ? "view-list-status-from-platform" : null}
                 // , "height": props.hub ? height : 200
-                style={{ "width": props.hub ? width : 300,"left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
+                style={{ "width": props.hub ? width : 300, "left": props.hub ? left : 60, "top": props.hub ? top : 410 }}>
 
                 <div className={openPopUp || openPopUpToAdd ? "menu__ mb-4" : ""}>
                     <div className="status-list">

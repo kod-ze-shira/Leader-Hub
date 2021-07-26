@@ -7,17 +7,14 @@ import ShareOneMember from '../share/shareOneMember/shareOneMember'
 import ReactTooltip from 'react-tooltip';
 import './shareProject.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import $ from 'jquery'
 import ContactList from '../../contact/contactList'
 import arrow_select from '../../../../assets/img/arrow_select.svg'
 function ShareProject(props) {
     const [shareDetails, setShareDetails] = useState([])//all contacts details
     const [membersTeamEmails, setMembersTeamEmails] = useState([])//team members
     const [teams, setTeams] = useState([])
-    const [teamId, setTeamId] = useState(0)
     const [permissionContact, setPermissionContact] = useState('viewer')
     const [permissionTeam, setPermissionTeam] = useState('viewer')
-    const [clickCreateTeam, setClickCreateTeam] = useState(false)
     const [showTeams, setShowTeams] = useState(false)
     //onselect contact his email and perrmisin add shareDetails list
     const setStateMailToContactMail = (emailMember) => {
@@ -64,7 +61,7 @@ function ShareProject(props) {
     const changePermissionContactAfterRender = (permission, shareDetailWithNewPermission) => {
         // let permission = event.target.options[event.target.selectedIndex].label
         shareDetails.find(detail => {
-            if (detail.member.email == shareDetailWithNewPermission.member.email)
+            if (detail.member.email === shareDetailWithNewPermission.member.email)
                 detail.permission = permission
         })
     }
@@ -73,9 +70,9 @@ function ShareProject(props) {
         // let permission = event.target.options[event.target.selectedIndex].label
 
         teams.forEach(team => {
-            if (team.teamId == teamId)
+            if (team.teamId === teamId)
                 team.members.find(member => {
-                    if (member.member.email == shareDetailWithNewPermission.member.email)
+                    if (member.member.email === shareDetailWithNewPermission.member.email)
                         member.permission = permission
                 })
         });
@@ -137,11 +134,11 @@ function ShareProject(props) {
                     </div>
                     <div className="row">
                         <div className="col-md-9">
-                            {/* <DynamicSelect
+                            <DynamicSelect
                                 setContactEmail={setStateMailToContactMail}
-                                options={'contacts'} /> */}
-                                {/* <ContactList  ></ContactList>  */}
-                            
+                                options={'contacts'} />
+                            {/* <ContactList  ></ContactList>  */}
+
                         </div>
                         <div className="col-3 pl-0">
                             <select className="form-control select_permission" onChange={(e) => setStatePerrmissionContact(e)}>

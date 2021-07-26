@@ -11,10 +11,10 @@ function redirectToLogin(routes) {
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     // חילוץ jwt מהקוקי
     let jwtFromCookie = ''
-    if (window.location.hostname == "localhost") {
+    if (window.location.hostname === "localhost") {
         jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko'
     }
-    
+
     else {
         if (document.cookie) {
             jwtFromCookie = document.cookie.includes('jwt') ?
@@ -35,7 +35,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     else
         userName = rest.computedMatch.params.userName;
     useEffect(() => {
-        const isLocal = window.location.hostname == "localhost"
+        const isLocal = window.location.hostname === "localhost"
         const url = `${keys.API_URL_BASE_SERVER}/${userName}/isPermission?isLocal=${isLocal}`;
         const isPermission = async () => {
             let response = await fetch(url, {
@@ -46,7 +46,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                     'Content-Type': 'application/json'
                 },
             })
-            if (response.status == 401) {
+            if (response.status === 401) {
                 routes = "hub"
                 setIsLoading(false)
                 setIsLoggedIn(true)

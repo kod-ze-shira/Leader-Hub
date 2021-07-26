@@ -21,7 +21,7 @@ function File(props) {
     // }
     useEffect(() => {
 
-        if (props.file.url == 'new' && props.file) {
+        if (props.file.url === 'new' && props.file) {
             setFile(URL.createObjectURL(props.file.file))
             setTimeout(() => {
                 setProgressFile(30)
@@ -69,7 +69,7 @@ function File(props) {
                     'col-4  imgFileInTask ' : 'col-4  imgFileInTask pr-0'}
                 // {props.file.url ? 'mt-5' : null}
                 >
-                    {props.file.url != 'new' ?
+                    {props.file.url !== 'new' ?
                         <a href={props.file.url} target="_blank">
                             {props.file.name.endsWith(".pdf") ?
                                 <FontAwesomeIcon className='fontAwesomeIconFile pdfFile'
@@ -97,7 +97,7 @@ function File(props) {
                 </div>
                 <div className='col-8  nameFileAndAction'>
                     <span className='nameFileInTask'>
-                        {props.file.url != 'new' ?
+                        {props.file.url !== 'new' ?
                             <a href={props.file.url} target="_blank"
                                 // <a href='#'
                                 // onClick={() => showFiles(props.file.url)}
@@ -109,7 +109,7 @@ function File(props) {
                     </span>
                     {/* <div> */}
                     <span className='sizeFile' >{(props.file.size / 1024).toFixed(2)}Kb</span>
-                    {(progressFile != 100 && props.file.url == 'new') ?
+                    {(progressFile !== 100 && props.file.url === 'new') ?
                         <div className="progressFile"
                             // ref={refToProject}
                             style={{ backgroundColor: '#e9ecef' }}
@@ -127,14 +127,14 @@ function File(props) {
                         : null
                     }
 
-                    {props.file.url != 'new' ?
+                    {props.file.url !== 'new' ?
                         <img onClick={(e) => {
                             downloadFile(e)
                         }} style={{ float: 'right' }}
                             className='downloadFileInTask mt-4 imgActionFile'
                             src={require('../../../assets/img/download.svg')}></img>
                         : null}
-                    {props.file.url != 'new' &&
+                    {props.file.url !== 'new' &&
                         <img onClick={(e) => deleteFile(e)} id={props.file.name} className='mr-1 ml-1 mt-4 imgActionFile' style={{ float: 'right' }}
                             src={require('../../../assets/img/Group 21592.svg')}></img>
                     }

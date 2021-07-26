@@ -62,7 +62,7 @@ class QuillEditTask extends Component {
     }
 
     checkURL = (url) => {
-        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png)$/) != null);
+        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png)$/) !== null);
     }
     compressedFile = async (myFiles) => {
 

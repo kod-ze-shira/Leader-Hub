@@ -17,25 +17,25 @@ function SelectWorkspace(props) {
     let { idWorkspace, idProject } = useParams();
     useEffect(() => {
         if (props.workspaces) {
-            if (window.location.href.indexOf('workspace') != -1) {
+            if (window.location.href.indexOf('workspace') !== -1) {
                 // props.getProjectsByWorkspaceId(idWorkspace)
-                let w = props.workspaces.find(w => w._id == idWorkspace)
+                let w = props.workspaces.find(w => w._id === idWorkspace)
                 props.setWorkspace(w)
-                w = props.workspaces.findIndex(w => w._id == idWorkspace)
+                w = props.workspaces.findIndex(w => w._id === idWorkspace)
                 props.saveIndexOfWorkspaceInRedux(w)
 
             }
             else
-                if (window.location.href.indexOf('allProjects') != -1) {
+                if (window.location.href.indexOf('allProjects') !== -1) {
                     props.saveIndexOfWorkspaceInRedux(0)
                     props.setWorkspace(props.workspaces[0])
                 }
                 else
-                    if (window.location.href.indexOf('projectPlatform') != -1) {
+                    if (window.location.href.indexOf('projectPlatform') !== -1) {
 
                         for (let index = 0; index < props.workspaces.length; index++) {
                             for (let j = 0; j < props.workspaces[index].projects.length; j++) {
-                                if (idProject == props.workspaces[index].projects[j]._id) {
+                                if (idProject === props.workspaces[index].projects[j]._id) {
                                     props.saveIndexOfWorkspaceInRedux(index)
 
                                     props.setWorkspace(props.workspaces[index])
@@ -82,21 +82,21 @@ function SelectWorkspace(props) {
             workspaceIndex: index
         }
     ))
-    const placeholderWorkspace =props.workspaces[props.indexOfWorkspace] ? 
-    <div className="d-flex flex-row" >
-                <div>
-                    <div className="  logo-w-little header-w-select "
-                        style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', textAlign: 'center' }}
-                    >
-                        {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
-                    </div>
+    const placeholderWorkspace = props.workspaces[props.indexOfWorkspace] ?
+        <div className="d-flex flex-row" >
+            <div>
+                <div className="  logo-w-little header-w-select "
+                    style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', textAlign: 'center' }}
+                >
+                    {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
                 </div>
-                <div className="select-not-belong header-w-name">
-                    { props.workspaces[props.indexOfWorkspace].name }
-                </div>
-            </div >
-   
-    : null
+            </div>
+            <div className="select-not-belong header-w-name">
+                {props.workspaces[props.indexOfWorkspace].name}
+            </div>
+        </div >
+
+        : null
     // const viewWorkspacesList = props.workspaces.map((workspace, index) => (
     //     {
     //         value: workspace._id,

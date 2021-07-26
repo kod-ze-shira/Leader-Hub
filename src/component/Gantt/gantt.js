@@ -3,7 +3,7 @@ import { gantt } from 'dhtmlx-gantt';
 import './gantt.css';
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css';
 import '../Gantt/gantt.css';
-import { LinearProgress } from '@material-ui/core';
+// import { LinearProgress } from '@material-ui/core';
 import { actions } from '../../redux/actions/action'
 import store from '../../redux/Store/Store'
 import $ from 'jquery'
@@ -44,7 +44,7 @@ export default class Gantt extends Component {
                                 ) {
                                     return "today-scale"
                                 }
-                                if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat")
+                                if (dateToStr(date) === "Sun" || dateToStr(date) === "Sat")
                                     return "last-weekend";
                                 return "";
                             }

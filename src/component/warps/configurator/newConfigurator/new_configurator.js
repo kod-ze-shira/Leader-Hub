@@ -6,30 +6,30 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './new_configurator.css';
 import NumberOfNotShowShareProjects from '../numberOfNotShowShareProjects/numberOfNotShowShareProjects'
+
 function NewConfigorator(props) {
     const [closeOrOpenConfigurator, setCloseOrOpenConfigurator] = useState(true)
-    const [viewDetails, setViewDetails] = useState(false)
 
     // checkTheUrl()
     // function checkTheUrl() {
     $(document).ready(function () {
-        if (window.location.href.indexOf('workspace') != -1) {
+        if (window.location.href.indexOf('workspace') !== -1) {
             $("li").removeClass("li-back")
             $(`img`).removeClass("li-back")
         }
         else
-            if (window.location.href.indexOf('allProjects') != -1) {
+            if (window.location.href.indexOf('allProjects') !== -1) {
                 $("li").removeClass("li-back")
                 $(`#allProjects`).addClass("li-back")
                 $(`#allProjects img`).removeClass("li-back")
 
             } else {
-                if (window.location.href.indexOf('myTasks') != -1) {
+                if (window.location.href.indexOf('myTasks') !== -1) {
                     $("li").removeClass("li-back")
                     $(`#myTask`).addClass("li-back")
                     $(`#myTask img`).removeClass("li-back")
                 } else {
-                    if (window.location.href.indexOf('milestones') != -1) {
+                    if (window.location.href.indexOf('milestones') !== -1) {
                         $("li").removeClass("li-back")
                         $(`#milstones`).addClass("li-back")
                         $(`#milstones img`).removeClass("li-back")
@@ -54,7 +54,7 @@ function NewConfigorator(props) {
     }
     function goToAllProjects(e) {
         changeBackground(e)
-        if (props.sharedProjects.filter(shareProject => shareProject.ifShow == false).length > 0)
+        if (props.sharedProjects.filter(shareProject => shareProject.ifShow === false).length > 0)
             props.setIfShowShareProjectsToTrue()
         props.history.push("/" + props.user + "/hub/allProjects")
     }

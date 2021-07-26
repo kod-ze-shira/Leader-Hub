@@ -67,7 +67,7 @@ class QuillEditTaskNotBelong extends Component {
     }
 
     checkURL = (url) => {
-        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png)$/) != null);
+        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png)$/) !== null);
     }
     compressedFile = async (myFiles) => {
 
@@ -126,7 +126,7 @@ class QuillEditTaskNotBelong extends Component {
             }]
             file = await this.compressedFile(file)
             let task = {}
-            task = this.props.tasks.filter((task) => task._id == this.props.taskId)
+            task = this.props.tasks.filter((task) => task._id === this.props.taskId)
             this.props.uploadFiles({ 'files': file, 'task': task, type: 'taskNotBelong' })
         }
     }
@@ -189,8 +189,8 @@ class QuillEditTaskNotBelong extends Component {
                     id="textQuil"
                     modules={this.modules}
                     formats={this.formats}
-                    value={this.props.tasks.filter((task) => task._id == this.props.taskId).description ?
-                        this.props.tasks.filter((task) => task._id == this.props.taskId).description
+                    value={this.props.tasks.filter((task) => task._id === this.props.taskId).description ?
+                        this.props.tasks.filter((task) => task._id === this.props.taskId).description
                         : null}
                     onChange={(e) => this.changeFiledInEditTask(e)}
                 >

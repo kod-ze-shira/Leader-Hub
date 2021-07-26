@@ -15,7 +15,7 @@ function ViewCardsTabs(props) {
 
     useEffect(() => {
         if (props.cards[props.indexCurrentCard])
-            if (props.openInputTask && props.cards[props.indexCurrentCard]._id == props.cardFromMap._id) {
+            if (props.openInputTask && props.cards[props.indexCurrentCard]._id === props.cardFromMap._id) {
                 document.getElementById("add-new-card").focus();
                 setAddTaskInInput(true)
                 props.setCard(props.cardFromMap)
@@ -77,7 +77,7 @@ function ViewCardsTabs(props) {
     const handleClick = (event) => {
         textInput.current.focus()
 
-        if (event == "rename") {
+        if (event === "rename") {
             console.log(textInput.current)
             // textInput.current.focus()
         }
@@ -90,9 +90,8 @@ function ViewCardsTabs(props) {
         handleClick(nameAction)
         setAnchorEl(null)
         // textInput.current.focus()
-        if (nameAction == "delete") {
-            $(`#${props.cards[props.indexCard]._id}`).css("display", "none")
-
+        if (nameAction === "delete") {
+            // $(`#${props.cards[props.indexCard]._id}`).css("display", "none")
             props.showToast({ 'type': 'Card', 'object': props.cardFromMap })
         }
     }
@@ -108,14 +107,14 @@ function ViewCardsTabs(props) {
         });
         $(".autosize").keydown(function (e) {
             // Enter was pressed without shift key
-            if (e.key == 'Enter' && !e.shiftKey) {
+            if (e.key === 'Enter' && !e.shiftKey) {
                 resize($(this));
 
                 // prevent default behavior
                 e.preventDefault();
 
             }
-            if (e.key == 'Enter') {
+            if (e.key === 'Enter') {
                 newTask()
 
             }
@@ -128,7 +127,7 @@ function ViewCardsTabs(props) {
     }
 
     const openViewDetails = (task) => {
-        if (task != false) {
+        if (task !== false) {
             props.openViewDetails(task)
         }
     };
@@ -143,15 +142,16 @@ function ViewCardsTabs(props) {
 
     $('span').bind('click',
         function () {
-            $(this).attr('contentEditable', true);
+            $(this).attr('contenteditable', true);
         });
 
     $('span').bind('blur',
         function () {
-            $(this).attr('contentEditable', false);
+            $(this).attr('contenteditable', false);
         });
     return (
         <>
+
             <div className="col-md-3 col-sm-10 px-2 mt-4 pb-0" id={props.cards[props.indexCard]._id}>
                 <Draggable draggableId={props.cardFromMap._id} index={props.index}>
                     {provided => (
@@ -208,7 +208,7 @@ function ViewCardsTabs(props) {
                                                             indexTask={index}
                                                             viewToastMassege={props.viewToastMassege}
                                                             viewContactList={props.viewContactList}
-                                                            openNewInputTask={(cardId) => props.cardFromMap._id == cardId ? setAddTaskInInput(true) : null} />
+                                                            openNewInputTask={(cardId) => props.cardFromMap._id === cardId ? setAddTaskInInput(true) : null} />
                                                     )) : null}
                                                     {
                                                         addTaskInInput ?
@@ -243,7 +243,7 @@ function ViewCardsTabs(props) {
                         </div>
                     )}
                 </Draggable>
-            </div >
+            </div>
         </>
     )
 }
