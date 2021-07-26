@@ -40,7 +40,7 @@ function ViewContact(props) {
             else
                 member = { "email": email }
             props.assingToMany(member)
-            props.viewToastMassege({ show: true, massege: props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name + ' assign!!' })
+            // props.viewToastMassege({ show: true, massege: props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name + ' assign!!' })
 
         }
         props.closeContactList()
@@ -57,7 +57,7 @@ function ViewContact(props) {
     return (
         <>
             <div onClick={() => assingTaskToContact(props.contact.email)} className="option-contact row mb-2" >
-                {props.contact.thumbnail ? <img  referrerpolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
+                {props.contact.thumbnail ? <img  referrerPolicy="no-referrer" src={props.contact.thumbnail} className="thumbnail-contact ml-3" />
                     : <div className="logo-contact ml-3" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{props.contact.name ? props.contact.name[0] : null}</div>}
                 <p className="name-contact ">{props.contact.name} </p>   <p className="email-contact ">{props.contact.email} </p>
                 {/* <p className="remove-member" onClick={(e) => {e.stopPropagation(); removeMemberFromAssign(props.contact.email)}}>   x</p> */}

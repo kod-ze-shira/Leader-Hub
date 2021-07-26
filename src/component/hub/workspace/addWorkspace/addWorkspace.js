@@ -91,7 +91,7 @@ function AddWorkspace(props) {
                         <div className="close pr-3" onClick={() => props.closeViewDetails()} >x</div>
                     </div>
                     <div className="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input name="name" ref={nameworkspae} required
                             // onChange={handleChange}
                             autoFocus
@@ -103,7 +103,7 @@ function AddWorkspace(props) {
                     </div>
 
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <textarea className="form-control descriptionWorkspace"
                             id="description" rows="2" placeholder="Write a description about your workspace"
                             // onChange={handleChange} 
@@ -111,7 +111,7 @@ function AddWorkspace(props) {
                             contentEditable></textarea>
                     </div>
                     {/* <div className="form-group"> */}
-                    <label className="row ml-2" for="color">Logo Color</label>
+                    <label className="row ml-2" htmlFor="color">Logo Color</label>
                     <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />
 
                     {/* onChange={handleChange} /> */}
@@ -121,7 +121,7 @@ function AddWorkspace(props) {
                 <div className="row justify-content-end">
                     <button onClick={addNewWorkspace} className="save_canges_btn px-5" id='sevaNewWorkspace'>Save</button>
                 </div>
-            </div>
+            </div >
         </>
 
     )

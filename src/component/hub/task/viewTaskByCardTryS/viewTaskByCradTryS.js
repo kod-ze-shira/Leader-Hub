@@ -79,7 +79,7 @@ function ViewTaskByCradTryS(props) {
             value: priority,
             label:
                 <div className="prioprty-select">
-                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <img referrerPolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
         }
@@ -173,7 +173,7 @@ function ViewTaskByCradTryS(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastComplete({ show: true, massege: 'comlited task!!' })
+            props.viewToastComplete({ show: true, massege: 'Completed task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -327,22 +327,24 @@ function ViewTaskByCradTryS(props) {
                                 <label className=" border-left  col-1 " onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
-                                        {props.task.assingTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                            {props.task.assingTo ? <img referrerpolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
-                                                : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
-                                        </div> : null}
+                                        {props.task.assingTo ?
+                                            <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                                {props.task.assingTo ? <img referrerPolicy="no-referrer" src={props.task.assingTo ? props.task.assingTo.contact.thumbnail : null} className="thumbnail-contact ml-2" />
+                                                    : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
+                                            </div>
+                                            : null}
                                         {props.task.assignTo1 && props.task.assignTo1.length > 0 ?
                                             <div className="widthofContacts ">
                                                 {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                     if (index < 3)
-                                                        // return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
-                                                        return assingTo.contact ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+                                                        // return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+                                                        return assingTo.contact ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
 
                                                             : null
                                                 }) : null}
                                                 {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
                                             </div> : <img
-                                                className="ml-2 assing-to-icon"
+                                                className="ml-2"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                 src={require('../../../../assets/img/share-icon.png')}>
                                             </img>}
@@ -361,7 +363,7 @@ function ViewTaskByCradTryS(props) {
                                     {props.task.dueDate}
                                 </label>
                                 <label className="border-left px-2 col-1">{props.task.priority ?
-                                    <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                    <img referrerPolicy="no-referrer" src={props.task.priority.icon} />
                                     : <hr></hr>}
                                 </label>
                                 {/* <label className="view-details-btn col-1 border-left px-2" title="View Details">
@@ -383,6 +385,8 @@ function ViewTaskByCradTryS(props) {
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
                                             viewToastComplete={props.viewToastComplete}
+                                            viewToastMassege={props.viewToastMassege}
+
                                         > </ViewDetails>
                                     </div>
                                     : null}

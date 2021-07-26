@@ -29,6 +29,24 @@
     text-align: left;
     font: normal normal medium 16px/21px Roboto;
   }
+  .details .css-yk16xz-control:focus{
+    border:none !important;
+    outline: none !important;
+    border-color: white !important;
+  }
+  .details .css-yk16xz-control:hover{
+    border-color: white !important;
+
+  }
+.css-1f43avz-a11yText-A11yText{
+  border:none !important;
+  outline: none;
+}
+  /* .details  .css-yk16xz-control:hover{
+    border:none !important;
+    outline: none !important;
+  } */
+  
 
   /* input[type=date]::-webkit-calendar-picker-indicator {
     margin: 1px;

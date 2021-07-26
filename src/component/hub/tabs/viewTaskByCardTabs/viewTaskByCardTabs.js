@@ -43,6 +43,7 @@ function ViewTaskByCradTabs(props) {
         doneStatus = props.task.complete
     }, [props.task.complete])
 
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         event.stopPropagation();
@@ -157,7 +158,7 @@ function ViewTaskByCradTabs(props) {
         if (doneStatus) {
             props.setCountReadyTasks(true)
             props.showRocketShip(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else {
             props.setCountReadyTasks(false)
@@ -401,7 +402,7 @@ function ViewTaskByCradTabs(props) {
                                     </label>
                                     <div
                                         onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
-                                        className={props.task.complete ? "status-task-tabs-opacity px-2 ml-5" : "status-task-tabs px-2 ml-5"}
+                                        className={props.task.complete ? "status-task-tabs-opacity px-2 " : "status-task-tabs px-2 "}
                                         style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
                                     </div>
@@ -441,7 +442,7 @@ function ViewTaskByCradTabs(props) {
                                 </div> */}
                                 <textarea
                                     className={props.task.complete ? "autosize disabled form-control textarea-name-task col-12 mx-0" : "autosize textarea-name-task form-control col-12 mx-0"}
-                                    style={props.task.files && props.task.files.length ? null : { 'marginTop': '12px' }}
+                                    style={props.task.files && props.task.files.length ? null : { marginTop: '12px' }}
                                     value={props.task.name}
                                     onClick={(e) => e.stopPropagation()}
                                     name="name"
@@ -473,13 +474,13 @@ function ViewTaskByCradTabs(props) {
                                                 {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts mr-1">
                                                     {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                         if (index < 2)
-                                                            return assingTo.contact ?<> <p className="remove-member-from-assign" onClick={(e) =>  removeMemberFromAssign(assingTo.contact.email)}>x</p><img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" /></>
+                                                            return assingTo.contact ?<><img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" /></>
                                                                 : null
                                                     }) : null}
                                                     {props.task.assignTo1 ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
                                                 </div> : <img
                                                     // id={`${props.task._id}assing-to`}
-                                                    className="mx-1 assing-to-icon"
+                                                    className="mx-1 "
                                                     onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                     src={require('../../../../assets/img/share-icon.png')}>
                                                 </img>}
@@ -488,11 +489,11 @@ function ViewTaskByCradTabs(props) {
 
                                             <div>
                                                 {props.task.milestones ?
-                                                    <img className=" mx-1" referrerpolicy="no-referrer" src={require('../../../img/milstone.png')} />
+                                                    <img className=" mx-1" referrerPolicy="no-referrer" src={require('../../../img/milstone.png')} />
                                                     : null}
                                             </div>
-                                            <label for="fileFromTask">
-                                                <img className="mr-1 ml-1" referrerpolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
+                                            <label htmlFor="fileFromTask">
+                                                <img className="mr-1 ml-1" referrerPolicy="no-referrer" src={require('../../../img/attachment-alt.png')} />
                                             </label>
                                             <input
                                                 type={"file"}
@@ -512,7 +513,7 @@ function ViewTaskByCradTabs(props) {
 
                                         <div className="icons-task-tabs">
                                             <div className="px-1"> {props.task.priority ?
-                                                <img className="priority-img mr-1" referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                                <img className="priority-img mr-1" referrerPolicy="no-referrer" src={props.task.priority.icon} />
                                                 : null}
                                             </div>
                                             <div className="due-date-hover" title={title.title_due_date}>

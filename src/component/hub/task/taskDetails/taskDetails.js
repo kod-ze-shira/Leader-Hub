@@ -22,8 +22,10 @@ function TaskDetails(props) {
     let [taskBeforeChanges, setTaskBeforeChanges] = useState();
     const [flugFiles, setFlugFiles] = useState(false)
     const [showContactList, setShowContactList] = useState(false)
-    // const [completeTask, setCompleteTask] = useState(props.task.complete)
+    const [taskName, setTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
     const [milstone, setMilstone] = useState()
+    // const [taskComplete, setTaskComplete] = useState()
+
 
     useEffect(() => {
         setMilstone(props.cards[props.indexCurrentCard] && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
@@ -38,17 +40,18 @@ function TaskDetails(props) {
             if (props.contactsUser.length == 0)
                 props.getContactsForUser()
         }
+        setTaskName(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
     }, [props.cards, milstone])
 
-    // useEffect(() => {
-    //     // nameRequired.current.focus();
-    // }, [])
 
     let doneStatus = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete : null
     useEffect(() => {
+        doneStatus = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete : null
+    }, [ props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete])
 
-
+    useEffect(() => {
     }, [props.arrFilesOfTask])
+    
     const [openPopUp, setOpenPopUp] = useState(false)
     const [fileComponentArr, setFileComponentArr] = useState([])
     const [startTimerComp, setStartTimerComp] = useState(false)
@@ -132,7 +135,7 @@ function TaskDetails(props) {
             value: priority,
             label:
                 <div className="prioprty-select ">
-                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <img referrerPolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
         }
@@ -164,10 +167,10 @@ function TaskDetails(props) {
     let [dueDateTask, setDueDateTask] = useState(dueDate_)
     let [startDateTask, setStartDateTask] = useState(startDate_)
 
-
     const changeFiledInTask = (input) => {
         let editTaskInRedux
         let value = input.target.value
+        // setTaskName(input.target.value)
         if (input.target.name == "startDate") {
             value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
@@ -181,8 +184,8 @@ function TaskDetails(props) {
                 if (input.target.name == "milestones") {
                     setMilstone(!props.task.milestones)
                     value = !milstone
-                    if (!milstone)
-                        props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
+                    // if (!milstone)
+                        // props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
                 }
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
@@ -197,6 +200,8 @@ function TaskDetails(props) {
         props.setWidthScreen(width)
         props.setHeightScreen(height)
         setShowContactList(true)
+        // props.viewToastMassege({ show: true, massege: 'Completed task!!' })
+
     }
     function closeViewDetailsInTask() {
         props.setTaskFromTasks(taskBeforeChanges)
@@ -239,7 +244,19 @@ function TaskDetails(props) {
         $(this).find('.files-task-hover').hide();
         $(this).find('.files-task').show();
     });
+    $('.complete-details ').hover(function () {
+        $(this).find('.delete-task').hide();
+        $(this).find('.complete-task-hover').show();
+    }, function () {
+        $(this).find('.complete-task-hover').hide();
+        $(this).find('.delete-task').show();
+    });
     const completeTask = () => {
+
+            doneStatus = !doneStatus
+            console.log("doneStatus:",doneStatus);
+
+        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -248,32 +265,35 @@ function TaskDetails(props) {
         let completeTask = {
             "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id,
             "name": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name,
-            "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description,
+            "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description:null,
             "dueDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate,
             "startDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate,
             "complete": doneStatus,
             "endDate": today,
             "likes": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].likes,
-            "assingTo": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assingTo,
+            "assignTo1": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
             "files": props.task.files ? props.task.files : null,
-            "priority": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority
-
+            "priority": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority:null
         }
+       
         // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
         // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
-
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
             // setShowChalalit(true)
-
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else {
             props.setCountReadyTasks(false)
         }
+    }
+    const removeMemberFromAssign = (email) => {
+        // props.setCurrentIndexTask(currentIndexTask)
+        // props.setCurrentIndexCard(currentIndexCard)
+        props.removeMemberFromAssign(email)
     }
     autosize();
     function autosize() {
@@ -318,10 +338,8 @@ function TaskDetails(props) {
                                 <div className='row mt-4 justify-content-between headerDitails'>
                                     <h5 className=" title-view-details   pl-3">Task details</h5>
                                     {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
-
                                     <div className="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
                                 </div>
-
                                 <div className="row justify-content-between mx-1" >
                                     <label>Create
                                         {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
@@ -332,8 +350,8 @@ function TaskDetails(props) {
                                     <label for="name">Name</label>
                                     <textarea
                                         required ref={nameRequired}
-                                        className= "autosize textarea-name-task form-control"
-                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name}                                         onClick={(e) => e.stopPropagation()}
+                                        className="autosize textarea-name-task form-control"
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} onClick={(e) => e.stopPropagation()}
                                         name="name"
                                         onChange={(e) => changeFiledInTask(e)}
                                     />
@@ -342,6 +360,8 @@ function TaskDetails(props) {
                                         className="form-control"
                                         id="name"
                                         onChange={(e) => changeFiledInTask(e)}
+                                        // onChange={(e) => {setTaskName(e.target.value);changeFiledInTask(e)}}
+                                        // value={taskName}
                                         // onBlur={(e) => editTaskInServer()}
                                         // onMouseLeave={(e) => alert("ff")}
                                         value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} /> */}
@@ -351,7 +371,7 @@ function TaskDetails(props) {
                                 </div>
 
                                 <div className="form-group">
-                                    <label for="description">Description</label>
+                                    <label htmlFor="description">Description</label>
                                     <QuillEditTask />
 
 
@@ -367,7 +387,7 @@ function TaskDetails(props) {
                                 </div>
                                 <div className="row justify-content-between">
                                     <div className="form-group col-md-6 col-lg-5">
-                                        <label for="startDate">Start Date</label>
+                                        <label htmlFor="startDate">Start Date</label>
                                         <input
                                             className="form-control"
                                             name="startDate"
@@ -379,7 +399,7 @@ function TaskDetails(props) {
                                         />
                                     </div>
                                     <div className="form-group col-md-6 col-lg-5">
-                                        <label for="dueDate">Due Date</label>
+                                        <label htmlFor="dueDate">Due Date</label>
                                         <input
                                             className="form-control "
                                             name="dueDate"
@@ -395,7 +415,7 @@ function TaskDetails(props) {
                                 <div className="row justify-content-between">
                                     <div className="dropdown col-md-6 col-lg-5">
                                         {/* form-control */}
-                                        <label for="status">Status</label>
+                                        <label htmlFor="status">Status</label>
 
                                         <button onClick={(e) => openPopUpStatus(e)} className=" dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {props.cards[props.indexCurrentCard] && props.statuses && props.statuses.length > 0 ? <>
@@ -437,7 +457,7 @@ function TaskDetails(props) {
                                 </div>
                                 <div className="row justify-content-between ">
                                     <div className=" col-md-6 col-lg-5 mt-2 priority-task-details">
-                                        <label for="priority">Priority</label>
+                                        <label htmlFor="priority">Priority</label>
 
                                         <Select
                                             isSearchable={false}
@@ -446,10 +466,10 @@ function TaskDetails(props) {
                                             options={viewPriortyList}
                                             placeholder={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority ?
                                                 <div className="prioprty-select  dropdown-toggle">
-                                                    <img referrerpolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
+                                                    <img referrerPolicy="no-referrer" src={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.icon} />
                                                     <p >{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority.level}</p>
                                                 </div> : <div className="prioprty-select  dropdown-toggle">
-                                                    <img referrerpolicy="no-referrer" src={props.priorities[0].icon} />
+                                                    <img referrerPolicy="no-referrer" src={props.priorities[0].icon} />
                                                     <p >{props.priorities[0].level}</p>
                                                 </div>}
                                             onChange={(e) => changePriority(e)}
@@ -458,21 +478,21 @@ function TaskDetails(props) {
                                     <div className="form-group col-md-6 col-lg-5 priority-task-details">
                                         <Timer></Timer>
                                     </div>
-                                </div>
-                            </div>
+                                </div >
+                            </div >
 
                             <div className='row  mt-3 d-flex justify-content-between mr-3 ml-3'>
                                 {newFileComponentArr}
                             </div>
                             <hr></hr>
 
-                        </div>
+                        </div >
 
                         <div className="row   ">
 
                             {/* {props.task.assingTo ?
 
-                        props.task.assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
+                        props.task.assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={props.task.assingTo.contact.thumbnail} className="thumbnail-contact-details mr-1 mt-1" />
                             : <div className="logo-contact-details mr-1 mt-1" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>
                         : null} */}
                             <div className="assingto-details mr-2" data-tip data-for="assing">
@@ -491,12 +511,17 @@ function TaskDetails(props) {
                                     {title.title_files}
                                 </ReactTooltip>
                             </div>
-                            <div className="delete-details mx-2" data-tip data-for="delete">
+                            <div className="delete-details mx-1" data-tip data-for="delete">
                                 <img className="delete-task" src={require('../../../../assets/img/delete-icon.svg')} onClick={(e) => deleteTask(e)} ></img>
                                 <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                                 <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                                     {title.title_delete}
                                 </ReactTooltip>
+                            </div>
+                            <div className="complete-details mx-1">
+                                <img className="delete-task" src={require('../../../../assets/img/delete-icon.svg')} ></img>
+                                <img className="complete-task-hover" src={require('../../../../assets/img/complete-hover.svg')} onClick={(e)=>completeTask(e)}></img>
+                             
                             </div>
                             {showContactList ?
                                 <ContactList closeContactList={(e) => setShowContactList(false)} taskDetails={true} ></ContactList> : null
@@ -504,8 +529,9 @@ function TaskDetails(props) {
                             <div className="widthofContacts col-4 mt-1 ml-1">
                                 {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1 ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1.map((assingTo, index) => {
                                     if (index < 3)
-                                        // return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
-                                        return assingTo.contact !== null ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                        // return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                        return assingTo.contact !== null ? <> <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" /><p className="remove-member-from-assign" onClick={(e) => removeMemberFromAssign(assingTo.contact.email)}>x</p>
+                                        </>
 
                                             : null
                                 }) : null}
@@ -519,8 +545,8 @@ function TaskDetails(props) {
                                 {title.title_save}
                             </ReactTooltip>
                         </div>
-                    </div>
-                </div>}
+                    </div >
+                </div >}
         </>
 
     )
@@ -558,7 +584,10 @@ const mapDispatchToProps = (dispatch) => {
         setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
         setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
         setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
-
+        removeMemberFromAssign: (member) => dispatch(actions.removeMemberFromAssign(member)),
+        setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
+        completeTask: (task) => dispatch(actions.completeTask(task)),
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

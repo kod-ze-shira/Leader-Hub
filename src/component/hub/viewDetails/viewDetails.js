@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSpring, animated } from "react-spring";
 import { connect } from 'react-redux';
 import EditProject from '../project/editProject/editProject';
 import NewProject from '../project/newProject/newProject';
@@ -13,9 +14,7 @@ import './viewDetails.css';
 
 const mapStateToProps = (state) => {
     return {
-        // close: state.public_reducer.close,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace
-
     }
 }
 
@@ -26,10 +25,22 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    function ViewDetails(props) {
 
-        const [close, setclose] = useState(true)
-        const [open, setOpen] = useState(true)
+
+    function ViewDetails(props) {
+        const [key, setKey] = useState(1);
+
+        const scrolling = useSpring({
+            from:{ transform: "translate(100%,0)" }, 
+            to: { transform: "translate(50%,0)" },
+            config: { duration: 600 },//מהירות
+            // reset: true,
+            //reverse: key % 2 == 0,
+            onRest: () => {
+                setKey(key + 1);
+            }
+        });
+
         const [oldObject, setOldObject] = useState()
         const { from } = props//to know from which component its come
 
@@ -69,7 +80,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         }
                     />
                 case 'newProject':
-                    return <NewProject fromAllproject={props.fromAllproject}closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
+                    return <NewProject fromAllproject={props.fromAllproject} closeViewDetails={props.closeViewDetails} workspaceId={props.workspaceId} />
                 case 'editProject':
                     return <EditProject closeViewDetails={props.closeViewDetails}
                         showToast={(e) => showToast(e)} objectBeforeChanges={(e) => setOldObject(e)} />
@@ -87,12 +98,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
 
         return (
             <>
-                <div className="row ">
-                    <div className="view-details  col-5">
-                        {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
-                        {renderSwitch()}
+                {/* <animated.div style={scrolling}> */}
+                    <div className="row ">
+                        <div className="view-details  col-5">
+                            {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
+                            {renderSwitch()}
+                        </div>
                     </div>
-                </div>
+                {/* </animated.div> */}
             </>
         )
     })

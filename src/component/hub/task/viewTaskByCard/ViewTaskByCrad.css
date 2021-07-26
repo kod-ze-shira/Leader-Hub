@@ -56,8 +56,8 @@ opacity: 0.3;
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  height: 21px;
-  width: 21px;
+  height: 22px;
+  width: 22px;
   background-color: #FFFFFF;
   border: 0.5px solid #C4CCD5;
   border-radius: 50%;

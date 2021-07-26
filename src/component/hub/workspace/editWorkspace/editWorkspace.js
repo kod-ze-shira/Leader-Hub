@@ -64,7 +64,7 @@ function EditWorkspace(props) {
                         {/* <h5 className="my-5 title-view-details pb-2 col-10">Workspace details</h5> */}
                     </div>
                     <div className="form-group" id='nameRequired'>
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input name="name" ref={nameRequired} required
                             onChange={(input) => changeFiledInWorkspace(input)}
                             type="text" className="" className="form-control input-name" id="name"
@@ -80,7 +80,7 @@ function EditWorkspace(props) {
                     </div>
 
                     <div className="form-group">
-                        <label className="label" for="description">Description</label>
+                        <label className="label" htmlFor="description">Description</label>
                         <div className="form-control descriptionWorkspace"
                             id="description" rows="5"
                             placeholder="Write a description about your workspace"
@@ -89,7 +89,7 @@ function EditWorkspace(props) {
                             onChange={(input) => changeFiledInWorkspace(input)} contentEditable
                         ></div>
                     </div>
-                    <label className="row ml-2" for="color">Logo Color</label>
+                    <label className="row ml-2" htmlFor="color">Logo Color</label>
                     <ColorWorkspace setColorWorkspace={(color) => changeColorFiledInWorkspace(color)} />
 
                 </div>

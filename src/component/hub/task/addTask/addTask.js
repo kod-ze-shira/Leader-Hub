@@ -42,24 +42,24 @@ function AddTask(props) {
     return (
         <div className="edit-task">
             <h5 className="mt-2">Add Task</h5>
-            <label for="task-name">name:</label>
+            <label htmlFor="task-name">name:</label>
             <input type="text" name="name" className="form-control" id="task-name" placeholder="name"
                 onChange={handleChange} />
-            <label for="description">description:</label>
+            <label htmlFor="description" > description:</label >
             <input type="text" name="description" className="form-control" id="description" placeholder="description"
                 onChange={handleChange} />
-            {/* <label for="status">status:</label>
+            {/* <label htmlFor="status">status:</label>
             <select type="text" name="status" className="form-control" id="status" placeholder="status"
                 onChange={handleChange} >
                 <option>to do</option>
                 <option>in progress</option>
                 <option>done</option>
             </select> */}
-            <label for="startDate">startDate:</label>
+            <label htmlFor="startDate" > startDate:</label >
             <input type="date" name="startDate" className="form-control" id="startDate" placeholder={date2}
                 min={date2} required
                 onChange={handleChange} />
-            <label for="dueDate">dueDate:</label>
+            <label htmlFor="dueDate" > dueDate:</label >
             <input name="dueDate" type="date" className="form-control" id="dueDate" placeholder="dueDate"
                 onChange={handleChange} />
             <br></br>

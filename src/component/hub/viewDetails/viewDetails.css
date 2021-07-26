@@ -41,6 +41,9 @@ margin-top: 14px;
     overflow-x: hidden !important;
     padding-bottom: 0px !important;
 }
+.propertiesViewDitails::-webkit-scrollbar {
+  display: none ;
+}
 
 .propertiesViewDitails .headerDitails{
   border-bottom: 1px solid #707070

@@ -81,7 +81,7 @@ function ViewTaskByCrad(props) {
             value: priority,
             label:
                 <div className="prioprty-select">
-                    <img referrerpolicy="no-referrer" src={priority.icon} />
+                    <img referrerPolicy="no-referrer" src={priority.icon} />
                     <p >{priority.level}</p>
                 </div>
         }
@@ -171,7 +171,7 @@ function ViewTaskByCrad(props) {
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
-            props.viewToastMassege({ show: true, massege: 'comlited task!!' })
+            props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else
             props.setCountReadyTasks(false)
@@ -245,7 +245,7 @@ function ViewTaskByCrad(props) {
         e.stopPropagation()
     }
 
- 
+
     return (
         <>
             <Draggable draggableId={props.task._id} index={props.indexTask} Draggable="false">
@@ -318,19 +318,19 @@ function ViewTaskByCrad(props) {
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
                                         {props.task.assignTo1 ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                            {props.task.assignTo1 ? <img referrerpolicy="no-referrer" src={props.task.assignTo1.contact.thumbnail} className="thumbnail-contact ml-2" />
+                                            {props.task.assignTo1 ? <img referrerPolicy="no-referrer" src={props.task.assignTo1.contact.thumbnail} className="thumbnail-contact ml-2" />
                                                 : <div className="logo-contact ml-2" >{props.task.assignTo1.contact.name ? props.task.assignTo1.contact.name[0] : null}</div>}
                                         </div> : null}
                                         {props.task.assignTo1 && props.task.assignTo1.length > 0 ?
                                             <div className="widthofContacts col-4">
                                                 {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
                                                     if (index < 3)
-                                                        return assingTo.contact.thumbnail ? <img referrerpolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
+                                                        return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
                                                             : null
                                                 }) : null}
                                                 {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
                                             </div> : <img
-                                                className="ml-2 assing-to-icon"
+                                                className="ml-2"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
                                                 src={require('../../../../assets/img/share-icon.png')}>
                                             </img>}
@@ -347,7 +347,7 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task border-left  col">{props.task.dueDate}
                                 </label>
                                 <label className="check-task border-left  px-2 col-priority">{props.task.priority ?
-                                    <img referrerpolicy="no-referrer" src={props.task.priority.icon} />
+                                    <img referrerPolicy="no-referrer" src={props.task.priority.icon} />
                                     : null}
                                 </label>
                                 <label className="check-task border-left  px-2 col-add-task">
@@ -359,6 +359,7 @@ function ViewTaskByCrad(props) {
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
                                             viewToastComplete={props.viewToastComplete}
+                                            viewToastMassege={props.viewToastMassege}
                                         > </ViewDetails>
                                     </div>
                                     : null}

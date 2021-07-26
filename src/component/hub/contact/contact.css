@@ -223,8 +223,10 @@ margin-bottom: 0.5vh !important; */
         /* And hide the input's outline, so the form looks like the outline */
         border:none;
       }
+    
 
       .imgContact{
+        margin-right: -4px;
         border-radius: 50%;
         display: inline-block;
         height: 30px;

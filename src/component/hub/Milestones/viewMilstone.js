@@ -24,13 +24,13 @@ function ViewMilstone(props) {
     }
 
     function openDetails(event) {
-
         getCardsByProject().then((result) => {
             props.saveCurrentIndexOfCardInRedux(props.milestone.card.index)
             props.saveCurrentIndexOfTaskInRedux(props.milestone.task.index)
             setViewDetails(true)
 
         })
+
         event.stopPropagation()//to do statuses not opend
     }
     function viewInGantt() {
@@ -52,7 +52,7 @@ function ViewMilstone(props) {
                     <button onClick={(e) => openDetails(e)}>view details +</button>
                 </label>
             </div>
-
+            {/* && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]  */}
             {viewDetails && props.cards.length > 0 ?
                 <div onClick={(e) => e.stopPropagation()}>
                     <ViewDetails
@@ -60,6 +60,8 @@ function ViewMilstone(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={props.milestone.task}
+                        viewToastMassege={props.viewToastMassege}
+
                         // setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}> </ViewDetails>
                 </div> : null}

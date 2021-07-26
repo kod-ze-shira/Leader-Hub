@@ -38,7 +38,7 @@ function AssingToContact(props) {
             value: contact, label:
                 <div className="container">
                     <div className="option-contact row">
-                        {contact.thumbnail ? <img referrerpolicy="no-referrer" src={contact.thumbnail} className="thumbnail-contact " />
+                        {contact.thumbnail ? <img referrerPolicy="no-referrer" src={contact.thumbnail} className="thumbnail-contact " />
                             : <div className="logo-contact" style={{ backgroundColor: colors[Math.floor(Math.random() * colors.length)] }}>{contact.name ? contact.name[0] : null}</div>}
 
                         <p className="name-contact ">{contact.name} </p></div>
@@ -55,12 +55,12 @@ function AssingToContact(props) {
 
     })
     const viewTeamsList = props.teamsUser ? props.teamsUser.map((team) => (
-        { value: team, label: <div><img referrerpolicy="no-referrer" src={team.logo} height="30px" width="30px" />{team.name} </div> }
+        { value: team, label: <div><img referrerPolicy="no-referrer" src={team.logo} height="30px" width="30px" />{team.name} </div> }
     )) : null
 
     const [value, setValue] = useState()
     const handleChange = (newValue, actionMeta) => {
-        
+
         if (newValue) {
             console.group('Value Changed');
             console.log(newValue);

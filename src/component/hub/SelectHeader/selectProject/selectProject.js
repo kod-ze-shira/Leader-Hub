@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { useParams, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import { actions } from '../../../../redux/actions/action';
-import ProjectStyle from '../../project/projectStyle'
 import CreatableSelect from 'react-select/creatable';
 import Background from '../../../../assets/img/down-arrow.svg';
+import { ProjectStyleLabel } from '../../project/projectStyle.style'
 
 function SelectProject(props) {
     const { idProject } = useParams();
-  
+
     //to chang the project that user selected
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
     const changeSelectedProject = (id) => {
@@ -92,7 +92,7 @@ function SelectProject(props) {
                     style={{ 'background-color': project.color }} >
                 </span> */}
                         <div style={{ marginTop: '0.5px' }}>
-                            <ProjectStyle color={project.color}></ProjectStyle>
+                            <ProjectStyleLabel color={project.color}></ProjectStyleLabel>
                         </div>
                         <span className="select-not-belong project-select-not-belong">{project.name}</span>
                     </div >,
@@ -102,7 +102,7 @@ function SelectProject(props) {
     const placeholder = props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.name ?
         <div className="d-flex flex-row" style={{ color: project.color }}>
             <div style={{ marginTop: '0.5px' }}>
-                <ProjectStyle color={project.color}></ProjectStyle>
+                <ProjectStyleLabel color={project.color}></ProjectStyleLabel>
             </div>
             <span className="select-not-belong project-select-not-belong">{project.name}</span>
         </div >

@@ -12,6 +12,9 @@ overflow-y: auto;
 .delete-task-hover{
   display: none;
 }
+.complete-task-hover{
+  display: none;
+}
 .divStatus{
   display: inline-block;
 }
