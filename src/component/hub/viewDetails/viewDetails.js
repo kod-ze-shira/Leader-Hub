@@ -31,11 +31,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         const [key, setKey] = useState(1);
 
         const scrolling = useSpring({
-            from:{ transform: "translate(100%,0)" }, 
+            from: { transform: "translate(100%,0)" },
             to: { transform: "translate(50%,0)" },
             config: { duration: 600 },//מהירות
             // reset: true,
-            //reverse: key % 2 == 0,
+            //reverse: key % 2=== 0,
             onRest: () => {
                 setKey(key + 1);
             }
@@ -99,12 +99,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         return (
             <>
                 {/* <animated.div style={scrolling}> */}
-                    <div className="row ">
-                        <div className="view-details  col-5">
-                            {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
-                            {renderSwitch()}
-                        </div>
+                <div className="row ">
+                    <div className="view-details  col-5">
+                        {/* <div className="close mt-2 mr-2" onClick={(e) => closeEndRefreshViewDetails()} >x</div> */}
+                        {renderSwitch()}
                     </div>
+                </div>
                 {/* </animated.div> */}
             </>
         )

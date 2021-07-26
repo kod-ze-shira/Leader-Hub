@@ -86,7 +86,7 @@ function EditWorkspace(props) {
                             placeholder="Write a description about your workspace"
                             name="description"
                             value={props.workspaces[props.indexOfWorkspace].description}
-                            onChange={(input) => changeFiledInWorkspace(input)} contentEditable
+                            onChange={(input) => changeFiledInWorkspace(input)} contenteditable
                         ></div>
                     </div>
                     <label className="row ml-2" htmlFor="color">Logo Color</label>

@@ -16,9 +16,9 @@ function ViewFilesByCard(props) {
     function addOrRemoveFileToArr(e, file, ref) {
 
         let index = 0
-        filesForDownload.forEach(f => f._id == file._id ? index = f._id : null)
+        filesForDownload.forEach(f => f._id === file._id ? index = f._id : null)
 
-        if (index == 0) {
+        if (index === 0) {
             // ref.current.checked = true
             filesForDownload.push(file)
             // props.downloadRef.current.disabled = false

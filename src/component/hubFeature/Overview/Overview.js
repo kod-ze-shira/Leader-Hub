@@ -17,17 +17,17 @@ function Overview(props) {
     const { idProject } = useParams();
     const [refresh, setRefresh] = useState(false)
     // useEffect(() => {
-    //     if (props.workspaces.length == 0)
+    //     if (props.workspaces.length=== 0)
     //         props.getAllWorkspaces()
 
     // }, [])
     useEffect(() => {
         for (let i = 0; i < props.workspaces.length; i++) {
-            let project = props.workspaces[i].projects.find((p) => p._id == idProject)
+            let project = props.workspaces[i].projects.find((p) => p._id === idProject)
             if (project) {
                 props.indexOfWorkspace(i)
                 props.getAllStatusesTaskForWorkspace()
-                let indexProject = props.workspaces[i].projects.findIndex(project => project._id == idProject)
+                let indexProject = props.workspaces[i].projects.findIndex(project => project._id === idProject)
                 props.setCurrentIndexProject(indexProject)
             }
         }

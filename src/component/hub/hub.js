@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -21,9 +21,6 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-// import AddObject from './addObject/addObject'
-// import HeaderLeader from '@leadercodes/Leader-header'
-// import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
@@ -78,19 +75,19 @@ function Hub(props) {
         setOpen(!open);
     }
     const setShowToastDeletefunc = (value) => {
-
-        setShowToastDelete(value)
         let i = objectToDelete.length - 1
-        if (objectToDelete[i].type == "Card") {
+        setShowToastDelete(value)
+        if (objectToDelete[i].type === "Card") {
             $(`#${objectToDelete[i].object._id} `).css("display", "inline-block")
-        }
-        else if (!objectToDelete[i].object.card || deleteMilstone)
-            $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
-        else if (objectToDelete[i].type == "Task")
+        } else if (objectToDelete[i].type === "Task")
             $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "block")
 
-        else if (objectToDelete[i].type == "Project")
+        else if (!objectToDelete[i].object.card || deleteMilstone) {
+            $(`#${objectToDelete[i].object._id + "disappear"}`).css("display", "flex")
+        }
+        if (objectToDelete[i].type === "Project")
             $(`#${objectToDelete[i].object._id}`).css("display", "table-row")
+
         else
             $(`#${objectToDelete[i].object._id}`).css("display", "block")
         for (let index = 0; index < i; index++) {
@@ -135,11 +132,12 @@ function Hub(props) {
     const deleteWorkspaceInRedux = (e) => {
         // console.log(e.target.className)
         // if (props.workspaces[props.workspaces.length - 1])
-        //     if (props.workspaces[props.workspaces.length - 1]._id == undefined) {
+        //     if (props.workspaces[props.workspaces.length - 1]._id=== undefined) {
         //         props.removeOneWorkspaceFromWorkspaces()
         //     }
     }
     const [focusInputCard, setFocusInputCard] = useState(false)
+
     return (
         <>
             {showModalDelete ? <ShureDelete
@@ -152,11 +150,11 @@ function Hub(props) {
             {/*   <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div> */}
-            <Router history={history}>
+            <Router history={history} >
                 <div className='headerLeaderHub'>
                     <HeaderLeader userName={props.userName} appName='hub' />‏
                 </div>
-                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
+                <div className="row back-screen" >
 
                     <div className="configuratorBlue col-2 ">
                         {/* <div className="col-2 px-0"> */}
@@ -243,7 +241,6 @@ function Hub(props) {
                         : null}
 
                     {showToastMassege.show ?
-
                         <ToastMessage message={showToastMassege.massege}
                             viewToastMassege={(val => setShowToastMassege(val))}
                         />
@@ -277,7 +274,7 @@ function Hub(props) {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.public_reducer.userName,
+        userName: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 
 import './allWorkspace.css'
 import { connect } from 'react-redux'
@@ -14,9 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function AllWorkspaces(props) {
-    // const [showToastDelete, setShowToastDelete] = useState(false)
-    // const [showModalDelete, setShowModalDelete] = useState(false)
-    // const refToDeleteToast = useRef(null);
+    let workspaceLength = props.workspaces.length
     const colorList = ["#C967B6", "#8D18AD", "#4D2AC9", "#6A67C9", "#2B79C2", "#32AABA", "#34A38B", "#53A118", "#91A118", "#BDAA1C",
         "#C48E1A", "#C46F1A", "#C43C1A", "#BF2E63", "#C9676F",
         "#FD80E5", "#B620E0", "#6236FC", "#8580FD", "#3598F4", "#40D9ED", "#44D7B6", "#6DD41F", "#BFD41", "#F0D923",
@@ -72,6 +70,8 @@ function AllWorkspaces(props) {
         setWorspaceToEdit(value)
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)
+        props.saveIndexOfWorkspaceInRedux(workspaceLength)
+
     }
     // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
@@ -98,11 +98,20 @@ function AllWorkspaces(props) {
         props.addWorkspaceToWorkspaces({ description: "", name: "", color: p })
         setAddOrEditWorkspace("addWorkspace")
         setShowWorkspace(true)
+        props.saveIndexOfWorkspaceInRedux(workspaceLength)
         e.stopPropagation()
     }
-    $(window).click(function () {
+    // $(window).on("click", function () {
+    //     setShowWorkspace(false)
+    //     let a = props.workspaces
+    //             props.addWorkspaceToWorkspacesFromServer(null)//to delete workspace in redux
+
+    // })
+    $(window).click(function (props) {
         setShowWorkspace(false)
         // props.addWorkspaceToWorkspacesFromServer(null)//to delete workspace in redux
+
+
     });
     function stopP(event) {
         event.stopPropagation();
@@ -111,17 +120,14 @@ function AllWorkspaces(props) {
     return (
 
         <>
-
-
             <div className="row mt-5"></div>
             <div className="col-12" >
                 <div className="row borderBottom mx-5">
                     <div className="MyWorkspace">My Workspaces</div>
-                    <div className="row">
+                    <div className="row ">
                         {
                             grid ?
                                 <>
-
                                     {/* <img data-tip data-for="registerTip" src={copy} id="img1" onClick={copyToClipboard} className="img_copy"></img> */}
                                     <div data-tip data-for="Grid" className="col-1 grid" onClick={chenge_grid}>
                                         <img src={require('../../../../assets/img/gridIcon.png')} />
@@ -233,6 +239,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        saveIndexOfWorkspaceInRedux: (workspaceLength) => dispatch(actions.saveIndexOfWorkspaceInRedux(workspaceLength)),
         addWorkspaceToWorkspaces: (props) => dispatch(actions.addWorkspaceToWorkspaces(props)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         deleteWorkspaceFromServer: () => dispatch(actions.deleteWorkspaceFromServer()),

@@ -17,7 +17,7 @@ function Timer(props) {
     const [startTimerComp, setStartTimerComp] = useState(false)
 
     // const refminutes = props.refMinutes;
- 
+
     useEffect(() => {
         let interval = null;
         // if (props.flagTrueTimer1 === true) {

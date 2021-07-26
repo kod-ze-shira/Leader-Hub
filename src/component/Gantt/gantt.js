@@ -44,7 +44,7 @@ export default class Gantt extends Component {
                                 ) {
                                     return "today-scale"
                                 }
-                                if (dateToStr(date) == "Sun" || dateToStr(date) == "Sat")
+                                if (dateToStr(date) === "Sun" || dateToStr(date) === "Sat")
                                     return "last-weekend";
                                 return "";
                             }

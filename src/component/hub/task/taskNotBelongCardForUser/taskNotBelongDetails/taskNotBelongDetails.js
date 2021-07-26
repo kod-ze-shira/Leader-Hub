@@ -98,15 +98,15 @@ function TaskNotBelongDetails(props) {
                     let arrayUrl = []
                     for (let index = 0; index < props.arrDeleteFilesOfTask.length; index++) {
                         arrayUrl.push(props.arrDeleteFilesOfTask[index].url)
-                        // props.task.files.filter((myFile) => myFile.url == props.arrDeleteFilesOfTask[index].url)
+                        // props.task.files.filter((myFile) => myFile.url=== props.arrDeleteFilesOfTask[index].url)
                         for (let index2 = 0; index2 < props.task.files.length; index2++) {
-                            if (props.arrDeleteFilesOfTask[index]._id == props.task.files[index2]._id) {
+                            if (props.arrDeleteFilesOfTask[index]._id === props.task.files[index2]._id) {
                                 props.task.files.splice(index2, 1);
                                 // delete props.task.files[index2];
                             }
                             // first element removed
                         }
-                        // props.task.files.filter((myFile) => myFile.url != props.arrDeleteFilesOfTask[index].url)
+                        // props.task.files.filter((myFile) => myFile.url !==  props.arrDeleteFilesOfTask[index].url)
 
                     }
 
@@ -149,13 +149,13 @@ function TaskNotBelongDetails(props) {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             } else
-                if (input.target.name == "milestones") {
+                if (input.target.name === "milestones") {
                     props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
                     setMilstone(!props.task.milestones)
                     value = !milstone
                 }
         // else
-        //     if (input.target.name == "milestones") {
+        //     if (input.target.name=== "milestones") {
         //         setMilstone(!props.task.milestones)
         //         value = !milstone
         //     }
@@ -260,7 +260,7 @@ function TaskNotBelongDetails(props) {
                                 placeholder="Write a description about your workspace"
                                 name="description"
                                 value={props.task.description}
-                                onChange={(e) => changeFiledInTask(e)} contentEditable
+                                onChange={(e) => changeFiledInTask(e)} contenteditable
                             ></textarea> */}
                         </div>
                         <div className="row justify-content-between">

@@ -8,11 +8,7 @@ import ViewDetails from '../viewDetails/viewDetails'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './tabs.css'
 import $ from "jquery"
-import taskDetails from '../task/taskDetails/taskDetails'
-import ReactTooltip from 'react-tooltip';
-import title from '../../../Data/title.json'
 import { useParams } from 'react-router-dom';
-import { dragTask } from '../../../redux/middleware/taskCrud'
 
 function Tabs(props) {
 
@@ -28,31 +24,28 @@ function Tabs(props) {
 
     useEffect(() => {
         for (let i = 0; i < props.workspaces.length; i++) {
-            let workspace = props.workspaces[i].projects.find((p) => p._id == idProject)
+            let workspace = props.workspaces[i].projects.find((p) => p._id === idProject)
             if (workspace) {
                 props.indexOfWorkspace(i)
-                props.getAllStatusesTaskForWorkspace()
+                if (props.statuses)
+                    props.getAllStatusesTaskForWorkspace()
             }
         }
     }, [props.workspaces, props.cards])
 
     useEffect(() => {
         // if (props.cards.length) {
-        if (props.cards.length || props.cardsEmpty == true) {
+        if (props.cards.length || props.cardsEmpty === true) {
             setIfAnimation(false)
         }
     }, [props.cards.length, props.cardsEmpty])
-    const [dragTask, setDragTask] = useState(false)
-    useEffect(() => {
 
-    }, [dragTask])
 
-    function setDragTaskF() {
-        setDragTask(true)
-    }
+
+
     function onDragEndׂ(e) {
         if (e.source.droppableId && e.destination) {
-            if (props.cards.find(card => card._id == e.draggableId)) {
+            if (props.cards.find(card => card._id === e.draggableId)) {
                 onDragEndׂCard(e)
             }
             else {
@@ -60,13 +53,13 @@ function Tabs(props) {
                 let iSourse, iDestination
                 let iCardTo, iCardFrom;
                 for (iSourse = 0; iSourse < props.cards.length; iSourse++) {
-                    if (props.cards[iSourse]._id == e.source.droppableId) {
+                    if (props.cards[iSourse]._id === e.source.droppableId) {
                         iCardFrom = props.cards[iSourse]._id;
                         break
                     }
                 }
                 for (iDestination = 0; iDestination < props.cards.length; iDestination++) {
-                    if (props.cards[iDestination]._id == e.destination.droppableId) {
+                    if (props.cards[iDestination]._id === e.destination.droppableId) {
                         iCardTo = props.cards[iDestination]._id;
                         break
                     }
@@ -75,7 +68,7 @@ function Tabs(props) {
                 props.changeTaskplace(replace)
 
                 const replaceIServer = [e.draggableId, iCardFrom, iCardTo, iSourse, iDestination]
-                if (replace[2] == replace[3])
+                if (replace[2] === replace[3])
                     props.dragTask(iSourse)
                 else
                     props.moveTaskBetweenCards(replaceIServer)
@@ -85,12 +78,12 @@ function Tabs(props) {
     function onDragEndׂCard(e) {
         let indexDest, indexSource
         for (let index = 0; index < props.cards.length; index++)
-            if (props.cards[index]._id == e.destination.droppableId) {
+            if (props.cards[index]._id === e.destination.droppableId) {
                 indexDest = index
                 break
             }
         for (let index = 0; index < props.cards.length; index++) {
-            if (props.cards[index]._id == e.draggableId) {
+            if (props.cards[index]._id === e.draggableId) {
                 indexSource = index
             }
         }
@@ -138,7 +131,6 @@ function Tabs(props) {
                 if (viewDetails === true) {
                     setViewDetails(false)
                     props.closeCalendarOrContact(true)
-                    // props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
                 }
             }
         }
@@ -158,7 +150,7 @@ function Tabs(props) {
             {props.workspaces.length ?
                 <DragDropContext onDragEndׂ={(e) => onDragEndׂCard(e)}>
                     <Droppable
-                        // droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
+                        droppableId={props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard]._id : null}
                         // droppableId={dragTask ? null : props.cards[props.indexCurrentCard]._id}
                         droppableId={props.cards.length ? props.cards[props.cards.length - 1]._id : null}
                     >
@@ -172,7 +164,7 @@ function Tabs(props) {
                                             <DragDropContext
                                                 onDragEnd={(e) => onDragEndׂ(e)} >
                                                 {props.cards.map((card, index) => {
-                                                    return card != null ? <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
+                                                    return card !== null ? <ViewCardsTabs openViewDetails={(task) => openViewDetails(task)}
                                                         openInputTask={openInputTask}
                                                         viewToastMassege={props.viewToastMassege}
                                                         viewContactList={props.viewContactList}
