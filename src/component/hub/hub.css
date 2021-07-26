@@ -25,11 +25,7 @@ margin-left: 8vh;
         margin-left:505px;
     }
   }
-  /* @media screen and (min-width: 850px) {
-    .icons-header{
-        margin-left:750px;
-    }
-  } */
+ 
   @media screen and (min-width: 1150px) {
     .icons-header{
         margin-left:1000px;
