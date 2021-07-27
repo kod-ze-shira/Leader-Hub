@@ -33,7 +33,7 @@ function ViewTaskByCradTabs(props) {
         if (props.task.assingTo)
             $(`#${props.task._id}assing-to`).css("display", "none")
 
-        let hasLike = props.task.likes ? props.task.likes.find(user => user == props.userId) : null
+        let hasLike = props.task.likes ? props.task.likes.find(user => user === props.userId) : null
         if (hasLike)
             setUserHasLike(true)
 
@@ -62,13 +62,13 @@ function ViewTaskByCradTabs(props) {
         });
         $(".autosize").keydown(function (e) {
             // Enter was pressed without shift key
-            if (e.key == 'Enter' && !e.shiftKey) {
+            if (e.key === 'Enter' && !e.shiftKey) {
                 resize($(this));
 
                 // prevent default behavior
                 e.preventDefault();
             }
-            if (e.key == 'Enter') {
+            if (e.key === 'Enter') {
                 editTask()
             }
 
@@ -84,12 +84,12 @@ function ViewTaskByCradTabs(props) {
         setAnchorEl(null);
         if (e) {
             console.log(e);
-            if (e == "viewCard") {
+            if (e === "viewCard") {
                 console.log(props.task)
                 props.openViewDetails(props.task)
                 event.stopPropagation()
             }
-            if (e == "delete") {
+            if (e === "delete") {
                 $(`#${props.task._id + "disappear"}`).css("display", "none")
                 props.objectToast({ 'type': 'Task', 'object': props.task })
             }
@@ -166,7 +166,7 @@ function ViewTaskByCradTabs(props) {
     }
     const showDetails = (event) => {
 
-        if (anchorEl == null) {
+        if (anchorEl === null) {
             props.setCurrentIndexTask(currentIndexTask)
             props.setCurrentIndexCard(currentIndexCard)
             props.openViewDetails(props.task)
@@ -175,7 +175,7 @@ function ViewTaskByCradTabs(props) {
     }
 
     const checkURL = (url) => {
-        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png|PNG)$/) != null);
+        return (url.match(/^http[^\?]*\.(jpeg|jpg|gif|png|PNG)$/) !== null);
     }
 
     const addFile = async (file) => {
@@ -222,13 +222,13 @@ function ViewTaskByCradTabs(props) {
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux
 
-        // if (event.name == "name") {
+        // if (event.name=== "name") {
         //     editTaskInRedux = { "nameFiled": event.name, "value": textInput.current.innerHTML }
         //     props.setTaskByFiledFromTasks(editTaskInRedux)
         // }
         // else {
         let value = event.target.value
-        if (event.target.name == "complete") {
+        if (event.target.name === "complete") {
 
             doneStatus = !doneStatus
             value = doneStatus
@@ -270,7 +270,7 @@ function ViewTaskByCradTabs(props) {
     }
 
     function addChalalit(e) {
-        // if (props.task.complete == false)
+        // if (props.task.complete=== false)
         // setShowChalalit(true)
         e.stopPropagation()
     }
@@ -435,7 +435,7 @@ function ViewTaskByCradTabs(props) {
 
                                 {myFiles}
                                 {/* <div>
-                                    <span className="span-name-task mt-2" contentEditable={true} >
+                                    <span className="span-name-task mt-2" contenteditable={true} >
                                         {props.task.name}
                                     </span>
 
@@ -447,7 +447,7 @@ function ViewTaskByCradTabs(props) {
                                     onClick={(e) => e.stopPropagation()}
                                     name="name"
                                     onChange={(e) => changeFiledInTask(e)}
-                                // onBlur={(e) => editTask()}
+                                    onBlur={(e) => editTask()}
                                 // onKeyPress={event => {
                                 //     if (event.key === 'Enter') {
                                 //         editTask()

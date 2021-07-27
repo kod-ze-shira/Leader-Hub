@@ -5,7 +5,7 @@ import keys from '../../config/env/keys'
 
 // ${keys.API_URL_BASE_SERVER}
 export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => action => {
-    if (action.type == "GET_WORKSPACE_BY_ID_FROM_SERVER") {
+    if (action.type === "GET_WORKSPACE_BY_ID_FROM_SERVER") {
         let workspaceId = action.payload;
         let url = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/getWorkspaceByworkspaceId`
         fetch(url, {
@@ -28,9 +28,6 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
 export const getAllWorkspacesFromServer = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_WORKSPACES_FROM_SERVER') {
         let urlData;
-
-
-
         urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/getWorkspacesForUser`
         fetch(urlData,
             {
@@ -183,7 +180,7 @@ export const duplicateWorkspace = ({ dispatch, getState }) => next => action => 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status == "401") {
+        if (result.status === "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
                 window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?

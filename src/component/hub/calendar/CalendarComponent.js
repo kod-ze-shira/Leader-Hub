@@ -10,7 +10,7 @@ import Calendar from 'react-calendar';
 
 function CalendarComponent(props) {
     useEffect(() => {
-        if (props.contactsUser.length == 0)
+        if (props.contactsUser.length === 0)
             props.getContactsForUser()
     }, [])
     const handleChange = (event) => {

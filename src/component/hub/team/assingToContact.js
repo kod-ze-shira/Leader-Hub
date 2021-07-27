@@ -6,11 +6,11 @@ import './style.css';
 
 function AssingToContact(props) {
     useEffect(() => {
-        if (props.options == 'contacts' && props.contactsUser.length == 0) {
+        if (props.options === 'contacts' && props.contactsUser.length === 0) {
             props.getContactsForUser()
         }
         else
-            if (props.teamsUser.length == 0)
+            if (props.teamsUser.length === 0)
                 props.getAllTeamsForUser()
     }, [])
     const [currentIndexTask, setCurrentIndexTask] = useState("")
@@ -65,7 +65,7 @@ function AssingToContact(props) {
             console.group('Value Changed');
             console.log(newValue);
             // setValue(newValue)
-            props.options == 'contacts' ? props.setContactEmail(newValue) : props.addMemberEmailToMembersEmailList(newValue)
+            props.options === 'contacts' ? props.setContactEmail(newValue) : props.addMemberEmailToMembersEmailList(newValue)
             console.log(`action: ${actionMeta.action}`);
             console.groupEnd();
         }

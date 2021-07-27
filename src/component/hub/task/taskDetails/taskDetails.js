@@ -24,12 +24,10 @@ function TaskDetails(props) {
     const [showContactList, setShowContactList] = useState(false)
     const [taskName, setTaskName] = useState(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
     const [milstone, setMilstone] = useState()
-    // const [taskComplete, setTaskComplete] = useState()
-
+    const [priorityTask, setPriorityTask] = useState()
 
     useEffect(() => {
         setMilstone(props.cards[props.indexCurrentCard] && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].milestones)
-        console.log(props.task.assingTo1);
         if (props.cards.length > 0) {
             setTaskBeforeChanges(({ ...props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask] }))
             props.setFilesFromTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].files)
@@ -37,7 +35,7 @@ function TaskDetails(props) {
             props.objectBeforeChanges({ 'type': 'task', 'task': taskBeforeChanges })
             if (!(props.statuses && props.statuses.length > 0))
                 props.getAllStatusesTaskForWorkspace();
-            if (props.contactsUser.length == 0)
+            if (props.contactsUser.length === 0)
                 props.getContactsForUser()
         }
         setTaskName(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name)
@@ -51,13 +49,14 @@ function TaskDetails(props) {
 
     useEffect(() => {
     }, [props.arrFilesOfTask])
-    
+    useEffect(() => {
+        return () => {
+            props.EditTask(props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask])
+        };
+    }, [])
     const [openPopUp, setOpenPopUp] = useState(false)
-    const [fileComponentArr, setFileComponentArr] = useState([])
-    const [startTimerComp, setStartTimerComp] = useState(false)
     const [shoewModalFiles, setShoewModalFiles] = useState(false)
     const [url, setUrl] = useState('dddd')
-
 
     const openPopUpStatus = (event) => {
         setOpenPopUp(true)
@@ -107,22 +106,19 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
-
+        debugger
         if (nameRequired.current.value) {
-            if (milstone)
-                // props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
-                props.objectBeforeChanges(null)
+            // if (milstone)
+            //     props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
+            props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
-                newFiles = props.arrFilesOfTask.filter((file) => file.url == 'new')
+                newFiles = props.arrFilesOfTask.filter((file) => file.url === 'new')
             if (newFiles.length) {
                 newFiles = await compressedFile(newFiles)
                 props.uploadFiles({ 'files': newFiles, 'task': props.task })
             }
-            else
-                props.EditTask(props.task)
             props.closeViewDetails();
-
         }
         else {
             nameRequired.current.focus()
@@ -141,15 +137,11 @@ function TaskDetails(props) {
         }
     )) : null
 
-    const [priorityTask, setPriorityTask] = useState()
     const changePriority = (event) => {
         setPriorityTask(event.value)
-        console.log(priorityTask);
         let editTaskInRedux = { "nameFiled": "priority", "value": event.value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
         let editTask = { "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id, "priority": event.value._id }
-        console.log(editTask)
-        props.EditTask(editTask)
     };
 
     const deleteTask = (e) => {
@@ -171,21 +163,21 @@ function TaskDetails(props) {
         let editTaskInRedux
         let value = input.target.value
         // setTaskName(input.target.value)
-        if (input.target.name == "startDate") {
+        if (input.target.name === "startDate") {
             value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
             setStartDateTask(input.target.value)
         }
         else
-            if (input.target.name == "dueDate") {
+            if (input.target.name === "dueDate") {
                 value = value.split("-")[2] + '/' + value.split("-")[1] + '/' + value.split("-")[0];
                 setDueDateTask(input.target.value)
             }
             else
-                if (input.target.name == "milestones") {
+                if (input.target.name === "milestones") {
                     setMilstone(!props.task.milestones)
                     value = !milstone
                     // if (!milstone)
-                        // props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
+                    // props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
                 }
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
@@ -208,7 +200,6 @@ function TaskDetails(props) {
         props.closeViewDetails()
     }
     function func(val) {
-        // alert(val)
         setShoewModalFiles(val)
     }
 
@@ -382,7 +373,7 @@ function TaskDetails(props) {
                                 value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description}
                                 onChange={(e) => changeFiledInTask(e)}
                                 // onBlur={(e) => editTaskInServer()}
-                                contentEditable
+                                contenteditable
                             ></textarea> */}
                                 </div>
                                 <div className="row justify-content-between">
@@ -445,7 +436,7 @@ function TaskDetails(props) {
                                             <input type="checkbox"
                                                 name="milestones"
                                                 checked={milstone}
-                                                value={props.task.milestones}
+                                                // value={props.task.milestones}
                                                 onChange={(e) => changeFiledInTask(e)}
                                             // onBlur={(e) => editTaskInServer()}
                                             />

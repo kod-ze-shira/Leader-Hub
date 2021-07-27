@@ -29,7 +29,7 @@ function ViewTaskByCrad(props) {
     useEffect(() => {
         setCurrentIndexTask(props.indexTask)
         setCurrentIndexCard(props.indexCard)
-        let hasLike = props.task.likes.length ? props.task.likes.find(user => user == props.userId) : null
+        let hasLike = props.task.likes.length ? props.task.likes.find(user => user === props.userId) : null
         if (hasLike)
             setUserHasLike(true)
         $(`#${props.task._id}assing-to`).css("display", "none")
@@ -64,7 +64,7 @@ function ViewTaskByCrad(props) {
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let value = input.target.value
-        if (input.target.name == "complete") {
+        if (input.target.name === "complete") {
             doneStatus = !doneStatus
             value = doneStatus
             editCompleteTask()
@@ -122,7 +122,7 @@ function ViewTaskByCrad(props) {
         event.stopPropagation();
     }
     function addChalalit() {
-        if (props.task.complete == false)
+        if (props.task.complete === false)
             props.showRocketShip(true)
     }
 

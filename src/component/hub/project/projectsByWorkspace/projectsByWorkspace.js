@@ -22,7 +22,7 @@ function ProjectsByWorkspace(props) {
 
     let workspaceName = ''
     useEffect(() => {
-        if (props.showViewDitailsProject && e != props.showViewDitailsProject.e) {
+        if (props.showViewDitailsProject && e !== props.showViewDitailsProject.e) {
             if (props.showViewDitailsProject.fromAllProject) {
                 setFromAllproject(true)
             }
@@ -44,8 +44,8 @@ function ProjectsByWorkspace(props) {
     if (props.history.location.pathname.includes('allProjects')) {
         workspaceName = 'All Projects'
     }
-    else{
-        workspaceName=props.workspaces[props.indexOfWorkspace]&&props.workspaces[props.indexOfWorkspace].name+' projects'
+    else {
+        workspaceName = props.workspaces[props.indexOfWorkspace] && props.workspaces[props.indexOfWorkspace].name + ' projects'
     }
     function openEditOrShareProject(from) {
         setEditOrShareProject(from)
@@ -75,7 +75,7 @@ function ProjectsByWorkspace(props) {
                 : null : null
         })
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
-        return workspace.projects.map((project, index) => {
+        return workspace.projects ? workspace.projects.map((project, index) => {
             return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
                 <ViewProject showToast={(obj) => showToast1(obj)}
                     closeViewDetails={false}
@@ -84,7 +84,7 @@ function ProjectsByWorkspace(props) {
                     editOrShareProject={(editOrShare) => openEditOrShareProject(editOrShare)}
                     shareProject={openEditOrShareProject} />
                 : null
-        })
+        }) : null
     }) : null
 
 

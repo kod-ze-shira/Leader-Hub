@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import { actions } from '../actions/action'
-import configData from '../../ProtectedRoute/configData.json'
-import { useForkRef } from '@material-ui/core';
+// import { useForkRef } from '@material-ui/core';
 import keys from '../../config/env/keys'
 
 export const getCardsByProjectId = ({ dispatch, getState }) => next => action => {
@@ -35,7 +34,7 @@ export const getCardsByProjectId = ({ dispatch, getState }) => next => action =>
             },
             error: function (err) {
                 checkPermission(err).then((ifOk) => {
-                    if (err.status == 300)//share
+                    if (err.status === 300)//share
                         window.location.assign(window.origin + '/' + err.responseJSON.routes)
                 })
             }
@@ -137,7 +136,7 @@ export const removeCardById = ({ dispatch, getState }) => next => action => {
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status == "401") {
+        if (result.status === "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
                 window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?

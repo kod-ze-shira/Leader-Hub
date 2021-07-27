@@ -55,7 +55,7 @@ function ProjectPlatform(props) {
 
     const deleteTaskOrCard = () => {
         setShowToastDelete(false)
-        if (props.cards.find(card => card._id == taskOrCard._id)) {
+        if (props.cards.find(card => card._id === taskOrCard._id)) {
             props.removeCardById(taskOrCard._id)
         }
         else

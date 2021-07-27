@@ -30,12 +30,11 @@ function ViewContact(props) {
         let i
 //check if contact is in assign exist
         for (i = 0; i < assign.length; i++) {
-            debugger
-            if (assign[i].contact._id == props.contact._id)
+            if (assign[i].contact._id === props.contact._id)
                 isExistContactInList = true
         }
         if (!isExistContactInList) {
-            if (admin && props.contact._id == contactId)
+            if (admin && props.contact._id === contactId)
                 member = { "email": email, "level": "admin" }
             else
                 member = { "email": email }

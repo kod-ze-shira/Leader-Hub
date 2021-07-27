@@ -104,7 +104,7 @@ store.dispatch(actions.extractJwt());
 var url = window.location;
 let jwtFromCookie
 store.dispatch(actions.setUserName(url.pathname.split('/')[1]))
-if (window.location.hostname == "localhost") {
+if (window.location.hostname === "localhost") {
     jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJ6bUJBR2w0WFJrYXFpb1MzYUUyN1E3RTYxRG0xIiwiZW1haWwiOiJyZW5hbmFAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjIzMzEyODYwfQ.PaZaGd7eZ0K8t4dBWVwQ55uUNsLAZ73OYChnJ7ronko'
     // jwtFromCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJYUkpoSmNYazZKUUYyY0NhVmlOcWFFbUhtRFoyIiwiZW1haWwiOiJldGlAbGVhZGVyLmNvZGVzIiwiaWF0IjoxNjI0NTE5NTYxfQ.91bWm0VkQ4nGsAif8U6pP3LxEhjUokhCqLWcoRdd4qI'
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
@@ -121,7 +121,7 @@ else {
     //             document.cookie.split(";")
     //                 .filter(s => s.includes('devJwt'))[0].split("=").pop() : null;
     store.dispatch(actions.setTokenFromCookies(jwtFromCookie));
-// }
+    // }
 }
 window.store = store;
 export const Token = jwtFromCookie;

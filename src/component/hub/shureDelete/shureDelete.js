@@ -19,7 +19,7 @@ export default function SureDelete(props) {
         // setShowModal(false)
         props.closeModal(false)
 
-        if (props.objectToDelete.type == "Card") {
+        if (props.objectToDelete.type === "Card") {
             $(`#${props.objectToDelete.object._id} `).css({ "display": "none" })
             // $(`#${props.objectToDelete.object._id} `).addClass("displayNone")
             $(`#${props.objectToDelete.object._id} `).removeClass("mt-4")
@@ -46,11 +46,11 @@ export default function SureDelete(props) {
                 </Modal.Header>
                 <Modal.Body>
                     Are you shure you want to delete this {type}?
-              </Modal.Body>
+                </Modal.Body>
                 <Modal.Footer className='justify-content-between'>
                     <Button className='cancelModalDelete' onClick={(e) => props.closeModal(false)}>
                         Cancel
-                </Button>
+                    </Button>
                     <Button className='deleteInModalDelete' onClick={(e) => deleteObject()}>Delete</Button>
                 </Modal.Footer>
             </Modal>

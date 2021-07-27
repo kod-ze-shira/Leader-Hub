@@ -206,15 +206,15 @@ function createNewEventWhenNewTask(task, userName, jwt) {
 
 export const editTask = ({ dispatch, getState }) => next => action => {
     if (action.type === 'EDIT_TASK') {
-        
+
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editTask`
         let task = action.payload
         // console.log('EDIT_TASK')
-        if (action.payload.type && action.payload.type == 'editTaskFromGantt') {
+        if (action.payload.type && action.payload.type === 'editTaskFromGantt') {
             task = action.payload.task
         }
         else
-            if (action.payload.type && action.payload.type == 'taskNotBelong') {
+            if (action.payload.type && action.payload.type === 'taskNotBelong') {
                 task = action.payload.task
                 if (!task.description)
                     task.description = null
@@ -222,7 +222,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
             else
                 if (!action.payload.card) {
                     for (let index = 0; index < getState().public_reducer.tasks.length; index++) {
-                        if (getState().public_reducer.tasks[index]._id == action.payload._id)
+                        if (getState().public_reducer.tasks[index]._id === action.payload._id)
                             task = getState().public_reducer.tasks[index]
                     }
                 }
@@ -264,7 +264,7 @@ export const editTask = ({ dispatch, getState }) => next => action => {
 export const removeFileInTaskAndServerFiles = ({ dispatch, getState }) => next => action => {
     if (action.type === 'REMOVE_FILE_IN_TASK_AND_SERVER_FILES') {
         let task = {}
-        if (action.payload.taskId == '' && getState().public_reducer.cards &&
+        if (action.payload.taskId === '' && getState().public_reducer.cards &&
             getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks
             && getState().public_reducer.cards[getState().public_reducer.indexCurrentCard].tasks[getState().public_reducer.indexCurrentTask]
         ) {
@@ -272,7 +272,7 @@ export const removeFileInTaskAndServerFiles = ({ dispatch, getState }) => next =
 
         }
         else if (getState().public_reducer.tasks) {
-            task = getState().public_reducer.tasks.find((task) => task._id == action.payload.taskId)
+            task = getState().public_reducer.tasks.find((task) => task._id === action.payload.taskId)
         }
 
 
@@ -291,7 +291,7 @@ export const removeFileInTaskAndServerFiles = ({ dispatch, getState }) => next =
 
                 checkPermission(result).then((ifOk) => {
                     console.log(result);
-                    if (result.massege == 'task updated successfully')
+                    if (result.massege === 'task updated successfully')
                         dispatch(actions.removeFile([action.payload.url]))
                 })
 
@@ -598,7 +598,7 @@ export const displayLineByStart = ({ dispatch, getState }) => next => action => 
             },
             dataType: 'json',
             success: function (data) {
-                
+
                 console.log("success")
                 console.log(data);
                 dispatch(actions.setStartHour(data.currentHour))
@@ -651,7 +651,7 @@ export const disaplayLineByStop = ({ dispatch, getState }) => next => action => 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status == "401") {
+        if (result.status === "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
                 window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?

@@ -7,7 +7,6 @@ import $ from 'jquery'
 
 
 function ContactList(props) {
-  const [arrayFilter, setArrayFilter] = useState(null);
   const [contacts, setContacts] = useState(props.contactsUser);
   const [search, setSearch] = useState('')
 
@@ -60,12 +59,12 @@ function ContactList(props) {
   //     let i
   //     for (i = 0; i < assign.length; i++) {
 
-  //         if (assign[i].contact._id == props.contact._id)
+  //         if (assign[i].contact._id=== props.contact._id)
   //             isExistContactInList = true
 
   //     }
   //     if (!isExistContactInList) {
-  //         if (admin && props.contact._id == contactId)
+  //         if (admin && props.contact._id=== contactId)
   //             member = { "email": email, "level": "admin" }
   //         else
   //             member = { "email": email }

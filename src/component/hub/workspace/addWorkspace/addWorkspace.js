@@ -12,8 +12,6 @@ import ColorWorkspace from '../../color/colorWorkspace'
 
 function AddWorkspace(props) {
 
-
-    // let [myColor, setMyColor] = useState("#C967B6")
     let [myColor, setMyColor] = useState()
     const [workspace, setWorkspace] = useState({
         name: "",
@@ -23,38 +21,22 @@ function AddWorkspace(props) {
     useEffect(() => {
         setMyColor(props.colorWorkspace)
         workspace.color = myColor
+        return () => {
+            if (!props.workspaces[props.indexOfWorkspace]._id)
+                props.removeOneWorkspaceFromWorkspaces()
+        };
     }, [])
     const nameworkspae = useRef()
-
     const changeColorFiledInWorkspace = (color) => {
         let editWorkspaceInRedux = { "nameFiled": "color", "value": color }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
 
-    // const changeColorWorkspace = (event) => {
-    //     setMyColor(event.target.value)
-    //     const { name, value } = event.target
-    //     setWorkspace(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    // }
-    // if (!flag) {
-    //     fun()
-    //     setFlag(true)
-    // }
-
-
-
-
-
-
     function addNewWorkspace() {
-
         if (nameworkspae.current.value) {
             workspace.color = myColor
-            // props.addNewWorkspaceToServer(workspace)
             props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
+            // newWorkspace()
             props.closeViewDetails()
         }
         else {
@@ -63,7 +45,16 @@ function AddWorkspace(props) {
             form.classList.add('was-validated')
         }
     }
-
+    // function newWorkspace(params) {
+    //     return new Promise(async (resolve, reject) => {
+    //         try {
+    //             let newWorkspace = await props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
+    //             resolve(newWorkspace)
+    //         } catch (error) {
+    //             reject(error)
+    //         }
+    //     })
+    // }
     // const handleChange = (event) => {
     //     const { name, value } = event.target
     //     setWorkspace(prevState => ({
@@ -73,17 +64,14 @@ function AddWorkspace(props) {
     // }
 
     const changeFiledInWorkspace = (input) => {
-        if (input.target.name == 'color')
+        if (input.target.name === 'color')
             setMyColor(input.target.value)
-
         let editWorkspaceInRedux = { "nameFiled": input.target.name, "value": input.target.value }
         props.saveIndexOfWorkspaceInRedux(props.workspaces.length - 1)
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
     return (
         <>
-
-
             <div className="details d-workspace mr-5 ml-4" >
                 <div className='propertiesViewDitails'>
                     <div className='row mt-4 mb-1 justify-content-between headerDitails'>
@@ -108,7 +96,7 @@ function AddWorkspace(props) {
                             id="description" rows="2" placeholder="Write a description about your workspace"
                             // onChange={handleChange} 
                             onChange={(input) => changeFiledInWorkspace(input)}
-                            contentEditable></textarea>
+                            contenteditable></textarea>
                     </div>
                     {/* <div className="form-group"> */}
                     <label className="row ml-2" htmlFor="color">Logo Color</label>
@@ -131,6 +119,7 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.workspaces,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -139,7 +128,7 @@ const mapDispatchToProps = (dispatch) => {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
         saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
-
+        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces()),
     }
 
 

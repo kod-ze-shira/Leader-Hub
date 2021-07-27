@@ -15,6 +15,11 @@ function EditProject(props) {
         props.objectBeforeChanges({ 'type': 'project', 'project': projectBeforeChanges })
 
     }, [props.workspaces])
+    useEffect(() => {
+        return () => {
+            saveProject()
+        }
+    }, [])
 
     let myDate = props.workspaces[props.indexWorkspace].projects[props.indexProject].dueDate;
     let dueDate1 = myDate.split("/")[2] + '-' + myDate.split("/")[1] + '-' + myDate.split("/")[0];
@@ -25,7 +30,7 @@ function EditProject(props) {
     const changeFiledInProject = (input) => {
         // let editProjectInRedux = { "nameFiled": input.target.name, "value": input.target.value, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         let value;
-        if (input.target.attributes[1].nodeValue == 'description')
+        if (input.target.attributes[1].nodeValue === 'description')
             value = input.target.value ? input.target.innerHTML : input.target.innerHTML
         else value = input.target.value ? input.target.value : input.target.innerText
         if (!value)
@@ -35,13 +40,11 @@ function EditProject(props) {
         // props.workspaces[props.indexWorkspace].projects[props.indexProject][input.target.name] = input.target.value
     }
 
-    const changeDateInProject = (input) => {
-
+    const changeDateInProject = (input) => {   
         let res = input.target.value.split("-")[2] + '/' + input.target.value.split("-")[1] + '/' + input.target.value.split("-")[0];
         let editProjectInRedux = { "nameFiled": input.target.name, "value": res, "project": props.workspaces[props.indexWorkspace].projects[props.indexProject] }
         setDueDateProject(input.target.value)
         props.setProjectByFiledFromWorkspace(editProjectInRedux)
-        // props.workspaces[props.indexWorkspace].projects[props.indexProject][input.target.name] = res
     }
 
     function saveProject() {

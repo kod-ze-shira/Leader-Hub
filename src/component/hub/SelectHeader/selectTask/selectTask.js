@@ -11,10 +11,10 @@ function SelectTask(props) {
 
     let myTask = props.task;
     const changeSelectedTask = (id) => {
-        myTask = props.tasks.find(p => p._id == id.value)
+        myTask = props.tasks.find(p => p._id === id.value)
         props.setTask(myTask)
     }
-    
+
     const viewTasksList = props.card.tasks ? props.card.tasks.map((task) => (
         { value: task._id, label: task.name }
     )) : null
@@ -57,7 +57,7 @@ function SelectTask(props) {
 
                 />
             </div>
-            
+
 
         </>
     )

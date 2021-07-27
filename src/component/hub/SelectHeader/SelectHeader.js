@@ -59,13 +59,13 @@ function SelectHeader(props) {
 
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
-        if (history.location.pathname.indexOf('list') != -1)
+        if (history.location.pathname.indexOf('list') !== -1)
             setValue(2)
         else
-            if (history.location.pathname.indexOf('Overview') != -1)
+            if (history.location.pathname.indexOf('Overview') !== -1)
                 setValue(0)
             else
-                if (history.location.pathname.indexOf('gantt') != -1)
+                if (history.location.pathname.indexOf('gantt') !== -1)
                     setValue(3)
 
     }, [window.location.pathname])
@@ -88,7 +88,7 @@ function SelectHeader(props) {
         if (window.location.href.indexOf('workspace') != -1 || window.location.href.indexOf('allProjects') != -1)
             props.history.push("/" + props.user + "/hub")
         else
-            if (window.location.href.indexOf('projectPlatform') != -1)
+            if (window.location.href.indexOf('projectPlatform') !== -1)
                 props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
     }
     function newProject(e) {
