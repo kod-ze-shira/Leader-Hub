@@ -8,11 +8,16 @@ import Background from '../../../../assets/img/down-arrow.svg';
 import { ProjectStyleLabel } from '../../project/projectStyle.style'
 
 function SelectProject(props) {
+    debugger
     const { idProject } = useParams();
+    let [project, setProject] = useState()
+    useEffect(() => {
+        setProject(props.workspaces[props.indexWorkspace].projects[props.indexProject]);
 
+    }, [props.indexWorkspace])
     //to chang the project that user selected
-    let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
     const changeSelectedProject = (id) => {
+        debugger
         props.setCurrentIndexProject(id.projectIndex)
         project = props.workspaces[props.indexWorkspace].projects.find(p => p._id == id.value)
         props.getCardsByProjectId(project._id)
@@ -38,13 +43,13 @@ function SelectProject(props) {
     const colourStyles = {
         control: (base, state) => ({
             ...base,
-            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             border: state.isFocused ? 0 : 0,
             // This line disable the blue border
             boxShadow: state.isFocused ? 0 : 0,
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+                backgroundColor: state.isFocused ? 'transparent' : 'transparent',
 
             }
         }),
@@ -100,11 +105,11 @@ function SelectProject(props) {
             } : null
         )) : null
     const placeholder = props.workspaces[props.indexWorkspace]?.projects[props.indexProject]?.name ?
-        <div className="d-flex flex-row" style={{ color: project.color }}>
+        <div className="d-flex flex-row" style={{ color: project && project.color }}>
             <div style={{ marginTop: '0.5px' }}>
-                <ProjectStyleLabel color={project.color}></ProjectStyleLabel>
+                <ProjectStyleLabel color={project && project.color}></ProjectStyleLabel>
             </div>
-            <span className="select-not-belong project-select-not-belong">{project.name}</span>
+            <span className="select-not-belong project-select-not-belong">{project && project.name}</span>
         </div >
         : "All Projects"
 
@@ -116,13 +121,13 @@ function SelectProject(props) {
             backgroundPosition: '90%',
             backgroundImage: `url(${Background})`,
             backgroundRepeat: 'no-repeat',
-            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             border: 0,
             // This line disable the blue border
             boxShadow: 0,
             "&:hover": {
                 border: 0,
-                backgroundColor: '#eeeeee',
+                backgroundColor: 'transparent',
             }
         })
     };

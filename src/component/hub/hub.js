@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useParams } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -21,6 +21,12 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
+// import './selectHeader.css'
+import SelectProject from './SelectHeader/selectProject/selectProject';
+import SelectWorkspace from './SelectHeader/selectWorkspace/selectWorkspace'
+import SelectCards from './SelectHeader/selectCards/selectCards'
+import SelectTask from './SelectHeader/selectTask/selectTask'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import AddObject from './addObject/addObject'
 // import HeaderLeader from '@leadercodes/Leader-header'
 // import ViewDetails from './viewDetails/viewDetails'
@@ -37,6 +43,7 @@ import RocketShip from './rocketShip/rocketShip'
 import ViewAllStatuses from '../hub/status/viewAllStatuses';
 import HeaderLeader from '@leadercodes/header';
 import ModalFiles from './modalFIles/modalFiles';
+import SelectHeader from './SelectHeader/SelectHeader';
 function Hub(props) {
     const [open, setOpen] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
@@ -50,6 +57,7 @@ function Hub(props) {
     const [openCalander, setOpenCalander] = useState(false)
     const [showRocketShip, setShowRocketShip] = useState(false)
     const [closeElementsOnScreen, setCloseElementsOnScreen] = useState(true)
+
     // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
@@ -74,9 +82,45 @@ function Hub(props) {
             props['remove' + objectToDelete[i].type](objectToDelete[i].object._id)
         }
     }
+    const [value, setValue] = useState(1);
+
+    const color = '#00C6EA'
+    // const { idProject } = useParams();
+
+    useEffect(() => {
+        debugger
+            // alert("yes")
+        if (props.workspaces.length == 0)
+            props.getAllWorkspaces()
+        if (history.location.pathname.indexOf('list') != -1)
+            setValue(2)
+        else
+            if (history.location.pathname.indexOf('Overview') != -1)
+                setValue(0)
+            else
+                if (history.location.pathname.indexOf('gantt') != -1)
+                    setValue(3)
+
+    }, [])
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const changeFlag = (value) => {
+        props.flag(value)
+    }
+    function backToPage() {
+
+        if (window.location.href.indexOf('workspace') != -1 || window.location.href.indexOf('allProjects') != -1)
+            props.history.push("/" + props.user + "/hub/")
+        else
+            if (window.location.href.indexOf('projectPlatform') != -1)
+                props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+    }
     const openConfigurator = () => {
         setOpen(!open);
     }
+
     const setShowToastDeletefunc = (value) => {
 
         setShowToastDelete(value)
@@ -153,9 +197,17 @@ function Hub(props) {
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div> */}
             <Router history={history}>
-                <div className='headerLeaderHub'>
+                {/* <div className='headerLeaderHub'>
                     <HeaderLeader userName={props.userName} appName='hub' />‏
-                </div>
+                </div> */}
+                    <SelectHeader
+                        //  number={number}
+                        flag={changeFlag}
+                        //  from={howToPresent} /
+                        menue={true}
+                        // type='projects'
+                         /> 
+
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="configuratorBlue col-2 ">
@@ -164,7 +216,7 @@ function Hub(props) {
                     </div>
 
                     <div onScroll={(e) => setShowContactList(false)} style={{ marginTop: '24px !important' }}
-                        className={open ? "bodyHub mt-3" : "col-12 bodyHub mx-2 mt-4"}>
+                        className={open ? "bodyHub " : "col-12 bodyHub mx-2 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -282,6 +334,8 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
+        workspace: state.workspace_reducer.workspace,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -291,7 +345,9 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
-        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces())
+        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces()),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+
     }
 
 

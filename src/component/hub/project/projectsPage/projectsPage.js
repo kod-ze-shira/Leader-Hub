@@ -25,10 +25,11 @@ function ProjectsPage(props) {
     }
     return (
         <div className="" >
-            <SelectHeader selectProject={selectProject} flag={changeFlag}
+
+            {/* <SelectHeader selectProject={selectProject} flag={changeFlag}
                 openViewDitailsAddProject={(e) => setAddProject(e)}
                 valueSearchProject={(e) => setValueSearchProject(e)}
-                from={from} menue={false} type='projects' />
+                from={from} menue={false} type='projects' /> */}
             <ProjectsByWorkspace
                 showToast={(object) => props.showToastDelete(object)}
                 valueSearchProject={valueSearchProject}

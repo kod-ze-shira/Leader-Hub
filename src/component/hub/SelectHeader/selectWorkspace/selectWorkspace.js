@@ -13,15 +13,21 @@ import Background from '../../../../assets/img/down-arrow.svg';
 const Input = props => <components.Input {...props} maxLength={5} />;
 
 function SelectWorkspace(props) {
-
+    debugger
     let { idWorkspace, idProject } = useParams();
     useEffect(() => {
+        debugger
         if (props.workspaces) {
+            if (idWorkspace == undefined) {
+                debugger
+                idWorkspace = window.location.pathname.split('/')[4]
+            }
             if (window.location.href.indexOf('workspace') != -1) {
                 // props.getProjectsByWorkspaceId(idWorkspace)
                 let w = props.workspaces.find(w => w._id == idWorkspace)
                 props.setWorkspace(w)
                 w = props.workspaces.findIndex(w => w._id == idWorkspace)
+                // if (w != -1)
                 props.saveIndexOfWorkspaceInRedux(w)
 
             }
@@ -47,10 +53,10 @@ function SelectWorkspace(props) {
                         }
                     }
         }
-    }, [props.workspace])
-    useEffect(() => {
-        // console.log("props.workspaces", props.workspaces);
-    }, [props.workspaces])
+    }, [props.workspace, props.indexOfWorkspace])
+    // useEffect(() => {
+    //     // console.log("props.workspaces", props.workspaces);
+    // }, [props.workspaces])
 
     //to change the workspace that user selected
     const changeSelectedWorkspace = (workspace) => {
@@ -82,21 +88,21 @@ function SelectWorkspace(props) {
             workspaceIndex: index
         }
     ))
-    const placeholderWorkspace =props.workspaces[props.indexOfWorkspace] ? 
-    <div className="d-flex flex-row" >
-                <div>
-                    <div className="  logo-w-little header-w-select "
-                        style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', textAlign: 'center' }}
-                    >
-                        {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
-                    </div>
+    const placeholderWorkspace = props.workspaces[props.indexOfWorkspace] ?
+        <div className="d-flex flex-row" >
+            <div>
+                <div className="  logo-w-little header-w-select "
+                    style={{ backgroundColor: props.workspaces[props.indexOfWorkspace].color, display: 'inline-block', textAlign: 'center' }}
+                >
+                    {props.workspaces[props.indexOfWorkspace].name ? props.workspaces[props.indexOfWorkspace].name[0].toUpperCase() : null}
                 </div>
-                <div className="select-not-belong header-w-name">
-                    { props.workspaces[props.indexOfWorkspace].name }
-                </div>
-            </div >
-   
-    : null
+            </div>
+            <div className="select-not-belong header-w-name">
+                {props.workspaces[props.indexOfWorkspace].name}
+            </div>
+        </div >
+
+        : null
     // const viewWorkspacesList = props.workspaces.map((workspace, index) => (
     //     {
     //         value: workspace._id,
@@ -115,13 +121,13 @@ function SelectWorkspace(props) {
             backgroundPosition: '90%',
             backgroundImage: `url(${Background})`,
             backgroundRepeat: 'no-repeat',
-            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             border: 0,
             // This line disable the blue border
             boxShadow: 0,
             "&:hover": {
                 border: 0,
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+                backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             }
         })
 

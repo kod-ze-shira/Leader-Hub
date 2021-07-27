@@ -13,6 +13,8 @@ import { useParams, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import history from "../../history"
 import newProject from '../project/newProject/newProject';
+import HeaderLeader from '@leadercodes/header';
+
 
 
 
@@ -39,8 +41,22 @@ function SelectHeader(props) {
 
     const color = '#00C6EA'
     const { idProject } = useParams();
+    const [showSelectHeader, setShowSelectHeader] = useState(false)
+
 
     useEffect(() => {
+        debugger
+        let url1 = "/" + props.user
+        let url2 = "/" + props.user + "/hub"
+        let check
+        if (window.location.pathname != url1 && window.location.pathname != url2) {
+            setShowSelectHeader(true)
+            console.log(showSelectHeader);
+        }
+        else
+            setShowSelectHeader(false)
+        // alert(true)
+
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
         if (history.location.pathname.indexOf('list') != -1)
@@ -52,7 +68,7 @@ function SelectHeader(props) {
                 if (history.location.pathname.indexOf('gantt') != -1)
                     setValue(3)
 
-    }, [])
+    }, [window.location.pathname])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -70,7 +86,7 @@ function SelectHeader(props) {
     function backToPage() {
 
         if (window.location.href.indexOf('workspace') != -1 || window.location.href.indexOf('allProjects') != -1)
-            props.history.push("/" + props.user + "/hub/")
+            props.history.push("/" + props.user + "/hub")
         else
             if (window.location.href.indexOf('projectPlatform') != -1)
                 props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
@@ -84,13 +100,28 @@ function SelectHeader(props) {
     }
     return (
         <>
-            <div className="s-header ml-0  row align-items-center">
+            <div className='headerLeaderHub row  '>
+                <div className=""></div>
+                <div className="ml-5">
+                    {/* <h2>Leader</h2> */}
 
+                    <img className="" src={require('../../../assets/img/logo-hub-header.png')}></img>
+
+                </div>
+                <div className="font-logo-header mr-5 ">
+                    <p>Leader hub</p>
+                    <p>{props.user}</p>
+                </div>
+
+                {/* <div className="s-header ml-0  row align-items-center"> */}
+                {/* 
                 <FontAwesomeIcon className="ml-3 back-header"
-                    onClick={backToPage} id='close' icon={["fas", "chevron-left"]} />
-                {props.workspaces.length > 0 ?
-                    <>
-                        <div className="col-5">
+                 onClick={backToPage} id='close' icon={["fas", "chevron-left"]} /> */}
+                <div className="col-5">
+
+                    {props.workspaces.length > 0 && showSelectHeader ?
+                        <>
+
                             <div className="row">
                                 <div className=" col-sm px-1">
                                     <SelectWorkspace workspaces={props.workspaces} projectPage={props.menue ? false : true} />
@@ -105,20 +136,34 @@ function SelectHeader(props) {
                                 <div className=" col-sm px-1">
                                     <SelectTask />
                                 </div>
-                            </div></div>
-                    </> : null}
+                            </div>
+                        </> : null}
+                </div>
+                {/* </div> */}
+                <div className={showSelectHeader ? "icons-header-with-select  icons-header" : "icons-header-without-select icons-header"}>
+                    <img className="" src={require('../../../assets/img/search-header.png')}></img>
+                    <img className="" src={require('../../../assets/img/king-header.png')}></img>
+                    <img className="" src={require('../../../assets/img/settings-header.png')}></img>
+                    {/* <div className='headerLeaderHub'> */}
+                        <HeaderLeader userName={props.userName} appName='hub' />‏
+                    {/* </div> */}
+                    {/* <img className="" src={require('../../../assets/img/profile-header.png')}></img> */}
+                </div>
 
+
+                {/* <HeaderLeader userName={props.userName} appName='hub' />‏ */}
+                {/* </div> */}
                 {window.location.href.indexOf('allProjects') != -1 ||
                     window.location.href.indexOf('workspace') != -1 ?
 
                     <>
                         {/* {window.location.href.indexOf('workspace') != -1 ? */}
-                        <div className='row col-5 offset-1' id='tabsAndList' >
+                        {/* <div className='row col-5 offset-1' id='tabsAndList' >
 
                             <div className="input-group inputSearchProject col-9 row mt-0 pr-0" >
                                 <div className="input-group-prepend">
                                     {/* <FontAwesomeIcon icon={["fas", "search"]} /> */}
-                                    <img src={require('../../../assets/img/onic-ios-search.png')} />
+                        {/* <img src={require('../../../assets/img/onic-ios-search.png')} />
                                 </div>
                                 <input type="text" className="col-10" placeholder="Search project..."
                                     onChange={(e) => props.valueSearchProject(e.target.value)}
@@ -127,7 +172,7 @@ function SelectHeader(props) {
                             <button className='buttonNewProject col-3' data-tip data-for="add_p"
                                 onClick={(e) => newProject(e)}
                             >+ New Project</button>
-                        </div>
+                        </div> */}
                         {/* :
                                 <div className='row col-4 pr-0' id='tabsAndList' >
                                     <div className="input-group inputSearchProject col-12 row pr-0">
@@ -148,7 +193,7 @@ function SelectHeader(props) {
 
                     <div className={classes.root} id='tabsAndList '>
                         {/* {props.menue ? */}
-                        <Tabs
+                        {/* <Tabs
                             className="offset-5"
                             value={value}
                             onChange={handleChange}
@@ -161,7 +206,7 @@ function SelectHeader(props) {
                             <Tab label="Cards" className='tabsInSelect' onClick={(e) => changePresent("tabs")} contenteditable="false" />
                             <Tab label="List" className='listInSelect' onClick={(e) => changePresent("list")} contenteditable="false" />
                             <Tab label="Gant" className='tabsInSelect' onClick={(e) => changePresent("gantt")} contenteditable="false" />
-                        </Tabs>
+                        </Tabs> */}
                     </div>
 
                 }

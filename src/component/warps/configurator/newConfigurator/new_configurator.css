@@ -1,6 +1,7 @@
 .left_nav{
-  
-  height:100vh;
+  /* margin-top: 60px; */
+  padding:0px !important;
+  height:90vh;
   background: #0A102E 0% 0% no-repeat padding-box;
   /* border: 1px solid #707070; */
   /* animation: openConfigurator 1s ; */
