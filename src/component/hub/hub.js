@@ -277,7 +277,7 @@ function Hub(props) {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.public_reducer.userName,
+        userName: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
