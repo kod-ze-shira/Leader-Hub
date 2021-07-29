@@ -66,7 +66,7 @@ function ListMembers(props) {
                 // ref={inputSearch}
                 type='text'
                 placeholder='name or email'
-                onChange={(e) => {searchContacts(e) }} />
+                onChange={(e) => { searchContacts(e) }} />
             {
                 contacts.length !== 0 ?
                     contacts.map(cl => < OneMemberToAdd member={cl}

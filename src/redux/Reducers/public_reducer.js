@@ -57,7 +57,7 @@ const publicData = {
     deleteFilesInTask(state, action) {
         for (let indexUrl = 0; indexUrl < action.payload.length; indexUrl++)
             for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
-                if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload[indexUrl])
+                if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url === action.payload[indexUrl])
                     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
             }
 
@@ -66,7 +66,7 @@ const publicData = {
         let myFiles = Object.values(action.payload.file)
         let indexTask
         for (let index = 0; index < state.tasks.length; index++) {
-            if (state.tasks[index]._id == action.payload.id)
+            if (state.tasks[index]._id === action.payload.id)
                 indexTask = index;
         }
         for (let index = 0; index < myFiles.length; index++) {
@@ -81,14 +81,13 @@ const publicData = {
     setTaskByFiledFromTasks(state, action) {
         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
         [action.payload.nameFiled] = action.payload.value
-        console.log(state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
-        [action.payload.nameFiled])
+
     },
 
     setTaskByFiledFromTasksNotBelong(state, action) {
         let indexTask;
         for (let index = 0; index < state.tasks.length; index++) {
-            if (state.tasks[index]._id == action.payload.idTask) {
+            if (state.tasks[index]._id === action.payload.idTask) {
                 indexTask = index
             }
         }
@@ -101,13 +100,13 @@ const publicData = {
         // dispatch(actions.setIdFiles(data.result.files));
         action.payload.map((file) => {
             state.arrFilesOfTask.map((myFile, index) => {
-                if (myFile.url == 'new' && file.name == file.name) {
+                if (myFile.url === 'new' && file.name === file.name) {
                     state.arrFilesOfTask[index]._id = file._id
                     state.arrFilesOfTask[index].url = file.url
                 }
             })
             state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.map((myFile, index) => {
-                if (myFile.url == file.url) {
+                if (myFile.url === file.url) {
                     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index]._id = file._id
                     // state.task._id = file._id
                     state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url = file.url
@@ -148,7 +147,7 @@ const publicData = {
         state.workspaces[state.indexOfWorkspace][action.payload.nameFiled] = action.payload.value
 
         // state.workspaces.forEach((workspace, index) => {
-        //     if (workspace._id == action.payload.workspace._id) {
+        //     if (workspace._id=== action.payload.workspace._id) {
         //         state.workspaces[index][action.payload.nameFiled] = action.payload.value
         //     }
         // })
@@ -156,7 +155,7 @@ const publicData = {
     setWorkspaceBeforeChanges(state, action) {
 
         state.workspaces.forEach((workspace, index) => {
-            if (workspace._id == action.payload._id) {
+            if (workspace._id === action.payload._id) {
                 state.workspaces[index] = action.payload
             }
         })
@@ -197,7 +196,6 @@ const publicData = {
     },
     setMilestones(state, action) {
         state.milestones = action.payload;
-        console.log(state.milestones)
     },
     addNewWorkspace(state, action) {
         state.workspaces.push(action.payload)
@@ -205,7 +203,7 @@ const publicData = {
 
     deletTask(state, action) {
         state.cards.map(card => {
-            if (card._id == action.payload.card)
+            if (card._id === action.payload.card)
                 card.tasks = card.tasks.filter((_, i) =>
                     card.tasks[i]._id !== action.payload._id
                 )
@@ -217,12 +215,9 @@ const publicData = {
         )
     },
     deleteCard(state, action) {
-        console.log(action.payload)
         state.cards = action.payload
-        // console.log("project",action.payload.project)
         // state.cards = state.cards.filter((_, i) =>      
-        //        {  console.log("filter",state.cards[i])
-        //         return state.cards[i]._id !== action.payload.project._id}   
+        //        {  return state.cards[i]._id !== action.payload.project._id}   
         // )
     },
 
@@ -230,7 +225,7 @@ const publicData = {
 
         let workspaceId = action.payload.workspace
         for (let i = 0; i < state.workspaces.length; i++) {
-            if (state.workspaces[i]._id == workspaceId) {
+            if (state.workspaces[i]._id === workspaceId) {
                 state.workspaces[i].projects.push(action.payload)
             }
         }
@@ -239,11 +234,10 @@ const publicData = {
 
     setNewTask(state, action) {
         let i, j
-        console.log("state.cards[i].tasks[j]._id action.payload._id")
         for (i = 0; i < state.cards.length; i++)
-            if (state.cards[i]._id == action.payload.card) {
+            if (state.cards[i]._id === action.payload.card) {
                 for (j = 0; j < state.cards[i].tasks.length; j++) {
-                    if (state.cards[i].tasks[j]._id == action.payload._id) {
+                    if (state.cards[i].tasks[j]._id === action.payload._id) {
                         state.cards[i].tasks[j] = action.payload
                         break
                     }
@@ -261,11 +255,10 @@ const publicData = {
         let i, j
         // console.log(state.cards[i].tasks[j]._id== action.payload._id)
         for (i = 0; i < state.cards.length; i++)
-            if (state.cards[i]._id == action.payload.card) {
+            if (state.cards[i]._id === action.payload.card) {
                 for (j = 0; j < state.cards[i].tasks.length; j++) {
-                    if (state.cards[i].tasks[j]._id == action.payload._id) {
+                    if (state.cards[i].tasks[j]._id === action.payload._id) {
                         state.cards[i].tasks[j] = action.payload
-                        console.log()
                     }
                 }
             }
@@ -306,7 +299,7 @@ const publicData = {
     },
     getCardsOfProject(state, action) {
         state.projects.find(project => {
-            if (project._id == action.payload)
+            if (project._id === action.payload)
                 state.cards = project.cards
             state.cardsEmpty = true
 
@@ -315,7 +308,7 @@ const publicData = {
 
     getTasksOfCard(state, action) {
         state.cards.find(card => {
-            if (card._id == action.payload)
+            if (card._id === action.payload)
                 state.tasks = card.tasks
         })
     },
@@ -329,20 +322,19 @@ const publicData = {
         let cards = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
         cards[cards.length] = action.payload
 
-        let a = state.workspaces[state.indexOfWorkspace].projects[state.indexCurrentProject].cards
-        console.log(a)
 
     },
     addTaskToTasksWhenAddTaskToServer(state, action) {
         state.cards.map(card => {
-            if (card._id == action.payload.card)
+            if (card._id === action.payload.card)
                 card.tasks.push(action.payload);
         })
     },
 
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
-        if (action.payload == undefined)
+        debugger
+        if (action.payload === undefined)
             state.workspaces = state.workspaces.filter((_, i) =>
                 state.workspaces[i]._id !== undefined)
 
@@ -351,11 +343,14 @@ const publicData = {
                 state.workspaces[i]._id !== action.payload._id
             )
     },
+    // deleteWorkspaceFromRedux(state, action) {
+    //     debugger
+    //     state.workspaces.filter((_,i) => workspace._id !== null)
+    // },
 
     setCardNameInput(state, action) {
-        console.log(action.payload)
         state.cards.map(card => {
-            if (card._id == action.payload._id)
+            if (card._id === action.payload._id)
                 card.name = action.payload.name;
         })
     },
@@ -375,7 +370,6 @@ const publicData = {
         state.workspaces[state.indexOfWorkspace] = action.payload
     },
 
-
     setCompleteTask(state, action) {
         state.tasks[action.payload.index].complete = action.payload.value
     },
@@ -390,9 +384,9 @@ const publicData = {
 
     setTaskFromTasks(state, action) {
         state.cards.forEach((card, index1) => {
-            if (card._id == action.payload.card) {
+            if (card._id === action.payload.card) {
                 card.tasks.forEach((task, index2) => {
-                    if (task._id == action.payload._id) {
+                    if (task._id === action.payload._id) {
                         state.cards[index1].tasks[index2] = action.payload
                     }
                 })
@@ -401,7 +395,7 @@ const publicData = {
     },
     setTaskFromTasksNotBelong(state, action) {
         state.tasks.forEach((task, index) => {
-            if (task._id == action.payload._id)
+            if (task._id === action.payload._id)
                 state.tasks[index] = action.payload
         })
     },
@@ -410,30 +404,30 @@ const publicData = {
     },
     removeFileInRedux(state, action) {
 
-        if (action.payload.url != 'new') {
-            let fileToDelete = state.arrFilesOfTask.find((file) => file.url == action.payload.url)
+        if (action.payload.url !== 'new') {
+            let fileToDelete = state.arrFilesOfTask.find((file) => file.url === action.payload.url)
             if (state.arrDeleteFilesOfTask.length) {
                 state.arrDeleteFilesOfTask.push(fileToDelete)
             }
             else {
                 state.arrDeleteFilesOfTask[0] = fileToDelete
             }
-            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url != action.payload.url)
+            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.url !== action.payload.url)
             if (state.cards && state.cards[state.indexCurrentCard] && state.cards[state.indexCurrentCard].tasks && state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]) {
                 for (let index = 0; index < state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.length; index++) {
-                    if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url == action.payload.url) {
+                    if (state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files[index].url === action.payload.url) {
                         state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
                         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files =
                         // state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].files.splice(index, 1)
                     }
                 }
 
-                // .filter((file) => file.url != action.payload.url)
+                // .filter((file) => file.url !==  action.payload.url)
             }
 
         }
         else {
-            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name != action.payload.name || file.url != 'new')
+            state.arrFilesOfTask = state.arrFilesOfTask.filter((file) => file.name !== action.payload.name || file.url !== 'new')
         }
 
     },

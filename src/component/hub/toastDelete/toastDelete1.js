@@ -11,7 +11,7 @@ export default function ToastDelete1(props) {
         to: { transform: "translate(-5%,0)" },
         config: { duration: 600 },//מהירות
         // reset: true,
-        //reverse: key % 2 == 0,
+        //reverse: key % 2=== 0,
         onRest: () => {
             setKey(key + 1);
         }

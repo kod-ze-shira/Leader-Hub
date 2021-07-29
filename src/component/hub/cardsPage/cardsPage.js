@@ -21,25 +21,25 @@ function CardsPage(props) {
         if (props.cards.length < 1) {
             props.getCardsByProjectId(idProject)
         }
-        if (props.contactsUser.length == 0)
+        if (props.contactsUser.length === 0)
             props.getContactsForUser()
 
-        if ((window.location.href.indexOf('list') != -1)) {
+        if ((window.location.href.indexOf('list') !== -1)) {
             setPresent("list")
             setNumber(1)
         }
         else
-            if ((window.location.href.indexOf('tabs') != -1)) {
+            if ((window.location.href.indexOf('tabs') !== -1)) {
                 setPresent("tabs")
                 setNumber(0)
             }
             else
-                if ((window.location.href.indexOf('gantt') != -1)) {
+                if ((window.location.href.indexOf('gantt') !== -1)) {
                     setPresent("gantt")
                     setNumber(3)
                 }
                 else
-                    if ((window.location.href.indexOf('Overview') != -1)) {
+                    if ((window.location.href.indexOf('Overview') !== -1)) {
                         setPresent("Overview")
                         setNumber(2)
                     }

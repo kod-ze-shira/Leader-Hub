@@ -53,16 +53,13 @@ function ViewCards(props) {
 
     const addTask = () => {
         props.setCard(props.cardFromMap)
-        setAddTaskInInput(!addTaskInInput)
+        setAddTaskInInput(true)
         if (props.cardFromMap.tasks.length)
-            if (!(props.flag == props.cardFromMap._id && flagFromSelect) && !flag) {
+            if (!(props.flag === props.cardFromMap._id && flagFromSelect) && !flag) {
                 changeSelectedCard()
             }
     }
-    const updateCardName = (event) => {
-        setEditCardName(event.target.value)
 
-    }
     const deleteCard = () => {
         // addNewStyle(`${props.cardFromMap._id} {display:none !important;}`)
         // document.getElementById(props.cardFromMap._id).setAttribute('style', 'display:none !important');
@@ -97,7 +94,7 @@ function ViewCards(props) {
     const changeSelectedCard = (e) => {
         triangleSide(props.cardFromMap._id)
         props.setCard(props.cardFromMap)
-        if (props.flag == props.cardFromMap._id && flagFromSelect == true) {
+        if (props.flag === props.cardFromMap._id && flagFromSelect === true) {
             setFlagFromSelect(false)
             setAddTaskInInput(false)
 
@@ -119,26 +116,26 @@ function ViewCards(props) {
     };
     const handleClose = (e) => {
         setAnchorEl(null);
-        if (e == "delete")
+        if (e === "delete")
             deleteCard()
         else
-            if (e == "rename") {
+            if (e === "rename") {
             }
 
     };
 
     $('span').bind('click',
         function () {
-            $(this).attr('contentEditable', true);
+            $(this).attr('contenteditable', true);
         });
 
-    $(window).on("click", function () {
-        setAddTaskInInput(false)
-    })
+    // $(window).click(function () {
+    //     setAddTaskInInput(false)
+    // })
 
     $('span').bind('blur',
         function () {
-            $(this).attr('contentEditable', false);
+            $(this).attr('contenteditable', false);
         });
 
     return (
@@ -203,7 +200,7 @@ function ViewCards(props) {
                     </ReactTooltip>
                 </a></p>
                 {
-                    props.flag == props.cardFromMap._id && flagFromSelect || flag ?
+                    props.flag === props.cardFromMap._id && flagFromSelect || flag ?
                         <div className="allTaskInCard">
                             <Droppable droppableId={props.cardFromMap._id}  >
                                 {provided => (
@@ -243,8 +240,8 @@ function ViewCards(props) {
                             }
                         }}
                     />
-                    : null
-                }
+                    : null}
+
 
                 {
                     viewDetails ?

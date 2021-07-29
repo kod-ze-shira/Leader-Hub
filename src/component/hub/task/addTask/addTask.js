@@ -23,7 +23,7 @@ function AddTask(props) {
         let cons1 = event.target.name
         let cons2 = event.target.value
 
-        if (cons1 == "dueDate") {
+        if (cons1 === "dueDate") {
             cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
         }

@@ -141,7 +141,7 @@ export const newProject = ({ dispatch, getState }) => next => action => {
     if (action.type === 'NEW_PROJECT') {
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newProject`
         let project = action.payload;
-        
+
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -175,14 +175,14 @@ export const editProjectInServer = ({ dispatch, getState }) => next => action =>
         console.log(action.payload);
         let project
         let projectBeforeChanges
-        if (action.payload == undefined)
+        if (action.payload === undefined)
             project = getState().public_reducer.workspaces[getState().public_reducer.indexOfWorkspace].projects[getState().public_reducer.indexCurrentProject]
         else {
             project = action.payload.project;
             projectBeforeChanges = action.payload.projectBeforeChanges;
         }
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/editProject`
-        
+
         $.ajax({
             url: urlData,
             type: 'POST',
@@ -244,7 +244,7 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 //this func to check the headers jwt and username, if them not good its throw to login
 function checkPermission(result) {
     return new Promise((resolve, reject) => {
-        if (result.status == "401") {
+        if (result.status === "401") {
             result.responseJSON.routes ?//in ajax has responseJSON but in in fetch has routes
                 window.location.assign(`${keys.API_URL_LOGIN}?routes=hub/${result.responseJSON.routes}`) :
                 result.routes ?

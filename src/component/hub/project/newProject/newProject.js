@@ -160,7 +160,7 @@ function NewProject(props) {
 
                         {/* <div className="form-control descriptionProject" name="description"
                             id="descriptionProject" rows="5" placeholder="Write a description about your project"
-                            ref={descriptionInput} contentEditable></div> */}
+                            ref={descriptionInput} contenteditable></div> */}
                     </div>
                     <div className="row justify-content-between" >
                         <div className="form-group col-5 ditailsAction col-md-4">

@@ -27,7 +27,7 @@ export function workspace(props) {
         $(".workspaces").click(function () {
             // $(".workspaces").css("border", "none");
             flag = !flag;
-            if (flag == false) {
+            if (flag === false) {
                 $(".workspace-list").hide();
                 $(".show").hide();
                 $(".arrow-down").css("transform", "rotate(1800deg)")

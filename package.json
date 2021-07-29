@@ -13,7 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@leadercodes/header": "^0.1.1",
-    "@material-ui/core": "^4.11.3",
+    "@material-ui/core": "^4.12.2",
     "@material-ui/data-grid": "^4.0.0-alpha.10",
     "@material/radio": "^9.0.0",
     "@material/react-tab": "^0.15.0",

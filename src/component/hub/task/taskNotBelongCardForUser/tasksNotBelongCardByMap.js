@@ -10,11 +10,11 @@ import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CreatableSelect from 'react-select/creatable';
-import { blue } from '@material-ui/core/colors';
+// import { blue } from '@material-ui/core/colors';
 // import {angleDown} from 'react-fa'
 import Background from '../../../../assets/img/down-arrow.svg';
 import ReactTooltip from 'react-tooltip';
-import {ProjectStyleLabel} from '../../project/projectStyle.style'
+import { ProjectStyleLabel } from '../../project/projectStyle.style'
 
 function TasksNotBelongCardByMap(props) {
 
@@ -55,14 +55,11 @@ function TasksNotBelongCardByMap(props) {
     // }
 
     function addChalalit() {
-        if (props.task.complete == false)
+        if (props.task.complete === false)
             props.showRocketShip(true)
-
-
     }
 
     const editCompleteTask = (complete) => {
-
         props.completeTask(props.task._id)
         doneStatus = !doneStatus
         if (doneStatus) {
@@ -73,7 +70,7 @@ function TasksNotBelongCardByMap(props) {
     const changeFiledInTask = (input) => {
         let indexTask
         for (let index = 0; index < props.tasks.length; index++) {
-            if (props.tasks[index]._id == props.task._id)
+            if (props.tasks[index]._id === props.task._id)
                 indexTask = index
         }
         let value = input.target.value
@@ -88,6 +85,7 @@ function TasksNotBelongCardByMap(props) {
         console.log(props.task._id)
         $(`#${props.task._id + "disappear"}`).css("display", "none")
         props.objectToast({ 'type': 'Task', 'object': props.task })
+
     }
 
     const workspaceSelect = props.workspaces ? props.workspaces.map((workspace) => (
@@ -120,7 +118,7 @@ function TasksNotBelongCardByMap(props) {
 
             let indexWorkspace
             for (let index = 0; index < props.workspaces.length; index++) {
-                if (props.workspaces[index]._id == newValue.value._id) {
+                if (props.workspaces[index]._id === newValue.value._id) {
                     indexWorkspace = index
                     setIndexOfWorkspace(index)
                     setIdWorkspace(props.workspaces[index]._id)
@@ -139,12 +137,12 @@ function TasksNotBelongCardByMap(props) {
     };
     const handleChangeProject = (newValue, actionMeta) => {
         if (newValue) {
-            //   props.options == 
+            //   props.options=== 
             let indexProject
             // setIndexOfProject(0) ;
             console.log(indexOfProject);
             for (let index = 0; index < myProjects.length; index++) {
-                if (myProjects[index]._id == newValue.value._id) {
+                if (myProjects[index]._id === newValue.value._id) {
                     setIndexOfProject(index);
                     indexProject = index;
                 }

@@ -15,8 +15,8 @@ function DisplayGantt(props) {
             theCards = []
             theTasks = []
             mone = []
-            cnt=-1;
-            i=1;
+            cnt = -1;
+            i = 1;
         }
     }, [])
 
@@ -25,10 +25,10 @@ function DisplayGantt(props) {
     let theCards = []
     let theTasks = []
     let mone = []
-    let cnt=-1;
-    let i=1;
+    let cnt = -1;
+    let i = 1;
     props.cards.map((card, index) => {
-        if (index == 0 & theCards.length > 0)
+        if (index === 0 & theCards.length > 0)
             theCards.clear()
         {
             theCards.push(card);
@@ -50,19 +50,19 @@ function DisplayGantt(props) {
         card.tasks.map((task, index1) => {
             let diffDays = calculateDiff(task.dueDate, task.startDate)
             let startDate = task.startDate.split("/")[2] + '-' + task.startDate.split("/")[1] + '-' + task.startDate.split("/")[0];
-            let cardName=null
-            let a = theTasks.find(task => task.cardName == card.name)
-         
+            let cardName = null
+            let a = theTasks.find(task => task.cardName === card.name)
+
             if (a)
                 cardName = null
-            else{
+            else {
 
-                
+
                 theTasks.push({
-                    index:i++,
+                    index: i++,
                     indexCard: cnt--,
                     indexTask: -1,
-                    card:-1,
+                    card: -1,
                     cardName: card.name,
                     priority: "not-show-task-gantt",
                     id: cnt--,
@@ -74,11 +74,11 @@ function DisplayGantt(props) {
                     contacts: [],
                 })
             }
-            if(diffDays===0){
-                diffDays =1;
+            if (diffDays === 0) {
+                diffDays = 1;
             }
             theTasks.push({
-                index:i++,
+                index: i++,
                 indexCard: index,
                 indexTask: index1,
                 card: card._id,
@@ -90,7 +90,7 @@ function DisplayGantt(props) {
                 duration: diffDays,
                 progress: 0.3,
                 milestones: task.milestones,
-                contacts: task.assignTo1.map((c)=>{return c?.contact?.thumbnail})
+                contacts: task.assignTo1.map((c) => { return c?.contact?.thumbnail })
             })
         })
         mone.push(index)
@@ -124,14 +124,14 @@ function DisplayGantt(props) {
         })
     }
 
-    currDate = currDate == undefined ? parseInt(new Date().getFullYear()) : parseInt(currDate)
+    currDate = currDate === undefined ? parseInt(new Date().getFullYear()) : parseInt(currDate)
     currDate = currDate + 2
     currDate = currDate.toString();
     currDate = currDate.concat('-01-01')
     maxYear = currDate;
     theTasks.push(
         {
-            "index":i++,
+            "index": i++,
             "indexCard": -1,
             "indexTask": -1,
             "card": -1,
@@ -144,7 +144,7 @@ function DisplayGantt(props) {
             "progress": 0.6,
             "milestones": null,
             status: {},
-            contacts:[]
+            contacts: []
         })
     const state = {
         currentZoom: 'Days',
@@ -160,7 +160,7 @@ function DisplayGantt(props) {
     const logDataUpdate = (type, action, item, id) => {
         let text = item && item.text ? ` (${item.text})` : '';
         let message = `${type} ${action}: ${id} ${text}`;
-        if (type === 'link' && action !== 'delete') {
+        if (type === 'link' && action !==  'delete') {
             message += ` ( source: ${item.source}, target: ${item.target} )`;
         }
         this.addMessage(message);

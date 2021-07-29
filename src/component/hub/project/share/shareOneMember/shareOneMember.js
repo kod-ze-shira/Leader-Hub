@@ -13,7 +13,7 @@ export default function ShareOneMember(props) {
     const [ifCheckedMember, setIfCheckedMember] = useState(true)
     let refToDivColor = useRef(null)
     const backgroundStyle = refToDivColor.current ?//because the color will render anyway
-        refToDivColor.current.style.backgroundColor != "" ?
+        refToDivColor.current.style.backgroundColor !== "" ?
             refToDivColor.current.style.backgroundColor :
             colors[Math.floor(Math.random() * colors.length)] :
         colors[Math.floor(Math.random() * colors.length)]
@@ -63,9 +63,9 @@ export default function ShareOneMember(props) {
                             <select className=" select_permission_one_member" onChange={(event) => props.changePermission(event.target.options[event.target.selectedIndex].label, props.member, props.teamId)}>
                                 {/* send teamId to change perrission to change petrmission of member from true team */}
                                 <option selected>{props.member.permission}</option>
-                                {props.member.permission != 'viewer' ? <option value="1">viewer</option> : null}
-                                {props.member.permission != 'editor' ? <option value="2">editor</option> : null}
-                                {props.member.permission != 'admin' ? <option value="3">admin</option> : null}
+                                {props.member.permission !== 'viewer' ? <option value="1">viewer</option> : null}
+                                {props.member.permission !== 'editor' ? <option value="2">editor</option> : null}
+                                {props.member.permission !== 'admin' ? <option value="3">admin</option> : null}
                             </select>
 
                         </div>

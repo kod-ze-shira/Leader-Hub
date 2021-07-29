@@ -122,7 +122,7 @@ function TaskNotBelongCardForUser(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 
 }

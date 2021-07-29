@@ -184,7 +184,7 @@ function TeamExample(props) {
 
     function isInList(email) {
 
-        return team.emailAndPermissionsArr.find(el => el.email == email)
+        return team.emailAndPermissionsArr.find(el => el.email === email)
 
     }
 
@@ -318,15 +318,15 @@ function TeamExample(props) {
 
                     </InputGroup>
 
-                    <Button className={permission == 'viewer' ? "choose" : ""}
+                    <Button className={permission === 'viewer' ? "choose" : ""}
                         onClick={() => setPermission('viewer')} variant="primary">
                         viewer
                     </Button>
-                    <Button className={permission == 'editor' ? "choose" : ""}
+                    <Button className={permission === 'editor' ? "choose" : ""}
                         onClick={() => setPermission('editor')} variant="primary">
                         editor
                     </Button>
-                    <Button className={permission == 'admin' ? "choose" : ""}
+                    <Button className={permission === 'admin' ? "choose" : ""}
                         onClick={() => setPermission('admin')} variant="primary">
                         admin
                     </Button>

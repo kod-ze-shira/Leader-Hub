@@ -32,11 +32,11 @@ function AddObject(props) {
                 props.setShowViewDitails('addWorkspace')
                 break;
             case 'Project':
-                if (window.location.href.indexOf('workspace') != -1)
+                if (window.location.href.indexOf('workspace') !== -1)
                     props.setShowViewDitails('newProject')
                 break;
             case 'Card':
-                if (window.location.href.indexOf('projectPlatform') != -1)
+                if (window.location.href.indexOf('projectPlatform') !== -1)
                     props.focusInputCard(true)
                 console.log('Card')
 
@@ -51,11 +51,11 @@ function AddObject(props) {
 
     function startComponentAddObject() {
 
-        // if (window.location.href.indexOf('workspace') != -1) {
+        // if (window.location.href.indexOf('workspace') !==  -1) {
         //     document.getElementById("newProjectInComponentAddObject").style.cursor = "pointer";
         // } else 
 
-        if (window.location.href.indexOf('workspace') == -1 && window.location.href.indexOf('projectPlatform') == -1) {
+        if (window.location.href.indexOf('workspace') === -1 && window.location.href.indexOf('projectPlatform') === -1) {
             document.getElementById("newProjectInComponentAddObject").style.cursor = "no-drop";
 
         }
@@ -63,12 +63,12 @@ function AddObject(props) {
             document.getElementById("newProjectInComponentAddObject").style.cursor = "pointer";
 
         }
-        if (window.location.href.indexOf('projectPlatform') == -1)
+        if (window.location.href.indexOf('projectPlatform') === -1)
             document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
         document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
         // }
         // else
-        //     if (window.location.href.indexOf('projectPlatform') == -1) {
+        //     if (window.location.href.indexOf('projectPlatform')=== -1) {
         //         document.getElementById("newCardInComponentAddObject").style.cursor = "no-drop";
         //         document.getElementById("newTaskInComponentAddObject").style.cursor = "no-drop";
         //         document.getElementById("newProjectInComponentAddObject").style.cursor = "no-drop";

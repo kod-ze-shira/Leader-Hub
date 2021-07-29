@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import FilesFolder from '../filesFolder/filesFolder'
-import download from '../../../../../assets/img/download.png'
-import ReactTooltip from 'react-tooltip'
-import title from '../../../../../Data/title.json'
 import { actions } from '../../../../../redux/actions/action'
 import './viewCards.css'
 
@@ -23,9 +20,9 @@ function ViewFilesByCards(props) {
     function addOrRemoveFolderToArr(e, folder) {
         // e.stopPropagation()
         let index = -1
-        foldersForDownloadArr.forEach((f, i) => f.cardId == folder.cardId ? index = i : null)
+        foldersForDownloadArr.forEach((f, i) => f.cardId === folder.cardId ? index = i : null)
 
-        if (index == -1) {
+        if (index === -1) {
             // ref.current.checked=true
             foldersForDownloadArr.push(folder)
             // props.downloadRef.current.disabled = false

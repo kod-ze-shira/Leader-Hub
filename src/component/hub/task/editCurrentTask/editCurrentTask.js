@@ -21,11 +21,11 @@ function EditCurrentTask(props) {
         let cons1 = event.target.name
         let cons2 = event.target.value
 
-        if (cons1 == "dueDate" || cons1 == "startDate") {
+        if (cons1 === "dueDate" || cons1 === "startDate") {
             cons2 = cons2.split("-")[2] + '/' + cons2.split("-")[1] + '/' + cons2.split("-")[0];
 
         }
-        // if (cons1 == "startDate" && cons2 < date)
+        // if (cons1=== "startDate" && cons2 < date)
         //     alert("yes")
 
         setAddTask(prevState => ({

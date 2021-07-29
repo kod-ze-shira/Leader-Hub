@@ -14,7 +14,7 @@ export default function ToastMessage(props) {
         to: { transform: "translate(-5%,0)" },
         config: { duration: 600 },//מהירות
         // reset: true,
-        //reverse: key % 2 == 0,
+        //reverse: key % 2=== 0,
         onRest: () => {
             setKey(key + 1);
         }
@@ -24,9 +24,9 @@ export default function ToastMessage(props) {
         <>
             <animated.div style={scrolling}>
                 <Toast className="toast_delete"
-                    // show={show} autohide>
                     onClose={() => props.viewToastMassege({ show: false })}
-                    show={show} autohide>
+                    // show={show}
+                     autohide>
                     <div className="border-top-gradient"></div>
                     <Toast.Header className="toast_header row justify-content-center" closeButton={false}>
                         <div className=" "></div>

@@ -14,7 +14,7 @@ function SelectProject(props) {
     let project = props.workspaces[props.indexWorkspace].projects[props.indexProject];
     const changeSelectedProject = (id) => {
         props.setCurrentIndexProject(id.projectIndex)
-        project = props.workspaces[props.indexWorkspace].projects.find(p => p._id == id.value)
+        project = props.workspaces[props.indexWorkspace].projects.find(p => p._id === id.value)
         props.getCardsByProjectId(project._id)
         props.history.push("/" + props.user + "/hub/projectPlatform/" + project._id)
     }
