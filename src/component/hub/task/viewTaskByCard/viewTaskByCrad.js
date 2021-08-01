@@ -317,18 +317,18 @@ function ViewTaskByCrad(props) {
                                 <label className="check-task border-left    px-2 col-assignee" onMouseOver={(e) => showAssign(e)}
                                     onMouseOut={(e) => closeAssign(e)}>
                                     <div className="assing-to-list">
-                                        {props.task.assignTo1 ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
-                                            {props.task.assignTo1 ? <img referrerPolicy="no-referrer" src={props.task.assignTo1.contact.thumbnail} className="thumbnail-contact ml-2" />
-                                                : <div className="logo-contact ml-2" >{props.task.assignTo1.contact.name ? props.task.assignTo1.contact.name[0] : null}</div>}
+                                        {props.task.assignTo ? <div className="assing-to" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >
+                                            {props.task.assignTo ? <img referrerPolicy="no-referrer" src={props.task.assignTo.contact.thumbnail} className="thumbnail-contact ml-2" />
+                                                : <div className="logo-contact ml-2" >{props.task.assignTo.contact.name ? props.task.assignTo.contact.name[0] : null}</div>}
                                         </div> : null}
-                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ?
+                                        {props.task.assignTo && props.task.assignTo.length > 0 ?
                                             <div className="widthofContacts col-4">
-                                                {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                                {props.task.assignTo ? props.task.assignTo.map((assingTo, index) => {
                                                     if (index < 3)
                                                         return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
                                                             : null
                                                 }) : null}
-                                                {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
+                                                {props.task.assignTo ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo.length > 3 ? props.task.assignTo.length - 3 : null}</div> : null}
                                             </div> : <img
                                                 className="ml-2"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}

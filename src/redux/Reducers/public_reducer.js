@@ -463,7 +463,7 @@ const publicData = {
 
     pushAssignToInRedux(state, action) {
 
-        let assign = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].assignTo1
+        let assign = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask].assignTo
         assign.push(action.payload)
         let a = state.cards[state.indexCurrentCard].tasks[state.indexCurrentTask]
     }

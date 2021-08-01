@@ -90,7 +90,7 @@ function DisplayGantt(props) {
                 duration: diffDays,
                 progress: 0.3,
                 milestones: task.milestones,
-                contacts: task.assignTo1.map((c) => { return c?.contact?.thumbnail })
+                contacts: task.assignTo.map((c) => { return c?.contact?.thumbnail })
             })
         })
         mone.push(index)
