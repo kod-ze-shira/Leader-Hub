@@ -107,8 +107,8 @@ function TaskDetails(props) {
     }
     const saveTask = async () => {
         if (nameRequired.current.value) {
-            // if (milstone)
-            //     props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
+            if (milstone)
+                props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
             props.objectBeforeChanges(null)
             let newFiles
             if (props.arrFilesOfTask)
@@ -175,8 +175,8 @@ function TaskDetails(props) {
                 if (input.target.name === "milestones") {
                     setMilstone(!props.task.milestones)
                     value = !milstone
-                    // if (!milstone)
-                    // props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
+                    if (!milstone)
+                    props.viewToastMassege({ show: true, massege: 'Task mark as milstone!!' })
                 }
         editTaskInRedux = { "nameFiled": input.target.name, "value": value }
         props.setTaskByFiledFromTasks(editTaskInRedux)
@@ -512,10 +512,10 @@ function TaskDetails(props) {
                              
                             </div>
                             {showContactList ?
-                                <ContactList closeContactList={(e) => setShowContactList(false)} taskDetails={true} ></ContactList> : null
+                                <ContactList viewToastMassege={props.viewToastMassege} closeContactList={(e) => setShowContactList(false)} taskDetails={true} ></ContactList> : null
                             }
                             <div className="widthofContacts col-4 mt-1 ml-1">
-                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1 ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1.map((assingTo, index) => {
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo.map((assingTo, index) => {
                                     if (index < 3)
                                         // return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
                                         return assingTo.contact !== null ? <> <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" /><p className="remove-member-from-assign" onClick={(e) => removeMemberFromAssign(assingTo.contact.email)}>x</p>
@@ -523,7 +523,7 @@ function TaskDetails(props) {
 
                                             : null
                                 }) : null}
-                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1 && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1.length > 3 ? <div className="imgContact  marginTeam">+{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1.length - 3}</div> : null}
+                                {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo && props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo.length > 3 ? <div className="imgContact  marginTeam">+{props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo.length - 3}</div> : null}
                             </div>
 
                             {/* <button onClick={(e) => completeTask(e)}>complete</button> */}

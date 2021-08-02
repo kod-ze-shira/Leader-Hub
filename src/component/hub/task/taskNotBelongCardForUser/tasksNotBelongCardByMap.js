@@ -39,12 +39,7 @@ function TasksNotBelongCardByMap(props) {
     let doneStatus = props.task?.complete;
     const [downloadFile, setDownloadFile] = useState(false)
     const [flag, setFlag] = useState(true)
-    useEffect(() => {
-        if (!props.workspaces.length) {
-            props.getAllWorkspacesFromServer()
-        }
 
-    }, [props.workspaces])
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
@@ -93,7 +88,7 @@ function TasksNotBelongCardByMap(props) {
             value: workspace, label:
                 <div className="d-flex flex-row" >
                     <div  >
-                        <div className="  logo-w-little "
+                        <div className="logo-w-little "
                             style={{ backgroundColor: workspace.color, display: 'inline-block', textAlign: 'center' }}
                         >
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
@@ -105,7 +100,7 @@ function TasksNotBelongCardByMap(props) {
                 </div >
         } : null
     )) : null
-
+   
     const selectPlaceHorder = <hr className="hr-place-holder" />
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
@@ -354,7 +349,6 @@ function TasksNotBelongCardByMap(props) {
                             value={indexOfWorkspace !== null ?
                                 workspaceSelect[indexOfWorkspace] : 'Select...'}
                             styles={style}
-
                         />
                         {/* <div className="drop-down"> 
                             <i className="fa fa-angle-down" aria-hidden="true"></i>
@@ -465,12 +459,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
-        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-        completeTask: (task) => dispatch(actions.completeTask(task)),
+       completeTask: (task) => dispatch(actions.completeTask(task)),
         setCompleteTask: (taskDetails) => dispatch(actions.setCompleteTask(taskDetails)),
         belongTask: (ids) => dispatch(actions.belongTask(ids)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TasksNotBelongCardByMap)

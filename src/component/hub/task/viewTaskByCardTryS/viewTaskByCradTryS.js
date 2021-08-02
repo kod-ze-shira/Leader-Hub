@@ -331,16 +331,16 @@ function ViewTaskByCradTryS(props) {
                                                     : <div className="logo-contact ml-2" >{props.task.assingTo.contact.name ? props.task.assingTo.contact.name[0] : null}</div>}
                                             </div>
                                             : null}
-                                        {props.task.assignTo1 && props.task.assignTo1.length > 0 ?
+                                        {props.task.assignTo && props.task.assignTo.length > 0 ?
                                             <div className="widthofContacts ">
-                                                {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                                {props.task.assignTo ? props.task.assignTo.map((assingTo, index) => {
                                                     if (index < 3)
                                                         // return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
                                                         return assingTo.contact ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeam" />
 
                                                             : null
                                                 }) : null}
-                                                {props.task.assignTo1 ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 3 ? props.task.assignTo1.length - 3 : null}</div> : null}
+                                                {props.task.assignTo ? <div className="imgTeam marginTeam" onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo.length > 3 ? props.task.assignTo.length - 3 : null}</div> : null}
                                             </div> : <img
                                                 className="ml-2"
                                                 onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })}
