@@ -13,16 +13,20 @@ import Background from '../../../../assets/img/down-arrow.svg';
 const Input = props => <components.Input {...props} maxLength={5} />;
 
 function SelectWorkspace(props) {
-
     let { idWorkspace, idProject } = useParams();
     useEffect(() => {
         if (props.workspaces) {
-            if (window.location.href.indexOf('workspace') !== -1) {
-                let w
+            if (idWorkspace == undefined) {
+                //לבדוק מקרי מקצה
+                idWorkspace = window.location.pathname.split('/')[4]
+            }
+            if (window.location.href.indexOf('workspace') != -1) {
                 // props.getProjectsByWorkspaceId(idWorkspace)
-                //  w = props.workspaces.find(w => w._id === idWorkspace)
+                let w 
+                // = props.workspaces.find(w => w._id === idWorkspace)
                 // props.setWorkspace(w)
-                w = props.workspaces.findIndex(w => w._id === idWorkspace)
+                w = props.workspaces.findIndex(w => w._id == idWorkspace)
+                // if (w != -1)
                 props.saveIndexOfWorkspaceInRedux(w)
 
             }
@@ -46,12 +50,10 @@ function SelectWorkspace(props) {
                         }
                     }
         }
-        // }, [props.workspace])
-    }, [])
-
-    useEffect(() => {
-        // console.log("props.workspaces", props.workspaces);
-    }, [props.workspaces])
+    }, [props.workspace, props.indexOfWorkspace])
+    // useEffect(() => {
+    //     // console.log("props.workspaces", props.workspaces);
+    // }, [props.workspaces])
 
     //to change the workspace that user selected
     const changeSelectedWorkspace = (workspace) => {
@@ -116,13 +118,13 @@ function SelectWorkspace(props) {
             backgroundPosition: '90%',
             backgroundImage: `url(${Background})`,
             backgroundRepeat: 'no-repeat',
-            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             border: 0,
             // This line disable the blue border
             boxShadow: 0,
             "&:hover": {
                 border: 0,
-                backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+                backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             }
         })
 

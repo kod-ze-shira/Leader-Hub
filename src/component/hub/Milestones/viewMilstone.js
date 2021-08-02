@@ -59,6 +59,8 @@ function ViewMilstone(props) {
                         closeViewDetails={() => setViewDetails(false)}
                         from={"viewTaskByCard"}
                         task={props.milestone.task}
+                        viewToastMassege={props.viewToastMassege}
+
                         // setDownloadFile={(e) => setDownloadFile(e)}
                         open={true}> </ViewDetails>
                 </div> : null}

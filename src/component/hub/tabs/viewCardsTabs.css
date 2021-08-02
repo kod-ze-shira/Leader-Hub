@@ -161,10 +161,11 @@ margin: auto !important;
   .MuiMenuItem-root{
       font-size: 0.9rem !important;
   }
-  /* .view-cards-tabs .card-body::-webkit-scrollbar {
-    background-color: #EDFBFC ;
-    width: 6px;
-  } */
+  .view-cards-tabs .card-body::-webkit-scrollbar {
+    display: none ;
+    /* background-color: #EDFBFC ;
+    width: 6px; */
+  }
   
    
     /* Track */

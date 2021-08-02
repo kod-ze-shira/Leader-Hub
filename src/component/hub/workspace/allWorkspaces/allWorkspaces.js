@@ -216,6 +216,8 @@ function AllWorkspaces(props) {
                             closeViewDetails={() => setShowWorkspace(false)}
                             from={addOrEditWorkspace} workspace={workspaceToEdit}
                             colorWorkspace={myColor}
+                            viewToastMassege={props.viewToastMassege}
+                            
                         />
                     </div> : null
             }

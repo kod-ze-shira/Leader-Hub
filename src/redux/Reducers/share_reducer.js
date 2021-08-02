@@ -20,7 +20,12 @@ const share = {
         })
         if (isContact === false)
             state.contactsUser.push(action.payload)
-    }
+    },
+    // removeMemberFromAssignToTask(state, action) {
+    //     state.contactsUser = state.contactsUser.filter((contact) => contact._id !== action.payload)
+
+    // }
+    
 }
 
 export default produce((state, action) => createReducer(state, action, share), initialState);

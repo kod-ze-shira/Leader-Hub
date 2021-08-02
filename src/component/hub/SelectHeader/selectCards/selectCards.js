@@ -35,13 +35,13 @@ function SelectCards(props) {
             backgroundPosition: '90%',
             backgroundImage: `url(${Background})`,
             backgroundRepeat: 'no-repeat',
-            backgroundColor: state.isFocused ? '#eeeeee' : 'white',
+            backgroundColor: state.isFocused ? 'transparent' : 'transparent',
             border: state.isFocused ? 0 : 0,
             // This line disable the blue border
             boxShadow: state.isFocused ? 0 : 0,
             "&:hover": {
                 border: state.isFocused ? 0 : 0,
-                backgroundColor: '#eeeeee',
+                backgroundColor: 'transparent',
             }
         })
     };

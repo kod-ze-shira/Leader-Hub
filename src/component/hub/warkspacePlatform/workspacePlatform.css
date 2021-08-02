@@ -1,0 +1,30 @@
+.warkspace-platform{
+    background-color:white;
+    height: 87vh;
+    border-radius: 5px; 
+}
+.warkspace-paltform-show{
+border:none;
+font-size: x-large;
+background-color: transparent;
+color:#778CA2;
+}
+.warkspace-paltform-show:focus{
+    outline: 0;
+}
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #778CA2;
+  }
+  .border-bottom{
+      background-color:#EAEAEA;
+      
+  }
+  .aa{
+      color:teal !important;
+      font-size: xx-large;
+      background-color: tomato !important;
+  }

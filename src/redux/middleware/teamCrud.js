@@ -242,7 +242,6 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ assign }),
 
       success: function (data) {
-
         console.log("success")
         console.log("data", data);
         // if (data.task.assignTo.contact)
@@ -261,6 +260,39 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
   }
   return next(action);
 }
+
+
+export const removeMemberFromAssign = ({ dispatch, getState }) => next => action => {
+  if (action.type === 'REMOVE_MEMBER_FROM_ASSIGN') {
+    let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
+      .tasks[getState().public_reducer.indexCurrentTask]._id
+    let email = action.payload
+    console.log(taskId);
+    let urlData = `${configData.SERVER_URL}/${getState().public_reducer.userName}/${taskId}/removeMemberFromAssign`
+    $.ajax({
+      url: urlData,
+      type: 'POST',
+      headers: {
+        Authorization: getState().public_reducer.tokenFromCookies
+      },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ email }),
+
+      success: function (data) {
+        console.log("success")
+        console.log("data", data);
+        dispatch(actions.removeMemberFromAssignToTask(data.task))
+      },
+      error: function (err) {
+        checkPermission(err).then((ifOk) => {
+        })
+      }
+    });
+
+  }
+  return next(action);
+}
+
 
 
 export const getMembersByProjectId = ({ dispatch, getState }) => next => action => {

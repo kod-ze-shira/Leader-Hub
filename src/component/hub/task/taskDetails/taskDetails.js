@@ -44,8 +44,10 @@ function TaskDetails(props) {
 
     let doneStatus = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete : null
     useEffect(() => {
+        doneStatus = props.cards[props.indexCurrentCard] ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete : null
+    }, [ props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].complete])
 
-
+    useEffect(() => {
     }, [props.arrFilesOfTask])
     useEffect(() => {
         return () => {
@@ -104,7 +106,6 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
-        debugger
         if (nameRequired.current.value) {
             if (milstone)
                 props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
@@ -190,6 +191,8 @@ function TaskDetails(props) {
         props.setWidthScreen(width)
         props.setHeightScreen(height)
         setShowContactList(true)
+        // props.viewToastMassege({ show: true, massege: 'Completed task!!' })
+
     }
     function closeViewDetailsInTask() {
         props.setTaskFromTasks(taskBeforeChanges)
@@ -231,7 +234,17 @@ function TaskDetails(props) {
         $(this).find('.files-task-hover').hide();
         $(this).find('.files-task').show();
     });
+    $('.complete-details ').hover(function () {
+        $(this).find('.delete-task').hide();
+        $(this).find('.complete-task-hover').show();
+    }, function () {
+        $(this).find('.complete-task-hover').hide();
+        $(this).find('.delete-task').show();
+    });
     const completeTask = () => {
+
+            doneStatus = !doneStatus
+            console.log("doneStatus:",doneStatus);
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1
@@ -240,33 +253,64 @@ function TaskDetails(props) {
         let completeTask = {
             "_id": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask]._id,
             "name": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name,
-            "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description,
+            "description": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].description:null,
             "dueDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].dueDate,
             "startDate": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate,
             "complete": doneStatus,
             "endDate": today,
             "likes": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].likes,
-            "assingTo": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assingTo,
+            "assignTo1": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
             "files": props.task.files ? props.task.files : null,
-            "priority": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority
-
+            "priority": props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority?props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].priority:null
         }
+       
         // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
         // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
-
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
             props.setCountReadyTasks(true)
             // setShowChalalit(true)
-
             props.viewToastMassege({ show: true, massege: 'Completed task!!' })
         }
         else {
             props.setCountReadyTasks(false)
         }
     }
+    const removeMemberFromAssign = (email) => {
+        // props.setCurrentIndexTask(currentIndexTask)
+        // props.setCurrentIndexCard(currentIndexCard)
+        props.removeMemberFromAssign(email)
+    }
+    autosize();
+    function autosize() {
+        var text = $('.autosize');
+
+        text.each(function () {
+            $(this).attr('rows', 1);
+            resize($(this));
+        });
+        $(".autosize").keydown(function (e) {
+            // Enter was pressed without shift key
+            if (e.key == 'Enter' && !e.shiftKey) {
+                resize($(this));
+
+                // prevent default behavior
+                e.preventDefault();
+            }
+            if (e.key == 'Enter') {
+                // editTask()
+            }
+
+        });
+
+        function resize($text) {
+            $text.css('height', 'auto');
+            $text.css('height', $text[0].scrollHeight + 'px');
+        }
+    }
+
     return (
         <>
             {
@@ -282,10 +326,8 @@ function TaskDetails(props) {
                                 <div className='row mt-4 justify-content-between headerDitails'>
                                     <h5 className=" title-view-details   pl-3">Task details</h5>
                                     {/* <img className="files-task-hover" src={require('../../../assets/img/close.svg')} ></img> */}
-
                                     <div className="close pr-3" onClick={() => closeViewDetailsInTask()}>x</div>
                                 </div>
-
                                 <div className="row justify-content-between mx-1" >
                                     <label>Create
                                         {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].startDate}</label>
@@ -293,8 +335,15 @@ function TaskDetails(props) {
                                         {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].updateDates : null}</label>
                                 </div>
                                 <div className="form-group" id='nameRequired'>
-                                    <label htmlFor="name">Name</label>
-                                    <input name="name"
+                                    <label for="name">Name</label>
+                                    <textarea
+                                        required ref={nameRequired}
+                                        className="autosize textarea-name-task form-control"
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} onClick={(e) => e.stopPropagation()}
+                                        name="name"
+                                        onChange={(e) => changeFiledInTask(e)}
+                                    />
+                                    {/* <input name="name"
                                         required ref={nameRequired}
                                         className="form-control"
                                         id="name"
@@ -303,8 +352,8 @@ function TaskDetails(props) {
                                         // value={taskName}
                                         // onBlur={(e) => editTaskInServer()}
                                         // onMouseLeave={(e) => alert("ff")}
-                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} />
-                                    <div className="invalid-feedback">
+                                        value={props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].name} /> */}
+                                    <div class="invalid-feedback">
                                         Please enter task name.
                                     </div>
                                 </div>
@@ -450,12 +499,17 @@ function TaskDetails(props) {
                                     {title.title_files}
                                 </ReactTooltip>
                             </div>
-                            <div className="delete-details mx-2" data-tip data-for="delete">
+                            <div className="delete-details mx-1" data-tip data-for="delete">
                                 <img className="delete-task" src={require('../../../../assets/img/delete-icon.svg')} onClick={(e) => deleteTask(e)} ></img>
                                 <img className="delete-task-hover" src={require('../../../../assets/img/delete-hover.png')} onClick={(e) => deleteTask(e)} ></img>
                                 <ReactTooltip className="tooltip-style" data-tip id="delete" place="top" effect="solid" >
                                     {title.title_delete}
                                 </ReactTooltip>
+                            </div>
+                            <div className="complete-details mx-1">
+                                <img className="delete-task" src={require('../../../../assets/img/delete-icon.svg')} ></img>
+                                <img className="complete-task-hover" src={require('../../../../assets/img/complete-hover.svg')} onClick={(e)=>completeTask(e)}></img>
+                             
                             </div>
                             {showContactList ?
                                 <ContactList viewToastMassege={props.viewToastMassege} closeContactList={(e) => setShowContactList(false)} taskDetails={true} ></ContactList> : null
@@ -464,7 +518,8 @@ function TaskDetails(props) {
                                 {props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo ? props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo.map((assingTo, index) => {
                                     if (index < 3)
                                         // return assingTo.contact.thumbnail ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
-                                        return assingTo.contact !== null ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" />
+                                        return assingTo.contact !== null ? <> <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgContact" /><p className="remove-member-from-assign" onClick={(e) => removeMemberFromAssign(assingTo.contact.email)}>x</p>
+                                        </>
 
                                             : null
                                 }) : null}
@@ -517,7 +572,10 @@ const mapDispatchToProps = (dispatch) => {
         setLeftContactList: (left) => dispatch(actions.saveLeftContactListInRedux(left)),
         setWidthScreen: (width) => dispatch(actions.saveWidthScreenInRedux(width)),
         setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
-
+        removeMemberFromAssign: (member) => dispatch(actions.removeMemberFromAssign(member)),
+        setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
+        completeTask: (task) => dispatch(actions.completeTask(task)),
+        setCountReadyTasks: (value) => dispatch(actions.setCountReadyTasks(value)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useParams } from 'react'
 import Body from './body/body';
 import Configurator from '../warps/configurator/newConfigurator/new_configurator';
 import {
@@ -21,6 +21,15 @@ import ToastDelete from './toastDelete/toastDelete1';
 import { actions } from '../../redux/actions/action'
 import { connect } from 'react-redux'
 import $ from 'jquery'
+// import './selectHeader.css'
+import SelectProject from './SelectHeader/selectProject/selectProject';
+import SelectWorkspace from './SelectHeader/selectWorkspace/selectWorkspace'
+import SelectCards from './SelectHeader/selectCards/selectCards'
+import SelectTask from './SelectHeader/selectTask/selectTask'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import AddObject from './addObject/addObject'
+// import HeaderLeader from '@leadercodes/Leader-header'
+// import ViewDetails from './viewDetails/viewDetails'
 import Milestones from './Milestones/Milestones'
 import ProtectedRoute from '../../ProtectedRoute/protectedRoute';
 import { Token } from '../../redux/Store/Store'
@@ -34,8 +43,9 @@ import RocketShip from './rocketShip/rocketShip'
 import ViewAllStatuses from '../hub/status/viewAllStatuses';
 import HeaderLeader from '@leadercodes/header';
 import ModalFiles from './modalFIles/modalFiles';
+import SelectHeader from './SelectHeader/SelectHeader';
 function Hub(props) {
-    const [open, setOpen] = useState(true);
+    const [openConfigurator, setOpenConfigurator] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastMassege, setShowToastMassege] = useState(false)
@@ -47,6 +57,7 @@ function Hub(props) {
     const [openCalander, setOpenCalander] = useState(false)
     const [showRocketShip, setShowRocketShip] = useState(false)
     const [closeElementsOnScreen, setCloseElementsOnScreen] = useState(true)
+
     // const [objectToDelete, setObjectToDelete] = useState()
 
     const showToastToDelete = (objectToDelete_) => {
@@ -71,9 +82,45 @@ function Hub(props) {
             props['remove' + objectToDelete[i].type](objectToDelete[i].object._id)
         }
     }
-    const openConfigurator = () => {
-        setOpen(!open);
+    const [value, setValue] = useState(1);
+
+    const color = '#00C6EA'
+    // const { idProject } = useParams();
+
+    useEffect(() => {
+
+        // alert("yes")
+        if (props.workspaces.length == 0)
+            props.getAllWorkspaces()
+        if (history.location.pathname.indexOf('list') != -1)
+            setValue(2)
+        else
+            if (history.location.pathname.indexOf('Overview') != -1)
+                setValue(0)
+            else
+                if (history.location.pathname.indexOf('gantt') != -1)
+                    setValue(3)
+
+    }, [])
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+    const changeFlag = (value) => {
+        props.flag(value)
     }
+    function backToPage() {
+
+        if (window.location.href.indexOf('workspace') != -1 || window.location.href.indexOf('allProjects') != -1)
+            props.history.push("/" + props.user + "/hub/")
+        else
+            if (window.location.href.indexOf('projectPlatform') != -1)
+                props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
+    }
+    // const openConfigurator = () => {
+    //     setOpen(!open);
+    // }
+
     const setShowToastDeletefunc = (value) => {
         let i = objectToDelete.length - 1
         setShowToastDelete(value)
@@ -150,19 +197,25 @@ function Hub(props) {
             {/*   <div onClick={openConfigurator} >
                 <img className="menu-open-close" src={require('../img/menu.png')}></img>
             </div> */}
-            <Router history={history} >
-                <div className='headerLeaderHub'>
+            <Router history={history}>
+                {/* <div className='headerLeaderHub'>
                     <HeaderLeader userName={props.userName} appName='hub' />‏
-                </div>
-                <div className="row back-screen" >
+                </div> */}
+                <SelectHeader
+                    openOrCloseConfigurator={() => setOpenConfigurator(!openConfigurator)}
+                    flag={changeFlag}
+                    menue={true}
+                />
+
+                <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="configuratorBlue col-2 ">
                         {/* <div className="col-2 px-0"> */}
-                        <Configurator openOrClose={(e) => setOpen(!open)} />
+                        {openConfigurator ? <Configurator /> : null}
                     </div>
 
                     <div onScroll={(e) => setShowContactList(false)} style={{ marginTop: '24px !important' }}
-                        className={open ? "bodyHub mt-3" : "col-12 bodyHub mx-2 mt-4"}>
+                        className={openConfigurator ? "bodyHub " : " col-12 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -193,6 +246,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
+                                    openConfigurator={openConfigurator}
                                     showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastMassege={(val) => setShowToastMassege(val)}
                                     showToastDelete={(object) => showToastToDelete(object)}
@@ -208,7 +262,12 @@ function Hub(props) {
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
-                                <Milestones showToastDelete={(obj) => { showToastToDelete(obj); setDeleteMilstone(true) }} />
+                                <Milestones
+                                    openConfigurator={openConfigurator}
+                                    showToastDelete={(obj) => {
+                                        showToastToDelete(obj);
+                                        setDeleteMilstone(true)
+                                    }} />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/ModalFiles"}>
@@ -217,7 +276,9 @@ function Hub(props) {
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName"}>
-                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <Body
+                                    openConfigurator={openConfigurator}
+                                    showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             {/* <ProtectedRoute path={"/:userName/hub/projectPlatform/:indexCurrentProject/Overview/:cardId"}>
                                 <ViewFilesOfProject />
@@ -275,6 +336,8 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
+        // workspace: state.workspace_reducer.workspace,
+        indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -284,7 +347,9 @@ const mapDispatchToProps = (dispatch) => {
         removeProject: (p) => dispatch(actions.deleteProjectInServer(p)),
         removeWorkspace: (worksapceId) => dispatch(actions.deleteWorkspaceFromServer(worksapceId)),
         addFile: (files) => dispatch(actions.addFile(files)),
-        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces())
+        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces()),
+        getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
+
     }
 
 

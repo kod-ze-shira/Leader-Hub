@@ -357,6 +357,7 @@ function ViewTaskByCrad(props) {
                                             from={detailsOrEditTask} task={props.task} open={true}
                                             setDownloadFile={(e) => setDownloadFile(e)}
                                             viewToastComplete={props.viewToastComplete}
+                                            viewToastMassege={props.viewToastMassege}
                                         > </ViewDetails>
                                     </div>
                                     : null}

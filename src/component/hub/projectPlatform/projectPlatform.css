@@ -1,16 +1,16 @@
 .body{
-  height: 85vh;;
+  height: 87vh;
   background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 5px;
     opacity: 1;  
     overflow-y: auto!important;
     /* box-shadow: 0px 3px 6px #00000029; */
-    margin-right: 10px;
-
+    margin-right: 25px;
+    margin-top: 10px;
   }
 
   .bodyListTak{
-    height: 85vh;
+    height: 87vh;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 5px;
     opacity: 1;
@@ -20,6 +20,7 @@
   }
   @media screen and (min-width: 1550px) {
     .body {
+      margin-top:10px;
       height: 87.7vh;
     }
     .card{

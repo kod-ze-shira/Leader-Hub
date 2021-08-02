@@ -39,7 +39,7 @@ function Milestones(props) {
     })
 
     return (
-        <div className="body-workspace ">
+        <div className={props.openConfigurator?"body-workspace":"body-workspace-without-configurator"}>
             <div className=" row justify-content-start mill mx-4 ">
                 <p className="milstoneTitle pl-3">My Milestones</p>
             </div >

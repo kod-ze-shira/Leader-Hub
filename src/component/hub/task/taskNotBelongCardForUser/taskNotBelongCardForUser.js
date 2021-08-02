@@ -50,7 +50,7 @@ function TaskNotBelongCardForUser(props) {
     })
 
     return (
-        <div className="body-workspace ">
+        <div className={props.openConfigurator?"body-workspace":"body-workspace-without-configurator"}>
             <div className='input-group-task-not-belongs d-flex '>
 
                 <button

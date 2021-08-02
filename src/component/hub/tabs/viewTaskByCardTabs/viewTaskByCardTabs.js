@@ -215,7 +215,6 @@ function ViewTaskByCradTabs(props) {
     }
 
     const changeFiledInTask = (event) => {
-
         props.setCurrentIndexTask(currentIndexTask)
         props.setCurrentIndexCard(currentIndexCard)
         let editTaskInRedux
@@ -288,6 +287,11 @@ function ViewTaskByCradTabs(props) {
         props.updateLike(props.task._id)
         setUserHasLike(!userHasLike)
         e.stopPropagation()
+    }
+    const removeMemberFromAssign = (email) => {
+        props.setCurrentIndexTask(currentIndexTask)
+        props.setCurrentIndexCard(currentIndexCard)
+        props.removeMemberFromAssign(email)
     }
 
     $('.span-name-task').on('DOMSubtreeModified', function (event) {
@@ -394,7 +398,7 @@ function ViewTaskByCradTabs(props) {
                                     </label>
                                     <div
                                         onClick={(e) => showAssigToOrCalander({ "e": e, "name": "status" })}
-                                        className={props.task.complete ? "status-task-tabs-opacity px-2 ml-5" : "status-task-tabs px-2 ml-5"}
+                                        className={props.task.complete ? "status-task-tabs-opacity px-2 " : "status-task-tabs px-2 "}
                                         style={{ "backgroundColor": props.task.status ? props.task.status.color : null }} >
                                         {props.task.status ? props.task.status.statusName : null}
                                     </div>
@@ -466,7 +470,7 @@ function ViewTaskByCradTabs(props) {
                                                 {props.task.assignTo && props.task.assignTo.length > 0 ? <div className="widthofContacts mr-1">
                                                     {props.task.assignTo ? props.task.assignTo.map((assingTo, index) => {
                                                         if (index < 2)
-                                                            return assingTo.contact ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
+                                                            return assingTo.contact ?<><img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" /></>
                                                                 : null
                                                     }) : null}
                                                     {props.task.assignTo ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo.length > 2 ? props.task.assignTo.length - 2 : null}</div> : null}
@@ -576,7 +580,9 @@ const mapDispatchToProps = (dispatch) => {
         setHeightScreen: (height) => dispatch(actions.saveHeightScreenInRedux(height)),
         setTaskComplete: (completeDetails) => dispatch(actions.setTaskComplete(completeDetails)),
         completeTask: (task) => dispatch(actions.completeTask(task)),
-        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact))
+        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
+        removeMemberFromAssign: (member) => dispatch(actions.removeMemberFromAssign(member)),
+
     }
 }
 

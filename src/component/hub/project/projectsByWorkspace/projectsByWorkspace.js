@@ -114,7 +114,7 @@ function ProjectsByWorkspace(props) {
                 <thead className="mx-3">
                     <tr className='projectsTitle'>
                         <th className='nameProjectInList'>
-                            <span className=''>{workspaceName}</span>
+                            <span className='name22ProjectInList'>{workspaceName}</span>
                         </th>
                         <th className='widthCellInProject'><span>Due Date</span></th>
                         <th ><span>Cards</span></th>

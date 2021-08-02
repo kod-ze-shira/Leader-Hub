@@ -23,6 +23,13 @@
     border-top: none !important;
     border-bottom: 0.5px solid rgb(209, 207, 207);
 }
+.name22ProjectInList{
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    margin-top: -23px;  
+}
 
 .name2ProjectInList{
     -webkit-box-orient: vertical;
