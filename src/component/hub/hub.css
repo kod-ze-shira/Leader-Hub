@@ -20,19 +20,24 @@ margin-left: 8vh;
   }
   @media screen and (min-width: 700px) {
     .icons-header-without-select{
-        margin-left: 370px;
+        /* margin-left: 370px; */
         padding-top: 3px; 
     }
     /* .icons-header-with-select{
         margin-left:50px;
     } */
   }
-  /* @media screen and (min-width: 850px) {
-    .icons-header{
-        margin-left:750px;
-    }
-  } */
+  @media screen and (min-width: 800px) {
+    /* .icons-header-without-select{
+        margin-left: 200px;
+        padding-top: 3px;    
+    } */
+  }
   @media screen and (min-width: 1150px) {
+    .icons-header-without-select{
+        margin-left: 370px;
+        padding-top: 3px;    
+    }
     .icons-header-with-select{
         margin-left: 370px;
         padding-top: 3px;    }

@@ -106,7 +106,6 @@ function TaskDetails(props) {
         return compressedFiles
     }
     const saveTask = async () => {
-        debugger
         if (nameRequired.current.value) {
             // if (milstone)
             //     props.viewToastMassege({ show: true, massege: 'Mark milstone!!' })
@@ -246,8 +245,6 @@ function TaskDetails(props) {
 
             doneStatus = !doneStatus
             console.log("doneStatus:",doneStatus);
-
-        debugger
         let today = new Date()
         let dd = today.getDate()
         let mm = today.getMonth() + 1

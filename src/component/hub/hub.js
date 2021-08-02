@@ -88,8 +88,8 @@ function Hub(props) {
     // const { idProject } = useParams();
 
     useEffect(() => {
-        debugger
-            // alert("yes")
+
+        // alert("yes")
         if (props.workspaces.length == 0)
             props.getAllWorkspaces()
         if (history.location.pathname.indexOf('list') != -1)
@@ -117,9 +117,9 @@ function Hub(props) {
             if (window.location.href.indexOf('projectPlatform') != -1)
                 props.history.push("/" + props.user + "/hub/workspace/" + props.workspaces[props.indexOfWorkspace]._id)
     }
-    const openConfigurator = () => {
-        setOpen(!open);
-    }
+    // const openConfigurator = () => {
+    //     setOpen(!open);
+    // }
 
     const setShowToastDeletefunc = (value) => {
         let i = objectToDelete.length - 1
@@ -201,19 +201,19 @@ function Hub(props) {
                 {/* <div className='headerLeaderHub'>
                     <HeaderLeader userName={props.userName} appName='hub' />‏
                 </div> */}
-                    <SelectHeader
-                        //  number={number}
-                        flag={changeFlag}
-                        //  from={howToPresent} /
-                        menue={true}
-                        // type='projects'
-                         /> 
+                <SelectHeader
+                    //  number={number}
+                    flag={changeFlag}
+                    //  from={howToPresent} /
+                    menue={true}
+                // type='projects'
+                />
 
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="configuratorBlue col-2 ">
                         {/* <div className="col-2 px-0"> */}
-                        <Configurator openOrClose={(e) => setOpen(!open)} />
+                        <Configurator openMenu={(val) => alert(val)} />
                     </div>
 
                     <div onScroll={(e) => setShowContactList(false)} style={{ marginTop: '24px !important' }}

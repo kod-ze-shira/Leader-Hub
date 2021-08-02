@@ -8,7 +8,6 @@ import Background from '../../../../assets/img/down-arrow.svg';
 import { ProjectStyleLabel } from '../../project/projectStyle.style'
 
 function SelectProject(props) {
-    debugger
     const { idProject } = useParams();
     let [project, setProject] = useState()
     useEffect(() => {
@@ -17,7 +16,6 @@ function SelectProject(props) {
     }, [props.indexWorkspace])
     //to chang the project that user selected
     const changeSelectedProject = (id) => {
-        debugger
         props.setCurrentIndexProject(id.projectIndex)
         project = props.workspaces[props.indexWorkspace].projects.find(p => p._id === id.value)
         props.getCardsByProjectId(project._id)

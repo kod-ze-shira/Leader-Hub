@@ -242,7 +242,6 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
       data: JSON.stringify({ assign }),
 
       success: function (data) {
-        debugger
         console.log("success")
         console.log("data", data);
         // if (data.task.assignTo1.contact)
@@ -265,7 +264,6 @@ export const assingToMany = ({ dispatch, getState }) => next => action => {
 
 export const removeMemberFromAssign = ({ dispatch, getState }) => next => action => {
   if (action.type === 'REMOVE_MEMBER_FROM_ASSIGN') {
-    debugger
     let taskId = getState().public_reducer.cards[getState().public_reducer.indexCurrentCard]
       .tasks[getState().public_reducer.indexCurrentTask]._id
     let email = action.payload
@@ -281,7 +279,6 @@ export const removeMemberFromAssign = ({ dispatch, getState }) => next => action
       data: JSON.stringify({ email }),
 
       success: function (data) {
-        debugger
         console.log("success")
         console.log("data", data);
         dispatch(actions.removeMemberFromAssignToTask(data.task))

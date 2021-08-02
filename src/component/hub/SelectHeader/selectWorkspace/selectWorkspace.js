@@ -13,13 +13,10 @@ import Background from '../../../../assets/img/down-arrow.svg';
 const Input = props => <components.Input {...props} maxLength={5} />;
 
 function SelectWorkspace(props) {
-    debugger
     let { idWorkspace, idProject } = useParams();
     useEffect(() => {
-        debugger
         if (props.workspaces) {
             if (idWorkspace == undefined) {
-                debugger
                 idWorkspace = window.location.pathname.split('/')[4]
             }
             if (window.location.href.indexOf('workspace') != -1) {

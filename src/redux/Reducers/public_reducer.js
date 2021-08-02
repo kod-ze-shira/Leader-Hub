@@ -337,7 +337,6 @@ const publicData = {
 
     //remove one workspace when go back from server
     removeOneWorkspaceFromWorkspaces(state, action) {
-        debugger
         if (action.payload === undefined)
             state.workspaces = state.workspaces.filter((_, i) =>
                 state.workspaces[i]._id !== undefined)

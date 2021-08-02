@@ -45,7 +45,6 @@ function SelectHeader(props) {
 
 
     useEffect(() => {
-        debugger
         let url1 = "/" + props.user
         let url2 = "/" + props.user + "/hub"
         let check
@@ -98,11 +97,20 @@ function SelectHeader(props) {
             props.openViewDitailsAddProject({ 'e': e, 'show': true })
 
     }
+    const [open, setOpen] = useState(true);
+    const openConfigurator1 = (e) => {
+        debugger
+        props.openMenu(!open);
+        console.log(open);
+    }
     return (
         <>
             <div className='headerLeaderHub row  '>
-                <div className=""></div>
-                <div className="ml-5">
+                {/*   <div onClick={openConfigurator} >
+                <img className="menu-open-close" src={require('../img/menu.png')}></img>
+            </div> */}
+                <img onClick={(e) => openConfigurator1(e)} className="ml-1" src={require('../../../assets/img/menu-4-16.png')}></img>
+                <div className="">
                     {/* <h2>Leader</h2> */}
 
                     <img className="" src={require('../../../assets/img/logo-hub-header.png')}></img>
@@ -145,7 +153,7 @@ function SelectHeader(props) {
                     <img className="" src={require('../../../assets/img/king-header.png')}></img>
                     <img className="" src={require('../../../assets/img/settings-header.png')}></img>
                     {/* <div className='headerLeaderHub'> */}
-                        <HeaderLeader userName={props.userName} appName='hub' />‏
+                    <HeaderLeader userName={props.userName} appName='hub' />‏
                     {/* </div> */}
                     {/* <img className="" src={require('../../../assets/img/profile-header.png')}></img> */}
                 </div>
