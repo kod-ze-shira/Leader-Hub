@@ -105,8 +105,6 @@ function AddObject(props) {
 export default connect(
     (state) => {
         return {
-            // workspaceToEdit: state.workspace_reducer.workspace,
-
 
         }
     },

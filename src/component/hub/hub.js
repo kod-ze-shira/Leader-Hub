@@ -182,10 +182,6 @@ function Hub(props) {
                                 />
                             </ProtectedRoute>
 
-                            {/* <ProtectedRoute path={"/workspacePlatform"}>
-                                <WorkspacePlatform />
-                            </ProtectedRoute> */}
-
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     closeCalendarOrContact={(e) => setCloseElementsOnScreen(e)}

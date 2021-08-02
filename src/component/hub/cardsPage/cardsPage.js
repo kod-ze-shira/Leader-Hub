@@ -43,8 +43,22 @@ function CardsPage(props) {
                         setPresent("Overview")
                         setNumber(2)
                     }
-
+        if (!props.statuses) {
+            props.getAllStatusesTaskForWorkspace()
+        }
     }, [])
+
+    useEffect(() => {
+        for (let i = 0; i < props.workspaces.length; i++) {
+            let projectIndex = props.workspaces[i].projects.findIndex((p) => p._id === idProject)
+            if (projectIndex >= 0) {
+                props.setIndexOfWorkspace(i)
+                props.setCurrentIndexProject(projectIndex)
+
+            }
+        }
+
+    }, [props.workspaces, props.cards])
 
     const changeFlag = (value) => {
         setFlag(value)
@@ -77,7 +91,6 @@ function CardsPage(props) {
             case 'Overview':
                 return <Overview />
             default:
-                // return <Tabs showToast={showToast} projectId={props.project._id} />
                 return <ProjectPlatform
                     closeCalendarOrContact={props.closeCalendarOrContact}
                     showRocketShip={props.showRocketShip}
@@ -99,11 +112,9 @@ function CardsPage(props) {
 const mapStateToProps = (state) => {
     return {
         workspaces: state.public_reducer.workspaces,
-        project: state.project_reducer.project,
         cards: state.public_reducer.cards,
         statuses: state.status_reducer.statuses,
         contactsUser: state.share_reducer.contactsUser,
-
     }
 }
 
@@ -111,6 +122,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         getContactsForUser: () => dispatch(actions.getContactsForUser()),
+        getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
+        setIndexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
+        setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
 
     }
 }

@@ -7,12 +7,9 @@ import './cardsByProject.css'
 
 function CardsByProject(props) {
 
+  
     useEffect(() => {
-        // props.getCardsByProjectId(props.projectId)
 
-    }, [props.projectId])
-    useEffect(() => {
-        // props.getCardsByProjectId(props.projectId)
     }, [])
 
     // function onDragEndׂ(e) {
@@ -127,168 +124,6 @@ function CardsByProject(props) {
 
                         )} */}
                     </div>
-                    {/* <div className="table-responsive">
-                        <table className="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <div>
-                                        <th>
-                                            <div scope="col">A</div></th>
-                                        <th>
-                                            <div scope="col">B</div></th>
-                                        <th>
-                                            <div scope="col">C</div></th>
-                                        <th>
-                                            <div scope="col">D</div></th>
-                                    </div>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"gfeewfewfwef"</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                    <div className="table-responsive">
-                        <table className="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <div scope="col">A</div></th>
-                                    <th>
-                                        <div scope="col">B</div></th>
-                                    <th>
-                                        <div scope="col">C</div></th>
-                                    <th>
-                                        <div scope="col">D</div></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div>"fewf"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"fwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"fwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"dvewf"</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>"fewfew"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"fewfw"</div>
-                                    </td>
-                                    <td>
-                                        <div>"fwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"fwef"</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>"fewf"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"fw"</div>
-                                    </td>
-                                    <td>
-                                        <div>"fwef"</div>
-                                    </td>
-                                    <td>
-                                        <div>"fwqf"</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>"fw"</div>
-
-                                    </td>
-                                    <td>
-                                        <div>"efwe"</div>
-                                    </td>
-                                    <td>
-                                        <div>"efdewq"</div>
-                                    </td>
-                                    <td>
-                                        <div>"ydgwjw"</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> */}
-
                 </DragDropContext>
                 :
                 <div className="logoGif"><img src={require('../../../../assets/img/hub.gif')} /></div>
@@ -307,8 +142,6 @@ export default connect(
     },
     (dispatch) => {
         return {
-            getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-            getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),
             dragTask: (cardOfTask) => dispatch(actions.dragTask(cardOfTask)),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),

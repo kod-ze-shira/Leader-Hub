@@ -7,15 +7,11 @@ import { actions } from '../../../../redux/actions/action'
 import { InputGroup, FormControl, Table } from 'react-bootstrap'
 // import './viewTaskByCard.css'
 // import './viewTaskByCrad.css'
-import Select from 'react-select';
-
 import ViewDetails from '../../viewDetails/viewDetails'
 import $ from 'jquery';
 import Animation from '../../animation/animation'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import task_reducer from '../../../../redux/Reducers/task_reducer';
-// import Toast from '../../toast/toastMessage'
 import DynamicSelect from '../../team/dynamicSelect';
 
 function ViewTaskByCradTryS(props) {
@@ -400,7 +396,6 @@ const mapStateToProps = (state) => {
     return {
         userId: state.public_reducer.userId,
         tasks: state.public_reducer.tasks,
-        taskReducer: state.task_reducer.task,
         cards: state.public_reducer.cards,
         statuses: state.status_reducer.statuses,
         indexCurrentCard: state.public_reducer.indexCurrentCard,

@@ -174,7 +174,6 @@ const mapStateToProps = (state) => {
     return {
         cards: state.public_reducer.cards,
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.workspace,
         user: state.public_reducer.userName,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
@@ -182,7 +181,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
     }
 }

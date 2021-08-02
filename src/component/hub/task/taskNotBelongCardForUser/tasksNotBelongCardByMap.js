@@ -24,15 +24,9 @@ function TasksNotBelongCardByMap(props) {
     const [cardId, setCardId] = useState()
     const [myProjects, setMyProjects] = useState([])
     const [myCards, setMyCards] = useState()
-    const [myWorkspace, setMyWorkspace] = useState()
     // const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [idWorkspace, setIdWorkspace] = useState()
     const [indexOfWorkspace, setIndexOfWorkspace] = useState()
-    const [task, setTask] = useState({
-        "_id": props.task._id, "name": props.task.name, "description": props.task.description
-        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-    })
-
     const [indexOfProject, setIndexOfProject] = useState(null);
     const [indexOfCard, setIndexOfCard] = useState(null);
 
@@ -44,7 +38,9 @@ function TasksNotBelongCardByMap(props) {
             props.getAllWorkspacesFromServer()
         }
 
-    }, [props.workspaces])
+    // }, [props.workspaces])
+}, [])
+
     useEffect(() => {
         doneStatus = props.task.complete
     }, [props.task.complete])
@@ -126,7 +122,6 @@ function TasksNotBelongCardByMap(props) {
             }
 
             // chooseWorkspace()
-            setMyWorkspace('selectedWorkspace')
             setTimeout(() => {
                 setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
 
@@ -284,7 +279,7 @@ function TasksNotBelongCardByMap(props) {
     return (
         <>
             <div
-                style={{ 'min-height': '47px' }}
+                style={{ 'minHeight': '47px' }}
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
@@ -304,7 +299,7 @@ function TasksNotBelongCardByMap(props) {
                                 type="checkbox"
                                 name="name" id="name"
                                 data-tip data-for="task_not_belong_name"
-                                checked={props.task.complete}
+                                // checked={props.task.complete}
                                 className={props.task.complete ?
                                     "disabled show-card " : "show-card "}
                             />

@@ -17,7 +17,7 @@ export const getWorkspaceByIdFromServer = ({ dispatch, getState }) => next => ac
         }).then((result) => {
             console.log(result)
             checkPermission(result).then((ifOk) => {
-                dispatch(actions.setWorkspace(result.result))
+                // dispatch(actions.setWorkspace(result.result))
 
             })
         })
@@ -63,7 +63,7 @@ export const addNewWorkspaceToServer = ({ dispatch, getState }) => next => actio
 
     if (action.type === 'ADD_NEW_WORKSPACE_TO_SERVER') {
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/newWorkspace`
-        let workspace = action.payload
+        let workspace = getState().public_reducer.workspaces[getState().public_reducer.workspaces.length - 1]
         $.ajax({
             url: urlData,
             method: 'POST',
@@ -123,9 +123,8 @@ export const deleteWorkspaceFromServer = ({ dispatch, getState }) => next => act
 
     if (action.type === 'DELETE_WORKSPACE_FROM_SERVER') {
         let workspaceId = action.payload
-        let workspace = getState().workspace_reducer.workspace;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${workspaceId}/removeWorkspaceById`
-
+        debugger
         $.ajax({
             url: urlData,
             type: 'POST',

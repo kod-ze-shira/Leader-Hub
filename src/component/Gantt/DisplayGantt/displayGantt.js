@@ -160,7 +160,7 @@ function DisplayGantt(props) {
     const logDataUpdate = (type, action, item, id) => {
         let text = item && item.text ? ` (${item.text})` : '';
         let message = `${type} ${action}: ${id} ${text}`;
-        if (type === 'link' && action !==  'delete') {
+        if (type === 'link' && action !== 'delete') {
             message += ` ( source: ${item.source}, target: ${item.target} )`;
         }
         this.addMessage(message);
@@ -197,7 +197,6 @@ const mapStateToProps = (state) => {
         workspaces: state.public_reducer.workspaces,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-        project: state.project_reducer.project
     }
 }
 const mapDispatchToProps = (dispatch) => {

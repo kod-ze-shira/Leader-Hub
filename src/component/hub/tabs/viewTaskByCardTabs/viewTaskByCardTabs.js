@@ -20,7 +20,6 @@ function ViewTaskByCradTabs(props) {
     const textInput = useRef();
     const [currentIndexTask, setCurrentIndexTask] = useState("")
     const [currentIndexCard, setCurrentIndexCard] = useState("")
-    const [showchalalit, setShowChalalit] = useState(false)
     const [userHasLike, setUserHasLike] = useState(false)
 
     let actionCard = { renameCard: "rename", deleteCard: "delete", viewCard: "viewCard" };
@@ -152,7 +151,6 @@ function ViewTaskByCradTabs(props) {
         }
         // let project = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject]
         // props.editProjectInServer({ 'project': { 'id': project._id, 'countReadyTasks': project.countReadyTasks + 1 } })
-
         props.setTaskComplete(completeTask)//redux
         props.completeTask(completeTask)//server
         if (doneStatus) {
@@ -233,6 +231,7 @@ function ViewTaskByCradTabs(props) {
             doneStatus = !doneStatus
             value = doneStatus
             editCompleteTask()
+            
         }
         else {
 
@@ -262,16 +261,14 @@ function ViewTaskByCradTabs(props) {
                     // text = event.replace(text, '')
                 }
             }
-
+        
             editTaskInRedux = { "nameFiled": event.target.name, "value": value }
             props.setTaskByFiledFromTasks(editTaskInRedux)
         }
-        // }
+
     }
 
     function addChalalit(e) {
-        // if (props.task.complete=== false)
-        // setShowChalalit(true)
         e.stopPropagation()
     }
 
@@ -551,7 +548,6 @@ const mapStateToProps = (state) => {
         userId: state.public_reducer.userId,
         tasks: state.public_reducer.tasks,
         cards: state.public_reducer.cards,
-        card: state.card_reducer.card,
         workspaces: state.public_reducer.workspaces,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexCurrentCard: state.public_reducer.indexCurrentCard,

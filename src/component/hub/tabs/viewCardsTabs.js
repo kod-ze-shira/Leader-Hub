@@ -18,7 +18,7 @@ function ViewCardsTabs(props) {
             if (props.openInputTask && props.cards[props.indexCurrentCard]._id === props.cardFromMap._id) {
                 document.getElementById("add-new-card").focus();
                 setAddTaskInInput(true)
-                props.setCard(props.cardFromMap)
+                // props.setCard(props.cardFromMap)
             }
     }, [props.flag, props.openInputTask])
 
@@ -46,8 +46,9 @@ function ViewCardsTabs(props) {
             task = {
                 name: inputValue, description: "",
                 // status: status,
-                startDate: today, dueDate: today, "card": props.card._id
+                startDate: today, dueDate: today, "card": props.cardFromMap._id
             }
+            debugger
             props.newTask(task)
             //לבדוק נפילה
             let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
@@ -60,16 +61,13 @@ function ViewCardsTabs(props) {
 
     const addTask = (e) => {
         setAddTaskInInput(!addTaskInInput)
-        props.setCard(props.cardFromMap)
+        // props.setCard(props.cardFromMap)//becouse delete card
         e.stopPropagation();
 
     }
-    // const updateCardName = (event) => {
-
-    //     setEditCardName(event.target.value)
-    // }
+   
     const editCard = (event) => {
-        let card = { "_id": props.cardFromMap._id, "name": textInput.current.innerHTML, "project": props.project._id }
+        let card = { "_id": props.cardFromMap._id, "name": textInput.current.innerHTML, "project": props.cardFromMap.project }
         console.log("edut-card", card)
         props.editCard(card);
     }
@@ -249,11 +247,7 @@ function ViewCardsTabs(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        project: state.project_reducer.project,
         cards: state.public_reducer.cards,
-        card: state.card_reducer.card,
-        task: state.task_reducer.task,
-        tasks: state.public_reducer.tasks,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
@@ -265,7 +259,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setCountTasks: (count) => dispatch(actions.setCountTasks(count)),
-        setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         editCard: (card) => dispatch(actions.editCard(card)),

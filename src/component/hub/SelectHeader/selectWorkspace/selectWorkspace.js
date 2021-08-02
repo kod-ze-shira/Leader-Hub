@@ -18,9 +18,10 @@ function SelectWorkspace(props) {
     useEffect(() => {
         if (props.workspaces) {
             if (window.location.href.indexOf('workspace') !== -1) {
+                let w
                 // props.getProjectsByWorkspaceId(idWorkspace)
-                let w = props.workspaces.find(w => w._id === idWorkspace)
-                props.setWorkspace(w)
+                //  w = props.workspaces.find(w => w._id === idWorkspace)
+                // props.setWorkspace(w)
                 w = props.workspaces.findIndex(w => w._id === idWorkspace)
                 props.saveIndexOfWorkspaceInRedux(w)
 
@@ -28,7 +29,6 @@ function SelectWorkspace(props) {
             else
                 if (window.location.href.indexOf('allProjects') !== -1) {
                     props.saveIndexOfWorkspaceInRedux(0)
-                    props.setWorkspace(props.workspaces[0])
                 }
                 else
                     if (window.location.href.indexOf('projectPlatform') !== -1) {
@@ -38,16 +38,17 @@ function SelectWorkspace(props) {
                                 if (idProject === props.workspaces[index].projects[j]._id) {
                                     props.saveIndexOfWorkspaceInRedux(index)
 
-                                    props.setWorkspace(props.workspaces[index])
-                                    props.setProject(props.workspaces[index].projects[j])
-                                    //sssssssss
+                                    // props.setWorkspace(props.workspaces[index])
+                                    // props.setProject(props.workspaces[index].projects[j])
                                     // props.getCardsByProjectId(props.workspaces[index].projects[j]._id)
                                 }
                             }
                         }
                     }
         }
-    }, [props.workspace])
+        // }, [props.workspace])
+    }, [])
+
     useEffect(() => {
         // console.log("props.workspaces", props.workspaces);
     }, [props.workspaces])
@@ -161,9 +162,7 @@ function SelectWorkspace(props) {
 const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
-        project: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.workspace,
         cards: state.public_reducer.cards,
         user: state.public_reducer.userName,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace
@@ -174,11 +173,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         saveIndexOfWorkspaceInRedux: (indexWorkspace) => dispatch(actions.saveIndexOfWorkspaceInRedux(indexWorkspace)),
         setCards: (c) => dispatch(actions.setCards(c)),
-        setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
-        setProject: (project) => dispatch(actions.setProject(project)),
         setProjects: (project) => dispatch(actions.setProjects(project)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
 

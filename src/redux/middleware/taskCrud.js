@@ -17,7 +17,7 @@ export const getTaskByIdFromServer = ({ dispatch, getState }) => next => action 
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setTask(data.result))
+                // dispatch(actions.setTask(data.result))
                 console.log("success")
                 console.log("data", data);
 
@@ -374,7 +374,6 @@ export const completeTask = ({ dispatch, getState }) => next => action => {
 export const removeTaskById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_TASK_BY_ID') {
-        // let workspace = getState().workspace_reducer;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${action.payload}/removeTaskById`
         $.ajax({
             url: urlData,

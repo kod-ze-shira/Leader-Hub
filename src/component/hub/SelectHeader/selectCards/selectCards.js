@@ -9,24 +9,21 @@ function SelectCards(props) {
 
 
     useEffect(() => {
-        if (props.cards[0])
-            props.setCard(props.cards[0])
+     
 
     }, [])
 
 
     //to chang the card that user selected
-    let myCard = props.card;
 
+    let myCard; let cardIndex
     const changeSelectedCard = (id) => {
         myCard = props.cards.find(p => p._id === id.value)
-        props.setCard(myCard)
-        props.flag(myCard._id)
-        // if (myCard.tasks[0])
-        //     props.setTask(myCard.tasks[0])
-        // else
-        //     props.setTaskName("No Cards")
+        cardIndex = props.cards.findIndex(p => p._id === id.value)
+        props.setCurrentIndexCard(cardIndex)
+        props.flag(myCard._id)//to open card in list page
     }
+
     const viewCardsList = props.cards.length ? props.cards.map((card) => (
         card !== null ? { value: card._id, label: card.name } : null
     )) : null;
@@ -66,7 +63,6 @@ function SelectCards(props) {
                         },
                     })}
                     options={viewCardsList}
-                    // props.card ? props.card.name :
                     placeholder={"All Cards"}
                     styles={style}
 
@@ -78,19 +74,12 @@ function SelectCards(props) {
 const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
-        card: state.card_reducer.card,
-        workspace: state.workspace_reducer.workspace,
         cards: state.public_reducer.cards,
-
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCard: (card) => dispatch(actions.setCard(card)),
-        setProject: (project) => dispatch(actions.setProject(project)),
-        setTask: (task) => dispatch(actions.setTask(task)),
-        setTaskName: (taskName) => dispatch(actions.setTask(taskName)),
+        setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
         getTasksByCardId: (cardId) => dispatch(actions.getTasksByCardId(cardId))
     }
 

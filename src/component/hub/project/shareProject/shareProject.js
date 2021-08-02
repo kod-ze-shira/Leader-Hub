@@ -105,7 +105,6 @@ function ShareProject(props) {
             props.viewToastMassege({ show: true, massege: 'Project shared!!' })
 
         props.closeViewDetails()//close vd
-        // alert('project shared')
     }
 
     return (
@@ -123,7 +122,6 @@ function ShareProject(props) {
                     </div>
                     <div className="row pl-3 pt-3 pb-1">
                         <div className="txt_share">Share With Email Address</div>
-                        {/* <i className="fas fa-question"></i> */}
                         <FontAwesomeIcon icon={["fas", "question"]} data-tip
                             className='iconQuestion' data-for="iconQuestion" />
                         <ReactTooltip className="tooltip-style" data-tip id="iconQuestion" place="top" effect="solid">

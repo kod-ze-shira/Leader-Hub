@@ -23,24 +23,11 @@ function Tabs(props) {
     const [ifAnimation, setIfAnimation] = useState(true)
 
     useEffect(() => {
-        for (let i = 0; i < props.workspaces.length; i++) {
-            let workspace = props.workspaces[i].projects.find((p) => p._id === idProject)
-            if (workspace) {
-                props.indexOfWorkspace(i)
-                if (props.statuses)
-                    props.getAllStatusesTaskForWorkspace()
-            }
-        }
-    }, [props.workspaces, props.cards])
-
-    useEffect(() => {
-        // if (props.cards.length) {
         if (props.cards.length || props.cardsEmpty === true) {
             setIfAnimation(false)
         }
+
     }, [props.cards.length, props.cardsEmpty])
-
-
 
 
     function onDragEndׂ(e) {
@@ -99,7 +86,7 @@ function Tabs(props) {
     const newCard = () => {
         let card;
         if (inputValue) {
-            card = { "project": props.project._id, name: inputValue }
+            card = { "project": props.cards[0].project, name: inputValue }
             props.newCard(card)
         }
         setInputValue("")
@@ -139,7 +126,6 @@ function Tabs(props) {
     function stopP(event) {
         event.stopPropagation();
     }
-
 
     return (
         <><div className="body-cards ">
@@ -252,13 +238,11 @@ export default connect(
         return {
             indexCurrentCard: state.public_reducer.indexCurrentCard,
             indexCurrentTask: state.public_reducer.indexCurrentTask,
-            project: state.project_reducer.project,
-            cards: state.public_reducer.cards,
-            projects: state.project_reducer.projects,
-            user: state.public_reducer.userName,
-            workspaces: state.public_reducer.workspaces,
             indexCurrentProject: state.public_reducer.indexCurrentProject,
             indexOfWorkspace: state.public_reducer.indexOfWorkspace,
+            cards: state.public_reducer.cards,
+            user: state.public_reducer.userName,
+            workspaces: state.public_reducer.workspaces,
             statuses: state.public_reducer.statuses,
             cardsEmpty: state.public_reducer.cardsEmpty,
 
@@ -268,10 +252,10 @@ export default connect(
         return {
             dragTask: (cardOfTask) => dispatch(actions.dragTask(cardOfTask)),
             setCurrentIndexCard: (index) => dispatch(actions.saveCurrentIndexOfCardInRedux(index)),
-            indexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
+            setIndexOfWorkspace: (index) => dispatch(actions.indexOfWorkspace(index)),
+            setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
             dragCard: () => dispatch(actions.dragCard()),
             moveTaskBetweenCards: (taskAndCard) => dispatch(actions.moveTaskBetweenCards(taskAndCard)),
-            getAllStatusesTaskForWorkspace: () => dispatch(actions.getAllStatusesTaskForWorkspace()),
             getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
             getCardsOfProject: (projectId) => dispatch(actions.getCardsOfProject(projectId)),
             changeTaskplace: (obj) => dispatch(actions.changeTaskplace(obj)),
