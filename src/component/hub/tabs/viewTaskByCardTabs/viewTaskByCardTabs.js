@@ -143,7 +143,7 @@ function ViewTaskByCradTabs(props) {
             "complete": doneStatus,
             "endDate": today,
             "likes": props.task.likes,
-            "assingTo1": props.task.assingTo1 ? props.task.assingTo1 : null,
+            "assingTo": props.task.assingTo ? props.task.assingTo : null,
             "status": props.statuses ? doneStatus ? props.statuses[2] : props.statuses[0] : null,
             "files": props.task.files ? props.task.files : null,
             "priority": props.task.priority
@@ -463,13 +463,13 @@ function ViewTaskByCradTabs(props) {
                                         <div className="p_task ">
                                             <div>
                                                 {/* ? assingTo.contact.thumbnail */}
-                                                {props.task.assignTo1 && props.task.assignTo1.length > 0 ? <div className="widthofContacts mr-1">
-                                                    {props.task.assignTo1 ? props.task.assignTo1.map((assingTo, index) => {
+                                                {props.task.assignTo && props.task.assignTo.length > 0 ? <div className="widthofContacts mr-1">
+                                                    {props.task.assignTo ? props.task.assignTo.map((assingTo, index) => {
                                                         if (index < 2)
                                                             return assingTo.contact ? <img referrerPolicy="no-referrer" src={assingTo.contact.thumbnail} className="imgTeamTabs" />
                                                                 : null
                                                     }) : null}
-                                                    {props.task.assignTo1 ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo1.length > 2 ? props.task.assignTo1.length - 2 : null}</div> : null}
+                                                    {props.task.assignTo ? <div className="imgTeam marginTeam " onClick={(e) => showAssigToOrCalander({ "e": e, "name": "share" })} >+{props.task.assignTo.length > 2 ? props.task.assignTo.length - 2 : null}</div> : null}
                                                 </div> : <img
                                                     // id={`${props.task._id}assing-to`}
                                                     className="mx-1 "

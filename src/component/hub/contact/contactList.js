@@ -54,7 +54,7 @@ function ContactList(props) {
   // }, [])
   //   const assingTaskToContact = (email) => {
   //     let member
-  //     let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1
+  //     let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo
   //     let isExistContactInList = false
   //     let i
   //     for (i = 0; i < assign.length; i++) {

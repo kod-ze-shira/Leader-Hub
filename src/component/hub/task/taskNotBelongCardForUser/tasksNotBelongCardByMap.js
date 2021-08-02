@@ -38,8 +38,8 @@ function TasksNotBelongCardByMap(props) {
             props.getAllWorkspacesFromServer()
         }
 
-    // }, [props.workspaces])
-}, [])
+        // }, [props.workspaces])
+    }, [])
 
     useEffect(() => {
         doneStatus = props.task.complete

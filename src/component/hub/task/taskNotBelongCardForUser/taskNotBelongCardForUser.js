@@ -17,6 +17,12 @@ function TaskNotBelongCardForUser(props) {
         }
     }, [props.tasks])
     useEffect(() => {
+        if (!props.workspaces.length) {
+            props.getAllWorkspacesFromServer()
+        }
+
+    }, [props.workspaces])
+    useEffect(() => {
         addTaskInput.current.focus();
     }, [showBtn])
 
@@ -131,6 +137,7 @@ const mapStateToProps = (state) => {
     return {
         // user: state.public_reducer.userName,
         tasks: state.public_reducer.tasks,
+        workspaces:state.public_reducer.workspaces
 
     }
 }
@@ -138,6 +145,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getAllTasksNotBelongsCardForUser: () => dispatch(actions.getAllTasksNotBelongsCardForUser()),
         newTaskNotBelong: (nameTask) => dispatch(actions.newTaskNotBelong(nameTask)),
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer())
 
     }
 }

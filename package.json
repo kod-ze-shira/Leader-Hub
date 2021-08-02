@@ -1,5 +1,5 @@
 {
-  "name": "frame",
+  "name": "leader-hub",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,8 +12,9 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@leadercodes/header": "^0.1.0",
+    "@leadercodes/header": "^0.1.1",
     "@material-ui/core": "^4.12.2",
+    "@material-ui/data-grid": "^4.0.0-alpha.10",
     "@material/radio": "^9.0.0",
     "@material/react-tab": "^0.15.0",
     "@react-md/icon": "^2.5.5",

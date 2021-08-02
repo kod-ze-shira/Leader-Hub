@@ -16,6 +16,7 @@ function ShareProject(props) {
     const [permissionContact, setPermissionContact] = useState('viewer')
     const [permissionTeam, setPermissionTeam] = useState('viewer')
     const [showTeams, setShowTeams] = useState(false)
+    const [showContactList,setShowContactList]=useState(false)
     //onselect contact his email and perrmisin add shareDetails list
     const setStateMailToContactMail = (emailMember) => {
         let shareDetailToAdd
@@ -135,7 +136,10 @@ function ShareProject(props) {
                             <DynamicSelect
                                 setContactEmail={setStateMailToContactMail}
                                 options={'contacts'} />
-                            {/* <ContactList  ></ContactList>  */}
+                                {/* <div onClick={()=>setShowContactList(true)}>Choose Email</div>
+                                {showContactList?
+                            <ContactList></ContactList>
+                            :null} */}
 
                         </div>
                         <div className="col-3 pl-0">

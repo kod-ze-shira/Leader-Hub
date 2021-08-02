@@ -25,7 +25,7 @@ function ViewContact(props) {
 
     const assingTaskToContact = (email) => {
         let member
-        let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo1
+        let assign = props.cards[props.indexCurrentCard].tasks[props.indexCurrentTask].assignTo
         let isExistContactInList = false
         let i
 
@@ -71,7 +71,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        assingTo: (emailOfContact) => dispatch(actions.assingTo(emailOfContact)),
         assingToMany: (member) => dispatch(actions.assingToMany(member)),
 
     }
