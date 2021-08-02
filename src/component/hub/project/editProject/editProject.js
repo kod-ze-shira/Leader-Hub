@@ -91,7 +91,7 @@ function EditProject(props) {
                         {/* <h5 className="mt-5 title-view-details pb-1 mb-2">Project details</h5> */}
                     </div>
                     <div className="row justify-content-between  mx-1 mb-2">
-                        <label>workspace: {props.workspace.name}</label>
+                        <label>workspace: {props.workspaces[props.indexWorkspace].name}</label>
                     </div>
                     <div className="form-group" id='nameRequired'>
                         <label htmlFor="name">Name</label>
@@ -155,8 +155,6 @@ export default connect(
     (state) => {
         return {
             workspaces: state.public_reducer.workspaces,
-            projectReducer: state.project_reducer.project,
-            workspace: state.workspace_reducer.workspace,
             indexProject: state.public_reducer.indexCurrentProject,
             indexWorkspace: state.public_reducer.indexOfWorkspace
         }
@@ -165,7 +163,6 @@ export default connect(
         return {
             editProjectInServer: (task) => dispatch(actions.editProjectInServer(task)),
             setProjectByFiledFromWorkspace: (p) => dispatch(actions.setProjectByFiledFromWorkspace(p)),
-            setProject: (p) => dispatch(actions.setProject(p)),
             setProjectInWorkspace: (project) => dispatch(actions.setProjectInWorkspace(project)),
 
         }

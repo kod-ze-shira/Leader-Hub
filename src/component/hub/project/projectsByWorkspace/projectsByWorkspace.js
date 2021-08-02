@@ -55,7 +55,7 @@ function ProjectsByWorkspace(props) {
     const viewProjectsByWorkspace = props.workspaces[props.indexOfWorkspace] ?
         props.workspaces[props.indexOfWorkspace].projects.map((project, index) => {
             return project.name.toUpperCase().includes(valueSearch.toUpperCase())
-                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                ? <ViewProject showToast={(obj) => showToast(obj)}
                     closeViewDetails={false}
                     indexProject={index}
                     myProject={project}
@@ -66,7 +66,7 @@ function ProjectsByWorkspace(props) {
     const viewSharedProjects =
         props.sharedProjects.map((project, index) => {
             return project.objectId ? project.objectId.name.toUpperCase().includes(valueSearch.toUpperCase())
-                ? <ViewProject showToast={(obj) => showToast1(obj)}
+                ? <ViewProject showToast={(obj) => showToast(obj)}
                     closeViewDetails={false}
                     indexProject={index}
                     myProject={project.objectId}
@@ -77,7 +77,7 @@ function ProjectsByWorkspace(props) {
     const viewAllProjects = props.workspaces ? props.workspaces.map((workspace) => {
         return workspace.projects ? workspace.projects.map((project, index) => {
             return project.name.toUpperCase().includes(valueSearch.toUpperCase()) ?
-                <ViewProject showToast={(obj) => showToast1(obj)}
+                <ViewProject showToast={(obj) => showToast(obj)}
                     closeViewDetails={false}
                     myProject={project}
                     indexProject={index}
@@ -87,18 +87,12 @@ function ProjectsByWorkspace(props) {
         }) : null
     }) : null
 
-
-    function showToast1(obj) {
+    function showToast(obj) {
         props.showToast(obj)
-    }
-
-    function showToast() {
-        props.showToast({ 'type': 'Project', 'object': props.projectToDelete })
+        // props.showToast({ 'type': 'Project', 'object': props.project })
     }
 
     $(window).click(function () {
-        if (showEditOrShareProject)
-            props.editProjectInServer()
         setShowProject(false)
         setShowEditOrShareProject(false)
     });
@@ -163,7 +157,6 @@ function ProjectsByWorkspace(props) {
 const mapStateToProps = (state) => {
 
     return {
-        projectToDelete: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
         sharedProjects: state.public_reducer.sharedProjects
@@ -171,7 +164,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        editProjectInServer: () => dispatch(actions.editProjectInServer()),
     }
 }
 

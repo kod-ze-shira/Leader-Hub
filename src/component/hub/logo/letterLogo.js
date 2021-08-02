@@ -10,9 +10,10 @@ function LetterLogo(props) {
     useEffect(() => {
         if (props.workspaces) {
             if (window.location.href.indexOf('workspace') !== -1) {
+                let w
                 // props.getProjectsByWorkspaceId(idWorkspace)
-                let w = props.workspaces.find(w => w._id === idWorkspace)
-                props.setWorkspace(w)
+                // w = props.workspaces.find(w => w._id === idWorkspace)
+                // props.setWorkspace(w)
                 w = props.workspaces.findIndex(w => w._id === idWorkspace)
                 props.setIndexWorkspace(w)
 
@@ -20,7 +21,6 @@ function LetterLogo(props) {
             else
                 if (window.location.href.indexOf('allProjects') !== -1) {
                     props.setIndexWorkspace(0)
-                    props.setWorkspace(props.workspaces[0])
                 }
                 else
                     if (window.location.href.indexOf('projectPlatform') !== -1) {
@@ -30,16 +30,17 @@ function LetterLogo(props) {
                                 if (idProject === props.workspaces[index].projects[j]._id) {
                                     props.setIndexWorkspace(index)
 
-                                    props.setWorkspace(props.workspaces[index])
-                                    props.setProject(props.workspaces[index].projects[j])
-                                    //sssssssss
+                                    // props.setWorkspace(props.workspaces[index])
+                                    // props.setProject(props.workspaces[index].projects[j])
+
                                     // props.getCardsByProjectId(props.workspaces[index].projects[j]._id)
                                 }
                             }
                         }
                     }
         }
-    }, [props.workspace])
+    // check when does the use effect run
+    }, [props.indexOfWorkspace])
 
     return (
         <>
@@ -64,14 +65,11 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.workspace,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setWorkspace: (workspaceId) => dispatch(actions.setWorkspace(workspaceId)),
-        setProject: (project) => dispatch(actions.setProject(project)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
 

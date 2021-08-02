@@ -43,15 +43,12 @@ function ViewWorkspaceList(props) {
     }
     function delete_workspace() {
         $(`#${workspace._id}`).css("display", "none")
-
         props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace })
-        props.setWorkspace(workspace);
     }
+
     function duplicateWorkspace() {
-        props.setWorkspace(workspace);
         props.duplicateWorkspace(workspace._id);
     }
-    const [over, setover] = useState(false);
 
     function func_over(id) {
         $(`#${id} .iconsAction`).css({ 'display': 'inline' })
@@ -98,7 +95,6 @@ function ViewWorkspaceList(props) {
 
                     </div>
                     {/* { */}
-                    {/* // over ? */}
                     <div className="col-2">
                         <div className="row  mt-4 icons-in-list-w" >
                             <div
@@ -142,8 +138,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
-
-        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
         saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),

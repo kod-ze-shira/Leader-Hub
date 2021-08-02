@@ -8,7 +8,7 @@ import './viewWorkspaceName.css'
 const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
-        isConfiguratorOpenWorkspace: state.workspace_reducer.isConfiguratorOpenWorkspace
+
     }
 }
 
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(
 
-    function ViewWorkspaceName({ isConfiguratorOpenWorkspace, setisConfiguratorOpenWorkspace, props, workspace }) {
+    function ViewWorkspaceName({  props, workspace }) {
 
 
         const [viewProjects, setViewProjects] = useState(false)
@@ -31,7 +31,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
         }
         return (
             <>
-                {isConfiguratorOpenWorkspace ?
+                {/* {isConfiguratorOpenWorkspace ? */}
 
                     <>
 
@@ -45,8 +45,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                                     : null}
                             </li>
                         </ul>
-                    </> : null
-                }
+                    </> 
+                {/* // : null} */}
             </>
 
         )

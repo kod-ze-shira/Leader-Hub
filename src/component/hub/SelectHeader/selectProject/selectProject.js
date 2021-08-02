@@ -158,9 +158,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.public_reducer.userName,
         projects: state.public_reducer.projects,
-        project: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.workspace,
         indexProject: state.public_reducer.indexCurrentProject,
         indexWorkspace: state.public_reducer.indexOfWorkspace
     }
@@ -169,10 +167,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setCurrentIndexProject: (indexProject) => dispatch(actions.setCurrentIndexProject(indexProject)),
         saveIndexOfWorkspaceInRedux: (indexWorkspace) => dispatch(actions.saveIndexOfWorkspaceInRedux(indexWorkspace)),
-        setCard: (card) => dispatch(actions.setCard(card)),
-        setCards: (cards) => dispatch(actions.setCards(cards)),
-        setProject: (project) => dispatch(actions.setProject(project)),
-        setCardName: (cardName) => dispatch(actions.setCardName(cardName)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))

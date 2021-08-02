@@ -80,7 +80,7 @@ function NewProject(props) {
         project.updateDates[0] = date + '/' + month + '/' + year
         console.log(project)
         project.color = myColor
-        project.workspace = props.workspace._id
+        project.workspace = props.workspaces[props.indexOfWorkspace]._id
         project.name = nameProject
         project.description = description
 
@@ -138,7 +138,7 @@ function NewProject(props) {
 
                     {!props.fromAllproject ?
                         <div className="row justify-content-between  mx-1 mb-2">
-                            <label>workspace: {props.workspace.name}</label>
+                            <label>workspace: {props.workspaces[props.indexOfWorkspace].name}</label>
                         </div> :
                         <div className=" col-3 px-1">
                             <label>choose workspace: </label>
@@ -187,7 +187,7 @@ function NewProject(props) {
                 </div >
                 <div className="row justify-content-end">
                     <button onClick={() => addProject()} data-tip data-for="save"
-                        style={{ marginTop: '0px !important;' }} className="save_canges_btn px-5">Save</button>
+                        style={{ marginTop: '0px !important' }} className="save_canges_btn px-5">Save</button>
                     <ReactTooltip className="tooltip-style" data-tip id="save" place="top" effect="solid">
                         {title.title_save}
                     </ReactTooltip>
@@ -197,16 +197,13 @@ function NewProject(props) {
 
         </>
 
-
-
-
-
     )
 }
 export default connect(
     (state) => {
         return {
-            workspace: state.workspace_reducer.workspace,
+            workspaces: state.public_reducer.workspaces,
+            indexOfWorkspace:state.public_reducer.indexOfWorkspace,
             descriptionNewProject: state.public_reducer.descriptionNewProject
         }
     },

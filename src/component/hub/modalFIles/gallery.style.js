@@ -51,7 +51,7 @@ export const GaleryGridStyle = createGlobalStyle`
 
 export const WrapGridGallery = styled.div`
     display: block;
-    min-height: 1px;
+    minHeight: 1px;
     width: 100%;
     overflow: auto;
 `

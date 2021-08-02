@@ -14,6 +14,7 @@ function ProjectPlatform(props) {
     useEffect(() => {
 
     }, [props.focusInputCard]);
+
     if (!showInput) {
         if (props.focusInputCard) {
             setShowInput(true)
@@ -40,7 +41,7 @@ function ProjectPlatform(props) {
     const newCard = () => {
         let card;
         if (inputValue) {
-            card = { "project": props.project._id, name: inputValue }
+            card = { "project": props.cards[0].project, name: inputValue }
             props.newCard(card)
         }
         setInputValue("")
@@ -69,7 +70,7 @@ function ProjectPlatform(props) {
                         closeCalendarOrContact={props.closeCalendarOrContact}
                         showRocketShip={props.showRocketShip}
                         viewToastMassege={props.viewToastMassege}
-                        showToast={(obj) => showToastToDeleteTask(obj)} projectId={props.project._id} flag={props.flag}
+                        showToast={(obj) => showToastToDeleteTask(obj)} flag={props.flag}
                         viewContactList={props.viewContactList} />
                     <div className="add-new-pop-up ">
                         <a >New Workspace</a><br></br>
@@ -114,21 +115,12 @@ function ProjectPlatform(props) {
 const mapStateToProps = (state) => {
     return {
         cards: state.public_reducer.cards,
-        projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.worksapce,
-        project: state.project_reducer.project,
-
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        // removeCardById: (cardId) => dispatch(actions.removeCardById(cardId)),
-        // removeTaskById: (taskId) => dispatch(actions.removeTaskById(taskId)),
-        // getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
-        // getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
-        // getAllWorkspaces: () => dispatch(actions.getAllWorkspaces()),
         newCard: (cardname) => dispatch(actions.newCard(cardname)),
     }
 

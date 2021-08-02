@@ -24,21 +24,22 @@ function TasksNotBelongCardByMap(props) {
     const [cardId, setCardId] = useState()
     const [myProjects, setMyProjects] = useState([])
     const [myCards, setMyCards] = useState()
-    const [myWorkspace, setMyWorkspace] = useState()
     // const [viewCompleteTask, setViewCompleteTask] = useState(false)
     const [idWorkspace, setIdWorkspace] = useState()
     const [indexOfWorkspace, setIndexOfWorkspace] = useState()
-    const [task, setTask] = useState({
-        "_id": props.task._id, "name": props.task.name, "description": props.task.description
-        , "status": props.status, "dueDate": props.task.dueDate, "startDate": props.task.startDate
-    })
-
     const [indexOfProject, setIndexOfProject] = useState(null);
     const [indexOfCard, setIndexOfCard] = useState(null);
 
     let doneStatus = props.task?.complete;
     const [downloadFile, setDownloadFile] = useState(false)
     const [flag, setFlag] = useState(true)
+    useEffect(() => {
+        if (!props.workspaces.length) {
+            props.getAllWorkspacesFromServer()
+        }
+
+        // }, [props.workspaces])
+    }, [])
 
     useEffect(() => {
         doneStatus = props.task.complete
@@ -88,7 +89,7 @@ function TasksNotBelongCardByMap(props) {
             value: workspace, label:
                 <div className="d-flex flex-row" >
                     <div  >
-                        <div className="logo-w-little "
+                        <div className="  logo-w-little "
                             style={{ backgroundColor: workspace.color, display: 'inline-block', textAlign: 'center' }}
                         >
                             {workspace.name ? workspace.name[0].toUpperCase() : null}
@@ -100,7 +101,7 @@ function TasksNotBelongCardByMap(props) {
                 </div >
         } : null
     )) : null
-   
+
     const selectPlaceHorder = <hr className="hr-place-holder" />
 
     const handleChangeWorkspace = (newValue, actionMeta) => {
@@ -121,7 +122,6 @@ function TasksNotBelongCardByMap(props) {
             }
 
             // chooseWorkspace()
-            setMyWorkspace('selectedWorkspace')
             setTimeout(() => {
                 setMyProjects(props.workspaces[indexWorkspace].projects ? props.workspaces[indexWorkspace].projects : null)
 
@@ -279,7 +279,7 @@ function TasksNotBelongCardByMap(props) {
     return (
         <>
             <div
-                style={{ 'min-height': '47px' }}
+                style={{ 'minHeight': '47px' }}
                 className="show-task row mx-4 border-bottom "
                 id={props.task._id + 'disappear'}
             >
@@ -299,7 +299,7 @@ function TasksNotBelongCardByMap(props) {
                                 type="checkbox"
                                 name="name" id="name"
                                 data-tip data-for="task_not_belong_name"
-                                checked={props.task.complete}
+                                // checked={props.task.complete}
                                 className={props.task.complete ?
                                     "disabled show-card " : "show-card "}
                             />
@@ -349,6 +349,7 @@ function TasksNotBelongCardByMap(props) {
                             value={indexOfWorkspace !== null ?
                                 workspaceSelect[indexOfWorkspace] : 'Select...'}
                             styles={style}
+
                         />
                         {/* <div className="drop-down"> 
                             <i className="fa fa-angle-down" aria-hidden="true"></i>
@@ -459,10 +460,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         EditTask: (task) => dispatch(actions.editTask(task)),
         setTaskStatus: (index) => dispatch(actions.setTaskStatus(index)),
-       completeTask: (task) => dispatch(actions.completeTask(task)),
+        getAllWorkspacesFromServer: () => dispatch(actions.getAllWorkspacesFromServer()),
+        completeTask: (task) => dispatch(actions.completeTask(task)),
         setCompleteTask: (taskDetails) => dispatch(actions.setCompleteTask(taskDetails)),
         belongTask: (ids) => dispatch(actions.belongTask(ids)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TasksNotBelongCardByMap)
