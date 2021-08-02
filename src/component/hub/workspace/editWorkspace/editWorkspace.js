@@ -11,12 +11,18 @@ import ColorWorkspace from '../../color/colorWorkspace';
 function EditWorkspace(props) {
 
     const [workspaceBeforeChanges] = useState({ ...props.workspace })
-
     const nameRequired = useRef()
+
     useEffect(() => {
         props.objectBeforeChanges({ 'type': 'workspace', 'workspace': workspaceBeforeChanges })
+
     }, [props.workspaces])
 
+    useEffect(() => {
+        return () => {
+            saveEdit()
+        }
+    }, [])
 
     function closeViewDetailsInWorkspace() {
         props.setWorkspaceBeforeChanges(workspaceBeforeChanges)
@@ -119,7 +125,6 @@ export default connect(
     (dispatch) => {
         return {
             setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
-            setWorkspaceOnChangeFiled: (nameFiled, value) => dispatch(actions.setWorkspaceOnChangeFiled(nameFiled, value)),
             saveWorkspaceInServerUfterEdit: (workspace) => dispatch(actions.editWorkspaceInServer(workspace)),
             setWorkspaceBeforeChanges: (workspace) => dispatch(actions.setWorkspaceBeforeChanges(workspace)),
 

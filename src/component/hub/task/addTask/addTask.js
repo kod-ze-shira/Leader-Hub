@@ -69,16 +69,12 @@ function AddTask(props) {
 }
 const mapStateToProps = (state) => {
     return {
-        project: state.project_reducer.project,
-        card: state.card_reducer.card,
-        task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         statuses: state.status_reducer.statuses
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
     }

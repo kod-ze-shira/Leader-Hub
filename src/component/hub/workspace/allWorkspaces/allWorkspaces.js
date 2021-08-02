@@ -46,7 +46,7 @@ function AllWorkspaces(props) {
                 key={workspace._id}
                 index={index} workspace={workspace}
                 editWorkspace={openEditWorkspace}
-            //   bin={disableBin}
+            
             />
         }) :
         <div className="logoGif"><img src={require('../../../../assets/img/animation.gif')} /></div>
@@ -58,7 +58,6 @@ function AllWorkspaces(props) {
                 return <ViewWorkspaceGrid indexWorkspace={index}
                     setShowToastDeleteWhenClickDelete={(obj) => props.showToast(obj)}
                     key={workspace._id}
-                    //  bin={disableBin} 
                     index={index}
                     workspace={workspace} editWorkspace={openEditWorkspace} />
             }) :
@@ -70,8 +69,6 @@ function AllWorkspaces(props) {
         setWorspaceToEdit(value)
         setAddOrEditWorkspace("editWorkspace")
         setShowWorkspace(true)
-        props.saveIndexOfWorkspaceInRedux(workspaceLength)
-
     }
     // "603ce1181ee2aa42a43e8f80"
     function chenge_list1() {
@@ -234,7 +231,6 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.workspaces,
-        workspaceDeleted: state.workspace_reducer.workspace,
         contactsUser: state.share_reducer.contactsUser,
         teamsUser: state.share_reducer.teamsUser,
     }

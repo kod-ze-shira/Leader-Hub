@@ -38,7 +38,6 @@ function ViewMilstone(props) {
     }
     $(window).click(function () {
         if (viewDetails) {
-            // alert()
             setViewDetails(false)
         }
     });

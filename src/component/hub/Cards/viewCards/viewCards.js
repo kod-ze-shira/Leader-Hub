@@ -40,7 +40,7 @@ function ViewCards(props) {
             let status = props.statuses[0]
             console.log(status);
             // props.statuses[0]._id
-            task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.card._id }
+            task = { name: inputValue, description: "", status: status, startDate: today, dueDate: today, "card": props.cardFromMap._id }
             // console.log(props.statuses[0].statusName);
             props.newTask(task)
             let countTasksInProject = props.workspaces[props.indexOfWorkspace].projects[props.indexCurrentProject].countTasks
@@ -52,7 +52,7 @@ function ViewCards(props) {
 
 
     const addTask = () => {
-        props.setCard(props.cardFromMap)
+        // props.setCard(props.cardFromMap)//becouse delete reducer
         setAddTaskInInput(true)
         if (props.cardFromMap.tasks.length)
             if (!(props.flag === props.cardFromMap._id && flagFromSelect) && !flag) {
@@ -69,10 +69,7 @@ function ViewCards(props) {
         props.showToastDelete({ 'type': 'Card', 'object': props.cardFromMap })
     }
     const editCard = (event) => {
-        // defaultValue
-        let name = textInput.current.innerHTML ? textInput.current.innerHTML : textInput.current.defaultValue
-        let card = { "_id": props.cardFromMap._id, "name": textInput.current.innerHTML, "project": props.project._id }
-        console.log("edit-card", card)
+        let card = { "_id": props.cardFromMap._id, "name": textInput.current.innerHTML, "project": props.cardFromMap.project }
         props.EditCard(card);
     }
     const showDetails =
@@ -93,7 +90,6 @@ function ViewCards(props) {
     }
     const changeSelectedCard = (e) => {
         triangleSide(props.cardFromMap._id)
-        props.setCard(props.cardFromMap)
         if (props.flag === props.cardFromMap._id && flagFromSelect === true) {
             setFlagFromSelect(false)
             setAddTaskInInput(false)
@@ -264,9 +260,6 @@ const mapStateToProps = (state) => {
 
     return {
         workspaces: state.public_reducer.workspaces,
-        project: state.project_reducer.project,
-        card: state.card_reducer.card,
-        task: state.task_reducer.task,
         tasks: state.public_reducer.tasks,
         statuses: state.status_reducer.statuses,
         indexCurrentProject: state.public_reducer.indexCurrentProject,
@@ -279,7 +272,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setCountTasks: (count) => dispatch(actions.setCountTasks(count)),
-        setCard: (card) => dispatch(actions.setCard(card)),
         newTask: (task) => dispatch(actions.newTask(task)),
         getTasksByCardId: (id) => dispatch(actions.getTasksByCardId(id)),
         EditCard: (card) => dispatch(actions.editCard(card)),

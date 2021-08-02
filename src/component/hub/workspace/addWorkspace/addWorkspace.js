@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { actions } from '../../../../redux/actions/action'
-import ViewWorkspaceList from '../viewWorkspace/viewWorkspacelist/viewWorkspacelist'
-import ViewWorkspaceGrid from '../viewWorkspace/viewWorkspaceGrid/viewWorkspaceGrid'
-import ViewDetails from '../../viewDetails/viewDetails'
 import { useRef } from 'react'
 import ColorWorkspace from '../../color/colorWorkspace'
 
-// let workspace;
-
-
 function AddWorkspace(props) {
-
+    let ifAddWorkspace = false
     let [myColor, setMyColor] = useState()
     const [workspace, setWorkspace] = useState({
         name: "",
@@ -23,21 +17,25 @@ function AddWorkspace(props) {
         workspace.color = myColor
         return () => {
             if (!props.workspaces[props.indexOfWorkspace]._id)
-                props.removeOneWorkspaceFromWorkspaces()
+                props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
+            //   props.removeOneWorkspaceFromWorkspaces()
+
         };
     }, [])
+
     const nameworkspae = useRef()
     const changeColorFiledInWorkspace = (color) => {
         let editWorkspaceInRedux = { "nameFiled": "color", "value": color }
         props.setWorkspaceByFiled(editWorkspaceInRedux)
     }
 
-    function addNewWorkspace() {
+    async function addNewWorkspace() {
+        ifAddWorkspace = true
         if (nameworkspae.current.value) {
             workspace.color = myColor
-            props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
-            // newWorkspace()
+            // props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
             props.closeViewDetails()
+
         }
         else {
             nameworkspae.current.focus()
@@ -45,23 +43,17 @@ function AddWorkspace(props) {
             form.classList.add('was-validated')
         }
     }
-    // function newWorkspace(params) {
-    //     return new Promise(async (resolve, reject) => {
-    //         try {
-    //             let newWorkspace = await props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
-    //             resolve(newWorkspace)
-    //         } catch (error) {
-    //             reject(error)
-    //         }
-    //     })
-    // }
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target
-    //     setWorkspace(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    // }
+    function newWorkspace() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let newWorkspace = await props.addNewWorkspaceToServer(props.workspaces[props.workspaces.length - 1])
+                resolve(newWorkspace)
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
+  
 
     const changeFiledInWorkspace = (input) => {
         if (input.target.name === 'color')
@@ -128,7 +120,7 @@ const mapDispatchToProps = (dispatch) => {
         getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         setWorkspaceByFiled: (workspace) => dispatch(actions.setWorkspaceByFiled(workspace)),
         saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
-        removeOneWorkspaceFromWorkspaces: () => dispatch(actions.removeOneWorkspaceFromWorkspaces()),
+        removeOneWorkspaceFromWorkspaces: (a) => dispatch(actions.removeOneWorkspaceFromWorkspaces(a)),
     }
 
 

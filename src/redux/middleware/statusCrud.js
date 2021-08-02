@@ -5,7 +5,7 @@ import keys from '../../config/env/keys'
 
 export const getAllStatusesTaskForWorkspace = ({ dispatch, getState }) => next => action => {
     if (action.type === 'GET_ALL_STATUSES_TASK_FOR_WORKSPACE') {
-
+        debugger
         let workspaceId;
         if (action.payload) {
             if (action.payload.workspaceId)

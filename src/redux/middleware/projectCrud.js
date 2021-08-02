@@ -18,8 +18,7 @@ export const getProjectByIdInServer = ({ dispatch, getState }) => next => action
             contentType: "application/json; charset=utf-8",
 
             success: function (data) {
-                dispatch(actions.setProject(data))
-
+                // dispatch(actions.setProject(data))
 
             },
             error: function (err) {
@@ -213,7 +212,6 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
 
     if (action.type === 'DELETE_PROJECT_IN_SERVER') {
         var projectId = action.payload;
-        // let project = getState().project_reducer.project;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${projectId}/removeProjectById`
         // let jwtFromCookie = getState().public_reducer.tokenFromCookies;
         $.ajax({
@@ -225,7 +223,6 @@ export const deleteProjectInServer = ({ dispatch, getState }) => next => action 
             contentType: "application/json; charset=utf-8",
             // data: JSON.stringify({ project }),
             success: function (data) {
-                // dispatch(actions.setProject(data.result))
                 dispatch(actions.deleteProjectFromWorkspace(data.project))
                 // dispatch(actions.setProjects(result.projects))
 

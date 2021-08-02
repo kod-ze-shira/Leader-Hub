@@ -9,13 +9,13 @@ function SelectTask(props) {
 
     }, [])
 
-    let myTask = props.task;
+    let myTask;
     const changeSelectedTask = (id) => {
         myTask = props.tasks.find(p => p._id === id.value)
-        props.setTask(myTask)
+        // props.setTask(myTask)//beacouse delete workspace
     }
 
-    const viewTasksList = props.card.tasks ? props.card.tasks.map((task) => (
+    const viewTasksList = props.cards[props.indexCurrentCard] && props.cards[props.indexCurrentCard].tasks ? props.cards[props.indexCurrentCard].tasks.map((task) => (
         { value: task._id, label: task.name }
     )) : null
     const style = {
@@ -65,17 +65,14 @@ function SelectTask(props) {
 const mapStateToProps = (state) => {
     return {
         tasks: state.public_reducer.tasks,
-        task: state.task_reducer.task,
-        card: state.card_reducer.card,
         cards: state.public_reducer.cards,
-
+        indexCurrentCard: state.public_reducer.indexCurrentCard,
 
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         setCard: (card) => dispatch(actions.setCard(card)),
-        setTask: (task) => dispatch(actions.setTask(task)),
         // getAllWorkspaces: () => dispatch(actions.getAllWorkspacesFromServer()),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace))

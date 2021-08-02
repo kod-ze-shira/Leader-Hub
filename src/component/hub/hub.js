@@ -45,7 +45,7 @@ import HeaderLeader from '@leadercodes/header';
 import ModalFiles from './modalFIles/modalFiles';
 import SelectHeader from './SelectHeader/SelectHeader';
 function Hub(props) {
-    const [open, setOpen] = useState(true);
+    const [openConfigurator, setOpenConfigurator] = useState(true);
     const [showToastDelete, setShowToastDelete] = useState(false)
     const [showModalDelete, setShowModlalDelete] = useState(false)
     const [showToastMassege, setShowToastMassege] = useState(false)
@@ -202,22 +202,20 @@ function Hub(props) {
                     <HeaderLeader userName={props.userName} appName='hub' />‏
                 </div> */}
                 <SelectHeader
-                    //  number={number}
+                    openOrCloseConfigurator={() => setOpenConfigurator(!openConfigurator)}
                     flag={changeFlag}
-                    //  from={howToPresent} /
                     menue={true}
-                // type='projects'
                 />
 
                 <div className="row back-screen" onClick={deleteWorkspaceInRedux}>
 
                     <div className="configuratorBlue col-2 ">
                         {/* <div className="col-2 px-0"> */}
-                        <Configurator openMenu={(val) => alert(val)} />
+                        {openConfigurator ? <Configurator /> : null}
                     </div>
 
                     <div onScroll={(e) => setShowContactList(false)} style={{ marginTop: '24px !important' }}
-                        className={open ? "bodyHub " : "col-12 bodyHub mx-2 "}>
+                        className={openConfigurator ? "bodyHub " : " col-12 "}>
                         <Switch>
                             {/* <button onClick={() => window.location.reload(false)}>Click to reload!</button> */}
 
@@ -237,10 +235,6 @@ function Hub(props) {
                                 />
                             </ProtectedRoute>
 
-                            {/* <ProtectedRoute path={"/workspacePlatform"}>
-                                <WorkspacePlatform />
-                            </ProtectedRoute> */}
-
                             <ProtectedRoute path={"/:userName/hub/projectPlatform/:idProject"}>
                                 <CardsPage
                                     closeCalendarOrContact={(e) => setCloseElementsOnScreen(e)}
@@ -252,6 +246,7 @@ function Hub(props) {
 
                             <ProtectedRoute path={"/:userName/hub/myTasks"}>
                                 <TaskNotBelongCardForUser
+                                    openConfigurator={openConfigurator}
                                     showRocketShip={(val) => setShowRocketShip(val)}
                                     viewToastMassege={(val) => setShowToastMassege(val)}
                                     showToastDelete={(object) => showToastToDelete(object)}
@@ -267,7 +262,12 @@ function Hub(props) {
                                     focusInputCard={focusInputCard} showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             <ProtectedRoute path={"/:userName/hub/milestones"}>
-                                <Milestones showToastDelete={(obj) => { showToastToDelete(obj); setDeleteMilstone(true) }} />
+                                <Milestones
+                                    openConfigurator={openConfigurator}
+                                    showToastDelete={(obj) => {
+                                        showToastToDelete(obj);
+                                        setDeleteMilstone(true)
+                                    }} />
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName/ModalFiles"}>
@@ -276,7 +276,9 @@ function Hub(props) {
                             </ProtectedRoute>
 
                             <ProtectedRoute path={"/:userName"}>
-                                <Body showToastDelete={(obj) => showToastToDelete(obj)} />
+                                <Body
+                                    openConfigurator={openConfigurator}
+                                    showToastDelete={(obj) => showToastToDelete(obj)} />
                             </ProtectedRoute>
                             {/* <ProtectedRoute path={"/:userName/hub/projectPlatform/:indexCurrentProject/Overview/:cardId"}>
                                 <ViewFilesOfProject />
@@ -334,7 +336,7 @@ const mapStateToProps = (state) => {
         cards: state.public_reducer.cards,
         indexCurrentCard: state.public_reducer.indexCurrentCard,
         indexCurrentTask: state.public_reducer.indexCurrentTask,
-        workspace: state.workspace_reducer.workspace,
+        // workspace: state.workspace_reducer.workspace,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
     }
 }

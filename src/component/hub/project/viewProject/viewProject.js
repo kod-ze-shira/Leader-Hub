@@ -19,7 +19,6 @@ function ViewProject(props) {
     let complited = props.myProject.countReadyTasks
         , complitedColor;
     let styleIcon = useRef()
-    // props.setProject(props.myProject)
     let refToProject = useRef('')
     useEffect(() => {
     }, [props.indexOfWorkspace])
@@ -199,8 +198,6 @@ function ViewProject(props) {
 const mapStateToProps = (state) => {
     return {
         indexOfWorkspace: state.public_reducer.indexOfWorkspace,
-        projectToDelete: state.project_reducer.project,
-        projects: state.project_reducer.projects,
         user: state.public_reducer.userName,
         workspaces: state.public_reducer.workspaces,
         indexCurrentProject: state.public_reducer.indexCurrentProject,

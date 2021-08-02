@@ -9,7 +9,6 @@ import TaskDetails from '../task/taskDetails/taskDetails';
 import TaskNotBelongDetails from '../task/taskNotBelongCardForUser/taskNotBelongDetails/taskNotBelongDetails';
 import AddWorkspace from '../workspace/addWorkspace/addWorkspace';
 import EditWorkspace from '../workspace/editWorkspace/editWorkspace';
-import EditCurrentTask from '../task/editCurrentTask/editCurrentTask';
 import './viewDetails.css';
 
 const mapStateToProps = (state) => {
@@ -66,9 +65,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(
                         workspace={props.workspace}
                         objectBeforeChanges={(e) => setOldObject(e)}
                     />
-
-                case 'editCurrentTask':
-                    return <EditCurrentTask task={props.task} />
                 case 'taskNotBelongDetails':
                     return <TaskNotBelongDetails task={props.task}
                         objectBeforeChanges={(e) => setOldObject(e)}

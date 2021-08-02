@@ -107,7 +107,6 @@ export const editCard = ({ dispatch, getState }) => next => action => {
 export const removeCardById = ({ dispatch, getState }) => next => action => {
 
     if (action.type === 'REMOVE_CARD_BY_ID') {
-        // let workspace = getState().workspace_reducer;
         let urlData = `${keys.API_URL_BASE_SERVER}/${getState().public_reducer.userName}/${action.payload}/removeCardById`
         $.ajax({
             url: urlData,

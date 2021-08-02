@@ -11,11 +11,6 @@ const Input = props => <components.Input {...props} maxLength={5} />;
 
 function AssignWorkspaceToNewProject(props) {
 
-    useEffect(() => {
-
-    }, [props.workspace])
-
-
     //to change the workspace that user selected
     const changeSelectedWorkspace = (workspace) => {
         props.setWorkspaceToProject(workspace.value)
@@ -110,9 +105,7 @@ function AssignWorkspaceToNewProject(props) {
 const mapStateToProps = (state) => {
     return {
         projects: state.public_reducer.projects,
-        project: state.project_reducer.project,
         workspaces: state.public_reducer.workspaces,
-        workspace: state.workspace_reducer.workspace,
         cards: state.public_reducer.cards,
         user: state.public_reducer.userName,
         indexOfWorkspace: state.public_reducer.indexOfWorkspace
@@ -123,11 +116,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         saveIndexOfWorkspaceInRedux: (indexWorkspace) => dispatch(actions.saveIndexOfWorkspaceInRedux(indexWorkspace)),
         setCards: (c) => dispatch(actions.setCards(c)),
-        setProjectName: (projectName) => dispatch(actions.setProjectName(projectName)),
-        setProject: (project) => dispatch(actions.setProject(project)),
         setProjects: (project) => dispatch(actions.setProjects(project)),
         getCardsByProjectId: (projectId) => dispatch(actions.getCardsByProjectId(projectId)),
-        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         getProjectByIdInServer: (idProject) => dispatch(actions.getProjectByIdInServer(idProject)),
         getProjectsByWorkspaceId: (idWorkspace) => dispatch(actions.getProjectsByWorkspaceId(idWorkspace)),
 

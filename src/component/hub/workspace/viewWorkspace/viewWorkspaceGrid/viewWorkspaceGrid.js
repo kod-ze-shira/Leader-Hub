@@ -16,14 +16,6 @@ import { MyStyleGrid } from './viewWorkspaceGrid.style'
 function ViewWorkspaceGrid(props) {
     const workspace = props.workspace
 
-    // const MyStyle = styled.div` 
-    //     &:hover {
-    //         border: 1.5px solid ${workspace.color} !important
-    //     }`;
-    useEffect(() => {
-
-    }, [props.workspaces])
-
     const routeToProject = (e) => {
         props.setIndexWorkspace(props.indexWorkspace)
         // props.setCurrentIndexProject(0)
@@ -34,13 +26,11 @@ function ViewWorkspaceGrid(props) {
         $(`#${id} .stripeToSavePlace`).css({ 'color': '#ffffff00' })
     }
     function editWorkspace(event) {
-        // props.setWorkspace(workspace)//to select workspace to edit and send him to server
         props.saveIndexOfWorkspaceInRedux(props.indexWorkspace)
         props.editWorkspace(workspace)
         event.stopPropagation();
     }
     function duplicateWorkspace() {
-        props.setWorkspace(workspace);
         props.duplicateWorkspace(workspace._id);
     }
 
@@ -50,9 +40,7 @@ function ViewWorkspaceGrid(props) {
     }
 
     function delete_workspace() {
-        // $(`#${workspace._id}`).css("display", "none")
         props.setShowToastDeleteWhenClickDelete({ 'type': 'Workspace', 'object': workspace })
-        props.setWorkspace(workspace);
     }
     return (
         <>
@@ -119,14 +107,12 @@ const mapStateToProps = (state) => {
 
     return {
         user: state.public_reducer.userName,
-        workspaces: state.workspace_reducer.workspaces,
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
         setCurrentIndexProject: (index) => dispatch(actions.setCurrentIndexProject(index)),
         setIndexWorkspace: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index)),
-        setWorkspace: (workspace) => dispatch(actions.setWorkspace(workspace)),
         setProjects: (projects) => dispatch(actions.setProjects(projects)),
         duplicateWorkspace: (workspaceId) => dispatch(actions.duplicateWorkspace(workspaceId)),
         saveIndexOfWorkspaceInRedux: (index) => dispatch(actions.saveIndexOfWorkspaceInRedux(index))
